@@ -44,7 +44,19 @@ Or specify a directory:
 python readmenator.py /path/to/your/project
 ```
 
+Test suite
+
+```bash
+python readmenator.py --test
+```
+
 The tool will generate a `KNOWLEDGE_BASE.md` file in the project root.
+
+### Self-Documentation
+
+This repository is documented using ReadMenator itself.
+
+readmenator See [KNOWLEDGE_BASE.md](https://github.com/grisuno/ReadMenator/blob/main/KNOWLEDGE_BASE.md) — the tool analyzing its own codebase.
 
 ### Why ReadMenator?
 
