@@ -1,7 +1,7 @@
 # Polyglot Codebase Knowledge Graph
 
-> Generated offline by **readmeneitor**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.
-> No LLMs. No tokens. Pure static analysis.
+> Generated offline by **readmenator**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.
+> No LLMs. No tokens. Pure static analysis. See more [here](https://github.com/grisuno/ReadMenator) 
 
 **Total Files Parsed:** 1 | **Total Symbols Extracted:** 62 | **Total Imports:** 11
 
@@ -96,8 +96,8 @@ graph TD
 - `PolyglotScanner` (line 515) - *Securely walks directory trees and orchestrates polyglot AST/Regex analysis.*
 - `MermaidRenderer` (line 601) - *Converts graph primitives into Mermaid diagram syntax.*
 - `DocumentationGenerator` (line 690) - *Generates comprehensive Markdown documentation.*
-- `ReadmeneitorApplication` (line 765) - *Main application orchestrator.*
-- `TestPolyglotReadmeneitor` (line 786) - *Comprehensive test suite validating polyglot contracts.*
+- `readmenatorApplication` (line 765) - *Main application orchestrator.*
+- `TestPolyglotreadmenator` (line 786) - *Comprehensive test suite validating polyglot contracts.*
 
 **Functions:**
 - `__init__` (line 81) - *Initialize parser with filename and configuration.*
