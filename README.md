@@ -66,9 +66,6 @@ While tools like Graphify depend on LLMs and consume large amounts of tokens, Re
 
 AGPL-3.0
 
----
-
-¿Quieres que agregue alguna sección extra (instalación, configuración, comparación con Graphify, etc.)?
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) [![License: AGPL v3](https://img.shields.io/badge/License-AGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
