@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-readmeneitor.py
+readmenator.py
 
 Production-grade, polyglot, offline codebase knowledge graph generator.
 Supports C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, 
@@ -703,7 +703,7 @@ class DocumentationGenerator:
         sections = [
             "# Polyglot Codebase Knowledge Graph",
             "",
-            "> Generated offline by **readmeneitor**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.",
+            "> Generated offline by **readmenator**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.",
             "> No LLMs. No tokens. Pure static analysis.",
             "",
             f"**Total Files Parsed:** {len(nodes)} | **Total Symbols Extracted:** {total_symbols} | **Total Imports:** {len(edges)}",
@@ -762,7 +762,7 @@ class DocumentationGenerator:
         return "\n".join(sections)
 
 
-class ReadmeneitorApplication:
+class readmenatorApplication:
     """Main application orchestrator."""
 
     def __init__(self, config: Optional[Config] = None) -> None:
@@ -783,13 +783,13 @@ class ReadmeneitorApplication:
         print(f"[+] Files: {len(nodes)} | Symbols: {sum(len(n.symbols) for n in nodes)} | Imports: {len(edges)}")
 
 
-class TestPolyglotReadmeneitor(unittest.TestCase):
+class TestPolyglotreadmenator(unittest.TestCase):
     """Comprehensive test suite validating polyglot contracts."""
 
     def setUp(self) -> None:
         """Set up test fixtures."""
         self.config = Config()
-        self.test_dir = Path("__readmeneitor_polyglot_fixture__")
+        self.test_dir = Path("__readmenator_polyglot_fixture__")
         self.test_dir.mkdir(exist_ok=True)
 
     def tearDown(self) -> None:
@@ -882,11 +882,11 @@ if __name__ == "__main__":
         sys.argv = [sys.argv[0]]
         unittest.main(verbosity=2)
     elif len(sys.argv) == 2:
-        ReadmeneitorApplication().run(sys.argv[1])
+        readmenatorApplication().run(sys.argv[1])
     else:
         print("Usage:")
-        print("  Generate docs:  python readmeneitor.py /path/to/project")
-        print("  Run tests:      python readmeneitor.py --test")
+        print("  Generate docs:  python readmenator.py /path/to/project")
+        print("  Run tests:      python readmenator.py --test")
         print("")
         print("Supported languages:")
         print("  C/C++ (.c, .cpp, .h, .hpp)")
