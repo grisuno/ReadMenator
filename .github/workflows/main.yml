@@ -36,4 +36,4 @@ jobs:
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
       - name: Run Orchestrator
-        run: python3 readmenator/readmenator_orchestrator.py
+        run: python3 ReadMenator/readmenator_orchestrator.py
