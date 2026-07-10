@@ -13,6 +13,13 @@ A token-free, offline Polyglot Codebase Knowledge Graph generator.
 - Works completely offline with zero token consumption.
 - Designed as a lightweight alternative to Graphify.
 
+### Cloning
+
+```bash
+git clone https://github.com/grisuno/ReadMenator.git
+cd ReadMenator
+```
+
 ### Usage
 
 ```bash
