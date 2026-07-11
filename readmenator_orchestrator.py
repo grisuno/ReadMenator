@@ -115,6 +115,18 @@ class RepositoryProcessor:
         """Initializes the processor with configuration and GitHub client."""
         self.config = config
         self.github = github_client
+        self.token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
+
+    def _configure_git_auth(self, repo_dir: Path) -> None:
+        """Configures Git to use the GitHub token for authentication."""
+        if not self.token:
+            return
+        
+        repo_url = f"https://{self.token}@github.com/{self.github.user}"
+        subprocess.run(
+            ["git", "remote", "set-url", "origin", f"{repo_url}.git"],
+            cwd=repo_dir, check=True, capture_output=True
+        )
 
     def process(self, repo: str) -> tuple:
         """Executes the full processing pipeline for a single repository."""
@@ -156,8 +168,13 @@ class RepositoryProcessor:
         """Clones the repository into a secure temporary directory."""
         temp_dir = Path(tempfile.mkdtemp(prefix=f"readmenator_{repo}_"))
         try:
+            # Use token for cloning if available to avoid rate limits or auth issues
+            clone_url = f"https://github.com/{self.github.user}/{repo}.git"
+            if self.token:
+                clone_url = f"https://{self.token}@github.com/{self.github.user}/{repo}.git"
+            
             subprocess.run(
-                ["git", "clone", "--depth", "1", f"https://github.com/{self.github.user}/{repo}.git", str(temp_dir)],
+                ["git", "clone", "--depth", "1", clone_url, str(temp_dir)],
                 check=True, capture_output=True, text=True
             )
             return temp_dir
@@ -206,6 +223,8 @@ class RepositoryProcessor:
         env["GIT_COMMITTER_EMAIL"] = self.config.git_user_email
 
         try:
+            self._configure_git_auth(repo_dir)
+            
             subprocess.run(
                 ["git", "checkout", "-B", self.config.target_branch], 
                 cwd=repo_dir, check=True, capture_output=True, env=env
