@@ -116,6 +116,8 @@ ReadMenator follows a contract-based design with strict separation of concerns:
 
 This repository is documented using ReadMenator itself. See [KNOWLEDGE_BASE.md](KNOWLEDGE_BASE.md) -- the tool analyzing its own codebase.
 
+- [https://pypi.org/project/readmenator/](https://pypi.org/project/readmenator/)
+
 ## License
 
 AGPL-3.0
