@@ -1,5 +1,7 @@
 # ReadMenator
 
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-45c9-a119-fa154d03446b" />
+
 A token-free, offline, production-grade polyglot codebase knowledge graph generator.
 
 **No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
