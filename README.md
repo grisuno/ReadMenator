@@ -4,9 +4,15 @@ A token-free, offline, production-grade polyglot codebase knowledge graph genera
 
 **No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
 
+Stop uploading proprietary code to the cloud just to understand it. ReadMenator builds production-grade codebase knowledge graphs 100% offline—with zero LLMs, zero token costs, and absolute data privacy.
+
 ## Supported Languages (13)
 
 C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly.
+
+Accelerate developer onboarding without compromising your security. ReadMenator uses pure static analysis to map architectures and trace dependencies locally, giving you a complete codebase knowledge base for free.
+
+Tired of burning LLM tokens to navigate legacy code? ReadMenator generates full Mermaid dependency graphs and answers architectural queries right from your terminal, completely offline and with zero cloud costs.
 
 ## Installation
 
