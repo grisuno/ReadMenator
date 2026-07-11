@@ -14,7 +14,7 @@ Accelerate developer onboarding without compromising your security. ReadMenator 
 
 Tired of burning LLM tokens to navigate legacy code? ReadMenator generates full Mermaid dependency graphs and answers architectural queries right from your terminal, completely offline and with zero cloud costs.
 
-## Installation
+## [Installation](https://pypi.org/project/readmenator/)
 
 ```bash
 pip install readmenator 
