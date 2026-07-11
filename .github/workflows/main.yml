@@ -41,4 +41,8 @@ jobs:
           git config --global user.email "readmenator-bot@users.noreply.github.com"
 
       - name: Run Orchestrator
+        env:
+          GITHUB_USER: grisuno
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 readmenator_orchestrator.py
