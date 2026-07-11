@@ -117,11 +117,20 @@ class RepositoryProcessor:
         self.github = github_client
         self.token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
 
-    def _get_auth_url(self, repo: str) -> str:
-        """Constructs the authenticated GitHub URL for a repository."""
-        if self.token:
-            return f"https://{self.token}@github.com/{self.github.user}/{repo}.git"
-        return f"https://github.com/{self.github.user}/{repo}.git"
+    def _configure_git_credentials(self, repo_dir: Path) -> None:
+        """Configures Git to use the GitHub token via credential helper."""
+        if not self.token:
+            return
+        
+        # Configure git to use the store credential helper temporarily
+        # and pre-fill the credentials for github.com
+        credential_store_path = repo_dir / ".git_credentials"
+        credential_store_path.write_text(f"https://{self.token}@github.com\n")
+        
+        subprocess.run(
+            ["git", "config", "credential.helper", f"store --file {credential_store_path}"],
+            cwd=repo_dir, check=True, capture_output=True
+        )
 
     def process(self, repo: str) -> tuple:
         """Executes the full processing pipeline for a single repository."""
@@ -163,7 +172,11 @@ class RepositoryProcessor:
         """Clones the repository into a secure temporary directory."""
         temp_dir = Path(tempfile.mkdtemp(prefix=f"readmenator_{repo}_"))
         try:
-            clone_url = self._get_auth_url(repo)
+            # Use token for cloning if available
+            clone_url = f"https://github.com/{self.github.user}/{repo}.git"
+            if self.token:
+                clone_url = f"https://{self.token}@github.com/{self.github.user}/{repo}.git"
+            
             subprocess.run(
                 ["git", "clone", "--depth", "1", clone_url, str(temp_dir)],
                 check=True, capture_output=True, text=True
@@ -214,12 +227,7 @@ class RepositoryProcessor:
         env["GIT_COMMITTER_EMAIL"] = self.config.git_user_email
 
         try:
-            # Ensure remote URL has auth token
-            auth_url = self._get_auth_url(repo)
-            subprocess.run(
-                ["git", "remote", "set-url", "origin", auth_url],
-                cwd=repo_dir, check=True, capture_output=True
-            )
+            self._configure_git_credentials(repo_dir)
             
             subprocess.run(
                 ["git", "checkout", "-B", self.config.target_branch], 
