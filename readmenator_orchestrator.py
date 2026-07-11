@@ -117,18 +117,28 @@ class RepositoryProcessor:
         self.github = github_client
         self.token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
 
-    def _configure_git_credentials(self, repo_dir: Path) -> None:
-        """Configures Git to use the GitHub token via credential helper."""
+    def _setup_git_auth(self, repo_dir: Path) -> None:
+        """Configures Git credential helper to use the token securely."""
         if not self.token:
             return
         
-        # Configure git to use the store credential helper temporarily
-        # and pre-fill the credentials for github.com
-        credential_store_path = repo_dir / ".git_credentials"
-        credential_store_path.write_text(f"https://{self.token}@github.com\n")
+        cred_file = repo_dir / ".git-credentials"
+        # Format: https://<token>@github.com
+        # Note: For GitHub Actions, the token acts as both username and password in some contexts,
+        # but standard format is https://x-access-token:<token>@github.com or just <token>@github.com
+        # Using x-access-token is the most reliable for GITHUB_TOKEN in Actions.
+        cred_line = f"https://x-access-token:{self.token}@github.com\n"
+        cred_file.write_text(cred_line)
         
+        # Configure local git to use this specific credential file
         subprocess.run(
-            ["git", "config", "credential.helper", f"store --file {credential_store_path}"],
+            ["git", "config", "credential.helper", f"store --file={cred_file}"],
+            cwd=repo_dir, check=True, capture_output=True
+        )
+        
+        # Ensure remote URL is clean (no embedded token) to avoid conflicts
+        subprocess.run(
+            ["git", "remote", "set-url", "origin", f"https://github.com/{self.github.user}/{repo_dir.name}.git"],
             cwd=repo_dir, check=True, capture_output=True
         )
 
@@ -143,6 +153,9 @@ class RepositoryProcessor:
             return False, "Failed to clone repository"
 
         try:
+            # Setup auth immediately after clone
+            self._setup_git_auth(temp_dir)
+
             generated_file = self._run_readmenator(temp_dir)
             if not generated_file or not generated_file.exists():
                 return False, "Readmenator did not generate the output file"
@@ -172,10 +185,9 @@ class RepositoryProcessor:
         """Clones the repository into a secure temporary directory."""
         temp_dir = Path(tempfile.mkdtemp(prefix=f"readmenator_{repo}_"))
         try:
-            # Use token for cloning if available
-            clone_url = f"https://github.com/{self.github.user}/{repo}.git"
-            if self.token:
-                clone_url = f"https://{self.token}@github.com/{self.github.user}/{repo}.git"
+            # Clone using token in URL initially to ensure access
+            # We will switch to credential helper immediately after
+            clone_url = f"https://x-access-token:{self.token}@github.com/{self.github.user}/{repo}.git" if self.token else f"https://github.com/{self.github.user}/{repo}.git"
             
             subprocess.run(
                 ["git", "clone", "--depth", "1", clone_url, str(temp_dir)],
@@ -227,8 +239,6 @@ class RepositoryProcessor:
         env["GIT_COMMITTER_EMAIL"] = self.config.git_user_email
 
         try:
-            self._configure_git_credentials(repo_dir)
-            
             subprocess.run(
                 ["git", "checkout", "-B", self.config.target_branch], 
                 cwd=repo_dir, check=True, capture_output=True, env=env
