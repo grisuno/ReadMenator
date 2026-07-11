@@ -704,7 +704,7 @@ class DocumentationGenerator:
             "# Polyglot Codebase Knowledge Graph",
             "",
             "> Generated offline by **readmenator**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.",
-            "> No LLMs. No tokens. Pure static analysis.",
+            "> No LLMs. No tokens. Pure static analysis. See more [here](https://github.com/grisuno/ReadMenator) ",
             "",
             f"**Total Files Parsed:** {len(nodes)} | **Total Symbols Extracted:** {total_symbols} | **Total Imports:** {len(edges)}",
             "",
