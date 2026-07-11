@@ -1,3 +1,10 @@
+"""Immutable configuration dataclass for readmenator.
+
+All tuneable parameters live here as frozen dataclass fields. No magic
+numbers or hardcoded paths exist elsewhere in the codebase. Derived
+consumers import Config and read values from an instance.
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -6,6 +13,12 @@ from typing import Tuple
 
 @dataclass(frozen=True)
 class Config:
+    """Single source of truth for all readmenator settings.
+
+    Every tuneable constant -- file-size limits, directory depth,
+    supported extensions, symbol pluralisation map, and Mermaid style
+    tokens -- is defined here and consumed by reference elsewhere.
+    """
     IGNORE_DIRS: Tuple[str, ...] = (
         ".git", "__pycache__", "venv", ".venv", "env", ".env", "node_modules",
         ".tox", ".eggs", ".pytest_cache", "build", "dist", ".idea", ".vscode",

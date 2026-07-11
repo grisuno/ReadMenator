@@ -1,3 +1,11 @@
+"""KNOWLEDGE_BASE.md generator for the readmenator project.
+
+Produces the human-readable Markdown artifact that contains the
+structural knowledge map (Mermaid graph), architecture reference
+grouped by language, and per-file symbol listings with docstrings
+and signatures.
+"""
+
 from __future__ import annotations
 
 from typing import Dict, List
@@ -8,12 +16,33 @@ from readmenator._models import Edge, Node, Symbol, pluralize_symbol_kind
 
 
 class DocumentationGenerator:
+    """Builds the KNOWLEDGE_BASE.md document from scanned nodes and edges.
+
+    Delegates graph rendering to MermaidRenderer and handles the
+    Markdown layout: header metadata, Mermaid block, and per-language
+    architecture sections with pluralised symbol kind headings.
+    """
+
     def __init__(self, config: Config) -> None:
+        """Initialise with config and pre-compute the plural map.
+
+        Args:
+            config: Application settings including SYMBOL_TYPE_PLURALS.
+        """
         self._config = config
         self._mermaid = MermaidRenderer(config)
         self._plural_map: Dict[str, str] = dict(config.SYMBOL_TYPE_PLURALS)
 
     def generate(self, nodes: List[Node], edges: List[Edge]) -> str:
+        """Assemble the full KNOWLEDGE_BASE.md Markdown document.
+
+        Groups files by language, lists symbols per file under
+        pluralised kind headings (e.g. "Classes", "Functions"),
+        and includes a note when the Mermaid graph was pruned.
+
+        Returns:
+            Complete Markdown string ready to write to disk.
+        """
         total_symbols = sum(len(n.symbols) for n in nodes)
         graph_output, is_truncated = self._mermaid.render(nodes, edges)
 

@@ -462,133 +462,322 @@ graph TD
 **Path:** `readmenator/__main__.py`
 
 **Functions:**
-- `build_parser` (line 12) `def build_parser()`
-- `_run_tests` (line 47) `def _run_tests()`
-- `main` (line 62) `def main()`
+- `build_parser` (line 19) `def build_parser()` - *Construct the argument parser with subcommand help and examples.*
+- `_run_tests` (line 55) `def _run_tests()` - *Discover and run the full test suite from the tests/ directory.*
+- `main` (line 71) `def main()` - *Primary CLI entry point invoked by ``python -m readmenator``.
+
+Supports direct subcommand dispatch (query, explain, path, summary,
+--rebuild, update) or falls back to the argument parser for the
+default workflow: generate or summarise KNOWLEDGE_BASE.md.*
 
 #### `_app.py`
 **Path:** `readmenator/_app.py`
 
 **Classes:**
-- `readmenatorApplication` (line 13) `class readmenatorApplication`
+- `readmenatorApplication` (line 20) `class readmenatorApplication` - *High-level facade for readmenator operations.
+
+Provides convenience methods for the full pipeline:
+  - ``run`` / ``rebuild``: scan + generate KNOWLEDGE_BASE.md
+  - ``query``, ``explain``, ``find_path``, ``summary``:
+    scan + query in a single call.*
 
 **Functions:**
-- `__init__` (line 14) `def __init__(self, config)`
-- `_scan` (line 21) `def _scan(self, target_dir)`
-- `run` (line 28) `def run(self, target_dir)`
-- `query` (line 42) `def query(self, target_dir, question)`
-- `explain` (line 47) `def explain(self, target_dir, symbol_name)`
-- `find_path` (line 59) `def find_path(self, target_dir, symbol_a, symbol_b)`
-- `summary` (line 72) `def summary(self, target_dir)`
-- `rebuild` (line 77) `def rebuild(self, target_dir)`
+- `__init__` (line 29) `def __init__(self, config)` - *Initialise the application with an optional custom config.
+
+Args:
+    config: Application settings; defaults to Config() if omitted.*
+- `_scan` (line 41) `def _scan(self, target_dir)` - *Resolve *target_dir* and run the scanner, caching results.*
+- `run` (line 49) `def run(self, target_dir)` - *Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
+
+Prints a summary of files, symbols, and imports on completion.*
+- `query` (line 67) `def query(self, target_dir, question)` - *Scan *target_dir* and answer *question* using the query engine.*
+- `explain` (line 73) `def explain(self, target_dir, symbol_name)` - *Scan *target_dir* and return a detailed explanation of *symbol_name*.*
+- `find_path` (line 86) `def find_path(self, target_dir, symbol_a, symbol_b)` - *Scan *target_dir* and find the shortest import path between two symbols.*
+- `summary` (line 100) `def summary(self, target_dir)` - *Scan *target_dir* and return a concise knowledge base overview.*
+- `rebuild` (line 106) `def rebuild(self, target_dir)` - *Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.*
 
 #### `_config.py`
 **Path:** `readmenator/_config.py`
 
 **Classes:**
-- `Config` (line 8) `class Config`
+- `Config` (line 15) `class Config` - *Single source of truth for all readmenator settings.
+
+Every tuneable constant -- file-size limits, directory depth,
+supported extensions, symbol pluralisation map, and Mermaid style
+tokens -- is defined here and consumed by reference elsewhere.*
 
 #### `_documentation.py`
 **Path:** `readmenator/_documentation.py`
 
 **Classes:**
-- `DocumentationGenerator` (line 10) `class DocumentationGenerator`
+- `DocumentationGenerator` (line 18) `class DocumentationGenerator` - *Builds the KNOWLEDGE_BASE.md document from scanned nodes and edges.
+
+Delegates graph rendering to MermaidRenderer and handles the
+Markdown layout: header metadata, Mermaid block, and per-language
+architecture sections with pluralised symbol kind headings.*
 
 **Functions:**
-- `__init__` (line 11) `def __init__(self, config)`
-- `generate` (line 16) `def generate(self, nodes, edges)`
+- `__init__` (line 26) `def __init__(self, config)` - *Initialise with config and pre-compute the plural map.
+
+Args:
+    config: Application settings including SYMBOL_TYPE_PLURALS.*
+- `generate` (line 36) `def generate(self, nodes, edges)` - *Assemble the full KNOWLEDGE_BASE.md Markdown document.
+
+Groups files by language, lists symbols per file under
+pluralised kind headings (e.g. "Classes", "Functions"),
+and includes a note when the Mermaid graph was pruned.
+
+Returns:
+    Complete Markdown string ready to write to disk.*
 
 #### `_mermaid.py`
 **Path:** `readmenator/_mermaid.py`
 
 **Classes:**
-- `MermaidRenderer` (line 10) `class MermaidRenderer`
+- `MermaidRenderer` (line 17) `class MermaidRenderer` - *Renders a knowledge graph to Mermaid JS flowchart syntax.
+
+Nodes are ordered by import count and symbol richness; the top
+``MERMAID_MAX_NODES`` entries are included. External dependencies
+(import targets not matching any scanned file) appear as dashed
+boxes.*
 
 **Functions:**
-- `__init__` (line 11) `def __init__(self, config)`
-- `_sanitize_id` (line 14) `def _sanitize_id(self, node_id)`
-- `render` (line 20) `def render(self, nodes, edges)`
+- `__init__` (line 26) `def __init__(self, config)` - *Initialise with configuration for style tokens and node limits.
+
+Args:
+    config: Provides MERMAID_* style strings and MERMAID_MAX_NODES.*
+- `_sanitize_id` (line 34) `def _sanitize_id(self, node_id)` - *Convert *node_id* to a Mermaid-safe identifier.
+
+Replaces non-alphanumeric characters with underscores and
+prepends ``n_`` if the result starts with a digit.*
+- `render` (line 45) `def render(self, nodes, edges)` - *Produce a Mermaid flowchart string and a truncation flag.
+
+Nodes are sorted by import popularity, then by symbol count.
+At most ``MERMAID_MAX_NODES`` items (files + child symbols +
+external deps) are emitted. External imports use dashed edges.
+
+Returns:
+    Tuple of (Mermaid source string, is_truncated bool).*
 
 #### `_models.py`
 **Path:** `readmenator/_models.py`
 
 **Classes:**
-- `Symbol` (line 8) `class Symbol`
-- `Node` (line 17) `class Node`
-- `Edge` (line 27) `class Edge`
+- `Symbol` (line 15) `class Symbol` - *A single code symbol extracted from a source file.
+
+Attributes:
+    name: Identifier of the symbol (class name, function name, etc.).
+    kind: Semantic type (class, function, struct, enum, ...).
+    line: One-based line number where the symbol is defined.
+    doc: Optional docstring or comment extracted from the source.
+    signature: Optional method or function signature snippet.*
+- `Node` (line 34) `class Node` - *A file node in the knowledge graph, containing its symbols.
+
+Attributes:
+    node_id: Relative path of the file used as a unique identifier.
+    label: Base file name for display purposes.
+    kind: Type of node (typically "module").
+    language: Programming language derived from the file extension.
+    doc: Optional file-level documentation string.
+    symbols: List of Symbol instances defined in this file.*
+- `Edge` (line 55) `class Edge` - *A directed relationship between two nodes in the knowledge graph.
+
+Attributes:
+    source: Node ID of the source (dependent) file.
+    target: Node ID of the target (dependency) file or module.
+    relation: Semantic relation label (e.g. "imports").*
 
 **Functions:**
-- `pluralize_symbol_kind` (line 33) `def pluralize_symbol_kind(kind, plural_map)`
+- `pluralize_symbol_kind` (line 69) `def pluralize_symbol_kind(kind, plural_map)` - *Return the plural form of *kind* according to *plural_map*.
+
+Falls back to appending ``"s"`` when the kind is not found.
+This prevents obvious misspellings like ``"Classs"``.*
 
 #### `_parsers.py`
 **Path:** `readmenator/_parsers.py`
 
 **Classes:**
-- `LanguageParser` (line 12) `class LanguageParser`
-- `CParser` (line 77) `class CParser(LanguageParser)`
-- `PythonParser` (line 146) `class PythonParser(LanguageParser)`
-- `GoParser` (line 193) `class GoParser(LanguageParser)`
-- `RustParser` (line 229) `class RustParser(LanguageParser)`
-- `JavaScriptParser` (line 277) `class JavaScriptParser(LanguageParser)`
-- `JavaParser` (line 320) `class JavaParser(LanguageParser)`
-- `CSharpParser` (line 353) `class CSharpParser(LanguageParser)`
-- `ShellParser` (line 386) `class ShellParser(LanguageParser)`
-- `PHPParser` (line 405) `class PHPParser(LanguageParser)`
-- `DartParser` (line 433) `class DartParser(LanguageParser)`
-- `GDScriptParser` (line 465) `class GDScriptParser(LanguageParser)`
-- `NimParser` (line 483) `class NimParser(LanguageParser)`
-- `AssemblyParser` (line 511) `class AssemblyParser(LanguageParser)`
+- `LanguageParser` (line 22) `class LanguageParser` - *Base class for all language-specific parsers.
+
+Subclasses must implement ``_extract_specifics`` to populate
+``self.symbols`` and ``self.imports``. Common utility methods
+``_extract_docstring`` and ``_extract_signature`` are provided
+for reuse across all parsers.*
+- `CParser` (line 118) `class CParser(LanguageParser)` - *Parser for C, C++ (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
+
+Extracts includes, structs, classes, functions, and preprocessor
+macros using regex heuristics tuned to C-family syntax.*
+- `PythonParser` (line 193) `class PythonParser(LanguageParser)` - *Parser for Python (.py) using the native ``ast`` module.
+
+Extracts imports, functions (including async), and class
+definitions with docstrings via ``ast.get_docstring``.*
+- `GoParser` (line 246) `class GoParser(LanguageParser)` - *Parser for Go (.go).
+
+Extracts import blocks or single import statements, exported
+functions (including methods), and type definitions (struct/interface).*
+- `RustParser` (line 288) `class RustParser(LanguageParser)` - *Parser for Rust (.rs).
+
+Extracts ``use`` imports, public and private functions,
+structs, traits, and enums.*
+- `JavaScriptParser` (line 342) `class JavaScriptParser(LanguageParser)` - *Parser for JavaScript / TypeScript (.js, .ts, .jsx, .tsx).
+
+Extracts ES module imports, CommonJS ``require`` calls, function
+declarations, arrow-function variables, and class definitions
+(including inheritance).*
+- `JavaParser` (line 392) `class JavaParser(LanguageParser)` - *Parser for Java (.java).
+
+Extracts import statements, class and interface declarations,
+and methods complete with access modifiers and type signatures.*
+- `CSharpParser` (line 431) `class CSharpParser(LanguageParser)` - *Parser for C# (.cs).
+
+Extracts ``using`` directives, class/struct/interface/record
+declarations, and methods with access modifiers.*
+- `ShellParser` (line 470) `class ShellParser(LanguageParser)` - *Parser for shell scripts (.sh, .bash, .zsh).
+
+Extracts function declarations in both POSIX (``name() {``)
+and ``function`` keyword syntax.*
+- `PHPParser` (line 495) `class PHPParser(LanguageParser)` - *Parser for PHP (.php).
+
+Extracts ``use/require/include`` (including ``_once`` variants),
+function declarations, and class declarations.*
+- `DartParser` (line 529) `class DartParser(LanguageParser)` - *Parser for Dart (.dart).
+
+Extracts import statements, class declarations (with extends),
+and top-level or method function declarations by return type.*
+- `GDScriptParser` (line 567) `class GDScriptParser(LanguageParser)` - *Parser for Godot GDScript (.gd).
+
+Extracts ``extends`` / ``class_name`` directives and ``func``
+method declarations.*
+- `NimParser` (line 591) `class NimParser(LanguageParser)` - *Parser for Nim (.nim).
+
+Extracts ``import`` statements, ``proc`` / ``func`` / ``method``
+declarations, and ``type`` definitions.*
+- `AssemblyParser` (line 625) `class AssemblyParser(LanguageParser)` - *Parser for assembly (.asm, .s, .S).
+
+Extracts labels at the start of a line (``label:``) as function
+symbols. This is a best-effort heuristic; local labels and
+directives are not always distinguishable.*
 
 **Functions:**
-- `create_parser` (line 555) `def create_parser(extension, filename, config)`
-- `__init__` (line 13) `def __init__(self, filename, config)`
-- `parse` (line 20) `def parse(self, content)`
-- `_extract_specifics` (line 24) `def _extract_specifics(self, content)`
-- `_extract_docstring` (line 27) `def _extract_docstring(self, line_num)`
-- `_extract_signature` (line 66) `def _extract_signature(self, content, match_start, pattern)`
-- `_extract_specifics` (line 78) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 147) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 194) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 230) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 278) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 321) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 354) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 387) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 406) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 434) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 466) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 484) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 512) `def _extract_specifics(self, content)`
+- `create_parser` (line 676) `def create_parser(extension, filename, config)` - *Factory: return a parser instance for *extension* or ``None``.
+
+Looks up the extension in ``_PARSER_MAP`` (case-insensitive).
+Returns ``None`` for unsupported extensions so the caller can
+silently skip unknown file types.*
+- `__init__` (line 31) `def __init__(self, filename, config)` - *Initialise the parser with a file path and application config.
+
+Args:
+    filename: Relative or absolute path of the source file.
+    config: Application-wide configuration settings.*
+- `parse` (line 44) `def parse(self, content)` - *Parse *content* and populate symbol/import lists.
+
+Splits the source into lines, then delegates to the subclass-
+specific ``_extract_specifics`` logic.*
+- `_extract_specifics` (line 53) `def _extract_specifics(self, content)` - *Subclass hook for language-specific symbol extraction.*
+- `_extract_docstring` (line 57) `def _extract_docstring(self, line_num)` - *Walk backwards from *line_num* to collect preceding comments/docstrings.
+
+Supports ``//``, ``///``, ``//!``, ``#``, ``/* */``, and ``/** */``
+comment styles. Truncates at ``DOCSTRING_MAX_LENGTH`` and limits
+lookback to ``DOCSTRING_LOOKBACK_LINES`` (both from Config).*
+- `_extract_signature` (line 102) `def _extract_signature(self, content, match_start, pattern)` - *Extract a compact signature snippet starting at *match_start*.
+
+Scans forward to the opening brace or a fallback length,
+then truncates to 100 characters for display.*
+- `_extract_specifics` (line 125) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 200) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 253) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 295) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 350) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 399) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 438) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 477) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 502) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 536) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 574) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 598) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 633) `def _extract_specifics(self, content)`
 
 #### `_query.py`
 **Path:** `readmenator/_query.py`
 
 **Classes:**
-- `QueryEngine` (line 9) `class QueryEngine`
+- `QueryEngine` (line 17) `class QueryEngine` - *In-memory query engine over the scanned knowledge graph.
+
+Builds a symbol-name index and an import-adjacency graph on
+construction. Provides exact and fuzzy symbol lookup, detailed
+explanation output, BFS shortest-path resolution, free-text
+search, and a summary report.*
 
 **Functions:**
-- `__init__` (line 10) `def __init__(self, nodes, edges)`
-- `_build_symbol_index` (line 16) `def _build_symbol_index(self)`
-- `_build_import_graph` (line 25) `def _build_import_graph(self)`
-- `find_symbol` (line 36) `def find_symbol(self, name)`
-- `explain` (line 49) `def explain(self, name)`
-- `_find_incoming_imports` (line 77) `def _find_incoming_imports(self, target)`
-- `find_path` (line 84) `def find_path(self, symbol_a, symbol_b)`
-- `query` (line 113) `def query(self, question)`
-- `summary` (line 162) `def summary(self)`
+- `__init__` (line 26) `def __init__(self, nodes, edges)` - *Initialise internal indexes from scanned data.
+
+Args:
+    nodes: List of scanned file nodes.
+    edges: List of import-relationship edges.*
+- `_build_symbol_index` (line 38) `def _build_symbol_index(self)` - *Build a name-to-list-of-(node, symbol) lookup.
+
+Returns:
+    Dict mapping symbol names to list of (Node, Symbol) tuples.*
+- `_build_import_graph` (line 52) `def _build_import_graph(self)` - *Build an adjacency map from import edges.
+
+Returns:
+    Dict mapping each file node_id to its set of import targets.*
+- `find_symbol` (line 68) `def find_symbol(self, name)` - *Look up *name* by exact match, then by substring fuzzy match.
+
+Returns:
+    A list of (Node, Symbol) tuples, or ``None`` if not found.*
+- `explain` (line 86) `def explain(self, name)` - *Return a detailed multi-line explanation of *name*.
+
+Includes kind, file path, line number, docstring, signature,
+imports, reverse dependencies ("imported by"), and sibling
+symbols in the same file.
+
+Returns:
+    Formatted string or ``None`` if the symbol is not found.*
+- `_find_incoming_imports` (line 123) `def _find_incoming_imports(self, target)` - *List all node IDs that import *target*.*
+- `find_path` (line 131) `def find_path(self, symbol_a, symbol_b)` - *Find the shortest import path from *symbol_a* to *symbol_b*.
+
+Uses BFS on the import graph. Returns a list of file node IDs
+forming the dependency chain, or ``None`` if no path exists.*
+- `query` (line 165) `def query(self, question)` - *Free-text search over symbols and file paths.
+
+Tokenises the input, matches against symbol names (substring)
+and then against file paths as a fallback. Returns a
+human-readable result string summarising matches or a
+no-results message with KB statistics.*
+- `summary` (line 221) `def summary(self)` - *Return a concise overview of the loaded knowledge base.
+
+Reports file count, symbol count, import count, language
+diversity, top-level modules (by import popularity), and
+lists of key class-like and function-like symbols.*
 
 #### `_scanner.py`
 **Path:** `readmenator/_scanner.py`
 
 **Classes:**
-- `PolyglotScanner` (line 11) `class PolyglotScanner`
+- `PolyglotScanner` (line 18) `class PolyglotScanner` - *Recursive directory scanner with security and size guards.
+
+Rejects symlinks, enforces file-size and directory-depth limits,
+skips ignored directories, and silently catches parse errors
+so a single misbehaving file never breaks the full scan.*
 
 **Functions:**
-- `__init__` (line 12) `def __init__(self, config)`
-- `_is_ignored` (line 15) `def _is_ignored(self, path)`
-- `_validate_path_security` (line 18) `def _validate_path_security(self, path)`
-- `_check_directory_depth` (line 30) `def _check_directory_depth(self, path, root)`
-- `scan` (line 37) `def scan(self, root)`
+- `__init__` (line 26) `def __init__(self, config)` - *Initialise the scanner with application configuration.
+
+Args:
+    config: Settings including ignore dirs, size limits, etc.*
+- `_is_ignored` (line 34) `def _is_ignored(self, path)` - *Return ``True`` if any path component matches IGNORE_DIRS.*
+- `_validate_path_security` (line 38) `def _validate_path_security(self, path)` - *Reject symlinks and files exceeding MAX_FILE_SIZE_MB.*
+- `_check_directory_depth` (line 51) `def _check_directory_depth(self, path, root)` - *Return ``True`` if *path* is within MAX_DIRECTORY_DEPTH of *root*.*
+- `scan` (line 59) `def scan(self, root)` - *Walk *root* recursively and produce (nodes, edges) for the graph.
+
+Security checks (symlinks, size, depth, ignore dirs) are applied
+per file. Parse failures are silently caught so a single broken
+file never blocks the rest of the scan.
+
+Returns:
+    A tuple of (list of Node, list of Edge). Edges represent
+    ``imports`` relationships between scanned files.*
 
 #### `readmenator.py`
 **Path:** `readmenator.py`

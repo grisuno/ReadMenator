@@ -1,3 +1,10 @@
+"""CLI entry point for readmenator.
+
+Parses command-line arguments, dispatches to the appropriate subcommand
+(query, explain, path, summary, --rebuild, --test), and manages the
+target directory analysis lifecycle.
+"""
+
 from __future__ import annotations
 
 import argparse
@@ -10,6 +17,7 @@ from readmenator._app import readmenatorApplication
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """Construct the argument parser with subcommand help and examples."""
     parser = argparse.ArgumentParser(
         description="ReadMenator: Zero-token polyglot codebase knowledge graph generator.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -45,6 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _run_tests() -> None:
+    """Discover and run the full test suite from the tests/ directory."""
     package_dir = Path(__file__).resolve().parent.parent
     tests_dir = package_dir / "tests"
     if tests_dir.is_dir():
@@ -60,7 +69,13 @@ def _run_tests() -> None:
 
 
 def main() -> None:
-    if len(sys.argv) > 1 and sys.argv[1] == "--test":
+    """Primary CLI entry point invoked by ``python -m readmenator``.
+
+    Supports direct subcommand dispatch (query, explain, path, summary,
+    --rebuild, update) or falls back to the argument parser for the
+    default workflow: generate or summarise KNOWLEDGE_BASE.md.
+    """
+    if "--test" in sys.argv:
         _run_tests()
         return
 

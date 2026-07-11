@@ -1,3 +1,13 @@
+"""Language parsers for code symbol extraction.
+
+Implements the Strategy pattern with a common LanguageParser base,
+13 concrete subclasses (one per supported language), and a factory
+function ``create_parser`` that maps file extensions to parser classes.
+
+Python uses the native ``ast`` module; all other languages rely on
+regex-based heuristics tuned to each language's grammar.
+"""
+
 from __future__ import annotations
 
 import ast
@@ -10,7 +20,21 @@ from readmenator._models import Symbol
 
 
 class LanguageParser:
+    """Base class for all language-specific parsers.
+
+    Subclasses must implement ``_extract_specifics`` to populate
+    ``self.symbols`` and ``self.imports``. Common utility methods
+    ``_extract_docstring`` and ``_extract_signature`` are provided
+    for reuse across all parsers.
+    """
+
     def __init__(self, filename: str, config: Config) -> None:
+        """Initialise the parser with a file path and application config.
+
+        Args:
+            filename: Relative or absolute path of the source file.
+            config: Application-wide configuration settings.
+        """
         self.filename = filename
         self.config = config
         self.symbols: List[Symbol] = []
@@ -18,13 +42,25 @@ class LanguageParser:
         self.lines: List[str] = []
 
     def parse(self, content: str) -> None:
+        """Parse *content* and populate symbol/import lists.
+
+        Splits the source into lines, then delegates to the subclass-
+        specific ``_extract_specifics`` logic.
+        """
         self.lines = content.split("\n")
         self._extract_specifics(content)
 
     def _extract_specifics(self, content: str) -> None:
+        """Subclass hook for language-specific symbol extraction."""
         raise NotImplementedError
 
     def _extract_docstring(self, line_num: int) -> str:
+        """Walk backwards from *line_num* to collect preceding comments/docstrings.
+
+        Supports ``//``, ``///``, ``//!``, ``#``, ``/* */``, and ``/** */``
+        comment styles. Truncates at ``DOCSTRING_MAX_LENGTH`` and limits
+        lookback to ``DOCSTRING_LOOKBACK_LINES`` (both from Config).
+        """
         if line_num >= len(self.lines):
             return ""
         doc_lines: List[str] = []
@@ -64,6 +100,11 @@ class LanguageParser:
         return doc
 
     def _extract_signature(self, content: str, match_start: int, pattern: str) -> str:
+        """Extract a compact signature snippet starting at *match_start*.
+
+        Scans forward to the opening brace or a fallback length,
+        then truncates to 100 characters for display.
+        """
         start = match_start
         end = content.find("{", start)
         if end == -1:
@@ -75,6 +116,12 @@ class LanguageParser:
 
 
 class CParser(LanguageParser):
+    """Parser for C, C++ (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
+
+    Extracts includes, structs, classes, functions, and preprocessor
+    macros using regex heuristics tuned to C-family syntax.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(
             r'^\s*#\s*include\s*[<"]([^>"]+)[>"]', content, re.MULTILINE
@@ -144,6 +191,12 @@ class CParser(LanguageParser):
 
 
 class PythonParser(LanguageParser):
+    """Parser for Python (.py) using the native ``ast`` module.
+
+    Extracts imports, functions (including async), and class
+    definitions with docstrings via ``ast.get_docstring``.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", SyntaxWarning)
@@ -191,6 +244,12 @@ class PythonParser(LanguageParser):
 
 
 class GoParser(LanguageParser):
+    """Parser for Go (.go).
+
+    Extracts import blocks or single import statements, exported
+    functions (including methods), and type definitions (struct/interface).
+    """
+
     def _extract_specifics(self, content: str) -> None:
         block = re.search(r"import\s*\((.*?)\)", content, re.DOTALL)
         if block:
@@ -227,6 +286,12 @@ class GoParser(LanguageParser):
 
 
 class RustParser(LanguageParser):
+    """Parser for Rust (.rs).
+
+    Extracts ``use`` imports, public and private functions,
+    structs, traits, and enums.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"^use\s+([\w:]+)", content, re.MULTILINE):
             self.imports.append(m.group(1))
@@ -275,6 +340,13 @@ class RustParser(LanguageParser):
 
 
 class JavaScriptParser(LanguageParser):
+    """Parser for JavaScript / TypeScript (.js, .ts, .jsx, .tsx).
+
+    Extracts ES module imports, CommonJS ``require`` calls, function
+    declarations, arrow-function variables, and class definitions
+    (including inheritance).
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(
             r"""import\s+(?:\{[^}]*\}\s+from\s+)?['"]([^'"]+)['"]""", content
@@ -318,6 +390,12 @@ class JavaScriptParser(LanguageParser):
 
 
 class JavaParser(LanguageParser):
+    """Parser for Java (.java).
+
+    Extracts import statements, class and interface declarations,
+    and methods complete with access modifiers and type signatures.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"^import\s+([\w.]+)", content, re.MULTILINE):
             self.imports.append(m.group(1))
@@ -351,6 +429,12 @@ class JavaParser(LanguageParser):
 
 
 class CSharpParser(LanguageParser):
+    """Parser for C# (.cs).
+
+    Extracts ``using`` directives, class/struct/interface/record
+    declarations, and methods with access modifiers.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"^using\s+([\w.]+)", content, re.MULTILINE):
             self.imports.append(m.group(1))
@@ -384,6 +468,12 @@ class CSharpParser(LanguageParser):
 
 
 class ShellParser(LanguageParser):
+    """Parser for shell scripts (.sh, .bash, .zsh).
+
+    Extracts function declarations in both POSIX (``name() {``)
+    and ``function`` keyword syntax.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         patterns = [
             r"^(\w+)\s*\(\)\s*\{",
@@ -403,6 +493,12 @@ class ShellParser(LanguageParser):
 
 
 class PHPParser(LanguageParser):
+    """Parser for PHP (.php).
+
+    Extracts ``use/require/include`` (including ``_once`` variants),
+    function declarations, and class declarations.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(
             r"(?:use|require|include)(?:_once)?\s+['\"]?([^'\";\s]+)", content
@@ -431,6 +527,12 @@ class PHPParser(LanguageParser):
 
 
 class DartParser(LanguageParser):
+    """Parser for Dart (.dart).
+
+    Extracts import statements, class declarations (with extends),
+    and top-level or method function declarations by return type.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"""import\s+['"]([^'"]+)['"]""", content):
             self.imports.append(m.group(1))
@@ -463,6 +565,12 @@ class DartParser(LanguageParser):
 
 
 class GDScriptParser(LanguageParser):
+    """Parser for Godot GDScript (.gd).
+
+    Extracts ``extends`` / ``class_name`` directives and ``func``
+    method declarations.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(
             r"^(?:extends|class_name)\s+(\w+)", content, re.MULTILINE
@@ -481,6 +589,12 @@ class GDScriptParser(LanguageParser):
 
 
 class NimParser(LanguageParser):
+    """Parser for Nim (.nim).
+
+    Extracts ``import`` statements, ``proc`` / ``func`` / ``method``
+    declarations, and ``type`` definitions.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"^import\s+([\w,/ ]+)", content, re.MULTILINE):
             self.imports.extend(x.strip() for x in m.group(1).split(","))
@@ -509,6 +623,13 @@ class NimParser(LanguageParser):
 
 
 class AssemblyParser(LanguageParser):
+    """Parser for assembly (.asm, .s, .S).
+
+    Extracts labels at the start of a line (``label:``) as function
+    symbols. This is a best-effort heuristic; local labels and
+    directives are not always distinguishable.
+    """
+
     def _extract_specifics(self, content: str) -> None:
         for m in re.finditer(r"^([a-zA-Z_]\w*):", content, re.MULTILINE):
             line_num = content[: m.start()].count("\n")
@@ -555,6 +676,12 @@ _PARSER_MAP: Dict[str, Type[LanguageParser]] = {
 def create_parser(
     extension: str, filename: str, config: Config
 ) -> Optional[LanguageParser]:
+    """Factory: return a parser instance for *extension* or ``None``.
+
+    Looks up the extension in ``_PARSER_MAP`` (case-insensitive).
+    Returns ``None`` for unsupported extensions so the caller can
+    silently skip unknown file types.
+    """
     parser_class = _PARSER_MAP.get(extension.lower())
     if parser_class is not None:
         return parser_class(filename, config)

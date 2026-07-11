@@ -1,3 +1,10 @@
+"""Secure polyglot directory traversal and file analysis.
+
+The scanner walks a directory tree, applies security and size checks,
+resolves each supported file through ParserFactory, and returns a
+flat list of Node and Edge objects that form the knowledge graph.
+"""
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -9,13 +16,27 @@ from readmenator._parsers import create_parser
 
 
 class PolyglotScanner:
+    """Recursive directory scanner with security and size guards.
+
+    Rejects symlinks, enforces file-size and directory-depth limits,
+    skips ignored directories, and silently catches parse errors
+    so a single misbehaving file never breaks the full scan.
+    """
+
     def __init__(self, config: Config) -> None:
+        """Initialise the scanner with application configuration.
+
+        Args:
+            config: Settings including ignore dirs, size limits, etc.
+        """
         self._config = config
 
     def _is_ignored(self, path: Path) -> bool:
+        """Return ``True`` if any path component matches IGNORE_DIRS."""
         return any(part in self._config.IGNORE_DIRS for part in path.parts)
 
     def _validate_path_security(self, path: Path) -> bool:
+        """Reject symlinks and files exceeding MAX_FILE_SIZE_MB."""
         try:
             if path.is_symlink():
                 return False
@@ -28,6 +49,7 @@ class PolyglotScanner:
             return False
 
     def _check_directory_depth(self, path: Path, root: Path) -> bool:
+        """Return ``True`` if *path* is within MAX_DIRECTORY_DEPTH of *root*."""
         try:
             rel_path = path.relative_to(root)
             return len(rel_path.parts) <= self._config.MAX_DIRECTORY_DEPTH
@@ -35,6 +57,16 @@ class PolyglotScanner:
             return False
 
     def scan(self, root: Path) -> Tuple[List[Node], List[Edge]]:
+        """Walk *root* recursively and produce (nodes, edges) for the graph.
+
+        Security checks (symlinks, size, depth, ignore dirs) are applied
+        per file. Parse failures are silently caught so a single broken
+        file never blocks the rest of the scan.
+
+        Returns:
+            A tuple of (list of Node, list of Edge). Edges represent
+            ``imports`` relationships between scanned files.
+        """
         nodes: List[Node] = []
         edges: List[Edge] = []
 

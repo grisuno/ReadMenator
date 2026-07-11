@@ -1,3 +1,10 @@
+"""Mermaid graph renderer with intelligent pruning.
+
+Converts the internal Node/Edge graph into a Mermaid flowchart
+(string) suitable for embedding in Markdown. Handles node limits,
+deduplication, and CSS-like class styling.
+"""
+
 from __future__ import annotations
 
 import re
@@ -8,16 +15,43 @@ from readmenator._models import Edge, Node
 
 
 class MermaidRenderer:
+    """Renders a knowledge graph to Mermaid JS flowchart syntax.
+
+    Nodes are ordered by import count and symbol richness; the top
+    ``MERMAID_MAX_NODES`` entries are included. External dependencies
+    (import targets not matching any scanned file) appear as dashed
+    boxes.
+    """
+
     def __init__(self, config: Config) -> None:
+        """Initialise with configuration for style tokens and node limits.
+
+        Args:
+            config: Provides MERMAID_* style strings and MERMAID_MAX_NODES.
+        """
         self._config = config
 
     def _sanitize_id(self, node_id: str) -> str:
+        """Convert *node_id* to a Mermaid-safe identifier.
+
+        Replaces non-alphanumeric characters with underscores and
+        prepends ``n_`` if the result starts with a digit.
+        """
         sanitized = re.sub(r"[^a-zA-Z0-9]", "_", node_id)
         if sanitized and sanitized[0].isdigit():
             sanitized = "n_" + sanitized
         return sanitized
 
     def render(self, nodes: List[Node], edges: List[Edge]) -> Tuple[str, bool]:
+        """Produce a Mermaid flowchart string and a truncation flag.
+
+        Nodes are sorted by import popularity, then by symbol count.
+        At most ``MERMAID_MAX_NODES`` items (files + child symbols +
+        external deps) are emitted. External imports use dashed edges.
+
+        Returns:
+            Tuple of (Mermaid source string, is_truncated bool).
+        """
         lines: List[str] = ["graph TD"]
         lines.append(f"    classDef mod {self._config.MERMAID_MODULE_STYLE};")
         lines.append(f"    classDef cls {self._config.MERMAID_CLASS_STYLE};")

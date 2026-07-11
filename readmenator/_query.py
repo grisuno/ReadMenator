@@ -1,3 +1,11 @@
+"""Query engine for the readmenator knowledge base.
+
+Supports natural-language-like search (``query``), symbol explanation
+(``explain``), dependency-path tracing (``find_path``), and a concise
+codebase overview (``summary``). All queries operate on an in-memory
+index built from the scanned Node/Edge list.
+"""
+
 from __future__ import annotations
 
 from collections import deque
@@ -7,13 +15,32 @@ from readmenator._models import Edge, Node, Symbol
 
 
 class QueryEngine:
+    """In-memory query engine over the scanned knowledge graph.
+
+    Builds a symbol-name index and an import-adjacency graph on
+    construction. Provides exact and fuzzy symbol lookup, detailed
+    explanation output, BFS shortest-path resolution, free-text
+    search, and a summary report.
+    """
+
     def __init__(self, nodes: List[Node], edges: List[Edge]) -> None:
+        """Initialise internal indexes from scanned data.
+
+        Args:
+            nodes: List of scanned file nodes.
+            edges: List of import-relationship edges.
+        """
         self._nodes = nodes
         self._edges = edges
         self._symbol_index: Dict[str, List[tuple]] = self._build_symbol_index()
         self._import_graph: Dict[str, Set[str]] = self._build_import_graph()
 
     def _build_symbol_index(self) -> Dict[str, List[tuple]]:
+        """Build a name-to-list-of-(node, symbol) lookup.
+
+        Returns:
+            Dict mapping symbol names to list of (Node, Symbol) tuples.
+        """
         index: Dict[str, List[tuple]] = {}
         for node in self._nodes:
             for symbol in node.symbols:
@@ -23,6 +50,11 @@ class QueryEngine:
         return index
 
     def _build_import_graph(self) -> Dict[str, Set[str]]:
+        """Build an adjacency map from import edges.
+
+        Returns:
+            Dict mapping each file node_id to its set of import targets.
+        """
         graph: Dict[str, Set[str]] = {}
         for edge in self._edges:
             if edge.relation == "imports":
@@ -34,6 +66,11 @@ class QueryEngine:
         return graph
 
     def find_symbol(self, name: str) -> Optional[List[tuple]]:
+        """Look up *name* by exact match, then by substring fuzzy match.
+
+        Returns:
+            A list of (Node, Symbol) tuples, or ``None`` if not found.
+        """
         results = self._symbol_index.get(name)
         if results:
             return results
@@ -47,6 +84,15 @@ class QueryEngine:
         return None
 
     def explain(self, name: str) -> Optional[str]:
+        """Return a detailed multi-line explanation of *name*.
+
+        Includes kind, file path, line number, docstring, signature,
+        imports, reverse dependencies ("imported by"), and sibling
+        symbols in the same file.
+
+        Returns:
+            Formatted string or ``None`` if the symbol is not found.
+        """
         results = self.find_symbol(name)
         if results is None:
             return None
@@ -75,6 +121,7 @@ class QueryEngine:
         return "\n".join(lines)
 
     def _find_incoming_imports(self, target: str) -> List[str]:
+        """List all node IDs that import *target*."""
         result: List[str] = []
         for edge in self._edges:
             if edge.relation == "imports" and edge.target == target:
@@ -82,6 +129,11 @@ class QueryEngine:
         return result
 
     def find_path(self, symbol_a: str, symbol_b: str) -> Optional[List[str]]:
+        """Find the shortest import path from *symbol_a* to *symbol_b*.
+
+        Uses BFS on the import graph. Returns a list of file node IDs
+        forming the dependency chain, or ``None`` if no path exists.
+        """
         results_a = self.find_symbol(symbol_a)
         results_b = self.find_symbol(symbol_b)
         if not results_a or not results_b:
@@ -111,6 +163,13 @@ class QueryEngine:
         return None
 
     def query(self, question: str) -> str:
+        """Free-text search over symbols and file paths.
+
+        Tokenises the input, matches against symbol names (substring)
+        and then against file paths as a fallback. Returns a
+        human-readable result string summarising matches or a
+        no-results message with KB statistics.
+        """
         terms = question.lower().split()
         relevant_symbols: List[tuple] = []
         for term in terms:
@@ -160,6 +219,12 @@ class QueryEngine:
         return "\n".join(lines)
 
     def summary(self) -> str:
+        """Return a concise overview of the loaded knowledge base.
+
+        Reports file count, symbol count, import count, language
+        diversity, top-level modules (by import popularity), and
+        lists of key class-like and function-like symbols.
+        """
         nodes = self._nodes
         edges = self._edges
         total_symbols = sum(len(n.symbols) for n in nodes)
