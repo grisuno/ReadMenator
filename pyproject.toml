@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools>=68.0"]
-build-backend = "setuptools.backends._legacy:_Backend"
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
 
 [project]
 name = "readmenator"
@@ -25,8 +25,22 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
-[tool.setuptools.packages.find]
-include = ["readmenator*"]
+[project.urls]
+Homepage = "https://github.com/grisuno/ReadMenator"
+Repository = "https://github.com/grisuno/ReadMenator"
+Documentation = "https://github.com/grisuno/ReadMenator"
+Issues = "https://github.com/grisuno/ReadMenator/issues"
 
-[tool.setuptools.package-data]
-readmenator = ["py.typed"]
+[project.scripts]
+readmenator = "readmenator.__main__:main"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/readmenator",
+    "/readmenator.py",
+    "/readmenator_orchestrator.py",
+    "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["readmenator"]
