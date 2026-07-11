@@ -181,20 +181,15 @@ class RepositoryProcessor:
             return None
 
     def _run_readmenator(self, repo_dir: Path) -> Optional[Path]:
-        """Executes the readmenator script on the cloned repository."""
-        script_path = Path(__file__).parent / self.config.readmenator_script_name
-        if not script_path.exists():
-            logging.error("Readmenator script not found at %s", script_path)
-            return None
-
         output_file = repo_dir / self.config.output_filename
         try:
             subprocess.run(
-                [sys.executable, str(script_path), str(repo_dir)],
+                [sys.executable, "-m", "readmenator", str(repo_dir)],
                 check=True,
                 capture_output=True,
                 text=True,
-                timeout=self.config.subprocess_timeout
+                timeout=self.config.subprocess_timeout,
+                cwd=Path(__file__).parent,
             )
             return output_file
         except subprocess.CalledProcessError as e:

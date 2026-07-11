@@ -1,72 +1,109 @@
 # ReadMenator
 
-A token-free, offline Polyglot Codebase Knowledge Graph generator.
+A token-free, offline, production-grade polyglot codebase knowledge graph generator.
 
-**No LLMs. No tokens. No cloud costs.** Pure static analysis.
+**No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
 
-### Features
+## Supported Languages (13)
 
-- Supports multiple languages: C, C++, Python, Go, Rust, JavaScript/TypeScript, Java, C#, Shell, PHP, and more.
-- Generates structural knowledge graphs with Mermaid diagrams.
-- Extracts classes, functions, imports, and relationships.
-- Creates detailed architecture references with line numbers and descriptions.
-- Works completely offline with zero token consumption.
-- Designed as a lightweight alternative to Graphify.
+C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly.
 
-### Usage
+## Installation
 
 ```bash
-python3 readmenator.py
-Usage:
-  Generate docs:  python readmenator.py /path/to/project
-  Run tests:      python readmenator.py --test
-
-Supported languages:
-  C/C++ (.c, .cpp, .h, .hpp)
-  Python (.py)
-  Go (.go)
-  Rust (.rs)
-  JavaScript/TypeScript (.js, .ts, .jsx, .tsx)
-  Java (.java)
-  C# (.cs)
-  Shell (.sh, .bash, .zsh)
-  PHP (.php)
-  Dart (.dart)
-  GDScript (.gd)
-  Nim (.nim)
-  Assembly (.asm, .s)
-
+pip install .
 ```
 
-Or specify a directory:
+Or run directly:
 
 ```bash
-python readmenator.py /path/to/your/project
+python -m readmenator /path/to/project
 ```
 
-Test suite
+## Usage
+
+### Generate knowledge base
 
 ```bash
+python -m readmenator /path/to/project
+```
+
+Creates `KNOWLEDGE_BASE.md` in the project root with a Mermaid dependency graph and full architecture reference.
+
+### Force regeneration
+
+```bash
+python -m readmenator /path/to/project --rebuild
+```
+
+### Query the knowledge base
+
+```bash
+python -m readmenator /path/to/project query "What classes handle HTTP?"
+```
+
+### Explain a symbol
+
+```bash
+python -m readmenator /path/to/project explain Database
+```
+
+### Trace dependency path
+
+```bash
+python -m readmenator /path/to/project path SymbolA SymbolB
+```
+
+### Show summary
+
+```bash
+python -m readmenator /path/to/project summary
+```
+
+### Run tests
+
+```bash
+python -m readmenator --test
+```
+
+## Backward Compatibility
+
+The existing `readmenator.py` wrapper preserves the original CLI interface:
+
+```bash
+python readmenator.py /path/to/project
 python readmenator.py --test
 ```
 
-The tool will generate a `KNOWLEDGE_BASE.md` file in the project root.
+## Architecture
 
-### Self-Documentation
+ReadMenator follows a contract-based design with strict separation of concerns:
 
-This repository is documented using ReadMenator itself.
+| Contract | File | Responsibility |
+|----------|------|----------------|
+| Config | `_config.py` | Immutable centralized configuration |
+| Models | `_models.py` | Symbol, Node, Edge data types |
+| Parsers | `_parsers.py` | 13 language parsers + factory (Strategy pattern) |
+| Scanner | `_scanner.py` | Secure directory walking and file processing |
+| Mermaid | `_mermaid.py` | Mermaid graph rendering |
+| Documentation | `_documentation.py` | KNOWLEDGE_BASE.md generation |
+| Query | `_query.py` | Interactive query/explain/path engine |
+| Application | `_app.py` | Application orchestrator |
+| CLI | `__main__.py` | CLI entry point and argument dispatch |
 
-readmenator See [KNOWLEDGE_BASE.md](https://github.com/grisuno/ReadMenator/blob/main/KNOWLEDGE_BASE.md) — the tool analyzing its own codebase.
+## Security
 
-### Why ReadMenator?
+- Symlinks are rejected
+- File size capped at 10 MB
+- Directory depth limited to 20
+- Binary/unreadable files are silently skipped
+- No absolute paths in code; no external network calls
+- All exceptions during parsing are caught
 
-While tools like Graphify depend on LLMs and consume large amounts of tokens, ReadMenator uses pure static analysis. It works reliably on small projects as well as large codebases without burning through your AI session limits.
+## Self-Documentation
 
-### License
+This repository is documented using ReadMenator itself. See [KNOWLEDGE_BASE.md](KNOWLEDGE_BASE.md) -- the tool analyzing its own codebase.
+
+## License
 
 AGPL-3.0
-
-
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) [![License: AGPL v3](https://img.shields.io/badge/License-AGPLv3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Y8Y2Z73AV)

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "readmenator"
+version = "1.0.0"
+description = "Zero-token polyglot codebase knowledge graph generator"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "AGPL-3.0"}
+authors = [
+    {name = "Gris Iscomeback"},
+]
+keywords = ["static-analysis", "knowledge-graph", "codebase", "mermaid", "documentation"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.setuptools.packages.find]
+include = ["readmenator*"]
+
+[tool.setuptools.package-data]
+readmenator = ["py.typed"]
