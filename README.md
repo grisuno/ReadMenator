@@ -17,6 +17,12 @@ Tired of burning LLM tokens to navigate legacy code? ReadMenator generates full 
 ## Installation
 
 ```bash
+pip install readmenator 
+```
+
+or install from path
+
+```bash
 pip install .
 ```
 
