@@ -180,52 +180,58 @@ class DocumentationGenerator:
         resolved_edges: Optional[List[Edge]] = None,
     ) -> List[str]:
         """Build a statistics dashboard with import metrics and top files."""
+        import_only = [e for e in edges if e.relation == "imports"]
+        call_only = [e for e in edges if e.relation == "calls"]
+        inherit_only = [e for e in edges if e.relation == "inherits"]
+        total_symbols = sum(len(n.symbols) for n in nodes)
+        langs = set(n.language for n in nodes)
+
         lines: List[str] = [
             "## Statistics Dashboard",
             "",
         ]
-
-        total_symbols = sum(len(n.symbols) for n in nodes)
-        langs = set(n.language for n in nodes)
-        lines.append(f"| Metric | Value |")
-        lines.append(f"|--------|-------|")
+        lines.append("| Metric | Value |")
+        lines.append("|--------|-------|")
         lines.append(f"| Total Files | {len(nodes)} |")
         lines.append(f"| Total Symbols | {total_symbols} |")
-        lines.append(f"| Total Imports | {len(edges)} |")
+        lines.append(f"| Total Imports | {len(import_only)} |")
+        lines.append(f"| Call Edges | {len(call_only)} |")
+        lines.append(f"| Inheritance Edges | {len(inherit_only)} |")
         lines.append(f"| Languages | {len(langs)} |")
         lines.append(f"| Avg Symbols/File | {total_symbols / max(len(nodes), 1):.1f} |")
-        lines.append(f"| Avg Imports/File | {len(edges) / max(len(nodes), 1):.1f} |")
+        lines.append(f"| Avg Imports/File | {len(import_only) / max(len(nodes), 1):.1f} |")
 
         if resolved_edges:
             lines.append(f"| Resolved Imports | {len(resolved_edges)} |")
-
         lines.append("")
 
         import_counts: Dict[str, int] = {}
-        for edge in edges:
+        for edge in import_only:
             import_counts[edge.source] = import_counts.get(edge.source, 0) + 1
 
+        node_map = {n.node_id: n for n in nodes}
         fan_out = sorted(
-            import_counts.items(), key=lambda x: x[1], reverse=True
+            [(nid, c) for nid, c in import_counts.items() if nid in node_map],
+            key=lambda x: x[1],
+            reverse=True,
         )[:10]
+
         if fan_out:
             lines.append("### Top Files by Import Count (Fan-Out)")
             lines.append("")
             lines.append("| File | Imports | Symbols | Language |")
             lines.append("|------|---------|---------|----------|")
-            node_map = {n.node_id: n for n in nodes}
             for nid, count in fan_out:
-                node = node_map.get(nid)
-                if node:
-                    lines.append(
-                        f"| `{node.label}` | {count} | "
-                        f"{len(node.symbols)} | {node.language} |"
-                    )
+                node = node_map[nid]
+                lines.append(
+                    f"| `{node.label}` | {count} | "
+                    f"{len(node.symbols)} | {node.language} |"
+                )
             lines.append("")
 
         fan_in: Dict[str, int] = {}
         file_ids = {n.node_id for n in nodes}
-        for edge in edges:
+        for edge in import_only:
             if edge.target in file_ids:
                 fan_in[edge.target] = fan_in.get(edge.target, 0) + 1
 

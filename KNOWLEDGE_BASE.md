@@ -13,10 +13,9 @@
 2. [Architectural Layers](#architectural-layers)
 3. [God Nodes](#god-nodes)
 4. [Community Analysis](#community-analysis)
-5. [Surprising Connections](#surprising-connections)
-6. [Suggested Questions](#suggested-questions)
-7. [Structural Knowledge Map](#structural-knowledge-map)
-8. [Architecture Reference](#architecture-reference)
+5. [Suggested Questions](#suggested-questions)
+6. [Structural Knowledge Map](#structural-knowledge-map)
+7. [Architecture Reference](#architecture-reference)
     - [PY (32 files)](#py-32-files)
 
 ---
@@ -27,16 +26,28 @@
 |--------|-------|
 | Total Files | 32 |
 | Total Symbols | 456 |
-| Total Imports | 2622 |
+| Total Imports | 169 |
+| Call Edges | 2400 |
+| Inheritance Edges | 56 |
 | Languages | 1 |
 | Avg Symbols/File | 14.2 |
-| Avg Imports/File | 81.9 |
+| Avg Imports/File | 5.3 |
 | Resolved Imports | 61 |
 
 ### Top Files by Import Count (Fan-Out)
 
 | File | Imports | Symbols | Language |
 |------|---------|---------|----------|
+| `_app.py` | 15 | 22 | py |
+| `readmenator_orchestrator.py` | 12 | 30 | py |
+| `_exporter.py` | 10 | 13 | py |
+| `test_cache.py` | 8 | 15 | py |
+| `_analyzer.py` | 7 | 13 | py |
+| `_cache.py` | 7 | 8 | py |
+| `_parsers.py` | 7 | 45 | py |
+| `test_scanner.py` | 7 | 12 | py |
+| `__main__.py` | 6 | 3 | py |
+| `_documentation.py` | 6 | 12 | py |
 
 ---
 
@@ -124,9 +135,9 @@ Most architecturally central files ranked by combined import/export degree and s
 
 Files grouped by import-based community detection. Cohesion measures how tightly connected each community is internally.
 
-### readmenator (Cohesion: 0.98)
+### readmenator (Cohesion: 1.00)
 
-**28 files** in this community:
+**30 files** in this community:
 
 - `readmenator.py` (py, 0 symbols)
 - `__init__.py` (py, 0 symbols)
@@ -142,32 +153,13 @@ Files grouped by import-based community detection. Cohesion measures how tightly
 - `_models.py` (py, 6 symbols)
 - `_parsers.py` (py, 45 symbols)
 - `_query.py` (py, 13 symbols)
+- `_resolver.py` (py, 11 symbols)
 - `_scanner.py` (py, 8 symbols)
 - `_watcher.py` (py, 5 symbols)
 - `test_analyzer.py` (py, 12 symbols)
 - `test_cache.py` (py, 15 symbols)
 - `test_config.py` (py, 6 symbols)
-- `test_documentation.py` (py, 15 symbols)
-- ... and 8 more files
-
-### readmenator (Cohesion: 0.50)
-
-**2 files** in this community:
-
-- `_resolver.py` (py, 11 symbols)
-- `test_resolver.py` (py, 11 symbols)
-
----
-
-## Surprising Connections
-
-Files in different communities connected through 3+ indirect hops.
-
-- `_mermaid.py` <-> `test_resolver.py` (4 hops, across 2 communities)
-- `_parsers.py` <-> `test_resolver.py` (4 hops, across 2 communities)
-- `readmenator.py` <-> `test_resolver.py` (4 hops, across 2 communities)
-- `test_analyzer.py` <-> `test_resolver.py` (4 hops, across 2 communities)
-- `test_cache.py` <-> `test_resolver.py` (4 hops, across 2 communities)
+- ... and 10 more files
 
 ---
 
@@ -178,8 +170,8 @@ Auto-generated exploration prompts based on graph structure:
 - What does _config.py depend on, and what depends on it? (20 connections)
 - What does _models.py depend on, and what depends on it? (16 connections)
 - What does _app.py depend on, and what depends on it? (14 connections)
-- How are the 28 files in 'readmenator' related to each other?
-- Why are _mermaid.py and test_resolver.py connected through 4 hops across 2 communities?
+- How are the 30 files in 'readmenator' related to each other?
+- What is GraphAnalyzer in _analyzer.py and how is it used?
 
 ---
 
@@ -559,8 +551,6 @@ graph TD
     readmenator__query_py__build_resolved_graph["_build_resolved_graph"]
     class readmenator__query_py__build_resolved_graph fn;
     readmenator__query_py --> readmenator__query_py__build_resolved_graph
-    end
-    subgraph community_1 ["readmenator"]
     readmenator__resolver_py["_resolver.py (py)"]
     class readmenator__resolver_py mod;
     readmenator__resolver_py_ImportResolver["ImportResolver"]
@@ -1267,12 +1257,12 @@ Returns:
 - `_build_toc` (line 99) `def _build_toc(self, nodes, analysis, layers, is_truncated)` - *Build a table of contents for the document.*
 - `_build_layers` (line 140) `def _build_layers(self, layers, nodes)` - *Build the architectural layers section.*
 - `_build_dashboard` (line 176) `def _build_dashboard(self, nodes, edges, resolved_edges)` - *Build a statistics dashboard with import metrics and top files.*
-- `_build_god_nodes` (line 251) `def _build_god_nodes(self, analysis)` - *Build the god nodes section.*
-- `_build_community_analysis` (line 272) `def _build_community_analysis(self, analysis, nodes)` - *Build the community analysis section.*
-- `_build_surprising_connections` (line 306) `def _build_surprising_connections(self, analysis, nodes)` - *Build the surprising connections section.*
-- `_build_suggested_questions` (line 332) `def _build_suggested_questions(self, analysis)` - *Build the suggested questions section.*
-- `_build_mermaid_section` (line 349) `def _build_mermaid_section(self, graph_output, is_truncated)` - *Build the Mermaid graph section.*
-- `_build_architecture_reference` (line 373) `def _build_architecture_reference(self, nodes, edges)` - *Build the architecture reference grouped by language.*
+- `_build_god_nodes` (line 257) `def _build_god_nodes(self, analysis)` - *Build the god nodes section.*
+- `_build_community_analysis` (line 278) `def _build_community_analysis(self, analysis, nodes)` - *Build the community analysis section.*
+- `_build_surprising_connections` (line 312) `def _build_surprising_connections(self, analysis, nodes)` - *Build the surprising connections section.*
+- `_build_suggested_questions` (line 338) `def _build_suggested_questions(self, analysis)` - *Build the suggested questions section.*
+- `_build_mermaid_section` (line 355) `def _build_mermaid_section(self, graph_output, is_truncated)` - *Build the Mermaid graph section.*
+- `_build_architecture_reference` (line 379) `def _build_architecture_reference(self, nodes, edges)` - *Build the architecture reference grouped by language.*
 
 #### `_exporter.py`
 **Path:** `readmenator/_exporter.py`
