@@ -56,6 +56,72 @@ class PolyglotScanner:
         except ValueError:
             return False
 
+    def _extract_file_doc(self, content: str) -> str:
+        """Extract a file-level docstring from the first lines of a source file.
+
+        Walks the first FILE_HEADER_MAX_LINES lines looking for a contiguous
+        block of comments or a shebang followed by comments. Returns the
+        concatenated comment text.
+
+        Args:
+            content: Raw file content as a string.
+
+        Returns:
+            Extracted file-level docstring or empty string.
+        """
+        if not content:
+            return ""
+        lines = content.split("\n")
+        max_lines = min(self._config.FILE_HEADER_MAX_LINES, len(lines))
+        doc_lines: List[str] = []
+        collecting = False
+        for i in range(max_lines):
+            line = lines[i].strip()
+            if not line:
+                if collecting:
+                    doc_lines.append("")
+                continue
+            if line.startswith("#!") and i == 0:
+                continue
+            if line.startswith("#"):
+                cleaned = line.lstrip("#").strip()
+                doc_lines.append(cleaned)
+                collecting = True
+            elif line.startswith("//"):
+                cleaned = line.lstrip("/").strip()
+                doc_lines.append(cleaned)
+                collecting = True
+            elif line.startswith("/*") or line.startswith("/**"):
+                collecting = True
+                cleaned = line.lstrip("/*").rstrip("*/").lstrip("*").strip()
+                doc_lines.append(cleaned)
+                if "*/" in line:
+                    break
+            elif collecting and ("*/" in line):
+                cleaned = line.rstrip("*/").lstrip("*").strip()
+                if cleaned:
+                    doc_lines.append(cleaned)
+                break
+            elif collecting:
+                break
+            else:
+                break
+        doc = " ".join(doc_lines).strip()
+        max_len = self._config.DOCSTRING_MAX_LENGTH
+        if len(doc) > max_len:
+            doc = doc[: max_len - 3] + "..."
+        return doc
+
+    def _emit_progress(self, count: int) -> None:
+        """Emit a progress message every PROGRESS_REPORT_BATCH files.
+
+        Args:
+            count: Number of files scanned so far.
+        """
+        batch = self._config.PROGRESS_REPORT_BATCH
+        if count > 0 and count % batch == 0:
+            print(f"[readmenator] Scanned {count} files...", flush=True)
+
     def scan(self, root: Path) -> Tuple[List[Node], List[Edge]]:
         """Walk *root* recursively and produce (nodes, edges) for the graph.
 
@@ -74,6 +140,7 @@ class PolyglotScanner:
             raise ValueError(f"Path is not a valid directory: {root}")
 
         root = root.resolve()
+        scanned_count = 0
 
         for file_path in sorted(root.rglob("*")):
             if not file_path.is_file():
@@ -98,6 +165,7 @@ class PolyglotScanner:
 
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
+                file_doc = self._extract_file_doc(content)
                 parser.parse(content)
 
                 node = Node(
@@ -105,7 +173,7 @@ class PolyglotScanner:
                     label=file_path.name,
                     kind="module",
                     language=extension.lstrip("."),
-                    doc="",
+                    doc=file_doc,
                     symbols=parser.symbols,
                 )
                 nodes.append(node)
@@ -114,6 +182,9 @@ class PolyglotScanner:
                     edges.append(
                         Edge(source=rel_path_str, target=imp, relation="imports")
                     )
+
+                scanned_count += 1
+                self._emit_progress(scanned_count)
 
             except Exception:
                 continue

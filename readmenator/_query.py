@@ -23,17 +23,26 @@ class QueryEngine:
     search, and a summary report.
     """
 
-    def __init__(self, nodes: List[Node], edges: List[Edge]) -> None:
+    def __init__(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+    ):
         """Initialise internal indexes from scanned data.
 
         Args:
             nodes: List of scanned file nodes.
             edges: List of import-relationship edges.
+            resolved_edges: Optional resolved-import edges (both
+                source and target are project file IDs).
         """
         self._nodes = nodes
         self._edges = edges
+        self._resolved_edges = resolved_edges or []
         self._symbol_index: Dict[str, List[tuple]] = self._build_symbol_index()
         self._import_graph: Dict[str, Set[str]] = self._build_import_graph()
+        self._resolved_graph: Dict[str, Set[str]] = self._build_resolved_graph()
 
     def _build_symbol_index(self) -> Dict[str, List[tuple]]:
         """Build a name-to-list-of-(node, symbol) lookup.
@@ -58,6 +67,26 @@ class QueryEngine:
         graph: Dict[str, Set[str]] = {}
         for edge in self._edges:
             if edge.relation == "imports":
+                if edge.source not in graph:
+                    graph[edge.source] = set()
+                graph[edge.source].add(edge.target)
+                if edge.target not in graph:
+                    graph[edge.target] = set()
+        return graph
+
+    def _build_resolved_graph(self) -> Dict[str, Set[str]]:
+        """Build an adjacency map from resolved import edges.
+
+        Only contains edges where both source and target are
+        project files (not external modules).
+
+        Returns:
+            Dict mapping each file node_id to files it imports within the project.
+        """
+        graph: Dict[str, Set[str]] = {}
+        file_ids = {n.node_id for n in self._nodes}
+        for edge in self._resolved_edges:
+            if edge.source in file_ids and edge.target in file_ids:
                 if edge.source not in graph:
                     graph[edge.source] = set()
                 graph[edge.source].add(edge.target)
@@ -102,8 +131,10 @@ class QueryEngine:
             lines.append(f"  Type: {symbol.kind}")
             lines.append(f"  File: {node.node_id}")
             lines.append(f"  Line: {symbol.line}")
+            if node.doc:
+                lines.append(f"  File Doc: {node.doc}")
             if symbol.doc:
-                lines.append(f"  Doc: {symbol.doc}")
+                lines.append(f"  Symbol Doc: {symbol.doc}")
             if symbol.signature:
                 lines.append(f"  Signature: {symbol.signature}")
             file_imports = self._import_graph.get(node.node_id, set())
@@ -131,8 +162,13 @@ class QueryEngine:
     def find_path(self, symbol_a: str, symbol_b: str) -> Optional[List[str]]:
         """Find the shortest import path from *symbol_a* to *symbol_b*.
 
-        Uses BFS on the import graph. Returns a list of file node IDs
-        forming the dependency chain, or ``None`` if no path exists.
+        Uses BFS on the resolved import graph (project-internal edges)
+        first, traversing in both directions (forward = A imports B,
+        reverse = B is imported by A). Falls back to the raw import
+        graph if no resolved path exists.
+
+        Returns:
+            List of file node IDs forming the dependency chain, or ``None``.
         """
         results_a = self.find_symbol(symbol_a)
         results_b = self.find_symbol(symbol_b)
@@ -142,20 +178,51 @@ class QueryEngine:
         file_b = results_b[0][0].node_id
         if file_a == file_b:
             return [file_a]
-        graph: Dict[str, List[str]] = {}
-        for edge in self._edges:
-            if edge.relation == "imports":
-                if edge.source not in graph:
-                    graph[edge.source] = []
-                graph[edge.source].append(edge.target)
-        visited: Set[str] = set()
+
+        bidir = self._make_bidirectional(self._resolved_graph)
+        path = self._bfs_shortest_path(bidir, file_a, file_b)
+        if path is not None:
+            return path
+
+        bidir_raw = self._make_bidirectional(self._import_graph)
+        path = self._bfs_shortest_path(bidir_raw, file_a, file_b)
+        return path
+
+    @staticmethod
+    def _make_bidirectional(graph: Dict[str, Set[str]]) -> Dict[str, Set[str]]:
+        """Convert a directed graph to a bidirectional one.
+
+        For each edge A→B, adds both A→B and B→A edges.
+        """
+        bidir: Dict[str, Set[str]] = {}
+        for src, targets in graph.items():
+            if src not in bidir:
+                bidir[src] = set()
+            for tgt in targets:
+                bidir[src].add(tgt)
+                if tgt not in bidir:
+                    bidir[tgt] = set()
+                bidir[tgt].add(src)
+        return bidir
+
+    def _bfs_shortest_path(
+        self,
+        graph: Dict[str, Set[str]],
+        start: str,
+        goal: str,
+    ) -> Optional[List[str]]:
+        """Run BFS to find the shortest path from *start* to *goal*.
+
+        Returns:
+            List of node IDs or ``None`` if no path exists.
+        """
+        visited: Set[str] = {start}
         queue: deque = deque()
-        queue.append((file_a, [file_a]))
-        visited.add(file_a)
+        queue.append((start, [start]))
         while queue:
             current, path = queue.popleft()
-            for neighbor in graph.get(current, []):
-                if neighbor == file_b:
+            for neighbor in graph.get(current, set()):
+                if neighbor == goal:
                     return path + [neighbor]
                 if neighbor not in visited:
                     visited.add(neighbor)

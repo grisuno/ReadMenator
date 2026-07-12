@@ -1,8 +1,9 @@
 """Data model types for the readmenator knowledge graph.
 
-Defines the three core entity types -- Symbol, Node, Edge -- plus a
-utility function for pluralising symbol kind labels. Every parser,
-scanner, renderer, and query engine depends on these definitions.
+Defines the core entity types -- Symbol, Node, Edge -- plus a
+utility function for pluralising symbol kind labels and a helper
+for constructing community analysis results. Every parser, scanner,
+renderer, and query engine depends on these definitions.
 """
 
 from __future__ import annotations
@@ -58,12 +59,14 @@ class Edge:
     Attributes:
         source: Node ID of the source (dependent) file.
         target: Node ID of the target (dependency) file or module.
-        relation: Semantic relation label (e.g. "imports").
+        relation: Semantic relation label (e.g. "imports", "resolved_imports").
+        confidence: Confidence tier ("EXTRACTED" for structural, "INFERRED" for heuristic).
     """
 
     source: str
     target: str
     relation: str
+    confidence: str = "EXTRACTED"
 
 
 def pluralize_symbol_kind(kind: str, plural_map: Dict[str, str]) -> str:
@@ -73,3 +76,43 @@ def pluralize_symbol_kind(kind: str, plural_map: Dict[str, str]) -> str:
     This prevents obvious misspellings like ``"Classs"``.
     """
     return plural_map.get(kind, kind + "s")
+
+
+@dataclass
+class CommunityResult:
+    """Result of community detection on the import graph.
+
+    Attributes:
+        community_id: Integer identifier of the community.
+        label: Human-readable name for the community.
+        file_ids: Set of node IDs belonging to this community.
+        cohesion: Cohesion score (internal edges / total edges involving community).
+        size: Number of files in the community.
+    """
+
+    community_id: int
+    label: str
+    file_ids: set
+    cohesion: float
+    size: int
+
+
+@dataclass
+class AnalysisResult:
+    """Complete graph analysis output.
+
+    Attributes:
+        god_nodes: List of (node_id, score) for most central nodes.
+        communities: List of CommunityResult instances.
+        surprising_connections: List of (source_node, target_node, hops, bridging_communities).
+        suggested_questions: List of plain-language exploration questions.
+        node_count: Total nodes in the graph.
+        edge_count: Total edges in the graph.
+    """
+
+    god_nodes: List[tuple]
+    communities: List[CommunityResult]
+    surprising_connections: List[tuple]
+    suggested_questions: List[str]
+    node_count: int
+    edge_count: int

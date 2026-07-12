@@ -1,6 +1,6 @@
 ---
 name: readmenator
-description: "Zero-token static analysis codebase context. Use KNOWLEDGE_BASE.md as source of truth -- no LLM extraction, no token cost. Pure AST + regex."
+description: "Zero-token static analysis codebase context. Use KNOWLEDGE_BASE.md as source of truth -- no LLM extraction, no token cost. Pure AST + regex. Now with community detection, god nodes, surprising connections, and interactive HTML/SVG exports."
 trigger: /readmenator
 ---
 
@@ -8,7 +8,7 @@ trigger: /readmenator
 
 Turn any codebase into a queryable knowledge base using pure static analysis. No LLMs. No tokens. No cloud. A single `KNOWLEDGE_BASE.md` file serves as the source of truth for all codebase questions.
 
-Contrast with graphify: graphify costs tokens to extract entities and relationships via LLM agents. ReadMenator generates the same structural knowledge through deterministic AST/regex parsing -- zero tokens, instant, repeatable.
+Contrast with graphify: graphify costs tokens to extract entities and relationships via LLM agents. ReadMenator generates the same structural knowledge through deterministic AST/regex parsing -- zero tokens, instant, repeatable. Now with community detection, god node identification, surprising connection discovery, and suggested questions -- all the structural intelligence of graphify without the token cost.
 
 ## Usage
 
@@ -18,8 +18,14 @@ Contrast with graphify: graphify costs tokens to extract entities and relationsh
 /readmenator --rebuild                    # force regeneration even if KNOWLEDGE_BASE.md exists
 /readmenator query "<question>"           # answer a question using the knowledge base
 /readmenator explain "<ClassName>"        # explain a specific symbol with its relationships
-/readmenator path "<SymbolA>" "<SymbolB>" # trace the dependency chain between two symbols
-/readmenator update                       # regenerate KNOWLEDGE_BASE.md for changed files only (TODO)
+/readmenator path "<SymbolA>" "<SymbolB>" # trace the dependency chain between two symbols (bidirectional)
+/readmenator update                       # incremental rebuild using SHA256 cache
+/readmenator analyze                      # run community detection and graph analysis
+/readmenator --export-all                 # export graph.json + graph.html + graph.svg
+/readmenator --json                       # export graph.json (GraphRAG-ready)
+/readmenator --html                       # export graph.html (interactive vis.js)
+/readmenator --svg                        # export graph.svg (static)
+/readmenator --no-analysis                # skip community detection (faster)
 ```
 
 ## What ReadMenator is for
@@ -28,8 +34,14 @@ ReadMenator solves a specific problem: every time you ask an AI about a codebase
 
 What it gives you:
 1. **A structural map** -- classes, functions, methods, imports, all with line numbers and docstrings, organized by file and language
-2. **Mermaid graph** -- visual dependency diagram showing which files import what, which symbols belong to which modules
-3. **Zero ongoing cost** -- regenerate after code changes, always free
+2. **Mermaid graph** -- visual dependency diagram showing which files import what, which symbols belong to which modules, with internal import edges between project files and community subgraphs
+3. **Community analysis** -- files grouped by import-based communities with cohesion scores
+4. **God nodes** -- most architecturally central files ranked by connectivity
+5. **Surprising connections** -- cross-community indirect bridges
+6. **Suggested questions** -- auto-generated exploration prompts from graph structure
+7. **Statistics dashboard** -- fan-in/fan-out, symbol density, language breakdown
+8. **Multi-format exports** -- JSON (GraphRAG-ready), HTML (interactive vis.js), SVG (static)
+9. **Zero ongoing cost** -- regenerate after code changes, always free
 
 Supported languages (13+): C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly.
 
@@ -44,22 +56,22 @@ Check if `KNOWLEDGE_BASE.md` already exists in the target directory. If it does 
 Otherwise, generate it:
 
 ```bash
+python3 -m readmenator TARGET_PATH --rebuild
+```
+
+If installed via pip. Or if the script is available locally:
+
+```bash
 python3 readmenator.py TARGET_PATH
 ```
 
-If `readmenator.py` is not in the current directory, find it. The script ships with the ReadMenator repo. Common locations:
+If `readmenator.py` is not in the current directory, find it. Common locations:
 
 ```bash
-# Try these in order:
-# 1. Current directory
-# 2. Cloned repo
-# 3. pip-installed (if packaged)
 if [ -f "readmenator.py" ]; then
     READMENATOR_SCRIPT="readmenator.py"
-elif [ -f "$HOME/src_note/py/readmenator.py/repo/ReadMenator/readmenator.py" ]; then
-    READMENATOR_SCRIPT="$HOME/src_note/py/readmenator.py/repo/ReadMenator/readmenator.py"
 else
-    echo "readmenator.py not found. Clone it: git clone https://github.com/grisuno/ReadMenator"
+    echo "readmenator.py not found. Install with: pip install readmenator"
     exit 1
 fi
 python3 "$READMENATOR_SCRIPT" TARGET_PATH
@@ -71,14 +83,17 @@ If generation fails, tell the user and stop.
 
 ### Step 2 -- Read KNOWLEDGE_BASE.md as context
 
-Read `TARGET_PATH/KNOWLEDGE_BASE.md`. This file has a predictable structure:
+Read `TARGET_PATH/KNOWLEDGE_BASE.md`. This file now has a richer structure:
 
-1. **Header** -- metadata (total files, symbols, imports)
-2. **Structural Knowledge Map** -- a Mermaid graph (```mermaid ... ```) showing the file/import dependency diagram. Nodes are modules (rectangles), classes (green), and functions (yellow). External imports are dashed nodes.
-3. **Architecture Reference** -- grouped by language (e.g. `### PY (1 files)`), then each file gets a section with:
-   - File path
-   - Lists of **Classes** with name, line number, and docstring
-   - Lists of **Functions** with name, line number, and docstring
+1. **Header** -- metadata (total files, symbols, imports, resolved imports)
+2. **Table of Contents** -- links to all sections
+3. **Statistics Dashboard** -- file counts, fan-in/fan-out, language breakdown
+4. **God Nodes** -- most central files ranked by connectivity
+5. **Community Analysis** -- import-based groups with cohesion scores
+6. **Surprising Connections** -- cross-community indirect bridges
+7. **Suggested Questions** -- auto-generated exploration prompts
+8. **Structural Knowledge Map** -- a Mermaid graph (```mermaid ... ```) showing the file/import dependency diagram. Nodes are modules (rectangles), classes (green), and functions (yellow). External imports are dashed nodes. Internal imports between project files are solid arrows. Community subgraphs group related files.
+9. **Architecture Reference** -- grouped by language, each file lists its symbols with cross-references ("Imported by" links) and file-level docstrings.
 
 **Parse the Mermaid graph first** to understand the high-level structure (what depends on what). Then use the Architecture Reference to look up specific symbols when answering queries.
 
@@ -102,7 +117,7 @@ Key classes: ClassA, ClassB, ClassC
 Key functions: funcX, funcY, funcZ
 ```
 
-Then offer to explore: "Ask me anything about this codebase. I'll answer from the knowledge base."
+Also highlight notable findings: god nodes, communities, surprising connections. Then offer to explore.
 
 #### For `/readmenator query "<question>"`
 
@@ -116,7 +131,8 @@ Then offer to explore: "Ask me anything about this codebase. I'll answer from th
 1. Find the symbol in the Architecture Reference section of KNOWLEDGE_BASE.md.
 2. Report: its type (class/function), file path, line number, docstring.
 3. Use the Mermaid graph to identify what imports it (incoming edges) and what it imports (outgoing edges).
-4. List other symbols in the same file for context.
+4. Use the "Imported by" cross-reference to list files that depend on it.
+5. List other symbols in the same file for context.
 
 #### For `/readmenator path "<SymbolA>" "<SymbolB>"`
 
@@ -140,24 +156,57 @@ The agent should understand this format to parse it efficiently:
 
 > Generated offline by **readmenator**. ...
 
-**Total Files Parsed:** N | **Total Symbols Extracted:** M | **Total Imports:** K
+**Total Files Parsed:** N | **Total Symbols Extracted:** M | **Total Imports:** K | **Resolved Imports:** R
+
+## Table of Contents
+1. [Statistics Dashboard](#statistics-dashboard)
+2. [God Nodes](#god-nodes)
+3. [Community Analysis](#community-analysis)
+4. [Surprising Connections](#surprising-connections)
+5. [Suggested Questions](#suggested-questions)
+6. [Structural Knowledge Map](#structural-knowledge-map)
+7. [Architecture Reference](#architecture-reference)
+
+---
+
+## Statistics Dashboard
+| Metric | Value |
+|--------|-------|
+| Total Files | N |
+| ...
+
+### Top Files by Import Count (Fan-Out)
+| File | Imports | Symbols | Language |
+| ...
+
+## God Nodes
+| File | Score | Connections |
+| ...
+
+## Community Analysis
+### community_name (Cohesion: X.XX)
+**N files** in this community:
+- `file.py` (py, M symbols)
+...
 
 ## Structural Knowledge Map
 ```mermaid
 graph TD
-    classDef mod fill:#1e1e1e,stroke:#ff6666,...
-    classDef cls fill:#2d2d2d,stroke:#4ec9b0,...
-    classDef fn fill:#333,stroke:#dcdcaa,...
-    classDef ext fill:#111,stroke:#666,...
+    classDef mod ...
+    classDef cls ...
+    classDef fn ...
+    classDef ext ...
 
-    module_py["module.py (py)"]     <- module node
-    class module_py mod;
-    module_py_ClassName["ClassName"] <- class node
-    class module_py_ClassName cls;
-    module_py --> module_py_ClassName <- containment edge
-    ext_os["os"]                      <- external import node
+    subgraph community_0 ["Community Label"]
+        module_py["module.py (py)"]
+        class module_py mod;
+        ...
+    end
+
+    module_py -- resolved_imports --> other_py  <- internal edge
+    ext_os["os"]
     class ext_os ext;
-    module_py -.->|imports| ext_os   <- import edge (dashed)
+    module_py -.->|imports| ext_os   <- external import edge (dashed)
 ```
 
 ## Architecture Reference
@@ -166,38 +215,39 @@ graph TD
 
 #### `filename.py`
 **Path:** `path/to/filename.py`
+**File Doc:** *Module-level documentation*
 
-**Classs:**
-- `ClassName` (line 42) - *Docstring describing the class.*
-- ...
+**Imported by:** `file_a.py`, `file_b.py`
+
+**Classes:**
+- `ClassName` (line 42) `class ClassName(Base)` - *Docstring describing the class.*
 
 **Functions:**
-- `function_name` (line 100) - *Docstring describing the function.*
-- ...
+- `function_name` (line 100) `def func(x, y)` - *Docstring describing the function.*
 ```
-
-Node IDs in Mermaid follow the pattern: `{sanitized_path}_{sanitized_symbol_name}`. All non-alphanumeric chars become `_`. External imports are prefixed with `ext_`.
 
 ## How this compares to graphify
 
 | Aspect | graphify | readmenator |
 |--------|----------|-------------|
 | Extraction | LLM agents (tokens) | AST + regex (free) |
-| Output | graph.json + HTML + report | KNOWLEDGE_BASE.md |
+| Output | graph.json + HTML + report | KNOWLEDGE_BASE.md + JSON + HTML + SVG |
 | Languages | Any (LLM reads anything) | 13+ static parsers |
 | Semantic edges | Yes (INFERRED, AMBIGUOUS) | No (structural only) |
-| Community detection | Yes (Leiden/Louvain) | No |
+| Community detection | Yes (Leiden/Louvain) | Yes (label propagation) |
+| God node analysis | Yes | Yes |
+| Surprising connections | Yes | Yes |
+| Suggested questions | Yes | Yes |
+| Interactive HTML | Yes (vis.js) | Yes (vis.js) |
 | Cross-document inference | Yes | No (import chains only) |
 | Speed | Minutes (LLM calls) | Seconds |
 | Cost | Token-based | Zero |
-| Regeneration | Full or incremental | Full (always fast) |
+| Regeneration | Full or incremental | Full or incremental (SHA256 cache) |
 
-Use readmenator when you need fast, free, structural understanding of a codebase. Use graphify when you need semantic cross-document relationships and community detection.
+Use readmenator when you need fast, free, structural understanding of a codebase with community intelligence. Use graphify when you need semantic cross-document relationships and multi-modal (pdf/image/video) extraction.
 
 ## Script location
 
-The canonical `readmenator.py` lives at:
+The canonical source lives at:
 - Repo: https://github.com/grisuno/ReadMenator
-- Local path hint: `$HOME/src_note/py/readmenator.py/repo/ReadMenator/readmenator.py`
-
-Update the find-command in Step 1 if you clone it elsewhere.
+- Install: `pip install readmenator`

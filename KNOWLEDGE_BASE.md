@@ -3,15 +3,167 @@
 > Generated offline by **readmenator**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM.
 > No LLMs. No tokens. Pure static analysis. See more [here](https://github.com/grisuno/ReadMenator)
 
-**Total Files Parsed:** 21 | **Total Symbols Extracted:** 271 | **Total Imports:** 99
+**Total Files Parsed:** 29 | **Total Symbols Extracted:** 390 | **Total Imports:** 152
+ | **Resolved Imports:** 55
+
+
+## Table of Contents
+
+1. [Statistics Dashboard](#statistics-dashboard)
+2. [God Nodes](#god-nodes)
+3. [Community Analysis](#community-analysis)
+4. [Surprising Connections](#surprising-connections)
+5. [Suggested Questions](#suggested-questions)
+6. [Structural Knowledge Map](#structural-knowledge-map)
+7. [Architecture Reference](#architecture-reference)
+    - [PY (29 files)](#py-29-files)
+
+---
+
+## Statistics Dashboard
+
+| Metric | Value |
+|--------|-------|
+| Total Files | 29 |
+| Total Symbols | 390 |
+| Total Imports | 152 |
+| Languages | 1 |
+| Avg Symbols/File | 13.4 |
+| Avg Imports/File | 5.2 |
+| Resolved Imports | 55 |
+
+### Top Files by Import Count (Fan-Out)
+
+| File | Imports | Symbols | Language |
+|------|---------|---------|----------|
+| `_app.py` | 13 | 17 | py |
+| `readmenator_orchestrator.py` | 12 | 30 | py |
+| `_exporter.py` | 9 | 11 | py |
+| `test_cache.py` | 8 | 15 | py |
+| `_analyzer.py` | 7 | 13 | py |
+| `_cache.py` | 7 | 8 | py |
+| `_parsers.py` | 7 | 33 | py |
+| `test_scanner.py` | 7 | 12 | py |
+| `__main__.py` | 6 | 3 | py |
+| `_scanner.py` | 6 | 8 | py |
+
+---
+
+## God Nodes
+
+Most architecturally central files ranked by combined import/export degree and symbol richness.
+
+| File | Score | Connections |
+|------|-------|-------------|
+| `_config.py` | 36.1 | |
+| `_models.py` | 30.6 | |
+| `_app.py` | 25.7 | |
+| `test_parsers.py` | 12.4 | |
+| `_parsers.py` | 11.3 | |
+| `_documentation.py` | 11.1 | |
+| `_scanner.py` | 10.8 | |
+| `_analyzer.py` | 9.3 | |
+| `_exporter.py` | 9.1 | |
+| `_mermaid.py` | 8.4 | |
+
+---
+
+## Community Analysis
+
+Files grouped by import-based community detection. Cohesion measures how tightly connected each community is internally.
+
+### readmenator (Cohesion: 0.96)
+
+**23 files** in this community:
+
+- `__init__.py` (py, 0 symbols)
+- `_analyzer.py` (py, 13 symbols)
+- `_app.py` (py, 17 symbols)
+- `_cache.py` (py, 8 symbols)
+- `_config.py` (py, 1 symbols)
+- `_documentation.py` (py, 11 symbols)
+- `_exporter.py` (py, 11 symbols)
+- `_mermaid.py` (py, 4 symbols)
+- `_models.py` (py, 6 symbols)
+- `_parsers.py` (py, 33 symbols)
+- `_query.py` (py, 13 symbols)
+- `_scanner.py` (py, 8 symbols)
+- `test_analyzer.py` (py, 12 symbols)
+- `test_cache.py` (py, 15 symbols)
+- `test_config.py` (py, 6 symbols)
+- `test_documentation.py` (py, 15 symbols)
+- `test_exporter.py` (py, 15 symbols)
+- `test_integration.py` (py, 11 symbols)
+- `test_mermaid.py` (py, 11 symbols)
+- `test_models.py` (py, 11 symbols)
+- ... and 3 more files
+
+### root (Cohesion: 0.50)
+
+**2 files** in this community:
+
+- `readmenator.py` (py, 0 symbols)
+- `__main__.py` (py, 3 symbols)
+
+### readmenator (Cohesion: 0.50)
+
+**2 files** in this community:
+
+- `_resolver.py` (py, 11 symbols)
+- `test_resolver.py` (py, 11 symbols)
+
+---
+
+## Surprising Connections
+
+Files in different communities connected through 3+ indirect hops.
+
+- `_mermaid.py` <-> `test_resolver.py` (4 hops, across 2 communities)
+- `_parsers.py` <-> `test_resolver.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `_mermaid.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `_parsers.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `test_analyzer.py` (4 hops, across 2 communities)
+
+---
+
+## Suggested Questions
+
+Auto-generated exploration prompts based on graph structure:
+
+- What does _config.py depend on, and what depends on it? (18 connections)
+- What does _models.py depend on, and what depends on it? (15 connections)
+- What does _app.py depend on, and what depends on it? (12 connections)
+- How are the 23 files in 'readmenator' related to each other?
+- Why are _mermaid.py and test_resolver.py connected through 4 hops across 2 communities?
+
+---
 
 ## Structural Knowledge Map
+
 ```mermaid
 graph TD
     classDef mod fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff;
     classDef cls fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff;
     classDef fn fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa;
     classDef ext fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa;
+    subgraph community_0 ["readmenator"]
+    readmenator__app_py["_app.py (py)"]
+    class readmenator__app_py mod;
+    readmenator__app_py_readmenatorApplication["readmenatorApplication"]
+    class readmenator__app_py_readmenatorApplication cls;
+    readmenator__app_py --> readmenator__app_py_readmenatorApplication
+    readmenator__app_py___init__["__init__"]
+    class readmenator__app_py___init__ fn;
+    readmenator__app_py --> readmenator__app_py___init__
+    readmenator__app_py__scan["_scan"]
+    class readmenator__app_py__scan fn;
+    readmenator__app_py --> readmenator__app_py__scan
+    readmenator__app_py__resolve_imports["_resolve_imports"]
+    class readmenator__app_py__resolve_imports fn;
+    readmenator__app_py --> readmenator__app_py__resolve_imports
+    readmenator__app_py_run["run"]
+    class readmenator__app_py_run fn;
+    readmenator__app_py --> readmenator__app_py_run
     readmenator_orchestrator_py["readmenator_orchestrator.py (py)"]
     class readmenator_orchestrator_py mod;
     readmenator_orchestrator_py_Config["Config"]
@@ -29,23 +181,40 @@ graph TD
     readmenator_orchestrator_py_TestOrchestrator["TestOrchestrator"]
     class readmenator_orchestrator_py_TestOrchestrator cls;
     readmenator_orchestrator_py --> readmenator_orchestrator_py_TestOrchestrator
-    readmenator__app_py["_app.py (py)"]
-    class readmenator__app_py mod;
-    readmenator__app_py_readmenatorApplication["readmenatorApplication"]
-    class readmenator__app_py_readmenatorApplication cls;
-    readmenator__app_py --> readmenator__app_py_readmenatorApplication
-    readmenator__app_py___init__["__init__"]
-    class readmenator__app_py___init__ fn;
-    readmenator__app_py --> readmenator__app_py___init__
-    readmenator__app_py__scan["_scan"]
-    class readmenator__app_py__scan fn;
-    readmenator__app_py --> readmenator__app_py__scan
-    readmenator__app_py_run["run"]
-    class readmenator__app_py_run fn;
-    readmenator__app_py --> readmenator__app_py_run
-    readmenator__app_py_query["query"]
-    class readmenator__app_py_query fn;
-    readmenator__app_py --> readmenator__app_py_query
+    readmenator__exporter_py["_exporter.py (py)"]
+    class readmenator__exporter_py mod;
+    readmenator__exporter_py_GraphExporter["GraphExporter"]
+    class readmenator__exporter_py_GraphExporter cls;
+    readmenator__exporter_py --> readmenator__exporter_py_GraphExporter
+    readmenator__exporter_py___init__["__init__"]
+    class readmenator__exporter_py___init__ fn;
+    readmenator__exporter_py --> readmenator__exporter_py___init__
+    readmenator__exporter_py_to_json["to_json"]
+    class readmenator__exporter_py_to_json fn;
+    readmenator__exporter_py --> readmenator__exporter_py_to_json
+    readmenator__exporter_py_to_html["to_html"]
+    class readmenator__exporter_py_to_html fn;
+    readmenator__exporter_py --> readmenator__exporter_py_to_html
+    readmenator__exporter_py__community_color_map["_community_color_map"]
+    class readmenator__exporter_py__community_color_map fn;
+    readmenator__exporter_py --> readmenator__exporter_py__community_color_map
+    tests_test_cache_py["test_cache.py (py)"]
+    class tests_test_cache_py mod;
+    tests_test_cache_py_TestFileCacheContract["TestFileCacheContract"]
+    class tests_test_cache_py_TestFileCacheContract cls;
+    tests_test_cache_py --> tests_test_cache_py_TestFileCacheContract
+    tests_test_cache_py_setUp["setUp"]
+    class tests_test_cache_py_setUp fn;
+    tests_test_cache_py --> tests_test_cache_py_setUp
+    tests_test_cache_py_tearDown["tearDown"]
+    class tests_test_cache_py_tearDown fn;
+    tests_test_cache_py --> tests_test_cache_py_tearDown
+    tests_test_cache_py__write["_write"]
+    class tests_test_cache_py__write fn;
+    tests_test_cache_py --> tests_test_cache_py__write
+    tests_test_cache_py_test_compute_hash_returns_hex_string["test_compute_hash_returns_hex_string"]
+    class tests_test_cache_py_test_compute_hash_returns_hex_string fn;
+    tests_test_cache_py --> tests_test_cache_py_test_compute_hash_returns_hex_string
     readmenator__parsers_py["_parsers.py (py)"]
     class readmenator__parsers_py mod;
     readmenator__parsers_py_LanguageParser["LanguageParser"]
@@ -63,6 +232,40 @@ graph TD
     readmenator__parsers_py_RustParser["RustParser"]
     class readmenator__parsers_py_RustParser cls;
     readmenator__parsers_py --> readmenator__parsers_py_RustParser
+    tests_test_exporter_py["test_exporter.py (py)"]
+    class tests_test_exporter_py mod;
+    tests_test_exporter_py_TestGraphExporterContract["TestGraphExporterContract"]
+    class tests_test_exporter_py_TestGraphExporterContract cls;
+    tests_test_exporter_py --> tests_test_exporter_py_TestGraphExporterContract
+    tests_test_exporter_py_setUp["setUp"]
+    class tests_test_exporter_py_setUp fn;
+    tests_test_exporter_py --> tests_test_exporter_py_setUp
+    tests_test_exporter_py__make_node["_make_node"]
+    class tests_test_exporter_py__make_node fn;
+    tests_test_exporter_py --> tests_test_exporter_py__make_node
+    tests_test_exporter_py__make_sym["_make_sym"]
+    class tests_test_exporter_py__make_sym fn;
+    tests_test_exporter_py --> tests_test_exporter_py__make_sym
+    tests_test_exporter_py_test_to_json_produces_valid_json["test_to_json_produces_valid_json"]
+    class tests_test_exporter_py_test_to_json_produces_valid_json fn;
+    tests_test_exporter_py --> tests_test_exporter_py_test_to_json_produces_valid_json
+    readmenator__analyzer_py["_analyzer.py (py)"]
+    class readmenator__analyzer_py mod;
+    readmenator__analyzer_py_GraphAnalyzer["GraphAnalyzer"]
+    class readmenator__analyzer_py_GraphAnalyzer cls;
+    readmenator__analyzer_py --> readmenator__analyzer_py_GraphAnalyzer
+    readmenator__analyzer_py___init__["__init__"]
+    class readmenator__analyzer_py___init__ fn;
+    readmenator__analyzer_py --> readmenator__analyzer_py___init__
+    readmenator__analyzer_py_analyze["analyze"]
+    class readmenator__analyzer_py_analyze fn;
+    readmenator__analyzer_py --> readmenator__analyzer_py_analyze
+    readmenator__analyzer_py__build_adjacency["_build_adjacency"]
+    class readmenator__analyzer_py__build_adjacency fn;
+    readmenator__analyzer_py --> readmenator__analyzer_py__build_adjacency
+    readmenator__analyzer_py__build_reverse_adjacency["_build_reverse_adjacency"]
+    class readmenator__analyzer_py__build_reverse_adjacency fn;
+    readmenator__analyzer_py --> readmenator__analyzer_py__build_reverse_adjacency
     tests_test_scanner_py["test_scanner.py (py)"]
     class tests_test_scanner_py mod;
     tests_test_scanner_py_TestScannerContract["TestScannerContract"]
@@ -80,34 +283,6 @@ graph TD
     tests_test_scanner_py_test_scans_python_files["test_scans_python_files"]
     class tests_test_scanner_py_test_scans_python_files fn;
     tests_test_scanner_py --> tests_test_scanner_py_test_scans_python_files
-    readmenator___main___py["__main__.py (py)"]
-    class readmenator___main___py mod;
-    readmenator___main___py_build_parser["build_parser"]
-    class readmenator___main___py_build_parser fn;
-    readmenator___main___py --> readmenator___main___py_build_parser
-    readmenator___main___py__run_tests["_run_tests"]
-    class readmenator___main___py__run_tests fn;
-    readmenator___main___py --> readmenator___main___py__run_tests
-    readmenator___main___py_main["main"]
-    class readmenator___main___py_main fn;
-    readmenator___main___py --> readmenator___main___py_main
-    tests_test_integration_py["test_integration.py (py)"]
-    class tests_test_integration_py mod;
-    tests_test_integration_py_TestEndToEndContract["TestEndToEndContract"]
-    class tests_test_integration_py_TestEndToEndContract cls;
-    tests_test_integration_py --> tests_test_integration_py_TestEndToEndContract
-    tests_test_integration_py_setUp["setUp"]
-    class tests_test_integration_py_setUp fn;
-    tests_test_integration_py --> tests_test_integration_py_setUp
-    tests_test_integration_py_tearDown["tearDown"]
-    class tests_test_integration_py_tearDown fn;
-    tests_test_integration_py --> tests_test_integration_py_tearDown
-    tests_test_integration_py__write["_write"]
-    class tests_test_integration_py__write fn;
-    tests_test_integration_py --> tests_test_integration_py__write
-    tests_test_integration_py_test_full_pipeline_generates_knowledge_base["test_full_pipeline_generates_knowledge_base"]
-    class tests_test_integration_py_test_full_pipeline_generates_knowledge_base fn;
-    tests_test_integration_py --> tests_test_integration_py_test_full_pipeline_generates_knowledge_base
     readmenator__scanner_py["_scanner.py (py)"]
     class readmenator__scanner_py mod;
     readmenator__scanner_py_PolyglotScanner["PolyglotScanner"]
@@ -125,20 +300,23 @@ graph TD
     readmenator__scanner_py__check_directory_depth["_check_directory_depth"]
     class readmenator__scanner_py__check_directory_depth fn;
     readmenator__scanner_py --> readmenator__scanner_py__check_directory_depth
-    readmenator__mermaid_py["_mermaid.py (py)"]
-    class readmenator__mermaid_py mod;
-    readmenator__mermaid_py_MermaidRenderer["MermaidRenderer"]
-    class readmenator__mermaid_py_MermaidRenderer cls;
-    readmenator__mermaid_py --> readmenator__mermaid_py_MermaidRenderer
-    readmenator__mermaid_py___init__["__init__"]
-    class readmenator__mermaid_py___init__ fn;
-    readmenator__mermaid_py --> readmenator__mermaid_py___init__
-    readmenator__mermaid_py__sanitize_id["_sanitize_id"]
-    class readmenator__mermaid_py__sanitize_id fn;
-    readmenator__mermaid_py --> readmenator__mermaid_py__sanitize_id
-    readmenator__mermaid_py_render["render"]
-    class readmenator__mermaid_py_render fn;
-    readmenator__mermaid_py --> readmenator__mermaid_py_render
+    tests_test_analyzer_py["test_analyzer.py (py)"]
+    class tests_test_analyzer_py mod;
+    tests_test_analyzer_py_TestGraphAnalyzerContract["TestGraphAnalyzerContract"]
+    class tests_test_analyzer_py_TestGraphAnalyzerContract cls;
+    tests_test_analyzer_py --> tests_test_analyzer_py_TestGraphAnalyzerContract
+    tests_test_analyzer_py_setUp["setUp"]
+    class tests_test_analyzer_py_setUp fn;
+    tests_test_analyzer_py --> tests_test_analyzer_py_setUp
+    tests_test_analyzer_py__make_node["_make_node"]
+    class tests_test_analyzer_py__make_node fn;
+    tests_test_analyzer_py --> tests_test_analyzer_py__make_node
+    tests_test_analyzer_py__make_edge["_make_edge"]
+    class tests_test_analyzer_py__make_edge fn;
+    tests_test_analyzer_py --> tests_test_analyzer_py__make_edge
+    tests_test_analyzer_py_test_analyze_empty_graph_returns_empty_result["test_analyze_empty_graph_returns_empty_result"]
+    class tests_test_analyzer_py_test_analyze_empty_graph_returns_empty_result fn;
+    tests_test_analyzer_py --> tests_test_analyzer_py_test_analyze_empty_graph_returns_empty_result
     readmenator__documentation_py["_documentation.py (py)"]
     class readmenator__documentation_py mod;
     readmenator__documentation_py_DocumentationGenerator["DocumentationGenerator"]
@@ -150,23 +328,46 @@ graph TD
     readmenator__documentation_py_generate["generate"]
     class readmenator__documentation_py_generate fn;
     readmenator__documentation_py --> readmenator__documentation_py_generate
-    tests_test_parsers_py["test_parsers.py (py)"]
-    class tests_test_parsers_py mod;
-    tests_test_parsers_py_TestCParserContract["TestCParserContract"]
-    class tests_test_parsers_py_TestCParserContract cls;
-    tests_test_parsers_py --> tests_test_parsers_py_TestCParserContract
-    tests_test_parsers_py_TestPythonParserContract["TestPythonParserContract"]
-    class tests_test_parsers_py_TestPythonParserContract cls;
-    tests_test_parsers_py --> tests_test_parsers_py_TestPythonParserContract
-    tests_test_parsers_py_TestGoParserContract["TestGoParserContract"]
-    class tests_test_parsers_py_TestGoParserContract cls;
-    tests_test_parsers_py --> tests_test_parsers_py_TestGoParserContract
-    tests_test_parsers_py_TestRustParserContract["TestRustParserContract"]
-    class tests_test_parsers_py_TestRustParserContract cls;
-    tests_test_parsers_py --> tests_test_parsers_py_TestRustParserContract
-    tests_test_parsers_py_TestJavaScriptParserContract["TestJavaScriptParserContract"]
-    class tests_test_parsers_py_TestJavaScriptParserContract cls;
-    tests_test_parsers_py --> tests_test_parsers_py_TestJavaScriptParserContract
+    readmenator__documentation_py__build_toc["_build_toc"]
+    class readmenator__documentation_py__build_toc fn;
+    readmenator__documentation_py --> readmenator__documentation_py__build_toc
+    readmenator__documentation_py__build_dashboard["_build_dashboard"]
+    class readmenator__documentation_py__build_dashboard fn;
+    readmenator__documentation_py --> readmenator__documentation_py__build_dashboard
+    tests_test_integration_py["test_integration.py (py)"]
+    class tests_test_integration_py mod;
+    tests_test_integration_py_TestEndToEndContract["TestEndToEndContract"]
+    class tests_test_integration_py_TestEndToEndContract cls;
+    tests_test_integration_py --> tests_test_integration_py_TestEndToEndContract
+    tests_test_integration_py_setUp["setUp"]
+    class tests_test_integration_py_setUp fn;
+    tests_test_integration_py --> tests_test_integration_py_setUp
+    tests_test_integration_py_tearDown["tearDown"]
+    class tests_test_integration_py_tearDown fn;
+    tests_test_integration_py --> tests_test_integration_py_tearDown
+    tests_test_integration_py__write["_write"]
+    class tests_test_integration_py__write fn;
+    tests_test_integration_py --> tests_test_integration_py__write
+    tests_test_integration_py_test_full_pipeline_generates_knowledge_base["test_full_pipeline_generates_knowledge_base"]
+    class tests_test_integration_py_test_full_pipeline_generates_knowledge_base fn;
+    tests_test_integration_py --> tests_test_integration_py_test_full_pipeline_generates_knowledge_base
+    readmenator__cache_py["_cache.py (py)"]
+    class readmenator__cache_py mod;
+    readmenator__cache_py_FileCache["FileCache"]
+    class readmenator__cache_py_FileCache cls;
+    readmenator__cache_py --> readmenator__cache_py_FileCache
+    readmenator__cache_py___init__["__init__"]
+    class readmenator__cache_py___init__ fn;
+    readmenator__cache_py --> readmenator__cache_py___init__
+    readmenator__cache_py_load["load"]
+    class readmenator__cache_py_load fn;
+    readmenator__cache_py --> readmenator__cache_py_load
+    readmenator__cache_py_save["save"]
+    class readmenator__cache_py_save fn;
+    readmenator__cache_py --> readmenator__cache_py_save
+    readmenator__cache_py_compute_hash["compute_hash"]
+    class readmenator__cache_py_compute_hash fn;
+    readmenator__cache_py --> readmenator__cache_py_compute_hash
     tests_test_documentation_py["test_documentation.py (py)"]
     class tests_test_documentation_py mod;
     tests_test_documentation_py_TestDocumentationGeneratorContract["TestDocumentationGeneratorContract"]
@@ -201,23 +402,52 @@ graph TD
     tests_test_mermaid_py_test_renders_symbol_subnodes["test_renders_symbol_subnodes"]
     class tests_test_mermaid_py_test_renders_symbol_subnodes fn;
     tests_test_mermaid_py --> tests_test_mermaid_py_test_renders_symbol_subnodes
-    readmenator__query_py["_query.py (py)"]
-    class readmenator__query_py mod;
-    readmenator__query_py_QueryEngine["QueryEngine"]
-    class readmenator__query_py_QueryEngine cls;
-    readmenator__query_py --> readmenator__query_py_QueryEngine
-    readmenator__query_py___init__["__init__"]
-    class readmenator__query_py___init__ fn;
-    readmenator__query_py --> readmenator__query_py___init__
-    readmenator__query_py__build_symbol_index["_build_symbol_index"]
-    class readmenator__query_py__build_symbol_index fn;
-    readmenator__query_py --> readmenator__query_py__build_symbol_index
-    readmenator__query_py__build_import_graph["_build_import_graph"]
-    class readmenator__query_py__build_import_graph fn;
-    readmenator__query_py --> readmenator__query_py__build_import_graph
-    readmenator__query_py_find_symbol["find_symbol"]
-    class readmenator__query_py_find_symbol fn;
-    readmenator__query_py --> readmenator__query_py_find_symbol
+    readmenator__mermaid_py["_mermaid.py (py)"]
+    class readmenator__mermaid_py mod;
+    readmenator__mermaid_py_MermaidRenderer["MermaidRenderer"]
+    class readmenator__mermaid_py_MermaidRenderer cls;
+    readmenator__mermaid_py --> readmenator__mermaid_py_MermaidRenderer
+    readmenator__mermaid_py___init__["__init__"]
+    class readmenator__mermaid_py___init__ fn;
+    readmenator__mermaid_py --> readmenator__mermaid_py___init__
+    readmenator__mermaid_py__sanitize_id["_sanitize_id"]
+    class readmenator__mermaid_py__sanitize_id fn;
+    readmenator__mermaid_py --> readmenator__mermaid_py__sanitize_id
+    readmenator__mermaid_py_render["render"]
+    class readmenator__mermaid_py_render fn;
+    readmenator__mermaid_py --> readmenator__mermaid_py_render
+    end
+    subgraph community_1 ["root"]
+    readmenator___main___py["__main__.py (py)"]
+    class readmenator___main___py mod;
+    readmenator___main___py_build_parser["build_parser"]
+    class readmenator___main___py_build_parser fn;
+    readmenator___main___py --> readmenator___main___py_build_parser
+    readmenator___main___py__run_tests["_run_tests"]
+    class readmenator___main___py__run_tests fn;
+    readmenator___main___py --> readmenator___main___py__run_tests
+    readmenator___main___py_main["main"]
+    class readmenator___main___py_main fn;
+    readmenator___main___py --> readmenator___main___py_main
+    tests_test_parsers_py["test_parsers.py (py)"]
+    class tests_test_parsers_py mod;
+    tests_test_parsers_py_TestCParserContract["TestCParserContract"]
+    class tests_test_parsers_py_TestCParserContract cls;
+    tests_test_parsers_py --> tests_test_parsers_py_TestCParserContract
+    tests_test_parsers_py_TestPythonParserContract["TestPythonParserContract"]
+    class tests_test_parsers_py_TestPythonParserContract cls;
+    tests_test_parsers_py --> tests_test_parsers_py_TestPythonParserContract
+    tests_test_parsers_py_TestGoParserContract["TestGoParserContract"]
+    class tests_test_parsers_py_TestGoParserContract cls;
+    tests_test_parsers_py --> tests_test_parsers_py_TestGoParserContract
+    tests_test_parsers_py_TestRustParserContract["TestRustParserContract"]
+    class tests_test_parsers_py_TestRustParserContract cls;
+    tests_test_parsers_py --> tests_test_parsers_py_TestRustParserContract
+    tests_test_parsers_py_TestJavaScriptParserContract["TestJavaScriptParserContract"]
+    class tests_test_parsers_py_TestJavaScriptParserContract cls;
+    tests_test_parsers_py --> tests_test_parsers_py_TestJavaScriptParserContract
+    readmenator___init___py["__init__.py (py)"]
+    class readmenator___init___py mod;
     tests_test_query_py["test_query.py (py)"]
     class tests_test_query_py mod;
     tests_test_query_py__make_node["_make_node"]
@@ -235,6 +465,59 @@ graph TD
     tests_test_query_py_test_find_exact_symbol["test_find_exact_symbol"]
     class tests_test_query_py_test_find_exact_symbol fn;
     tests_test_query_py --> tests_test_query_py_test_find_exact_symbol
+    readmenator__query_py["_query.py (py)"]
+    class readmenator__query_py mod;
+    readmenator__query_py_QueryEngine["QueryEngine"]
+    class readmenator__query_py_QueryEngine cls;
+    readmenator__query_py --> readmenator__query_py_QueryEngine
+    readmenator__query_py___init__["__init__"]
+    class readmenator__query_py___init__ fn;
+    readmenator__query_py --> readmenator__query_py___init__
+    readmenator__query_py__build_symbol_index["_build_symbol_index"]
+    class readmenator__query_py__build_symbol_index fn;
+    readmenator__query_py --> readmenator__query_py__build_symbol_index
+    readmenator__query_py__build_import_graph["_build_import_graph"]
+    class readmenator__query_py__build_import_graph fn;
+    readmenator__query_py --> readmenator__query_py__build_import_graph
+    readmenator__query_py__build_resolved_graph["_build_resolved_graph"]
+    class readmenator__query_py__build_resolved_graph fn;
+    readmenator__query_py --> readmenator__query_py__build_resolved_graph
+    end
+    subgraph community_2 ["readmenator"]
+    readmenator__resolver_py["_resolver.py (py)"]
+    class readmenator__resolver_py mod;
+    readmenator__resolver_py_ImportResolver["ImportResolver"]
+    class readmenator__resolver_py_ImportResolver cls;
+    readmenator__resolver_py --> readmenator__resolver_py_ImportResolver
+    readmenator__resolver_py___init__["__init__"]
+    class readmenator__resolver_py___init__ fn;
+    readmenator__resolver_py --> readmenator__resolver_py___init__
+    readmenator__resolver_py__build_stem_index["_build_stem_index"]
+    class readmenator__resolver_py__build_stem_index fn;
+    readmenator__resolver_py --> readmenator__resolver_py__build_stem_index
+    readmenator__resolver_py__build_dir_index["_build_dir_index"]
+    class readmenator__resolver_py__build_dir_index fn;
+    readmenator__resolver_py --> readmenator__resolver_py__build_dir_index
+    readmenator__resolver_py_resolve["resolve"]
+    class readmenator__resolver_py_resolve fn;
+    readmenator__resolver_py --> readmenator__resolver_py_resolve
+    tests_test_resolver_py["test_resolver.py (py)"]
+    class tests_test_resolver_py mod;
+    tests_test_resolver_py_TestImportResolverContract["TestImportResolverContract"]
+    class tests_test_resolver_py_TestImportResolverContract cls;
+    tests_test_resolver_py --> tests_test_resolver_py_TestImportResolverContract
+    tests_test_resolver_py_test_resolves_python_module_dotpath["test_resolves_python_module_dotpath"]
+    class tests_test_resolver_py_test_resolves_python_module_dotpath fn;
+    tests_test_resolver_py --> tests_test_resolver_py_test_resolves_python_module_dotpath
+    tests_test_resolver_py_test_resolves_relative_import["test_resolves_relative_import"]
+    class tests_test_resolver_py_test_resolves_relative_import fn;
+    tests_test_resolver_py --> tests_test_resolver_py_test_resolves_relative_import
+    tests_test_resolver_py_test_resolves_extensionless_python_import["test_resolves_extensionless_python_import"]
+    class tests_test_resolver_py_test_resolves_extensionless_python_import fn;
+    tests_test_resolver_py --> tests_test_resolver_py_test_resolves_extensionless_python_import
+    tests_test_resolver_py_test_resolves_package_init["test_resolves_package_init"]
+    class tests_test_resolver_py_test_resolves_package_init fn;
+    tests_test_resolver_py --> tests_test_resolver_py_test_resolves_package_init
     tests_test_config_py["test_config.py (py)"]
     class tests_test_config_py mod;
     tests_test_config_py_TestConfigContract["TestConfigContract"]
@@ -252,27 +535,6 @@ graph TD
     tests_test_config_py_test_plural_map_covers_all_symbol_types["test_plural_map_covers_all_symbol_types"]
     class tests_test_config_py_test_plural_map_covers_all_symbol_types fn;
     tests_test_config_py --> tests_test_config_py_test_plural_map_covers_all_symbol_types
-    readmenator__models_py["_models.py (py)"]
-    class readmenator__models_py mod;
-    readmenator__models_py_Symbol["Symbol"]
-    class readmenator__models_py_Symbol cls;
-    readmenator__models_py --> readmenator__models_py_Symbol
-    readmenator__models_py_Node["Node"]
-    class readmenator__models_py_Node cls;
-    readmenator__models_py --> readmenator__models_py_Node
-    readmenator__models_py_Edge["Edge"]
-    class readmenator__models_py_Edge cls;
-    readmenator__models_py --> readmenator__models_py_Edge
-    readmenator__models_py_pluralize_symbol_kind["pluralize_symbol_kind"]
-    class readmenator__models_py_pluralize_symbol_kind fn;
-    readmenator__models_py --> readmenator__models_py_pluralize_symbol_kind
-    readmenator__config_py["_config.py (py)"]
-    class readmenator__config_py mod;
-    readmenator__config_py_Config["Config"]
-    class readmenator__config_py_Config cls;
-    readmenator__config_py --> readmenator__config_py_Config
-    readmenator___init___py["__init__.py (py)"]
-    class readmenator___init___py mod;
     readmenator_py["readmenator.py (py)"]
     class readmenator_py mod;
     tests_test_models_py["test_models.py (py)"]
@@ -292,8 +554,86 @@ graph TD
     tests_test_models_py_test_symbol_creation["test_symbol_creation"]
     class tests_test_models_py_test_symbol_creation fn;
     tests_test_models_py --> tests_test_models_py_test_symbol_creation
+    readmenator__models_py["_models.py (py)"]
+    class readmenator__models_py mod;
+    readmenator__models_py_Symbol["Symbol"]
+    class readmenator__models_py_Symbol cls;
+    readmenator__models_py --> readmenator__models_py_Symbol
+    readmenator__models_py_Node["Node"]
+    class readmenator__models_py_Node cls;
+    readmenator__models_py --> readmenator__models_py_Node
+    readmenator__models_py_Edge["Edge"]
+    class readmenator__models_py_Edge cls;
+    readmenator__models_py --> readmenator__models_py_Edge
+    readmenator__models_py_pluralize_symbol_kind["pluralize_symbol_kind"]
+    class readmenator__models_py_pluralize_symbol_kind fn;
+    readmenator__models_py --> readmenator__models_py_pluralize_symbol_kind
+    readmenator__models_py_CommunityResult["CommunityResult"]
+    class readmenator__models_py_CommunityResult cls;
+    readmenator__models_py --> readmenator__models_py_CommunityResult
+    readmenator__config_py["_config.py (py)"]
+    class readmenator__config_py mod;
+    readmenator__config_py_Config["Config"]
+    class readmenator__config_py_Config cls;
+    readmenator__config_py --> readmenator__config_py_Config
     tests___init___py["__init__.py (py)"]
     class tests___init___py mod;
+    end
+    readmenator___init___py -- resolved_imports --> readmenator__app_py
+    readmenator___init___py -- resolved_imports --> readmenator__config_py
+    readmenator___init___py -- resolved_imports --> readmenator__models_py
+    readmenator___main___py -- resolved_imports --> readmenator__app_py
+    readmenator__analyzer_py -- resolved_imports --> readmenator__config_py
+    readmenator__analyzer_py -- resolved_imports --> readmenator__models_py
+    readmenator__app_py -- resolved_imports --> readmenator__analyzer_py
+    readmenator__app_py -- resolved_imports --> readmenator__cache_py
+    readmenator__app_py -- resolved_imports --> readmenator__config_py
+    readmenator__app_py -- resolved_imports --> readmenator__documentation_py
+    readmenator__app_py -- resolved_imports --> readmenator__exporter_py
+    readmenator__app_py -- resolved_imports --> readmenator__models_py
+    readmenator__app_py -- resolved_imports --> readmenator__query_py
+    readmenator__app_py -- resolved_imports --> readmenator__resolver_py
+    readmenator__app_py -- resolved_imports --> readmenator__scanner_py
+    readmenator__cache_py -- resolved_imports --> readmenator__config_py
+    readmenator__documentation_py -- resolved_imports --> readmenator__config_py
+    readmenator__documentation_py -- resolved_imports --> readmenator__mermaid_py
+    readmenator__documentation_py -- resolved_imports --> readmenator__models_py
+    readmenator__exporter_py -- resolved_imports --> readmenator__config_py
+    readmenator__exporter_py -- resolved_imports --> readmenator__models_py
+    readmenator__mermaid_py -- resolved_imports --> readmenator__config_py
+    readmenator__mermaid_py -- resolved_imports --> readmenator__models_py
+    readmenator__parsers_py -- resolved_imports --> readmenator__config_py
+    readmenator__parsers_py -- resolved_imports --> readmenator__models_py
+    readmenator__query_py -- resolved_imports --> readmenator__models_py
+    readmenator__scanner_py -- resolved_imports --> readmenator__config_py
+    readmenator__scanner_py -- resolved_imports --> readmenator__models_py
+    readmenator__scanner_py -- resolved_imports --> readmenator__parsers_py
+    readmenator_py -- resolved_imports --> readmenator___main___py
+    tests_test_analyzer_py -- resolved_imports --> readmenator__analyzer_py
+    tests_test_analyzer_py -- resolved_imports --> readmenator__config_py
+    tests_test_analyzer_py -- resolved_imports --> readmenator__models_py
+    tests_test_cache_py -- resolved_imports --> readmenator__cache_py
+    tests_test_cache_py -- resolved_imports --> readmenator__config_py
+    tests_test_config_py -- resolved_imports --> readmenator__config_py
+    tests_test_documentation_py -- resolved_imports --> readmenator__config_py
+    tests_test_documentation_py -- resolved_imports --> readmenator__documentation_py
+    tests_test_documentation_py -- resolved_imports --> readmenator__models_py
+    tests_test_exporter_py -- resolved_imports --> readmenator__config_py
+    tests_test_exporter_py -- resolved_imports --> readmenator__exporter_py
+    tests_test_exporter_py -- resolved_imports --> readmenator__models_py
+    tests_test_integration_py -- resolved_imports --> readmenator__app_py
+    tests_test_integration_py -- resolved_imports --> readmenator__config_py
+    tests_test_mermaid_py -- resolved_imports --> readmenator__config_py
+    tests_test_mermaid_py -- resolved_imports --> readmenator__mermaid_py
+    tests_test_mermaid_py -- resolved_imports --> readmenator__models_py
+    tests_test_models_py -- resolved_imports --> readmenator__models_py
+    tests_test_parsers_py -- resolved_imports --> readmenator__config_py
+    tests_test_parsers_py -- resolved_imports --> readmenator__parsers_py
+    tests_test_query_py -- resolved_imports --> readmenator__models_py
+    tests_test_query_py -- resolved_imports --> readmenator__query_py
+    tests_test_resolver_py -- resolved_imports --> readmenator__resolver_py
+    tests_test_scanner_py -- resolved_imports --> readmenator__config_py
+    tests_test_scanner_py -- resolved_imports --> readmenator__scanner_py
     ext_readmenator__app["readmenator._app"]
     class ext_readmenator__app ext;
     readmenator___init___py -.->|imports| ext_readmenator__app
@@ -309,9 +649,6 @@ graph TD
     ext_argparse["argparse"]
     class ext_argparse ext;
     readmenator___main___py -.->|imports| ext_argparse
-    ext_os["os"]
-    class ext_os ext;
-    readmenator___main___py -.->|imports| ext_os
     ext_sys["sys"]
     class ext_sys ext;
     readmenator___main___py -.->|imports| ext_sys
@@ -322,22 +659,59 @@ graph TD
     class ext_pathlib ext;
     readmenator___main___py -.->|imports| ext_pathlib
     readmenator___main___py -.->|imports| ext_readmenator__app
-    readmenator__app_py -.->|imports| ext___future__
-    readmenator__app_py -.->|imports| ext_pathlib
+    readmenator__analyzer_py -.->|imports| ext___future__
+    ext_random["random"]
+    class ext_random ext;
+    readmenator__analyzer_py -.->|imports| ext_random
+    ext_collections["collections"]
+    class ext_collections ext;
+    readmenator__analyzer_py -.->|imports| ext_collections
     ext_typing["typing"]
     class ext_typing ext;
+    readmenator__analyzer_py -.->|imports| ext_typing
+    readmenator__analyzer_py -.->|imports| ext_readmenator__config
+    readmenator__analyzer_py -.->|imports| ext_readmenator__models
+    readmenator__analyzer_py -.->|imports| ext_collections
+    readmenator__app_py -.->|imports| ext___future__
+    ext_json["json"]
+    class ext_json ext;
+    readmenator__app_py -.->|imports| ext_json
+    readmenator__app_py -.->|imports| ext_pathlib
     readmenator__app_py -.->|imports| ext_typing
+    ext_readmenator__analyzer["readmenator._analyzer"]
+    class ext_readmenator__analyzer ext;
+    readmenator__app_py -.->|imports| ext_readmenator__analyzer
+    ext_readmenator__cache["readmenator._cache"]
+    class ext_readmenator__cache ext;
+    readmenator__app_py -.->|imports| ext_readmenator__cache
     readmenator__app_py -.->|imports| ext_readmenator__config
     ext_readmenator__documentation["readmenator._documentation"]
     class ext_readmenator__documentation ext;
     readmenator__app_py -.->|imports| ext_readmenator__documentation
+    ext_readmenator__exporter["readmenator._exporter"]
+    class ext_readmenator__exporter ext;
+    readmenator__app_py -.->|imports| ext_readmenator__exporter
     readmenator__app_py -.->|imports| ext_readmenator__models
     ext_readmenator__query["readmenator._query"]
     class ext_readmenator__query ext;
     readmenator__app_py -.->|imports| ext_readmenator__query
+    ext_readmenator__resolver["readmenator._resolver"]
+    class ext_readmenator__resolver ext;
+    readmenator__app_py -.->|imports| ext_readmenator__resolver
     ext_readmenator__scanner["readmenator._scanner"]
     class ext_readmenator__scanner ext;
     readmenator__app_py -.->|imports| ext_readmenator__scanner
+    readmenator__cache_py -.->|imports| ext___future__
+    ext_hashlib["hashlib"]
+    class ext_hashlib ext;
+    readmenator__cache_py -.->|imports| ext_hashlib
+    readmenator__cache_py -.->|imports| ext_json
+    ext_os["os"]
+    class ext_os ext;
+    readmenator__cache_py -.->|imports| ext_os
+    readmenator__cache_py -.->|imports| ext_pathlib
+    readmenator__cache_py -.->|imports| ext_typing
+    readmenator__cache_py -.->|imports| ext_readmenator__config
     readmenator__config_py -.->|imports| ext___future__
     ext_dataclasses["dataclasses"]
     class ext_dataclasses ext;
@@ -350,6 +724,19 @@ graph TD
     class ext_readmenator__mermaid ext;
     readmenator__documentation_py -.->|imports| ext_readmenator__mermaid
     readmenator__documentation_py -.->|imports| ext_readmenator__models
+    readmenator__exporter_py -.->|imports| ext___future__
+    readmenator__exporter_py -.->|imports| ext_json
+    readmenator__exporter_py -.->|imports| ext_os
+    readmenator__exporter_py -.->|imports| ext_pathlib
+    ext_textwrap["textwrap"]
+    class ext_textwrap ext;
+    readmenator__exporter_py -.->|imports| ext_textwrap
+    readmenator__exporter_py -.->|imports| ext_typing
+    readmenator__exporter_py -.->|imports| ext_readmenator__config
+    readmenator__exporter_py -.->|imports| ext_readmenator__models
+    ext_math["math"]
+    class ext_math ext;
+    readmenator__exporter_py -.->|imports| ext_math
     readmenator__mermaid_py -.->|imports| ext___future__
     ext_re["re"]
     class ext_re ext;
@@ -372,11 +759,13 @@ graph TD
     readmenator__parsers_py -.->|imports| ext_readmenator__config
     readmenator__parsers_py -.->|imports| ext_readmenator__models
     readmenator__query_py -.->|imports| ext___future__
-    ext_collections["collections"]
-    class ext_collections ext;
     readmenator__query_py -.->|imports| ext_collections
     readmenator__query_py -.->|imports| ext_typing
     readmenator__query_py -.->|imports| ext_readmenator__models
+    readmenator__resolver_py -.->|imports| ext___future__
+    readmenator__resolver_py -.->|imports| ext_re
+    readmenator__resolver_py -.->|imports| ext_pathlib
+    readmenator__resolver_py -.->|imports| ext_typing
     readmenator__scanner_py -.->|imports| ext___future__
     readmenator__scanner_py -.->|imports| ext_pathlib
     readmenator__scanner_py -.->|imports| ext_typing
@@ -412,6 +801,19 @@ graph TD
     readmenator_orchestrator_py -.->|imports| ext_datetime
     readmenator_orchestrator_py -.->|imports| ext_pathlib
     readmenator_orchestrator_py -.->|imports| ext_typing
+    tests_test_analyzer_py -.->|imports| ext___future__
+    tests_test_analyzer_py -.->|imports| ext_unittest
+    tests_test_analyzer_py -.->|imports| ext_readmenator__analyzer
+    tests_test_analyzer_py -.->|imports| ext_readmenator__config
+    tests_test_analyzer_py -.->|imports| ext_readmenator__models
+    tests_test_cache_py -.->|imports| ext___future__
+    tests_test_cache_py -.->|imports| ext_os
+    tests_test_cache_py -.->|imports| ext_tempfile
+    tests_test_cache_py -.->|imports| ext_unittest
+    tests_test_cache_py -.->|imports| ext_pathlib
+    tests_test_cache_py -.->|imports| ext_readmenator__cache
+    tests_test_cache_py -.->|imports| ext_readmenator__config
+    tests_test_cache_py -.->|imports| ext_shutil
     tests_test_config_py -.->|imports| ext_unittest
     tests_test_config_py -.->|imports| ext_dataclasses
     tests_test_config_py -.->|imports| ext_readmenator__config
@@ -419,6 +821,12 @@ graph TD
     tests_test_documentation_py -.->|imports| ext_readmenator__config
     tests_test_documentation_py -.->|imports| ext_readmenator__documentation
     tests_test_documentation_py -.->|imports| ext_readmenator__models
+    tests_test_exporter_py -.->|imports| ext___future__
+    tests_test_exporter_py -.->|imports| ext_json
+    tests_test_exporter_py -.->|imports| ext_unittest
+    tests_test_exporter_py -.->|imports| ext_readmenator__config
+    tests_test_exporter_py -.->|imports| ext_readmenator__exporter
+    tests_test_exporter_py -.->|imports| ext_readmenator__models
     tests_test_integration_py -.->|imports| ext_tempfile
     tests_test_integration_py -.->|imports| ext_unittest
     tests_test_integration_py -.->|imports| ext_pathlib
@@ -438,6 +846,9 @@ graph TD
     tests_test_query_py -.->|imports| ext_unittest
     tests_test_query_py -.->|imports| ext_readmenator__models
     tests_test_query_py -.->|imports| ext_readmenator__query
+    tests_test_resolver_py -.->|imports| ext___future__
+    tests_test_resolver_py -.->|imports| ext_unittest
+    tests_test_resolver_py -.->|imports| ext_readmenator__resolver
     tests_test_scanner_py -.->|imports| ext_os
     tests_test_scanner_py -.->|imports| ext_tempfile
     tests_test_scanner_py -.->|imports| ext_unittest
@@ -451,7 +862,7 @@ graph TD
 
 ## Architecture Reference
 
-### PY (21 files)
+### PY (29 files)
 
 #### `__init__.py`
 **Path:** `readmenator/__init__.py`
@@ -463,38 +874,201 @@ graph TD
 
 **Functions:**
 - `build_parser` (line 19) `def build_parser()` - *Construct the argument parser with subcommand help and examples.*
-- `_run_tests` (line 55) `def _run_tests()` - *Discover and run the full test suite from the tests/ directory.*
-- `main` (line 71) `def main()` - *Primary CLI entry point invoked by ``python -m readmenator``.
+- `_run_tests` (line 94) `def _run_tests()` - *Discover and run the full test suite from the tests/ directory.*
+- `main` (line 110) `def main()` - *Primary CLI entry point invoked by ``python -m readmenator``.
 
 Supports direct subcommand dispatch (query, explain, path, summary,
---rebuild, update) or falls back to the argument parser for the
-default workflow: generate or summarise KNOWLEDGE_BASE.md.*
+update, export, analyze, --rebuild) or falls back to the argument
+parser for the default workflow: generate or summarise
+KNOWLEDGE_BASE.md.*
+
+#### `_analyzer.py`
+**Path:** `readmenator/_analyzer.py`
+
+**Classes:**
+- `GraphAnalyzer` (line 20) `class GraphAnalyzer` - *Deterministic graph analysis over scanned nodes and edges.
+
+Builds an internal adjacency graph from import edges, then applies
+community detection, centrality scoring, cross-community bridge
+discovery, and question generation without any external API calls.*
+
+**Functions:**
+- `__init__` (line 28) `def __init__(self, config)` - *Initialise with application configuration.
+
+Args:
+    config: Settings for thresholds and limits.*
+- `analyze` (line 36) `def analyze(self, nodes, edges, resolved_edges)` - *Run the full analysis pipeline and return structured results.
+
+Args:
+    nodes: Scanned file nodes.
+    edges: Import edges from the scanner.
+    resolved_edges: Optional list of resolved-import edges (source and
+        target are both project file IDs).
+
+Returns:
+    An AnalysisResult with god nodes, communities, surprising
+    connections, and suggested questions.*
+- `_build_adjacency` (line 89) `def _build_adjacency(self, nodes, edges)` - *Build an undirected adjacency map from import edges.*
+- `_build_reverse_adjacency` (line 103) `def _build_reverse_adjacency(self, adjacency)` - *Build a directed reverse adjacency (incoming edges) map.*
+- `_compute_god_nodes` (line 113) `def _compute_god_nodes(self, nodes, adjacency, reverse_adjacency)` - *Compute the most central nodes using combined degree centrality.
+
+Score is a combination of out-degree (imports), in-degree (imported-by),
+and symbol count. Higher score means more architecturally significant.*
+- `_detect_communities` (line 135) `def _detect_communities(self, nodes, adjacency)` - *Detect communities using label propagation.
+
+Each node adopts the most frequent community label among its
+neighbors. Iterates until convergence or max iterations reached.
+Simple, deterministic, and correct for connected graphs.*
+- `_label_communities` (line 186) `def _label_communities(self, nodes, communities)` - *Generate human-readable labels for communities.
+
+Labels are based on the most common directory within the community.*
+- `_build_community_map` (line 213) `def _build_community_map(self, communities)` - *Build a reverse map from file ID to community ID.*
+- `_compute_cohesion` (line 223) `def _compute_cohesion(self, communities, adjacency)` - *Compute cohesion score for each community.
+
+Cohesion = internal edges / (internal edges + external edges).*
+- `_find_surprising_connections` (line 248) `def _find_surprising_connections(self, nodes, adjacency, community_map)` - *Find non-obvious cross-community bridges.
+
+A connection is surprising when two nodes in different communities
+are connected indirectly through 3 or more hops, and the path
+crosses community boundaries.*
+- `_shortest_path_communities` (line 288) `def _shortest_path_communities(self, source, target, adjacency, community_map)` - *Find the shortest path and communities traversed.*
+- `_suggest_questions` (line 316) `def _suggest_questions(self, nodes, god_nodes, communities, community_labels, surprising, adjacency)` - *Generate plain-language exploration questions from graph structure.*
 
 #### `_app.py`
 **Path:** `readmenator/_app.py`
 
 **Classes:**
-- `readmenatorApplication` (line 20) `class readmenatorApplication` - *High-level facade for readmenator operations.
+- `readmenatorApplication` (line 26) `class readmenatorApplication` - *High-level facade for readmenator operations.
 
 Provides convenience methods for the full pipeline:
   - ``run`` / ``rebuild``: scan + generate KNOWLEDGE_BASE.md
+  - ``update``: incremental scan using content hash cache
   - ``query``, ``explain``, ``find_path``, ``summary``:
-    scan + query in a single call.*
+    scan + query in a single call
+  - ``analyze``: run community detection and graph analysis
+  - ``export_json``, ``export_html``, ``export_svg``:
+    export the graph to various formats*
 
 **Functions:**
-- `__init__` (line 29) `def __init__(self, config)` - *Initialise the application with an optional custom config.
+- `__init__` (line 39) `def __init__(self, config)` - *Initialise the application with an optional custom config.
 
 Args:
     config: Application settings; defaults to Config() if omitted.*
-- `_scan` (line 41) `def _scan(self, target_dir)` - *Resolve *target_dir* and run the scanner, caching results.*
-- `run` (line 49) `def run(self, target_dir)` - *Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
+- `_scan` (line 54) `def _scan(self, target_dir)` - *Resolve *target_dir* and run the scanner, caching results.*
+- `_resolve_imports` (line 63) `def _resolve_imports(self, nodes, edges, target_dir)` - *Resolve raw import strings to project file paths.
 
-Prints a summary of files, symbols, and imports on completion.*
-- `query` (line 67) `def query(self, target_dir, question)` - *Scan *target_dir* and answer *question* using the query engine.*
-- `explain` (line 73) `def explain(self, target_dir, symbol_name)` - *Scan *target_dir* and return a detailed explanation of *symbol_name*.*
-- `find_path` (line 86) `def find_path(self, target_dir, symbol_a, symbol_b)` - *Scan *target_dir* and find the shortest import path between two symbols.*
-- `summary` (line 100) `def summary(self, target_dir)` - *Scan *target_dir* and return a concise knowledge base overview.*
-- `rebuild` (line 106) `def rebuild(self, target_dir)` - *Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.*
+Args:
+    nodes: Scanned file nodes.
+    edges: Raw import edges.
+    target_dir: Project root directory.
+
+Returns:
+    List of resolved import edges with project file targets.*
+- `run` (line 92) `def run(self, target_dir, resolve_imports, run_analysis)` - *Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
+
+Args:
+    target_dir: Project directory to scan.
+    resolve_imports: Whether to resolve raw imports to project files.
+    run_analysis: Whether to run community detection and graph analysis.*
+- `update` (line 134) `def update(self, target_dir)` - *Incrementally update KNOWLEDGE_BASE.md for changed files only.
+
+Uses SHA256 content hashing to detect which files have changed
+since the last run. Falls back to full rebuild if no cache exists.
+
+Args:
+    target_dir: Project directory to scan.*
+- `_scan_for_cache` (line 162) `def _scan_for_cache(self, root, cache)` - *Scan only files that have changed since the last cache write.
+
+If no cache exists, performs a full scan and populates the cache.*
+- `query` (line 186) `def query(self, target_dir, question)` - *Scan *target_dir* and answer *question* using the query engine.*
+- `explain` (line 192) `def explain(self, target_dir, symbol_name)` - *Scan *target_dir* and return a detailed explanation of *symbol_name*.*
+- `find_path` (line 205) `def find_path(self, target_dir, symbol_a, symbol_b)` - *Scan *target_dir* and find the shortest import path between two symbols.
+
+Uses resolved imports when available for project-internal paths.*
+- `summary` (line 222) `def summary(self, target_dir)` - *Scan *target_dir* and return a concise knowledge base overview.*
+- `rebuild` (line 228) `def rebuild(self, target_dir)` - *Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.*
+- `analyze` (line 232) `def analyze(self, target_dir)` - *Run community detection and graph analysis on *target_dir*.
+
+Returns:
+    Structured AnalysisResult with god nodes, communities, etc.*
+- `export_json` (line 241) `def export_json(self, target_dir, output_path)` - *Export the knowledge graph as JSON.
+
+Args:
+    target_dir: Project directory to scan.
+    output_path: Optional file path for the JSON output.
+        Defaults to ``<target_dir>/graph.json``.
+
+Returns:
+    JSON string content.*
+- `export_html` (line 266) `def export_html(self, target_dir, output_path)` - *Export the knowledge graph as an interactive HTML page.
+
+Args:
+    target_dir: Project directory to scan.
+    output_path: Optional file path for the HTML output.
+        Defaults to ``<target_dir>/graph.html``.
+
+Returns:
+    HTML document string.*
+- `export_svg` (line 291) `def export_svg(self, target_dir, output_path)` - *Export the knowledge graph as a static SVG image.
+
+Args:
+    target_dir: Project directory to scan.
+    output_path: Optional file path for the SVG output.
+        Defaults to ``<target_dir>/graph.svg``.
+
+Returns:
+    SVG document string.*
+- `export` (line 316) `def export(self, target_dir)` - *Export all formats (JSON, HTML, SVG) at once.*
+
+#### `_cache.py`
+**Path:** `readmenator/_cache.py`
+
+**Classes:**
+- `FileCache` (line 19) `class FileCache` - *SHA256-based cache for incremental file scanning.
+
+Stores a JSON mapping of relative file paths to their content
+hashes inside the project's cache directory. On subsequent runs,
+files whose hash matches the cached value are skipped.*
+
+**Functions:**
+- `__init__` (line 27) `def __init__(self, config, project_root)` - *Initialise cache for the given project root.
+
+Args:
+    config: Application settings including CACHE_DIR.
+    project_root: Absolute path of the scanned project.*
+- `load` (line 38) `def load(self)` - *Load the cached hash map from disk.
+
+Returns:
+    Dict mapping relative file paths to their SHA256 hex digests.*
+- `save` (line 54) `def save(self, hashes)` - *Persist the hash map to disk.
+
+Args:
+    hashes: Dict mapping relative file paths to SHA256 hex digests.*
+- `compute_hash` (line 65) `def compute_hash(self, file_path)` - *Compute the SHA256 hex digest of a file's contents.
+
+Args:
+    file_path: Absolute path to the file.
+
+Returns:
+    SHA256 hex digest string.*
+- `compute_hashes` (line 82) `def compute_hashes(self, file_paths)` - *Compute hashes for a batch of relative-path-to-absolute-path mappings.
+
+Args:
+    file_paths: Dict mapping relative paths to absolute Path objects.
+
+Returns:
+    Dict mapping relative paths to their SHA256 hex digests.*
+- `find_changed` (line 98) `def find_changed(self, file_paths)` - *Determine which files have changed since the last cache.
+
+Args:
+    file_paths: Dict mapping relative paths to absolute Path objects.
+
+Returns:
+    Set of relative paths for files that are new or changed.*
+- `prune_deleted` (line 120) `def prune_deleted(self, current_file_ids)` - *Remove entries for files that no longer exist on disk.
+
+Args:
+    current_file_ids: Set of relative paths currently in the project.*
 
 #### `_config.py`
 **Path:** `readmenator/_config.py`
@@ -503,58 +1077,139 @@ Prints a summary of files, symbols, and imports on completion.*
 - `Config` (line 15) `class Config` - *Single source of truth for all readmenator settings.
 
 Every tuneable constant -- file-size limits, directory depth,
-supported extensions, symbol pluralisation map, and Mermaid style
-tokens -- is defined here and consumed by reference elsewhere.*
+supported extensions, symbol pluralisation map, Mermaid style
+tokens, graph analysis thresholds, and export settings -- is
+defined here and consumed by reference elsewhere.*
 
 #### `_documentation.py`
 **Path:** `readmenator/_documentation.py`
 
 **Classes:**
-- `DocumentationGenerator` (line 18) `class DocumentationGenerator` - *Builds the KNOWLEDGE_BASE.md document from scanned nodes and edges.
+- `DocumentationGenerator` (line 19) `class DocumentationGenerator` - *Builds the KNOWLEDGE_BASE.md document from scanned nodes and edges.
 
 Delegates graph rendering to MermaidRenderer and handles the
 Markdown layout: header metadata, Mermaid block, and per-language
 architecture sections with pluralised symbol kind headings.*
 
 **Functions:**
-- `__init__` (line 26) `def __init__(self, config)` - *Initialise with config and pre-compute the plural map.
+- `__init__` (line 27) `def __init__(self, config)` - *Initialise with config and pre-compute the plural map.
 
 Args:
     config: Application settings including SYMBOL_TYPE_PLURALS.*
-- `generate` (line 36) `def generate(self, nodes, edges)` - *Assemble the full KNOWLEDGE_BASE.md Markdown document.
+- `generate` (line 37) `def generate(self, nodes, edges, resolved_edges, analysis)` - *Assemble the full KNOWLEDGE_BASE.md Markdown document.
 
 Groups files by language, lists symbols per file under
 pluralised kind headings (e.g. "Classes", "Functions"),
 and includes a note when the Mermaid graph was pruned.
 
+Args:
+    nodes: Scanned file nodes.
+    edges: Import edges.
+    resolved_edges: Optional resolved-import edges.
+    analysis: Optional analysis results for communities, god nodes, etc.
+
 Returns:
     Complete Markdown string ready to write to disk.*
+- `_build_toc` (line 95) `def _build_toc(self, nodes, analysis, is_truncated)` - *Build a table of contents for the document.*
+- `_build_dashboard` (line 132) `def _build_dashboard(self, nodes, edges, resolved_edges)` - *Build a statistics dashboard with import metrics and top files.*
+- `_build_god_nodes` (line 207) `def _build_god_nodes(self, analysis)` - *Build the god nodes section.*
+- `_build_community_analysis` (line 228) `def _build_community_analysis(self, analysis, nodes)` - *Build the community analysis section.*
+- `_build_surprising_connections` (line 262) `def _build_surprising_connections(self, analysis, nodes)` - *Build the surprising connections section.*
+- `_build_suggested_questions` (line 288) `def _build_suggested_questions(self, analysis)` - *Build the suggested questions section.*
+- `_build_mermaid_section` (line 305) `def _build_mermaid_section(self, graph_output, is_truncated)` - *Build the Mermaid graph section.*
+- `_build_architecture_reference` (line 329) `def _build_architecture_reference(self, nodes, edges)` - *Build the architecture reference grouped by language.*
+
+#### `_exporter.py`
+**Path:** `readmenator/_exporter.py`
+
+**Classes:**
+- `GraphExporter` (line 20) `class GraphExporter` - *Exports the knowledge graph to JSON, HTML, and SVG formats.
+
+Each method is self-contained and produces a single file. No
+external network calls are made; the HTML file embeds vis.js
+from a CDN reference for offline-compatible rendering.*
+
+**Functions:**
+- `__init__` (line 28) `def __init__(self, config)` - *Initialise with application configuration.
+
+Args:
+    config: Settings for export styling and limits.*
+- `to_json` (line 36) `def to_json(self, nodes, edges, resolved_edges, analysis)` - *Export the graph as a node-link JSON string.
+
+Args:
+    nodes: Scanned file nodes.
+    edges: Import edges.
+    resolved_edges: Optional resolved-import edges.
+    analysis: Optional analysis results for metadata.
+
+Returns:
+    JSON string with nodes, edges, and optional analysis metadata.*
+- `to_html` (line 133) `def to_html(self, nodes, edges, resolved_edges, analysis)` - *Generate a standalone interactive HTML graph page.
+
+Uses vis.js loaded from CDN. Supports click-to-inspect nodes,
+search filtering, and community-based coloring.
+
+Args:
+    nodes: Scanned file nodes.
+    edges: Import edges.
+    resolved_edges: Optional resolved-import edges.
+    analysis: Optional analysis results for community coloring.
+
+Returns:
+    Complete HTML document as a string.*
+- `_community_color_map` (line 218) `def _community_color_map(self, analysis)` - *Build a node-to-color map based on community membership.*
+- `_lighten` (line 236) `def _lighten(hex_color)` - *Lighten a hex color by 30% for border use.*
+- `_render_html` (line 244) `def _render_html(self, vis_nodes, vis_edges, analysis)` - *Render the full HTML document with vis.js.*
+- `to_svg` (line 365) `def to_svg(self, nodes, edges, resolved_edges, analysis)` - *Generate a static SVG representation of the graph.
+
+Uses a simple force-directed layout without external dependencies.
+For graphs with more than SVG_MAX_NODES, returns a plain SVG
+with a truncation message.
+
+Args:
+    nodes: Scanned file nodes.
+    edges: Import edges.
+    resolved_edges: Optional resolved-import edges.
+    analysis: Optional analysis results for community coloring.
+
+Returns:
+    SVG document as a string.*
+- `_render_truncated_svg` (line 483) `def _render_truncated_svg(self, total_nodes)` - *Render a minimal SVG with a truncation notice.*
+- `_layout_spring` (line 498) `def _layout_spring(self, nodes, edges, node_map)` - *Compute a simple spring-layout for node positioning.
+
+Implements a basic force-directed layout with repulsion
+between all nodes and attraction along edges. Runs a fixed
+number of iterations for determinism.*
+- `_project` (line 427) `def _project(pos)`
 
 #### `_mermaid.py`
 **Path:** `readmenator/_mermaid.py`
 
 **Classes:**
-- `MermaidRenderer` (line 17) `class MermaidRenderer` - *Renders a knowledge graph to Mermaid JS flowchart syntax.
+- `MermaidRenderer` (line 18) `class MermaidRenderer` - *Renders a knowledge graph to Mermaid JS flowchart syntax.
 
 Nodes are ordered by import count and symbol richness; the top
 ``MERMAID_MAX_NODES`` entries are included. External dependencies
 (import targets not matching any scanned file) appear as dashed
-boxes.*
+boxes. Internal import edges between project files are rendered
+as solid arrows. Community subgraphs group related files when
+analysis results are available.*
 
 **Functions:**
-- `__init__` (line 26) `def __init__(self, config)` - *Initialise with configuration for style tokens and node limits.
+- `__init__` (line 29) `def __init__(self, config)` - *Initialise with configuration for style tokens and node limits.
 
 Args:
     config: Provides MERMAID_* style strings and MERMAID_MAX_NODES.*
-- `_sanitize_id` (line 34) `def _sanitize_id(self, node_id)` - *Convert *node_id* to a Mermaid-safe identifier.
+- `_sanitize_id` (line 38) `def _sanitize_id(node_id)` - *Convert *node_id* to a Mermaid-safe identifier.
 
 Replaces non-alphanumeric characters with underscores and
 prepends ``n_`` if the result starts with a digit.*
-- `render` (line 45) `def render(self, nodes, edges)` - *Produce a Mermaid flowchart string and a truncation flag.
+- `render` (line 49) `def render(self, nodes, edges, resolved_edges, analysis)` - *Produce a Mermaid flowchart string and a truncation flag.
 
 Nodes are sorted by import popularity, then by symbol count.
-At most ``MERMAID_MAX_NODES`` items (files + child symbols +
-external deps) are emitted. External imports use dashed edges.
+Internal import edges (between project files) are rendered as
+solid arrows when *resolved_edges* is provided. Community
+subgraphs wrap related files when *analysis* is given.
 
 Returns:
     Tuple of (Mermaid source string, is_truncated bool).*
@@ -563,7 +1218,7 @@ Returns:
 **Path:** `readmenator/_models.py`
 
 **Classes:**
-- `Symbol` (line 15) `class Symbol` - *A single code symbol extracted from a source file.
+- `Symbol` (line 16) `class Symbol` - *A single code symbol extracted from a source file.
 
 Attributes:
     name: Identifier of the symbol (class name, function name, etc.).
@@ -571,7 +1226,7 @@ Attributes:
     line: One-based line number where the symbol is defined.
     doc: Optional docstring or comment extracted from the source.
     signature: Optional method or function signature snippet.*
-- `Node` (line 34) `class Node` - *A file node in the knowledge graph, containing its symbols.
+- `Node` (line 35) `class Node` - *A file node in the knowledge graph, containing its symbols.
 
 Attributes:
     node_id: Relative path of the file used as a unique identifier.
@@ -580,15 +1235,33 @@ Attributes:
     language: Programming language derived from the file extension.
     doc: Optional file-level documentation string.
     symbols: List of Symbol instances defined in this file.*
-- `Edge` (line 55) `class Edge` - *A directed relationship between two nodes in the knowledge graph.
+- `Edge` (line 56) `class Edge` - *A directed relationship between two nodes in the knowledge graph.
 
 Attributes:
     source: Node ID of the source (dependent) file.
     target: Node ID of the target (dependency) file or module.
-    relation: Semantic relation label (e.g. "imports").*
+    relation: Semantic relation label (e.g. "imports", "resolved_imports").
+    confidence: Confidence tier ("EXTRACTED" for structural, "INFERRED" for heuristic).*
+- `CommunityResult` (line 82) `class CommunityResult` - *Result of community detection on the import graph.
+
+Attributes:
+    community_id: Integer identifier of the community.
+    label: Human-readable name for the community.
+    file_ids: Set of node IDs belonging to this community.
+    cohesion: Cohesion score (internal edges / total edges involving community).
+    size: Number of files in the community.*
+- `AnalysisResult` (line 101) `class AnalysisResult` - *Complete graph analysis output.
+
+Attributes:
+    god_nodes: List of (node_id, score) for most central nodes.
+    communities: List of CommunityResult instances.
+    surprising_connections: List of (source_node, target_node, hops, bridging_communities).
+    suggested_questions: List of plain-language exploration questions.
+    node_count: Total nodes in the graph.
+    edge_count: Total edges in the graph.*
 
 **Functions:**
-- `pluralize_symbol_kind` (line 69) `def pluralize_symbol_kind(kind, plural_map)` - *Return the plural form of *kind* according to *plural_map*.
+- `pluralize_symbol_kind` (line 72) `def pluralize_symbol_kind(kind, plural_map)` - *Return the plural form of *kind* according to *plural_map*.
 
 Falls back to appending ``"s"`` when the kind is not found.
 This prevents obvious misspellings like ``"Classs"``.*
@@ -709,24 +1382,33 @@ explanation output, BFS shortest-path resolution, free-text
 search, and a summary report.*
 
 **Functions:**
-- `__init__` (line 26) `def __init__(self, nodes, edges)` - *Initialise internal indexes from scanned data.
+- `__init__` (line 26) `def __init__(self, nodes, edges, resolved_edges)` - *Initialise internal indexes from scanned data.
 
 Args:
     nodes: List of scanned file nodes.
-    edges: List of import-relationship edges.*
-- `_build_symbol_index` (line 38) `def _build_symbol_index(self)` - *Build a name-to-list-of-(node, symbol) lookup.
+    edges: List of import-relationship edges.
+    resolved_edges: Optional resolved-import edges (both
+        source and target are project file IDs).*
+- `_build_symbol_index` (line 47) `def _build_symbol_index(self)` - *Build a name-to-list-of-(node, symbol) lookup.
 
 Returns:
     Dict mapping symbol names to list of (Node, Symbol) tuples.*
-- `_build_import_graph` (line 52) `def _build_import_graph(self)` - *Build an adjacency map from import edges.
+- `_build_import_graph` (line 61) `def _build_import_graph(self)` - *Build an adjacency map from import edges.
 
 Returns:
     Dict mapping each file node_id to its set of import targets.*
-- `find_symbol` (line 68) `def find_symbol(self, name)` - *Look up *name* by exact match, then by substring fuzzy match.
+- `_build_resolved_graph` (line 77) `def _build_resolved_graph(self)` - *Build an adjacency map from resolved import edges.
+
+Only contains edges where both source and target are
+project files (not external modules).
+
+Returns:
+    Dict mapping each file node_id to files it imports within the project.*
+- `find_symbol` (line 97) `def find_symbol(self, name)` - *Look up *name* by exact match, then by substring fuzzy match.
 
 Returns:
     A list of (Node, Symbol) tuples, or ``None`` if not found.*
-- `explain` (line 86) `def explain(self, name)` - *Return a detailed multi-line explanation of *name*.
+- `explain` (line 115) `def explain(self, name)` - *Return a detailed multi-line explanation of *name*.
 
 Includes kind, file path, line number, docstring, signature,
 imports, reverse dependencies ("imported by"), and sibling
@@ -734,22 +1416,74 @@ symbols in the same file.
 
 Returns:
     Formatted string or ``None`` if the symbol is not found.*
-- `_find_incoming_imports` (line 123) `def _find_incoming_imports(self, target)` - *List all node IDs that import *target*.*
-- `find_path` (line 131) `def find_path(self, symbol_a, symbol_b)` - *Find the shortest import path from *symbol_a* to *symbol_b*.
+- `_find_incoming_imports` (line 154) `def _find_incoming_imports(self, target)` - *List all node IDs that import *target*.*
+- `find_path` (line 162) `def find_path(self, symbol_a, symbol_b)` - *Find the shortest import path from *symbol_a* to *symbol_b*.
 
-Uses BFS on the import graph. Returns a list of file node IDs
-forming the dependency chain, or ``None`` if no path exists.*
-- `query` (line 165) `def query(self, question)` - *Free-text search over symbols and file paths.
+Uses BFS on the resolved import graph (project-internal edges)
+first, traversing in both directions (forward = A imports B,
+reverse = B is imported by A). Falls back to the raw import
+graph if no resolved path exists.
+
+Returns:
+    List of file node IDs forming the dependency chain, or ``None``.*
+- `_make_bidirectional` (line 192) `def _make_bidirectional(graph)` - *Convert a directed graph to a bidirectional one.
+
+For each edge A→B, adds both A→B and B→A edges.*
+- `_bfs_shortest_path` (line 208) `def _bfs_shortest_path(self, graph, start, goal)` - *Run BFS to find the shortest path from *start* to *goal*.
+
+Returns:
+    List of node IDs or ``None`` if no path exists.*
+- `query` (line 232) `def query(self, question)` - *Free-text search over symbols and file paths.
 
 Tokenises the input, matches against symbol names (substring)
 and then against file paths as a fallback. Returns a
 human-readable result string summarising matches or a
 no-results message with KB statistics.*
-- `summary` (line 221) `def summary(self)` - *Return a concise overview of the loaded knowledge base.
+- `summary` (line 288) `def summary(self)` - *Return a concise overview of the loaded knowledge base.
 
 Reports file count, symbol count, import count, language
 diversity, top-level modules (by import popularity), and
 lists of key class-like and function-like symbols.*
+
+#### `_resolver.py`
+**Path:** `readmenator/_resolver.py`
+
+**Classes:**
+- `ImportResolver` (line 15) `class ImportResolver` - *Resolves raw import strings to project file paths.
+
+Uses heuristics tuned to each language's import conventions:
+Python dots to slashes, Java dots to directory separators,
+relative-path resolution, and extensionless module detection.*
+
+**Functions:**
+- `__init__` (line 58) `def __init__(self, file_ids, root)` - *Initialise the resolver with all known file paths.
+
+Args:
+    file_ids: List of relative file paths from the scan.
+    root: Root directory for relative-path resolution.*
+- `_build_stem_index` (line 70) `def _build_stem_index(self, file_ids)` - *Map file stems (without extension) to their full paths.*
+- `_build_dir_index` (line 80) `def _build_dir_index(self, file_ids)` - *Map directory paths to the files they contain.*
+- `resolve` (line 97) `def resolve(self, import_str, source_file)` - *Resolve an import string to a concrete project file path.
+
+Args:
+    import_str: The raw import string from the parser.
+    source_file: The file that contains the import (for relative resolution).
+
+Returns:
+    Matching file node ID or ``None`` if no match found.*
+- `resolve_all` (line 132) `def resolve_all(self, import_str, source_file)` - *Resolve *import_str* to all possible matching project file paths.
+
+Args:
+    import_str: The raw import string.
+    source_file: The file that contains the import.
+
+Returns:
+    List of matching file node IDs (may be empty).*
+- `_resolve_relative` (line 148) `def _resolve_relative(self, import_str, source_file)` - *Resolve a relative import (starts with ``.`` or ``..``).*
+- `_resolve_extensionless` (line 166) `def _resolve_extensionless(self, import_str, source_file)` - *Resolve a bare module name by appending known extensions.*
+- `_resolve_directory_init` (line 175) `def _resolve_directory_init(self, import_str, source_file)` - *Resolve as a package directory with __init__ or index file.*
+- `_resolve_module_dotpath` (line 185) `def _resolve_module_dotpath(self, import_str)` - *Resolve a dotted module path (Python/Java convention).*
+- `_resolve_stem_match` (line 207) `def _resolve_stem_match(self, import_str)` - *Match by file stem only (last resort).*
 
 #### `_scanner.py`
 **Path:** `readmenator/_scanner.py`
@@ -769,7 +1503,22 @@ Args:
 - `_is_ignored` (line 34) `def _is_ignored(self, path)` - *Return ``True`` if any path component matches IGNORE_DIRS.*
 - `_validate_path_security` (line 38) `def _validate_path_security(self, path)` - *Reject symlinks and files exceeding MAX_FILE_SIZE_MB.*
 - `_check_directory_depth` (line 51) `def _check_directory_depth(self, path, root)` - *Return ``True`` if *path* is within MAX_DIRECTORY_DEPTH of *root*.*
-- `scan` (line 59) `def scan(self, root)` - *Walk *root* recursively and produce (nodes, edges) for the graph.
+- `_extract_file_doc` (line 59) `def _extract_file_doc(self, content)` - *Extract a file-level docstring from the first lines of a source file.
+
+Walks the first FILE_HEADER_MAX_LINES lines looking for a contiguous
+block of comments or a shebang followed by comments. Returns the
+concatenated comment text.
+
+Args:
+    content: Raw file content as a string.
+
+Returns:
+    Extracted file-level docstring or empty string.*
+- `_emit_progress` (line 115) `def _emit_progress(self, count)` - *Emit a progress message every PROGRESS_REPORT_BATCH files.
+
+Args:
+    count: Number of files scanned so far.*
+- `scan` (line 125) `def scan(self, root)` - *Walk *root* recursively and produce (nodes, edges) for the graph.
 
 Security checks (symlinks, size, depth, ignore dirs) are applied
 per file. Parse failures are silently caught so a single broken
@@ -826,6 +1575,47 @@ Returns:
 
 *No symbols extracted*
 
+#### `test_analyzer.py`
+**Path:** `tests/test_analyzer.py`
+
+**Classes:**
+- `TestGraphAnalyzerContract` (line 16) `class TestGraphAnalyzerContract` - *Contract: GraphAnalyzer provides graph intelligence.*
+
+**Functions:**
+- `setUp` (line 19) `def setUp(self)`
+- `_make_node` (line 23) `def _make_node(self, nid, label, lang)`
+- `_make_edge` (line 26) `def _make_edge(self, src, tgt, rel)`
+- `test_analyze_empty_graph_returns_empty_result` (line 29) `def test_analyze_empty_graph_returns_empty_result(self)`
+- `test_analyze_detects_communities_for_connected_graph` (line 34) `def test_analyze_detects_communities_for_connected_graph(self)`
+- `test_analyze_computes_god_nodes` (line 48) `def test_analyze_computes_god_nodes(self)`
+- `test_analyze_finds_surprising_connections` (line 64) `def test_analyze_finds_surprising_connections(self)`
+- `test_analyze_generates_questions` (line 81) `def test_analyze_generates_questions(self)`
+- `test_community_cohesion_is_between_zero_and_one` (line 92) `def test_community_cohesion_is_between_zero_and_one(self)`
+- `test_isolated_nodes_do_not_form_communities` (line 107) `def test_isolated_nodes_do_not_form_communities(self)`
+- `test_analyze_with_resolved_edges_counts_them` (line 116) `def test_analyze_with_resolved_edges_counts_them(self)`
+
+#### `test_cache.py`
+**Path:** `tests/test_cache.py`
+
+**Classes:**
+- `TestFileCacheContract` (line 18) `class TestFileCacheContract` - *Contract: FileCache provides SHA256-based incremental scan support.*
+
+**Functions:**
+- `setUp` (line 21) `def setUp(self)`
+- `tearDown` (line 26) `def tearDown(self)`
+- `_write` (line 30) `def _write(self, rel_path, content)`
+- `test_compute_hash_returns_hex_string` (line 36) `def test_compute_hash_returns_hex_string(self)`
+- `test_different_content_produces_different_hash` (line 42) `def test_different_content_produces_different_hash(self)`
+- `test_same_content_produces_same_hash` (line 49) `def test_same_content_produces_same_hash(self)`
+- `test_load_returns_empty_dict_when_no_cache` (line 56) `def test_load_returns_empty_dict_when_no_cache(self)`
+- `test_save_and_load_roundtrip` (line 60) `def test_save_and_load_roundtrip(self)`
+- `test_find_changed_detects_new_files` (line 66) `def test_find_changed_detects_new_files(self)`
+- `test_find_changed_detects_modified_files` (line 71) `def test_find_changed_detects_modified_files(self)`
+- `test_find_changed_skips_unchanged_files` (line 78) `def test_find_changed_skips_unchanged_files(self)`
+- `test_prune_deleted_removes_ghost_entries` (line 85) `def test_prune_deleted_removes_ghost_entries(self)`
+- `test_compute_hashes_batch` (line 92) `def test_compute_hashes_batch(self)`
+- `test_nonexistent_file_returns_empty_hash` (line 100) `def test_nonexistent_file_returns_empty_hash(self)`
+
 #### `test_config.py`
 **Path:** `tests/test_config.py`
 
@@ -860,6 +1650,28 @@ Returns:
 - `test_includes_file_path` (line 113) `def test_includes_file_path(self)`
 - `test_docstring_in_output` (line 124) `def test_docstring_in_output(self)`
 - `test_truncation_note_when_limited` (line 136) `def test_truncation_note_when_limited(self)`
+
+#### `test_exporter.py`
+**Path:** `tests/test_exporter.py`
+
+**Classes:**
+- `TestGraphExporterContract` (line 23) `class TestGraphExporterContract` - *Contract: GraphExporter produces valid JSON, HTML, and SVG outputs.*
+
+**Functions:**
+- `setUp` (line 26) `def setUp(self)`
+- `_make_node` (line 30) `def _make_node(self, nid, label, lang, symbols)`
+- `_make_sym` (line 42) `def _make_sym(self, name, kind, line)`
+- `test_to_json_produces_valid_json` (line 47) `def test_to_json_produces_valid_json(self)`
+- `test_to_json_includes_symbol_data` (line 56) `def test_to_json_includes_symbol_data(self)`
+- `test_to_json_includes_metadata` (line 65) `def test_to_json_includes_metadata(self)`
+- `test_to_json_includes_analysis_metadata` (line 76) `def test_to_json_includes_analysis_metadata(self)`
+- `test_to_html_produces_standalone_page` (line 101) `def test_to_html_produces_standalone_page(self)`
+- `test_to_html_includes_node_data` (line 109) `def test_to_html_includes_node_data(self)`
+- `test_to_html_includes_community_legend_when_analysis` (line 116) `def test_to_html_includes_community_legend_when_analysis(self)`
+- `test_to_svg_produces_svg_string` (line 138) `def test_to_svg_produces_svg_string(self)`
+- `test_to_svg_render_truncation_for_large_graph` (line 145) `def test_to_svg_render_truncation_for_large_graph(self)`
+- `test_to_svg_includes_readmenator_title` (line 154) `def test_to_svg_includes_readmenator_title(self)`
+- `test_to_json_handles_resolved_edges` (line 160) `def test_to_json_handles_resolved_edges(self)`
 
 #### `test_integration.py`
 **Path:** `tests/test_integration.py`
@@ -1030,6 +1842,24 @@ Returns:
 - `test_summary_shows_top_modules` (line 94) `def test_summary_shows_top_modules(self)`
 - `test_query_returns_matching_symbols` (line 98) `def test_query_returns_matching_symbols(self)`
 - `test_query_returns_file_matches` (line 102) `def test_query_returns_file_matches(self)`
+
+#### `test_resolver.py`
+**Path:** `tests/test_resolver.py`
+
+**Classes:**
+- `TestImportResolverContract` (line 15) `class TestImportResolverContract` - *Contract: ImportResolver maps import strings to file paths.*
+
+**Functions:**
+- `test_resolves_python_module_dotpath` (line 18) `def test_resolves_python_module_dotpath(self)`
+- `test_resolves_relative_import` (line 25) `def test_resolves_relative_import(self)`
+- `test_resolves_extensionless_python_import` (line 32) `def test_resolves_extensionless_python_import(self)`
+- `test_resolves_package_init` (line 39) `def test_resolves_package_init(self)`
+- `test_returns_none_for_external_stdlib` (line 46) `def test_returns_none_for_external_stdlib(self)`
+- `test_returns_none_for_unknown_import` (line 53) `def test_returns_none_for_unknown_import(self)`
+- `test_resolves_stem_match_when_unique` (line 60) `def test_resolves_stem_match_when_unique(self)`
+- `test_returns_none_for_empty_import` (line 67) `def test_returns_none_for_empty_import(self)`
+- `test_resolves_go_import` (line 72) `def test_resolves_go_import(self)`
+- `test_resolves_same_directory_import` (line 79) `def test_resolves_same_directory_import(self)`
 
 #### `test_scanner.py`
 **Path:** `tests/test_scanner.py`

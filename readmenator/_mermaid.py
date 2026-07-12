@@ -2,16 +2,17 @@
 
 Converts the internal Node/Edge graph into a Mermaid flowchart
 (string) suitable for embedding in Markdown. Handles node limits,
-deduplication, and CSS-like class styling.
+deduplication, CSS-like class styling, internal import edges, and
+community subgraphs.
 """
 
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
-from readmenator._models import Edge, Node
+from readmenator._models import AnalysisResult, Edge, Node
 
 
 class MermaidRenderer:
@@ -20,7 +21,9 @@ class MermaidRenderer:
     Nodes are ordered by import count and symbol richness; the top
     ``MERMAID_MAX_NODES`` entries are included. External dependencies
     (import targets not matching any scanned file) appear as dashed
-    boxes.
+    boxes. Internal import edges between project files are rendered
+    as solid arrows. Community subgraphs group related files when
+    analysis results are available.
     """
 
     def __init__(self, config: Config) -> None:
@@ -31,7 +34,8 @@ class MermaidRenderer:
         """
         self._config = config
 
-    def _sanitize_id(self, node_id: str) -> str:
+    @staticmethod
+    def _sanitize_id(node_id: str) -> str:
         """Convert *node_id* to a Mermaid-safe identifier.
 
         Replaces non-alphanumeric characters with underscores and
@@ -42,12 +46,19 @@ class MermaidRenderer:
             sanitized = "n_" + sanitized
         return sanitized
 
-    def render(self, nodes: List[Node], edges: List[Edge]) -> Tuple[str, bool]:
+    def render(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        analysis: Optional[AnalysisResult] = None,
+    ) -> Tuple[str, bool]:
         """Produce a Mermaid flowchart string and a truncation flag.
 
         Nodes are sorted by import popularity, then by symbol count.
-        At most ``MERMAID_MAX_NODES`` items (files + child symbols +
-        external deps) are emitted. External imports use dashed edges.
+        Internal import edges (between project files) are rendered as
+        solid arrows when *resolved_edges* is provided. Community
+        subgraphs wrap related files when *analysis* is given.
 
         Returns:
             Tuple of (Mermaid source string, is_truncated bool).
@@ -67,6 +78,10 @@ class MermaidRenderer:
         for edge in edges:
             if edge.source in import_counts:
                 import_counts[edge.source] += 1
+        if resolved_edges:
+            for edge in resolved_edges:
+                if edge.source in import_counts:
+                    import_counts[edge.source] += 1
 
         sorted_nodes = sorted(
             nodes,
@@ -74,17 +89,53 @@ class MermaidRenderer:
             reverse=True,
         )
 
+        community_map: Dict[str, int] = {}
+        if analysis and analysis.communities:
+            for c in analysis.communities:
+                for fid in c.file_ids:
+                    community_map[fid] = c.community_id
+
+        rendered_communities: Set[int] = set()
+        pending_subgraph_close = False
+
         for node in sorted_nodes:
             safe_id = self._sanitize_id(node.node_id)
             if safe_id in seen_ids:
                 continue
+            if node_count >= max_nodes:
+                is_truncated = True
+                break
+
+            comm_id = community_map.get(node.node_id)
+            if comm_id is not None and comm_id not in rendered_communities:
+                if pending_subgraph_close:
+                    lines.append("    end")
+                    pending_subgraph_close = False
+                comm_nodes = [
+                    n for n in sorted_nodes
+                    if community_map.get(n.node_id) == comm_id
+                    and self._sanitize_id(n.node_id) not in seen_ids
+                ]
+                if len(comm_nodes) >= 2:
+                    label = ""
+                    if analysis:
+                        for c in analysis.communities:
+                            if c.community_id == comm_id:
+                                label = c.label
+                                break
+                    safe_label = label.replace('"', '\\"') if label else f"Community {comm_id}"
+                    lines.append(f"    subgraph community_{comm_id} [\"{safe_label}\"]")
+                    rendered_communities.add(comm_id)
+                    pending_subgraph_close = True
+
             label = node.label.replace('"', '\\"')
             lines.append(f'    {safe_id}["{label} ({node.language})"]')
             lines.append(f"    class {safe_id} mod;")
             seen_ids.add(safe_id)
             node_count += 1
 
-            for symbol in node.symbols[:5]:
+            max_symbols = self._config.MERMAID_MAX_SYMBOLS_PER_FILE
+            for symbol in node.symbols[:max_symbols]:
                 if node_count >= max_nodes:
                     is_truncated = True
                     break
@@ -102,6 +153,25 @@ class MermaidRenderer:
             if node_count >= max_nodes:
                 is_truncated = True
                 break
+
+        if pending_subgraph_close:
+            lines.append("    end")
+
+        internal_edge_count = 0
+        if resolved_edges and not is_truncated:
+            file_ids = {n.node_id for n in nodes}
+            for edge in resolved_edges:
+                if internal_edge_count >= 100:
+                    break
+                src_safe = self._sanitize_id(edge.source)
+                tgt_safe = self._sanitize_id(edge.target)
+                if src_safe not in seen_ids or tgt_safe not in seen_ids:
+                    continue
+                if edge.source in file_ids and edge.target in file_ids:
+                    lines.append(
+                        f"    {src_safe} -- {edge.relation} --> {tgt_safe}"
+                    )
+                    internal_edge_count += 1
 
         for edge in edges:
             if is_truncated:

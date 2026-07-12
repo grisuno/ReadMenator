@@ -7,7 +7,7 @@ consumers import Config and read values from an instance.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Tuple
 
 
@@ -16,9 +16,11 @@ class Config:
     """Single source of truth for all readmenator settings.
 
     Every tuneable constant -- file-size limits, directory depth,
-    supported extensions, symbol pluralisation map, and Mermaid style
-    tokens -- is defined here and consumed by reference elsewhere.
+    supported extensions, symbol pluralisation map, Mermaid style
+    tokens, graph analysis thresholds, and export settings -- is
+    defined here and consumed by reference elsewhere.
     """
+
     IGNORE_DIRS: Tuple[str, ...] = (
         ".git", "__pycache__", "venv", ".venv", "env", ".env", "node_modules",
         ".tox", ".eggs", ".pytest_cache", "build", "dist", ".idea", ".vscode",
@@ -39,7 +41,11 @@ class Config:
 
     DOCSTRING_MAX_LENGTH: int = 150
 
+    FILE_HEADER_MAX_LINES: int = 30
+
     MERMAID_MAX_NODES: int = 300
+
+    MERMAID_MAX_SYMBOLS_PER_FILE: int = 5
 
     MERMAID_MODULE_STYLE: str = "fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff"
 
@@ -48,6 +54,8 @@ class Config:
     MERMAID_FUNCTION_STYLE: str = "fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa"
 
     MERMAID_EXTERNAL_STYLE: str = "fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa"
+
+    MERMAID_INTERNAL_EDGE_STYLE: str = "stroke:#88aaff,stroke-width:1px"
 
     SUPPORTED_EXTENSIONS: Tuple[str, ...] = (
         ".c", ".cpp", ".cc", ".cxx", ".h", ".hpp", ".hxx",
@@ -76,3 +84,25 @@ class Config:
         ("protocol", "protocols"),
         ("extension", "extensions"),
     )
+
+    COMMUNITY_MIN_SIZE: int = 2
+
+    COMMUNITY_MAX_SIZE_RATIO: float = 0.25
+
+    GOD_NODE_TOP_N: int = 10
+
+    SURPRISING_CONNECTION_HOP_THRESHOLD: int = 3
+
+    SURPRISING_CONNECTION_TOP_N: int = 5
+
+    SUGGESTED_QUESTIONS_COUNT: int = 5
+
+    CACHE_DIR: str = ".readmenator_cache"
+
+    HTML_TEMPLATE_STYLE: str = "dark"
+
+    SVG_DPI: int = 150
+
+    SVG_MAX_NODES: int = 200
+
+    PROGRESS_REPORT_BATCH: int = 50
