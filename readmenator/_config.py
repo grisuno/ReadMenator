@@ -65,6 +65,8 @@ class Config:
         ".sh", ".bash", ".zsh",
         ".php", ".dart", ".gd", ".nim",
         ".asm", ".s", ".S",
+        ".rb", ".swift", ".kt", ".kts", ".scala", ".sc",
+        ".lua", ".ex", ".exs",
     )
 
     SYMBOL_TYPE_PLURALS: Tuple[Tuple[str, str], ...] = (

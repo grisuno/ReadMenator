@@ -183,6 +183,33 @@ class PolyglotScanner:
                         Edge(source=rel_path_str, target=imp, relation="imports")
                     )
 
+                for caller, callee in parser.calls:
+                    if caller and callee:
+                        edges.append(
+                            Edge(
+                                source=f"{rel_path_str}::{caller}",
+                                target=f"{rel_path_str}::{callee}",
+                                relation="calls",
+                            )
+                        )
+                    elif callee:
+                        edges.append(
+                            Edge(
+                                source=rel_path_str,
+                                target=callee,
+                                relation="calls",
+                            )
+                        )
+
+                for child, parent in parser.inherits:
+                    edges.append(
+                        Edge(
+                            source=f"{rel_path_str}::{child}",
+                            target=parent,
+                            relation="inherits",
+                        )
+                    )
+
                 scanned_count += 1
                 self._emit_progress(scanned_count)
 

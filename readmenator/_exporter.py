@@ -577,3 +577,163 @@ network.on("click", function(params) {{
                 break
 
         return {fid: (p[0], p[1]) for fid, p in positions.items()}
+
+    def to_graphml(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        analysis: Optional[AnalysisResult] = None,
+    ) -> str:
+        """Export the graph as GraphML (Gephi/yEd compatible).
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional analysis results for community data.
+
+        Returns:
+            GraphML XML string.
+        """
+        all_edges = edges + (resolved_edges or [])
+        community_map: Dict[str, int] = {}
+        if analysis:
+            for c in analysis.communities:
+                for fid in c.file_ids:
+                    community_map[fid] = c.community_id
+
+        lines = [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"',
+            '         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"',
+            '         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns',
+            '         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">',
+            '  <key id="d0" for="node" attr.name="label" attr.type="string"/>',
+            '  <key id="d1" for="node" attr.name="language" attr.type="string"/>',
+            '  <key id="d2" for="node" attr.name="symbol_count" attr.type="int"/>',
+            '  <key id="d3" for="node" attr.name="community" attr.type="int"/>',
+            '  <key id="d4" for="edge" attr.name="relation" attr.type="string"/>',
+            '  <key id="d5" for="edge" attr.name="confidence" attr.type="string"/>',
+            '  <graph id="G" edgedefault="directed">',
+        ]
+
+        eid = 0
+        for node in nodes:
+            sym_count = len(node.symbols)
+            comm = community_map.get(node.node_id, -1)
+            label = node.label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+            lines.append(f'    <node id="{eid}">')
+            lines.append(f'      <data key="d0">{label}</data>')
+            lines.append(f'      <data key="d1">{node.language}</data>')
+            lines.append(f'      <data key="d2">{sym_count}</data>')
+            lines.append(f'      <data key="d3">{comm}</data>')
+            lines.append(f'    </node>')
+            eid += 1
+
+        node_map = {n.node_id: i for i, n in enumerate(nodes)}
+        edge_count = 0
+        for edge in all_edges:
+            if edge.source in node_map:
+                src_id = node_map[edge.source]
+                tgt_id = node_map.get(edge.target, -1)
+                if tgt_id < 0:
+                    if edge.target in node_map:
+                        tgt_id = node_map[edge.target]
+                    else:
+                        continue
+                rel = edge.relation.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                conf = edge.confidence.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                lines.append(f'    <edge id="{eid}" source="{src_id}" target="{tgt_id}">')
+                lines.append(f'      <data key="d4">{rel}</data>')
+                lines.append(f'      <data key="d5">{conf}</data>')
+                lines.append(f'    </edge>')
+                eid += 1
+                edge_count += 1
+
+        lines.append('  </graph>')
+        lines.append('</graphml>')
+        return "\n".join(lines)
+
+    def to_obsidian(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        output_dir: str,
+        analysis: Optional[AnalysisResult] = None,
+    ) -> int:
+        """Export the graph as an Obsidian vault with wikilinks.
+
+        Each file node becomes a markdown note. Community hub notes
+        aggregate related files. All notes use [[wikilinks]] for
+        Obsidian graph navigation.
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            output_dir: Directory to write the Obsidian notes.
+            analysis: Optional analysis results for community hubs.
+
+        Returns:
+            Number of notes written.
+        """
+        import os
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        written = 0
+
+        community_map: Dict[str, int] = {}
+        community_labels: Dict[int, str] = {}
+        if analysis:
+            for c in analysis.communities:
+                for fid in c.file_ids:
+                    community_map[fid] = c.community_id
+                community_labels[c.community_id] = c.label
+
+        reverse_imports: Dict[str, List[str]] = {}
+        for edge in edges:
+            if edge.target not in reverse_imports:
+                reverse_imports[edge.target] = []
+            reverse_imports[edge.target].append(edge.source)
+
+        for node in nodes:
+            note_name = node.label.replace(".", "_").replace(" ", "-")
+            note_path = out / f"{note_name}.md"
+            parts = [f"# {node.label}", "", f"**Path:** `{node.node_id}`", f"**Language:** {node.language}"]
+            if node.doc:
+                parts.append(f"**Doc:** {node.doc}")
+            if node.symbols:
+                parts.append("")
+                parts.append("## Symbols")
+                for sym in node.symbols:
+                    doc_str = f" - *{sym.doc[:100]}*" if sym.doc else ""
+                    parts.append(f"- `{sym.name}` ({sym.kind}, line {sym.line}){doc_str}")
+            if node.node_id in reverse_imports:
+                parts.append("")
+                parts.append("## Imported By")
+                for imp_src in sorted(set(reverse_imports[node.node_id]))[:10]:
+                    src_label = imp_src.split("/")[-1]
+                    parts.append(f"- [[{src_label.replace('.', '_')}]]")
+            note_path.write_text("\n".join(parts), encoding="utf-8")
+            written += 1
+
+        if analysis:
+            for c in analysis.communities:
+                hub_name = f"_COMMUNITY_{c.community_id}_{c.label.replace(' ', '-')}"
+                hub_path = out / f"{hub_name}.md"
+                hub_lines = [
+                    f"# {c.label}",
+                    "",
+                    f"**Cohesion:** {c.cohesion:.2f} | **Size:** {c.size} files",
+                    "",
+                    "## Files",
+                ]
+                for fid in sorted(c.file_ids)[:50]:
+                    note_link = fid.split("/")[-1].replace(".", "_").replace(" ", "-")
+                    hub_lines.append(f"- [[{note_link}]]")
+                if len(c.file_ids) > 50:
+                    hub_lines.append(f"\n*... and {len(c.file_ids) - 50} more files*")
+                hub_path.write_text("\n".join(hub_lines), encoding="utf-8")
+                written += 1
+
+        return written

@@ -39,6 +39,8 @@ class LanguageParser:
         self.config = config
         self.symbols: List[Symbol] = []
         self.imports: List[str] = []
+        self.calls: List[Tuple[str, str]] = []
+        self.inherits: List[Tuple[str, str]] = []
         self.lines: List[str] = []
 
     def parse(self, content: str) -> None:
@@ -205,6 +207,7 @@ class PythonParser(LanguageParser):
                 tree = ast.parse(content, filename=self.filename)
             except SyntaxError:
                 return
+        current_class: Optional[str] = None
         for node in ast.walk(tree):
             if isinstance(node, (ast.Import, ast.ImportFrom)):
                 if isinstance(node, ast.Import):
@@ -213,25 +216,19 @@ class PythonParser(LanguageParser):
                 else:
                     if node.module:
                         self.imports.append(node.module)
-            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-                params = ", ".join(
-                    arg.arg for arg in node.args.args
-                )
-                sig = f"def {node.name}({params})"
-                self.symbols.append(
-                    Symbol(
-                        name=node.name,
-                        kind="function",
-                        line=node.lineno,
-                        doc=ast.get_docstring(node) or "",
-                        signature=sig,
-                    )
-                )
             elif isinstance(node, ast.ClassDef):
-                bases = ", ".join(
-                    base.id for base in node.bases if isinstance(base, ast.Name)
-                )
-                sig = f"class {node.name}({bases})" if bases else f"class {node.name}"
+                current_class = node.name
+                bases = []
+                for base in node.bases:
+                    if isinstance(base, ast.Name):
+                        base_name = base.id
+                        bases.append(base_name)
+                        self.inherits.append((node.name, base_name))
+                    elif isinstance(base, ast.Attribute):
+                        base_name = base.attr if hasattr(base, 'attr') else str(base)
+                        bases.append(base_name)
+                        self.inherits.append((node.name, base_name))
+                sig = f"class {node.name}({', '.join(bases)})" if bases else f"class {node.name}"
                 self.symbols.append(
                     Symbol(
                         name=node.name,
@@ -241,6 +238,32 @@ class PythonParser(LanguageParser):
                         signature=sig,
                     )
                 )
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                params = ", ".join(
+                    arg.arg for arg in node.args.args
+                )
+                sig = f"def {node.name}({params})"
+                kind = "method" if current_class else "function"
+                self.symbols.append(
+                    Symbol(
+                        name=node.name,
+                        kind=kind,
+                        line=node.lineno,
+                        doc=ast.get_docstring(node) or "",
+                        signature=sig,
+                    )
+                )
+                for child in ast.walk(node):
+                    if isinstance(child, ast.Call):
+                        caller = node.name
+                        if isinstance(child.func, ast.Name):
+                            callee = child.func.id
+                            self.calls.append((caller, callee))
+                        elif isinstance(child.func, ast.Attribute):
+                            callee = child.func.attr if hasattr(child.func, 'attr') else str(child.func)
+                            self.calls.append((caller, callee))
+            elif isinstance(node, ast.Call) and isinstance(node, ast.AST):
+                pass
 
 
 class GoParser(LanguageParser):
@@ -378,15 +401,24 @@ class JavaScriptParser(LanguageParser):
         for m in re.finditer(
             r"class\s+(\w+)(?:\s+extends\s+(\w+))?", content
         ):
+            name = m.group(1)
+            parent = m.group(2)
             line_num = content[: m.start()].count("\n")
             self.symbols.append(
                 Symbol(
-                    name=m.group(1),
+                    name=name,
                     kind="class",
                     line=line_num + 1,
                     doc=self._extract_docstring(line_num),
                 )
             )
+            if parent:
+                self.inherits.append((name, parent))
+        for m in re.finditer(r"(\w+)\s*\([^)]*\)\s*(?:;|{)?", content):
+            callee = m.group(1)
+            if callee and callee[0].isupper() is False and callee not in reserved:
+                if len(callee) >= 3 and callee not in {"var", "let", "const", "new", "true", "false", "null"}:
+                    self.calls.append(("", callee))
 
 
 class JavaParser(LanguageParser):
@@ -643,6 +675,356 @@ class AssemblyParser(LanguageParser):
             )
 
 
+class RubyParser(LanguageParser):
+    """Parser for Ruby (.rb).
+
+    Extracts ``require`` / ``require_relative`` imports, class and
+    module definitions with inheritance, and method definitions.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(
+            r"""(?:require|require_relative)\s+['"]([^'"]+)['"]""", content
+        ):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^\s*class\s+(\w+)(?:\s*<\s*(\w+))?", content, re.MULTILINE
+        ):
+            name = m.group(1)
+            parent = m.group(2)
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=name,
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+            if parent:
+                self.inherits.append((name, parent))
+        for m in re.finditer(
+            r"^\s*module\s+(\w+)", content, re.MULTILINE
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="module",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(
+            r"^\s*def\s+(self\.)?(\w+)", content, re.MULTILINE
+        ):
+            name = m.group(2)
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=name,
+                    kind="method",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+
+
+class SwiftParser(LanguageParser):
+    """Parser for Swift (.swift).
+
+    Extracts ``import`` statements, class/struct/enum/protocol
+    declarations with inheritance, and function definitions.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(r"^import\s+(\w+)", content, re.MULTILINE):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^\s*(?:public|private|internal|fileprivate\s+)?"
+            r"(?:final\s+)?class\s+(\w+)(?:\s*:\s*(\w+))?",
+            content,
+            re.MULTILINE,
+        ):
+            name = m.group(1)
+            parent = m.group(2)
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=name,
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+            if parent:
+                self.inherits.append((name, parent))
+        for m in re.finditer(
+            r"^\s*(?:public|private|internal\s+)?(?:struct|enum)\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind=m.group(2) if "group" in str(m) else "struct",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(r"^\s*(?:public|private|internal\s+)?protocol\s+(\w+)", content, re.MULTILINE):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="protocol",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(
+            r"^\s*(?:public|private|internal\s+)?"
+            r"(?:override\s+)?(?:class\s+)?func\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="function",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+
+
+class KotlinParser(LanguageParser):
+    """Parser for Kotlin (.kt, .kts).
+
+    Extracts ``import`` statements, class/object/interface/data class
+    declarations, and function definitions.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(r"^import\s+([\w.]+)", content, re.MULTILINE):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^\s*(?:open\s+)?(?:abstract\s+)?(?:data\s+)?(?:sealed\s+)?"
+            r"(?:inner\s+)?class\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(r"^\s*(?:abstract\s+)?(?:sealed\s+)?interface\s+(\w+)", content, re.MULTILINE):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="interface",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(r"^\s*(?:object|companion object)\s+(\w+)", content, re.MULTILINE):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        reserved = {"if", "for", "while", "when", "catch", "try"}
+        for m in re.finditer(
+            r"^\s*(?:suspend\s+)?(?:inline\s+)?(?:tailrec\s+)?"
+            r"fun\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            name = m.group(1)
+            if name not in reserved:
+                line_num = content[: m.start()].count("\n")
+                self.symbols.append(
+                    Symbol(
+                        name=name,
+                        kind="function",
+                        line=line_num + 1,
+                        doc=self._extract_docstring(line_num),
+                    )
+                )
+
+
+class ScalaParser(LanguageParser):
+    """Parser for Scala (.scala).
+
+    Extracts ``import`` statements, class/object/trait declarations,
+    and method definitions.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(r"^import\s+([\w.]+)", content, re.MULTILINE):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^\s*(?:abstract\s+)?(?:sealed\s+)?(?:case\s+)?"
+            r"class\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(r"^\s*(?:sealed\s+)?trait\s+(\w+)", content, re.MULTILINE):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="trait",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(r"^\s*object\s+(\w+)", content, re.MULTILINE):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="class",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        reserved = {"if", "for", "while", "match", "case", "try", "catch"}
+        for m in re.finditer(
+            r"^\s*(?:private|protected\s+)?(?:override\s+)?"
+            r"def\s+(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            name = m.group(1)
+            if name not in reserved:
+                line_num = content[: m.start()].count("\n")
+                self.symbols.append(
+                    Symbol(
+                        name=name,
+                        kind="method",
+                        line=line_num + 1,
+                        doc=self._extract_docstring(line_num),
+                    )
+                )
+
+
+class LuaParser(LanguageParser):
+    """Parser for Lua (.lua).
+
+    Extracts ``require`` imports, function declarations (named and
+    table-based), and module returns.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(r"""require\s*\(?\s*['"]([^'"]+)['"]""", content):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^local\s+function\s+(\w+)", content, re.MULTILINE
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="function",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(
+            r"^function\s+(\w+)", content, re.MULTILINE
+        ):
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=m.group(1),
+                    kind="function",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(
+            r"^(?:local\s+)?(\w+)\s*=\s*\{", content, re.MULTILINE
+        ):
+            name = m.group(1)
+            if name not in ("if", "for", "while", "do", "repeat"):
+                line_num = content[: m.start()].count("\n")
+                self.symbols.append(
+                    Symbol(
+                        name=name,
+                        kind="struct",
+                        line=line_num + 1,
+                        doc=self._extract_docstring(line_num),
+                    )
+                )
+
+
+class ElixirParser(LanguageParser):
+    """Parser for Elixir (.ex, .exs).
+
+    Extracts ``import``/``alias``/``require``/``use`` directives,
+    module definitions, and named function definitions.
+    """
+
+    def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(
+            r"^\s*(?:import|alias|require|use)\s+([\w.{}]+)",
+            content,
+            re.MULTILINE,
+        ):
+            self.imports.append(m.group(1))
+        for m in re.finditer(
+            r"^\s*defmodule\s+([\w.]+)", content, re.MULTILINE
+        ):
+            name = m.group(1).split(".")[-1]
+            line_num = content[: m.start()].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=name,
+                    kind="module",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
+        for m in re.finditer(
+            r"^\s*def(?:macro)?(?:p)?\s+(when\s+.*?\bdo\b\s*)?(\w+)",
+            content,
+            re.MULTILINE,
+        ):
+            name = m.group(2) if m.group(2) else m.group(1)
+            if name and name not in ("if", "unless", "case", "cond", "with", "for", "try", "receive"):
+                line_num = content[: m.start()].count("\n")
+                self.symbols.append(
+                    Symbol(
+                        name=name,
+                        kind="function",
+                        line=line_num + 1,
+                        doc=self._extract_docstring(line_num),
+                    )
+                )
+
+
 _PARSER_MAP: Dict[str, Type[LanguageParser]] = {
     ".c": CParser,
     ".cpp": CParser,
@@ -670,6 +1052,15 @@ _PARSER_MAP: Dict[str, Type[LanguageParser]] = {
     ".asm": AssemblyParser,
     ".s": AssemblyParser,
     ".S": AssemblyParser,
+    ".rb": RubyParser,
+    ".swift": SwiftParser,
+    ".kt": KotlinParser,
+    ".kts": KotlinParser,
+    ".scala": ScalaParser,
+    ".sc": ScalaParser,
+    ".lua": LuaParser,
+    ".ex": ElixirParser,
+    ".exs": ElixirParser,
 }
 
 

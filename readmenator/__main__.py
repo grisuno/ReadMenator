@@ -84,6 +84,11 @@ def build_parser() -> argparse.ArgumentParser:
         help="Export all formats (JSON + HTML + SVG)",
     )
     parser.add_argument(
+        "--graphml",
+        action="store_true",
+        help="Export graph.graphml (Gephi/yEd)",
+    )
+    parser.add_argument(
         "--no-analysis",
         action="store_true",
         help="Skip community detection and graph analysis",
@@ -120,7 +125,7 @@ def main() -> None:
         return
 
     has_export_flags = any(
-        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all"}
+        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
     )
 
     positional_args = [
@@ -157,6 +162,18 @@ def main() -> None:
         elif command == "export":
             app.export(target)
             return
+        elif command == "graphml":
+            app.export_graphml(target)
+            return
+        elif command == "obsidian":
+            app.export_obsidian(target)
+            return
+        elif command == "watch":
+            app.watch(target)
+            return
+        elif command == "layers":
+            app.detect_layers(target)
+            return
         elif command == "analyze":
             result = app.analyze(target)
             print(f"Communities: {len(result.communities)}")
@@ -190,6 +207,8 @@ def main() -> None:
                 app.export_html(target)
             if args.svg:
                 app.export_svg(target)
+            if args.graphml:
+                app.export_graphml(target)
         return
 
     parser = build_parser()

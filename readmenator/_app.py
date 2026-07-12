@@ -17,6 +17,7 @@ from readmenator._cache import FileCache
 from readmenator._config import Config
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
+from readmenator._layers import LayerDetector
 from readmenator._models import AnalysisResult, Edge, Node
 from readmenator._query import QueryEngine
 from readmenator._resolver import ImportResolver
@@ -116,20 +117,33 @@ class readmenatorApplication:
         if run_analysis:
             analysis = self._analyzer.analyze(nodes, edges, resolved_edges)
 
-        content = self._generator.generate(nodes, edges, resolved_edges, analysis)
+        layers = LayerDetector(self._config).detect(nodes, edges)
+        layer_summary = LayerDetector(self._config).layer_summary(layers)
+
+        content = self._generator.generate(nodes, edges, resolved_edges, analysis, layers)
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
         total_symbols = sum(len(n.symbols) for n in nodes)
+        import_edges = [e for e in edges if e.relation == "imports"]
+        call_edges = [e for e in edges if e.relation == "calls"]
+        inherit_edges = [e for e in edges if e.relation == "inherits"]
         print(f"[+] Knowledge base generated: {output_path}")
         print(
             f"[+] Files: {len(nodes)} | "
             f"Symbols: {total_symbols} | "
-            f"Imports: {len(edges)}"
+            f"Imports: {len(import_edges)}"
         )
+        if call_edges:
+            print(f"[+] Call edges: {len(call_edges)}")
+        if inherit_edges:
+            print(f"[+] Inheritance edges: {len(inherit_edges)}")
         if resolved_edges:
             print(f"[+] Resolved imports: {len(resolved_edges)}")
         if analysis and analysis.communities:
             print(f"[+] Communities detected: {len(analysis.communities)}")
+        if layer_summary:
+            top_layer = max(layer_summary, key=layer_summary.get)
+            print(f"[+] Layers detected: {len(layer_summary)} (dominant: {top_layer})")
 
     def update(self, target_dir: str) -> None:
         """Incrementally update KNOWLEDGE_BASE.md for changed files only.
@@ -318,3 +332,85 @@ class readmenatorApplication:
         self.export_json(target_dir)
         self.export_html(target_dir)
         self.export_svg(target_dir)
+
+    def export_graphml(
+        self,
+        target_dir: str,
+        output_path: Optional[str] = None,
+    ) -> str:
+        """Export the knowledge graph as GraphML (Gephi/yEd compatible).
+
+        Args:
+            target_dir: Project directory to scan.
+            output_path: Optional file path for the GraphML output.
+                Defaults to ``<target_dir>/graph.graphml``.
+
+        Returns:
+            GraphML XML string.
+        """
+        nodes, edges = self._scan(target_dir)
+        analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        data = self._exporter.to_graphml(nodes, edges, self._last_resolved_edges, analysis)
+        if output_path is None:
+            root = Path(target_dir).resolve()
+            output_path = str(root / "graph.graphml")
+        Path(output_path).write_text(data, encoding="utf-8")
+        print(f"[+] GraphML exported: {output_path}")
+        return data
+
+    def export_obsidian(
+        self,
+        target_dir: str,
+        output_dir: Optional[str] = None,
+    ) -> int:
+        """Export the knowledge graph as an Obsidian vault.
+
+        Args:
+            target_dir: Project directory to scan.
+            output_dir: Optional directory for the Obsidian vault.
+                Defaults to ``<target_dir>/obsidian``.
+
+        Returns:
+            Number of notes written.
+        """
+        nodes, edges = self._scan(target_dir)
+        analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        if output_dir is None:
+            root = Path(target_dir).resolve()
+            output_dir = str(root / "obsidian")
+        written = self._exporter.to_obsidian(nodes, edges, output_dir, analysis)
+        print(f"[+] Obsidian vault: {written} notes in {output_dir}")
+        return written
+
+    def watch(self, target_dir: str) -> None:
+        """Start watching the project directory for changes (auto-rebuild).
+
+        Args:
+            target_dir: Project directory to watch.
+        """
+        from readmenator._watcher import DirectoryWatcher
+        root = str(Path(target_dir).resolve())
+
+        def on_change() -> None:
+            self.run(target_dir, resolve_imports=True, run_analysis=True)
+
+        watcher = DirectoryWatcher(root, self._config, on_change)
+        watcher.start()
+
+    def detect_layers(self, target_dir: str) -> dict:
+        """Detect architectural layers in the codebase.
+
+        Args:
+            target_dir: Project directory to scan.
+
+        Returns:
+            Dict mapping node_id to layer name.
+        """
+        nodes, edges = self._scan(target_dir)
+        detector = LayerDetector(self._config)
+        layers = detector.detect(nodes, edges)
+        summary = detector.layer_summary(layers)
+        print("[+] Layer detection complete:")
+        for layer, count in sorted(summary.items(), key=lambda x: x[1], reverse=True):
+            print(f"    {layer}: {count} files")
+        return layers

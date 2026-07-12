@@ -8,29 +8,32 @@ readmenator/
   __main__.py       - CLI entry point with argument dispatch
   _config.py        - Immutable Config dataclass (all settings, no magic numbers)
   _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult data types
-  _parsers.py       - 13 language parsers (Strategy pattern) + ParserFactory
-  _scanner.py       - Secure directory traversal and file analysis
+  _parsers.py       - 19 language parsers (Strategy pattern) + ParserFactory
+  _scanner.py       - Secure directory traversal, file-level docs, call/inherit edges
   _resolver.py      - Import path resolver (raw import strings -> project file paths)
   _mermaid.py       - Mermaid graph renderer with community subgraphs and internal edges
-  _documentation.py - KNOWLEDGE_BASE.md generator with TOC, dashboard, communities
+  _documentation.py - KNOWLEDGE_BASE.md with TOC, dashboard, layers, communities
   _query.py         - QueryEngine: query, explain, bidirectional path dependency tracing
   _analyzer.py      - Graph analysis: communities, god nodes, surprising connections
   _cache.py         - SHA256 content hash cache for incremental updates
-  _exporter.py      - Multi-format export: JSON, interactive HTML (vis.js), static SVG
+  _exporter.py      - Export: JSON, HTML (vis.js), SVG, GraphML, Obsidian vault
+  _layers.py        - Architectural layer detection (5-layer model)
+  _watcher.py       - Filesystem polling watcher for auto-rebuild
   _app.py           - Application orchestrator with import resolution and analysis
 tests/
-  test_config.py    - Config contract tests
-  test_models.py    - Data model contract tests
-  test_parsers.py   - 13 parser contract tests (SDD+TDD+BDD)
-  test_scanner.py   - Scanner security and behavior tests
-  test_resolver.py  - Import resolver contract tests
-  test_mermaid.py   - Mermaid rendering contract tests
+  test_config.py        - Config contract tests
+  test_models.py        - Data model contract tests
+  test_parsers.py       - 13 original parser contract tests
+  test_parsers_new.py   - 6 new parser contract tests (Ruby, Swift, Kotlin, Scala, Lua, Elixir)
+  test_scanner.py       - Scanner security and behavior tests
+  test_resolver.py      - Import resolver contract tests
+  test_mermaid.py       - Mermaid rendering contract tests
   test_documentation.py - Documentation output contract tests
-  test_query.py     - Query engine contract tests
-  test_analyzer.py  - Graph analysis contract tests
-  test_cache.py     - File cache contract tests
-  test_exporter.py  - Graph exporter contract tests
-  test_integration.py - End-to-end pipeline tests
+  test_query.py         - Query engine contract tests
+  test_analyzer.py      - Graph analysis contract tests
+  test_cache.py         - File cache contract tests
+  test_exporter.py      - Graph exporter contract tests
+  test_integration.py   - End-to-end pipeline tests
 ```
 
 ## Contracts
@@ -134,9 +137,24 @@ tests/
 - to_json: GraphRAG-ready node-link JSON with optional analysis metadata
 - to_html: Standalone interactive page using vis.js (CDN, no server needed)
 - to_svg: Static SVG with spring-layout, truncation for large graphs
+- to_graphml: GraphML XML for Gephi/yEd import
+- to_obsidian: Obsidian vault with wikilinks and community hub notes
 - Community-based node coloring in HTML and SVG
 - Search/filter UI in HTML export
 - All formats embed analysis metadata when available
+
+### Layer Detection Contract
+- detect(nodes, edges): maps each file to an architectural layer
+- 5-layer model: presentation, business_logic, data_access, infrastructure, testing
+- Detection via path patterns, naming conventions, and imported frameworks
+- layer_summary: counts files per layer
+
+### Watcher Contract
+- Polling-based filesystem monitor (no external deps)
+- Combined hash of file paths + sizes + mtimes for change detection
+- Triggers callback (auto-rebuild) when changes detected
+- Respects IGNORE_DIRS and symlink exclusion
+- Configurable polling interval
 
 ## Design Principles
 

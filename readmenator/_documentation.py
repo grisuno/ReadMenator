@@ -40,6 +40,7 @@ class DocumentationGenerator:
         edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
+        layers: Optional[Dict[str, str]] = None,
     ) -> str:
         """Assemble the full KNOWLEDGE_BASE.md Markdown document.
 
@@ -52,11 +53,13 @@ class DocumentationGenerator:
             edges: Import edges.
             resolved_edges: Optional resolved-import edges.
             analysis: Optional analysis results for communities, god nodes, etc.
+            layers: Optional dict mapping node_id to architectural layer.
 
         Returns:
             Complete Markdown string ready to write to disk.
         """
         total_symbols = sum(len(n.symbols) for n in nodes)
+        import_edges = sum(1 for e in edges if e.relation == "imports")
         graph_output, is_truncated = self._mermaid.render(
             nodes, edges, resolved_edges, analysis
         )
@@ -66,13 +69,13 @@ class DocumentationGenerator:
             "",
             "> Generated offline by **readmenator**. "
             "Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, "
-            "Dart, GDScript, Nim, ASM.",
+            "Dart, GDScript, Nim, ASM, Ruby, Swift, Kotlin, Scala, Lua, Elixir.",
             "> No LLMs. No tokens. Pure static analysis. "
             "See more [here](https://github.com/grisuno/ReadMenator)",
             "",
             f"**Total Files Parsed:** {len(nodes)} | "
             f"**Total Symbols Extracted:** {total_symbols} | "
-            f"**Total Imports:** {len(edges)}",
+            f"**Total Imports:** {import_edges}",
         ]
 
         if resolved_edges:
@@ -81,8 +84,9 @@ class DocumentationGenerator:
             )
         sections.extend(["", ""])
 
-        sections.extend(self._build_toc(nodes, analysis, is_truncated))
+        sections.extend(self._build_toc(nodes, analysis, layers, is_truncated))
         sections.extend(self._build_dashboard(nodes, edges, resolved_edges))
+        sections.extend(self._build_layers(layers, nodes))
         sections.extend(self._build_god_nodes(analysis))
         sections.extend(self._build_community_analysis(analysis, nodes))
         sections.extend(self._build_surprising_connections(analysis, nodes))
@@ -96,6 +100,7 @@ class DocumentationGenerator:
         self,
         nodes: List[Node],
         analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
         is_truncated: bool,
     ) -> List[str]:
         """Build a table of contents for the document."""
@@ -103,6 +108,9 @@ class DocumentationGenerator:
         toc.append("1. [Statistics Dashboard](#statistics-dashboard)")
 
         entry = 2
+        if layers:
+            toc.append(f"{entry}. [Architectural Layers](#architectural-layers)")
+            entry += 1
         if analysis and analysis.god_nodes:
             toc.append(f"{entry}. [God Nodes](#god-nodes)")
             entry += 1
@@ -128,6 +136,42 @@ class DocumentationGenerator:
 
         toc.extend(["", "---", ""])
         return toc
+
+    def _build_layers(
+        self,
+        layers: Optional[Dict[str, str]],
+        nodes: List[Node],
+    ) -> List[str]:
+        """Build the architectural layers section."""
+        if not layers:
+            return []
+        from collections import Counter
+        counts = Counter(layers.values())
+        node_map = {n.node_id: n for n in nodes}
+        lines: List[str] = [
+            "## Architectural Layers",
+            "",
+            "Auto-detected from path patterns, naming conventions, and imported frameworks.",
+            "",
+            "| Layer | Files |",
+            "|-------|-------|",
+        ]
+        for layer, count in counts.most_common():
+            lines.append(f"| {layer} | {count} |")
+        lines.append("")
+        for layer in counts:
+            file_ids = [nid for nid, l in layers.items() if l == layer]
+            lines.append(f"### {layer}")
+            lines.append("")
+            for nid in sorted(file_ids)[:15]:
+                node = node_map.get(nid)
+                if node:
+                    lines.append(f"- `{node.label}` ({node.language}, {len(node.symbols)} symbols)")
+            if len(file_ids) > 15:
+                lines.append(f"- *... and {len(file_ids) - 15} more*")
+            lines.append("")
+        lines.extend(["---", ""])
+        return lines
 
     def _build_dashboard(
         self,

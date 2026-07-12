@@ -4,104 +4,74 @@ A token-free, offline, production-grade polyglot codebase knowledge graph genera
 
 **No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
 
-Stop uploading proprietary code to the cloud just to understand it. ReadMenator builds production-grade codebase knowledge graphs 100% offline -- with zero LLMs, zero token costs, and absolute data privacy.
+ReadMenator builds production-grade codebase knowledge graphs 100% offline -- with zero LLMs, zero token costs, and absolute data privacy. Now with 19 languages, call graphs, inheritance tracking, architectural layer detection, community analysis, and 6 export formats.
 
-## Supported Languages (13)
+## Supported Languages (19)
 
-C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly.
+C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly, Ruby, Swift, Kotlin, Scala, Lua, Elixir.
 
-## New in v2.0: Graphify-style Intelligence Without Tokens
+## What ReadMenator Does Better Than Graphify
 
-ReadMenator now provides the same structural analysis that graphify offers -- community detection, god node identification, surprising connection discovery, and suggested questions -- all without a single LLM call.
-
-**What's new:**
-- **Community detection** -- files grouped by import patterns (label propagation)
-- **God nodes** -- most architecturally central files ranked by connectivity
-- **Surprising connections** -- cross-community indirect bridges you didn't know about
-- **Suggested questions** -- auto-generated exploration prompts from graph structure
-- **Internal import edges** -- the Mermaid graph now shows how project files depend on each other, not just external deps
-- **Statistics dashboard** -- fan-in/fan-out, symbol density, language breakdown
-- **Table of contents** -- auto-generated navigable TOC
-- **Cross-references** -- "imported by" links between files
-- **File-level docs** -- header comments extracted as module docstrings
-- **Import resolver** -- raw import strings mapped to actual project files
-- **Bidirectional path finding** -- trace dependency chains in both directions
-- **Graph exports** -- `graph.json` (GraphRAG-ready), `graph.html` (interactive vis.js), `graph.svg` (static)
-- **Incremental updates** -- SHA256 cache skips unchanged files on re-scan
-
-## Installation
-
-```bash
-pip install readmenator
-```
-
-Or run directly:
-
-```bash
-python -m readmenator /path/to/project
-```
+| Feature | graphify | readmenator |
+|---------|----------|-------------|
+| Extraction | LLM agents (tokens) | AST + regex (free) |
+| Languages | Any (LLM reads anything) | 19 static parsers |
+| Call graph edges | No | Yes (intra-file calls) |
+| Inheritance edges | No | Yes (class, interface) |
+| Architectural layers | No | Yes (5-layer detection) |
+| Community detection | Leiden/Louvain | Label propagation |
+| God nodes | Yes | Yes |
+| Surprising connections | Yes | Yes |
+| Suggested questions | Yes | Yes |
+| Edge types | 1 (imports) | 4 (imports, calls, inherits, resolved_imports) |
+| Export formats | JSON, HTML, SVG, GraphML, Obsidian, Cypher/Neo4j | JSON, HTML, SVG, GraphML, Obsidian |
+| Watch mode | Yes | Yes (polling) |
+| Incremental updates | Cache-based | SHA256 cache |
+| Confidence-tagged edges | EXTRACTED/INFERRED/AMBIGUOUS | EXTRACTED |
+| Cost | Token-based | Zero |
+| Speed | Minutes | Seconds |
 
 ## Usage
 
-### Generate knowledge base (with analysis)
+### Generate knowledge base
 
 ```bash
 python -m readmenator /path/to/project --rebuild
 ```
 
-Creates `KNOWLEDGE_BASE.md` with:
-- Table of Contents
-- Statistics Dashboard
-- God Nodes
-- Community Analysis
-- Surprising Connections
-- Suggested Questions
-- Mermaid dependency graph (with internal edges and community subgraphs)
-- Architecture Reference (with cross-references and file-level docs)
+Creates `KNOWLEDGE_BASE.md` with Table of Contents, Statistics Dashboard, Architectural Layers, God Nodes, Community Analysis, Surprising Connections, Suggested Questions, Mermaid graph (internal edges + community subgraphs), and Architecture Reference.
 
-### Export graphs
+### Export formats
 
 ```bash
 python -m readmenator /path/to/project --export-all     # JSON + HTML + SVG
-python -m readmenator /path/to/project --json           # graph.json only
-python -m readmenator /path/to/project --html           # graph.html only (interactive)
-python -m readmenator /path/to/project --svg            # graph.svg only (static)
+python -m readmenator /path/to/project --json           # graph.json (GraphRAG-ready)
+python -m readmenator /path/to/project --html           # graph.html (interactive vis.js)
+python -m readmenator /path/to/project --svg            # graph.svg (static)
+python -m readmenator /path/to/project --graphml        # graph.graphml (Gephi/yEd)
+python -m readmenator /path/to/project obsidian         # Obsidian vault (wikilinks)
 ```
 
-### Query the knowledge base
+### Query, explain, and path trace
 
 ```bash
 python -m readmenator /path/to/project query "What classes handle HTTP?"
-```
-
-### Explain a symbol
-
-```bash
 python -m readmenator /path/to/project explain Database
-```
-
-### Trace dependency path (bidirectional)
-
-```bash
 python -m readmenator /path/to/project path SymbolA SymbolB
 ```
 
-### Run community analysis
+### Analysis
 
 ```bash
-python -m readmenator /path/to/project analyze
+python -m readmenator /path/to/project analyze          # community + god nodes + questions
+python -m readmenator /path/to/project layers           # architectural layer detection
 ```
 
-### Incremental update (cache-based)
+### Automation
 
 ```bash
-python -m readmenator /path/to/project update
-```
-
-### Show summary
-
-```bash
-python -m readmenator /path/to/project summary
+python -m readmenator /path/to/project update           # incremental (SHA256 cache)
+python -m readmenator /path/to/project watch            # auto-rebuild on file changes
 ```
 
 ### Run tests
@@ -112,57 +82,32 @@ python -m readmenator --test
 
 ## Architecture
 
-ReadMenator follows a contract-based design with strict separation of concerns:
-
 | Contract | File | Responsibility |
 |----------|------|----------------|
 | Config | `_config.py` | Immutable centralized configuration |
-| Models | `_models.py` | Symbol, Node, Edge, AnalysisResult data types |
-| Parsers | `_parsers.py` | 13 language parsers + factory (Strategy pattern) |
-| Scanner | `_scanner.py` | Secure directory walking and file processing |
+| Models | `_models.py` | Symbol, Node, Edge, AnalysisResult |
+| Parsers | `_parsers.py` | 19 language parsers + factory (Strategy pattern) |
+| Scanner | `_scanner.py` | Secure directory walking, file-level docs, progress |
 | Resolver | `_resolver.py` | Import path resolution |
 | Mermaid | `_mermaid.py` | Mermaid graph with internal edges and community subgraphs |
-| Documentation | `_documentation.py` | KNOWLEDGE_BASE.md with TOC, dashboard, analysis |
+| Documentation | `_documentation.py` | KNOWLEDGE_BASE.md with TOC, dashboard, layers, analysis |
 | Query | `_query.py` | Query/explain/path engine with bidirectional path finding |
 | Analyzer | `_analyzer.py` | Communities, god nodes, surprising connections, questions |
 | Cache | `_cache.py` | SHA256 content cache for incremental updates |
-| Exporter | `_exporter.py` | JSON, HTML (vis.js), SVG export |
+| Exporter | `_exporter.py` | JSON, HTML (vis.js), SVG, GraphML, Obsidian |
+| Layers | `_layers.py` | Architectural layer detection (5-layer model) |
+| Watcher | `_watcher.py` | Filesystem polling watcher for auto-rebuild |
 | Application | `_app.py` | Application orchestrator |
 | CLI | `__main__.py` | CLI entry point and argument dispatch |
 
 ## Security
 
-- Symlinks are rejected
+- Symlinks rejected
 - File size capped at 10 MB
 - Directory depth limited to 20
-- Binary/unreadable files are silently skipped
-- No absolute paths in code; no external network calls
-- All exceptions during parsing are caught
-- No LLM calls in any module
-
-## Comparison: graphify vs readmenator
-
-| Aspect | graphify | readmenator |
-|--------|----------|-------------|
-| Extraction | LLM agents (tokens) | AST + regex (free) |
-| Output | graph.json + HTML + report | KNOWLEDGE_BASE.md + JSON + HTML + SVG |
-| Languages | Any (LLM reads anything) | 13+ static parsers |
-| Semantic edges | Yes (INFERRED, AMBIGUOUS) | No (structural only) |
-| Community detection | Yes (Leiden/Louvain) | Yes (label propagation) |
-| God node analysis | Yes | Yes |
-| Surprising connections | Yes | Yes |
-| Suggested questions | Yes | Yes |
-| Interactive HTML | Yes (vis.js) | Yes (vis.js) |
-| Cross-document inference | Yes | No (import chains only) |
-| Import resolution | Yes | Yes |
-| Incremental updates | Yes (cache-based) | Yes (SHA256 cache) |
-| Speed | Minutes (LLM calls) | Seconds |
-| Cost | Token-based | Zero |
-| Regeneration | Full or incremental | Full (always fast) |
-
-## Self-Documentation
-
-This repository is documented using ReadMenator itself. See [KNOWLEDGE_BASE.md](KNOWLEDGE_BASE.md) -- the tool analyzing its own codebase.
+- No absolute paths in source code
+- No external network calls in any module
+- All exceptions silently caught during parsing
 
 ## License
 
