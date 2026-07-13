@@ -13,9 +13,11 @@
 2. [Architectural Layers](#architectural-layers)
 3. [God Nodes](#god-nodes)
 4. [Community Analysis](#community-analysis)
-5. [Suggested Questions](#suggested-questions)
-6. [Structural Knowledge Map](#structural-knowledge-map)
-7. [Architecture Reference](#architecture-reference)
+5. [Surprising Connections](#surprising-connections)
+6. [Suggested Questions](#suggested-questions)
+7. [Security Audit](#security-audit)
+8. [Structural Knowledge Map](#structural-knowledge-map)
+9. [Architecture Reference](#architecture-reference)
     - [PY (34 files)](#py-34-files)
 
 ---
@@ -136,13 +138,11 @@ Most architecturally central files ranked by combined import/export degree and s
 
 Files grouped by import-based community detection. Cohesion measures how tightly connected each community is internally.
 
-### readmenator (Cohesion: 1.00)
+### readmenator (Cohesion: 0.97)
 
-**32 files** in this community:
+**28 files** in this community:
 
-- `readmenator.py` (py, 0 symbols)
 - `__init__.py` (py, 0 symbols)
-- `__main__.py` (py, 3 symbols)
 - `_analyzer.py` (py, 13 symbols)
 - `_app.py` (py, 23 symbols)
 - `_cache.py` (py, 8 symbols)
@@ -154,13 +154,41 @@ Files grouped by import-based community detection. Cohesion measures how tightly
 - `_models.py` (py, 7 symbols)
 - `_parsers.py` (py, 45 symbols)
 - `_query.py` (py, 13 symbols)
-- `_resolver.py` (py, 11 symbols)
 - `_scanner.py` (py, 8 symbols)
 - `_security.py` (py, 27 symbols)
 - `_watcher.py` (py, 5 symbols)
 - `test_analyzer.py` (py, 12 symbols)
 - `test_cache.py` (py, 15 symbols)
-- ... and 12 more files
+- `test_config.py` (py, 6 symbols)
+- `test_documentation.py` (py, 15 symbols)
+- `test_exporter.py` (py, 15 symbols)
+- ... and 8 more files
+
+### root (Cohesion: 0.50)
+
+**2 files** in this community:
+
+- `readmenator.py` (py, 0 symbols)
+- `__main__.py` (py, 3 symbols)
+
+### readmenator (Cohesion: 0.50)
+
+**2 files** in this community:
+
+- `_resolver.py` (py, 11 symbols)
+- `test_resolver.py` (py, 11 symbols)
+
+---
+
+## Surprising Connections
+
+Files in different communities connected through 3+ indirect hops.
+
+- `_mermaid.py` <-> `test_resolver.py` (4 hops, across 2 communities)
+- `_parsers.py` <-> `test_resolver.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `_mermaid.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `_parsers.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `test_analyzer.py` (4 hops, across 2 communities)
 
 ---
 
@@ -171,8 +199,64 @@ Auto-generated exploration prompts based on graph structure:
 - What does _config.py depend on, and what depends on it? (22 connections)
 - What does _models.py depend on, and what depends on it? (18 connections)
 - What does _app.py depend on, and what depends on it? (15 connections)
-- How are the 32 files in 'readmenator' related to each other?
-- What is GraphAnalyzer in _analyzer.py and how is it used?
+- How are the 28 files in 'readmenator' related to each other?
+- Why are _mermaid.py and test_resolver.py connected through 4 hops across 2 communities?
+
+---
+
+## Security Audit
+
+Automated pattern-based security analysis. Findings are grouped by severity (critical → info).
+
+### 🔴 Critical (22)
+
+| File | Line | Rule | Description | Snippet | CWE |
+|------|------|------|-------------|---------|-----|
+| `readmenator/_security.py` | 206 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `return re.compile(joined, re.IGNORECASE)` | CWE-95 |
+| `readmenator/_security.py` | 420 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `"Command injection via Runtime.exec()",` | CWE-95 |
+| `readmenator/_security.py` | 504 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `"Command injection via exec()",` | CWE-95 |
+| `readmenator/_security.py` | 664 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `"Command injection via Runtime.exec()",` | CWE-95 |
+| `tests/test_security.py` | 31 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `snippet='os.system("rm -rf /")',` | CWE-78 |
+| `tests/test_security.py` | 39 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `self.assertEqual(finding.snippet, 'os.system("rm -rf /")')` | CWE-78 |
+| `tests/test_security.py` | 79 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `findings = self._scan_content('import os\nos.system("ls -la")\n', ".py")` | CWE-78 |
+| `tests/test_security.py` | 84 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('eval("__import__(\'os\').system(\'id\')")\n', ".py")` | CWE-95 |
+| `tests/test_security.py` | 129 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('eval(userCode);\n', ".js")` | CWE-95 |
+| `tests/test_security.py` | 134 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('child_process.exec("rm -rf /");\n', ".js")` | CWE-95 |
+| `tests/test_security.py` | 159 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('Runtime.getRuntime().exec("cmd");\n', ".java")` | CWE-95 |
+| `tests/test_security.py` | 174 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('eval("system(\'id\')")\n', ".rb")` | CWE-95 |
+| `tests/test_security.py` | 184 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content("<?php eval('echo 1;'); ?>", ".php")` | CWE-95 |
+| `tests/test_security.py` | 209 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('Runtime.getRuntime().exec("cmd")\n', ".kt")` | CWE-95 |
+| `tests/test_security.py` | 254 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `findings = self._scan_content('Runtime.getRuntime.exec("cmd")\n', ".scala")` | CWE-95 |
+| `tests/test_security.py` | 304 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `'import os\nos.system("ls")\nassert True\n',` | CWE-78 |
+| `tests/test_security.py` | 318 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `'import os\nos.system("ls")\nassert True\n',` | CWE-78 |
+| `tests/test_security.py` | 335 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `real_file.write_text('eval("test")\n', encoding="utf-8")` | CWE-95 |
+| `tests/test_security.py` | 352 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `bad_file.write_text('eval("danger")\n', encoding="utf-8")` | CWE-95 |
+| `tests/test_security.py` | 369 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `file_path.write_text('eval("danger")\n', encoding="utf-8")` | CWE-95 |
+| `tests/test_security.py` | 387 | `PY002` | Use of eval/exec — can lead to arbitrary code execution | `SecurityFinding("a.py", 1, "high", "PY002", "eval", "eval(x)", "CWE-95"),` | CWE-95 |
+| `tests/test_security.py` | 388 | `PY001` | Command injection via os.system/os.popen or subprocess with shell=True | `SecurityFinding("b.py", 5, "critical", "PY001", "os.system", 'os.system("id")', "CWE-78"),` | CWE-78 |
+
+### 🟠 High (3)
+
+| File | Line | Rule | Description | Snippet | CWE |
+|------|------|------|-------------|---------|-----|
+| `tests/test_security.py` | 89 | `PY003` | Unsafe deserialization via pickle — can execute arbitrary code | `findings = self._scan_content('pickle.loads(data)\n', ".py")` | CWE-502 |
+| `tests/test_security.py` | 94 | `PY004` | Possible SQL injection — string concatenation or f-string in SQL query | `findings = self._scan_content('cursor.execute("SELECT * FROM users WHERE id = " + uid)\n', ".py")` | CWE-89 |
+| `tests/test_security.py` | 119 | `PY012` | Unsafe yaml.load — use yaml.safe_load instead | `findings = self._scan_content('yaml.load(data)\n', ".py")` | CWE-502 |
+
+### 🟡 Medium (4)
+
+| File | Line | Rule | Description | Snippet | CWE |
+|------|------|------|-------------|---------|-----|
+| `tests/test_security.py` | 99 | `PY005` | Hardcoded secret/credential detected | `findings = self._scan_content('password = "super_secret_123"\n', ".py")` | CWE-798 |
+| `tests/test_security.py` | 104 | `PY006` | Weak cryptographic hash function (MD5/SHA1) used for security | `findings = self._scan_content('hashlib.md5(b"test")\n', ".py")` | CWE-327 |
+| `tests/test_security.py` | 109 | `PY008` | HTTP request with certificate verification disabled | `findings = self._scan_content('requests.get(url, verify=False)\n', ".py")` | CWE-295 |
+| `tests/test_security.py` | 114 | `PY009` | Flask debug mode enabled — can expose debugger in production | `findings = self._scan_content('app.run(debug=True)\n', ".py")` | CWE-489 |
+
+### By Language
+
+| Language | Findings |
+|----------|----------|
+| py | 29 |
 
 ---
 
@@ -505,6 +589,8 @@ graph TD
     readmenator__mermaid_py_render["render"]
     class readmenator__mermaid_py_render fn;
     readmenator__mermaid_py --> readmenator__mermaid_py_render
+    end
+    subgraph community_1 ["root"]
     readmenator___main___py["__main__.py (py)"]
     class readmenator___main___py mod;
     readmenator___main___py_build_parser["build_parser"]
@@ -586,6 +672,8 @@ graph TD
     readmenator__query_py__build_resolved_graph["_build_resolved_graph"]
     class readmenator__query_py__build_resolved_graph fn;
     readmenator__query_py --> readmenator__query_py__build_resolved_graph
+    end
+    subgraph community_2 ["readmenator"]
     readmenator__resolver_py["_resolver.py (py)"]
     class readmenator__resolver_py mod;
     readmenator__resolver_py_ImportResolver["ImportResolver"]
