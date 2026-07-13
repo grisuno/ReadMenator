@@ -13,7 +13,7 @@ from typing import Dict, List, Optional
 
 from readmenator._config import Config
 from readmenator._mermaid import MermaidRenderer
-from readmenator._models import AnalysisResult, Edge, Node, Symbol, pluralize_symbol_kind
+from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding, Symbol, pluralize_symbol_kind
 
 
 class DocumentationGenerator:
@@ -41,6 +41,7 @@ class DocumentationGenerator:
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
         layers: Optional[Dict[str, str]] = None,
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> str:
         """Assemble the full KNOWLEDGE_BASE.md Markdown document.
 
@@ -54,6 +55,7 @@ class DocumentationGenerator:
             resolved_edges: Optional resolved-import edges.
             analysis: Optional analysis results for communities, god nodes, etc.
             layers: Optional dict mapping node_id to architectural layer.
+            findings: Optional security audit findings.
 
         Returns:
             Complete Markdown string ready to write to disk.
@@ -84,13 +86,14 @@ class DocumentationGenerator:
             )
         sections.extend(["", ""])
 
-        sections.extend(self._build_toc(nodes, analysis, layers, is_truncated))
+        sections.extend(self._build_toc(nodes, analysis, layers, findings, is_truncated))
         sections.extend(self._build_dashboard(nodes, edges, resolved_edges))
         sections.extend(self._build_layers(layers, nodes))
         sections.extend(self._build_god_nodes(analysis))
         sections.extend(self._build_community_analysis(analysis, nodes))
         sections.extend(self._build_surprising_connections(analysis, nodes))
         sections.extend(self._build_suggested_questions(analysis))
+        sections.extend(self._build_security_findings(findings))
         sections.extend(self._build_mermaid_section(graph_output, is_truncated))
         sections.extend(self._build_architecture_reference(nodes, edges))
 
@@ -101,6 +104,7 @@ class DocumentationGenerator:
         nodes: List[Node],
         analysis: Optional[AnalysisResult],
         layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
         is_truncated: bool,
     ) -> List[str]:
         """Build a table of contents for the document."""
@@ -122,6 +126,10 @@ class DocumentationGenerator:
             entry += 1
         if analysis and analysis.suggested_questions:
             toc.append(f"{entry}. [Suggested Questions](#suggested-questions)")
+            entry += 1
+
+        if findings:
+            toc.append(f"{entry}. [Security Audit](#security-audit)")
             entry += 1
 
         toc.append(f"{entry}. [Structural Knowledge Map](#structural-knowledge-map)")
@@ -349,6 +357,62 @@ class DocumentationGenerator:
         ]
         for q in analysis.suggested_questions:
             lines.append(f"- {q}")
+        lines.extend(["", "---", ""])
+        return lines
+
+    def _build_security_findings(
+        self, findings: Optional[List[SecurityFinding]]
+    ) -> List[str]:
+        """Build the security audit section."""
+        if not findings:
+            return []
+        by_severity: Dict[str, List[SecurityFinding]] = {}
+        for f in findings:
+            by_severity.setdefault(f.severity, []).append(f)
+
+        lines: List[str] = [
+            "## Security Audit",
+            "",
+            "Automated pattern-based security analysis. "
+            "Findings are grouped by severity (critical → info).",
+            "",
+        ]
+        severity_emoji = {
+            "critical": "🔴",
+            "high": "🟠",
+            "medium": "🟡",
+            "low": "🔵",
+            "info": "⚪",
+        }
+        sev_order = ["critical", "high", "medium", "low", "info"]
+        for sev in sev_order:
+            items = by_severity.get(sev)
+            if not items:
+                continue
+            emoji = severity_emoji.get(sev, "")
+            lines.append(f"### {emoji} {sev.title()} ({len(items)})")
+            lines.append("")
+            lines.append("| File | Line | Rule | Description | Snippet | CWE |")
+            lines.append("|------|------|------|-------------|---------|-----|")
+            for f in items:
+                snippet = f.snippet.replace("|", "\\|")[:100]
+                lines.append(
+                    f"| `{f.file_path}` | {f.line} | `{f.rule_id}` | "
+                    f"{f.description} | `{snippet}` | {f.cwe} |"
+                )
+            lines.append("")
+
+        by_lang: Dict[str, List[SecurityFinding]] = {}
+        for f in findings:
+            ext = f.file_path.rsplit(".", 1)[-1] if "." in f.file_path else "?"
+            by_lang.setdefault(ext, []).append(f)
+
+        lines.append("### By Language")
+        lines.append("")
+        lines.append("| Language | Findings |")
+        lines.append("|----------|----------|")
+        for lang in sorted(by_lang):
+            lines.append(f"| {lang} | {len(by_lang[lang])} |")
         lines.extend(["", "---", ""])
         return lines
 

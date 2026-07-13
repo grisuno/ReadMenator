@@ -14,7 +14,7 @@ from textwrap import dedent
 from typing import Dict, List, Optional
 
 from readmenator._config import Config
-from readmenator._models import AnalysisResult, Edge, Node
+from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
 
 
 class GraphExporter:
@@ -39,6 +39,7 @@ class GraphExporter:
         edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> str:
         """Export the graph as a node-link JSON string.
 
@@ -47,9 +48,10 @@ class GraphExporter:
             edges: Import edges.
             resolved_edges: Optional resolved-import edges.
             analysis: Optional analysis results for metadata.
+            findings: Optional security audit findings.
 
         Returns:
-            JSON string with nodes, edges, and optional analysis metadata.
+            JSON string with nodes, edges, and optional analysis/findings metadata.
         """
         all_edges = edges + (resolved_edges or [])
         node_data = []
@@ -128,6 +130,20 @@ class GraphExporter:
                 "suggested_questions": analysis.suggested_questions,
             }
 
+        if findings:
+            result["security_findings"] = [
+                {
+                    "file_path": f.file_path,
+                    "line": f.line,
+                    "severity": f.severity,
+                    "rule_id": f.rule_id,
+                    "description": f.description,
+                    "snippet": f.snippet,
+                    "cwe": f.cwe,
+                }
+                for f in findings
+            ]
+
         return json.dumps(result, indent=2, ensure_ascii=False)
 
     def to_html(
@@ -136,6 +152,7 @@ class GraphExporter:
         edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> str:
         """Generate a standalone interactive HTML graph page.
 
@@ -213,7 +230,7 @@ class GraphExporter:
                     "title": edge.relation,
                 })
 
-        return self._render_html(vis_nodes, vis_edges, analysis)
+        return self._render_html(vis_nodes, vis_edges, analysis, findings)
 
     def _community_color_map(
         self, analysis: Optional[AnalysisResult]
@@ -246,6 +263,7 @@ class GraphExporter:
         vis_nodes: List[Dict],
         vis_edges: List[Dict],
         analysis: Optional[AnalysisResult],
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> str:
         """Render the full HTML document with vis.js."""
         nodes_json = json.dumps(vis_nodes, ensure_ascii=False)
@@ -294,6 +312,42 @@ class GraphExporter:
                 f"<ul>{''.join(q_items)}</ul></details>"
             )
 
+        security_section = ""
+        if findings:
+            sev_colors = {"critical":"#ff4444", "high":"#ff8800", "medium":"#ffcc00", "low":"#44aaff", "info":"#aaaaaa"}
+            rows = ""
+            for f in findings:
+                color = sev_colors.get(f.severity, "#888")
+                safe_snippet = f.snippet.replace("<", "&lt;").replace(">", "&gt;").replace("|", "&#124;")
+                rows += (
+                    f"<tr><td>{f.file_path}</td><td>{f.line}</td>"
+                    f"<td style='color:{color}'>{f.severity}</td>"
+                    f"<td><code>{f.rule_id}</code></td>"
+                    f"<td>{f.description}</td>"
+                    f"<td><code>{safe_snippet[:80]}</code></td>"
+                    f"<td>{f.cwe}</td></tr>"
+                )
+            by_sev = {}
+            for f in findings:
+                by_sev[f.severity] = by_sev.get(f.severity, 0) + 1
+            def _sev_span(sev: str, count: int) -> str:
+                color = sev_colors.get(sev, "#888")
+                return f"<span style='color:{color}'>{sev}: {count}</span>"
+            summary_parts = " | ".join(
+                _sev_span(s, c) for s, c in sorted(by_sev.items())
+            )
+            security_section = (
+                "<details open style='border-top:1px solid #333;padding:8px;background:#1a1a1a;'>"
+                "<summary style='cursor:pointer;color:#ff6666;font-weight:bold;'>"
+                f"Security Audit ({len(findings)} findings)</summary>"
+                f"<div style='font-size:12px;color:#aaa;margin:4px 0;'>{summary_parts}</div>"
+                "<div style='overflow-x:auto;max-height:300px;overflow-y:auto;'>"
+                "<table style='width:100%;font-size:11px;border-collapse:collapse;'>"
+                "<thead><tr style='border-bottom:1px solid #444;'>"
+                "<th>File</th><th>Line</th><th>Severity</th><th>Rule</th><th>Description</th><th>Snippet</th><th>CWE</th>"
+                f"</tr></thead><tbody>{rows}</tbody></table></div></details>"
+            )
+
         return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -321,6 +375,7 @@ class GraphExporter:
 {community_legend}
 {god_section}
 {question_section}
+{security_section}
 <div id="mynetwork"></div>
 <script>
 var nodes = new vis.DataSet({json.dumps(vis_nodes, ensure_ascii=False)});

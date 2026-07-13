@@ -18,10 +18,11 @@ from readmenator._config import Config
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
 from readmenator._layers import LayerDetector
-from readmenator._models import AnalysisResult, Edge, Node
+from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
 from readmenator._query import QueryEngine
 from readmenator._resolver import ImportResolver
 from readmenator._scanner import PolyglotScanner
+from readmenator._security import SecurityAnalyzer
 
 
 class readmenatorApplication:
@@ -47,10 +48,12 @@ class readmenatorApplication:
         self._scanner = PolyglotScanner(self._config)
         self._generator = DocumentationGenerator(self._config)
         self._analyzer = GraphAnalyzer(self._config)
+        self._security = SecurityAnalyzer(self._config)
         self._exporter = GraphExporter(self._config)
         self._last_nodes: List[Node] = []
         self._last_edges: List[Edge] = []
         self._last_resolved_edges: List[Edge] = []
+        self._last_findings: List[SecurityFinding] = []
 
     def _scan(self, target_dir: str) -> Tuple[List[Node], List[Edge]]:
         """Resolve *target_dir* and run the scanner, caching results."""
@@ -95,6 +98,7 @@ class readmenatorApplication:
         target_dir: str,
         resolve_imports: bool = True,
         run_analysis: bool = True,
+        run_security: Optional[bool] = None,
     ) -> None:
         """Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
 
@@ -102,6 +106,8 @@ class readmenatorApplication:
             target_dir: Project directory to scan.
             resolve_imports: Whether to resolve raw imports to project files.
             run_analysis: Whether to run community detection and graph analysis.
+            run_security: Whether to run security audit. Defaults to
+                config.SECURITY_ENABLED if None.
         """
         root = Path(target_dir).resolve()
         nodes, edges = self._scanner.scan(root)
@@ -117,12 +123,26 @@ class readmenatorApplication:
         if run_analysis:
             analysis = self._analyzer.analyze(nodes, edges, resolved_edges)
 
+        if run_security is None:
+            run_security = self._config.SECURITY_ENABLED
+        findings: List[SecurityFinding] = []
+        if run_security:
+            findings = self._security.scan(root)
+            self._last_findings = findings
+
         layers = LayerDetector(self._config).detect(nodes, edges)
         layer_summary = LayerDetector(self._config).layer_summary(layers)
 
-        content = self._generator.generate(nodes, edges, resolved_edges, analysis, layers)
+        content = self._generator.generate(
+            nodes, edges, resolved_edges, analysis, layers, findings
+        )
         output_path = root / self._config.OUTPUT_FILENAME
-        output_path.write_text(content, encoding="utf-8")
+        if self._config.SECURITY_OUTPUT != "KNOWLEDGE_BASE.md":
+            security_path = root / self._config.SECURITY_OUTPUT
+            security_path.write_text(content, encoding="utf-8")
+        else:
+            output_path.write_text(content, encoding="utf-8")
+
         total_symbols = sum(len(n.symbols) for n in nodes)
         import_edges = [e for e in edges if e.relation == "imports"]
         call_edges = [e for e in edges if e.relation == "calls"]
@@ -144,8 +164,10 @@ class readmenatorApplication:
         if layer_summary:
             top_layer = max(layer_summary, key=layer_summary.get)
             print(f"[+] Layers detected: {len(layer_summary)} (dominant: {top_layer})")
+        if findings:
+            print(self._security.summary(findings))
 
-    def update(self, target_dir: str) -> None:
+    def update(self, target_dir: str, run_security: Optional[bool] = None) -> None:
         """Incrementally update KNOWLEDGE_BASE.md for changed files only.
 
         Uses SHA256 content hashing to detect which files have changed
@@ -153,6 +175,7 @@ class readmenatorApplication:
 
         Args:
             target_dir: Project directory to scan.
+            run_security: Whether to run security audit.
         """
         root = Path(target_dir).resolve()
         cache = FileCache(self._config, str(root))
@@ -162,7 +185,15 @@ class readmenatorApplication:
         resolved_edges = self._resolve_imports(nodes, edges, target_dir)
         self._last_resolved_edges = resolved_edges
         analysis = self._analyzer.analyze(nodes, edges, resolved_edges)
-        content = self._generator.generate(nodes, edges, resolved_edges, analysis)
+
+        if run_security is None:
+            run_security = self._config.SECURITY_ENABLED
+        findings: List[SecurityFinding] = []
+        if run_security:
+            findings = self._security.scan(root)
+            self._last_findings = findings
+
+        content = self._generator.generate(nodes, edges, resolved_edges, analysis, findings=findings)
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
         total_symbols = sum(len(n.symbols) for n in nodes)
@@ -239,9 +270,14 @@ class readmenatorApplication:
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         return engine.summary()
 
-    def rebuild(self, target_dir: str) -> None:
-        """Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md."""
-        self.run(target_dir)
+    def rebuild(self, target_dir: str, run_security: Optional[bool] = None) -> None:
+        """Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.
+
+        Args:
+            target_dir: Project directory to scan.
+            run_security: Whether to run security audit.
+        """
+        self.run(target_dir, run_security=run_security)
 
     def analyze(self, target_dir: str) -> AnalysisResult:
         """Run community detection and graph analysis on *target_dir*.
@@ -396,6 +432,24 @@ class readmenatorApplication:
 
         watcher = DirectoryWatcher(root, self._config, on_change)
         watcher.start()
+
+    def audit(self, target_dir: str) -> List[SecurityFinding]:
+        """Run a security audit on *target_dir* and return findings.
+
+        Performs pattern-based static analysis across all supported
+        languages and returns language-specific security findings.
+
+        Args:
+            target_dir: Project directory to scan.
+
+        Returns:
+            List of SecurityFinding instances sorted by severity.
+        """
+        root = Path(target_dir).resolve()
+        findings = self._security.scan(root)
+        self._last_findings = findings
+        print(self._security.summary(findings))
+        return findings
 
     def detect_layers(self, target_dir: str) -> dict:
         """Detect architectural layers in the codebase.

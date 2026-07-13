@@ -69,6 +69,29 @@ class Edge:
     confidence: str = "EXTRACTED"
 
 
+@dataclass
+class SecurityFinding:
+    """A security-relevant pattern detected in a source file.
+
+    Attributes:
+        file_path: Relative path of the file containing the finding.
+        line: One-based line number where the pattern was found.
+        severity: Severity level (critical, high, medium, low, info).
+        rule_id: Unique identifier for the detection rule (e.g. "PY001").
+        description: Human-readable explanation of the issue.
+        snippet: The offending source code line.
+        cwe: CWE identifier string (e.g. "CWE-78").
+    """
+
+    file_path: str
+    line: int
+    severity: str
+    rule_id: str
+    description: str
+    snippet: str
+    cwe: str
+
+
 def pluralize_symbol_kind(kind: str, plural_map: Dict[str, str]) -> str:
     """Return the plural form of *kind* according to *plural_map*.
 

@@ -19,6 +19,7 @@ readmenator/
   _exporter.py      - Export: JSON, HTML (vis.js), SVG, GraphML, Obsidian vault
   _layers.py        - Architectural layer detection (5-layer model)
   _watcher.py       - Filesystem polling watcher for auto-rebuild
+  _security.py      - Pattern-based static security analysis (18 language rule sets)
   _app.py           - Application orchestrator with import resolution and analysis
 tests/
   test_config.py        - Config contract tests
@@ -33,6 +34,7 @@ tests/
   test_analyzer.py      - Graph analysis contract tests
   test_cache.py         - File cache contract tests
   test_exporter.py      - Graph exporter contract tests
+  test_security.py      - Security analyzer contract tests (41 languages, thresholds, paths)
   test_integration.py   - End-to-end pipeline tests
 ```
 
@@ -47,6 +49,7 @@ tests/
 - Export settings (SVG_DPI, SVG_MAX_NODES, HTML_TEMPLATE_STYLE)
 - Cache directory config (CACHE_DIR)
 - Docstrings stored in full, no truncation (``DOCSTRING_MAX_LENGTH`` removed intentionally)
+- Security audit settings (SECURITY_ENABLED, SECURITY_SEVERITY_THRESHOLD, SECURITY_OUTPUT)
 - Progress reporting batch size (PROGRESS_REPORT_BATCH)
 
 ### Models Contract
@@ -56,6 +59,7 @@ tests/
 - pluralize_symbol_kind: returns correct plural form
 - CommunityResult: community_id, label, file_ids, cohesion, size
 - AnalysisResult: god_nodes, communities, surprising_connections, suggested_questions
+- SecurityFinding: file_path, line, severity, rule_id, description, snippet, cwe
 
 ### Parsers Contract
 - LanguageParser base with _extract_docstring and _extract_signature
@@ -144,6 +148,16 @@ tests/
 - Search/filter UI in HTML export
 - All formats embed analysis metadata when available
 
+### Security Analyzer Contract
+- Pattern-based static analysis (regex, zero deps)
+- Per-language rule sets: Python, JS/TS, C/C++, Java, Go, Ruby, PHP, Shell, C#, Kotlin, Swift, Scala, Lua, Dart, Rust, Nim, GDScript, Elixir
+- Detects: command injection, SQL injection, XSS, eval/exec, unsafe deserialization, hardcoded secrets, weak crypto, path traversal, buffer overflow functions
+- Severity levels: critical, high, medium, low, info
+- Configurable severity threshold (SECURITY_SEVERITY_THRESHOLD)
+- Findings sorted by severity then file path
+- Reuses scanner security checks (symlinks, ignore dirs, size/depth limits)
+- No external API calls — fully offline
+
 ### Layer Detection Contract
 - detect(nodes, edges): maps each file to an architectural layer
 - 5-layer model: presentation, business_logic, data_access, infrastructure, testing
@@ -180,6 +194,7 @@ tests/
 - Directory depth limits enforced
 - All parsing exceptions caught
 - No external API calls in any analysis or export module
+- Pattern-based security analyzer with 18 language rule sets
 
 ### Testing (SDD + TDD + BDD)
 - Tests named as `test_<contract>_<behavior>` (BDD style)

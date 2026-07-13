@@ -3,8 +3,8 @@
 > Generated offline by **readmenator**. Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, Dart, GDScript, Nim, ASM, Ruby, Swift, Kotlin, Scala, Lua, Elixir.
 > No LLMs. No tokens. Pure static analysis. See more [here](https://github.com/grisuno/ReadMenator)
 
-**Total Files Parsed:** 32 | **Total Symbols Extracted:** 456 | **Total Imports:** 169
- | **Resolved Imports:** 61
+**Total Files Parsed:** 34 | **Total Symbols Extracted:** 550 | **Total Imports:** 185
+ | **Resolved Imports:** 67
 
 
 ## Table of Contents
@@ -13,11 +13,10 @@
 2. [Architectural Layers](#architectural-layers)
 3. [God Nodes](#god-nodes)
 4. [Community Analysis](#community-analysis)
-5. [Surprising Connections](#surprising-connections)
-6. [Suggested Questions](#suggested-questions)
-7. [Structural Knowledge Map](#structural-knowledge-map)
-8. [Architecture Reference](#architecture-reference)
-    - [PY (32 files)](#py-32-files)
+5. [Suggested Questions](#suggested-questions)
+6. [Structural Knowledge Map](#structural-knowledge-map)
+7. [Architecture Reference](#architecture-reference)
+    - [PY (34 files)](#py-34-files)
 
 ---
 
@@ -25,30 +24,30 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Files | 32 |
-| Total Symbols | 456 |
-| Total Imports | 169 |
-| Call Edges | 2397 |
-| Inheritance Edges | 56 |
+| Total Files | 34 |
+| Total Symbols | 550 |
+| Total Imports | 185 |
+| Call Edges | 2861 |
+| Inheritance Edges | 62 |
 | Languages | 1 |
-| Avg Symbols/File | 14.2 |
-| Avg Imports/File | 5.3 |
-| Resolved Imports | 61 |
+| Avg Symbols/File | 16.2 |
+| Avg Imports/File | 5.4 |
+| Resolved Imports | 67 |
 
 ### Top Files by Import Count (Fan-Out)
 
 | File | Imports | Symbols | Language |
 |------|---------|---------|----------|
-| `_app.py` | 15 | 22 | py |
+| `_app.py` | 16 | 23 | py |
 | `readmenator_orchestrator.py` | 12 | 30 | py |
-| `_exporter.py` | 10 | 13 | py |
+| `_exporter.py` | 10 | 14 | py |
 | `test_cache.py` | 8 | 15 | py |
+| `test_security.py` | 8 | 63 | py |
 | `_analyzer.py` | 7 | 13 | py |
 | `_cache.py` | 7 | 8 | py |
 | `_parsers.py` | 7 | 45 | py |
+| `_security.py` | 7 | 27 | py |
 | `test_scanner.py` | 7 | 12 | py |
-| `__main__.py` | 6 | 3 | py |
-| `_documentation.py` | 6 | 12 | py |
 
 ---
 
@@ -58,8 +57,8 @@ Auto-detected from path patterns, naming conventions, and imported frameworks.
 
 | Layer | Files |
 |-------|-------|
-| testing | 16 |
-| utility | 12 |
+| testing | 17 |
+| utility | 13 |
 | infrastructure | 2 |
 | business_logic | 1 |
 | data_access | 1 |
@@ -69,14 +68,15 @@ Auto-detected from path patterns, naming conventions, and imported frameworks.
 - `readmenator.py` (py, 0 symbols)
 - `__init__.py` (py, 0 symbols)
 - `_analyzer.py` (py, 13 symbols)
-- `_app.py` (py, 22 symbols)
-- `_documentation.py` (py, 12 symbols)
-- `_exporter.py` (py, 13 symbols)
+- `_app.py` (py, 23 symbols)
+- `_documentation.py` (py, 13 symbols)
+- `_exporter.py` (py, 14 symbols)
 - `_layers.py` (py, 5 symbols)
 - `_mermaid.py` (py, 4 symbols)
 - `_parsers.py` (py, 45 symbols)
 - `_resolver.py` (py, 11 symbols)
 - `_scanner.py` (py, 8 symbols)
+- `_security.py` (py, 27 symbols)
 - `_watcher.py` (py, 5 symbols)
 
 ### testing
@@ -96,7 +96,7 @@ Auto-detected from path patterns, naming conventions, and imported frameworks.
 - `test_parsers_new.py` (py, 36 symbols)
 - `test_query.py` (py, 18 symbols)
 - `test_resolver.py` (py, 11 symbols)
-- *... and 1 more*
+- *... and 2 more*
 
 ### infrastructure
 
@@ -105,7 +105,7 @@ Auto-detected from path patterns, naming conventions, and imported frameworks.
 
 ### business_logic
 
-- `_models.py` (py, 6 symbols)
+- `_models.py` (py, 7 symbols)
 
 ### data_access
 
@@ -119,16 +119,16 @@ Most architecturally central files ranked by combined import/export degree and s
 
 | File | Score | Connections |
 |------|-------|-------------|
-| `_config.py` | 40.1 | |
-| `_models.py` | 32.6 | |
-| `_app.py` | 30.2 | |
+| `_config.py` | 44.1 | |
+| `_models.py` | 36.7 | |
+| `_app.py` | 32.3 | |
 | `_parsers.py` | 14.5 | |
 | `test_parsers.py` | 12.4 | |
-| `_documentation.py` | 11.2 | |
+| `test_security.py` | 12.3 | |
+| `_documentation.py` | 11.3 | |
 | `_scanner.py` | 10.8 | |
-| `_analyzer.py` | 9.3 | |
-| `_exporter.py` | 9.3 | |
-| `_mermaid.py` | 8.4 | |
+| `_security.py` | 10.7 | |
+| `_exporter.py` | 9.4 | |
 
 ---
 
@@ -136,50 +136,31 @@ Most architecturally central files ranked by combined import/export degree and s
 
 Files grouped by import-based community detection. Cohesion measures how tightly connected each community is internally.
 
-### readmenator (Cohesion: 0.98)
+### readmenator (Cohesion: 1.00)
 
-**28 files** in this community:
+**32 files** in this community:
 
+- `readmenator.py` (py, 0 symbols)
 - `__init__.py` (py, 0 symbols)
+- `__main__.py` (py, 3 symbols)
 - `_analyzer.py` (py, 13 symbols)
-- `_app.py` (py, 22 symbols)
+- `_app.py` (py, 23 symbols)
 - `_cache.py` (py, 8 symbols)
 - `_config.py` (py, 1 symbols)
-- `_documentation.py` (py, 12 symbols)
-- `_exporter.py` (py, 13 symbols)
+- `_documentation.py` (py, 13 symbols)
+- `_exporter.py` (py, 14 symbols)
 - `_layers.py` (py, 5 symbols)
 - `_mermaid.py` (py, 4 symbols)
-- `_models.py` (py, 6 symbols)
+- `_models.py` (py, 7 symbols)
 - `_parsers.py` (py, 45 symbols)
 - `_query.py` (py, 13 symbols)
 - `_resolver.py` (py, 11 symbols)
 - `_scanner.py` (py, 8 symbols)
+- `_security.py` (py, 27 symbols)
 - `_watcher.py` (py, 5 symbols)
 - `test_analyzer.py` (py, 12 symbols)
 - `test_cache.py` (py, 15 symbols)
-- `test_config.py` (py, 6 symbols)
-- `test_documentation.py` (py, 15 symbols)
-- `test_exporter.py` (py, 15 symbols)
-- ... and 8 more files
-
-### root (Cohesion: 0.50)
-
-**2 files** in this community:
-
-- `readmenator.py` (py, 0 symbols)
-- `__main__.py` (py, 3 symbols)
-
----
-
-## Surprising Connections
-
-Files in different communities connected through 3+ indirect hops.
-
-- `readmenator.py` <-> `_mermaid.py` (4 hops, across 2 communities)
-- `readmenator.py` <-> `_parsers.py` (4 hops, across 2 communities)
-- `readmenator.py` <-> `test_analyzer.py` (4 hops, across 2 communities)
-- `readmenator.py` <-> `test_cache.py` (4 hops, across 2 communities)
-- `readmenator.py` <-> `test_config.py` (4 hops, across 2 communities)
+- ... and 12 more files
 
 ---
 
@@ -187,11 +168,11 @@ Files in different communities connected through 3+ indirect hops.
 
 Auto-generated exploration prompts based on graph structure:
 
-- What does _config.py depend on, and what depends on it? (20 connections)
-- What does _models.py depend on, and what depends on it? (16 connections)
-- What does _app.py depend on, and what depends on it? (14 connections)
-- How are the 28 files in 'readmenator' related to each other?
-- Why are readmenator.py and _mermaid.py connected through 4 hops across 2 communities?
+- What does _config.py depend on, and what depends on it? (22 connections)
+- What does _models.py depend on, and what depends on it? (18 connections)
+- What does _app.py depend on, and what depends on it? (15 connections)
+- How are the 32 files in 'readmenator' related to each other?
+- What is GraphAnalyzer in _analyzer.py and how is it used?
 
 ---
 
@@ -255,6 +236,23 @@ graph TD
     readmenator__exporter_py__community_color_map["_community_color_map"]
     class readmenator__exporter_py__community_color_map fn;
     readmenator__exporter_py --> readmenator__exporter_py__community_color_map
+    tests_test_security_py["test_security.py (py)"]
+    class tests_test_security_py mod;
+    tests_test_security_py_TestSecurityFinding["TestSecurityFinding"]
+    class tests_test_security_py_TestSecurityFinding cls;
+    tests_test_security_py --> tests_test_security_py_TestSecurityFinding
+    tests_test_security_py_TestSecurityAnalyzerConfig["TestSecurityAnalyzerConfig"]
+    class tests_test_security_py_TestSecurityAnalyzerConfig cls;
+    tests_test_security_py --> tests_test_security_py_TestSecurityAnalyzerConfig
+    tests_test_security_py_TestSecurityAnalyzerRules["TestSecurityAnalyzerRules"]
+    class tests_test_security_py_TestSecurityAnalyzerRules cls;
+    tests_test_security_py --> tests_test_security_py_TestSecurityAnalyzerRules
+    tests_test_security_py_TestSecurityAnalyzerThreshold["TestSecurityAnalyzerThreshold"]
+    class tests_test_security_py_TestSecurityAnalyzerThreshold cls;
+    tests_test_security_py --> tests_test_security_py_TestSecurityAnalyzerThreshold
+    tests_test_security_py_TestSecurityAnalyzerPathValidation["TestSecurityAnalyzerPathValidation"]
+    class tests_test_security_py_TestSecurityAnalyzerPathValidation cls;
+    tests_test_security_py --> tests_test_security_py_TestSecurityAnalyzerPathValidation
     tests_test_cache_py["test_cache.py (py)"]
     class tests_test_cache_py mod;
     tests_test_cache_py_TestFileCacheContract["TestFileCacheContract"]
@@ -289,6 +287,23 @@ graph TD
     readmenator__parsers_py_RustParser["RustParser"]
     class readmenator__parsers_py_RustParser cls;
     readmenator__parsers_py --> readmenator__parsers_py_RustParser
+    readmenator__security_py["_security.py (py)"]
+    class readmenator__security_py mod;
+    readmenator__security_py_SecurityRule["SecurityRule"]
+    class readmenator__security_py_SecurityRule cls;
+    readmenator__security_py --> readmenator__security_py_SecurityRule
+    readmenator__security_py_SecurityAnalyzer["SecurityAnalyzer"]
+    class readmenator__security_py_SecurityAnalyzer cls;
+    readmenator__security_py --> readmenator__security_py_SecurityAnalyzer
+    readmenator__security_py__compile["_compile"]
+    class readmenator__security_py__compile fn;
+    readmenator__security_py --> readmenator__security_py__compile
+    readmenator__security_py__python_rules["_python_rules"]
+    class readmenator__security_py__python_rules fn;
+    readmenator__security_py --> readmenator__security_py__python_rules
+    readmenator__security_py__javascript_rules["_javascript_rules"]
+    class readmenator__security_py__javascript_rules fn;
+    readmenator__security_py --> readmenator__security_py__javascript_rules
     tests_test_exporter_py["test_exporter.py (py)"]
     class tests_test_exporter_py mod;
     tests_test_exporter_py_TestGraphExporterContract["TestGraphExporterContract"]
@@ -490,8 +505,6 @@ graph TD
     readmenator__mermaid_py_render["render"]
     class readmenator__mermaid_py_render fn;
     readmenator__mermaid_py --> readmenator__mermaid_py_render
-    end
-    subgraph community_1 ["root"]
     readmenator___main___py["__main__.py (py)"]
     class readmenator___main___py mod;
     readmenator___main___py_build_parser["build_parser"]
@@ -671,12 +684,12 @@ graph TD
     readmenator__models_py_Edge["Edge"]
     class readmenator__models_py_Edge cls;
     readmenator__models_py --> readmenator__models_py_Edge
+    readmenator__models_py_SecurityFinding["SecurityFinding"]
+    class readmenator__models_py_SecurityFinding cls;
+    readmenator__models_py --> readmenator__models_py_SecurityFinding
     readmenator__models_py_pluralize_symbol_kind["pluralize_symbol_kind"]
     class readmenator__models_py_pluralize_symbol_kind fn;
     readmenator__models_py --> readmenator__models_py_pluralize_symbol_kind
-    readmenator__models_py_CommunityResult["CommunityResult"]
-    class readmenator__models_py_CommunityResult cls;
-    readmenator__models_py --> readmenator__models_py_CommunityResult
     readmenator__config_py["_config.py (py)"]
     class readmenator__config_py mod;
     readmenator__config_py_Config["Config"]
@@ -701,6 +714,7 @@ graph TD
     readmenator__app_py -- resolved_imports --> readmenator__query_py
     readmenator__app_py -- resolved_imports --> readmenator__resolver_py
     readmenator__app_py -- resolved_imports --> readmenator__scanner_py
+    readmenator__app_py -- resolved_imports --> readmenator__security_py
     readmenator__app_py -- resolved_imports --> readmenator__watcher_py
     readmenator__cache_py -- resolved_imports --> readmenator__config_py
     readmenator__documentation_py -- resolved_imports --> readmenator__config_py
@@ -717,6 +731,8 @@ graph TD
     readmenator__scanner_py -- resolved_imports --> readmenator__config_py
     readmenator__scanner_py -- resolved_imports --> readmenator__models_py
     readmenator__scanner_py -- resolved_imports --> readmenator__parsers_py
+    readmenator__security_py -- resolved_imports --> readmenator__config_py
+    readmenator__security_py -- resolved_imports --> readmenator__models_py
     readmenator__watcher_py -- resolved_imports --> readmenator__config_py
     readmenator_py -- resolved_imports --> readmenator___main___py
     tests_test_analyzer_py -- resolved_imports --> readmenator__analyzer_py
@@ -746,6 +762,9 @@ graph TD
     tests_test_resolver_py -- resolved_imports --> readmenator__resolver_py
     tests_test_scanner_py -- resolved_imports --> readmenator__config_py
     tests_test_scanner_py -- resolved_imports --> readmenator__scanner_py
+    tests_test_security_py -- resolved_imports --> readmenator__config_py
+    tests_test_security_py -- resolved_imports --> readmenator__models_py
+    tests_test_security_py -- resolved_imports --> readmenator__security_py
     ext_readmenator__app["readmenator._app"]
     class ext_readmenator__app ext;
     readmenator___init___py -.->|imports| ext_readmenator__app
@@ -816,6 +835,9 @@ graph TD
     ext_readmenator__scanner["readmenator._scanner"]
     class ext_readmenator__scanner ext;
     readmenator__app_py -.->|imports| ext_readmenator__scanner
+    ext_readmenator__security["readmenator._security"]
+    class ext_readmenator__security ext;
+    readmenator__app_py -.->|imports| ext_readmenator__security
     ext_readmenator__watcher["readmenator._watcher"]
     class ext_readmenator__watcher ext;
     readmenator__app_py -.->|imports| ext_readmenator__watcher
@@ -897,6 +919,13 @@ graph TD
     ext_readmenator__parsers["readmenator._parsers"]
     class ext_readmenator__parsers ext;
     readmenator__scanner_py -.->|imports| ext_readmenator__parsers
+    readmenator__security_py -.->|imports| ext___future__
+    readmenator__security_py -.->|imports| ext_re
+    readmenator__security_py -.->|imports| ext_dataclasses
+    readmenator__security_py -.->|imports| ext_pathlib
+    readmenator__security_py -.->|imports| ext_typing
+    readmenator__security_py -.->|imports| ext_readmenator__config
+    readmenator__security_py -.->|imports| ext_readmenator__models
     readmenator__watcher_py -.->|imports| ext___future__
     readmenator__watcher_py -.->|imports| ext_hashlib
     ext_time["time"]
@@ -991,13 +1020,21 @@ graph TD
     tests_test_scanner_py -.->|imports| ext_readmenator__config
     tests_test_scanner_py -.->|imports| ext_readmenator__scanner
     tests_test_scanner_py -.->|imports| ext_shutil
+    tests_test_security_py -.->|imports| ext___future__
+    tests_test_security_py -.->|imports| ext_os
+    tests_test_security_py -.->|imports| ext_tempfile
+    tests_test_security_py -.->|imports| ext_unittest
+    tests_test_security_py -.->|imports| ext_pathlib
+    tests_test_security_py -.->|imports| ext_readmenator__config
+    tests_test_security_py -.->|imports| ext_readmenator__models
+    tests_test_security_py -.->|imports| ext_readmenator__security
 ```
 
 ---
 
 ## Architecture Reference
 
-### PY (32 files)
+### PY (34 files)
 
 #### `__init__.py`
 **Path:** `readmenator/__init__.py`
@@ -1009,8 +1046,8 @@ graph TD
 
 **Functions:**
 - `build_parser` (line 19) `def build_parser()` - *Construct the argument parser with subcommand help and examples.*
-- `_run_tests` (line 99) `def _run_tests()` - *Discover and run the full test suite from the tests/ directory.*
-- `main` (line 115) `def main()` - *Primary CLI entry point invoked by ``python -m readmenator``.
+- `_run_tests` (line 106) `def _run_tests()` - *Discover and run the full test suite from the tests/ directory.*
+- `main` (line 122) `def main()` - *Primary CLI entry point invoked by ``python -m readmenator``.
 
 Supports direct subcommand dispatch (query, explain, path, summary,
 update, export, analyze, --rebuild) or falls back to the argument
@@ -1073,7 +1110,7 @@ crosses community boundaries.*
 **Path:** `readmenator/_app.py`
 
 **Classes:**
-- `readmenatorApplication` (line 27) `class readmenatorApplication` - *High-level facade for readmenator operations.
+- `readmenatorApplication` (line 28) `class readmenatorApplication` - *High-level facade for readmenator operations.
 
 Provides convenience methods for the full pipeline:
   - ``run`` / ``rebuild``: scan + generate KNOWLEDGE_BASE.md
@@ -1085,12 +1122,12 @@ Provides convenience methods for the full pipeline:
     export the graph to various formats*
 
 **Methods:**
-- `__init__` (line 40) `def __init__(self, config)` - *Initialise the application with an optional custom config.
+- `__init__` (line 41) `def __init__(self, config)` - *Initialise the application with an optional custom config.
 
 Args:
     config: Application settings; defaults to Config() if omitted.*
-- `_scan` (line 55) `def _scan(self, target_dir)` - *Resolve *target_dir* and run the scanner, caching results.*
-- `_resolve_imports` (line 64) `def _resolve_imports(self, nodes, edges, target_dir)` - *Resolve raw import strings to project file paths.
+- `_scan` (line 58) `def _scan(self, target_dir)` - *Resolve *target_dir* and run the scanner, caching results.*
+- `_resolve_imports` (line 67) `def _resolve_imports(self, nodes, edges, target_dir)` - *Resolve raw import strings to project file paths.
 
 Args:
     nodes: Scanned file nodes.
@@ -1099,34 +1136,41 @@ Args:
 
 Returns:
     List of resolved import edges with project file targets.*
-- `run` (line 93) `def run(self, target_dir, resolve_imports, run_analysis)` - *Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
+- `run` (line 96) `def run(self, target_dir, resolve_imports, run_analysis, run_security)` - *Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
 
 Args:
     target_dir: Project directory to scan.
     resolve_imports: Whether to resolve raw imports to project files.
-    run_analysis: Whether to run community detection and graph analysis.*
-- `update` (line 148) `def update(self, target_dir)` - *Incrementally update KNOWLEDGE_BASE.md for changed files only.
+    run_analysis: Whether to run community detection and graph analysis.
+    run_security: Whether to run security audit. Defaults to
+        config.SECURITY_ENABLED if None.*
+- `update` (line 170) `def update(self, target_dir, run_security)` - *Incrementally update KNOWLEDGE_BASE.md for changed files only.
 
 Uses SHA256 content hashing to detect which files have changed
 since the last run. Falls back to full rebuild if no cache exists.
 
 Args:
-    target_dir: Project directory to scan.*
-- `_scan_for_cache` (line 176) `def _scan_for_cache(self, root, cache)` - *Scan only files that have changed since the last cache write.
+    target_dir: Project directory to scan.
+    run_security: Whether to run security audit.*
+- `_scan_for_cache` (line 207) `def _scan_for_cache(self, root, cache)` - *Scan only files that have changed since the last cache write.
 
 If no cache exists, performs a full scan and populates the cache.*
-- `query` (line 200) `def query(self, target_dir, question)` - *Scan *target_dir* and answer *question* using the query engine.*
-- `explain` (line 206) `def explain(self, target_dir, symbol_name)` - *Scan *target_dir* and return a detailed explanation of *symbol_name*.*
-- `find_path` (line 219) `def find_path(self, target_dir, symbol_a, symbol_b)` - *Scan *target_dir* and find the shortest import path between two symbols.
+- `query` (line 231) `def query(self, target_dir, question)` - *Scan *target_dir* and answer *question* using the query engine.*
+- `explain` (line 237) `def explain(self, target_dir, symbol_name)` - *Scan *target_dir* and return a detailed explanation of *symbol_name*.*
+- `find_path` (line 250) `def find_path(self, target_dir, symbol_a, symbol_b)` - *Scan *target_dir* and find the shortest import path between two symbols.
 
 Uses resolved imports when available for project-internal paths.*
-- `summary` (line 236) `def summary(self, target_dir)` - *Scan *target_dir* and return a concise knowledge base overview.*
-- `rebuild` (line 242) `def rebuild(self, target_dir)` - *Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.*
-- `analyze` (line 246) `def analyze(self, target_dir)` - *Run community detection and graph analysis on *target_dir*.
+- `summary` (line 267) `def summary(self, target_dir)` - *Scan *target_dir* and return a concise knowledge base overview.*
+- `rebuild` (line 273) `def rebuild(self, target_dir, run_security)` - *Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.
+
+Args:
+    target_dir: Project directory to scan.
+    run_security: Whether to run security audit.*
+- `analyze` (line 282) `def analyze(self, target_dir)` - *Run community detection and graph analysis on *target_dir*.
 
 Returns:
     Structured AnalysisResult with god nodes, communities, etc.*
-- `export_json` (line 255) `def export_json(self, target_dir, output_path)` - *Export the knowledge graph as JSON.
+- `export_json` (line 291) `def export_json(self, target_dir, output_path)` - *Export the knowledge graph as JSON.
 
 Args:
     target_dir: Project directory to scan.
@@ -1135,7 +1179,7 @@ Args:
 
 Returns:
     JSON string content.*
-- `export_html` (line 280) `def export_html(self, target_dir, output_path)` - *Export the knowledge graph as an interactive HTML page.
+- `export_html` (line 316) `def export_html(self, target_dir, output_path)` - *Export the knowledge graph as an interactive HTML page.
 
 Args:
     target_dir: Project directory to scan.
@@ -1144,7 +1188,7 @@ Args:
 
 Returns:
     HTML document string.*
-- `export_svg` (line 305) `def export_svg(self, target_dir, output_path)` - *Export the knowledge graph as a static SVG image.
+- `export_svg` (line 341) `def export_svg(self, target_dir, output_path)` - *Export the knowledge graph as a static SVG image.
 
 Args:
     target_dir: Project directory to scan.
@@ -1153,8 +1197,8 @@ Args:
 
 Returns:
     SVG document string.*
-- `export` (line 330) `def export(self, target_dir)` - *Export all formats (JSON, HTML, SVG) at once.*
-- `export_graphml` (line 336) `def export_graphml(self, target_dir, output_path)` - *Export the knowledge graph as GraphML (Gephi/yEd compatible).
+- `export` (line 366) `def export(self, target_dir)` - *Export all formats (JSON, HTML, SVG) at once.*
+- `export_graphml` (line 372) `def export_graphml(self, target_dir, output_path)` - *Export the knowledge graph as GraphML (Gephi/yEd compatible).
 
 Args:
     target_dir: Project directory to scan.
@@ -1163,7 +1207,7 @@ Args:
 
 Returns:
     GraphML XML string.*
-- `export_obsidian` (line 361) `def export_obsidian(self, target_dir, output_dir)` - *Export the knowledge graph as an Obsidian vault.
+- `export_obsidian` (line 397) `def export_obsidian(self, target_dir, output_dir)` - *Export the knowledge graph as an Obsidian vault.
 
 Args:
     target_dir: Project directory to scan.
@@ -1172,18 +1216,28 @@ Args:
 
 Returns:
     Number of notes written.*
-- `watch` (line 385) `def watch(self, target_dir)` - *Start watching the project directory for changes (auto-rebuild).
+- `watch` (line 421) `def watch(self, target_dir)` - *Start watching the project directory for changes (auto-rebuild).
 
 Args:
     target_dir: Project directory to watch.*
-- `detect_layers` (line 400) `def detect_layers(self, target_dir)` - *Detect architectural layers in the codebase.
+- `audit` (line 436) `def audit(self, target_dir)` - *Run a security audit on *target_dir* and return findings.
+
+Performs pattern-based static analysis across all supported
+languages and returns language-specific security findings.
+
+Args:
+    target_dir: Project directory to scan.
+
+Returns:
+    List of SecurityFinding instances sorted by severity.*
+- `detect_layers` (line 454) `def detect_layers(self, target_dir)` - *Detect architectural layers in the codebase.
 
 Args:
     target_dir: Project directory to scan.
 
 Returns:
     Dict mapping node_id to layer name.*
-- `on_change` (line 394) `def on_change()`
+- `on_change` (line 430) `def on_change()`
 
 #### `_cache.py`
 **Path:** `readmenator/_cache.py`
@@ -1261,7 +1315,7 @@ architecture sections with pluralised symbol kind headings.*
 
 Args:
     config: Application settings including SYMBOL_TYPE_PLURALS.*
-- `generate` (line 37) `def generate(self, nodes, edges, resolved_edges, analysis, layers)` - *Assemble the full KNOWLEDGE_BASE.md Markdown document.
+- `generate` (line 37) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings)` - *Assemble the full KNOWLEDGE_BASE.md Markdown document.
 
 Groups files by language, lists symbols per file under
 pluralised kind headings (e.g. "Classes", "Functions"),
@@ -1273,18 +1327,20 @@ Args:
     resolved_edges: Optional resolved-import edges.
     analysis: Optional analysis results for communities, god nodes, etc.
     layers: Optional dict mapping node_id to architectural layer.
+    findings: Optional security audit findings.
 
 Returns:
     Complete Markdown string ready to write to disk.*
-- `_build_toc` (line 99) `def _build_toc(self, nodes, analysis, layers, is_truncated)` - *Build a table of contents for the document.*
-- `_build_layers` (line 140) `def _build_layers(self, layers, nodes)` - *Build the architectural layers section.*
-- `_build_dashboard` (line 176) `def _build_dashboard(self, nodes, edges, resolved_edges)` - *Build a statistics dashboard with import metrics and top files.*
-- `_build_god_nodes` (line 257) `def _build_god_nodes(self, analysis)` - *Build the god nodes section.*
-- `_build_community_analysis` (line 278) `def _build_community_analysis(self, analysis, nodes)` - *Build the community analysis section.*
-- `_build_surprising_connections` (line 312) `def _build_surprising_connections(self, analysis, nodes)` - *Build the surprising connections section.*
-- `_build_suggested_questions` (line 338) `def _build_suggested_questions(self, analysis)` - *Build the suggested questions section.*
-- `_build_mermaid_section` (line 355) `def _build_mermaid_section(self, graph_output, is_truncated)` - *Build the Mermaid graph section.*
-- `_build_architecture_reference` (line 379) `def _build_architecture_reference(self, nodes, edges)` - *Build the architecture reference grouped by language.*
+- `_build_toc` (line 102) `def _build_toc(self, nodes, analysis, layers, findings, is_truncated)` - *Build a table of contents for the document.*
+- `_build_layers` (line 148) `def _build_layers(self, layers, nodes)` - *Build the architectural layers section.*
+- `_build_dashboard` (line 184) `def _build_dashboard(self, nodes, edges, resolved_edges)` - *Build a statistics dashboard with import metrics and top files.*
+- `_build_god_nodes` (line 265) `def _build_god_nodes(self, analysis)` - *Build the god nodes section.*
+- `_build_community_analysis` (line 286) `def _build_community_analysis(self, analysis, nodes)` - *Build the community analysis section.*
+- `_build_surprising_connections` (line 320) `def _build_surprising_connections(self, analysis, nodes)` - *Build the surprising connections section.*
+- `_build_suggested_questions` (line 346) `def _build_suggested_questions(self, analysis)` - *Build the suggested questions section.*
+- `_build_security_findings` (line 363) `def _build_security_findings(self, findings)` - *Build the security audit section.*
+- `_build_mermaid_section` (line 419) `def _build_mermaid_section(self, graph_output, is_truncated)` - *Build the Mermaid graph section.*
+- `_build_architecture_reference` (line 443) `def _build_architecture_reference(self, nodes, edges)` - *Build the architecture reference grouped by language.*
 
 #### `_exporter.py`
 **Path:** `readmenator/_exporter.py`
@@ -1301,17 +1357,18 @@ from a CDN reference for offline-compatible rendering.*
 
 Args:
     config: Settings for export styling and limits.*
-- `to_json` (line 36) `def to_json(self, nodes, edges, resolved_edges, analysis)` - *Export the graph as a node-link JSON string.
+- `to_json` (line 36) `def to_json(self, nodes, edges, resolved_edges, analysis, findings)` - *Export the graph as a node-link JSON string.
 
 Args:
     nodes: Scanned file nodes.
     edges: Import edges.
     resolved_edges: Optional resolved-import edges.
     analysis: Optional analysis results for metadata.
+    findings: Optional security audit findings.
 
 Returns:
-    JSON string with nodes, edges, and optional analysis metadata.*
-- `to_html` (line 133) `def to_html(self, nodes, edges, resolved_edges, analysis)` - *Generate a standalone interactive HTML graph page.
+    JSON string with nodes, edges, and optional analysis/findings metadata.*
+- `to_html` (line 149) `def to_html(self, nodes, edges, resolved_edges, analysis, findings)` - *Generate a standalone interactive HTML graph page.
 
 Uses vis.js loaded from CDN. Supports click-to-inspect nodes,
 search filtering, and community-based coloring.
@@ -1324,10 +1381,10 @@ Args:
 
 Returns:
     Complete HTML document as a string.*
-- `_community_color_map` (line 218) `def _community_color_map(self, analysis)` - *Build a node-to-color map based on community membership.*
-- `_lighten` (line 236) `def _lighten(hex_color)` - *Lighten a hex color by 30% for border use.*
-- `_render_html` (line 244) `def _render_html(self, vis_nodes, vis_edges, analysis)` - *Render the full HTML document with vis.js.*
-- `to_svg` (line 365) `def to_svg(self, nodes, edges, resolved_edges, analysis)` - *Generate a static SVG representation of the graph.
+- `_community_color_map` (line 235) `def _community_color_map(self, analysis)` - *Build a node-to-color map based on community membership.*
+- `_lighten` (line 253) `def _lighten(hex_color)` - *Lighten a hex color by 30% for border use.*
+- `_render_html` (line 261) `def _render_html(self, vis_nodes, vis_edges, analysis, findings)` - *Render the full HTML document with vis.js.*
+- `to_svg` (line 420) `def to_svg(self, nodes, edges, resolved_edges, analysis)` - *Generate a static SVG representation of the graph.
 
 Uses a simple force-directed layout without external dependencies.
 For graphs with more than SVG_MAX_NODES, returns a plain SVG
@@ -1341,13 +1398,13 @@ Args:
 
 Returns:
     SVG document as a string.*
-- `_render_truncated_svg` (line 483) `def _render_truncated_svg(self, total_nodes)` - *Render a minimal SVG with a truncation notice.*
-- `_layout_spring` (line 498) `def _layout_spring(self, nodes, edges, node_map)` - *Compute a simple spring-layout for node positioning.
+- `_render_truncated_svg` (line 538) `def _render_truncated_svg(self, total_nodes)` - *Render a minimal SVG with a truncation notice.*
+- `_layout_spring` (line 553) `def _layout_spring(self, nodes, edges, node_map)` - *Compute a simple spring-layout for node positioning.
 
 Implements a basic force-directed layout with repulsion
 between all nodes and attraction along edges. Runs a fixed
 number of iterations for determinism.*
-- `to_graphml` (line 581) `def to_graphml(self, nodes, edges, resolved_edges, analysis)` - *Export the graph as GraphML (Gephi/yEd compatible).
+- `to_graphml` (line 636) `def to_graphml(self, nodes, edges, resolved_edges, analysis)` - *Export the graph as GraphML (Gephi/yEd compatible).
 
 Args:
     nodes: Scanned file nodes.
@@ -1357,7 +1414,7 @@ Args:
 
 Returns:
     GraphML XML string.*
-- `to_obsidian` (line 658) `def to_obsidian(self, nodes, edges, output_dir, analysis)` - *Export the graph as an Obsidian vault with wikilinks.
+- `to_obsidian` (line 713) `def to_obsidian(self, nodes, edges, output_dir, analysis)` - *Export the graph as an Obsidian vault with wikilinks.
 
 Each file node becomes a markdown note. Community hub notes
 aggregate related files. All notes use [[wikilinks]] for
@@ -1371,7 +1428,8 @@ Args:
 
 Returns:
     Number of notes written.*
-- `_project` (line 427) `def _project(pos)`
+- `_project` (line 482) `def _project(pos)`
+- `_sev_span` (line 333) `def _sev_span(sev, count)`
 
 #### `_layers.py`
 **Path:** `readmenator/_layers.py`
@@ -1462,7 +1520,17 @@ Attributes:
     target: Node ID of the target (dependency) file or module.
     relation: Semantic relation label (e.g. "imports", "resolved_imports").
     confidence: Confidence tier ("EXTRACTED" for structural, "INFERRED" for heuristic).*
-- `CommunityResult` (line 82) `class CommunityResult` - *Result of community detection on the import graph.
+- `SecurityFinding` (line 73) `class SecurityFinding` - *A security-relevant pattern detected in a source file.
+
+Attributes:
+    file_path: Relative path of the file containing the finding.
+    line: One-based line number where the pattern was found.
+    severity: Severity level (critical, high, medium, low, info).
+    rule_id: Unique identifier for the detection rule (e.g. "PY001").
+    description: Human-readable explanation of the issue.
+    snippet: The offending source code line.
+    cwe: CWE identifier string (e.g. "CWE-78").*
+- `CommunityResult` (line 105) `class CommunityResult` - *Result of community detection on the import graph.
 
 Attributes:
     community_id: Integer identifier of the community.
@@ -1470,7 +1538,7 @@ Attributes:
     file_ids: Set of node IDs belonging to this community.
     cohesion: Cohesion score (internal edges / total edges involving community).
     size: Number of files in the community.*
-- `AnalysisResult` (line 101) `class AnalysisResult` - *Complete graph analysis output.
+- `AnalysisResult` (line 124) `class AnalysisResult` - *Complete graph analysis output.
 
 Attributes:
     god_nodes: List of (node_id, score) for most central nodes.
@@ -1481,7 +1549,7 @@ Attributes:
     edge_count: Total edges in the graph.*
 
 **Methods:**
-- `pluralize_symbol_kind` (line 72) `def pluralize_symbol_kind(kind, plural_map)` - *Return the plural form of *kind* according to *plural_map*.
+- `pluralize_symbol_kind` (line 95) `def pluralize_symbol_kind(kind, plural_map)` - *Return the plural form of *kind* according to *plural_map*.
 
 Falls back to appending ``"s"`` when the kind is not found.
 This prevents obvious misspellings like ``"Classs"``.*
@@ -1777,6 +1845,64 @@ file never blocks the rest of the scan.
 Returns:
     A tuple of (list of Node, list of Edge). Edges represent
     ``imports`` relationships between scanned files.*
+
+#### `_security.py`
+**Path:** `readmenator/_security.py`
+
+**Classes:**
+- `SecurityRule` (line 20) `class SecurityRule` - *A single security detection rule.
+
+Attributes:
+    rule_id: Unique identifier (e.g. "PY001").
+    severity: Severity level (critical, high, medium, low, info).
+    description: Human-readable description of the issue.
+    pattern: Compiled regex to search for.
+    cwe: CWE identifier string.*
+- `SecurityAnalyzer` (line 38) `class SecurityAnalyzer` - *Pattern-based static security scanner.
+
+Maintains per-language rule sets and walks the target directory
+applying rules to every supported source file. Designed to slot
+into the readmenator pipeline alongside GraphAnalyzer.*
+
+**Methods:**
+- `_compile` (line 203) `def _compile()` - *Compile multiple patterns into a single case-insensitive regex.*
+- `_python_rules` (line 209) `def _python_rules()` - *Return security rules for Python (.py).*
+- `_javascript_rules` (line 307) `def _javascript_rules()` - *Return security rules for JavaScript/TypeScript (.js/.ts/.jsx/.tsx).*
+- `_c_rules` (line 361) `def _c_rules()` - *Return security rules for C/C++ (.c/.cpp/.cc/.cxx/.h/.hpp/.hxx).*
+- `_java_rules` (line 415) `def _java_rules()` - *Return security rules for Java (.java).*
+- `_go_rules` (line 454) `def _go_rules()` - *Return security rules for Go (.go).*
+- `_ruby_rules` (line 487) `def _ruby_rules()` - *Return security rules for Ruby (.rb).*
+- `_php_rules` (line 529) `def _php_rules()` - *Return security rules for PHP (.php).*
+- `_shell_rules` (line 590) `def _shell_rules()` - *Return security rules for Shell (.sh/.bash/.zsh).*
+- `_csharp_rules` (line 620) `def _csharp_rules()` - *Return security rules for C# (.cs).*
+- `_kotlin_rules` (line 659) `def _kotlin_rules()` - *Return security rules for Kotlin (.kt/.kts).*
+- `_swift_rules` (line 686) `def _swift_rules()` - *Return security rules for Swift (.swift).*
+- `_scala_rules` (line 713) `def _scala_rules()` - *Return security rules for Scala (.scala/.sc).*
+- `_lua_rules` (line 741) `def _lua_rules()` - *Return security rules for Lua (.lua).*
+- `_dart_rules` (line 765) `def _dart_rules()` - *Return security rules for Dart (.dart).*
+- `_rust_rules` (line 797) `def _rust_rules()` - *Return security rules for Rust (.rs).*
+- `_nim_rules` (line 830) `def _nim_rules()` - *Return security rules for Nim (.nim).*
+- `_gdscript_rules` (line 858) `def _gdscript_rules()` - *Return security rules for GDScript (.gd).*
+- `_elixir_rules` (line 882) `def _elixir_rules()` - *Return security rules for Elixir (.ex/.exs).*
+- `__init__` (line 48) `def __init__(self, config)` - *Initialise with application configuration.
+
+Args:
+    config: Settings including SECURITY_ENABLED and
+        SECURITY_SEVERITY_THRESHOLD.*
+- `_build_rules` (line 59) `def _build_rules()` - *Build the complete per-language rule set.*
+- `_meets_threshold` (line 96) `def _meets_threshold(self, severity)` - *Check if *severity* meets the configured threshold.*
+- `scan` (line 103) `def scan(self, root)` - *Walk *root* and return all security findings.
+
+Applies the same security checks as PolyglotScanner (symlinks,
+ignore dirs, size limits, depth limits) for consistency.
+
+Args:
+    root: Project root directory to scan.
+
+Returns:
+    List of SecurityFinding instances, sorted by severity.*
+- `_validate_path` (line 170) `def _validate_path(self, path, root)` - *Validate path security: reject symlinks and enforce limits.*
+- `summary` (line 188) `def summary(self, findings)` - *Return a concise summary string of security findings.*
 
 #### `_watcher.py`
 **Path:** `readmenator/_watcher.py`
@@ -2200,3 +2326,73 @@ removed, or modified.*
 - `test_respects_max_directory_depth` (line 78) `def test_respects_max_directory_depth(self)`
 - `test_raises_on_invalid_directory` (line 88) `def test_raises_on_invalid_directory(self)`
 - `test_import_edges_are_created` (line 93) `def test_import_edges_are_created(self)`
+
+#### `test_security.py`
+**Path:** `tests/test_security.py`
+
+**Classes:**
+- `TestSecurityFinding` (line 21) `class TestSecurityFinding(TestCase)` - *SecurityFinding dataclass contract tests.*
+- `TestSecurityAnalyzerConfig` (line 43) `class TestSecurityAnalyzerConfig(TestCase)` - *SecurityAnalyzer configuration contract tests.*
+- `TestSecurityAnalyzerRules` (line 64) `class TestSecurityAnalyzerRules(TestCase)` - *Per-language rule detection tests using inline code.*
+- `TestSecurityAnalyzerThreshold` (line 295) `class TestSecurityAnalyzerThreshold(TestCase)` - *Severity threshold filtering tests.*
+- `TestSecurityAnalyzerPathValidation` (line 327) `class TestSecurityAnalyzerPathValidation(TestCase)` - *Security path validation tests.*
+- `TestSecurityAnalyzerSummary` (line 374) `class TestSecurityAnalyzerSummary(TestCase)` - *Security summary output tests.*
+
+**Methods:**
+- `test_security_finding_fields` (line 24) `def test_security_finding_fields(self)`
+- `test_default_config_disables_security` (line 46) `def test_default_config_disables_security(self)`
+- `test_default_severity_threshold` (line 50) `def test_default_severity_threshold(self)`
+- `test_default_security_output` (line 54) `def test_default_security_output(self)`
+- `test_init_with_config` (line 58) `def test_init_with_config(self)`
+- `setUp` (line 67) `def setUp(self)`
+- `_scan_content` (line 71) `def _scan_content(self, content, extension)` - *Write content to a temp file and scan it.*
+- `test_python_os_system` (line 78) `def test_python_os_system(self)`
+- `test_python_eval` (line 83) `def test_python_eval(self)`
+- `test_python_pickle` (line 88) `def test_python_pickle(self)`
+- `test_python_sql_injection` (line 93) `def test_python_sql_injection(self)`
+- `test_python_hardcoded_secret` (line 98) `def test_python_hardcoded_secret(self)`
+- `test_python_weak_crypto` (line 103) `def test_python_weak_crypto(self)`
+- `test_python_request_verify_false` (line 108) `def test_python_request_verify_false(self)`
+- `test_python_flask_debug` (line 113) `def test_python_flask_debug(self)`
+- `test_python_yaml_load` (line 118) `def test_python_yaml_load(self)`
+- `test_javascript_inner_html` (line 123) `def test_javascript_inner_html(self)`
+- `test_javascript_eval` (line 128) `def test_javascript_eval(self)`
+- `test_javascript_child_process` (line 133) `def test_javascript_child_process(self)`
+- `test_javascript_dangerously_set_inner_html` (line 138) `def test_javascript_dangerously_set_inner_html(self)`
+- `test_c_strcpy` (line 143) `def test_c_strcpy(self)`
+- `test_c_gets` (line 148) `def test_c_gets(self)`
+- `test_c_system` (line 153) `def test_c_system(self)`
+- `test_java_runtime_exec` (line 158) `def test_java_runtime_exec(self)`
+- `test_java_sql_injection` (line 163) `def test_java_sql_injection(self)`
+- `test_go_exec_command` (line 168) `def test_go_exec_command(self)`
+- `test_ruby_eval` (line 173) `def test_ruby_eval(self)`
+- `test_ruby_marshal_load` (line 178) `def test_ruby_marshal_load(self)`
+- `test_php_eval` (line 183) `def test_php_eval(self)`
+- `test_php_sql_injection` (line 188) `def test_php_sql_injection(self)`
+- `test_php_unseralize` (line 193) `def test_php_unseralize(self)`
+- `test_shell_eval` (line 198) `def test_shell_eval(self)`
+- `test_csharp_process_start` (line 203) `def test_csharp_process_start(self)`
+- `test_kotlin_runtime_exec` (line 208) `def test_kotlin_runtime_exec(self)`
+- `test_swift_process` (line 213) `def test_swift_process(self)`
+- `test_lua_load` (line 218) `def test_lua_load(self)`
+- `test_lua_os_execute` (line 223) `def test_lua_os_execute(self)`
+- `test_dart_process_run` (line 228) `def test_dart_process_run(self)`
+- `test_rust_unsafe` (line 233) `def test_rust_unsafe(self)`
+- `test_elixir_code_eval` (line 238) `def test_elixir_code_eval(self)`
+- `test_elixir_system_cmd` (line 243) `def test_elixir_system_cmd(self)`
+- `test_gdscript_os_execute` (line 248) `def test_gdscript_os_execute(self)`
+- `test_scala_runtime_exec` (line 253) `def test_scala_runtime_exec(self)`
+- `test_nim_exec_process` (line 258) `def test_nim_exec_process(self)`
+- `test_safe_code_produces_no_findings` (line 263) `def test_safe_code_produces_no_findings(self)`
+- `test_csharp_binary_formatter` (line 274) `def test_csharp_binary_formatter(self)`
+- `test_ruby_backtick` (line 279) `def test_ruby_backtick(self)`
+- `test_php_xss` (line 284) `def test_php_xss(self)`
+- `test_go_unsafe_package` (line 289) `def test_go_unsafe_package(self)`
+- `test_threshold_filters_low` (line 298) `def test_threshold_filters_low(self)`
+- `test_threshold_info_shows_all` (line 312) `def test_threshold_info_shows_all(self)`
+- `test_ignores_symlinks` (line 330) `def test_ignores_symlinks(self)`
+- `test_ignores_ignored_dirs` (line 345) `def test_ignores_ignored_dirs(self)`
+- `test_empty_directory` (line 357) `def test_empty_directory(self)`
+- `test_unsupported_extension` (line 364) `def test_unsupported_extension(self)`
+- `test_summary_empty` (line 377) `def test_summary_empty(self)`
+- `test_summary_with_findings` (line 383) `def test_summary_with_findings(self)`

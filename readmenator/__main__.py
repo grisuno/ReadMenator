@@ -30,9 +30,11 @@ def build_parser() -> argparse.ArgumentParser:
             "  analyze                 Run community detection and analysis\n"
             "  update                  Incremental rebuild (cache-based)\n"
             "  export                  Export graph (JSON + HTML + SVG)\n"
+            "  audit                   Run static security analysis\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
+            "  --audit                 Include security audit in output\n"
             "  --json                  Export graph.json\n"
             "  --html                  Export graph.html (interactive)\n"
             "  --svg                   Export graph.svg (static)\n"
@@ -93,6 +95,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Skip community detection and graph analysis",
     )
+    parser.add_argument(
+        "--audit",
+        action="store_true",
+        help="Run static security analysis and include findings in output",
+    )
     return parser
 
 
@@ -131,7 +138,7 @@ def main() -> None:
     positional_args = [
         a for a in sys.argv[1:] if not a.startswith("-") and a not in {
             "query", "explain", "path", "summary", "sum", "info",
-            "update", "export", "analyze",
+            "update", "export", "analyze", "audit",
         }
     ]
 
@@ -183,6 +190,9 @@ def main() -> None:
             for q in result.suggested_questions:
                 print(f"  - {q}")
             return
+        elif command == "audit":
+            app.audit(target)
+            return
         elif command == "--rebuild":
             app.rebuild(target)
             return
@@ -219,7 +229,7 @@ def main() -> None:
     output_path = Path(target) / "KNOWLEDGE_BASE.md"
 
     if args.rebuild or not output_path.exists():
-        app.run(target, run_analysis=not args.no_analysis)
+        app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
     else:
         result = app.summary(target)
         print(result)

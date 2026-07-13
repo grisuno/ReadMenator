@@ -106,3 +106,9 @@ class Config:
     SVG_MAX_NODES: int = 200
 
     PROGRESS_REPORT_BATCH: int = 50
+
+    SECURITY_ENABLED: bool = False
+
+    SECURITY_SEVERITY_THRESHOLD: str = "medium"
+
+    SECURITY_OUTPUT: str = "KNOWLEDGE_BASE.md"
