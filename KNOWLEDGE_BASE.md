@@ -13,9 +13,10 @@
 2. [Architectural Layers](#architectural-layers)
 3. [God Nodes](#god-nodes)
 4. [Community Analysis](#community-analysis)
-5. [Suggested Questions](#suggested-questions)
-6. [Structural Knowledge Map](#structural-knowledge-map)
-7. [Architecture Reference](#architecture-reference)
+5. [Surprising Connections](#surprising-connections)
+6. [Suggested Questions](#suggested-questions)
+7. [Structural Knowledge Map](#structural-knowledge-map)
+8. [Architecture Reference](#architecture-reference)
     - [PY (32 files)](#py-32-files)
 
 ---
@@ -27,7 +28,7 @@
 | Total Files | 32 |
 | Total Symbols | 456 |
 | Total Imports | 169 |
-| Call Edges | 2400 |
+| Call Edges | 2397 |
 | Inheritance Edges | 56 |
 | Languages | 1 |
 | Avg Symbols/File | 14.2 |
@@ -135,13 +136,11 @@ Most architecturally central files ranked by combined import/export degree and s
 
 Files grouped by import-based community detection. Cohesion measures how tightly connected each community is internally.
 
-### readmenator (Cohesion: 1.00)
+### readmenator (Cohesion: 0.98)
 
-**30 files** in this community:
+**28 files** in this community:
 
-- `readmenator.py` (py, 0 symbols)
 - `__init__.py` (py, 0 symbols)
-- `__main__.py` (py, 3 symbols)
 - `_analyzer.py` (py, 13 symbols)
 - `_app.py` (py, 22 symbols)
 - `_cache.py` (py, 8 symbols)
@@ -159,7 +158,28 @@ Files grouped by import-based community detection. Cohesion measures how tightly
 - `test_analyzer.py` (py, 12 symbols)
 - `test_cache.py` (py, 15 symbols)
 - `test_config.py` (py, 6 symbols)
-- ... and 10 more files
+- `test_documentation.py` (py, 15 symbols)
+- `test_exporter.py` (py, 15 symbols)
+- ... and 8 more files
+
+### root (Cohesion: 0.50)
+
+**2 files** in this community:
+
+- `readmenator.py` (py, 0 symbols)
+- `__main__.py` (py, 3 symbols)
+
+---
+
+## Surprising Connections
+
+Files in different communities connected through 3+ indirect hops.
+
+- `readmenator.py` <-> `_mermaid.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `_parsers.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `test_analyzer.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `test_cache.py` (4 hops, across 2 communities)
+- `readmenator.py` <-> `test_config.py` (4 hops, across 2 communities)
 
 ---
 
@@ -170,8 +190,8 @@ Auto-generated exploration prompts based on graph structure:
 - What does _config.py depend on, and what depends on it? (20 connections)
 - What does _models.py depend on, and what depends on it? (16 connections)
 - What does _app.py depend on, and what depends on it? (14 connections)
-- How are the 30 files in 'readmenator' related to each other?
-- What is GraphAnalyzer in _analyzer.py and how is it used?
+- How are the 28 files in 'readmenator' related to each other?
+- Why are readmenator.py and _mermaid.py connected through 4 hops across 2 communities?
 
 ---
 
@@ -470,6 +490,8 @@ graph TD
     readmenator__mermaid_py_render["render"]
     class readmenator__mermaid_py_render fn;
     readmenator__mermaid_py --> readmenator__mermaid_py_render
+    end
+    subgraph community_1 ["root"]
     readmenator___main___py["__main__.py (py)"]
     class readmenator___main___py mod;
     readmenator___main___py_build_parser["build_parser"]
@@ -1474,87 +1496,87 @@ Subclasses must implement ``_extract_specifics`` to populate
 ``self.symbols`` and ``self.imports``. Common utility methods
 ``_extract_docstring`` and ``_extract_signature`` are provided
 for reuse across all parsers.*
-- `CParser` (line 120) `class CParser(LanguageParser)` - *Parser for C, C++ (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
+- `CParser` (line 117) `class CParser(LanguageParser)` - *Parser for C, C++ (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
 
 Extracts includes, structs, classes, functions, and preprocessor
 macros using regex heuristics tuned to C-family syntax.*
-- `PythonParser` (line 195) `class PythonParser(LanguageParser)` - *Parser for Python (.py) using the native ``ast`` module.
+- `PythonParser` (line 192) `class PythonParser(LanguageParser)` - *Parser for Python (.py) using the native ``ast`` module.
 
 Extracts imports, functions (including async), and class
 definitions with docstrings via ``ast.get_docstring``.*
-- `GoParser` (line 269) `class GoParser(LanguageParser)` - *Parser for Go (.go).
+- `GoParser` (line 266) `class GoParser(LanguageParser)` - *Parser for Go (.go).
 
 Extracts import blocks or single import statements, exported
 functions (including methods), and type definitions (struct/interface).*
-- `RustParser` (line 311) `class RustParser(LanguageParser)` - *Parser for Rust (.rs).
+- `RustParser` (line 308) `class RustParser(LanguageParser)` - *Parser for Rust (.rs).
 
 Extracts ``use`` imports, public and private functions,
 structs, traits, and enums.*
-- `JavaScriptParser` (line 365) `class JavaScriptParser(LanguageParser)` - *Parser for JavaScript / TypeScript (.js, .ts, .jsx, .tsx).
+- `JavaScriptParser` (line 362) `class JavaScriptParser(LanguageParser)` - *Parser for JavaScript / TypeScript (.js, .ts, .jsx, .tsx).
 
 Extracts ES module imports, CommonJS ``require`` calls, function
 declarations, arrow-function variables, and class definitions
 (including inheritance).*
-- `JavaParser` (line 424) `class JavaParser(LanguageParser)` - *Parser for Java (.java).
+- `JavaParser` (line 421) `class JavaParser(LanguageParser)` - *Parser for Java (.java).
 
 Extracts import statements, class and interface declarations,
 and methods complete with access modifiers and type signatures.*
-- `CSharpParser` (line 463) `class CSharpParser(LanguageParser)` - *Parser for C# (.cs).
+- `CSharpParser` (line 460) `class CSharpParser(LanguageParser)` - *Parser for C# (.cs).
 
 Extracts ``using`` directives, class/struct/interface/record
 declarations, and methods with access modifiers.*
-- `ShellParser` (line 502) `class ShellParser(LanguageParser)` - *Parser for shell scripts (.sh, .bash, .zsh).
+- `ShellParser` (line 499) `class ShellParser(LanguageParser)` - *Parser for shell scripts (.sh, .bash, .zsh).
 
 Extracts function declarations in both POSIX (``name() {``)
 and ``function`` keyword syntax.*
-- `PHPParser` (line 527) `class PHPParser(LanguageParser)` - *Parser for PHP (.php).
+- `PHPParser` (line 524) `class PHPParser(LanguageParser)` - *Parser for PHP (.php).
 
 Extracts ``use/require/include`` (including ``_once`` variants),
 function declarations, and class declarations.*
-- `DartParser` (line 561) `class DartParser(LanguageParser)` - *Parser for Dart (.dart).
+- `DartParser` (line 558) `class DartParser(LanguageParser)` - *Parser for Dart (.dart).
 
 Extracts import statements, class declarations (with extends),
 and top-level or method function declarations by return type.*
-- `GDScriptParser` (line 599) `class GDScriptParser(LanguageParser)` - *Parser for Godot GDScript (.gd).
+- `GDScriptParser` (line 596) `class GDScriptParser(LanguageParser)` - *Parser for Godot GDScript (.gd).
 
 Extracts ``extends`` / ``class_name`` directives and ``func``
 method declarations.*
-- `NimParser` (line 623) `class NimParser(LanguageParser)` - *Parser for Nim (.nim).
+- `NimParser` (line 620) `class NimParser(LanguageParser)` - *Parser for Nim (.nim).
 
 Extracts ``import`` statements, ``proc`` / ``func`` / ``method``
 declarations, and ``type`` definitions.*
-- `AssemblyParser` (line 657) `class AssemblyParser(LanguageParser)` - *Parser for assembly (.asm, .s, .S).
+- `AssemblyParser` (line 654) `class AssemblyParser(LanguageParser)` - *Parser for assembly (.asm, .s, .S).
 
 Extracts labels at the start of a line (``label:``) as function
 symbols. This is a best-effort heuristic; local labels and
 directives are not always distinguishable.*
-- `RubyParser` (line 678) `class RubyParser(LanguageParser)` - *Parser for Ruby (.rb).
+- `RubyParser` (line 675) `class RubyParser(LanguageParser)` - *Parser for Ruby (.rb).
 
 Extracts ``require`` / ``require_relative`` imports, class and
 module definitions with inheritance, and method definitions.*
-- `SwiftParser` (line 733) `class SwiftParser(LanguageParser)` - *Parser for Swift (.swift).
+- `SwiftParser` (line 730) `class SwiftParser(LanguageParser)` - *Parser for Swift (.swift).
 
 Extracts ``import`` statements, class/struct/enum/protocol
 declarations with inheritance, and function definitions.*
-- `KotlinParser` (line 803) `class KotlinParser(LanguageParser)` - *Parser for Kotlin (.kt, .kts).
+- `KotlinParser` (line 800) `class KotlinParser(LanguageParser)` - *Parser for Kotlin (.kt, .kts).
 
 Extracts ``import`` statements, class/object/interface/data class
 declarations, and function definitions.*
-- `ScalaParser` (line 868) `class ScalaParser(LanguageParser)` - *Parser for Scala (.scala).
+- `ScalaParser` (line 865) `class ScalaParser(LanguageParser)` - *Parser for Scala (.scala).
 
 Extracts ``import`` statements, class/object/trait declarations,
 and method definitions.*
-- `LuaParser` (line 933) `class LuaParser(LanguageParser)` - *Parser for Lua (.lua).
+- `LuaParser` (line 930) `class LuaParser(LanguageParser)` - *Parser for Lua (.lua).
 
 Extracts ``require`` imports, function declarations (named and
 table-based), and module returns.*
-- `ElixirParser` (line 983) `class ElixirParser(LanguageParser)` - *Parser for Elixir (.ex, .exs).
+- `ElixirParser` (line 980) `class ElixirParser(LanguageParser)` - *Parser for Elixir (.ex, .exs).
 
 Extracts ``import``/``alias``/``require``/``use`` directives,
 module definitions, and named function definitions.*
 
 **Methods:**
-- `create_parser` (line 1067) `def create_parser(extension, filename, config)` - *Factory: return a parser instance for *extension* or ``None``.
+- `create_parser` (line 1064) `def create_parser(extension, filename, config)` - *Factory: return a parser instance for *extension* or ``None``.
 
 Looks up the extension in ``_PARSER_MAP`` (case-insensitive).
 Returns ``None`` for unsupported extensions so the caller can
@@ -1572,31 +1594,31 @@ specific ``_extract_specifics`` logic.*
 - `_extract_docstring` (line 59) `def _extract_docstring(self, line_num)` - *Walk backwards from *line_num* to collect preceding comments/docstrings.
 
 Supports ``//``, ``///``, ``//!``, ``#``, ``/* */``, and ``/** */``
-comment styles. Truncates at ``DOCSTRING_MAX_LENGTH`` and limits
-lookback to ``DOCSTRING_LOOKBACK_LINES`` (both from Config).*
-- `_extract_signature` (line 104) `def _extract_signature(self, content, match_start, pattern)` - *Extract a compact signature snippet starting at *match_start*.
+comment styles. Limits lookback to ``DOCSTRING_LOOKBACK_LINES``
+from Config.*
+- `_extract_signature` (line 101) `def _extract_signature(self, content, match_start, pattern)` - *Extract a compact signature snippet starting at *match_start*.
 
 Scans forward to the opening brace or a fallback length,
 then truncates to 100 characters for display.*
-- `_extract_specifics` (line 127) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 202) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 276) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 318) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 373) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 431) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 470) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 509) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 534) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 568) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 606) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 630) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 665) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 685) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 740) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 810) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 875) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 940) `def _extract_specifics(self, content)`
-- `_extract_specifics` (line 990) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 124) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 199) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 273) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 315) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 370) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 428) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 467) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 506) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 531) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 565) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 603) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 627) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 662) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 682) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 737) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 807) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 872) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 937) `def _extract_specifics(self, content)`
+- `_extract_specifics` (line 987) `def _extract_specifics(self, content)`
 
 #### `_query.py`
 **Path:** `readmenator/_query.py`
@@ -1742,11 +1764,11 @@ Args:
 
 Returns:
     Extracted file-level docstring or empty string.*
-- `_emit_progress` (line 115) `def _emit_progress(self, count)` - *Emit a progress message every PROGRESS_REPORT_BATCH files.
+- `_emit_progress` (line 112) `def _emit_progress(self, count)` - *Emit a progress message every PROGRESS_REPORT_BATCH files.
 
 Args:
     count: Number of files scanned so far.*
-- `scan` (line 125) `def scan(self, root)` - *Walk *root* recursively and produce (nodes, edges) for the graph.
+- `scan` (line 122) `def scan(self, root)` - *Walk *root* recursively and produce (nodes, edges) for the graph.
 
 Security checks (symlinks, size, depth, ignore dirs) are applied
 per file. Parse failures are silently caught so a single broken
@@ -1879,9 +1901,9 @@ removed, or modified.*
 **Methods:**
 - `test_config_is_immutable` (line 8) `def test_config_is_immutable(self)`
 - `test_config_defaults_are_sane` (line 13) `def test_config_defaults_are_sane(self)`
-- `test_ignore_dirs_are_comprehensive` (line 25) `def test_ignore_dirs_are_comprehensive(self)`
-- `test_plural_map_covers_all_symbol_types` (line 31) `def test_plural_map_covers_all_symbol_types(self)`
-- `test_supported_extensions_no_duplicates` (line 42) `def test_supported_extensions_no_duplicates(self)`
+- `test_ignore_dirs_are_comprehensive` (line 24) `def test_ignore_dirs_are_comprehensive(self)`
+- `test_plural_map_covers_all_symbol_types` (line 30) `def test_plural_map_covers_all_symbol_types(self)`
+- `test_supported_extensions_no_duplicates` (line 41) `def test_supported_extensions_no_duplicates(self)`
 
 #### `test_documentation.py`
 **Path:** `tests/test_documentation.py`

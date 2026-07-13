@@ -46,6 +46,7 @@ tests/
 - Graph analysis thresholds (COMMUNITY_MIN_SIZE, GOD_NODE_TOP_N, etc.)
 - Export settings (SVG_DPI, SVG_MAX_NODES, HTML_TEMPLATE_STYLE)
 - Cache directory config (CACHE_DIR)
+- Docstrings stored in full, no truncation (``DOCSTRING_MAX_LENGTH`` removed intentionally)
 - Progress reporting batch size (PROGRESS_REPORT_BATCH)
 
 ### Models Contract

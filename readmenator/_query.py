@@ -279,7 +279,7 @@ class QueryEngine:
             f"Found {len(unique)} symbol(s) matching your query:"
         ]
         for node, symbol in unique:
-            doc_short = f" - {symbol.doc[:60]}" if symbol.doc else ""
+            doc_short = f" - {symbol.doc}" if symbol.doc else ""
             lines.append(
                 f"  - {symbol.name} ({symbol.kind}, {node.node_id}:{symbol.line}){doc_short}"
             )

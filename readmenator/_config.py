@@ -39,8 +39,6 @@ class Config:
 
     DOCSTRING_LOOKBACK_LINES: int = 15
 
-    DOCSTRING_MAX_LENGTH: int = 150
-
     FILE_HEADER_MAX_LINES: int = 30
 
     MERMAID_MAX_NODES: int = 300

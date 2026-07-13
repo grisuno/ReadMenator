@@ -15,7 +15,6 @@ class TestConfigContract(unittest.TestCase):
         self.assertEqual(config.MAX_FILE_SIZE_MB, 10.0)
         self.assertEqual(config.MAX_DIRECTORY_DEPTH, 20)
         self.assertEqual(config.DOCSTRING_LOOKBACK_LINES, 15)
-        self.assertEqual(config.DOCSTRING_MAX_LENGTH, 150)
         self.assertEqual(config.MERMAID_MAX_NODES, 300)
         self.assertIn(".py", config.SUPPORTED_EXTENSIONS)
         self.assertIn(".rs", config.SUPPORTED_EXTENSIONS)

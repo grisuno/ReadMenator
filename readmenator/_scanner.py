@@ -107,9 +107,6 @@ class PolyglotScanner:
             else:
                 break
         doc = " ".join(doc_lines).strip()
-        max_len = self._config.DOCSTRING_MAX_LENGTH
-        if len(doc) > max_len:
-            doc = doc[: max_len - 3] + "..."
         return doc
 
     def _emit_progress(self, count: int) -> None:

@@ -172,7 +172,7 @@ class GraphExporter:
                 if len(node.symbols) > 10:
                     title_parts.append(f"  ... +{len(node.symbols) - 10} more")
             if node.doc:
-                title_parts.append(f"<br><i>{node.doc[:200]}</i>")
+                title_parts.append(f"<br><i>{node.doc}</i>")
 
             vis_nodes.append({
                 "id": node.node_id,
@@ -706,7 +706,7 @@ network.on("click", function(params) {{
                 parts.append("")
                 parts.append("## Symbols")
                 for sym in node.symbols:
-                    doc_str = f" - *{sym.doc[:100]}*" if sym.doc else ""
+                    doc_str = f" - *{sym.doc}*" if sym.doc else ""
                     parts.append(f"- `{sym.name}` ({sym.kind}, line {sym.line}){doc_str}")
             if node.node_id in reverse_imports:
                 parts.append("")

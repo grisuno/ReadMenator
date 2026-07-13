@@ -60,8 +60,8 @@ class LanguageParser:
         """Walk backwards from *line_num* to collect preceding comments/docstrings.
 
         Supports ``//``, ``///``, ``//!``, ``#``, ``/* */``, and ``/** */``
-        comment styles. Truncates at ``DOCSTRING_MAX_LENGTH`` and limits
-        lookback to ``DOCSTRING_LOOKBACK_LINES`` (both from Config).
+        comment styles. Limits lookback to ``DOCSTRING_LOOKBACK_LINES``
+        from Config.
         """
         if line_num >= len(self.lines):
             return ""
@@ -96,9 +96,6 @@ class LanguageParser:
                 break
         doc = " ".join(doc_lines).strip()
         doc = re.sub(r"^[\-\*\+]\s*", "", doc)
-        max_len = self.config.DOCSTRING_MAX_LENGTH
-        if len(doc) > max_len:
-            doc = doc[: max_len - 3] + "..."
         return doc
 
     def _extract_signature(self, content: str, match_start: int, pattern: str) -> str:
