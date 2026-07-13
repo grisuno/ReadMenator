@@ -1,10 +1,14 @@
 # ReadMenator
 
+<img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-45c9-a119-fa154d03446b" />
+
 A token-free, offline, production-grade polyglot codebase knowledge graph generator.
 
 **No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
 
 ReadMenator builds production-grade codebase knowledge graphs 100% offline -- with zero LLMs, zero token costs, and absolute data privacy. Now with 19 languages, call graphs, inheritance tracking, architectural layer detection, community analysis, and 6 export formats.
+
+- [https://pypi.org/project/readmenator/](https://pypi.org/project/readmenator/)
 
 ## Supported Languages (19)
 
@@ -30,6 +34,18 @@ C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GD
 | Confidence-tagged edges | EXTRACTED/INFERRED/AMBIGUOUS | EXTRACTED |
 | Cost | Token-based | Zero |
 | Speed | Minutes | Seconds |
+
+## Installation
+
+```bash
+pip install readmenator 
+```
+
+or install from path
+
+```bash
+pip install .
+```
 
 ## Usage
 
