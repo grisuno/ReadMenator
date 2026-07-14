@@ -127,4 +127,6 @@ python -m readmenator --test
 
 ## License
 
+<img width="300" height="124" alt="image" src="https://github.com/user-attachments/assets/e25f889b-aae5-4e53-a397-284ca1988825" />
+
 AGPL-3.0
