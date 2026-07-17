@@ -71,8 +71,10 @@ class MermaidRenderer:
 
         seen_ids: Set[str] = set()
         node_count = 0
+        symbol_count = 0
         is_truncated = False
         max_nodes = self._config.MERMAID_MAX_NODES
+        max_symbols = self._config.MERMAID_MAX_SYMBOLS_PER_FILE
 
         import_counts: Dict[str, int] = {node.node_id: 0 for node in nodes}
         for edge in edges:
@@ -134,11 +136,11 @@ class MermaidRenderer:
             seen_ids.add(safe_id)
             node_count += 1
 
-            max_symbols = self._config.MERMAID_MAX_SYMBOLS_PER_FILE
-            for symbol in node.symbols[:max_symbols]:
-                if node_count >= max_nodes:
-                    is_truncated = True
-                    break
+            if symbol_count < max_symbols:
+                sym_limit = max_symbols
+            else:
+                sym_limit = 0
+            for symbol in node.symbols[:sym_limit]:
                 symbol_id = f"{safe_id}_{self._sanitize_id(symbol.name)}"
                 symbol_label = symbol.name.replace('"', '\\"')
                 lines.append(f'    {symbol_id}["{symbol_label}"]')
@@ -148,11 +150,7 @@ class MermaidRenderer:
                 else:
                     lines.append(f"    class {symbol_id} fn;")
                 lines.append(f"    {safe_id} --> {symbol_id}")
-                node_count += 1
-
-            if node_count >= max_nodes:
-                is_truncated = True
-                break
+                symbol_count += 1
 
         if pending_subgraph_close:
             lines.append("    end")
@@ -173,6 +171,7 @@ class MermaidRenderer:
                     )
                     internal_edge_count += 1
 
+        ext_node_count = 0
         for edge in edges:
             if is_truncated:
                 break
@@ -182,13 +181,13 @@ class MermaidRenderer:
             target_id = self._sanitize_id(f"ext_{edge.target}")
             target_label = edge.target.split("/")[-1].replace('"', '\\"')
             if target_id not in seen_ids:
-                if node_count >= max_nodes:
+                if ext_node_count >= max_nodes:
                     is_truncated = True
                     break
                 lines.append(f'    {target_id}["{target_label}"]')
                 lines.append(f"    class {target_id} ext;")
                 seen_ids.add(target_id)
-                node_count += 1
+                ext_node_count += 1
             lines.append(f"    {src} -.->|imports| {target_id}")
 
         return "\n".join(lines), is_truncated

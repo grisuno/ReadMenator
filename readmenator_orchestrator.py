@@ -1,6 +1,8 @@
 import argparse
 import logging
 import os
+import re
+import shlex
 import shutil
 import subprocess
 import sys
@@ -9,11 +11,14 @@ import unittest
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
+
+_REPO_NAME_PATTERN: re.Pattern = re.compile(r"^[a-zA-Z0-9_.-]+$")
+_BRANCH_NAME_PATTERN: re.Pattern = re.compile(r"^[a-zA-Z0-9_./-]+$")
+
 
 @dataclass(frozen=True)
 class Config:
-    """Centralized, immutable configuration. No magic numbers or hardcoded paths."""
     github_user: str = ""
     target_branch: str = "docs-export"
     commit_message: str = "docs: auto-generate knowledge base with readmenator"
@@ -35,20 +40,43 @@ class Config:
     subprocess_timeout: int = 300
 
 
-class GitHubClient:
-    """Handles all interactions with the GitHub API via the gh CLI."""
+def _validate_repo_name(name: str) -> str:
+    if not _REPO_NAME_PATTERN.match(name):
+        raise ValueError(f"Invalid repository name: {name}")
+    return name
 
+
+def _validate_branch_name(name: str) -> str:
+    if not _BRANCH_NAME_PATTERN.match(name):
+        raise ValueError(f"Invalid branch name: {name}")
+    return name
+
+
+def _safe_env() -> dict:
+    env = os.environ.copy()
+    for key in list(env.keys()):
+        if key not in {
+            "PATH", "HOME", "USER", "GITHUB_REPOSITORY", "GITHUB_TOKEN",
+            "GIT_AUTHOR_NAME", "GIT_AUTHOR_EMAIL", "GIT_COMMITTER_NAME",
+            "GIT_COMMITTER_EMAIL", "GH_TOKEN", "GITHUB_ACTOR",
+            "GITHUB_REF", "GITHUB_SHA", "RUNNER_TEMP", "RUNNER_TOOL_CACHE",
+        }:
+            if key.startswith("GITHUB_") or key.startswith("INPUT_"):
+                continue
+            del env[key]
+    return env
+
+
+class GitHubClient:
     def __init__(self, config: Config) -> None:
-        """Initializes the client with configuration and resolves the GitHub user."""
         self.config = config
         self.user = self._resolve_user()
         self._setup_git_auth()
 
     def _resolve_user(self) -> str:
-        """Resolves the authenticated GitHub username."""
         if self.config.github_user:
             return self.config.github_user
-        
+
         github_repo = os.getenv("GITHUB_REPOSITORY")
         if github_repo:
             return github_repo.split("/")[0]
@@ -56,85 +84,115 @@ class GitHubClient:
         try:
             result = subprocess.run(
                 ["gh", "api", "user", "--jq", ".login"],
-                capture_output=True, text=True, check=True
+                capture_output=True, text=True, check=True,
+                env=_safe_env(),
             )
             return result.stdout.strip()
         except subprocess.CalledProcessError:
-            raise EnvironmentError("Could not resolve GitHub user. Set GITHUB_USER env var or ensure gh is authenticated.")
+            raise EnvironmentError(
+                "Could not resolve GitHub user. "
+                "Set GITHUB_USER env var or ensure gh is authenticated."
+            )
 
     def _setup_git_auth(self) -> None:
-        """Configures Git to use gh CLI for authentication globally."""
         try:
             subprocess.run(
                 ["gh", "auth", "setup-git"],
-                check=True, capture_output=True, text=True
+                check=True, capture_output=True, text=True,
+                env=_safe_env(),
             )
             logging.info("Git credential helper configured via gh auth setup-git")
         except subprocess.CalledProcessError as e:
-            logging.warning("Failed to setup git auth via gh: %s. Falling back to env token.", e.stderr)
+            logging.warning(
+                "Failed to setup git auth via gh: %s. Falling back to env token.",
+                e.stderr,
+            )
 
-    def list_repos(self) -> list:
-        """Retrieves a list of all repositories for the authenticated user."""
+    def list_repos(self) -> List[str]:
         result = subprocess.run(
-            ["gh", "repo", "list", self.user, "--limit", str(self.config.max_repos), "--json", "name", "-q", ".[].name"],
-            capture_output=True, text=True, check=True
+            [
+                "gh", "repo", "list", self.user,
+                "--limit", str(self.config.max_repos),
+                "--json", "name", "-q", ".[].name",
+            ],
+            capture_output=True, text=True, check=True,
+            env=_safe_env(),
         )
-        return [r for r in result.stdout.strip().split('\n') if r]
+        return [r for r in result.stdout.strip().split("\n") if r]
 
     def close_existing_prs(self, repo: str) -> None:
-        """Closes all existing pull requests for the target branch."""
-        safe_branch = self.config.target_branch.replace('"', '\\"')
-        jq_filter = f'.[] | select(.headRefName == "{safe_branch}") | .number'
+        safe_repo = shlex.quote(_validate_repo_name(repo))
+        safe_branch = shlex.quote(_validate_branch_name(self.config.target_branch))
+        jq_filter = f".[] | select(.headRefName == {safe_branch}) | .number"
         result = subprocess.run(
-            ["gh", "pr", "list", "--repo", f"{self.user}/{repo}", "--state", "all", "--json", "number,headRefName", "--jq", jq_filter],
-            capture_output=True, text=True
+            [
+                "gh", "pr", "list",
+                "--repo", f"{self.user}/{safe_repo}",
+                "--state", "all",
+                "--json", "number,headRefName",
+                "--jq", jq_filter,
+            ],
+            capture_output=True, text=True,
+            env=_safe_env(),
         )
-        for pr_num in result.stdout.strip().split('\n'):
-            if pr_num:
+        for pr_num in result.stdout.strip().split("\n"):
+            pr_num = pr_num.strip()
+            if pr_num and pr_num.isdigit():
                 subprocess.run(
-                    ["gh", "pr", "close", pr_num, "--repo", f"{self.user}/{repo}", "--delete-branch", "false"],
-                    capture_output=True
+                    [
+                        "gh", "pr", "close", pr_num,
+                        "--repo", f"{self.user}/{safe_repo}",
+                        "--delete-branch", "false",
+                    ],
+                    capture_output=True,
+                    env=_safe_env(),
                 )
 
     def delete_remote_branch(self, repo: str) -> None:
-        """Deletes the remote target branch if it exists."""
+        safe_repo = shlex.quote(_validate_repo_name(repo))
+        safe_branch = shlex.quote(_validate_branch_name(self.config.target_branch))
         subprocess.run(
-            ["gh", "api", "-X", "DELETE", f"repos/{self.user}/{repo}/git/refs/heads/{self.config.target_branch}"],
-            capture_output=True
+            [
+                "gh", "api", "-X", "DELETE",
+                f"repos/{self.user}/{safe_repo}/git/refs/heads/{safe_branch}",
+            ],
+            capture_output=True,
+            env=_safe_env(),
         )
 
     def create_pr(self, repo: str, default_branch: str, timestamp: str) -> str:
-        """Creates a new pull request for the generated documentation."""
-        body = self.config.pr_body_template.format(timestamp=timestamp)
+        safe_repo = shlex.quote(_validate_repo_name(repo))
+        safe_base = shlex.quote(_validate_branch_name(default_branch))
+        safe_head = shlex.quote(_validate_branch_name(self.config.target_branch))
+        safe_title = self.config.pr_title
+        safe_body = self.config.pr_body_template.format(timestamp=timestamp)
         result = subprocess.run(
             [
                 "gh", "pr", "create",
-                "--repo", f"{self.user}/{repo}",
-                "--base", default_branch,
-                "--head", self.config.target_branch,
-                "--title", self.config.pr_title,
-                "--body", body
+                "--repo", f"{self.user}/{safe_repo}",
+                "--base", safe_base,
+                "--head", safe_head,
+                "--title", safe_title,
+                "--body", safe_body,
             ],
-            capture_output=True, text=True
+            capture_output=True, text=True,
+            env=_safe_env(),
         )
         return result.stdout.strip()
 
 
 class RepositoryProcessor:
-    """Processes individual repositories: clones, generates docs, commits, and pushes."""
-
     def __init__(self, config: Config, github_client: GitHubClient) -> None:
-        """Initializes the processor with configuration and GitHub client."""
         self.config = config
         self.github = github_client
 
     def process(self, repo: str) -> tuple:
-        """Executes the full processing pipeline for a single repository."""
-        default_branch = self._get_default_branch(repo)
+        safe_repo = _validate_repo_name(repo)
+        default_branch = self._get_default_branch(safe_repo)
         if not default_branch:
             return False, "Failed to retrieve default branch"
 
-        temp_dir = self._clone_repository(repo)
+        temp_dir = self._clone_repository(safe_repo)
         if not temp_dir:
             return False, "Failed to clone repository"
 
@@ -144,39 +202,48 @@ class RepositoryProcessor:
                 return False, "Readmenator did not generate the output file"
 
             self._copy_to_docs_dir(temp_dir, generated_file)
-            
-            if not self._commit_and_push(temp_dir, repo):
+
+            if not self._commit_and_push(temp_dir, safe_repo):
                 return False, "No changes to commit or push failed"
 
-            pr_url = self.github.create_pr(repo, default_branch, datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            pr_url = self.github.create_pr(
+                safe_repo,
+                default_branch,
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            )
             return True, pr_url
         finally:
             self._cleanup_temp_dir(temp_dir)
 
     def _get_default_branch(self, repo: str) -> Optional[str]:
-        """Retrieves the default branch name for the repository."""
+        safe_repo = shlex.quote(_validate_repo_name(repo))
         try:
             result = subprocess.run(
-                ["gh", "api", f"repos/{self.github.user}/{repo}", "--jq", ".default_branch"],
-                capture_output=True, text=True, check=True
+                [
+                    "gh", "api",
+                    f"repos/{self.github.user}/{safe_repo}",
+                    "--jq", ".default_branch",
+                ],
+                capture_output=True, text=True, check=True,
+                env=_safe_env(),
             )
             return result.stdout.strip()
         except subprocess.CalledProcessError:
             return None
 
     def _clone_repository(self, repo: str) -> Optional[Path]:
-        """Clones the repository into a secure temporary directory."""
-        temp_dir = Path(tempfile.mkdtemp(prefix=f"readmenator_{repo}_"))
+        safe_repo = shlex.quote(_validate_repo_name(repo))
+        temp_dir = Path(tempfile.mkdtemp(prefix=f"readmenator_{safe_repo}_"))
         try:
-            # Use standard HTTPS URL; gh auth setup-git handles credentials
-            clone_url = f"https://github.com/{self.github.user}/{repo}.git"
+            clone_url = f"https://github.com/{self.github.user}/{safe_repo}.git"
             subprocess.run(
                 ["git", "clone", "--depth", "1", clone_url, str(temp_dir)],
-                check=True, capture_output=True, text=True
+                check=True, capture_output=True, text=True,
+                env=_safe_env(),
             )
             return temp_dir
         except subprocess.CalledProcessError as e:
-            logging.error("Failed to clone %s: %s", repo, e.stderr)
+            logging.error("Failed to clone %s: %s", safe_repo, e.stderr)
             self._cleanup_temp_dir(temp_dir)
             return None
 
@@ -190,6 +257,7 @@ class RepositoryProcessor:
                 text=True,
                 timeout=self.config.subprocess_timeout,
                 cwd=Path(__file__).parent,
+                env=_safe_env(),
             )
             return output_file
         except subprocess.CalledProcessError as e:
@@ -199,16 +267,16 @@ class RepositoryProcessor:
             logging.error("Readmenator execution timed out")
             return None
 
-    def _copy_to_docs_dir(self, repo_dir: Path, generated_file: Path) -> None:
-        """Copies the generated knowledge base to the docs subdirectory."""
-        docs_dir = repo_dir / self.config.docs_subdir
+    @staticmethod
+    def _copy_to_docs_dir(repo_dir: Path, generated_file: Path) -> None:
+        docs_dir = repo_dir / "docs"
         docs_dir.mkdir(exist_ok=True)
-        target_file = docs_dir / self.config.output_filename
+        target_file = docs_dir / generated_file.name
         shutil.copy2(generated_file, target_file)
 
     def _commit_and_push(self, repo_dir: Path, repo: str) -> bool:
-        """Commits and pushes the generated documentation to the target branch."""
-        env = os.environ.copy()
+        safe_repo = shlex.quote(_validate_repo_name(repo))
+        env = _safe_env()
         env["GIT_AUTHOR_NAME"] = self.config.git_user_name
         env["GIT_AUTHOR_EMAIL"] = self.config.git_user_email
         env["GIT_COMMITTER_NAME"] = self.config.git_user_name
@@ -216,61 +284,61 @@ class RepositoryProcessor:
 
         try:
             subprocess.run(
-                ["git", "checkout", "-B", self.config.target_branch], 
-                cwd=repo_dir, check=True, capture_output=True, env=env
+                ["git", "checkout", "-B", self.config.target_branch],
+                cwd=repo_dir, check=True, capture_output=True, env=env,
             )
             subprocess.run(
-                ["git", "add", self.config.output_filename, f"{self.config.docs_subdir}/{self.config.output_filename}"], 
-                cwd=repo_dir, check=True, capture_output=True, env=env
+                [
+                    "git", "add",
+                    self.config.output_filename,
+                    f"{self.config.docs_subdir}/{self.config.output_filename}",
+                ],
+                cwd=repo_dir, check=True, capture_output=True, env=env,
             )
-            
+
             diff_result = subprocess.run(
-                ["git", "diff", "--cached", "--quiet"], 
-                cwd=repo_dir, capture_output=True, env=env
+                ["git", "diff", "--cached", "--quiet"],
+                cwd=repo_dir, capture_output=True, env=env,
             )
             if diff_result.returncode == 0:
-                logging.info("No changes to commit for %s", repo)
+                logging.info("No changes to commit for %s", safe_repo)
                 return False
 
             subprocess.run(
-                ["git", "commit", "-m", self.config.commit_message], 
-                cwd=repo_dir, check=True, capture_output=True, env=env
+                ["git", "commit", "-m", self.config.commit_message],
+                cwd=repo_dir, check=True, capture_output=True, env=env,
             )
             subprocess.run(
-                ["git", "push", "-u", "origin", self.config.target_branch], 
-                cwd=repo_dir, check=True, capture_output=True, env=env
+                ["git", "push", "-u", "origin", self.config.target_branch],
+                cwd=repo_dir, check=True, capture_output=True, env=env,
             )
             return True
         except subprocess.CalledProcessError as e:
-            logging.error("Git operation failed: %s", e.stderr)
+            logging.error("Git operation failed for %s: %s", safe_repo, e.stderr)
             return False
 
-    def _cleanup_temp_dir(self, temp_dir: Path) -> None:
-        """Safely removes the temporary directory."""
+    @staticmethod
+    def _cleanup_temp_dir(temp_dir: Path) -> None:
         if temp_dir and temp_dir.exists():
             shutil.rmtree(temp_dir, ignore_errors=True)
 
 
 class Orchestrator:
-    """Main orchestrator that coordinates the documentation generation across all repositories."""
-
     def __init__(self, config: Optional[Config] = None) -> None:
-        """Initializes the orchestrator with configuration."""
         self.config = config or Config()
         self.github = GitHubClient(self.config)
         self.processor = RepositoryProcessor(self.config, self.github)
 
     def run(self, dry_run: bool = False, only_repo: Optional[str] = None) -> None:
-        """Executes the orchestration pipeline."""
         logging.info("Fetching repositories for user: %s", self.github.user)
         repos = self.github.list_repos()
-        
+
         if not repos:
             logging.error("No repositories found.")
             return
 
         logging.info("Total repositories found: %d", len(repos))
-        
+
         success_count = 0
         skip_count = 0
         fail_count = 0
@@ -304,61 +372,76 @@ class Orchestrator:
                 else:
                     fail_count += 1
 
-        logging.info("Orchestration complete. Success: %d, Skipped: %d, Failed: %d", success_count, skip_count, fail_count)
+        logging.info(
+            "Orchestration complete. Success: %d, Skipped: %d, Failed: %d",
+            success_count, skip_count, fail_count,
+        )
 
 
 class TestOrchestrator(unittest.TestCase):
-    """Test suite for the ReadMenator Orchestrator (SDD + TDD + BDD)."""
-
     def setUp(self) -> None:
-        """Sets up test fixtures."""
         self.config = Config(github_user="test_user", target_branch="test-branch")
         self.temp_dir = Path(tempfile.mkdtemp())
 
     def tearDown(self) -> None:
-        """Tears down test fixtures."""
         shutil.rmtree(self.temp_dir, ignore_errors=True)
 
     def test_config_immutability(self) -> None:
-        """Validates that the Config dataclass is immutable."""
-        with self.assertRaises(AttributeError):
+        with self.assertRaises(Exception):
             self.config.target_branch = "new-branch"
 
     def test_config_defaults(self) -> None:
-        """Validates default configuration values."""
         default_config = Config()
         self.assertEqual(default_config.output_filename, "KNOWLEDGE_BASE.md")
         self.assertEqual(default_config.docs_subdir, "docs")
         self.assertEqual(default_config.subprocess_timeout, 300)
 
     def test_skip_repos_logic(self) -> None:
-        """Validates that critical repositories are skipped by default."""
         self.assertIn("ReadMenator", self.config.skip_repos)
         self.assertIn("security_issue", self.config.skip_repos)
 
-    def test_jq_filter_escaping(self) -> None:
-        """Validates that jq filters are safely escaped against injection."""
-        config = Config(target_branch='test"branch')
-        client = GitHubClient(config)
-        self.assertIsNotNone(client.config.target_branch)
+    def test_repo_name_validation(self) -> None:
+        valid = "my-repo_123"
+        self.assertEqual(_validate_repo_name(valid), valid)
+        with self.assertRaises(ValueError):
+            _validate_repo_name("repo; rm -rf /")
+        with self.assertRaises(ValueError):
+            _validate_repo_name("../etc/passwd")
+        with self.assertRaises(ValueError):
+            _validate_repo_name("")
+
+    def test_branch_name_validation(self) -> None:
+        valid = "feature/my-branch_1"
+        self.assertEqual(_validate_branch_name(valid), valid)
+        with self.assertRaises(ValueError):
+            _validate_branch_name("branch;ls")
+        with self.assertRaises(ValueError):
+            _validate_branch_name("")
 
 
 def parse_arguments() -> argparse.Namespace:
-    """Parses command line arguments."""
     parser = argparse.ArgumentParser(description="ReadMenator Orchestrator")
-    parser.add_argument("--dry-run", action="store_true", help="Simulate the process without making changes")
-    parser.add_argument("--only", type=str, help="Process only the specified repository")
-    parser.add_argument("--test", action="store_true", help="Run the built-in test suite")
+    parser.add_argument(
+        "--dry-run", action="store_true",
+        help="Simulate the process without making changes",
+    )
+    parser.add_argument(
+        "--only", type=str,
+        help="Process only the specified repository",
+    )
+    parser.add_argument(
+        "--test", action="store_true",
+        help="Run the built-in test suite",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
-    """Main entry point for the orchestrator."""
     args = parse_arguments()
-    
+
     logging.basicConfig(
         level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s"
+        format="%(asctime)s - %(levelname)s - %(message)s",
     )
 
     if args.test:
