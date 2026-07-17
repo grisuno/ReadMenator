@@ -17,7 +17,7 @@ class LayerDetector:
 
     Assigns each file to a layer based on path patterns, naming
     conventions, and imported frameworks. Returns a mapping that
-    can enrich documentation and analysis.
+    can enrich documentation and analysis. No config dependency.
     """
 
     _LAYER_PATTERNS: Dict[str, List[str]] = {
@@ -67,10 +67,6 @@ class LayerDetector:
         "jest": "testing",
         "unittest": "testing",
     }
-
-    def __init__(self, config: Config) -> None:
-        """Initialise with application configuration."""
-        self._config = config
 
     def detect(
         self, nodes: List[Node], edges: List[Edge]
@@ -122,7 +118,8 @@ class LayerDetector:
 
         return max_layer
 
-    def layer_summary(self, layers: Dict[str, str]) -> Dict[str, int]:
+    @staticmethod
+    def layer_summary(layers: Dict[str, str]) -> Dict[str, int]:
         """Count files per layer.
 
         Args:

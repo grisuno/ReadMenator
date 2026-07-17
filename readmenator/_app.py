@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -17,16 +18,10 @@ from readmenator._pipeline import AnalyzerFactory, DeepAnalysisRunner
 from readmenator._query import QueryEngine
 from readmenator._resolver import ImportResolver
 
+logger = logging.getLogger(__name__)
+
 
 class readmenatorApplication:
-    """High-level facade for readmenator operations.
-
-    Delegates component creation to AnalyzerFactory and deep analysis
-    to DeepAnalysisRunner. This class focuses on orchestration logic:
-    scanning, resolving imports, coordinating output, and providing
-    CLI-facing convenience methods.
-    """
-
     def __init__(self, config: Optional[Config] = None):
         self._config = config or Config()
         self._factory = AnalyzerFactory(self._config)
@@ -102,8 +97,8 @@ class readmenatorApplication:
             findings = self._factory.security.scan(root)
             self._last_findings = findings
 
-        layers = LayerDetector(self._config).detect(nodes, edges)
-        layer_summary = LayerDetector(self._config).layer_summary(layers)
+        layers = LayerDetector().detect(nodes, edges)
+        layer_summary = LayerDetector.layer_summary(layers)
 
         if run_v2_analysis is None:
             run_v2_analysis = True
@@ -114,21 +109,14 @@ class readmenatorApplication:
             )
 
         content = self._factory.generator.generate(
-            nodes,
-            edges,
-            resolved_edges,
-            analysis,
-            layers,
-            findings,
-            analysis_v2,
+            nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
 
         self._write_sidecar_outputs(root, findings, analysis_v2)
-
-        self._print_summary(
-            nodes, edges, resolved_edges, analysis, layer_summary, analysis_v2, findings
+        self._log_summary(
+            nodes, edges, resolved_edges, analysis, layer_summary, analysis_v2, findings,
         )
 
     def _write_sidecar_outputs(
@@ -141,7 +129,7 @@ class readmenatorApplication:
             sarif_path = root / self._config.SARIF_OUTPUT
             sarif_content = self._factory.sarif.export(findings, root.name)
             sarif_path.write_text(sarif_content, encoding="utf-8")
-            print(f"[+] SARIF audit: {sarif_path}")
+            logger.info("SARIF audit written: %s", sarif_path)
 
         if (
             self._config.RULE_GEN_ENABLED
@@ -153,9 +141,11 @@ class readmenatorApplication:
                 analysis_v2.suggested_rules, rules_dir
             )
             if written:
-                print(f"[+] Suggested rules: {written} files in {rules_dir}")
+                logger.info(
+                    "Suggested rules: %d files in %s", written, rules_dir
+                )
 
-    def _print_summary(
+    def _log_summary(
         self,
         nodes: List[Node],
         edges: List[Edge],
@@ -169,37 +159,45 @@ class readmenatorApplication:
         import_edges = [e for e in edges if e.relation == "imports"]
         call_edges = [e for e in edges if e.relation == "calls"]
         inherit_edges = [e for e in edges if e.relation == "inherits"]
-        output_path = Path.cwd() / self._config.OUTPUT_FILENAME
-        print(f"[+] Knowledge base generated: {output_path}")
-        print(
-            f"[+] Files: {len(nodes)} | "
-            f"Symbols: {total_symbols} | "
-            f"Imports: {len(import_edges)}"
+        logger.info(
+            "Files: %d | Symbols: %d | Imports: %d",
+            len(nodes), total_symbols, len(import_edges),
         )
         if call_edges:
-            print(f"[+] Call edges: {len(call_edges)}")
+            logger.info("Call edges: %d", len(call_edges))
         if inherit_edges:
-            print(f"[+] Inheritance edges: {len(inherit_edges)}")
+            logger.info("Inheritance edges: %d", len(inherit_edges))
         if resolved_edges:
-            print(f"[+] Resolved imports: {len(resolved_edges)}")
+            logger.info("Resolved imports: %d", len(resolved_edges))
         if analysis and analysis.communities:
-            print(f"[+] Communities detected: {len(analysis.communities)}")
+            logger.info("Communities detected: %d", len(analysis.communities))
         if layer_summary:
             top_layer = max(layer_summary, key=layer_summary.get)
-            print(f"[+] Layers detected: {len(layer_summary)} (dominant: {top_layer})")
+            logger.info(
+                "Layers detected: %d (dominant: %s)",
+                len(layer_summary), top_layer,
+            )
         if analysis_v2:
             if analysis_v2.taint and analysis_v2.taint.paths:
-                print(f"[+] Taint paths: {len(analysis_v2.taint.paths)}")
+                logger.info("Taint paths: %d", len(analysis_v2.taint.paths))
             if analysis_v2.hotspots:
-                print(f"[+] Hotspot files: {len(analysis_v2.hotspots)}")
+                logger.info("Hotspot files: %d", len(analysis_v2.hotspots))
             if analysis_v2.cycles:
-                print(f"[+] Dependency cycles: {len(analysis_v2.cycles)}")
+                logger.info("Dependency cycles: %d", len(analysis_v2.cycles))
             if analysis_v2.layer_violations:
-                print(f"[+] Layer violations: {len(analysis_v2.layer_violations)}")
+                logger.info(
+                    "Layer violations: %d", len(analysis_v2.layer_violations)
+                )
             if analysis_v2.suggested_rules:
-                print(f"[+] Suggested rules: {len(analysis_v2.suggested_rules)}")
+                logger.info(
+                    "Suggested rules: %d", len(analysis_v2.suggested_rules)
+                )
         if findings:
-            print(self._factory.security.summary(findings))
+            logger.info(self._factory.security.summary(findings))
+        logger.info(
+            "Knowledge base generated: %s",
+            Path.cwd() / self._config.OUTPUT_FILENAME,
+        )
 
     def update(self, target_dir: str, run_security: Optional[bool] = None) -> None:
         root = Path(target_dir).resolve()
@@ -219,16 +217,17 @@ class readmenatorApplication:
             self._last_findings = findings
 
         content = self._factory.generator.generate(
-            nodes, edges, resolved_edges, analysis, findings=findings
+            nodes, edges, resolved_edges, analysis, findings=findings,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
         total_symbols = sum(len(n.symbols) for n in nodes)
-        print(f"[+] Knowledge base updated: {output_path}")
-        print(
-            f"[+] Files: {len(nodes)} | "
-            f"Symbols: {total_symbols} | "
-            f"Imports: {len(edges)}"
+        logger.info(
+            "Knowledge base updated: %s", output_path,
+        )
+        logger.info(
+            "Files: %d | Symbols: %d | Imports: %d",
+            len(nodes), total_symbols, len(edges),
         )
 
     def _scan_for_cache(
@@ -289,65 +288,39 @@ class readmenatorApplication:
 
     def analyze(self, target_dir: str) -> AnalysisResult:
         nodes, edges = self._scan(target_dir)
-        return self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
+        return self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
 
-    def export_json(
-        self,
-        target_dir: str,
-        output_path: Optional[str] = None,
-    ) -> str:
+    def export_json(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
-        analysis = self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
-        data = self._factory.exporter.to_json(
-            nodes, edges, self._last_resolved_edges, analysis
-        )
+        analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        data = self._factory.exporter.to_json(nodes, edges, self._last_resolved_edges, analysis)
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.json")
         Path(output_path).write_text(data, encoding="utf-8")
-        print(f"[+] Graph JSON exported: {output_path}")
+        logger.info("Graph JSON exported: %s", output_path)
         return data
 
-    def export_html(
-        self,
-        target_dir: str,
-        output_path: Optional[str] = None,
-    ) -> str:
+    def export_html(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
-        analysis = self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
-        data = self._factory.exporter.to_html(
-            nodes, edges, self._last_resolved_edges, analysis
-        )
+        analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        data = self._factory.exporter.to_html(nodes, edges, self._last_resolved_edges, analysis)
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.html")
         Path(output_path).write_text(data, encoding="utf-8")
-        print(f"[+] Graph HTML exported: {output_path}")
+        logger.info("Graph HTML exported: %s", output_path)
         return data
 
-    def export_svg(
-        self,
-        target_dir: str,
-        output_path: Optional[str] = None,
-    ) -> str:
+    def export_svg(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
-        analysis = self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
-        data = self._factory.exporter.to_svg(
-            nodes, edges, self._last_resolved_edges, analysis
-        )
+        analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        data = self._factory.exporter.to_svg(nodes, edges, self._last_resolved_edges, analysis)
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.svg")
         Path(output_path).write_text(data, encoding="utf-8")
-        print(f"[+] Graph SVG exported: {output_path}")
+        logger.info("Graph SVG exported: %s", output_path)
         return data
 
     def export(self, target_dir: str) -> None:
@@ -355,46 +328,29 @@ class readmenatorApplication:
         self.export_html(target_dir)
         self.export_svg(target_dir)
 
-    def export_graphml(
-        self,
-        target_dir: str,
-        output_path: Optional[str] = None,
-    ) -> str:
+    def export_graphml(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
-        analysis = self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
-        data = self._factory.exporter.to_graphml(
-            nodes, edges, self._last_resolved_edges, analysis
-        )
+        analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        data = self._factory.exporter.to_graphml(nodes, edges, self._last_resolved_edges, analysis)
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.graphml")
         Path(output_path).write_text(data, encoding="utf-8")
-        print(f"[+] GraphML exported: {output_path}")
+        logger.info("GraphML exported: %s", output_path)
         return data
 
-    def export_obsidian(
-        self,
-        target_dir: str,
-        output_dir: Optional[str] = None,
-    ) -> int:
+    def export_obsidian(self, target_dir: str, output_dir: Optional[str] = None) -> int:
         nodes, edges = self._scan(target_dir)
-        analysis = self._factory.analyzer.analyze(
-            nodes, edges, self._last_resolved_edges
-        )
+        analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
         if output_dir is None:
             root = Path(target_dir).resolve()
             output_dir = str(root / "obsidian")
-        written = self._factory.exporter.to_obsidian(
-            nodes, edges, output_dir, analysis
-        )
-        print(f"[+] Obsidian vault: {written} notes in {output_dir}")
+        written = self._factory.exporter.to_obsidian(nodes, edges, output_dir, analysis)
+        logger.info("Obsidian vault: %d notes in %s", written, output_dir)
         return written
 
     def watch(self, target_dir: str) -> None:
         from readmenator._watcher import DirectoryWatcher
-
         root = str(Path(target_dir).resolve())
 
         def on_change() -> None:
@@ -407,66 +363,55 @@ class readmenatorApplication:
         root = Path(target_dir).resolve()
         findings = self._factory.security.scan(root)
         self._last_findings = findings
-        print(self._factory.security.summary(findings))
+        logger.info(self._factory.security.summary(findings))
         return findings
 
     def audit_deep(self, target_dir: str) -> AnalysisResultV2:
         nodes, edges, content_map = self._scan_with_content(target_dir)
         resolved_edges = self._last_resolved_edges
-        layers = LayerDetector(self._config).detect(nodes, edges)
-        result = self._deep_runner.run(
-            nodes, edges, resolved_edges, layers, content_map
-        )
+        layers = LayerDetector().detect(nodes, edges)
+        result = self._deep_runner.run(nodes, edges, resolved_edges, layers, content_map)
         if result.taint:
-            print(f"[+] Taint paths: {len(result.taint.paths)}")
+            logger.info("Taint paths: %d", len(result.taint.paths))
         if result.cycles:
-            print(f"[+] Dependency cycles: {len(result.cycles)}")
+            logger.info("Dependency cycles: %d", len(result.cycles))
         if result.hotspots:
-            print(
-                f"[+] Top hotspot: {result.hotspots[0].file_id if result.hotspots else 'none'}"
+            logger.info(
+                "Top hotspot: %s",
+                result.hotspots[0].file_id if result.hotspots else "none",
             )
         if result.layer_violations:
-            print(f"[+] Layer violations: {len(result.layer_violations)}")
+            logger.info("Layer violations: %d", len(result.layer_violations))
         if result.suggested_rules:
-            print(f"[+] Suggested rules: {len(result.suggested_rules)}")
+            logger.info("Suggested rules: %d", len(result.suggested_rules))
         return result
 
-    def export_sarif(
-        self,
-        target_dir: str,
-        output_path: Optional[str] = None,
-    ) -> str:
+    def export_sarif(self, target_dir: str, output_path: Optional[str] = None) -> str:
         root = Path(target_dir).resolve()
         findings = self._factory.security.scan(root)
         if output_path is None:
             output_path = str(root / self._config.SARIF_OUTPUT)
         data = self._factory.sarif.export(findings, root.name)
         Path(output_path).write_text(data, encoding="utf-8")
-        print(f"[+] SARIF exported: {output_path}")
+        logger.info("SARIF exported: %s", output_path)
         return data
 
-    def export_rules(
-        self,
-        target_dir: str,
-        output_dir: Optional[str] = None,
-    ) -> int:
+    def export_rules(self, target_dir: str, output_dir: Optional[str] = None) -> int:
         root = Path(target_dir).resolve()
         nodes, edges, content_map = self._scan_with_content(target_dir)
         if output_dir is None:
             output_dir = str(root / self._config.RULE_GEN_OUTPUT_DIR)
         rules = self._factory.rule_gen.generate(nodes, content_map)
         written = self._factory.rule_gen.write_rules(rules, output_dir)
-        print(f"[+] Rules exported: {written} files to {output_dir}")
+        logger.info("Rules exported: %d files to %s", written, output_dir)
         return written
 
     def detect_layers(self, target_dir: str) -> dict:
         nodes, edges = self._scan(target_dir)
-        detector = LayerDetector(self._config)
+        detector = LayerDetector()
         layers = detector.detect(nodes, edges)
         summary = detector.layer_summary(layers)
-        print("[+] Layer detection complete:")
-        for layer, count in sorted(
-            summary.items(), key=lambda x: x[1], reverse=True
-        ):
-            print(f"    {layer}: {count} files")
+        logger.info("Layer detection complete:")
+        for layer, count in sorted(summary.items(), key=lambda x: x[1], reverse=True):
+            logger.info("  %s: %d files", layer, count)
         return layers

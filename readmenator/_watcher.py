@@ -8,11 +8,14 @@ configurable interval to avoid external dependencies.
 from __future__ import annotations
 
 import hashlib
+import logging
 import time
 from pathlib import Path
-from typing import Callable, Dict, Optional, Set
+from typing import Callable, Optional, Set
 
 from readmenator._config import Config
+
+logger = logging.getLogger(__name__)
 
 
 class DirectoryWatcher:
@@ -78,18 +81,18 @@ class DirectoryWatcher:
         """Start watching the directory (blocking)."""
         self._running = True
         self._last_hash = self._compute_snapshot()
-        print(f"[readmenator] Watching {self._root} for changes...")
+        logger.info("Watching %s for changes...", self._root)
         try:
             while self._running:
                 time.sleep(self._interval)
                 current_hash = self._compute_snapshot()
                 if current_hash and current_hash != self._last_hash:
-                    print("[readmenator] Changes detected, rebuilding...")
+                    logger.info("Changes detected, rebuilding...")
                     self._last_hash = current_hash
                     self._callback()
-                    print("[readmenator] Rebuild complete. Watching...")
+                    logger.info("Rebuild complete. Watching...")
         except KeyboardInterrupt:
-            print("\n[readmenator] Watch stopped.")
+            logger.info("Watch stopped.")
 
     def stop(self) -> None:
         """Stop watching."""

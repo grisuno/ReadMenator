@@ -4,7 +4,6 @@ import hashlib
 import json
 from typing import Dict, List, Optional
 
-from readmenator._config import Config
 from readmenator._models import AnalysisResult, Edge, Node, Symbol
 
 
@@ -19,8 +18,8 @@ class CodePropertyGraph:
 
     CPG_CONTEXT = "https://readmenator.dev/cpg/v1"
 
-    def __init__(self, config: Config) -> None:
-        self._config = config
+    def __init__(self, privacy_mode: bool = False) -> None:
+        self._privacy_mode = privacy_mode
 
     def generate(
         self,
@@ -46,7 +45,7 @@ class CodePropertyGraph:
                 "kind": node.kind,
                 "language": node.language,
             }
-            if node.doc and not self._config.PRIVACY_MODE:
+            if node.doc and not self._privacy_mode:
                 cpg_node["doc"] = node.doc
             content_hash = self._compute_node_hash(node)
             cpg_node["sha256"] = content_hash
@@ -118,7 +117,7 @@ class CodePropertyGraph:
             }
             if sym.signature:
                 entry["signature"] = sym.signature
-            if sym.doc and not self._config.PRIVACY_MODE:
+            if sym.doc and not self._privacy_mode:
                 entry["doc"] = sym.doc
             symbols.append(entry)
         return symbols

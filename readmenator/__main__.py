@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import logging
 import sys
 import unittest
 from pathlib import Path
 
 from readmenator._app import readmenatorApplication
+
+logger = logging.getLogger(__name__)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -36,77 +39,20 @@ def build_parser() -> argparse.ArgumentParser:
             "  --test                  Run the test suite\n"
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
             "  --sarif                 Generate SARIF audit file\n"
-            "\n"
-            "Examples:\n"
-            "  python -m readmenator /path/to/project\n"
-            "  python -m readmenator /path/to/project explain ClassName\n"
-            "  python -m readmenator . query \"What classes handle HTTP?\"\n"
-            "  python -m readmenator . --export-all\n"
-            "  python -m readmenator /path/to/project --json --sarif\n"
-            "  python -m readmenator /path/to/project --privacy\n"
         ),
     )
-    parser.add_argument(
-        "target",
-        nargs="?",
-        default=".",
-        help="Target directory to analyze (default: current directory)",
-    )
-    parser.add_argument(
-        "--rebuild",
-        action="store_true",
-        help="Force regeneration of KNOWLEDGE_BASE.md",
-    )
-    parser.add_argument(
-        "--test",
-        action="store_true",
-        help="Run the built-in test suite",
-    )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="Export graph.json",
-    )
-    parser.add_argument(
-        "--html",
-        action="store_true",
-        help="Export graph.html (interactive visualization)",
-    )
-    parser.add_argument(
-        "--svg",
-        action="store_true",
-        help="Export graph.svg (static visualization)",
-    )
-    parser.add_argument(
-        "--export-all",
-        action="store_true",
-        help="Export all formats (JSON + HTML + SVG)",
-    )
-    parser.add_argument(
-        "--graphml",
-        action="store_true",
-        help="Export graph.graphml (Gephi/yEd)",
-    )
-    parser.add_argument(
-        "--no-analysis",
-        action="store_true",
-        help="Skip community detection and graph analysis",
-    )
-    parser.add_argument(
-        "--audit",
-        action="store_true",
-        help="Run static security analysis and include findings in output",
-    )
-    parser.add_argument(
-        "--privacy",
-        action="store_true",
-        help="Privacy mode: strip source snippets and docstrings from output",
-    )
-    parser.add_argument(
-        "--sarif",
-        action="store_true",
-        help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md",
-    )
+    parser.add_argument("target", nargs="?", default=".", help="Target directory to analyze (default: current directory)")
+    parser.add_argument("--rebuild", action="store_true", help="Force regeneration of KNOWLEDGE_BASE.md")
+    parser.add_argument("--test", action="store_true", help="Run the built-in test suite")
+    parser.add_argument("--json", action="store_true", help="Export graph.json")
+    parser.add_argument("--html", action="store_true", help="Export graph.html (interactive visualization)")
+    parser.add_argument("--svg", action="store_true", help="Export graph.svg (static visualization)")
+    parser.add_argument("--export-all", action="store_true", help="Export all formats (JSON + HTML + SVG)")
+    parser.add_argument("--graphml", action="store_true", help="Export graph.graphml (Gephi/yEd)")
+    parser.add_argument("--no-analysis", action="store_true", help="Skip community detection and graph analysis")
+    parser.add_argument("--audit", action="store_true", help="Run static security analysis and include findings in output")
+    parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
+    parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
     return parser
 
 
@@ -121,18 +67,23 @@ def _run_tests() -> None:
         result = runner.run(suite)
         sys.exit(0 if result.wasSuccessful() else 1)
     else:
-        print("No tests directory found.", file=sys.stderr)
+        logger.error("No tests directory found.")
         sys.exit(1)
 
 
 def main() -> None:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(message)s",
+        stream=sys.stdout,
+    )
+
     if "--test" in sys.argv:
         _run_tests()
         return
 
     has_export_flags = any(
-        f in sys.argv
-        for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
+        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
     )
 
     if len(sys.argv) > 2 and sys.argv[1] != "--rebuild" and not sys.argv[1].startswith("-"):
@@ -176,23 +127,22 @@ def main() -> None:
             return
         elif command == "analyze":
             result = app.analyze(target)
-            print(f"Communities: {len(result.communities)}")
-            print(f"God nodes: {len(result.god_nodes)}")
-            print(f"Surprising connections: {len(result.surprising_connections)}")
-            print("Suggested questions:")
+            logger.info("Communities: %d", len(result.communities))
+            logger.info("God nodes: %d", len(result.god_nodes))
+            logger.info("Surprising connections: %d", len(result.surprising_connections))
             for q in result.suggested_questions:
-                print(f"  - {q}")
+                logger.info("  - %s", q)
             return
         elif command == "audit":
             app.audit(target)
             return
         elif command == "audit-deep":
             result = app.audit_deep(target)
-            print(f"Taint paths: {len(result.taint.paths) if result.taint else 0}")
-            print(f"Hotspots: {len(result.hotspots)}")
-            print(f"Cycles: {len(result.cycles)}")
-            print(f"Layer violations: {len(result.layer_violations)}")
-            print(f"Suggested rules: {len(result.suggested_rules)}")
+            logger.info("Taint paths: %d", len(result.taint.paths) if result.taint else 0)
+            logger.info("Hotspots: %d", len(result.hotspots))
+            logger.info("Cycles: %d", len(result.cycles))
+            logger.info("Layer violations: %d", len(result.layer_violations))
+            logger.info("Suggested rules: %d", len(result.suggested_rules))
             return
         elif command == "export-sarif":
             app.export_sarif(target)
@@ -206,7 +156,7 @@ def main() -> None:
         elif command.startswith("--"):
             pass
         else:
-            print(f"Unknown command: {command}", file=sys.stderr)
+            logger.error("Unknown command: %s", command)
             sys.exit(1)
 
     if has_export_flags:
@@ -235,35 +185,18 @@ def main() -> None:
     app = readmenatorApplication()
     if args.privacy:
         from readmenator._config import Config
-        app = readmenatorApplication(
-            Config(
-                PRIVACY_MODE=True,
-                SARIF_ENABLED=args.sarif,
-                SECURITY_ENABLED=args.audit,
-            )
-        )
+        app = readmenatorApplication(Config(PRIVACY_MODE=True, SARIF_ENABLED=args.sarif, SECURITY_ENABLED=args.audit))
     elif args.sarif:
         from readmenator._config import Config
-        app = readmenatorApplication(
-            Config(SARIF_ENABLED=True, SECURITY_ENABLED=args.audit)
-        )
+        app = readmenatorApplication(Config(SARIF_ENABLED=True, SECURITY_ENABLED=args.audit))
 
     output_path = Path(target) / "KNOWLEDGE_BASE.md"
 
     if args.rebuild or not output_path.exists():
-        app.run(
-            target,
-            run_analysis=not args.no_analysis,
-            run_security=args.audit,
-        )
+        app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
     else:
         result = app.summary(target)
         print(result)
-
-    print("\nRun with --rebuild to regenerate or use query/explain/path subcommands.")
-    print("Use --json, --html, --svg, or --export-all for graph exports.")
-    print("Use --audit for security scan or --sarif for SARIF output.")
-    print("Use --privacy to strip source snippets from output.")
 
 
 if __name__ == "__main__":

@@ -3,17 +3,15 @@ from __future__ import annotations
 import json
 from typing import Dict, List
 
-from readmenator._config import Config
 from readmenator._models import SecurityFinding
 
 
 class SarifExporter:
-    """Exports security findings to the SARIF (Static Analysis Results
-    Interchange Format) standard.
+    """Exports security findings to the SARIF standard format.
 
     SARIF is an OASIS standard format for static analysis tool output.
-    This exporter produces SARIF v2.1.0 JSON that is compatible with
-    GitHub Code Scanning, VS Code SARIF viewer, and other SARIF consumers.
+    This exporter produces SARIF v2.1.0 JSON compatible with GitHub
+    Code Scanning, VS Code SARIF viewer, and other SARIF consumers.
     """
 
     SARIF_VERSION = "2.1.0"
@@ -27,8 +25,8 @@ class SarifExporter:
         "info": "note",
     }
 
-    def __init__(self, config: Config) -> None:
-        self._config = config
+    def __init__(self, privacy_mode: bool = False) -> None:
+        self._privacy_mode = privacy_mode
 
     def export(
         self,
@@ -127,7 +125,7 @@ class SarifExporter:
             ],
         }
 
-        if finding.snippet and not self._config.PRIVACY_MODE:
+        if finding.snippet and not self._privacy_mode:
             result["locations"][0]["physicalLocation"]["region"]["snippet"] = {
                 "text": finding.snippet,
             }

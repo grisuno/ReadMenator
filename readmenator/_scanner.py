@@ -7,13 +7,16 @@ flat list of Node and Edge objects that form the knowledge graph.
 
 from __future__ import annotations
 
+import logging
 import re
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
 from readmenator._models import Edge, Node, Symbol
-from readmenator._parsers import create_parser
+from readmenator.parsers import create_parser
+
+logger = logging.getLogger(__name__)
 
 
 class PolyglotScanner:
@@ -193,7 +196,7 @@ class PolyglotScanner:
         """
         batch = self._config.PROGRESS_REPORT_BATCH
         if count > 0 and count % batch == 0:
-            print(f"[readmenator] Scanned {count} files...", flush=True)
+            logger.info("Scanned %d files...", count)
 
     def scan(self, root: Path) -> Tuple[List[Node], List[Edge]]:
         """Walk *root* recursively and produce (nodes, edges) for the graph.

@@ -8,7 +8,13 @@ readmenator/
   __main__.py       - CLI entry point with argument dispatch
   _config.py        - Immutable Config dataclass (all settings, no magic numbers)
   _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult, AnalysisResultV2, TaintPath, etc.
-  _parsers.py       - 19 language parsers (Strategy pattern) + ParserFactory
+  parsers/          - Language parsers package (Strategy pattern, 1 file per language)
+    __init__.py     - ParserFactory (create_parser) + extension registry
+    _base.py        - LanguageParser base class with docstring/signature extraction
+    _c.py, _python.py, _go.py, _rust.py, _javascript.py, _java.py,
+    _csharp.py, _shell.py, _php.py, _dart.py, _gdscript.py, _nim.py,
+    _assembly.py, _ruby.py, _swift.py, _kotlin.py, _scala.py, _lua.py,
+    _elixir.py      - 19 per-language parsers
   _scanner.py       - Secure directory traversal, file-level docs, call/inherit edges, gitignore, privacy mode
   _resolver.py      - Import path resolver (raw import strings -> project file paths)
   _mermaid.py       - Mermaid graph renderer with community subgraphs and internal edges
@@ -93,9 +99,9 @@ tests/
 
 ### Parsers Contract
 - LanguageParser base with _extract_docstring and _extract_signature
-- 13 parser subclasses, one per language
+- 19 parser subclasses, one per language, in `parsers/` package
 - Python uses native ast module; all others use regex
-- ParserFactory maps extension to parser class
+- ParserFactory (create_parser) maps extension to parser class (case-insensitive)
 - All parsers populate: self.symbols (List[Symbol]), self.imports (List[str])
 - Reserved keywords filtered out (if, for, while, switch, catch)
 
@@ -247,9 +253,10 @@ tests/
 
 ### Layer Detection Contract
 - detect(nodes, edges): maps each file to an architectural layer
+- No Config dependency (static patterns only)
 - 5-layer model: presentation, business_logic, data_access, infrastructure, testing
 - Detection via path patterns, naming conventions, and imported frameworks
-- layer_summary: counts files per layer
+- layer_summary: static method, counts files per layer
 
 ### Watcher Contract
 - Polling-based filesystem monitor (no external deps)
@@ -284,6 +291,12 @@ tests/
 - No external API calls in any analysis or export module
 - Pattern-based security analyzer with 18 language rule sets
 - Privacy mode strips source snippets from output
+
+### Structured Output
+- All progress/report messages use `logging.getLogger(__name__)` (never `print()`)
+- User-facing output (query results, summaries) uses `print()` to stdout
+- Logging format configured in `__main__.py` via `logging.basicConfig`
+- Each module gets its own logger via `logger = logging.getLogger(__name__)`
 
 ### Testing (SDD + TDD + BDD)
 - Tests named as `test_<contract>_<behavior>` (BDD style)

@@ -9,7 +9,7 @@ from __future__ import annotations
 import unittest
 
 from readmenator._config import Config
-from readmenator._parsers import create_parser
+from readmenator.parsers import create_parser
 
 
 class TestRubyParserContract(unittest.TestCase):

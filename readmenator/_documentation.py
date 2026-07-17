@@ -34,8 +34,16 @@ class DocumentationGenerator:
 
     def __init__(self, config: Config) -> None:
         self._config = config
-        self._mermaid = MermaidRenderer(config)
-        self._cpg = CodePropertyGraph(config)
+        self._mermaid = MermaidRenderer(
+            max_nodes=config.MERMAID_MAX_NODES,
+            max_symbols_per_file=config.MERMAID_MAX_SYMBOLS_PER_FILE,
+            module_style=config.MERMAID_MODULE_STYLE,
+            class_style=config.MERMAID_CLASS_STYLE,
+            function_style=config.MERMAID_FUNCTION_STYLE,
+            external_style=config.MERMAID_EXTERNAL_STYLE,
+            internal_edge_style=config.MERMAID_INTERNAL_EDGE_STYLE,
+        )
+        self._cpg = CodePropertyGraph(privacy_mode=config.PRIVACY_MODE)
         self._plural_map: Dict[str, str] = dict(config.SYMBOL_TYPE_PLURALS)
 
     def generate(

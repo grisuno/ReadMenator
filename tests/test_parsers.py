@@ -1,7 +1,7 @@
 import unittest
 
 from readmenator._config import Config
-from readmenator._parsers import (
+from readmenator.parsers import (
     AssemblyParser,
     CParser,
     CSharpParser,

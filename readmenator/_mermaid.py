@@ -11,7 +11,6 @@ from __future__ import annotations
 import re
 from typing import Dict, List, Optional, Set, Tuple
 
-from readmenator._config import Config
 from readmenator._models import AnalysisResult, Edge, Node
 
 
@@ -19,20 +18,28 @@ class MermaidRenderer:
     """Renders a knowledge graph to Mermaid JS flowchart syntax.
 
     Nodes are ordered by import count and symbol richness; the top
-    ``MERMAID_MAX_NODES`` entries are included. External dependencies
-    (import targets not matching any scanned file) appear as dashed
-    boxes. Internal import edges between project files are rendered
-    as solid arrows. Community subgraphs group related files when
-    analysis results are available.
+    ``max_nodes`` entries are included. External dependencies appear
+    as dashed boxes. Internal import edges are solid arrows.
+    Community subgraphs group related files when analysis is available.
     """
 
-    def __init__(self, config: Config) -> None:
-        """Initialise with configuration for style tokens and node limits.
-
-        Args:
-            config: Provides MERMAID_* style strings and MERMAID_MAX_NODES.
-        """
-        self._config = config
+    def __init__(
+        self,
+        max_nodes: int = 300,
+        max_symbols_per_file: int = 5,
+        module_style: str = "fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff",
+        class_style: str = "fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff",
+        function_style: str = "fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa",
+        external_style: str = "fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa",
+        internal_edge_style: str = "stroke:#88aaff,stroke-width:1px",
+    ) -> None:
+        self._max_nodes = max_nodes
+        self._max_symbols = max_symbols_per_file
+        self._module_style = module_style
+        self._class_style = class_style
+        self._function_style = function_style
+        self._external_style = external_style
+        self._internal_edge_style = internal_edge_style
 
     @staticmethod
     def _sanitize_id(node_id: str) -> str:
@@ -64,17 +71,17 @@ class MermaidRenderer:
             Tuple of (Mermaid source string, is_truncated bool).
         """
         lines: List[str] = ["graph TD"]
-        lines.append(f"    classDef mod {self._config.MERMAID_MODULE_STYLE};")
-        lines.append(f"    classDef cls {self._config.MERMAID_CLASS_STYLE};")
-        lines.append(f"    classDef fn {self._config.MERMAID_FUNCTION_STYLE};")
-        lines.append(f"    classDef ext {self._config.MERMAID_EXTERNAL_STYLE};")
+        lines.append(f"    classDef mod {self._module_style};")
+        lines.append(f"    classDef cls {self._class_style};")
+        lines.append(f"    classDef fn {self._function_style};")
+        lines.append(f"    classDef ext {self._external_style};")
 
         seen_ids: Set[str] = set()
         node_count = 0
         symbol_count = 0
         is_truncated = False
-        max_nodes = self._config.MERMAID_MAX_NODES
-        max_symbols = self._config.MERMAID_MAX_SYMBOLS_PER_FILE
+        max_nodes = self._max_nodes
+        max_symbols = self._max_symbols
 
         import_counts: Dict[str, int] = {node.node_id: 0 for node in nodes}
         for edge in edges:

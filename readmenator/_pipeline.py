@@ -105,19 +105,19 @@ class AnalyzerFactory:
     @property
     def sarif(self) -> SarifExporter:
         if self._sarif is None:
-            self._sarif = SarifExporter(self._config)
+            self._sarif = SarifExporter(privacy_mode=self._config.PRIVACY_MODE)
         return self._sarif
 
     @property
     def cpg(self) -> CodePropertyGraph:
         if self._cpg is None:
-            self._cpg = CodePropertyGraph(self._config)
+            self._cpg = CodePropertyGraph(privacy_mode=self._config.PRIVACY_MODE)
         return self._cpg
 
     @property
     def layer_detector(self) -> LayerDetector:
         if self._layer_detector is None:
-            self._layer_detector = LayerDetector(self._config)
+            self._layer_detector = LayerDetector()
         return self._layer_detector
 
 
