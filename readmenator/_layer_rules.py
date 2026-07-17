@@ -16,11 +16,14 @@ class LayerRuleEngine:
     """
 
     FORBIDDEN_EDGES: Set[Tuple[str, str]] = {
-        ("testing", "infrastructure"),
         ("testing", "presentation"),
-        ("testing", "data_access"),
-        ("testing", "business_logic"),
         ("presentation", "data_access"),
+    }
+
+    ALLOWED_EDGES: Set[Tuple[str, str]] = {
+        ("testing", "business_logic"),
+        ("testing", "infrastructure"),
+        ("testing", "data_access"),
     }
 
     WARN_EDGES: Set[Tuple[str, str]] = {
@@ -69,6 +72,9 @@ class LayerRuleEngine:
                 continue
 
             pair = (source_layer, target_layer)
+
+            if pair in self.ALLOWED_EDGES:
+                continue
 
             if pair in self.FORBIDDEN_EDGES:
                 violations.append(

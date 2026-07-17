@@ -26,7 +26,8 @@ readmenator/
   _hotspots.py      - Hotspot detection, cycle analysis, change impact analysis
   _rule_gen.py      - Suggested linting/security rule generation (Semgrep YAML)
   _sarif.py         - SARIF v2.1.0 output generator for security findings
-  _app.py           - Application orchestrator with all analysis modules
+  _pipeline.py      - AnalyzerFactory (lazy init) + DeepAnalysisRunner (decoupled v2 analysis)
+  _app.py           - Application orchestrator (thin facade over AnalyzerFactory)
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
@@ -215,11 +216,24 @@ tests/
 
 ### Layer Rule Engine Contract
 - detect_violations(nodes, edges, resolved_edges, layers): returns List[LayerViolation]
-- Forbidden layer edges: testing -> any other layer, presentation -> data_access
+- Forbidden layer edges: testing -> presentation, presentation -> data_access
+- Allowed edges: testing -> business_logic, testing -> infrastructure, testing -> data_access
 - Warning edges: data_access -> presentation, infrastructure -> presentation
 - Utility layer is ignored (no violations from/to utility)
 - violation_summary(violations): counts by severity
 - Strict mode enforces warning edges as violations (LAYER_VIOLATION_STRICT_MODE)
+
+### AnalyzerFactory Contract (pipeline)
+- Lazy property-based initialization of all analyzer components
+- Each component is created on first access and cached
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector
+- Decouples the application orchestrator from concrete instantiation
+
+### DeepAnalysisRunner Contract (pipeline)
+- run(nodes, edges, resolved_edges, layers, content_map): returns AnalysisResultV2
+- Runs all v2 analyses as a coordinated batch
+- Respects individual config enable flags (TAINT_ENABLED, HOTSPOTS_ENABLED, etc.)
+- Isolated from the main app to reduce coupling in _app.py
 
 ### Security Analyzer Contract
 - Pattern-based static analysis (regex, zero deps)

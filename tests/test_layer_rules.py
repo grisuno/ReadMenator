@@ -36,27 +36,38 @@ class TestLayerRuleEngineContract(unittest.TestCase):
     def test_forbidden_edge_detected(self) -> None:
         nodes = [self._make_node("a.py", "a.py"), self._make_node("b.py", "b.py")]
         edges = [Edge(source="a.py", target="b.py", relation="imports")]
-        layers = {"a.py": "testing", "b.py": "infrastructure"}
+        layers = {"a.py": "testing", "b.py": "presentation"}
         violations = self.engine.detect_violations(nodes, edges, layers=layers)
         self.assertEqual(len(violations), 1)
         self.assertEqual(violations[0].severity, "strict")
         self.assertEqual(violations[0].source_layer, "testing")
-        self.assertEqual(violations[0].target_layer, "infrastructure")
+        self.assertEqual(violations[0].target_layer, "presentation")
+
+    def test_allowed_testing_edges_no_violation(self) -> None:
+        for target_layer in ("business_logic", "infrastructure", "data_access"):
+            nodes = [self._make_node("test.py", "test.py"), self._make_node("dep.py", "dep.py")]
+            edges = [Edge(source="test.py", target="dep.py", relation="imports")]
+            layers = {"test.py": "testing", "dep.py": target_layer}
+            violations = self.engine.detect_violations(nodes, edges, layers=layers)
+            self.assertEqual(
+                len(violations), 0,
+                f"testing -> {target_layer} should be allowed",
+            )
 
     def test_multiple_violations(self) -> None:
         nodes = [
-            self._make_node("test.py", "test.py"),
-            self._make_node("db.py", "db.py"),
             self._make_node("ui.py", "ui.py"),
+            self._make_node("db.py", "db.py"),
+            self._make_node("test.py", "test.py"),
         ]
         edges = [
-            Edge(source="test.py", target="db.py", relation="imports"),
+            Edge(source="ui.py", target="db.py", relation="imports"),
             Edge(source="test.py", target="ui.py", relation="imports"),
         ]
         layers = {
-            "test.py": "testing",
-            "db.py": "data_access",
             "ui.py": "presentation",
+            "db.py": "data_access",
+            "test.py": "testing",
         }
         violations = self.engine.detect_violations(nodes, edges, layers=layers)
         self.assertEqual(len(violations), 2)
@@ -73,15 +84,17 @@ class TestLayerRuleEngineContract(unittest.TestCase):
             self._make_node("a.py", "a.py"),
             self._make_node("b.py", "b.py"),
             self._make_node("c.py", "c.py"),
+            self._make_node("d.py", "d.py"),
         ]
         edges = [
             Edge(source="a.py", target="b.py", relation="imports"),
-            Edge(source="c.py", target="b.py", relation="imports"),
+            Edge(source="c.py", target="d.py", relation="imports"),
         ]
         layers = {
             "a.py": "testing",
-            "b.py": "infrastructure",
+            "b.py": "presentation",
             "c.py": "testing",
+            "d.py": "presentation",
         }
         violations = self.engine.detect_violations(nodes, edges, layers=layers)
         summary = self.engine.violation_summary(violations)
@@ -93,8 +106,17 @@ class TestLayerRuleEngineContract(unittest.TestCase):
         resolved = [
             Edge(source="a.py", target="b.py", relation="resolved_imports"),
         ]
-        layers = {"a.py": "testing", "b.py": "infrastructure"}
+        layers = {"a.py": "testing", "b.py": "presentation"}
         violations = self.engine.detect_violations(
             nodes, [], resolved_edges=resolved, layers=layers
         )
         self.assertEqual(len(violations), 1)
+
+    def test_presentation_to_data_access_forbidden(self) -> None:
+        nodes = [self._make_node("ui.py", "ui.py"), self._make_node("db.py", "db.py")]
+        edges = [Edge(source="ui.py", target="db.py", relation="imports")]
+        layers = {"ui.py": "presentation", "db.py": "data_access"}
+        violations = self.engine.detect_violations(nodes, edges, layers=layers)
+        self.assertEqual(len(violations), 1)
+        self.assertEqual(violations[0].source_layer, "presentation")
+        self.assertEqual(violations[0].target_layer, "data_access")
