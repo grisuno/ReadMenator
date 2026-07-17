@@ -2,11 +2,12 @@
 
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-45c9-a119-fa154d03446b" />
 
-A token-free, offline, production-grade polyglot codebase knowledge graph generator.
+
+A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer.
 
 **No LLMs. No tokens. No cloud costs.** Pure static analysis via AST + regex.
 
-ReadMenator builds production-grade codebase knowledge graphs 100% offline -- with zero LLMs, zero token costs, and absolute data privacy. Now with 19 languages, call graphs, inheritance tracking, architectural layer detection, community analysis, and 6 export formats.
+ReadMenator builds production-grade codebase knowledge graphs and architectural health reports 100% offline. Identify structural risks, security flaws, and change impact patterns instantly across 19 languages.
 
 - [https://pypi.org/project/readmenator/](https://pypi.org/project/readmenator/)
 
@@ -83,11 +84,21 @@ python -m readmenator /path/to/project analyze          # community + god nodes 
 python -m readmenator /path/to/project layers           # architectural layer detection
 ```
 
+## Advanced Architectural Insights (Out of the Box)
+
+ReadMenator goes beyond simple visualization. It runs complex graph algorithms locally to give you deep insights into your code's health:
+
+*   **Change Impact Analysis:** Know exactly which files are highly coupled. ReadMenator calculates direct and transitive dependents so you can predict what will break before you refactor.
+*   **Hotspot Detection:** Automatically ranks files by combining cognitive complexity (symbol richness) and graph centrality to pinpoint technical debt.
+*   **Taint Propagation Mapping:** Traces how risky imports (like `subprocess` or OS-level sinks) propagate transitively through your codebase dependency graph.
+*   **Community & Layer Detection:** Automatically groups files into structural layers (utility, business logic, infrastructure) and highly cohesive communities using label propagation.
+
 ### Automation
 
 ```bash
 python -m readmenator /path/to/project update           # incremental (SHA256 cache)
 python -m readmenator /path/to/project watch            # auto-rebuild on file changes
+python -m readmenator /path/to/project analyze          # Analyze the proyect
 ```
 
 ### Run tests
