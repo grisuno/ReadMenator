@@ -8,10 +8,11 @@ the scanned nodes, edges, and optional analysis results.
 from __future__ import annotations
 
 import json
+import math
 import os
 from pathlib import Path
 from textwrap import dedent
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
 from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
@@ -562,8 +563,6 @@ network.on("click", function(params) {{
         between all nodes and attraction along edges. Runs a fixed
         number of iterations for determinism.
         """
-        import math
-
         positions: Dict[str, List[float]] = {}
         file_ids = [n.node_id for n in nodes]
         for i, fid in enumerate(file_ids):

@@ -68,7 +68,7 @@ class LayerDetector:
         "unittest": "testing",
     }
 
-    def __init__(self, config):
+    def __init__(self, config: Config) -> None:
         """Initialise with application configuration."""
         self._config = config
 

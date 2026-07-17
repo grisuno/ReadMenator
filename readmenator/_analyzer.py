@@ -10,7 +10,7 @@ token-free.
 from __future__ import annotations
 
 import random
-from collections import defaultdict
+from collections import defaultdict, deque
 from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
@@ -293,7 +293,6 @@ class GraphAnalyzer:
         community_map: Dict[str, int],
     ) -> Tuple[Set[int], Optional[int]]:
         """Find the shortest path and communities traversed."""
-        from collections import deque
         visited: Set[str] = {source}
         queue: deque = deque([(source, 0, set())])
         src_comm = community_map.get(source, -1)

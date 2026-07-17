@@ -112,3 +112,43 @@ class Config:
     SECURITY_SEVERITY_THRESHOLD: str = "medium"
 
     SECURITY_OUTPUT: str = "KNOWLEDGE_BASE.md"
+
+    CPG_ENABLED: bool = True
+
+    CPG_EMBED_IN_KNOWLEDGE_BASE: bool = True
+
+    TAINT_ENABLED: bool = True
+
+    TAINT_MAX_DEPTH: int = 10
+
+    TAINT_MAX_PATHS: int = 20
+
+    SARIF_ENABLED: bool = False
+
+    SARIF_OUTPUT: str = "readmenator_audit.sarif"
+
+    HOTSPOTS_ENABLED: bool = True
+
+    HOTSPOT_COMPLEXITY_WEIGHT: float = 0.4
+
+    HOTSPOT_CENTRALITY_WEIGHT: float = 0.6
+
+    CYCLE_DETECTION_ENABLED: bool = True
+
+    CHANGE_IMPACT_MAX_DEPTH: int = 10
+
+    CHANGE_IMPACT_MAX_FILES: int = 50
+
+    RULE_GEN_ENABLED: bool = True
+
+    RULE_GEN_MIN_PATTERN_COUNT: int = 3
+
+    RULE_GEN_OUTPUT_DIR: str = "readmenator-rules"
+
+    LAYER_VIOLATION_ENABLED: bool = True
+
+    LAYER_VIOLATION_STRICT_MODE: bool = False
+
+    PRIVACY_MODE: bool = False
+
+    GITIGNORE_AWARE: bool = True

@@ -1,11 +1,3 @@
-"""CLI entry point for readmenator.
-
-Parses command-line arguments, dispatches to the appropriate subcommand
-(query, explain, path, summary, update, export, analyze, --rebuild,
---test, --json, --html, --svg, --export-all), and manages the
-target directory analysis lifecycle.
-"""
-
 from __future__ import annotations
 
 import argparse
@@ -17,7 +9,6 @@ from readmenator._app import readmenatorApplication
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Construct the argument parser with subcommand help and examples."""
     parser = argparse.ArgumentParser(
         description="ReadMenator: Zero-token polyglot codebase knowledge graph generator.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -31,6 +22,9 @@ def build_parser() -> argparse.ArgumentParser:
             "  update                  Incremental rebuild (cache-based)\n"
             "  export                  Export graph (JSON + HTML + SVG)\n"
             "  audit                   Run static security analysis\n"
+            "  audit-deep              Run deep analysis (taint, hotspots, cycles)\n"
+            "  export-sarif            Export security findings as SARIF\n"
+            "  export-rules            Export suggested linting rules as Semgrep YAML\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -40,13 +34,16 @@ def build_parser() -> argparse.ArgumentParser:
             "  --svg                   Export graph.svg (static)\n"
             "  --export-all            Export all formats (JSON + HTML + SVG)\n"
             "  --test                  Run the test suite\n"
+            "  --privacy               Privacy mode (strip snippets and docstrings)\n"
+            "  --sarif                 Generate SARIF audit file\n"
             "\n"
             "Examples:\n"
             "  python -m readmenator /path/to/project\n"
             "  python -m readmenator /path/to/project explain ClassName\n"
             "  python -m readmenator . query \"What classes handle HTTP?\"\n"
             "  python -m readmenator . --export-all\n"
-            "  python -m readmenator /path/to/project --json\n"
+            "  python -m readmenator /path/to/project --json --sarif\n"
+            "  python -m readmenator /path/to/project --privacy\n"
         ),
     )
     parser.add_argument(
@@ -100,11 +97,20 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Run static security analysis and include findings in output",
     )
+    parser.add_argument(
+        "--privacy",
+        action="store_true",
+        help="Privacy mode: strip source snippets and docstrings from output",
+    )
+    parser.add_argument(
+        "--sarif",
+        action="store_true",
+        help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md",
+    )
     return parser
 
 
 def _run_tests() -> None:
-    """Discover and run the full test suite from the tests/ directory."""
     package_dir = Path(__file__).resolve().parent.parent
     tests_dir = package_dir / "tests"
     if tests_dir.is_dir():
@@ -120,27 +126,14 @@ def _run_tests() -> None:
 
 
 def main() -> None:
-    """Primary CLI entry point invoked by ``python -m readmenator``.
-
-    Supports direct subcommand dispatch (query, explain, path, summary,
-    update, export, analyze, --rebuild) or falls back to the argument
-    parser for the default workflow: generate or summarise
-    KNOWLEDGE_BASE.md.
-    """
     if "--test" in sys.argv:
         _run_tests()
         return
 
     has_export_flags = any(
-        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
+        f in sys.argv
+        for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
     )
-
-    positional_args = [
-        a for a in sys.argv[1:] if not a.startswith("-") and a not in {
-            "query", "explain", "path", "summary", "sum", "info",
-            "update", "export", "analyze", "audit",
-        }
-    ]
 
     if len(sys.argv) > 2 and sys.argv[1] != "--rebuild" and not sys.argv[1].startswith("-"):
         target = sys.argv[1]
@@ -193,6 +186,20 @@ def main() -> None:
         elif command == "audit":
             app.audit(target)
             return
+        elif command == "audit-deep":
+            result = app.audit_deep(target)
+            print(f"Taint paths: {len(result.taint.paths) if result.taint else 0}")
+            print(f"Hotspots: {len(result.hotspots)}")
+            print(f"Cycles: {len(result.cycles)}")
+            print(f"Layer violations: {len(result.layer_violations)}")
+            print(f"Suggested rules: {len(result.suggested_rules)}")
+            return
+        elif command == "export-sarif":
+            app.export_sarif(target)
+            return
+        elif command == "export-rules":
+            app.export_rules(target)
+            return
         elif command == "--rebuild":
             app.rebuild(target)
             return
@@ -226,16 +233,37 @@ def main() -> None:
     target = args.target
 
     app = readmenatorApplication()
+    if args.privacy:
+        from readmenator._config import Config
+        app = readmenatorApplication(
+            Config(
+                PRIVACY_MODE=True,
+                SARIF_ENABLED=args.sarif,
+                SECURITY_ENABLED=args.audit,
+            )
+        )
+    elif args.sarif:
+        from readmenator._config import Config
+        app = readmenatorApplication(
+            Config(SARIF_ENABLED=True, SECURITY_ENABLED=args.audit)
+        )
+
     output_path = Path(target) / "KNOWLEDGE_BASE.md"
 
     if args.rebuild or not output_path.exists():
-        app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
+        app.run(
+            target,
+            run_analysis=not args.no_analysis,
+            run_security=args.audit,
+        )
     else:
         result = app.summary(target)
         print(result)
 
     print("\nRun with --rebuild to regenerate or use query/explain/path subcommands.")
     print("Use --json, --html, --svg, or --export-all for graph exports.")
+    print("Use --audit for security scan or --sarif for SARIF output.")
+    print("Use --privacy to strip source snippets from output.")
 
 
 if __name__ == "__main__":

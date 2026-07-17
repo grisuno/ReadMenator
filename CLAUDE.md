@@ -7,35 +7,47 @@ readmenator/
   __init__.py       - Public API exports
   __main__.py       - CLI entry point with argument dispatch
   _config.py        - Immutable Config dataclass (all settings, no magic numbers)
-  _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult data types
+  _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult, AnalysisResultV2, TaintPath, etc.
   _parsers.py       - 19 language parsers (Strategy pattern) + ParserFactory
-  _scanner.py       - Secure directory traversal, file-level docs, call/inherit edges
+  _scanner.py       - Secure directory traversal, file-level docs, call/inherit edges, gitignore, privacy mode
   _resolver.py      - Import path resolver (raw import strings -> project file paths)
   _mermaid.py       - Mermaid graph renderer with community subgraphs and internal edges
-  _documentation.py - KNOWLEDGE_BASE.md with TOC, dashboard, layers, communities
+  _documentation.py - KNOWLEDGE_BASE.md with TOC, dashboard, layers, communities, CPG, taint, hotspots, etc.
   _query.py         - QueryEngine: query, explain, bidirectional path dependency tracing
   _analyzer.py      - Graph analysis: communities, god nodes, surprising connections
   _cache.py         - SHA256 content hash cache for incremental updates
   _exporter.py      - Export: JSON, HTML (vis.js), SVG, GraphML, Obsidian vault
   _layers.py        - Architectural layer detection (5-layer model)
+  _layer_rules.py   - Architecture violation detection engine
   _watcher.py       - Filesystem polling watcher for auto-rebuild
   _security.py      - Pattern-based static security analysis (18 language rule sets)
-  _app.py           - Application orchestrator with import resolution and analysis
+  _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
+  _taint.py         - Taint propagation analysis through import graph
+  _hotspots.py      - Hotspot detection, cycle analysis, change impact analysis
+  _rule_gen.py      - Suggested linting/security rule generation (Semgrep YAML)
+  _sarif.py         - SARIF v2.1.0 output generator for security findings
+  _app.py           - Application orchestrator with all analysis modules
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
   test_parsers.py       - 13 original parser contract tests
   test_parsers_new.py   - 6 new parser contract tests (Ruby, Swift, Kotlin, Scala, Lua, Elixir)
-  test_scanner.py       - Scanner security and behavior tests
+  test_scanner.py       - Scanner security, behavior, gitignore, privacy mode tests
   test_resolver.py      - Import resolver contract tests
   test_mermaid.py       - Mermaid rendering contract tests
-  test_documentation.py - Documentation output contract tests
+  test_documentation.py - Documentation output contract tests (all sections)
   test_query.py         - Query engine contract tests
   test_analyzer.py      - Graph analysis contract tests
   test_cache.py         - File cache contract tests
   test_exporter.py      - Graph exporter contract tests
   test_security.py      - Security analyzer contract tests (41 languages, thresholds, paths)
   test_integration.py   - End-to-end pipeline tests
+  test_cpg.py           - Code Property Graph contract tests
+  test_taint.py         - Taint analysis contract tests
+  test_hotspots.py      - Hotspot, cycle, change impact contract tests
+  test_rule_gen.py      - Rule generation contract tests
+  test_sarif.py         - SARIF export contract tests
+  test_layer_rules.py   - Layer violation detection contract tests
 ```
 
 ## Contracts
@@ -48,9 +60,18 @@ tests/
 - Graph analysis thresholds (COMMUNITY_MIN_SIZE, GOD_NODE_TOP_N, etc.)
 - Export settings (SVG_DPI, SVG_MAX_NODES, HTML_TEMPLATE_STYLE)
 - Cache directory config (CACHE_DIR)
-- Docstrings stored in full, no truncation (``DOCSTRING_MAX_LENGTH`` removed intentionally)
+- Docstrings stored in full, no truncation
 - Security audit settings (SECURITY_ENABLED, SECURITY_SEVERITY_THRESHOLD, SECURITY_OUTPUT)
 - Progress reporting batch size (PROGRESS_REPORT_BATCH)
+- CPG settings (CPG_ENABLED, CPG_EMBED_IN_KNOWLEDGE_BASE)
+- Taint analysis settings (TAINT_ENABLED, TAINT_MAX_DEPTH, TAINT_MAX_PATHS)
+- SARIF export settings (SARIF_ENABLED, SARIF_OUTPUT)
+- Hotspot settings (HOTSPOTS_ENABLED, HOTSPOT_COMPLEXITY_WEIGHT, HOTSPOT_CENTRALITY_WEIGHT)
+- Cycle detection settings (CYCLE_DETECTION_ENABLED)
+- Change impact settings (CHANGE_IMPACT_MAX_DEPTH, CHANGE_IMPACT_MAX_FILES)
+- Rule generation settings (RULE_GEN_ENABLED, RULE_GEN_MIN_PATTERN_COUNT, RULE_GEN_OUTPUT_DIR)
+- Layer violation settings (LAYER_VIOLATION_ENABLED, LAYER_VIOLATION_STRICT_MODE)
+- Privacy and gitignore settings (PRIVACY_MODE, GITIGNORE_AWARE)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -60,6 +81,14 @@ tests/
 - CommunityResult: community_id, label, file_ids, cohesion, size
 - AnalysisResult: god_nodes, communities, surprising_connections, suggested_questions
 - SecurityFinding: file_path, line, severity, rule_id, description, snippet, cwe
+- TaintPath: source_file, sink_file, path, hops, dangerous_import, severity
+- TaintAnalysisResult: paths, source_count, sink_count
+- DependencyCycle: cycle, length
+- ChangeImpact: file_id, direct_dependents, transitive_dependents, total_impact
+- HotspotResult: file_id, complexity_score, centrality_score, combined_score, symbol_count, connection_count
+- SuggestedRule: rule_id, severity, description, pattern, file_examples, match_count, language, semgrep_yaml
+- LayerViolation: source_file, source_layer, target_file, target_layer, description, severity
+- AnalysisResultV2: taint, cycles, change_impacts, hotspots, suggested_rules, layer_violations
 
 ### Parsers Contract
 - LanguageParser base with _extract_docstring and _extract_signature
@@ -79,6 +108,9 @@ tests/
 - Returns (List[Node], List[Edge])
 - Extracts file-level docstrings from header comments
 - Emits progress messages every PROGRESS_REPORT_BATCH files
+- Supports `.gitignore`-aware scanning (GITIGNORE_AWARE)
+- Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
+- scan_with_content() returns content map for rule gen, taint analysis
 
 ### Import Resolver Contract
 - Maps raw import strings (Python dots, relative paths, bare module names) to project file paths
@@ -99,13 +131,22 @@ tests/
 
 ### Documentation Generator Contract
 - Header: title + metadata line
-- Table of Contents with section links
+- Table of Contents with section links for all new sections
 - Statistics Dashboard (file counts, import fan-in/fan-out, language breakdown)
+- Architectural Layers section (auto-detected 5-layer model)
 - God Nodes section (most central files ranked by connectivity)
 - Community Analysis section (import-based groups with cohesion scores)
 - Surprising Connections section (cross-community indirect bridges)
 - Suggested Questions section (auto-generated exploration prompts)
+- Taint Propagation Map section (dangerous import propagation paths)
+- Hotspot Analysis section (files ranked by complexity + centrality)
+- Dependency Cycles section (circular dependencies)
+- Change Impact Analysis section (files sorted by transitive impact)
+- Architecture Violations section (layer rule violations)
+- Suggested Linting Rules section (auto-generated Semgrep rules)
+- Security Audit section (findings by severity, no emojis)
 - Mermaid graph in fenced code block with community subgraphs
+- Code Property Graph (CPG) block in JSON-LD format
 - Architecture Reference grouped by language
 - Each file lists its symbols by kind with correct pluralization
 - File-level docstring displayed per file
@@ -130,23 +171,55 @@ tests/
 - Community cohesion scoring (internal / total edges)
 - Community labeling from dominant directory
 
-### File Cache Contract
-- SHA256-based content hashing
-- Persistence to JSON file in CACHE_DIR
-- Change detection (find_changed)
-- Stale entry pruning (prune_deleted)
-- Batch hash computation (compute_hashes)
-- Save/load roundtrip
+### Code Property Graph Contract
+- generate(nodes, edges, resolved_edges, analysis): returns JSON-LD string
+- JSON-LD schema with @context, nodes (id, label, kind, language, sha256, symbols), edges (source, target, relation)
+- Embeddable in KNOWLEDGE_BASE.md for zero-token AI agent consumption
+- Respects PRIVACY_MODE (strips doc contents)
+- Includes SHA256 content hashes per node
+- Optional analysis metadata (god nodes, communities, surprising connections)
 
-### Graph Exporter Contract
-- to_json: GraphRAG-ready node-link JSON with optional analysis metadata
-- to_html: Standalone interactive page using vis.js (CDN, no server needed)
-- to_svg: Static SVG with spring-layout, truncation for large graphs
-- to_graphml: GraphML XML for Gephi/yEd import
-- to_obsidian: Obsidian vault with wikilinks and community hub notes
-- Community-based node coloring in HTML and SVG
-- Search/filter UI in HTML export
-- All formats embed analysis metadata when available
+### Taint Analyzer Contract
+- analyze(nodes, edges, resolved_edges): returns TaintAnalysisResult
+- Scans for known-dangerous imports per language (subprocess, eval, exec, etc.)
+- Propagates taint through resolved import graph (BFS)
+- Generates self-paths for direct dangerous imports (hops=0)
+- Configurable max propagation depth (TAINT_MAX_DEPTH)
+- Configurable max path count (TAINT_MAX_PATHS)
+- Per-language dangerous import maps
+
+### Hotspot Analyzer Contract
+- analyze_hotspots(nodes, edges, resolved_edges): returns List[HotspotResult]
+- Combined complexity (symbol count) + centrality (connection count) scoring
+- Configurable weights (HOTSPOT_COMPLEXITY_WEIGHT, HOTSPOT_CENTRALITY_WEIGHT)
+- detect_cycles(nodes, resolved_edges): DFS cycle detection, returns List[DependencyCycle]
+- analyze_change_impact(nodes, resolved_edges): BFS transitive dependent analysis
+- Configurable max depth and file count for change impact
+
+### Rule Generation Contract
+- generate(nodes, content_map): returns List[SuggestedRule]
+- Detects antipatterns: bare except, print statements, TODO/FIXME, hardcoded credentials
+- Language-aware analysis (per-language naming patterns)
+- Generates Semgrep YAML rules
+- write_rules(rules, output_dir): writes Semgrep YAML to filesystem
+- Configurable minimum pattern count (RULE_GEN_MIN_PATTERN_COUNT)
+- Output directory configurable (RULE_GEN_OUTPUT_DIR)
+
+### SARIF Exporter Contract
+- export(findings, project_name): returns SARIF v2.1.0 JSON string
+- OASIS SARIF standard format
+- Compatible with GitHub Code Scanning and VS Code SARIF viewer
+- Severity mapping: critical/high -> error, medium -> warning, low/info -> note
+- Respects PRIVACY_MODE (strips code snippets from regions)
+- Includes CWE identifiers in rule metadata
+
+### Layer Rule Engine Contract
+- detect_violations(nodes, edges, resolved_edges, layers): returns List[LayerViolation]
+- Forbidden layer edges: testing -> any other layer, presentation -> data_access
+- Warning edges: data_access -> presentation, infrastructure -> presentation
+- Utility layer is ignored (no violations from/to utility)
+- violation_summary(violations): counts by severity
+- Strict mode enforces warning edges as violations (LAYER_VIOLATION_STRICT_MODE)
 
 ### Security Analyzer Contract
 - Pattern-based static analysis (regex, zero deps)
@@ -156,7 +229,7 @@ tests/
 - Configurable severity threshold (SECURITY_SEVERITY_THRESHOLD)
 - Findings sorted by severity then file path
 - Reuses scanner security checks (symlinks, ignore dirs, size/depth limits)
-- No external API calls — fully offline
+- No external API calls -- fully offline
 
 ### Layer Detection Contract
 - detect(nodes, edges): maps each file to an architectural layer
@@ -178,10 +251,11 @@ tests/
 - Symbol creation logic is not duplicated across parsers
 - Docstring extraction lives once in LanguageParser base class
 - File-level doc extraction lives once in PolyglotScanner
+- All analysis thresholds in Config, never hardcoded
 
 ### SOLID
 - Single Responsibility: each module has one job
-- Open/Closed: add parsers without modifying existing code
+- Open/Closed: add parsers/analyzers without modifying existing code
 - Liskov Substitution: all parsers inherit from LanguageParser
 - Interface Segregation: each contract exposes minimal surface
 - Dependency Inversion: app depends on abstractions (Config, Scanner)
@@ -195,6 +269,7 @@ tests/
 - All parsing exceptions caught
 - No external API calls in any analysis or export module
 - Pattern-based security analyzer with 18 language rule sets
+- Privacy mode strips source snippets from output
 
 ### Testing (SDD + TDD + BDD)
 - Tests named as `test_<contract>_<behavior>` (BDD style)
@@ -203,6 +278,7 @@ tests/
 - Edge cases tested (empty files, syntax errors, symlinks)
 - Integration tests validate end-to-end pipeline
 - "Classs" regression test prevents re-introduction
+- All new modules have complete contract test suites
 
 ## Boy Scout Rules
 
@@ -215,3 +291,5 @@ When modifying this codebase:
 6. Do not add external dependencies to the core scanner
 7. Maintain backward compatibility of the CLI interface
 8. Update this CLAUDE.md and README.md for any contract changes
+9. Fix inline imports (move to top of file)
+10. Add type annotations to all function signatures

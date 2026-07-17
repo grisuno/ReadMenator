@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from readmenator._config import Config
+from readmenator._models import Symbol
 from readmenator._scanner import PolyglotScanner
 
 
@@ -99,3 +100,47 @@ class TestScannerContract(unittest.TestCase):
         self.assertIn("main.py", sources)
         self.assertIn("os", targets)
         self.assertIn("sys", targets)
+
+    def test_privacy_mode_strips_docs(self) -> None:
+        self._write("main.py", '"""File doc."""\ndef foo():\n    """Func doc."""\n    pass\n')
+        cfg = Config(PRIVACY_MODE=True)
+        scanner = PolyglotScanner(cfg)
+        nodes, _ = scanner.scan(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0].doc, "")
+        for sym in nodes[0].symbols:
+            self.assertEqual(sym.doc, "")
+
+    def test_scan_with_content_returns_content_map(self) -> None:
+        self._write("main.py", "def hello(): pass\n")
+        scanner = PolyglotScanner(self.config)
+        nodes, edges, content_map = scanner.scan_with_content(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertIn("main.py", content_map)
+        self.assertIn("def hello()", content_map["main.py"])
+
+    def test_gitignore_respected_when_enabled(self) -> None:
+        self._write("main.py", "def real(): pass\n")
+        self._write(".gitignore", "ignored.py\n")
+        self._write("ignored.py", "def ignored(): pass\n")
+        cfg = Config(GITIGNORE_AWARE=True)
+        scanner = PolyglotScanner(cfg)
+        nodes, _ = scanner.scan(self.temp_dir)
+        paths = [n.node_id for n in nodes]
+        self.assertIn("main.py", paths)
+        self.assertNotIn("ignored.py", paths)
+
+    def test_gitignore_disabled_by_default(self) -> None:
+        self._write("main.py", "def real(): pass\n")
+        self._write(".gitignore", "main.py\n")
+        default_cfg = Config()  # GITIGNORE_AWARE=True by default
+        scanner = PolyglotScanner(default_cfg)
+        nodes, _ = scanner.scan(self.temp_dir)
+        paths = [n.node_id for n in nodes]
+        self.assertNotIn("main.py", paths)
+
+    def test_gitignore_glob_conversion(self) -> None:
+        pattern = PolyglotScanner._gitignore_glob_to_regex("*.pyc")
+        import re
+        self.assertIsNotNone(re.search(pattern, "test.pyc"))
+        self.assertIsNone(re.search(pattern, "test.py"))

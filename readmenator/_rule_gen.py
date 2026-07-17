@@ -1,0 +1,261 @@
+from __future__ import annotations
+
+import os
+from collections import Counter
+from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple
+
+from readmenator._config import Config
+from readmenator._models import Node, SuggestedRule, Symbol
+
+
+class RuleGenerator:
+    """Generates suggested linting and security rules from code patterns.
+
+    Analyses the scanned codebase for repeated patterns that suggest
+    project-specific linting rules: bare except clauses, repeated
+    type annotations, common security antipatterns, and naming
+    convention violations. Outputs Semgrep YAML rules to a directory.
+    """
+
+    ANTIPATTERN_RULES: Dict[str, Dict] = {
+        "bare_except": {
+            "pattern": r"^\s*except\s*:",
+            "severity": "warning",
+            "description": "Bare except clause catches all exceptions including SystemExit",
+            "message": "Use 'except Exception:' instead of bare 'except:'",
+            "semgrep_yaml": """rules:
+  - id: rm-bare-except
+    pattern: "except:"
+    message: "Use 'except Exception:' instead of bare 'except:'"
+    severity: WARNING
+    languages: [python]
+""",
+        },
+        "print_statement": {
+            "pattern": r"^\s*print\(",
+            "severity": "info",
+            "description": "Print statement found (consider logging instead)",
+            "message": "Use logging module instead of print()",
+            "semgrep_yaml": """rules:
+  - id: rm-print-statement
+    pattern: "print(...)"
+    message: "Use logging module instead of print()"
+    severity: INFO
+    languages: [python]
+""",
+        },
+        "todo_comment": {
+            "pattern": r"#\s*(TODO|FIXME|HACK|XXX)\b",
+            "severity": "info",
+            "description": "Code marker comment found",
+            "message": "Resolve remaining code markers",
+            "semgrep_yaml": """rules:
+  - id: rm-todo-comment
+    pattern-regex: "#\\\\s*(TODO|FIXME|HACK|XXX)"
+    message: "Resolve remaining code markers"
+    severity: INFO
+    languages: [python, javascript, typescript, java, go, rust]
+""",
+        },
+        "hardcoded_password": {
+            "pattern": r"(password|passwd|pwd)\s*[:=]\s*['\"][^'\"]+['\"]",
+            "severity": "error",
+            "description": "Hardcoded credential detected",
+            "message": "Do not hardcode credentials; use environment variables or secrets manager",
+            "semgrep_yaml": """rules:
+  - id: rm-hardcoded-password
+    pattern-either:
+      - pattern: "password = \"...\""
+      - pattern: "passwd = \"...\""
+      - pattern: "pwd = \"...\""
+    message: "Do not hardcode credentials"
+    severity: ERROR
+    languages: [python, javascript, typescript, java, go]
+""",
+        },
+    }
+
+    NAMING_PATTERNS: Dict[str, str] = {
+        "py": r"^[a-z_][a-z0-9_]*$",
+        "js": r"^[a-z][a-zA-Z0-9]*$",
+        "ts": r"^[a-z][a-zA-Z0-9]*$",
+        "java": r"^[a-z][a-zA-Z0-9]*$",
+        "go": r"^[A-Za-z][A-Za-z0-9]*$",
+        "rs": r"^[a-z_][a-z0-9_]*$",
+    }
+
+    def __init__(self, config: Config) -> None:
+        self._config = config
+        self._rule_counter: int = 0
+
+    def generate(
+        self,
+        nodes: List[Node],
+        content_map: Optional[Dict[str, str]] = None,
+    ) -> List[SuggestedRule]:
+        """Generate suggested rules by scanning code patterns.
+
+        Args:
+            nodes: Scanned file nodes with symbols.
+            content_map: Optional mapping of file paths to their source content
+                for deeper pattern matching.
+
+        Returns:
+            List of SuggestedRule instances.
+        """
+        rules: List[SuggestedRule] = []
+        language_map: Dict[str, List[Node]] = self._group_by_language(nodes)
+        self._rule_counter = 0
+
+        for lang, lang_nodes in language_map.items():
+            lang_rules = self._analyze_language(lang, lang_nodes, content_map)
+            rules.extend(lang_rules)
+
+        rules.extend(self._detect_antipatterns(nodes, content_map))
+        rules.sort(key=lambda r: ("error", "warning", "info").index(r.severity) if r.severity in ("error", "warning", "info") else 3)
+
+        return rules
+
+    def write_rules(
+        self, rules: List[SuggestedRule], output_dir: str
+    ) -> int:
+        """Write suggested rules to Semgrep YAML files in output_dir.
+
+        Returns the number of rule files written.
+        """
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        written = 0
+
+        rule_groups: Dict[str, List[SuggestedRule]] = {}
+        for rule in rules:
+            if rule.language not in rule_groups:
+                rule_groups[rule.language] = []
+            rule_groups[rule.language].append(rule)
+
+        for lang, lang_rules in rule_groups.items():
+            filepath = out / f"readmenator_{lang}.yml"
+            yaml_parts: List[str] = ["# ReadMenator suggested rules for " + lang, "# Generated by readmenator rule generator", ""]
+            for rule in lang_rules:
+                if rule.semgrep_yaml:
+                    yaml_parts.append(rule.semgrep_yaml)
+                    yaml_parts.append("")
+            if len(yaml_parts) > 3:
+                filepath.write_text("\n".join(yaml_parts), encoding="utf-8")
+                written += 1
+
+        rules_yaml: List[str] = ["# ReadMenator suggested rules (combined)", "# Generated by readmenator rule generator", ""]
+        for rule in rules:
+            if rule.semgrep_yaml:
+                rules_yaml.append(rule.semgrep_yaml)
+                rules_yaml.append("")
+        combined_path = out / "readmenator_all.yml"
+        combined_path.write_text("\n".join(rules_yaml), encoding="utf-8")
+        written += 1
+
+        return written
+
+    def _group_by_language(self, nodes: List[Node]) -> Dict[str, List[Node]]:
+        """Group nodes by their language extension."""
+        groups: Dict[str, List[Node]] = {}
+        for node in nodes:
+            lang = node.language if node.language else "unknown"
+            if lang not in groups:
+                groups[lang] = []
+            groups[lang].append(node)
+        return groups
+
+    def _analyze_language(
+        self,
+        lang: str,
+        nodes: List[Node],
+        content_map: Optional[Dict[str, str]] = None,
+    ) -> List[SuggestedRule]:
+        """Analyze a single language group for rule suggestions."""
+        rules: List[SuggestedRule] = []
+
+        naming_mismatches: List[str] = []
+        function_count = 0
+        for node in nodes:
+            for sym in node.symbols:
+                if sym.kind in ("function", "method"):
+                    function_count += 1
+                    naming_mismatches.append(sym.name)
+
+        if function_count >= self._config.RULE_GEN_MIN_PATTERN_COUNT:
+            rules.append(
+                SuggestedRule(
+                    rule_id=self._next_rule_id(),
+                    severity="info",
+                    description=f"Large number of functions in {lang}: {function_count} total",
+                    pattern=f"functions > {self._config.RULE_GEN_MIN_PATTERN_COUNT}",
+                    file_examples=[n.node_id for n in nodes[:3]],
+                    match_count=function_count,
+                    language=lang,
+                    semgrep_yaml="",
+                )
+            )
+
+        return rules
+
+    def _detect_antipatterns(
+        self,
+        nodes: List[Node],
+        content_map: Optional[Dict[str, str]] = None,
+    ) -> List[SuggestedRule]:
+        """Detect known antipatterns across all files."""
+        rules: List[SuggestedRule] = []
+
+        if not content_map:
+            return rules
+
+        import re
+
+        for rule_id, rule_def in self.ANTIPATTERN_RULES.items():
+            pattern = rule_def["pattern"]
+            regex = re.compile(pattern, re.MULTILINE)
+            matches: List[str] = []
+            match_count = 0
+
+            for node in nodes:
+                content = content_map.get(node.node_id)
+                if content is None:
+                    continue
+                found = regex.findall(content)
+                if found:
+                    matches.append(node.node_id)
+                    match_count += len(found)
+
+            if match_count >= self._config.RULE_GEN_MIN_PATTERN_COUNT:
+                rule_langs = self._infer_language_for_rule(rule_id)
+                rules.append(
+                    SuggestedRule(
+                        rule_id=self._next_rule_id(),
+                        severity=rule_def["severity"],
+                        description=rule_def["description"],
+                        pattern=rule_def["pattern"],
+                        file_examples=matches[:5],
+                        match_count=match_count,
+                        language=rule_langs,
+                        semgrep_yaml=rule_def.get("semgrep_yaml", ""),
+                    )
+                )
+
+        return rules
+
+    @staticmethod
+    def _infer_language_for_rule(rule_id: str) -> str:
+        """Infer target language for a built-in antipattern rule."""
+        lang_map: Dict[str, str] = {
+            "bare_except": "python",
+            "print_statement": "python",
+            "todo_comment": "multi",
+            "hardcoded_password": "multi",
+        }
+        return lang_map.get(rule_id, "multi")
+
+    def _next_rule_id(self) -> str:
+        """Generate the next rule identifier."""
+        self._rule_counter += 1
+        return f"RM{self._rule_counter:03d}"

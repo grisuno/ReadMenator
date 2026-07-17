@@ -9,8 +9,17 @@ from readmenator._app import readmenatorApplication  # noqa: F401
 from readmenator._config import Config  # noqa: F401
 from readmenator._models import (  # noqa: F401
     AnalysisResult,
+    AnalysisResultV2,
+    ChangeImpact,
     CommunityResult,
+    DependencyCycle,
     Edge,
+    HotspotResult,
+    LayerViolation,
     Node,
+    SecurityFinding,
+    SuggestedRule,
     Symbol,
+    TaintAnalysisResult,
+    TaintPath,
 )

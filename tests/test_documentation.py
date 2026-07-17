@@ -1,8 +1,17 @@
+from __future__ import annotations
+
 import unittest
 
 from readmenator._config import Config
 from readmenator._documentation import DocumentationGenerator
-from readmenator._models import Edge, Node, Symbol
+from readmenator._models import (
+    AnalysisResultV2,
+    Edge,
+    Node,
+    Symbol,
+    TaintAnalysisResult,
+    TaintPath,
+)
 
 
 class TestDocumentationGeneratorContract(unittest.TestCase):
@@ -28,6 +37,16 @@ class TestDocumentationGeneratorContract(unittest.TestCase):
     def test_contains_architecture_reference(self) -> None:
         content = self.generator.generate([], [])
         self.assertIn("## Architecture Reference", content)
+
+    def test_contains_cpg_block(self) -> None:
+        content = self.generator.generate([], [])
+        self.assertIn("## Code Property Graph", content)
+        self.assertIn("@context", content)
+
+    def test_contains_statistics_dashboard(self) -> None:
+        content = self.generator.generate([], [])
+        self.assertIn("## Statistics Dashboard", content)
+        self.assertIn("Total Files", content)
 
     def test_groups_files_by_language(self) -> None:
         py_node = Node(
@@ -142,3 +161,86 @@ class TestDocumentationGeneratorContract(unittest.TestCase):
         ]
         content = generator.generate(nodes, [])
         self.assertIn("intelligently pruned", content)
+
+    def test_taint_propagation_section_present(self) -> None:
+        taint = TaintAnalysisResult(
+            paths=[
+                TaintPath(
+                    source_file="a.py",
+                    sink_file="c.py",
+                    path=["a.py", "b.py", "c.py"],
+                    hops=2,
+                    dangerous_import="subprocess",
+                    severity="high",
+                )
+            ],
+            source_count=1,
+            sink_count=1,
+        )
+        analysis_v2 = AnalysisResultV2(taint=taint)
+        content = self.generator.generate([], [], analysis_v2=analysis_v2)
+        self.assertIn("## Taint Propagation Map", content)
+        self.assertIn("subprocess", content)
+
+    def test_hotspot_section_present(self) -> None:
+        from readmenator._models import HotspotResult
+
+        analysis_v2 = AnalysisResultV2(
+            hotspots=[
+                HotspotResult(
+                    file_id="main.py",
+                    complexity_score=0.8,
+                    centrality_score=0.5,
+                    combined_score=0.65,
+                    symbol_count=10,
+                    connection_count=5,
+                )
+            ]
+        )
+        content = self.generator.generate([], [], analysis_v2=analysis_v2)
+        self.assertIn("## Hotspot Analysis", content)
+
+    def test_no_taint_section_when_empty(self) -> None:
+        content = self.generator.generate([], [])
+        self.assertNotIn("## Taint Propagation Map", content)
+
+    def test_no_hotspot_section_when_empty(self) -> None:
+        content = self.generator.generate([], [])
+        self.assertNotIn("## Hotspot Analysis", content)
+
+    def test_cpg_block_disabled_via_config(self) -> None:
+        cfg = Config(CPG_ENABLED=False)
+        generator = DocumentationGenerator(cfg)
+        content = generator.generate([], [])
+        self.assertNotIn("## Code Property Graph", content)
+
+    def test_architectural_layers_section(self) -> None:
+        layers = {"main.py": "testing"}
+        node = Node(
+            node_id="main.py",
+            label="main.py",
+            kind="module",
+            language="py",
+        )
+        content = self.generator.generate([node], [], layers=layers)
+        self.assertIn("## Architectural Layers", content)
+        self.assertIn("testing", content)
+
+    def test_security_findings_section(self) -> None:
+        from readmenator._models import SecurityFinding
+
+        findings = [
+            SecurityFinding(
+                file_path="main.py",
+                line=10,
+                severity="critical",
+                rule_id="TEST001",
+                description="Eval detected",
+                snippet="eval(x)",
+                cwe="CWE-95",
+            )
+        ]
+        content = self.generator.generate([], [], findings=findings)
+        self.assertIn("## Security Audit", content)
+        self.assertIn("Critical", content)
+        self.assertIn("eval(x)", content)

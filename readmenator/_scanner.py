@@ -7,11 +7,12 @@ flat list of Node and Edge objects that form the knowledge graph.
 
 from __future__ import annotations
 
+import re
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
-from readmenator._models import Edge, Node
+from readmenator._models import Edge, Node, Symbol
 from readmenator._parsers import create_parser
 
 
@@ -21,6 +22,9 @@ class PolyglotScanner:
     Rejects symlinks, enforces file-size and directory-depth limits,
     skips ignored directories, and silently catches parse errors
     so a single misbehaving file never breaks the full scan.
+
+    Supports privacy mode (strips snippets and docstrings) and
+    gitignore-aware scanning for more accurate project coverage.
     """
 
     def __init__(self, config: Config) -> None:
@@ -30,10 +34,82 @@ class PolyglotScanner:
             config: Settings including ignore dirs, size limits, etc.
         """
         self._config = config
+        self._gitignore_patterns: List[re.Pattern] = []
 
     def _is_ignored(self, path: Path) -> bool:
         """Return ``True`` if any path component matches IGNORE_DIRS."""
         return any(part in self._config.IGNORE_DIRS for part in path.parts)
+
+    def _load_gitignore(self, root: Path) -> None:
+        """Parse .gitignore patterns using regex (no external deps)."""
+        gitignore_path = root / ".gitignore"
+        if not gitignore_path.is_file():
+            self._gitignore_patterns = []
+            return
+        try:
+            patterns: List[str] = []
+            for line in gitignore_path.read_text(encoding="utf-8", errors="ignore").split("\n"):
+                stripped = line.strip()
+                if not stripped or stripped.startswith("#"):
+                    continue
+                if stripped.startswith("!"):
+                    continue
+                regex_pattern = self._gitignore_glob_to_regex(stripped)
+                if regex_pattern:
+                    patterns.append(regex_pattern)
+            self._gitignore_patterns = [re.compile(p) for p in patterns]
+        except (OSError, re.error):
+            self._gitignore_patterns = []
+
+    @staticmethod
+    def _gitignore_glob_to_regex(pattern: str) -> str:
+        """Convert a .gitignore glob pattern to a regex pattern."""
+        if pattern.startswith("/"):
+            pattern = pattern[1:]
+        if pattern.endswith("/"):
+            pattern = pattern.rstrip("/")
+        regex_parts: List[str] = []
+        i = 0
+        while i < len(pattern):
+            c = pattern[i]
+            if c == "*":
+                if i + 1 < len(pattern) and pattern[i + 1] == "*":
+                    regex_parts.append(".*")
+                    i += 2
+                    if i < len(pattern) and pattern[i] == "/":
+                        i += 1
+                    continue
+                else:
+                    regex_parts.append("[^/]*")
+                    i += 1
+            elif c == "?":
+                regex_parts.append("[^/]")
+                i += 1
+            elif c == ".":
+                regex_parts.append("\\.")
+                i += 1
+            elif c == "[":
+                end = pattern.find("]", i)
+                if end == -1:
+                    regex_parts.append(re.escape(c))
+                    i += 1
+                else:
+                    regex_parts.append(pattern[i:end + 1])
+                    i = end + 1
+            else:
+                regex_parts.append(re.escape(c))
+                i += 1
+        result = "".join(regex_parts)
+        return f"(^|/){result}"
+
+    def _is_gitignored(self, rel_path: str) -> bool:
+        """Check if a relative path matches any .gitignore pattern."""
+        if not self._gitignore_patterns:
+            return False
+        for pattern in self._gitignore_patterns:
+            if pattern.search(rel_path):
+                return True
+        return False
 
     def _validate_path_security(self, path: Path) -> bool:
         """Reject symlinks and files exceeding MAX_FILE_SIZE_MB."""
@@ -130,13 +206,37 @@ class PolyglotScanner:
             A tuple of (list of Node, list of Edge). Edges represent
             ``imports`` relationships between scanned files.
         """
+        nodes, edges, _ = self._scan_impl(root)
+        return nodes, edges
+
+    def scan_with_content(
+        self, root: Path
+    ) -> Tuple[List[Node], List[Edge], Dict[str, str]]:
+        """Scan and also return raw file contents for deeper analysis.
+
+        Returns:
+            Tuple of (nodes, edges, content_map) where content_map maps
+            node_id to raw file content.
+        """
+        return self._scan_impl(root)
+
+    def _scan_impl(
+        self, root: Path
+    ) -> Tuple[List[Node], List[Edge], Dict[str, str]]:
+        """Internal scan implementation returning nodes, edges, and content."""
         nodes: List[Node] = []
         edges: List[Edge] = []
+        content_map: Dict[str, str] = {}
 
         if not root.is_dir():
             raise ValueError(f"Path is not a valid directory: {root}")
 
         root = root.resolve()
+        privacy = self._config.PRIVACY_MODE
+
+        if self._config.GITIGNORE_AWARE:
+            self._load_gitignore(root)
+
         scanned_count = 0
 
         for file_path in sorted(root.rglob("*")):
@@ -150,10 +250,13 @@ class PolyglotScanner:
             if self._is_ignored(rel_path):
                 continue
 
+            rel_path_str = rel_path.as_posix()
+            if self._is_gitignored(rel_path_str):
+                continue
+
             if not self._check_directory_depth(file_path, root):
                 continue
 
-            rel_path_str = rel_path.as_posix()
             extension = file_path.suffix
 
             parser = create_parser(extension, rel_path_str, self._config)
@@ -162,8 +265,14 @@ class PolyglotScanner:
 
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
-                file_doc = self._extract_file_doc(content)
+                file_doc = self._extract_file_doc(content) if not privacy else ""
                 parser.parse(content)
+
+                if privacy:
+                    parser.symbols = [
+                        Symbol(s.name, s.kind, s.line, "", "")
+                        for s in parser.symbols
+                    ] if hasattr(parser, "symbols") else parser.symbols
 
                 node = Node(
                     node_id=rel_path_str,
@@ -174,6 +283,7 @@ class PolyglotScanner:
                     symbols=parser.symbols,
                 )
                 nodes.append(node)
+                content_map[rel_path_str] = content
 
                 for imp in parser.imports:
                     edges.append(
@@ -213,4 +323,4 @@ class PolyglotScanner:
             except Exception:
                 continue
 
-        return nodes, edges
+        return nodes, edges, content_map

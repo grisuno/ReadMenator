@@ -1,62 +1,66 @@
-"""Application orchestrator for the readmenator pipeline.
-
-Wires together scanner, documentation generator, query engine,
-import resolver, graph analyzer, file cache, and graph exporter
-into a single facade consumed by the CLI entry point (__main__) and
-the public API (__init__).
-"""
-
 from __future__ import annotations
 
-import json
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._cache import FileCache
 from readmenator._config import Config
+from readmenator._cpg import CodePropertyGraph
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
+from readmenator._hotspots import HotspotAnalyzer
+from readmenator._layer_rules import LayerRuleEngine
 from readmenator._layers import LayerDetector
-from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
+from readmenator._models import (
+    AnalysisResult,
+    AnalysisResultV2,
+    Edge,
+    Node,
+    SecurityFinding,
+    TaintAnalysisResult,
+)
 from readmenator._query import QueryEngine
 from readmenator._resolver import ImportResolver
+from readmenator._rule_gen import RuleGenerator
+from readmenator._sarif import SarifExporter
 from readmenator._scanner import PolyglotScanner
 from readmenator._security import SecurityAnalyzer
+from readmenator._taint import TaintAnalyzer
 
 
 class readmenatorApplication:
     """High-level facade for readmenator operations.
 
     Provides convenience methods for the full pipeline:
-      - ``run`` / ``rebuild``: scan + generate KNOWLEDGE_BASE.md
-      - ``update``: incremental scan using content hash cache
-      - ``query``, ``explain``, ``find_path``, ``summary``:
-        scan + query in a single call
-      - ``analyze``: run community detection and graph analysis
-      - ``export_json``, ``export_html``, ``export_svg``:
-        export the graph to various formats
+      - run / rebuild: scan + generate KNOWLEDGE_BASE.md
+      - update: incremental scan using content hash cache
+      - query, explain, find_path, summary: scan + query in a single call
+      - analyze: run community detection and graph analysis
+      - export_json, export_html, export_svg: export the graph
+      - audit, audit_deep: security and deep analysis
+      - export_sarif, export_rules: SARIF and rule output
     """
 
     def __init__(self, config: Optional[Config] = None):
-        """Initialise the application with an optional custom config.
-
-        Args:
-            config: Application settings; defaults to Config() if omitted.
-        """
         self._config = config or Config()
         self._scanner = PolyglotScanner(self._config)
         self._generator = DocumentationGenerator(self._config)
         self._analyzer = GraphAnalyzer(self._config)
         self._security = SecurityAnalyzer(self._config)
         self._exporter = GraphExporter(self._config)
+        self._taint = TaintAnalyzer(self._config)
+        self._hotspots = HotspotAnalyzer(self._config)
+        self._layer_rules = LayerRuleEngine(self._config)
+        self._rule_gen = RuleGenerator(self._config)
+        self._sarif = SarifExporter(self._config)
+        self._cpg = CodePropertyGraph(self._config)
         self._last_nodes: List[Node] = []
         self._last_edges: List[Edge] = []
         self._last_resolved_edges: List[Edge] = []
         self._last_findings: List[SecurityFinding] = []
 
     def _scan(self, target_dir: str) -> Tuple[List[Node], List[Edge]]:
-        """Resolve *target_dir* and run the scanner, caching results."""
         root = Path(target_dir).resolve()
         nodes, edges = self._scanner.scan(root)
         self._last_nodes = nodes
@@ -64,19 +68,19 @@ class readmenatorApplication:
         self._last_resolved_edges = self._resolve_imports(nodes, edges, target_dir)
         return nodes, edges
 
+    def _scan_with_content(
+        self, target_dir: str
+    ) -> Tuple[List[Node], List[Edge], Dict[str, str]]:
+        root = Path(target_dir).resolve()
+        nodes, edges, content_map = self._scanner.scan_with_content(root)
+        self._last_nodes = nodes
+        self._last_edges = edges
+        self._last_resolved_edges = self._resolve_imports(nodes, edges, target_dir)
+        return nodes, edges, content_map
+
     def _resolve_imports(
         self, nodes: List[Node], edges: List[Edge], target_dir: str
     ) -> List[Edge]:
-        """Resolve raw import strings to project file paths.
-
-        Args:
-            nodes: Scanned file nodes.
-            edges: Raw import edges.
-            target_dir: Project root directory.
-
-        Returns:
-            List of resolved import edges with project file targets.
-        """
         file_ids = [n.node_id for n in nodes]
         resolver = ImportResolver(file_ids, target_dir)
         resolved: List[Edge] = []
@@ -93,24 +97,49 @@ class readmenatorApplication:
                 )
         return resolved
 
+    def _run_v2_analysis(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        layers: Optional[Dict[str, str]] = None,
+        content_map: Optional[Dict[str, str]] = None,
+    ) -> AnalysisResultV2:
+        taint_result: Optional[TaintAnalysisResult] = None
+        if self._config.TAINT_ENABLED:
+            taint_result = self._taint.analyze(nodes, edges, resolved_edges)
+
+        hotspots = self._hotspots.analyze_hotspots(nodes, edges, resolved_edges) if self._config.HOTSPOTS_ENABLED else []
+
+        cycles = self._hotspots.detect_cycles(nodes, resolved_edges) if self._config.CYCLE_DETECTION_ENABLED else []
+
+        change_impacts = self._hotspots.analyze_change_impact(nodes, resolved_edges) if self._config.HOTSPOTS_ENABLED else []
+
+        layer_violations = self._layer_rules.detect_violations(
+            nodes, edges, resolved_edges, layers
+        ) if self._config.LAYER_VIOLATION_ENABLED else []
+
+        suggested_rules = self._rule_gen.generate(nodes, content_map) if self._config.RULE_GEN_ENABLED else []
+
+        return AnalysisResultV2(
+            taint=taint_result,
+            cycles=cycles,
+            change_impacts=change_impacts,
+            hotspots=hotspots,
+            suggested_rules=suggested_rules,
+            layer_violations=layer_violations,
+        )
+
     def run(
         self,
         target_dir: str,
         resolve_imports: bool = True,
         run_analysis: bool = True,
         run_security: Optional[bool] = None,
+        run_v2_analysis: Optional[bool] = None,
     ) -> None:
-        """Scan *target_dir* and write KNOWLEDGE_BASE.md to disk.
-
-        Args:
-            target_dir: Project directory to scan.
-            resolve_imports: Whether to resolve raw imports to project files.
-            run_analysis: Whether to run community detection and graph analysis.
-            run_security: Whether to run security audit. Defaults to
-                config.SECURITY_ENABLED if None.
-        """
         root = Path(target_dir).resolve()
-        nodes, edges = self._scanner.scan(root)
+        nodes, edges, content_map = self._scanner.scan_with_content(root)
         self._last_nodes = nodes
         self._last_edges = edges
 
@@ -133,15 +162,37 @@ class readmenatorApplication:
         layers = LayerDetector(self._config).detect(nodes, edges)
         layer_summary = LayerDetector(self._config).layer_summary(layers)
 
+        if run_v2_analysis is None:
+            run_v2_analysis = True
+        analysis_v2: Optional[AnalysisResultV2] = None
+        if run_v2_analysis:
+            analysis_v2 = self._run_v2_analysis(
+                nodes, edges, resolved_edges, layers, content_map
+            )
+
         content = self._generator.generate(
-            nodes, edges, resolved_edges, analysis, layers, findings
+            nodes,
+            edges,
+            resolved_edges,
+            analysis,
+            layers,
+            findings,
+            analysis_v2,
         )
         output_path = root / self._config.OUTPUT_FILENAME
-        if self._config.SECURITY_OUTPUT != "KNOWLEDGE_BASE.md":
-            security_path = root / self._config.SECURITY_OUTPUT
-            security_path.write_text(content, encoding="utf-8")
-        else:
-            output_path.write_text(content, encoding="utf-8")
+        output_path.write_text(content, encoding="utf-8")
+
+        if self._config.SARIF_ENABLED and findings:
+            sarif_path = root / self._config.SARIF_OUTPUT
+            sarif_content = self._sarif.export(findings, root.name)
+            sarif_path.write_text(sarif_content, encoding="utf-8")
+            print(f"[+] SARIF audit: {sarif_path}")
+
+        if self._config.RULE_GEN_ENABLED and analysis_v2 and analysis_v2.suggested_rules:
+            rules_dir = str(root / self._config.RULE_GEN_OUTPUT_DIR)
+            written = self._rule_gen.write_rules(analysis_v2.suggested_rules, rules_dir)
+            if written:
+                print(f"[+] Suggested rules: {written} files in {rules_dir}")
 
         total_symbols = sum(len(n.symbols) for n in nodes)
         import_edges = [e for e in edges if e.relation == "imports"]
@@ -164,19 +215,21 @@ class readmenatorApplication:
         if layer_summary:
             top_layer = max(layer_summary, key=layer_summary.get)
             print(f"[+] Layers detected: {len(layer_summary)} (dominant: {top_layer})")
+        if analysis_v2:
+            if analysis_v2.taint and analysis_v2.taint.paths:
+                print(f"[+] Taint paths: {len(analysis_v2.taint.paths)}")
+            if analysis_v2.hotspots:
+                print(f"[+] Hotspot files: {len(analysis_v2.hotspots)}")
+            if analysis_v2.cycles:
+                print(f"[+] Dependency cycles: {len(analysis_v2.cycles)}")
+            if analysis_v2.layer_violations:
+                print(f"[+] Layer violations: {len(analysis_v2.layer_violations)}")
+            if analysis_v2.suggested_rules:
+                print(f"[+] Suggested rules: {len(analysis_v2.suggested_rules)}")
         if findings:
             print(self._security.summary(findings))
 
     def update(self, target_dir: str, run_security: Optional[bool] = None) -> None:
-        """Incrementally update KNOWLEDGE_BASE.md for changed files only.
-
-        Uses SHA256 content hashing to detect which files have changed
-        since the last run. Falls back to full rebuild if no cache exists.
-
-        Args:
-            target_dir: Project directory to scan.
-            run_security: Whether to run security audit.
-        """
         root = Path(target_dir).resolve()
         cache = FileCache(self._config, str(root))
         nodes, edges = self._scan_for_cache(root, cache)
@@ -193,7 +246,9 @@ class readmenatorApplication:
             findings = self._security.scan(root)
             self._last_findings = findings
 
-        content = self._generator.generate(nodes, edges, resolved_edges, analysis, findings=findings)
+        content = self._generator.generate(
+            nodes, edges, resolved_edges, analysis, findings=findings
+        )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
         total_symbols = sum(len(n.symbols) for n in nodes)
@@ -207,10 +262,6 @@ class readmenatorApplication:
     def _scan_for_cache(
         self, root: Path, cache: FileCache
     ) -> Tuple[List[Node], List[Edge]]:
-        """Scan only files that have changed since the last cache write.
-
-        If no cache exists, performs a full scan and populates the cache.
-        """
         cached_hashes = cache.load()
         if not cached_hashes:
             return self._scanner.scan(root)
@@ -229,13 +280,11 @@ class readmenatorApplication:
         return nodes, edges
 
     def query(self, target_dir: str, question: str) -> str:
-        """Scan *target_dir* and answer *question* using the query engine."""
         nodes, edges = self._scan(target_dir)
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         return engine.query(question)
 
     def explain(self, target_dir: str, symbol_name: str) -> str:
-        """Scan *target_dir* and return a detailed explanation of *symbol_name*."""
         nodes, edges = self._scan(target_dir)
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         result = engine.explain(symbol_name)
@@ -248,10 +297,6 @@ class readmenatorApplication:
         return result
 
     def find_path(self, target_dir: str, symbol_a: str, symbol_b: str) -> str:
-        """Scan *target_dir* and find the shortest import path between two symbols.
-
-        Uses resolved imports when available for project-internal paths.
-        """
         nodes, edges = self._scan(target_dir)
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         result = engine.find_path(symbol_a, symbol_b)
@@ -265,26 +310,14 @@ class readmenatorApplication:
         return f"Dependency path: {path_str}"
 
     def summary(self, target_dir: str) -> str:
-        """Scan *target_dir* and return a concise knowledge base overview."""
         nodes, edges = self._scan(target_dir)
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         return engine.summary()
 
     def rebuild(self, target_dir: str, run_security: Optional[bool] = None) -> None:
-        """Alias for ``run`` -- forces regeneration of KNOWLEDGE_BASE.md.
-
-        Args:
-            target_dir: Project directory to scan.
-            run_security: Whether to run security audit.
-        """
         self.run(target_dir, run_security=run_security)
 
     def analyze(self, target_dir: str) -> AnalysisResult:
-        """Run community detection and graph analysis on *target_dir*.
-
-        Returns:
-            Structured AnalysisResult with god nodes, communities, etc.
-        """
         nodes, edges = self._scan(target_dir)
         return self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
 
@@ -293,16 +326,6 @@ class readmenatorApplication:
         target_dir: str,
         output_path: Optional[str] = None,
     ) -> str:
-        """Export the knowledge graph as JSON.
-
-        Args:
-            target_dir: Project directory to scan.
-            output_path: Optional file path for the JSON output.
-                Defaults to ``<target_dir>/graph.json``.
-
-        Returns:
-            JSON string content.
-        """
         nodes, edges = self._scan(target_dir)
         analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
         data = self._exporter.to_json(nodes, edges, self._last_resolved_edges, analysis)
@@ -318,16 +341,6 @@ class readmenatorApplication:
         target_dir: str,
         output_path: Optional[str] = None,
     ) -> str:
-        """Export the knowledge graph as an interactive HTML page.
-
-        Args:
-            target_dir: Project directory to scan.
-            output_path: Optional file path for the HTML output.
-                Defaults to ``<target_dir>/graph.html``.
-
-        Returns:
-            HTML document string.
-        """
         nodes, edges = self._scan(target_dir)
         analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
         data = self._exporter.to_html(nodes, edges, self._last_resolved_edges, analysis)
@@ -343,16 +356,6 @@ class readmenatorApplication:
         target_dir: str,
         output_path: Optional[str] = None,
     ) -> str:
-        """Export the knowledge graph as a static SVG image.
-
-        Args:
-            target_dir: Project directory to scan.
-            output_path: Optional file path for the SVG output.
-                Defaults to ``<target_dir>/graph.svg``.
-
-        Returns:
-            SVG document string.
-        """
         nodes, edges = self._scan(target_dir)
         analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
         data = self._exporter.to_svg(nodes, edges, self._last_resolved_edges, analysis)
@@ -364,7 +367,6 @@ class readmenatorApplication:
         return data
 
     def export(self, target_dir: str) -> None:
-        """Export all formats (JSON, HTML, SVG) at once."""
         self.export_json(target_dir)
         self.export_html(target_dir)
         self.export_svg(target_dir)
@@ -374,16 +376,6 @@ class readmenatorApplication:
         target_dir: str,
         output_path: Optional[str] = None,
     ) -> str:
-        """Export the knowledge graph as GraphML (Gephi/yEd compatible).
-
-        Args:
-            target_dir: Project directory to scan.
-            output_path: Optional file path for the GraphML output.
-                Defaults to ``<target_dir>/graph.graphml``.
-
-        Returns:
-            GraphML XML string.
-        """
         nodes, edges = self._scan(target_dir)
         analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
         data = self._exporter.to_graphml(nodes, edges, self._last_resolved_edges, analysis)
@@ -399,16 +391,6 @@ class readmenatorApplication:
         target_dir: str,
         output_dir: Optional[str] = None,
     ) -> int:
-        """Export the knowledge graph as an Obsidian vault.
-
-        Args:
-            target_dir: Project directory to scan.
-            output_dir: Optional directory for the Obsidian vault.
-                Defaults to ``<target_dir>/obsidian``.
-
-        Returns:
-            Number of notes written.
-        """
         nodes, edges = self._scan(target_dir)
         analysis = self._analyzer.analyze(nodes, edges, self._last_resolved_edges)
         if output_dir is None:
@@ -419,11 +401,6 @@ class readmenatorApplication:
         return written
 
     def watch(self, target_dir: str) -> None:
-        """Start watching the project directory for changes (auto-rebuild).
-
-        Args:
-            target_dir: Project directory to watch.
-        """
         from readmenator._watcher import DirectoryWatcher
         root = str(Path(target_dir).resolve())
 
@@ -434,32 +411,62 @@ class readmenatorApplication:
         watcher.start()
 
     def audit(self, target_dir: str) -> List[SecurityFinding]:
-        """Run a security audit on *target_dir* and return findings.
-
-        Performs pattern-based static analysis across all supported
-        languages and returns language-specific security findings.
-
-        Args:
-            target_dir: Project directory to scan.
-
-        Returns:
-            List of SecurityFinding instances sorted by severity.
-        """
         root = Path(target_dir).resolve()
         findings = self._security.scan(root)
         self._last_findings = findings
         print(self._security.summary(findings))
         return findings
 
+    def audit_deep(self, target_dir: str) -> AnalysisResultV2:
+        """Run deep analysis including taint, hotspots, cycles, and rules."""
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved_edges = self._last_resolved_edges
+        layers = LayerDetector(self._config).detect(nodes, edges)
+        result = self._run_v2_analysis(
+            nodes, edges, resolved_edges, layers, content_map
+        )
+        if result.taint:
+            print(f"[+] Taint paths: {len(result.taint.paths)}")
+        if result.cycles:
+            print(f"[+] Dependency cycles: {len(result.cycles)}")
+        if result.hotspots:
+            print(f"[+] Top hotspots: {result.hotspots[0].file_id if result.hotspots else 'none'}")
+        if result.layer_violations:
+            print(f"[+] Layer violations: {len(result.layer_violations)}")
+        if result.suggested_rules:
+            print(f"[+] Suggested rules: {len(result.suggested_rules)}")
+        return result
+
+    def export_sarif(
+        self,
+        target_dir: str,
+        output_path: Optional[str] = None,
+    ) -> str:
+        root = Path(target_dir).resolve()
+        findings = self._security.scan(root)
+        if output_path is None:
+            output_path = str(root / self._config.SARIF_OUTPUT)
+        data = self._sarif.export(findings, root.name)
+        Path(output_path).write_text(data, encoding="utf-8")
+        print(f"[+] SARIF exported: {output_path}")
+        return data
+
+    def export_rules(
+        self,
+        target_dir: str,
+        output_dir: Optional[str] = None,
+    ) -> int:
+        root = Path(target_dir).resolve()
+        content_map: Dict[str, str] = {}
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        if output_dir is None:
+            output_dir = str(root / self._config.RULE_GEN_OUTPUT_DIR)
+        rules = self._rule_gen.generate(nodes, content_map)
+        written = self._rule_gen.write_rules(rules, output_dir)
+        print(f"[+] Rules exported: {written} files to {output_dir}")
+        return written
+
     def detect_layers(self, target_dir: str) -> dict:
-        """Detect architectural layers in the codebase.
-
-        Args:
-            target_dir: Project directory to scan.
-
-        Returns:
-            Dict mapping node_id to layer name.
-        """
         nodes, edges = self._scan(target_dir)
         detector = LayerDetector(self._config)
         layers = detector.detect(nodes, edges)

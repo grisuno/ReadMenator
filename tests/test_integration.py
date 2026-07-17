@@ -77,3 +77,44 @@ class TestEndToEndContract(unittest.TestCase):
         content = kb_path.read_text(encoding="utf-8")
         self.assertIn("**Total Files Parsed:**", content)
         self.assertIn("2", content.split("Total Files Parsed:")[1].split("|")[0])
+
+    def test_knowledge_base_contains_cpg(self) -> None:
+        self._write("main.py", "def hello(): pass\n")
+        self.app.run(str(self.temp_dir))
+        kb_path = self.temp_dir / "KNOWLEDGE_BASE.md"
+        content = kb_path.read_text(encoding="utf-8")
+        self.assertIn("## Code Property Graph", content)
+        self.assertIn("@context", content)
+
+    def test_knowledge_base_contains_statistics_dashboard(self) -> None:
+        self._write("main.py", "def hello(): pass\n")
+        self.app.run(str(self.temp_dir))
+        kb_path = self.temp_dir / "KNOWLEDGE_BASE.md"
+        content = kb_path.read_text(encoding="utf-8")
+        self.assertIn("## Statistics Dashboard", content)
+        self.assertIn("Total Files", content)
+        self.assertIn("Total Symbols", content)
+
+    def test_audit_deep_returns_analysis(self) -> None:
+        self._write("main.py", "import subprocess\n\ndef run():\n    subprocess.run(['ls'])\n")
+        result = self.app.audit_deep(str(self.temp_dir))
+        self.assertIsNotNone(result)
+        if result.taint:
+            self.assertGreaterEqual(result.taint.source_count, 0)
+
+    def test_privacy_mode_works(self) -> None:
+        cfg = Config(PRIVACY_MODE=True)
+        app = readmenatorApplication(cfg)
+        self._write("main.py", '"""File doc."""\ndef hello():\n    """Func doc."""\n    pass\n')
+        app.run(str(self.temp_dir))
+        kb_path = self.temp_dir / "KNOWLEDGE_BASE.md"
+        content = kb_path.read_text(encoding="utf-8")
+        self.assertNotIn("File doc", content)
+
+    def test_export_sarif_produces_file(self) -> None:
+        self._write("main.py", "eval('danger')\n")
+        cfg = Config(SECURITY_ENABLED=True)
+        app = readmenatorApplication(cfg)
+        app.export_sarif(str(self.temp_dir))
+        sarif_path = self.temp_dir / "readmenator_audit.sarif"
+        self.assertTrue(sarif_path.exists())

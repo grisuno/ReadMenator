@@ -139,3 +139,157 @@ class AnalysisResult:
     suggested_questions: List[str]
     node_count: int
     edge_count: int
+
+
+@dataclass
+class TaintPath:
+    """A taint propagation path from source to sink through the import graph.
+
+    Attributes:
+        source_file: The file that introduces the dangerous import.
+        sink_file: The file that transitively receives the taint.
+        path: List of file node IDs forming the propagation chain.
+        hops: Number of hops in the propagation path.
+        dangerous_import: The specific dangerous module or function imported.
+        severity: Inferred severity of the taint path.
+    """
+
+    source_file: str
+    sink_file: str
+    path: List[str]
+    hops: int
+    dangerous_import: str
+    severity: str
+
+
+@dataclass
+class TaintAnalysisResult:
+    """Complete taint propagation analysis output.
+
+    Attributes:
+        paths: List of TaintPath instances discovered.
+        source_count: Number of unique taint source files.
+        sink_count: Number of unique taint sink files.
+    """
+
+    paths: List[TaintPath]
+    source_count: int
+    sink_count: int
+
+
+@dataclass
+class DependencyCycle:
+    """A cycle detected in the resolved import graph.
+
+    Attributes:
+        cycle: List of file node IDs forming the cycle.
+        length: Number of files in the cycle.
+    """
+
+    cycle: List[str]
+    length: int
+
+
+@dataclass
+class ChangeImpact:
+    """Change impact analysis for a single file.
+
+    Attributes:
+        file_id: The file that would be changed.
+        direct_dependents: Files that directly import this file.
+        transitive_dependents: Files that transitively depend on this file.
+        total_impact: Total number of affected files (direct + transitive).
+    """
+
+    file_id: str
+    direct_dependents: List[str]
+    transitive_dependents: List[str]
+    total_impact: int
+
+
+@dataclass
+class HotspotResult:
+    """A hotspot file combining complexity and centrality metrics.
+
+    Attributes:
+        file_id: The file node ID.
+        complexity_score: Normalised symbol count score (0-1).
+        centrality_score: Normalised god node score (0-1).
+        combined_score: Weighted combination of complexity and centrality.
+        symbol_count: Raw symbol count.
+        connection_count: Raw connection count.
+    """
+
+    file_id: str
+    complexity_score: float
+    centrality_score: float
+    combined_score: float
+    symbol_count: int
+    connection_count: int
+
+
+@dataclass
+class SuggestedRule:
+    """A suggested linting/security rule derived from code patterns.
+
+    Attributes:
+        rule_id: Suggested rule identifier (e.g. "RM001").
+        severity: Suggested severity (info, warning, error).
+        description: Human-readable description of the pattern.
+        pattern: The detected pattern or code snippet.
+        file_examples: Example file paths where the pattern was found.
+        match_count: Number of times the pattern was matched.
+        language: Target language for the rule.
+        semgrep_yaml: Optional Semgrep rule YAML string.
+    """
+
+    rule_id: str
+    severity: str
+    description: str
+    pattern: str
+    file_examples: List[str]
+    match_count: int
+    language: str
+    semgrep_yaml: str
+
+
+@dataclass
+class LayerViolation:
+    """A detected architectural layer violation.
+
+    Attributes:
+        source_file: The file causing the violation.
+        source_layer: The layer of the source file.
+        target_file: The file being imported.
+        target_layer: The layer of the target file.
+        description: Description of the violation.
+        severity: Severity (strict, warn, info).
+    """
+
+    source_file: str
+    source_layer: str
+    target_file: str
+    target_layer: str
+    description: str
+    severity: str
+
+
+@dataclass
+class AnalysisResultV2:
+    """Extended analysis result combining all new analysis modules.
+
+    Attributes:
+        taint: Optional taint analysis result.
+        cycles: List of dependency cycles.
+        change_impacts: List of change impact results for key files.
+        hotspots: List of hotspot results.
+        suggested_rules: List of suggested linting rules.
+        layer_violations: List of layer violations.
+    """
+
+    taint: TaintAnalysisResult | None = None
+    cycles: List[DependencyCycle] = field(default_factory=list)
+    change_impacts: List[ChangeImpact] = field(default_factory=list)
+    hotspots: List[HotspotResult] = field(default_factory=list)
+    suggested_rules: List[SuggestedRule] = field(default_factory=list)
+    layer_violations: List[LayerViolation] = field(default_factory=list)
