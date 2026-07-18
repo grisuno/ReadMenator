@@ -102,6 +102,57 @@ class TestFileCacheContract(unittest.TestCase):
         result = self.cache.compute_hash(path)
         self.assertEqual(result, "")
 
+    # ------------------------------------------------------------------
+    # Semantic analysis cache tests
+    # ------------------------------------------------------------------
+
+    def test_save_and_load_analysis_roundtrip(self) -> None:
+        data = {"god_nodes": [["a.py", 10.5]], "communities": []}
+        self.cache.save_analysis("analysis_v2", data)
+        loaded = self.cache.load_analysis("analysis_v2")
+        self.assertIsNotNone(loaded)
+        self.assertEqual(loaded["god_nodes"], data["god_nodes"])
+
+    def test_load_missing_analysis_key_returns_none(self) -> None:
+        result = self.cache.load_analysis("nonexistent_key")
+        self.assertIsNone(result)
+
+    def test_clear_analysis_specific_key(self) -> None:
+        self.cache.save_analysis("key_a", {"data": 1})
+        self.cache.save_analysis("key_b", {"data": 2})
+        self.cache.clear_analysis("key_a")
+        self.assertIsNone(self.cache.load_analysis("key_a"))
+        self.assertIsNotNone(self.cache.load_analysis("key_b"))
+
+    def test_clear_analysis_all_keys(self) -> None:
+        self.cache.save_analysis("key_a", {"data": 1})
+        self.cache.save_analysis("key_b", {"data": 2})
+        self.cache.clear_analysis()
+        self.assertIsNone(self.cache.load_analysis("key_a"))
+        self.assertIsNone(self.cache.load_analysis("key_b"))
+
+    def test_has_changed_since_last_analysis_returns_true_on_first_run(self) -> None:
+        path = self._write("test.py", "content")
+        result = self.cache.has_changed_since_last_analysis({"test.py": path})
+        self.assertTrue(result)
+
+    def test_has_changed_since_last_analysis_returns_false_when_no_changes(self) -> None:
+        path = self._write("stable.py", "content")
+        h = self.cache.compute_hash(path)
+        self.cache.save({"stable.py": h})
+        self.cache.save_analysis("analysis_v2", {"done": True})
+        result = self.cache.has_changed_since_last_analysis({"stable.py": path})
+        self.assertFalse(result)
+
+    def test_has_changed_since_last_analysis_returns_true_when_file_changed(self) -> None:
+        path = self._write("changed.py", "original")
+        h = self.cache.compute_hash(path)
+        self.cache.save({"changed.py": h})
+        self.cache.save_analysis("analysis_v2", {"done": True})
+        path.write_text("modified")
+        result = self.cache.has_changed_since_last_analysis({"changed.py": path})
+        self.assertTrue(result)
+
 
 if __name__ == "__main__":
     unittest.main()

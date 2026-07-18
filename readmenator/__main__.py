@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from readmenator._app import readmenatorApplication
+from readmenator._mcp_server import main as mcp_main
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  audit-deep              Run deep analysis (taint, hotspots, cycles)\n"
             "  export-sarif            Export security findings as SARIF\n"
             "  export-rules            Export suggested linting rules as Semgrep YAML\n"
+            "  serve [path]            Start MCP stdio server for AI agent queries\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -39,6 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  --test                  Run the test suite\n"
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
             "  --sarif                 Generate SARIF audit file\n"
+            "  --context-budget N      Target token budget for KB (0 = full output)\n"
         ),
     )
     parser.add_argument("target", nargs="?", default=".", help="Target directory to analyze (default: current directory)")
@@ -53,6 +56,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--audit", action="store_true", help="Run static security analysis and include findings in output")
     parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
+    parser.add_argument("--context-budget", type=int, default=0, help="Target token budget for KNOWLEDGE_BASE.md summary (0 = full output)")
     return parser
 
 
@@ -150,6 +154,9 @@ def main() -> None:
         elif command == "export-rules":
             app.export_rules(target)
             return
+        elif command == "serve":
+            mcp_main()
+            return
         elif command == "--rebuild":
             app.rebuild(target)
             return
@@ -195,8 +202,13 @@ def main() -> None:
     if args.rebuild or not output_path.exists():
         app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
     else:
-        result = app.summary(target)
-        print(result)
+        if args.context_budget > 0:
+            from readmenator._config import Config as Cfg
+            app = readmenatorApplication(Cfg(CONTEXT_BUDGET=args.context_budget))
+            app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
+        else:
+            result = app.summary(target)
+            print(result)
 
 
 if __name__ == "__main__":

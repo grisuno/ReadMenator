@@ -34,6 +34,7 @@ readmenator/
   _sarif.py         - SARIF v2.1.0 output generator for security findings
   _pipeline.py      - AnalyzerFactory (lazy init) + DeepAnalysisRunner (decoupled v2 analysis)
   _app.py           - Application orchestrator (thin facade over AnalyzerFactory)
+  _mcp_server.py    - MCP stdio server exposing tools + resources for AI agent queries
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
@@ -55,6 +56,7 @@ tests/
   test_rule_gen.py      - Rule generation contract tests
   test_sarif.py         - SARIF export contract tests
   test_layer_rules.py   - Layer violation detection contract tests
+  test_mcp_server.py    - MCP server protocol, tools, and resources contract tests
 ```
 
 ## Contracts
@@ -79,6 +81,7 @@ tests/
 - Rule generation settings (RULE_GEN_ENABLED, RULE_GEN_MIN_PATTERN_COUNT, RULE_GEN_OUTPUT_DIR)
 - Layer violation settings (LAYER_VIOLATION_ENABLED, LAYER_VIOLATION_STRICT_MODE)
 - Privacy and gitignore settings (PRIVACY_MODE, GITIGNORE_AWARE)
+- Context budget for token-optimized KB (CONTEXT_BUDGET)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -160,6 +163,7 @@ tests/
 - Cross-reference: "Imported by" links for each file
 - "Classes" not "Classs" (regression guard)
 - Truncation note when MERMAID_MAX_NODES exceeded
+- Context budget mode: when CONTEXT_BUDGET > 0, generates compact summary first, prioritizes sections by architectural importance, truncates at specified token budget
 
 ### Query Engine Contract
 - find_symbol(name): exact + fuzzy match
@@ -257,6 +261,31 @@ tests/
 - 5-layer model: presentation, business_logic, data_access, infrastructure, testing
 - Detection via path patterns, naming conventions, and imported frameworks
 - layer_summary: static method, counts files per layer
+
+### Cache Contract
+- SHA256 content hash cache for incremental scanning
+- FileCache class with load/save/compute_hash/find_changed/prune_deleted methods
+- Cache stored in CACHE_DIR/file_hashes.json within project
+- Empty cache on first run returns empty dict
+- Supports batch hash computation
+- Handles missing/deleted files gracefully
+- **Semantic cache**: save_analysis/load_analysis/clear_analysis for caching analysis results
+- **Change-aware analysis**: has_changed_since_last_analysis() for detecting staleness
+
+### MCP Server Contract
+- JSON-RPC 2.0 stdio-based MCP protocol server (zero external deps)
+- `initialize` handshake exchanges protocol version + server capabilities
+- `tools/list` returns all tool definitions with input schemas
+- `tools/call` dispatches to registered tool handlers, returns text content
+- `resources/list` returns all resource definitions with mime types
+- `resources/read` returns resource content (JSON or Markdown)
+- `notifications/initialized` acknowledged silently (no response)
+- Unknown methods return standard JSON-RPC error codes
+- Uninitialized requests return error code -32000
+- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json
+- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb
+- Integrated with readmenatorApplication for all query/analysis operations
+- Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
 
 ### Watcher Contract
 - Polling-based filesystem monitor (no external deps)

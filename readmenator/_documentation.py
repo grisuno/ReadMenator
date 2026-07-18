@@ -100,7 +100,151 @@ class DocumentationGenerator:
         sections.extend(self._build_cpg_block(nodes, edges, resolved_edges, analysis))
         sections.extend(self._build_architecture_reference(nodes, edges))
 
-        return "\n".join(sections)
+        content = "\n".join(sections)
+
+        if self._config.CONTEXT_BUDGET > 0:
+            content = self._apply_context_budget(
+                content, nodes, edges, resolved_edges, analysis, analysis_v2, findings,
+            )
+
+        return content
+
+    def _apply_context_budget(
+        self,
+        content: str,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        analysis: Optional[AnalysisResult] = None,
+        analysis_v2: Optional[AnalysisResultV2] = None,
+        findings: Optional[List[SecurityFinding]] = None,
+    ) -> str:
+        budget = self._config.CONTEXT_BUDGET
+        if budget <= 0:
+            return content
+
+        chars_per_token = 4
+        max_chars = budget * chars_per_token
+
+        total_symbols = sum(len(n.symbols) for n in nodes)
+        import_edges = sum(1 for e in edges if e.relation == "imports")
+        langs = sorted(set(n.language for n in nodes))
+        top_modules = sorted(
+            nodes,
+            key=lambda n: (sum(1 for e in edges if e.source == n.node_id), len(n.symbols)),
+            reverse=True,
+        )[:5]
+
+        compact_lines = [
+            "# Knowledge Base Summary",
+            "",
+            f"Files: {len(nodes)} | Symbols: {total_symbols} | Imports: {import_edges} | "
+            f"Languages: {len(langs)} ({', '.join(langs)})",
+            "",
+        ]
+
+        if analysis and analysis.god_nodes:
+            gods = []
+            for nid, score in analysis.god_nodes[:5]:
+                gods.append(f"{nid.split('/')[-1]}({score:.1f})")
+            compact_lines.append(f"God Nodes: {', '.join(gods)}")
+
+        if analysis and analysis.communities:
+            compact_lines.append(
+                f"Communities: {len(analysis.communities)} "
+                f"(avg cohesion: {sum(c.cohesion for c in analysis.communities)/len(analysis.communities):.2f})"
+            )
+
+        if analysis_v2:
+            if analysis_v2.hotspots:
+                compact_lines.append(f"Hotspots: {len(analysis_v2.hotspots)} files")
+            if analysis_v2.cycles:
+                compact_lines.append(f"Dependency Cycles: {len(analysis_v2.cycles)}")
+            if analysis_v2.taint and analysis_v2.taint.paths:
+                compact_lines.append(
+                    f"Taint: {analysis_v2.taint.source_count} sources, "
+                    f"{analysis_v2.taint.sink_count} sinks, "
+                    f"{len(analysis_v2.taint.paths)} paths"
+                )
+            if analysis_v2.layer_violations:
+                compact_lines.append(f"Layer Violations: {len(analysis_v2.layer_violations)}")
+
+        if findings:
+            sev_count = {}
+            for f in findings:
+                sev_count[f.severity] = sev_count.get(f.severity, 0) + 1
+            sev_str = ", ".join(f"{k}: {v}" for k, v in sorted(sev_count.items()))
+            compact_lines.append(f"Security Findings: {len(findings)} ({sev_str})")
+
+        compact_lines.extend(["", "---", ""])
+
+        compact = "\n".join(compact_lines)
+
+        if len(compact) >= max_chars:
+            return compact[:max_chars] + "\n\n... (truncated by context budget)"
+
+        remaining = max_chars - len(compact)
+        sections = content.split("\n---\n")
+        priority_order = [
+            "## God Nodes",
+            "## Community Analysis",
+            "## Statistics Dashboard",
+            "## Hotspot Analysis",
+            "## Taint Propagation Map",
+            "## Dependency Cycles",
+            "## Change Impact Analysis",
+            "## Architecture Violations",
+            "## Security Audit",
+            "## Suggested Linting Rules",
+            "## Enhanced Security Audit",
+            "## Suggested Questions",
+            "## Surprising Connections",
+            "## Architectural Layers",
+            "## Structural Knowledge Map",
+            "## Code Property Graph",
+            "## Table of Contents",
+            "## Architecture Reference",
+        ]
+
+        ordered = [compact]
+        seen_headers = set()
+        for target_header in priority_order:
+            if remaining <= 0:
+                break
+            for section in sections:
+                if not section.strip():
+                    continue
+                first_line = section.strip().split("\n")[0]
+                if first_line == target_header and first_line not in seen_headers:
+                    seen_headers.add(first_line)
+                    section_text = section.strip() + "\n\n---\n\n"
+                    if len(section_text) <= remaining:
+                        ordered.append(section_text)
+                        remaining -= len(section_text)
+                    else:
+                        section_text = section_text[:remaining] + "\n\n... (truncated by context budget)"
+                        ordered.append(section_text)
+                        remaining = 0
+
+        if remaining > 0:
+            for section in sections:
+                if not section.strip():
+                    continue
+                first_line = section.strip().split("\n")[0]
+                if first_line not in seen_headers:
+                    seen_headers.add(first_line)
+                    section_text = section.strip() + "\n\n---\n\n"
+                    if len(section_text) <= remaining:
+                        ordered.append(section_text)
+                        remaining -= len(section_text)
+                    else:
+                        ordered.append(section_text[:remaining])
+                        remaining = 0
+
+        result = "".join(ordered)
+        if len(result) > max_chars:
+            result = result[:max_chars] + "\n\n... (truncated by context budget)"
+        return result
 
     def _build_toc(
         self,

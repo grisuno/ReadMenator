@@ -33,6 +33,7 @@ Issues = "https://github.com/grisuno/ReadMenator/issues"
 
 [project.scripts]
 readmenator = "readmenator.__main__:main"
+readmenator-mcp = "readmenator._mcp_server:main"
 
 [tool.hatch.build.targets.sdist]
 include = [

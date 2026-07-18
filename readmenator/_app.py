@@ -114,6 +114,31 @@ class readmenatorApplication:
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
 
+        cache = FileCache(self._config, str(root))
+        file_paths: Dict[str, Path] = {n.node_id: root / n.node_id for n in nodes}
+        hashes = cache.compute_hashes(file_paths)
+        if hashes:
+            cache.save(hashes)
+        cache.save_analysis("analysis_v2", {
+            "god_nodes": [(nid, s) for nid, s in (analysis.god_nodes or [])],
+            "communities": [
+                {"id": c.community_id, "label": c.label,
+                 "file_ids": list(c.file_ids), "cohesion": c.cohesion, "size": c.size}
+                for c in (analysis.communities or [])
+            ],
+            "surprising_connections": list(analysis.surprising_connections or []),
+            "suggested_questions": list(analysis.suggested_questions or []),
+        })
+        cache.save_analysis("layers", dict(layers))
+        cache.save_analysis("security", {
+            "findings": [
+                {"file_path": f.file_path, "line": f.line,
+                 "severity": f.severity, "rule_id": f.rule_id,
+                 "description": f.description, "snippet": f.snippet, "cwe": f.cwe}
+                for f in findings
+            ]
+        })
+
         self._write_sidecar_outputs(root, findings, analysis_v2)
         self._log_summary(
             nodes, edges, resolved_edges, analysis, layer_summary, analysis_v2, findings,
@@ -207,17 +232,75 @@ class readmenatorApplication:
         self._last_edges = edges
         resolved_edges = self._resolve_imports(nodes, edges, target_dir)
         self._last_resolved_edges = resolved_edges
-        analysis = self._factory.analyzer.analyze(nodes, edges, resolved_edges)
+
+        cached_analysis = cache.load_analysis("analysis_v2")
+        cached_findings = cache.load_analysis("security")
+
+        file_paths: Dict[str, Path] = {n.node_id: root / n.node_id for n in nodes}
+        needs_reanalysis = cache.has_changed_since_last_analysis(file_paths)
+
+        if needs_reanalysis or cached_analysis is None:
+            analysis = self._factory.analyzer.analyze(nodes, edges, resolved_edges)
+            analysis_v2 = self._deep_runner.run(
+                nodes, edges, resolved_edges,
+                LayerDetector().detect(nodes, edges),
+                {n.node_id: "" for n in nodes},
+            )
+            layers = LayerDetector().detect(nodes, edges)
+            cache.save_analysis("analysis_v2", {
+                "god_nodes": [(nid, s) for nid, s in (analysis.god_nodes or [])],
+                "communities": [
+                    {"id": c.community_id, "label": c.label,
+                     "file_ids": list(c.file_ids), "cohesion": c.cohesion, "size": c.size}
+                    for c in (analysis.communities or [])
+                ],
+                "surprising_connections": list(analysis.surprising_connections or []),
+                "suggested_questions": list(analysis.suggested_questions or []),
+            })
+            cache.save_analysis("layers", dict(layers))
+        else:
+            analysis_data = cached_analysis
+            from readmenator._models import AnalysisResult, CommunityResult
+            communities = [
+                CommunityResult(c["id"], c["label"], set(c["file_ids"]), c["cohesion"], c["size"])
+                for c in analysis_data.get("communities", [])
+            ] if analysis_data.get("communities") else []
+            analysis = AnalysisResult(
+                god_nodes=[tuple(g) for g in analysis_data.get("god_nodes", [])],
+                communities=communities,
+                surprising_connections=[tuple(s) for s in analysis_data.get("surprising_connections", [])],
+                suggested_questions=list(analysis_data.get("suggested_questions", [])),
+                node_count=len(nodes),
+                edge_count=len(edges),
+            )
+            analysis_v2 = None
+            layers = cache.load_analysis("layers") or {}
 
         if run_security is None:
             run_security = self._config.SECURITY_ENABLED
         findings: List[SecurityFinding] = []
         if run_security:
-            findings = self._factory.security.scan(root)
+            if cached_findings and not needs_reanalysis:
+                from readmenator._models import SecurityFinding
+                findings = [
+                    SecurityFinding(**f) for f in cached_findings.get("findings", [])
+                ]
+            else:
+                findings = self._factory.security.scan(root)
+                cache.save_analysis("security", {
+                    "findings": [
+                        {"file_path": f.file_path, "line": f.line,
+                         "severity": f.severity, "rule_id": f.rule_id,
+                         "description": f.description, "snippet": f.snippet,
+                         "cwe": f.cwe}
+                        for f in findings
+                    ]
+                })
             self._last_findings = findings
 
         content = self._factory.generator.generate(
-            nodes, edges, resolved_edges, analysis, findings=findings,
+            nodes, edges, resolved_edges, analysis,
+            layers=layers, findings=findings, analysis_v2=analysis_v2,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")

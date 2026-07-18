@@ -244,3 +244,66 @@ class TestDocumentationGeneratorContract(unittest.TestCase):
         self.assertIn("## Security Audit", content)
         self.assertIn("Critical", content)
         self.assertIn("eval(x)", content)
+
+    # ------------------------------------------------------------------
+    # Context budget tests
+    # ------------------------------------------------------------------
+
+    def test_context_budget_zero_returns_full_content(self) -> None:
+        cfg = Config(CONTEXT_BUDGET=0)
+        generator = DocumentationGenerator(cfg)
+        node = Node(node_id="main.py", label="main.py", kind="module", language="py")
+        content = generator.generate([node], [])
+        self.assertIn("# Polyglot Codebase Knowledge Graph", content)
+        self.assertIn("## Architecture Reference", content)
+
+    def test_context_budget_returns_compact_summary(self) -> None:
+        cfg = Config(CONTEXT_BUDGET=200)
+        generator = DocumentationGenerator(cfg)
+        node = Node(node_id="main.py", label="main.py", kind="module", language="py")
+        content = generator.generate([node], [])
+        self.assertIn("# Knowledge Base Summary", content)
+        self.assertIn("Files:", content)
+
+    def test_context_budget_prioritizes_god_nodes(self) -> None:
+        cfg = Config(CONTEXT_BUDGET=500)
+        generator = DocumentationGenerator(cfg)
+        from readmenator._models import AnalysisResult
+        node = Node(node_id="core.py", label="core.py", kind="module", language="py",
+                     symbols=[Symbol(name="run", kind="function", line=1)])
+        analysis = AnalysisResult(
+            god_nodes=[("core.py", 15.5)],
+            communities=[],
+            surprising_connections=[],
+            suggested_questions=[],
+            node_count=1,
+            edge_count=0,
+        )
+        content = generator.generate([node], [], analysis=analysis)
+        self.assertIn("core.py", content)
+
+    def test_context_budget_truncates_at_limit(self) -> None:
+        cfg = Config(CONTEXT_BUDGET=50)
+        generator = DocumentationGenerator(cfg)
+        node = Node(node_id="long.py", label="long.py", kind="module", language="py",
+                     symbols=[Symbol(name="x", kind="function", line=1)])
+        content = generator.generate([node], [])
+        self.assertIn("truncated", content)
+
+    def test_context_budget_includes_security_findings(self) -> None:
+        cfg = Config(CONTEXT_BUDGET=1000)
+        generator = DocumentationGenerator(cfg)
+        from readmenator._models import SecurityFinding
+        findings = [
+            SecurityFinding(
+                file_path="danger.py",
+                line=5,
+                severity="critical",
+                rule_id="SEC001",
+                description="Hardcoded secret",
+                snippet="password = '1234'",
+                cwe="CWE-798",
+            )
+        ]
+        content = generator.generate([], [], findings=findings)
+        self.assertIn("Security Findings:", content)

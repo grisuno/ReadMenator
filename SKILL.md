@@ -1,253 +1,181 @@
 ---
 name: readmenator
-description: "Zero-token static analysis codebase context. Use KNOWLEDGE_BASE.md as source of truth -- no LLM extraction, no token cost. Pure AST + regex. Now with community detection, god nodes, surprising connections, and interactive HTML/SVG exports."
+description: "Zero-token static analysis codebase context. MCP-native AI agent integration. Use MCP tools for queries -- no LLM extraction, no KB file parsing, no token cost. Pure AST + regex."
 trigger: /readmenator
 ---
 
 # /readmenator
 
-Turn any codebase into a queryable knowledge base using pure static analysis. No LLMs. No tokens. No cloud. A single `KNOWLEDGE_BASE.md` file serves as the source of truth for all codebase questions.
+Turn any codebase into a queryable knowledge base using pure static analysis. No LLMs. No tokens. No cloud.
 
-Contrast with graphify: graphify costs tokens to extract entities and relationships via LLM agents. ReadMenator generates the same structural knowledge through deterministic AST/regex parsing -- zero tokens, instant, repeatable. Now with community detection, god node identification, surprising connection discovery, and suggested questions -- all the structural intelligence of graphify without the token cost.
+## Architecture: MCP-first, KB-fallback
+
+```
+Agent (Claude) ──MCP tools──> readmenator MCP server ──> live queries (50-200 tokens)
+              \
+               ──read file──> KNOWLEDGE_BASE.md ──> fallback (2000-8000 tokens)
+```
+
+The MCP server is the **primary** interface. The KNOWLEDGE_BASE.md file is the **fallback** for agents that don't support MCP tool calls.
+
+**Token savings with MCP:**
+| Query type | Without MCP (read KB.md) | With MCP (tool call) | Savings |
+|-----------|------------------------|---------------------|---------|
+| Summary  | 2000-8000 tokens | ~300 tokens | 85-96% |
+| Symbol search | Full KB parse | ~150 tokens | 93-98% |
+| Explain symbol | Parse KB for context | ~100 tokens | 95-99% |
+| Path tracing | Parse KB for context | ~100 tokens | 95-99% |
+| Daily (10 queries) | 20K-80K tokens | ~3K tokens | 85-96% |
 
 ## Usage
 
 ```
-/readmenator                              # ensure KNOWLEDGE_BASE.md exists, then use as context
+/readmenator                              # ensure KB + MCP server exist, then use tools
 /readmenator <path>                       # target a specific directory
-/readmenator --rebuild                    # force regeneration even if KNOWLEDGE_BASE.md exists
-/readmenator query "<question>"           # answer a question using the knowledge base
-/readmenator explain "<ClassName>"        # explain a specific symbol with its relationships
-/readmenator path "<SymbolA>" "<SymbolB>" # trace the dependency chain between two symbols (bidirectional)
-/readmenator update                       # incremental rebuild using SHA256 cache
-/readmenator analyze                      # run community detection and graph analysis
-/readmenator --export-all                 # export graph.json + graph.html + graph.svg
-/readmenator --json                       # export graph.json (GraphRAG-ready)
-/readmenator --html                       # export graph.html (interactive vis.js)
-/readmenator --svg                        # export graph.svg (static)
-/readmenator --no-analysis                # skip community detection (faster)
+/readmenator --rebuild                    # force regeneration
+/readmenator serve <path>                 # start MCP stdio server
+/readmenator --context-budget 500         # generate KB truncated to ~500 tokens
 ```
 
 ## What ReadMenator is for
 
-ReadMenator solves a specific problem: every time you ask an AI about a codebase, it needs to read files to understand the structure. This burns tokens. With ReadMenator, you pre-compute the structural map once (statically, for free), then use that map as context for all subsequent questions.
+ReadMenator pre-computes a structural map of your codebase (statically, for free), then serves it via MCP tools so the AI agent never needs to read source files or parse large KB documents.
 
-What it gives you:
-1. **A structural map** -- classes, functions, methods, imports, all with line numbers and docstrings, organized by file and language
-2. **Mermaid graph** -- visual dependency diagram showing which files import what, which symbols belong to which modules, with internal import edges between project files and community subgraphs
-3. **Community analysis** -- files grouped by import-based communities with cohesion scores
-4. **God nodes** -- most architecturally central files ranked by connectivity
-5. **Surprising connections** -- cross-community indirect bridges
-6. **Suggested questions** -- auto-generated exploration prompts from graph structure
-7. **Statistics dashboard** -- fan-in/fan-out, symbol density, language breakdown
-8. **Multi-format exports** -- JSON (GraphRAG-ready), HTML (interactive vis.js), SVG (static)
-9. **Zero ongoing cost** -- regenerate after code changes, always free
-
-Supported languages (13+): C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly.
+**19 languages:** C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly, Ruby, Swift, Kotlin, Scala, Lua, Elixir.
 
 ## What You Must Do When Invoked
 
 If no path was given, use `.` (current directory). Do not ask the user for a path.
 
-### Step 1 -- Ensure KNOWLEDGE_BASE.md exists
+### Step 1 -- Ensure the MCP server is ready
 
-Check if `KNOWLEDGE_BASE.md` already exists in the target directory. If it does (and `--rebuild` was not given), skip to Step 2.
-
-Otherwise, generate it:
+First, check if KNOWLEDGE_BASE.md exists. Generate it if not:
 
 ```bash
 python3 -m readmenator TARGET_PATH --rebuild
 ```
 
-If installed via pip. Or if the script is available locally:
-
-```bash
-python3 readmenator.py TARGET_PATH
-```
-
-If `readmenator.py` is not in the current directory, find it. Common locations:
-
+If `readmenator` is not installed:
 ```bash
 if [ -f "readmenator.py" ]; then
-    READMENATOR_SCRIPT="readmenator.py"
+    python3 readmenator.py TARGET_PATH
 else
-    echo "readmenator.py not found. Install with: pip install readmenator"
-    exit 1
+    pip install readmenator && python3 -m readmenator TARGET_PATH --rebuild
 fi
-python3 "$READMENATOR_SCRIPT" TARGET_PATH
 ```
 
-Replace `TARGET_PATH` with the actual path. If generation succeeds, print the summary (files, symbols, imports) shown in the script output.
+Replace `TARGET_PATH` with the actual path.
 
-If generation fails, tell the user and stop.
+### Step 2 -- Use MCP tools (primary path)
 
-### Step 2 -- Read KNOWLEDGE_BASE.md as context
+**Do NOT read KNOWLEDGE_BASE.md as text.** Use the MCP tools below instead. They return structured data at a fraction of the token cost.
 
-Read `TARGET_PATH/KNOWLEDGE_BASE.md`. This file now has a richer structure:
+Available MCP tools (when `readmenator serve <path>` is running):
 
-1. **Header** -- metadata (total files, symbols, imports, resolved imports)
-2. **Table of Contents** -- links to all sections
-3. **Statistics Dashboard** -- file counts, fan-in/fan-out, language breakdown
-4. **God Nodes** -- most central files ranked by connectivity
-5. **Community Analysis** -- import-based groups with cohesion scores
-6. **Surprising Connections** -- cross-community indirect bridges
-7. **Suggested Questions** -- auto-generated exploration prompts
-8. **Structural Knowledge Map** -- a Mermaid graph (```mermaid ... ```) showing the file/import dependency diagram. Nodes are modules (rectangles), classes (green), and functions (yellow). External imports are dashed nodes. Internal imports between project files are solid arrows. Community subgraphs group related files.
-9. **Architecture Reference** -- grouped by language, each file lists its symbols with cross-references ("Imported by" links) and file-level docstrings.
+| Tool | Purpose | Token cost |
+|------|---------|-----------|
+| `readmenator.summary` | Codebase overview | ~300 |
+| `readmenator.query(text)` | Free-text symbol search | ~150 |
+| `readmenator.explain(name)` | Full symbol detail | ~100 |
+| `readmenator.path(symbol_a, symbol_b)` | Dependency chain | ~100 |
+| `readmenator.findings(min_severity)` | Security issues | ~200 |
+| `readmenator.security_summary` | Security audit summary | ~100 |
+| `readmenator.taint` | Taint propagation paths | ~300 |
+| `readmenator.hotspots(top_n)` | Hotspot files | ~200 |
+| `readmenator.cycles` | Circular dependencies | ~200 |
+| `readmenator.communities` | Import communities | ~300 |
+| `readmenator.layers` | Architecture layers | ~200 |
+| `readmenator.layer_violations` | Layer rule violations | ~200 |
+| `readmenator.rebuild` | Full KB regeneration | N/A |
+| `readmenator.update` | Incremental update | N/A |
 
-**Parse the Mermaid graph first** to understand the high-level structure (what depends on what). Then use the Architecture Reference to look up specific symbols when answering queries.
+**How to call MCP tools (Claude Desktop):**
 
-**IMPORTANT:** Do NOT read individual source files unless KNOWLEDGE_BASE.md lacks the information needed. The whole point is to avoid reading source files -- KNOWLEDGE_BASE.md IS the context.
+The MCP server communicates via stdin/stdout using JSON-RPC 2.0. Claude Desktop connects automatically when configured with:
 
-### Step 3 -- Answer based on the knowledge base
-
-#### For `/readmenator` (no subcommand)
-
-After Step 1 and Step 2, present a summary:
-
+```json
+{
+  "mcpServers": {
+    "readmenator": {
+      "command": "readmenator-mcp",
+      "args": ["/path/to/project"]
+    }
+  }
+}
 ```
-Knowledge base loaded: N files, M symbols, K imports across L languages.
 
-Top-level modules:
-  - module_a.py (X symbols, imports: a, b, c)
-  - module_b.py (Y symbols, imports: d, e)
-  ...
-
-Key classes: ClassA, ClassB, ClassC
-Key functions: funcX, funcY, funcZ
+Or via Python directly:
+```json
+{
+  "mcpServers": {
+    "readmenator": {
+      "command": "python3",
+      "args": ["-m", "readmenator._mcp_server", "/path/to/project"]
+    }
+  }
+}
 ```
 
-Also highlight notable findings: god nodes, communities, surprising connections. Then offer to explore.
+### Step 2b -- Fallback: Read KNOWLEDGE_BASE.md (only if MCP unavailable)
 
-#### For `/readmenator query "<question>"`
+If the MCP server is not running AND you cannot start it, read `TARGET_PATH/KNOWLEDGE_BASE.md` directly.
 
-1. Parse the question for key terms (class names, function names, file names, concepts).
-2. Search the KNOWLEDGE_BASE.md content you already read for those terms.
-3. Answer using ONLY what the knowledge base contains. Cite file paths and line numbers from the Architecture Reference.
-4. If the knowledge base lacks enough detail, say so -- do not hallucinate. Offer to read the specific source file if needed.
+The file structure is deterministic:
 
-#### For `/readmenator explain "<SymbolName>"`
+1. **Header** -- metadata (total files, symbols, imports)
+2. **Statistics Dashboard** -- file counts, fan-in/fan-out, language breakdown
+3. **God Nodes** -- most central files ranked by connectivity
+4. **Community Analysis** -- import-based groups with cohesion scores
+5. **Structural Knowledge Map** -- Mermaid graph (```mermaid ... ```)
+6. **Architecture Reference** -- grouped by language, each file lists its symbols
 
-1. Find the symbol in the Architecture Reference section of KNOWLEDGE_BASE.md.
-2. Report: its type (class/function), file path, line number, docstring.
-3. Use the Mermaid graph to identify what imports it (incoming edges) and what it imports (outgoing edges).
-4. Use the "Imported by" cross-reference to list files that depend on it.
-5. List other symbols in the same file for context.
+If `--context-budget` was used during generation, the KB starts with a compact summary section (first ~400 chars) followed by high-priority analysis sections, truncated to the specified token budget.
 
-#### For `/readmenator path "<SymbolA>" "<SymbolB>"`
+### Step 3 -- Answer based on MCP tool results
 
-1. Find both symbols in KNOWLEDGE_BASE.md.
-2. Trace the import chain between their containing files using the Mermaid graph.
-3. Report the path as: `file_a.py --imports--> module_x --imports--> file_b.py`
-4. If no path exists, report the disconnected components.
+For `/readmenator` (no subcommand): Call `readmenator.summary` and present the result.
+
+For `/readmenator query "<question>"`: Call `readmenator.query(text="<question>")`.
+
+For `/readmenator explain "<symbol>"`: Call `readmenator.explain(name="<symbol>")`.
+
+For `/readmenator path "<A>" "<B>"`: Call `readmenator.path(symbol_a="<A>", symbol_b="<B>")`.
 
 ### Step 4 -- Offer regeneration
 
-When you finish answering, if the KNOWLEDGE_BASE.md is older than the source files (check git status or modify times), suggest:
+When done, suggest:
+> "The knowledge base may be stale. Run `/readmenator --rebuild` to regenerate, or use `readmenator.rebuild` via MCP."
 
-> "The knowledge base may be stale. Run `/readmenator --rebuild` to regenerate it."
+## MCP Resources (structured data access)
 
-## Structure of KNOWLEDGE_BASE.md (for reference)
+For agents that support MCP resources:
 
-The agent should understand this format to parse it efficiently:
+| Resource | Content | Type |
+|----------|---------|------|
+| `readmenator://summary` | Structured JSON: files, symbols, imports, langs, god nodes | JSON |
+| `readmenator://graph` | Full graph: nodes + edges | JSON |
+| `readmenator://findings` | All security findings grouped by severity | JSON |
+| `readmenator://analysis` | Complete analysis: communities, taint, hotspots, cycles | JSON |
+| `readmenator://kb` | Full KNOWLEDGE_BASE.md text | Markdown |
 
-```
-# Polyglot Codebase Knowledge Graph
-
-> Generated offline by **readmenator**. ...
-
-**Total Files Parsed:** N | **Total Symbols Extracted:** M | **Total Imports:** K | **Resolved Imports:** R
-
-## Table of Contents
-1. [Statistics Dashboard](#statistics-dashboard)
-2. [God Nodes](#god-nodes)
-3. [Community Analysis](#community-analysis)
-4. [Surprising Connections](#surprising-connections)
-5. [Suggested Questions](#suggested-questions)
-6. [Structural Knowledge Map](#structural-knowledge-map)
-7. [Architecture Reference](#architecture-reference)
-
----
-
-## Statistics Dashboard
-| Metric | Value |
-|--------|-------|
-| Total Files | N |
-| ...
-
-### Top Files by Import Count (Fan-Out)
-| File | Imports | Symbols | Language |
-| ...
-
-## God Nodes
-| File | Score | Connections |
-| ...
-
-## Community Analysis
-### community_name (Cohesion: X.XX)
-**N files** in this community:
-- `file.py` (py, M symbols)
-...
-
-## Structural Knowledge Map
-```mermaid
-graph TD
-    classDef mod ...
-    classDef cls ...
-    classDef fn ...
-    classDef ext ...
-
-    subgraph community_0 ["Community Label"]
-        module_py["module.py (py)"]
-        class module_py mod;
-        ...
-    end
-
-    module_py -- resolved_imports --> other_py  <- internal edge
-    ext_os["os"]
-    class ext_os ext;
-    module_py -.->|imports| ext_os   <- external import edge (dashed)
-```
-
-## Architecture Reference
-
-### PY (N files)
-
-#### `filename.py`
-**Path:** `path/to/filename.py`
-**File Doc:** *Module-level documentation*
-
-**Imported by:** `file_a.py`, `file_b.py`
-
-**Classes:**
-- `ClassName` (line 42) `class ClassName(Base)` - *Docstring describing the class.*
-
-**Functions:**
-- `function_name` (line 100) `def func(x, y)` - *Docstring describing the function.*
-```
-
-## How this compares to graphify
+## Comparison with graphify
 
 | Aspect | graphify | readmenator |
 |--------|----------|-------------|
 | Extraction | LLM agents (tokens) | AST + regex (free) |
-| Output | graph.json + HTML + report | KNOWLEDGE_BASE.md + JSON + HTML + SVG |
-| Languages | Any (LLM reads anything) | 13+ static parsers |
-| Semantic edges | Yes (INFERRED, AMBIGUOUS) | No (structural only) |
-| Community detection | Yes (Leiden/Louvain) | Yes (label propagation) |
-| God node analysis | Yes | Yes |
-| Surprising connections | Yes | Yes |
-| Suggested questions | Yes | Yes |
-| Interactive HTML | Yes (vis.js) | Yes (vis.js) |
-| Cross-document inference | Yes | No (import chains only) |
-| Speed | Minutes (LLM calls) | Seconds |
-| Cost | Token-based | Zero |
-| Regeneration | Full or incremental | Full or incremental (SHA256 cache) |
+| Agent integration | MCP queries | MCP tools + resources |
+| Community detection | Yes (Leiden) | Yes (label propagation) |
+| Semantic edges | Yes (costs tokens) | No (structural only, free) |
+| Security analysis | No | Yes (18 languages) |
+| Taint propagation | No | Yes |
+| Export formats | HTML, JSON, Obsidian | JSON, HTML, SVG, GraphML, Obsidian, SARIF |
+| Token cost per query | ~200 (MCP query) | ~100-300 (MCP tool) |
+| Regeneration cost | Token-based (LLM) | Zero (AST) |
 
-Use readmenator when you need fast, free, structural understanding of a codebase with community intelligence. Use graphify when you need semantic cross-document relationships and multi-modal (pdf/image/video) extraction.
+Use readmenator when you want **zero-token generation + minimal-token queries** via MCP. Use graphify when you need semantic cross-document inference with LLM extraction.
 
 ## Script location
 
-The canonical source lives at:
 - Repo: https://github.com/grisuno/ReadMenator
 - Install: `pip install readmenator`
+- MCP entry: `python3 -m readmenator._mcp_server <path>`

@@ -152,3 +152,5 @@ class Config:
     PRIVACY_MODE: bool = False
 
     GITIGNORE_AWARE: bool = True
+
+    CONTEXT_BUDGET: int = 0
