@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Dict, List, Optional
 
 from readmenator._analyzer import GraphAnalyzer
+from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
 from readmenator._documentation import DocumentationGenerator
@@ -17,6 +18,11 @@ from readmenator._models import (
     Node,
     SecurityFinding,
     TaintAnalysisResult,
+)
+from readmenator._rank import (
+    CompositeRanker,
+    RankConfig,
+    RankedResult,
 )
 from readmenator._rule_gen import RuleGenerator
 from readmenator._sarif import SarifExporter
@@ -47,6 +53,8 @@ class AnalyzerFactory:
         self._sarif: SarifExporter | None = None
         self._cpg: CodePropertyGraph | None = None
         self._layer_detector: LayerDetector | None = None
+        self._last_category: Category | None = None
+        self._last_typed_graph: TypedGraph | None = None
 
     @property
     def scanner(self) -> PolyglotScanner:
@@ -119,6 +127,40 @@ class AnalyzerFactory:
         if self._layer_detector is None:
             self._layer_detector = LayerDetector()
         return self._layer_detector
+
+    def build_typed_graph(
+        self, nodes: List[Node], edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+    ) -> Category:
+        node_ids = {n.node_id for n in nodes}
+        cat = build_category_from_edges(edges, resolved_edges, node_ids)
+        self._last_category = cat
+        self._last_typed_graph = TypedGraph(cat)
+        return cat
+
+    def make_ranker(self, typed_graph: TypedGraph) -> CompositeRanker:
+        """Create a CompositeRanker for the given typed graph."""
+        cfg = RankConfig(
+            alpha=self._config.RANKING_ALPHA,
+            max_iter=self._config.RANKING_MAX_ITER,
+            tolerance=self._config.RANKING_TOLERANCE,
+            top_n=self._config.RANKING_TOP_N,
+            noise_penalty=self._config.RANKING_NOISE_PENALTY,
+            composite_ppr_weight=self._config.RANKING_PPR_WEIGHT,
+            composite_authority_weight=self._config.RANKING_AUTHORITY_WEIGHT,
+            composite_test_weight=self._config.RANKING_TEST_WEIGHT,
+            composite_doc_weight=self._config.RANKING_DOC_WEIGHT,
+            composite_freshness_weight=self._config.RANKING_FRESHNESS_WEIGHT,
+        )
+        return CompositeRanker(typed_graph, config=cfg)
+
+    @property
+    def last_category(self) -> Optional[Category]:
+        return self._last_category
+
+    @property
+    def last_typed_graph(self) -> Optional[TypedGraph]:
+        return self._last_typed_graph
 
 
 class DeepAnalysisRunner:

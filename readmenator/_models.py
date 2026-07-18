@@ -9,7 +9,9 @@ renderer, and query engine depends on these definitions.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Optional
+
+from readmenator._category import EdgeKind  # noqa: F401
 
 
 @dataclass
@@ -61,12 +63,14 @@ class Edge:
         target: Node ID of the target (dependency) file or module.
         relation: Semantic relation label (e.g. "imports", "resolved_imports").
         confidence: Confidence tier ("EXTRACTED" for structural, "INFERRED" for heuristic).
+        kind: Optional typed edge kind for ranking-aware computations.
     """
 
     source: str
     target: str
     relation: str
     confidence: str = "EXTRACTED"
+    kind: Optional[EdgeKind] = None
 
 
 @dataclass

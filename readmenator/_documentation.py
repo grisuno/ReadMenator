@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import subprocess
 from collections import Counter
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
@@ -19,6 +20,7 @@ from readmenator._models import (
     TaintAnalysisResult,
     pluralize_symbol_kind,
 )
+from readmenator._rank import RankedResult, RankedItem
 
 
 class DocumentationGenerator:
@@ -29,7 +31,8 @@ class DocumentationGenerator:
     god nodes, community analysis, surprising connections, architecture
     layers, security audit, taint analysis, hotspots, dependency cycles,
     change impact, architecture violations, suggested rules, CPG block,
-    and per-language architecture sections with pluralised symbol kind headings.
+    ranking metadata, orphans, query recipes, and per-language architecture
+    sections with pluralised symbol kind headings.
     """
 
     def __init__(self, config: Config) -> None:
@@ -46,6 +49,34 @@ class DocumentationGenerator:
         self._cpg = CodePropertyGraph(privacy_mode=config.PRIVACY_MODE)
         self._plural_map: Dict[str, str] = dict(config.SYMBOL_TYPE_PLURALS)
 
+    def _ranking_version(self) -> str:
+        if not self._config.RANKING_ENABLED:
+            return ""
+        weights = (
+            f"ppr:{self._config.RANKING_PPR_WEIGHT},"
+            f"auth:{self._config.RANKING_AUTHORITY_WEIGHT},"
+            f"test:{self._config.RANKING_TEST_WEIGHT},"
+            f"doc:{self._config.RANKING_DOC_WEIGHT},"
+            f"fresh:{self._config.RANKING_FRESHNESS_WEIGHT}"
+        )
+        commit = self._get_git_commit()
+        return (
+            f"<!-- ranking_model: v1.0 | weights: {{{weights}}} | "
+            f"alpha:{self._config.RANKING_ALPHA} | "
+            f"commit:{commit} | date:2026-07-18 -->"
+        )
+
+    @staticmethod
+    def _get_git_commit() -> str:
+        try:
+            result = subprocess.run(
+                ["git", "rev-parse", "--short", "HEAD"],
+                capture_output=True, text=True, timeout=2,
+            )
+            return result.stdout.strip()[:8] if result.returncode == 0 else "unknown"
+        except Exception:
+            return "unknown"
+
     def generate(
         self,
         nodes: List[Node],
@@ -55,6 +86,7 @@ class DocumentationGenerator:
         layers: Optional[Dict[str, str]] = None,
         findings: Optional[List[SecurityFinding]] = None,
         analysis_v2: Optional[AnalysisResultV2] = None,
+        ranked: Optional[RankedResult] = None,
     ) -> str:
         total_symbols = sum(len(n.symbols) for n in nodes)
         import_edges = sum(1 for e in edges if e.relation == "imports")
@@ -62,7 +94,7 @@ class DocumentationGenerator:
             nodes, edges, resolved_edges, analysis
         )
 
-        sections: List[str] = [
+        lines: List[str] = [
             "# Polyglot Codebase Knowledge Graph",
             "",
             "> Generated offline by **readmenator**. "
@@ -77,30 +109,38 @@ class DocumentationGenerator:
         ]
 
         if resolved_edges:
-            sections.append(
+            lines.append(
                 f" | **Resolved Imports:** {len(resolved_edges)}"
             )
-        sections.extend(["", ""])
 
-        sections.extend(self._build_toc(nodes, analysis, layers, findings, analysis_v2, is_truncated))
-        sections.extend(self._build_dashboard(nodes, edges, resolved_edges))
-        sections.extend(self._build_layers(layers, nodes))
-        sections.extend(self._build_god_nodes(analysis))
-        sections.extend(self._build_community_analysis(analysis, nodes))
-        sections.extend(self._build_surprising_connections(analysis, nodes))
-        sections.extend(self._build_suggested_questions(analysis))
-        sections.extend(self._build_taint_analysis(analysis_v2))
-        sections.extend(self._build_hotspots(analysis_v2))
-        sections.extend(self._build_dependency_cycles(analysis_v2))
-        sections.extend(self._build_change_impact(analysis_v2))
-        sections.extend(self._build_layer_violations(analysis_v2))
-        sections.extend(self._build_suggested_rules(analysis_v2))
-        sections.extend(self._build_security_findings(findings))
-        sections.extend(self._build_mermaid_section(graph_output, is_truncated))
-        sections.extend(self._build_cpg_block(nodes, edges, resolved_edges, analysis))
-        sections.extend(self._build_architecture_reference(nodes, edges))
+        ranking_meta = self._ranking_version()
+        if ranking_meta:
+            lines.extend(["", ranking_meta])
+        lines.extend(["", ""])
 
-        content = "\n".join(sections)
+        lines.extend(self._build_toc(nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked))
+        lines.extend(self._build_dashboard(nodes, edges, resolved_edges))
+        lines.extend(self._build_layers(layers, nodes))
+        if ranked:
+            lines.extend(self._build_ranked_context(ranked))
+        lines.extend(self._build_god_nodes(analysis, ranked))
+        lines.extend(self._build_community_analysis(analysis, nodes))
+        lines.extend(self._build_surprising_connections(analysis, nodes))
+        lines.extend(self._build_suggested_questions(analysis))
+        lines.extend(self._build_taint_analysis(analysis_v2))
+        lines.extend(self._build_hotspots(analysis_v2, ranked))
+        lines.extend(self._build_dependency_cycles(analysis_v2))
+        lines.extend(self._build_change_impact(analysis_v2))
+        lines.extend(self._build_layer_violations(analysis_v2))
+        lines.extend(self._build_suggested_rules(analysis_v2))
+        lines.extend(self._build_security_findings(findings))
+        lines.extend(self._build_orphans(nodes, analysis_v2, ranked))
+        lines.extend(self._build_query_recipes())
+        lines.extend(self._build_mermaid_section(graph_output, is_truncated))
+        lines.extend(self._build_cpg_block(nodes, edges, resolved_edges, analysis))
+        lines.extend(self._build_architecture_reference(nodes, edges))
+
+        content = "\n".join(lines)
 
         if self._config.CONTEXT_BUDGET > 0:
             content = self._apply_context_budget(
@@ -254,6 +294,7 @@ class DocumentationGenerator:
         findings: Optional[List[SecurityFinding]],
         analysis_v2: Optional[AnalysisResultV2],
         is_truncated: bool,
+        ranked: Optional[RankedResult] = None,
     ) -> List[str]:
         toc: List[str] = ["## Table of Contents", ""]
         toc.append("1. [Statistics Dashboard](#statistics-dashboard)")
@@ -261,6 +302,10 @@ class DocumentationGenerator:
 
         toc.append(f"{entry}. [Architectural Layers](#architectural-layers)")
         entry += 1
+
+        if ranked:
+            toc.append(f"{entry}. [Ranked Context](#ranked-context)")
+            entry += 1
 
         if analysis and analysis.god_nodes:
             toc.append(f"{entry}. [God Nodes](#god-nodes)")
@@ -297,6 +342,17 @@ class DocumentationGenerator:
         if findings:
             toc.append(f"{entry}. [Security Audit](#security-audit)")
             entry += 1
+
+        has_orphans = any(
+            not (n.doc or any(s.doc for s in n.symbols))
+            for n in nodes
+        )
+        if has_orphans:
+            toc.append(f"{entry}. [Orphans](#orphans)")
+            entry += 1
+
+        toc.append(f"{entry}. [Query Recipes](#query-recipes)")
+        entry += 1
 
         toc.append(f"{entry}. [Structural Knowledge Map](#structural-knowledge-map)")
         entry += 1
@@ -428,7 +484,9 @@ class DocumentationGenerator:
         return lines
 
     def _build_god_nodes(
-        self, analysis: Optional[AnalysisResult]
+        self,
+        analysis: Optional[AnalysisResult],
+        ranked: Optional[RankedResult] = None,
     ) -> List[str]:
         if not analysis or not analysis.god_nodes:
             return []
@@ -438,12 +496,18 @@ class DocumentationGenerator:
             "Most architecturally central files ranked by combined "
             "import/export degree and symbol richness.",
             "",
-            "| File | Score | Connections |",
-            "|------|-------|-------------|",
+            "| File | Score | Connections | PageRank |",
+            "|------|-------|-------------|----------|",
         ]
+        ranked_scores: Dict[str, float] = {}
+        if ranked:
+            for item in ranked.items:
+                ranked_scores[item.node_id] = item.authority_score
+
         for nid, score in analysis.god_nodes[:10]:
             label = nid.split("/")[-1] if "/" in nid else nid
-            lines.append(f"| `{label}` | {score:.1f} | |")
+            pr = ranked_scores.get(nid, 0.0)
+            lines.append(f"| `{label}` | {score:.1f} | | {pr:.4f} |")
         lines.extend(["", "---", ""])
         return lines
 
@@ -521,6 +585,144 @@ class DocumentationGenerator:
         lines.extend(["", "---", ""])
         return lines
 
+    def _build_ranked_context(
+        self, ranked: RankedResult
+    ) -> List[str]:
+        lines: List[str] = [
+            "## Ranked Context",
+            "",
+            "Files ranked by composite score for the current query context. "
+            "The ranking combines Personalized PageRank (query relevance), "
+            "global authority, test coverage, documentation coverage, and "
+            f"code freshness. Model: {ranked.model_version}.",
+            "",
+            "| Rank | File | Composite | PPR | Authority | Test | Doc |",
+            "|------|------|-----------|-----|-----------|------|-----|",
+        ]
+        for i, item in enumerate(ranked.top(self._config.RANKING_TOP_N)):
+            label = item.node_id.split("/")[-1]
+            lines.append(
+                f"| {i + 1} | `{label}` | "
+                f"{item.composite_score:.4f} | "
+                f"{item.ppr_score:.4f} | "
+                f"{item.authority_score:.4f} | "
+                f"{item.test_coverage:.2f} | "
+                f"{item.doc_coverage:.2f} |"
+            )
+        lines.append("")
+
+        if ranked.seed_nodes:
+            lines.append(
+                f"**Query anchors:** {', '.join(ranked.seed_nodes[:8])}"
+            )
+            if len(ranked.seed_nodes) > 8:
+                lines[-1] += f" (+{len(ranked.seed_nodes) - 8} more)"
+            lines.append("")
+
+        top_item = ranked.top(1)
+        if top_item and top_item[0].justification_paths:
+            lines.append("**Top result justification paths:**")
+            lines.append("")
+            for path in top_item[0].justification_paths[:2]:
+                path_str = " -> ".join(p.split("/")[-1] for p in path)
+                lines.append(f"  `{path_str}`")
+            lines.append("")
+
+        lines.extend(["---", ""])
+        return lines
+
+    def _build_orphans(
+        self,
+        nodes: List[Node],
+        analysis_v2: Optional[AnalysisResultV2],
+        ranked: Optional[RankedResult] = None,
+    ) -> List[str]:
+        """Build a section listing nodes with low coverage signals."""
+        orphans: List[Node] = []
+        for node in nodes:
+            has_doc = bool(node.doc) or any(s.doc for s in node.symbols)
+            if not has_doc:
+                orphans.append(node)
+
+        if not orphans:
+            return []
+
+        lines: List[str] = [
+            "## Orphans",
+            "",
+            "Files with no documentation or low connectivity. "
+            "These are candidates for documentation investment or cleanup.",
+            "",
+        ]
+
+        if ranked:
+            rank_order: Dict[str, int] = {
+                item.node_id: i for i, item in enumerate(ranked.items)
+            }
+            orphans.sort(key=lambda n: rank_order.get(n.node_id, 999))
+
+        for node in orphans[:20]:
+            label = node.label
+            sym_count = len(node.symbols)
+            has_doc = bool(node.doc)
+            has_sym_doc = any(s.doc for s in node.symbols)
+            doc_str = "no doc"
+            if has_doc:
+                doc_str = "file doc"
+            elif has_sym_doc:
+                doc_str = "symbol docs"
+            lines.append(
+                f"- `{label}` ({sym_count} symbols, {doc_str})"
+            )
+
+        if len(orphans) > 20:
+            lines.append(f"- *... and {len(orphans) - 20} more*")
+
+        lines.extend(["", "---", ""])
+        return lines
+
+    def _build_query_recipes(self) -> List[str]:
+        lines: List[str] = [
+            "## Query Recipes",
+            "",
+            "Example queries you can run against this knowledge base using "
+            "the ranking engine:",
+            "",
+            "```",
+            "# Find files most relevant to a concept",
+            "readmenator query \"Where is the import resolver implemented?\"",
+            "",
+            "# Rank files by relevance to a topic",
+            "readmenator query \"How does documentation generation work?\"",
+            "",
+            "# Explain why a file ranks highly",
+            "readmenator query \"explain readmenator/_documentation.py\"",
+            "",
+            "# Trace dependency paths with ranked context",
+            "readmenator query \"path from CLI to exporter\"",
+            "```",
+            "",
+            "The ranking model uses the following signals:",
+            "",
+            f"- **Personalized PageRank** ({self._config.RANKING_PPR_WEIGHT:.0%} weight): "
+            "query-specific relevance via seed propagation",
+            f"- **Global Authority** ({self._config.RANKING_AUTHORITY_WEIGHT:.0%} weight): "
+            "structural importance via standard PageRank",
+            f"- **Test Coverage** ({self._config.RANKING_TEST_WEIGHT:.0%} weight): "
+            "fraction of symbols referenced in test files",
+            f"- **Doc Coverage** ({self._config.RANKING_DOC_WEIGHT:.0%} weight): "
+            "presence of docstrings and file-level docs",
+            f"- **Freshness** ({self._config.RANKING_FRESHNESS_WEIGHT:.0%} weight): "
+            "recent modification activity",
+            "",
+            "Results include score decomposition and justification paths "
+            "for each ranked item.",
+            "",
+            "---",
+            "",
+        ]
+        return lines
+
     def _build_taint_analysis(
         self, analysis_v2: Optional[AnalysisResultV2]
     ) -> List[str]:
@@ -557,7 +759,9 @@ class DocumentationGenerator:
         return lines
 
     def _build_hotspots(
-        self, analysis_v2: Optional[AnalysisResultV2]
+        self,
+        analysis_v2: Optional[AnalysisResultV2],
+        ranked: Optional[RankedResult] = None,
     ) -> List[str]:
         if not analysis_v2 or not analysis_v2.hotspots:
             return []
@@ -571,7 +775,17 @@ class DocumentationGenerator:
             "| File | Complexity | Centrality | Combined | Symbols | Connections |",
             "|------|-----------|------------|----------|---------|-------------|",
         ]
-        for h in analysis_v2.hotspots[:15]:
+
+        hotspots = list(analysis_v2.hotspots)
+        if ranked:
+            rank_order: Dict[str, int] = {
+                item.node_id: i for i, item in enumerate(ranked.items)
+            }
+            hotspots.sort(
+                key=lambda h: rank_order.get(h.file_id, 999),
+            )
+
+        for h in hotspots[:15]:
             lines.append(
                 f"| `{h.file_id.split('/')[-1]}` | "
                 f"{h.complexity_score:.3f} | "

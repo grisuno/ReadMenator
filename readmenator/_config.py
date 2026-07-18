@@ -154,3 +154,25 @@ class Config:
     GITIGNORE_AWARE: bool = True
 
     CONTEXT_BUDGET: int = 0
+
+    RANKING_ENABLED: bool = True
+
+    RANKING_ALPHA: float = 0.85
+
+    RANKING_MAX_ITER: int = 100
+
+    RANKING_TOLERANCE: float = 1e-6
+
+    RANKING_TOP_N: int = 10
+
+    RANKING_NOISE_PENALTY: float = 0.7
+
+    RANKING_PPR_WEIGHT: float = 0.45
+
+    RANKING_AUTHORITY_WEIGHT: float = 0.20
+
+    RANKING_TEST_WEIGHT: float = 0.15
+
+    RANKING_DOC_WEIGHT: float = 0.10
+
+    RANKING_FRESHNESS_WEIGHT: float = 0.10

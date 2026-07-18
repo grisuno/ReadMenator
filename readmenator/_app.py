@@ -16,6 +16,7 @@ from readmenator._models import (
 )
 from readmenator._pipeline import AnalyzerFactory, DeepAnalysisRunner
 from readmenator._query import QueryEngine
+from readmenator._rank import RankedResult
 from readmenator._resolver import ImportResolver
 
 logger = logging.getLogger(__name__)
@@ -108,8 +109,25 @@ class readmenatorApplication:
                 nodes, edges, resolved_edges, layers, content_map
             )
 
+        ranked: Optional[RankedResult] = None
+        if self._config.RANKING_ENABLED:
+            try:
+                cat = self._factory.build_typed_graph(nodes, edges, resolved_edges)
+                tg = self._factory.last_typed_graph
+                if tg is not None:
+                    ranker = self._factory.make_ranker(tg)
+                    engine = QueryEngine(
+                        nodes, edges, resolved_edges, ranker=ranker,
+                    )
+                    ranked = engine.ranked_query(
+                        "architecture patterns design implementation",
+                        top_n=self._config.RANKING_TOP_N,
+                    )
+            except Exception:
+                logger.exception("Ranking failed, continuing without it")
+
         content = self._factory.generator.generate(
-            nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2,
+            nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
@@ -365,6 +383,36 @@ class readmenatorApplication:
         nodes, edges = self._scan(target_dir)
         engine = QueryEngine(nodes, edges, self._last_resolved_edges)
         return engine.summary()
+
+    def rank_query(
+        self, target_dir: str, query: str, top_n: Optional[int] = None
+    ) -> RankedResult:
+        """Run a ranked query against the knowledge graph.
+
+        Uses Personalized PageRank seeded from query terms to produce
+        a relevance-ranked list of files with score decomposition.
+
+        Args:
+            target_dir: Project root directory.
+            query: Free-text query.
+            top_n: Number of results.
+
+        Returns:
+            A RankedResult with scored items.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved_edges = self._last_resolved_edges
+
+        cat = self._factory.build_typed_graph(nodes, edges, resolved_edges)
+        typed_graph = self._factory.last_typed_graph
+        if typed_graph is None:
+            typed_graph = self._factory.build_typed_graph(nodes, edges, resolved_edges)
+
+        ranker = self._factory.make_ranker(typed_graph)
+        engine = QueryEngine(
+            nodes, edges, resolved_edges, ranker=ranker,
+        )
+        return engine.ranked_query(query, top_n=top_n)
 
     def rebuild(self, target_dir: str, run_security: Optional[bool] = None) -> None:
         self.run(target_dir, run_security=run_security)

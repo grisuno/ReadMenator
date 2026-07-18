@@ -1,9 +1,10 @@
 """Query engine for the readmenator knowledge base.
 
 Supports natural-language-like search (``query``), symbol explanation
-(``explain``), dependency-path tracing (``find_path``), and a concise
-codebase overview (``summary``). All queries operate on an in-memory
-index built from the scanned Node/Edge list.
+(``explain``), dependency-path tracing (``find_path``), ranked queries
+via PageRank/PPR integration (``ranked_query``), and a concise codebase
+overview (``summary``). All queries operate on an in-memory index built
+from the scanned Node/Edge list.
 """
 
 from __future__ import annotations
@@ -11,7 +12,14 @@ from __future__ import annotations
 from collections import deque
 from typing import Dict, List, Optional, Set
 
+from readmenator._category import TypedGraph, build_category_from_edges
 from readmenator._models import Edge, Node, Symbol
+from readmenator._rank import (
+    CompositeRanker,
+    RankConfig,
+    RankedResult,
+    build_seeds_from_query,
+)
 
 
 class QueryEngine:
@@ -28,6 +36,8 @@ class QueryEngine:
         nodes: List[Node],
         edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
+        ranker: Optional[CompositeRanker] = None,
+        config: Optional[RankConfig] = None,
     ):
         """Initialise internal indexes from scanned data.
 
@@ -36,6 +46,8 @@ class QueryEngine:
             edges: List of import-relationship edges.
             resolved_edges: Optional resolved-import edges (both
                 source and target are project file IDs).
+            ranker: Optional CompositeRanker for ranked queries.
+            config: Optional RankConfig if ranker is not provided.
         """
         self._nodes = nodes
         self._edges = edges
@@ -43,6 +55,117 @@ class QueryEngine:
         self._symbol_index: Dict[str, List[tuple]] = self._build_symbol_index()
         self._import_graph: Dict[str, Set[str]] = self._build_import_graph()
         self._resolved_graph: Dict[str, Set[str]] = self._build_resolved_graph()
+        self._ranker = ranker
+        self._rank_config = config or RankConfig()
+
+        if ranker is None and nodes:
+            self._init_default_ranker()
+
+    def _init_default_ranker(self) -> None:
+        """Build a default CompositeRanker from the loaded data."""
+        node_ids = {n.node_id for n in self._nodes}
+        cat = build_category_from_edges(
+            self._edges, self._resolved_edges, node_ids
+        )
+        typed_graph = TypedGraph(cat)
+        self._ranker = CompositeRanker(typed_graph, config=self._rank_config)
+
+    def ranked_query(
+        self,
+        query: str,
+        top_n: Optional[int] = None,
+    ) -> RankedResult:
+        """Answer *query* with a ranked list of relevant nodes.
+
+        Uses Personalized PageRank seeded from lexical matches
+        against the query text, combined with authority, test
+        coverage, doc coverage, and freshness signals.
+
+        Args:
+            query: Free-text query string.
+            top_n: Number of results to return (default: RankConfig.top_n).
+
+        Returns:
+            A RankedResult with scored items and explanations.
+        """
+        if self._ranker is None:
+            self._init_default_ranker()
+
+        node_ids = [n.node_id for n in self._nodes]
+        node_labels = {n.node_id: n.label for n in self._nodes}
+        symbol_map: Dict[str, List[str]] = {
+            n.node_id: [s.name for s in n.symbols]
+            for n in self._nodes
+        }
+
+        seeds = build_seeds_from_query(query, node_ids, node_labels, symbol_map)
+
+        node_ids_set = {n.node_id for n in self._nodes}
+        cat = build_category_from_edges(
+            self._edges, self._resolved_edges, node_ids_set
+        )
+
+        test_coverage = self._estimate_test_coverage()
+        doc_coverage = self._estimate_doc_coverage()
+
+        result = self._ranker.rank(
+            query=query,
+            seeds=seeds,
+            category=cat,
+            node_ids=node_ids,
+            test_coverage=test_coverage,
+            doc_coverage=doc_coverage,
+        )
+
+        if top_n is not None:
+            result.items = result.items[:top_n]
+        return result
+
+    def _estimate_test_coverage(self) -> Dict[str, float]:
+        """Estimate test coverage per file.
+
+        A file is considered 'tested' if a test file imports it.
+        Returns fraction of symbols referenced across test files.
+        """
+        test_files: Set[str] = set()
+        for node in self._nodes:
+            label = node.node_id.lower()
+            if "/test" in label or label.startswith("test_") or "/spec" in label:
+                test_files.add(node.node_id)
+
+        coverage: Dict[str, float] = {}
+        for node in self._nodes:
+            if not node.symbols:
+                coverage[node.node_id] = 0.0
+                continue
+            tested_count = 0
+            for sym in node.symbols:
+                for test_fid in test_files:
+                    if sym.name in self._import_graph.get(test_fid, set()):
+                        tested_count += 1
+                        break
+            coverage[node.node_id] = tested_count / max(len(node.symbols), 1)
+        return coverage
+
+    def _estimate_doc_coverage(self) -> Dict[str, float]:
+        """Estimate documentation coverage per file.
+
+        A file has doc coverage if it has a file-level docstring or
+        any of its symbols have docstrings.
+        """
+        coverage: Dict[str, float] = {}
+        for node in self._nodes:
+            if not node.symbols:
+                coverage[node.node_id] = 1.0 if node.doc else 0.0
+                continue
+            documented = 0
+            if node.doc:
+                documented += 1
+            for sym in node.symbols:
+                if sym.doc:
+                    documented += 1
+            coverage[node.node_id] = documented / max(len(node.symbols), 1)
+        return coverage
 
     def _build_symbol_index(self) -> Dict[str, List[tuple]]:
         """Build a name-to-list-of-(node, symbol) lookup.
