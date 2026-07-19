@@ -18,10 +18,10 @@ def build_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Subcommands:\n"
-            "  query \"<question>\"     Answer a question using the knowledge base\n"
-            "  explain \"<symbol>\"     Explain a symbol with relationships\n"
-            "  path \"<A>\" \"<B>\"       Trace dependency chain between two symbols\n"
-            "  summary | sum | info   Print a concise codebase overview\n"
+            "  query \"<question>\"      Answer a question using the knowledge base\n"
+            "  explain \"<symbol>\"      Explain a symbol with relationships\n"
+            "  path \"<A>\" \"<B>\"        Trace dependency chain between two symbols\n"
+            "  summary | sum | info    Print a concise codebase overview\n"
             "  analyze                 Run community detection and analysis\n"
             "  update                  Incremental rebuild (cache-based)\n"
             "  export                  Export graph (JSON + HTML + SVG)\n"
@@ -29,6 +29,8 @@ def build_parser() -> argparse.ArgumentParser:
             "  audit-deep              Run deep analysis (taint, hotspots, cycles)\n"
             "  export-sarif            Export security findings as SARIF\n"
             "  export-rules            Export suggested linting rules as Semgrep YAML\n"
+            "  graphml                 Export graph as GraphML (Gephi/yEd)\n"
+            "  cypher                  Export graph as Cypher (Neo4j/Memgraph)\n"
             "  serve [path]            Start MCP stdio server for AI agent queries\n"
             "\n"
             "Flags:\n"
@@ -38,6 +40,8 @@ def build_parser() -> argparse.ArgumentParser:
             "  --html                  Export graph.html (interactive)\n"
             "  --svg                   Export graph.svg (static)\n"
             "  --export-all            Export all formats (JSON + HTML + SVG)\n"
+            "  --graphml               Export graph.graphml\n"
+            "  --cypher                Export graph.cypher (Neo4j/Memgraph)\n"
             "  --test                  Run the test suite\n"
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
             "  --sarif                 Generate SARIF audit file\n"
@@ -52,6 +56,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--svg", action="store_true", help="Export graph.svg (static visualization)")
     parser.add_argument("--export-all", action="store_true", help="Export all formats (JSON + HTML + SVG)")
     parser.add_argument("--graphml", action="store_true", help="Export graph.graphml (Gephi/yEd)")
+    parser.add_argument("--cypher", action="store_true", help="Export graph.cypher (Neo4j/Memgraph)")
     parser.add_argument("--no-analysis", action="store_true", help="Skip community detection and graph analysis")
     parser.add_argument("--audit", action="store_true", help="Run static security analysis and include findings in output")
     parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
@@ -87,7 +92,7 @@ def main() -> None:
         return
 
     has_export_flags = any(
-        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml"}
+        f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml", "--cypher"}
     )
 
     if len(sys.argv) > 2 and sys.argv[1] != "--rebuild" and not sys.argv[1].startswith("-"):
@@ -119,6 +124,9 @@ def main() -> None:
             return
         elif command == "graphml":
             app.export_graphml(target)
+            return
+        elif command == "cypher":
+            app.export_cypher(target)
             return
         elif command == "obsidian":
             app.export_obsidian(target)
@@ -183,6 +191,8 @@ def main() -> None:
                 app.export_svg(target)
             if args.graphml:
                 app.export_graphml(target)
+            if args.cypher:
+                app.export_cypher(target)
         return
 
     parser = build_parser()

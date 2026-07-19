@@ -470,6 +470,19 @@ class readmenatorApplication:
         logger.info("GraphML exported: %s", output_path)
         return data
 
+    def export_cypher(self, target_dir: str, output_path: Optional[str] = None) -> str:
+        nodes, edges = self._scan(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        findings = self._last_findings or []
+        data = self._factory.exporter.to_cypher(nodes, edges, resolved, analysis, findings)
+        if output_path is None:
+            root = Path(target_dir).resolve()
+            output_path = str(root / "graph.cypher")
+        Path(output_path).write_text(data, encoding="utf-8")
+        logger.info("Cypher exported: %s", output_path)
+        return data
+
     def export_obsidian(self, target_dir: str, output_dir: Optional[str] = None) -> int:
         nodes, edges = self._scan(target_dir)
         analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)

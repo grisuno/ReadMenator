@@ -85,6 +85,7 @@ class SecurityFinding:
         description: Human-readable explanation of the issue.
         snippet: The offending source code line.
         cwe: CWE identifier string (e.g. "CWE-78").
+        mitre_attack: MITRE ATT&CK technique ID (e.g. "T1059.001").
     """
 
     file_path: str
@@ -94,6 +95,7 @@ class SecurityFinding:
     description: str
     snippet: str
     cwe: str
+    mitre_attack: str = ""
 
 
 def pluralize_symbol_kind(kind: str, plural_map: Dict[str, str]) -> str:

@@ -1,0 +1,156 @@
+name: Validate Security Rules
+
+on:
+  pull_request:
+    paths:
+      - 'readmenator-rules/**'
+  push:
+    paths:
+      - 'readmenator-rules/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  validate-rules:
+    name: Validate Rule YAML Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml jsonschema
+
+      - name: Validate _security_rules.yml against schema
+        run: |
+          python -c "
+import json
+import sys
+import yaml
+from pathlib import Path
+
+schema_path = Path('readmenator-rules/rule_schema.json')
+rules_path = Path('readmenator-rules/_security_rules.yml')
+
+if not schema_path.exists():
+    print(f'::error::Schema file not found: {schema_path}')
+    sys.exit(1)
+
+if not rules_path.exists():
+    print(f'::warning::Rules file not found: {rules_path}')
+    sys.exit(0)
+
+import jsonschema
+
+with open(schema_path) as f:
+    schema = json.load(f)
+
+with open(rules_path) as f:
+    try:
+        data = yaml.safe_load(f)
+    except yaml.YAMLError as e:
+        print(f'::error::YAML parse error in {rules_path}: {e}')
+        sys.exit(1)
+
+if data is None:
+    print(f'::error::Empty rules file: {rules_path}')
+    sys.exit(1)
+
+try:
+    jsonschema.validate(instance=data, schema=schema)
+    print(f'OK: {rules_path} — {len(data[\"rules\"])} rules valid')
+except jsonschema.ValidationError as e:
+    print(f'::error file={rules_path}::Schema validation failed: {e.message}')
+    print(f'  Path: {\" → \".join(str(p) for p in e.absolute_path)}')
+    sys.exit(1)
+"
+
+      - name: Validate regex patterns compile correctly
+        run: |
+          python -c "
+import re
+import sys
+import yaml
+from pathlib import Path
+
+rules_path = Path('readmenator-rules/_security_rules.yml')
+if not rules_path.exists():
+    sys.exit(0)
+
+with open(rules_path) as f:
+    data = yaml.safe_load(f)
+
+errors = 0
+for rule in data.get('rules', []):
+    rid = rule.get('rule_id', 'UNKNOWN')
+    for i, pattern in enumerate(rule.get('patterns', [])):
+        try:
+            re.compile(pattern, re.IGNORECASE)
+        except re.error as e:
+            print(f'::error file={rules_path}::Rule {rid}, pattern {i}: regex error: {e}')
+            errors += 1
+
+if errors:
+    print(f'FAIL: {errors} regex compilation error(s)')
+    sys.exit(1)
+else:
+    total = len(data.get('rules', []))
+    pats = sum(len(r.get('patterns', [])) for r in data.get('rules', []))
+    print(f'OK: {total} rules, {pats} patterns — all compile successfully')
+"
+
+      - name: Validate all YAML rule files in readmenator-rules/
+        run: |
+          python -c "
+import sys
+import yaml
+from pathlib import Path
+
+errors = 0
+for yaml_file in sorted(Path('readmenator-rules').glob('*.yml')):
+    try:
+        with open(yaml_file) as f:
+            data = yaml.safe_load(f)
+        name = yaml_file.name
+        if data is None:
+            print(f'OK: {name} — empty (valid)')
+        elif isinstance(data.get('rules'), list):
+            print(f'OK: {name} — {len(data[\"rules\"])} rule(s)')
+        else:
+            print(f'OK: {name} — valid YAML')
+    except yaml.YAMLError as e:
+        print(f'::error file={yaml_file}::YAML error: {e}')
+        errors += 1
+
+if errors:
+    sys.exit(1)
+"
+
+      - name: Summary
+        run: |
+          echo "## Rule Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All rule files validated successfully." >> $GITHUB_STEP_SUMMARY
+          RULES=$(python -c "
+import yaml
+from pathlib import Path
+p = Path('readmenator-rules/_security_rules.yml')
+if p.exists():
+    d = yaml.safe_load(p.read_text())
+    print(len(d.get('rules', [])))
+else:
+    print(0)
+")
+          echo "- **Security rules:** \`$RULES\` in \`_security_rules.yml\`" >> $GITHUB_STEP_SUMMARY
+          FILES=$(find readmenator-rules -name '*.yml' | wc -l)
+          echo "- **Total YAML files:** \`$FILES\`" >> $GITHUB_STEP_SUMMARY

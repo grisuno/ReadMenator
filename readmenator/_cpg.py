@@ -4,16 +4,17 @@ import hashlib
 import json
 from typing import Dict, List, Optional
 
-from readmenator._models import AnalysisResult, Edge, Node, Symbol
+from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding, Symbol
 
 
 class CodePropertyGraph:
     """Generates a Code Property Graph (CPG) as JSON-LD for AI agent consumption.
 
     Produces a structured representation merging AST-level symbol data,
-    control-flow edges (calls), data-flow edges (imports), and inheritance
-    relationships into a single machine-readable document. Designed to be
-    embedded in KNOWLEDGE_BASE.md for zero-token agent context.
+    control-flow edges (calls), data-flow edges (imports), inheritance
+    relationships, and security findings (with MITRE ATT&CK mappings)
+    into a single machine-readable document. Designed to be embedded in
+    KNOWLEDGE_BASE.md for zero-token agent context.
     """
 
     CPG_CONTEXT = "https://readmenator.dev/cpg/v1"
@@ -27,13 +28,20 @@ class CodePropertyGraph:
         edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> str:
         """Generate the CPG JSON-LD string embeddable in markdown.
 
-        Returns a compact JSON object with @context, nodes array (each
-        containing id, label, kind, language, sha256, symbols, layer),
-        edges array (source, target, relation, confidence), and analysis
-        metadata (god_nodes, communities).
+        Args:
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional analysis results for metadata.
+            findings: Optional security findings with MITRE ATT&CK IDs.
+
+        Returns:
+            Compact JSON-LD string with @context, nodes, edges, analysis,
+            and mitre_attack metadata.
         """
         cpg_nodes: List[Dict] = []
         node_map: Dict[str, Node] = {n.node_id: n for n in nodes}
@@ -104,10 +112,40 @@ class CodePropertyGraph:
                 ],
             }
 
+        if findings:
+            result["security"] = {
+                "total_findings": len(findings),
+                "by_severity": self._severity_counts(findings),
+                "findings": [
+                    {
+                        "file_path": f.file_path,
+                        "line": f.line,
+                        "severity": f.severity,
+                        "rule_id": f.rule_id,
+                        "description": f.description,
+                        "cwe": f.cwe,
+                        "mitre_attack": f.mitre_attack,
+                    }
+                    for f in findings
+                ],
+            }
+            mitre_ids = sorted({f.mitre_attack for f in findings if f.mitre_attack})
+            if mitre_ids:
+                result["mitre_attack"] = {
+                    "techniques": mitre_ids,
+                    "count": len(mitre_ids),
+                    "mapping": "https://attack.mitre.org/techniques/{id}/",
+                }
+
         return json.dumps(result, indent=None, ensure_ascii=False, sort_keys=True)
 
+    def _severity_counts(self, findings: List[SecurityFinding]) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for f in findings:
+            counts[f.severity] = counts.get(f.severity, 0) + 1
+        return dict(sorted(counts.items()))
+
     def _build_symbol_list(self, node: Node) -> List[Dict]:
-        """Build symbol list for a node, respecting privacy mode."""
         symbols: List[Dict] = []
         for sym in node.symbols:
             entry: Dict = {
@@ -124,7 +162,6 @@ class CodePropertyGraph:
 
     @staticmethod
     def _compute_node_hash(node: Node) -> str:
-        """Compute a deterministic content hash for a node."""
         parts = [node.node_id, node.label, node.kind, node.language]
         for s in node.symbols:
             parts.extend([s.name, s.kind, str(s.line)])

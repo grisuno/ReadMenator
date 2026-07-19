@@ -709,6 +709,111 @@ network.on("click", function(params) {{
         lines.append('</graphml>')
         return "\n".join(lines)
 
+    def to_cypher(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        analysis: Optional[AnalysisResult] = None,
+        findings: Optional[List[SecurityFinding]] = None,
+    ) -> str:
+        """Export the graph as native Cypher CREATE statements.
+
+        Generates Neo4j/Memgraph-compatible Cypher for direct graph
+        database ingestion. Each file node becomes a ``(:File)`` node,
+        import dependencies become ``(:File)-[:IMPORTS]->(:File)``
+        relationships. Optional security findings are attached as node
+        properties and standalone ``(:SecurityFinding)`` nodes.
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional analysis results for community metadata.
+            findings: Optional security finding nodes.
+
+        Returns:
+            String of Cypher CREATE statements.
+        """
+        all_edges = edges + (resolved_edges or [])
+        community_map: Dict[str, int] = {}
+        if analysis:
+            for c in analysis.communities:
+                for fid in c.file_ids:
+                    community_map[fid] = c.community_id
+
+        stmts: List[str] = []
+        stmts.append("// ReadMenator Knowledge Graph — Cypher export")
+        stmts.append(f"// Nodes: {len(nodes)}, Edges: {len(all_edges)}")
+        stmts.append("")
+
+        node_vars: Dict[str, str] = {}
+        for i, node in enumerate(nodes):
+            var = f"f{i}"
+            node_vars[node.node_id] = var
+            lang = node.label.split(".")[-1] if "." in node.label else node.language
+            props = [
+                f"id: '{node.node_id}'",
+                f"label: '{node.label.replace(chr(39), chr(39)*2)}'",
+                f"language: '{node.language}'",
+                f"kind: '{node.kind}'",
+            ]
+            if node.doc:
+                safe_doc = node.doc.replace("'", "\\'").replace("\n", "\\n")[:200]
+                props.append(f"doc: '{safe_doc}'")
+            if node.node_id in community_map:
+                props.append(f"community: {community_map[node.node_id]}")
+            sym_count = len(node.symbols)
+            if sym_count:
+                props.append(f"symbol_count: {sym_count}")
+            stmts.append(f"CREATE ({var}:File {{{', '.join(props)}}})")
+
+        if stmts:
+            stmts.append("")
+
+        if findings:
+            for i, f in enumerate(findings):
+                fvar = f"sf{i}"
+                fprops = [
+                    f"file_path: '{f.file_path}'",
+                    f"line: {f.line}",
+                    f"severity: '{f.severity}'",
+                    f"rule_id: '{f.rule_id}'",
+                    f"cwe: '{f.cwe}'",
+                ]
+                if f.mitre_attack:
+                    fprops.append(f"mitre_attack: '{f.mitre_attack}'")
+                desc = f.description.replace("'", "\\'")[:200]
+                fprops.append(f"description: '{desc}'")
+                safe_snippet = f.snippet.replace("'", "\\'")[:200]
+                fprops.append(f"snippet: '{safe_snippet}'")
+                stmts.append(f"CREATE ({fvar}:SecurityFinding {{{', '.join(fprops)}}})")
+                if f.file_path in node_vars:
+                    stmts.append(
+                        f"CREATE ({node_vars[f.file_path]})-[:HAS_FINDING]->({fvar})"
+                    )
+
+        if findings:
+            stmts.append("")
+
+        edge_count = 0
+        for edge in all_edges:
+            src_var = node_vars.get(edge.source)
+            tgt_var = node_vars.get(edge.target)
+            if src_var and tgt_var:
+                rel_type = "IMPORTS"
+                if edge.confidence == "INFERRED":
+                    rel_type = "INFERRED_IMPORT"
+                stmts.append(
+                    f"CREATE ({src_var})-[:{rel_type} {{relation: '{edge.relation}'}}]->({tgt_var})"
+                )
+                edge_count += 1
+
+        stmts.append(f"// Total: {len(nodes)} nodes, {edge_count} edges")
+        if findings:
+            stmts[-1] += f", {len(findings)} findings"
+        return "\n".join(stmts)
+
     def to_obsidian(
         self,
         nodes: List[Node],

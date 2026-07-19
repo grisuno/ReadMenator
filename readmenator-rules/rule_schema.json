@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://readmenator.dev/schemas/security-rule.json",
+  "title": "ReadMenator Security Rule Schema",
+  "description": "Validates the structure of ReadMenator security detection rules in _security_rules.yml",
+  "type": "object",
+  "required": ["rules"],
+  "properties": {
+    "rules": {
+      "type": "array",
+      "description": "List of security detection rules",
+      "items": {
+        "type": "object",
+        "required": [
+          "rule_id",
+          "severity",
+          "description",
+          "patterns",
+          "cwe",
+          "languages",
+          "extensions"
+        ],
+        "properties": {
+          "rule_id": {
+            "type": "string",
+            "description": "Unique rule identifier (e.g. PY001)",
+            "pattern": "^[A-Z]{1,4}\\d{3}$"
+          },
+          "severity": {
+            "type": "string",
+            "description": "Severity level",
+            "enum": ["critical", "high", "medium", "low", "info"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the security issue",
+            "minLength": 5,
+            "maxLength": 500
+          },
+          "patterns": {
+            "type": "array",
+            "description": "List of regex patterns to match",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "cwe": {
+            "type": "string",
+            "description": "CWE identifier (e.g. CWE-78)",
+            "pattern": "^CWE-\\d{2,4}$"
+          },
+          "mitre_attack": {
+            "type": "string",
+            "description": "MITRE ATT&CK technique ID (e.g. T1059.001)",
+            "pattern": "^T\\d{4}(?:\\.\\d{3})?$|^$"
+          },
+          "languages": {
+            "type": "array",
+            "description": "Target languages for this rule",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "extensions": {
+            "type": "array",
+            "description": "File extensions this rule applies to (with leading dot)",
+            "items": {
+              "type": "string",
+              "pattern": "^\\.[a-z0-9]+$"
+            },
+            "minItems": 1
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
