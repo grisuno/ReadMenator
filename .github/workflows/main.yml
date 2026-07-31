@@ -13,12 +13,12 @@ jobs:
       pull-requests: write
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -33,6 +33,9 @@ jobs:
 
       - name: Authenticate GitHub CLI with PAT
         run: echo "${{ secrets.PAT_TOKEN }}" | gh auth login --with-token
+
+      - name: Install readmenator
+        run: pip install .
 
       - name: Configure Git User
         run: |

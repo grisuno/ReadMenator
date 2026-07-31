@@ -17,11 +17,11 @@ by transformation, not just proximity:
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import StrEnum
+from enum import Enum
 from typing import Dict, List, Optional, Set
 
 
-class EdgeKind(StrEnum):
+class EdgeKind(str, Enum):
     """Semantic type of a morphism between two code artifacts."""
 
     IMPORTS = "imports"
@@ -34,6 +34,9 @@ class EdgeKind(StrEnum):
     GENERATES = "generates"
     DEPENDS_ON = "depends_on"
     RESOLVED_IMPORTS = "resolved_imports"
+
+    def __str__(self) -> str:
+        return self.value
 
 
 EDGE_WEIGHTS: Dict[EdgeKind, float] = {
