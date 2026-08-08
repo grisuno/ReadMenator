@@ -7,6 +7,7 @@ from typing import Dict, List, Optional, Set
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
 from readmenator._mermaid import MermaidRenderer
+from readmenator._uml import UmlGenerator
 from readmenator._models import (
     AnalysisResult,
     AnalysisResultV2,
@@ -47,6 +48,7 @@ class DocumentationGenerator:
             internal_edge_style=config.MERMAID_INTERNAL_EDGE_STYLE,
         )
         self._cpg = CodePropertyGraph(privacy_mode=config.PRIVACY_MODE)
+        self._uml = UmlGenerator(config)
         self._plural_map: Dict[str, str] = dict(config.SYMBOL_TYPE_PLURALS)
 
     def _ranking_version(self) -> str:
@@ -137,6 +139,7 @@ class DocumentationGenerator:
         lines.extend(self._build_orphans(nodes, analysis_v2, ranked))
         lines.extend(self._build_query_recipes())
         lines.extend(self._build_mermaid_section(graph_output, is_truncated))
+        lines.extend(self._build_uml_diagram(nodes, edges))
         lines.extend(self._build_cpg_block(nodes, edges, resolved_edges, analysis))
         lines.extend(self._build_architecture_reference(nodes, edges))
 
@@ -241,6 +244,7 @@ class DocumentationGenerator:
             "## Surprising Connections",
             "## Architectural Layers",
             "## Structural Knowledge Map",
+            "## UML Class Diagram",
             "## Code Property Graph",
             "## Table of Contents",
             "## Architecture Reference",
@@ -355,6 +359,8 @@ class DocumentationGenerator:
         entry += 1
 
         toc.append(f"{entry}. [Structural Knowledge Map](#structural-knowledge-map)")
+        entry += 1
+        toc.append(f"{entry}. [UML Class Diagram](#uml-class-diagram)")
         entry += 1
         toc.append(f"{entry}. [Code Property Graph](#code-property-graph)")
         entry += 1
@@ -962,6 +968,32 @@ class DocumentationGenerator:
             "---",
             "",
         ])
+        return lines
+
+    def _build_uml_diagram(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+    ) -> List[str]:
+        if not self._config.UML_ENABLED:
+            return []
+        uml_source = self._uml.render_mermaid_class_diagram(nodes, edges)
+        if not uml_source:
+            return []
+        lines: List[str] = [
+            "## UML Class Diagram",
+            "",
+            "Auto-generated Mermaid class diagram from parsed class-level symbols. "
+            "Shows classes, structs, interfaces, traits, and their methods "
+            "with inheritance and dependency relationships.",
+            "",
+            "```mermaid",
+            uml_source,
+            "```",
+            "",
+            "---",
+            "",
+        ]
         return lines
 
     def _build_cpg_block(

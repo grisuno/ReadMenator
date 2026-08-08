@@ -176,3 +176,14 @@ class Config:
     RANKING_DOC_WEIGHT: float = 0.10
 
     RANKING_FRESHNESS_WEIGHT: float = 0.10
+
+    UML_ENABLED: bool = True
+
+    UML_MAX_CLASSES: int = 50
+
+    UML_GENERATED_LANGUAGES: Tuple[str, ...] = (
+        "cpp", "java", "csharp", "python", "go", "rust",
+        "php", "kotlin", "scala", "swift", "dart", "ruby",
+    )
+
+    README_INJECTION_ENABLED: bool = True

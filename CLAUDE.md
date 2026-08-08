@@ -28,6 +28,8 @@ readmenator/
   _watcher.py       - Filesystem polling watcher for auto-rebuild
   _security.py      - Pattern-based static security analysis (18 language rule sets)
   _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
+  _uml.py           - UML class diagram generator (Mermaid classDiagram + 12-language code generation)
+  _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
   _taint.py         - Taint propagation analysis through import graph
   _hotspots.py      - Hotspot detection, cycle analysis, change impact analysis
   _rule_gen.py      - Suggested linting/security rule generation (Semgrep YAML)
@@ -57,6 +59,8 @@ tests/
   test_sarif.py         - SARIF export contract tests
   test_layer_rules.py   - Layer violation detection contract tests
   test_mcp_server.py    - MCP server protocol, tools, and resources contract tests
+  test_uml.py           - UML class diagram and code generation contract tests
+  test_readme_injector.py - README injection contract tests
 ```
 
 ## Contracts
@@ -236,7 +240,7 @@ tests/
 ### AnalyzerFactory Contract (pipeline)
 - Lazy property-based initialization of all analyzer components
 - Each component is created on first access and cached
-- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, readme_injector
 - Decouples the application orchestrator from concrete instantiation
 
 ### DeepAnalysisRunner Contract (pipeline)
@@ -293,6 +297,34 @@ tests/
 - Triggers callback (auto-rebuild) when changes detected
 - Respects IGNORE_DIRS and symlink exclusion
 - Configurable polling interval
+
+### UML Generator Contract
+- render_mermaid_class_diagram(nodes, edges): returns Mermaid classDiagram string
+- Collects class, struct, interface, trait, enum, record, protocol, extension symbols
+- Groups symbols by file, renders methods up to 10 per class
+- Shows inheritance edges (inherits relation from parsers)
+- Shows dependency/usage edges (imports relation between files with class symbols)
+- Respects UML_MAX_CLASSES limit (default 50)
+- Returns empty string when no class-like symbols found
+- ID sanitization: alphanumeric + underscore preserved, special chars replaced, digit prefix handled
+- generate_code(nodes, edges, target_language): returns class stubs in target language
+- 12 target languages: cpp, java, csharp, python, go, rust, php, kotlin, scala, swift, dart, ruby
+- Each language generator produces idiomatic class/type declarations
+- Unknown language returns error message string
+- Type mapping from Python-style hints to target language types
+
+### README Injection Contract
+- ReadmeInjector class with inject(project_root) and remove(project_root) methods
+- Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
+- Injects a section linking to KNOWLEDGE_BASE.md with HTML anchor comments
+- Idempotent: second injection returns False when anchor already present
+- Preserves existing README content
+- Markdown injection: link, description, AI/human context
+- reStructuredText injection: adapted RST syntax
+- Uses configurable kb_filename parameter for custom KB paths
+- Remove method strips injected section cleanly
+- Returns False when no README found or no injection present
+- Guided by README_INJECTION_ENABLED config flag
 
 ## Design Principles
 

@@ -31,6 +31,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  export-rules            Export suggested linting rules as Semgrep YAML\n"
             "  graphml                 Export graph as GraphML (Gephi/yEd)\n"
             "  cypher                  Export graph as Cypher (Neo4j/Memgraph)\n"
+            "  uml                     Generate UML class diagram and print\n"
             "  serve [path]            Start MCP stdio server for AI agent queries\n"
             "\n"
             "Flags:\n"
@@ -46,6 +47,18 @@ def build_parser() -> argparse.ArgumentParser:
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
             "  --sarif                 Generate SARIF audit file\n"
             "  --context-budget N      Target token budget for KB (0 = full output)\n"
+            "  --c++                   Generate C++ class declarations from UML\n"
+            "  --java                  Generate Java class declarations from UML\n"
+            "  --csharp                Generate C# class declarations from UML\n"
+            "  --python-classes        Generate Python class declarations from UML\n"
+            "  --go-classes            Generate Go type declarations from UML\n"
+            "  --rust-classes          Generate Rust type declarations from UML\n"
+            "  --php-classes           Generate PHP class declarations from UML\n"
+            "  --kotlin                Generate Kotlin class declarations from UML\n"
+            "  --scala                 Generate Scala class declarations from UML\n"
+            "  --swift-classes         Generate Swift type declarations from UML\n"
+            "  --dart-classes          Generate Dart class declarations from UML\n"
+            "  --ruby-classes          Generate Ruby class declarations from UML\n"
         ),
     )
     parser.add_argument("target", nargs="?", default=".", help="Target directory to analyze (default: current directory)")
@@ -62,6 +75,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
     parser.add_argument("--context-budget", type=int, default=0, help="Target token budget for KNOWLEDGE_BASE.md summary (0 = full output)")
+    parser.add_argument("--c++", dest="cpp", action="store_true", help="Generate C++ class declarations from UML")
+    parser.add_argument("--java", action="store_true", help="Generate Java class declarations from UML")
+    parser.add_argument("--csharp", action="store_true", help="Generate C# class declarations from UML")
+    parser.add_argument("--python-classes", dest="python_classes", action="store_true", help="Generate Python class declarations from UML")
+    parser.add_argument("--go-classes", dest="go_classes", action="store_true", help="Generate Go type declarations from UML")
+    parser.add_argument("--rust-classes", dest="rust_classes", action="store_true", help="Generate Rust type declarations from UML")
+    parser.add_argument("--php-classes", dest="php_classes", action="store_true", help="Generate PHP class declarations from UML")
+    parser.add_argument("--kotlin", action="store_true", help="Generate Kotlin class declarations from UML")
+    parser.add_argument("--scala", action="store_true", help="Generate Scala class declarations from UML")
+    parser.add_argument("--swift-classes", dest="swift_classes", action="store_true", help="Generate Swift type declarations from UML")
+    parser.add_argument("--dart-classes", dest="dart_classes", action="store_true", help="Generate Dart class declarations from UML")
+    parser.add_argument("--ruby-classes", dest="ruby_classes", action="store_true", help="Generate Ruby class declarations from UML")
     return parser
 
 
@@ -94,6 +119,29 @@ def main() -> None:
     has_export_flags = any(
         f in sys.argv for f in {"--json", "--html", "--svg", "--export-all", "--graphml", "--cypher"}
     )
+
+    uml_lang_flags = {
+        "--c++": "cpp", "--java": "java", "--csharp": "csharp",
+        "--python-classes": "python", "--go-classes": "go",
+        "--rust-classes": "rust", "--php-classes": "php",
+        "--kotlin": "kotlin", "--scala": "scala",
+        "--swift-classes": "swift", "--dart-classes": "dart",
+        "--ruby-classes": "ruby",
+    }
+    uml_codegen_flag: Optional[str] = None
+    for flag, lang in uml_lang_flags.items():
+        if flag in sys.argv:
+            uml_codegen_flag = lang
+            break
+
+    if uml_codegen_flag:
+        parser = build_parser()
+        args = parser.parse_args()
+        target = args.target
+        app = readmenatorApplication()
+        code = app.generate_uml_code(target, uml_codegen_flag)
+        print(code)
+        return
 
     if len(sys.argv) > 2 and sys.argv[1] != "--rebuild" and not sys.argv[1].startswith("-"):
         target = sys.argv[1]
@@ -161,6 +209,14 @@ def main() -> None:
             return
         elif command == "export-rules":
             app.export_rules(target)
+            return
+        elif command == "uml":
+            nodes, edges = app._scan(target)
+            uml_diagram = app._factory.uml.render_mermaid_class_diagram(nodes, edges)
+            if uml_diagram:
+                print(uml_diagram)
+            else:
+                logger.info("No class-level symbols found for UML diagram.")
             return
         elif command == "serve":
             mcp_main()

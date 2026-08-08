@@ -24,11 +24,13 @@ from readmenator._rank import (
     RankConfig,
     RankedResult,
 )
+from readmenator._readme_injector import ReadmeInjector
 from readmenator._rule_gen import RuleGenerator
 from readmenator._sarif import SarifExporter
 from readmenator._scanner import PolyglotScanner
 from readmenator._security import SecurityAnalyzer
 from readmenator._taint import TaintAnalyzer
+from readmenator._uml import UmlGenerator
 
 
 class AnalyzerFactory:
@@ -53,6 +55,8 @@ class AnalyzerFactory:
         self._sarif: SarifExporter | None = None
         self._cpg: CodePropertyGraph | None = None
         self._layer_detector: LayerDetector | None = None
+        self._uml: UmlGenerator | None = None
+        self._readme_injector: ReadmeInjector | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -127,6 +131,20 @@ class AnalyzerFactory:
         if self._layer_detector is None:
             self._layer_detector = LayerDetector()
         return self._layer_detector
+
+    @property
+    def uml(self) -> UmlGenerator:
+        if self._uml is None:
+            self._uml = UmlGenerator(self._config)
+        return self._uml
+
+    @property
+    def readme_injector(self) -> ReadmeInjector:
+        if self._readme_injector is None:
+            self._readme_injector = ReadmeInjector(
+                kb_filename=self._config.OUTPUT_FILENAME,
+            )
+        return self._readme_injector
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

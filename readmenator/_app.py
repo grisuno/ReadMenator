@@ -158,6 +158,7 @@ class readmenatorApplication:
         })
 
         self._write_sidecar_outputs(root, findings, analysis_v2)
+        self._inject_readme_link(root)
         self._log_summary(
             nodes, edges, resolved_edges, analysis, layer_summary, analysis_v2, findings,
         )
@@ -187,6 +188,26 @@ class readmenatorApplication:
                 logger.info(
                     "Suggested rules: %d files in %s", written, rules_dir
                 )
+
+    def _inject_readme_link(self, root: Path) -> None:
+        if not self._config.README_INJECTION_ENABLED:
+            return
+        try:
+            self._factory.readme_injector.inject(str(root))
+        except Exception:
+            logger.debug("README injection skipped", exc_info=True)
+
+    def generate_uml_code(
+        self, target_dir: str, language: str, output_path: Optional[str] = None,
+    ) -> str:
+        nodes, edges = self._scan(target_dir)
+        code = self._factory.uml.generate_code(
+            nodes, self._last_edges, language,
+        )
+        if output_path:
+            Path(output_path).write_text(code, encoding="utf-8")
+            logger.info("UML code generated: %s", output_path)
+        return code
 
     def _log_summary(
         self,
@@ -322,6 +343,7 @@ class readmenatorApplication:
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
+        self._inject_readme_link(root)
         total_symbols = sum(len(n.symbols) for n in nodes)
         logger.info(
             "Knowledge base updated: %s", output_path,

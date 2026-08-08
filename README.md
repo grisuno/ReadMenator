@@ -56,7 +56,7 @@ pip install .
 python -m readmenator /path/to/project --rebuild
 ```
 
-Creates `KNOWLEDGE_BASE.md` with Table of Contents, Statistics Dashboard, Architectural Layers, God Nodes, Community Analysis, Surprising Connections, Suggested Questions, Mermaid graph (internal edges + community subgraphs), and Architecture Reference.
+Creates `KNOWLEDGE_BASE.md` with Table of Contents, Statistics Dashboard, Architectural Layers, God Nodes, Community Analysis, Surprising Connections, Suggested Questions, **UML Class Diagram**, Mermaid graph (internal edges + community subgraphs), and Architecture Reference. A link to the knowledge base is automatically injected into the project's README.md.
 
 ### Export formats
 
@@ -107,23 +107,55 @@ python -m readmenator /path/to/project analyze          # Analyze the proyect
 python -m readmenator --test
 ```
 
+### UML Class Diagram
+
+ReadMenator auto-generates Mermaid `classDiagram` from parsed class-level symbols across all
+supported languages. UML diagrams are embedded in `KNOWLEDGE_BASE.md` by default.
+
+```bash
+python -m readmenator /path/to/project uml              # Print UML class diagram
+```
+
+### Generate Class Stubs in Other Languages
+
+Translate extracted class structures into target language declarations:
+
+```bash
+python -m readmenator /path/to/project --c++            # C++ class declarations
+python -m readmenator /path/to/project --java           # Java class declarations
+python -m readmenator /path/to/project --csharp         # C# class declarations
+python -m readmenator /path/to/project --kotlin         # Kotlin class declarations
+python -m readmenator /path/to/project --scala          # Scala class declarations
+python -m readmenator /path/to/project --swift-classes  # Swift type declarations
+python -m readmenator /path/to/project --dart-classes   # Dart class declarations
+python -m readmenator /path/to/project --ruby-classes   # Ruby class declarations
+python -m readmenator /path/to/project --go-classes     # Go type declarations
+python -m readmenator /path/to/project --rust-classes   # Rust type declarations
+python -m readmenator /path/to/project --php-classes    # PHP class declarations
+python -m readmenator /path/to/project --python-classes # Python class declarations
+```
+
+Supported target languages (12): C++, Java, C#, Python, Go, Rust, PHP, Kotlin, Scala, Swift, Dart, Ruby.
+
 ## Architecture
 
 | Contract | File | Responsibility |
 |----------|------|----------------|
 | Config | `_config.py` | Immutable centralized configuration |
 | Models | `_models.py` | Symbol, Node, Edge, AnalysisResult |
-| Parsers | `_parsers.py` | 19 language parsers + factory (Strategy pattern) |
+| Parsers | `parsers/` package | 19 language parsers + factory (Strategy pattern) |
 | Scanner | `_scanner.py` | Secure directory walking, file-level docs, progress |
 | Resolver | `_resolver.py` | Import path resolution |
 | Mermaid | `_mermaid.py` | Mermaid graph with internal edges and community subgraphs |
-| Documentation | `_documentation.py` | KNOWLEDGE_BASE.md with TOC, dashboard, layers, analysis |
+| UML Generator | `_uml.py` | Mermaid class diagrams + 12-language code generation |
+| Documentation | `_documentation.py` | KNOWLEDGE_BASE.md with TOC, dashboard, layers, analysis, UML |
 | Query | `_query.py` | Query/explain/path engine with bidirectional path finding |
 | Analyzer | `_analyzer.py` | Communities, god nodes, surprising connections, questions |
 | Cache | `_cache.py` | SHA256 content cache for incremental updates |
 | Exporter | `_exporter.py` | JSON, HTML (vis.js), SVG, GraphML, Obsidian |
 | Layers | `_layers.py` | Architectural layer detection (5-layer model) |
 | Watcher | `_watcher.py` | Filesystem polling watcher for auto-rebuild |
+| README Injector | `_readme_injector.py` | Auto-injects KB link into project README |
 | Application | `_app.py` | Application orchestrator |
 | CLI | `__main__.py` | CLI entry point and argument dispatch |
 
@@ -141,3 +173,18 @@ python -m readmenator --test
 <img width="300" height="124" alt="image" src="https://github.com/user-attachments/assets/e25f889b-aae5-4e53-a397-284ca1988825" />
 
 AGPL-3.0
+
+<!-- readmenator-kb-link -->
+## Knowledge Base
+
+This project has been analyzed by [ReadMenator](https://github.com/grisuno/ReadMenator),
+a zero-token polyglot static analysis tool. A comprehensive knowledge base is available:
+
+- **[KNOWLEDGE_BASE.md](./KNOWLEDGE_BASE.md)** -- Architecture reference with all
+  classes, functions, imports, dependency graphs, UML class diagrams, security
+  audit findings, community analysis, and more.
+
+AI agents and developers: Read `KNOWLEDGE_BASE.md` for full project context
+without LLM token cost.
+<!-- /readmenator-kb-link -->
+

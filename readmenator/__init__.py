@@ -2,8 +2,8 @@
 
 Public API: Config, Symbol, Node, Edge, EdgeKind, Morphism, Category,
 and readmenatorApplication provide the complete toolkit for generating,
-querying, and ranking codebase knowledge graphs without any LLM calls
-or cloud dependencies.
+querying, ranking, and UML diagramming codebase knowledge graphs without
+any LLM calls or cloud dependencies.
 """
 
 from readmenator._app import readmenatorApplication  # noqa: F401
@@ -39,3 +39,5 @@ from readmenator._rank import (  # noqa: F401
     global_pagerank,
     personalized_pagerank,
 )
+from readmenator._readme_injector import ReadmeInjector  # noqa: F401
+from readmenator._uml import UmlGenerator  # noqa: F401
