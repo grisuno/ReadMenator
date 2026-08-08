@@ -17,10 +17,9 @@ class CodePropertyGraph:
     KNOWLEDGE_BASE.md for zero-token agent context.
     """
 
-    CPG_CONTEXT = "https://readmenator.dev/cpg/v1"
-
-    def __init__(self, privacy_mode: bool = False) -> None:
+    def __init__(self, privacy_mode: bool = False, cpg_context: str = "") -> None:
         self._privacy_mode = privacy_mode
+        self._cpg_context = cpg_context
 
     def generate(
         self,
@@ -73,7 +72,7 @@ class CodePropertyGraph:
                 })
 
         result: Dict = {
-            "@context": self.CPG_CONTEXT,
+            "@context": self._cpg_context or "https://schema.org",
             "type": "CodePropertyGraph",
             "version": "1.0",
             "generator": "readmenator",

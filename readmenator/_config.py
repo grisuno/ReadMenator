@@ -115,6 +115,8 @@ class Config:
 
     CPG_ENABLED: bool = True
 
+    CPG_CONTEXT: str = ""
+
     CPG_EMBED_IN_KNOWLEDGE_BASE: bool = True
 
     TAINT_ENABLED: bool = True

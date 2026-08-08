@@ -13,7 +13,7 @@ class TestCodePropertyGraphContract(unittest.TestCase):
 
     def setUp(self) -> None:
         self.config = Config()
-        self.cpg = CodePropertyGraph(self.config)
+        self.cpg = CodePropertyGraph(privacy_mode=self.config.PRIVACY_MODE)
 
     def _make_node(self, nid: str, label: str, lang: str = "py") -> Node:
         return Node(node_id=nid, label=label, kind="module", language=lang)
@@ -70,7 +70,7 @@ class TestCodePropertyGraphContract(unittest.TestCase):
 
     def test_privacy_mode_strips_docs(self) -> None:
         cfg = Config(PRIVACY_MODE=True)
-        cpg = CodePropertyGraph(cfg)
+        cpg = CodePropertyGraph(privacy_mode=cfg.PRIVACY_MODE)
         sym = self._make_sym("MyClass", "class", line=1)
         sym.doc = "Sensitive docstring"
         node = Node(

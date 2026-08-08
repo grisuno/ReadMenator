@@ -123,7 +123,10 @@ class AnalyzerFactory:
     @property
     def cpg(self) -> CodePropertyGraph:
         if self._cpg is None:
-            self._cpg = CodePropertyGraph(privacy_mode=self._config.PRIVACY_MODE)
+            self._cpg = CodePropertyGraph(
+                privacy_mode=self._config.PRIVACY_MODE,
+                cpg_context=self._config.CPG_CONTEXT,
+            )
         return self._cpg
 
     @property

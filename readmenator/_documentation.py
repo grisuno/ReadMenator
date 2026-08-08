@@ -47,7 +47,10 @@ class DocumentationGenerator:
             external_style=config.MERMAID_EXTERNAL_STYLE,
             internal_edge_style=config.MERMAID_INTERNAL_EDGE_STYLE,
         )
-        self._cpg = CodePropertyGraph(privacy_mode=config.PRIVACY_MODE)
+        self._cpg = CodePropertyGraph(
+            privacy_mode=config.PRIVACY_MODE,
+            cpg_context=config.CPG_CONTEXT,
+        )
         self._uml = UmlGenerator(config)
         self._plural_map: Dict[str, str] = dict(config.SYMBOL_TYPE_PLURALS)
 
