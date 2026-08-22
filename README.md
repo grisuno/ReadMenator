@@ -61,12 +61,12 @@ Creates `KNOWLEDGE_BASE.md` with Table of Contents, Statistics Dashboard, Archit
 ### Export formats
 
 ```bash
-python -m readmenator /path/to/project --export-all     # JSON + HTML + SVG
-python -m readmenator /path/to/project --json           # graph.json (GraphRAG-ready)
-python -m readmenator /path/to/project --html           # graph.html (interactive vis.js)
-python -m readmenator /path/to/project --svg            # graph.svg (static)
-python -m readmenator /path/to/project --graphml        # graph.graphml (Gephi/yEd)
-python -m readmenator /path/to/project obsidian         # Obsidian vault (wikilinks)
+python -m readmenator <path> --export-all     # JSON + HTML + SVG
+python -m readmenator <path> --json           # graph.json (GraphRAG-ready)
+python -m readmenator <path> --html           # graph.html (interactive vis.js)
+python -m readmenator <path> --svg            # graph.svg (static)
+python -m readmenator <path> --graphml        # graph.graphml (Gephi/yEd)
+python -m readmenator <path> obsidian         # Obsidian vault (wikilinks)
 python3 readmenator.py <path> lint                      # Architecture violations (exit 1 on errors)
 python3 readmenator.py <path> strip-dead-code           # Orphaned symbol report
 python3 readmenator.py <path> generate-rules            # Generate .cursorrules file
