@@ -189,3 +189,25 @@ class Config:
     )
 
     README_INJECTION_ENABLED: bool = True
+
+    LINTER_ENABLED: bool = True
+
+    LINTER_MAX_LINES: int = 300
+
+    LINTER_CROSS_LAYER_VIOLATIONS: bool = True
+
+    DEAD_CODE_ENABLED: bool = True
+
+    DEAD_CODE_ENTRY_POINTS: Tuple[str, ...] = ("main", "app", "index", "__init__")
+
+    DEAD_CODE_QUARANTINE_DIR: str = ".readmenator_trash"
+
+    CURSORRULES_ENABLED: bool = True
+
+    CURSORRULES_OUTPUT: str = ".cursorrules"
+
+    REFACTORIZER_ENABLED: bool = True
+
+    REFACTORIZER_MIN_LINES: int = 300
+
+    REFACTORIZER_MAX_FILES: int = 10

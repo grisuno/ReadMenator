@@ -1,0 +1,49 @@
+# ReadMenator Generated Architecture Rules
+# This file is auto-generated. Do not edit manually.
+
+## General Rules
+1. Maintain strict separation of concerns.
+2. UI/presentation components must not contain business logic or database queries.
+3. Business logic must not depend on presentation or infrastructure details.
+4. Data access must be isolated behind repository interfaces.
+5. Keep files under 300 lines. Split larger files into cohesive modules.
+6. Never add absolute paths to source code.
+7. Never hardcode configuration values. Use the Config class.
+8. All new modules must have corresponding test files.
+9. Use type annotations on all function signatures.
+10. Follow the existing code style and naming conventions.
+
+## Detected Architectural Layers
+- **business_logic**: readmenator/_cursorrules_generator.py, readmenator/_layer_rules.py, readmenator/_models.py, readmenator/_rule_gen.py
+- **data_access**: readmenator/_query.py
+- **infrastructure**: readmenator/_cache.py, readmenator/_config.py, readmenator/_readme_injector.py
+- **testing**: readmenator/__main__.py, readmenator_orchestrator.py, tests/__init__.py, tests/test_analyzer.py, tests/test_cache.py (+28 more)
+- **utility**: readmenator/__init__.py, readmenator/_analyzer.py, readmenator/_app.py, readmenator/_category.py, readmenator/_cpg.py (+42 more)
+
+## Graph Analysis Constraints
+### Central Files (God Nodes)
+Changes to these files require extra review:
+- readmenator/_models.py (centrality: 135.9)
+- readmenator/_config.py (centrality: 94.1)
+- readmenator/parsers/__init__.py (centrality: 48.2)
+- readmenator/parsers/_base.py (centrality: 44.6)
+- tests/test_parsers_property.py (centrality: 41.6)
+
+### Community Boundaries
+Avoid importing across community boundaries unless necessary:
+- Community 'readmenator': 55 files (cohesion: 0.78)
+- Community 'readmenator': 7 files (cohesion: 0.46)
+- Community 'readmenator/parsers': 24 files (cohesion: 0.69)
+
+## Active Violations to Fix
+- [WARNING] ARC001: File exceeds 300 lines (305 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (370 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (643 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (1087 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (898 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (813 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (373 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (473 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (537 lines). Consider modularization.
+- [WARNING] ARC001: File exceeds 300 lines (329 lines). Consider modularization.
+- ... and 9 more violations

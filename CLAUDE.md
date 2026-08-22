@@ -7,7 +7,7 @@ readmenator/
   __init__.py       - Public API exports
   __main__.py       - CLI entry point with argument dispatch
   _config.py        - Immutable Config dataclass (all settings, no magic numbers)
-  _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult, AnalysisResultV2, TaintPath, etc.
+  _models.py        - Symbol, Node, Edge, AnalysisResult, CommunityResult, AnalysisResultV2, TaintPath, LinterViolation, DeadCodeReport, RefactoringPlan, RefactoringAction, etc.
   parsers/          - Language parsers package (Strategy pattern, 1 file per language)
     __init__.py     - ParserFactory (create_parser) + extension registry
     _base.py        - LanguageParser base class with docstring/signature extraction
@@ -25,6 +25,10 @@ readmenator/
   _exporter.py      - Export: JSON, HTML (vis.js), SVG, GraphML, Obsidian vault
   _layers.py        - Architectural layer detection (5-layer model)
   _layer_rules.py   - Architecture violation detection engine
+  _linter.py        - Architecture linter: file length, cross-layer, circular dependencies
+  _dead_code.py     - Dead code detection: orphaned symbols with zero in-degree
+  _cursorrules_generator.py - Dynamic .cursorrules generator for AI assistants
+  _refactorizer.py  - Monolithic file refactoring planner
   _watcher.py       - Filesystem polling watcher for auto-rebuild
   _security.py      - Pattern-based static security analysis (18 language rule sets)
   _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
@@ -48,6 +52,10 @@ tests/
   test_documentation.py - Documentation output contract tests (all sections)
   test_query.py         - Query engine contract tests
   test_analyzer.py      - Graph analysis contract tests
+  test_linter.py        - Architecture linter contract tests
+  test_dead_code.py     - Dead code stripper contract tests
+  test_cursorrules.py   - Cursor rules generator contract tests
+  test_refactorizer.py  - Monolith refactorizer contract tests
   test_cache.py         - File cache contract tests
   test_exporter.py      - Graph exporter contract tests
   test_security.py      - Security analyzer contract tests (41 languages, thresholds, paths)
@@ -86,6 +94,10 @@ tests/
 - Layer violation settings (LAYER_VIOLATION_ENABLED, LAYER_VIOLATION_STRICT_MODE)
 - Privacy and gitignore settings (PRIVACY_MODE, GITIGNORE_AWARE)
 - Context budget for token-optimized KB (CONTEXT_BUDGET)
+- Linter settings (LINTER_ENABLED, LINTER_MAX_LINES, LINTER_CROSS_LAYER_VIOLATIONS)
+- Dead code settings (DEAD_CODE_ENABLED, DEAD_CODE_ENTRY_POINTS, DEAD_CODE_QUARANTINE_DIR)
+- Cursor rules settings (CURSORRULES_ENABLED, CURSORRULES_OUTPUT)
+- Refactorizer settings (REFACTORIZER_ENABLED, REFACTORIZER_MIN_LINES, REFACTORIZER_MAX_FILES)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -103,6 +115,10 @@ tests/
 - SuggestedRule: rule_id, severity, description, pattern, file_examples, match_count, language, semgrep_yaml
 - LayerViolation: source_file, source_layer, target_file, target_layer, description, severity
 - AnalysisResultV2: taint, cycles, change_impacts, hotspots, suggested_rules, layer_violations
+- LinterViolation: file_path, rule_id, severity, message
+- DeadCodeReport: file_path, symbol_name, symbol_type, recommendation
+- RefactoringAction: action_type, source_file, start_line, end_line, target_file, description
+- RefactoringPlan: file_path, actions, estimated_impact, current_lines
 
 ### Parsers Contract
 - LanguageParser base with _extract_docstring and _extract_signature
@@ -325,6 +341,44 @@ tests/
 - Remove method strips injected section cleanly
 - Returns False when no README found or no injection present
 - Guided by README_INJECTION_ENABLED config flag
+
+### Architecture Linter Contract
+- ArchitectureLinter class with lint(nodes, edges, resolved_edges, layers, content_map) method
+- ARC001: File exceeds configurable line threshold (LINTER_MAX_LINES, default 300)
+- ARC002: Cross-layer import violations (presentation -> data_access forbidden)
+- ARC003: Circular dependency detection in resolved import graph
+- Respects LAYER_VIOLATION_STRICT_MODE for warning edges
+- Returns List[LinterViolation] sorted by severity (error > warning > info)
+- Configurable via LINTER_ENABLED and LINTER_CROSS_LAYER_VIOLATIONS flags
+
+### Dead Code Stripper Contract
+- DeadCodeStripper class with identify(nodes, edges, resolved_edges) method
+- Builds in-degree map from resolved import edges
+- Excludes configurable entry points (DEAD_CODE_ENTRY_POINTS)
+- Classifies recommendations: MOVE_TO_TRASH for functions/variables, REVIEW for classes
+- Returns List[DeadCodeReport] sorted by file path
+- Configurable via DEAD_CODE_ENABLED flag
+
+### Cursor Rules Generator Contract
+- CursorRulesGenerator class with generate(nodes, edges, analysis, layers, violations, project_root) method
+- Produces deterministic .cursorrules file content
+- Base rules: separation of concerns, file length limits, no absolute paths, no hardcoded config
+- Layer constraints from detected architectural layers
+- Analysis constraints from god nodes and community boundaries
+- Violation rules from linter output (limited to 10 entries)
+- Optional file output when project_root is provided
+- Configurable via CURSORRULES_ENABLED and CURSORRULES_OUTPUT flags
+
+### Monolith Refactorizer Contract
+- MonolithRefactorizer class with analyze(nodes, edges, resolved_edges, content_map) method
+- Identifies files exceeding REFACTORIZER_MIN_LINES threshold
+- Groups symbols by kind (class, function, etc.) to detect extractable clusters
+- Generates EXTRACT_CLASS, EXTRACT_FUNCTION, EXTRACT_MODULE actions
+- Estimates impact from resolved import edges
+- generate_script(plan, project_root): produces executable bash script with sed commands
+- Returns List[RefactoringPlan] sorted by line count (largest first)
+- Respects REFACTORIZER_MAX_FILES limit
+- Configurable via REFACTORIZER_ENABLED flag
 
 ## Design Principles
 

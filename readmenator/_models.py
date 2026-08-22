@@ -299,3 +299,75 @@ class AnalysisResultV2:
     hotspots: List[HotspotResult] = field(default_factory=list)
     suggested_rules: List[SuggestedRule] = field(default_factory=list)
     layer_violations: List[LayerViolation] = field(default_factory=list)
+
+
+@dataclass
+class LinterViolation:
+    """A violation detected by the architecture linter.
+
+    Attributes:
+        file_path: Relative path of the file containing the violation.
+        rule_id: Unique identifier for the linter rule (e.g. "ARC001").
+        severity: Severity level (error, warning, info).
+        message: Human-readable description of the violation.
+    """
+
+    file_path: str
+    rule_id: str
+    severity: str
+    message: str
+
+
+@dataclass
+class DeadCodeReport:
+    """A dead code symbol identified by the stripper.
+
+    Attributes:
+        file_path: Relative path of the file containing the symbol.
+        symbol_name: Name of the dead symbol.
+        symbol_type: Type of symbol (function, class, method, etc.).
+        recommendation: Recommended action (MOVE_TO_TRASH, REVIEW, KEEP).
+    """
+
+    file_path: str
+    symbol_name: str
+    symbol_type: str
+    recommendation: str
+
+
+@dataclass
+class RefactoringAction:
+    """A single refactoring action within a plan.
+
+    Attributes:
+        action_type: Type of action (EXTRACT_CLASS, EXTRACT_FUNCTION, MOVE_SYMBOL).
+        source_file: The file to refactor.
+        start_line: Start line of the code range to extract.
+        end_line: End line of the code range to extract.
+        target_file: The new file to create (for EXTRACT actions).
+        description: Human-readable description of the action.
+    """
+
+    action_type: str
+    source_file: str
+    start_line: int
+    end_line: int
+    target_file: str
+    description: str
+
+
+@dataclass
+class RefactoringPlan:
+    """A complete refactoring plan for a monolithic file.
+
+    Attributes:
+        file_path: The file to refactor.
+        actions: List of refactoring actions to perform.
+        estimated_impact: Number of files affected by the refactoring.
+        current_lines: Current line count of the file.
+    """
+
+    file_path: str
+    actions: List[RefactoringAction]
+    estimated_impact: int
+    current_lines: int

@@ -6,17 +6,25 @@ from typing import Dict, List, Optional, Tuple
 
 from readmenator._cache import FileCache
 from readmenator._config import Config
+from readmenator._cursorrules_generator import CursorRulesGenerator
+from readmenator._dead_code import DeadCodeStripper
 from readmenator._layers import LayerDetector
+from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
     AnalysisResult,
     AnalysisResultV2,
+    CommunityResult,
+    DeadCodeReport,
     Edge,
+    LinterViolation,
     Node,
+    RefactoringPlan,
     SecurityFinding,
 )
 from readmenator._pipeline import AnalyzerFactory, DeepAnalysisRunner
 from readmenator._query import QueryEngine
 from readmenator._rank import RankedResult
+from readmenator._refactorizer import MonolithRefactorizer
 from readmenator._resolver import ImportResolver
 
 logger = logging.getLogger(__name__)
@@ -299,7 +307,6 @@ class readmenatorApplication:
             cache.save_analysis("layers", dict(layers))
         else:
             analysis_data = cached_analysis
-            from readmenator._models import AnalysisResult, CommunityResult
             communities = [
                 CommunityResult(c["id"], c["label"], set(c["file_ids"]), c["cohesion"], c["size"])
                 for c in analysis_data.get("communities", [])
@@ -320,7 +327,6 @@ class readmenatorApplication:
         findings: List[SecurityFinding] = []
         if run_security:
             if cached_findings and not needs_reanalysis:
-                from readmenator._models import SecurityFinding
                 findings = [
                     SecurityFinding(**f) for f in cached_findings.get("findings", [])
                 ]
@@ -581,3 +587,57 @@ class readmenatorApplication:
         for layer, count in sorted(summary.items(), key=lambda x: x[1], reverse=True):
             logger.info("  %s: %d files", layer, count)
         return layers
+
+    def lint(self, target_dir: str) -> List[LinterViolation]:
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved_edges = self._last_resolved_edges
+        layers = LayerDetector().detect(nodes, edges)
+        linter = ArchitectureLinter(self._config)
+        violations = linter.lint(nodes, edges, resolved_edges, layers, content_map)
+        error_count = sum(1 for v in violations if v.severity == "error")
+        warn_count = sum(1 for v in violations if v.severity == "warning")
+        logger.info("Linter: %d errors, %d warnings", error_count, warn_count)
+        for v in violations:
+            logger.info("  [%s] %s: %s", v.severity.upper(), v.rule_id, v.message)
+        return violations
+
+    def strip_dead_code(self, target_dir: str) -> List[DeadCodeReport]:
+        nodes, edges = self._scan(target_dir)
+        resolved_edges = self._last_resolved_edges
+        stripper = DeadCodeStripper(self._config)
+        reports = stripper.identify(nodes, edges, resolved_edges)
+        logger.info("Dead code: %d orphaned symbols found", len(reports))
+        for r in reports:
+            logger.info("  %s:%s (%s) -> %s", r.file_path, r.symbol_name, r.symbol_type, r.recommendation)
+        return reports
+
+    def generate_cursorrules(self, target_dir: str) -> str:
+        nodes, edges = self._scan(target_dir)
+        resolved_edges = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved_edges)
+        layers = LayerDetector().detect(nodes, edges)
+        linter = ArchitectureLinter(self._config)
+        violations = linter.lint(nodes, edges, resolved_edges, layers)
+        generator = CursorRulesGenerator(self._config)
+        content = generator.generate(
+            nodes, edges, analysis=analysis, layers=layers,
+            violations=violations, project_root=target_dir,
+        )
+        logger.info("Cursor rules generated: %s/%s", target_dir, self._config.CURSORRULES_OUTPUT)
+        return content
+
+    def refactor_monolith(self, target_dir: str) -> List[RefactoringPlan]:
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved_edges = self._last_resolved_edges
+        refactorizer = MonolithRefactorizer(self._config)
+        plans = refactorizer.analyze(nodes, edges, resolved_edges, content_map)
+        logger.info("Refactorizer: %d monolithic files detected", len(plans))
+        for plan in plans:
+            logger.info("  %s (%d lines, %d actions)", plan.file_path, plan.current_lines, len(plan.actions))
+            root = Path(target_dir).resolve()
+            script_path = root / f".refactor_{Path(plan.file_path).stem}.sh"
+            script_content = refactorizer.generate_script(plan, str(root))
+            script_path.write_text(script_content, encoding="utf-8")
+            script_path.chmod(0o755)
+            logger.info("    Script: %s", script_path.name)
+        return plans

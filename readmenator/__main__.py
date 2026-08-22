@@ -33,6 +33,10 @@ def build_parser() -> argparse.ArgumentParser:
             "  cypher                  Export graph as Cypher (Neo4j/Memgraph)\n"
             "  uml                     Generate UML class diagram and print\n"
             "  serve [path]            Start MCP stdio server for AI agent queries\n"
+            "  lint                    Run architecture linter and report violations\n"
+            "  strip-dead-code         Identify orphaned symbols (dead code)\n"
+            "  generate-rules          Generate .cursorrules for AI assistants\n"
+            "  refactor-monolith       Generate refactoring plans for large files\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -220,6 +224,26 @@ def main() -> None:
             return
         elif command == "serve":
             mcp_main()
+            return
+        elif command == "lint":
+            violations = app.lint(target)
+            sys.exit(1 if any(v.severity == "error" for v in violations) else 0)
+            return
+        elif command == "strip-dead-code":
+            reports = app.strip_dead_code(target)
+            for r in reports:
+                print(f"{r.file_path}:{r.symbol_name} ({r.symbol_type}) -> {r.recommendation}")
+            return
+        elif command == "generate-rules":
+            content = app.generate_cursorrules(target)
+            print(content)
+            return
+        elif command == "refactor-monolith":
+            plans = app.refactor_monolith(target)
+            for plan in plans:
+                print(f"\n{plan.file_path} ({plan.current_lines} lines, {plan.estimated_impact} dependents):")
+                for action in plan.actions:
+                    print(f"  [{action.action_type}] {action.description}")
             return
         elif command == "--rebuild":
             app.rebuild(target)
