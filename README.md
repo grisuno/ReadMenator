@@ -67,6 +67,10 @@ python -m readmenator /path/to/project --html           # graph.html (interactiv
 python -m readmenator /path/to/project --svg            # graph.svg (static)
 python -m readmenator /path/to/project --graphml        # graph.graphml (Gephi/yEd)
 python -m readmenator /path/to/project obsidian         # Obsidian vault (wikilinks)
+python3 readmenator.py <path> lint                      # Architecture violations (exit 1 on errors)
+python3 readmenator.py <path> strip-dead-code           # Orphaned symbol report
+python3 readmenator.py <path> generate-rules            # Generate .cursorrules file
+python3 readmenator.py <path> refactor-monolith         # Refactoring plans + executable scripts
 ```
 
 ### Query, explain, and path trace
