@@ -167,8 +167,9 @@ class readmenatorApplication:
 
         self._write_sidecar_outputs(root, findings, analysis_v2)
         self._inject_readme_link(root)
+        self._inject_agent_files(root)
         self._log_summary(
-            nodes, edges, resolved_edges, analysis, layer_summary, analysis_v2, findings,
+            nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings,
         )
 
     def _write_sidecar_outputs(
@@ -205,6 +206,14 @@ class readmenatorApplication:
         except Exception:
             logger.debug("README injection skipped", exc_info=True)
 
+    def _inject_agent_files(self, root: Path) -> None:
+        if not self._config.AGENT_INJECTION_ENABLED:
+            return
+        try:
+            self._factory.agent_injector.inject(str(root))
+        except Exception:
+            logger.debug("Agent file injection skipped", exc_info=True)
+
     def generate_uml_code(
         self, target_dir: str, language: str, output_path: Optional[str] = None,
     ) -> str:
@@ -221,6 +230,7 @@ class readmenatorApplication:
         self,
         nodes: List[Node],
         edges: List[Edge],
+        root: Path,
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
         layer_summary: Optional[Dict[str, int]] = None,
@@ -268,7 +278,7 @@ class readmenatorApplication:
             logger.info(self._factory.security.summary(findings))
         logger.info(
             "Knowledge base generated: %s",
-            Path.cwd() / self._config.OUTPUT_FILENAME,
+            root / self._config.OUTPUT_FILENAME,
         )
 
     def update(self, target_dir: str, run_security: Optional[bool] = None) -> None:
@@ -350,6 +360,7 @@ class readmenatorApplication:
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
         self._inject_readme_link(root)
+        self._inject_agent_files(root)
         total_symbols = sum(len(n.symbols) for n in nodes)
         logger.info(
             "Knowledge base updated: %s", output_path,

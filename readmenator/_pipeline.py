@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, List, Optional
 
+from readmenator._agent_injector import AgentInjector
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._config import Config
@@ -57,6 +58,7 @@ class AnalyzerFactory:
         self._layer_detector: LayerDetector | None = None
         self._uml: UmlGenerator | None = None
         self._readme_injector: ReadmeInjector | None = None
+        self._agent_injector: AgentInjector | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -148,6 +150,14 @@ class AnalyzerFactory:
                 kb_filename=self._config.OUTPUT_FILENAME,
             )
         return self._readme_injector
+
+    @property
+    def agent_injector(self) -> AgentInjector:
+        if self._agent_injector is None:
+            self._agent_injector = AgentInjector(
+                kb_filename=self._config.AGENT_INJECTION_KB_FILENAME,
+            )
+        return self._agent_injector
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

@@ -49,6 +49,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  --cypher                Export graph.cypher (Neo4j/Memgraph)\n"
             "  --test                  Run the test suite\n"
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
+            "  --no-agent-injection    Skip injecting KB reference into AI agent files\n"
             "  --sarif                 Generate SARIF audit file\n"
             "  --context-budget N      Target token budget for KB (0 = full output)\n"
             "  --c++                   Generate C++ class declarations from UML\n"
@@ -77,6 +78,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-analysis", action="store_true", help="Skip community detection and graph analysis")
     parser.add_argument("--audit", action="store_true", help="Run static security analysis and include findings in output")
     parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
+    parser.add_argument("--no-agent-injection", dest="no_agent_injection", action="store_true", help="Skip injecting KB reference into AI agent files")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
     parser.add_argument("--context-budget", type=int, default=0, help="Target token budget for KNOWLEDGE_BASE.md summary (0 = full output)")
     parser.add_argument("--c++", dest="cpp", action="store_true", help="Generate C++ class declarations from UML")
@@ -282,10 +284,22 @@ def main() -> None:
     app = readmenatorApplication()
     if args.privacy:
         from readmenator._config import Config
-        app = readmenatorApplication(Config(PRIVACY_MODE=True, SARIF_ENABLED=args.sarif, SECURITY_ENABLED=args.audit))
+        app = readmenatorApplication(Config(
+            PRIVACY_MODE=True, SARIF_ENABLED=args.sarif,
+            SECURITY_ENABLED=args.audit,
+            AGENT_INJECTION_ENABLED=not args.no_agent_injection,
+        ))
     elif args.sarif:
         from readmenator._config import Config
-        app = readmenatorApplication(Config(SARIF_ENABLED=True, SECURITY_ENABLED=args.audit))
+        app = readmenatorApplication(Config(
+            SARIF_ENABLED=True, SECURITY_ENABLED=args.audit,
+            AGENT_INJECTION_ENABLED=not args.no_agent_injection,
+        ))
+    elif args.no_agent_injection:
+        from readmenator._config import Config
+        app = readmenatorApplication(Config(
+            AGENT_INJECTION_ENABLED=False,
+        ))
 
     output_path = Path(target) / "KNOWLEDGE_BASE.md"
 
