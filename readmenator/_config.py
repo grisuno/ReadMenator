@@ -215,3 +215,9 @@ class Config:
     AGENT_INJECTION_ENABLED: bool = True
 
     AGENT_INJECTION_KB_FILENAME: str = "KNOWLEDGE_BASE.md"
+
+    AGENT_OUTPUT_ENABLED: bool = True
+
+    AGENT_OUTPUT_DIR: str = "readmenator-agent"
+
+    AGENT_OUTPUT_MIN_SUBSYSTEM_FILES: int = 2

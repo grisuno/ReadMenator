@@ -34,6 +34,8 @@ readmenator/
   _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
   _uml.py           - UML class diagram generator (Mermaid classDiagram + 12-language code generation)
   _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
+  _agent_injector.py - Injects KB + agent output references into AI agent config files
+  _agent_output.py   - Agent-friendly grep-optimized output generator (INDEX.md, API.md, etc.)
   _taint.py         - Taint propagation analysis through import graph
   _hotspots.py      - Hotspot detection, cycle analysis, change impact analysis
   _rule_gen.py      - Suggested linting/security rule generation (Semgrep YAML)
@@ -69,6 +71,7 @@ tests/
   test_mcp_server.py    - MCP server protocol, tools, and resources contract tests
   test_uml.py           - UML class diagram and code generation contract tests
   test_readme_injector.py - README injection contract tests
+  test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
 ```
 
 ## Contracts
@@ -98,6 +101,7 @@ tests/
 - Dead code settings (DEAD_CODE_ENABLED, DEAD_CODE_ENTRY_POINTS, DEAD_CODE_QUARANTINE_DIR)
 - Cursor rules settings (CURSORRULES_ENABLED, CURSORRULES_OUTPUT)
 - Refactorizer settings (REFACTORIZER_ENABLED, REFACTORIZER_MIN_LINES, REFACTORIZER_MAX_FILES)
+- Agent output settings (AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -332,15 +336,45 @@ tests/
 ### README Injection Contract
 - ReadmeInjector class with inject(project_root) and remove(project_root) methods
 - Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
-- Injects a section linking to KNOWLEDGE_BASE.md with HTML anchor comments
-- Idempotent: second injection returns False when anchor already present
+- Injects a section linking to KNOWLEDGE_BASE.md and agent output directory with HTML anchor comments
+- Idempotent: second injection returns False when injection text is identical
+- **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - Preserves existing README content
 - Markdown injection: link, description, AI/human context
 - reStructuredText injection: adapted RST syntax
-- Uses configurable kb_filename parameter for custom KB paths
+- Uses configurable kb_filename and agent_output_dir parameters
 - Remove method strips injected section cleanly
 - Returns False when no README found or no injection present
 - Guided by README_INJECTION_ENABLED config flag
+
+### Agent Injection Contract
+- AgentInjector class with inject(project_root) and remove(project_root) methods
+- Detects 15 AI agent config files: AGENTS.md, CLAUDE.md, SOUL.md, LLM.md, CONVENTIONS.md, .cursorrules, .instructions.md, .windsurfrules, .aider.conf.yml, SKILL.md, GEMINI.md, AGENTS.override.md, RULES.md, PROJECT_RULES.md, .github/copilot-instructions.md, plus .cursor/rules/*.mdc globs
+- Injects section referencing both KNOWLEDGE_BASE.md and readmenator-agent/ directory
+- Idempotent: second injection returns False when injection text is identical
+- **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
+- Markdown vs plain text injection based on file suffix (.yml/.yaml = plain, else markdown)
+- Uses configurable kb_filename and agent_output_dir parameters
+- Guided by AGENT_INJECTION_ENABLED config flag
+- Auto-install feature: ensure_readmenator_installed() checks and installs via pip
+
+### Agent Output Contract
+- AgentOutputGenerator class with generate() entry point
+- Generates grep-optimized, flat-markdown files in readmenator-agent/ directory
+- Output layout: INDEX.md, ARCHITECTURE.md, SECURITY.md, API.md, GOTCHAS.md, recipes/*.md, KB_<subsystem>.md
+- **Subsystem inference**: groups nodes by directory, names from last directory component (never hardcoded)
+- Files with >= AGENT_OUTPUT_MIN_SUBSYSTEM_FILES get their own KB_<name>.md
+- Unassigned files go to KB_root.md (flat project) or KB_misc.md (scattered)
+- INDEX.md: table format `| File | Purpose | Subsystem | Symbols |` (grep-friendly)
+- ARCHITECTURE.md: flat list of dependency pairs (no JSON wrapping)
+- SECURITY.md: findings grouped by severity, flat list (critical->info)
+- API.md: functions/methods with signatures, contracts, dependencies, imported-by
+- GOTCHAS.md: god nodes, hotspots, cycles, layer violations as actionable warnings
+- recipes/: add-function.md, fix-cycle.md, fix-security.md, reduce-complexity.md
+- All output is plain Markdown, no JSON wrapping, no fenced code blocks around data
+- Every line is greppable
+- No file exceeds 500 lines
+- Configurable via AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES
 
 ### Architecture Linter Contract
 - ArchitectureLinter class with lint(nodes, edges, resolved_edges, layers, content_map) method
@@ -439,11 +473,19 @@ When modifying this codebase:
 <!-- readmenator-agent-kb-link -->
 ## Project Knowledge Base
 
-This project contains a KNOWLEDGE_BASE.md generated by [ReadMenator](https://github.com/grisuno/ReadMenator), a zero-token polyglot static analysis tool.
+This project contains analysis outputs generated by [ReadMenator](https://github.com/grisuno/ReadMenator), a zero-token polyglot static analysis tool.
 
-If KNOWLEDGE_BASE.md does not exist or is outdated, regenerate it by running:
+**For humans:** Read `KNOWLEDGE_BASE.md` -- full architecture reference.
+
+**For agents:** Read `readmenator-agent/INDEX.md` -- grep-friendly index.
+  - `readmenator-agent/INDEX.md` -- file -> purpose map (start here)
+  - `readmenator-agent/API.md` -- public functions + contracts
+  - `readmenator-agent/GOTCHAS.md` -- "don't change X because Y breaks"
+  - `readmenator-agent/KB_<subsystem>.md` -- per-subsystem context (grep-friendly)
+  - `readmenator-agent/SECURITY.md` -- findings by severity
+  - `readmenator-agent/recipes/*.md` -- actionable task blocks
+
+If outputs are outdated, regenerate by running:
 
     pip install readmenator && readmenator .
-
-Read KNOWLEDGE_BASE.md for full project context: architecture overview, all classes, functions, imports, dependency graphs, security audit findings, community analysis, and more. This file provides comprehensive codebase understanding without LLM token cost.
 <!-- /readmenator-agent-kb-link -->

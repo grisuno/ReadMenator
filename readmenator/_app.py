@@ -166,6 +166,13 @@ class readmenatorApplication:
         })
 
         self._write_sidecar_outputs(root, findings, analysis_v2)
+
+        if self._config.AGENT_OUTPUT_ENABLED:
+            self._factory.agent_output.generate(
+                nodes, edges, resolved_edges, analysis,
+                analysis_v2, findings, layers, str(root),
+            )
+
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         self._log_summary(
@@ -359,6 +366,13 @@ class readmenatorApplication:
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
+
+        if self._config.AGENT_OUTPUT_ENABLED:
+            self._factory.agent_output.generate(
+                nodes, edges, resolved_edges, analysis,
+                analysis_v2, findings, layers, str(root),
+            )
+
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         total_symbols = sum(len(n.symbols) for n in nodes)

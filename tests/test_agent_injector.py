@@ -79,14 +79,14 @@ class TestAgentInjectorInjectBehavior(unittest.TestCase):
 
     def test_inject_skips_when_already_up_to_date(self):
         path = self.root / "CLAUDE.md"
-        new_injection = (
-            "<!-- readmenator-agent-kb-link -->\n"
-            "## Project Knowledge Base\n\n"
-            "If KNOWLEDGE_BASE.md does not exist or is outdated, regenerate it by running:\n\n"
-            "    pip install readmenator && readmenator .\n"
-            "<!-- /readmenator-agent-kb-link -->"
+        from readmenator._agent_injector import _ANCHOR, _ANCHOR_END, _INJECTION_MD
+        current_injection = _INJECTION_MD.format(
+            anchor_start=_ANCHOR,
+            anchor_end=_ANCHOR_END,
+            kb_filename="KNOWLEDGE_BASE.md",
+            agent_output_dir="readmenator-agent",
         )
-        path.write_text("# Rules\n\n" + new_injection + "\n")
+        path.write_text("# Rules\n\n" + current_injection + "\n")
         count = self.injector.inject(str(self.root))
         self.assertEqual(count, 0)
 

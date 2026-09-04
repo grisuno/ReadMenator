@@ -13,14 +13,19 @@ _INJECTION_TEXT_MD = """{anchor_start}
 ## Knowledge Base
 
 This project has been analyzed by [ReadMenator](https://github.com/grisuno/ReadMenator),
-a zero-token polyglot static analysis tool. A comprehensive knowledge base is available:
+a zero-token polyglot static analysis tool. Analysis outputs are available:
 
-- **[{kb_filename}](./{kb_filename})** -- Architecture reference with all
+- **[{kb_filename}](./{kb_filename})** -- Full architecture reference with all
   classes, functions, imports, dependency graphs, UML class diagrams, security
   audit findings, community analysis, and more.
+- **[{agent_output_dir}/](./{agent_output_dir}/)** -- Agent-friendly, grep-optimized index.
+  - `INDEX.md` -- Quick reference: what each file does
+  - `API.md` -- Public function contracts
+  - `GOTCHAS.md` -- Change warnings
+  - `SECURITY.md` -- Findings by severity
 
-AI agents and developers: Read `{kb_filename}` for full project context
-without LLM token cost.
+AI agents: Read `{agent_output_dir}/INDEX.md` for fast project context.
+Developers: Read `{kb_filename}` for full architecture reference.
 {anchor_end}
 """
 
@@ -29,14 +34,20 @@ Knowledge Base
 --------------
 
 This project has been analyzed by `ReadMenator <https://github.com/grisuno/ReadMenator>`_,
-a zero-token polyglot static analysis tool. A comprehensive knowledge base is available:
+a zero-token polyglot static analysis tool. Analysis outputs are available:
 
-- **{kb_filename}** -- Architecture reference with all classes, functions,
+- **{kb_filename}** -- Full architecture reference with all classes, functions,
   imports, dependency graphs, UML class diagrams, security audit findings,
   community analysis, and more.
+- **{agent_output_dir}/** -- Agent-friendly, grep-optimized index.
 
-AI agents and developers: Read `{kb_filename}` for full project context
-without LLM token cost.
+  - ``INDEX.md`` -- Quick reference: what each file does
+  - ``API.md`` -- Public function contracts
+  - ``GOTCHAS.md`` -- Change warnings
+  - ``SECURITY.md`` -- Findings by severity
+
+AI agents: Read ``{agent_output_dir}/INDEX.md`` for fast project context.
+Developers: Read ``{kb_filename}`` for full architecture reference.
 {anchor_end}
 """
 
@@ -54,8 +65,13 @@ class ReadmeInjector:
     so that both human developers and AI agents know it exists.
     """
 
-    def __init__(self, kb_filename: str = "KNOWLEDGE_BASE.md") -> None:
+    def __init__(
+        self,
+        kb_filename: str = "KNOWLEDGE_BASE.md",
+        agent_output_dir: str = "readmenator-agent",
+    ) -> None:
         self._kb_filename = kb_filename
+        self._agent_output_dir = agent_output_dir
 
     def inject(self, project_root: str) -> bool:
         root = Path(project_root).resolve()
@@ -65,19 +81,45 @@ class ReadmeInjector:
             return False
 
         content = readme_path.read_text(encoding="utf-8", errors="replace")
+        injection = self._build_injection(readme_path.suffix.lower())
 
         if _ANCHOR_START in content and _ANCHOR_END in content:
-            logger.debug("Injection already present in %s", readme_path.name)
-            return False
+            current = self._extract_current_injection(content)
+            if current.strip() == injection.strip():
+                logger.debug("Injection already up to date in %s", readme_path.name)
+                return False
+            content = self._remove_old_injection(content)
+            new_content = content.rstrip("\n") + "\n\n" + injection + "\n"
+            readme_path.write_text(new_content, encoding="utf-8")
+            logger.info("Updated knowledge base link in %s", readme_path.name)
+            return True
 
-        injection = self._build_injection(readme_path.suffix.lower())
         new_content = content.rstrip("\n") + "\n\n" + injection + "\n"
-
         readme_path.write_text(new_content, encoding="utf-8")
         logger.info(
             "Injected knowledge base link into %s", readme_path.name
         )
         return True
+
+    @staticmethod
+    def _extract_current_injection(content: str) -> str:
+        start_idx = content.find(_ANCHOR_START)
+        end_idx = content.find(_ANCHOR_END)
+        if start_idx < 0 or end_idx < 0:
+            return ""
+        end_idx += len(_ANCHOR_END)
+        return content[start_idx:end_idx]
+
+    @staticmethod
+    def _remove_old_injection(content: str) -> str:
+        start_idx = content.find(_ANCHOR_START)
+        end_idx = content.find(_ANCHOR_END)
+        if start_idx < 0 or end_idx < 0:
+            return content
+        end_idx += len(_ANCHOR_END)
+        before = content[:start_idx].rstrip("\n")
+        after = content[end_idx:].lstrip("\n")
+        return before + ("\n" + after if after else "")
 
     def remove(self, project_root: str) -> bool:
         root = Path(project_root).resolve()
@@ -116,14 +158,12 @@ class ReadmeInjector:
         return None
 
     def _build_injection(self, suffix: str) -> str:
-        if suffix == ".rst":
-            return _INJECTION_TEXT_RST.format(
-                anchor_start=_ANCHOR_START,
-                anchor_end=_ANCHOR_END,
-                kb_filename=self._kb_filename,
-            )
-        return _INJECTION_TEXT_MD.format(
+        kwargs = dict(
             anchor_start=_ANCHOR_START,
             anchor_end=_ANCHOR_END,
             kb_filename=self._kb_filename,
+            agent_output_dir=self._agent_output_dir,
         )
+        if suffix == ".rst":
+            return _INJECTION_TEXT_RST.format(**kwargs)
+        return _INJECTION_TEXT_MD.format(**kwargs)

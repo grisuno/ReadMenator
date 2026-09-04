@@ -1,0 +1,964 @@
+# Subsystem: tests
+
+## tests/__init__.py
+- Layer: testing
+- Language: py
+
+## tests/test_agent_injector.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestAgentInjectorInjectBehavior` (class, line 19) `class TestAgentInjectorInjectBehavior(TestCase)`
+  - `TestAgentInjectorRemoveBehavior` (class, line 165) `class TestAgentInjectorRemoveBehavior(TestCase)`
+  - `TestAgentInjectorFindFiles` (class, line 208) `class TestAgentInjectorFindFiles(TestCase)`
+  - `TestAgentInjectorEdgeCases` (class, line 245) `class TestAgentInjectorEdgeCases(TestCase)`
+  - `setUp` (method, line 22) `def setUp(self)`
+  - `tearDown` (method, line 27) `def tearDown(self)`
+  - `test_inject_into_agents_md_adds_kb_link` (method, line 30) `def test_inject_into_agents_md_adds_kb_link(self)`
+  - `test_inject_into_claude_md_adds_kb_link` (method, line 39) `def test_inject_into_claude_md_adds_kb_link(self)`
+  - `test_inject_into_cursorrules_adds_kb_link` (method, line 47) `def test_inject_into_cursorrules_adds_kb_link(self)`
+  - `test_inject_into_github_copilot_instructions` (method, line 55) `def test_inject_into_github_copilot_instructions(self)`
+  - `test_inject_replaces_old_injection_without_regen_command` (method, line 65) `def test_inject_replaces_old_injection_without_regen_command(self)`
+  - `test_inject_skips_when_already_up_to_date` (method, line 80) `def test_inject_skips_when_already_up_to_date(self)`
+  - `test_inject_into_cursor_rules_mdc_glob` (method, line 93) `def test_inject_into_cursor_rules_mdc_glob(self)`
+  - `test_inject_is_idempotent_does_not_duplicate` (method, line 103) `def test_inject_is_idempotent_does_not_duplicate(self)`
+  - `test_inject_no_agent_files_returns_zero` (method, line 114) `def test_inject_no_agent_files_returns_zero(self)`
+  - `test_inject_preserves_existing_content` (method, line 118) `def test_inject_preserves_existing_content(self)`
+  - `test_inject_multiple_agent_files` (method, line 126) `def test_inject_multiple_agent_files(self)`
+  - `test_inject_plain_text_format_for_yaml` (method, line 133) `def test_inject_plain_text_format_for_yaml(self)`
+  - `test_custom_kb_filename_works` (method, line 142) `def test_custom_kb_filename_works(self)`
+  - `test_injection_includes_regeneration_command` (method, line 150) `def test_injection_includes_regeneration_command(self)`
+  - `test_inject_does_not_execute_commands` (method, line 157) `def test_inject_does_not_execute_commands(self)`
+  - `setUp` (method, line 168) `def setUp(self)`
+  - `tearDown` (method, line 173) `def tearDown(self)`
+  - `test_remove_strips_injected_section` (method, line 176) `def test_remove_strips_injected_section(self)`
+  - `test_remove_without_injection_returns_zero` (method, line 187) `def test_remove_without_injection_returns_zero(self)`
+  - `test_remove_no_files_returns_zero` (method, line 193) `def test_remove_no_files_returns_zero(self)`
+  - `test_remove_preserves_original_content` (method, line 197) `def test_remove_preserves_original_content(self)`
+  - `setUp` (method, line 211) `def setUp(self)`
+  - `tearDown` (method, line 215) `def tearDown(self)`
+  - `test_finds_agents_md` (method, line 218) `def test_finds_agents_md(self)`
+  - `test_finds_all_listed_files` (method, line 224) `def test_finds_all_listed_files(self)`
+  - `test_finds_cursor_rules_glob` (method, line 231) `def test_finds_cursor_rules_glob(self)`
+  - `test_returns_empty_when_no_files` (method, line 240) `def test_returns_empty_when_no_files(self)`
+  - `setUp` (method, line 248) `def setUp(self)`
+  - `tearDown` (method, line 253) `def tearDown(self)`
+  - `test_inject_into_empty_file` (method, line 256) `def test_inject_into_empty_file(self)`
+  - `test_inject_respects_custom_agent_files_list` (method, line 264) `def test_inject_respects_custom_agent_files_list(self)`
+  - `test_inject_does_not_touch_unlisted_files` (method, line 272) `def test_inject_does_not_touch_unlisted_files(self)`
+- Depends on: `readmenator/_agent_injector.py`
+
+## tests/test_agent_output.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_make_node` (function, line 19) `def _make_node(node_id, symbols, doc, language)`
+  - `_make_edge` (function, line 30) `def _make_edge(source, target, relation)`
+  - `_make_finding` (function, line 34) `def _make_finding(file_path, line, severity, rule_id, description, snippet, cwe)`
+  - `TestAgentOutputContract` (class, line 49) `class TestAgentOutputContract(TestCase)`
+  - `TestSubsystemInference` (class, line 63) `class TestSubsystemInference(TestCase)`
+  - `TestIndexGeneration` (class, line 117) `class TestIndexGeneration(TestCase)`
+  - `TestSecurityGeneration` (class, line 143) `class TestSecurityGeneration(TestCase)`
+  - `TestGotchasGeneration` (class, line 175) `class TestGotchasGeneration(TestCase)`
+  - `TestArchitectureGeneration` (class, line 216) `class TestArchitectureGeneration(TestCase)`
+  - `TestApiGeneration` (class, line 238) `class TestApiGeneration(TestCase)`
+  - `TestSubsystemFileGeneration` (class, line 264) `class TestSubsystemFileGeneration(TestCase)`
+  - `TestRecipesGeneration` (class, line 286) `class TestRecipesGeneration(TestCase)`
+  - `TestFullGenerate` (class, line 301) `class TestFullGenerate(TestCase)`
+  - `TestInjectionOutdatedDetection` (class, line 361) `class TestInjectionOutdatedDetection(TestCase)`
+  - `test_config_defaults` (method, line 50) `def test_config_defaults(self)`
+  - `test_config_immutable` (method, line 56) `def test_config_immutable(self)`
+  - `test_inferred_from_directories` (method, line 64) `def test_inferred_from_directories(self)`
+  - `test_flat_project_single_file` (method, line 80) `def test_flat_project_single_file(self)`
+  - `test_min_threshold_respected` (method, line 91) `def test_min_threshold_respected(self)`
+  - `test_misc_catches_unassigned` (method, line 103) `def test_misc_catches_unassigned(self)`
+  - `test_index_lists_all_files` (method, line 118) `def test_index_lists_all_files(self)`
+  - `test_index_table_format` (method, line 133) `def test_index_table_format(self)`
+  - `test_empty_findings` (method, line 144) `def test_empty_findings(self)`
+  - `test_findings_grouped_by_severity` (method, line 150) `def test_findings_grouped_by_severity(self)`
+  - `test_no_json_wrapping` (method, line 166) `def test_no_json_wrapping(self)`
+  - `test_god_nodes_section` (method, line 176) `def test_god_nodes_section(self)`
+  - `test_cycles_section` (method, line 192) `def test_cycles_section(self)`
+  - `test_empty_gotchas` (method, line 209) `def test_empty_gotchas(self)`
+  - `test_internal_dependencies` (method, line 217) `def test_internal_dependencies(self)`
+  - `test_external_imports` (method, line 228) `def test_external_imports(self)`
+  - `test_functions_listed` (method, line 239) `def test_functions_listed(self)`
+  - `test_no_json_in_api` (method, line 253) `def test_no_json_in_api(self)`
+  - `test_subsystem_files_written` (method, line 265) `def test_subsystem_files_written(self)`
+  - `test_recipes_directory` (method, line 287) `def test_recipes_directory(self)`
+  - `test_generate_creates_all_files` (method, line 302) `def test_generate_creates_all_files(self)`
+  - `test_all_files_under_500_lines` (method, line 333) `def test_all_files_under_500_lines(self)`
+  - `test_no_json_in_any_output` (method, line 348) `def test_no_json_in_any_output(self)`
+  - `test_agent_injector_detects_outdated` (method, line 362) `def test_agent_injector_detects_outdated(self)`
+  - `test_agent_injector_skips_identical` (method, line 384) `def test_agent_injector_skips_identical(self)`
+  - `test_readme_injector_detects_outdated` (method, line 400) `def test_readme_injector_detects_outdated(self)`
+  - `test_readme_injector_skips_identical` (method, line 422) `def test_readme_injector_skips_identical(self)`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_readme_injector.py`
+
+## tests/test_analyzer.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestGraphAnalyzerContract` (class, line 16) `class TestGraphAnalyzerContract(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `_make_node` (method, line 23) `def _make_node(self, nid, label, lang)`
+  - `_make_edge` (method, line 26) `def _make_edge(self, src, tgt, rel)`
+  - `test_analyze_empty_graph_returns_empty_result` (method, line 29) `def test_analyze_empty_graph_returns_empty_result(self)`
+  - `test_analyze_detects_communities_for_connected_graph` (method, line 34) `def test_analyze_detects_communities_for_connected_graph(self)`
+  - `test_analyze_computes_god_nodes` (method, line 48) `def test_analyze_computes_god_nodes(self)`
+  - `test_analyze_finds_surprising_connections` (method, line 64) `def test_analyze_finds_surprising_connections(self)`
+  - `test_analyze_generates_questions` (method, line 81) `def test_analyze_generates_questions(self)`
+  - `test_community_cohesion_is_between_zero_and_one` (method, line 92) `def test_community_cohesion_is_between_zero_and_one(self)`
+  - `test_isolated_nodes_do_not_form_communities` (method, line 107) `def test_isolated_nodes_do_not_form_communities(self)`
+  - `test_analyze_with_resolved_edges_counts_them` (method, line 116) `def test_analyze_with_resolved_edges_counts_them(self)`
+- Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`
+
+## tests/test_cache.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestFileCacheContract` (class, line 18) `class TestFileCacheContract(TestCase)`
+  - `setUp` (method, line 21) `def setUp(self)`
+  - `tearDown` (method, line 26) `def tearDown(self)`
+  - `_write` (method, line 30) `def _write(self, rel_path, content)`
+  - `test_compute_hash_returns_hex_string` (method, line 36) `def test_compute_hash_returns_hex_string(self)`
+  - `test_different_content_produces_different_hash` (method, line 42) `def test_different_content_produces_different_hash(self)`
+  - `test_same_content_produces_same_hash` (method, line 49) `def test_same_content_produces_same_hash(self)`
+  - `test_load_returns_empty_dict_when_no_cache` (method, line 56) `def test_load_returns_empty_dict_when_no_cache(self)`
+  - `test_save_and_load_roundtrip` (method, line 60) `def test_save_and_load_roundtrip(self)`
+  - `test_find_changed_detects_new_files` (method, line 66) `def test_find_changed_detects_new_files(self)`
+  - `test_find_changed_detects_modified_files` (method, line 71) `def test_find_changed_detects_modified_files(self)`
+  - `test_find_changed_skips_unchanged_files` (method, line 78) `def test_find_changed_skips_unchanged_files(self)`
+  - `test_prune_deleted_removes_ghost_entries` (method, line 85) `def test_prune_deleted_removes_ghost_entries(self)`
+  - `test_compute_hashes_batch` (method, line 92) `def test_compute_hashes_batch(self)`
+  - `test_nonexistent_file_returns_empty_hash` (method, line 100) `def test_nonexistent_file_returns_empty_hash(self)`
+  - `test_save_and_load_analysis_roundtrip` (method, line 109) `def test_save_and_load_analysis_roundtrip(self)`
+  - `test_load_missing_analysis_key_returns_none` (method, line 116) `def test_load_missing_analysis_key_returns_none(self)`
+  - `test_clear_analysis_specific_key` (method, line 120) `def test_clear_analysis_specific_key(self)`
+  - `test_clear_analysis_all_keys` (method, line 127) `def test_clear_analysis_all_keys(self)`
+  - `test_has_changed_since_last_analysis_returns_true_on_first_run` (method, line 134) `def test_has_changed_since_last_analysis_returns_true_on_first_run(self)`
+  - `test_has_changed_since_last_analysis_returns_false_when_no_changes` (method, line 139) `def test_has_changed_since_last_analysis_returns_false_when_no_changes(self)`
+  - `test_has_changed_since_last_analysis_returns_true_when_file_changed` (method, line 147) `def test_has_changed_since_last_analysis_returns_true_when_file_changed(self)`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`
+
+## tests/test_config.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestConfigContract` (class, line 7) `class TestConfigContract(TestCase)`
+  - `test_config_is_immutable` (method, line 8) `def test_config_is_immutable(self)`
+  - `test_config_defaults_are_sane` (method, line 13) `def test_config_defaults_are_sane(self)`
+  - `test_ignore_dirs_are_comprehensive` (method, line 24) `def test_ignore_dirs_are_comprehensive(self)`
+  - `test_plural_map_covers_all_symbol_types` (method, line 30) `def test_plural_map_covers_all_symbol_types(self)`
+  - `test_supported_extensions_no_duplicates` (method, line 41) `def test_supported_extensions_no_duplicates(self)`
+- Depends on: `readmenator/_config.py`
+
+## tests/test_cpg.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestCodePropertyGraphContract` (class, line 11) `class TestCodePropertyGraphContract(TestCase)`
+  - `setUp` (method, line 14) `def setUp(self)`
+  - `_make_node` (method, line 18) `def _make_node(self, nid, label, lang)`
+  - `_make_sym` (method, line 21) `def _make_sym(self, name, kind, line)`
+  - `test_generate_returns_valid_json` (method, line 24) `def test_generate_returns_valid_json(self)`
+  - `test_generate_includes_node_data` (method, line 33) `def test_generate_includes_node_data(self)`
+  - `test_generate_includes_edges` (method, line 49) `def test_generate_includes_edges(self)`
+  - `test_generate_includes_metadata` (method, line 61) `def test_generate_includes_metadata(self)`
+  - `test_privacy_mode_strips_docs` (method, line 71) `def test_privacy_mode_strips_docs(self)`
+  - `test_sha256_hash_included` (method, line 89) `def test_sha256_hash_included(self)`
+  - `test_empty_graph_returns_valid_json` (method, line 96) `def test_empty_graph_returns_valid_json(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_models.py`
+
+## tests/test_cursorrules.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestCursorRulesGeneratorContract` (class, line 18) `class TestCursorRulesGeneratorContract(TestCase)`
+  - `setUp` (method, line 21) `def setUp(self)`
+  - `test_generate_returns_string` (method, line 25) `def test_generate_returns_string(self)`
+  - `test_generate_contains_header` (method, line 29) `def test_generate_contains_header(self)`
+  - `test_generate_contains_base_rules` (method, line 33) `def test_generate_contains_base_rules(self)`
+  - `test_generate_includes_layer_constraints` (method, line 38) `def test_generate_includes_layer_constraints(self)`
+  - `test_generate_includes_god_nodes` (method, line 49) `def test_generate_includes_god_nodes(self)`
+  - `test_generate_includes_communities` (method, line 62) `def test_generate_includes_communities(self)`
+  - `test_generate_includes_violations` (method, line 82) `def test_generate_includes_violations(self)`
+  - `test_generate_limits_violations_to_ten` (method, line 95) `def test_generate_limits_violations_to_ten(self)`
+  - `test_generate_writes_file_when_project_root` (method, line 103) `def test_generate_writes_file_when_project_root(self)`
+  - `test_generate_idempotent` (method, line 111) `def test_generate_idempotent(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_models.py`
+
+## tests/test_dead_code.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestDeadCodeStripperContract` (class, line 16) `class TestDeadCodeStripperContract(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `_make_symbol` (method, line 23) `def _make_symbol(self, name, kind)`
+  - `_make_node` (method, line 26) `def _make_node(self, nid, symbols)`
+  - `_make_edge` (method, line 35) `def _make_edge(self, src, tgt)`
+  - `test_identify_empty_graph_returns_empty` (method, line 38) `def test_identify_empty_graph_returns_empty(self)`
+  - `test_identify_finds_dead_symbol` (method, line 42) `def test_identify_finds_dead_symbol(self)`
+  - `test_identify_excludes_entry_points` (method, line 53) `def test_identify_excludes_entry_points(self)`
+  - `test_identify_excludes_app_entry_point` (method, line 61) `def test_identify_excludes_app_entry_point(self)`
+  - `test_identify_excludes_init_entry_point` (method, line 69) `def test_identify_excludes_init_entry_point(self)`
+  - `test_identify_recommends_review_for_classes` (method, line 77) `def test_identify_recommends_review_for_classes(self)`
+  - `test_identify_recommends_trash_for_functions` (method, line 85) `def test_identify_recommends_trash_for_functions(self)`
+  - `test_identify_recommends_trash_for_variables` (method, line 93) `def test_identify_recommends_trash_for_variables(self)`
+  - `test_all_symbols_imported_returns_empty` (method, line 101) `def test_all_symbols_imported_returns_empty(self)`
+  - `test_reports_sorted_by_file_path` (method, line 113) `def test_reports_sorted_by_file_path(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_models.py`
+
+## tests/test_documentation.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestDocumentationGeneratorContract` (class, line 17) `class TestDocumentationGeneratorContract(TestCase)`
+  - `setUp` (method, line 18) `def setUp(self)`
+  - `test_contains_header` (method, line 22) `def test_contains_header(self)`
+  - `test_contains_metadata_line` (method, line 26) `def test_contains_metadata_line(self)`
+  - `test_contains_mermaid_block` (method, line 32) `def test_contains_mermaid_block(self)`
+  - `test_contains_architecture_reference` (method, line 37) `def test_contains_architecture_reference(self)`
+  - `test_contains_cpg_block` (method, line 41) `def test_contains_cpg_block(self)`
+  - `test_contains_statistics_dashboard` (method, line 46) `def test_contains_statistics_dashboard(self)`
+  - `test_groups_files_by_language` (method, line 51) `def test_groups_files_by_language(self)`
+  - `test_lists_symbols_under_file` (method, line 70) `def test_lists_symbols_under_file(self)`
+  - `test_class_symbol_is_pluralized_correctly` (method, line 83) `def test_class_symbol_is_pluralized_correctly(self)`
+  - `test_function_pluralization` (method, line 97) `def test_function_pluralization(self)`
+  - `test_method_pluralization` (method, line 109) `def test_method_pluralization(self)`
+  - `test_shows_no_symbols_for_empty_files` (method, line 121) `def test_shows_no_symbols_for_empty_files(self)`
+  - `test_includes_file_path` (method, line 132) `def test_includes_file_path(self)`
+  - `test_docstring_in_output` (method, line 143) `def test_docstring_in_output(self)`
+  - `test_truncation_note_when_limited` (method, line 155) `def test_truncation_note_when_limited(self)`
+  - `test_taint_propagation_section_present` (method, line 165) `def test_taint_propagation_section_present(self)`
+  - `test_hotspot_section_present` (method, line 185) `def test_hotspot_section_present(self)`
+  - `test_no_taint_section_when_empty` (method, line 203) `def test_no_taint_section_when_empty(self)`
+  - `test_no_hotspot_section_when_empty` (method, line 207) `def test_no_hotspot_section_when_empty(self)`
+  - `test_cpg_block_disabled_via_config` (method, line 211) `def test_cpg_block_disabled_via_config(self)`
+  - `test_architectural_layers_section` (method, line 217) `def test_architectural_layers_section(self)`
+  - `test_security_findings_section` (method, line 229) `def test_security_findings_section(self)`
+  - `test_context_budget_zero_returns_full_content` (method, line 252) `def test_context_budget_zero_returns_full_content(self)`
+  - `test_context_budget_returns_compact_summary` (method, line 260) `def test_context_budget_returns_compact_summary(self)`
+  - `test_context_budget_prioritizes_god_nodes` (method, line 268) `def test_context_budget_prioritizes_god_nodes(self)`
+  - `test_context_budget_truncates_at_limit` (method, line 285) `def test_context_budget_truncates_at_limit(self)`
+  - `test_context_budget_includes_security_findings` (method, line 293) `def test_context_budget_includes_security_findings(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_models.py`
+
+## tests/test_exporter.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestGraphExporterContract` (class, line 23) `class TestGraphExporterContract(TestCase)`
+  - `setUp` (method, line 26) `def setUp(self)`
+  - `_make_node` (method, line 30) `def _make_node(self, nid, label, lang, symbols)`
+  - `_make_sym` (method, line 42) `def _make_sym(self, name, kind, line)`
+  - `test_to_json_produces_valid_json` (method, line 47) `def test_to_json_produces_valid_json(self)`
+  - `test_to_json_includes_symbol_data` (method, line 56) `def test_to_json_includes_symbol_data(self)`
+  - `test_to_json_includes_metadata` (method, line 65) `def test_to_json_includes_metadata(self)`
+  - `test_to_json_includes_analysis_metadata` (method, line 76) `def test_to_json_includes_analysis_metadata(self)`
+  - `test_to_html_produces_standalone_page` (method, line 101) `def test_to_html_produces_standalone_page(self)`
+  - `test_to_html_includes_node_data` (method, line 109) `def test_to_html_includes_node_data(self)`
+  - `test_to_html_includes_community_legend_when_analysis` (method, line 116) `def test_to_html_includes_community_legend_when_analysis(self)`
+  - `test_to_svg_produces_svg_string` (method, line 138) `def test_to_svg_produces_svg_string(self)`
+  - `test_to_svg_render_truncation_for_large_graph` (method, line 145) `def test_to_svg_render_truncation_for_large_graph(self)`
+  - `test_to_svg_includes_readmenator_title` (method, line 154) `def test_to_svg_includes_readmenator_title(self)`
+  - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
+
+## tests/test_hotspots.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestHotspotAnalyzerContract` (class, line 10) `class TestHotspotAnalyzerContract(TestCase)`
+  - `setUp` (method, line 13) `def setUp(self)`
+  - `_make_node` (method, line 17) `def _make_node(self, nid, label, sym_count)`
+  - `test_empty_graph_returns_empty_hotspots` (method, line 29) `def test_empty_graph_returns_empty_hotspots(self)`
+  - `test_hotspots_rank_by_combined_score` (method, line 33) `def test_hotspots_rank_by_combined_score(self)`
+  - `test_hotspot_includes_scores` (method, line 43) `def test_hotspot_includes_scores(self)`
+  - `test_no_cycles_in_acyclic_graph` (method, line 53) `def test_no_cycles_in_acyclic_graph(self)`
+  - `test_detects_simple_cycle` (method, line 66) `def test_detects_simple_cycle(self)`
+  - `test_change_impact_ranks_by_total_impact` (method, line 79) `def test_change_impact_ranks_by_total_impact(self)`
+  - `test_change_impact_no_edges` (method, line 94) `def test_change_impact_no_edges(self)`
+  - `test_hotspot_weights_from_config` (method, line 100) `def test_hotspot_weights_from_config(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_hotspots.py`, `readmenator/_models.py`
+
+## tests/test_integration.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestEndToEndContract` (class, line 9) `class TestEndToEndContract(TestCase)`
+  - `setUp` (method, line 10) `def setUp(self)`
+  - `tearDown` (method, line 15) `def tearDown(self)`
+  - `_write` (method, line 19) `def _write(self, path, content)`
+  - `test_full_pipeline_generates_knowledge_base` (method, line 24) `def test_full_pipeline_generates_knowledge_base(self)`
+  - `test_knowledge_base_contains_mermaid` (method, line 40) `def test_knowledge_base_contains_mermaid(self)`
+  - `test_query_subcommand_works` (method, line 48) `def test_query_subcommand_works(self)`
+  - `test_explain_subcommand_works` (method, line 53) `def test_explain_subcommand_works(self)`
+  - `test_path_subcommand_works` (method, line 59) `def test_path_subcommand_works(self)`
+  - `test_summary_works` (method, line 65) `def test_summary_works(self)`
+  - `test_rebuild` (method, line 71) `def test_rebuild(self)`
+  - `test_knowledge_base_contains_cpg` (method, line 81) `def test_knowledge_base_contains_cpg(self)`
+  - `test_knowledge_base_contains_statistics_dashboard` (method, line 89) `def test_knowledge_base_contains_statistics_dashboard(self)`
+  - `test_audit_deep_returns_analysis` (method, line 98) `def test_audit_deep_returns_analysis(self)`
+  - `test_privacy_mode_works` (method, line 105) `def test_privacy_mode_works(self)`
+  - `test_export_sarif_produces_file` (method, line 114) `def test_export_sarif_produces_file(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`
+
+## tests/test_layer_rules.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestLayerRuleEngineContract` (class, line 10) `class TestLayerRuleEngineContract(TestCase)`
+  - `setUp` (method, line 13) `def setUp(self)`
+  - `_make_node` (method, line 17) `def _make_node(self, nid, label)`
+  - `test_empty_graph_returns_empty_violations` (method, line 20) `def test_empty_graph_returns_empty_violations(self)`
+  - `test_no_layers_returns_empty_violations` (method, line 24) `def test_no_layers_returns_empty_violations(self)`
+  - `test_same_layer_no_violation` (method, line 29) `def test_same_layer_no_violation(self)`
+  - `test_forbidden_edge_detected` (method, line 36) `def test_forbidden_edge_detected(self)`
+  - `test_allowed_testing_edges_no_violation` (method, line 46) `def test_allowed_testing_edges_no_violation(self)`
+  - `test_multiple_violations` (method, line 57) `def test_multiple_violations(self)`
+  - `test_utility_layer_ignored` (method, line 75) `def test_utility_layer_ignored(self)`
+  - `test_violation_summary` (method, line 82) `def test_violation_summary(self)`
+  - `test_resolved_edges_also_checked` (method, line 104) `def test_resolved_edges_also_checked(self)`
+  - `test_presentation_to_data_access_forbidden` (method, line 115) `def test_presentation_to_data_access_forbidden(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`
+
+## tests/test_linter.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestArchitectureLinterContract` (class, line 16) `class TestArchitectureLinterContract(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `_make_node` (method, line 23) `def _make_node(self, nid, label, lang)`
+  - `_make_edge` (method, line 26) `def _make_edge(self, src, tgt, rel)`
+  - `test_lint_empty_graph_returns_no_violations` (method, line 29) `def test_lint_empty_graph_returns_no_violations(self)`
+  - `test_lint_returns_empty_for_files_under_threshold` (method, line 33) `def test_lint_returns_empty_for_files_under_threshold(self)`
+  - `test_lint_detects_file_exceeding_max_lines` (method, line 40) `def test_lint_detects_file_exceeding_max_lines(self)`
+  - `test_lint_detects_cross_layer_violation` (method, line 49) `def test_lint_detects_cross_layer_violation(self)`
+  - `test_lint_allows_same_layer_imports` (method, line 61) `def test_lint_allows_same_layer_imports(self)`
+  - `test_lint_allows_testing_to_business_logic` (method, line 72) `def test_lint_allows_testing_to_business_logic(self)`
+  - `test_lint_ignores_utility_layer` (method, line 83) `def test_lint_ignores_utility_layer(self)`
+  - `test_lint_detects_circular_dependencies` (method, line 94) `def test_lint_detects_circular_dependencies(self)`
+  - `test_violations_sorted_by_severity` (method, line 108) `def test_violations_sorted_by_severity(self)`
+  - `test_lint_returns_empty_when_disabled` (method, line 121) `def test_lint_returns_empty_when_disabled(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_linter.py`, `readmenator/_models.py`
+
+## tests/test_mcp_server.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMCPProtocol` (class, line 21) `class TestMCPProtocol(TestCase)`
+  - `setUp` (method, line 24) `def setUp(self)`
+  - `tearDown` (method, line 33) `def tearDown(self)`
+  - `_make_request` (method, line 36) `def _make_request(self, method, params, msg_id)`
+  - `_call` (method, line 42) `def _call(self, req)`
+  - `test_initialize_exchanges_protocol_version` (method, line 49) `def test_initialize_exchanges_protocol_version(self)`
+  - `test_notifications_initialized_returns_no_response` (method, line 62) `def test_notifications_initialized_returns_no_response(self)`
+  - `test_unknown_method_returns_error` (method, line 67) `def test_unknown_method_returns_error(self)`
+  - `test_uninitialized_request_returns_error` (method, line 75) `def test_uninitialized_request_returns_error(self)`
+  - `test_list_tools_returns_all_tool_definitions` (method, line 85) `def test_list_tools_returns_all_tool_definitions(self)`
+  - `test_call_tool_without_initialize_returns_error` (method, line 115) `def test_call_tool_without_initialize_returns_error(self)`
+  - `test_call_tool_unknown_tool_returns_method_not_found` (method, line 123) `def test_call_tool_unknown_tool_returns_method_not_found(self)`
+  - `test_call_summary_tool_returns_content` (method, line 132) `def test_call_summary_tool_returns_content(self)`
+  - `test_call_query_tool_with_text_returns_results` (method, line 145) `def test_call_query_tool_with_text_returns_results(self)`
+  - `test_call_query_tool_missing_required_param_raises` (method, line 154) `def test_call_query_tool_missing_required_param_raises(self)`
+  - `test_list_resources_returns_resource_definitions` (method, line 168) `def test_list_resources_returns_resource_definitions(self)`
+  - `test_read_resource_summary_returns_json` (method, line 186) `def test_read_resource_summary_returns_json(self)`
+  - `test_read_resource_unknown_uri_returns_error` (method, line 197) `def test_read_resource_unknown_uri_returns_error(self)`
+  - `test_read_resource_kb_returns_markdown` (method, line 205) `def test_read_resource_kb_returns_markdown(self)`
+  - `_get_tool_def` (method, line 219) `def _get_tool_def(self, name)`
+  - `test_query_tool_requires_text_param` (method, line 226) `def test_query_tool_requires_text_param(self)`
+  - `test_explain_tool_requires_name_param` (method, line 230) `def test_explain_tool_requires_name_param(self)`
+  - `test_path_tool_requires_two_params` (method, line 234) `def test_path_tool_requires_two_params(self)`
+  - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
+  - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
+
+## tests/test_mermaid.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMermaidRendererContract` (class, line 7) `class TestMermaidRendererContract(TestCase)`
+  - `setUp` (method, line 8) `def setUp(self)`
+  - `test_renders_graph_header` (method, line 11) `def test_renders_graph_header(self)`
+  - `test_renders_module_node` (method, line 19) `def test_renders_module_node(self)`
+  - `test_renders_symbol_subnodes` (method, line 27) `def test_renders_symbol_subnodes(self)`
+  - `test_class_symbol_gets_cls_style` (method, line 36) `def test_class_symbol_gets_cls_style(self)`
+  - `test_function_symbol_gets_fn_style` (method, line 45) `def test_function_symbol_gets_fn_style(self)`
+  - `test_external_import_edge_is_dashed` (method, line 54) `def test_external_import_edge_is_dashed(self)`
+  - `test_truncation_when_over_limit` (method, line 62) `def test_truncation_when_over_limit(self)`
+  - `test_limits_symbols_to_five_per_node` (method, line 72) `def test_limits_symbols_to_five_per_node(self)`
+  - `test_handles_special_characters_in_ids` (method, line 82) `def test_handles_special_characters_in_ids(self)`
+- Depends on: `readmenator/_mermaid.py`, `readmenator/_models.py`
+
+## tests/test_models.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSymbolContract` (class, line 6) `class TestSymbolContract(TestCase)`
+  - `TestNodeContract` (class, line 20) `class TestNodeContract(TestCase)`
+  - `TestEdgeContract` (class, line 48) `class TestEdgeContract(TestCase)`
+  - `TestPluralizeContract` (class, line 56) `class TestPluralizeContract(TestCase)`
+  - `test_symbol_creation` (method, line 7) `def test_symbol_creation(self)`
+  - `test_symbol_with_signature` (method, line 15) `def test_symbol_with_signature(self)`
+  - `test_node_creation` (method, line 21) `def test_node_creation(self)`
+  - `test_node_with_symbols` (method, line 35) `def test_node_with_symbols(self)`
+  - `test_edge_creation` (method, line 49) `def test_edge_creation(self)`
+  - `test_pluralize_class` (method, line 57) `def test_pluralize_class(self)`
+  - `test_pluralize_unknown_appends_s` (method, line 62) `def test_pluralize_unknown_appends_s(self)`
+- Depends on: `readmenator/_models.py`
+
+## tests/test_parsers.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestCParserContract` (class, line 22) `class TestCParserContract(TestCase)`
+  - `TestPythonParserContract` (class, line 72) `class TestPythonParserContract(TestCase)`
+  - `TestGoParserContract` (class, line 141) `class TestGoParserContract(TestCase)`
+  - `TestRustParserContract` (class, line 184) `class TestRustParserContract(TestCase)`
+  - `TestJavaScriptParserContract` (class, line 222) `class TestJavaScriptParserContract(TestCase)`
+  - `TestJavaParserContract` (class, line 261) `class TestJavaParserContract(TestCase)`
+  - `TestCSharpParserContract` (class, line 293) `class TestCSharpParserContract(TestCase)`
+  - `TestShellParserContract` (class, line 326) `class TestShellParserContract(TestCase)`
+  - `TestPHPParserContract` (class, line 345) `class TestPHPParserContract(TestCase)`
+  - `TestDartParserContract` (class, line 371) `class TestDartParserContract(TestCase)`
+  - `TestGDScriptParserContract` (class, line 396) `class TestGDScriptParserContract(TestCase)`
+  - `TestNimParserContract` (class, line 414) `class TestNimParserContract(TestCase)`
+  - `TestAssemblyParserContract` (class, line 440) `class TestAssemblyParserContract(TestCase)`
+  - `TestParserFactoryContract` (class, line 460) `class TestParserFactoryContract(TestCase)`
+  - `setUp` (method, line 23) `def setUp(self)`
+  - `test_extracts_function` (method, line 26) `def test_extracts_function(self)`
+  - `test_extracts_struct` (method, line 33) `def test_extracts_struct(self)`
+  - `test_extracts_include` (method, line 40) `def test_extracts_include(self)`
+  - `test_extracts_define` (method, line 47) `def test_extracts_define(self)`
+  - `test_skips_reserved_words` (method, line 54) `def test_skips_reserved_words(self)`
+  - `test_class_with_inheritance` (method, line 64) `def test_class_with_inheritance(self)`
+  - `setUp` (method, line 73) `def setUp(self)`
+  - `test_extracts_function` (method, line 76) `def test_extracts_function(self)`
+  - `test_extracts_class` (method, line 83) `def test_extracts_class(self)`
+  - `test_extracts_imports` (method, line 90) `def test_extracts_imports(self)`
+  - `test_extracts_async_function` (method, line 98) `def test_extracts_async_function(self)`
+  - `test_handles_syntax_error_gracefully` (method, line 105) `def test_handles_syntax_error_gracefully(self)`
+  - `test_suppresses_syntax_warnings` (method, line 111) `def test_suppresses_syntax_warnings(self)`
+  - `test_extracts_signature_with_params` (method, line 123) `def test_extracts_signature_with_params(self)`
+  - `test_extracts_class_with_bases` (method, line 131) `def test_extracts_class_with_bases(self)`
+  - `setUp` (method, line 142) `def setUp(self)`
+  - `test_extracts_function` (method, line 145) `def test_extracts_function(self)`
+  - `test_extracts_method_receiver` (method, line 152) `def test_extracts_method_receiver(self)`
+  - `test_extracts_import_block` (method, line 159) `def test_extracts_import_block(self)`
+  - `test_extracts_single_import` (method, line 166) `def test_extracts_single_import(self)`
+  - `test_extracts_struct_and_interface` (method, line 172) `def test_extracts_struct_and_interface(self)`
+  - `setUp` (method, line 185) `def setUp(self)`
+  - `test_extracts_function` (method, line 188) `def test_extracts_function(self)`
+  - `test_extracts_pub_function` (method, line 195) `def test_extracts_pub_function(self)`
+  - `test_extracts_struct_and_trait_and_enum` (method, line 202) `def test_extracts_struct_and_trait_and_enum(self)`
+  - `test_extracts_use` (method, line 215) `def test_extracts_use(self)`
+  - `setUp` (method, line 223) `def setUp(self)`
+  - `test_extracts_function` (method, line 226) `def test_extracts_function(self)`
+  - `test_extracts_arrow_function` (method, line 233) `def test_extracts_arrow_function(self)`
+  - `test_extracts_class` (method, line 240) `def test_extracts_class(self)`
+  - `test_extracts_import_and_require` (method, line 247) `def test_extracts_import_and_require(self)`
+  - `test_skips_reserved_words` (method, line 254) `def test_skips_reserved_words(self)`
+  - `setUp` (method, line 262) `def setUp(self)`
+  - `test_extracts_class` (method, line 265) `def test_extracts_class(self)`
+  - `test_extracts_method` (method, line 272) `def test_extracts_method(self)`
+  - `test_extracts_import` (method, line 279) `def test_extracts_import(self)`
+  - `test_abstract_class` (method, line 285) `def test_abstract_class(self)`
+  - `setUp` (method, line 294) `def setUp(self)`
+  - `test_extracts_class` (method, line 297) `def test_extracts_class(self)`
+  - `test_extracts_method` (method, line 304) `def test_extracts_method(self)`
+  - `test_extracts_using` (method, line 311) `def test_extracts_using(self)`
+  - `test_record_and_interface` (method, line 317) `def test_record_and_interface(self)`
+  - `setUp` (method, line 327) `def setUp(self)`
+  - `test_extracts_function_with_parentheses` (method, line 330) `def test_extracts_function_with_parentheses(self)`
+  - `test_extracts_function_keyword` (method, line 337) `def test_extracts_function_keyword(self)`
+  - `setUp` (method, line 346) `def setUp(self)`
+  - `test_extracts_function` (method, line 349) `def test_extracts_function(self)`
+  - `test_extracts_class` (method, line 356) `def test_extracts_class(self)`
+  - `test_extracts_use_and_require` (method, line 363) `def test_extracts_use_and_require(self)`
+  - `setUp` (method, line 372) `def setUp(self)`
+  - `test_extracts_class` (method, line 375) `def test_extracts_class(self)`
+  - `test_extracts_function` (method, line 382) `def test_extracts_function(self)`
+  - `test_extracts_import` (method, line 389) `def test_extracts_import(self)`
+  - `setUp` (method, line 397) `def setUp(self)`
+  - `test_extracts_function` (method, line 400) `def test_extracts_function(self)`
+  - `test_extracts_extends` (method, line 407) `def test_extracts_extends(self)`
+  - `setUp` (method, line 415) `def setUp(self)`
+  - `test_extracts_proc` (method, line 418) `def test_extracts_proc(self)`
+  - `test_extracts_type` (method, line 425) `def test_extracts_type(self)`
+  - `test_extracts_import` (method, line 432) `def test_extracts_import(self)`
+  - `setUp` (method, line 441) `def setUp(self)`
+  - `test_extracts_label` (method, line 444) `def test_extracts_label(self)`
+  - `test_extracts_multiple_labels` (method, line 451) `def test_extracts_multiple_labels(self)`
+  - `setUp` (method, line 461) `def setUp(self)`
+  - `test_returns_c_parser_for_c_extensions` (method, line 464) `def test_returns_c_parser_for_c_extensions(self)`
+  - `test_returns_python_parser_for_py` (method, line 470) `def test_returns_python_parser_for_py(self)`
+  - `test_returns_none_for_unknown_extension` (method, line 475) `def test_returns_none_for_unknown_extension(self)`
+  - `test_returns_rust_parser_for_rs` (method, line 479) `def test_returns_rust_parser_for_rs(self)`
+  - `test_case_insensitive_extension` (method, line 484) `def test_case_insensitive_extension(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
+
+## tests/test_parsers_new.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestRubyParserContract` (class, line 15) `class TestRubyParserContract(TestCase)`
+  - `TestSwiftParserContract` (class, line 45) `class TestSwiftParserContract(TestCase)`
+  - `TestKotlinParserContract` (class, line 68) `class TestKotlinParserContract(TestCase)`
+  - `TestScalaParserContract` (class, line 85) `class TestScalaParserContract(TestCase)`
+  - `TestLuaParserContract` (class, line 102) `class TestLuaParserContract(TestCase)`
+  - `TestElixirParserContract` (class, line 117) `class TestElixirParserContract(TestCase)`
+  - `TestNewParserFactoryContract` (class, line 134) `class TestNewParserFactoryContract(TestCase)`
+  - `TestPythonCallExtractionContract` (class, line 151) `class TestPythonCallExtractionContract(TestCase)`
+  - `setUp` (method, line 16) `def setUp(self)`
+  - `test_extracts_class_with_inheritance` (method, line 19) `def test_extracts_class_with_inheritance(self)`
+  - `test_extracts_module` (method, line 27) `def test_extracts_module(self)`
+  - `test_extracts_method` (method, line 33) `def test_extracts_method(self)`
+  - `test_extracts_require` (method, line 39) `def test_extracts_require(self)`
+  - `setUp` (method, line 46) `def setUp(self)`
+  - `test_extracts_class` (method, line 49) `def test_extracts_class(self)`
+  - `test_extracts_function` (method, line 55) `def test_extracts_function(self)`
+  - `test_extracts_protocol` (method, line 61) `def test_extracts_protocol(self)`
+  - `setUp` (method, line 69) `def setUp(self)`
+  - `test_extracts_class` (method, line 72) `def test_extracts_class(self)`
+  - `test_extracts_fun` (method, line 78) `def test_extracts_fun(self)`
+  - `setUp` (method, line 86) `def setUp(self)`
+  - `test_extracts_object` (method, line 89) `def test_extracts_object(self)`
+  - `test_extracts_def` (method, line 95) `def test_extracts_def(self)`
+  - `setUp` (method, line 103) `def setUp(self)`
+  - `test_extracts_function` (method, line 106) `def test_extracts_function(self)`
+  - `test_extracts_require` (method, line 111) `def test_extracts_require(self)`
+  - `setUp` (method, line 118) `def setUp(self)`
+  - `test_extracts_defmodule` (method, line 121) `def test_extracts_defmodule(self)`
+  - `test_extracts_function` (method, line 127) `def test_extracts_function(self)`
+  - `setUp` (method, line 135) `def setUp(self)`
+  - `test_ruby_extension_maps_correctly` (method, line 138) `def test_ruby_extension_maps_correctly(self)`
+  - `test_swift_extension_maps_correctly` (method, line 142) `def test_swift_extension_maps_correctly(self)`
+  - `test_kotlin_extension_maps_correctly` (method, line 146) `def test_kotlin_extension_maps_correctly(self)`
+  - `setUp` (method, line 152) `def setUp(self)`
+  - `test_extracts_class_inheritance` (method, line 155) `def test_extracts_class_inheritance(self)`
+  - `test_extracts_function_calls` (method, line 160) `def test_extracts_function_calls(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
+
+## tests/test_parsers_property.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_generate_multiline_code` (function, line 67) `def _generate_multiline_code(lines, line_strategy)`
+  - `_create_parser` (function, line 104) `def _create_parser(ext)`
+  - `TestParserHypothesisContract` (class, line 117) `class TestParserHypothesisContract(TestCase)`
+  - `TestPythonParserProperty` (class, line 250) `class TestPythonParserProperty(TestCase)`
+  - `test_never_crashes_on_malformed_code` (method, line 124) `def test_never_crashes_on_malformed_code(self, ext, code)`
+  - `test_never_crashes_on_unicode_code` (method, line 142) `def test_never_crashes_on_unicode_code(self, ext, code)`
+  - `test_empty_code_returns_empty_or_valid` (method, line 160) `def test_empty_code_returns_empty_or_valid(self, ext)`
+  - `test_whitespace_code_returns_empty_or_valid` (method, line 170) `def test_whitespace_code_returns_empty_or_valid(self, ext)`
+  - `test_never_crashes_on_many_lines` (method, line 182) `def test_never_crashes_on_many_lines(self, ext, lines)`
+  - `test_repeated_keywords_no_crash` (method, line 200) `def test_repeated_keywords_no_crash(self, ext)`
+  - `test_parser_imports_is_list_of_strings` (method, line 219) `def test_parser_imports_is_list_of_strings(self, ext)`
+  - `test_unknown_extension_returns_none` (method, line 231) `def test_unknown_extension_returns_none(self)`
+  - `_assert_valid_symbols` (method, line 237) `def _assert_valid_symbols(self, symbols)`
+  - `setUp` (method, line 253) `def setUp(self)`
+  - `test_python_never_crashes_on_weird_ascii` (method, line 258) `def test_python_never_crashes_on_weird_ascii(self, code)`
+  - `test_python_never_crashes_on_any_text` (method, line 272) `def test_python_never_crashes_on_any_text(self, code)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+## tests/test_query.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_make_node` (function, line 7) `def _make_node(node_id, symbols)`
+  - `_make_sym` (function, line 18) `def _make_sym(name, kind, line)`
+  - `TestQueryEngineContract` (class, line 22) `class TestQueryEngineContract(TestCase)`
+  - `setUp` (method, line 23) `def setUp(self)`
+  - `test_find_exact_symbol` (method, line 36) `def test_find_exact_symbol(self)`
+  - `test_find_symbol_fuzzy` (method, line 42) `def test_find_symbol_fuzzy(self)`
+  - `test_find_symbol_not_found` (method, line 47) `def test_find_symbol_not_found(self)`
+  - `test_explain_returns_details` (method, line 51) `def test_explain_returns_details(self)`
+  - `test_explain_shows_imports` (method, line 58) `def test_explain_shows_imports(self)`
+  - `test_explain_shows_siblings` (method, line 63) `def test_explain_shows_siblings(self)`
+  - `test_explain_unknown_returns_none` (method, line 69) `def test_explain_unknown_returns_none(self)`
+  - `test_find_path_direct_import` (method, line 73) `def test_find_path_direct_import(self)`
+  - `test_find_path_same_file` (method, line 79) `def test_find_path_same_file(self)`
+  - `test_find_path_unknown_returns_none` (method, line 84) `def test_find_path_unknown_returns_none(self)`
+  - `test_summary_shows_counts` (method, line 88) `def test_summary_shows_counts(self)`
+  - `test_summary_shows_top_modules` (method, line 94) `def test_summary_shows_top_modules(self)`
+  - `test_query_returns_matching_symbols` (method, line 98) `def test_query_returns_matching_symbols(self)`
+  - `test_query_returns_file_matches` (method, line 102) `def test_query_returns_file_matches(self)`
+- Depends on: `readmenator/_models.py`, `readmenator/_query.py`
+
+## tests/test_ranking.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestEdgeKind` (class, line 60) `class TestEdgeKind`
+  - `TestMorphism` (class, line 84) `class TestMorphism`
+  - `TestCategory` (class, line 104) `class TestCategory`
+  - `TestTypedGraph` (class, line 183) `class TestTypedGraph`
+  - `_make_test_graph` (method, line 238) `def _make_test_graph()`
+  - `TestGlobalPageRank` (class, line 247) `class TestGlobalPageRank`
+  - `TestPersonalizedPageRank` (class, line 288) `class TestPersonalizedPageRank`
+  - `TestHITS` (class, line 325) `class TestHITS`
+  - `TestSeedGeneration` (class, line 350) `class TestSeedGeneration`
+  - `TestCompositeRanker` (class, line 403) `class TestCompositeRanker`
+  - `TestProjections` (class, line 490) `class TestProjections`
+  - `TestExplain` (class, line 539) `class TestExplain`
+  - `TestIntegration` (class, line 587) `class TestIntegration`
+  - `test_all_edge_kinds_have_weights` (method, line 61) `def test_all_edge_kinds_have_weights(self)`
+  - `test_infer_edge_kind_maps_correctly` (method, line 66) `def test_infer_edge_kind_maps_correctly(self)`
+  - `test_infer_edge_kind_falls_back` (method, line 71) `def test_infer_edge_kind_falls_back(self)`
+  - `test_edge_kind_is_str_enum` (method, line 75) `def test_edge_kind_is_str_enum(self)`
+  - `test_weight_is_edge_weight_times_confidence` (method, line 85) `def test_weight_is_edge_weight_times_confidence(self)`
+  - `test_weight_default_confidence` (method, line 90) `def test_weight_default_confidence(self)`
+  - `test_morphism_is_frozen` (method, line 94) `def test_morphism_is_frozen(self)`
+  - `test_empty_category` (method, line 105) `def test_empty_category(self)`
+  - `test_add_object_and_morphism` (method, line 110) `def test_add_object_and_morphism(self)`
+  - `test_outgoing_and_incoming` (method, line 118) `def test_outgoing_and_incoming(self)`
+  - `test_compose_same_kind` (method, line 130) `def test_compose_same_kind(self)`
+  - `test_compose_imports_then_defines` (method, line 140) `def test_compose_imports_then_defines(self)`
+  - `test_compose_incompatible_returns_none` (method, line 148) `def test_compose_incompatible_returns_none(self)`
+  - `test_compose_mismatched_target_source` (method, line 155) `def test_compose_mismatched_target_source(self)`
+  - `test_paths_finds_composition_chains` (method, line 162) `def test_paths_finds_composition_chains(self)`
+  - `test_paths_empty_when_no_route` (method, line 171) `def test_paths_empty_when_no_route(self)`
+  - `test_empty_graph` (method, line 184) `def test_empty_graph(self)`
+  - `test_stochastic_row_normalizes_to_one` (method, line 190) `def test_stochastic_row_normalizes_to_one(self)`
+  - `test_stochastic_row_empty_for_dangling` (method, line 199) `def test_stochastic_row_empty_for_dangling(self)`
+  - `test_transition_weight_aggregates_parallel_edges` (method, line 205) `def test_transition_weight_aggregates_parallel_edges(self)`
+  - `test_build_category_from_edges` (method, line 214) `def test_build_category_from_edges(self)`
+  - `test_build_category_from_edges_filters_by_node_ids` (method, line 225) `def test_build_category_from_edges_filters_by_node_ids(self)`
+  - `test_scores_sum_to_one` (method, line 248) `def test_scores_sum_to_one(self)`
+  - `test_all_nodes_have_positive_score` (method, line 254) `def test_all_nodes_have_positive_score(self)`
+  - `test_converges_within_max_iter` (method, line 260) `def test_converges_within_max_iter(self)`
+  - `test_stable_across_calls` (method, line 266) `def test_stable_across_calls(self)`
+  - `test_dangling_node_handled` (method, line 273) `def test_dangling_node_handled(self)`
+  - `test_empty_graph` (method, line 284) `def test_empty_graph(self)`
+  - `test_seed_node_gets_highest_score` (method, line 289) `def test_seed_node_gets_highest_score(self)`
+  - `test_scores_sum_to_one` (method, line 296) `def test_scores_sum_to_one(self)`
+  - `test_different_seeds_produce_different_rankings` (method, line 303) `def test_different_seeds_produce_different_rankings(self)`
+  - `test_empty_seeds_uses_uniform` (method, line 310) `def test_empty_seeds_uses_uniform(self)`
+  - `test_multi_seed` (method, line 317) `def test_multi_seed(self)`
+  - `test_authorities_and_hubs_have_positive_scores` (method, line 326) `def test_authorities_and_hubs_have_positive_scores(self)`
+  - `test_authorities_l2_normalized` (method, line 333) `def test_authorities_l2_normalized(self)`
+  - `test_hubs_l2_normalized` (method, line 339) `def test_hubs_l2_normalized(self)`
+  - `test_build_seeds_from_query_matches_node_id` (method, line 351) `def test_build_seeds_from_query_matches_node_id(self)`
+  - `test_build_seeds_from_query_matches_symbol` (method, line 363) `def test_build_seeds_from_query_matches_symbol(self)`
+  - `test_build_seeds_from_query_no_match_returns_empty` (method, line 374) `def test_build_seeds_from_query_no_match_returns_empty(self)`
+  - `test_build_seeds_for_context` (method, line 383) `def test_build_seeds_for_context(self)`
+  - `test_build_seeds_for_context_no_match` (method, line 392) `def test_build_seeds_for_context_no_match(self)`
+  - `test_rank_returns_sorted_results` (method, line 404) `def test_rank_returns_sorted_results(self)`
+  - `test_rank_items_have_all_score_fields` (method, line 421) `def test_rank_items_have_all_score_fields(self)`
+  - `test_noise_penalty_applied` (method, line 447) `def test_noise_penalty_applied(self)`
+  - `test_top_n` (method, line 466) `def test_top_n(self)`
+  - `test_explain_returns_none_for_missing` (method, line 479) `def test_explain_returns_none_for_missing(self)`
+  - `test_identity_projection_passes_all` (method, line 491) `def test_identity_projection_passes_all(self)`
+  - `test_doc_projection_filters_undocumented` (method, line 498) `def test_doc_projection_filters_undocumented(self)`
+  - `test_doc_projection_filters_morphism_kind` (method, line 506) `def test_doc_projection_filters_morphism_kind(self)`
+  - `test_apply_view_architecture` (method, line 512) `def test_apply_view_architecture(self)`
+  - `test_apply_view_reverse` (method, line 521) `def test_apply_view_reverse(self)`
+  - `test_apply_view_empty` (method, line 528) `def test_apply_view_empty(self)`
+  - `test_explain_rank_found` (method, line 540) `def test_explain_rank_found(self)`
+  - `test_explain_rank_not_found` (method, line 559) `def test_explain_rank_not_found(self)`
+  - `test_rank_summary_format` (method, line 565) `def test_rank_summary_format(self)`
+  - `test_category_from_real_edges` (method, line 588) `def test_category_from_real_edges(self)`
+  - `test_pagerank_on_real_category` (method, line 613) `def test_pagerank_on_real_category(self)`
+  - `test_ppr_favors_seed` (method, line 625) `def test_ppr_favors_seed(self)`
+  - `test_ranker_from_real_data` (method, line 637) `def test_ranker_from_real_data(self)`
+- Depends on: `readmenator/_category.py`, `readmenator/_explain.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_rank.py`
+
+## tests/test_readme_injector.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestReadmeInjectorInjectBehavior` (class, line 16) `class TestReadmeInjectorInjectBehavior(TestCase)`
+  - `TestReadmeInjectorRemoveBehavior` (class, line 71) `class TestReadmeInjectorRemoveBehavior(TestCase)`
+  - `TestReadmeInjectorFindReadme` (class, line 104) `class TestReadmeInjectorFindReadme(TestCase)`
+  - `TestReadmeInjectorEdgeCases` (class, line 139) `class TestReadmeInjectorEdgeCases(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `tearDown` (method, line 24) `def tearDown(self)`
+  - `test_inject_into_markdown_readme_adds_kb_link` (method, line 28) `def test_inject_into_markdown_readme_adds_kb_link(self)`
+  - `test_inject_into_rst_readme_adds_kb_link` (method, line 38) `def test_inject_into_rst_readme_adds_kb_link(self)`
+  - `test_inject_is_idempotent_does_not_duplicate` (method, line 47) `def test_inject_is_idempotent_does_not_duplicate(self)`
+  - `test_inject_no_readme_file_returns_false` (method, line 58) `def test_inject_no_readme_file_returns_false(self)`
+  - `test_inject_preserves_existing_content` (method, line 62) `def test_inject_preserves_existing_content(self)`
+  - `setUp` (method, line 74) `def setUp(self)`
+  - `tearDown` (method, line 79) `def tearDown(self)`
+  - `test_remove_strips_injected_section` (method, line 83) `def test_remove_strips_injected_section(self)`
+  - `test_remove_without_injection_returns_false` (method, line 93) `def test_remove_without_injection_returns_false(self)`
+  - `test_remove_no_readme_returns_false` (method, line 99) `def test_remove_no_readme_returns_false(self)`
+  - `setUp` (method, line 107) `def setUp(self)`
+  - `tearDown` (method, line 111) `def tearDown(self)`
+  - `test_finds_readme_md` (method, line 115) `def test_finds_readme_md(self)`
+  - `test_finds_readme_rst` (method, line 121) `def test_finds_readme_rst(self)`
+  - `test_prefers_readme_md_over_rst` (method, line 127) `def test_prefers_readme_md_over_rst(self)`
+  - `test_returns_none_when_no_readme` (method, line 134) `def test_returns_none_when_no_readme(self)`
+  - `setUp` (method, line 142) `def setUp(self)`
+  - `tearDown` (method, line 147) `def tearDown(self)`
+  - `test_inject_into_empty_readme` (method, line 151) `def test_inject_into_empty_readme(self)`
+  - `test_custom_kb_filename_works` (method, line 159) `def test_custom_kb_filename_works(self)`
+- Depends on: `readmenator/_readme_injector.py`
+
+## tests/test_refactorizer.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMonolithRefactorizerContract` (class, line 18) `class TestMonolithRefactorizerContract(TestCase)`
+  - `setUp` (method, line 21) `def setUp(self)`
+  - `_make_symbol` (method, line 25) `def _make_symbol(self, name, kind, line)`
+  - `_make_node` (method, line 28) `def _make_node(self, nid, symbols)`
+  - `_make_edge` (method, line 37) `def _make_edge(self, src, tgt)`
+  - `test_analyze_empty_graph_returns_empty` (method, line 40) `def test_analyze_empty_graph_returns_empty(self)`
+  - `test_analyze_ignores_small_files` (method, line 44) `def test_analyze_ignores_small_files(self)`
+  - `test_analyze_detects_large_file` (method, line 50) `def test_analyze_detects_large_file(self)`
+  - `test_analyze_generates_extract_class_for_multiple_classes` (method, line 59) `def test_analyze_generates_extract_class_for_multiple_classes(self)`
+  - `test_analyze_generates_extract_function_for_multiple_functions` (method, line 74) `def test_analyze_generates_extract_function_for_multiple_functions(self)`
+  - `test_analyze_splits_file_with_many_symbols` (method, line 89) `def test_analyze_splits_file_with_many_symbols(self)`
+  - `test_analyze_estimates_impact_from_resolved_edges` (method, line 97) `def test_analyze_estimates_impact_from_resolved_edges(self)`
+  - `test_generate_script_contains_shebang` (method, line 109) `def test_generate_script_contains_shebang(self)`
+  - `test_generate_script_contains_set_e` (method, line 129) `def test_generate_script_contains_set_e(self)`
+  - `test_generate_script_contains_sed_commands` (method, line 140) `def test_generate_script_contains_sed_commands(self)`
+  - `test_analyze_sorted_by_line_count` (method, line 160) `def test_analyze_sorted_by_line_count(self)`
+  - `test_analyze_respects_max_files_limit` (method, line 173) `def test_analyze_respects_max_files_limit(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_refactorizer.py`
+
+## tests/test_resolver.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestImportResolverContract` (class, line 15) `class TestImportResolverContract(TestCase)`
+  - `test_resolves_python_module_dotpath` (method, line 18) `def test_resolves_python_module_dotpath(self)`
+  - `test_resolves_relative_import` (method, line 25) `def test_resolves_relative_import(self)`
+  - `test_resolves_extensionless_python_import` (method, line 32) `def test_resolves_extensionless_python_import(self)`
+  - `test_resolves_package_init` (method, line 39) `def test_resolves_package_init(self)`
+  - `test_returns_none_for_external_stdlib` (method, line 46) `def test_returns_none_for_external_stdlib(self)`
+  - `test_returns_none_for_unknown_import` (method, line 53) `def test_returns_none_for_unknown_import(self)`
+  - `test_resolves_stem_match_when_unique` (method, line 60) `def test_resolves_stem_match_when_unique(self)`
+  - `test_returns_none_for_empty_import` (method, line 67) `def test_returns_none_for_empty_import(self)`
+  - `test_resolves_go_import` (method, line 72) `def test_resolves_go_import(self)`
+  - `test_resolves_same_directory_import` (method, line 79) `def test_resolves_same_directory_import(self)`
+- Depends on: `readmenator/_resolver.py`
+
+## tests/test_rule_gen.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestRuleGeneratorContract` (class, line 12) `class TestRuleGeneratorContract(TestCase)`
+  - `setUp` (method, line 15) `def setUp(self)`
+  - `_make_node` (method, line 19) `def _make_node(self, nid, label, lang)`
+  - `_make_node_with_symbols` (method, line 29) `def _make_node_with_symbols(self, nid, sym_count)`
+  - `test_empty_nodes_returns_empty_rules` (method, line 44) `def test_empty_nodes_returns_empty_rules(self)`
+  - `test_generates_rules_for_function_heavy_language` (method, line 48) `def test_generates_rules_for_function_heavy_language(self)`
+  - `test_detects_antipatterns_with_content` (method, line 56) `def test_detects_antipatterns_with_content(self)`
+  - `test_antipattern_threshold_from_config` (method, line 67) `def test_antipattern_threshold_from_config(self)`
+  - `test_write_rules_creates_files` (method, line 77) `def test_write_rules_creates_files(self)`
+  - `test_rule_id_increments` (method, line 90) `def test_rule_id_increments(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_rule_gen.py`
+
+## tests/test_sarif.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSarifExporterContract` (class, line 11) `class TestSarifExporterContract(TestCase)`
+  - `setUp` (method, line 14) `def setUp(self)`
+  - `_make_finding` (method, line 18) `def _make_finding(self, file_path, line, severity, rule_id, description, snippet, cwe)`
+  - `test_export_returns_valid_json` (method, line 38) `def test_export_returns_valid_json(self)`
+  - `test_export_includes_tool_info` (method, line 46) `def test_export_includes_tool_info(self)`
+  - `test_export_includes_rule` (method, line 54) `def test_export_includes_rule(self)`
+  - `test_export_includes_result` (method, line 62) `def test_export_includes_result(self)`
+  - `test_severity_maps_correctly` (method, line 73) `def test_severity_maps_correctly(self)`
+  - `test_privacy_mode_strips_snippets` (method, line 88) `def test_privacy_mode_strips_snippets(self)`
+  - `test_empty_findings_produces_valid_sarif` (method, line 97) `def test_empty_findings_produces_valid_sarif(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_sarif.py`
+
+## tests/test_scanner.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestScannerContract` (class, line 11) `class TestScannerContract(TestCase)`
+  - `setUp` (method, line 12) `def setUp(self)`
+  - `tearDown` (method, line 16) `def tearDown(self)`
+  - `_write` (method, line 20) `def _write(self, path, content)`
+  - `test_scans_python_files` (method, line 25) `def test_scans_python_files(self)`
+  - `test_ignores_env_and_vendor_dirs` (method, line 32) `def test_ignores_env_and_vendor_dirs(self)`
+  - `test_rejects_symlinks` (method, line 45) `def test_rejects_symlinks(self)`
+  - `test_skips_non_code_files` (method, line 59) `def test_skips_non_code_files(self)`
+  - `test_scans_multiple_languages` (method, line 70) `def test_scans_multiple_languages(self)`
+  - `test_respects_max_directory_depth` (method, line 79) `def test_respects_max_directory_depth(self)`
+  - `test_raises_on_invalid_directory` (method, line 89) `def test_raises_on_invalid_directory(self)`
+  - `test_import_edges_are_created` (method, line 94) `def test_import_edges_are_created(self)`
+  - `test_privacy_mode_strips_docs` (method, line 104) `def test_privacy_mode_strips_docs(self)`
+  - `test_scan_with_content_returns_content_map` (method, line 114) `def test_scan_with_content_returns_content_map(self)`
+  - `test_gitignore_respected_when_enabled` (method, line 122) `def test_gitignore_respected_when_enabled(self)`
+  - `test_gitignore_disabled_by_default` (method, line 133) `def test_gitignore_disabled_by_default(self)`
+  - `test_gitignore_glob_conversion` (method, line 142) `def test_gitignore_glob_conversion(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_scanner.py`
+
+## tests/test_security.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSecurityFinding` (class, line 21) `class TestSecurityFinding(TestCase)`
+  - `TestSecurityAnalyzerConfig` (class, line 43) `class TestSecurityAnalyzerConfig(TestCase)`
+  - `TestSecurityAnalyzerRules` (class, line 64) `class TestSecurityAnalyzerRules(TestCase)`
+  - `TestSecurityAnalyzerThreshold` (class, line 295) `class TestSecurityAnalyzerThreshold(TestCase)`
+  - `TestSecurityAnalyzerPathValidation` (class, line 327) `class TestSecurityAnalyzerPathValidation(TestCase)`
+  - `TestSecurityAnalyzerSummary` (class, line 374) `class TestSecurityAnalyzerSummary(TestCase)`
+  - `test_security_finding_fields` (method, line 24) `def test_security_finding_fields(self)`
+  - `test_default_config_disables_security` (method, line 46) `def test_default_config_disables_security(self)`
+  - `test_default_severity_threshold` (method, line 50) `def test_default_severity_threshold(self)`
+  - `test_default_security_output` (method, line 54) `def test_default_security_output(self)`
+  - `test_init_with_config` (method, line 58) `def test_init_with_config(self)`
+  - `setUp` (method, line 67) `def setUp(self)`
+  - `_scan_content` (method, line 71) `def _scan_content(self, content, extension)`
+  - `test_python_os_system` (method, line 78) `def test_python_os_system(self)`
+  - `test_python_eval` (method, line 83) `def test_python_eval(self)`
+  - `test_python_pickle` (method, line 88) `def test_python_pickle(self)`
+  - `test_python_sql_injection` (method, line 93) `def test_python_sql_injection(self)`
+  - `test_python_hardcoded_secret` (method, line 98) `def test_python_hardcoded_secret(self)`
+  - `test_python_weak_crypto` (method, line 103) `def test_python_weak_crypto(self)`
+  - `test_python_request_verify_false` (method, line 108) `def test_python_request_verify_false(self)`
+  - `test_python_flask_debug` (method, line 113) `def test_python_flask_debug(self)`
+  - `test_python_yaml_load` (method, line 118) `def test_python_yaml_load(self)`
+  - `test_javascript_inner_html` (method, line 123) `def test_javascript_inner_html(self)`
+  - `test_javascript_eval` (method, line 128) `def test_javascript_eval(self)`
+  - `test_javascript_child_process` (method, line 133) `def test_javascript_child_process(self)`
+  - `test_javascript_dangerously_set_inner_html` (method, line 138) `def test_javascript_dangerously_set_inner_html(self)`
+  - `test_c_strcpy` (method, line 143) `def test_c_strcpy(self)`
+  - `test_c_gets` (method, line 148) `def test_c_gets(self)`
+  - `test_c_system` (method, line 153) `def test_c_system(self)`
+  - `test_java_runtime_exec` (method, line 158) `def test_java_runtime_exec(self)`
+  - `test_java_sql_injection` (method, line 163) `def test_java_sql_injection(self)`
+  - `test_go_exec_command` (method, line 168) `def test_go_exec_command(self)`
+  - `test_ruby_eval` (method, line 173) `def test_ruby_eval(self)`
+  - `test_ruby_marshal_load` (method, line 178) `def test_ruby_marshal_load(self)`
+  - `test_php_eval` (method, line 183) `def test_php_eval(self)`
+  - `test_php_sql_injection` (method, line 188) `def test_php_sql_injection(self)`
+  - `test_php_unseralize` (method, line 193) `def test_php_unseralize(self)`
+  - `test_shell_eval` (method, line 198) `def test_shell_eval(self)`
+  - `test_csharp_process_start` (method, line 203) `def test_csharp_process_start(self)`
+  - `test_kotlin_runtime_exec` (method, line 208) `def test_kotlin_runtime_exec(self)`
+  - `test_swift_process` (method, line 213) `def test_swift_process(self)`
+  - `test_lua_load` (method, line 218) `def test_lua_load(self)`
+  - `test_lua_os_execute` (method, line 223) `def test_lua_os_execute(self)`
+  - `test_dart_process_run` (method, line 228) `def test_dart_process_run(self)`
+  - `test_rust_unsafe` (method, line 233) `def test_rust_unsafe(self)`
+  - `test_elixir_code_eval` (method, line 238) `def test_elixir_code_eval(self)`
+  - `test_elixir_system_cmd` (method, line 243) `def test_elixir_system_cmd(self)`
+  - `test_gdscript_os_execute` (method, line 248) `def test_gdscript_os_execute(self)`
+  - `test_scala_runtime_exec` (method, line 253) `def test_scala_runtime_exec(self)`
+  - `test_nim_exec_process` (method, line 258) `def test_nim_exec_process(self)`
+  - `test_safe_code_produces_no_findings` (method, line 263) `def test_safe_code_produces_no_findings(self)`
+  - `test_csharp_binary_formatter` (method, line 274) `def test_csharp_binary_formatter(self)`
+  - `test_ruby_backtick` (method, line 279) `def test_ruby_backtick(self)`
+  - `test_php_xss` (method, line 284) `def test_php_xss(self)`
+  - `test_go_unsafe_package` (method, line 289) `def test_go_unsafe_package(self)`
+  - `test_threshold_filters_low` (method, line 298) `def test_threshold_filters_low(self)`
+  - `test_threshold_info_shows_all` (method, line 312) `def test_threshold_info_shows_all(self)`
+  - `test_ignores_symlinks` (method, line 330) `def test_ignores_symlinks(self)`
+  - `test_ignores_ignored_dirs` (method, line 345) `def test_ignores_ignored_dirs(self)`
+  - `test_empty_directory` (method, line 357) `def test_empty_directory(self)`
+  - `test_unsupported_extension` (method, line 364) `def test_unsupported_extension(self)`
+  - `test_summary_empty` (method, line 377) `def test_summary_empty(self)`
+  - `test_summary_with_findings` (method, line 383) `def test_summary_with_findings(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_security.py`
+
+## tests/test_taint.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestTaintAnalyzerContract` (class, line 10) `class TestTaintAnalyzerContract(TestCase)`
+  - `setUp` (method, line 13) `def setUp(self)`
+  - `_make_node` (method, line 17) `def _make_node(self, nid, label)`
+  - `test_empty_graph_returns_empty_result` (method, line 20) `def test_empty_graph_returns_empty_result(self)`
+  - `test_no_dangerous_imports_returns_empty` (method, line 25) `def test_no_dangerous_imports_returns_empty(self)`
+  - `test_direct_dangerous_import_found` (method, line 31) `def test_direct_dangerous_import_found(self)`
+  - `test_taint_propagates_through_resolved_edges` (method, line 38) `def test_taint_propagates_through_resolved_edges(self)`
+  - `test_dangerous_import_by_language` (method, line 62) `def test_dangerous_import_by_language(self)`
+  - `test_taint_path_has_severity` (method, line 70) `def test_taint_path_has_severity(self)`
+  - `test_max_depth_limits_propagation` (method, line 77) `def test_max_depth_limits_propagation(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_taint.py`
+
+## tests/test_taint_bdd.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_build_project_files` (function, line 29) `def _build_project_files(project, root)`
+  - `_scan_project` (function, line 36) `def _scan_project(root, cfg)`
+  - `_run_taint` (function, line 54) `def _run_taint(files, cfg)`
+  - `test_direct_dangerous_import` (function, line 71) `def test_direct_dangerous_import()`
+  - `test_taint_propagates_chain` (function, line 75) `def test_taint_propagates_chain()`
+  - `test_taint_max_depth` (function, line 79) `def test_taint_max_depth()`
+  - `test_cross_language_taint` (function, line 83) `def test_cross_language_taint()`
+  - `test_bdd_skipped` (function, line 87) `def test_bdd_skipped()`
+  - `_bkg` (function, line 112) `def _bkg()`
+  - `_direct_given` (function, line 117) `def _direct_given()`
+  - `_direct_when` (function, line 121) `def _direct_when(_taint_result)`
+  - `_check_has_path` (function, line 125) `def _check_has_path(_taint_result)`
+  - `_check_direct_path` (function, line 130) `def _check_direct_path(_taint_result)`
+  - `_check_src` (function, line 135) `def _check_src(_taint_result)`
+  - `_check_sink` (function, line 139) `def _check_sink(_taint_result)`
+  - `_chain_given` (function, line 144) `def _chain_given()`
+  - `_chain_when` (function, line 148) `def _chain_when(_taint_result)`
+  - `_check_long_path` (function, line 152) `def _check_long_path(_taint_result)`
+  - `_shallow_cfg` (function, line 159) `def _shallow_cfg()`
+  - `_chain_given2` (function, line 163) `def _chain_given2()`
+  - `_run_shallow` (function, line 167) `def _run_shallow(_shallow_cfg)`
+  - `_check_shallow` (function, line 171) `def _check_shallow(_taint_result)`
+  - `_js_given` (function, line 178) `def _js_given()`
+  - `_js_when` (function, line 182) `def _js_when(_taint_result)`
+  - `_check_js_dangerous` (function, line 186) `def _check_js_dangerous(_taint_result)`
+  - `_check_js_source` (function, line 192) `def _check_js_source(_taint_result)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`, `readmenator/_taint.py`
+
+## tests/test_uml.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestUmlMermaidDiagram` (class, line 16) `class TestUmlMermaidDiagram(TestCase)`
+  - `TestUmlSanitizeId` (class, line 157) `class TestUmlSanitizeId(TestCase)`
+  - `TestUmlCodeGenerationCpp` (class, line 181) `class TestUmlCodeGenerationCpp(TestCase)`
+  - `TestUmlCodeGenerationJava` (class, line 239) `class TestUmlCodeGenerationJava(TestCase)`
+  - `TestUmlCodeGenerationCSharp` (class, line 281) `class TestUmlCodeGenerationCSharp(TestCase)`
+  - `TestUmlCodeGenerationGo` (class, line 306) `class TestUmlCodeGenerationGo(TestCase)`
+  - `TestUmlCodeGenerationRust` (class, line 347) `class TestUmlCodeGenerationRust(TestCase)`
+  - `TestUmlCodeGenerationPhp` (class, line 387) `class TestUmlCodeGenerationPhp(TestCase)`
+  - `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` (class, line 427) `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `test_render_empty_nodes_returns_empty_string` (method, line 23) `def test_render_empty_nodes_returns_empty_string(self)`
+  - `test_render_no_class_symbols_returns_empty_string` (method, line 27) `def test_render_no_class_symbols_returns_empty_string(self)`
+  - `test_render_single_class_produces_mermaid_class_diagram` (method, line 42) `def test_render_single_class_produces_mermaid_class_diagram(self)`
+  - `test_render_multiple_classes_from_different_files` (method, line 62) `def test_render_multiple_classes_from_different_files(self)`
+  - `test_render_with_import_edges_produces_relationships` (method, line 90) `def test_render_with_import_edges_produces_relationships(self)`
+  - `test_render_respects_max_classes_limit` (method, line 119) `def test_render_respects_max_classes_limit(self)`
+  - `test_render_with_structs_interfaces_traits` (method, line 137) `def test_render_with_structs_interfaces_traits(self)`
+  - `setUp` (method, line 160) `def setUp(self)`
+  - `test_sanitize_preserves_alphanumeric` (method, line 164) `def test_sanitize_preserves_alphanumeric(self)`
+  - `test_sanitize_replaces_special_chars` (method, line 168) `def test_sanitize_replaces_special_chars(self)`
+  - `test_sanitize_prefixes_digit_start` (method, line 172) `def test_sanitize_prefixes_digit_start(self)`
+  - `test_sanitize_handles_empty_string` (method, line 176) `def test_sanitize_handles_empty_string(self)`
+  - `setUp` (method, line 184) `def setUp(self)`
+  - `test_generate_cpp_produces_valid_code` (method, line 188) `def test_generate_cpp_produces_valid_code(self)`
+  - `test_generate_cpp_with_empty_classes` (method, line 208) `def test_generate_cpp_with_empty_classes(self)`
+  - `test_generate_cpp_unknown_language_returns_error_message` (method, line 223) `def test_generate_cpp_unknown_language_returns_error_message(self)`
+  - `setUp` (method, line 242) `def setUp(self)`
+  - `test_generate_java_class_produces_valid_code` (method, line 246) `def test_generate_java_class_produces_valid_code(self)`
+  - `test_generate_java_interface_produces_interface` (method, line 265) `def test_generate_java_interface_produces_interface(self)`
+  - `setUp` (method, line 284) `def setUp(self)`
+  - `test_generate_csharp_produces_valid_code` (method, line 288) `def test_generate_csharp_produces_valid_code(self)`
+  - `setUp` (method, line 309) `def setUp(self)`
+  - `test_generate_go_struct_produces_valid_code` (method, line 313) `def test_generate_go_struct_produces_valid_code(self)`
+  - `test_generate_go_interface_produces_valid_code` (method, line 330) `def test_generate_go_interface_produces_valid_code(self)`
+  - `setUp` (method, line 350) `def setUp(self)`
+  - `test_generate_rust_struct_produces_valid_code` (method, line 354) `def test_generate_rust_struct_produces_valid_code(self)`
+  - `test_generate_rust_trait_produces_valid_code` (method, line 370) `def test_generate_rust_trait_produces_valid_code(self)`
+  - `setUp` (method, line 390) `def setUp(self)`
+  - `test_generate_php_class_produces_valid_code` (method, line 394) `def test_generate_php_class_produces_valid_code(self)`
+  - `test_generate_php_interface_produces_valid_code` (method, line 411) `def test_generate_php_interface_produces_valid_code(self)`
+  - `setUp` (method, line 430) `def setUp(self)`
+  - `_make_class_node` (method, line 434) `def _make_class_node(self, name, lang, kind)`
+  - `test_generate_kotlin_produces_valid_code` (method, line 446) `def test_generate_kotlin_produces_valid_code(self)`
+  - `test_generate_scala_produces_valid_code` (method, line 452) `def test_generate_scala_produces_valid_code(self)`
+  - `test_generate_scala_trait_produces_valid_code` (method, line 458) `def test_generate_scala_trait_produces_valid_code(self)`
+  - `test_generate_swift_produces_valid_code` (method, line 463) `def test_generate_swift_produces_valid_code(self)`
+  - `test_generate_swift_protocol_produces_valid_code` (method, line 469) `def test_generate_swift_protocol_produces_valid_code(self)`
+  - `test_generate_dart_produces_valid_code` (method, line 474) `def test_generate_dart_produces_valid_code(self)`
+  - `test_generate_ruby_produces_valid_code` (method, line 480) `def test_generate_ruby_produces_valid_code(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_uml.py`

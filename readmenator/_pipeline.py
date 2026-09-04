@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Dict, List, Optional
 
 from readmenator._agent_injector import AgentInjector
+from readmenator._agent_output import AgentOutputGenerator
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._config import Config
@@ -59,6 +60,7 @@ class AnalyzerFactory:
         self._uml: UmlGenerator | None = None
         self._readme_injector: ReadmeInjector | None = None
         self._agent_injector: AgentInjector | None = None
+        self._agent_output: AgentOutputGenerator | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -148,6 +150,7 @@ class AnalyzerFactory:
         if self._readme_injector is None:
             self._readme_injector = ReadmeInjector(
                 kb_filename=self._config.OUTPUT_FILENAME,
+                agent_output_dir=self._config.AGENT_OUTPUT_DIR,
             )
         return self._readme_injector
 
@@ -156,8 +159,15 @@ class AnalyzerFactory:
         if self._agent_injector is None:
             self._agent_injector = AgentInjector(
                 kb_filename=self._config.AGENT_INJECTION_KB_FILENAME,
+                agent_output_dir=self._config.AGENT_OUTPUT_DIR,
             )
         return self._agent_injector
+
+    @property
+    def agent_output(self) -> AgentOutputGenerator:
+        if self._agent_output is None:
+            self._agent_output = AgentOutputGenerator(self._config)
+        return self._agent_output
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],
