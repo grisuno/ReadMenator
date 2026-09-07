@@ -10,6 +10,7 @@ A token-free, offline, production-grade polyglot codebase knowledge graph & arch
 ReadMenator builds production-grade codebase knowledge graphs and architectural health reports 100% offline. Identify structural risks, security flaws, and change impact patterns instantly across 19 languages.
 
 - [https://pypi.org/project/readmenator/](https://pypi.org/project/readmenator/)
+- [https://grisuno.github.io/ReadMenator/](https://grisuno.github.io/ReadMenator/)
 
 ## Supported Languages (19)
 
