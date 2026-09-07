@@ -42,6 +42,44 @@ try:
 except ImportError:
     HAS_HYPOTHESIS = False
 
+    class _StrategyPlaceholder:
+        """Chainable placeholder that never generates data."""
+
+        def __or__(self, other):
+            """Combine placeholders without evaluating strategies."""
+            return self
+
+        def __ror__(self, other):
+            """Combine placeholders without evaluating strategies."""
+            return self
+
+        def map(self, *args, **kwargs):
+            """Return the placeholder unchanged."""
+            return self
+
+    class _UnavailableStrategies:
+        """Permissive strategy factory used only when hypothesis is missing."""
+
+        def __getattr__(self, name):
+            """Return a builder producing inert placeholders."""
+            def builder(*args, **kwargs):
+                return _StrategyPlaceholder()
+            return builder
+
+    def given(*args, **kwargs):
+        """Identity decorator used when hypothesis is unavailable."""
+        def wrapper(fn):
+            return fn
+        return wrapper
+
+    def settings(*args, **kwargs):
+        """Identity decorator used when hypothesis is unavailable."""
+        def wrapper(fn):
+            return fn
+        return wrapper
+
+    st = _UnavailableStrategies()
+
 
 # ── Strategy: source code that is deliberately pathological ──────────────
 

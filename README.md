@@ -120,6 +120,31 @@ supported languages. UML diagrams are embedded in `KNOWLEDGE_BASE.md` by default
 python -m readmenator /path/to/project uml              # Print UML class diagram
 ```
 
+### Interactive System Maps
+
+ReadMenator builds five interactive physics-driven diagrams from scanned topology and writes
+them to `readmenator-maps/` on every run: architecture, workflow, sequence, dataflow,
+and lifecycle. Each file is a vis.js network with draggable nodes, live physics,
+search, focus passport with full file documentation, upstream/downstream reach,
+directed route probing, role comparison, guided chapters, dark/light themes,
+keyboard shortcuts, hash deep links, and client-side PNG and JSON export.
+Cards state the primary scope honestly ("N of M files");
+the full per-file listing lives in KNOWLEDGE_BASE.md.
+
+```bash
+python -m readmenator /path/to/project diagrams        # Export all 5 vis.js maps + gallery index (needs network)
+python -m readmenator /path/to/project diagram sequence # Export one vis.js map (draggable nodes, live physics)
+python -m readmenator /path/to/project pages           # Publish docs/ static site: gallery index + maps (GitHub Pages ready)
+```
+
+Maps are physics-driven vis.js documents (engine loaded from a CDN pinned in
+Config). Click any node for full file documentation: docstring, symbol table
+with signatures, and import neighborhoods.
+
+Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
+Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
+with relative paths, works fully offline, and needs no build step.
+
 ### Generate Class Stubs in Other Languages
 
 Translate extracted class structures into target language declarations:

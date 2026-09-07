@@ -33,6 +33,7 @@ readmenator/
   _security.py      - Pattern-based static security analysis (18 language rule sets)
   _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
   _uml.py           - UML class diagram generator (Mermaid classDiagram + 12-language code generation)
+  _diagrams.py      - Interactive system maps: typed IR, validator, builder, standalone HTML renderer
   _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
   _agent_injector.py - Injects KB + agent output references into AI agent config files
   _agent_output.py   - Agent-friendly grep-optimized output generator (INDEX.md, API.md, etc.)
@@ -70,6 +71,7 @@ tests/
   test_layer_rules.py   - Layer violation detection contract tests
   test_mcp_server.py    - MCP server protocol, tools, and resources contract tests
   test_uml.py           - UML class diagram and code generation contract tests
+  test_diagrams.py      - Interactive system maps contract tests (IR, validation, rendering)
   test_readme_injector.py - README injection contract tests
   test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
 ```
@@ -102,6 +104,13 @@ tests/
 - Cursor rules settings (CURSORRULES_ENABLED, CURSORRULES_OUTPUT)
 - Refactorizer settings (REFACTORIZER_ENABLED, REFACTORIZER_MIN_LINES, REFACTORIZER_MAX_FILES)
 - Agent output settings (AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES)
+- Interactive map settings (DIAGRAM_ENABLED, DIAGRAM_MAX_NODES, DIAGRAM_MAX_EDGES, DIAGRAM_OUTPUT_DIR)
+- Map geometry settings (DIAGRAM_NODE_WIDTH, DIAGRAM_NODE_HEIGHT, DIAGRAM_COLUMN_GAP, DIAGRAM_ROW_GAP, DIAGRAM_CANVAS_WIDTH, DIAGRAM_CANVAS_HEIGHT, DIAGRAM_MARGIN_X, DIAGRAM_MARGIN_Y, DIAGRAM_MIN_GAP, DIAGRAM_LANE_TOP, DIAGRAM_SEQUENCE_TOP)
+- Map scope settings (DIAGRAM_SEQUENCE_MAX_PARTICIPANTS, DIAGRAM_WORKFLOW_FALLBACK_NODES, DIAGRAM_CHAPTER_FOCUS, DIAGRAM_MAX_VIEWS, DIAGRAM_MAX_LABEL_CHARS)
+- Map style vocabulary (DIAGRAM_PRESETS, DIAGRAM_KINDS, DIAGRAM_ROLES, DIAGRAM_ROLE_COLORS, DIAGRAM_PRESET, DIAGRAM_THEME, DIAGRAM_MOTION_ENABLED, DIAGRAM_SHARE_WIDTH, DIAGRAM_SHARE_HEIGHT)
+- Map documentation payload (DIAGRAM_MAP_SYMBOLS_PER_NODE, DIAGRAM_TOOLTIP_DOC_CHARS, DIAGRAM_NEIGHBOR_NAMES)
+- Live CDN renderer settings (DIAGRAM_VIS_ENABLED, DIAGRAM_VIS_CDN_JS, DIAGRAM_VIS_CDN_CSS, DIAGRAM_VIS_PHYSICS_ENABLED, DIAGRAM_VIS_STABILIZE_ITERATIONS)
+- Pages publishing settings (DIAGRAM_PAGES_DIR, DIAGRAM_MAPS_SUBDIR)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -130,6 +139,7 @@ tests/
 - Python uses native ast module; all others use regex
 - ParserFactory (create_parser) maps extension to parser class (case-insensitive)
 - All parsers populate: self.symbols (List[Symbol]), self.imports (List[str])
+- C-family and assembly parsers extract #include directives (quoted and angled) as imports
 - Reserved keywords filtered out (if, for, while, switch, catch)
 
 ### Scanner Contract
@@ -150,10 +160,13 @@ tests/
 - Maps raw import strings (Python dots, relative paths, bare module names) to project file paths
 - Handles Python stdlib exclusion
 - Handles relative imports (./ and ../)
+- Handles quoted C-family includes verbatim against the source directory ("utils.h", "lib/net.h")
+- Normalizes parent directory segments ("src/../include/types.h" -> "include/types.h")
+- Handles include-directory suffix matching ("kernel/mm.h" -> "include/kernel/mm.h", unique matches only)
+- Handles extensionless imports with the full Config extension list (C headers, C++ sources, and all 19 languages)
 - Handles dotted module paths (foo.bar.baz -> foo/bar/baz.py)
 - Handles package __init__.py resolution
-- Handles extensionless imports by trying known extensions
-- Handles stem matching as fallback
+- Handles stem matching as fallback with known-extension stripping ("utils.h" -> "utils")
 - Works across all supported languages
 
 ### Mermaid Renderer Contract
@@ -414,6 +427,48 @@ tests/
 - Respects REFACTORIZER_MAX_FILES limit
 - Configurable via REFACTORIZER_ENABLED flag
 
+### Interactive System Maps Contract
+- SystemMapBuilder class with build() and build_all() entry points
+- Builds five typed maps from scanned topology: architecture, workflow, sequence, dataflow, lifecycle
+- Architecture: centrality-ranked files grouped by layer with resolved import edges
+- Workflow: one representative file per architectural lane chained as the delivery path
+- Sequence: top participants as lifelines with directed call messages
+- Dataflow: sources through transforms to data_access stores with sensitivity marking
+- Lifecycle: layer states with transitions plus retry edges for mutual dependencies
+- Deterministic: identical input yields identical coordinates and bytes (sorted selection, fixed layout)
+- Fit by construction: per-lane member caps from canvas geometry, column gap compression with DIAGRAM_MIN_GAP floor, lane priority dropping, sequence participant capacity; every built map passes canvas-bound validation at any project size
+- Oversized graphs truncated to DIAGRAM_MAX_NODES with internal edges capped at DIAGRAM_MAX_EDGES
+- SystemMapValidator class with validate(map) returning a MapReceipt (passed, checks, errors, warnings)
+- Nine deterministic checks: schema, unique_ids, endpoints, connectivity, size_bounds, canvas_bounds, overlap, label_clearance, export_ready
+- Stable rule codes D000 (unknown kind), D001 (duplicate id), D002 (dangling edge), D003 (empty map), D004/D008 (size limits), D009/D010 (canvas bounds), D011 (overlap), D013/D014/D015 (guided view violations); advisories D005/D006/D007/D012
+- compare(base, head) returns a MapDelta with added, removed, changed, moved, rerouted facts
+- InteractiveMapRenderer class with render(map) returning one self-contained HTML document
+- Zero external requests: inline SVG, inline CSS, inline scripts, no CDN, no fonts fetched
+- Retained as offline fallback; default published output uses the live renderer below
+- Canvas uses the darkest token with lifted node panels; edge labels carry halo strokes for readability
+- Four visual presets with identity (classic, signal-flow glow, blueprint grid with square nodes, warm editorial) and dark/light themes from Config
+- VisNetworkRenderer class with render(map) returning a physics-driven vis.js document
+- Default export format for `diagrams`, `diagram`, and `pages` (CDN bundle URLs from Config, pages need network access)
+- Map nodes carry documentation payloads: file doc, language, symbol records with signatures, total counts
+- Tooltips show docs plus top symbols; focus passport renders the symbol table with docs, neighbor lists, and counts
+- Draggable nodes with barnesHut physics, stabilization, freeze toggle, PNG snapshot and typed JSON export
+- Reuses reader contracts: search, focus, reach, route, lens, chapters, deep links, titled controls
+- Every toolbar and dialog action carries a human-readable title plus a visible reading guide and a gallery how-to section
+- Deep links restore #focus=id, #focus=id&reach=upstream|downstream, #route=a~b, #lens=role, #view=id
+- Motion is finite, honors prefers-reduced-motion, and never enters canonical exports
+- All labels HTML-escaped in Python and script payloads unicode-escaped for angle brackets
+- DocsSitePublisher class with publish(maps, project_name, output_dir, stats, renderer) entry point
+- Publishes maps/<kind>.html plus a gallery index.html and a .nojekyll marker into DIAGRAM_PAGES_DIR
+- Gallery index: project header with stats, one card per validated map with counts and descriptions, filter input, theme toggle, how-to-read section, relative links only, zero external requests
+- Gallery cards report primary scope honestly ("N of M files"); maps embed the project total in their passport header
+- Published maps carry a Gallery home link via the optional meta home target (omitted for standalone exports)
+- Invalid maps are skipped while the index is still written; empty input yields an empty gallery notice
+- Publish never mutates caller supplied map metadata
+- CLI: `pages` publishes the static site (GitHub Pages ready: serve the output directory directly)
+- CLI: `diagrams` exports all five maps, `diagram <kind>` exports one map
+- AnalyzerFactory exposes diagram_builder, diagram_renderer, diagram_validator, vis_renderer (lazy init)
+- Configurable via DIAGRAM_ENABLED, DIAGRAM_OUTPUT_DIR, and all DIAGRAM_* geometry/scope/style settings
+
 ## Design Principles
 
 ### DRY
@@ -455,6 +510,15 @@ tests/
 - Integration tests validate end-to-end pipeline
 - "Classs" regression test prevents re-introduction
 - All new modules have complete contract test suites
+- Mutation check after SDD+TDD+BDD: introduce one-line mutants (validation bypass, escaping bypass, ordering change); a killed mutant fails at least one test, a surviving mutant requires a stronger test before refactor
+- Property-based parser tests skip cleanly when hypothesis is not installed (inert strategy placeholders, identity decorators)
+
+### Definition of Done (code)
+- English only, no emojis, no prose comments, docstrings on every public and private function
+- DRY and SOLID, one self-contained file per contract, production code with no placeholders or simplifications
+- No hardcoded tuneables or magic numbers: every setting lives in Config
+- No absolute paths, no network calls from analysis or export modules, all untrusted text escaped at the boundary
+- Boy scout: any technical debt or security flaw found during the change is fixed without losing functionality
 
 ## Boy Scout Rules
 

@@ -456,6 +456,13 @@ class TestAssemblyParserContract(unittest.TestCase):
         self.assertIn("main", names)
         self.assertIn("loop", names)
 
+    def test_extracts_includes(self) -> None:
+        code = '#include "asm.h"\n#include <bits/cpu.h>\n_start:\n    nop\n'
+        parser = AssemblyParser("test.S", self.config)
+        parser.parse(code)
+        self.assertIn("asm.h", parser.imports)
+        self.assertIn("bits/cpu.h", parser.imports)
+
 
 class TestParserFactoryContract(unittest.TestCase):
     def setUp(self) -> None:

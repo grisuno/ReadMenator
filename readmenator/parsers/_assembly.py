@@ -15,6 +15,11 @@ class AssemblyParser(LanguageParser):
     """
 
     def _extract_specifics(self, content: str) -> None:
+        for m in re.finditer(
+            r'^\s*#\s*include\s*[<"]([^>"]+)[>"]', content, re.MULTILINE
+        ):
+            self.imports.append(m.group(1))
+
         for m in re.finditer(r"^([a-zA-Z_]\w*):", content, re.MULTILINE):
             line_num = content[: m.start()].count("\n")
             self.symbols.append(

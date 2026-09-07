@@ -7,9 +7,12 @@ tracing operations work on concrete files rather than opaque strings.
 
 from __future__ import annotations
 
+import posixpath
 import re
 from pathlib import Path
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Tuple
+
+from readmenator._config import Config
 
 
 class ImportResolver:
@@ -55,15 +58,22 @@ class ImportResolver:
         "zipapp", "zipfile", "zipimport", "zlib",
     }
 
-    def __init__(self, file_ids: List[str], root: str = "."):
+    def __init__(
+        self,
+        file_ids: List[str],
+        root: str = ".",
+        extensions: Optional[Tuple[str, ...]] = None,
+    ):
         """Initialise the resolver with all known file paths.
 
         Args:
             file_ids: List of relative file paths from the scan.
             root: Root directory for relative-path resolution.
+            extensions: Known source extensions, defaults to Config.
         """
         self._file_ids: Set[str] = set(file_ids)
         self._root: str = root
+        self._extensions: Tuple[str, ...] = extensions or Config().SUPPORTED_EXTENSIONS
         self._stem_index: Dict[str, List[str]] = self._build_stem_index(file_ids)
         self._dir_index: Dict[str, Set[str]] = self._build_dir_index(file_ids)
 
@@ -123,6 +133,10 @@ class ImportResolver:
         if candidate:
             return candidate
 
+        candidate = self._resolve_suffix_match(import_str)
+        if candidate:
+            return candidate
+
         candidate = self._resolve_stem_match(import_str)
         if candidate:
             return candidate
@@ -148,13 +162,13 @@ class ImportResolver:
     def _resolve_relative(self, import_str: str, source_file: str) -> Optional[str]:
         """Resolve a relative import (starts with ``.`` or ``..``)."""
         if not import_str.startswith("."):
-            return None
+            return self._resolve_verbatim(import_str, source_file)
         source_dir = str(Path(source_file).parent) if source_file else ""
         base = Path(source_dir) if source_dir != "." else Path("")
-        candidate_path = (base / import_str).as_posix()
+        candidate_path = posixpath.normpath((base / import_str).as_posix())
         if candidate_path in self._file_ids:
             return candidate_path
-        for ext in (".py", ".js", ".ts", ".go", ".rs", ".java", ".cs", ".php", ".dart", ".nim"):
+        for ext in self._extensions:
             with_ext = candidate_path + ext
             if with_ext in self._file_ids:
                 return with_ext
@@ -163,10 +177,28 @@ class ImportResolver:
             return init_path
         return None
 
+    def _resolve_verbatim(self, import_str: str, source_file: str) -> Optional[str]:
+        """Resolve a path-like import verbatim against the source directory.
+
+        Covers quoted C-family includes such as ``"utils.h"`` or
+        ``"lib/net.h"`` which name a project file relative to the
+        including file.
+        """
+        source_dir = str(Path(source_file).parent) if source_file else ""
+        if "/" not in import_str and "." not in import_str:
+            return None
+        if source_dir and source_dir != ".":
+            candidate = posixpath.normpath(f"{source_dir}/{import_str}")
+        else:
+            candidate = posixpath.normpath(import_str)
+        if candidate in self._file_ids:
+            return candidate
+        return None
+
     def _resolve_extensionless(self, import_str: str, source_file: str) -> Optional[str]:
         """Resolve a bare module name by appending known extensions."""
         source_dir = str(Path(source_file).parent) if source_file else ""
-        for ext in (".py", ".js", ".ts", ".go", ".rs", ".java", ".cs", ".php", ".dart", ".nim"):
+        for ext in self._extensions:
             candidate = f"{source_dir}/{import_str}{ext}" if source_dir and source_dir != "." else f"{import_str}{ext}"
             if candidate in self._file_ids:
                 return candidate
@@ -204,10 +236,43 @@ class ImportResolver:
                 return candidate
         return None
 
+    def _resolve_suffix_match(self, import_str: str) -> Optional[str]:
+        """Match a slash-qualified include against project path suffixes.
+
+        Covers include-directory style references such as
+        ``"kernel/mm.h"`` mapping to ``"include/kernel/mm.h"``. Only
+        unambiguous matches resolve.
+        """
+        if "/" not in import_str:
+            return None
+        wanted = "/" + import_str.lstrip("/")
+        matches = sorted([fid for fid in self._file_ids if fid.endswith(wanted)])
+        if len(matches) == 1:
+            return matches[0]
+        return None
+
     def _resolve_stem_match(self, import_str: str) -> Optional[str]:
         """Match by file stem only (last resort)."""
-        clean_name = import_str.split("/")[-1].split(".")[-1]
+        clean_name = import_str.split("/")[-1]
+        clean_name = self._strip_extension(clean_name)
         matches = self._stem_index.get(clean_name, [])
         if len(matches) == 1:
             return matches[0]
         return None
+
+    def _strip_extension(self, name: str) -> str:
+        """Remove a trailing known source extension from a file name.
+
+        Args:
+            name: Base file name which may carry an extension.
+
+        Returns:
+            The file stem used for stem index lookups.
+        """
+        lowered = name.lower()
+        for ext in self._extensions:
+            if lowered.endswith(ext.lower()) and len(name) > len(ext):
+                stem = name[: -len(ext)]
+                if "." not in stem:
+                    return stem
+        return name.split(".")[-1] if "." in name else name

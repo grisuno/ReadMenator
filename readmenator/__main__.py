@@ -7,6 +7,7 @@ import unittest
 from pathlib import Path
 
 from readmenator._app import readmenatorApplication
+from readmenator._config import Config
 from readmenator._mcp_server import main as mcp_main
 
 logger = logging.getLogger(__name__)
@@ -37,6 +38,9 @@ def build_parser() -> argparse.ArgumentParser:
             "  strip-dead-code         Identify orphaned symbols (dead code)\n"
             "  generate-rules          Generate .cursorrules for AI assistants\n"
             "  refactor-monolith       Generate refactoring plans for large files\n"
+            "  diagrams                Export 5 vis.js maps + gallery index (needs network)\n"
+            "  diagram <kind>          Export one vis.js map (needs network)\n"
+            "  pages                   Publish maps plus gallery index into docs/ (static site)\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -249,6 +253,19 @@ def main() -> None:
                 for action in plan.actions:
                     print(f"  [{action.action_type}] {action.description}")
             return
+        elif command == "diagrams":
+            written = app.export_diagrams(target)
+            for kind, path in sorted(written.items()):
+                print(f"{kind}: {path}")
+            return
+        elif command == "diagram" and len(sys.argv) >= 4:
+            app.export_diagram(target, sys.argv[3])
+            return
+        elif command == "pages":
+            written = app.export_pages(target)
+            for kind, path in sorted(written.items()):
+                print(f"{kind}: {path}")
+            return
         elif command == "--rebuild":
             app.rebuild(target)
             return
@@ -285,7 +302,6 @@ def main() -> None:
 
     app = readmenatorApplication()
     if args.privacy:
-        from readmenator._config import Config
         app = readmenatorApplication(Config(
             PRIVACY_MODE=True, SARIF_ENABLED=args.sarif,
             SECURITY_ENABLED=args.audit,
@@ -293,14 +309,12 @@ def main() -> None:
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
         ))
     elif args.sarif:
-        from readmenator._config import Config
         app = readmenatorApplication(Config(
             SARIF_ENABLED=True, SECURITY_ENABLED=args.audit,
             AGENT_INJECTION_ENABLED=not args.no_agent_injection,
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
         ))
     elif args.no_agent_injection or args.no_agent_output:
-        from readmenator._config import Config
         app = readmenatorApplication(Config(
             AGENT_INJECTION_ENABLED=not args.no_agent_injection,
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
@@ -312,8 +326,7 @@ def main() -> None:
         app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
     else:
         if args.context_budget > 0:
-            from readmenator._config import Config as Cfg
-            app = readmenatorApplication(Cfg(CONTEXT_BUDGET=args.context_budget))
+            app = readmenatorApplication(Config(CONTEXT_BUDGET=args.context_budget))
             app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
         else:
             result = app.summary(target)

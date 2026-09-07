@@ -14,6 +14,20 @@ from readmenator._category import (  # noqa: F401
     TypedGraph,
 )
 from readmenator._config import Config  # noqa: F401
+from readmenator._diagrams import (  # noqa: F401
+    DocsSitePublisher,
+    InteractiveMapRenderer,
+    MapDelta,
+    MapDiagnostic,
+    MapEdge,
+    MapNode,
+    MapReceipt,
+    MapView,
+    SystemMap,
+    SystemMapBuilder,
+    SystemMapValidator,
+    VisNetworkRenderer,
+)
 from readmenator._mcp_server import MCPServer  # noqa: F401
 from readmenator._models import (  # noqa: F401
     AnalysisResult,

@@ -8,6 +8,7 @@ from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
+from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
 from readmenator._hotspots import HotspotAnalyzer
@@ -61,6 +62,11 @@ class AnalyzerFactory:
         self._readme_injector: ReadmeInjector | None = None
         self._agent_injector: AgentInjector | None = None
         self._agent_output: AgentOutputGenerator | None = None
+        self._diagram_builder: SystemMapBuilder | None = None
+        self._diagram_renderer: InteractiveMapRenderer | None = None
+        self._diagram_validator: SystemMapValidator | None = None
+        self._diagram_publisher: DocsSitePublisher | None = None
+        self._vis_renderer: VisNetworkRenderer | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -168,6 +174,41 @@ class AnalyzerFactory:
         if self._agent_output is None:
             self._agent_output = AgentOutputGenerator(self._config)
         return self._agent_output
+
+    @property
+    def diagram_builder(self) -> SystemMapBuilder:
+        """Return the lazily initialised system map builder."""
+        if self._diagram_builder is None:
+            self._diagram_builder = SystemMapBuilder(self._config)
+        return self._diagram_builder
+
+    @property
+    def diagram_renderer(self) -> InteractiveMapRenderer:
+        """Return the lazily initialised interactive map renderer."""
+        if self._diagram_renderer is None:
+            self._diagram_renderer = InteractiveMapRenderer(self._config)
+        return self._diagram_renderer
+
+    @property
+    def diagram_validator(self) -> SystemMapValidator:
+        """Return the lazily initialised system map validator."""
+        if self._diagram_validator is None:
+            self._diagram_validator = SystemMapValidator(self._config)
+        return self._diagram_validator
+
+    @property
+    def diagram_publisher(self) -> DocsSitePublisher:
+        """Return the lazily initialised documentation site publisher."""
+        if self._diagram_publisher is None:
+            self._diagram_publisher = DocsSitePublisher(self._config)
+        return self._diagram_publisher
+
+    @property
+    def vis_renderer(self) -> VisNetworkRenderer:
+        """Return the lazily initialised vis.js network renderer."""
+        if self._vis_renderer is None:
+            self._vis_renderer = VisNetworkRenderer(self._config)
+        return self._vis_renderer
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

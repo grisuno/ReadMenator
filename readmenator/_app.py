@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from dataclasses import replace
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -8,6 +9,7 @@ from readmenator._cache import FileCache
 from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
+from readmenator._diagrams import DocsSitePublisher, SystemMap
 from readmenator._layers import LayerDetector
 from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
@@ -172,6 +174,12 @@ class readmenatorApplication:
                 nodes, edges, resolved_edges, analysis,
                 analysis_v2, findings, layers, str(root),
             )
+
+        if self._config.DIAGRAM_ENABLED:
+            try:
+                self.export_diagrams(str(root))
+            except Exception:
+                logger.debug("Interactive maps skipped", exc_info=True)
 
         self._inject_readme_link(root)
         self._inject_agent_files(root)
@@ -545,6 +553,128 @@ class readmenatorApplication:
         written = self._factory.exporter.to_obsidian(nodes, edges, output_dir, analysis)
         logger.info("Obsidian vault: %d notes in %s", written, output_dir)
         return written
+
+    def export_diagrams(
+        self, target_dir: str, output_dir: Optional[str] = None
+    ) -> Dict[str, str]:
+        """Export all five interactive system maps plus a gallery index.
+
+        Args:
+            target_dir: Project root directory.
+            output_dir: Destination directory for map files.
+
+        Returns:
+            Mapping of diagram kind to written file path.
+        """
+        nodes, edges = self._scan(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._last_findings or []
+        maps = self._factory.diagram_builder.build_all(
+            nodes, edges, resolved, layers, findings, analysis
+        )
+        root = Path(target_dir).resolve()
+        dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_OUTPUT_DIR
+        if not dest.is_absolute():
+            dest = root / dest
+        stats = {
+            "files": len(nodes),
+            "symbols": sum(len(n.symbols) for n in nodes),
+            "imports": len(edges),
+        }
+        flat_publisher = DocsSitePublisher(replace(self._config, DIAGRAM_MAPS_SUBDIR="."))
+        written = flat_publisher.publish(
+            maps, root.name, str(dest), stats, self._live_renderer()
+        )
+        for kind in sorted(maps):
+            if kind not in written:
+                logger.warning("Diagram %s failed validation and was skipped", kind)
+        logger.info("Interactive system maps: %d files in %s", len(written), dest)
+        return written
+
+    def _live_renderer(self):
+        """Return the configured map renderer for published output.
+
+        Returns:
+            The vis.js renderer when enabled, else the offline renderer.
+        """
+        if self._config.DIAGRAM_VIS_ENABLED:
+            return self._factory.vis_renderer
+        return self._factory.diagram_renderer
+
+    def export_diagram(
+        self, target_dir: str, kind: str, output_path: Optional[str] = None
+    ) -> str:
+        """Export a single interactive system map as standalone HTML.
+
+        Args:
+            target_dir: Project root directory.
+            kind: Diagram kind identifier.
+            output_path: Destination file path.
+
+        Returns:
+            Rendered HTML document that was written.
+        """
+        nodes, edges = self._scan(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._last_findings or []
+        normalized = kind if kind in self._factory.diagram_builder.supported_kinds() else "architecture"
+        system_map = self._factory.diagram_builder.build(
+            nodes, edges, resolved, layers, findings, analysis, normalized
+        )
+        receipt = self._factory.diagram_validator.validate(system_map)
+        if not receipt.passed:
+            logger.warning(
+                "Diagram %s has %d validation errors", normalized, len(receipt.errors)
+            )
+        root = Path(target_dir).resolve()
+        if output_path is None:
+            output_path = str(root / self._config.DIAGRAM_OUTPUT_DIR / (normalized + ".html"))
+        out = Path(output_path)
+        if not out.is_absolute():
+            out = root / out
+        content = self._live_renderer().write(system_map, str(out))
+        logger.info("Interactive system map exported: %s", out)
+        return content
+
+    def export_pages(
+        self, target_dir: str, output_dir: Optional[str] = None
+    ) -> Dict[str, str]:
+        """Publish all system maps plus a gallery index as a static site.
+
+        Args:
+            target_dir: Project root directory.
+            output_dir: Destination directory for the static site.
+
+        Returns:
+            Mapping of published page identifier to written file path.
+        """
+        nodes, edges = self._scan(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._last_findings or []
+        maps = self._factory.diagram_builder.build_all(
+            nodes, edges, resolved, layers, findings, analysis
+        )
+        root = Path(target_dir).resolve()
+        dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_PAGES_DIR
+        if not dest.is_absolute():
+            dest = root / dest
+        stats = {
+            "files": len(nodes),
+            "symbols": sum(len(n.symbols) for n in nodes),
+            "imports": len(edges),
+        }
+        written = self._factory.diagram_publisher.publish(
+            maps, root.name, str(dest), stats, self._live_renderer()
+        )
+        logger.info("Documentation site published: %d pages in %s", len(written), dest)
+        return written
+
 
     def watch(self, target_dir: str) -> None:
         from readmenator._watcher import DirectoryWatcher

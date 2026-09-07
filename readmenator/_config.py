@@ -221,3 +221,96 @@ class Config:
     AGENT_OUTPUT_DIR: str = "readmenator-agent"
 
     AGENT_OUTPUT_MIN_SUBSYSTEM_FILES: int = 2
+
+    DIAGRAM_ENABLED: bool = True
+
+    DIAGRAM_MAX_NODES: int = 60
+
+    DIAGRAM_MAX_EDGES: int = 120
+
+    DIAGRAM_NODE_WIDTH: int = 190
+
+    DIAGRAM_NODE_HEIGHT: int = 64
+
+    DIAGRAM_COLUMN_GAP: int = 90
+
+    DIAGRAM_ROW_GAP: int = 48
+
+    DIAGRAM_CANVAS_WIDTH: int = 1280
+
+    DIAGRAM_CANVAS_HEIGHT: int = 760
+
+    DIAGRAM_PRESET: str = "classic"
+
+    DIAGRAM_THEME: str = "dark"
+
+    DIAGRAM_OUTPUT_DIR: str = "readmenator-maps"
+
+    DIAGRAM_PAGES_DIR: str = "docs"
+
+    DIAGRAM_MAPS_SUBDIR: str = "maps"
+
+    DIAGRAM_VIS_ENABLED: bool = True
+
+    DIAGRAM_VIS_CDN_JS: str = "https://unpkg.com/vis-network@9/standalone/umd/vis-network.min.js"
+
+    DIAGRAM_VIS_CDN_CSS: str = "https://unpkg.com/vis-network@9/styles/vis-network.min.css"
+
+    DIAGRAM_VIS_PHYSICS_ENABLED: bool = True
+
+    DIAGRAM_VIS_STABILIZE_ITERATIONS: int = 250
+
+    DIAGRAM_MOTION_ENABLED: bool = True
+
+    DIAGRAM_SHARE_WIDTH: int = 1200
+
+    DIAGRAM_SHARE_HEIGHT: int = 630
+
+    DIAGRAM_MAX_VIEWS: int = 5
+
+    DIAGRAM_MAX_LABEL_CHARS: int = 28
+
+    DIAGRAM_MARGIN_X: int = 40
+
+    DIAGRAM_MARGIN_Y: int = 40
+
+    DIAGRAM_MIN_GAP: int = 12
+
+    DIAGRAM_LANE_TOP: int = 90
+
+    DIAGRAM_SEQUENCE_TOP: int = 110
+
+    DIAGRAM_SEQUENCE_MAX_PARTICIPANTS: int = 8
+
+    DIAGRAM_WORKFLOW_FALLBACK_NODES: int = 4
+
+    DIAGRAM_CHAPTER_FOCUS: int = 6
+
+    DIAGRAM_MAP_SYMBOLS_PER_NODE: int = 25
+
+    DIAGRAM_TOOLTIP_DOC_CHARS: int = 160
+
+    DIAGRAM_NEIGHBOR_NAMES: int = 8
+
+    DIAGRAM_PRESETS: Tuple[str, ...] = (
+        "classic", "flow", "blueprint", "editorial",
+    )
+
+    DIAGRAM_KINDS: Tuple[str, ...] = (
+        "architecture", "workflow", "sequence", "dataflow", "lifecycle",
+    )
+
+    DIAGRAM_ROLES: Tuple[str, ...] = (
+        "frontend", "backend", "database", "cloud",
+        "security", "messagebus", "external",
+    )
+
+    DIAGRAM_ROLE_COLORS: Tuple[Tuple[str, str], ...] = (
+        ("frontend", "#22d3ee"),
+        ("backend", "#34d399"),
+        ("database", "#a78bfa"),
+        ("cloud", "#fbbf24"),
+        ("security", "#fb7185"),
+        ("messagebus", "#fb923c"),
+        ("external", "#94a3b8"),
+    )
