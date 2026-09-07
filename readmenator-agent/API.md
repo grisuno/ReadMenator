@@ -3,17 +3,17 @@
 ## readmenator/__main__.py
 
 ### build_parser `def build_parser()`
-- Defined: `readmenator/__main__.py:15`
+- Defined: `readmenator/__main__.py:16`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
 ### _run_tests `def _run_tests()`
-- Defined: `readmenator/__main__.py:101`
+- Defined: `readmenator/__main__.py:105`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
 ### main `def main()`
-- Defined: `readmenator/__main__.py:116`
+- Defined: `readmenator/__main__.py:120`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
@@ -229,190 +229,214 @@
 ## readmenator/_app.py
 
 ### __init__ `def __init__(self, config)`
-- Defined: `readmenator/_app.py:34`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:36`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _scan `def _scan(self, target_dir)`
-- Defined: `readmenator/_app.py:43`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:45`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _scan_with_content `def _scan_with_content(self, target_dir)`
-- Defined: `readmenator/_app.py:51`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:53`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _resolve_imports `def _resolve_imports(self, nodes, edges, target_dir)`
-- Defined: `readmenator/_app.py:61`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:63`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### run `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
-- Defined: `readmenator/_app.py:80`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:82`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _write_sidecar_outputs `def _write_sidecar_outputs(self, root, findings, analysis_v2)`
-- Defined: `readmenator/_app.py:182`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:190`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _inject_readme_link `def _inject_readme_link(self, root)`
-- Defined: `readmenator/_app.py:208`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:216`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _inject_agent_files `def _inject_agent_files(self, root)`
-- Defined: `readmenator/_app.py:216`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:224`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### generate_uml_code `def generate_uml_code(self, target_dir, language, output_path)`
-- Defined: `readmenator/_app.py:224`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:232`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _log_summary `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)`
-- Defined: `readmenator/_app.py:236`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:244`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### update `def update(self, target_dir, run_security)`
-- Defined: `readmenator/_app.py:291`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:299`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### _scan_for_cache `def _scan_for_cache(self, root, cache)`
-- Defined: `readmenator/_app.py:387`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:395`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### query `def query(self, target_dir, question)`
-- Defined: `readmenator/_app.py:405`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:413`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### explain `def explain(self, target_dir, symbol_name)`
-- Defined: `readmenator/_app.py:410`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:418`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### find_path `def find_path(self, target_dir, symbol_a, symbol_b)`
-- Defined: `readmenator/_app.py:422`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:430`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### summary `def summary(self, target_dir)`
-- Defined: `readmenator/_app.py:435`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:443`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### rank_query `def rank_query(self, target_dir, query, top_n)`
-- Defined: `readmenator/_app.py:440`
+- Defined: `readmenator/_app.py:448`
 - Doc: Run a ranked query against the knowledge graph.
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### rebuild `def rebuild(self, target_dir, run_security)`
-- Defined: `readmenator/_app.py:470`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:478`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### analyze `def analyze(self, target_dir)`
-- Defined: `readmenator/_app.py:473`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:481`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_json `def export_json(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:477`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:485`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_html `def export_html(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:488`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:496`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_svg `def export_svg(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:499`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:507`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export `def export(self, target_dir)`
-- Defined: `readmenator/_app.py:510`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:518`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_graphml `def export_graphml(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:515`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:523`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_cypher `def export_cypher(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:526`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:534`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_obsidian `def export_obsidian(self, target_dir, output_dir)`
-- Defined: `readmenator/_app.py:539`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:547`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+
+### export_diagrams `def export_diagrams(self, target_dir, output_dir)`
+- Defined: `readmenator/_app.py:557`
+- Doc: Export all five interactive system maps plus a gallery index.
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+
+### _live_renderer `def _live_renderer(self)`
+- Defined: `readmenator/_app.py:596`
+- Doc: Return the configured map renderer for published output.
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+
+### export_diagram `def export_diagram(self, target_dir, kind, output_path)`
+- Defined: `readmenator/_app.py:606`
+- Doc: Export a single interactive system map as standalone HTML.
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+
+### export_pages `def export_pages(self, target_dir, output_dir)`
+- Defined: `readmenator/_app.py:643`
+- Doc: Publish all system maps plus a gallery index as a static site.
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### watch `def watch(self, target_dir)`
-- Defined: `readmenator/_app.py:549`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:679`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### audit `def audit(self, target_dir)`
-- Defined: `readmenator/_app.py:559`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:689`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### audit_deep `def audit_deep(self, target_dir)`
-- Defined: `readmenator/_app.py:566`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:696`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_sarif `def export_sarif(self, target_dir, output_path)`
-- Defined: `readmenator/_app.py:586`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:716`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### export_rules `def export_rules(self, target_dir, output_dir)`
-- Defined: `readmenator/_app.py:596`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:726`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### detect_layers `def detect_layers(self, target_dir)`
-- Defined: `readmenator/_app.py:606`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:736`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### lint `def lint(self, target_dir)`
-- Defined: `readmenator/_app.py:616`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:746`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### strip_dead_code `def strip_dead_code(self, target_dir)`
-- Defined: `readmenator/_app.py:629`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:759`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### generate_cursorrules `def generate_cursorrules(self, target_dir)`
-- Defined: `readmenator/_app.py:639`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:769`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### refactor_monolith `def refactor_monolith(self, target_dir)`
-- Defined: `readmenator/_app.py:654`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:784`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ### on_change `def on_change()`
-- Defined: `readmenator/_app.py:553`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
+- Defined: `readmenator/_app.py:683`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
 ## readmenator/_cache.py
 
@@ -691,6 +715,338 @@
 - Doc: Classify the recommended action for a dead symbol.
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_app.py`, `tests/test_dead_code.py`
+
+## readmenator/_diagrams.py
+
+### _escape_markup `def _escape_markup(value)`
+- Defined: `readmenator/_diagrams.py:24`
+- Doc: Escape text for HTML and tooltip embedding.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _json_payload `def _json_payload(payload)`
+- Defined: `readmenator/_diagrams.py:36`
+- Doc: Serialize a payload for safe inline script embedding.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _role_color `def _role_color(role, config)`
+- Defined: `readmenator/_diagrams.py:48`
+- Doc: Return the stroke color for a semantic role.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### __init__ `def __init__(self, config)`
+- Defined: `readmenator/_diagrams.py:205`
+- Doc: Initialise the validator with application configuration.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### validate `def validate(self, system_map)`
+- Defined: `readmenator/_diagrams.py:213`
+- Doc: Validate a system map and return a deterministic receipt.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### __init__ `def __init__(self, config)`
+- Defined: `readmenator/_diagrams.py:432`
+- Doc: Initialise the builder with application configuration.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### supported_kinds `def supported_kinds(self)`
+- Defined: `readmenator/_diagrams.py:441`
+- Doc: Return the supported diagram kind identifiers.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### build `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind)`
+- Defined: `readmenator/_diagrams.py:449`
+- Doc: Build one deterministic system map of the requested kind.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### build_all `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis)`
+- Defined: `readmenator/_diagrams.py:484`
+- Doc: Build all five diagram kinds deterministically.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### compare `def compare(self, base, head)`
+- Defined: `readmenator/_diagrams.py:513`
+- Doc: Compare two maps of the same kind as before, delta, and after.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _title_for `def _title_for(self, kind)`
+- Defined: `readmenator/_diagrams.py:552`
+- Doc: Return the display title for a diagram kind.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _role_for `def _role_for(self, group, sensitive)`
+- Defined: `readmenator/_diagrams.py:566`
+- Doc: Return the semantic role for a group with sensitivity override.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _sensitive_files `def _sensitive_files(self, findings)`
+- Defined: `readmenator/_diagrams.py:583`
+- Doc: Return files carrying elevated severity findings.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _ranked_file_ids `def _ranked_file_ids(self, nodes, links, analysis)`
+- Defined: `readmenator/_diagrams.py:600`
+- Doc: Rank file identifiers by centrality then symbol count.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _select_primary `def _select_primary(self, nodes, links, analysis)`
+- Defined: `readmenator/_diagrams.py:635`
+- Doc: Select the primary node scope honoring the configured limit.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _internal_links `def _internal_links(self, edges, selected)`
+- Defined: `readmenator/_diagrams.py:657`
+- Doc: Filter edges to project-internal links between selected files.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _symbol_records `def _symbol_records(self, node)`
+- Defined: `readmenator/_diagrams.py:677`
+- Doc: Build truncated symbol records for map documentation payloads.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _short_label `def _short_label(self, value)`
+- Defined: `readmenator/_diagrams.py:699`
+- Doc: Shorten a label to the configured readable length.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _layout_columns `def _layout_columns(self, items, kind)`
+- Defined: `readmenator/_diagrams.py:714`
+- Doc: Compute deterministic column lane coordinates for grouped items.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _lanes_that_fit `def _lanes_that_fit(self, lanes)`
+- Defined: `readmenator/_diagrams.py:760`
+- Doc: Drop lowest-priority lanes until columns fit the canvas width.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _fitted_gap `def _fitted_gap(self, count, item, gap, total, margin)`
+- Defined: `readmenator/_diagrams.py:777`
+- Doc: Compress spacing deterministically so items fit the canvas.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _lane_capacity `def _lane_capacity(self)`
+- Defined: `readmenator/_diagrams.py:801`
+- Doc: Return the maximum members per lane fitting the canvas height.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _cap_lane_scope `def _cap_lane_scope(self, ranked, layer_of)`
+- Defined: `readmenator/_diagrams.py:815`
+- Doc: Cap ranked nodes per lane so every lane fits the canvas height.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _layout_sequence `def _layout_sequence(self, ordered)`
+- Defined: `readmenator/_diagrams.py:839`
+- Doc: Compute deterministic lifeline row coordinates for sequences.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _sequence_capacity `def _sequence_capacity(self)`
+- Defined: `readmenator/_diagrams.py:860`
+- Doc: Return the maximum participants fitting the canvas width.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _place `def _place(self, ranked, layer_of, kind)`
+- Defined: `readmenator/_diagrams.py:874`
+- Doc: Cap lane scope and compute coordinates for placed nodes only.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _make_views `def _make_views(self, kind, primary, links)`
+- Defined: `readmenator/_diagrams.py:893`
+- Doc: Create guided chapters from authored topology.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _build_architecture `def _build_architecture(self, nodes, links, layers, findings, analysis)`
+- Defined: `readmenator/_diagrams.py:965`
+- Doc: Build the runtime architecture map from file topology.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _build_workflow `def _build_workflow(self, nodes, links, layers, findings)`
+- Defined: `readmenator/_diagrams.py:1023`
+- Doc: Build the delivery workflow map across architectural lanes.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _build_sequence `def _build_sequence(self, nodes, links, layers, analysis)`
+- Defined: `readmenator/_diagrams.py:1096`
+- Doc: Build the request sequence map over top participants.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _build_dataflow `def _build_dataflow(self, nodes, links, layers, findings)`
+- Defined: `readmenator/_diagrams.py:1167`
+- Doc: Build the data flow map from sources through stores.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _build_lifecycle `def _build_lifecycle(self, nodes, links, layers, findings)`
+- Defined: `readmenator/_diagrams.py:1248`
+- Doc: Build the change lifecycle map with waits, retries, and terminals.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### __init__ `def __init__(self, config)`
+- Defined: `readmenator/_diagrams.py:1341`
+- Doc: Initialise the renderer with application configuration.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### render `def render(self, system_map)`
+- Defined: `readmenator/_diagrams.py:1349`
+- Doc: Render a system map as a self-contained HTML document.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### write `def write(self, system_map, output_path)`
+- Defined: `readmenator/_diagrams.py:1446`
+- Doc: Render a system map and write it to a relative output path.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _safe_json `def _safe_json(self, payload)`
+- Defined: `readmenator/_diagrams.py:1465`
+- Doc: Serialize a payload for safe inline script embedding.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _escape `def _escape(self, value)`
+- Defined: `readmenator/_diagrams.py:1476`
+- Doc: Escape text for SVG and HTML embedding.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _role_color `def _role_color(self, role)`
+- Defined: `readmenator/_diagrams.py:1487`
+- Doc: Return the stroke color for a semantic role.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _edge_path `def _edge_path(self, x1, y1, x2, y2)`
+- Defined: `readmenator/_diagrams.py:1498`
+- Doc: Compute a deterministic curved route between two nodes.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _nodes_svg `def _nodes_svg(self, system_map)`
+- Defined: `readmenator/_diagrams.py:1534`
+- Doc: Render authored nodes as inline SVG groups.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _edges_svg `def _edges_svg(self, system_map)`
+- Defined: `readmenator/_diagrams.py:1582`
+- Doc: Render authored relationships as inline SVG paths.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _template `def _template(self)`
+- Defined: `readmenator/_diagrams.py:1629`
+- Doc: Return the self-contained viewer document template.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### __init__ `def __init__(self, config)`
+- Defined: `readmenator/_diagrams.py:2035`
+- Doc: Initialise the renderer with application configuration.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### render `def render(self, system_map)`
+- Defined: `readmenator/_diagrams.py:2043`
+- Doc: Render a system map as a vis.js network HTML document.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### write `def write(self, system_map, output_path)`
+- Defined: `readmenator/_diagrams.py:2144`
+- Doc: Render a vis.js map and write it to a relative output path.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _tooltip `def _tooltip(self, node)`
+- Defined: `readmenator/_diagrams.py:2161`
+- Doc: Build a documentation tooltip for a network node.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _template `def _template(self)`
+- Defined: `readmenator/_diagrams.py:2192`
+- Doc: Return the vis.js viewer document template.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### __init__ `def __init__(self, config)`
+- Defined: `readmenator/_diagrams.py:2565`
+- Doc: Initialise the publisher with application configuration.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### description_for `def description_for(self, kind)`
+- Defined: `readmenator/_diagrams.py:2575`
+- Doc: Return the gallery description for a diagram kind.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### publish `def publish(self, maps, project_name, output_dir, stats, renderer)`
+- Defined: `readmenator/_diagrams.py:2589`
+- Doc: Publish maps and a gallery index into a documentation directory.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### render_index `def render_index(self, project_name, maps, stats, href_prefix)`
+- Defined: `readmenator/_diagrams.py:2647`
+- Doc: Render the gallery index page for published maps.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _href_prefix `def _href_prefix(self)`
+- Defined: `readmenator/_diagrams.py:2744`
+- Doc: Return the relative href prefix for map links.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _card `def _card(self, kind, system_map, href_prefix)`
+- Defined: `readmenator/_diagrams.py:2755`
+- Doc: Render one gallery card linking to a published map.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _stats_line `def _stats_line(self, stats)`
+- Defined: `readmenator/_diagrams.py:2791`
+- Doc: Render the gallery header statistics line.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
+
+### _escape `def _escape(self, value)`
+- Defined: `readmenator/_diagrams.py:2805`
+- Doc: Escape text for HTML embedding.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
 
 ## readmenator/_documentation.py
 
@@ -1301,124 +1657,154 @@
 - Defined: `readmenator/_models.py:101`
 - Doc: Return the plural form of *kind* according to *plural_map*.
 - Depends on: `readmenator/_category.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_mermaid.py`, `readmenator/_pipeline.py`, `readmenator/_projections.py`, `readmenator/_query.py`, `readmenator/_refactorizer.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`, `tests/test_agent_output.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dead_code.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_hotspots.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mermaid.py`, `tests/test_models.py`, `tests/test_parsers_property.py`, `tests/test_query.py`, `tests/test_ranking.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_mermaid.py`, `readmenator/_pipeline.py`, `readmenator/_projections.py`, `readmenator/_query.py`, `readmenator/_refactorizer.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`, `tests/test_agent_output.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_hotspots.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mermaid.py`, `tests/test_models.py`, `tests/test_parsers_property.py`, `tests/test_query.py`, `tests/test_ranking.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`
 
 ## readmenator/_pipeline.py
 
 ### __init__ `def __init__(self, config)`
-- Defined: `readmenator/_pipeline.py:46`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:47`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### scanner `def scanner(self)`
-- Defined: `readmenator/_pipeline.py:68`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:74`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### generator `def generator(self)`
-- Defined: `readmenator/_pipeline.py:74`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:80`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### analyzer `def analyzer(self)`
-- Defined: `readmenator/_pipeline.py:80`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:86`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### security `def security(self)`
-- Defined: `readmenator/_pipeline.py:86`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:92`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### exporter `def exporter(self)`
-- Defined: `readmenator/_pipeline.py:92`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:98`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### taint `def taint(self)`
-- Defined: `readmenator/_pipeline.py:98`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:104`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### hotspots `def hotspots(self)`
-- Defined: `readmenator/_pipeline.py:104`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:110`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### layer_rules `def layer_rules(self)`
-- Defined: `readmenator/_pipeline.py:110`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:116`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### rule_gen `def rule_gen(self)`
-- Defined: `readmenator/_pipeline.py:116`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:122`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### sarif `def sarif(self)`
-- Defined: `readmenator/_pipeline.py:122`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:128`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### cpg `def cpg(self)`
-- Defined: `readmenator/_pipeline.py:128`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:134`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### layer_detector `def layer_detector(self)`
-- Defined: `readmenator/_pipeline.py:137`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:143`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### uml `def uml(self)`
-- Defined: `readmenator/_pipeline.py:143`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:149`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### readme_injector `def readme_injector(self)`
-- Defined: `readmenator/_pipeline.py:149`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:155`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### agent_injector `def agent_injector(self)`
-- Defined: `readmenator/_pipeline.py:158`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:164`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### agent_output `def agent_output(self)`
-- Defined: `readmenator/_pipeline.py:167`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:173`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Imported by: `readmenator/_app.py`
+
+### diagram_builder `def diagram_builder(self)`
+- Defined: `readmenator/_pipeline.py:179`
+- Doc: Return the lazily initialised system map builder.
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Imported by: `readmenator/_app.py`
+
+### diagram_renderer `def diagram_renderer(self)`
+- Defined: `readmenator/_pipeline.py:186`
+- Doc: Return the lazily initialised interactive map renderer.
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Imported by: `readmenator/_app.py`
+
+### diagram_validator `def diagram_validator(self)`
+- Defined: `readmenator/_pipeline.py:193`
+- Doc: Return the lazily initialised system map validator.
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Imported by: `readmenator/_app.py`
+
+### diagram_publisher `def diagram_publisher(self)`
+- Defined: `readmenator/_pipeline.py:200`
+- Doc: Return the lazily initialised documentation site publisher.
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Imported by: `readmenator/_app.py`
+
+### vis_renderer `def vis_renderer(self)`
+- Defined: `readmenator/_pipeline.py:207`
+- Doc: Return the lazily initialised vis.js network renderer.
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### build_typed_graph `def build_typed_graph(self, nodes, edges, resolved_edges)`
-- Defined: `readmenator/_pipeline.py:172`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:213`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### make_ranker `def make_ranker(self, typed_graph)`
-- Defined: `readmenator/_pipeline.py:182`
+- Defined: `readmenator/_pipeline.py:223`
 - Doc: Create a CompositeRanker for the given typed graph.
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### last_category `def last_category(self)`
-- Defined: `readmenator/_pipeline.py:199`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:240`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### last_typed_graph `def last_typed_graph(self)`
-- Defined: `readmenator/_pipeline.py:203`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:244`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### __init__ `def __init__(self, factory)`
-- Defined: `readmenator/_pipeline.py:216`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:257`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ### run `def run(self, nodes, edges, resolved_edges, layers, content_map)`
-- Defined: `readmenator/_pipeline.py:219`
-- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
+- Defined: `readmenator/_pipeline.py:260`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_app.py`
 
 ## readmenator/_projections.py
@@ -1730,54 +2116,82 @@
 
 ## readmenator/_resolver.py
 
-### __init__ `def __init__(self, file_ids, root)`
-- Defined: `readmenator/_resolver.py:58`
+### __init__ `def __init__(self, file_ids, root, extensions)`
+- Defined: `readmenator/_resolver.py:61`
 - Doc: Initialise the resolver with all known file paths.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _build_stem_index `def _build_stem_index(self, file_ids)`
-- Defined: `readmenator/_resolver.py:70`
+- Defined: `readmenator/_resolver.py:80`
 - Doc: Map file stems (without extension) to their full paths.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _build_dir_index `def _build_dir_index(self, file_ids)`
-- Defined: `readmenator/_resolver.py:80`
+- Defined: `readmenator/_resolver.py:90`
 - Doc: Map directory paths to the files they contain.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### resolve `def resolve(self, import_str, source_file)`
-- Defined: `readmenator/_resolver.py:97`
+- Defined: `readmenator/_resolver.py:107`
 - Doc: Resolve an import string to a concrete project file path.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### resolve_all `def resolve_all(self, import_str, source_file)`
-- Defined: `readmenator/_resolver.py:132`
+- Defined: `readmenator/_resolver.py:146`
 - Doc: Resolve *import_str* to all possible matching project file paths.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _resolve_relative `def _resolve_relative(self, import_str, source_file)`
-- Defined: `readmenator/_resolver.py:148`
+- Defined: `readmenator/_resolver.py:162`
 - Doc: Resolve a relative import (starts with ``.`` or ``..``).
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+
+### _resolve_verbatim `def _resolve_verbatim(self, import_str, source_file)`
+- Defined: `readmenator/_resolver.py:180`
+- Doc: Resolve a path-like import verbatim against the source directory.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _resolve_extensionless `def _resolve_extensionless(self, import_str, source_file)`
-- Defined: `readmenator/_resolver.py:166`
+- Defined: `readmenator/_resolver.py:198`
 - Doc: Resolve a bare module name by appending known extensions.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _resolve_directory_init `def _resolve_directory_init(self, import_str, source_file)`
-- Defined: `readmenator/_resolver.py:175`
+- Defined: `readmenator/_resolver.py:207`
 - Doc: Resolve as a package directory with __init__ or index file.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _resolve_module_dotpath `def _resolve_module_dotpath(self, import_str)`
-- Defined: `readmenator/_resolver.py:185`
+- Defined: `readmenator/_resolver.py:217`
 - Doc: Resolve a dotted module path (Python/Java convention).
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+
+### _resolve_suffix_match `def _resolve_suffix_match(self, import_str)`
+- Defined: `readmenator/_resolver.py:239`
+- Doc: Match a slash-qualified include against project path suffixes.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ### _resolve_stem_match `def _resolve_stem_match(self, import_str)`
-- Defined: `readmenator/_resolver.py:207`
+- Defined: `readmenator/_resolver.py:254`
 - Doc: Match by file stem only (last resort).
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+
+### _strip_extension `def _strip_extension(self, name)`
+- Defined: `readmenator/_resolver.py:263`
+- Doc: Remove a trailing known source extension from a file name.
+- Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_app.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ## readmenator/_rule_gen.py
@@ -3085,6 +3499,323 @@
 - Defined: `tests/test_dead_code.py:113`
 - Depends on: `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_models.py`
 
+## tests/test_diagrams.py
+
+### setUp `def setUp(self)`
+- Defined: `tests/test_diagrams.py:33`
+- Doc: Initialise builder with default configuration.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _make_graph `def _make_graph(self)`
+- Defined: `tests/test_diagrams.py:38`
+- Doc: Create a small deterministic project graph.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_supports_five_kinds `def test_builder_supports_five_kinds(self)`
+- Defined: `tests/test_diagrams.py:52`
+- Doc: Builder exposes architecture, workflow, sequence, dataflow, lifecycle.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_produces_all_kinds `def test_builder_produces_all_kinds(self)`
+- Defined: `tests/test_diagrams.py:59`
+- Doc: Build all returns one map per supported kind.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_is_deterministic `def test_builder_is_deterministic(self)`
+- Defined: `tests/test_diagrams.py:68`
+- Doc: Two builds over identical input share coordinates and bytes.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_orders_links_deterministically `def test_builder_orders_links_deterministically(self)`
+- Defined: `tests/test_diagrams.py:80`
+- Doc: Shuffled input edges yield identical ordered map relationships.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_validates_large_graph_for_all_kinds `def test_builder_validates_large_graph_for_all_kinds(self)`
+- Defined: `tests/test_diagrams.py:101`
+- Doc: Large layered graphs validate for every diagram kind.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_reports_total_scope `def test_builder_reports_total_scope(self)`
+- Defined: `tests/test_diagrams.py:119`
+- Doc: Built maps record shown scope and total input file count.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_attaches_symbols_and_docs `def test_builder_attaches_symbols_and_docs(self)`
+- Defined: `tests/test_diagrams.py:126`
+- Doc: Map nodes carry symbol records, file docs, and language.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_truncates_symbols_per_node `def test_builder_truncates_symbols_per_node(self)`
+- Defined: `tests/test_diagrams.py:143`
+- Doc: Symbol records respect the per-node configured cap.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_builder_truncates_to_configured_limit `def test_builder_truncates_to_configured_limit(self)`
+- Defined: `tests/test_diagrams.py:152`
+- Doc: Oversized graphs are truncated to the configured node limit.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_compare_reports_added_removed_rerouted `def test_compare_reports_added_removed_rerouted(self)`
+- Defined: `tests/test_diagrams.py:162`
+- Doc: Delta comparison reports added, removed, and rerouted facts.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### setUp `def setUp(self)`
+- Defined: `tests/test_diagrams.py:179`
+- Doc: Initialise validator with default configuration.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _valid_map `def _valid_map(self)`
+- Defined: `tests/test_diagrams.py:184`
+- Doc: Create a minimal valid architecture map.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_validator_passes_valid_map `def test_validator_passes_valid_map(self)`
+- Defined: `tests/test_diagrams.py:197`
+- Doc: Valid maps pass with the full check list and zero errors.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_validator_rejects_duplicate_node_ids `def test_validator_rejects_duplicate_node_ids(self)`
+- Defined: `tests/test_diagrams.py:204`
+- Doc: Duplicate identifiers fail with rule D001.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_validator_rejects_dangling_edge `def test_validator_rejects_dangling_edge(self)`
+- Defined: `tests/test_diagrams.py:214`
+- Doc: Edges pointing at unknown nodes fail with rule D002.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_validator_rejects_empty_map `def test_validator_rejects_empty_map(self)`
+- Defined: `tests/test_diagrams.py:222`
+- Doc: Maps without nodes fail with rule D003.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_validator_rejects_unknown_kind `def test_validator_rejects_unknown_kind(self)`
+- Defined: `tests/test_diagrams.py:228`
+- Doc: Unknown diagram kinds fail with rule D000.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### setUp `def setUp(self)`
+- Defined: `tests/test_diagrams.py:240`
+- Doc: Initialise builder and renderer with default configuration.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _map `def _map(self, kind)`
+- Defined: `tests/test_diagrams.py:246`
+- Doc: Build a small map of the requested kind.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_produces_standalone_document `def test_renderer_produces_standalone_document(self)`
+- Defined: `tests/test_diagrams.py:256`
+- Doc: Output is a complete HTML document with inline SVG.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_has_no_external_requests `def test_renderer_has_no_external_requests(self)`
+- Defined: `tests/test_diagrams.py:263`
+- Doc: Output performs no external fetches or CDN references.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_includes_interaction_controls `def test_renderer_includes_interaction_controls(self)`
+- Defined: `tests/test_diagrams.py:270`
+- Doc: Output includes search, passport, reach, route, lens, views, export.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_includes_keyboard_and_deep_links `def test_renderer_includes_keyboard_and_deep_links(self)`
+- Defined: `tests/test_diagrams.py:276`
+- Doc: Output documents shortcuts and hash deep link contracts.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_escapes_malicious_labels `def test_renderer_escapes_malicious_labels(self)`
+- Defined: `tests/test_diagrams.py:285`
+- Doc: Malicious labels are escaped and never break the document.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_embeds_valid_json_payloads `def test_renderer_embeds_valid_json_payloads(self)`
+- Defined: `tests/test_diagrams.py:298`
+- Doc: Embedded payload scripts parse as valid JSON arrays.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_covers_all_five_kinds `def test_renderer_covers_all_five_kinds(self)`
+- Defined: `tests/test_diagrams.py:307`
+- Doc: Every diagram kind renders a standalone document.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_links_gallery_home_when_configured `def test_renderer_links_gallery_home_when_configured(self)`
+- Defined: `tests/test_diagrams.py:314`
+- Doc: Maps with a home target expose a gallery back link.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_omits_gallery_home_by_default `def test_renderer_omits_gallery_home_by_default(self)`
+- Defined: `tests/test_diagrams.py:321`
+- Doc: Maps without a home target expose no gallery link.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_keeps_canvas_distinct_from_nodes `def test_renderer_keeps_canvas_distinct_from_nodes(self)`
+- Defined: `tests/test_diagrams.py:326`
+- Doc: Canvas background differs from node fill for readability.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_supports_drag_and_settle `def test_renderer_supports_drag_and_settle(self)`
+- Defined: `tests/test_diagrams.py:334`
+- Doc: Nodes are draggable with pointer capture plus a force pass.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_sanitizes_viewer_state_on_export `def test_renderer_sanitizes_viewer_state_on_export(self)`
+- Defined: `tests/test_diagrams.py:342`
+- Doc: Exports drop temporary focus, dim, and drag classes.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_buttons_explain_their_purpose `def test_renderer_buttons_explain_their_purpose(self)`
+- Defined: `tests/test_diagrams.py:348`
+- Doc: Every toolbar action carries a human-readable title.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### setUp `def setUp(self)`
+- Defined: `tests/test_diagrams.py:363`
+- Doc: Initialise builder and publisher with default configuration.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _maps `def _maps(self)`
+- Defined: `tests/test_diagrams.py:369`
+- Doc: Build all five maps from a small deterministic graph.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_writes_index_plus_five_maps `def test_publish_writes_index_plus_five_maps(self)`
+- Defined: `tests/test_diagrams.py:379`
+- Doc: Publish creates an index, five map files, and a nojekyll marker.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_index_links_every_map `def test_publish_index_links_every_map(self)`
+- Defined: `tests/test_diagrams.py:390`
+- Doc: Gallery index links every published map with relative paths.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_output_has_no_external_requests `def test_publish_output_has_no_external_requests(self)`
+- Defined: `tests/test_diagrams.py:399`
+- Doc: Index and maps perform no external fetches or CDN references.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_is_deterministic `def test_publish_is_deterministic(self)`
+- Defined: `tests/test_diagrams.py:412`
+- Doc: Two publishes over identical input share index bytes.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_escapes_malicious_project_name `def test_publish_escapes_malicious_project_name(self)`
+- Defined: `tests/test_diagrams.py:423`
+- Doc: Malicious project names are escaped in the gallery index.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_escapes_malicious_stat_keys `def test_publish_escapes_malicious_stat_keys(self)`
+- Defined: `tests/test_diagrams.py:432`
+- Doc: Malicious statistics keys are escaped in the gallery index.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_skips_invalid_maps `def test_publish_skips_invalid_maps(self)`
+- Defined: `tests/test_diagrams.py:443`
+- Doc: Maps failing validation are skipped while the index is written.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_empty_maps_writes_empty_gallery `def test_publish_empty_maps_writes_empty_gallery(self)`
+- Defined: `tests/test_diagrams.py:455`
+- Doc: Empty input writes an index with an empty gallery notice.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_leaves_input_maps_unmodified `def test_publish_leaves_input_maps_unmodified(self)`
+- Defined: `tests/test_diagrams.py:464`
+- Doc: Publish never mutates the caller supplied map metadata.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_flat_subdir_keeps_links_relative `def test_publish_flat_subdir_keeps_links_relative(self)`
+- Defined: `tests/test_diagrams.py:473`
+- Doc: Flat layouts link maps beside the index with a local home.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_index_explains_how_to_read `def test_publish_index_explains_how_to_read(self)`
+- Defined: `tests/test_diagrams.py:486`
+- Doc: Gallery index documents the reader interactions.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_publish_card_reports_primary_scope `def test_publish_card_reports_primary_scope(self)`
+- Defined: `tests/test_diagrams.py:494`
+- Doc: Gallery cards state shown files against the project total.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### setUp `def setUp(self)`
+- Defined: `tests/test_diagrams.py:506`
+- Doc: Initialise builder and renderer with default configuration.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _map `def _map(self, kind)`
+- Defined: `tests/test_diagrams.py:512`
+- Doc: Build a small map of the requested kind.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_uses_configured_cdn_urls `def test_renderer_uses_configured_cdn_urls(self)`
+- Defined: `tests/test_diagrams.py:522`
+- Doc: Script and style tags come from Config, never hardcoded.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_builds_vis_network_with_physics `def test_renderer_builds_vis_network_with_physics(self)`
+- Defined: `tests/test_diagrams.py:535`
+- Doc: Output instantiates a vis network with physics enabled.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_links_gallery_home_when_configured `def test_renderer_links_gallery_home_when_configured(self)`
+- Defined: `tests/test_diagrams.py:543`
+- Doc: Vis maps with a home target expose a gallery back link.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_disables_physics_from_config `def test_renderer_disables_physics_from_config(self)`
+- Defined: `tests/test_diagrams.py:551`
+- Doc: Physics honors the configured enabled flag.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_escapes_malicious_titles `def test_renderer_escapes_malicious_titles(self)`
+- Defined: `tests/test_diagrams.py:558`
+- Doc: Malicious labels never break tooltips or markup.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_exposes_reader_controls `def test_renderer_exposes_reader_controls(self)`
+- Defined: `tests/test_diagrams.py:571`
+- Doc: Output carries search, reach, route, lens, chapters, export.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_is_deterministic `def test_renderer_is_deterministic(self)`
+- Defined: `tests/test_diagrams.py:577`
+- Doc: Two renders over identical input share bytes.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_embeds_valid_payloads `def test_renderer_embeds_valid_payloads(self)`
+- Defined: `tests/test_diagrams.py:582`
+- Doc: Embedded node and edge payloads parse as valid JSON.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_documents_symbols_per_file `def test_renderer_documents_symbols_per_file(self)`
+- Defined: `tests/test_diagrams.py:590`
+- Doc: Node payloads and tooltips expose symbols with signatures.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_renderer_escapes_malicious_symbol_docs `def test_renderer_escapes_malicious_symbol_docs(self)`
+- Defined: `tests/test_diagrams.py:606`
+- Doc: Malicious symbol documentation never breaks tooltips.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### _project `def _project(self, tmp)`
+- Defined: `tests/test_diagrams.py:622`
+- Doc: Create a two-file project in a temporary directory.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_export_diagrams_writes_vis_maps_by_default `def test_export_diagrams_writes_vis_maps_by_default(self)`
+- Defined: `tests/test_diagrams.py:627`
+- Doc: Default diagram export writes CDN-powered vis.js maps.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
+### test_export_diagrams_falls_back_offline_when_disabled `def test_export_diagrams_falls_back_offline_when_disabled(self)`
+- Defined: `tests/test_diagrams.py:641`
+- Doc: Disabled vis flag produces offline maps without CDN.
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
 ## tests/test_documentation.py
 
 ### setUp `def setUp(self)`
@@ -3893,28 +4624,32 @@
 - Defined: `tests/test_parsers.py:451`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
+### test_extracts_includes `def test_extracts_includes(self)`
+- Defined: `tests/test_parsers.py:459`
+- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
+
 ### setUp `def setUp(self)`
-- Defined: `tests/test_parsers.py:461`
+- Defined: `tests/test_parsers.py:468`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ### test_returns_c_parser_for_c_extensions `def test_returns_c_parser_for_c_extensions(self)`
-- Defined: `tests/test_parsers.py:464`
+- Defined: `tests/test_parsers.py:471`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ### test_returns_python_parser_for_py `def test_returns_python_parser_for_py(self)`
-- Defined: `tests/test_parsers.py:470`
+- Defined: `tests/test_parsers.py:477`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ### test_returns_none_for_unknown_extension `def test_returns_none_for_unknown_extension(self)`
-- Defined: `tests/test_parsers.py:475`
+- Defined: `tests/test_parsers.py:482`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ### test_returns_rust_parser_for_rs `def test_returns_rust_parser_for_rs(self)`
-- Defined: `tests/test_parsers.py:479`
+- Defined: `tests/test_parsers.py:486`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ### test_case_insensitive_extension `def test_case_insensitive_extension(self)`
-- Defined: `tests/test_parsers.py:484`
+- Defined: `tests/test_parsers.py:491`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ## tests/test_parsers_new.py
@@ -4034,61 +4769,103 @@
 ## tests/test_parsers_property.py
 
 ### _generate_multiline_code `def _generate_multiline_code(lines, line_strategy)`
-- Defined: `tests/test_parsers_property.py:67`
+- Defined: `tests/test_parsers_property.py:105`
 - Doc: Generate source code with a configurable number of lines.
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### _create_parser `def _create_parser(ext)`
-- Defined: `tests/test_parsers_property.py:104`
+- Defined: `tests/test_parsers_property.py:142`
 - Doc: Create a parser for the given extension.
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_never_crashes_on_malformed_code `def test_never_crashes_on_malformed_code(self, ext, code)`
-- Defined: `tests/test_parsers_property.py:124`
+- Defined: `tests/test_parsers_property.py:162`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_never_crashes_on_unicode_code `def test_never_crashes_on_unicode_code(self, ext, code)`
-- Defined: `tests/test_parsers_property.py:142`
+- Defined: `tests/test_parsers_property.py:180`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_empty_code_returns_empty_or_valid `def test_empty_code_returns_empty_or_valid(self, ext)`
-- Defined: `tests/test_parsers_property.py:160`
+- Defined: `tests/test_parsers_property.py:198`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_whitespace_code_returns_empty_or_valid `def test_whitespace_code_returns_empty_or_valid(self, ext)`
-- Defined: `tests/test_parsers_property.py:170`
+- Defined: `tests/test_parsers_property.py:208`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_never_crashes_on_many_lines `def test_never_crashes_on_many_lines(self, ext, lines)`
-- Defined: `tests/test_parsers_property.py:182`
+- Defined: `tests/test_parsers_property.py:220`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_repeated_keywords_no_crash `def test_repeated_keywords_no_crash(self, ext)`
-- Defined: `tests/test_parsers_property.py:200`
+- Defined: `tests/test_parsers_property.py:238`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_parser_imports_is_list_of_strings `def test_parser_imports_is_list_of_strings(self, ext)`
-- Defined: `tests/test_parsers_property.py:219`
+- Defined: `tests/test_parsers_property.py:257`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_unknown_extension_returns_none `def test_unknown_extension_returns_none(self)`
-- Defined: `tests/test_parsers_property.py:231`
+- Defined: `tests/test_parsers_property.py:269`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### _assert_valid_symbols `def _assert_valid_symbols(self, symbols)`
-- Defined: `tests/test_parsers_property.py:237`
+- Defined: `tests/test_parsers_property.py:275`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### setUp `def setUp(self)`
-- Defined: `tests/test_parsers_property.py:253`
+- Defined: `tests/test_parsers_property.py:291`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_python_never_crashes_on_weird_ascii `def test_python_never_crashes_on_weird_ascii(self, code)`
-- Defined: `tests/test_parsers_property.py:258`
+- Defined: `tests/test_parsers_property.py:296`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ### test_python_never_crashes_on_any_text `def test_python_never_crashes_on_any_text(self, code)`
-- Defined: `tests/test_parsers_property.py:272`
+- Defined: `tests/test_parsers_property.py:310`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### given `def given()`
+- Defined: `tests/test_parsers_property.py:69`
+- Doc: Identity decorator used when hypothesis is unavailable.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### settings `def settings()`
+- Defined: `tests/test_parsers_property.py:75`
+- Doc: Identity decorator used when hypothesis is unavailable.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### __or__ `def __or__(self, other)`
+- Defined: `tests/test_parsers_property.py:48`
+- Doc: Combine placeholders without evaluating strategies.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### __ror__ `def __ror__(self, other)`
+- Defined: `tests/test_parsers_property.py:52`
+- Doc: Combine placeholders without evaluating strategies.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### map `def map(self)`
+- Defined: `tests/test_parsers_property.py:56`
+- Doc: Return the placeholder unchanged.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### __getattr__ `def __getattr__(self, name)`
+- Defined: `tests/test_parsers_property.py:63`
+- Doc: Return a builder producing inert placeholders.
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### wrapper `def wrapper(fn)`
+- Defined: `tests/test_parsers_property.py:71`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### wrapper `def wrapper(fn)`
+- Defined: `tests/test_parsers_property.py:77`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+
+### builder `def builder()`
+- Defined: `tests/test_parsers_property.py:65`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ## tests/test_query.py
@@ -4599,6 +5376,50 @@
 
 ### test_resolves_same_directory_import `def test_resolves_same_directory_import(self)`
 - Defined: `tests/test_resolver.py:79`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_c_quoted_header_same_dir `def test_resolves_c_quoted_header_same_dir(self)`
+- Defined: `tests/test_resolver.py:86`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_c_quoted_header_subdir `def test_resolves_c_quoted_header_subdir(self)`
+- Defined: `tests/test_resolver.py:93`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_c_extensionless_header `def test_resolves_c_extensionless_header(self)`
+- Defined: `tests/test_resolver.py:100`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_c_source_from_header_dir `def test_resolves_c_source_from_header_dir(self)`
+- Defined: `tests/test_resolver.py:107`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_cpp_header_same_dir `def test_resolves_cpp_header_same_dir(self)`
+- Defined: `tests/test_resolver.py:114`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_c_header_stem_across_dirs `def test_resolves_c_header_stem_across_dirs(self)`
+- Defined: `tests/test_resolver.py:121`
+- Depends on: `readmenator/_resolver.py`
+
+### test_returns_none_for_c_system_header `def test_returns_none_for_c_system_header(self)`
+- Defined: `tests/test_resolver.py:128`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_parent_dir_include `def test_resolves_parent_dir_include(self)`
+- Defined: `tests/test_resolver.py:135`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_parent_dir_include_despite_ambiguous_stem `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)`
+- Defined: `tests/test_resolver.py:142`
+- Depends on: `readmenator/_resolver.py`
+
+### test_resolves_include_dir_suffix_match `def test_resolves_include_dir_suffix_match(self)`
+- Defined: `tests/test_resolver.py:149`
+- Depends on: `readmenator/_resolver.py`
+
+### test_returns_none_for_ambiguous_suffix_match `def test_returns_none_for_ambiguous_suffix_match(self)`
+- Defined: `tests/test_resolver.py:156`
 - Depends on: `readmenator/_resolver.py`
 
 ## tests/test_rule_gen.py

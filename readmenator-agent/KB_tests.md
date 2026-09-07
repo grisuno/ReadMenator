@@ -209,6 +209,81 @@
   - `test_reports_sorted_by_file_path` (method, line 113) `def test_reports_sorted_by_file_path(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_models.py`
 
+## tests/test_diagrams.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSystemMapBuilderContract` (class, line 30) `class TestSystemMapBuilderContract(TestCase)`
+  - `TestSystemMapValidatorContract` (class, line 176) `class TestSystemMapValidatorContract(TestCase)`
+  - `TestInteractiveMapRendererContract` (class, line 237) `class TestInteractiveMapRendererContract(TestCase)`
+  - `TestDocsSitePublisherContract` (class, line 360) `class TestDocsSitePublisherContract(TestCase)`
+  - `TestVisNetworkRendererContract` (class, line 503) `class TestVisNetworkRendererContract(TestCase)`
+  - `TestDiagramVariantsContract` (class, line 619) `class TestDiagramVariantsContract(TestCase)`
+  - `setUp` (method, line 33) `def setUp(self)`
+  - `_make_graph` (method, line 38) `def _make_graph(self)`
+  - `test_builder_supports_five_kinds` (method, line 52) `def test_builder_supports_five_kinds(self)`
+  - `test_builder_produces_all_kinds` (method, line 59) `def test_builder_produces_all_kinds(self)`
+  - `test_builder_is_deterministic` (method, line 68) `def test_builder_is_deterministic(self)`
+  - `test_builder_orders_links_deterministically` (method, line 80) `def test_builder_orders_links_deterministically(self)`
+  - `test_builder_validates_large_graph_for_all_kinds` (method, line 101) `def test_builder_validates_large_graph_for_all_kinds(self)`
+  - `test_builder_reports_total_scope` (method, line 119) `def test_builder_reports_total_scope(self)`
+  - `test_builder_attaches_symbols_and_docs` (method, line 126) `def test_builder_attaches_symbols_and_docs(self)`
+  - `test_builder_truncates_symbols_per_node` (method, line 143) `def test_builder_truncates_symbols_per_node(self)`
+  - `test_builder_truncates_to_configured_limit` (method, line 152) `def test_builder_truncates_to_configured_limit(self)`
+  - `test_compare_reports_added_removed_rerouted` (method, line 162) `def test_compare_reports_added_removed_rerouted(self)`
+  - `setUp` (method, line 179) `def setUp(self)`
+  - `_valid_map` (method, line 184) `def _valid_map(self)`
+  - `test_validator_passes_valid_map` (method, line 197) `def test_validator_passes_valid_map(self)`
+  - `test_validator_rejects_duplicate_node_ids` (method, line 204) `def test_validator_rejects_duplicate_node_ids(self)`
+  - `test_validator_rejects_dangling_edge` (method, line 214) `def test_validator_rejects_dangling_edge(self)`
+  - `test_validator_rejects_empty_map` (method, line 222) `def test_validator_rejects_empty_map(self)`
+  - `test_validator_rejects_unknown_kind` (method, line 228) `def test_validator_rejects_unknown_kind(self)`
+  - `setUp` (method, line 240) `def setUp(self)`
+  - `_map` (method, line 246) `def _map(self, kind)`
+  - `test_renderer_produces_standalone_document` (method, line 256) `def test_renderer_produces_standalone_document(self)`
+  - `test_renderer_has_no_external_requests` (method, line 263) `def test_renderer_has_no_external_requests(self)`
+  - `test_renderer_includes_interaction_controls` (method, line 270) `def test_renderer_includes_interaction_controls(self)`
+  - `test_renderer_includes_keyboard_and_deep_links` (method, line 276) `def test_renderer_includes_keyboard_and_deep_links(self)`
+  - `test_renderer_escapes_malicious_labels` (method, line 285) `def test_renderer_escapes_malicious_labels(self)`
+  - `test_renderer_embeds_valid_json_payloads` (method, line 298) `def test_renderer_embeds_valid_json_payloads(self)`
+  - `test_renderer_covers_all_five_kinds` (method, line 307) `def test_renderer_covers_all_five_kinds(self)`
+  - `test_renderer_links_gallery_home_when_configured` (method, line 314) `def test_renderer_links_gallery_home_when_configured(self)`
+  - `test_renderer_omits_gallery_home_by_default` (method, line 321) `def test_renderer_omits_gallery_home_by_default(self)`
+  - `test_renderer_keeps_canvas_distinct_from_nodes` (method, line 326) `def test_renderer_keeps_canvas_distinct_from_nodes(self)`
+  - `test_renderer_supports_drag_and_settle` (method, line 334) `def test_renderer_supports_drag_and_settle(self)`
+  - `test_renderer_sanitizes_viewer_state_on_export` (method, line 342) `def test_renderer_sanitizes_viewer_state_on_export(self)`
+  - `test_renderer_buttons_explain_their_purpose` (method, line 348) `def test_renderer_buttons_explain_their_purpose(self)`
+  - `setUp` (method, line 363) `def setUp(self)`
+  - `_maps` (method, line 369) `def _maps(self)`
+  - `test_publish_writes_index_plus_five_maps` (method, line 379) `def test_publish_writes_index_plus_five_maps(self)`
+  - `test_publish_index_links_every_map` (method, line 390) `def test_publish_index_links_every_map(self)`
+  - `test_publish_output_has_no_external_requests` (method, line 399) `def test_publish_output_has_no_external_requests(self)`
+  - `test_publish_is_deterministic` (method, line 412) `def test_publish_is_deterministic(self)`
+  - `test_publish_escapes_malicious_project_name` (method, line 423) `def test_publish_escapes_malicious_project_name(self)`
+  - `test_publish_escapes_malicious_stat_keys` (method, line 432) `def test_publish_escapes_malicious_stat_keys(self)`
+  - `test_publish_skips_invalid_maps` (method, line 443) `def test_publish_skips_invalid_maps(self)`
+  - `test_publish_empty_maps_writes_empty_gallery` (method, line 455) `def test_publish_empty_maps_writes_empty_gallery(self)`
+  - `test_publish_leaves_input_maps_unmodified` (method, line 464) `def test_publish_leaves_input_maps_unmodified(self)`
+  - `test_publish_flat_subdir_keeps_links_relative` (method, line 473) `def test_publish_flat_subdir_keeps_links_relative(self)`
+  - `test_publish_index_explains_how_to_read` (method, line 486) `def test_publish_index_explains_how_to_read(self)`
+  - `test_publish_card_reports_primary_scope` (method, line 494) `def test_publish_card_reports_primary_scope(self)`
+  - `setUp` (method, line 506) `def setUp(self)`
+  - `_map` (method, line 512) `def _map(self, kind)`
+  - `test_renderer_uses_configured_cdn_urls` (method, line 522) `def test_renderer_uses_configured_cdn_urls(self)`
+  - `test_renderer_builds_vis_network_with_physics` (method, line 535) `def test_renderer_builds_vis_network_with_physics(self)`
+  - `test_renderer_links_gallery_home_when_configured` (method, line 543) `def test_renderer_links_gallery_home_when_configured(self)`
+  - `test_renderer_disables_physics_from_config` (method, line 551) `def test_renderer_disables_physics_from_config(self)`
+  - `test_renderer_escapes_malicious_titles` (method, line 558) `def test_renderer_escapes_malicious_titles(self)`
+  - `test_renderer_exposes_reader_controls` (method, line 571) `def test_renderer_exposes_reader_controls(self)`
+  - `test_renderer_is_deterministic` (method, line 577) `def test_renderer_is_deterministic(self)`
+  - `test_renderer_embeds_valid_payloads` (method, line 582) `def test_renderer_embeds_valid_payloads(self)`
+  - `test_renderer_documents_symbols_per_file` (method, line 590) `def test_renderer_documents_symbols_per_file(self)`
+  - `test_renderer_escapes_malicious_symbol_docs` (method, line 606) `def test_renderer_escapes_malicious_symbol_docs(self)`
+  - `_project` (method, line 622) `def _project(self, tmp)`
+  - `test_export_diagrams_writes_vis_maps_by_default` (method, line 627) `def test_export_diagrams_writes_vis_maps_by_default(self)`
+  - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 641) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
 ## tests/test_documentation.py
 - Layer: testing
 - Language: py
@@ -425,7 +500,7 @@
   - `TestGDScriptParserContract` (class, line 396) `class TestGDScriptParserContract(TestCase)`
   - `TestNimParserContract` (class, line 414) `class TestNimParserContract(TestCase)`
   - `TestAssemblyParserContract` (class, line 440) `class TestAssemblyParserContract(TestCase)`
-  - `TestParserFactoryContract` (class, line 460) `class TestParserFactoryContract(TestCase)`
+  - `TestParserFactoryContract` (class, line 467) `class TestParserFactoryContract(TestCase)`
   - `setUp` (method, line 23) `def setUp(self)`
   - `test_extracts_function` (method, line 26) `def test_extracts_function(self)`
   - `test_extracts_struct` (method, line 33) `def test_extracts_struct(self)`
@@ -490,12 +565,13 @@
   - `setUp` (method, line 441) `def setUp(self)`
   - `test_extracts_label` (method, line 444) `def test_extracts_label(self)`
   - `test_extracts_multiple_labels` (method, line 451) `def test_extracts_multiple_labels(self)`
-  - `setUp` (method, line 461) `def setUp(self)`
-  - `test_returns_c_parser_for_c_extensions` (method, line 464) `def test_returns_c_parser_for_c_extensions(self)`
-  - `test_returns_python_parser_for_py` (method, line 470) `def test_returns_python_parser_for_py(self)`
-  - `test_returns_none_for_unknown_extension` (method, line 475) `def test_returns_none_for_unknown_extension(self)`
-  - `test_returns_rust_parser_for_rs` (method, line 479) `def test_returns_rust_parser_for_rs(self)`
-  - `test_case_insensitive_extension` (method, line 484) `def test_case_insensitive_extension(self)`
+  - `test_extracts_includes` (method, line 459) `def test_extracts_includes(self)`
+  - `setUp` (method, line 468) `def setUp(self)`
+  - `test_returns_c_parser_for_c_extensions` (method, line 471) `def test_returns_c_parser_for_c_extensions(self)`
+  - `test_returns_python_parser_for_py` (method, line 477) `def test_returns_python_parser_for_py(self)`
+  - `test_returns_none_for_unknown_extension` (method, line 482) `def test_returns_none_for_unknown_extension(self)`
+  - `test_returns_rust_parser_for_rs` (method, line 486) `def test_returns_rust_parser_for_rs(self)`
+  - `test_case_insensitive_extension` (method, line 491) `def test_case_insensitive_extension(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
 
 ## tests/test_parsers_new.py
@@ -544,22 +620,33 @@
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_generate_multiline_code` (function, line 67) `def _generate_multiline_code(lines, line_strategy)`
-  - `_create_parser` (function, line 104) `def _create_parser(ext)`
-  - `TestParserHypothesisContract` (class, line 117) `class TestParserHypothesisContract(TestCase)`
-  - `TestPythonParserProperty` (class, line 250) `class TestPythonParserProperty(TestCase)`
-  - `test_never_crashes_on_malformed_code` (method, line 124) `def test_never_crashes_on_malformed_code(self, ext, code)`
-  - `test_never_crashes_on_unicode_code` (method, line 142) `def test_never_crashes_on_unicode_code(self, ext, code)`
-  - `test_empty_code_returns_empty_or_valid` (method, line 160) `def test_empty_code_returns_empty_or_valid(self, ext)`
-  - `test_whitespace_code_returns_empty_or_valid` (method, line 170) `def test_whitespace_code_returns_empty_or_valid(self, ext)`
-  - `test_never_crashes_on_many_lines` (method, line 182) `def test_never_crashes_on_many_lines(self, ext, lines)`
-  - `test_repeated_keywords_no_crash` (method, line 200) `def test_repeated_keywords_no_crash(self, ext)`
-  - `test_parser_imports_is_list_of_strings` (method, line 219) `def test_parser_imports_is_list_of_strings(self, ext)`
-  - `test_unknown_extension_returns_none` (method, line 231) `def test_unknown_extension_returns_none(self)`
-  - `_assert_valid_symbols` (method, line 237) `def _assert_valid_symbols(self, symbols)`
-  - `setUp` (method, line 253) `def setUp(self)`
-  - `test_python_never_crashes_on_weird_ascii` (method, line 258) `def test_python_never_crashes_on_weird_ascii(self, code)`
-  - `test_python_never_crashes_on_any_text` (method, line 272) `def test_python_never_crashes_on_any_text(self, code)`
+  - `_generate_multiline_code` (function, line 105) `def _generate_multiline_code(lines, line_strategy)`
+  - `_create_parser` (function, line 142) `def _create_parser(ext)`
+  - `TestParserHypothesisContract` (class, line 155) `class TestParserHypothesisContract(TestCase)`
+  - `TestPythonParserProperty` (class, line 288) `class TestPythonParserProperty(TestCase)`
+  - `test_never_crashes_on_malformed_code` (method, line 162) `def test_never_crashes_on_malformed_code(self, ext, code)`
+  - `test_never_crashes_on_unicode_code` (method, line 180) `def test_never_crashes_on_unicode_code(self, ext, code)`
+  - `test_empty_code_returns_empty_or_valid` (method, line 198) `def test_empty_code_returns_empty_or_valid(self, ext)`
+  - `test_whitespace_code_returns_empty_or_valid` (method, line 208) `def test_whitespace_code_returns_empty_or_valid(self, ext)`
+  - `test_never_crashes_on_many_lines` (method, line 220) `def test_never_crashes_on_many_lines(self, ext, lines)`
+  - `test_repeated_keywords_no_crash` (method, line 238) `def test_repeated_keywords_no_crash(self, ext)`
+  - `test_parser_imports_is_list_of_strings` (method, line 257) `def test_parser_imports_is_list_of_strings(self, ext)`
+  - `test_unknown_extension_returns_none` (method, line 269) `def test_unknown_extension_returns_none(self)`
+  - `_assert_valid_symbols` (method, line 275) `def _assert_valid_symbols(self, symbols)`
+  - `setUp` (method, line 291) `def setUp(self)`
+  - `test_python_never_crashes_on_weird_ascii` (method, line 296) `def test_python_never_crashes_on_weird_ascii(self, code)`
+  - `test_python_never_crashes_on_any_text` (method, line 310) `def test_python_never_crashes_on_any_text(self, code)`
+  - `_StrategyPlaceholder` (class, line 45) `class _StrategyPlaceholder`
+  - `_UnavailableStrategies` (class, line 60) `class _UnavailableStrategies`
+  - `given` (method, line 69) `def given()`
+  - `settings` (method, line 75) `def settings()`
+  - `__or__` (method, line 48) `def __or__(self, other)`
+  - `__ror__` (method, line 52) `def __ror__(self, other)`
+  - `map` (method, line 56) `def map(self)`
+  - `__getattr__` (method, line 63) `def __getattr__(self, name)`
+  - `wrapper` (method, line 71) `def wrapper(fn)`
+  - `wrapper` (method, line 77) `def wrapper(fn)`
+  - `builder` (method, line 65) `def builder()`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ## tests/test_query.py
@@ -734,6 +821,17 @@
   - `test_returns_none_for_empty_import` (method, line 67) `def test_returns_none_for_empty_import(self)`
   - `test_resolves_go_import` (method, line 72) `def test_resolves_go_import(self)`
   - `test_resolves_same_directory_import` (method, line 79) `def test_resolves_same_directory_import(self)`
+  - `test_resolves_c_quoted_header_same_dir` (method, line 86) `def test_resolves_c_quoted_header_same_dir(self)`
+  - `test_resolves_c_quoted_header_subdir` (method, line 93) `def test_resolves_c_quoted_header_subdir(self)`
+  - `test_resolves_c_extensionless_header` (method, line 100) `def test_resolves_c_extensionless_header(self)`
+  - `test_resolves_c_source_from_header_dir` (method, line 107) `def test_resolves_c_source_from_header_dir(self)`
+  - `test_resolves_cpp_header_same_dir` (method, line 114) `def test_resolves_cpp_header_same_dir(self)`
+  - `test_resolves_c_header_stem_across_dirs` (method, line 121) `def test_resolves_c_header_stem_across_dirs(self)`
+  - `test_returns_none_for_c_system_header` (method, line 128) `def test_returns_none_for_c_system_header(self)`
+  - `test_resolves_parent_dir_include` (method, line 135) `def test_resolves_parent_dir_include(self)`
+  - `test_resolves_parent_dir_include_despite_ambiguous_stem` (method, line 142) `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)`
+  - `test_resolves_include_dir_suffix_match` (method, line 149) `def test_resolves_include_dir_suffix_match(self)`
+  - `test_returns_none_for_ambiguous_suffix_match` (method, line 156) `def test_returns_none_for_ambiguous_suffix_match(self)`
 - Depends on: `readmenator/_resolver.py`
 
 ## tests/test_rule_gen.py

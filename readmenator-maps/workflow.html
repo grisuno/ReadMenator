@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-preset="classic">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Workflow | Live System Map</title>
+<link href="https://unpkg.com/vis-network@9/styles/vis-network.min.css" rel="stylesheet">
+<script src="https://unpkg.com/vis-network@9/standalone/umd/vis-network.min.js"></script>
+<style>
+:root{--canvas:#020617;--mask:#0f172a;--ink:#ffffff;--muted:#94a3b8;--border:#1e293b;--box:#0f172a;--boxink:#ffffff}
+html[data-theme="light"]{--canvas:#f8fafc;--mask:#ffffff;--ink:#0f172a;--muted:#475569;--border:#e2e8f0;--box:#ffffff;--boxink:#0f172a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.toolbar{display:flex;gap:8px;align-items:center;padding:10px 14px;background:var(--mask);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.brand{font-weight:700;font-size:14px;letter-spacing:.04em}
+.kind{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.live{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;border:1px solid var(--border);border-radius:999px;padding:3px 10px}
+.toolbar input{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;min-width:220px;font:inherit;font-size:12px}
+.toolbar button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font:inherit;font-size:12px;cursor:pointer;min-height:32px}
+.toolbar button:hover,.toolbar button:focus-visible{border-color:#22d3ee;outline:2px solid #22d3ee;outline-offset:2px}
+.home-link{color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;text-decoration:none;background:var(--canvas)}
+.home-link:hover,.home-link:focus-visible{border-color:#22d3ee;outline:2px solid #22d3ee;outline-offset:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;min-height:calc(100vh - 53px)}
+.stage{position:relative;padding:16px;overflow:auto}
+#network{width:100%;height:78vh;min-height:520px;background:var(--canvas);border:1px solid var(--border);border-radius:16px}
+#network:focus-visible{outline:2px solid #22d3ee;outline-offset:3px}
+.symbols{font-size:11px;margin-top:10px;overflow:auto}
+.symbols table{width:100%;border-collapse:collapse}
+.symbols th{text-align:left;color:var(--muted);font-weight:400;border-bottom:1px solid var(--border);padding:3px 4px}
+.symbols td{border-bottom:1px solid var(--border);padding:3px 4px;vertical-align:top}
+.symbols code{font-size:11px}
+.symbols .filedoc{color:var(--muted);margin:0 0 8px;line-height:1.6}
+.symbols .neighbors{color:var(--muted);margin:8px 0 0;line-height:1.6}
+.passport{background:var(--mask);border-left:1px solid var(--border);padding:16px;overflow:auto}
+.passport h2{font-size:13px;margin:0 0 8px}
+.passport .row{font-size:12px;color:var(--muted);margin:6px 0;line-height:1.7}
+.counts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.chip{border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:11px;color:var(--ink);background:transparent;cursor:pointer;font:inherit}
+.views{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.views button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:6px 9px;font:inherit;font-size:11px;cursor:pointer}
+.journey{font-size:12px;line-height:1.7}
+.receipt{font-size:11px;color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:8px;margin-top:10px}
+.routebox{display:flex;gap:6px;margin-top:8px}
+.routebox input{flex:1;background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px;font:inherit;font-size:12px;min-width:0}
+.routebox button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font:inherit;font-size:12px;cursor:pointer}
+.present .layout{grid-template-columns:minmax(0,1fr)}
+.present .passport{display:none}
+dialog{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:12px;max-width:520px}
+dialog kbd{border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:11px}
+@media (max-width:960px){.layout{grid-template-columns:minmax(0,1fr)}.passport{border-left:none;border-top:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<header class="toolbar" aria-label="Map controls">
+<span class="brand">System Maps</span>
+<span class="live">Live physics</span>
+<a class="home-link" href="index.html">Gallery</a>
+<span class="kind">workflow | Delivery Workflow</span>
+<input id="search" type="search" placeholder="Search nodes ( / )" aria-label="Search nodes" title="Filter nodes by label or id. Shortcut: /">
+<button type="button" data-action="reach-up" aria-label="Trace upstream reach" title="Show everything that reaches the focused node (authored relationships only)">Upstream</button>
+<button type="button" data-action="reach-down" aria-label="Trace downstream reach" title="Show everything the focused node reaches (authored relationships only)">Downstream</button>
+<button type="button" data-action="lens" aria-label="Compare roles" title="Highlight one semantic role and compare counts; activate again to clear">Lens</button>
+<button type="button" data-action="views-prev" aria-label="Previous chapter" title="Show the previous guided chapter">[</button>
+<button type="button" data-action="views-next" aria-label="Next chapter" title="Show the next guided chapter">]</button>
+<button type="button" data-action="play" aria-label="Play guided story" title="Play all guided chapters in order">Play</button>
+<button type="button" data-action="stabilize" aria-label="Stabilize layout" title="Re-run the physics stabilization">Stabilize</button>
+<button type="button" data-action="physics" aria-label="Toggle physics" title="Freeze or resume the live physics engine">Physics</button>
+<button type="button" data-action="present" aria-label="Enter presentation stage" title="Hide the side panel for presenting">Present</button>
+<button type="button" data-action="style" aria-label="Cycle visual preset" title="Cycle visual preset: classic, flow, blueprint, editorial">Style</button>
+<button type="button" data-action="theme" aria-label="Toggle theme" title="Toggle dark and light themes">Theme</button>
+<button type="button" data-action="export" aria-label="Open export menu" title="Download a PNG snapshot or the typed JSON">Export</button>
+<button type="button" data-action="help" aria-label="Open diagram guide" title="Open the diagram guide with every shortcut">?</button>
+</header>
+<div class="layout">
+<main class="stage">
+<div id="network" tabindex="0" role="application" aria-label="Delivery Workflow live network. Drag nodes to rearrange them."></div>
+</main>
+<aside class="passport" aria-live="polite" aria-label="Semantic passport">
+<h2 id="passport-title">Diagram guide</h2>
+<div class="row" id="passport-meta"></div>
+<div class="views" id="chapters"></div>
+<div class="counts" id="role-counts"></div>
+<div class="row">1. Drag any node; physics settles the rest. 2. Click a node to focus it. 3. Upstream and Downstream trace authored reach. 4. Path probes the exact route between two ids. 5. Play walks the guided chapters. Press ? for every shortcut. This page loads its network engine from a CDN and needs network access.</div>
+<div class="routebox"><input id="route-from" placeholder="route from id" aria-label="Route source" title="Source node id for the route probe"><input id="route-to" placeholder="route to id" aria-label="Route target" title="Target node id for the route probe"><button type="button" data-action="route" aria-label="Probe directed route" title="Highlight the shortest authored directed path">Path</button></div>
+<div class="journey" id="journey"></div>
+<div class="symbols" id="node-symbols"></div>
+<div class="receipt" id="receipt"></div>
+</aside>
+</div>
+<dialog id="guide" aria-label="Diagram guide dialog">
+<h2>Diagram guide</h2>
+<p><kbd>/</kbd> search &middot; <kbd>R</kbd> route probe &middot; <kbd>L</kbd> role lens &middot; <kbd>P</kbd> play &middot; <kbd>[</kbd> <kbd>]</kbd> chapters &middot; <kbd>F</kbd> present &middot; <kbd>S</kbd> style &middot; <kbd>T</kbd> theme &middot; <kbd>E</kbd> export &middot; <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd> zoom &middot; <kbd>B</kbd> physics</p>
+<p>Drag nodes freely; Stabilize re-runs the physics engine and Physics freezes it. Reach, routes, lens, and chapters reuse authored relationships only. Deep links restore <code>#focus=id</code>, <code>#focus=id&amp;reach=upstream|downstream</code>, <code>#route=a~b</code>, <code>#lens=role</code>, and <code>#view=id</code>.</p>
+<button type="button" data-action="close-guide" title="Close the diagram guide">Close</button>
+</dialog>
+<dialog id="exports" aria-label="Export dialog">
+<h2>Export</h2>
+<p>PNG captures the live canvas; JSON carries the typed source.</p>
+<button type="button" data-action="export-png" title="Download a PNG snapshot of the live canvas">Download PNG</button>
+<button type="button" data-action="export-json" title="Download the typed JSON behind this diagram">Download typed JSON</button>
+<button type="button" data-action="close-exports" title="Close the export menu">Close</button>
+</dialog>
+<script type="application/json" id="vis-nodes">[{"id": "readmenator/_models.py", "label": "_models.py", "title": "\u003cb>_models.py\u003c/b>\u003cbr>backend | business_logic | py\u003cbr>symbols: 19 (Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind)", "group": "backend", "language": "py", "doc": "", "symbols": [{"name": "Symbol", "kind": "class", "line": "18", "signature": "class Symbol", "doc": "A single code symbol extracted from a source file.\n\nAttributes:\n    name: Identifier of the symbol (class name, function name, etc.).\n    kind: Semantic type (class, function, struct, enum, ...).\n    line: One-based line number where the symbol is defined.\n    doc: Optional docstring or comment extracted from the source.\n    signature: Optional method or function signature snippet."}, {"name": "Node", "kind": "class", "line": "37", "signature": "class Node", "doc": "A file node in the knowledge graph, containing its symbols.\n\nAttributes:\n    node_id: Relative path of the file used as a unique identifier.\n    label: Base file name for display purposes.\n    kind: Type of node (typically \"module\").\n    language: Programming language derived from the file extension.\n    doc: Optional file-level documentation string.\n    symbols: List of Symbol instances defined in this file."}, {"name": "Edge", "kind": "class", "line": "58", "signature": "class Edge", "doc": "A directed relationship between two nodes in the knowledge graph.\n\nAttributes:\n    source: Node ID of the source (dependent) file.\n    target: Node ID of the target (dependency) file or module.\n    relation: Semantic relation label (e.g. \"imports\", \"resolved_imports\").\n    confidence: Confidence tier (\"EXTRACTED\" for structural, \"INFERRED\" for heuristic).\n    kind: Optional typed edge kind for ranking-aware computations."}, {"name": "SecurityFinding", "kind": "class", "line": "77", "signature": "class SecurityFinding", "doc": "A security-relevant pattern detected in a source file.\n\nAttributes:\n    file_path: Relative path of the file containing the finding.\n    line: One-based line number where the pattern was found.\n    severity: Severity level (critical, high, medium, low, info).\n    rule_id: Unique identifier for the detection rule (e.g. \"PY001\").\n    description: Human-readable explanation of the issue.\n    snippet: The offending source code line.\n    cwe: CWE identifier string (e.g. \"CWE-78\").\n    mitre_attack: MITRE ATT&CK technique ID (e.g. \"T1059.001\")."}, {"name": "pluralize_symbol_kind", "kind": "method", "line": "101", "signature": "def pluralize_symbol_kind(kind, plural_map)", "doc": "Return the plural form of *kind* according to *plural_map*.\n\nFalls back to appending ``\"s\"`` when the kind is not found.\nThis prevents obvious misspellings like ``\"Classs\"``."}, {"name": "CommunityResult", "kind": "class", "line": "111", "signature": "class CommunityResult", "doc": "Result of community detection on the import graph.\n\nAttributes:\n    community_id: Integer identifier of the community.\n    label: Human-readable name for the community.\n    file_ids: Set of node IDs belonging to this community.\n    cohesion: Cohesion score (internal edges / total edges involving community).\n    size: Number of files in the community."}, {"name": "AnalysisResult", "kind": "class", "line": "130", "signature": "class AnalysisResult", "doc": "Complete graph analysis output.\n\nAttributes:\n    god_nodes: List of (node_id, score) for most central nodes.\n    communities: List of CommunityResult instances.\n    surprising_connections: List of (source_node, target_node, hops, bridging_communities).\n    suggested_questions: List of plain-language exploration questions.\n    node_count: Total nodes in the graph.\n    edge_count: Total edges in the graph."}, {"name": "TaintPath", "kind": "class", "line": "151", "signature": "class TaintPath", "doc": "A taint propagation path from source to sink through the import graph.\n\nAttributes:\n    source_file: The file that introduces the dangerous import.\n    sink_file: The file that transitively receives the taint.\n    path: List of file node IDs forming the propagation chain.\n    hops: Number of hops in the propagation path.\n    dangerous_import: The specific dangerous module or function imported.\n    severity: Inferred severity of the taint path."}, {"name": "TaintAnalysisResult", "kind": "class", "line": "172", "signature": "class TaintAnalysisResult", "doc": "Complete taint propagation analysis output.\n\nAttributes:\n    paths: List of TaintPath instances discovered.\n    source_count: Number of unique taint source files.\n    sink_count: Number of unique taint sink files."}, {"name": "DependencyCycle", "kind": "class", "line": "187", "signature": "class DependencyCycle", "doc": "A cycle detected in the resolved import graph.\n\nAttributes:\n    cycle: List of file node IDs forming the cycle.\n    length: Number of files in the cycle."}, {"name": "ChangeImpact", "kind": "class", "line": "200", "signature": "class ChangeImpact", "doc": "Change impact analysis for a single file.\n\nAttributes:\n    file_id: The file that would be changed.\n    direct_dependents: Files that directly import this file.\n    transitive_dependents: Files that transitively depend on this file.\n    total_impact: Total number of affected files (direct + transitive)."}, {"name": "HotspotResult", "kind": "class", "line": "217", "signature": "class HotspotResult", "doc": "A hotspot file combining complexity and centrality metrics.\n\nAttributes:\n    file_id: The file node ID.\n    complexity_score: Normalised symbol count score (0-1).\n    centrality_score: Normalised god node score (0-1).\n    combined_score: Weighted combination of complexity and centrality.\n    symbol_count: Raw symbol count.\n    connection_count: Raw connection count."}, {"name": "SuggestedRule", "kind": "class", "line": "238", "signature": "class SuggestedRule", "doc": "A suggested linting/security rule derived from code patterns.\n\nAttributes:\n    rule_id: Suggested rule identifier (e.g. \"RM001\").\n    severity: Suggested severity (info, warning, error).\n    description: Human-readable description of the pattern.\n    pattern: The detected pattern or code snippet.\n    file_examples: Example file paths where the pattern was found.\n    match_count: Number of times the pattern was matched.\n    language: Target language for the rule.\n    semgrep_yaml: Optional Semgrep rule YAML string."}, {"name": "LayerViolation", "kind": "class", "line": "263", "signature": "class LayerViolation", "doc": "A detected architectural layer violation.\n\nAttributes:\n    source_file: The file causing the violation.\n    source_layer: The layer of the source file.\n    target_file: The file being imported.\n    target_layer: The layer of the target file.\n    description: Description of the violation.\n    severity: Severity (strict, warn, info)."}, {"name": "AnalysisResultV2", "kind": "class", "line": "284", "signature": "class AnalysisResultV2", "doc": "Extended analysis result combining all new analysis modules.\n\nAttributes:\n    taint: Optional taint analysis result.\n    cycles: List of dependency cycles.\n    change_impacts: List of change impact results for key files.\n    hotspots: List of hotspot results.\n    suggested_rules: List of suggested linting rules.\n    layer_violations: List of layer violations."}, {"name": "LinterViolation", "kind": "class", "line": "305", "signature": "class LinterViolation", "doc": "A violation detected by the architecture linter.\n\nAttributes:\n    file_path: Relative path of the file containing the violation.\n    rule_id: Unique identifier for the linter rule (e.g. \"ARC001\").\n    severity: Severity level (error, warning, info).\n    message: Human-readable description of the violation."}, {"name": "DeadCodeReport", "kind": "class", "line": "322", "signature": "class DeadCodeReport", "doc": "A dead code symbol identified by the stripper.\n\nAttributes:\n    file_path: Relative path of the file containing the symbol.\n    symbol_name: Name of the dead symbol.\n    symbol_type: Type of symbol (function, class, method, etc.).\n    recommendation: Recommended action (MOVE_TO_TRASH, REVIEW, KEEP)."}, {"name": "RefactoringAction", "kind": "class", "line": "339", "signature": "class RefactoringAction", "doc": "A single refactoring action within a plan.\n\nAttributes:\n    action_type: Type of action (EXTRACT_CLASS, EXTRACT_FUNCTION, MOVE_SYMBOL).\n    source_file: The file to refactor.\n    start_line: Start line of the code range to extract.\n    end_line: End line of the code range to extract.\n    target_file: The new file to create (for EXTRACT actions).\n    description: Human-readable description of the action."}, {"name": "RefactoringPlan", "kind": "class", "line": "360", "signature": "class RefactoringPlan", "doc": "A complete refactoring plan for a monolithic file.\n\nAttributes:\n    file_path: The file to refactor.\n    actions: List of refactoring actions to perform.\n    estimated_impact: Number of files affected by the refactoring.\n    current_lines: Current line count of the file."}], "symbolTotal": 19}, {"id": "readmenator/_query.py", "label": "_query.py", "title": "\u003cb>_query.py\u003c/b>\u003cbr>database | data_access | py\u003cbr>symbols: 17 (QueryEngine, __init__, _init_default_ranker, ranked_query, _estimate_test_coverage)", "group": "database", "language": "py", "doc": "", "symbols": [{"name": "QueryEngine", "kind": "class", "line": "25", "signature": "class QueryEngine", "doc": "In-memory query engine over the scanned knowledge graph.\n\nBuilds a symbol-name index and an import-adjacency graph on\nconstruction. Provides exact and fuzzy symbol lookup, detailed\nexplanation output, BFS shortest-path resolution, free-text\nsearch, and a summary report."}, {"name": "__init__", "kind": "method", "line": "34", "signature": "def __init__(self, nodes, edges, resolved_edges, ranker, config)", "doc": "Initialise internal indexes from scanned data.\n\nArgs:\n    nodes: List of scanned file nodes.\n    edges: List of import-relationship edges.\n    resolved_edges: Optional resolved-import edges (both\n        source and target are project file IDs).\n    ranker: Optional CompositeRanker for ranked queries.\n    config: Optional RankConfig if ranker is not provided."}, {"name": "_init_default_ranker", "kind": "method", "line": "64", "signature": "def _init_default_ranker(self)", "doc": "Build a default CompositeRanker from the loaded data."}, {"name": "ranked_query", "kind": "method", "line": "73", "signature": "def ranked_query(self, query, top_n)", "doc": "Answer *query* with a ranked list of relevant nodes.\n\nUses Personalized PageRank seeded from lexical matches\nagainst the query text, combined with authority, test\ncoverage, doc coverage, and freshness signals.\n\nArgs:\n    query: Free-text query string.\n    top_n: Number of results to return (default: RankConfig.top_n).\n\nReturns:\n    A RankedResult with scored items and explanations."}, {"name": "_estimate_test_coverage", "kind": "method", "line": "124", "signature": "def _estimate_test_coverage(self)", "doc": "Estimate test coverage per file.\n\nA file is considered 'tested' if a test file imports it.\nReturns fraction of symbols referenced across test files."}, {"name": "_estimate_doc_coverage", "kind": "method", "line": "150", "signature": "def _estimate_doc_coverage(self)", "doc": "Estimate documentation coverage per file.\n\nA file has doc coverage if it has a file-level docstring or\nany of its symbols have docstrings."}, {"name": "_build_symbol_index", "kind": "method", "line": "170", "signature": "def _build_symbol_index(self)", "doc": "Build a name-to-list-of-(node, symbol) lookup.\n\nReturns:\n    Dict mapping symbol names to list of (Node, Symbol) tuples."}, {"name": "_build_import_graph", "kind": "method", "line": "184", "signature": "def _build_import_graph(self)", "doc": "Build an adjacency map from import edges.\n\nReturns:\n    Dict mapping each file node_id to its set of import targets."}, {"name": "_build_resolved_graph", "kind": "method", "line": "200", "signature": "def _build_resolved_graph(self)", "doc": "Build an adjacency map from resolved import edges.\n\nOnly contains edges where both source and target are\nproject files (not external modules).\n\nReturns:\n    Dict mapping each file node_id to files it imports within the project."}, {"name": "find_symbol", "kind": "method", "line": "220", "signature": "def find_symbol(self, name)", "doc": "Look up *name* by exact match, then by substring fuzzy match.\n\nReturns:\n    A list of (Node, Symbol) tuples, or ``None`` if not found."}, {"name": "explain", "kind": "method", "line": "238", "signature": "def explain(self, name)", "doc": "Return a detailed multi-line explanation of *name*.\n\nIncludes kind, file path, line number, docstring, signature,\nimports, reverse dependencies (\"imported by\"), and sibling\nsymbols in the same file.\n\nReturns:\n    Formatted string or ``None`` if the symbol is not found."}, {"name": "_find_incoming_imports", "kind": "method", "line": "277", "signature": "def _find_incoming_imports(self, target)", "doc": "List all node IDs that import *target*."}, {"name": "find_path", "kind": "method", "line": "285", "signature": "def find_path(self, symbol_a, symbol_b)", "doc": "Find the shortest import path from *symbol_a* to *symbol_b*.\n\nUses BFS on the resolved import graph (project-internal edges)\nfirst, traversing in both directions (forward = A imports B,\nreverse = B is imported by A). Falls back to the raw import\ngraph if no resolved path exists.\n\nReturns:\n    List of file node IDs forming the dependency chain, or ``None``."}, {"name": "_make_bidirectional", "kind": "method", "line": "315", "signature": "def _make_bidirectional(graph)", "doc": "Convert a directed graph to a bidirectional one.\n\nFor each edge A→B, adds both A→B and B→A edges."}, {"name": "_bfs_shortest_path", "kind": "method", "line": "331", "signature": "def _bfs_shortest_path(self, graph, start, goal)", "doc": "Run BFS to find the shortest path from *start* to *goal*.\n\nReturns:\n    List of node IDs or ``None`` if no path exists."}, {"name": "query", "kind": "method", "line": "355", "signature": "def query(self, question)", "doc": "Free-text search over symbols and file paths.\n\nTokenises the input, matches against symbol names (substring)\nand then against file paths as a fallback. Returns a\nhuman-readable result string summarising matches or a\nno-results message with KB statistics."}, {"name": "summary", "kind": "method", "line": "411", "signature": "def summary(self)", "doc": "Return a concise overview of the loaded knowledge base.\n\nReports file count, symbol count, import count, language\ndiversity, top-level modules (by import popularity), and\nlists of key class-like and function-like symbols."}], "symbolTotal": 17}, {"id": "readmenator/_config.py", "label": "_config.py", "title": "\u003cb>_config.py\u003c/b>\u003cbr>cloud | infrastructure | py\u003cbr>symbols: 1 (Config)", "group": "cloud", "language": "py", "doc": "", "symbols": [{"name": "Config", "kind": "class", "line": "15", "signature": "class Config", "doc": "Single source of truth for all readmenator settings.\n\nEvery tuneable constant -- file-size limits, directory depth,\nsupported extensions, symbol pluralisation map, Mermaid style\ntokens, graph analysis thresholds, and export settings -- is\ndefined here and consumed by reference elsewhere."}], "symbolTotal": 1}, {"id": "tests/test_parsers_property.py", "label": "test_parsers_property.py", "title": "\u003cb>test_parsers_property.py\u003c/b>\u003cbr>external | testing | py\u003cbr>symbols: 27 (_StrategyPlaceholder, __or__, __ror__, map, _UnavailableStrategies +2 more)", "group": "external", "language": "py", "doc": "", "symbols": [{"name": "_StrategyPlaceholder", "kind": "class", "line": "45", "signature": "class _StrategyPlaceholder", "doc": "Chainable placeholder that never generates data."}, {"name": "__or__", "kind": "method", "line": "48", "signature": "def __or__(self, other)", "doc": "Combine placeholders without evaluating strategies."}, {"name": "__ror__", "kind": "method", "line": "52", "signature": "def __ror__(self, other)", "doc": "Combine placeholders without evaluating strategies."}, {"name": "map", "kind": "method", "line": "56", "signature": "def map(self)", "doc": "Return the placeholder unchanged."}, {"name": "_UnavailableStrategies", "kind": "class", "line": "60", "signature": "class _UnavailableStrategies", "doc": "Permissive strategy factory used only when hypothesis is missing."}, {"name": "__getattr__", "kind": "method", "line": "63", "signature": "def __getattr__(self, name)", "doc": "Return a builder producing inert placeholders."}, {"name": "builder", "kind": "method", "line": "65", "signature": "def builder()", "doc": ""}, {"name": "given", "kind": "method", "line": "69", "signature": "def given()", "doc": "Identity decorator used when hypothesis is unavailable."}, {"name": "wrapper", "kind": "method", "line": "71", "signature": "def wrapper(fn)", "doc": ""}, {"name": "settings", "kind": "method", "line": "75", "signature": "def settings()", "doc": "Identity decorator used when hypothesis is unavailable."}, {"name": "wrapper", "kind": "method", "line": "77", "signature": "def wrapper(fn)", "doc": ""}, {"name": "_generate_multiline_code", "kind": "function", "line": "105", "signature": "def _generate_multiline_code(lines, line_strategy)", "doc": "Generate source code with a configurable number of lines."}, {"name": "_create_parser", "kind": "function", "line": "142", "signature": "def _create_parser(ext)", "doc": "Create a parser for the given extension."}, {"name": "TestParserHypothesisContract", "kind": "class", "line": "155", "signature": "class TestParserHypothesisContract(TestCase)", "doc": "Property-based contract: parsers never crash on arbitrary input."}, {"name": "test_never_crashes_on_malformed_code", "kind": "method", "line": "162", "signature": "def test_never_crashes_on_malformed_code(self, ext, code)", "doc": ""}, {"name": "test_never_crashes_on_unicode_code", "kind": "method", "line": "180", "signature": "def test_never_crashes_on_unicode_code(self, ext, code)", "doc": ""}, {"name": "test_empty_code_returns_empty_or_valid", "kind": "method", "line": "198", "signature": "def test_empty_code_returns_empty_or_valid(self, ext)", "doc": ""}, {"name": "test_whitespace_code_returns_empty_or_valid", "kind": "method", "line": "208", "signature": "def test_whitespace_code_returns_empty_or_valid(self, ext)", "doc": ""}, {"name": "test_never_crashes_on_many_lines", "kind": "method", "line": "220", "signature": "def test_never_crashes_on_many_lines(self, ext, lines)", "doc": ""}, {"name": "test_repeated_keywords_no_crash", "kind": "method", "line": "238", "signature": "def test_repeated_keywords_no_crash(self, ext)", "doc": ""}, {"name": "test_parser_imports_is_list_of_strings", "kind": "method", "line": "257", "signature": "def test_parser_imports_is_list_of_strings(self, ext)", "doc": ""}, {"name": "test_unknown_extension_returns_none", "kind": "method", "line": "269", "signature": "def test_unknown_extension_returns_none(self)", "doc": ""}, {"name": "_assert_valid_symbols", "kind": "method", "line": "275", "signature": "def _assert_valid_symbols(self, symbols)", "doc": ""}, {"name": "TestPythonParserProperty", "kind": "class", "line": "288", "signature": "class TestPythonParserProperty(TestCase)", "doc": "Property-based tests specific to the Python parser (native ast)."}, {"name": "setUp", "kind": "method", "line": "291", "signature": "def setUp(self)", "doc": ""}], "symbolTotal": 27}, {"id": "readmenator/parsers/__init__.py", "label": "__init__.py", "title": "\u003cb>__init__.py\u003c/b>\u003cbr>external | utility | py\u003cbr>symbols: 2 (_init_parser_map, create_parser)", "group": "external", "language": "py", "doc": "", "symbols": [{"name": "_init_parser_map", "kind": "function", "line": "32", "signature": "def _init_parser_map()", "doc": ""}, {"name": "create_parser", "kind": "function", "line": "65", "signature": "def create_parser(extension, filename, config)", "doc": "Factory: return a parser instance for the given file extension."}], "symbolTotal": 2}]</script>
+<script type="application/json" id="vis-edges">[{"from": "readmenator/_config.py", "to": "tests/test_parsers_property.py", "title": "next", "dashes": true}, {"from": "readmenator/_models.py", "to": "readmenator/_query.py", "title": "next", "dashes": true}, {"from": "readmenator/_query.py", "to": "readmenator/_config.py", "title": "next", "dashes": true}, {"from": "readmenator/_query.py", "to": "readmenator/_models.py", "title": "resolved_imports", "dashes": false}, {"from": "readmenator/parsers/__init__.py", "to": "readmenator/_config.py", "title": "resolved_imports", "dashes": false}, {"from": "tests/test_parsers_property.py", "to": "readmenator/_config.py", "title": "resolved_imports", "dashes": false}, {"from": "tests/test_parsers_property.py", "to": "readmenator/_models.py", "title": "resolved_imports", "dashes": false}, {"from": "tests/test_parsers_property.py", "to": "readmenator/parsers/__init__.py", "title": "next", "dashes": true}]</script>
+<script type="application/json" id="vis-views">[{"id": "primary-path", "title": "Primary path", "focus": ["readmenator/_models.py", "readmenator/_query.py", "readmenator/_config.py", "tests/test_parsers_property.py", "readmenator/parsers/__init__.py"], "description": "Follow the dominant authored path first."}, {"id": "happy-path", "title": "Happy path", "focus": ["readmenator/_models.py", "readmenator/_config.py", "readmenator/parsers/__init__.py"], "description": "Trace the shortest authored route end to end."}, {"id": "hub-focus", "title": "Hub focus", "focus": ["tests/test_parsers_property.py"], "description": "Inspect the most connected authored hub."}, {"id": "side-branches", "title": "Side branches", "focus": ["readmenator/_config.py", "tests/test_parsers_property.py", "readmenator/parsers/__init__.py"], "description": "Review supporting detail without losing orientation."}, {"id": "full-map", "title": "Full map", "focus": ["readmenator/_models.py", "readmenator/_query.py", "readmenator/_config.py", "tests/test_parsers_property.py", "readmenator/parsers/__init__.py"], "description": "Restore the complete authored context."}]</script>
+<script type="application/json" id="vis-meta">{"kind": "workflow", "title": "Delivery Workflow", "nodeCount": 5, "edgeCount": 8, "totalFiles": "104", "neighbors": 8}</script>
+<script type="application/json" id="vis-physics">{"enabled": true, "barnesHut": {"gravitationalConstant": -60000, "centralGravity": 0.15, "springLength": 320, "damping": 0.12}, "stabilization": {"iterations": 250}}</script>
+<script type="application/json" id="vis-roles">{"frontend": "#22d3ee", "backend": "#34d399", "database": "#a78bfa", "cloud": "#fbbf24", "security": "#fb7185", "messagebus": "#fb923c", "external": "#94a3b8"}</script>
+<script>
+(function(){
+"use strict";
+var rawNodes=JSON.parse(document.getElementById("vis-nodes").textContent||"[]");
+var rawEdges=JSON.parse(document.getElementById("vis-edges").textContent||"[]");
+var views=JSON.parse(document.getElementById("vis-views").textContent||"[]");
+var meta=JSON.parse(document.getElementById("vis-meta").textContent||"{}");
+var physics=JSON.parse(document.getElementById("vis-physics").textContent||"{}");
+var roleColors=JSON.parse(document.getElementById("vis-roles").textContent||"{}");
+var root=document.documentElement;
+var container=document.getElementById("network");
+var search=document.getElementById("search");
+var passportTitle=document.getElementById("passport-title");
+var passportMeta=document.getElementById("passport-meta");
+var journey=document.getElementById("journey");
+var receipt=document.getElementById("receipt");
+var chapters=document.getElementById("chapters");
+var roleCounts=document.getElementById("role-counts");
+var nodeSymbols=document.getElementById("node-symbols");
+var guide=document.getElementById("guide");
+var exportsDialog=document.getElementById("exports");
+var state={focus:null,reach:null,lens:null,view:-1,physicsOn:true};
+var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function themeBox(){return root.getAttribute("data-theme")==="light"?{box:"#ffffff",ink:"#0f172a"}:{box:"#0f172a",ink:"#ffffff"};}
+function paintNodes(){
+var palette=themeBox();
+var update=rawNodes.map(function(n){
+return {id:n.id,color:{background:palette.box,border:roleColors[n.group]||"#94a3b8",highlight:{background:palette.box,border:roleColors[n.group]||"#94a3b8"}},font:{color:palette.ink,size:13,face:"monospace"}};});
+visNodes.update(update);}
+var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:n.label,title:n.title,group:n.group,shape:"box"};}));
+var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,title:e.label,arrows:"to",dashes:!!e.dashes,smooth:{type:"dynamic"},color:{opacity:0.7}};}));
+paintNodes();
+var network=new vis.Network(container,{nodes:visNodes,edges:visEdges},{
+physics:physics,
+interaction:{hover:true,navigationButtons:false,keyboard:false},
+nodes:{shape:"box",borderWidth:2,margin:10},
+edges:{arrows:{to:{enabled:true}},smooth:{type:"dynamic"}}});
+if(reduced&&physics.enabled){try{network.stabilize(50);}catch(e){}}
+function outgoing(id){return rawEdges.filter(function(e){return e.from===id;});}
+function incoming(id){return rawEdges.filter(function(e){return e.to===id;});}
+function nodeById(id){for(var i=0;i<rawNodes.length;i++){if(rawNodes[i].id===id){return rawNodes[i];}}return null;}
+function escapeHtml(text){
+return String(text==null?"":text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function neighborNames(ids){
+var cap=(meta.neighbors||8);
+return ids.slice().sort().slice(0,cap).map(function(id){var n=nodeById(id);return escapeHtml(n?n.label:id);});}
+function renderNodeDetail(node){
+if(!nodeSymbols){return;}
+var ins=incoming(node.id).map(function(e){return e.from;});
+var outs=outgoing(node.id).map(function(e){return e.to;});
+var html="";
+if(node.doc){html+='<p class="filedoc">'+escapeHtml(node.doc)+"</p>";}
+var symbols=node.symbols||[];
+if(symbols.length){
+html+="<table><thead><tr><th>Symbol</th><th>Kind</th><th>Line</th></tr></thead><tbody>";
+symbols.forEach(function(s){
+var docTitle=s.doc?(' title="'+escapeHtml(s.doc)+'"'):"";
+var name="<span"+docTitle+">"+escapeHtml(s.name)+"</span>"+(s.signature?" <code>"+escapeHtml(s.signature)+"</code>":"");
+html+="<tr><td>"+name+"</td><td>"+escapeHtml(s.kind)+"</td><td>"+escapeHtml(s.line)+"</td></tr>";});
+html+="</tbody></table>";
+var hidden=(node.symbolTotal||symbols.length)-symbols.length;
+if(hidden>0){html+='<p class="filedoc">+'+hidden+' more symbols in source.</p>';}}
+else{html+='<p class="filedoc">No symbols extracted.</p>';}
+html+='<p class="neighbors">Imports '+outs.length+(outs.length?": "+neighborNames(outs).join(", "):"")+"</p>";
+html+='<p class="neighbors">Imported by '+ins.length+(ins.length?": "+neighborNames(ins).join(", "):"")+"</p>";
+nodeSymbols.innerHTML=html;}
+function clearNodeDetail(){
+if(nodeSymbols){nodeSymbols.innerHTML="";}
+passportTitle.textContent="Diagram guide";}
+function clearNodeDetailSilent(){
+if(nodeSymbols){nodeSymbols.innerHTML="";}}
+function bfsReach(start,direction){
+var seen={};seen[start]=0;var queue=[start];var order=[start];
+while(queue.length){var current=queue.shift();var nexts=direction==="downstream"?outgoing(current):incoming(current);
+for(var i=0;i<nexts.length;i++){var nid=direction==="downstream"?nexts[i].to:nexts[i].from;
+if(!(nid in seen)){seen[nid]=seen[current]+1;queue.push(nid);order.push(nid);}}}
+return {members:order,hops:seen};}
+function bfsRoute(from,to){
+if(from===to){return [from];}
+var prev={};var seen={};seen[from]=true;var queue=[from];
+while(queue.length){var current=queue.shift();var nexts=outgoing(current);
+for(var i=0;i<nexts.length;i++){var nid=nexts[i].to;
+if(!(nid in seen)){seen[nid]=true;prev[nid]=current;
+if(nid===to){var path=[to];var c=to;while(c!==from){c=prev[c];path.unshift(c);}return path;}
+queue.push(nid);}}}
+return [];}
+function showOnly(allowed){
+var nodeUpdate=rawNodes.map(function(n){return {id:n.id,hidden:!allowed[n.id]};});
+visNodes.update(nodeUpdate);
+var edgeUpdate=rawEdges.map(function(e,index){return {id:"e"+index,hidden:!(allowed[e.from]&&allowed[e.to])};});
+visEdges.update(edgeUpdate);}
+function showAll(){
+var nodeUpdate=rawNodes.map(function(n){return {id:n.id,hidden:false};});
+visNodes.update(nodeUpdate);
+var edgeUpdate=rawEdges.map(function(e,index){return {id:"e"+index,hidden:false};});
+visEdges.update(edgeUpdate);}
+function setHash(value){try{history.replaceState(null,"",value);}catch(e){location.hash=value;}}
+function focusNode(id,reach){
+var node=nodeById(id);if(!node){return;}
+state.focus=id;state.reach=reach||null;
+var allowed={};allowed[id]=true;
+if(state.reach){var found=bfsReach(id,state.reach);found.members.forEach(function(m){allowed[m]=true;});
+var hops=0;for(var k in found.hops){if(found.hops[k]>hops){hops=found.hops[k];}}
+receipt.textContent=(state.reach==="downstream"?"Downstream":"Upstream")+" reach: "+found.members.length+" nodes, "+hops+" max hops. Authored relationships only.";}
+else{receipt.textContent="In: "+incoming(id).length+" | Out: "+outgoing(id).length+" | Views: "+views.length;}
+showOnly(allowed);
+network.selectNodes([id]);
+passportTitle.textContent=node.label;
+passportMeta.textContent=node.id+" | role "+node.group+" | "+(node.language||"")+" | "+(node.symbolTotal||0)+" symbols";
+renderNodeDetail(node);
+var hash="#focus="+encodeURIComponent(id);
+if(state.reach){hash+="&reach="+state.reach;}
+setHash(hash);}
+function probeRoute(){
+var from=document.getElementById("route-from").value.trim();
+var to=document.getElementById("route-to").value.trim();
+if(!from||!to){return;}
+var path=bfsRoute(from,to);
+if(!path.length){journey.textContent="No authored directed route from "+from+" to "+to+".";receipt.textContent="Route probe: 0 links.";return;}
+var allowed={};path.forEach(function(n){allowed[n]=true;});
+showOnly(allowed);
+network.selectNodes(path);
+try{network.fit({nodes:path,animation:reduced?false:{duration:600}});}catch(e){}
+var names=path.map(function(n){var node=nodeById(n);return node?node.label:n;});
+journey.textContent="Journey: "+names.join(" -> ")+" ("+(path.length-1)+" hops).";
+receipt.textContent="Route probe: "+path.length+" nodes, "+(path.length-1)+" links.";
+setHash("#route="+encodeURIComponent(from)+"~"+encodeURIComponent(to));}
+function applyLens(role){
+state.lens=role;
+if(!role){showAll();clearNodeDetail();receipt.textContent="Lens cleared.";setHash("#");return;}
+var counts={};rawNodes.forEach(function(n){counts[n.group]=(counts[n.group]||0)+1;});
+var allowed={};rawNodes.forEach(function(n){if(n.group===role){allowed[n.id]=true;}});
+showOnly(allowed);
+var parts=[];for(var k in counts){parts.push(k+": "+counts[k]);}
+receipt.textContent="Lens "+role+": "+(counts[role]||0)+" of "+rawNodes.length+" nodes. "+parts.join(" | ");
+setHash("#lens="+encodeURIComponent(role));}
+function showView(index){
+if(!views.length){return;}
+state.view=(index+views.length)%views.length;
+var view=views[state.view];
+chapters.querySelectorAll("button").forEach(function(b,i){b.disabled=(i===state.view);});
+passportTitle.textContent=view.title;
+passportMeta.textContent=view.description||"";
+clearNodeDetailSilent();
+if(!view.focus.length){showAll();}
+else{var allowed={};view.focus.forEach(function(n){allowed[n]=true;});showOnly(allowed);network.selectNodes(view.focus);}
+journey.textContent=view.focus.length?("Chapter focus: "+view.focus.join(", ")):"";
+receipt.textContent="Chapter "+(state.view+1)+" of "+views.length+".";
+setHash("#view="+encodeURIComponent(view.id));}
+function renderChapters(){
+chapters.innerHTML="";
+views.forEach(function(view,index){var b=document.createElement("button");b.type="button";b.textContent=view.title;b.setAttribute("aria-label","Show chapter "+view.title);b.setAttribute("title","Focus the "+view.title+" chapter");b.addEventListener("click",function(){showView(index);});chapters.appendChild(b);});}
+function renderRoleCounts(){
+var counts={};rawNodes.forEach(function(n){counts[n.group]=(counts[n.group]||0)+1;});
+roleCounts.innerHTML="";
+Object.keys(counts).sort().forEach(function(role){var s=document.createElement("button");s.type="button";s.className="chip";s.textContent=role+": "+counts[role];s.setAttribute("aria-label","Filter role "+role);s.setAttribute("title","Highlight the "+role+" role");s.addEventListener("click",function(){applyLens(role);});roleCounts.appendChild(s);});}
+function cyclePreset(){
+var presets=["classic","flow","blueprint","editorial"];
+var current=root.getAttribute("data-preset")||"classic";
+root.setAttribute("data-preset",presets[(presets.indexOf(current)+1)%presets.length]);}
+function toggleTheme(){
+var current=root.getAttribute("data-theme")||"dark";
+root.setAttribute("data-theme",current==="dark"?"light":"dark");
+paintNodes();}
+function togglePhysics(){
+state.physicsOn=!state.physicsOn;
+try{network.setOptions({physics:{enabled:state.physicsOn}});}catch(e){}
+receipt.textContent=state.physicsOn?"Physics resumed.":"Physics frozen; nodes stay draggable.";}
+function exportPNG(){
+try{
+var link=document.createElement("a");
+link.href=network.canvas.frame.canvas.toDataURL("image/png");
+link.download="system-map-"+(meta.kind||"map")+".png";
+document.body.appendChild(link);link.click();
+setTimeout(function(){link.remove();},400);
+receipt.textContent="PNG snapshot downloaded.";
+}catch(e){receipt.textContent="PNG export unavailable in this browser.";}}
+function exportJSON(){
+var payload={kind:meta.kind,title:meta.title,nodes:rawNodes,edges:rawEdges,views:views};
+var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+var link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download="system-map-"+(meta.kind||"map")+".json";document.body.appendChild(link);link.click();
+setTimeout(function(){URL.revokeObjectURL(link.href);link.remove();},400);}
+function readHash(){
+var hash=location.hash||"";
+if(hash.indexOf("#route=")===0){var parts=hash.slice(7).split("~");if(parts.length===2){document.getElementById("route-from").value=decodeURIComponent(parts[0]);document.getElementById("route-to").value=decodeURIComponent(parts[1]);probeRoute();}return;}
+if(hash.indexOf("#lens=")===0){applyLens(decodeURIComponent(hash.slice(6)));return;}
+if(hash.indexOf("#view=")===0){var id=decodeURIComponent(hash.slice(6));for(var i=0;i<views.length;i++){if(views[i].id===id){showView(i);return;}}return;}
+if(hash.indexOf("#focus=")===0){var rest=hash.slice(7).split("&reach=");focusNode(decodeURIComponent(rest[0]),rest[1]?decodeURIComponent(rest[1]):null);return;}}
+network.on("click",function(params){
+if(params.nodes.length>0){focusNode(params.nodes[0]);}});
+network.on("stabilized",function(){receipt.textContent="Physics stabilized: "+rawNodes.length+" nodes placed.";});
+document.querySelectorAll("[data-action]").forEach(function(btn){
+btn.addEventListener("click",function(){
+var action=btn.getAttribute("data-action");
+if(action==="reach-up"&&state.focus){focusNode(state.focus,"upstream");}
+else if(action==="reach-down"&&state.focus){focusNode(state.focus,"downstream");}
+else if(action==="route"){probeRoute();}
+else if(action==="lens"){applyLens(state.lens?null:"backend");}
+else if(action==="views-prev"){showView(state.view-1);}
+else if(action==="views-next"){showView(state.view+1);}
+else if(action==="play"){var i=0;var step=function(){if(i>=views.length){return;}showView(i);i++;if(!reduced){setTimeout(step,1400);}};step();}
+else if(action==="stabilize"){try{network.stabilize();}catch(e){}receipt.textContent="Stabilizing physics...";}
+else if(action==="physics"){togglePhysics();}
+else if(action==="present"){document.body.classList.toggle("present");}
+else if(action==="style"){cyclePreset();}
+else if(action==="theme"){toggleTheme();}
+else if(action==="export"){if(typeof exportsDialog.showModal==="function"){exportsDialog.showModal();}}
+else if(action==="help"){if(typeof guide.showModal==="function"){guide.showModal();}}
+else if(action==="close-guide"){guide.close();}
+else if(action==="close-exports"){exportsDialog.close();}
+else if(action==="export-png"){exportPNG();}
+else if(action==="export-json"){exportJSON();}});});
+search.addEventListener("input",function(){
+var term=search.value.trim().toLowerCase();
+if(!term){showAll();return;}
+var allowed={};rawNodes.forEach(function(n){
+if(n.label.toLowerCase().indexOf(term)>=0||n.id.toLowerCase().indexOf(term)>=0){allowed[n.id]=true;}});
+showOnly(allowed);});
+document.addEventListener("keydown",function(ev){
+if(ev.target&&(ev.target.tagName==="INPUT"||ev.target.tagName==="TEXTAREA")){return;}
+if(ev.key==="/"){ev.preventDefault();search.focus();}
+else if(ev.key==="R"||ev.key==="r"){var f=document.getElementById("route-from");if(f){f.focus();}}
+else if(ev.key==="L"||ev.key==="l"){applyLens(state.lens?null:"backend");}
+else if(ev.key==="P"||ev.key==="p"){showView(state.view+1);}
+else if(ev.key==="["){showView(state.view-1);}
+else if(ev.key==="]"){showView(state.view+1);}
+else if(ev.key==="B"||ev.key==="b"){togglePhysics();}
+else if(ev.key==="F"||ev.key==="f"){document.body.classList.toggle("present");}
+else if(ev.key==="S"||ev.key==="s"){cyclePreset();}
+else if(ev.key==="T"||ev.key==="t"){toggleTheme();}
+else if(ev.key==="E"||ev.key==="e"){if(typeof exportsDialog.showModal==="function"){exportsDialog.showModal();}}
+else if(ev.key==="?"){if(typeof guide.showModal==="function"){guide.showModal();}}
+else if(ev.key==="+"){try{network.zoomIn();}catch(e){}}
+else if(ev.key==="-"){try{network.zoomOut();}catch(e){}}
+else if(ev.key==="0"){try{network.fit();}catch(e){}}});
+passportMeta.textContent=(meta.nodeCount||rawNodes.length)+" of "+(meta.totalFiles||rawNodes.length)+" files | "+(meta.edgeCount||rawEdges.length)+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
+receipt.textContent="Live physics network. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
+renderChapters();renderRoleCounts();readHash();
+})();
+</script>
+</body>
+</html>
