@@ -35,6 +35,9 @@ def _init_parser_map():
     entries = [
         (".c", CParser), (".cpp", CParser), (".cc", CParser), (".cxx", CParser),
         (".h", CParser), (".hpp", CParser), (".hxx", CParser),
+        (".hh", CParser), (".h++", CParser), (".tcc", CParser),
+        (".inl", CParser), (".inc", CParser), (".i", CParser),
+        (".C", CParser),
         (".py", PythonParser),
         (".go", GoParser),
         (".rs", RustParser),

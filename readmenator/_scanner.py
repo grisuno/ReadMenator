@@ -38,9 +38,14 @@ class PolyglotScanner:
         """
         self._config = config
         self._gitignore_patterns: List[re.Pattern] = []
+        self.last_skip_counts: Dict[str, int] = {}
+        self.last_gitignored_examples: List[str] = []
 
     def _is_ignored(self, path: Path) -> bool:
         """Return ``True`` if any path component matches IGNORE_DIRS."""
+        if self._config.SCAN_MODE == "all":
+            always = {".git", "__pycache__", ".pytest_cache", ".readmenator_cache"}
+            return any(part in always for part in path.parts)
         return any(part in self._config.IGNORE_DIRS for part in path.parts)
 
     def _load_gitignore(self, root: Path) -> None:
@@ -241,29 +246,41 @@ class PolyglotScanner:
             self._load_gitignore(root)
 
         scanned_count = 0
+        skip_counts: Dict[str, int] = {
+            "security": 0, "ignored_dir": 0, "gitignored": 0,
+            "depth": 0, "unsupported_ext": 0, "parse_error": 0,
+        }
+        gitignored_examples: List[str] = []
 
         for file_path in sorted(root.rglob("*")):
             if not file_path.is_file():
                 continue
 
             if not self._validate_path_security(file_path):
+                skip_counts["security"] += 1
                 continue
 
             rel_path = file_path.relative_to(root)
             if self._is_ignored(rel_path):
+                skip_counts["ignored_dir"] += 1
                 continue
 
             rel_path_str = rel_path.as_posix()
             if self._is_gitignored(rel_path_str):
+                skip_counts["gitignored"] += 1
+                if len(gitignored_examples) < 10:
+                    gitignored_examples.append(rel_path_str)
                 continue
 
             if not self._check_directory_depth(file_path, root):
+                skip_counts["depth"] += 1
                 continue
 
             extension = file_path.suffix
 
             parser = create_parser(extension, rel_path_str, self._config)
             if parser is None:
+                skip_counts["unsupported_ext"] += 1
                 continue
 
             try:
@@ -324,6 +341,26 @@ class PolyglotScanner:
                 self._emit_progress(scanned_count)
 
             except Exception:
+                skip_counts["parse_error"] += 1
                 continue
+
+        self.last_skip_counts = dict(skip_counts)
+        self.last_gitignored_examples = list(gitignored_examples)
+        total_skipped = sum(skip_counts.values())
+        if total_skipped:
+            logger.info(
+                "Scan coverage: %d files scanned, %d skipped "
+                "(ignored_dir=%d gitignored=%d unsupported_ext=%d "
+                "security=%d depth=%d parse_error=%d)",
+                scanned_count, total_skipped,
+                skip_counts["ignored_dir"], skip_counts["gitignored"],
+                skip_counts["unsupported_ext"], skip_counts["security"],
+                skip_counts["depth"], skip_counts["parse_error"],
+            )
+            if gitignored_examples:
+                logger.info(
+                    "Gitignored examples: %s",
+                    ", ".join(gitignored_examples[:10]),
+                )
 
         return nodes, edges, content_map

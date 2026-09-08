@@ -63,6 +63,7 @@ class ImportResolver:
         file_ids: List[str],
         root: str = ".",
         extensions: Optional[Tuple[str, ...]] = None,
+        include_dirs: Optional[Tuple[str, ...]] = None,
     ):
         """Initialise the resolver with all known file paths.
 
@@ -70,10 +71,12 @@ class ImportResolver:
             file_ids: List of relative file paths from the scan.
             root: Root directory for relative-path resolution.
             extensions: Known source extensions, defaults to Config.
+            include_dirs: Extra include search dirs (``-I`` style).
         """
         self._file_ids: Set[str] = set(file_ids)
         self._root: str = root
         self._extensions: Tuple[str, ...] = extensions or Config().SUPPORTED_EXTENSIONS
+        self._include_dirs: Tuple[str, ...] = include_dirs or Config().SCAN_INCLUDE_DIRS
         self._stem_index: Dict[str, List[str]] = self._build_stem_index(file_ids)
         self._dir_index: Dict[str, Set[str]] = self._build_dir_index(file_ids)
 
@@ -117,27 +120,37 @@ class ImportResolver:
         if not import_str:
             return None
 
-        candidate = self._resolve_relative(import_str, source_file)
+        raw = import_str[4:] if import_str.startswith("sys:") else import_str
+
+        candidate = self._resolve_include_dirs(raw)
         if candidate:
             return candidate
 
-        candidate = self._resolve_extensionless(import_str, source_file)
+        candidate = self._resolve_relative(raw, source_file)
         if candidate:
             return candidate
 
-        candidate = self._resolve_directory_init(import_str, source_file)
+        candidate = self._resolve_extensionless(raw, source_file)
         if candidate:
             return candidate
 
-        candidate = self._resolve_module_dotpath(import_str)
+        candidate = self._resolve_directory_init(raw, source_file)
         if candidate:
             return candidate
 
-        candidate = self._resolve_suffix_match(import_str)
+        candidate = self._resolve_module_dotpath(raw)
         if candidate:
             return candidate
 
-        candidate = self._resolve_stem_match(import_str)
+        candidate = self._resolve_suffix_match(raw)
+        if candidate:
+            return candidate
+
+        candidate = self._resolve_basename_match(raw)
+        if candidate:
+            return candidate
+
+        candidate = self._resolve_stem_match(raw)
         if candidate:
             return candidate
 
@@ -158,6 +171,26 @@ class ImportResolver:
         if result:
             results.append(result)
         return results
+
+    def _resolve_include_dirs(self, import_str: str) -> Optional[str]:
+        """Resolve *import_str* against configured ``-I`` include dirs.
+
+        Args:
+            import_str: Raw header path without ``sys:`` prefix.
+
+        Returns:
+            Matching file node ID or ``None``.
+        """
+        if not self._include_dirs:
+            return None
+        clean = import_str.lstrip("/")
+        for inc in self._include_dirs:
+            base = inc.strip().strip("/")
+            cand = f"{base}/{clean}" if base else clean
+            cand = posixpath.normpath(cand)
+            if cand in self._file_ids:
+                return cand
+        return None
 
     def _resolve_relative(self, import_str: str, source_file: str) -> Optional[str]:
         """Resolve a relative import (starts with ``.`` or ``..``)."""
@@ -247,6 +280,24 @@ class ImportResolver:
             return None
         wanted = "/" + import_str.lstrip("/")
         matches = sorted([fid for fid in self._file_ids if fid.endswith(wanted)])
+        if len(matches) == 1:
+            return matches[0]
+        return None
+
+    def _resolve_basename_match(self, import_str: str) -> Optional[str]:
+        """Match by exact file basename including extension.
+
+        Covers the classic C pair pattern where ``kernel.h`` is
+        included but ``kernel.c`` shares its stem: stem matching
+        stays ambiguous while the basename is unique. Only
+        unambiguous matches resolve.
+        """
+        clean = import_str.split("/")[-1]
+        if "." not in clean:
+            return None
+        matches = sorted(
+            fid for fid in self._file_ids if fid.split("/")[-1] == clean
+        )
         if len(matches) == 1:
             return matches[0]
         return None

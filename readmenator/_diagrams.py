@@ -1364,6 +1364,10 @@ class InteractiveMapRenderer:
                 "detail": node.detail,
                 "x": node.x,
                 "y": node.y,
+                "language": node.language,
+                "doc": node.doc[: self._config.DIAGRAM_TOOLTIP_DOC_CHARS],
+                "symbols": node.symbols,
+                "symbol_total": node.symbol_total,
             }
             for node in system_map.nodes
         ]

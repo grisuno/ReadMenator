@@ -57,6 +57,7 @@ class Config:
 
     SUPPORTED_EXTENSIONS: Tuple[str, ...] = (
         ".c", ".cpp", ".cc", ".cxx", ".h", ".hpp", ".hxx",
+        ".hh", ".h++", ".tcc", ".inl", ".inc", ".i", ".C",
         ".py", ".go", ".rs",
         ".js", ".ts", ".jsx", ".tsx",
         ".java", ".cs",
@@ -66,6 +67,22 @@ class Config:
         ".rb", ".swift", ".kt", ".kts", ".scala", ".sc",
         ".lua", ".ex", ".exs",
     )
+
+    SCAN_MODE: str = "default"
+
+    SCAN_INCLUDE_DIRS: Tuple[str, ...] = ()
+
+    SCAN_EXCLUDE_PATTERNS: Tuple[str, ...] = ()
+
+    KB_TITLE: str = "Polyglot Codebase Knowledge Graph"
+
+    KB_HERO_ENABLED: bool = True
+
+    KB_MERMAID_THEME: str = "dark"
+
+    SITE_ENABLED: bool = True
+
+    SITE_DIR: str = "readmenator-site"
 
     SYMBOL_TYPE_PLURALS: Tuple[Tuple[str, str], ...] = (
         ("class", "classes"),

@@ -181,21 +181,24 @@ class GraphExporter:
             color = community_colors.get(node.node_id)
             bg = color or "#2d2d2d"
             border = self._lighten(bg) if color else "#4ec9b0"
-            title_parts = [f"<b>{node.label}</b>", f"Language: {node.language}"]
-            if node.symbols:
-                sym_list = "<br>".join(
-                    f"  {s.name} ({s.kind})" for s in node.symbols[:10]
-                )
-                title_parts.append(f"<br>Symbols:<br>{sym_list}")
-                if len(node.symbols) > 10:
-                    title_parts.append(f"  ... +{len(node.symbols) - 10} more")
-            if node.doc:
-                title_parts.append(f"<br><i>{node.doc}</i>")
-
+            short_title = f"{node.label} [{node.language}] ({len(node.symbols)} symbols)"
+            detail = {
+                "id": node.node_id,
+                "label": node.label,
+                "language": node.language,
+                "doc": node.doc or "",
+                "symbols": [
+                    {"name": s.name, "kind": s.kind, "line": s.line,
+                     "signature": s.signature or "", "doc": s.doc or ""}
+                    for s in node.symbols[:50]
+                ],
+                "symbol_total": len(node.symbols),
+            }
             vis_nodes.append({
                 "id": node.node_id,
                 "label": node.label,
-                "title": "<br>".join(title_parts),
+                "title": short_title,
+                "detail": detail,
                 "color": {"background": bg, "border": border},
                 "shape": "box",
                 "font": {"color": "#ffffff", "size": 12},
@@ -355,8 +358,8 @@ class GraphExporter:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReadMenator - Knowledge Graph</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet">
+<script src="https://unpkg.com/vis-network@9/standalone/umd/vis-network.min.js"></script>
+<link href="https://unpkg.com/vis-network@9/styles/vis-network.min.css" rel="stylesheet">
 <style>
     body {{ margin:0; font-family:'Segoe UI',sans-serif; background:#0d0d0d; color:#ccc; }}
     #header {{ padding:12px 16px; background:#1a1a1a; border-bottom:2px solid #ff6666; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }}
@@ -378,6 +381,7 @@ class GraphExporter:
 {question_section}
 {security_section}
 <div id="mynetwork"></div>
+<div id="inspector" style="position:fixed;right:0;top:0;width:340px;max-height:100vh;overflow-y:auto;background:#1a1a1a;border-left:2px solid #4ec9b0;padding:12px;font-size:12px;display:none;"></div>
 <script>
 var nodes = new vis.DataSet({json.dumps(vis_nodes, ensure_ascii=False)});
 var edges = new vis.DataSet({json.dumps(vis_edges, ensure_ascii=False)});
@@ -409,10 +413,21 @@ function filterNodes() {{
 }}
 
 network.on("click", function(params) {{
-    if (params.nodes.length > 0) {{
-        var node = nodes.get(params.nodes[0]);
-        alert(node.title || node.label);
-    }}
+     if (params.nodes.length > 0) {{
+         var node = nodes.get(params.nodes[0]);
+         var d = node.detail || {{}};
+         var esc = function(s) {{ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }};
+         var rows = (d.symbols||[]).slice(0,20).map(function(s) {{
+             return "<tr><td><code>"+esc(s.name)+"</code></td><td>"+esc(s.kind)+"</td><td>"+s.line+"</td><td><code>"+esc((s.signature||"").slice(0,80))+"</code></td></tr>";
+         }}).join("");
+         var panel = document.getElementById('inspector');
+         panel.style.display = 'block';
+         panel.innerHTML = "<h3 style='color:#4ec9b0;margin-top:0;'>"+esc(d.label||node.label)+"</h3>"
+             + "<p style='color:#888;'>"+esc(d.id||"")+" | "+esc(d.language||"")+" | "+(d.symbol_total||0)+" symbols</p>"
+             + (d.doc ? "<p><i>"+esc(d.doc.slice(0,300))+"</i></p>" : "")
+             + "<table style='width:100%;font-size:11px;border-collapse:collapse;'><thead><tr><th>Symbol</th><th>Kind</th><th>Ln</th><th>Sig</th></tr></thead><tbody>"+rows+"</tbody></table>"
+             + "<button onclick=\"document.getElementById('inspector').style.display='none'\" style='margin-top:8px;'>Close</button>";
+     }}
 }});
 </script>
 </body>

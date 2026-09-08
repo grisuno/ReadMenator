@@ -100,13 +100,19 @@ class DocumentationGenerator:
         )
 
         lines: List[str] = [
-            "# Polyglot Codebase Knowledge Graph",
+            f"# {self._config.KB_TITLE}",
             "",
             "> Generated offline by **readmenator**. "
+            f"{len(nodes)} files, {total_symbols} symbols, "
+            f"{import_edges} imports. "
             "Supports C, C++, Python, Go, Rust, JS/TS, Java, C#, Shell, PHP, "
             "Dart, GDScript, Nim, ASM, Ruby, Swift, Kotlin, Scala, Lua, Elixir.",
             "> No LLMs. No tokens. Pure static analysis. "
             "See more [here](https://github.com/grisuno/ReadMenator)",
+            "",
+            "**Start here:** Statistics Dashboard for scope, God Nodes for "
+            "blast radius, Architecture Reference for per-file API. "
+            "Agents: prefer `readmenator-agent/INDEX.md` + `SYMBOLS.md`.",
             "",
             f"**Total Files Parsed:** {len(nodes)} | "
             f"**Total Symbols Extracted:** {total_symbols} | "

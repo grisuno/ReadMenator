@@ -82,6 +82,10 @@ class AgentOutputGenerator:
         self._write(out_dir / "INDEX.md", self._build_index(
             nodes, files_by_subsystem,
         ))
+        self._write(out_dir / "MANIFEST.json", self._build_manifest(
+            nodes, edges, resolved_edges, findings, project_root,
+        ))
+        self._write(out_dir / "SYMBOLS.md", self._build_symbols(nodes))
         self._write(out_dir / "ARCHITECTURE.md", self._build_architecture(
             edges, resolved_edges, nodes,
         ))
@@ -254,20 +258,25 @@ class AgentOutputGenerator:
         imported_by: Dict[str, List[str]],
     ) -> str:
         lines = ["# API", ""]
+        api_kinds = ("function", "method")
         functions = [
             sym
             for node in nodes
             for sym in node.symbols
-            if sym.kind in ("function", "method")
+            if sym.kind in api_kinds
         ]
         if not functions:
             lines.append("No public functions detected.")
             return "\n".join(lines)
 
+        deps_by_src: Dict[str, List[str]] = {}
+        for (src, tgt) in resolved_map:
+            deps_by_src.setdefault(src, []).append(tgt)
+
         for node in sorted(nodes, key=lambda n: n.node_id):
             node_fns = [
                 s for s in node.symbols
-                if s.kind in ("function", "method")
+                if s.kind in api_kinds
             ]
             if not node_fns:
                 continue
@@ -275,16 +284,13 @@ class AgentOutputGenerator:
             lines.append("")
             for fn in node_fns:
                 sig = f" `{fn.signature}`" if fn.signature else ""
-                lines.append(f"### {fn.name}{sig}")
+                lines.append(f"### {fn.name} ({fn.kind}){sig}")
                 lines.append(f"- Defined: `{node.node_id}:{fn.line}`")
                 if fn.doc:
                     doc_line = fn.doc.split("\n")[0][:120]
                     lines.append(f"- Doc: {doc_line}")
 
-                deps = []
-                for target in list(resolved_map.keys()):
-                    if target[0] == node.node_id:
-                        deps.append(target[1])
+                deps = deps_by_src.get(node.node_id, [])
                 if deps:
                     lines.append(
                         "- Depends on: "
@@ -298,6 +304,57 @@ class AgentOutputGenerator:
                         + ", ".join(f"`{c}`" for c in sorted(callers))
                     )
                 lines.append("")
+        return "\n".join(lines)
+
+    def _build_manifest(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: List[Edge],
+        findings: List[SecurityFinding],
+        project_root: str,
+    ) -> str:
+        """Build MANIFEST.json with freshness + entry points for agents."""
+        import json
+        import time
+        entry = [n.node_id for n in nodes
+                 if n.label in ("main.c", "kernel.c", "main.py", "__main__.py")
+                 or n.node_id.endswith(("/main.c", "/kernel.c"))]
+        langs: Dict[str, int] = {}
+        for n in nodes:
+            langs[n.language] = langs.get(n.language, 0) + 1
+        manifest = {
+            "tool": "readmenator",
+            "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "project_root": project_root,
+            "files": len(nodes),
+            "symbols": sum(len(n.symbols) for n in nodes),
+            "imports": len(edges),
+            "resolved_imports": len(resolved_edges),
+            "security_findings": len(findings),
+            "languages": langs,
+            "entrypoints": sorted(entry)[:10],
+            "start_here": "INDEX.md",
+            "workflow": [
+                "grep -n '<keyword>' INDEX.md",
+                "cat KB_<subsystem>.md",
+                "grep -n '<file>' ARCHITECTURE.md SYMBOLS.md",
+            ],
+            "regenerate": "readmenator . --rebuild",
+        }
+        return json.dumps(manifest, indent=2, ensure_ascii=False)
+
+    def _build_symbols(self, nodes: List[Node]) -> str:
+        """Build grep-friendly symbol index (one line per symbol)."""
+        lines = ["# Symbols", "",
+                 "| Symbol | Kind | File:Line | Signature |",
+                 "|--------|------|-----------|-----------|"]
+        for node in sorted(nodes, key=lambda n: n.node_id):
+            for s in sorted(node.symbols, key=lambda x: (x.name, x.line)):
+                sig = (s.signature or "").replace("|", "\\|")[:120]
+                lines.append(f"| `{s.name}` | {s.kind} | "
+                             f"`{node.node_id}:{s.line}` | `{sig}` |")
+        lines.append("")
         return "\n".join(lines)
 
     # ------------------------------------------------------------------
