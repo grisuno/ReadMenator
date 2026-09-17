@@ -5,7 +5,7 @@
 - Language: py
 - Symbols:
   - `_init_parser_map` (function, line 32) `def _init_parser_map()`
-  - `create_parser` (function, line 65) `def create_parser(extension, filename, config)`
+  - `create_parser` (function, line 68) `def create_parser(extension, filename, config)`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 - Imported by: `readmenator/_scanner.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`
 
@@ -35,8 +35,9 @@
 - Layer: utility
 - Language: py
 - Symbols:
-  - `CParser` (class, line 9) `class CParser(LanguageParser)`
-  - `_extract_specifics` (method, line 16) `def _extract_specifics(self, content)`
+  - `_has_type_prefix` (function, line 16) `def _has_type_prefix(prefix)`
+  - `CParser` (class, line 28) `class CParser(LanguageParser)`
+  - `_extract_specifics` (method, line 35) `def _extract_specifics(self, content)`
 - Depends on: `readmenator/_models.py`, `readmenator/parsers/_base.py`
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 

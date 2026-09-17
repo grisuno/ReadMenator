@@ -61,6 +61,22 @@ class TestCParserContract(unittest.TestCase):
         self.assertNotIn("for", names)
         self.assertNotIn("return", names)
 
+    def test_function_line_points_at_definition(self) -> None:
+        code = "\n\nint add(int a, int b) {\n    return a + b;\n}\n"
+        parser = CParser("test.c", self.config)
+        parser.parse(code)
+        lines = {s.name: s.line for s in parser.symbols if s.kind == "function"}
+        self.assertEqual(lines.get("add"), 3)
+
+    def test_calls_are_not_prototypes(self) -> None:
+        code = "int RunELF(void) {\n    fprintf(stderr, \"x\");\n    free(p);\n    return 0;\n}\n"
+        parser = CParser("test.c", self.config)
+        parser.parse(code)
+        names = [s.name for s in parser.symbols if s.kind == "function"]
+        self.assertIn("RunELF", names)
+        self.assertNotIn("fprintf", names)
+        self.assertNotIn("free", names)
+
     def test_class_with_inheritance(self) -> None:
         code = "class Dog : public Animal {};\n"
         parser = CParser("test.cpp", self.config)

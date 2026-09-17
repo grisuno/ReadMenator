@@ -43,6 +43,8 @@ class TestAgentInjectorInjectBehavior(unittest.TestCase):
         self.assertEqual(count, 1)
         content = path.read_text()
         self.assertIn("KNOWLEDGE_BASE.md", content)
+        self.assertIn("readmenator-wiki/index.md", content)
+        self.assertIn("ls *.md", content)
 
     def test_inject_into_cursorrules_adds_kb_link(self):
         path = self.root / ".cursorrules"
@@ -85,6 +87,7 @@ class TestAgentInjectorInjectBehavior(unittest.TestCase):
             anchor_end=_ANCHOR_END,
             kb_filename="KNOWLEDGE_BASE.md",
             agent_output_dir="readmenator-agent",
+            wiki_output_dir="readmenator-wiki",
         )
         path.write_text("# Rules\n\n" + current_injection + "\n")
         count = self.injector.inject(str(self.root))

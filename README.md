@@ -68,6 +68,8 @@ python -m readmenator /path/to/project --html                      # graph.html 
 python -m readmenator /path/to/project --svg                       # graph.svg (static)
 python -m readmenator /path/to/project --graphml                   # graph.graphml (Gephi/yEd)
 python -m readmenator /path/to/project obsidian                    # Obsidian vault (wikilinks)
+python -m readmenator /path/to/project wiki                       # Agent wiki (index + community pages)
+python -m readmenator /path/to/project lint-wiki                  # Wiki health check
 python -m readmenator /path/to/project lint                        # Architecture violations (exit 1 on errors)
 python -m readmenator /path/to/project strip-dead-code             # Orphaned symbol report
 python -m readmenator /path/to/project generate-rules              # Generate .cursorrules file
@@ -218,8 +220,12 @@ a zero-token polyglot static analysis tool. Analysis outputs are available:
   - `API.md` -- Public function contracts
   - `GOTCHAS.md` -- Change warnings
   - `SECURITY.md` -- Findings by severity
+- **[readmenator-wiki/](./readmenator-wiki/)** -- Navigable wiki (start here for the big picture).
+  - `index.md` -- Entry point: overview, reading order, god nodes, connections
+  - `community_*.md` -- One synthesis page per code community
+  - `REPORT.md` -- Honest audit: coverage, confidence, limits
 
-AI agents: Read `readmenator-agent/INDEX.md` for fast project context.
+AI agents: Read `readmenator-wiki/index.md` first for the big picture, then `readmenator-agent/INDEX.md` for grep-friendly lookup.
 Developers: Read `KNOWLEDGE_BASE.md` for full architecture reference.
 <!-- /readmenator-kb-link -->
 

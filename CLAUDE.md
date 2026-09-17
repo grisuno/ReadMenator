@@ -74,6 +74,8 @@ tests/
   test_diagrams.py      - Interactive system maps contract tests (IR, validation, rendering)
   test_readme_injector.py - README injection contract tests
   test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
+  test_wiki.py - Agent wiki contract tests (index, community pages, connections, orphans, lint, privacy)
+  test_dataflow.py - Dataflow analyzer contract tests (def-use, alloc checks, C idioms, span bounds)
 ```
 
 ## Contracts
@@ -104,6 +106,9 @@ tests/
 - Cursor rules settings (CURSORRULES_ENABLED, CURSORRULES_OUTPUT)
 - Refactorizer settings (REFACTORIZER_ENABLED, REFACTORIZER_MIN_LINES, REFACTORIZER_MAX_FILES)
 - Agent output settings (AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES)
+- Wiki settings (WIKI_ENABLED, WIKI_OUTPUT_DIR, WIKI_MAX_FILES_PER_PAGE, WIKI_MAX_SYMBOLS_PER_PAGE, WIKI_MAX_CONNECTIONS)
+- Large-file threshold via WIKI_LARGE_FILE_KB (default 256)
+- Dataflow settings (DATAFLOW_ENABLED, DATAFLOW_MAX_ISSUES, default 50)
 - Interactive map settings (DIAGRAM_ENABLED, DIAGRAM_MAX_NODES, DIAGRAM_MAX_EDGES, DIAGRAM_OUTPUT_DIR)
 - Map geometry settings (DIAGRAM_NODE_WIDTH, DIAGRAM_NODE_HEIGHT, DIAGRAM_COLUMN_GAP, DIAGRAM_ROW_GAP, DIAGRAM_CANVAS_WIDTH, DIAGRAM_CANVAS_HEIGHT, DIAGRAM_MARGIN_X, DIAGRAM_MARGIN_Y, DIAGRAM_MIN_GAP, DIAGRAM_LANE_TOP, DIAGRAM_SEQUENCE_TOP)
 - Map scope settings (DIAGRAM_SEQUENCE_MAX_PARTICIPANTS, DIAGRAM_WORKFLOW_FALLBACK_NODES, DIAGRAM_CHAPTER_FOCUS, DIAGRAM_MAX_VIEWS, DIAGRAM_MAX_LABEL_CHARS)
@@ -141,6 +146,7 @@ tests/
 - All parsers populate: self.symbols (List[Symbol]), self.imports (List[str])
 - C-family and assembly parsers extract #include directives (quoted and angled) as imports
 - Reserved keywords filtered out (if, for, while, switch, catch)
+- C parser: function/prototype line numbers anchored at the symbol name (multiline signatures safe); call statements rejected as prototypes via return-type prefix check; extern/define patterns never span newlines
 
 ### Scanner Contract
 - Rejects symlinks for security
@@ -150,7 +156,9 @@ tests/
 - Only processes files with supported extensions
 - Catches all exceptions silently during parsing
 - Returns (List[Node], List[Edge])
-- Extracts file-level docstrings from header comments
+- Extracts file-level docstrings from header comments (including Python `"""`/`'''` module docstrings)
+- Skips encoding-cookie lines (`coding: utf-8`) when extracting file docs
+- Skips preprocessor directives (`#ifndef`, `#define`, `#include`, ...) when extracting file docs
 - Emits progress messages every PROGRESS_REPORT_BATCH files
 - Supports `.gitignore`-aware scanning (GITIGNORE_AWARE)
 - Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
@@ -178,6 +186,7 @@ tests/
 
 ### Documentation Generator Contract
 - Header: title + metadata line
+- Header links the agent wiki (`readmenator-wiki/index.md`) and states the EXTRACTED/INFERRED/AMBIGUOUS confidence legend
 - Table of Contents with section links for all new sections
 - Statistics Dashboard (file counts, import fan-in/fan-out, language breakdown)
 - Architectural Layers section (auto-detected 5-layer model)
@@ -213,11 +222,13 @@ tests/
 ### Graph Analyzer Contract
 - analyze(nodes, edges, resolved_edges): returns AnalysisResult
 - Community detection via label propagation
+- Deterministic: content-seeded shuffle order, sorted neighbor traversal, min-label tie-break (stable across runs and hash seeds)
 - God node scoring via combined in/out degree + symbol weight
 - Surprising connection discovery via cross-community path analysis
 - Suggested question generation from graph structure
 - Community cohesion scoring (internal / total edges)
-- Community labeling from dominant directory
+- Community labeling from dominant directory (dominant_directory(): count wins, ties prefer longest/most-specific dir, then alphabetical; deterministic)
+- AnalysisResultV2 carries dataflow_issues alongside taint/cycles/hotspots/rules/violations
 
 ### Code Property Graph Contract
 - generate(nodes, edges, resolved_edges, analysis): returns JSON-LD string
@@ -273,7 +284,7 @@ tests/
 ### AnalyzerFactory Contract (pipeline)
 - Lazy property-based initialization of all analyzer components
 - Each component is created on first access and cached
-- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, readme_injector
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector
 - Decouples the application orchestrator from concrete instantiation
 
 ### DeepAnalysisRunner Contract (pipeline)
@@ -289,6 +300,7 @@ tests/
 - Severity levels: critical, high, medium, low, info
 - Configurable severity threshold (SECURITY_SEVERITY_THRESHOLD)
 - Findings sorted by severity then file path
+- fix_hint_for(finding): one-line CWE-keyed remediation hint with least-privilege fallback
 - Reuses scanner security checks (symlinks, ignore dirs, size/depth limits)
 - No external API calls -- fully offline
 
@@ -350,6 +362,7 @@ tests/
 - ReadmeInjector class with inject(project_root) and remove(project_root) methods
 - Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
 - Injects a section linking to KNOWLEDGE_BASE.md and agent output directory with HTML anchor comments
+- Injected section also links readmenator-wiki/ (index.md entry point, community pages, REPORT.md)
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - Preserves existing README content
@@ -364,6 +377,7 @@ tests/
 - AgentInjector class with inject(project_root) and remove(project_root) methods
 - Detects 15 AI agent config files: AGENTS.md, CLAUDE.md, SOUL.md, LLM.md, CONVENTIONS.md, .cursorrules, .instructions.md, .windsurfrules, .aider.conf.yml, SKILL.md, GEMINI.md, AGENTS.override.md, RULES.md, PROJECT_RULES.md, .github/copilot-instructions.md, plus .cursor/rules/*.mdc globs
 - Injects section referencing both KNOWLEDGE_BASE.md and readmenator-agent/ directory
+- Injected section points agents at readmenator-wiki/index.md first (big picture) before grep-friendly files
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - Markdown vs plain text injection based on file suffix (.yml/.yaml = plain, else markdown)
@@ -380,14 +394,46 @@ tests/
 - Unassigned files go to KB_root.md (flat project) or KB_misc.md (scattered)
 - INDEX.md: table format `| File | Purpose | Subsystem | Symbols |` (grep-friendly)
 - ARCHITECTURE.md: flat list of dependency pairs (no JSON wrapping)
-- SECURITY.md: findings grouped by severity, flat list (critical->info)
+- SECURITY.md: findings grouped by severity, flat list (critical->info), each line with enclosing symbol, CWE, and Fix hint
 - API.md: functions/methods with signatures, contracts, dependencies, imported-by
-- GOTCHAS.md: god nodes, hotspots, cycles, layer violations as actionable warnings
+- GOTCHAS.md: god nodes, hotspots, closed-loop cycles (`a -> b -> a`), layer violations as actionable warnings
 - recipes/: add-function.md, fix-cycle.md, fix-security.md, reduce-complexity.md
+- recipes/ are grounded in project data: fix-cycle names the actual cycle + per-file import grep, fix-security lists top 3 findings with fixes, reduce-complexity names the top hotspot
 - All output is plain Markdown, no JSON wrapping, no fenced code blocks around data
 - Every line is greppable
 - No file exceeds 500 lines
 - Configurable via AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES
+
+### Agent Wiki Contract
+- WikiGenerator class with generate() entry point (readmenator/_wiki.py)
+- Generates navigable, progressively disclosed wiki in readmenator-wiki/ directory (offline, zero tokens, deterministic)
+- Output layout: index.md, community_<id>_<slug>.md, connections.json, queries.md, REPORT.md
+- index.md: Second Brain entry point (overview synthesis, stats, token estimate, reading order, god nodes, strongest connections, navigation tips)
+- Community pages: Definition (core file by symbol count, garbage-doc filtered purpose), Files (directory-grouped when over budget), Key Symbols, Internal vs External Edges, Connections, Risks (scoped security with enclosing symbol + Fix hint, taint, closed-loop cycles, layer, dataflow), Open Questions, Sources
+- connections.json: typed bridges (depends_on EXTRACTED 0.9, bridges INFERRED from surprising connections, duplicates INFERRED from symbol overlap Jaccard>=0.3, shares_context INFERRED 0.5) sorted by strength desc
+- Purpose cleaning: banner runs, SPDX lines, bare filenames, and parenthesized metadata stripped (never shown as purpose)
+- Unassigned files covered by computed orphans community (never dropped from the wiki)
+- Stale community pages pruned on regenerate (no rot across runs with shifting ids)
+- Duplicate community labels disambiguated in index (`label (community <id>)`)
+- Duplicate god-node basenames disambiguated in overview (full path on repeat)
+- Oversized files flagged (`WIKI_LARGE_FILE_KB`): tagged in God Nodes, listed in Stats and REPORT (checked-in build artifacts skew centrality)
+- queries.md: suggested questions starter plus append-only answer log (feedback loop)
+- REPORT.md: honest audit (EXTRACTED vs INFERRED vs AMBIGUOUS counts, coverage, orphans, limits, token benchmark, reproduce commands)
+- lint(project_root): health check (missing dir, missing index, no community pages, invalid connections.json)
+- Respects PRIVACY_MODE (strips doc text from synthesis)
+- Every connection tagged with confidence; ambiguous edges reported, never hidden
+- Configurable via WIKI_ENABLED, WIKI_OUTPUT_DIR, WIKI_MAX_FILES_PER_PAGE, WIKI_MAX_SYMBOLS_PER_PAGE, WIKI_MAX_CONNECTIONS
+- Large-file threshold via WIKI_LARGE_FILE_KB (default 256)
+- CLI: `wiki` generates the wiki, `lint-wiki` health-checks it (exit 1 on issues)
+
+### Dataflow Analyzer Contract
+- DataflowAnalyzer class with analyze(nodes, content_map) entry point (readmenator/_dataflow.py)
+- Procedural intra-function def-use over symbol line spans: UNINIT_USE, DEAD_STORE, UNCHECKED_ALLOC (all INFERRED)
+- Zero tokens: brace-depth spans (locals never truncate), block-comment stripping, strings-before-comments, sizeof-is-not-a-read
+- Models C idioms: &out-params, array args to fillers (multiline calls tracked), subscript stores, asm outputs, assert-macro checks, fd/MAP_FAILED checks, function-pointer calls, alias-pointer stores, member-base attribution
+- Statics/globals skipped (zero-init + cross-function visibility); same-line reads compared positionally
+- Wired into DeepAnalysisRunner (DATAFLOW_ENABLED), KB Dataflow Analysis section, agent GOTCHAS, wiki Risks
+- Configurable via DATAFLOW_ENABLED, DATAFLOW_MAX_ISSUES (default 50)
 
 ### Architecture Linter Contract
 - ArchitectureLinter class with lint(nodes, edges, resolved_edges, layers, content_map) method
@@ -535,21 +581,31 @@ When modifying this codebase:
 10. Add type annotations to all function signatures
 
 <!-- readmenator-agent-kb-link -->
-## Project Knowledge Base
+## Project Knowledge Base (MUST read before coding)
+
+MUST read `readmenator-agent/MANIFEST.json` first for freshness. NEVER `glob src/**` before `grep` in `readmenator-agent/INDEX.md`.
+
+Orient first: `ls *.md readmenator-agent/ readmenator-wiki/` (docs only, ignore build noise). Then follow the workflow below.
+
+Workflow: 1) `grep -n '<keyword>' readmenator-agent/INDEX.md readmenator-agent/SYMBOLS.md` 2) `cat readmenator-agent/KB_<subsystem>.md` 3) check `readmenator-agent/GOTCHAS.md` before editing.
 
 This project contains analysis outputs generated by [ReadMenator](https://github.com/grisuno/ReadMenator), a zero-token polyglot static analysis tool.
 
 **For humans:** Read `KNOWLEDGE_BASE.md` -- full architecture reference.
 
 **For agents:** Read `readmenator-agent/INDEX.md` -- grep-friendly index.
-  - `readmenator-agent/INDEX.md` -- file -> purpose map (start here)
+  - `readmenator-agent/MANIFEST.json` -- freshness + entrypoints (start here)
+  - `readmenator-agent/INDEX.md` -- file -> purpose map
+  - `readmenator-agent/SYMBOLS.md` -- symbol index (grep-friendly)
   - `readmenator-agent/API.md` -- public functions + contracts
   - `readmenator-agent/GOTCHAS.md` -- "don't change X because Y breaks"
   - `readmenator-agent/KB_<subsystem>.md` -- per-subsystem context (grep-friendly)
   - `readmenator-agent/SECURITY.md` -- findings by severity
   - `readmenator-agent/recipes/*.md` -- actionable task blocks
+**For agents (big picture first):** Read `readmenator-wiki/index.md` --
+  overview, reading order, god nodes, connections. Then use the files above.
 
-If outputs are outdated, regenerate by running:
+If MANIFEST date/commit is stale vs `git HEAD`, regenerate:
 
-    pip install readmenator && readmenator .
+    pip install readmenator && readmenator . --rebuild
 <!-- /readmenator-agent-kb-link -->

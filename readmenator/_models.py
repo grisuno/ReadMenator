@@ -291,6 +291,7 @@ class AnalysisResultV2:
         hotspots: List of hotspot results.
         suggested_rules: List of suggested linting rules.
         layer_violations: List of layer violations.
+        dataflow_issues: List of procedural dataflow findings.
     """
 
     taint: TaintAnalysisResult | None = None
@@ -299,6 +300,30 @@ class AnalysisResultV2:
     hotspots: List[HotspotResult] = field(default_factory=list)
     suggested_rules: List[SuggestedRule] = field(default_factory=list)
     layer_violations: List[LayerViolation] = field(default_factory=list)
+    dataflow_issues: List[DataflowIssue] = field(default_factory=list)
+
+
+@dataclass
+class DataflowIssue:
+    """A procedural intra-function dataflow finding.
+
+    Attributes:
+        file_path: Relative path of the file containing the issue.
+        function: Name of the enclosing function.
+        line: One-based line number of the suspicious operation.
+        kind: Issue kind (UNINIT_USE, DEAD_STORE, UNCHECKED_ALLOC).
+        variable: Name of the involved local variable.
+        description: Human-readable explanation of the suspicion.
+        confidence: Confidence tier (always INFERRED for heuristics).
+    """
+
+    file_path: str
+    function: str
+    line: int
+    kind: str
+    variable: str
+    description: str
+    confidence: str = "INFERRED"
 
 
 @dataclass

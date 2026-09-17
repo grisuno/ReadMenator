@@ -51,6 +51,9 @@ _INJECTION_MD = (
     "MUST read `{agent_output_dir}/MANIFEST.json` first for freshness. "
     "NEVER `glob src/**` before `grep` in `{agent_output_dir}/INDEX.md`.\n"
     "\n"
+    "Orient first: `ls *.md {agent_output_dir}/ {wiki_output_dir}/` "
+    "(docs only, ignore build noise). Then follow the workflow below.\n"
+    "\n"
     "Workflow: 1) `grep -n '<keyword>' {agent_output_dir}/INDEX.md "
     "{agent_output_dir}/SYMBOLS.md` 2) `cat {agent_output_dir}/KB_<subsystem>.md` "
     "3) check `{agent_output_dir}/GOTCHAS.md` before editing.\n"
@@ -70,6 +73,8 @@ _INJECTION_MD = (
     "  - `{agent_output_dir}/KB_<subsystem>.md` -- per-subsystem context (grep-friendly)\n"
     "  - `{agent_output_dir}/SECURITY.md` -- findings by severity\n"
     "  - `{agent_output_dir}/recipes/*.md` -- actionable task blocks\n"
+    "**For agents (big picture first):** Read `{wiki_output_dir}/index.md` --\n"
+    "  overview, reading order, god nodes, connections. Then use the files above.\n"
     "\n"
     "If MANIFEST date/commit is stale vs `git HEAD`, regenerate:\n"
     "\n"
@@ -94,6 +99,7 @@ _INJECTION_PLAIN = (
     "  - {agent_output_dir}/KB_<subsystem>.md -- per-subsystem context\n"
     "  - {agent_output_dir}/SECURITY.md -- findings by severity\n"
     "  - {agent_output_dir}/recipes/*.md -- actionable task blocks\n"
+    "For agents (big picture first): Read {wiki_output_dir}/index.md -- overview.\n"
     "\n"
     "If outputs are outdated, regenerate by running:\n"
     "\n"
@@ -144,11 +150,13 @@ class AgentInjector:
         agent_output_dir: str = "readmenator-agent",
         agent_files: Optional[Sequence[str]] = None,
         agent_globs: Optional[Sequence[str]] = None,
+        wiki_output_dir: str = "readmenator-wiki",
     ) -> None:
         self._kb_filename = kb_filename
         self._agent_output_dir = agent_output_dir
         self._agent_files = tuple(agent_files or _AGENT_FILES)
         self._agent_globs = tuple(agent_globs or _AGENT_GLOBS)
+        self._wiki_output_dir = wiki_output_dir
 
     def inject(self, project_root: str) -> int:
         """Inject KB reference into all discovered agent files.
@@ -278,6 +286,7 @@ class AgentInjector:
             anchor_end=_ANCHOR_END,
             kb_filename=self._kb_filename,
             agent_output_dir=self._agent_output_dir,
+            wiki_output_dir=self._wiki_output_dir,
         )
         if fmt == "plain":
             return _INJECTION_PLAIN.format(**kwargs)

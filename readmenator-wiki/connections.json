@@ -1,0 +1,66 @@
+[
+  {
+    "community_a": 0,
+    "community_b": 1,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 0,
+    "community_b": 1,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: readmenator/__init__.py reaches tests/test_agent_injector.py in 4 hops.",
+    "strength": 0.6,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 1,
+    "community_b": 0,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: readmenator/_agent_injector.py reaches tests/test_resolver.py in 4 hops.",
+    "strength": 0.6,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 0,
+    "community_b": 1,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: readmenator/_cache.py reaches tests/test_agent_injector.py in 4 hops.",
+    "strength": 0.6,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 0,
+    "community_b": 1,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: readmenator/_cursorrules_generator.py reaches tests/test_agent_injector.py in 4 hops.",
+    "strength": 0.6,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 1,
+    "community_b": 0,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.",
+    "strength": 0.5,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 0,
+    "community_b": 2,
+    "connection_type": "shares_context",
+    "explanation": "Inferred shared context (layer utility) with no import path between community 0 (readmenator) and community 2 (orphans).",
+    "strength": 0.5,
+    "confidence": "INFERRED"
+  },
+  {
+    "community_a": 1,
+    "community_b": 2,
+    "connection_type": "shares_context",
+    "explanation": "Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 2 (orphans).",
+    "strength": 0.5,
+    "confidence": "INFERRED"
+  }
+]

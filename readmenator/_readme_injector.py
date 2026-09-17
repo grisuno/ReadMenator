@@ -23,8 +23,12 @@ a zero-token polyglot static analysis tool. Analysis outputs are available:
   - `API.md` -- Public function contracts
   - `GOTCHAS.md` -- Change warnings
   - `SECURITY.md` -- Findings by severity
+- **[{wiki_output_dir}/](./{wiki_output_dir}/)** -- Navigable wiki (start here for the big picture).
+  - `index.md` -- Entry point: overview, reading order, god nodes, connections
+  - `community_*.md` -- One synthesis page per code community
+  - `REPORT.md` -- Honest audit: coverage, confidence, limits
 
-AI agents: Read `{agent_output_dir}/INDEX.md` for fast project context.
+AI agents: Read `{wiki_output_dir}/index.md` first for the big picture, then `{agent_output_dir}/INDEX.md` for grep-friendly lookup.
 Developers: Read `{kb_filename}` for full architecture reference.
 {anchor_end}
 """
@@ -45,8 +49,12 @@ a zero-token polyglot static analysis tool. Analysis outputs are available:
   - ``API.md`` -- Public function contracts
   - ``GOTCHAS.md`` -- Change warnings
   - ``SECURITY.md`` -- Findings by severity
+- **{wiki_output_dir}/** -- Navigable wiki (start here for the big picture).
 
-AI agents: Read ``{agent_output_dir}/INDEX.md`` for fast project context.
+  - ``index.md`` -- Entry point: overview, reading order, god nodes
+  - ``REPORT.md`` -- Honest audit: coverage, confidence, limits
+
+AI agents: Read ``{wiki_output_dir}/index.md`` first, then ``{agent_output_dir}/INDEX.md``.
 Developers: Read ``{kb_filename}`` for full architecture reference.
 {anchor_end}
 """
@@ -69,9 +77,11 @@ class ReadmeInjector:
         self,
         kb_filename: str = "KNOWLEDGE_BASE.md",
         agent_output_dir: str = "readmenator-agent",
+        wiki_output_dir: str = "readmenator-wiki",
     ) -> None:
         self._kb_filename = kb_filename
         self._agent_output_dir = agent_output_dir
+        self._wiki_output_dir = wiki_output_dir
 
     def inject(self, project_root: str) -> bool:
         root = Path(project_root).resolve()
@@ -163,6 +173,7 @@ class ReadmeInjector:
             anchor_end=_ANCHOR_END,
             kb_filename=self._kb_filename,
             agent_output_dir=self._agent_output_dir,
+            wiki_output_dir=self._wiki_output_dir,
         )
         if suffix == ".rst":
             return _INJECTION_TEXT_RST.format(**kwargs)

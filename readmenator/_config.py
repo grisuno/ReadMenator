@@ -239,6 +239,22 @@ class Config:
 
     AGENT_OUTPUT_MIN_SUBSYSTEM_FILES: int = 2
 
+    WIKI_ENABLED: bool = True
+
+    WIKI_OUTPUT_DIR: str = "readmenator-wiki"
+
+    WIKI_MAX_FILES_PER_PAGE: int = 20
+
+    WIKI_MAX_SYMBOLS_PER_PAGE: int = 30
+
+    WIKI_MAX_CONNECTIONS: int = 20
+
+    WIKI_LARGE_FILE_KB: int = 256
+
+    DATAFLOW_ENABLED: bool = True
+
+    DATAFLOW_MAX_ISSUES: int = 50
+
     DIAGRAM_ENABLED: bool = True
 
     DIAGRAM_MAX_NODES: int = 60

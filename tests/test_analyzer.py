@@ -127,6 +127,30 @@ class TestGraphAnalyzerContract(unittest.TestCase):
         result = self.analyzer.analyze(nodes, edges, resolved)
         self.assertEqual(result.edge_count, 2)
 
+    def test_analyze_is_repeatable(self) -> None:
+        nodes = [self._make_node(f"n{i}.py", f"n{i}.py") for i in range(12)]
+        edges = [self._make_edge(f"n{i}.py", f"n{(i + 1) % 12}.py") for i in range(12)]
+        edges += [self._make_edge("n0.py", "n6.py"), self._make_edge("n3.py", "n9.py")]
+        first = self.analyzer.analyze(nodes, edges)
+        second = self.analyzer.analyze(nodes, edges)
+        first_comms = sorted(sorted(c.file_ids) for c in first.communities)
+        second_comms = sorted(sorted(c.file_ids) for c in second.communities)
+        self.assertEqual(first_comms, second_comms)
+        self.assertEqual(first.surprising_connections, second.surprising_connections)
+
+    def test_dominant_directory_prefers_specific_on_tie(self) -> None:
+        from readmenator._analyzer import dominant_directory
+        self.assertEqual(
+            dominant_directory({"a.c", "b.c", "sandbox/c.c", "sandbox/d.c"}),
+            "sandbox",
+        )
+        self.assertEqual(dominant_directory({"a.c"}), "root")
+        self.assertEqual(dominant_directory(set()), "root")
+        self.assertEqual(
+            dominant_directory({"src/a.c", "src/b.c", "lib/c.c"}),
+            "src",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

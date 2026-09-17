@@ -41,6 +41,8 @@ def build_parser() -> argparse.ArgumentParser:
             "  diagrams                Export 5 vis.js maps + gallery index (needs network)\n"
             "  diagram <kind>          Export one vis.js map (needs network)\n"
             "  pages                   Publish maps plus gallery index into docs/ (static site)\n"
+            "  wiki                    Generate navigable agent wiki (index + community pages)\n"
+            "  lint-wiki               Health-check the agent wiki\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -191,6 +193,14 @@ def main() -> None:
         elif command == "obsidian":
             app.export_obsidian(target)
             return
+        elif command == "wiki":
+            out = app.export_wiki(target)
+            logger.info("Agent wiki: %s", out)
+            return
+        elif command == "lint-wiki":
+            issues = app.lint_wiki(target)
+            sys.exit(1 if issues else 0)
+            return
         elif command == "watch":
             app.watch(target)
             return
@@ -267,7 +277,9 @@ def main() -> None:
                 print(f"{kind}: {path}")
             return
         elif command == "--rebuild":
-            app.rebuild(target)
+            argset = set(sys.argv[3:])
+            run_security = True if "--audit" in argset else None
+            app.rebuild(target, run_security=run_security)
             return
         elif command.startswith("--"):
             pass

@@ -581,3 +581,54 @@ class SecurityAnalyzer:
             if count:
                 parts.append(f"    {sev}: {count}")
         return "\n".join(parts)
+
+
+_FIX_GUIDANCE: Dict[str, str] = {
+    "CWE-78": "Avoid shell=True and string-built commands; use argument arrays and input allowlists.",
+    "CWE-88": "Avoid shell=True and string-built commands; use argument arrays and input allowlists.",
+    "CWE-89": "Use parameterized queries or prepared statements; never concatenate input into SQL.",
+    "CWE-94": "Replace eval-like code generation with dispatch tables or sandboxed parsers.",
+    "CWE-95": "Replace eval/exec with JSON parsing, dispatch tables, or ast.literal_eval.",
+    "CWE-502": "Replace pickle with JSON or another safe format; use yaml.safe_load for YAML.",
+    "CWE-79": "Use textContent or an allowlist sanitizer; never assign untrusted data to innerHTML.",
+    "CWE-80": "Use textContent or an allowlist sanitizer; never assign untrusted data to script sinks.",
+    "CWE-119": "Use bounded functions with explicit sizes and verify NUL termination.",
+    "CWE-120": "Use bounded functions (strncpy, snprintf) with explicit sizes and NUL termination.",
+    "CWE-121": "Use bounded functions (strncpy, snprintf) with explicit sizes and NUL termination.",
+    "CWE-122": "Use bounded functions (strncpy, snprintf) with explicit sizes and NUL termination.",
+    "CWE-676": "Replace with bounded memory-safe alternatives and check return values.",
+    "CWE-22": "Canonicalize paths and confine file access to an allowlisted base directory.",
+    "CWE-23": "Canonicalize paths and confine file access to an allowlisted base directory.",
+    "CWE-73": "Never pass user input to file inclusion; use allowlisted module names.",
+    "CWE-98": "Never pass user input to file inclusion; use allowlisted module names.",
+    "CWE-798": "Move secrets to environment variables or a secret manager; rotate the exposed value.",
+    "CWE-259": "Move secrets to environment variables or a secret manager; rotate the exposed value.",
+    "CWE-327": "Use SHA-256 or stronger; use bcrypt, scrypt, or argon2 for passwords.",
+    "CWE-328": "Use SHA-256 or stronger; use bcrypt, scrypt, or argon2 for passwords.",
+    "CWE-295": "Enable certificate verification; bundle CA certs instead of disabling checks.",
+    "CWE-611": "Disable external entities and DTD processing in the XML parser.",
+    "CWE-489": "Disable debug mode in production builds.",
+    "CWE-377": "Use mkstemp or another secure temp-file API instead of predictable names.",
+    "CWE-770": "Enforce size and quantity limits on allocation paths.",
+}
+
+_FIX_FALLBACK = (
+    "Isolate the flagged construct and replace it with the least-privilege alternative."
+)
+
+
+def fix_hint_for(finding: SecurityFinding) -> str:
+    """Return a one-line remediation hint for a security finding.
+
+    Looks up the finding CWE in the guidance map and falls back to a
+    generic least-privilege hint for unmapped identifiers.
+
+    Args:
+        finding: Security finding with a CWE identifier string.
+
+    Returns:
+        One-line remediation hint without markdown formatting.
+    """
+    parts = (finding.cwe or "").strip().split()
+    cwe = parts[0] if parts else ""
+    return _FIX_GUIDANCE.get(cwe, _FIX_FALLBACK)

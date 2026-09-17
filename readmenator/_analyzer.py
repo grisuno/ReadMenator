@@ -9,12 +9,31 @@ token-free.
 
 from __future__ import annotations
 
+import hashlib
 import random
 from collections import defaultdict, deque
 from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
 from readmenator._models import AnalysisResult, CommunityResult, Edge, Node
+
+
+def dominant_directory(file_ids: Set[str]) -> str:
+    """Return the most informative directory label for a set of files.
+
+    Highest file count wins; ties prefer the longest (most specific)
+    directory so that ``sandbox`` beats ``.``; remaining ties go
+    alphabetical. ``"."`` is reported as ``"root"``.
+    """
+    counts: Dict[str, int] = {}
+    for fid in sorted(file_ids):
+        parent = fid.rsplit("/", 1)[0] if "/" in fid else "."
+        counts[parent] = counts.get(parent, 0) + 1
+    if not counts:
+        return "root"
+    ranked = sorted(counts, key=lambda d: (-counts[d], -len(d), d))
+    best = ranked[0]
+    return "root" if best == "." else best
 
 
 class GraphAnalyzer:
@@ -146,14 +165,18 @@ class GraphAnalyzer:
 
         file_ids = [n.node_id for n in nodes]
         labels: Dict[str, int] = {fid: i for i, fid in enumerate(file_ids)}
+        seed = int(
+            hashlib.sha256("|".join(sorted(file_ids)).encode()).hexdigest(), 16
+        ) % (2 ** 32)
+        rng = random.Random(seed)
 
         for _iteration in range(50):
             changed = False
             node_list = list(file_ids)
-            random.shuffle(node_list)
+            rng.shuffle(node_list)
             for fid in node_list:
                 neighbor_labels: Dict[int, int] = {}
-                for neighbor in adjacency.get(fid, set()):
+                for neighbor in sorted(adjacency.get(fid, set())):
                     nl = labels.get(neighbor)
                     if nl is not None:
                         neighbor_labels[nl] = neighbor_labels.get(nl, 0) + 1
@@ -161,7 +184,7 @@ class GraphAnalyzer:
                     continue
                 max_count = max(neighbor_labels.values())
                 best_labels = [lab for lab, cnt in neighbor_labels.items() if cnt == max_count]
-                best_label = best_labels[0] if best_labels else labels[fid]
+                best_label = min(best_labels) if best_labels else labels[fid]
                 if best_label != labels[fid]:
                     labels[fid] = best_label
                     changed = True
@@ -197,17 +220,7 @@ class GraphAnalyzer:
             if not member_nodes:
                 labels[cid] = f"Community {cid}"
                 continue
-            dirs: List[str] = []
-            for n in member_nodes:
-                parent = n.node_id.rsplit("/", 1)[0] if "/" in n.node_id else "."
-                dirs.append(parent)
-            dir_counts: Dict[str, int] = {}
-            for d in dirs:
-                dir_counts[d] = dir_counts.get(d, 0) + 1
-            top_dir = max(dir_counts, key=dir_counts.get) if dir_counts else "."
-            if top_dir == ".":
-                top_dir = "root"
-            labels[cid] = top_dir
+            labels[cid] = dominant_directory({n.node_id for n in member_nodes})
         return labels
 
     def _build_community_map(
@@ -305,7 +318,7 @@ class GraphAnalyzer:
                 comms = comms | {cur_comm}
             if current == target:
                 return comms, distance
-            for neighbor in adjacency.get(current, set()):
+            for neighbor in sorted(adjacency.get(current, set())):
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append((neighbor, distance + 1, comms))

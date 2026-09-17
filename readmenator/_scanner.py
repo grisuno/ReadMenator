@@ -18,6 +18,12 @@ from readmenator.parsers import create_parser
 
 logger = logging.getLogger(__name__)
 
+_PREPROC_DIRECTIVES = frozenset({
+    "if", "ifdef", "ifndef", "elif", "else", "endif",
+    "define", "undef", "include", "pragma", "error",
+    "warning", "line",
+})
+
 
 class PolyglotScanner:
     """Recursive directory scanner with security and size guards.
@@ -144,8 +150,8 @@ class PolyglotScanner:
         """Extract a file-level docstring from the first lines of a source file.
 
         Walks the first FILE_HEADER_MAX_LINES lines looking for a contiguous
-        block of comments or a shebang followed by comments. Returns the
-        concatenated comment text.
+        block of comments, a Python module docstring, or a shebang followed
+        by comments. Returns the concatenated comment text.
 
         Args:
             content: Raw file content as a string.
@@ -167,8 +173,31 @@ class PolyglotScanner:
                 continue
             if line.startswith("#!") and i == 0:
                 continue
+            if not collecting and (line.startswith('"""') or line.startswith("'''")):
+                fence = line[:3]
+                rest = line[3:]
+                if fence in rest:
+                    doc_lines.append(rest.split(fence)[0].strip())
+                    break
+                if rest:
+                    doc_lines.append(rest.strip())
+                collecting = True
+                for j in range(i + 1, max_lines):
+                    body = lines[j].strip()
+                    if fence in body:
+                        head = body.split(fence)[0].strip()
+                        if head:
+                            doc_lines.append(head)
+                        break
+                    doc_lines.append(body)
+                break
             if line.startswith("#"):
                 cleaned = line.lstrip("#").strip()
+                if re.search(r"coding[:=]", cleaned):
+                    continue
+                first_token = cleaned.split()[0].lower() if cleaned.split() else ""
+                if first_token in _PREPROC_DIRECTIVES:
+                    continue
                 doc_lines.append(cleaned)
                 collecting = True
             elif line.startswith("//"):

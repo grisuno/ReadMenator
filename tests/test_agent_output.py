@@ -163,6 +163,21 @@ class TestSecurityGeneration(unittest.TestCase):
         self.assertIn("a.py:1", content)
         self.assertIn("b.py:2", content)
 
+    def test_findings_include_fix_hint_and_scope(self) -> None:
+        config = Config()
+        gen = AgentOutputGenerator(config)
+        nodes = [_make_node("a.py", symbols=[
+            Symbol(name="checkout", kind="function", line=8),
+        ])]
+        findings = [_make_finding(
+            file_path="a.py", line=11, severity="critical",
+            rule_id="JS002", description="Use of eval", snippet="eval(x)", cwe="CWE-95",
+        )]
+        content = gen._build_security(findings, nodes)
+        self.assertIn("(in `checkout`)", content)
+        self.assertIn("Fix:", content)
+        self.assertIn("literal_eval", content)
+
     def test_no_json_wrapping(self) -> None:
         config = Config()
         gen = AgentOutputGenerator(config)
@@ -211,6 +226,21 @@ class TestGotchasGeneration(unittest.TestCase):
         gen = AgentOutputGenerator(config)
         content = gen._build_gotchas(None, None, [])
         self.assertIn("No gotchas detected", content)
+
+    def test_cycle_loop_closed(self) -> None:
+        config = Config()
+        gen = AgentOutputGenerator(config)
+        from readmenator._models import DependencyCycle
+        analysis_v2 = AnalysisResultV2(
+            taint=None,
+            cycles=[DependencyCycle(cycle=["a.py", "b.py"], length=2)],
+            change_impacts=[],
+            hotspots=[],
+            suggested_rules=[],
+            layer_violations=[],
+        )
+        content = gen._build_gotchas(None, analysis_v2, [])
+        self.assertIn("`a.py` -> `b.py` -> `a.py`", content)
 
 
 class TestArchitectureGeneration(unittest.TestCase):
@@ -297,6 +327,37 @@ class TestRecipesGeneration(unittest.TestCase):
             self.assertTrue((recipes_dir / "fix-security.md").exists())
             self.assertTrue((recipes_dir / "reduce-complexity.md").exists())
 
+    def test_recipes_grounded_in_actual_findings(self) -> None:
+        import tempfile
+        from readmenator._models import DependencyCycle, HotspotResult
+        config = Config()
+        gen = AgentOutputGenerator(config)
+        analysis_v2 = AnalysisResultV2(
+            taint=None,
+            cycles=[DependencyCycle(cycle=["a.py", "b.py"], length=2)],
+            change_impacts=[],
+            hotspots=[HotspotResult("hot.py", 1.0, 1.0, 1.0, 10, 5)],
+            suggested_rules=[],
+            layer_violations=[],
+        )
+        findings = [_make_finding(
+            file_path="vuln.py", line=3, severity="critical",
+            rule_id="PY002", description="Use of eval", snippet="eval(x)", cwe="CWE-95",
+        )]
+        with tempfile.TemporaryDirectory() as tmpdir:
+            recipes_dir = Path(tmpdir) / "recipes"
+            recipes_dir.mkdir()
+            gen._write_recipes(recipes_dir, None, analysis_v2, findings)
+            cycle = (recipes_dir / "fix-cycle.md").read_text()
+            self.assertIn("a.py", cycle)
+            self.assertIn("b.py", cycle)
+            self.assertIn("`a.py` -> `b.py` -> `a.py`", cycle)
+            security = (recipes_dir / "fix-security.md").read_text()
+            self.assertIn("vuln.py:3", security)
+            self.assertIn("Fix:", security)
+            hotspot = (recipes_dir / "reduce-complexity.md").read_text()
+            self.assertIn("hot.py", hotspot)
+
 
 class TestFullGenerate(unittest.TestCase):
     def test_generate_creates_all_files(self) -> None:
@@ -356,6 +417,18 @@ class TestFullGenerate(unittest.TestCase):
             for md_file in out.rglob("*.md"):
                 content = md_file.read_text()
                 self.assertNotIn('"', f"{md_file.name} contains double quotes (possible JSON)")
+
+    def test_manifest_workflow_orients_with_ls(self) -> None:
+        import json
+        import tempfile
+        config = Config()
+        gen = AgentOutputGenerator(config)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            gen.generate([_make_node("a.py")], [], [], None, None, [], {}, tmpdir)
+            manifest = json.loads(
+                (Path(tmpdir) / config.AGENT_OUTPUT_DIR / "MANIFEST.json").read_text()
+            )
+            self.assertTrue(any("ls " in step for step in manifest["workflow"]))
 
 
 class TestInjectionOutdatedDetection(unittest.TestCase):

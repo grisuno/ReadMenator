@@ -111,6 +111,35 @@ class TestScannerContract(unittest.TestCase):
         for sym in nodes[0].symbols:
             self.assertEqual(sym.doc, "")
 
+    def test_module_docstring_extracted_as_file_doc(self) -> None:
+        self._write("main.py", '"""File doc."""\ndef foo():\n    """Func doc."""\n    pass\n')
+        scanner = PolyglotScanner(self.config)
+        nodes, _ = scanner.scan(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0].doc, "File doc.")
+
+    def test_multiline_module_docstring_extracted(self) -> None:
+        self._write("main.py", '"""\nFile doc line one.\nFile doc line two.\n"""\ndef foo(): pass\n')
+        scanner = PolyglotScanner(self.config)
+        nodes, _ = scanner.scan(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertIn("File doc line one.", nodes[0].doc)
+        self.assertIn("File doc line two.", nodes[0].doc)
+
+    def test_coding_cookie_ignored_as_file_doc(self) -> None:
+        self._write("app.py", '# -*- coding: utf-8 -*-\n"""Real purpose."""\ndef foo(): pass\n')
+        scanner = PolyglotScanner(self.config)
+        nodes, _ = scanner.scan(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0].doc, "Real purpose.")
+
+    def test_preprocessor_guards_ignored_as_file_doc(self) -> None:
+        self._write("lib.h", '#ifndef LIB_H\n#define LIB_H\n/* Real purpose. */\nint f(void);\n#endif\n')
+        scanner = PolyglotScanner(self.config)
+        nodes, _ = scanner.scan(self.temp_dir)
+        self.assertEqual(len(nodes), 1)
+        self.assertEqual(nodes[0].doc, "Real purpose.")
+
     def test_scan_with_content_returns_content_map(self) -> None:
         self._write("main.py", "def hello(): pass\n")
         scanner = PolyglotScanner(self.config)

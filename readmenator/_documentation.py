@@ -114,6 +114,13 @@ class DocumentationGenerator:
             "blast radius, Architecture Reference for per-file API. "
             "Agents: prefer `readmenator-agent/INDEX.md` + `SYMBOLS.md`.",
             "",
+            "**Wiki:** prefer `readmenator-wiki/index.md` for progressive disclosure: "
+            "one synthesis page per community, `connections.json` with "
+            "EXTRACTED vs INFERRED confidence, `queries.md` log, `REPORT.md` audit.",
+            "",
+            "**Confidence:** EXTRACTED = parsed from source, INFERRED = heuristic bridge, "
+            "AMBIGUOUS = reported, never hidden. See `readmenator-wiki/REPORT.md`.",
+            "",
             f"**Total Files Parsed:** {len(nodes)} | "
             f"**Total Symbols Extracted:** {total_symbols} | "
             f"**Total Imports:** {import_edges}",
@@ -140,6 +147,7 @@ class DocumentationGenerator:
         lines.extend(self._build_suggested_questions(analysis))
         lines.extend(self._build_taint_analysis(analysis_v2))
         lines.extend(self._build_hotspots(analysis_v2, ranked))
+        lines.extend(self._build_dataflow_analysis(analysis_v2))
         lines.extend(self._build_dependency_cycles(analysis_v2))
         lines.extend(self._build_change_impact(analysis_v2))
         lines.extend(self._build_layer_violations(analysis_v2))
@@ -350,6 +358,9 @@ class DocumentationGenerator:
             entry += 1
         if analysis_v2 and analysis_v2.suggested_rules:
             toc.append(f"{entry}. [Suggested Linting Rules](#suggested-linting-rules)")
+            entry += 1
+        if analysis_v2 and analysis_v2.dataflow_issues:
+            toc.append(f"{entry}. [Dataflow Analysis](#dataflow-analysis)")
             entry += 1
 
         if findings:
@@ -811,6 +822,37 @@ class DocumentationGenerator:
         lines.extend(["", "---", ""])
         return lines
 
+    def _build_dataflow_analysis(
+        self, analysis_v2: Optional[AnalysisResultV2]
+    ) -> List[str]:
+        """Build the procedural dataflow findings section."""
+        if not analysis_v2 or not analysis_v2.dataflow_issues:
+            return []
+        issues = analysis_v2.dataflow_issues
+        kinds: Dict[str, int] = {}
+        for issue in issues:
+            kinds[issue.kind] = kinds.get(issue.kind, 0) + 1
+        summary = ", ".join(f"{k}: {v}" for k, v in sorted(kinds.items()))
+        lines: List[str] = [
+            "## Dataflow Analysis",
+            "",
+            "Procedural intra-function dataflow findings (zero tokens, "
+            "regex-based heuristics, all INFERRED). Each lead is grounded "
+            "at file:line for manual review.",
+            "",
+            f"**{len(issues)} findings** ({summary}).",
+            "",
+            "| File | Function | Line | Kind | Variable | Description |",
+            "|------|----------|------|------|----------|-------------|",
+        ]
+        for issue in issues[: self._config.DATAFLOW_MAX_ISSUES]:
+            lines.append(
+                f"| `{issue.file_path}` | `{issue.function}` | {issue.line} | "
+                f"`{issue.kind}` | `{issue.variable}` | {issue.description} |"
+            )
+        lines.extend(["", "---", ""])
+        return lines
+
     def _build_dependency_cycles(
         self, analysis_v2: Optional[AnalysisResultV2]
     ) -> List[str]:
@@ -826,7 +868,8 @@ class DocumentationGenerator:
             "|-------|--------|-------|",
         ]
         for dc in analysis_v2.cycles[:10]:
-            files_str = " -> ".join(f.split("/")[-1] for f in dc.cycle)
+            loop = list(dc.cycle) + ([dc.cycle[0]] if dc.cycle else [])
+            files_str = " -> ".join(f.split("/")[-1] for f in loop)
             lines.append(f"| `{files_str}` | {dc.length} | {len(dc.cycle)} |")
         lines.extend(["", "---", ""])
         return lines

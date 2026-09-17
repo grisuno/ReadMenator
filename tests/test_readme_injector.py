@@ -34,6 +34,7 @@ class TestReadmeInjectorInjectBehavior(unittest.TestCase):
         self.assertIn("KNOWLEDGE_BASE.md", content)
         self.assertIn("ReadMenator", content)
         self.assertIn("<!-- readmenator-kb-link -->", content)
+        self.assertIn("readmenator-wiki/index.md", content)
 
     def test_inject_into_rst_readme_adds_kb_link(self):
         readme = self.root / "README.rst"

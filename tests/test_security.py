@@ -15,7 +15,7 @@ from pathlib import Path
 
 from readmenator._config import Config
 from readmenator._models import SecurityFinding
-from readmenator._security import SecurityAnalyzer
+from readmenator._security import SecurityAnalyzer, fix_hint_for
 
 
 class TestSecurityFinding(unittest.TestCase):
@@ -391,6 +391,27 @@ class TestSecurityAnalyzerSummary(unittest.TestCase):
         self.assertIn("2 finding", result)
         self.assertIn("high", result)
         self.assertIn("critical", result)
+
+
+class TestFixGuidance(unittest.TestCase):
+    """fix_hint_for remediation hint contract tests."""
+
+    def _finding(self, cwe: str) -> SecurityFinding:
+        return SecurityFinding("a.py", 1, "high", "XX001", "desc", "snip", cwe)
+
+    def test_known_cwe_returns_actionable_hint(self) -> None:
+        self.assertIn("parameterized", fix_hint_for(self._finding("CWE-89")))
+        self.assertIn("textContent", fix_hint_for(self._finding("CWE-79")))
+        self.assertIn("shell", fix_hint_for(self._finding("CWE-78")))
+        self.assertIn("strncpy", fix_hint_for(self._finding("CWE-120")))
+
+    def test_unknown_cwe_falls_back(self) -> None:
+        hint = fix_hint_for(self._finding("CWE-99999"))
+        self.assertTrue(len(hint) > 10)
+        self.assertNotIn("{", hint)
+
+    def test_empty_cwe_falls_back(self) -> None:
+        self.assertTrue(len(fix_hint_for(self._finding(""))) > 10)
 
 
 if __name__ == "__main__":

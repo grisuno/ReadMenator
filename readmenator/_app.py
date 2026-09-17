@@ -175,6 +175,15 @@ class readmenatorApplication:
                 analysis_v2, findings, layers, str(root),
             )
 
+        if self._config.WIKI_ENABLED:
+            try:
+                self._factory.wiki.generate(
+                    nodes, edges, resolved_edges, analysis,
+                    layers, findings, analysis_v2, str(root),
+                )
+            except Exception:
+                logger.debug("Agent wiki skipped", exc_info=True)
+
         if self._config.DIAGRAM_ENABLED:
             try:
                 self.export_diagrams(str(root))
@@ -381,6 +390,15 @@ class readmenatorApplication:
                 analysis_v2, findings, layers, str(root),
             )
 
+        if self._config.WIKI_ENABLED:
+            try:
+                self._factory.wiki.generate(
+                    nodes, edges, resolved_edges, analysis,
+                    layers, findings, analysis_v2, str(root),
+                )
+            except Exception:
+                logger.debug("Agent wiki skipped", exc_info=True)
+
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         total_symbols = sum(len(n.symbols) for n in nodes)
@@ -553,6 +571,47 @@ class readmenatorApplication:
         written = self._factory.exporter.to_obsidian(nodes, edges, output_dir, analysis)
         logger.info("Obsidian vault: %d notes in %s", written, output_dir)
         return written
+
+    def export_wiki(self, target_dir: str, output_dir: Optional[str] = None) -> str:
+        """Generate the navigable agent wiki for the target project.
+
+        Args:
+            target_dir: Project root directory.
+            output_dir: Optional override for the wiki output directory.
+
+        Returns:
+            Path of the wiki directory that was written.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve())
+        analysis_v2 = self._deep_runner.run(nodes, edges, resolved, layers, content_map)
+        out = self._factory.wiki.generate(
+            nodes, edges, resolved, analysis, layers, findings, analysis_v2, target_dir,
+        )
+        if output_dir is not None:
+            logger.info("Agent wiki exported: %s", out)
+        return out
+
+    def lint_wiki(self, target_dir: str) -> List[str]:
+        """Check wiki health and log reported issues.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            List of issue descriptions, empty when healthy.
+        """
+        issues = self._factory.wiki.lint(target_dir)
+        if issues:
+            logger.info("Wiki lint: %d issues", len(issues))
+            for issue in issues:
+                logger.info("  - %s", issue)
+        else:
+            logger.info("Wiki lint: healthy")
+        return issues
 
     def export_diagrams(
         self, target_dir: str, output_dir: Optional[str] = None

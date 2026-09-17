@@ -8,6 +8,7 @@ from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
+from readmenator._dataflow import DataflowAnalyzer
 from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
@@ -34,6 +35,7 @@ from readmenator._scanner import PolyglotScanner
 from readmenator._security import SecurityAnalyzer
 from readmenator._taint import TaintAnalyzer
 from readmenator._uml import UmlGenerator
+from readmenator._wiki import WikiGenerator
 
 
 class AnalyzerFactory:
@@ -52,6 +54,7 @@ class AnalyzerFactory:
         self._security: SecurityAnalyzer | None = None
         self._exporter: GraphExporter | None = None
         self._taint: TaintAnalyzer | None = None
+        self._dataflow: DataflowAnalyzer | None = None
         self._hotspots: HotspotAnalyzer | None = None
         self._layer_rules: LayerRuleEngine | None = None
         self._rule_gen: RuleGenerator | None = None
@@ -59,6 +62,7 @@ class AnalyzerFactory:
         self._cpg: CodePropertyGraph | None = None
         self._layer_detector: LayerDetector | None = None
         self._uml: UmlGenerator | None = None
+        self._wiki: WikiGenerator | None = None
         self._readme_injector: ReadmeInjector | None = None
         self._agent_injector: AgentInjector | None = None
         self._agent_output: AgentOutputGenerator | None = None
@@ -107,6 +111,13 @@ class AnalyzerFactory:
         return self._taint
 
     @property
+    def dataflow(self) -> DataflowAnalyzer:
+        """Return the lazily initialised dataflow analyzer."""
+        if self._dataflow is None:
+            self._dataflow = DataflowAnalyzer(self._config)
+        return self._dataflow
+
+    @property
     def hotspots(self) -> HotspotAnalyzer:
         if self._hotspots is None:
             self._hotspots = HotspotAnalyzer(self._config)
@@ -152,11 +163,19 @@ class AnalyzerFactory:
         return self._uml
 
     @property
+    def wiki(self) -> WikiGenerator:
+        """Return the lazily initialised agent wiki generator."""
+        if self._wiki is None:
+            self._wiki = WikiGenerator(self._config)
+        return self._wiki
+
+    @property
     def readme_injector(self) -> ReadmeInjector:
         if self._readme_injector is None:
             self._readme_injector = ReadmeInjector(
                 kb_filename=self._config.OUTPUT_FILENAME,
                 agent_output_dir=self._config.AGENT_OUTPUT_DIR,
+                wiki_output_dir=self._config.WIKI_OUTPUT_DIR,
             )
         return self._readme_injector
 
@@ -166,6 +185,7 @@ class AnalyzerFactory:
             self._agent_injector = AgentInjector(
                 kb_filename=self._config.AGENT_INJECTION_KB_FILENAME,
                 agent_output_dir=self._config.AGENT_OUTPUT_DIR,
+                wiki_output_dir=self._config.WIKI_OUTPUT_DIR,
             )
         return self._agent_injector
 
@@ -303,6 +323,12 @@ class DeepAnalysisRunner:
             else []
         )
 
+        dataflow_issues = (
+            self._factory.dataflow.analyze(nodes, content_map)
+            if config.DATAFLOW_ENABLED
+            else []
+        )
+
         return AnalysisResultV2(
             taint=taint_result,
             cycles=cycles,
@@ -310,4 +336,5 @@ class DeepAnalysisRunner:
             hotspots=hotspots,
             suggested_rules=suggested_rules,
             layer_violations=layer_violations,
+            dataflow_issues=dataflow_issues,
         )

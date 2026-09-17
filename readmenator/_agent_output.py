@@ -37,6 +37,7 @@ from readmenator._models import (
     SecurityFinding,
     Symbol,
 )
+from readmenator._security import fix_hint_for
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +90,7 @@ class AgentOutputGenerator:
         self._write(out_dir / "ARCHITECTURE.md", self._build_architecture(
             edges, resolved_edges, nodes,
         ))
-        self._write(out_dir / "SECURITY.md", self._build_security(findings))
+        self._write(out_dir / "SECURITY.md", self._build_security(findings, nodes))
         self._write(out_dir / "API.md", self._build_api(
             nodes, resolved_map, imported_by,
         ))
@@ -99,7 +100,7 @@ class AgentOutputGenerator:
         self._write_subsystem_files(
             out_dir, files_by_subsystem, resolved_map, imported_by, layers,
         )
-        self._write_recipes(recipes_dir, analysis, analysis_v2)
+        self._write_recipes(recipes_dir, analysis, analysis_v2, findings)
 
         logger.info(
             "Agent output written to %s (%d files)",
@@ -223,7 +224,9 @@ class AgentOutputGenerator:
     # SECURITY.md
     # ------------------------------------------------------------------
 
-    def _build_security(self, findings: List[SecurityFinding]) -> str:
+    def _build_security(
+        self, findings: List[SecurityFinding], nodes: Optional[List[Node]] = None
+    ) -> str:
         lines = ["# Security Findings", ""]
         if not findings:
             lines.append("No security findings.")
@@ -241,11 +244,30 @@ class AgentOutputGenerator:
             lines.append("")
             for f in sorted(group, key=lambda x: (x.file_path, x.line)):
                 cwe = f" [{f.cwe}]" if f.cwe else ""
+                scope = self._enclosing_symbol(nodes or [], f.file_path, f.line)
+                scope_str = f" (in `{scope}`)" if scope else ""
                 lines.append(
-                    f"- `{f.file_path}:{f.line}` -- {f.description}{cwe}"
+                    f"- `{f.file_path}:{f.line}`{scope_str} -- {f.description}{cwe}"
                 )
+                lines.append(f"  Fix: {fix_hint_for(f)}")
             lines.append("")
         return "\n".join(lines)
+
+    @staticmethod
+    def _enclosing_symbol(
+        nodes: List[Node], file_path: str, line: int
+    ) -> str:
+        """Return the nearest symbol defined at or before line in file_path."""
+        best = ""
+        best_line = -1
+        for node in nodes:
+            if node.node_id != file_path:
+                continue
+            for sym in node.symbols:
+                if sym.line <= line and sym.line > best_line:
+                    best = sym.name
+                    best_line = sym.line
+        return best
 
     # ------------------------------------------------------------------
     # API.md
@@ -336,6 +358,7 @@ class AgentOutputGenerator:
             "entrypoints": sorted(entry)[:10],
             "start_here": "INDEX.md",
             "workflow": [
+                "ls *.md readmenator-*/  # orient: docs first, ignore build noise",
                 "grep -n '<keyword>' INDEX.md",
                 "cat KB_<subsystem>.md",
                 "grep -n '<file>' ARCHITECTURE.md SYMBOLS.md",
@@ -401,7 +424,8 @@ class AgentOutputGenerator:
             )
             lines.append("")
             for c in analysis_v2.cycles[:10]:
-                cycle_str = " -> ".join(f"`{f}`" for f in c.cycle)
+                loop = list(c.cycle) + ([c.cycle[0]] if c.cycle else [])
+                cycle_str = " -> ".join(f"`{f}`" for f in loop)
                 lines.append(f"- {cycle_str}")
             lines.append("")
 
@@ -420,8 +444,20 @@ class AgentOutputGenerator:
             analysis_v2 and analysis_v2.hotspots,
             analysis_v2 and analysis_v2.cycles,
             analysis_v2 and analysis_v2.layer_violations,
+            analysis_v2 and analysis_v2.dataflow_issues,
         ]):
             lines.append("No gotchas detected.")
+            lines.append("")
+            return "\n".join(lines)
+
+        if analysis_v2 and analysis_v2.dataflow_issues:
+            lines.append("## Dataflow Issues (INFERRED, review each lead)")
+            lines.append("")
+            for issue in analysis_v2.dataflow_issues[:10]:
+                lines.append(
+                    f"- `{issue.file_path}:{issue.line}` `{issue.function}` "
+                    f"[{issue.kind}] `{issue.variable}`: {issue.description}"
+                )
             lines.append("")
 
         return "\n".join(lines)
@@ -504,7 +540,83 @@ class AgentOutputGenerator:
         recipes_dir: Path,
         analysis: Optional[AnalysisResult],
         analysis_v2: Optional[AnalysisResultV2],
+        findings: Optional[List[SecurityFinding]] = None,
     ) -> None:
+        cycles = list(analysis_v2.cycles[:3]) if analysis_v2 and analysis_v2.cycles else []
+        hotspots = list(analysis_v2.hotspots[:1]) if analysis_v2 and analysis_v2.hotspots else []
+        top_findings = sorted(
+            findings or [], key=lambda f: (_SEVERITY_ORDER.index(f.severity) if f.severity in _SEVERITY_ORDER else 99, f.file_path, f.line),
+        )[:3]
+
+        cycle_lines = ["# Recipe: Fix a Dependency Cycle", ""]
+        if cycles:
+            loop = list(cycles[0].cycle) + ([cycles[0].cycle[0]] if cycles[0].cycle else [])
+            cycle_lines.append(
+                "Target cycle: " + " -> ".join(f"`{f}`" for f in loop)
+            )
+            cycle_lines.append("")
+            cycle_lines.append(
+                "1. Read the imports between these files: "
+                + ", ".join(f"`grep -n '^import\\|^from\\|#include' {f}`" for f in dict.fromkeys(cycles[0].cycle))
+            )
+            cycle_lines.append("2. Move the shared symbols into a new leaf module both sides import")
+            cycle_lines.append("3. Verify: `readmenator . && grep -c 'Dependency Cycles' readmenator-agent/GOTCHAS.md`")
+        else:
+            cycle_lines.extend([
+                "1. Read cycles: `grep -A5 'Dependency Cycles' readmenator-agent/GOTCHAS.md`",
+                "2. Pick the cycle to break",
+                "3. Introduce an interface/abstraction to decouple",
+                "4. Verify: `readmenator . && grep -c 'cycle' readmenator-agent/GOTCHAS.md`",
+            ])
+        cycle_lines.append("")
+        self._write(recipes_dir / "fix-cycle.md", "\n".join(cycle_lines))
+
+        security_lines = ["# Recipe: Fix a Security Finding", ""]
+        if top_findings:
+            for f in top_findings:
+                security_lines.append(
+                    f"- `{f.file_path}:{f.line}` [{f.severity}] {f.rule_id}: {f.description}"
+                )
+                security_lines.append(f"  Fix: {fix_hint_for(f)}")
+            security_lines.append("")
+            security_lines.append(
+                "Verify: `readmenator . --audit && grep -c 'CRITICAL\\|HIGH' readmenator-agent/SECURITY.md`"
+            )
+        else:
+            security_lines.extend([
+                "1. Read findings: `grep -n '<file>' readmenator-agent/SECURITY.md`",
+                "2. Check API contract: `grep -A10 '<function>' readmenator-agent/API.md`",
+                "3. Apply fix",
+                "4. Verify: `readmenator . --audit && grep -c 'CRITICAL\\|HIGH' readmenator-agent/SECURITY.md`",
+            ])
+        security_lines.append("")
+        self._write(recipes_dir / "fix-security.md", "\n".join(security_lines))
+
+        hotspot_lines = ["# Recipe: Reduce File Complexity", ""]
+        if hotspots:
+            hotspot_lines.append(f"Target hotspot: `{hotspots[0].file_id}`")
+            hotspot_lines.append(
+                f"(complexity {hotspots[0].complexity_score:.1f}, "
+                f"centrality {hotspots[0].centrality_score:.1f})"
+            )
+            hotspot_lines.append("")
+            hotspot_lines.append(
+                f"1. Read dependents: `grep -n '{hotspots[0].file_id}' readmenator-agent/ARCHITECTURE.md`"
+            )
+            hotspot_lines.append("2. Extract functions/classes into new files in the same subsystem")
+            hotspot_lines.append("3. Update imports")
+            hotspot_lines.append("4. Regenerate: `readmenator .`")
+        else:
+            hotspot_lines.extend([
+                "1. Read hotspots: `grep -A5 'Hotspots' readmenator-agent/GOTCHAS.md`",
+                "2. Pick the worst offender",
+                "3. Extract functions/classes into new files in the same subsystem",
+                "4. Update imports",
+                "5. Regenerate: `readmenator .`",
+            ])
+        hotspot_lines.append("")
+        self._write(recipes_dir / "reduce-complexity.md", "\n".join(hotspot_lines))
+
         self._write(
             recipes_dir / "add-function.md",
             "# Recipe: Add a Function\n"
@@ -513,37 +625,6 @@ class AgentOutputGenerator:
             "2. Read the subsystem context: `cat readmenator-agent/KB_<subsystem>.md`\n"
             "3. Check dependencies: `grep -n '<filename>' readmenator-agent/ARCHITECTURE.md`\n"
             "4. Edit the file\n"
-            "5. Regenerate: `readmenator .`\n"
-            "\n",
-        )
-        self._write(
-            recipes_dir / "fix-cycle.md",
-            "# Recipe: Fix a Dependency Cycle\n"
-            "\n"
-            "1. Read cycles: `grep -A5 'Dependency Cycles' readmenator-agent/GOTCHAS.md`\n"
-            "2. Pick the cycle to break\n"
-            "3. Introduce an interface/abstraction to decouple\n"
-            "4. Verify: `readmenator . && grep -c 'cycle' readmenator-agent/GOTCHAS.md`\n"
-            "\n",
-        )
-        self._write(
-            recipes_dir / "fix-security.md",
-            "# Recipe: Fix a Security Finding\n"
-            "\n"
-            "1. Read findings: `grep -n '<file>' readmenator-agent/SECURITY.md`\n"
-            "2. Check API contract: `grep -A10 '<function>' readmenator-agent/API.md`\n"
-            "3. Apply fix\n"
-            "4. Verify: `readmenator . --audit && grep -c 'CRITICAL\\|HIGH' readmenator-agent/SECURITY.md`\n"
-            "\n",
-        )
-        self._write(
-            recipes_dir / "reduce-complexity.md",
-            "# Recipe: Reduce File Complexity\n"
-            "\n"
-            "1. Read hotspots: `grep -A5 'Hotspots' readmenator-agent/GOTCHAS.md`\n"
-            "2. Pick the worst offender\n"
-            "3. Extract functions/classes into new files in the same subsystem\n"
-            "4. Update imports\n"
             "5. Regenerate: `readmenator .`\n"
             "\n",
         )

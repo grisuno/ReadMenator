@@ -5,6 +5,25 @@ from readmenator._models import Symbol
 import re
 
 
+_PROTO_TYPE_WORDS = frozenset({
+    "void", "char", "short", "int", "long", "float", "double",
+    "signed", "unsigned", "struct", "union", "enum",
+    "const", "static", "extern", "inline", "virtual",
+    "size_t", "ssize_t", "ptrdiff_t", "bool",
+})
+
+
+def _has_type_prefix(prefix: str) -> bool:
+    """Return True when a prototype prefix carries a return type."""
+    tokens = re.findall(r"[A-Za-z_]\w*|\*|&", prefix)
+    for tok in tokens:
+        if tok in ("*", "&"):
+            return True
+        if tok in _PROTO_TYPE_WORDS or tok.endswith("_t"):
+            return True
+    return False
+
+
 
 class CParser(LanguageParser):
     """Parser for C, C++ (.c, .cpp, .cc, .cxx, .h, .hpp, .hxx).
@@ -164,7 +183,7 @@ class CParser(LanguageParser):
             preceding = content[max(0, m.start() - 200) : m.start()]
             if "/*" in preceding and "*/" not in preceding.split("/*")[-1]:
                 continue
-            line_num = content[: m.start()].count("\n")
+            line_num = content[: m.start(1)].count("\n")
             seen_funcs.add((name, line_num + 1))
             self.symbols.append(
                 Symbol(
@@ -182,7 +201,10 @@ class CParser(LanguageParser):
             if name in ("if", "for", "while", "switch", "catch", "return",
                         "sizeof", "typedef", "do", "else", "case"):
                 continue
-            line_num = content[: m.start()].count("\n")
+            prefix = content[m.start():m.start(1)]
+            if not _has_type_prefix(prefix):
+                continue
+            line_num = content[: m.start(1)].count("\n")
             if (name, line_num + 1) in seen_funcs:
                 continue
             if any(s.name == name and s.kind == "function" for s in self.symbols):
@@ -197,7 +219,7 @@ class CParser(LanguageParser):
                 )
             )
 
-        for m in re.finditer(r"^\s*extern\s+(?:\"C\"\s*\{?)?\s*([^;]+?)\s*(\w+)\s*(?:\[[^\]]*\])?\s*;", content, re.MULTILINE):
+        for m in re.finditer(r"^[ \t]*extern\s+(?:\"C\"\s*\{?)?\s*([^;]+?)\s*(\w+)\s*(?:\[[^\]]*\])?\s*;", content, re.MULTILINE):
             line_num = content[: m.start()].count("\n")
             self.symbols.append(
                 Symbol(
@@ -209,7 +231,7 @@ class CParser(LanguageParser):
                 )
             )
 
-        for m in re.finditer(r'^\s*#\s*define\s+(\w+)(\([^)]*\))?', content, re.MULTILINE):
+        for m in re.finditer(r'^[ \t]*#\s*define\s+(\w+)(\([^)]*\))?', content, re.MULTILINE):
             line_num = content[: m.start()].count("\n")
             sig = m.group(0).strip()[:200]
             self.symbols.append(
