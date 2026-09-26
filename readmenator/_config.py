@@ -257,6 +257,8 @@ class Config:
 
     DIAGRAM_ENABLED: bool = True
 
+    DIAGRAM_FULL_MODE: bool = False
+
     DIAGRAM_MAX_NODES: int = 60
 
     DIAGRAM_MAX_EDGES: int = 120

@@ -614,24 +614,26 @@ class readmenatorApplication:
         return issues
 
     def export_diagrams(
-        self, target_dir: str, output_dir: Optional[str] = None
+        self, target_dir: str, output_dir: Optional[str] = None, full: bool = False
     ) -> Dict[str, str]:
         """Export all five interactive system maps plus a gallery index.
 
         Args:
             target_dir: Project root directory.
             output_dir: Destination directory for map files.
+            full: True includes every file with a grown canvas, False truncates.
 
         Returns:
             Mapping of diagram kind to written file path.
         """
+        use_full = bool(full or self._config.DIAGRAM_FULL_MODE)
         nodes, edges = self._scan(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
         findings = self._last_findings or []
         maps = self._factory.diagram_builder.build_all(
-            nodes, edges, resolved, layers, findings, analysis
+            nodes, edges, resolved, layers, findings, analysis, use_full
         )
         root = Path(target_dir).resolve()
         dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_OUTPUT_DIR
@@ -663,7 +665,7 @@ class readmenatorApplication:
         return self._factory.diagram_renderer
 
     def export_diagram(
-        self, target_dir: str, kind: str, output_path: Optional[str] = None
+        self, target_dir: str, kind: str, output_path: Optional[str] = None, full: bool = False
     ) -> str:
         """Export a single interactive system map as standalone HTML.
 
@@ -671,10 +673,12 @@ class readmenatorApplication:
             target_dir: Project root directory.
             kind: Diagram kind identifier.
             output_path: Destination file path.
+            full: True includes every file with a grown canvas, False truncates.
 
         Returns:
             Rendered HTML document that was written.
         """
+        use_full = bool(full or self._config.DIAGRAM_FULL_MODE)
         nodes, edges = self._scan(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
@@ -682,7 +686,7 @@ class readmenatorApplication:
         findings = self._last_findings or []
         normalized = kind if kind in self._factory.diagram_builder.supported_kinds() else "architecture"
         system_map = self._factory.diagram_builder.build(
-            nodes, edges, resolved, layers, findings, analysis, normalized
+            nodes, edges, resolved, layers, findings, analysis, normalized, use_full
         )
         receipt = self._factory.diagram_validator.validate(system_map)
         if not receipt.passed:
@@ -700,24 +704,26 @@ class readmenatorApplication:
         return content
 
     def export_pages(
-        self, target_dir: str, output_dir: Optional[str] = None
+        self, target_dir: str, output_dir: Optional[str] = None, full: bool = False
     ) -> Dict[str, str]:
         """Publish all system maps plus a gallery index as a static site.
 
         Args:
             target_dir: Project root directory.
             output_dir: Destination directory for the static site.
+            full: True includes every file with a grown canvas, False truncates.
 
         Returns:
             Mapping of published page identifier to written file path.
         """
+        use_full = bool(full or self._config.DIAGRAM_FULL_MODE)
         nodes, edges = self._scan(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
         findings = self._last_findings or []
         maps = self._factory.diagram_builder.build_all(
-            nodes, edges, resolved, layers, findings, analysis
+            nodes, edges, resolved, layers, findings, analysis, use_full
         )
         root = Path(target_dir).resolve()
         dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_PAGES_DIR

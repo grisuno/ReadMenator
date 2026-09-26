@@ -514,6 +514,7 @@ tests/
 - CLI: `diagrams` exports all five maps, `diagram <kind>` exports one map
 - AnalyzerFactory exposes diagram_builder, diagram_renderer, diagram_validator, vis_renderer (lazy init)
 - Configurable via DIAGRAM_ENABLED, DIAGRAM_OUTPUT_DIR, and all DIAGRAM_* geometry/scope/style settings
+- Full mode (`DIAGRAM_FULL_MODE=True` or `diagrams --full` / `diagram <kind> --full` / `pages --full`): zero exclusions, every scanned file in every map, grown per-map canvas, size-limit checks D004/D008 skipped, gallery cards report "full scope"
 
 ## Design Principles
 

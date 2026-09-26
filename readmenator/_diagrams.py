@@ -210,6 +210,27 @@ class SystemMapValidator:
         """
         self._config = config
 
+    def _effective_canvas(self, system_map: SystemMap) -> Tuple[int, int]:
+        """Return the canvas bounds applying per-map full-mode growth.
+
+        Args:
+            system_map: Map carrying optional canvas_width/canvas_height metadata.
+
+        Returns:
+            Effective canvas width and height pair.
+        """
+        width = self._config.DIAGRAM_CANVAS_WIDTH
+        height = self._config.DIAGRAM_CANVAS_HEIGHT
+        try:
+            width = max(width, int(str(system_map.meta.get("canvas_width", width))))
+        except ValueError:
+            pass
+        try:
+            height = max(height, int(str(system_map.meta.get("canvas_height", height))))
+        except ValueError:
+            pass
+        return width, height
+
     def validate(self, system_map: SystemMap) -> MapReceipt:
         """Validate a system map and return a deterministic receipt.
 
@@ -292,7 +313,8 @@ class SystemMapValidator:
                         repair="remove the loop or model it as a retry transition",
                     )
                 )
-        if len(system_map.nodes) > self._config.DIAGRAM_MAX_NODES:
+        full = str(system_map.meta.get("full", "")).lower() == "true"
+        if not full and len(system_map.nodes) > self._config.DIAGRAM_MAX_NODES:
             errors.append(
                 MapDiagnostic(
                     rule="D004",
@@ -304,7 +326,7 @@ class SystemMapValidator:
                     repair="reduce scope to the primary path plus side branches",
                 )
             )
-        if len(system_map.edges) > self._config.DIAGRAM_MAX_EDGES:
+        if not full and len(system_map.edges) > self._config.DIAGRAM_MAX_EDGES:
             errors.append(
                 MapDiagnostic(
                     rule="D008",
@@ -326,6 +348,7 @@ class SystemMapValidator:
                 )
             )
         positions: Set[Tuple[int, int]] = set()
+        canvas_w, canvas_h = self._effective_canvas(system_map)
         for node in system_map.nodes:
             if node.x < 0 or node.y < 0:
                 errors.append(
@@ -336,7 +359,7 @@ class SystemMapValidator:
                         repair="re-run the deterministic layout",
                     )
                 )
-            if node.x > self._config.DIAGRAM_CANVAS_WIDTH or node.y > self._config.DIAGRAM_CANVAS_HEIGHT:
+            if node.x > canvas_w or node.y > canvas_h:
                 errors.append(
                     MapDiagnostic(
                         rule="D010",
@@ -446,6 +469,19 @@ class SystemMapBuilder:
         """
         return list(self._config.DIAGRAM_KINDS)
 
+    def _is_full(self, full: Optional[bool]) -> bool:
+        """Return whether full-map scope applies for this build.
+
+        Args:
+            full: Explicit caller override, None honors configuration.
+
+        Returns:
+            True when every scanned file must be included without truncation.
+        """
+        if full is not None:
+            return bool(full)
+        return bool(self._config.DIAGRAM_FULL_MODE)
+
     def build(
         self,
         nodes: Sequence[Node],
@@ -455,6 +491,7 @@ class SystemMapBuilder:
         findings: Optional[Sequence[SecurityFinding]] = None,
         analysis: Optional[AnalysisResult] = None,
         kind: str = "architecture",
+        full: Optional[bool] = None,
     ) -> SystemMap:
         """Build one deterministic system map of the requested kind.
 
@@ -466,20 +503,22 @@ class SystemMapBuilder:
             findings: Security findings used for sensitivity marking.
             analysis: Graph analysis used for centrality ranking.
             kind: Diagram kind identifier.
+            full: True includes every file with a grown canvas, None honors config.
 
         Returns:
             Validated system map intermediate representation.
         """
         normalized = kind if kind in self.supported_kinds() else "architecture"
+        use_full = self._is_full(full)
         if normalized == "architecture":
-            return self._build_architecture(nodes, resolved_edges or edges, layers, findings, analysis)
+            return self._build_architecture(nodes, resolved_edges or edges, layers, findings, analysis, use_full)
         if normalized == "workflow":
-            return self._build_workflow(nodes, resolved_edges or edges, layers, findings)
+            return self._build_workflow(nodes, resolved_edges or edges, layers, findings, use_full)
         if normalized == "sequence":
-            return self._build_sequence(nodes, resolved_edges or edges, layers, analysis)
+            return self._build_sequence(nodes, resolved_edges or edges, layers, analysis, use_full)
         if normalized == "dataflow":
-            return self._build_dataflow(nodes, resolved_edges or edges, layers, findings)
-        return self._build_lifecycle(nodes, resolved_edges or edges, layers, findings)
+            return self._build_dataflow(nodes, resolved_edges or edges, layers, findings, use_full)
+        return self._build_lifecycle(nodes, resolved_edges or edges, layers, findings, use_full)
 
     def build_all(
         self,
@@ -489,6 +528,7 @@ class SystemMapBuilder:
         layers: Optional[Dict[str, str]] = None,
         findings: Optional[Sequence[SecurityFinding]] = None,
         analysis: Optional[AnalysisResult] = None,
+        full: Optional[bool] = None,
     ) -> Dict[str, SystemMap]:
         """Build all five diagram kinds deterministically.
 
@@ -499,6 +539,7 @@ class SystemMapBuilder:
             layers: Mapping of file identifier to architectural layer.
             findings: Security findings used for sensitivity marking.
             analysis: Graph analysis used for centrality ranking.
+            full: True includes every file with a grown canvas, None honors config.
 
         Returns:
             Mapping of diagram kind to system map.
@@ -506,7 +547,7 @@ class SystemMapBuilder:
         result: Dict[str, SystemMap] = {}
         for kind in self.supported_kinds():
             result[kind] = self.build(
-                nodes, edges, resolved_edges, layers, findings, analysis, kind
+                nodes, edges, resolved_edges, layers, findings, analysis, kind, full
             )
         return result
 
@@ -637,6 +678,7 @@ class SystemMapBuilder:
         nodes: Sequence[Node],
         links: Sequence[Edge],
         analysis: Optional[AnalysisResult],
+        full: bool = False,
     ) -> List[Node]:
         """Select the primary node scope honoring the configured limit.
 
@@ -644,24 +686,28 @@ class SystemMapBuilder:
             nodes: Scanned file nodes.
             links: Internal edges used for ranking.
             analysis: Optional analysis with centrality scores.
+            full: True returns every ranked node without truncation.
 
         Returns:
             Primary nodes in deterministic ranked order.
         """
         ordered_ids = self._ranked_file_ids(nodes, links, analysis)
         by_id = {node.node_id: node for node in nodes}
+        if full:
+            return [by_id[nid] for nid in ordered_ids if nid in by_id]
         limit = max(1, self._config.DIAGRAM_MAX_NODES)
         selected = [by_id[nid] for nid in ordered_ids[:limit] if nid in by_id]
         return selected
 
     def _internal_links(
-        self, edges: Sequence[Edge], selected: Set[str]
+        self, edges: Sequence[Edge], selected: Set[str], full: bool = False
     ) -> List[Edge]:
         """Filter edges to project-internal links between selected files.
 
         Args:
             edges: Candidate edges.
             selected: Selected file identifiers.
+            full: True keeps every internal edge without truncation.
 
         Returns:
             Deterministically ordered internal edges.
@@ -672,6 +718,8 @@ class SystemMapBuilder:
             if edge.source in selected and edge.target in selected
         ]
         kept.sort(key=lambda e: (e.source, e.target, e.relation))
+        if full:
+            return kept
         return kept[: max(0, self._config.DIAGRAM_MAX_EDGES)]
 
     def _symbol_records(self, node: Node) -> List[Dict[str, str]]:
@@ -712,13 +760,14 @@ class SystemMapBuilder:
         return text[: max(1, limit - 1)] + "+"
 
     def _layout_columns(
-        self, items: List[Tuple[str, str]], kind: str
+        self, items: List[Tuple[str, str]], kind: str, full: bool = False
     ) -> Dict[str, Tuple[int, int]]:
         """Compute deterministic column lane coordinates for grouped items.
 
         Args:
             items: Pairs of identifier and group name.
             kind: Diagram kind used only for metadata completeness.
+            full: True keeps every lane and grows the canvas instead of dropping.
 
         Returns:
             Mapping of identifier to canvas coordinates.
@@ -738,7 +787,8 @@ class SystemMapBuilder:
         for group in sorted(lanes):
             if group not in used_lanes:
                 used_lanes.append(group)
-        used_lanes = self._lanes_that_fit(used_lanes)
+        if not full:
+            used_lanes = self._lanes_that_fit(used_lanes)
         positions: Dict[str, Tuple[int, int]] = {}
         lane_count = max(1, len(used_lanes))
         canvas_w = self._config.DIAGRAM_CANVAS_WIDTH
@@ -836,11 +886,12 @@ class SystemMapBuilder:
             scoped.append(node)
         return scoped
 
-    def _layout_sequence(self, ordered: List[str]) -> Dict[str, Tuple[int, int]]:
+    def _layout_sequence(self, ordered: List[str], full: bool = False) -> Dict[str, Tuple[int, int]]:
         """Compute deterministic lifeline row coordinates for sequences.
 
         Args:
             ordered: Participant identifiers in display order.
+            full: True wraps participants across rows instead of truncating width.
 
         Returns:
             Mapping of identifier to canvas coordinates.
@@ -849,12 +900,27 @@ class SystemMapBuilder:
         col_gap = self._config.DIAGRAM_COLUMN_GAP
         canvas_w = self._config.DIAGRAM_CANVAS_WIDTH
         margin_x = self._config.DIAGRAM_MARGIN_X
-        gap = self._fitted_gap(len(ordered), width, col_gap, canvas_w, margin_x)
-        total_w = len(ordered) * width + max(0, len(ordered) - 1) * gap
+        if not full:
+            gap = self._fitted_gap(len(ordered), width, col_gap, canvas_w, margin_x)
+            total_w = len(ordered) * width + max(0, len(ordered) - 1) * gap
+            start_x = margin_x + max(0, (canvas_w - 2 * margin_x - total_w) // 2)
+            positions: Dict[str, Tuple[int, int]] = {}
+            for index, nid in enumerate(ordered):
+                positions[nid] = (start_x + index * (width + gap), self._config.DIAGRAM_SEQUENCE_TOP)
+            return positions
+        per_row = max(1, self._sequence_capacity())
+        row_step = self._config.DIAGRAM_NODE_HEIGHT + self._config.DIAGRAM_ROW_GAP
+        gap = self._fitted_gap(min(len(ordered), per_row), width, col_gap, canvas_w, margin_x)
+        total_w = per_row * width + max(0, per_row - 1) * gap
         start_x = margin_x + max(0, (canvas_w - 2 * margin_x - total_w) // 2)
-        positions: Dict[str, Tuple[int, int]] = {}
+        positions = {}
         for index, nid in enumerate(ordered):
-            positions[nid] = (start_x + index * (width + gap), self._config.DIAGRAM_SEQUENCE_TOP)
+            col = index % per_row
+            row = index // per_row
+            positions[nid] = (
+                start_x + col * (width + gap),
+                self._config.DIAGRAM_SEQUENCE_TOP + row * row_step,
+            )
         return positions
 
     def _sequence_capacity(self) -> int:
@@ -872,7 +938,7 @@ class SystemMapBuilder:
         return max(1, available // max(1, step))
 
     def _place(
-        self, ranked: List[Node], layer_of: Dict[str, str], kind: str
+        self, ranked: List[Node], layer_of: Dict[str, str], kind: str, full: bool = False
     ) -> Tuple[Dict[str, Tuple[int, int]], List[Node]]:
         """Cap lane scope and compute coordinates for placed nodes only.
 
@@ -880,15 +946,57 @@ class SystemMapBuilder:
             ranked: Nodes in global rank order.
             layer_of: Mapping of file identifier to lane name.
             kind: Diagram kind used only for metadata completeness.
+            full: True keeps every node without lane caps or drops.
 
         Returns:
             Canvas positions and the placed node subset.
         """
-        scoped = self._cap_lane_scope(ranked, layer_of)
+        scoped = list(ranked) if full else self._cap_lane_scope(ranked, layer_of)
         items = [(node.node_id, layer_of.get(node.node_id, "utility")) for node in scoped]
-        positions = self._layout_columns(items, kind)
+        positions = self._layout_columns(items, kind, full)
         placed = [node for node in scoped if node.node_id in positions]
         return positions, placed
+
+    def _canvas_for(self, positions: Dict[str, Tuple[int, int]], full: bool = False) -> Tuple[int, int]:
+        """Grow the canvas to enclose every placed node in full mode.
+
+        Args:
+            positions: Placed node coordinates.
+            full: True grows beyond configured bounds, False returns configured size.
+
+        Returns:
+            Effective canvas width and height pair.
+        """
+        base_w = self._config.DIAGRAM_CANVAS_WIDTH
+        base_h = self._config.DIAGRAM_CANVAS_HEIGHT
+        if not full or not positions:
+            return base_w, base_h
+        need_w = max(x for x, _ in positions.values()) + self._config.DIAGRAM_NODE_WIDTH + self._config.DIAGRAM_MARGIN_X
+        need_h = max(y for _, y in positions.values()) + self._config.DIAGRAM_NODE_HEIGHT + self._config.DIAGRAM_MARGIN_Y
+        return max(base_w, need_w), max(base_h, need_h)
+
+    def _meta_for(self, kind: str, placed: List[MapNode], links: int, total: int, positions: Dict[str, Tuple[int, int]], full: bool = False) -> Dict[str, str]:
+        """Build generation metadata with honest scope and canvas size.
+
+        Args:
+            kind: Diagram kind identifier, unused beyond completeness.
+            placed: Authored map nodes.
+            links: Authored edge count.
+            total: Total scanned file count.
+            positions: Placed coordinates used for canvas growth.
+            full: True tags the map as untruncated with a grown canvas.
+
+        Returns:
+            Metadata mapping for receipts and exports.
+        """
+        del kind
+        canvas_w, canvas_h = self._canvas_for(positions, full)
+        meta = {"scope": str(len(placed)), "total": str(total), "links": str(links)}
+        if full:
+            meta["full"] = "true"
+            meta["canvas_width"] = str(canvas_w)
+            meta["canvas_height"] = str(canvas_h)
+        return meta
 
     def _make_views(
         self, kind: str, primary: List[str], links: Sequence[Edge]
@@ -969,6 +1077,7 @@ class SystemMapBuilder:
         layers: Optional[Dict[str, str]],
         findings: Optional[Sequence[SecurityFinding]],
         analysis: Optional[AnalysisResult],
+        full: bool = False,
     ) -> SystemMap:
         """Build the runtime architecture map from file topology.
 
@@ -978,15 +1087,16 @@ class SystemMapBuilder:
             layers: Layer mapping.
             findings: Security findings.
             analysis: Graph analysis.
+            full: True keeps every file without truncation.
 
         Returns:
             Architecture system map.
         """
-        selected = self._select_primary(nodes, links, analysis)
+        selected = self._select_primary(nodes, links, analysis, full)
         layer_of_all = {node.node_id: (layers or {}).get(node.node_id, "utility") for node in selected}
-        positions, selected = self._place(selected, layer_of_all, "architecture")
+        positions, selected = self._place(selected, layer_of_all, "architecture", full)
         chosen = {node.node_id for node in selected}
-        kept = self._internal_links(links, chosen)
+        kept = self._internal_links(links, chosen, full)
         sensitive = self._sensitive_files(findings)
         groups = {node.node_id: layer_of_all[node.node_id] for node in selected}
         map_nodes = [
@@ -1017,7 +1127,7 @@ class SystemMapBuilder:
             nodes=map_nodes,
             edges=map_edges,
             views=views,
-            meta={"scope": str(len(map_nodes)), "total": str(len(nodes)), "links": str(len(map_edges))},
+            meta=self._meta_for("architecture", map_nodes, len(map_edges), len(nodes), positions, full),
         )
 
     def _build_workflow(
@@ -1026,6 +1136,7 @@ class SystemMapBuilder:
         links: Sequence[Edge],
         layers: Optional[Dict[str, str]],
         findings: Optional[Sequence[SecurityFinding]],
+        full: bool = False,
     ) -> SystemMap:
         """Build the delivery workflow map across architectural lanes.
 
@@ -1034,29 +1145,33 @@ class SystemMapBuilder:
             links: Internal edges.
             layers: Layer mapping.
             findings: Security findings.
+            full: True keeps every file without lane sampling.
 
         Returns:
             Workflow system map.
         """
-        selected = self._select_primary(nodes, links, None)
+        selected = self._select_primary(nodes, links, None, full)
         layer_of = {node.node_id: (layers or {}).get(node.node_id, "utility") for node in selected}
-        lane_representative: Dict[str, Node] = {}
-        for node in selected:
-            group = layer_of[node.node_id]
-            if group not in lane_representative:
-                lane_representative[group] = node
-        lane_nodes = [lane_representative[group] for group in self._GROUP_ORDER if group in lane_representative]
-        if not lane_nodes:
-            lane_nodes = list(selected[: min(len(selected), self._config.DIAGRAM_WORKFLOW_FALLBACK_NODES)])
+        if full:
+            lane_nodes = list(selected)
+        else:
+            lane_representative: Dict[str, Node] = {}
+            for node in selected:
+                group = layer_of[node.node_id]
+                if group not in lane_representative:
+                    lane_representative[group] = node
+            lane_nodes = [lane_representative[group] for group in self._GROUP_ORDER if group in lane_representative]
+            if not lane_nodes:
+                lane_nodes = list(selected[: min(len(selected), self._config.DIAGRAM_WORKFLOW_FALLBACK_NODES)])
         chosen = {node.node_id for node in lane_nodes}
         sensitive = self._sensitive_files(findings)
-        kept = self._internal_links(links, chosen)
+        kept = self._internal_links(links, chosen, full)
         workflow_edges: List[MapEdge] = [
             MapEdge(source=e.source, target=e.target, label=e.relation, kind=e.relation)
             for e in kept
         ]
         items = [(node.node_id, layer_of[node.node_id]) for node in lane_nodes]
-        positions = self._layout_columns(items, "workflow")
+        positions = self._layout_columns(items, "workflow", full)
         lane_nodes = [node for node in lane_nodes if node.node_id in positions]
         chain = [node.node_id for node in lane_nodes]
         for first, second in zip(chain, chain[1:]):
@@ -1066,7 +1181,9 @@ class SystemMapBuilder:
         ordered_edges = sorted(
             [e for e in workflow_edges if e.source in placed_ids and e.target in placed_ids],
             key=lambda e: (e.source, e.target),
-        )[: max(0, self._config.DIAGRAM_MAX_EDGES)]
+        )
+        if not full:
+            ordered_edges = ordered_edges[: max(0, self._config.DIAGRAM_MAX_EDGES)]
         map_nodes = [
             MapNode(
                 node_id=node.node_id,
@@ -1090,7 +1207,7 @@ class SystemMapBuilder:
             nodes=map_nodes,
             edges=ordered_edges,
             views=views,
-            meta={"scope": str(len(map_nodes)), "total": str(len(nodes)), "links": str(len(ordered_edges))},
+            meta=self._meta_for("workflow", map_nodes, len(ordered_edges), len(nodes), positions, full),
         )
 
     def _build_sequence(
@@ -1099,6 +1216,7 @@ class SystemMapBuilder:
         links: Sequence[Edge],
         layers: Optional[Dict[str, str]],
         analysis: Optional[AnalysisResult],
+        full: bool = False,
     ) -> SystemMap:
         """Build the request sequence map over top participants.
 
@@ -1107,26 +1225,36 @@ class SystemMapBuilder:
             links: Internal edges.
             layers: Layer mapping.
             analysis: Graph analysis.
+            full: True keeps every participant with wrapped rows.
 
         Returns:
             Sequence system map.
         """
-        selected = self._select_primary(nodes, links, analysis)
-        width_cap = min(
-            max(1, self._config.DIAGRAM_SEQUENCE_MAX_PARTICIPANTS),
-            self._sequence_capacity(),
-        )
-        participants = list(selected[: min(len(selected), width_cap)])
-        if len(participants) < 2 and len(selected) >= 2:
-            participants = list(selected[: min(len(selected), 2)])
+        selected = self._select_primary(nodes, links, analysis, full)
+        if full:
+            participants = list(selected)
+        else:
+            width_cap = min(
+                max(1, self._config.DIAGRAM_SEQUENCE_MAX_PARTICIPANTS),
+                self._sequence_capacity(),
+            )
+            participants = list(selected[: min(len(selected), width_cap)])
+            if len(participants) < 2 and len(selected) >= 2:
+                participants = list(selected[: min(len(selected), 2)])
         chosen = {node.node_id for node in participants}
         ordered_ids = [node.node_id for node in participants]
-        positions = self._layout_sequence(ordered_ids)
-        kept = self._internal_links(links, chosen)
-        sequence_edges: List[MapEdge] = [
-            MapEdge(source=e.source, target=e.target, label=e.relation, kind=e.relation)
-            for e in kept[: min(len(kept), max(1, self._config.DIAGRAM_MAX_EDGES // 2))]
-        ]
+        positions = self._layout_sequence(ordered_ids, full)
+        kept = self._internal_links(links, chosen, full)
+        if full:
+            sequence_edges: List[MapEdge] = [
+                MapEdge(source=e.source, target=e.target, label=e.relation, kind=e.relation)
+                for e in kept
+            ]
+        else:
+            sequence_edges = [
+                MapEdge(source=e.source, target=e.target, label=e.relation, kind=e.relation)
+                for e in kept[: min(len(kept), max(1, self._config.DIAGRAM_MAX_EDGES // 2))]
+            ]
         if not sequence_edges and len(ordered_ids) >= 2:
             sequence_edges = [
                 MapEdge(
@@ -1161,7 +1289,7 @@ class SystemMapBuilder:
             nodes=map_nodes,
             edges=sequence_edges,
             views=views,
-            meta={"scope": str(len(map_nodes)), "total": str(len(nodes)), "links": str(len(sequence_edges))},
+            meta=self._meta_for("sequence", map_nodes, len(sequence_edges), len(nodes), positions, full),
         )
 
     def _build_dataflow(
@@ -1170,6 +1298,7 @@ class SystemMapBuilder:
         links: Sequence[Edge],
         layers: Optional[Dict[str, str]],
         findings: Optional[Sequence[SecurityFinding]],
+        full: bool = False,
     ) -> SystemMap:
         """Build the data flow map from sources through stores.
 
@@ -1178,15 +1307,16 @@ class SystemMapBuilder:
             links: Internal edges.
             layers: Layer mapping.
             findings: Security findings for sensitivity.
+            full: True keeps every file without truncation.
 
         Returns:
             Dataflow system map.
         """
-        selected = self._select_primary(nodes, links, None)
+        selected = self._select_primary(nodes, links, None, full)
         proto_layer_of = {node.node_id: (layers or {}).get(node.node_id, "utility") for node in selected}
-        _proto_positions, selected = self._place(selected, proto_layer_of, "dataflow")
+        _proto_positions, selected = self._place(selected, proto_layer_of, "dataflow", full)
         chosen = {node.node_id for node in selected}
-        kept = self._internal_links(links, chosen)
+        kept = self._internal_links(links, chosen, full)
         targets = {edge.target for edge in kept}
         sources = [node for node in selected if node.node_id not in targets]
         stores = [
@@ -1207,7 +1337,7 @@ class SystemMapBuilder:
                 stage_of[node.node_id] = "data_access"
             else:
                 stage_of[node.node_id] = layer_of[node.node_id]
-        positions, ordered = self._place(ordered, stage_of, "dataflow")
+        positions, ordered = self._place(ordered, stage_of, "dataflow", full)
         placed_ids = {node.node_id for node in ordered}
         scoped_kept = [e for e in kept if e.source in placed_ids and e.target in placed_ids]
         map_nodes = [
@@ -1242,7 +1372,7 @@ class SystemMapBuilder:
             nodes=map_nodes,
             edges=map_edges,
             views=views,
-            meta={"scope": str(len(map_nodes)), "total": str(len(nodes)), "links": str(len(map_edges))},
+            meta=self._meta_for("dataflow", map_nodes, len(map_edges), len(nodes), positions, full),
         )
 
     def _build_lifecycle(
@@ -1251,6 +1381,7 @@ class SystemMapBuilder:
         links: Sequence[Edge],
         layers: Optional[Dict[str, str]],
         findings: Optional[Sequence[SecurityFinding]],
+        full: bool = False,
     ) -> SystemMap:
         """Build the change lifecycle map with waits, retries, and terminals.
 
@@ -1259,15 +1390,16 @@ class SystemMapBuilder:
             links: Internal edges.
             layers: Layer mapping.
             findings: Security findings.
+            full: True keeps every file without truncation.
 
         Returns:
             Lifecycle system map.
         """
-        selected = self._select_primary(nodes, links, None)
+        selected = self._select_primary(nodes, links, None, full)
         proto_layer_of = {node.node_id: (layers or {}).get(node.node_id, "utility") for node in selected}
-        _proto_positions, selected = self._place(selected, proto_layer_of, "lifecycle")
+        _proto_positions, selected = self._place(selected, proto_layer_of, "lifecycle", full)
         chosen = {node.node_id for node in selected}
-        kept = self._internal_links(links, chosen)
+        kept = self._internal_links(links, chosen, full)
         sensitive = self._sensitive_files(findings)
         layer_of = {node.node_id: proto_layer_of[node.node_id] for node in selected}
         dependents: Dict[str, int] = {}
@@ -1281,7 +1413,7 @@ class SystemMapBuilder:
                 state_of[node.node_id] = terminal_group
             else:
                 state_of[node.node_id] = layer_of[node.node_id]
-        positions, selected = self._place(selected, state_of, "lifecycle")
+        positions, selected = self._place(selected, state_of, "lifecycle", full)
         placed_ids = {node.node_id for node in selected}
         scoped_kept = [e for e in kept if e.source in placed_ids and e.target in placed_ids]
         group_of = {node.node_id: state_of[node.node_id] for node in selected}
@@ -1325,13 +1457,14 @@ class SystemMapBuilder:
                 deduped.append(edge)
                 seen_routes.add(key)
         views = self._make_views("lifecycle", [node.node_id for node in selected], deduped)
+        final_edges = deduped if full else deduped[: max(0, self._config.DIAGRAM_MAX_EDGES)]
         return SystemMap(
             kind="lifecycle",
             title=self._title_for("lifecycle"),
             nodes=map_nodes,
-            edges=deduped[: max(0, self._config.DIAGRAM_MAX_EDGES)],
+            edges=final_edges,
             views=views,
-            meta={"scope": str(len(map_nodes)), "total": str(len(nodes)), "links": str(len(deduped))},
+            meta=self._meta_for("lifecycle", map_nodes, len(final_edges), len(nodes), positions, full),
         )
 
 
@@ -1346,6 +1479,27 @@ class InteractiveMapRenderer:
         """
         self._config = config
 
+    def _canvas_size(self, system_map: SystemMap) -> Tuple[int, int]:
+        """Return the effective canvas size for rendering a map.
+
+        Args:
+            system_map: Map carrying optional grown canvas metadata.
+
+        Returns:
+            Effective canvas width and height pair.
+        """
+        width = self._config.DIAGRAM_CANVAS_WIDTH
+        height = self._config.DIAGRAM_CANVAS_HEIGHT
+        try:
+            width = max(width, int(str(system_map.meta.get("canvas_width", width))))
+        except ValueError:
+            pass
+        try:
+            height = max(height, int(str(system_map.meta.get("canvas_height", height))))
+        except ValueError:
+            pass
+        return width, height
+
     def render(self, system_map: SystemMap) -> str:
         """Render a system map as a self-contained HTML document.
 
@@ -1355,6 +1509,7 @@ class InteractiveMapRenderer:
         Returns:
             Complete standalone HTML document with inline SVG and scripting.
         """
+        canvas_w, canvas_h = self._canvas_size(system_map)
         nodes_payload = [
             {
                 "id": node.node_id,
@@ -1435,16 +1590,16 @@ class InteractiveMapRenderer:
                     "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
                     "nodeWidth": self._config.DIAGRAM_NODE_WIDTH,
                     "nodeHeight": self._config.DIAGRAM_NODE_HEIGHT,
-                    "canvasWidth": self._config.DIAGRAM_CANVAS_WIDTH,
-                    "canvasHeight": self._config.DIAGRAM_CANVAS_HEIGHT,
+                    "canvasWidth": canvas_w,
+                    "canvasHeight": canvas_h,
                 }
             ),
         )
         document = document.replace(
             "__PRESETS_JSON__", self._safe_json(list(self._config.DIAGRAM_PRESETS))
         )
-        document = document.replace("__CANVAS_W__", str(self._config.DIAGRAM_CANVAS_WIDTH))
-        document = document.replace("__CANVAS_H__", str(self._config.DIAGRAM_CANVAS_HEIGHT))
+        document = document.replace("__CANVAS_W__", str(canvas_w))
+        document = document.replace("__CANVAS_H__", str(canvas_h))
         return document
 
     def write(
@@ -2769,6 +2924,7 @@ root.setAttribute("data-theme",root.getAttribute("data-theme")==="light"?"dark":
         """
         href = self._escape(href_prefix + kind + ".html")
         total = system_map.meta.get("total", str(len(system_map.nodes)))
+        scope = "full scope" if str(system_map.meta.get("full", "")).lower() == "true" else "primary scope"
         return (
             '<article class="card" data-kind="'
             + self._escape(kind)
@@ -2780,7 +2936,9 @@ root.setAttribute("data-theme",root.getAttribute("data-theme")==="light"?"dark":
             + str(len(system_map.nodes))
             + " of "
             + self._escape(str(total))
-            + " files in primary scope | "
+            + " files in "
+            + scope
+            + " | "
             + str(len(system_map.edges))
             + " links | "
             + str(len(system_map.views))

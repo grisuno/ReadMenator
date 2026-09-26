@@ -39,8 +39,11 @@ def build_parser() -> argparse.ArgumentParser:
             "  generate-rules          Generate .cursorrules for AI assistants\n"
             "  refactor-monolith       Generate refactoring plans for large files\n"
             "  diagrams                Export 5 vis.js maps + gallery index (needs network)\n"
+            "  diagrams --full         Export 5 full maps with every file, no truncation\n"
             "  diagram <kind>          Export one vis.js map (needs network)\n"
+            "  diagram <kind> --full   Export one full map with every file\n"
             "  pages                   Publish maps plus gallery index into docs/ (static site)\n"
+            "  pages --full            Publish full maps with every file\n"
             "  wiki                    Generate navigable agent wiki (index + community pages)\n"
             "  lint-wiki               Health-check the agent wiki\n"
             "\n"
@@ -264,15 +267,18 @@ def main() -> None:
                     print(f"  [{action.action_type}] {action.description}")
             return
         elif command == "diagrams":
-            written = app.export_diagrams(target)
+            use_full = "--full" in sys.argv
+            written = app.export_diagrams(target, full=use_full)
             for kind, path in sorted(written.items()):
                 print(f"{kind}: {path}")
             return
         elif command == "diagram" and len(sys.argv) >= 4:
-            app.export_diagram(target, sys.argv[3])
+            use_full = "--full" in sys.argv
+            app.export_diagram(target, sys.argv[3], full=use_full)
             return
         elif command == "pages":
-            written = app.export_pages(target)
+            use_full = "--full" in sys.argv
+            written = app.export_pages(target, full=use_full)
             for kind, path in sorted(written.items()):
                 print(f"{kind}: {path}")
             return
