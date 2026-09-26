@@ -11,8 +11,8 @@
 - Language: py
 - Symbols:
   - `build_parser` (function, line 16) `def build_parser()`
-  - `_run_tests` (function, line 107) `def _run_tests()`
-  - `main` (function, line 122) `def main()`
+  - `_run_tests` (function, line 110) `def _run_tests()`
+  - `main` (function, line 125) `def main()`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
@@ -119,21 +119,21 @@
   - `export_obsidian` (method, line 565) `def export_obsidian(self, target_dir, output_dir)`
   - `export_wiki` (method, line 575) `def export_wiki(self, target_dir, output_dir)`
   - `lint_wiki` (method, line 598) `def lint_wiki(self, target_dir)`
-  - `export_diagrams` (method, line 616) `def export_diagrams(self, target_dir, output_dir)`
-  - `_live_renderer` (method, line 655) `def _live_renderer(self)`
-  - `export_diagram` (method, line 665) `def export_diagram(self, target_dir, kind, output_path)`
-  - `export_pages` (method, line 702) `def export_pages(self, target_dir, output_dir)`
-  - `watch` (method, line 738) `def watch(self, target_dir)`
-  - `audit` (method, line 748) `def audit(self, target_dir)`
-  - `audit_deep` (method, line 755) `def audit_deep(self, target_dir)`
-  - `export_sarif` (method, line 775) `def export_sarif(self, target_dir, output_path)`
-  - `export_rules` (method, line 785) `def export_rules(self, target_dir, output_dir)`
-  - `detect_layers` (method, line 795) `def detect_layers(self, target_dir)`
-  - `lint` (method, line 805) `def lint(self, target_dir)`
-  - `strip_dead_code` (method, line 818) `def strip_dead_code(self, target_dir)`
-  - `generate_cursorrules` (method, line 828) `def generate_cursorrules(self, target_dir)`
-  - `refactor_monolith` (method, line 843) `def refactor_monolith(self, target_dir)`
-  - `on_change` (method, line 742) `def on_change()`
+  - `export_diagrams` (method, line 616) `def export_diagrams(self, target_dir, output_dir, full)`
+  - `_live_renderer` (method, line 657) `def _live_renderer(self)`
+  - `export_diagram` (method, line 667) `def export_diagram(self, target_dir, kind, output_path, full)`
+  - `export_pages` (method, line 706) `def export_pages(self, target_dir, output_dir, full)`
+  - `watch` (method, line 744) `def watch(self, target_dir)`
+  - `audit` (method, line 754) `def audit(self, target_dir)`
+  - `audit_deep` (method, line 761) `def audit_deep(self, target_dir)`
+  - `export_sarif` (method, line 781) `def export_sarif(self, target_dir, output_path)`
+  - `export_rules` (method, line 791) `def export_rules(self, target_dir, output_dir)`
+  - `detect_layers` (method, line 801) `def detect_layers(self, target_dir)`
+  - `lint` (method, line 811) `def lint(self, target_dir)`
+  - `strip_dead_code` (method, line 824) `def strip_dead_code(self, target_dir)`
+  - `generate_cursorrules` (method, line 834) `def generate_cursorrules(self, target_dir)`
+  - `refactor_monolith` (method, line 849) `def refactor_monolith(self, target_dir)`
+  - `on_change` (method, line 748) `def on_change()`
 - Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_watcher.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`
 
@@ -287,62 +287,67 @@
   - `MapReceipt` (class, line 165) `class MapReceipt`
   - `MapDelta` (class, line 182) `class MapDelta`
   - `SystemMapValidator` (class, line 202) `class SystemMapValidator`
-  - `SystemMapBuilder` (class, line 403) `class SystemMapBuilder`
-  - `InteractiveMapRenderer` (class, line 1338) `class InteractiveMapRenderer`
-  - `VisNetworkRenderer` (class, line 2031) `class VisNetworkRenderer`
-  - `DocsSitePublisher` (class, line 2552) `class DocsSitePublisher`
+  - `SystemMapBuilder` (class, line 426) `class SystemMapBuilder`
+  - `InteractiveMapRenderer` (class, line 1471) `class InteractiveMapRenderer`
+  - `VisNetworkRenderer` (class, line 2186) `class VisNetworkRenderer`
+  - `DocsSitePublisher` (class, line 2707) `class DocsSitePublisher`
   - `__init__` (method, line 205) `def __init__(self, config)`
-  - `validate` (method, line 213) `def validate(self, system_map)`
-  - `__init__` (method, line 432) `def __init__(self, config)`
-  - `supported_kinds` (method, line 441) `def supported_kinds(self)`
-  - `build` (method, line 449) `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind)`
-  - `build_all` (method, line 484) `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis)`
-  - `compare` (method, line 513) `def compare(self, base, head)`
-  - `_title_for` (method, line 552) `def _title_for(self, kind)`
-  - `_role_for` (method, line 566) `def _role_for(self, group, sensitive)`
-  - `_sensitive_files` (method, line 583) `def _sensitive_files(self, findings)`
-  - `_ranked_file_ids` (method, line 600) `def _ranked_file_ids(self, nodes, links, analysis)`
-  - `_select_primary` (method, line 635) `def _select_primary(self, nodes, links, analysis)`
-  - `_internal_links` (method, line 657) `def _internal_links(self, edges, selected)`
-  - `_symbol_records` (method, line 677) `def _symbol_records(self, node)`
-  - `_short_label` (method, line 699) `def _short_label(self, value)`
-  - `_layout_columns` (method, line 714) `def _layout_columns(self, items, kind)`
-  - `_lanes_that_fit` (method, line 760) `def _lanes_that_fit(self, lanes)`
-  - `_fitted_gap` (method, line 777) `def _fitted_gap(self, count, item, gap, total, margin)`
-  - `_lane_capacity` (method, line 801) `def _lane_capacity(self)`
-  - `_cap_lane_scope` (method, line 815) `def _cap_lane_scope(self, ranked, layer_of)`
-  - `_layout_sequence` (method, line 839) `def _layout_sequence(self, ordered)`
-  - `_sequence_capacity` (method, line 860) `def _sequence_capacity(self)`
-  - `_place` (method, line 874) `def _place(self, ranked, layer_of, kind)`
-  - `_make_views` (method, line 893) `def _make_views(self, kind, primary, links)`
-  - `_build_architecture` (method, line 965) `def _build_architecture(self, nodes, links, layers, findings, analysis)`
-  - `_build_workflow` (method, line 1023) `def _build_workflow(self, nodes, links, layers, findings)`
-  - `_build_sequence` (method, line 1096) `def _build_sequence(self, nodes, links, layers, analysis)`
-  - `_build_dataflow` (method, line 1167) `def _build_dataflow(self, nodes, links, layers, findings)`
-  - `_build_lifecycle` (method, line 1248) `def _build_lifecycle(self, nodes, links, layers, findings)`
-  - `__init__` (method, line 1341) `def __init__(self, config)`
-  - `render` (method, line 1349) `def render(self, system_map)`
-  - `write` (method, line 1450) `def write(self, system_map, output_path)`
-  - `_safe_json` (method, line 1469) `def _safe_json(self, payload)`
-  - `_escape` (method, line 1480) `def _escape(self, value)`
-  - `_role_color` (method, line 1491) `def _role_color(self, role)`
-  - `_edge_path` (method, line 1502) `def _edge_path(self, x1, y1, x2, y2)`
-  - `_nodes_svg` (method, line 1538) `def _nodes_svg(self, system_map)`
-  - `_edges_svg` (method, line 1586) `def _edges_svg(self, system_map)`
-  - `_template` (method, line 1633) `def _template(self)`
-  - `__init__` (method, line 2039) `def __init__(self, config)`
-  - `render` (method, line 2047) `def render(self, system_map)`
-  - `write` (method, line 2148) `def write(self, system_map, output_path)`
-  - `_tooltip` (method, line 2165) `def _tooltip(self, node)`
-  - `_template` (method, line 2196) `def _template(self)`
-  - `__init__` (method, line 2569) `def __init__(self, config)`
-  - `description_for` (method, line 2579) `def description_for(self, kind)`
-  - `publish` (method, line 2593) `def publish(self, maps, project_name, output_dir, stats, renderer)`
-  - `render_index` (method, line 2651) `def render_index(self, project_name, maps, stats, href_prefix)`
-  - `_href_prefix` (method, line 2748) `def _href_prefix(self)`
-  - `_card` (method, line 2759) `def _card(self, kind, system_map, href_prefix)`
-  - `_stats_line` (method, line 2795) `def _stats_line(self, stats)`
-  - `_escape` (method, line 2809) `def _escape(self, value)`
+  - `_effective_canvas` (method, line 213) `def _effective_canvas(self, system_map)`
+  - `validate` (method, line 234) `def validate(self, system_map)`
+  - `__init__` (method, line 455) `def __init__(self, config)`
+  - `supported_kinds` (method, line 464) `def supported_kinds(self)`
+  - `_is_full` (method, line 472) `def _is_full(self, full)`
+  - `build` (method, line 485) `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)`
+  - `build_all` (method, line 523) `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)`
+  - `compare` (method, line 554) `def compare(self, base, head)`
+  - `_title_for` (method, line 593) `def _title_for(self, kind)`
+  - `_role_for` (method, line 607) `def _role_for(self, group, sensitive)`
+  - `_sensitive_files` (method, line 624) `def _sensitive_files(self, findings)`
+  - `_ranked_file_ids` (method, line 641) `def _ranked_file_ids(self, nodes, links, analysis)`
+  - `_select_primary` (method, line 676) `def _select_primary(self, nodes, links, analysis, full)`
+  - `_internal_links` (method, line 702) `def _internal_links(self, edges, selected, full)`
+  - `_symbol_records` (method, line 725) `def _symbol_records(self, node)`
+  - `_short_label` (method, line 747) `def _short_label(self, value)`
+  - `_layout_columns` (method, line 762) `def _layout_columns(self, items, kind, full)`
+  - `_lanes_that_fit` (method, line 810) `def _lanes_that_fit(self, lanes)`
+  - `_fitted_gap` (method, line 827) `def _fitted_gap(self, count, item, gap, total, margin)`
+  - `_lane_capacity` (method, line 851) `def _lane_capacity(self)`
+  - `_cap_lane_scope` (method, line 865) `def _cap_lane_scope(self, ranked, layer_of)`
+  - `_layout_sequence` (method, line 889) `def _layout_sequence(self, ordered, full)`
+  - `_sequence_capacity` (method, line 926) `def _sequence_capacity(self)`
+  - `_place` (method, line 940) `def _place(self, ranked, layer_of, kind, full)`
+  - `_canvas_for` (method, line 960) `def _canvas_for(self, positions, full)`
+  - `_meta_for` (method, line 978) `def _meta_for(self, kind, placed, links, total, positions, full)`
+  - `_make_views` (method, line 1001) `def _make_views(self, kind, primary, links)`
+  - `_build_architecture` (method, line 1073) `def _build_architecture(self, nodes, links, layers, findings, analysis, full)`
+  - `_build_workflow` (method, line 1133) `def _build_workflow(self, nodes, links, layers, findings, full)`
+  - `_build_sequence` (method, line 1213) `def _build_sequence(self, nodes, links, layers, analysis, full)`
+  - `_build_dataflow` (method, line 1295) `def _build_dataflow(self, nodes, links, layers, findings, full)`
+  - `_build_lifecycle` (method, line 1378) `def _build_lifecycle(self, nodes, links, layers, findings, full)`
+  - `__init__` (method, line 1474) `def __init__(self, config)`
+  - `_canvas_size` (method, line 1482) `def _canvas_size(self, system_map)`
+  - `render` (method, line 1503) `def render(self, system_map)`
+  - `write` (method, line 1605) `def write(self, system_map, output_path)`
+  - `_safe_json` (method, line 1624) `def _safe_json(self, payload)`
+  - `_escape` (method, line 1635) `def _escape(self, value)`
+  - `_role_color` (method, line 1646) `def _role_color(self, role)`
+  - `_edge_path` (method, line 1657) `def _edge_path(self, x1, y1, x2, y2)`
+  - `_nodes_svg` (method, line 1693) `def _nodes_svg(self, system_map)`
+  - `_edges_svg` (method, line 1741) `def _edges_svg(self, system_map)`
+  - `_template` (method, line 1788) `def _template(self)`
+  - `__init__` (method, line 2194) `def __init__(self, config)`
+  - `render` (method, line 2202) `def render(self, system_map)`
+  - `write` (method, line 2303) `def write(self, system_map, output_path)`
+  - `_tooltip` (method, line 2320) `def _tooltip(self, node)`
+  - `_template` (method, line 2351) `def _template(self)`
+  - `__init__` (method, line 2724) `def __init__(self, config)`
+  - `description_for` (method, line 2734) `def description_for(self, kind)`
+  - `publish` (method, line 2748) `def publish(self, maps, project_name, output_dir, stats, renderer)`
+  - `render_index` (method, line 2806) `def render_index(self, project_name, maps, stats, href_prefix)`
+  - `_href_prefix` (method, line 2903) `def _href_prefix(self)`
+  - `_card` (method, line 2914) `def _card(self, kind, system_map, href_prefix)`
+  - `_stats_line` (method, line 2953) `def _stats_line(self, stats)`
+  - `_escape` (method, line 2967) `def _escape(self, value)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
 

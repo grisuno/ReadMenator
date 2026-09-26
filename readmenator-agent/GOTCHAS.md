@@ -12,8 +12,8 @@ These files have the most connections. Changes here have high blast radius.
 - `readmenator/_app.py` (score: 44.40)
 - `tests/test_parsers_property.py` (score: 42.70)
 - `readmenator/_mcp_server.py` (score: 21.20)
+- `readmenator/_diagrams.py` (score: 19.20)
 - `readmenator/_documentation.py` (score: 18.80)
-- `readmenator/_diagrams.py` (score: 18.70)
 
 ## Hotspots (complexity + centrality)
 
@@ -23,9 +23,9 @@ These files have the most connections. Changes here have high blast radius.
 - `readmenator/_app.py` -- complexity: 0.5, centrality: 0.4, combined: 0.5
 - `tests/test_agent_output.py` -- complexity: 0.5, centrality: 0.4, combined: 0.4
 - `tests/test_parsers.py` -- complexity: 1.0, centrality: 0.1, combined: 0.4
+- `readmenator/_diagrams.py` -- complexity: 0.8, centrality: 0.2, combined: 0.4
 - `tests/test_parsers_property.py` -- complexity: 0.3, centrality: 0.5, combined: 0.4
 - `tests/test_ranking.py` -- complexity: 0.8, centrality: 0.1, combined: 0.4
-- `readmenator/_diagrams.py` -- complexity: 0.8, centrality: 0.2, combined: 0.4
 - `readmenator/_config.py` -- complexity: 0.0, centrality: 0.6, combined: 0.4
 
 ## Dependency Cycles

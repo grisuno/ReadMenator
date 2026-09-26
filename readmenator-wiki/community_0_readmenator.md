@@ -49,8 +49,8 @@ This community groups 93 file(s) rooted at `readmenator` with dominant language 
 ## Key Symbols
 
 - `build_parser` (function, `readmenator/__main__.py:16`) `def build_parser()`
-- `_run_tests` (function, `readmenator/__main__.py:107`) `def _run_tests()`
-- `main` (function, `readmenator/__main__.py:122`) `def main()`
+- `_run_tests` (function, `readmenator/__main__.py:110`) `def _run_tests()`
+- `main` (function, `readmenator/__main__.py:125`) `def main()`
 - `AgentOutputGenerator` (class, `readmenator/_agent_output.py:47`) `class AgentOutputGenerator` - Generates agent-friendly, grep-optimised output files.
 - `__init__` (method, `readmenator/_agent_output.py:54`) `def __init__(self, config)`
 - `generate` (method, `readmenator/_agent_output.py:61`) `def generate(self, nodes, edges, resolved_edges, analysis, analysis_v2, findings` - Write all agent output files and return the output directory path.
@@ -97,20 +97,20 @@ This community groups 93 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/__main__.py` via `subprocess` (2 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_app.py` via `subprocess` (3 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_config.py` via `subprocess` (3 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_mcp_server.py` via `subprocess` (3 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_cursorrules_generator.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_models.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_config.py` via `subprocess` (3 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_app.py` via `subprocess` (3 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_query.py` via `subprocess` (4 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_layers.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_models.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_watcher.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_cache.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_rank.py` via `subprocess` (4 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_diagrams.py` via `subprocess` (4 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_pipeline.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_query.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_resolver.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_rank.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_watcher.py` via `subprocess` (4 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_refactorizer.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_dead_code.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_linter.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_resolver.py` via `subprocess` (4 hops)
 
 ## Open Questions
 

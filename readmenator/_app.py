@@ -186,7 +186,7 @@ class readmenatorApplication:
 
         if self._config.DIAGRAM_ENABLED:
             try:
-                self.export_diagrams(str(root))
+                self.export_diagrams(str(root), full=True)
             except Exception:
                 logger.debug("Interactive maps skipped", exc_info=True)
 
