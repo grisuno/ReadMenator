@@ -190,6 +190,11 @@ class readmenatorApplication:
             except Exception:
                 logger.debug("Interactive maps skipped", exc_info=True)
 
+        self._maybe_export_video(
+            root, nodes, edges, resolved_edges, analysis,
+            layers, findings, analysis_v2, content_map,
+        )
+
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         self._log_summary(
@@ -739,6 +744,70 @@ class readmenatorApplication:
         )
         logger.info("Documentation site published: %d pages in %s", len(written), dest)
         return written
+
+
+    def export_video(
+        self, target_dir: str, output_path: Optional[str] = None,
+    ) -> Optional[str]:
+        """Render the cinematic overview video for the target project.
+
+        Args:
+            target_dir: Project root directory.
+            output_path: Destination mp4 path.
+
+        Returns:
+            Written file path, or None when video is disabled or skipped.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve())
+        analysis_v2 = self._deep_runner.run(nodes, edges, resolved, layers, content_map)
+        root = Path(target_dir).resolve()
+        return self._maybe_export_video(
+            root, nodes, edges, resolved, analysis,
+            layers, findings, analysis_v2, content_map, output_path,
+        )
+
+    def _maybe_export_video(
+        self,
+        root: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
+        analysis_v2: Optional[AnalysisResultV2],
+        content_map: Optional[Dict[str, str]] = None,
+        output_path: Optional[str] = None,
+    ) -> Optional[str]:
+        """Render video when enabled, skipping gracefully without deps."""
+        if not self._config.VIDEO_ENABLED:
+            return None
+        try:
+            from readmenator._video import dependencies_available
+        except ImportError:
+            logger.debug("Video skipped: _video module unavailable")
+            return None
+        if not dependencies_available():
+            logger.info("Video skipped: PIL or ffmpeg not available")
+            return None
+        try:
+            out = Path(output_path) if output_path else root / self._config.VIDEO_OUTPUT
+            if not out.is_absolute():
+                out = root / out
+            data = self._factory.video.collect(
+                nodes, edges, resolved_edges, analysis, layers,
+                findings or [], analysis_v2, root.name, content_map or {},
+            )
+            written = self._factory.video.render(data, str(out))
+            logger.info("Overview video: %s", written)
+            return written
+        except Exception:
+            logger.debug("Overview video skipped", exc_info=True)
+            return None
 
 
     def watch(self, target_dir: str) -> None:

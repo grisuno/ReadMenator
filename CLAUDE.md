@@ -34,6 +34,7 @@ readmenator/
   _cpg.py           - Code Property Graph (CPG) JSON-LD embed generator
   _uml.py           - UML class diagram generator (Mermaid classDiagram + 12-language code generation)
   _diagrams.py      - Interactive system maps: typed IR, validator, builder, standalone HTML renderer
+  _video.py         - Cinematic synthwave overview video (general-purpose codebase explainer, PIL + ffmpeg)
   _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
   _agent_injector.py - Injects KB + agent output references into AI agent config files
   _agent_output.py   - Agent-friendly grep-optimized output generator (INDEX.md, API.md, etc.)
@@ -72,6 +73,7 @@ tests/
   test_mcp_server.py    - MCP server protocol, tools, and resources contract tests
   test_uml.py           - UML class diagram and code generation contract tests
   test_diagrams.py      - Interactive system maps contract tests (IR, validation, rendering)
+  test_video.py         - Cinematic video contract tests (collect, scenes, frames, skip)
   test_readme_injector.py - README injection contract tests
   test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
   test_wiki.py - Agent wiki contract tests (index, community pages, connections, orphans, lint, privacy)
@@ -116,6 +118,9 @@ tests/
 - Map documentation payload (DIAGRAM_MAP_SYMBOLS_PER_NODE, DIAGRAM_TOOLTIP_DOC_CHARS, DIAGRAM_NEIGHBOR_NAMES)
 - Live CDN renderer settings (DIAGRAM_VIS_ENABLED, DIAGRAM_VIS_CDN_JS, DIAGRAM_VIS_CDN_CSS, DIAGRAM_VIS_PHYSICS_ENABLED, DIAGRAM_VIS_STABILIZE_ITERATIONS)
 - Pages publishing settings (DIAGRAM_PAGES_DIR, DIAGRAM_MAPS_SUBDIR)
+- Cinematic video settings (VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS)
+- Video act durations (VIDEO_TITLE_S, VIDEO_CARD_S, VIDEO_LAYER_S, VIDEO_GOD_S, VIDEO_TREE_S, VIDEO_COMM_S, VIDEO_GRAPH_S, VIDEO_DNA_S, VIDEO_OUTRO_S)
+- Video scope settings (VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -284,7 +289,7 @@ tests/
 ### AnalyzerFactory Contract (pipeline)
 - Lazy property-based initialization of all analyzer components
 - Each component is created on first access and cached
-- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector, video
 - Decouples the application orchestrator from concrete instantiation
 
 ### DeepAnalysisRunner Contract (pipeline)
@@ -516,6 +521,17 @@ tests/
 - Configurable via DIAGRAM_ENABLED, DIAGRAM_OUTPUT_DIR, and all DIAGRAM_* geometry/scope/style settings
 - Full mode (`DIAGRAM_FULL_MODE=True` or `diagrams --full` / `diagram <kind> --full` / `pages --full`): zero exclusions, every scanned file in every map, grown per-map canvas, size-limit checks D004/D008 skipped, gallery cards report "full scope"
 - `run`/`rebuild` always export full maps (`export_diagrams(full=True)`), so default `KNOWLEDGE_BASE.md` regeneration never ships truncated doom-only diagrams
+
+### Cinematic Video Contract
+- CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)
+- General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
+- Six acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V resolved import graph with packets + hottest ranking, VI code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, outro telemetry
+- Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
+- Fit by construction: all panels/boxes derived from VIDEO_WIDTH/HEIGHT, graph capped at VIDEO_MAX_GRAPH_NODES, DNA capped at 144 cells, labels truncated to VIDEO_MAX_LABEL_CHARS
+- Optional dependency: dependencies_available() checks PIL + ffmpeg; run()/rebuild() skip with a warning when missing, never fail the KB pipeline
+- AnalyzerFactory exposes video (lazy init); app.export_video(target) renders standalone, run()/rebuild() auto-render to VIDEO_OUTPUT unless VIDEO_ENABLED=False
+- CLI: `video` renders the mp4, `--video` forces it, `--no-video` skips it (including on the `--rebuild` path)
+- Configurable via VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS, per-act VIDEO_*_S durations, VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH
 
 ## Design Principles
 

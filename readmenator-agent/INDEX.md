@@ -18,7 +18,7 @@
 | `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files.  Detects c | readmenator | 14 |
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat | readmenator | 18 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph.  Provides community d | readmenator | 14 |
-| `readmenator/_app.py` | - | readmenator | 44 |
+| `readmenator/_app.py` | - | readmenator | 46 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching.  Computes | readmenator | 13 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph.  Defines typed morphisms ( | readmenator | 26 |
 | `readmenator/_config.py` | Immutable configuration dataclass for readmenator.  All tuneable parameters live | readmenator | 1 |
@@ -37,7 +37,7 @@
 | `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator.  Exposes the full cod | readmenator | 52 |
 | `readmenator/_mermaid.py` | Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edg | readmenator | 4 |
 | `readmenator/_models.py` | Data model types for the readmenator knowledge graph.  Defines the core entity t | readmenator | 20 |
-| `readmenator/_pipeline.py` | - | readmenator | 32 |
+| `readmenator/_pipeline.py` | - | readmenator | 33 |
 | `readmenator/_projections.py` | Functors and projections for the readmenator code category.  Defines projection  | readmenator | 15 |
 | `readmenator/_query.py` | Query engine for the readmenator knowledge base.  Supports natural-language-like | readmenator | 17 |
 | `readmenator/_rank.py` | PageRank, Personalized PageRank, HITS, and composite scoring.  Provides typed-gr | readmenator | 17 |
@@ -50,6 +50,7 @@
 | `readmenator/_security.py` | Pattern-based static security analysis for the readmenator knowledge graph.  Sca | readmenator | 32 |
 | `readmenator/_taint.py` | - | readmenator | 6 |
 | `readmenator/_uml.py` | - | readmenator | 25 |
+| `readmenator/_video.py` | Cinematic codebase overview video, general purpose.  Renders a short synthwave e | readmenator | 49 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base.  Monitors the project | readmenator | 5 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator.  Builds a navigable, progres | readmenator | 34 |
 | `readmenator/parsers/__init__.py` | - | parsers | 2 |
@@ -109,4 +110,5 @@
 | `tests/test_taint.py` | - | tests | 10 |
 | `tests/test_taint_bdd.py` | BDD-style contract tests for taint propagation analysis.  Uses pytest-bdd scenar | tests | 26 |
 | `tests/test_uml.py` | Contract tests for UML class diagram generation and language code generation.  S | tests | 49 |
+| `tests/test_video.py` | Contract tests for the cinematic overview video renderer. | tests | 14 |
 | `tests/test_wiki.py` | - | tests | 30 |

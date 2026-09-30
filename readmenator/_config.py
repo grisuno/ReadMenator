@@ -349,3 +349,43 @@ class Config:
         ("messagebus", "#fb923c"),
         ("external", "#94a3b8"),
     )
+
+    VIDEO_ENABLED: bool = True
+
+    VIDEO_OUTPUT: str = "readmenator.mp4"
+
+    VIDEO_WIDTH: int = 1280
+
+    VIDEO_HEIGHT: int = 720
+
+    VIDEO_FPS: int = 24
+
+    VIDEO_CRF: str = "20"
+
+    VIDEO_JOBS: int = 0
+
+    VIDEO_TITLE_S: float = 5.0
+
+    VIDEO_CARD_S: float = 2.2
+
+    VIDEO_LAYER_S: float = 8.0
+
+    VIDEO_GOD_S: float = 8.0
+
+    VIDEO_TREE_S: float = 10.0
+
+    VIDEO_PREVIEW_LINES: int = 24
+
+    VIDEO_COMM_S: float = 9.0
+
+    VIDEO_GRAPH_S: float = 12.0
+
+    VIDEO_DNA_S: float = 10.0
+
+    VIDEO_OUTRO_S: float = 7.0
+
+    VIDEO_MAX_GRAPH_NODES: int = 60
+
+    VIDEO_MAX_LABEL_CHARS: int = 28
+
+    VIDEO_MUSIC_PATH: str = ""

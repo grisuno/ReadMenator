@@ -46,6 +46,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  pages --full            Publish full maps with every file\n"
             "  wiki                    Generate navigable agent wiki (index + community pages)\n"
             "  lint-wiki               Health-check the agent wiki\n"
+            "  video                   Render cinematic overview video (synthwave mp4)\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -58,6 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  --cypher                Export graph.cypher (Neo4j/Memgraph)\n"
             "  --test                  Run the test suite\n"
             "  --privacy               Privacy mode (strip snippets and docstrings)\n"
+            "  --video / --no-video    Force enable/disable overview video render\n"
             "  --no-agent-injection    Skip injecting KB reference into AI agent files\n"
             "  --no-agent-output       Skip generating agent-friendly output directory\n"
             "  --sarif                 Generate SARIF audit file\n"
@@ -88,6 +90,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-analysis", action="store_true", help="Skip community detection and graph analysis")
     parser.add_argument("--audit", action="store_true", help="Run static security analysis and include findings in output")
     parser.add_argument("--privacy", action="store_true", help="Privacy mode: strip source snippets and docstrings from output")
+    parser.add_argument("--video", dest="video", action="store_true", default=None, help="Force enable overview video render")
+    parser.add_argument("--no-video", dest="video", action="store_false", help="Skip overview video render")
     parser.add_argument("--no-agent-injection", dest="no_agent_injection", action="store_true", help="Skip injecting KB reference into AI agent files")
     parser.add_argument("--no-agent-output", dest="no_agent_output", action="store_true", help="Skip generating agent-friendly output directory")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
@@ -282,9 +286,18 @@ def main() -> None:
             for kind, path in sorted(written.items()):
                 print(f"{kind}: {path}")
             return
+        elif command == "video":
+            out = app.export_video(target)
+            if out:
+                print(out)
+            else:
+                logger.info("Video skipped (disabled or missing PIL/ffmpeg)")
+            return
         elif command == "--rebuild":
             argset = set(sys.argv[3:])
             run_security = True if "--audit" in argset else None
+            if "--no-video" in argset:
+                app = readmenatorApplication(Config(VIDEO_ENABLED=False))
             app.rebuild(target, run_security=run_security)
             return
         elif command.startswith("--"):
@@ -319,23 +332,27 @@ def main() -> None:
     target = args.target
 
     app = readmenatorApplication()
+    video_override = args.video
     if args.privacy:
         app = readmenatorApplication(Config(
             PRIVACY_MODE=True, SARIF_ENABLED=args.sarif,
             SECURITY_ENABLED=args.audit,
             AGENT_INJECTION_ENABLED=not args.no_agent_injection,
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
+            VIDEO_ENABLED=video_override if video_override is not None else True,
         ))
     elif args.sarif:
         app = readmenatorApplication(Config(
             SARIF_ENABLED=True, SECURITY_ENABLED=args.audit,
             AGENT_INJECTION_ENABLED=not args.no_agent_injection,
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
+            VIDEO_ENABLED=video_override if video_override is not None else True,
         ))
-    elif args.no_agent_injection or args.no_agent_output:
+    elif args.no_agent_injection or args.no_agent_output or video_override is not None:
         app = readmenatorApplication(Config(
             AGENT_INJECTION_ENABLED=not args.no_agent_injection,
             AGENT_OUTPUT_ENABLED=not args.no_agent_output,
+            VIDEO_ENABLED=video_override if video_override is not None else True,
         ))
 
     output_path = Path(target) / "KNOWLEDGE_BASE.md"
@@ -344,7 +361,10 @@ def main() -> None:
         app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
     else:
         if args.context_budget > 0:
-            app = readmenatorApplication(Config(CONTEXT_BUDGET=args.context_budget))
+            app = readmenatorApplication(Config(
+                CONTEXT_BUDGET=args.context_budget,
+                VIDEO_ENABLED=video_override if video_override is not None else True,
+            ))
             app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
         else:
             result = app.summary(target)

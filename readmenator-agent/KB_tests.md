@@ -1149,6 +1149,27 @@
   - `test_generate_ruby_produces_valid_code` (method, line 480) `def test_generate_ruby_produces_valid_code(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_uml.py`
 
+## tests/test_video.py
+- Layer: testing
+- Doc: Contract tests for the cinematic overview video renderer.
+- Language: py
+- Symbols:
+  - `_nodes` (function, line 15) `def _nodes()`
+  - `_analysis` (function, line 23) `def _analysis()`
+  - `TestVideoContract` (class, line 35) `class TestVideoContract(TestCase)`
+  - `test_video_collect_counts` (method, line 36) `def test_video_collect_counts(self)`
+  - `test_video_collect_empty_project` (method, line 48) `def test_video_collect_empty_project(self)`
+  - `test_video_collect_enriched_fields` (method, line 58) `def test_video_collect_enriched_fields(self)`
+  - `test_video_build_scenes_durations` (method, line 78) `def test_video_build_scenes_durations(self)`
+  - `test_video_all_scenes_render_small_canvas` (method, line 88) `def test_video_all_scenes_render_small_canvas(self)`
+  - `test_video_graph_positions_deterministic` (method, line 106) `def test_video_graph_positions_deterministic(self)`
+  - `test_video_single_frame_bytes` (method, line 117) `def test_video_single_frame_bytes(self)`
+  - `test_video_hash_color_deterministic` (method, line 132) `def test_video_hash_color_deterministic(self)`
+  - `test_video_short_label_truncates` (method, line 138) `def test_video_short_label_truncates(self)`
+  - `test_video_dependencies_returns_bool` (method, line 143) `def test_video_dependencies_returns_bool(self)`
+  - `test_video_disabled_skips_without_render` (method, line 146) `def test_video_disabled_skips_without_render(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_video.py`
+
 ## tests/test_wiki.py
 - Layer: testing
 - Language: py

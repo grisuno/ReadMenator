@@ -1,6 +1,6 @@
 # orphans
 
-*Community 2 | 12 files | cohesion 0.00*
+*Community 3 | 12 files | cohesion 0.00*
 
 ## Definition
 
@@ -63,8 +63,8 @@ This community groups 12 file(s) rooted at `root` with dominant language sh (coh
 
 ## Connections
 
-- [INFERRED] shares_context community 0 <-> 2 (strength 0.5): Inferred shared context (layer utility) with no import path between community 0 (readmenator) and community 2 (orphans).
-- [INFERRED] shares_context community 1 <-> 2 (strength 0.5): Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 2 (orphans).
+- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 3 (orphans).
+- [INFERRED] shares_context community 2 <-> 3 (strength 0.5): Inferred shared context (layer utility) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).
 
 ## Risks
 

@@ -35,6 +35,7 @@ from readmenator._scanner import PolyglotScanner
 from readmenator._security import SecurityAnalyzer
 from readmenator._taint import TaintAnalyzer
 from readmenator._uml import UmlGenerator
+from readmenator._video import CinematicVideoRenderer
 from readmenator._wiki import WikiGenerator
 
 
@@ -71,6 +72,7 @@ class AnalyzerFactory:
         self._diagram_validator: SystemMapValidator | None = None
         self._diagram_publisher: DocsSitePublisher | None = None
         self._vis_renderer: VisNetworkRenderer | None = None
+        self._video: CinematicVideoRenderer | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -229,6 +231,13 @@ class AnalyzerFactory:
         if self._vis_renderer is None:
             self._vis_renderer = VisNetworkRenderer(self._config)
         return self._vis_renderer
+
+    @property
+    def video(self) -> CinematicVideoRenderer:
+        """Return the lazily initialised cinematic video renderer."""
+        if self._video is None:
+            self._video = CinematicVideoRenderer(self._config)
+        return self._video
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

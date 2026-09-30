@@ -9,7 +9,7 @@ from readmenator._config import Config
 class TestEndToEndContract(unittest.TestCase):
     def setUp(self) -> None:
         self.temp_dir = Path(tempfile.mkdtemp())
-        self.config = Config()
+        self.config = Config(VIDEO_ENABLED=False)
         self.app = readmenatorApplication(self.config)
 
     def tearDown(self) -> None:
@@ -103,7 +103,7 @@ class TestEndToEndContract(unittest.TestCase):
             self.assertGreaterEqual(result.taint.source_count, 0)
 
     def test_privacy_mode_works(self) -> None:
-        cfg = Config(PRIVACY_MODE=True)
+        cfg = Config(PRIVACY_MODE=True, VIDEO_ENABLED=False)
         app = readmenatorApplication(cfg)
         self._write("main.py", '"""File doc."""\ndef hello():\n    """Func doc."""\n    pass\n')
         app.run(str(self.temp_dir))
@@ -113,7 +113,7 @@ class TestEndToEndContract(unittest.TestCase):
 
     def test_export_sarif_produces_file(self) -> None:
         self._write("main.py", "eval('danger')\n")
-        cfg = Config(SECURITY_ENABLED=True)
+        cfg = Config(SECURITY_ENABLED=True, VIDEO_ENABLED=False)
         app = readmenatorApplication(cfg)
         app.export_sarif(str(self.temp_dir))
         sarif_path = self.temp_dir / "readmenator_audit.sarif"

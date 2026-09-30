@@ -1,15 +1,15 @@
 {
   "tool": "readmenator",
-  "generated_at": "2026-09-26T17:26:45Z",
+  "generated_at": "2026-09-30T20:05:35Z",
   "project_root": "/home/grisun0/src_note/py/readmenator.py/repo/ReadMenator",
-  "files": 108,
-  "symbols": 1666,
-  "imports": 10249,
-  "resolved_imports": 314,
+  "files": 110,
+  "symbols": 1732,
+  "imports": 11117,
+  "resolved_imports": 322,
   "security_findings": 0,
   "languages": {
     "sh": 10,
-    "py": 98
+    "py": 100
   },
   "entrypoints": [
     "readmenator/__main__.py"
