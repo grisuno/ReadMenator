@@ -2752,6 +2752,9 @@ class DocsSitePublisher:
         output_dir: str,
         stats: Optional[Dict[str, int]] = None,
         renderer: Optional[object] = None,
+        project_root: Optional[str] = None,
+        video_rel: Optional[str] = None,
+        doc_entries: Optional[List[Dict[str, str]]] = None,
     ) -> Dict[str, str]:
         """Publish maps and a gallery index into a documentation directory.
 
@@ -2761,6 +2764,9 @@ class DocsSitePublisher:
             output_dir: Destination directory for the static site.
             stats: Optional project counters shown in the gallery header.
             renderer: Map renderer with a write method, defaults to offline.
+            project_root: Optional project root used to collect video and docs.
+            video_rel: Optional precomputed video href relative to the index.
+            doc_entries: Optional precomputed doc entries with name and href.
 
         Returns:
             Mapping of published page identifier to written file path.
@@ -2792,9 +2798,24 @@ class DocsSitePublisher:
             active.write(localized, str(target))
             published[kind] = system_map
             written[kind] = str(target)
+        resolved_video = video_rel
+        resolved_docs = list(doc_entries) if doc_entries is not None else None
+        if resolved_video is None and resolved_docs is None and project_root is not None:
+            try:
+                collected = self.publish_assets(project_root, str(root))
+                resolved_video = collected.get("video_rel")
+                resolved_docs = collected.get("doc_entries", [])
+                for key, path in collected.get("written", {}).items():
+                    written[key] = path
+            except OSError:
+                resolved_video = None
+                resolved_docs = []
         index_target = root / "index.html"
         index_target.write_text(
-            self.render_index(project_name, published, stats or {}, href_prefix),
+            self.render_index(
+                project_name, published, stats or {}, href_prefix,
+                resolved_video, resolved_docs,
+            ),
             encoding="utf-8",
         )
         written["index"] = str(index_target)
@@ -2803,12 +2824,91 @@ class DocsSitePublisher:
         written["nojekyll"] = str(nojekyll_target)
         return written
 
+    def collect_doc_sources(self, project_root: str) -> List[Path]:
+        """Collect generated markdown sources for the static site.
+
+        Args:
+            project_root: Project root directory to scan for docs.
+
+        Returns:
+            Sorted list of markdown file paths capped by configuration.
+        """
+        base = Path(project_root).resolve()
+        candidates: List[Path] = []
+        for name in ("KNOWLEDGE_BASE.md", "README.md", "SECURITY.md", "SKILL.md"):
+            candidate = base / name
+            if candidate.is_file():
+                candidates.append(candidate)
+        for dirname in (self._config.AGENT_OUTPUT_DIR, self._config.WIKI_OUTPUT_DIR):
+            docs_dir = base / dirname
+            if not docs_dir.is_dir():
+                continue
+            for path in sorted(docs_dir.rglob("*.md")):
+                if path.is_file() and path not in candidates:
+                    candidates.append(path)
+        limit = max(1, self._config.SITE_MAX_DOCS)
+        ordered = sorted(candidates, key=lambda p: p.relative_to(base).as_posix())
+        return ordered[:limit]
+
+    def publish_assets(
+        self, project_root: str, output_dir: str
+    ) -> Dict[str, object]:
+        """Copy overview video and markdown docs into the static site.
+
+        Args:
+            project_root: Project root holding generated artifacts.
+            output_dir: Static site root receiving copied assets.
+
+        Returns:
+            Mapping with video_rel, doc_entries, and written paths.
+        """
+        import shutil
+
+        base = Path(project_root).resolve()
+        root = Path(output_dir)
+        root.mkdir(parents=True, exist_ok=True)
+        written: Dict[str, str] = {}
+        video_rel: Optional[str] = None
+        if self._config.SITE_VIDEO_ENABLED:
+            source = base / self._config.VIDEO_OUTPUT
+            if source.is_file():
+                target = root / self._config.SITE_VIDEO_FILENAME
+                if source.resolve() != target.resolve():
+                    shutil.copy2(source, target)
+                    written["video"] = str(target)
+                else:
+                    written["video"] = str(target)
+                video_rel = target.name
+        doc_entries: List[Dict[str, str]] = []
+        if self._config.SITE_DOCS_ENABLED:
+            docs_root = root / self._config.SITE_DOCS_SUBDIR.strip().strip("/")
+            docs_root.mkdir(parents=True, exist_ok=True)
+            for source in self.collect_doc_sources(str(base)):
+                rel = source.relative_to(base).as_posix()
+                target = docs_root / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(source, target)
+                href = (
+                    self._config.SITE_DOCS_SUBDIR.strip().strip("/") + "/" + rel
+                )
+                preview = ""
+                try:
+                    text = source.read_text(encoding="utf-8", errors="replace")
+                    preview = " ".join(text.split())[: self._config.SITE_MD_PREVIEW_CHARS]
+                except OSError:
+                    preview = ""
+                doc_entries.append({"name": rel, "href": href, "preview": preview})
+                written["doc:" + rel] = str(target)
+        return {"video_rel": video_rel, "doc_entries": doc_entries, "written": written}
+
     def render_index(
         self,
         project_name: str,
         maps: Dict[str, SystemMap],
         stats: Dict[str, int],
         href_prefix: Optional[str] = None,
+        video_rel: Optional[str] = None,
+        doc_entries: Optional[List[Dict[str, str]]] = None,
     ) -> str:
         """Render the gallery index page for published maps.
 
@@ -2817,6 +2917,8 @@ class DocsSitePublisher:
             maps: Mapping of published diagram kind to system map.
             stats: Project counters shown in the gallery header.
             href_prefix: Relative prefix pointing at the map directory.
+            video_rel: Optional video href relative to the index.
+            doc_entries: Optional doc entries with name, href, preview.
 
         Returns:
             Complete standalone HTML gallery document.
@@ -2832,6 +2934,8 @@ class DocsSitePublisher:
             '<p class="empty">No validated maps were published yet.</p>'
         )
         stats_line = self._stats_line(stats)
+        video_section = self._video_section(video_rel)
+        docs_section = self._docs_section(doc_entries or [])
         return """<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -2839,8 +2943,8 @@ class DocsSitePublisher:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>""" + title + """ | System Maps</title>
 <style>
-:root{--canvas:#020617;--mask:#0f172a;--ink:#ffffff;--muted:#94a3b8;--border:#1e293b}
-html[data-theme="light"]{--canvas:#f8fafc;--mask:#ffffff;--ink:#0f172a;--muted:#475569;--border:#e2e8f0}
+:root{--canvas:#020617;--mask:#0f172a;--ink:#ffffff;--muted:#94a3b8;--border:#1e293b;--accent:#22d3ee;--code:#0b1226;--kw:#c084fc;--str:#86efac;--fn:#fcd34d;--cm:#64748b}
+html[data-theme="light"]{--canvas:#f8fafc;--mask:#ffffff;--ink:#0f172a;--muted:#475569;--border:#e2e8f0;--code:#f1f5f9;--cm:#94a3b8}
 *{box-sizing:border-box}
 body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 header{padding:28px 20px 18px;max-width:1024px;margin:0 auto}
@@ -2854,11 +2958,31 @@ header p{color:var(--muted);font-size:13px;margin:4px 0}
 .card h2{font-size:15px;margin:0}
 .card p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
 .card .meta{font-size:11px;color:var(--muted)}
-.card a{margin-top:auto;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;text-decoration:none;text-align:center}
-.card a:hover,.card a:focus-visible{border-color:#22d3ee;outline:2px solid #22d3ee;outline-offset:2px}
+.card a,.card button.doc-open{margin-top:auto;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;text-decoration:none;text-align:center;background:transparent;font:inherit;cursor:pointer}
+.card a:hover,.card a:focus-visible,.card button.doc-open:hover,.card button.doc-open:focus-visible{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:2px}
 .howto{max-width:1024px;margin:0 auto;padding:0 20px 20px}
 .howto h2{font-size:15px;margin:0 0 8px}
 .howto p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.section{max-width:1024px;margin:0 auto;padding:0 20px 20px}
+.section h2{font-size:15px;margin:0 0 10px}
+video.overview{width:100%;max-height:520px;background:#000;border:1px solid var(--border);border-radius:14px}
+.md-body{font-size:13px;line-height:1.7}
+.md-body h1,.md-body h2,.md-body h3{margin:14px 0 8px;line-height:1.3}
+.md-body h1{font-size:18px}.md-body h2{font-size:16px}.md-body h3{font-size:14px}
+.md-body p{margin:8px 0;color:var(--ink)}
+.md-body a{color:var(--accent)}
+.md-body code{background:var(--code);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:12px}
+.md-body pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+.md-body pre code{background:none;border:none;padding:0}
+.md-body blockquote{border-left:3px solid var(--accent);margin:8px 0;padding:4px 12px;color:var(--muted)}
+.md-body ul,.md-body ol{margin:8px 0;padding-left:22px}
+.md-body table{border-collapse:collapse;width:100%;font-size:12px;margin:10px 0}
+.md-body th,.md-body td{border:1px solid var(--border);padding:6px 8px;text-align:left}
+.md-body th{color:var(--muted);font-weight:400}
+.md-body hr{border:none;border-top:1px solid var(--border);margin:14px 0}
+.tok-kw{color:var(--kw)}.tok-str{color:var(--str)}.tok-fn{color:var(--fn)}.tok-cm{color:var(--cm);font-style:italic}
+#doc-viewer{background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:12px;max-height:640px;overflow:auto}
+#doc-viewer .meta{font-size:11px;color:var(--muted);margin-bottom:8px}
 .empty{color:var(--muted);font-size:13px}
 footer{max-width:1024px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:11px}
 </style>
@@ -2867,15 +2991,16 @@ footer{max-width:1024px;margin:0 auto;padding:0 20px 30px;color:var(--muted);fon
 <header>
 <h1>""" + title + """ | System Maps</h1>
 <p>""" + stats_line + """</p>
-<p>This gallery page works offline. Each map loads its physics engine from a CDN and needs network access.</p>
+<p>This gallery page works offline. Each map loads its physics engine from a CDN and needs network access. Video and documentation below are local and work offline.</p>
 </header>
 <div class="controls">
-<input id="filter" type="search" placeholder="Filter diagrams..." aria-label="Filter diagrams">
+<input id="filter" type="search" placeholder="Filter diagrams and docs..." aria-label="Filter diagrams and docs">
 <button type="button" id="theme">Theme</button>
 </div>
 <main class="grid" id="gallery">
 """ + gallery + """
 </main>
+""" + video_section + docs_section + """
 <section class="howto">
 <h2>How to read these maps</h2>
 <p>Open any map, then: drag nodes freely while physics settles the rest, search (/) to filter, click a node to focus it with full file documentation, Upstream and Downstream to trace authored reach, Path to probe the exact route between two ids, Lens to compare semantic roles, Play to walk the guided chapters, Stabilize to re-run physics, Theme for dark and light, Export for PNG or typed JSON. Deep links such as #route=a~b restore any reading.</p>
@@ -2884,6 +3009,32 @@ footer{max-width:1024px;margin:0 auto;padding:0 20px 30px;color:var(--muted);fon
 <script>
 (function(){
 "use strict";
+function escapeHtml(text){return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function highlightCode(code,lang){
+var esc=escapeHtml(code);
+esc=esc.replace(/(&quot;.*?&quot;|&#x27;.*?&#x27;|"[^"\\n]*"|'[^'\\n]*')/g,'<span class="tok-str">$1</span>');
+esc=esc.replace(/(^|\\s)(def|class|return|import|from|if|else|elif|for|while|try|except|with|as|pass|raise|None|True|False|function|const|let|var|new|typeof|struct|impl|fn|pub|mut|match|enum|interface|type)\\b/g,'$1<span class="tok-kw">$2</span>');
+return esc;}
+function md2html(src){
+var lines=String(src).split("\\n");var out=[];var inCode=false;var codeLang="";var buf=[];var listTag="";
+function closeList(){if(listTag){out.push("</"+listTag+">");listTag="";}}
+function flushCode(){out.push('<pre><code class="lang-'+escapeHtml(codeLang)+'">'+highlightCode(buf.join("\\n"),codeLang)+'</code></pre>');buf=[];}
+for(var i=0;i<lines.length;i++){var line=lines[i];
+if(line.indexOf("```")===0){if(!inCode){inCode=true;codeLang=line.slice(3).trim();buf=[];}else{inCode=false;flushCode();}continue;}
+if(inCode){buf.push(line);continue;}
+if(line.indexOf("# ")===0){closeList();out.push("<h1>"+inline(line.slice(2))+"</h1>");continue;}
+if(line.indexOf("## ")===0){closeList();out.push("<h2>"+inline(line.slice(3))+"</h2>");continue;}
+if(line.indexOf("### ")===0){closeList();out.push("<h3>"+inline(line.slice(4))+"</h3>");continue;}
+if(line.trim()==="---"||line.trim()==="***"){closeList();out.push("<hr>");continue;}
+if(line.indexOf("> ")===0){closeList();out.push("<blockquote>"+inline(line.slice(2))+"</blockquote>");continue;}
+if(line.indexOf("|")>=0&&lines[i+1]&&/^\\s*\\|?[\\s:\\-|]+\\|?\\s*$/.test(lines[i+1])){closeList();var head=line.split("|").map(function(c){return c.trim();}).filter(function(c){return c;});i++;var rows=[];while(i+1<lines.length&&lines[i+1].indexOf("|")>=0){i++;rows.push(lines[i].split("|").map(function(c){return c.trim();}).filter(function(c){return c;});}var h="<table><thead><tr>"+head.map(function(c){return "<th>"+inline(c)+"</th>";}).join("")+"</tr></thead>";if(rows.length){h+="<tbody>"+rows.map(function(r){return "<tr>"+r.map(function(c){return "<td>"+inline(c)+"</td>";}).join("")+"</tr>";}).join("")+"</tbody>";}out.push(h+"</table>");continue;}
+if(/^(\\s*[-*]\\s+)/.test(line)){if(listTag!=="ul"){closeList();listTag="ul";out.push("<ul>");}out.push("<li>"+inline(line.replace(/^\\s*[-*]\\s+/,""))+"</li>");continue;}
+if(/^(\\s*\\d+\\.\\s+)/.test(line)){if(listTag!=="ol"){closeList();listTag="ol";out.push("<ol>");}out.push("<li>"+inline(line.replace(/^\\s*\\d+\\.\\s+/,""))+"</li>");continue;}
+if(!line.trim()){closeList();continue;}
+closeList();out.push("<p>"+inline(line)+"</p>");}
+closeList();if(inCode){flushCode();}
+return out.join("\\n");}
+function inline(s){var esc=escapeHtml(s);esc=esc.replace(/`([^`]+)`/g,"<code>$1</code>");esc=esc.replace(/\\*\\*([^*]+)\\*\\*/g,"<strong>$1</strong>");esc=esc.replace(/\\*([^*]+)\\*/g,"<em>$1</em>");esc=esc.replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2">$1</a>');return esc;}
 var filter=document.getElementById("filter");
 var theme=document.getElementById("theme");
 var cards=Array.prototype.slice.call(document.querySelectorAll(".card"));
@@ -2895,10 +3046,88 @@ card.style.display=(!term||text.indexOf(term)>=0)?"":"none";});});
 theme.addEventListener("click",function(){
 var root=document.documentElement;
 root.setAttribute("data-theme",root.getAttribute("data-theme")==="light"?"dark":"light");});
+var viewer=document.getElementById("doc-body");var title=document.getElementById("doc-title");var meta=document.getElementById("doc-meta");
+document.querySelectorAll("button.doc-open").forEach(function(btn){btn.addEventListener("click",function(){
+var href=btn.getAttribute("data-href");var name=btn.getAttribute("data-name");
+if(title){title.textContent=name;}
+if(meta){meta.textContent="Loading "+name+"...";}
+fetch(href).then(function(r){if(!r.ok){throw new Error("HTTP "+r.status);}return r.text();}).then(function(md){
+if(meta){meta.textContent=name+" | "+md.length+" chars | rendered with offline markdown2html";}
+if(viewer){viewer.innerHTML=md2html(md);location.hash="#doc="+encodeURIComponent(name);}}).catch(function(e){if(meta){meta.textContent="Could not load "+name+": "+e;}});});});
+if(location.hash.indexOf("#doc=")===0){var wanted=decodeURIComponent(location.hash.slice(5));var match=null;document.querySelectorAll("button.doc-open").forEach(function(b){if(b.getAttribute("data-name")===wanted){match=b;}});if(match){match.click();}}
 })();
 </script>
 </body>
 </html>"""
+
+    def _video_section(self, video_rel: Optional[str]) -> str:
+        """Render the overview video section with an HTML5 video tag.
+
+        Args:
+            video_rel: Video href relative to the index, None hides the section.
+
+        Returns:
+            HTML section fragment, empty string when no video is available.
+        """
+        if not video_rel:
+            return ""
+        src = self._escape(video_rel)
+        return (
+            '<section class="section" id="video">'
+            "<h2>Overview video</h2>"
+            '<video class="overview" controls preload="metadata" src="'
+            + src
+            + '">Your browser does not support the video tag. '
+            + '<a href="' + src + '">Download the overview video</a>.</video>'
+            + '<p class="empty">Cinematic synthwave overview rendered from real scan data. '
+            + '<a href="' + src + '">Open/download ' + src + "</a>.</p>"
+            + "</section>"
+        )
+
+    def _docs_section(self, doc_entries: List[Dict[str, str]]) -> str:
+        """Render the documentation grid with an offline markdown viewer.
+
+        Args:
+            doc_entries: Doc entries with name, href, and preview keys.
+
+        Returns:
+            HTML section fragment, empty string when no docs are available.
+        """
+        if not doc_entries:
+            return ""
+        cards = []
+        for entry in sorted(doc_entries, key=lambda d: str(d.get("name", ""))):
+            name = str(entry.get("name", ""))
+            href = str(entry.get("href", ""))
+            preview = str(entry.get("preview", ""))
+            cards.append(
+                '<article class="card" data-doc="'
+                + self._escape(name)
+                + '"><h2>'
+                + self._escape(name.split("/")[-1])
+                + "</h2><p>"
+                + self._escape(name)
+                + "</p>"
+                + ('<p class="meta">' + self._escape(preview) + "</p>" if preview else "")
+                + '<button type="button" class="doc-open" data-href="'
+                + self._escape(href)
+                + '" data-name="'
+                + self._escape(name)
+                + '">Read rendered</button><a href="'
+                + self._escape(href)
+                + '">Open raw markdown</a></article>'
+            )
+        return (
+            '<section class="section" id="docs"><h2>Documentation '
+            + str(len(cards))
+            + " files</h2>"
+            + '<div class="grid" id="docs-grid" style="padding:0;max-width:none">'
+            + "\n".join(cards)
+            + "</div>"
+            + '<div id="doc-viewer"><h2 id="doc-title">Rendered documentation</h2>'
+            + '<div class="meta" id="doc-meta">Pick any document above to render it here with offline markdown2html and colored code.</div>'
+            + '<div id="doc-body" class="md-body"></div></div></section>'
+        )
 
     def _href_prefix(self) -> str:
         """Return the relative href prefix for map links.

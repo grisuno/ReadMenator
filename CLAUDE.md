@@ -118,6 +118,7 @@ tests/
 - Map documentation payload (DIAGRAM_MAP_SYMBOLS_PER_NODE, DIAGRAM_TOOLTIP_DOC_CHARS, DIAGRAM_NEIGHBOR_NAMES)
 - Live CDN renderer settings (DIAGRAM_VIS_ENABLED, DIAGRAM_VIS_CDN_JS, DIAGRAM_VIS_CDN_CSS, DIAGRAM_VIS_PHYSICS_ENABLED, DIAGRAM_VIS_STABILIZE_ITERATIONS)
 - Pages publishing settings (DIAGRAM_PAGES_DIR, DIAGRAM_MAPS_SUBDIR)
+- Site media settings (SITE_VIDEO_ENABLED, SITE_VIDEO_FILENAME, SITE_DOCS_ENABLED, SITE_DOCS_SUBDIR, SITE_MAX_DOCS, SITE_MD_PREVIEW_CHARS)
 - Cinematic video settings (VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS)
 - Video act durations (VIDEO_TITLE_S, VIDEO_CARD_S, VIDEO_LAYER_S, VIDEO_GOD_S, VIDEO_TREE_S, VIDEO_COMM_S, VIDEO_GRAPH_S, VIDEO_DNA_S, VIDEO_OUTRO_S)
 - Video scope settings (VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
@@ -508,9 +509,12 @@ tests/
 - Deep links restore #focus=id, #focus=id&reach=upstream|downstream, #route=a~b, #lens=role, #view=id
 - Motion is finite, honors prefers-reduced-motion, and never enters canonical exports
 - All labels HTML-escaped in Python and script payloads unicode-escaped for angle brackets
-- DocsSitePublisher class with publish(maps, project_name, output_dir, stats, renderer) entry point
+- DocsSitePublisher class with publish(maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries) entry point
 - Publishes maps/<kind>.html plus a gallery index.html and a .nojekyll marker into DIAGRAM_PAGES_DIR
 - Gallery index: project header with stats, one card per validated map with counts and descriptions, filter input, theme toggle, how-to-read section, relative links only, zero external requests
+- Gallery index embeds the overview video with an HTML5 <video controls> tag (SITE_VIDEO_FILENAME) and a documentation grid with offline markdown2html viewer (colored code, tables, deep link #doc=name)
+- publish_assets(project_root, output_dir) copies VIDEO_OUTPUT into the site root and KNOWLEDGE_BASE/README/agent/wiki markdown into SITE_DOCS_SUBDIR (capped by SITE_MAX_DOCS); collect_doc_sources() is deterministic and sorted
+- export_pages/export_diagrams pass project_root so `pages` and `diagrams` outputs always ship video + docs without extra flags
 - Gallery cards report primary scope honestly ("N of M files"); maps embed the project total in their passport header
 - Published maps carry a Gallery home link via the optional meta home target (omitted for standalone exports)
 - Invalid maps are skipped while the index is still written; empty input yields an empty gallery notice

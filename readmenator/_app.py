@@ -651,7 +651,8 @@ class readmenatorApplication:
         }
         flat_publisher = DocsSitePublisher(replace(self._config, DIAGRAM_MAPS_SUBDIR="."))
         written = flat_publisher.publish(
-            maps, root.name, str(dest), stats, self._live_renderer()
+            maps, root.name, str(dest), stats, self._live_renderer(),
+            project_root=str(root),
         )
         for kind in sorted(maps):
             if kind not in written:
@@ -740,7 +741,8 @@ class readmenatorApplication:
             "imports": len(edges),
         }
         written = self._factory.diagram_publisher.publish(
-            maps, root.name, str(dest), stats, self._live_renderer()
+            maps, root.name, str(dest), stats, self._live_renderer(),
+            project_root=str(root),
         )
         logger.info("Documentation site published: %d pages in %s", len(written), dest)
         return written

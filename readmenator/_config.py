@@ -84,6 +84,18 @@ class Config:
 
     SITE_DIR: str = "readmenator-site"
 
+    SITE_VIDEO_ENABLED: bool = True
+
+    SITE_VIDEO_FILENAME: str = "readmenator.mp4"
+
+    SITE_DOCS_ENABLED: bool = True
+
+    SITE_DOCS_SUBDIR: str = "md"
+
+    SITE_MAX_DOCS: int = 60
+
+    SITE_MD_PREVIEW_CHARS: int = 120
+
     SYMBOL_TYPE_PLURALS: Tuple[Tuple[str, str], ...] = (
         ("class", "classes"),
         ("struct", "structs"),
