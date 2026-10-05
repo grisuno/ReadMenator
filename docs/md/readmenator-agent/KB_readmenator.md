@@ -120,22 +120,22 @@
   - `export_wiki` (method, line 580) `def export_wiki(self, target_dir, output_dir)`
   - `lint_wiki` (method, line 603) `def lint_wiki(self, target_dir)`
   - `export_diagrams` (method, line 621) `def export_diagrams(self, target_dir, output_dir, full)`
-  - `_live_renderer` (method, line 662) `def _live_renderer(self)`
-  - `export_diagram` (method, line 672) `def export_diagram(self, target_dir, kind, output_path, full)`
-  - `export_pages` (method, line 711) `def export_pages(self, target_dir, output_dir, full)`
-  - `export_video` (method, line 749) `def export_video(self, target_dir, output_path)`
-  - `_maybe_export_video` (method, line 773) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, content_map, output_path)`
-  - `watch` (method, line 813) `def watch(self, target_dir)`
-  - `audit` (method, line 823) `def audit(self, target_dir)`
-  - `audit_deep` (method, line 830) `def audit_deep(self, target_dir)`
-  - `export_sarif` (method, line 850) `def export_sarif(self, target_dir, output_path)`
-  - `export_rules` (method, line 860) `def export_rules(self, target_dir, output_dir)`
-  - `detect_layers` (method, line 870) `def detect_layers(self, target_dir)`
-  - `lint` (method, line 880) `def lint(self, target_dir)`
-  - `strip_dead_code` (method, line 893) `def strip_dead_code(self, target_dir)`
-  - `generate_cursorrules` (method, line 903) `def generate_cursorrules(self, target_dir)`
-  - `refactor_monolith` (method, line 918) `def refactor_monolith(self, target_dir)`
-  - `on_change` (method, line 817) `def on_change()`
+  - `_live_renderer` (method, line 663) `def _live_renderer(self)`
+  - `export_diagram` (method, line 673) `def export_diagram(self, target_dir, kind, output_path, full)`
+  - `export_pages` (method, line 712) `def export_pages(self, target_dir, output_dir, full)`
+  - `export_video` (method, line 751) `def export_video(self, target_dir, output_path)`
+  - `_maybe_export_video` (method, line 775) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, content_map, output_path)`
+  - `watch` (method, line 815) `def watch(self, target_dir)`
+  - `audit` (method, line 825) `def audit(self, target_dir)`
+  - `audit_deep` (method, line 832) `def audit_deep(self, target_dir)`
+  - `export_sarif` (method, line 852) `def export_sarif(self, target_dir, output_path)`
+  - `export_rules` (method, line 862) `def export_rules(self, target_dir, output_dir)`
+  - `detect_layers` (method, line 872) `def detect_layers(self, target_dir)`
+  - `lint` (method, line 882) `def lint(self, target_dir)`
+  - `strip_dead_code` (method, line 895) `def strip_dead_code(self, target_dir)`
+  - `generate_cursorrules` (method, line 905) `def generate_cursorrules(self, target_dir)`
+  - `refactor_monolith` (method, line 920) `def refactor_monolith(self, target_dir)`
+  - `on_change` (method, line 819) `def on_change()`
 - Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
 
@@ -344,12 +344,16 @@
   - `_template` (method, line 2351) `def _template(self)`
   - `__init__` (method, line 2724) `def __init__(self, config)`
   - `description_for` (method, line 2734) `def description_for(self, kind)`
-  - `publish` (method, line 2748) `def publish(self, maps, project_name, output_dir, stats, renderer)`
-  - `render_index` (method, line 2806) `def render_index(self, project_name, maps, stats, href_prefix)`
-  - `_href_prefix` (method, line 2903) `def _href_prefix(self)`
-  - `_card` (method, line 2914) `def _card(self, kind, system_map, href_prefix)`
-  - `_stats_line` (method, line 2953) `def _stats_line(self, stats)`
-  - `_escape` (method, line 2967) `def _escape(self, value)`
+  - `publish` (method, line 2748) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)`
+  - `collect_doc_sources` (method, line 2827) `def collect_doc_sources(self, project_root)`
+  - `publish_assets` (method, line 2853) `def publish_assets(self, project_root, output_dir)`
+  - `render_index` (method, line 2904) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries)`
+  - `_video_section` (method, line 3063) `def _video_section(self, video_rel)`
+  - `_docs_section` (method, line 3087) `def _docs_section(self, doc_entries)`
+  - `_href_prefix` (method, line 3132) `def _href_prefix(self)`
+  - `_card` (method, line 3143) `def _card(self, kind, system_map, href_prefix)`
+  - `_stats_line` (method, line 3182) `def _stats_line(self, stats)`
+  - `_escape` (method, line 3196) `def _escape(self, value)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_diagrams.py`, `tests/test_diagrams.py`
 

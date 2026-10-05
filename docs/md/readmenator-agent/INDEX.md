@@ -26,7 +26,7 @@
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph.  Reads archi | readmenator | 8 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator.  Detects classic lo | readmenator | 21 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph.  Identifies orphaned sy | readmenator | 5 |
-| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph.  Builds typed in | readmenator | 72 |
+| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph.  Builds typed in | readmenator | 76 |
 | `readmenator/_documentation.py` | - | readmenator | 28 |
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system.  Provides human | readmenator | 3 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph.  Produces JSON (Graph | readmenator | 15 |

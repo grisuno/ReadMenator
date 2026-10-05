@@ -68,8 +68,8 @@ This community groups 7 file(s) rooted at `readmenator` with dominant language p
 
 ## Risks
 
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_rank.py` via `subprocess` (4 hops)
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_query.py` via `subprocess` (4 hops)
+- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_rank.py` via `subprocess` (4 hops)
 - [cycle] `readmenator/_models.py` -> `readmenator/_category.py` -> `readmenator/_models.py`
 
 ## Open Questions

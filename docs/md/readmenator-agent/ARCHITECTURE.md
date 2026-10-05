@@ -438,6 +438,7 @@
 - `readmenator/_diagrams.py` -> `pathlib`
 - `readmenator/_diagrams.py` -> `readmenator._config`
 - `readmenator/_diagrams.py` -> `readmenator._models`
+- `readmenator/_diagrams.py` -> `shutil`
 - `readmenator/_diagrams.py` -> `typing`
 - `readmenator/_documentation.py` -> `__future__`
 - `readmenator/_documentation.py` -> `collections`
