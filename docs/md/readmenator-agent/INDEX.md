@@ -7,8 +7,8 @@
 | `readmenator/__main__.py` | Command line entry point: argument parsing and subcommand dispatch. | readmenator | 3 | 1 |
 | `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 3 |
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 32 | 3 |
-| `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 18 | 4 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 50 | 9 |
+| `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 22 | 4 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 51 | 9 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 4 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 8 |
 | `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 61 |
@@ -16,7 +16,7 @@
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
-| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 79 | 5 |
+| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 87 | 5 |
 | `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 28 | 2 |
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 15 | 2 |
@@ -69,7 +69,7 @@
 | `readmenator/parsers/_swift.py` | Swift parser: regex extraction of symbols, signatures, docstrings, and imports. | parsers | 2 | 2 |
 | `readmenator_orchestrator.py` | - | root | 34 | 0 |
 | `tests/__init__.py` | - | tests | 0 | 0 |
-| `tests/test_agent_friendliness.py` | Contract tests for agent-facing output quality: budgets, purposes, freshness, noise. | tests | 43 | 0 |
+| `tests/test_agent_friendliness.py` | Contract tests for agent-facing output quality: budgets, purposes, freshness, noise. | tests | 54 | 0 |
 | `tests/test_agent_injector.py` | Contract tests for AI agent file injection. | tests | 38 | 0 |
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |

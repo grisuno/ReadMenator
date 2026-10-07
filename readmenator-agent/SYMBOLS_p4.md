@@ -3,6 +3,30 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_python_never_crashes_on_weird_ascii` | method | `tests/test_parsers_property.py:296` | `def test_python_never_crashes_on_weird_ascii(self, code)` |
+| `test_repeated_keywords_no_crash` | method | `tests/test_parsers_property.py:238` | `def test_repeated_keywords_no_crash(self, ext)` |
+| `test_unknown_extension_returns_none` | method | `tests/test_parsers_property.py:269` | `def test_unknown_extension_returns_none(self)` |
+| `test_whitespace_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:208` | `def test_whitespace_code_returns_empty_or_valid(self, ext)` |
+| `wrapper` | method | `tests/test_parsers_property.py:71` | `def wrapper(fn)` |
+| `wrapper` | method | `tests/test_parsers_property.py:77` | `def wrapper(fn)` |
+| `TestQueryEngineContract` | class | `tests/test_query.py:22` | `class TestQueryEngineContract(TestCase)` |
+| `_make_node` | function | `tests/test_query.py:7` | `def _make_node(node_id, symbols)` |
+| `_make_sym` | function | `tests/test_query.py:18` | `def _make_sym(name, kind, line)` |
+| `setUp` | method | `tests/test_query.py:23` | `def setUp(self)` |
+| `test_explain_returns_details` | method | `tests/test_query.py:51` | `def test_explain_returns_details(self)` |
+| `test_explain_shows_imports` | method | `tests/test_query.py:58` | `def test_explain_shows_imports(self)` |
+| `test_explain_shows_siblings` | method | `tests/test_query.py:63` | `def test_explain_shows_siblings(self)` |
+| `test_explain_unknown_returns_none` | method | `tests/test_query.py:69` | `def test_explain_unknown_returns_none(self)` |
+| `test_find_exact_symbol` | method | `tests/test_query.py:36` | `def test_find_exact_symbol(self)` |
+| `test_find_path_direct_import` | method | `tests/test_query.py:73` | `def test_find_path_direct_import(self)` |
+| `test_find_path_same_file` | method | `tests/test_query.py:79` | `def test_find_path_same_file(self)` |
+| `test_find_path_unknown_returns_none` | method | `tests/test_query.py:84` | `def test_find_path_unknown_returns_none(self)` |
+| `test_find_symbol_fuzzy` | method | `tests/test_query.py:42` | `def test_find_symbol_fuzzy(self)` |
+| `test_find_symbol_not_found` | method | `tests/test_query.py:47` | `def test_find_symbol_not_found(self)` |
+| `test_query_returns_file_matches` | method | `tests/test_query.py:102` | `def test_query_returns_file_matches(self)` |
+| `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
+| `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
+| `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
 | `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
 | `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
 | `TestEdgeKind` | class | `tests/test_ranking.py:60` | `class TestEdgeKind` |

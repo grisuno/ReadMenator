@@ -94,7 +94,17 @@ class Config:
 
     SITE_MAX_DOCS: int = 60
 
-    SITE_MD_PREVIEW_CHARS: int = 120
+    SITE_MD_PREVIEW_CHARS: int = 160
+
+    SITE_MD_PREVIEW_MIN_CHARS: int = 24
+
+    SITE_VIDEO_POSTER_FILENAME: str = "readmenator-poster.jpg"
+
+    SITE_VIDEO_POSTER_AT_S: float = 6.0
+
+    SITE_VIDEO_POSTER_QUALITY: int = 3
+
+    SITE_VIDEO_POSTER_TIMEOUT_S: int = 60
 
     SITE_LLMS_TXT_ENABLED: bool = True
 
@@ -135,6 +145,14 @@ class Config:
     COMMUNITY_VOTE_EPSILON: float = 1e-9
 
     COMMUNITY_MERGE_BELOW: int = 3
+
+    COMMUNITY_ALGORITHM: str = "louvain"
+
+    COMMUNITY_RESOLUTION: float = 1.0
+
+    COMMUNITY_MAX_LEVELS: int = 10
+
+    COMMUNITY_MAX_SWEEPS: int = 50
 
     SURPRISING_CONNECTION_HOP_THRESHOLD: int = 3
 

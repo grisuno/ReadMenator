@@ -13,11 +13,18 @@ from __future__ import annotations
 
 import html
 import json
+import re
+import shutil
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 
 from readmenator._config import Config
+
+_MD_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+_MD_MARK_RE = re.compile(r"[`*_]")
+_PAGE_PART_RE = re.compile(r"^(?P<base>.+?)_p(?P<page>\d+)\.md$")
 from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
 
 
@@ -2704,6 +2711,188 @@ renderChapters();renderRoleCounts();readHash();
 </script>
 </body>
 </html>"""
+_GALLERY_HEAD = """<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__TITLE__ | System Maps</title>
+<style>
+:root{--canvas:#020617;--mask:#0f172a;--mask2:#111c33;--ink:#ffffff;--muted:#94a3b8;--border:#1e293b;--accent:#22d3ee;--accent2:#f472b6;--code:#0b1226;--kw:#c084fc;--str:#86efac;--fn:#fcd34d;--cm:#64748b;--glow:rgba(34,211,238,.18)}
+html[data-theme="light"]{--canvas:#f8fafc;--mask:#ffffff;--mask2:#f1f5f9;--ink:#0f172a;--muted:#475569;--border:#e2e8f0;--code:#f1f5f9;--cm:#94a3b8;--accent:#0891b2;--accent2:#db2777;--glow:rgba(8,145,178,.12)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;line-height:1.5}
+a{color:var(--accent)}
+.muted{color:var(--muted);font-size:12px}
+.backdrop{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(900px 420px at 15% -10%,var(--glow),transparent 70%),radial-gradient(700px 380px at 95% 0%,rgba(244,114,182,.10),transparent 70%)}
+.backdrop::after{content:"";position:absolute;left:-50%;right:-50%;bottom:-40%;height:70%;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:44px 44px;transform:perspective(500px) rotateX(62deg);opacity:.35;animation:grid 14s linear infinite;mask-image:linear-gradient(to top,#000,transparent)}
+@keyframes grid{to{background-position:0 44px,0 0}}
+.hero,.section,.toolbar,footer{max-width:1120px;margin:0 auto;padding-left:20px;padding-right:20px}
+.hero{padding-top:40px;padding-bottom:12px}
+.eyebrow{color:var(--accent);font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin:0 0 8px}
+.hero h1{font-size:30px;margin:0 0 10px;background:linear-gradient(90deg,var(--ink),var(--accent) 70%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 span{font-weight:400}
+.lede{color:var(--muted);font-size:13px;max-width:760px;margin:0 0 18px}
+.stats-line{color:var(--muted);font-size:11px;margin:10px 0 0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.tile{background:linear-gradient(160deg,var(--mask2),var(--mask));border:1px solid var(--border);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column}
+.tile .num{font-size:26px;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.tile .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.section{padding-top:22px;padding-bottom:10px}
+.section h2{font-size:17px;margin:0 0 6px}
+.starts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:10px}
+.start{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:14px;color:var(--ink);text-decoration:none;font:inherit;font-size:13px;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s}
+.start:hover,.start:focus-visible{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 8px 28px var(--glow);outline:none}
+.step{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:var(--canvas);font-weight:700;font-size:13px}
+.toolbar{position:sticky;top:0;z-index:5;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:12px;padding-bottom:12px;background:color-mix(in srgb,var(--canvas) 85%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.toolbar input{flex:1;min-width:220px;background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px}
+.toolbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+button{font:inherit}
+#theme{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:12px;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
+.card{position:relative;background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:transform .2s,border-color .2s,box-shadow .2s}
+.card:hover,.card:focus-within{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 30px var(--glow)}
+.card h3{font-size:14px;margin:0;overflow-wrap:anywhere}
+.card p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
+.card .path{font-size:11px;opacity:.8;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{font-size:10.5px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 8px}
+.glyph{width:80px;height:64px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
+.glyph .flow{stroke:var(--accent2);stroke-dasharray:4 4}
+.map-card:hover .glyph .flow{animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-16}}
+.stretch{color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:12px;text-decoration:none;text-align:center}
+.stretch::after{content:"";position:absolute;inset:0;border-radius:14px}
+.stretch:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.actions{display:flex;gap:8px;align-items:center}
+.doc-open.primary{flex:1;background:var(--accent);color:var(--canvas);border:0;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:700;cursor:pointer}
+.doc-open.primary:hover,.doc-open.primary:focus-visible{filter:brightness(1.1);outline:2px solid var(--accent);outline-offset:2px}
+.raw{font-size:11px;color:var(--muted)}
+.pages{display:flex;gap:4px;flex-wrap:wrap}
+.page{min-width:28px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:3px 6px;font-size:11px;cursor:pointer}
+.page:hover,.page:focus-visible{border-color:var(--accent);outline:none}
+.doc-group{margin-top:18px}
+.group-title{font-size:14px;margin:0 0 2px}
+.video-frame{margin:10px 0 0}
+video.overview{width:100%;max-height:560px;background:#000;border:1px solid var(--border);border-radius:16px;box-shadow:0 20px 60px var(--glow)}
+figcaption{margin-top:8px}
+.howto p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
+.empty{color:var(--muted);font-size:13px}
+footer{padding-top:24px;padding-bottom:40px;color:var(--muted);font-size:11px}
+#doc-viewer{position:fixed;top:0;right:0;bottom:0;width:min(860px,100%);z-index:20;background:var(--mask);border-left:1px solid var(--border);box-shadow:-20px 0 60px rgba(0,0,0,.45);transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column}
+#doc-viewer.open{transform:none}
+#doc-viewer .bar{display:flex;gap:8px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
+#doc-viewer .bar h2{font-size:14px;margin:0;flex:1;word-break:break-all}
+#doc-viewer .bar a,#doc-viewer .bar button{background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer;text-decoration:none}
+#doc-meta{font-size:11px;color:var(--muted);padding:8px 18px 0}
+#doc-body{padding:4px 18px 30px;overflow:auto;flex:1}
+.scrim{position:fixed;inset:0;z-index:19;background:rgba(2,6,23,.55);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.md-body{font-size:13px;line-height:1.7}
+.md-body h1,.md-body h2,.md-body h3{margin:16px 0 8px;line-height:1.3}
+.md-body h1{font-size:19px}.md-body h2{font-size:16px;color:var(--accent)}.md-body h3{font-size:14px}
+.md-body p{margin:8px 0;color:var(--ink)}
+.md-body a{color:var(--accent)}
+.md-body code{background:var(--code);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:12px}
+.md-body pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
+.md-body pre code{background:none;border:none;padding:0}
+.md-body blockquote{border-left:3px solid var(--accent);margin:8px 0;padding:4px 12px;color:var(--muted)}
+.md-body ul,.md-body ol{margin:8px 0;padding-left:22px}
+.md-body table{border-collapse:collapse;width:100%;font-size:12px;margin:10px 0;display:block;overflow:auto}
+.md-body th,.md-body td{border:1px solid var(--border);padding:6px 8px;text-align:left}
+.md-body th{color:var(--muted);font-weight:400;position:sticky;top:0;background:var(--mask)}
+.md-body tr:hover td{background:var(--mask2)}
+.md-body hr{border:none;border-top:1px solid var(--border);margin:14px 0}
+.tok-kw{color:var(--kw)}.tok-str{color:var(--str)}.tok-fn{color:var(--fn)}.tok-cm{color:var(--cm);font-style:italic}
+.hidden{display:none!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+@media (max-width:640px){.hero h1{font-size:22px}.tile .num{font-size:20px}}
+</style>
+</head>
+<body>
+"""
+
+_GALLERY_DRAWER = (
+    '<div class="scrim" id="doc-scrim"></div>'
+    '<aside id="doc-viewer" role="dialog" aria-modal="true" aria-labelledby="doc-title" aria-hidden="true">'
+    '<div class="bar"><h2 id="doc-title">Rendered documentation</h2>'
+    '<a id="doc-raw" href="#">Raw</a><button type="button" id="doc-close" title="Close (Esc)">Close</button></div>'
+    '<div class="meta" id="doc-meta">Pick any document to render it here with offline markdown2html and colored code.</div>'
+    '<div id="doc-body" class="md-body"></div></aside>'
+)
+
+_GALLERY_APP_JS = """var filter=document.getElementById("filter");
+var countEl=document.getElementById("filter-count");
+var cards=Array.prototype.slice.call(document.querySelectorAll(".card"));
+function applyFilter(){
+var term=filter.value.trim().toLowerCase();var shown=0;
+cards.forEach(function(card){var hit=!term||(card.textContent||"").toLowerCase().indexOf(term)>=0;card.classList.toggle("hidden",!hit);if(hit){shown++;}});
+document.querySelectorAll(".doc-group").forEach(function(g){g.classList.toggle("hidden",!g.querySelector(".card:not(.hidden)"));});
+if(countEl){countEl.textContent=term?shown+" of "+cards.length+" shown":"";}}
+filter.addEventListener("input",applyFilter);
+document.addEventListener("keydown",function(e){
+if(e.key==="/"&&document.activeElement!==filter){e.preventDefault();filter.focus();}
+if(e.key==="Escape"){closeDoc();}});
+document.getElementById("theme").addEventListener("click",function(){
+var root=document.documentElement;root.setAttribute("data-theme",root.getAttribute("data-theme")==="light"?"dark":"light");});
+var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if(!reduce){document.querySelectorAll("[data-count]").forEach(function(el){
+var target=parseInt(el.getAttribute("data-count"),10)||0;var t0=Date.now();var done=false;
+function finish(){done=true;el.textContent=target.toLocaleString();}
+function tick(){if(done){return;}var p=Math.min((Date.now()-t0)/900,1);if(p>=1){finish();return;}el.textContent=Math.round(target*(1-Math.pow(1-p,3))).toLocaleString();requestAnimationFrame(tick);}
+el.textContent="0";requestAnimationFrame(tick);setTimeout(finish,1000);});}
+var drawer=document.getElementById("doc-viewer");var scrim=document.getElementById("doc-scrim");
+var viewer=document.getElementById("doc-body");var title=document.getElementById("doc-title");
+var meta=document.getElementById("doc-meta");var raw=document.getElementById("doc-raw");
+var known={};document.querySelectorAll(".doc-open").forEach(function(b){known[b.getAttribute("data-name")]=b.getAttribute("data-href");});
+var lastFocus=null;
+function closeDoc(){if(!drawer.classList.contains("open")){return;}drawer.classList.remove("open");scrim.classList.remove("open");drawer.setAttribute("aria-hidden","true");
+if(location.hash.indexOf("#doc=")===0){history.replaceState(null,"",location.pathname+location.search);}if(lastFocus){lastFocus.focus();}}
+function resolveDoc(base,rel){var parts=base.split("/");parts.pop();rel.split("/").forEach(function(seg){if(seg==="..") {parts.pop();}else if(seg!=="."&&seg!==""){parts.push(seg);}});return parts.join("/");}
+function openDoc(name){var href=known[name];if(!href){return;}
+lastFocus=document.activeElement;title.textContent=name;raw.setAttribute("href",href);meta.textContent="Loading "+name+"...";
+drawer.classList.add("open");scrim.classList.add("open");drawer.setAttribute("aria-hidden","false");document.getElementById("doc-close").focus();
+fetch(href).then(function(r){if(!r.ok){throw new Error("HTTP "+r.status);}return r.text();}).then(function(md){
+meta.textContent=name+" | "+md.split("\\n").length+" lines | rendered offline";
+viewer.innerHTML=md2html(md);viewer.scrollTop=0;history.replaceState(null,"","#doc="+encodeURIComponent(name));
+viewer.querySelectorAll("a[href]").forEach(function(a){var h=a.getAttribute("href");if(!h||/^[a-z]+:/i.test(h)||h.charAt(0)==="#"){return;}
+var target=resolveDoc(name,h.split("#")[0]);if(known[target]){a.addEventListener("click",function(ev){ev.preventDefault();openDoc(target);});}});
+}).catch(function(e){meta.textContent="Could not load "+name+": "+e+" (serve the folder over http to read docs inline)";});}
+document.querySelectorAll(".doc-open").forEach(function(btn){btn.addEventListener("click",function(){openDoc(btn.getAttribute("data-name"));});});
+document.getElementById("doc-close").addEventListener("click",closeDoc);scrim.addEventListener("click",closeDoc);
+if(location.hash.indexOf("#doc=")===0){openDoc(decodeURIComponent(location.hash.slice(5)));}
+"""
+
+_GALLERY_MD_JS = """function escapeHtml(text){return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function highlightCode(code,lang){
+var esc=escapeHtml(code);
+esc=esc.replace(/(&quot;.*?&quot;|&#x27;.*?&#x27;|"[^"\\n]*"|'[^'\\n]*')/g,'<span class="tok-str">$1</span>');
+esc=esc.replace(/(^|\\s)(def|class|return|import|from|if|else|elif|for|while|try|except|with|as|pass|raise|None|True|False|function|const|let|var|new|typeof|struct|impl|fn|pub|mut|match|enum|interface|type)\\b/g,'$1<span class="tok-kw">$2</span>');
+return esc;}
+function md2html(src){
+var lines=String(src).split("\\n");var out=[];var inCode=false;var codeLang="";var buf=[];var listTag="";
+function closeList(){if(listTag){out.push("</"+listTag+">");listTag="";}}
+function flushCode(){out.push('<pre><code class="lang-'+escapeHtml(codeLang)+'">'+highlightCode(buf.join("\\n"),codeLang)+'</code></pre>');buf=[];}
+for(var i=0;i<lines.length;i++){var line=lines[i];
+if(line.indexOf("```")===0){if(!inCode){inCode=true;codeLang=line.slice(3).trim();buf=[];}else{inCode=false;flushCode();}continue;}
+if(inCode){buf.push(line);continue;}
+if(line.indexOf("# ")===0){closeList();out.push("<h1>"+inline(line.slice(2))+"</h1>");continue;}
+if(line.indexOf("## ")===0){closeList();out.push("<h2>"+inline(line.slice(3))+"</h2>");continue;}
+if(line.indexOf("### ")===0){closeList();out.push("<h3>"+inline(line.slice(4))+"</h3>");continue;}
+if(line.trim()==="---"||line.trim()==="***"){closeList();out.push("<hr>");continue;}
+if(line.indexOf("> ")===0){closeList();out.push("<blockquote>"+inline(line.slice(2))+"</blockquote>");continue;}
+if(line.indexOf("|")>=0&&lines[i+1]&&/^\\s*\\|?[\\s:\\-|]+\\|?\\s*$/.test(lines[i+1])){closeList();var head=line.split("|").map(function(c){return c.trim();}).filter(function(c){return c;});i++;var rows=[];while(i+1<lines.length&&lines[i+1].indexOf("|")>=0){i++;rows.push(lines[i].split("|").map(function(c){return c.trim();}).filter(function(c){return c;}));}var h="<table><thead><tr>"+head.map(function(c){return "<th>"+inline(c)+"</th>";}).join("")+"</tr></thead>";if(rows.length){h+="<tbody>"+rows.map(function(r){return "<tr>"+r.map(function(c){return "<td>"+inline(c)+"</td>";}).join("")+"</tr>";}).join("")+"</tbody>";}out.push(h+"</table>");continue;}
+if(/^(\\s*[-*]\\s+)/.test(line)){if(listTag!=="ul"){closeList();listTag="ul";out.push("<ul>");}out.push("<li>"+inline(line.replace(/^\\s*[-*]\\s+/,""))+"</li>");continue;}
+if(/^(\\s*\\d+\\.\\s+)/.test(line)){if(listTag!=="ol"){closeList();listTag="ol";out.push("<ol>");}out.push("<li>"+inline(line.replace(/^\\s*\\d+\\.\\s+/,""))+"</li>");continue;}
+if(!line.trim()){closeList();continue;}
+closeList();out.push("<p>"+inline(line)+"</p>");}
+closeList();if(inCode){flushCode();}
+return out.join("\\n");}
+function inline(s){var esc=escapeHtml(s);esc=esc.replace(/`([^`]+)`/g,"<code>$1</code>");esc=esc.replace(/\\*\\*([^*]+)\\*\\*/g,"<strong>$1</strong>");esc=esc.replace(/\\*([^*]+)\\*/g,"<em>$1</em>");esc=esc.replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2">$1</a>');return esc;}
+"""
+
+
 class DocsSitePublisher:
     """Publishes validated system maps as a static documentation site.
 
@@ -2799,11 +2988,13 @@ class DocsSitePublisher:
             published[kind] = system_map
             written[kind] = str(target)
         resolved_video = video_rel
+        resolved_poster: Optional[str] = None
         resolved_docs = list(doc_entries) if doc_entries is not None else None
         if resolved_video is None and resolved_docs is None and project_root is not None:
             try:
                 collected = self.publish_assets(project_root, str(root))
                 resolved_video = collected.get("video_rel")
+                resolved_poster = collected.get("poster_rel")
                 resolved_docs = collected.get("doc_entries", [])
                 for key, path in collected.get("written", {}).items():
                     written[key] = path
@@ -2814,7 +3005,7 @@ class DocsSitePublisher:
         index_target.write_text(
             self.render_index(
                 project_name, published, stats or {}, href_prefix,
-                resolved_video, resolved_docs,
+                resolved_video, resolved_docs, resolved_poster,
             ),
             encoding="utf-8",
         )
@@ -2871,13 +3062,12 @@ class DocsSitePublisher:
         Returns:
             Mapping with video_rel, doc_entries, and written paths.
         """
-        import shutil
-
         base = Path(project_root).resolve()
         root = Path(output_dir)
         root.mkdir(parents=True, exist_ok=True)
         written: Dict[str, str] = {}
         video_rel: Optional[str] = None
+        poster_rel: Optional[str] = None
         if self._config.SITE_VIDEO_ENABLED:
             source = base / self._config.VIDEO_OUTPUT
             if source.is_file():
@@ -2888,6 +3078,10 @@ class DocsSitePublisher:
                 else:
                     written["video"] = str(target)
                 video_rel = target.name
+                poster = self._render_poster(target, root)
+                if poster is not None:
+                    written["poster"] = str(poster)
+                    poster_rel = poster.name
         doc_entries: List[Dict[str, str]] = []
         if self._config.SITE_DOCS_ENABLED:
             docs_root = root / self._config.SITE_DOCS_SUBDIR.strip().strip("/")
@@ -2905,14 +3099,107 @@ class DocsSitePublisher:
                     self._config.SITE_DOCS_SUBDIR.strip().strip("/") + "/" + rel
                 )
                 preview = ""
+                lines = 0
+                chars = 0
                 try:
                     text = source.read_text(encoding="utf-8", errors="replace")
-                    preview = " ".join(text.split())[: self._config.SITE_MD_PREVIEW_CHARS]
+                    preview = self._doc_preview(text)
+                    lines = len(text.splitlines())
+                    chars = len(text)
                 except OSError:
                     preview = ""
-                doc_entries.append({"name": rel, "href": href, "preview": preview})
+                doc_entries.append({
+                    "name": rel, "href": href, "preview": preview,
+                    "title": self._doc_title(text) if chars else "",
+                    "lines": str(lines), "chars": str(chars),
+                })
                 written["doc:" + rel] = str(target)
-        return {"video_rel": video_rel, "doc_entries": doc_entries, "written": written}
+        return {
+            "video_rel": video_rel, "poster_rel": poster_rel,
+            "doc_entries": doc_entries, "written": written,
+        }
+
+    def _render_poster(self, video: Path, site_root: Path) -> Optional[Path]:
+        """Extract one video frame as the player poster so it never shows black.
+
+        Re-renders only when the video is newer than the poster. Skips
+        silently when ffmpeg is missing or fails.
+
+        Args:
+            video: Published video file.
+            site_root: Site root receiving the poster image.
+
+        Returns:
+            Poster path, or None when no poster is available.
+        """
+        poster = site_root / self._config.SITE_VIDEO_POSTER_FILENAME
+        try:
+            if poster.is_file() and poster.stat().st_mtime >= video.stat().st_mtime:
+                return poster
+        except OSError:
+            return None
+        ffmpeg = shutil.which("ffmpeg")
+        if ffmpeg is None:
+            return poster if poster.is_file() else None
+        command = [
+            ffmpeg, "-y", "-loglevel", "error",
+            "-ss", str(self._config.SITE_VIDEO_POSTER_AT_S),
+            "-i", str(video), "-frames:v", "1",
+            "-q:v", str(self._config.SITE_VIDEO_POSTER_QUALITY), str(poster),
+        ]
+        try:
+            subprocess.run(
+                command, check=True, capture_output=True,
+                timeout=self._config.SITE_VIDEO_POSTER_TIMEOUT_S,
+            )
+        except (OSError, subprocess.SubprocessError):
+            return poster if poster.is_file() else None
+        return poster if poster.is_file() else None
+
+    @staticmethod
+    def _doc_title(text: str) -> str:
+        """Return the first H1 heading of a markdown document without page suffixes."""
+        for raw in text.splitlines()[:40]:
+            line = raw.strip()
+            if line.startswith("# "):
+                title = line[2:].replace("**", "").replace("`", "").strip()
+                return title.split(" (page ")[0].strip()
+        return ""
+
+    def _doc_preview(self, text: str) -> str:
+        """Return the first prose sentence of a markdown document for its card.
+
+        Headings, tables, navigation lines, front matter, and code fences
+        are skipped and inline markdown is stripped, so cards show what a
+        document says instead of its raw syntax.
+
+        Args:
+            text: Markdown source.
+
+        Returns:
+            Plain-text preview capped at SITE_MD_PREVIEW_CHARS.
+        """
+        skip_prefixes = ("#", "|", ">", "```", "---", "Pages:", "Previous:", "Next:", "<", "*Last")
+        in_fence = False
+        for raw in text.splitlines():
+            line = raw.strip()
+            if line.startswith("```"):
+                in_fence = not in_fence
+                continue
+            if in_fence or not line or line.startswith(skip_prefixes):
+                continue
+            if ":" in line.split(" ", 1)[0] and line.endswith(("\"", "'")):
+                continue
+            plain = _MD_LINK_RE.sub(r"\1", line)
+            plain = _MD_MARK_RE.sub("", plain).lstrip("-*0123456789. ").strip()
+            if len(plain) < self._config.SITE_MD_PREVIEW_MIN_CHARS:
+                continue
+            limit = self._config.SITE_MD_PREVIEW_CHARS
+            if len(plain) <= limit:
+                return plain
+            cut = plain[:limit].rsplit(" ", 1)[0]
+            return cut.rstrip(",;:-") + "..."
+        return ""
 
     @staticmethod
     def _prune_stale_docs(docs_root: Path, keep: Set[str]) -> None:
@@ -3016,6 +3303,7 @@ class DocsSitePublisher:
         href_prefix: Optional[str] = None,
         video_rel: Optional[str] = None,
         doc_entries: Optional[List[Dict[str, str]]] = None,
+        poster_rel: Optional[str] = None,
     ) -> str:
         """Render the gallery index page for published maps.
 
@@ -3025,7 +3313,8 @@ class DocsSitePublisher:
             stats: Project counters shown in the gallery header.
             href_prefix: Relative prefix pointing at the map directory.
             video_rel: Optional video href relative to the index.
-            doc_entries: Optional doc entries with name, href, preview.
+            doc_entries: Optional doc entries with name, href, preview, lines, chars.
+            poster_rel: Optional poster image href for the video player.
 
         Returns:
             Complete standalone HTML gallery document.
@@ -3033,145 +3322,113 @@ class DocsSitePublisher:
         if href_prefix is None:
             href_prefix = self._href_prefix()
         title = self._escape(project_name.strip() or "Project")
-        cards = []
-        for kind in sorted(maps):
-            system_map = maps[kind]
-            cards.append(self._card(kind, system_map, href_prefix))
+        entries = list(doc_entries or [])
+        cards = [self._card(kind, maps[kind], href_prefix) for kind in sorted(maps)]
         gallery = "\n".join(cards) if cards else (
             '<p class="empty">No validated maps were published yet.</p>'
         )
-        stats_line = self._stats_line(stats)
-        video_section = self._video_section(video_rel)
-        docs_section = self._docs_section(doc_entries or [])
-        return """<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>""" + title + """ | System Maps</title>
-<style>
-:root{--canvas:#020617;--mask:#0f172a;--ink:#ffffff;--muted:#94a3b8;--border:#1e293b;--accent:#22d3ee;--code:#0b1226;--kw:#c084fc;--str:#86efac;--fn:#fcd34d;--cm:#64748b}
-html[data-theme="light"]{--canvas:#f8fafc;--mask:#ffffff;--ink:#0f172a;--muted:#475569;--border:#e2e8f0;--code:#f1f5f9;--cm:#94a3b8}
-*{box-sizing:border-box}
-body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-header{padding:28px 20px 18px;max-width:1024px;margin:0 auto}
-header h1{font-size:22px;margin:0 0 8px}
-header p{color:var(--muted);font-size:13px;margin:4px 0}
-.controls{max-width:1024px;margin:0 auto;padding:0 20px 10px;display:flex;gap:8px;flex-wrap:wrap}
-.controls input{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font:inherit;font-size:12px;min-width:220px}
-.controls button{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font:inherit;font-size:12px;cursor:pointer}
-.grid{max-width:1024px;margin:0 auto;padding:10px 20px 40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.card{background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
-.card h2{font-size:15px;margin:0}
-.card p{font-size:12px;color:var(--muted);margin:0;line-height:1.6}
-.card .meta{font-size:11px;color:var(--muted)}
-.card a,.card button.doc-open{margin-top:auto;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:12px;text-decoration:none;text-align:center;background:transparent;font:inherit;cursor:pointer}
-.card a:hover,.card a:focus-visible,.card button.doc-open:hover,.card button.doc-open:focus-visible{border-color:var(--accent);outline:2px solid var(--accent);outline-offset:2px}
-.howto{max-width:1024px;margin:0 auto;padding:0 20px 20px}
-.howto h2{font-size:15px;margin:0 0 8px}
-.howto p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
-.section{max-width:1024px;margin:0 auto;padding:0 20px 20px}
-.section h2{font-size:15px;margin:0 0 10px}
-video.overview{width:100%;max-height:520px;background:#000;border:1px solid var(--border);border-radius:14px}
-.md-body{font-size:13px;line-height:1.7}
-.md-body h1,.md-body h2,.md-body h3{margin:14px 0 8px;line-height:1.3}
-.md-body h1{font-size:18px}.md-body h2{font-size:16px}.md-body h3{font-size:14px}
-.md-body p{margin:8px 0;color:var(--ink)}
-.md-body a{color:var(--accent)}
-.md-body code{background:var(--code);border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:12px}
-.md-body pre{background:var(--code);border:1px solid var(--border);border-radius:10px;padding:12px;overflow:auto}
-.md-body pre code{background:none;border:none;padding:0}
-.md-body blockquote{border-left:3px solid var(--accent);margin:8px 0;padding:4px 12px;color:var(--muted)}
-.md-body ul,.md-body ol{margin:8px 0;padding-left:22px}
-.md-body table{border-collapse:collapse;width:100%;font-size:12px;margin:10px 0}
-.md-body th,.md-body td{border:1px solid var(--border);padding:6px 8px;text-align:left}
-.md-body th{color:var(--muted);font-weight:400}
-.md-body hr{border:none;border-top:1px solid var(--border);margin:14px 0}
-.tok-kw{color:var(--kw)}.tok-str{color:var(--str)}.tok-fn{color:var(--fn)}.tok-cm{color:var(--cm);font-style:italic}
-#doc-viewer{background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:12px;max-height:640px;overflow:auto}
-#doc-viewer .meta{font-size:11px;color:var(--muted);margin-bottom:8px}
-.empty{color:var(--muted);font-size:13px}
-footer{max-width:1024px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:11px}
-</style>
-</head>
-<body>
-<header>
-<h1>""" + title + """ | System Maps</h1>
-<p>""" + stats_line + """</p>
-<p>This gallery page works offline. Each map loads its physics engine from a CDN and needs network access. Video and documentation below are local and work offline.</p>
-</header>
-<div class="controls">
-<input id="filter" type="search" placeholder="Filter diagrams and docs..." aria-label="Filter diagrams and docs">
-<button type="button" id="theme">Theme</button>
-</div>
-<main class="grid" id="gallery">
-""" + gallery + """
-</main>
-""" + video_section + docs_section + """
-<section class="howto">
-<h2>How to read these maps</h2>
-<p>Open any map, then: drag nodes freely while physics settles the rest, search (/) to filter, click a node to focus it with full file documentation, Upstream and Downstream to trace authored reach, Path to probe the exact route between two ids, Lens to compare semantic roles, Play to walk the guided chapters, Stabilize to re-run physics, Theme for dark and light, Export for PNG or typed JSON. Deep links such as #route=a~b restore any reading.</p>
-</section>
-<footer>Generated offline from scanned source topology. Counts reflect authored relationships only.</footer>
-<script>
-(function(){
-"use strict";
-function escapeHtml(text){return String(text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function highlightCode(code,lang){
-var esc=escapeHtml(code);
-esc=esc.replace(/(&quot;.*?&quot;|&#x27;.*?&#x27;|"[^"\\n]*"|'[^'\\n]*')/g,'<span class="tok-str">$1</span>');
-esc=esc.replace(/(^|\\s)(def|class|return|import|from|if|else|elif|for|while|try|except|with|as|pass|raise|None|True|False|function|const|let|var|new|typeof|struct|impl|fn|pub|mut|match|enum|interface|type)\\b/g,'$1<span class="tok-kw">$2</span>');
-return esc;}
-function md2html(src){
-var lines=String(src).split("\\n");var out=[];var inCode=false;var codeLang="";var buf=[];var listTag="";
-function closeList(){if(listTag){out.push("</"+listTag+">");listTag="";}}
-function flushCode(){out.push('<pre><code class="lang-'+escapeHtml(codeLang)+'">'+highlightCode(buf.join("\\n"),codeLang)+'</code></pre>');buf=[];}
-for(var i=0;i<lines.length;i++){var line=lines[i];
-if(line.indexOf("```")===0){if(!inCode){inCode=true;codeLang=line.slice(3).trim();buf=[];}else{inCode=false;flushCode();}continue;}
-if(inCode){buf.push(line);continue;}
-if(line.indexOf("# ")===0){closeList();out.push("<h1>"+inline(line.slice(2))+"</h1>");continue;}
-if(line.indexOf("## ")===0){closeList();out.push("<h2>"+inline(line.slice(3))+"</h2>");continue;}
-if(line.indexOf("### ")===0){closeList();out.push("<h3>"+inline(line.slice(4))+"</h3>");continue;}
-if(line.trim()==="---"||line.trim()==="***"){closeList();out.push("<hr>");continue;}
-if(line.indexOf("> ")===0){closeList();out.push("<blockquote>"+inline(line.slice(2))+"</blockquote>");continue;}
-if(line.indexOf("|")>=0&&lines[i+1]&&/^\\s*\\|?[\\s:\\-|]+\\|?\\s*$/.test(lines[i+1])){closeList();var head=line.split("|").map(function(c){return c.trim();}).filter(function(c){return c;});i++;var rows=[];while(i+1<lines.length&&lines[i+1].indexOf("|")>=0){i++;rows.push(lines[i].split("|").map(function(c){return c.trim();}).filter(function(c){return c;}));}var h="<table><thead><tr>"+head.map(function(c){return "<th>"+inline(c)+"</th>";}).join("")+"</tr></thead>";if(rows.length){h+="<tbody>"+rows.map(function(r){return "<tr>"+r.map(function(c){return "<td>"+inline(c)+"</td>";}).join("")+"</tr>";}).join("")+"</tbody>";}out.push(h+"</table>");continue;}
-if(/^(\\s*[-*]\\s+)/.test(line)){if(listTag!=="ul"){closeList();listTag="ul";out.push("<ul>");}out.push("<li>"+inline(line.replace(/^\\s*[-*]\\s+/,""))+"</li>");continue;}
-if(/^(\\s*\\d+\\.\\s+)/.test(line)){if(listTag!=="ol"){closeList();listTag="ol";out.push("<ol>");}out.push("<li>"+inline(line.replace(/^\\s*\\d+\\.\\s+/,""))+"</li>");continue;}
-if(!line.trim()){closeList();continue;}
-closeList();out.push("<p>"+inline(line)+"</p>");}
-closeList();if(inCode){flushCode();}
-return out.join("\\n");}
-function inline(s){var esc=escapeHtml(s);esc=esc.replace(/`([^`]+)`/g,"<code>$1</code>");esc=esc.replace(/\\*\\*([^*]+)\\*\\*/g,"<strong>$1</strong>");esc=esc.replace(/\\*([^*]+)\\*/g,"<em>$1</em>");esc=esc.replace(/\\[([^\\]]+)\\]\\(([^)]+)\\)/g,'<a href="$2">$1</a>');return esc;}
-var filter=document.getElementById("filter");
-var theme=document.getElementById("theme");
-var cards=Array.prototype.slice.call(document.querySelectorAll(".card"));
-filter.addEventListener("input",function(){
-var term=filter.value.trim().toLowerCase();
-cards.forEach(function(card){
-var text=(card.textContent||"").toLowerCase();
-card.style.display=(!term||text.indexOf(term)>=0)?"":"none";});});
-theme.addEventListener("click",function(){
-var root=document.documentElement;
-root.setAttribute("data-theme",root.getAttribute("data-theme")==="light"?"dark":"light");});
-var viewer=document.getElementById("doc-body");var title=document.getElementById("doc-title");var meta=document.getElementById("doc-meta");
-document.querySelectorAll("button.doc-open").forEach(function(btn){btn.addEventListener("click",function(){
-var href=btn.getAttribute("data-href");var name=btn.getAttribute("data-name");
-if(title){title.textContent=name;}
-if(meta){meta.textContent="Loading "+name+"...";}
-fetch(href).then(function(r){if(!r.ok){throw new Error("HTTP "+r.status);}return r.text();}).then(function(md){
-if(meta){meta.textContent=name+" | "+md.length+" chars | rendered with offline markdown2html";}
-if(viewer){viewer.innerHTML=md2html(md);location.hash="#doc="+encodeURIComponent(name);}}).catch(function(e){if(meta){meta.textContent="Could not load "+name+": "+e;}});});});
-if(location.hash.indexOf("#doc=")===0){var wanted=decodeURIComponent(location.hash.slice(5));var match=null;document.querySelectorAll("button.doc-open").forEach(function(b){if(b.getAttribute("data-name")===wanted){match=b;}});if(match){match.click();}}
-})();
-</script>
-</body>
-</html>"""
+        return (
+            _GALLERY_HEAD.replace("__TITLE__", title)
+            + '<div class="backdrop" aria-hidden="true"></div>'
+            + '<header class="hero"><p class="eyebrow">Zero-token knowledge base</p>'
+            + "<h1>" + title + " <span>| System Maps</span></h1>"
+            + "<p class=\"lede\">Architecture maps, an overview video, and the full documentation "
+            + "set, generated offline from the source code. Nothing here was written by an LLM.</p>"
+            + self._stat_tiles(stats)
+            + "</header>"
+            + self._start_here(entries, video_rel)
+            + '<div class="toolbar"><input id="filter" type="search" '
+            + 'placeholder="Filter maps and docs ( / )" aria-label="Filter diagrams and docs">'
+            + '<span id="filter-count" class="muted" aria-live="polite"></span>'
+            + '<button type="button" id="theme" title="Toggle dark and light theme">Theme</button></div>'
+            + '<section class="section" id="maps"><h2>Interactive maps</h2>'
+            + '<p class="muted">Physics-driven diagrams: drag nodes, click one for its documentation, '
+            + "trace upstream or downstream reach. Maps load their engine from a CDN.</p>"
+            + '<div class="grid" id="gallery">' + gallery + "</div></section>"
+            + self._video_section(video_rel, poster_rel)
+            + self._docs_section(entries)
+            + '<section class="howto section"><h2>How to read these maps</h2>'
+            + "<p>Open any map, then: drag nodes freely while physics settles the rest, search (/) to filter, "
+            + "click a node to focus it with full file documentation, Upstream and Downstream to trace authored "
+            + "reach, Path to probe the exact route between two ids, Lens to compare semantic roles, Play to walk "
+            + "the guided chapters, Stabilize to re-run physics, Theme for dark and light, Export for PNG or typed "
+            + "JSON. Deep links such as #route=a~b restore any reading.</p></section>"
+            + "<footer>Generated offline from scanned source topology. Counts reflect authored relationships only. "
+            + "Agents: read <a href=\"" + self._escape(self._config.SITE_LLMS_TXT_FILENAME) + "\">"
+            + self._escape(self._config.SITE_LLMS_TXT_FILENAME) + "</a>.</footer>"
+            + _GALLERY_DRAWER
+            + "<script>\n(function(){\n\"use strict\";\n"
+            + _GALLERY_MD_JS
+            + _GALLERY_APP_JS
+            + "})();\n</script>\n</body>\n</html>"
+        )
 
-    def _video_section(self, video_rel: Optional[str]) -> str:
+    def _stat_tiles(self, stats: Dict[str, int]) -> str:
+        """Render animated counter tiles for the headline project metrics.
+
+        Args:
+            stats: Project counters.
+
+        Returns:
+            HTML fragment, empty when no stats are known.
+        """
+        if not stats:
+            return ""
+        tiles = []
+        for key in sorted(stats):
+            value = int(stats[key])
+            tiles.append(
+                '<div class="tile"><span class="num" data-count="' + str(value) + '">'
+                + "{:,}".format(value) + '</span><span class="label">' + self._escape(str(key)) + "</span></div>"
+            )
+        return '<div class="tiles">' + "".join(tiles) + "</div>"
+
+    def _start_here(self, entries: List[Dict[str, str]], video_rel: Optional[str]) -> str:
+        """Render the three-step reading path shown above the maps.
+
+        Args:
+            entries: Published doc entries.
+            video_rel: Video href, when a video was published.
+
+        Returns:
+            HTML fragment linking the wiki overview, knowledge base, and video.
+        """
+        by_name = {e.get("name", ""): e for e in entries}
+        steps: List[Tuple[str, str, str, str]] = []
+        wiki = by_name.get(self._config.WIKI_OUTPUT_DIR + "/index.md")
+        if wiki:
+            steps.append(("doc", wiki.get("name", ""), "Big picture", "Wiki overview: communities, god nodes, reading order"))
+        if video_rel:
+            steps.append(("link", "#video", "Watch", "Overview video of the whole codebase"))
+        kb = by_name.get(self._config.OUTPUT_FILENAME)
+        if kb:
+            steps.append(("doc", kb.get("name", ""), "Deep dive", "Knowledge base: every file, symbol, and finding"))
+        agent = by_name.get(self._config.AGENT_OUTPUT_DIR + "/INDEX.md")
+        if agent:
+            steps.append(("doc", agent.get("name", ""), "Look up", "Agent index: file, purpose, who depends on it"))
+        if not steps:
+            return ""
+        items = []
+        for index, (mode, target, label, text) in enumerate(steps, start=1):
+            inner = (
+                '<span class="step">' + str(index) + '</span><span><strong>' + self._escape(label)
+                + "</strong><br><span class=\"muted\">" + self._escape(text) + "</span></span>"
+            )
+            if mode == "doc":
+                items.append(
+                    '<button type="button" class="start doc-open" data-name="' + self._escape(target)
+                    + '" data-href="' + self._escape(by_name[target].get("href", "")) + '">' + inner + "</button>"
+                )
+            else:
+                items.append('<a class="start" href="' + self._escape(target) + '">' + inner + "</a>")
+        return '<nav class="start-here section" aria-label="Start here"><h2>Start here</h2><div class="starts">' + "".join(items) + "</div></nav>"
+
+    def _video_section(self, video_rel: Optional[str], poster_rel: Optional[str] = None) -> str:
         """Render the overview video section with an HTML5 video tag.
 
         Args:
             video_rel: Video href relative to the index, None hides the section.
+            poster_rel: Optional poster image shown before playback.
 
         Returns:
             HTML section fragment, empty string when no video is available.
@@ -3179,61 +3436,109 @@ if(location.hash.indexOf("#doc=")===0){var wanted=decodeURIComponent(location.ha
         if not video_rel:
             return ""
         src = self._escape(video_rel)
+        poster = ' poster="' + self._escape(poster_rel) + '"' if poster_rel else ""
         return (
             '<section class="section" id="video">'
             "<h2>Overview video</h2>"
-            '<video class="overview" controls preload="metadata" src="'
-            + src
+            '<figure class="video-frame"><video class="overview" controls preload="metadata"'
+            + poster + ' src="' + src
             + '">Your browser does not support the video tag. '
             + '<a href="' + src + '">Download the overview video</a>.</video>'
-            + '<p class="empty">Cinematic synthwave overview rendered from real scan data. '
-            + '<a href="' + src + '">Open/download ' + src + "</a>.</p>"
+            + '<figcaption class="muted">Cinematic synthwave overview rendered from real scan data: layers, '
+            + "god nodes, dependency tree, communities, import graph, and code DNA. "
+            + '<a href="' + src + '">Open/download ' + src + "</a>.</figcaption></figure>"
             + "</section>"
         )
 
+    def _doc_group(self, name: str) -> str:
+        """Return the gallery group a published document belongs to."""
+        if name.startswith(self._config.WIKI_OUTPUT_DIR + "/"):
+            return "wiki"
+        if name.startswith(self._config.AGENT_OUTPUT_DIR + "/recipes/"):
+            return "recipes"
+        if name.startswith(self._config.AGENT_OUTPUT_DIR + "/"):
+            return "agent"
+        return "project"
+
     def _docs_section(self, doc_entries: List[Dict[str, str]]) -> str:
-        """Render the documentation grid with an offline markdown viewer.
+        """Render grouped documentation cards with an offline markdown drawer.
+
+        Paged documents (``NAME_p2.md``) collapse into their first page's
+        card as page chips, and every card shows a prose preview plus its
+        size, so readers pick the right document before opening it.
 
         Args:
-            doc_entries: Doc entries with name, href, and preview keys.
+            doc_entries: Doc entries with name, href, preview, lines, chars.
 
         Returns:
             HTML section fragment, empty string when no docs are available.
         """
         if not doc_entries:
             return ""
-        cards = []
+        chars_per_token = max(1, self._config.AGENT_CHARS_PER_TOKEN)
+        pages: Dict[str, List[Tuple[int, Dict[str, str]]]] = {}
         for entry in sorted(doc_entries, key=lambda d: str(d.get("name", ""))):
             name = str(entry.get("name", ""))
-            href = str(entry.get("href", ""))
-            preview = str(entry.get("preview", ""))
-            cards.append(
-                '<article class="card" data-doc="'
-                + self._escape(name)
-                + '"><h2>'
-                + self._escape(name.split("/")[-1])
-                + "</h2><p>"
-                + self._escape(name)
-                + "</p>"
-                + ('<p class="meta">' + self._escape(preview) + "</p>" if preview else "")
-                + '<button type="button" class="doc-open" data-href="'
-                + self._escape(href)
-                + '" data-name="'
-                + self._escape(name)
-                + '">Read rendered</button><a href="'
-                + self._escape(href)
-                + '">Open raw markdown</a></article>'
+            match = _PAGE_PART_RE.match(name)
+            base = match.group("base") + ".md" if match else name
+            page = int(match.group("page")) if match else 1
+            pages.setdefault(base, []).append((page, entry))
+        groups: Dict[str, List[str]] = {"wiki": [], "project": [], "agent": [], "recipes": []}
+        lead = ("index.md", "INDEX.md", self._config.OUTPUT_FILENAME, "README.md")
+
+        def doc_order(base: str) -> Tuple[int, str]:
+            """Entry points first, then alphabetical."""
+            leaf = base.rsplit("/", 1)[-1]
+            return (lead.index(leaf) if leaf in lead else len(lead), base.lower())
+
+        for base in sorted(pages, key=doc_order):
+            parts = sorted(pages[base], key=lambda item: item[0])
+            first = parts[0][1]
+            name = str(first.get("name", ""))
+            total_lines = sum(int(str(p.get("lines", "0")) or 0) for _, p in parts)
+            total_chars = sum(int(str(p.get("chars", "0")) or 0) for _, p in parts)
+            badges = '<span class="chip">' + str(total_lines) + " lines</span>"
+            if total_chars:
+                badges += '<span class="chip">~' + str(max(1, total_chars // chars_per_token)) + " tokens</span>"
+            chips = ""
+            if len(parts) > 1:
+                chips = '<div class="pages">' + "".join(
+                    '<button type="button" class="page doc-open" data-href="' + self._escape(str(p.get("href", "")))
+                    + '" data-name="' + self._escape(str(p.get("name", ""))) + '" title="Page ' + str(num) + '">'
+                    + str(num) + "</button>"
+                    for num, p in parts
+                ) + "</div>"
+            preview = str(first.get("preview", ""))
+            groups[self._doc_group(name)].append(
+                '<article class="card doc-card" data-doc="' + self._escape(name) + '">'
+                + "<h3>" + self._escape(str(first.get("title", "")) or base.split("/")[-1]) + "</h3>"
+                + '<p class="path">' + self._escape(base) + "</p>"
+                + ("<p>" + self._escape(preview) + "</p>" if preview else "")
+                + '<div class="chips">' + badges + "</div>" + chips
+                + '<div class="actions"><button type="button" class="doc-open primary" data-href="'
+                + self._escape(str(first.get("href", ""))) + '" data-name="' + self._escape(name)
+                + '">Read rendered</button><a class="raw" href="' + self._escape(str(first.get("href", "")))
+                + '">Open raw markdown</a></div></article>'
+            )
+        titles = (
+            ("wiki", "Wiki", "Concept pages per code community: start with index.md."),
+            ("project", "Project docs", "Knowledge base, README, and policies."),
+            ("agent", "Agent docs", "Grep-friendly indexes for AI agents (also useful for humans)."),
+            ("recipes", "Recipes", "Step-by-step tasks grounded in this codebase."),
+        )
+        total = sum(len(v) for v in groups.values())
+        blocks = []
+        for key, heading, blurb in titles:
+            if not groups[key]:
+                continue
+            blocks.append(
+                '<div class="doc-group" data-group="' + key + '"><h3 class="group-title">' + heading
+                + ' <span class="muted">' + str(len(groups[key])) + '</span></h3><p class="muted">' + blurb
+                + '</p><div class="grid">' + "\n".join(groups[key]) + "</div></div>"
             )
         return (
-            '<section class="section" id="docs"><h2>Documentation '
-            + str(len(cards))
-            + " files</h2>"
-            + '<div class="grid" id="docs-grid" style="padding:0;max-width:none">'
-            + "\n".join(cards)
-            + "</div>"
-            + '<div id="doc-viewer"><h2 id="doc-title">Rendered documentation</h2>'
-            + '<div class="meta" id="doc-meta">Pick any document above to render it here with offline markdown2html and colored code.</div>'
-            + '<div id="doc-body" class="md-body"></div></div></section>'
+            '<section class="section" id="docs"><h2>Documentation ' + str(total) + " files</h2>"
+            + "".join(blocks) + "</section>"
         )
 
     def _href_prefix(self) -> str:
@@ -3247,6 +3552,43 @@ if(location.hash.indexOf("#doc=")===0){var wanted=decodeURIComponent(location.ha
             return ""
         return subdir + "/"
 
+    _KIND_GLYPHS: Tuple[Tuple[str, str], ...] = (
+        ("architecture",
+         '<rect x="8" y="6" width="64" height="12" rx="3"/><rect x="8" y="26" width="28" height="12" rx="3"/>'
+         '<rect x="44" y="26" width="28" height="12" rx="3"/><rect x="8" y="46" width="64" height="12" rx="3"/>'
+         '<path class="flow" d="M22 18v8M58 18v8M22 38v8M58 38v8"/>'),
+        ("workflow",
+         '<circle cx="10" cy="32" r="6"/><circle cx="31" cy="32" r="6"/><circle cx="52" cy="32" r="6"/>'
+         '<rect x="64" y="26" width="12" height="12" rx="2"/><path class="flow" d="M16 32h9M37 32h9M58 32h6"/>'),
+        ("sequence",
+         '<path d="M14 6v52M40 6v52M66 6v52"/><path class="flow" d="M14 16h26M40 28h26M66 40H40M40 52H14"/>'),
+        ("dataflow",
+         '<circle cx="10" cy="20" r="6"/><circle cx="10" cy="44" r="6"/><rect x="30" y="24" width="18" height="16" rx="3"/>'
+         '<ellipse cx="68" cy="22" rx="8" ry="3"/><path d="M60 22v20c0 2 16 2 16 0V22"/>'
+         '<path class="flow" d="M16 20l14 8M16 44l14-8M48 32h12"/>'),
+        ("lifecycle",
+         '<circle cx="40" cy="10" r="6"/><circle cx="68" cy="32" r="6"/><circle cx="40" cy="54" r="6"/><circle cx="12" cy="32" r="6"/>'
+         '<path class="flow" d="M46 12l17 15M64 38L46 52M34 52L17 38M16 27l18-15"/>'),
+    )
+
+    def _glyph(self, kind: str) -> str:
+        """Return a small inline SVG pictogram for a diagram kind.
+
+        Args:
+            kind: Diagram kind identifier.
+
+        Returns:
+            SVG markup (decorative, hidden from assistive technology).
+        """
+        body = '<rect x="8" y="8" width="64" height="48" rx="6"/>'
+        for candidate, markup in self._KIND_GLYPHS:
+            if candidate == kind:
+                body = markup
+        return (
+            '<svg class="glyph" viewBox="0 0 80 64" aria-hidden="true" focusable="false">'
+            + body + "</svg>"
+        )
+
     def _card(self, kind: str, system_map: SystemMap, href_prefix: str) -> str:
         """Render one gallery card linking to a published map.
 
@@ -3256,29 +3598,31 @@ if(location.hash.indexOf("#doc=")===0){var wanted=decodeURIComponent(location.ha
             href_prefix: Relative prefix pointing at the map directory.
 
         Returns:
-            HTML card fragment with a relative map link.
+            HTML card fragment with a relative map link covering the card.
         """
         href = self._escape(href_prefix + kind + ".html")
         total = system_map.meta.get("total", str(len(system_map.nodes)))
         scope = "full scope" if str(system_map.meta.get("full", "")).lower() == "true" else "primary scope"
         return (
-            '<article class="card" data-kind="'
+            '<article class="card map-card" data-kind="'
             + self._escape(kind)
-            + '"><h2>'
+            + '">'
+            + self._glyph(kind)
+            + "<h3>"
             + self._escape(system_map.title)
-            + "</h2><p>"
+            + "</h3><p>"
             + self._escape(self.description_for(kind))
-            + '</p><div class="meta">'
+            + '</p><div class="chips"><span class="chip">'
             + str(len(system_map.nodes))
             + " of "
             + self._escape(str(total))
             + " files in "
             + scope
-            + " | "
+            + '</span><span class="chip">'
             + str(len(system_map.edges))
-            + " links | "
+            + ' links</span><span class="chip">'
             + str(len(system_map.views))
-            + ' chapters</div><a href="'
+            + ' chapters</span></div><a class="stretch" href="'
             + href
             + '">Open '
             + self._escape(kind)

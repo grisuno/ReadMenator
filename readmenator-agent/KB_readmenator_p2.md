@@ -1,6 +1,17 @@
 # Subsystem: readmenator (page 2 of 3)
 Previous: [KB_readmenator.md](KB_readmenator.md)
 
+## readmenator/_gitmeta.py
+- Doc: Read-only git metadata for freshness stamps on generated documents.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `_read_small` (function, line 19) `def _read_small(path)`
+  - `_git_dir` (function, line 38) `def _git_dir(root)`
+  - `_packed_ref` (function, line 59) `def _packed_ref(git_dir, ref)`
+  - `read_git_head` (function, line 84) `def read_git_head(project_root)`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_gh_wiki.py`, `tests/test_agent_friendliness.py`
+
 ## readmenator/_hotspots.py
 - Doc: Hotspot, dependency cycle, and change impact analysis.
 - Layer: utility

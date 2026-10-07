@@ -343,7 +343,7 @@
 - `readmenator/_cursorrules_generator.py` -> __future__, pathlib, typing
 - `readmenator/_dataflow.py` -> __future__, logging, re, typing
 - `readmenator/_dead_code.py` -> __future__, collections, typing
-- `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, shutil, typing
+- `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, re, shutil, subprocess, typing
 - `readmenator/_documentation.py` -> __future__, collections, subprocess, typing
 - `readmenator/_explain.py` -> __future__, typing
 - `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing

@@ -3,6 +3,30 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_analyze_is_repeatable` | method | `tests/test_analyzer.py:130` | `def test_analyze_is_repeatable(self)` |
+| `test_analyze_with_resolved_edges_counts_them` | method | `tests/test_analyzer.py:116` | `def test_analyze_with_resolved_edges_counts_them(self)` |
+| `test_community_cohesion_is_between_zero_and_one` | method | `tests/test_analyzer.py:92` | `def test_community_cohesion_is_between_zero_and_one(self)` |
+| `test_dominant_directory_prefers_specific_on_tie` | method | `tests/test_analyzer.py:141` | `def test_dominant_directory_prefers_specific_on_tie(self)` |
+| `test_isolated_nodes_do_not_form_communities` | method | `tests/test_analyzer.py:107` | `def test_isolated_nodes_do_not_form_communities(self)` |
+| `TestFileCacheContract` | class | `tests/test_cache.py:18` | `class TestFileCacheContract(TestCase)` |
+| `_write` | method | `tests/test_cache.py:30` | `def _write(self, rel_path, content)` |
+| `setUp` | method | `tests/test_cache.py:21` | `def setUp(self)` |
+| `tearDown` | method | `tests/test_cache.py:26` | `def tearDown(self)` |
+| `test_clear_analysis_all_keys` | method | `tests/test_cache.py:127` | `def test_clear_analysis_all_keys(self)` |
+| `test_clear_analysis_specific_key` | method | `tests/test_cache.py:120` | `def test_clear_analysis_specific_key(self)` |
+| `test_compute_hash_returns_hex_string` | method | `tests/test_cache.py:36` | `def test_compute_hash_returns_hex_string(self)` |
+| `test_compute_hashes_batch` | method | `tests/test_cache.py:92` | `def test_compute_hashes_batch(self)` |
+| `test_different_content_produces_different_hash` | method | `tests/test_cache.py:42` | `def test_different_content_produces_different_hash(self)` |
+| `test_find_changed_detects_modified_files` | method | `tests/test_cache.py:71` | `def test_find_changed_detects_modified_files(self)` |
+| `test_find_changed_detects_new_files` | method | `tests/test_cache.py:66` | `def test_find_changed_detects_new_files(self)` |
+| `test_find_changed_skips_unchanged_files` | method | `tests/test_cache.py:78` | `def test_find_changed_skips_unchanged_files(self)` |
+| `test_has_changed_since_last_analysis_returns_false_when_no_changes` | method | `tests/test_cache.py:139` | `def test_has_changed_since_last_analysis_returns_false_when_no_changes(self)` |
+| `test_has_changed_since_last_analysis_returns_true_on_first_run` | method | `tests/test_cache.py:134` | `def test_has_changed_since_last_analysis_returns_true_on_first_run(self)` |
+| `test_has_changed_since_last_analysis_returns_true_when_file_changed` | method | `tests/test_cache.py:147` | `def test_has_changed_since_last_analysis_returns_true_when_file_changed(self)` |
+| `test_load_missing_analysis_key_returns_none` | method | `tests/test_cache.py:116` | `def test_load_missing_analysis_key_returns_none(self)` |
+| `test_load_returns_empty_dict_when_no_cache` | method | `tests/test_cache.py:56` | `def test_load_returns_empty_dict_when_no_cache(self)` |
+| `test_nonexistent_file_returns_empty_hash` | method | `tests/test_cache.py:100` | `def test_nonexistent_file_returns_empty_hash(self)` |
+| `test_prune_deleted_removes_ghost_entries` | method | `tests/test_cache.py:85` | `def test_prune_deleted_removes_ghost_entries(self)` |
 | `test_same_content_produces_same_hash` | method | `tests/test_cache.py:49` | `def test_same_content_produces_same_hash(self)` |
 | `test_save_and_load_analysis_roundtrip` | method | `tests/test_cache.py:109` | `def test_save_and_load_analysis_roundtrip(self)` |
 | `test_save_and_load_roundtrip` | method | `tests/test_cache.py:60` | `def test_save_and_load_roundtrip(self)` |
@@ -472,29 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_never_crashes_on_unicode_code` | method | `tests/test_parsers_property.py:180` | `def test_never_crashes_on_unicode_code(self, ext, code)` |
 | `test_parser_imports_is_list_of_strings` | method | `tests/test_parsers_property.py:257` | `def test_parser_imports_is_list_of_strings(self, ext)` |
 | `test_python_never_crashes_on_any_text` | method | `tests/test_parsers_property.py:310` | `def test_python_never_crashes_on_any_text(self, code)` |
-| `test_python_never_crashes_on_weird_ascii` | method | `tests/test_parsers_property.py:296` | `def test_python_never_crashes_on_weird_ascii(self, code)` |
-| `test_repeated_keywords_no_crash` | method | `tests/test_parsers_property.py:238` | `def test_repeated_keywords_no_crash(self, ext)` |
-| `test_unknown_extension_returns_none` | method | `tests/test_parsers_property.py:269` | `def test_unknown_extension_returns_none(self)` |
-| `test_whitespace_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:208` | `def test_whitespace_code_returns_empty_or_valid(self, ext)` |
-| `wrapper` | method | `tests/test_parsers_property.py:71` | `def wrapper(fn)` |
-| `wrapper` | method | `tests/test_parsers_property.py:77` | `def wrapper(fn)` |
-| `TestQueryEngineContract` | class | `tests/test_query.py:22` | `class TestQueryEngineContract(TestCase)` |
-| `_make_node` | function | `tests/test_query.py:7` | `def _make_node(node_id, symbols)` |
-| `_make_sym` | function | `tests/test_query.py:18` | `def _make_sym(name, kind, line)` |
-| `setUp` | method | `tests/test_query.py:23` | `def setUp(self)` |
-| `test_explain_returns_details` | method | `tests/test_query.py:51` | `def test_explain_returns_details(self)` |
-| `test_explain_shows_imports` | method | `tests/test_query.py:58` | `def test_explain_shows_imports(self)` |
-| `test_explain_shows_siblings` | method | `tests/test_query.py:63` | `def test_explain_shows_siblings(self)` |
-| `test_explain_unknown_returns_none` | method | `tests/test_query.py:69` | `def test_explain_unknown_returns_none(self)` |
-| `test_find_exact_symbol` | method | `tests/test_query.py:36` | `def test_find_exact_symbol(self)` |
-| `test_find_path_direct_import` | method | `tests/test_query.py:73` | `def test_find_path_direct_import(self)` |
-| `test_find_path_same_file` | method | `tests/test_query.py:79` | `def test_find_path_same_file(self)` |
-| `test_find_path_unknown_returns_none` | method | `tests/test_query.py:84` | `def test_find_path_unknown_returns_none(self)` |
-| `test_find_symbol_fuzzy` | method | `tests/test_query.py:42` | `def test_find_symbol_fuzzy(self)` |
-| `test_find_symbol_not_found` | method | `tests/test_query.py:47` | `def test_find_symbol_not_found(self)` |
-| `test_query_returns_file_matches` | method | `tests/test_query.py:102` | `def test_query_returns_file_matches(self)` |
-| `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
-| `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
-| `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

@@ -406,3 +406,93 @@ class TestSiteDocsPruning(unittest.TestCase):
             DocsSitePublisher(config).publish_assets(project, site)
             self.assertFalse(stale.exists())
             self.assertTrue((stale.parent / "index.md").exists())
+
+
+class TestLouvainCommunities(unittest.TestCase):
+    """Default community detection is deterministic modularity optimisation."""
+
+    def _two_cliques(self):
+        """Two dense groups joined by one bridge edge."""
+        left = [f"left/m{i}.py" for i in range(5)]
+        right = [f"right/m{i}.py" for i in range(5)]
+        resolved = []
+        for group in (left, right):
+            for i, src in enumerate(group):
+                for tgt in group[i + 1:]:
+                    resolved.append(_edge(src, tgt, "resolved_imports"))
+        resolved.append(_edge(left[0], right[0], "resolved_imports"))
+        return [_node(f) for f in left + right], resolved
+
+    def test_louvain_splits_bridged_cliques(self) -> None:
+        from readmenator._analyzer import GraphAnalyzer
+
+        nodes, resolved = self._two_cliques()
+        result = GraphAnalyzer(Config()).analyze(nodes, [], resolved)
+        groups = sorted(sorted(c.file_ids) for c in result.communities)
+        self.assertEqual(len(groups), 2)
+        self.assertTrue(all(len({f.split("/")[0] for f in g}) == 1 for g in groups))
+
+    def test_louvain_is_deterministic_and_numbered_by_size(self) -> None:
+        from readmenator._analyzer import GraphAnalyzer
+
+        nodes, resolved = self._two_cliques()
+        runs = [
+            [(c.community_id, sorted(c.file_ids)) for c in GraphAnalyzer(Config()).analyze(list(reversed(nodes)) if i else nodes, [], resolved).communities]
+            for i in range(2)
+        ]
+        self.assertEqual(runs[0], runs[1])
+        self.assertEqual(Config().COMMUNITY_ALGORITHM, "louvain")
+
+    def test_community_label_ignores_test_directory(self) -> None:
+        from readmenator._analyzer import GraphAnalyzer
+
+        nodes = [_node("src/core.py"), _node("tests/test_a.py"), _node("tests/test_b.py")]
+        labels = GraphAnalyzer(Config())._label_communities(
+            nodes, {0: ["src/core.py", "tests/test_a.py", "tests/test_b.py"]},
+        )
+        self.assertEqual(labels[0], "src")
+
+
+class TestGalleryIndex(unittest.TestCase):
+    """The gallery groups docs, collapses pages, shows titles, and stays offline."""
+
+    def _entries(self):
+        """Doc entries covering wiki, agent pages, recipes, and project docs."""
+        return [
+            {"name": "readmenator-wiki/index.md", "href": "md/readmenator-wiki/index.md", "preview": "Overview.", "lines": "10", "chars": "400", "title": "Second Brain"},
+            {"name": "readmenator-wiki/community_0_core.md", "href": "md/readmenator-wiki/community_0_core.md", "preview": "", "lines": "5", "chars": "100", "title": "core"},
+            {"name": "readmenator-agent/API.md", "href": "md/readmenator-agent/API.md", "preview": "", "lines": "500", "chars": "4000", "title": "API"},
+            {"name": "readmenator-agent/API_p2.md", "href": "md/readmenator-agent/API_p2.md", "preview": "", "lines": "100", "chars": "800", "title": "API"},
+            {"name": "readmenator-agent/recipes/fix-cycle.md", "href": "md/readmenator-agent/recipes/fix-cycle.md", "preview": "", "lines": "7", "chars": "70", "title": "Recipe"},
+            {"name": "KNOWLEDGE_BASE.md", "href": "md/KNOWLEDGE_BASE.md", "preview": "", "lines": "9", "chars": "90", "title": "KB"},
+        ]
+
+    def test_gallery_groups_docs_and_collapses_pages(self) -> None:
+        html = DocsSitePublisher(Config()).render_index("Demo", {}, {"files": 3}, "", "v.mp4", self._entries(), "poster.jpg")
+        for group in ('data-group="wiki"', 'data-group="agent"', 'data-group="recipes"', 'data-group="project"'):
+            self.assertIn(group, html)
+        self.assertEqual(html.count('data-doc="readmenator-agent/API'), 1)
+        self.assertIn('class="page doc-open"', html)
+        self.assertIn("600 lines", html)
+        self.assertIn("<h3>Second Brain</h3>", html)
+        self.assertLess(html.index("Second Brain"), html.index("<h3>core</h3>"))
+
+    def test_gallery_video_has_poster_and_start_here(self) -> None:
+        html = DocsSitePublisher(Config()).render_index("Demo", {}, {"files": 3}, "", "v.mp4", self._entries(), "poster.jpg")
+        self.assertIn('poster="poster.jpg"', html)
+        self.assertIn("Start here", html)
+        self.assertIn('data-count="3"', html)
+
+    def test_gallery_has_no_external_resources_and_escapes_titles(self) -> None:
+        entries = self._entries()
+        entries[0]["title"] = "<img src=x onerror=alert(1)>"
+        html = DocsSitePublisher(Config()).render_index("Demo", {}, {}, "", None, entries)
+        self.assertNotIn('src="http', html)
+        self.assertNotIn('href="http', html)
+        self.assertNotIn("<img src=x", html)
+
+    def test_doc_preview_skips_markdown_syntax(self) -> None:
+        publisher = DocsSitePublisher(Config())
+        text = "# Title\n\n| a | b |\n|---|---|\nPages: [x](x)\n\nThe **real** sentence about [this](y.md) module.\n"
+        self.assertEqual(publisher._doc_preview(text), "The real sentence about this module.")
+        self.assertEqual(publisher._doc_title("# API (page 1 of 3)\n"), "API")

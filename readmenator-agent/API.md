@@ -25,9 +25,8 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `te
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_agent_friendliness.py`, `tests/test_analyzer.py`
 - `dominant_directory` (function) `readmenator/_analyzer.py:22` `def dominant_directory(file_ids)` -- Return the most informative directory label for a set of files.
-- `GraphAnalyzer.__init__` (method) `readmenator/_analyzer.py:48` `def __init__(self, config)` -- Initialise with application configuration.
-- `GraphAnalyzer.analyze` (method) `readmenator/_analyzer.py:56` `def analyze(self, nodes, edges, resolved_edges)` -- Run the full analysis pipeline and return structured results.
-- `GraphAnalyzer.is_test` (method) `readmenator/_analyzer.py:314` `def is_test(fid)` -- Return whether a path looks like a test file.
+- `GraphAnalyzer.__init__` (method) `readmenator/_analyzer.py:54` `def __init__(self, config)` -- Initialise with application configuration.
+- `GraphAnalyzer.analyze` (method) `readmenator/_analyzer.py:62` `def analyze(self, nodes, edges, resolved_edges)` -- Run the full analysis pipeline and return structured results.
 
 ## readmenator/_app.py
 Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
@@ -55,20 +54,20 @@ Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/
 - `readmenatorApplication.export_wiki` (method) `readmenator/_app.py:668` `def export_wiki(self, target_dir, output_dir)` -- Generate the navigable agent wiki for the target project.
 - `readmenatorApplication.lint_wiki` (method) `readmenator/_app.py:691` `def lint_wiki(self, target_dir)` -- Check wiki health and log reported issues.
 - `readmenatorApplication.export_diagrams` (method) `readmenator/_app.py:709` `def export_diagrams(self, target_dir, output_dir, full)` -- Export all five interactive system maps plus a gallery index.
-- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:761` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
-- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:800` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
-- `readmenatorApplication.export_video` (method) `readmenator/_app.py:839` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
-- `readmenatorApplication.watch` (method) `readmenator/_app.py:903` `def watch(self, target_dir)`
-- `readmenatorApplication.on_change` (method) `readmenator/_app.py:907` `def on_change()`
-- `readmenatorApplication.audit` (method) `readmenator/_app.py:913` `def audit(self, target_dir)`
-- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:920` `def audit_deep(self, target_dir)`
-- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:940` `def export_sarif(self, target_dir, output_path)`
-- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:950` `def export_rules(self, target_dir, output_dir)`
-- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:960` `def detect_layers(self, target_dir)`
-- `readmenatorApplication.lint` (method) `readmenator/_app.py:970` `def lint(self, target_dir)`
-- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:983` `def strip_dead_code(self, target_dir)`
-- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:993` `def generate_cursorrules(self, target_dir)`
-- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:1008` `def refactor_monolith(self, target_dir)`
+- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:770` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
+- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:809` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
+- `readmenatorApplication.export_video` (method) `readmenator/_app.py:844` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
+- `readmenatorApplication.watch` (method) `readmenator/_app.py:908` `def watch(self, target_dir)`
+- `readmenatorApplication.on_change` (method) `readmenator/_app.py:912` `def on_change()`
+- `readmenatorApplication.audit` (method) `readmenator/_app.py:918` `def audit(self, target_dir)`
+- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:925` `def audit_deep(self, target_dir)`
+- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:945` `def export_sarif(self, target_dir, output_path)`
+- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:955` `def export_rules(self, target_dir, output_dir)`
+- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:965` `def detect_layers(self, target_dir)`
+- `readmenatorApplication.lint` (method) `readmenator/_app.py:975` `def lint(self, target_dir)`
+- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:988` `def strip_dead_code(self, target_dir)`
+- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:998` `def generate_cursorrules(self, target_dir)`
+- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:1013` `def refactor_monolith(self, target_dir)`
 
 ## readmenator/_cache.py
 Depends on: `readmenator/_config.py`
@@ -134,27 +133,28 @@ Imported by: `readmenator/_app.py`, `tests/test_dead_code.py`
 ## readmenator/_diagrams.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`
-- `SystemMapValidator.__init__` (method) `readmenator/_diagrams.py:205` `def __init__(self, config)` -- Initialise the validator with application configuration.
-- `SystemMapValidator.validate` (method) `readmenator/_diagrams.py:234` `def validate(self, system_map)` -- Validate a system map and return a deterministic receipt.
-- `SystemMapBuilder.__init__` (method) `readmenator/_diagrams.py:455` `def __init__(self, config)` -- Initialise the builder with application configuration.
-- `SystemMapBuilder.supported_kinds` (method) `readmenator/_diagrams.py:464` `def supported_kinds(self)` -- Return the supported diagram kind identifiers.
-- `SystemMapBuilder.build` (method) `readmenator/_diagrams.py:485` `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` -- Build one deterministic system map of the requested kind.
-- `SystemMapBuilder.build_all` (method) `readmenator/_diagrams.py:523` `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` -- Build all five diagram kinds deterministically.
-- `SystemMapBuilder.compare` (method) `readmenator/_diagrams.py:554` `def compare(self, base, head)` -- Compare two maps of the same kind as before, delta, and after.
-- `InteractiveMapRenderer.__init__` (method) `readmenator/_diagrams.py:1474` `def __init__(self, config)` -- Initialise the renderer with application configuration.
-- `InteractiveMapRenderer.render` (method) `readmenator/_diagrams.py:1503` `def render(self, system_map)` -- Render a system map as a self-contained HTML document.
-- `InteractiveMapRenderer.write` (method) `readmenator/_diagrams.py:1605` `def write(self, system_map, output_path)` -- Render a system map and write it to a relative output path.
-- `VisNetworkRenderer.__init__` (method) `readmenator/_diagrams.py:2194` `def __init__(self, config)` -- Initialise the renderer with application configuration.
-- `VisNetworkRenderer.render` (method) `readmenator/_diagrams.py:2202` `def render(self, system_map)` -- Render a system map as a vis.js network HTML document.
-- `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2303` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
-- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:2724` `def __init__(self, config)` -- Initialise the publisher with application configuration.
-- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:2734` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
-- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:2748` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` -- Publish maps and a gallery index into a documentation directory.
-- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:2836` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
-- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:2862` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
-- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:2935` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
-- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:2983` `def order(entry)` -- Sort entry points first, then alphabetically.
-- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3011` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries)` -- Render the gallery index page for published maps.
+- `SystemMapValidator.__init__` (method) `readmenator/_diagrams.py:212` `def __init__(self, config)` -- Initialise the validator with application configuration.
+- `SystemMapValidator.validate` (method) `readmenator/_diagrams.py:241` `def validate(self, system_map)` -- Validate a system map and return a deterministic receipt.
+- `SystemMapBuilder.__init__` (method) `readmenator/_diagrams.py:462` `def __init__(self, config)` -- Initialise the builder with application configuration.
+- `SystemMapBuilder.supported_kinds` (method) `readmenator/_diagrams.py:471` `def supported_kinds(self)` -- Return the supported diagram kind identifiers.
+- `SystemMapBuilder.build` (method) `readmenator/_diagrams.py:492` `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` -- Build one deterministic system map of the requested kind.
+- `SystemMapBuilder.build_all` (method) `readmenator/_diagrams.py:530` `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` -- Build all five diagram kinds deterministically.
+- `SystemMapBuilder.compare` (method) `readmenator/_diagrams.py:561` `def compare(self, base, head)` -- Compare two maps of the same kind as before, delta, and after.
+- `InteractiveMapRenderer.__init__` (method) `readmenator/_diagrams.py:1481` `def __init__(self, config)` -- Initialise the renderer with application configuration.
+- `InteractiveMapRenderer.render` (method) `readmenator/_diagrams.py:1510` `def render(self, system_map)` -- Render a system map as a self-contained HTML document.
+- `InteractiveMapRenderer.write` (method) `readmenator/_diagrams.py:1612` `def write(self, system_map, output_path)` -- Render a system map and write it to a relative output path.
+- `VisNetworkRenderer.__init__` (method) `readmenator/_diagrams.py:2201` `def __init__(self, config)` -- Initialise the renderer with application configuration.
+- `VisNetworkRenderer.render` (method) `readmenator/_diagrams.py:2209` `def render(self, system_map)` -- Render a system map as a vis.js network HTML document.
+- `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2310` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
+- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:2913` `def __init__(self, config)` -- Initialise the publisher with application configuration.
+- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:2923` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
+- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:2937` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` -- Publish maps and a gallery index into a documentation directory.
+- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3027` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
+- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3053` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
+- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3222` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
+- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3270` `def order(entry)` -- Sort entry points first, then alphabetically.
+- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3298` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` -- Render the gallery index page for published maps.
+- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3489` `def doc_order(base)` -- Entry points first, then alphabetical.
 
 ## readmenator/_documentation.py
 Depends on: `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`

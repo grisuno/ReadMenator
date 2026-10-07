@@ -1,6 +1,6 @@
 # orphans
 
-*Community 3 | 2 files | cohesion 0.00*
+*Community 5 | 2 files | cohesion 0.00*
 
 ## Definition
 
@@ -53,18 +53,19 @@ This community groups 2 file(s) rooted at `tests` with dominant language py (coh
 
 ## Connections
 
-- [INFERRED] shares_context community 0 <-> 3 (strength 0.5): Inferred shared context (language py and layer testing) with no import path between community 0 (readmenator: _diagrams) and community 3 (orphans).
-- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator: _category) and community 3 (orphans).
-- [INFERRED] shares_context community 2 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).
+- [INFERRED] shares_context community 0 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 0 (readmenator/parsers) and community 5 (orphans).
+- [INFERRED] shares_context community 1 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator: _dataflow) and community 5 (orphans).
+- [INFERRED] shares_context community 2 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 2 (readmenator: _pipeline) and community 5 (orphans).
+- [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 3 (readmenator: _diagrams) and community 5 (orphans).
+- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
 
 ## Risks
 
-- [taint high] `readmenator_orchestrator.py` -> `readmenator_orchestrator.py` via `subprocess` (0 hops)
+- No scoped security, taint, cycle, or layer risks.
 
 ## Open Questions
 
 - Why do 2 file(s) lack file-level docs (e.g. `readmenator_orchestrator.py`)? What purpose do they serve?
-- Is the dangerous import `subprocess` in `readmenator_orchestrator.py` still required, or can it be isolated?
 - What would break if the most connected file in orphans changed?
 - Should orphans be split, given cohesion 0.00?
 

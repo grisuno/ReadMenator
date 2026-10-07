@@ -37,6 +37,12 @@ def dominant_directory(file_ids: Set[str]) -> str:
     return "root" if best == "." else best
 
 
+def _is_test_path(file_id: str) -> bool:
+    """Return whether a project path looks like a test file or lives under tests/."""
+    base = file_id.rsplit("/", 1)[-1].lower()
+    return base.startswith("test") or "_test." in base or "/tests/" in f"/{file_id.lower()}"
+
+
 class GraphAnalyzer:
     """Deterministic graph analysis over scanned nodes and edges.
 
@@ -164,6 +170,10 @@ class GraphAnalyzer:
         """
         if not nodes or not adjacency:
             return {}
+        if self._config.COMMUNITY_ALGORITHM == "louvain":
+            return self._finalize_communities(
+                self._louvain([n.node_id for n in nodes], adjacency), adjacency,
+            )
 
         file_ids = [n.node_id for n in nodes]
         labels: Dict[str, int] = {fid: i for i, fid in enumerate(file_ids)}
@@ -198,21 +208,114 @@ class GraphAnalyzer:
             if not changed:
                 break
 
+        return self._finalize_communities(labels, adjacency)
+
+    def _finalize_communities(
+        self, labels: Dict[str, int], adjacency: Dict[str, Set[str]]
+    ) -> Dict[int, List[str]]:
+        """Group labels, fold tiny groups, drop undersized ones, renumber by size.
+
+        Communities are numbered largest first (ties by first member) so
+        ids and wiki page names stay stable and meaningful across runs.
+        """
+        weights = self._vote_weights(list(labels), adjacency)
         result: Dict[int, List[str]] = {}
         for fid, lab in labels.items():
-            if lab not in result:
-                result[lab] = []
-            result[lab].append(fid)
+            result.setdefault(lab, []).append(fid)
         result = self._merge_small_communities(result, adjacency, weights)
+        kept = [
+            sorted(members) for members in result.values()
+            if len(members) >= self._config.COMMUNITY_MIN_SIZE
+        ]
+        kept.sort(key=lambda members: (-len(members), members[0]))
+        return {index: members for index, members in enumerate(kept)}
 
-        filtered: Dict[int, List[str]] = {}
-        new_id = 0
-        for lab, members in result.items():
-            if len(members) >= self._config.COMMUNITY_MIN_SIZE:
-                filtered[new_id] = sorted(members)
-                new_id += 1
+    def _louvain(
+        self, file_ids: List[str], adjacency: Dict[str, Set[str]]
+    ) -> Dict[str, int]:
+        """Partition files by greedy modularity optimisation (Louvain method).
 
-        return filtered
+        Pure Python and deterministic: nodes are visited in sorted order,
+        moves require a strictly positive gain, and ties pick the smallest
+        community key. Modularity already discounts hub degree, so shared
+        modules do not swallow the project.
+
+        Args:
+            file_ids: All file ids.
+            adjacency: Undirected adjacency between files.
+
+        Returns:
+            Mapping of file id to community label.
+        """
+        resolution = self._config.COMMUNITY_RESOLUTION
+        epsilon = self._config.COMMUNITY_VOTE_EPSILON
+        ids = sorted(set(file_ids))
+        index = {fid: i for i, fid in enumerate(ids)}
+        graph: Dict[int, Dict[int, float]] = {i: {} for i in range(len(ids))}
+        for fid in ids:
+            for neighbor in adjacency.get(fid, set()):
+                if neighbor in index and neighbor != fid:
+                    graph[index[fid]][index[neighbor]] = 1.0
+        membership = list(range(len(ids)))
+        for _level in range(self._config.COMMUNITY_MAX_LEVELS):
+            partition, improved = self._louvain_pass(graph, resolution, epsilon)
+            if not improved:
+                break
+            membership = [partition[m] for m in membership]
+            graph = self._aggregate(graph, partition)
+        return {fid: membership[i] for i, fid in enumerate(ids)}
+
+    def _louvain_pass(
+        self, graph: Dict[int, Dict[int, float]], resolution: float, epsilon: float,
+    ) -> Tuple[Dict[int, int], bool]:
+        """Run Louvain local moves on one level and return a compact partition."""
+        degree = {n: sum(nbrs.values()) for n, nbrs in graph.items()}
+        total = sum(degree.values())
+        community = {n: n for n in graph}
+        if total <= 0:
+            return community, False
+        tot = dict(degree)
+        improved = False
+        for _sweep in range(self._config.COMMUNITY_MAX_SWEEPS):
+            moved = False
+            for node in sorted(graph):
+                current = community[node]
+                k_i = degree[node]
+                links: Dict[int, float] = {}
+                for neighbor, weight in graph[node].items():
+                    if neighbor != node:
+                        links[community[neighbor]] = links.get(community[neighbor], 0.0) + weight
+                tot[current] -= k_i
+                best = current
+                best_gain = links.get(current, 0.0) - resolution * tot[current] * k_i / total
+                for target in sorted(links):
+                    gain = links[target] - resolution * tot[target] * k_i / total
+                    if gain > best_gain + epsilon:
+                        best, best_gain = target, gain
+                tot[best] += k_i
+                if best != current:
+                    community[node] = best
+                    moved = True
+                    improved = True
+            if not moved:
+                break
+        renumber: Dict[int, int] = {}
+        for node in sorted(graph):
+            renumber.setdefault(community[node], len(renumber))
+        return {node: renumber[community[node]] for node in graph}, improved
+
+    @staticmethod
+    def _aggregate(
+        graph: Dict[int, Dict[int, float]], partition: Dict[int, int],
+    ) -> Dict[int, Dict[int, float]]:
+        """Collapse each community into one weighted super node."""
+        merged: Dict[int, Dict[int, float]] = {c: {} for c in set(partition.values())}
+        for node, nbrs in graph.items():
+            source = partition[node]
+            for neighbor, weight in nbrs.items():
+                target = partition[neighbor]
+                merged[source][target] = merged[source].get(target, 0.0) + weight
+        return merged
 
     def _merge_small_communities(
         self,
@@ -292,7 +395,8 @@ class GraphAnalyzer:
             if not member_nodes:
                 labels[cid] = f"Community {cid}"
                 continue
-            labels[cid] = dominant_directory({n.node_id for n in member_nodes})
+            production = {n.node_id for n in member_nodes if not _is_test_path(n.node_id)}
+            labels[cid] = dominant_directory(production or {n.node_id for n in member_nodes})
         counts: Dict[str, int] = {}
         for label in labels.values():
             counts[label] = counts.get(label, 0) + 1
@@ -311,12 +415,7 @@ class GraphAnalyzer:
         Used to tell apart communities that share a dominant directory,
         so labels read ``pkg: _video`` instead of an opaque number.
         """
-        def is_test(fid: str) -> bool:
-            """Return whether a path looks like a test file."""
-            base = fid.rsplit("/", 1)[-1].lower()
-            return base.startswith("test") or "_test." in base or "/tests/" in f"/{fid}"
-
-        candidates = [m for m in members if m in node_map and not is_test(m)]
+        candidates = [m for m in members if m in node_map and not _is_test_path(m)]
         if not candidates:
             candidates = [m for m in members if m in node_map]
         if not candidates:

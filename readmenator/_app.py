@@ -732,11 +732,7 @@ class readmenatorApplication:
         dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_OUTPUT_DIR
         if not dest.is_absolute():
             dest = root / dest
-        stats = {
-            "files": len(nodes),
-            "symbols": sum(len(n.symbols) for n in nodes),
-            "imports": len(edges),
-        }
+        stats = self._site_stats(nodes, edges, analysis)
         flat_publisher = DocsSitePublisher(replace(self._config, DIAGRAM_MAPS_SUBDIR="."))
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
@@ -747,6 +743,19 @@ class readmenatorApplication:
                 logger.warning("Diagram %s failed validation and was skipped", kind)
         logger.info("Interactive system maps: %d files in %s", len(written), dest)
         return written
+
+    @staticmethod
+    def _site_stats(
+        nodes: List[Node], edges: List[Edge], analysis: Optional[AnalysisResult],
+    ) -> Dict[str, int]:
+        """Return headline counters for the gallery (imports exclude call edges)."""
+        return {
+            "files": len(nodes),
+            "symbols": sum(len(n.symbols) for n in nodes),
+            "imports": sum(1 for e in edges if e.relation == "imports"),
+            "languages": len({n.language for n in nodes}),
+            "communities": len(analysis.communities) if analysis else 0,
+        }
 
     def _live_renderer(self):
         """Return the configured map renderer for published output.
@@ -823,11 +832,7 @@ class readmenatorApplication:
         dest = Path(output_dir) if output_dir else root / self._config.DIAGRAM_PAGES_DIR
         if not dest.is_absolute():
             dest = root / dest
-        stats = {
-            "files": len(nodes),
-            "symbols": sum(len(n.symbols) for n in nodes),
-            "imports": sum(1 for e in edges if e.relation == "imports"),
-        }
+        stats = self._site_stats(nodes, edges, analysis)
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root),

@@ -3,6 +3,19 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
+| `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
+| `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
+| `RiskProjection` | class | `readmenator/_projections.py:63` | `class RiskProjection` |
+| `__init__` | method | `readmenator/_projections.py:49` | `def __init__(self, documented_ids)` |
+| `__init__` | method | `readmenator/_projections.py:70` | `def __init__(self, fan_in, fan_out, test_files)` |
+| `apply_view` | method | `readmenator/_projections.py:95` | `def apply_view(category, view_config)` |
+| `map_morphism` | method | `readmenator/_projections.py:27` | `def map_morphism(self, m)` |
+| `map_morphism` | method | `readmenator/_projections.py:38` | `def map_morphism(self, m)` |
+| `map_morphism` | method | `readmenator/_projections.py:57` | `def map_morphism(self, m)` |
+| `map_morphism` | method | `readmenator/_projections.py:91` | `def map_morphism(self, m)` |
+| `map_node` | method | `readmenator/_projections.py:23` | `def map_node(self, node)` |
+| `map_node` | method | `readmenator/_projections.py:35` | `def map_node(self, node)` |
 | `map_node` | method | `readmenator/_projections.py:52` | `def map_node(self, node)` |
 | `map_node` | method | `readmenator/_projections.py:80` | `def map_node(self, node)` |
 | `_primary_symbol` | function | `readmenator/_purpose.py:116` | `def _primary_symbol(symbols)` |
@@ -341,7 +354,9 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TestAgentOutputSignal` | class | `tests/test_agent_friendliness.py:110` | `class TestAgentOutputSignal(TestCase)` |
 | `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
 | `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
+| `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
 | `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
+| `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
 | `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
 | `TestNoiseReduction` | class | `tests/test_agent_friendliness.py:244` | `class TestNoiseReduction(TestCase)` |
 | `TestPurposeExtraction` | class | `tests/test_agent_friendliness.py:176` | `class TestPurposeExtraction(TestCase)` |
@@ -349,8 +364,10 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TestSourceFreshness` | class | `tests/test_agent_friendliness.py:329` | `class TestSourceFreshness(TestCase)` |
 | `_big_project` | function | `tests/test_agent_friendliness.py:34` | `def _big_project(files, symbols_per_file)` |
 | `_edge` | function | `tests/test_agent_friendliness.py:29` | `def _edge(source, target, relation)` |
+| `_entries` | method | `tests/test_agent_friendliness.py:459` | `def _entries(self)` |
 | `_git_repo` | method | `tests/test_agent_friendliness.py:202` | `def _git_repo(self, root, packed)` |
 | `_node` | function | `tests/test_agent_friendliness.py:21` | `def _node(node_id, doc, symbols)` |
+| `_two_cliques` | method | `tests/test_agent_friendliness.py:414` | `def _two_cliques(self)` |
 | `test_agent_output_pages_repeat_table_header_and_link_next` | method | `tests/test_agent_friendliness.py:84` | `def test_agent_output_pages_repeat_table_header_and_link_next(self)` |
 | `test_agent_output_pages_respect_line_cap_on_large_projects` | method | `tests/test_agent_friendliness.py:58` | `def test_agent_output_pages_respect_line_cap_on_large_projects(self)` |
 | `test_agent_output_pagination_keeps_every_symbol_greppable` | method | `tests/test_agent_friendliness.py:71` | `def test_agent_output_pagination_keeps_every_symbol_greppable(self)` |
@@ -361,7 +378,12 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `test_architecture_external_excludes_internally_resolved_imports` | method | `tests/test_agent_friendliness.py:144` | `def test_architecture_external_excludes_internally_resolved_imports(self)` |
 | `test_check_freshness_detects_source_edits` | method | `tests/test_agent_friendliness.py:343` | `def test_check_freshness_detects_source_edits(self)` |
 | `test_communities_survive_a_shared_hub` | method | `tests/test_agent_friendliness.py:311` | `def test_communities_survive_a_shared_hub(self)` |
+| `test_community_label_ignores_test_directory` | method | `tests/test_agent_friendliness.py:446` | `def test_community_label_ignores_test_directory(self)` |
+| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:494` | `def test_doc_preview_skips_markdown_syntax(self)` |
 | `test_fingerprint_changes_with_content_not_with_order` | method | `tests/test_agent_friendliness.py:332` | `def test_fingerprint_changes_with_content_not_with_order(self)` |
+| `test_gallery_groups_docs_and_collapses_pages` | method | `tests/test_agent_friendliness.py:470` | `def test_gallery_groups_docs_and_collapses_pages(self)` |
+| `test_gallery_has_no_external_resources_and_escapes_titles` | method | `tests/test_agent_friendliness.py:486` | `def test_gallery_has_no_external_resources_and_escapes_titles(self)` |
+| `test_gallery_video_has_poster_and_start_here` | method | `tests/test_agent_friendliness.py:480` | `def test_gallery_video_has_poster_and_start_here(self)` |
 | `test_gitmeta_outside_repository_is_empty` | method | `tests/test_agent_friendliness.py:220` | `def test_gitmeta_outside_repository_is_empty(self)` |
 | `test_gitmeta_reads_loose_and_packed_refs` | method | `tests/test_agent_friendliness.py:214` | `def test_gitmeta_reads_loose_and_packed_refs(self)` |
 | `test_gotchas_exclude_test_layer_and_report_blast_radius` | method | `tests/test_agent_friendliness.py:161` | `def test_gotchas_exclude_test_layer_and_report_blast_radius(self)` |
@@ -369,6 +391,8 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `test_layers_match_whole_words_not_substrings` | method | `tests/test_agent_friendliness.py:264` | `def test_layers_match_whole_words_not_substrings(self)` |
 | `test_layers_test_framework_import_needs_test_path` | method | `tests/test_agent_friendliness.py:272` | `def test_layers_test_framework_import_needs_test_path(self)` |
 | `test_llms_txt_lists_wiki_before_agent_docs` | method | `tests/test_agent_friendliness.py:284` | `def test_llms_txt_lists_wiki_before_agent_docs(self)` |
+| `test_louvain_is_deterministic_and_numbered_by_size` | method | `tests/test_agent_friendliness.py:435` | `def test_louvain_is_deterministic_and_numbered_by_size(self)` |
+| `test_louvain_splits_bridged_cliques` | method | `tests/test_agent_friendliness.py:426` | `def test_louvain_splits_bridged_cliques(self)` |
 | `test_manifest_has_commit_relative_root_and_inventory` | method | `tests/test_agent_friendliness.py:224` | `def test_manifest_has_commit_relative_root_and_inventory(self)` |
 | `test_publish_assets_prunes_stale_markdown` | method | `tests/test_agent_friendliness.py:397` | `def test_publish_assets_prunes_stale_markdown(self)` |
 | `test_publish_writes_llms_txt` | method | `tests/test_agent_friendliness.py:296` | `def test_publish_writes_llms_txt(self)` |
@@ -472,29 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `test_analyze_empty_graph_returns_empty_result` | method | `tests/test_analyzer.py:29` | `def test_analyze_empty_graph_returns_empty_result(self)` |
 | `test_analyze_finds_surprising_connections` | method | `tests/test_analyzer.py:64` | `def test_analyze_finds_surprising_connections(self)` |
 | `test_analyze_generates_questions` | method | `tests/test_analyzer.py:81` | `def test_analyze_generates_questions(self)` |
-| `test_analyze_is_repeatable` | method | `tests/test_analyzer.py:130` | `def test_analyze_is_repeatable(self)` |
-| `test_analyze_with_resolved_edges_counts_them` | method | `tests/test_analyzer.py:116` | `def test_analyze_with_resolved_edges_counts_them(self)` |
-| `test_community_cohesion_is_between_zero_and_one` | method | `tests/test_analyzer.py:92` | `def test_community_cohesion_is_between_zero_and_one(self)` |
-| `test_dominant_directory_prefers_specific_on_tie` | method | `tests/test_analyzer.py:141` | `def test_dominant_directory_prefers_specific_on_tie(self)` |
-| `test_isolated_nodes_do_not_form_communities` | method | `tests/test_analyzer.py:107` | `def test_isolated_nodes_do_not_form_communities(self)` |
-| `TestFileCacheContract` | class | `tests/test_cache.py:18` | `class TestFileCacheContract(TestCase)` |
-| `_write` | method | `tests/test_cache.py:30` | `def _write(self, rel_path, content)` |
-| `setUp` | method | `tests/test_cache.py:21` | `def setUp(self)` |
-| `tearDown` | method | `tests/test_cache.py:26` | `def tearDown(self)` |
-| `test_clear_analysis_all_keys` | method | `tests/test_cache.py:127` | `def test_clear_analysis_all_keys(self)` |
-| `test_clear_analysis_specific_key` | method | `tests/test_cache.py:120` | `def test_clear_analysis_specific_key(self)` |
-| `test_compute_hash_returns_hex_string` | method | `tests/test_cache.py:36` | `def test_compute_hash_returns_hex_string(self)` |
-| `test_compute_hashes_batch` | method | `tests/test_cache.py:92` | `def test_compute_hashes_batch(self)` |
-| `test_different_content_produces_different_hash` | method | `tests/test_cache.py:42` | `def test_different_content_produces_different_hash(self)` |
-| `test_find_changed_detects_modified_files` | method | `tests/test_cache.py:71` | `def test_find_changed_detects_modified_files(self)` |
-| `test_find_changed_detects_new_files` | method | `tests/test_cache.py:66` | `def test_find_changed_detects_new_files(self)` |
-| `test_find_changed_skips_unchanged_files` | method | `tests/test_cache.py:78` | `def test_find_changed_skips_unchanged_files(self)` |
-| `test_has_changed_since_last_analysis_returns_false_when_no_changes` | method | `tests/test_cache.py:139` | `def test_has_changed_since_last_analysis_returns_false_when_no_changes(self)` |
-| `test_has_changed_since_last_analysis_returns_true_on_first_run` | method | `tests/test_cache.py:134` | `def test_has_changed_since_last_analysis_returns_true_on_first_run(self)` |
-| `test_has_changed_since_last_analysis_returns_true_when_file_changed` | method | `tests/test_cache.py:147` | `def test_has_changed_since_last_analysis_returns_true_when_file_changed(self)` |
-| `test_load_missing_analysis_key_returns_none` | method | `tests/test_cache.py:116` | `def test_load_missing_analysis_key_returns_none(self)` |
-| `test_load_returns_empty_dict_when_no_cache` | method | `tests/test_cache.py:56` | `def test_load_returns_empty_dict_when_no_cache(self)` |
-| `test_nonexistent_file_returns_empty_hash` | method | `tests/test_cache.py:100` | `def test_nonexistent_file_returns_empty_hash(self)` |
-| `test_prune_deleted_removes_ghost_entries` | method | `tests/test_cache.py:85` | `def test_prune_deleted_removes_ghost_entries(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

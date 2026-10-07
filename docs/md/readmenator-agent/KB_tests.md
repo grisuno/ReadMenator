@@ -23,6 +23,8 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `TestSourceFreshness` (class, line 329) `class TestSourceFreshness(TestCase)`
   - `TestCommunityShaping` (class, line 363) `class TestCommunityShaping(TestCase)`
   - `TestSiteDocsPruning` (class, line 394) `class TestSiteDocsPruning(TestCase)`
+  - `TestLouvainCommunities` (class, line 411) `class TestLouvainCommunities(TestCase)`
+  - `TestGalleryIndex` (class, line 456) `class TestGalleryIndex(TestCase)`
   - `test_agent_output_pages_respect_line_cap_on_large_projects` (method, line 58) `def test_agent_output_pages_respect_line_cap_on_large_projects(self)`
   - `test_agent_output_pagination_keeps_every_symbol_greppable` (method, line 71) `def test_agent_output_pagination_keeps_every_symbol_greppable(self)`
   - `test_agent_output_pages_repeat_table_header_and_link_next` (method, line 84) `def test_agent_output_pages_repeat_table_header_and_link_next(self)`
@@ -53,6 +55,15 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_small_community_merges_into_best_connected_neighbor` (method, line 366) `def test_small_community_merges_into_best_connected_neighbor(self)`
   - `test_shared_directory_labels_use_core_file` (method, line 380) `def test_shared_directory_labels_use_core_file(self)`
   - `test_publish_assets_prunes_stale_markdown` (method, line 397) `def test_publish_assets_prunes_stale_markdown(self)`
+  - `_two_cliques` (method, line 414) `def _two_cliques(self)`
+  - `test_louvain_splits_bridged_cliques` (method, line 426) `def test_louvain_splits_bridged_cliques(self)`
+  - `test_louvain_is_deterministic_and_numbered_by_size` (method, line 435) `def test_louvain_is_deterministic_and_numbered_by_size(self)`
+  - `test_community_label_ignores_test_directory` (method, line 446) `def test_community_label_ignores_test_directory(self)`
+  - `_entries` (method, line 459) `def _entries(self)`
+  - `test_gallery_groups_docs_and_collapses_pages` (method, line 470) `def test_gallery_groups_docs_and_collapses_pages(self)`
+  - `test_gallery_video_has_poster_and_start_here` (method, line 480) `def test_gallery_video_has_poster_and_start_here(self)`
+  - `test_gallery_has_no_external_resources_and_escapes_titles` (method, line 486) `def test_gallery_has_no_external_resources_and_escapes_titles(self)`
+  - `test_doc_preview_skips_markdown_syntax` (method, line 494) `def test_doc_preview_skips_markdown_syntax(self)`
 - Depends on: `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
 
 ## tests/test_agent_injector.py

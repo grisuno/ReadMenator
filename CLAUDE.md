@@ -238,7 +238,8 @@ tests/
 
 ### Graph Analyzer Contract
 - analyze(nodes, edges, resolved_edges): returns AnalysisResult
-- Community detection via label propagation
+- Community detection via deterministic Louvain modularity optimisation by default (COMMUNITY_ALGORITHM="louvain", COMMUNITY_RESOLUTION, COMMUNITY_MAX_LEVELS, COMMUNITY_MAX_SWEEPS; sorted visit order, strict-gain moves, smallest-key ties); "label_propagation" kept as alternative
+- Communities numbered largest first; labels come from production (non-test) files
 - Deterministic: content-seeded shuffle order, sorted neighbor traversal, min-label tie-break (stable across runs and hash seeds)
 - Small-group folding: communities under COMMUNITY_MERGE_BELOW join the neighbor sharing the most vote weight (smallest first, lowest label on ties); isolated groups untouched
 - Labels shared by several communities get the core file stem (most symbols, non-test preferred): `pkg: _video`
@@ -533,6 +534,11 @@ tests/
 - DocsSitePublisher class with publish(maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries) entry point
 - Publishes maps/<kind>.html plus a gallery index.html and a .nojekyll marker into DIAGRAM_PAGES_DIR
 - Gallery index: project header with stats, one card per validated map with counts and descriptions, filter input, theme toggle, how-to-read section, relative links only, zero external requests
+- Gallery redesign: hero with counter tiles (files, symbols, imports by relation only, languages, communities; count-up always lands on the real value), Start here path (wiki index, video, KB, agent INDEX), sticky filter toolbar (`/` focuses, live match count), map cards with per-kind inline SVG glyphs and hover flow animation, whole-card links
+- Video player gets a poster frame (SITE_VIDEO_POSTER_FILENAME extracted by ffmpeg at SITE_VIDEO_POSTER_AT_S, refreshed only when the video is newer; skipped without ffmpeg)
+- Docs grouped Wiki / Project / Agent / Recipes, entry points first; paged NAME_pN.md collapse into one card with page chips; cards show the document H1 title, a prose preview (markdown syntax stripped), line count, and approximate tokens
+- Docs open in a slide-over drawer (Esc/scrim closes, focus restored, #doc= deep links); relative .md links inside a rendered doc open in the drawer
+- No entrance animations that can leave content hidden; all motion disabled under prefers-reduced-motion
 - Gallery index embeds the overview video with an HTML5 <video controls> tag (SITE_VIDEO_FILENAME) and a documentation grid with offline markdown2html viewer (colored code, tables, deep link #doc=name)
 - publish_assets(project_root, output_dir) copies VIDEO_OUTPUT into the site root and KNOWLEDGE_BASE/README/agent/wiki markdown into SITE_DOCS_SUBDIR (capped by SITE_MAX_DOCS); collect_doc_sources() is deterministic and sorted
 - export_pages/export_diagrams pass project_root so `pages` and `diagrams` outputs always ship video + docs without extra flags
