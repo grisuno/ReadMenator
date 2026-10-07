@@ -12,7 +12,7 @@
 **Total Files Parsed:** 105 | **Total Symbols Extracted:** 1884 | **Total Imports:** 801
  | **Resolved Imports:** 357
 
-<!-- ranking_model: v1.0 | weights: {ppr:0.45,auth:0.2,test:0.15,doc:0.1,fresh:0.1} | alpha:0.85 | commit:891042b | date:2026-07-18 -->
+<!-- ranking_model: v1.0 | weights: {ppr:0.45,auth:0.2,test:0.15,doc:0.1,fresh:0.1} | alpha:0.85 | commit:46172b2 | date:2026-07-18 -->
 
 
 ## Table of Contents
@@ -156,12 +156,12 @@ Files ranked by composite score for the current query context. The ranking combi
 | 9 | `_rule_gen.py` | 0.1222 | 0.0470 | 0.0053 | 0.00 | 1.00 |
 | 10 | `_diagrams.py` | 0.1211 | 0.0413 | 0.0069 | 0.00 | 1.01 |
 
-**Query anchors:** tests/test_ranking.py, tests/test_agent_friendliness.py, readmenator/_linter.py, readmenator/_diagrams.py, readmenator/_documentation.py, tests/test_linter.py, readmenator/_rule_gen.py, tests/test_documentation.py (+3 more)
+**Query anchors:** readmenator/_agent_output.py, readmenator/_documentation.py, tests/test_linter.py, readmenator/_linter.py, readmenator/_diagrams.py, tests/test_agent_friendliness.py, tests/test_rule_gen.py, tests/test_documentation.py (+3 more)
 
 **Top result justification paths:**
 
-  `test_agent_friendliness.py -> _agent_output.py -> _cache.py -> _config.py`
-  `test_agent_friendliness.py -> _agent_output.py -> _config.py`
+  `_agent_output.py -> _cache.py -> _config.py`
+  `_agent_output.py -> _config.py`
 
 ---
 
@@ -353,26 +353,26 @@ Taint analysis traces how dangerous imports propagate through the codebase via t
   Path: _diagrams.py -> _models.py -> _category.py
 - `_documentation.py` imports `subprocess` (0 hop to `_documentation.py`) [high]
   Path: _documentation.py
-- `_documentation.py` imports `subprocess` (1 hop to `_models.py`) [high]
-  Path: _documentation.py -> _models.py
-- `_documentation.py` imports `subprocess` (1 hop to `_uml.py`) [high]
-  Path: _documentation.py -> _uml.py
-- `_documentation.py` imports `subprocess` (1 hop to `_rank.py`) [high]
-  Path: _documentation.py -> _rank.py
 - `_documentation.py` imports `subprocess` (1 hop to `_config.py`) [high]
   Path: _documentation.py -> _config.py
 - `_documentation.py` imports `subprocess` (1 hop to `_cpg.py`) [high]
   Path: _documentation.py -> _cpg.py
+- `_documentation.py` imports `subprocess` (1 hop to `_models.py`) [high]
+  Path: _documentation.py -> _models.py
+- `_documentation.py` imports `subprocess` (1 hop to `_uml.py`) [high]
+  Path: _documentation.py -> _uml.py
 - `_documentation.py` imports `subprocess` (1 hop to `_mermaid.py`) [high]
   Path: _documentation.py -> _mermaid.py
+- `_documentation.py` imports `subprocess` (1 hop to `_rank.py`) [high]
+  Path: _documentation.py -> _rank.py
 - `_documentation.py` imports `subprocess` (2 hops to `_category.py`) [high]
   Path: _documentation.py -> _models.py -> _category.py
 - `_gh_wiki.py` imports `subprocess` (0 hop to `_gh_wiki.py`) [high]
   Path: _gh_wiki.py
-- `_gh_wiki.py` imports `subprocess` (1 hop to `_config.py`) [high]
-  Path: _gh_wiki.py -> _config.py
 - `_gh_wiki.py` imports `subprocess` (1 hop to `_gitmeta.py`) [high]
   Path: _gh_wiki.py -> _gitmeta.py
+- `_gh_wiki.py` imports `subprocess` (1 hop to `_config.py`) [high]
+  Path: _gh_wiki.py -> _config.py
 - `_video.py` imports `subprocess` (0 hop to `_video.py`) [high]
   Path: _video.py
 - `_video.py` imports `subprocess` (1 hop to `_models.py`) [high]
