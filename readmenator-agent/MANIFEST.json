@@ -1,28 +1,28 @@
 {
   "tool": "readmenator",
   "schema_version": 2,
-  "generated_at": "2026-10-07T05:20:58Z",
+  "generated_at": "2026-10-07T15:27:37Z",
   "project_root": ".",
   "project_name": "ReadMenator",
-  "git_commit": "46172b2503a6bc239d00000f59bed56eccd6a491",
+  "git_commit": "4a9a8db313b0eadd22ef8349b9096cdcbb38ddca",
   "git_branch": "main",
-  "source_fingerprint": "4727c5dce8238484ef29cb73b5bd3df53c4c64df9abe2472a94254f46a967b82",
+  "source_fingerprint": "fbf08c161e4df5370044c5cd95be7c43fcebfe29cf8d54f7cc343c4c7c478135",
   "freshness_check": "readmenator . fresh  # exit 0 = docs match sources, exit 1 = run: readmenator . --rebuild",
-  "files": 105,
-  "symbols": 1884,
-  "imports": 801,
-  "calls": 11599,
-  "inherits": 133,
-  "resolved_imports": 357,
+  "files": 107,
+  "symbols": 1909,
+  "imports": 814,
+  "calls": 11848,
+  "inherits": 134,
+  "resolved_imports": 364,
   "security_findings": 0,
   "languages": {
-    "py": 105
+    "py": 107
   },
   "subsystems": {
     "parsers": 21,
-    "readmenator": 43,
+    "readmenator": 44,
     "root": 2,
-    "tests": 39
+    "tests": 40
   },
   "entrypoints": [
     "readmenator/__main__.py"
@@ -43,13 +43,18 @@
   "documents": [
     {
       "path": "API.md",
-      "lines": 477,
-      "approx_tokens": 13813
+      "lines": 485,
+      "approx_tokens": 14052
     },
     {
       "path": "ARCHITECTURE.md",
-      "lines": 435,
-      "approx_tokens": 6593
+      "lines": 444,
+      "approx_tokens": 6722
+    },
+    {
+      "path": "CONCEPTS.md",
+      "lines": 120,
+      "approx_tokens": 5182
     },
     {
       "path": "GOTCHAS.md",
@@ -58,8 +63,8 @@
     },
     {
       "path": "INDEX.md",
-      "lines": 109,
-      "approx_tokens": 2969
+      "lines": 111,
+      "approx_tokens": 3035
     },
     {
       "path": "KB_parsers.md",
@@ -68,18 +73,18 @@
     },
     {
       "path": "KB_readmenator.md",
-      "lines": 500,
-      "approx_tokens": 9243
+      "lines": 492,
+      "approx_tokens": 9157
     },
     {
       "path": "KB_readmenator_p2.md",
-      "lines": 499,
-      "approx_tokens": 8230
+      "lines": 498,
+      "approx_tokens": 8141
     },
     {
       "path": "KB_readmenator_p3.md",
-      "lines": 112,
-      "approx_tokens": 1961
+      "lines": 146,
+      "approx_tokens": 2582
     },
     {
       "path": "KB_root.md",
@@ -88,8 +93,8 @@
     },
     {
       "path": "KB_tests.md",
-      "lines": 477,
-      "approx_tokens": 10575
+      "lines": 492,
+      "approx_tokens": 10858
     },
     {
       "path": "KB_tests_p2.md",
@@ -109,22 +114,22 @@
     {
       "path": "SYMBOLS.md",
       "lines": 500,
-      "approx_tokens": 12771
+      "approx_tokens": 12835
     },
     {
       "path": "SYMBOLS_p2.md",
       "lines": 500,
-      "approx_tokens": 13633
+      "approx_tokens": 13494
     },
     {
       "path": "SYMBOLS_p3.md",
       "lines": 500,
-      "approx_tokens": 14793
+      "approx_tokens": 14905
     },
     {
       "path": "SYMBOLS_p4.md",
-      "lines": 411,
-      "approx_tokens": 11905
+      "lines": 436,
+      "approx_tokens": 12566
     },
     {
       "path": "recipes/add-function.md",

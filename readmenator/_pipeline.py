@@ -12,6 +12,7 @@ from readmenator._agent_injector import AgentInjector
 from readmenator._agent_output import AgentOutputGenerator
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
+from readmenator._concepts import ConceptExtractor
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
 from readmenator._dataflow import DataflowAnalyzer
@@ -81,6 +82,7 @@ class AnalyzerFactory:
         self._diagram_publisher: DocsSitePublisher | None = None
         self._vis_renderer: VisNetworkRenderer | None = None
         self._video: CinematicVideoRenderer | None = None
+        self._concepts: ConceptExtractor | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -254,6 +256,13 @@ class AnalyzerFactory:
             self._video = CinematicVideoRenderer(self._config)
         return self._video
 
+    @property
+    def concepts(self) -> ConceptExtractor:
+        """Return the lazily initialised semantic concept extractor."""
+        if self._concepts is None:
+            self._concepts = ConceptExtractor(self._config)
+        return self._concepts
+
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],
         resolved_edges: Optional[List[Edge]] = None,
@@ -353,6 +362,12 @@ class DeepAnalysisRunner:
             else []
         )
 
+        concept_graph = (
+            self._factory.concepts.extract(nodes, edges, resolved_edges)
+            if config.CONCEPT_ENABLED
+            else None
+        )
+
         return AnalysisResultV2(
             taint=taint_result,
             cycles=cycles,
@@ -361,4 +376,5 @@ class DeepAnalysisRunner:
             suggested_rules=suggested_rules,
             layer_violations=layer_violations,
             dataflow_issues=dataflow_issues,
+            concept_graph=concept_graph,
         )

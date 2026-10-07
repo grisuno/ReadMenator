@@ -1,10 +1,10 @@
 # readmenator: _pipeline
 
-*Community 2 | 19 files | cohesion 0.40*
+*Community 2 | 19 files | cohesion 0.39*
 
 ## Definition
 
-This community groups 19 file(s) rooted at `readmenator` with dominant language py (cohesion 0.40). Central symbols: `AgentInjector`, `AnalyzerFactory`, `Category`, `CodePropertyGraph`, `CompositeRanker`, `DeepAnalysisRunner`, `DocProjection`, `DocumentationGenerator`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: ReadMenator -- Zero-token polyglot codebase knowledge graph generator.  Public API: Config, Symbol, Node, Edge, EdgeKind, Morphism, Category, and readmenatorApp.
+This community groups 19 file(s) rooted at `readmenator` with dominant language py (cohesion 0.39). Central symbols: `AgentInjector`, `AnalyzerFactory`, `Category`, `CodePropertyGraph`, `CompositeRanker`, `DeepAnalysisRunner`, `DocProjection`, `DocumentationGenerator`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: ReadMenator -- Zero-token polyglot codebase knowledge graph generator.  Public API: Config, Symbol, Node, Edge, EdgeKind, Morphism, Category, and readmenatorApp.
 
 ## Files
 
@@ -14,9 +14,9 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_agent_injector.py` | py | infrastructure | 14 | yes |
 | `readmenator/_category.py` | py | utility | 26 | yes |
 | `readmenator/_cpg.py` | py | utility | 6 | yes |
-| `readmenator/_documentation.py` | py | utility | 28 | yes |
+| `readmenator/_documentation.py` | py | utility | 29 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
-| `readmenator/_pipeline.py` | py | utility | 34 | yes |
+| `readmenator/_pipeline.py` | py | utility | 35 | yes |
 | `readmenator/_projections.py` | py | utility | 15 | yes |
 | `readmenator/_query.py` | py | data_access | 17 | yes |
 | `readmenator/_rank.py` | py | utility | 17 | yes |
@@ -66,20 +66,20 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 34
-- Cross-boundary resolved imports (EXTRACTED): 49
+- Cross-boundary resolved imports (EXTRACTED): 51
 
 ## Connections
 
 - [EXTRACTED] depends_on community 2 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.6): Inferred cross-community bridge: readmenator/__main__.py reaches tests/test_agent_injector.py in 4 hops.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
 - [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
 - [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 2 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 2 (readmenator: _pipeline) and community 5 (orphans).
+- [INFERRED] shares_context community 2 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 2 (readmenator: _pipeline) and community 5 (orphans).
 
 ## Risks
 
@@ -87,10 +87,10 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
@@ -100,7 +100,7 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 - Why do 3 file(s) lack file-level docs (e.g. `tests/test_agent_output.py`)? What purpose do they serve?
 - Is the dangerous import `subprocess` in `readmenator/_agent_injector.py` still required, or can it be isolated?
 - What would break if the most connected file in readmenator: _pipeline changed?
-- Should readmenator: _pipeline be split, given cohesion 0.40?
+- Should readmenator: _pipeline be split, given cohesion 0.39?
 
 ## Sources
 

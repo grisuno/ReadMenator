@@ -154,6 +154,7 @@ class DocumentationGenerator:
         lines.extend(self._build_taint_analysis(analysis_v2))
         lines.extend(self._build_hotspots(analysis_v2, ranked))
         lines.extend(self._build_dataflow_analysis(analysis_v2))
+        lines.extend(self._build_concept_graph(analysis_v2))
         lines.extend(self._build_dependency_cycles(analysis_v2))
         lines.extend(self._build_change_impact(analysis_v2))
         lines.extend(self._build_layer_violations(analysis_v2))
@@ -368,6 +369,11 @@ class DocumentationGenerator:
         if analysis_v2 and analysis_v2.dataflow_issues:
             toc.append(f"{entry}. [Dataflow Analysis](#dataflow-analysis)")
             entry += 1
+        if analysis_v2 and getattr(analysis_v2, "concept_graph", None):
+            graph = getattr(analysis_v2, "concept_graph", None)
+            if graph is not None and graph.concepts:
+                toc.append(f"{entry}. [Concept Graph](#concept-graph)")
+                entry += 1
 
         if findings:
             toc.append(f"{entry}. [Security Audit](#security-audit)")
@@ -857,6 +863,53 @@ class DocumentationGenerator:
                 f"`{issue.kind}` | `{issue.variable}` | {issue.description} |"
             )
         lines.extend(["", "---", ""])
+        return lines
+
+    def _build_concept_graph(
+        self, analysis_v2: Optional[AnalysisResultV2]
+    ) -> List[str]:
+        """Build the semantic noun/verb concept layer section."""
+        graph = getattr(analysis_v2, "concept_graph", None) if analysis_v2 else None
+        if graph is None or not graph.concepts:
+            return []
+        lines: List[str] = [
+            "## Concept Graph",
+            "",
+            "Semantic second-brain layer: nouns are concept nodes, verbs are "
+            "edges. Each noun maps atomically to a file set (EXTRACTED); "
+            "each verb aggregates structural imports, calls, and inherits "
+            "into consumes, invokes, extends, depends_on, or bridges (INFERRED).",
+            "",
+            f"**{len(graph.concepts)} concepts, {len(graph.relations)} relations.**",
+            "",
+            "| Concept | Files | Mentions |",
+            "|---------|-------|----------|",
+        ]
+        for concept in graph.concepts[:30]:
+            lines.append(
+                f"| `{concept.name}` | {len(concept.file_ids)} | "
+                f"{concept.mention_count} |"
+            )
+        lines.append("")
+        if graph.relations:
+            lines.extend([
+                "### Verb Edges",
+                "",
+                "| Source | Verb | Target | Strength | Evidence |",
+                "|--------|------|--------|----------|----------|",
+            ])
+            for rel in graph.relations[:30]:
+                lines.append(
+                    f"| `{rel.source}` | `{rel.verb}` | `{rel.target}` | "
+                    f"{rel.strength:.2f} | {len(rel.file_evidence)} |"
+                )
+            lines.append("")
+        if graph.dialectic_questions:
+            lines.extend(["### Dialectic Prompts", ""])
+            for question in graph.dialectic_questions[:10]:
+                lines.append(f"- {question}")
+            lines.append("")
+        lines.extend(["---", ""])
         return lines
 
     def _build_dependency_cycles(

@@ -5,6 +5,7 @@
 - `readmenator.py` -> `readmenator/__main__.py`
 - `readmenator/__init__.py` -> `readmenator/_app.py`
 - `readmenator/__init__.py` -> `readmenator/_category.py`
+- `readmenator/__init__.py` -> `readmenator/_concepts.py`
 - `readmenator/__init__.py` -> `readmenator/_config.py`
 - `readmenator/__init__.py` -> `readmenator/_diagrams.py`
 - `readmenator/__init__.py` -> `readmenator/_mcp_server.py`
@@ -42,6 +43,8 @@
 - `readmenator/_app.py` -> `readmenator/_video.py`
 - `readmenator/_app.py` -> `readmenator/_watcher.py`
 - `readmenator/_cache.py` -> `readmenator/_config.py`
+- `readmenator/_concepts.py` -> `readmenator/_config.py`
+- `readmenator/_concepts.py` -> `readmenator/_models.py`
 - `readmenator/_cpg.py` -> `readmenator/_models.py`
 - `readmenator/_cursorrules_generator.py` -> `readmenator/_config.py`
 - `readmenator/_cursorrules_generator.py` -> `readmenator/_layers.py`
@@ -83,6 +86,7 @@
 - `readmenator/_pipeline.py` -> `readmenator/_agent_output.py`
 - `readmenator/_pipeline.py` -> `readmenator/_analyzer.py`
 - `readmenator/_pipeline.py` -> `readmenator/_category.py`
+- `readmenator/_pipeline.py` -> `readmenator/_concepts.py`
 - `readmenator/_pipeline.py` -> `readmenator/_config.py`
 - `readmenator/_pipeline.py` -> `readmenator/_cpg.py`
 - `readmenator/_pipeline.py` -> `readmenator/_dataflow.py`
@@ -218,6 +222,9 @@
 - `tests/test_analyzer.py` -> `readmenator/_models.py`
 - `tests/test_cache.py` -> `readmenator/_cache.py`
 - `tests/test_cache.py` -> `readmenator/_config.py`
+- `tests/test_concepts.py` -> `readmenator/_concepts.py`
+- `tests/test_concepts.py` -> `readmenator/_config.py`
+- `tests/test_concepts.py` -> `readmenator/_models.py`
 - `tests/test_config.py` -> `readmenator/_config.py`
 - `tests/test_cpg.py` -> `readmenator/_config.py`
 - `tests/test_cpg.py` -> `readmenator/_cpg.py`
@@ -338,6 +345,7 @@
 - `readmenator/_app.py` -> __future__, dataclasses, json, logging, pathlib, typing
 - `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
 - `readmenator/_category.py` -> __future__, dataclasses, enum, typing
+- `readmenator/_concepts.py` -> __future__, collections, logging, re, typing
 - `readmenator/_config.py` -> __future__, dataclasses, typing
 - `readmenator/_cpg.py` -> __future__, hashlib, json, typing
 - `readmenator/_cursorrules_generator.py` -> __future__, pathlib, typing
@@ -400,6 +408,7 @@
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
+- `tests/test_concepts.py` -> unittest
 - `tests/test_config.py` -> dataclasses, unittest
 - `tests/test_cpg.py` -> __future__, json, unittest
 - `tests/test_cursorrules.py` -> __future__, pathlib, tempfile, unittest

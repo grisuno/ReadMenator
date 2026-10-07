@@ -596,7 +596,13 @@ class readmenatorApplication:
     def export_json(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
         analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
-        data = self._factory.exporter.to_json(nodes, edges, self._last_resolved_edges, analysis)
+        concepts = self._factory.concepts.extract(
+            nodes, edges, self._last_resolved_edges
+        )
+        data = self._factory.exporter.to_json(
+            nodes, edges, self._last_resolved_edges, analysis,
+            None, concepts,
+        )
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.json")
@@ -647,7 +653,10 @@ class readmenatorApplication:
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         findings = self._last_findings or []
-        data = self._factory.exporter.to_cypher(nodes, edges, resolved, analysis, findings)
+        concepts = self._factory.concepts.extract(nodes, edges, resolved)
+        data = self._factory.exporter.to_cypher(
+            nodes, edges, resolved, analysis, findings, concepts
+        )
         if output_path is None:
             root = Path(target_dir).resolve()
             output_path = str(root / "graph.cypher")
@@ -658,10 +667,15 @@ class readmenatorApplication:
     def export_obsidian(self, target_dir: str, output_dir: Optional[str] = None) -> int:
         nodes, edges = self._scan(target_dir)
         analysis = self._factory.analyzer.analyze(nodes, edges, self._last_resolved_edges)
+        concepts = self._factory.concepts.extract(
+            nodes, edges, self._last_resolved_edges
+        )
         if output_dir is None:
             root = Path(target_dir).resolve()
             output_dir = str(root / "obsidian")
-        written = self._factory.exporter.to_obsidian(nodes, edges, output_dir, analysis)
+        written = self._factory.exporter.to_obsidian(
+            nodes, edges, output_dir, analysis, concepts
+        )
         logger.info("Obsidian vault: %d notes in %s", written, output_dir)
         return written
 

@@ -6,18 +6,19 @@
 | `readmenator/__init__.py` | ReadMenator -- Zero-token polyglot codebase knowledge graph generator. | readmenator | 0 | 0 |
 | `readmenator/__main__.py` | Command line entry point: argument parsing and subcommand dispatch. | readmenator | 3 | 1 |
 | `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 3 |
-| `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 32 | 3 |
+| `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 33 | 3 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 22 | 4 |
 | `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 51 | 9 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 4 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 8 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 61 |
+| `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 63 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
 | `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 89 | 5 |
-| `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 28 | 2 |
+| `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 29 | 2 |
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 15 | 2 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 3 |
@@ -26,10 +27,10 @@
 | `readmenator/_layer_rules.py` | Architecture layer rule engine: forbidden and warning edges between layers. | readmenator | 4 | 2 |
 | `readmenator/_layers.py` | Architectural layer detection for the readmenator knowledge graph. | readmenator | 7 | 6 |
 | `readmenator/_linter.py` | Architecture linter for the readmenator knowledge graph. | readmenator | 7 | 2 |
-| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 52 | 3 |
+| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 54 | 3 |
 | `readmenator/_mermaid.py` | Mermaid graph renderer with intelligent pruning. | readmenator | 4 | 2 |
-| `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 20 | 78 |
-| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 34 | 1 |
+| `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 23 | 80 |
+| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 35 | 1 |
 | `readmenator/_projections.py` | Functors and projections for the readmenator code category. | readmenator | 15 | 1 |
 | `readmenator/_purpose.py` | Purpose extraction shared by every agent-facing document generator. | readmenator | 7 | 3 |
 | `readmenator/_query.py` | Query engine for the readmenator knowledge base. | readmenator | 17 | 3 |
@@ -45,7 +46,7 @@
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 49 | 3 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
-| `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 31 | 2 |
+| `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
 | `readmenator/parsers/__init__.py` | Parser factory: maps file extensions to per-language LanguageParser classes. | parsers | 2 | 3 |
 | `readmenator/parsers/_assembly.py` | Assembly parser: regex extraction of symbols, signatures, docstrings, and imports. | parsers | 2 | 1 |
 | `readmenator/parsers/_base.py` | LanguageParser base class with shared docstring and signature extraction. | parsers | 6 | 20 |
@@ -74,6 +75,7 @@
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
 | `tests/test_cache.py` | Contract tests for the FileCache. | tests | 22 | 0 |
+| `tests/test_concepts.py` | test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets. | tests | 8 | 0 |
 | `tests/test_config.py` | - | tests | 6 | 0 |
 | `tests/test_cpg.py` | TestCodePropertyGraphContract: Contract: CodePropertyGraph generates valid JSON-LD CPG output. | tests | 11 | 0 |
 | `tests/test_cursorrules.py` | Contract tests for the CursorRulesGenerator. | tests | 12 | 0 |

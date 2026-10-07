@@ -292,6 +292,7 @@ class AnalysisResultV2:
         suggested_rules: List of suggested linting rules.
         layer_violations: List of layer violations.
         dataflow_issues: List of procedural dataflow findings.
+        concept_graph: Optional semantic noun/verb layer.
     """
 
     taint: TaintAnalysisResult | None = None
@@ -301,6 +302,7 @@ class AnalysisResultV2:
     suggested_rules: List[SuggestedRule] = field(default_factory=list)
     layer_violations: List[LayerViolation] = field(default_factory=list)
     dataflow_issues: List[DataflowIssue] = field(default_factory=list)
+    concept_graph: ConceptGraph | None = None
 
 
 @dataclass
@@ -396,3 +398,56 @@ class RefactoringPlan:
     actions: List[RefactoringAction]
     estimated_impact: int
     current_lines: int
+
+
+@dataclass
+class ConceptNode:
+    """A semantic noun node in the concept graph.
+
+    Attributes:
+        name: Normalised noun label (lowercase token).
+        file_ids: Set of file node IDs where the noun appears.
+        mention_count: Total atomic mentions across paths and symbols.
+        confidence: Confidence tier (always EXTRACTED for parsed tokens).
+    """
+
+    name: str
+    file_ids: set
+    mention_count: int = 0
+    confidence: str = "EXTRACTED"
+
+
+@dataclass
+class ConceptRelation:
+    """A verb edge between two concept noun nodes.
+
+    Attributes:
+        source: Source concept name.
+        target: Target concept name.
+        verb: Verb label (consumes, invokes, extends, depends_on, bridges).
+        file_evidence: Sorted file pairs proving the relation.
+        strength: Normalised strength in [0, 1].
+        confidence: Confidence tier (always INFERRED for heuristics).
+    """
+
+    source: str
+    target: str
+    verb: str
+    file_evidence: List[str] = field(default_factory=list)
+    strength: float = 0.0
+    confidence: str = "INFERRED"
+
+
+@dataclass
+class ConceptGraph:
+    """Deterministic semantic layer over the structural graph.
+
+    Attributes:
+        concepts: Ordered concept noun nodes (ranked by file coverage).
+        relations: Ordered verb edges between concepts.
+        dialectic_questions: Deterministic thesis/antithesis prompts.
+    """
+
+    concepts: List[ConceptNode] = field(default_factory=list)
+    relations: List[ConceptRelation] = field(default_factory=list)
+    dialectic_questions: List[str] = field(default_factory=list)

@@ -48,6 +48,7 @@ readmenator/
   _pipeline.py      - AnalyzerFactory (lazy init) + DeepAnalysisRunner (decoupled v2 analysis)
   _app.py           - Application orchestrator (thin facade over AnalyzerFactory)
   _mcp_server.py    - MCP stdio server exposing tools + resources for AI agent queries
+  _concepts.py      - Semantic ConceptGraph: nouns as nodes, verbs as edges, atomic zero-token extraction
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
@@ -83,6 +84,7 @@ tests/
   test_dataflow.py - Dataflow analyzer contract tests (def-use, alloc checks, C idioms, span bounds)
   test_agent_friendliness.py - Agent output budgets, purposes, MANIFEST freshness, noise reduction, llms.txt
   test_gh_wiki.py - GitHub wiki publisher contract tests (faked git/gh runner, no network)
+  test_concepts.py - Semantic ConceptGraph contract tests (nouns, verbs, atomic, deterministic, dialectic)
 ```
 
 ## Contracts
@@ -355,10 +357,22 @@ tests/
 - `notifications/initialized` acknowledged silently (no response)
 - Unknown methods return standard JSON-RPC error codes
 - Uninitialized requests return error code -32000
-- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json
-- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb
+- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json, concepts
+- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts
 - Integrated with readmenatorApplication for all query/analysis operations
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
+
+### Semantic ConceptGraph Contract
+- ConceptExtractor class with extract(nodes, edges, resolved_edges) entry point (readmenator/_concepts.py)
+- Second-brain parameters as extra layer: nouns are ConceptNode (EXTRACTED), verbs are ConceptRelation (INFERRED)
+- Atomic zero-token tokenization: path, label, symbol names, docs split on camelCase, dots, slashes, separators; stopwords and short tokens filtered
+- Verb vocabulary from structure: imports->consumes, resolved_imports->depends_on, calls->invokes, inherits->extends, fallback bridges
+- Concept-concept aggregation over file edges with strength normalization and top-N budgets
+- Dialectic prompts: overlapping file sets (Jaccard>=0.3) emit Thesis/Antithesis/Synthesis questions
+- Deterministic: sorted traversal, ranked by file coverage then mentions then name
+- Respects PRIVACY_MODE (doc text skipped) and CONCEPT_ENABLED (empty graph when off)
+- Wired into DeepAnalysisRunner (AnalysisResultV2.concept_graph), KB Concept Graph section, wiki concepts.md + concept_graph.json, agent CONCEPTS.md, exporter JSON/Cypher/Obsidian, video collect concepts/dialectic, MCP concepts tool + resource
+- Configurable via CONCEPT_ENABLED, CONCEPT_MIN_FILES, CONCEPT_MAX_CONCEPTS, CONCEPT_MAX_RELATIONS, CONCEPT_MIN_TOKEN_LEN, CONCEPT_STOPWORDS, CONCEPT_MAX_FILES_PER_CONCEPT, CONCEPT_DIALECTIC_MAX
 
 ### Watcher Contract
 - Polling-based filesystem monitor (no external deps)

@@ -444,6 +444,7 @@ class CinematicVideoRenderer:
         analysis_v2: Optional[AnalysisResultV2],
         project_name: str,
         content_map: Optional[Dict[str, str]] = None,
+        concept_graph: Optional[Any] = None,
     ) -> Dict[str, Any]:
         """Collect every number each scene draws, from real scan data."""
         content_map = content_map or {}
@@ -556,6 +557,18 @@ class CinematicVideoRenderer:
         if preview_file and preview_file in content_map:
             for ln in content_map[preview_file].splitlines()[: self.config.VIDEO_PREVIEW_LINES]:
                 preview_lines.append(ln[:100].expandtabs(4))
+        resolved_graph = getattr(analysis_v2, "concept_graph", None) if analysis_v2 else None
+        active_graph = concept_graph if concept_graph is not None else resolved_graph
+        concepts: List[Dict[str, Any]] = []
+        dialectic: List[str] = []
+        if active_graph is not None and getattr(active_graph, "concepts", None):
+            for concept in list(active_graph.concepts)[:12]:
+                concepts.append({
+                    "name": concept.name,
+                    "files": len(concept.file_ids),
+                    "mentions": concept.mention_count,
+                })
+            dialectic = list(getattr(active_graph, "dialectic_questions", []) or [])[:3]
         return {"project": short_label(project_name, 40), "files": file_count,
                 "symbols": symbol_count, "imports": import_count,
                 "languages": top_languages, "layers": layer_counts,
@@ -566,6 +579,7 @@ class CinematicVideoRenderer:
                 "dna": dna, "graph_nodes": graph_nodes,
                 "graph_links": graph_links, "dep_tree": dep_tree,
                 "preview_file": preview_file, "preview_lines": preview_lines,
+                "concepts": concepts, "dialectic": dialectic,
                 "node_symbols": {nid: [(s.name, s.kind, s.line) for s in node.symbols[:12]]
                                  for nid, node in node_by_id.items() if node.symbols}}
 

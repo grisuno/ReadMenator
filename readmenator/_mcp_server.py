@@ -423,6 +423,14 @@ class MCPServer:
             self._tool_export_json,
             {"type": "object", "properties": {}},
         ))
+        self.register_tool(MCPTool(
+            "readmenator.concepts",
+            "Get the semantic second-brain layer: noun concepts mapping to "
+            "file sets plus verb edges (consumes, invokes, extends, "
+            "depends_on, bridges) and dialectic prompts.",
+            self._tool_concepts,
+            {"type": "object", "properties": {}},
+        ))
 
         self.register_resource(MCPResource(
             "readmenator://summary",
@@ -458,6 +466,13 @@ class MCPServer:
             "The complete KNOWLEDGE_BASE.md document",
             "text/markdown",
             self._resource_kb,
+        ))
+        self.register_resource(MCPResource(
+            "readmenator://concepts",
+            "Semantic Concepts",
+            "Noun concepts with file sets plus verb edges and dialectic prompts",
+            "application/json",
+            self._resource_concepts,
         ))
 
     # ------------------------------------------------------------------
@@ -698,6 +713,32 @@ class MCPServer:
         result = self._app.export_json(self._target_dir)
         return f"graph.json exported. {result[:200]}..."
 
+    def _tool_concepts(self) -> str:
+        """Return the semantic noun/verb layer as greppable text."""
+        nodes, edges, resolved = self._scan()
+        graph = self._app._factory.concepts.extract(nodes, edges, resolved)
+        lines = [
+            f"Concepts: {len(graph.concepts)}, "
+            f"relations: {len(graph.relations)}",
+            "",
+        ]
+        for concept in graph.concepts[:30]:
+            lines.append(
+                f"- `{concept.name}` files={len(concept.file_ids)} "
+                f"mentions={concept.mention_count}"
+            )
+        lines.append("")
+        for rel in graph.relations[:30]:
+            lines.append(
+                f"- `{rel.source}` --{rel.verb}--> `{rel.target}` "
+                f"({rel.strength:.2f})"
+            )
+        if graph.dialectic_questions:
+            lines.append("")
+            for question in graph.dialectic_questions[:5]:
+                lines.append(f"- {question}")
+        return "\n".join(lines)
+
     # ------------------------------------------------------------------
     # Resource handlers
     # ------------------------------------------------------------------
@@ -787,6 +828,33 @@ class MCPServer:
     def _resource_kb(self) -> str:
         self._ensure_kb()
         return self._kb_cache or ""
+
+    def _resource_concepts(self) -> dict:
+        """Return the semantic concept graph as structured JSON."""
+        nodes, edges, resolved = self._scan()
+        graph = self._app._factory.concepts.extract(nodes, edges, resolved)
+        return {
+            "concepts": [
+                {
+                    "name": c.name,
+                    "files": sorted(c.file_ids),
+                    "mentions": c.mention_count,
+                    "confidence": c.confidence,
+                }
+                for c in graph.concepts
+            ],
+            "relations": [
+                {
+                    "source": r.source,
+                    "target": r.target,
+                    "verb": r.verb,
+                    "strength": r.strength,
+                    "confidence": r.confidence,
+                }
+                for r in graph.relations
+            ],
+            "dialectic": list(graph.dialectic_questions),
+        }
 
     def _get_query_engine(self, nodes, edges, resolved):
         from readmenator._query import QueryEngine

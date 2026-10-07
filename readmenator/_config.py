@@ -525,3 +525,25 @@ class Config:
     VIDEO_MAX_LABEL_CHARS: int = 28
 
     VIDEO_MUSIC_PATH: str = ""
+
+    CONCEPT_ENABLED: bool = True
+
+    CONCEPT_MIN_FILES: int = 2
+
+    CONCEPT_MAX_CONCEPTS: int = 50
+
+    CONCEPT_MAX_RELATIONS: int = 100
+
+    CONCEPT_MIN_TOKEN_LEN: int = 3
+
+    CONCEPT_MAX_FILES_PER_CONCEPT: int = 50
+
+    CONCEPT_DIALECTIC_MAX: int = 10
+
+    CONCEPT_STOPWORDS: Tuple[str, ...] = (
+        "the", "and", "for", "with", "from", "that", "this",
+        "with", "into", "your", "you", "are", "was", "were",
+        "has", "have", "had", "will", "would", "could", "should",
+        "py", "c", "h", "js", "ts", "src", "lib", "test", "tests",
+        "init", "main", "utils", "util", "core", "base", "impl",
+    )

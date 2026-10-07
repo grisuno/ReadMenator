@@ -3,6 +3,31 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
+| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
+| `test_extracts_module` | method | `tests/test_parsers_new.py:27` | `def test_extracts_module(self)` |
+| `test_extracts_object` | method | `tests/test_parsers_new.py:89` | `def test_extracts_object(self)` |
+| `test_extracts_protocol` | method | `tests/test_parsers_new.py:61` | `def test_extracts_protocol(self)` |
+| `test_extracts_require` | method | `tests/test_parsers_new.py:39` | `def test_extracts_require(self)` |
+| `test_extracts_require` | method | `tests/test_parsers_new.py:111` | `def test_extracts_require(self)` |
+| `test_kotlin_extension_maps_correctly` | method | `tests/test_parsers_new.py:146` | `def test_kotlin_extension_maps_correctly(self)` |
+| `test_ruby_extension_maps_correctly` | method | `tests/test_parsers_new.py:138` | `def test_ruby_extension_maps_correctly(self)` |
+| `test_swift_extension_maps_correctly` | method | `tests/test_parsers_new.py:142` | `def test_swift_extension_maps_correctly(self)` |
+| `TestParserHypothesisContract` | class | `tests/test_parsers_property.py:155` | `class TestParserHypothesisContract(TestCase)` |
+| `TestPythonParserProperty` | class | `tests/test_parsers_property.py:288` | `class TestPythonParserProperty(TestCase)` |
+| `_StrategyPlaceholder` | class | `tests/test_parsers_property.py:45` | `class _StrategyPlaceholder` |
+| `_UnavailableStrategies` | class | `tests/test_parsers_property.py:60` | `class _UnavailableStrategies` |
+| `__getattr__` | method | `tests/test_parsers_property.py:63` | `def __getattr__(self, name)` |
+| `__or__` | method | `tests/test_parsers_property.py:48` | `def __or__(self, other)` |
+| `__ror__` | method | `tests/test_parsers_property.py:52` | `def __ror__(self, other)` |
+| `_assert_valid_symbols` | method | `tests/test_parsers_property.py:275` | `def _assert_valid_symbols(self, symbols)` |
+| `_create_parser` | function | `tests/test_parsers_property.py:142` | `def _create_parser(ext)` |
+| `_generate_multiline_code` | function | `tests/test_parsers_property.py:105` | `def _generate_multiline_code(lines, line_strategy)` |
+| `builder` | method | `tests/test_parsers_property.py:65` | `def builder()` |
+| `given` | method | `tests/test_parsers_property.py:69` | `def given()` |
+| `map` | method | `tests/test_parsers_property.py:56` | `def map(self)` |
+| `setUp` | method | `tests/test_parsers_property.py:291` | `def setUp(self)` |
+| `settings` | method | `tests/test_parsers_property.py:75` | `def settings()` |
 | `test_empty_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:198` | `def test_empty_code_returns_empty_or_valid(self, ext)` |
 | `test_never_crashes_on_malformed_code` | method | `tests/test_parsers_property.py:162` | `def test_never_crashes_on_malformed_code(self, ext, code)` |
 | `test_never_crashes_on_many_lines` | method | `tests/test_parsers_property.py:220` | `def test_never_crashes_on_many_lines(self, ext, lines)` |

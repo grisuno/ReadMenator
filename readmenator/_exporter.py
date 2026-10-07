@@ -15,7 +15,13 @@ from textwrap import dedent
 from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._config import Config
-from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
+from readmenator._models import (
+    AnalysisResult,
+    ConceptGraph,
+    Edge,
+    Node,
+    SecurityFinding,
+)
 
 
 class GraphExporter:
@@ -41,6 +47,7 @@ class GraphExporter:
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
         findings: Optional[List[SecurityFinding]] = None,
+        concept_graph: Optional[ConceptGraph] = None,
     ) -> str:
         """Export the graph as a node-link JSON string.
 
@@ -144,6 +151,31 @@ class GraphExporter:
                 }
                 for f in findings
             ]
+
+        if concept_graph is not None:
+            result["concepts"] = [
+                {
+                    "name": c.name,
+                    "files": sorted(c.file_ids),
+                    "mentions": c.mention_count,
+                    "confidence": c.confidence,
+                }
+                for c in concept_graph.concepts
+            ]
+            result["concept_relations"] = [
+                {
+                    "source": r.source,
+                    "target": r.target,
+                    "verb": r.verb,
+                    "strength": r.strength,
+                    "confidence": r.confidence,
+                    "evidence": r.file_evidence,
+                }
+                for r in concept_graph.relations
+            ]
+            result["dialectic_questions"] = list(
+                concept_graph.dialectic_questions
+            )
 
         return json.dumps(result, indent=2, ensure_ascii=False)
 
@@ -731,6 +763,7 @@ network.on("click", function(params) {{
         resolved_edges: Optional[List[Edge]] = None,
         analysis: Optional[AnalysisResult] = None,
         findings: Optional[List[SecurityFinding]] = None,
+        concept_graph: Optional[ConceptGraph] = None,
     ) -> str:
         """Export the graph as native Cypher CREATE statements.
 
@@ -827,6 +860,22 @@ network.on("click", function(params) {{
         stmts.append(f"// Total: {len(nodes)} nodes, {edge_count} edges")
         if findings:
             stmts[-1] += f", {len(findings)} findings"
+        if concept_graph is not None and concept_graph.concepts:
+            stmts.append("")
+            stmts.append("// Semantic second-brain layer: nouns and verbs")
+            for concept in concept_graph.concepts:
+                safe = concept.name.replace("'", "\\'")
+                stmts.append(
+                    f"CREATE (:Concept {{name: '{safe}', "
+                    f"files: {len(concept.file_ids)}, "
+                    f"mentions: {concept.mention_count}}})"
+                )
+            for rel in concept_graph.relations:
+                stmts.append(
+                    f"CREATE (:Concept {{name: '{rel.source}'}})"
+                    f"-[:{rel.verb.upper()} {{strength: {rel.strength}}}]->"
+                    f"(:Concept {{name: '{rel.target}'}})"
+                )
         return "\n".join(stmts)
 
     def to_obsidian(
@@ -835,18 +884,21 @@ network.on("click", function(params) {{
         edges: List[Edge],
         output_dir: str,
         analysis: Optional[AnalysisResult] = None,
+        concept_graph: Optional[ConceptGraph] = None,
     ) -> int:
         """Export the graph as an Obsidian vault with wikilinks.
 
         Each file node becomes a markdown note. Community hub notes
-        aggregate related files. All notes use [[wikilinks]] for
-        Obsidian graph navigation.
+        aggregate related files. Concept notes implement the second-brain
+        noun/verb layer with [[wikilinks]] to every mapped file. All notes
+        use [[wikilinks]] for Obsidian graph navigation.
 
         Args:
             nodes: Scanned file nodes.
             edges: Import edges.
             output_dir: Directory to write the Obsidian notes.
             analysis: Optional analysis results for community hubs.
+            concept_graph: Optional semantic noun/verb layer.
 
         Returns:
             Number of notes written.
@@ -908,6 +960,45 @@ network.on("click", function(params) {{
                 if len(c.file_ids) > 50:
                     hub_lines.append(f"\n*... and {len(c.file_ids) - 50} more files*")
                 hub_path.write_text("\n".join(hub_lines), encoding="utf-8")
+                written += 1
+
+        if concept_graph is not None and concept_graph.concepts:
+            for concept in concept_graph.concepts:
+                concept_path = out / f"_CONCEPT_{concept.name}.md"
+                file_links = [
+                    f"- [[{fid.split('/')[-1].replace('.', '_')}]] `{fid}`"
+                    for fid in sorted(concept.file_ids)[:50]
+                ]
+                verb_lines = [
+                    f"- [[_CONCEPT_{r.target}]] ({r.verb}, {r.strength:.2f})"
+                    for r in concept_graph.relations
+                    if r.source == concept.name
+                ][:20]
+                incoming = [
+                    f"- [[_CONCEPT_{r.source}]] ({r.verb}, {r.strength:.2f})"
+                    for r in concept_graph.relations
+                    if r.target == concept.name
+                ][:20]
+                body = [
+                    f"# {concept.name}",
+                    "",
+                    f"*Concept noun | {len(concept.file_ids)} files | "
+                    f"{concept.mention_count} mentions | {concept.confidence}*",
+                    "",
+                    "## Files",
+                    "",
+                    *file_links,
+                    "",
+                    "## Consumes / Produces",
+                    "",
+                    *(verb_lines or ["- No outgoing verb edges."]),
+                    "",
+                    "## Consumed By",
+                    "",
+                    *(incoming or ["- No incoming verb edges."]),
+                    "",
+                ]
+                concept_path.write_text("\n".join(body), encoding="utf-8")
                 written += 1
 
         return written

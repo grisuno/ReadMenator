@@ -1,6 +1,39 @@
 # Subsystem: readmenator (page 3 of 3)
 Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 
+## readmenator/_uml.py
+- Doc: UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `UmlGenerator` (class, line 34) `class UmlGenerator`
+  - `_get_code_generator` (method, line 172) `def _get_code_generator(language)`
+  - `_type_map_py_to_target` (method, line 190) `def _type_map_py_to_target(target, py_type_hint)`
+  - `_generate_cpp` (method, line 233) `def _generate_cpp(class_symbols, nodes, edges)`
+  - `_cpp_params` (method, line 259) `def _cpp_params(params)`
+  - `_generate_java` (method, line 274) `def _generate_java(class_symbols, nodes, edges)`
+  - `_java_params` (method, line 301) `def _java_params(params)`
+  - `_generate_csharp` (method, line 316) `def _generate_csharp(class_symbols, nodes, edges)`
+  - `_cs_params` (method, line 345) `def _cs_params(params)`
+  - `_generate_python` (method, line 360) `def _generate_python(class_symbols, nodes, edges)`
+  - `_generate_go` (method, line 395) `def _generate_go(class_symbols, nodes, edges)`
+  - `_generate_rust` (method, line 422) `def _generate_rust(class_symbols, nodes, edges)`
+  - `_generate_php` (method, line 448) `def _generate_php(class_symbols, nodes, edges)`
+  - `_generate_kotlin` (method, line 476) `def _generate_kotlin(class_symbols, nodes, edges)`
+  - `_generate_scala` (method, line 496) `def _generate_scala(class_symbols, nodes, edges)`
+  - `_generate_swift` (method, line 518) `def _generate_swift(class_symbols, nodes, edges)`
+  - `_generate_dart` (method, line 547) `def _generate_dart(class_symbols, nodes, edges)`
+  - `_generate_ruby` (method, line 567) `def _generate_ruby(class_symbols, nodes, edges)`
+  - `_safe_name` (method, line 588) `def _safe_name(name)`
+  - `_extract_params` (method, line 592) `def _extract_params(signature)`
+  - `__init__` (method, line 36) `def __init__(self, config)`
+  - `render_mermaid_class_diagram` (method, line 39) `def render_mermaid_class_diagram(self, nodes, edges)`
+  - `generate_code` (method, line 129) `def generate_code(self, nodes, edges, target_language)`
+  - `_sanitize_id` (method, line 153) `def _sanitize_id(raw)`
+  - `_find_node` (method, line 165) `def _find_node(nodes, node_id)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
+
 ## readmenator/_video.py
 - Doc: Cinematic codebase overview video, general purpose.
 - Layer: utility
@@ -34,27 +67,27 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `draw_header` (method, line 401) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
   - `draw_caption` (method, line 415) `def draw_caption(d, text, lt, dur, fonts, width, y)`
   - `CinematicVideoRenderer` (class, line 431) `class CinematicVideoRenderer`
-  - `_render_frame_bytes` (method, line 797) `def _render_frame_bytes(fi)`
-  - `_draw_frame` (method, line 802) `def _draw_frame(fi)`
-  - `_scene_title` (method, line 830) `def _scene_title(img, d, lt, gt, sc)`
-  - `_scene_card` (method, line 865) `def _scene_card(img, d, lt, gt, sc)`
-  - `_scene_layers` (method, line 879) `def _scene_layers(img, d, lt, gt, sc)`
-  - `_scene_gods` (method, line 904) `def _scene_gods(img, d, lt, gt, sc)`
-  - `_scene_tree` (method, line 947) `def _scene_tree(img, d, lt, gt, sc)`
-  - `_scene_communities` (method, line 1021) `def _scene_communities(img, d, lt, gt, sc)`
-  - `_scene_graph` (method, line 1065) `def _scene_graph(img, d, lt, gt, sc)`
-  - `_scene_dna` (method, line 1123) `def _scene_dna(img, d, lt, gt, sc)`
-  - `_scene_outro` (method, line 1182) `def _scene_outro(img, d, lt, gt, sc)`
+  - `_render_frame_bytes` (method, line 811) `def _render_frame_bytes(fi)`
+  - `_draw_frame` (method, line 816) `def _draw_frame(fi)`
+  - `_scene_title` (method, line 844) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (method, line 879) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (method, line 893) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (method, line 918) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (method, line 961) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (method, line 1035) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (method, line 1079) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_dna` (method, line 1137) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (method, line 1196) `def _scene_outro(img, d, lt, gt, sc)`
   - `_find` (method, line 201) `def _find(style)`
   - `__init__` (method, line 239) `def __init__(self, width, height)`
   - `_sun` (method, line 277) `def _sun(self, r)`
-  - `collect` (method, line 436) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map)`
-  - `_build_dep_tree` (method, line 572) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
-  - `build_scenes` (method, line 623) `def build_scenes(self, data)`
-  - `graph_positions` (method, line 649) `def graph_positions(self, data, box)`
-  - `tree_positions` (method, line 696) `def tree_positions(self, data, box)`
-  - `render_single_frame` (method, line 739) `def render_single_frame(self, data, frame_index)`
-  - `render` (method, line 757) `def render(self, data, output_path)`
+  - `collect` (method, line 436) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
+  - `_build_dep_tree` (method, line 586) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
+  - `build_scenes` (method, line 637) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 663) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 710) `def tree_positions(self, data, box)`
+  - `render_single_frame` (method, line 753) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 771) `def render(self, data, output_path)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
 
@@ -83,30 +116,31 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `WikiGenerator` (class, line 86) `class WikiGenerator`
   - `__init__` (method, line 89) `def __init__(self, config)`
   - `generate` (method, line 94) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)`
-  - `_prune_stale_pages` (method, line 142) `def _prune_stale_pages(self, out_dir, current)`
-  - `lint` (method, line 151) `def lint(self, project_root)`
-  - `_resolve_communities` (method, line 174) `def _resolve_communities(self, nodes, analysis, resolved)`
-  - `_community_of` (method, line 200) `def _community_of(self, node_id, communities)`
-  - `_build_connections` (method, line 209) `def _build_connections(self, communities, resolved, analysis, node_map, layers)`
-  - `_duplicate_links` (method, line 274) `def _duplicate_links(communities, node_map, skip_pairs)`
-  - `_shared_context_links` (method, line 317) `def _shared_context_links(self, communities, existing, node_map, layers)`
-  - `_shared_context` (method, line 353) `def _shared_context(first, second, node_map, layers)`
-  - `_build_connections_json` (method, line 386) `def _build_connections_json(self, connections)`
-  - `_definition_for` (method, line 390) `def _definition_for(self, community, node_map)`
-  - `_file_row` (method, line 419) `def _file_row(self, fid, node_map, layers)`
-  - `_build_grouped_files` (method, line 433) `def _build_grouped_files(self, members, node_map, layers, max_files)`
-  - `_build_community_page` (method, line 482) `def _build_community_page(self, community, node_map, resolved, analysis, layers, findings, analysis_v2, connections)`
-  - `_questions_for` (method, line 635) `def _questions_for(self, community, node_map, member_set, analysis_v2)`
-  - `_large_files` (method, line 673) `def _large_files(self, nodes, project_root)`
-  - `_build_index` (method, line 686) `def _build_index(self, nodes, resolved, analysis, layers, findings, analysis_v2, communities, pages, connections...`
-  - `_overview_paragraph` (method, line 798) `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)`
-  - `_connective_paragraph` (method, line 831) `def _connective_paragraph(self, communities, connections)`
-  - `_questions_paragraph` (method, line 852) `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)`
-  - `_build_queries` (method, line 868) `def _build_queries(self, analysis)`
-  - `_build_report` (method, line 893) `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...`
-  - `_estimate_tokens` (method, line 965) `def _estimate_tokens(self, nodes, connections)`
-  - `_write` (method, line 976) `def _write(path, content)`
-  - `dominant` (method, line 360) `def dominant(ids, key)`
+  - `_write_concepts` (method, line 143) `def _write_concepts(self, out_dir, analysis_v2)`
+  - `_prune_stale_pages` (method, line 210) `def _prune_stale_pages(self, out_dir, current)`
+  - `lint` (method, line 219) `def lint(self, project_root)`
+  - `_resolve_communities` (method, line 242) `def _resolve_communities(self, nodes, analysis, resolved)`
+  - `_community_of` (method, line 268) `def _community_of(self, node_id, communities)`
+  - `_build_connections` (method, line 277) `def _build_connections(self, communities, resolved, analysis, node_map, layers)`
+  - `_duplicate_links` (method, line 342) `def _duplicate_links(communities, node_map, skip_pairs)`
+  - `_shared_context_links` (method, line 385) `def _shared_context_links(self, communities, existing, node_map, layers)`
+  - `_shared_context` (method, line 421) `def _shared_context(first, second, node_map, layers)`
+  - `_build_connections_json` (method, line 454) `def _build_connections_json(self, connections)`
+  - `_definition_for` (method, line 458) `def _definition_for(self, community, node_map)`
+  - `_file_row` (method, line 487) `def _file_row(self, fid, node_map, layers)`
+  - `_build_grouped_files` (method, line 501) `def _build_grouped_files(self, members, node_map, layers, max_files)`
+  - `_build_community_page` (method, line 550) `def _build_community_page(self, community, node_map, resolved, analysis, layers, findings, analysis_v2, connections)`
+  - `_questions_for` (method, line 703) `def _questions_for(self, community, node_map, member_set, analysis_v2)`
+  - `_large_files` (method, line 741) `def _large_files(self, nodes, project_root)`
+  - `_build_index` (method, line 754) `def _build_index(self, nodes, resolved, analysis, layers, findings, analysis_v2, communities, pages, connections...`
+  - `_overview_paragraph` (method, line 866) `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)`
+  - `_connective_paragraph` (method, line 899) `def _connective_paragraph(self, communities, connections)`
+  - `_questions_paragraph` (method, line 920) `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)`
+  - `_build_queries` (method, line 936) `def _build_queries(self, analysis)`
+  - `_build_report` (method, line 961) `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...`
+  - `_estimate_tokens` (method, line 1033) `def _estimate_tokens(self, nodes, connections)`
+  - `_write` (method, line 1044) `def _write(path, content)`
+  - `dominant` (method, line 428) `def dominant(ids, key)`
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
 

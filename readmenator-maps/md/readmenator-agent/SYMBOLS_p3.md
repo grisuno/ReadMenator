@@ -3,6 +3,23 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_index_table_format` | method | `tests/test_agent_output.py:133` | `def test_index_table_format(self)` |
+| `test_inferred_from_directories` | method | `tests/test_agent_output.py:64` | `def test_inferred_from_directories(self)` |
+| `test_internal_dependencies` | method | `tests/test_agent_output.py:247` | `def test_internal_dependencies(self)` |
+| `test_manifest_workflow_orients_with_ls` | method | `tests/test_agent_output.py:421` | `def test_manifest_workflow_orients_with_ls(self)` |
+| `test_min_threshold_respected` | method | `tests/test_agent_output.py:91` | `def test_min_threshold_respected(self)` |
+| `test_misc_catches_unassigned` | method | `tests/test_agent_output.py:103` | `def test_misc_catches_unassigned(self)` |
+| `test_no_json_in_any_output` | method | `tests/test_agent_output.py:409` | `def test_no_json_in_any_output(self)` |
+| `test_no_json_in_api` | method | `tests/test_agent_output.py:283` | `def test_no_json_in_api(self)` |
+| `test_no_json_wrapping` | method | `tests/test_agent_output.py:181` | `def test_no_json_wrapping(self)` |
+| `test_readme_injector_detects_outdated` | method | `tests/test_agent_output.py:473` | `def test_readme_injector_detects_outdated(self)` |
+| `test_readme_injector_skips_identical` | method | `tests/test_agent_output.py:495` | `def test_readme_injector_skips_identical(self)` |
+| `test_recipes_directory` | method | `tests/test_agent_output.py:317` | `def test_recipes_directory(self)` |
+| `test_recipes_grounded_in_actual_findings` | method | `tests/test_agent_output.py:330` | `def test_recipes_grounded_in_actual_findings(self)` |
+| `test_subsystem_files_written` | method | `tests/test_agent_output.py:295` | `def test_subsystem_files_written(self)` |
+| `TestGraphAnalyzerContract` | class | `tests/test_analyzer.py:16` | `class TestGraphAnalyzerContract(TestCase)` |
+| `_make_edge` | method | `tests/test_analyzer.py:26` | `def _make_edge(self, src, tgt, rel)` |
+| `_make_node` | method | `tests/test_analyzer.py:23` | `def _make_node(self, nid, label, lang)` |
 | `setUp` | method | `tests/test_analyzer.py:19` | `def setUp(self)` |
 | `test_analyze_computes_god_nodes` | method | `tests/test_analyzer.py:48` | `def test_analyze_computes_god_nodes(self)` |
 | `test_analyze_detects_communities_for_connected_graph` | method | `tests/test_analyzer.py:34` | `def test_analyze_detects_communities_for_connected_graph(self)` |
@@ -36,6 +53,14 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_same_content_produces_same_hash` | method | `tests/test_cache.py:49` | `def test_same_content_produces_same_hash(self)` |
 | `test_save_and_load_analysis_roundtrip` | method | `tests/test_cache.py:109` | `def test_save_and_load_analysis_roundtrip(self)` |
 | `test_save_and_load_roundtrip` | method | `tests/test_cache.py:60` | `def test_save_and_load_roundtrip(self)` |
+| `TestConceptGraphContract` | class | `tests/test_concepts.py:20` | `class TestConceptGraphContract(TestCase)` |
+| `_node` | function | `tests/test_concepts.py:8` | `def _node(fid, symbols, doc)` |
+| `test_concept_atomic_breakdown_splits_camelcase` | method | `tests/test_concepts.py:53` | `def test_concept_atomic_breakdown_splits_camelcase(self)` |
+| `test_concept_deterministic_ordering` | method | `tests/test_concepts.py:62` | `def test_concept_deterministic_ordering(self)` |
+| `test_concept_dialectic_questions_for_overlap` | method | `tests/test_concepts.py:85` | `def test_concept_dialectic_questions_for_overlap(self)` |
+| `test_concept_disabled_returns_empty_graph` | method | `tests/test_concepts.py:76` | `def test_concept_disabled_returns_empty_graph(self)` |
+| `test_concept_nouns_map_to_file_sets` | method | `tests/test_concepts.py:21` | `def test_concept_nouns_map_to_file_sets(self)` |
+| `test_concept_verbs_come_from_structural_edges` | method | `tests/test_concepts.py:36` | `def test_concept_verbs_come_from_structural_edges(self)` |
 | `TestConfigContract` | class | `tests/test_config.py:7` | `class TestConfigContract(TestCase)` |
 | `test_config_defaults_are_sane` | method | `tests/test_config.py:13` | `def test_config_defaults_are_sane(self)` |
 | `test_config_is_immutable` | method | `tests/test_config.py:8` | `def test_config_is_immutable(self)` |
@@ -471,30 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_extracts_function` | method | `tests/test_parsers_new.py:55` | `def test_extracts_function(self)` |
 | `test_extracts_function` | method | `tests/test_parsers_new.py:106` | `def test_extracts_function(self)` |
 | `test_extracts_function` | method | `tests/test_parsers_new.py:127` | `def test_extracts_function(self)` |
-| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
-| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
-| `test_extracts_module` | method | `tests/test_parsers_new.py:27` | `def test_extracts_module(self)` |
-| `test_extracts_object` | method | `tests/test_parsers_new.py:89` | `def test_extracts_object(self)` |
-| `test_extracts_protocol` | method | `tests/test_parsers_new.py:61` | `def test_extracts_protocol(self)` |
-| `test_extracts_require` | method | `tests/test_parsers_new.py:39` | `def test_extracts_require(self)` |
-| `test_extracts_require` | method | `tests/test_parsers_new.py:111` | `def test_extracts_require(self)` |
-| `test_kotlin_extension_maps_correctly` | method | `tests/test_parsers_new.py:146` | `def test_kotlin_extension_maps_correctly(self)` |
-| `test_ruby_extension_maps_correctly` | method | `tests/test_parsers_new.py:138` | `def test_ruby_extension_maps_correctly(self)` |
-| `test_swift_extension_maps_correctly` | method | `tests/test_parsers_new.py:142` | `def test_swift_extension_maps_correctly(self)` |
-| `TestParserHypothesisContract` | class | `tests/test_parsers_property.py:155` | `class TestParserHypothesisContract(TestCase)` |
-| `TestPythonParserProperty` | class | `tests/test_parsers_property.py:288` | `class TestPythonParserProperty(TestCase)` |
-| `_StrategyPlaceholder` | class | `tests/test_parsers_property.py:45` | `class _StrategyPlaceholder` |
-| `_UnavailableStrategies` | class | `tests/test_parsers_property.py:60` | `class _UnavailableStrategies` |
-| `__getattr__` | method | `tests/test_parsers_property.py:63` | `def __getattr__(self, name)` |
-| `__or__` | method | `tests/test_parsers_property.py:48` | `def __or__(self, other)` |
-| `__ror__` | method | `tests/test_parsers_property.py:52` | `def __ror__(self, other)` |
-| `_assert_valid_symbols` | method | `tests/test_parsers_property.py:275` | `def _assert_valid_symbols(self, symbols)` |
-| `_create_parser` | function | `tests/test_parsers_property.py:142` | `def _create_parser(ext)` |
-| `_generate_multiline_code` | function | `tests/test_parsers_property.py:105` | `def _generate_multiline_code(lines, line_strategy)` |
-| `builder` | method | `tests/test_parsers_property.py:65` | `def builder()` |
-| `given` | method | `tests/test_parsers_property.py:69` | `def given()` |
-| `map` | method | `tests/test_parsers_property.py:56` | `def map(self)` |
-| `setUp` | method | `tests/test_parsers_property.py:291` | `def setUp(self)` |
-| `settings` | method | `tests/test_parsers_property.py:75` | `def settings()` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

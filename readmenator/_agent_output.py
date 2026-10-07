@@ -110,6 +110,7 @@ class AgentOutputGenerator:
             "GOTCHAS.md": self._build_gotchas(
                 analysis, analysis_v2, nodes, layers, imported_by,
             ),
+            "CONCEPTS.md": self._build_concepts(analysis_v2),
         }
         for name, file_nodes in files_by_subsystem.items():
             documents[f"KB_{self._safe_name(name)}.md"] = self._build_subsystem_content(
@@ -619,6 +620,45 @@ class AgentOutputGenerator:
 
         if not found:
             lines.append("No gotchas detected.")
+            lines.append("")
+        return "\n".join(lines)
+
+    def _build_concepts(
+        self, analysis_v2: Optional[AnalysisResultV2]
+    ) -> str:
+        """Build the grep-friendly semantic concept layer."""
+        graph = getattr(analysis_v2, "concept_graph", None) if analysis_v2 else None
+        lines = ["# Concepts", ""]
+        if graph is None or not graph.concepts:
+            lines.append("No concepts extracted.")
+            lines.append("")
+            return "\n".join(lines)
+        lines.append(
+            "Nouns map atomically to file sets (EXTRACTED); "
+            "verbs aggregate structural edges (INFERRED)."
+        )
+        lines.append("")
+        for concept in graph.concepts[:50]:
+            files = ", ".join(f"`{f}`" for f in sorted(concept.file_ids)[:10])
+            lines.append(
+                f"- `{concept.name}` | files={len(concept.file_ids)} "
+                f"| mentions={concept.mention_count} | {files}"
+            )
+        lines.append("")
+        if graph.relations:
+            lines.append("## Verb Edges")
+            lines.append("")
+            for rel in graph.relations[:50]:
+                lines.append(
+                    f"- `{rel.source}` --{rel.verb}--> `{rel.target}` "
+                    f"(strength {rel.strength:.2f})"
+                )
+            lines.append("")
+        if graph.dialectic_questions:
+            lines.append("## Dialectic")
+            lines.append("")
+            for question in graph.dialectic_questions:
+                lines.append(f"- {question}")
             lines.append("")
         return "\n".join(lines)
 

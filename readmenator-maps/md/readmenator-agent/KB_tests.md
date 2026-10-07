@@ -216,6 +216,21 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_has_changed_since_last_analysis_returns_true_when_file_changed` (method, line 147) `def test_has_changed_since_last_analysis_returns_true_when_file_changed(self)`
 - Depends on: `readmenator/_cache.py`, `readmenator/_config.py`
 
+## tests/test_concepts.py
+- Doc: test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 8) `def _node(fid, symbols, doc)`
+  - `TestConceptGraphContract` (class, line 20) `class TestConceptGraphContract(TestCase)`
+  - `test_concept_nouns_map_to_file_sets` (method, line 21) `def test_concept_nouns_map_to_file_sets(self)`
+  - `test_concept_verbs_come_from_structural_edges` (method, line 36) `def test_concept_verbs_come_from_structural_edges(self)`
+  - `test_concept_atomic_breakdown_splits_camelcase` (method, line 53) `def test_concept_atomic_breakdown_splits_camelcase(self)`
+  - `test_concept_deterministic_ordering` (method, line 62) `def test_concept_deterministic_ordering(self)`
+  - `test_concept_disabled_returns_empty_graph` (method, line 76) `def test_concept_disabled_returns_empty_graph(self)`
+  - `test_concept_dialectic_questions_for_overlap` (method, line 85) `def test_concept_dialectic_questions_for_overlap(self)`
+- Depends on: `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_models.py`
+
 ## tests/test_config.py
 - Layer: testing
 - Language: py

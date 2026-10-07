@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 0 | 26 files | cohesion 0.57*
+*Community 1 | 26 files | cohesion 0.56*
 
 ## Definition
 
-This community groups 26 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.57). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `DartParser`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
+This community groups 26 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.56). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
 
 ## Files
 
@@ -41,7 +41,7 @@ This community groups 26 file(s) rooted at `readmenator/parsers` with dominant l
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
 | `readmenator/_mermaid.py` | py | utility | 4 | yes |
-| `readmenator/_models.py` | py | business_logic | 20 | yes |
+| `readmenator/_models.py` | py | business_logic | 23 | yes |
 
 *... and 6 more files in this community.*
 
@@ -67,43 +67,43 @@ This community groups 26 file(s) rooted at `readmenator/parsers` with dominant l
 - `SuggestedRule` (class, `readmenator/_models.py:238`) `class SuggestedRule` - A suggested linting/security rule derived from code patterns.
 - `LayerViolation` (class, `readmenator/_models.py:263`) `class LayerViolation` - A detected architectural layer violation.
 - `AnalysisResultV2` (class, `readmenator/_models.py:284`) `class AnalysisResultV2` - Extended analysis result combining all new analysis modules.
-- `DataflowIssue` (class, `readmenator/_models.py:307`) `class DataflowIssue` - A procedural intra-function dataflow finding.
-- `LinterViolation` (class, `readmenator/_models.py:330`) `class LinterViolation` - A violation detected by the architecture linter.
-- `DeadCodeReport` (class, `readmenator/_models.py:347`) `class DeadCodeReport` - A dead code symbol identified by the stripper.
-- `RefactoringAction` (class, `readmenator/_models.py:364`) `class RefactoringAction` - A single refactoring action within a plan.
-- `RefactoringPlan` (class, `readmenator/_models.py:385`) `class RefactoringPlan` - A complete refactoring plan for a monolithic file.
+- `DataflowIssue` (class, `readmenator/_models.py:309`) `class DataflowIssue` - A procedural intra-function dataflow finding.
+- `LinterViolation` (class, `readmenator/_models.py:332`) `class LinterViolation` - A violation detected by the architecture linter.
+- `DeadCodeReport` (class, `readmenator/_models.py:349`) `class DeadCodeReport` - A dead code symbol identified by the stripper.
+- `RefactoringAction` (class, `readmenator/_models.py:366`) `class RefactoringAction` - A single refactoring action within a plan.
+- `RefactoringPlan` (class, `readmenator/_models.py:387`) `class RefactoringPlan` - A complete refactoring plan for a monolithic file.
+- `ConceptNode` (class, `readmenator/_models.py:404`) `class ConceptNode` - A semantic noun node in the concept graph.
+- `ConceptRelation` (class, `readmenator/_models.py:421`) `class ConceptRelation` - A verb edge between two concept noun nodes.
+- `ConceptGraph` (class, `readmenator/_models.py:442`) `class ConceptGraph` - Deterministic semantic layer over the structural graph.
 - `_init_parser_map` (function, `readmenator/parsers/__init__.py:34`) `def _init_parser_map()`
 - `create_parser` (function, `readmenator/parsers/__init__.py:70`) `def create_parser(extension, filename, config)` - Factory: return a parser instance for the given file extension.
 - `AssemblyParser` (class, `readmenator/parsers/_assembly.py:11`) `class AssemblyParser(LanguageParser)` - Parser for assembly (.asm, .s, .S).
-- `_extract_specifics` (method, `readmenator/parsers/_assembly.py:19`) `def _extract_specifics(self, content)`
-- `LanguageParser` (class, `readmenator/parsers/_base.py:12`) `class LanguageParser` - Base class for all language-specific parsers.
-- `__init__` (method, `readmenator/parsers/_base.py:21`) `def __init__(self, filename, config)` - Initialise the parser with a file path and application config.
 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 82
-- Cross-boundary resolved imports (EXTRACTED): 75
+- Cross-boundary resolved imports (EXTRACTED): 77
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_dataflow.py imports readmenator/_models.py.
-- [INFERRED] shares_context community 0 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 0 (readmenator/parsers) and community 5 (orphans).
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analyzer.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [INFERRED] shares_context community 1 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator/parsers) and community 5 (orphans).
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 
 ## Open Questions
 
 - Why do 2 file(s) lack file-level docs (e.g. `tests/test_mermaid.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.57?
+- Should readmenator/parsers be split, given cohesion 0.56?
 
 ## Sources
 

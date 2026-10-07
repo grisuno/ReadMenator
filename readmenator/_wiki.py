@@ -135,9 +135,77 @@ class WikiGenerator:
             out_dir / "REPORT.md",
             self._build_report(nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, root.name, str(root)),
         )
+        self._write_concepts(out_dir, analysis_v2)
 
         logger.info("Agent wiki written to %s (%d pages)", out_dir, len(pages))
         return str(out_dir)
+
+    def _write_concepts(
+        self, out_dir: Path, analysis_v2: Optional[AnalysisResultV2]
+    ) -> None:
+        """Write the semantic concept layer as wiki pages and JSON."""
+        graph = getattr(analysis_v2, "concept_graph", None) if analysis_v2 else None
+        if graph is None or not graph.concepts:
+            return
+        lines: List[str] = [
+            "# Concepts",
+            "",
+            "Second-brain semantic layer: nouns map atomically to file sets "
+            "(EXTRACTED); verbs aggregate structural edges (INFERRED).",
+            "",
+            "| Concept | Files | Mentions | Top Files |",
+            "|---------|-------|----------|-----------|",
+        ]
+        for concept in graph.concepts[:50]:
+            top = ", ".join(f"`{f}`" for f in sorted(concept.file_ids)[:5])
+            lines.append(
+                f"| `{concept.name}` | {len(concept.file_ids)} | "
+                f"{concept.mention_count} | {top} |"
+            )
+        lines.append("")
+        if graph.relations:
+            lines.extend([
+                "## Verb Edges",
+                "",
+                "| Source | Verb | Target | Strength |",
+                "|--------|------|--------|----------|",
+            ])
+            for rel in graph.relations[:50]:
+                lines.append(
+                    f"| `{rel.source}` | `{rel.verb}` | `{rel.target}` | "
+                    f"{rel.strength:.2f} |"
+                )
+            lines.append("")
+        if graph.dialectic_questions:
+            lines.extend(["## Dialectic Prompts", ""])
+            for question in graph.dialectic_questions:
+                lines.append(f"- {question}")
+            lines.append("")
+        self._write(out_dir / "concepts.md", "\n".join(lines))
+        payload = {
+            "concepts": [
+                {
+                    "name": c.name,
+                    "files": sorted(c.file_ids),
+                    "mentions": c.mention_count,
+                    "confidence": c.confidence,
+                }
+                for c in graph.concepts
+            ],
+            "relations": [
+                {
+                    "source": r.source,
+                    "target": r.target,
+                    "verb": r.verb,
+                    "strength": r.strength,
+                    "confidence": r.confidence,
+                    "evidence": r.file_evidence,
+                }
+                for r in graph.relations
+            ],
+            "dialectic": list(graph.dialectic_questions),
+        }
+        self._write(out_dir / "concept_graph.json", json.dumps(payload, indent=2) + "\n")
 
     def _prune_stale_pages(self, out_dir: Path, current: Set[str]) -> None:
         """Delete community pages from previous runs that are no longer generated."""

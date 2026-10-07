@@ -18,7 +18,7 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_gh_wiki.py` | py | utility | 18 | yes |
 | `readmenator/_layers.py` | py | utility | 7 | yes |
 | `readmenator/_linter.py` | py | utility | 7 | yes |
-| `readmenator/_mcp_server.py` | py | utility | 52 | yes |
+| `readmenator/_mcp_server.py` | py | utility | 54 | yes |
 | `readmenator/_video.py` | py | utility | 49 | yes |
 | `readmenator/_watcher.py` | py | utility | 5 | yes |
 | `tests/test_cursorrules.py` | py | testing | 12 | yes |
@@ -59,8 +59,8 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 - `rebuild` (method, `readmenator/_app.py:589`) `def rebuild(self, target_dir, run_security)`
 - `analyze` (method, `readmenator/_app.py:592`) `def analyze(self, target_dir)`
 - `export_json` (method, `readmenator/_app.py:596`) `def export_json(self, target_dir, output_path)`
-- `export_html` (method, `readmenator/_app.py:607`) `def export_html(self, target_dir, output_path)`
-- `export_svg` (method, `readmenator/_app.py:618`) `def export_svg(self, target_dir, output_path)`
+- `export_html` (method, `readmenator/_app.py:613`) `def export_html(self, target_dir, output_path)`
+- `export_svg` (method, `readmenator/_app.py:624`) `def export_svg(self, target_dir, output_path)`
 
 ## Internal vs External Edges
 
@@ -70,26 +70,26 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 ## Connections
 
 - [EXTRACTED] depends_on community 2 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_config.py.
 - [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_cache.py.
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.6): Inferred cross-community bridge: readmenator/__main__.py reaches tests/test_agent_injector.py in 4 hops.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
 - [INFERRED] bridges community 3 <-> 2 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
-- [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 3 (readmenator: _diagrams) and community 5 (orphans).
+- [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 3 (readmenator: _diagrams) and community 5 (orphans).
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gh_wiki.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_video.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_video.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_video.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 
 ## Open Questions
