@@ -1,6 +1,6 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 5 communities, 105 files, 798 imports, 1 languages, 1878 symbols.
+> Static analysis knowledge base for ReadMenator: 5 communities, 105 files, 801 imports, 1 languages, 1884 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
@@ -28,8 +28,8 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/KB_readmenator_p3.md](md/readmenator-agent/KB_readmenator_p3.md): Doc: Cinematic codebase overview video, general purpose.
 - [readmenator-agent/KB_root.md](md/readmenator-agent/KB_root.md): Doc: Launcher shim that runs the readmenator CLI from a source checkout.
 - [readmenator-agent/KB_tests.md](md/readmenator-agent/KB_tests.md): Doc: Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
-- [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact.
-- [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for the ImportResolver.
+- [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
+- [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for the MonolithRefactorizer.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)

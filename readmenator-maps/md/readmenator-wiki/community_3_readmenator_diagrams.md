@@ -4,7 +4,7 @@
 
 ## Definition
 
-This community groups 18 file(s) rooted at `readmenator` with dominant language py (cohesion 0.35). Central symbols: `ArchitectureLinter`, `Backdrop`, `CinematicVideoRenderer`, `CursorRulesGenerator`, `DirectoryWatcher`, `DocsSitePublisher`, `GitHubWikiPublisher`, `InteractiveMapRenderer`. Core file: `readmenator/_diagrams.py` (87 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 18 file(s) rooted at `readmenator` with dominant language py (cohesion 0.35). Central symbols: `ArchitectureLinter`, `Backdrop`, `CinematicVideoRenderer`, `CursorRulesGenerator`, `DirectoryWatcher`, `DocsSitePublisher`, `GitHubWikiPublisher`, `InteractiveMapRenderer`. Core file: `readmenator/_diagrams.py` (89 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
@@ -14,7 +14,7 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/__main__.py` | py | utility | 3 | yes |
 | `readmenator/_app.py` | py | utility | 51 | yes |
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
-| `readmenator/_diagrams.py` | py | utility | 87 | yes |
+| `readmenator/_diagrams.py` | py | utility | 89 | yes |
 | `readmenator/_gh_wiki.py` | py | utility | 18 | yes |
 | `readmenator/_layers.py` | py | utility | 7 | yes |
 | `readmenator/_linter.py` | py | utility | 7 | yes |
@@ -65,7 +65,7 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 28
-- Cross-boundary resolved imports (EXTRACTED): 47
+- Cross-boundary resolved imports (EXTRACTED): 49
 
 ## Connections
 
@@ -81,15 +81,15 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gh_wiki.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_video.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_video.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_video.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_video.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 
 ## Open Questions

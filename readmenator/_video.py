@@ -56,7 +56,7 @@ LAYER_COLORS = {
 ACT_CARDS = {
     "I": ("ACT I", "ARCHITECTURAL LAYERS", "where each file lives"),
     "II": ("ACT II", "GOD NODES", "ranked by measured connections + symbols"),
-    "III": ("ACT III", "THE REAL TREE", "a true dependency tree, grown by BFS"),
+    "III": ("ACT III", "THE BLAST RADIUS", "who breaks when the hub changes, grown by BFS"),
     "IV": ("ACT IV", "COMMUNITIES", "import neighbourhoods, and why they stick"),
     "V": ("ACT V", "THE NERVOUS SYSTEM", "every import as a live wire"),
     "VI": ("ACT VI", "CODE DNA", "each file becomes a color"),
@@ -534,8 +534,8 @@ class CinematicVideoRenderer:
             dna.append({"file": n.node_id, "symbols": len(n.symbols),
                         "language": n.language, "digest": digest,
                         "color": hash_color(digest)})
-        dna = sorted(dna, key=lambda r: r["file"])[:256]
-        cap = self.config.VIDEO_MAX_GRAPH_NODES
+        dna = sorted(dna, key=lambda r: r["file"])
+        cap = self.config.VIDEO_MAX_GRAPH_NODES or file_count
         ranked_ids = [nid for nid, _ in god_names]
         keep = set(ranked_ids[:cap])
         for c in communities:
@@ -549,7 +549,7 @@ class CinematicVideoRenderer:
                 keep.add(n.node_id)
         graph_nodes = [n.node_id for n in nodes if n.node_id in keep]
         graph_links = [(e.source, e.target) for e in graph_edges
-                       if e.source in keep and e.target in keep][: cap * 2]
+                       if e.source in keep and e.target in keep]
         dep_tree = self._build_dep_tree(node_by_id, link_set, god_names)
         preview_lines: List[str] = []
         preview_file = dep_tree["root"]
@@ -575,13 +575,20 @@ class CinematicVideoRenderer:
         link_set: List[Tuple[str, str]],
         god_names: List[Tuple[str, float]],
     ) -> Dict[str, Any]:
-        """Grow a true dependency spanning tree with BFS from the hub file."""
-        adjacency: Dict[str, List[str]] = {}
+        """Grow the blast-radius tree: BFS over files that import the hub.
+
+        Edges point from a file to the files that depend on it, so the
+        tree shows who breaks when the hub changes. Every dependent is
+        kept (VIDEO_TREE_MAX_NODES 0 = no limit); children are ordered by
+        their own fan-in so the most critical branches come first.
+        """
+        cfg = self.config
+        dependents: Dict[str, List[str]] = {}
+        imports: Dict[str, List[str]] = {}
         for a, b in link_set:
             if a in node_by_id and b in node_by_id and a != b:
-                adjacency.setdefault(a, []).append(b)
-        for children in adjacency.values():
-            children.sort()
+                dependents.setdefault(b, []).append(a)
+                imports.setdefault(a, []).append(b)
         root = ""
         for nid, _ in god_names:
             if nid in node_by_id:
@@ -589,6 +596,10 @@ class CinematicVideoRenderer:
                 break
         if not root and node_by_id:
             root = sorted(node_by_id)[0]
+        adjacency = dependents if dependents.get(root) else imports
+        fan_in = {nid: len(set(kids)) for nid, kids in dependents.items()}
+        for nid, children in list(adjacency.items()):
+            adjacency[nid] = sorted(set(children), key=lambda c: (-fan_in.get(c, 0), c))
         order: List[str] = []
         parent: Dict[str, Optional[str]] = {}
         depth: Dict[str, int] = {}
@@ -596,7 +607,7 @@ class CinematicVideoRenderer:
             parent[root] = None
             depth[root] = 0
             queue = [root]
-            limit = 36
+            limit = cfg.VIDEO_TREE_MAX_NODES or len(node_by_id)
             while queue and len(order) < limit:
                 cur = queue.pop(0)
                 order.append(cur)
@@ -651,14 +662,26 @@ class CinematicVideoRenderer:
                     g.add_edge(a, b)
             if len(g) == 1:
                 return {ids[0]: ((x0 + x1) / 2, (y0 + y1) / 2)}
-            pos = nx.spring_layout(g, seed=7, iterations=120)
-            xs = [p[0] for p in pos.values()]
-            ys = [p[1] for p in pos.values()]
+            linked = [nid for nid in ids if g.degree(nid) > 0]
+            loose = sorted(nid for nid in ids if g.degree(nid) == 0)
             out: Dict[str, Tuple[float, float]] = {}
-            for nid, (px, py) in pos.items():
-                fx = (px - min(xs)) / (max(xs) - min(xs) or 1)
-                fy = (py - min(ys)) / (max(ys) - min(ys) or 1)
-                out[nid] = (x0 + 60 + fx * (x1 - x0 - 120), y0 + 50 + fy * (y1 - y0 - 100))
+            strip = self.config.VIDEO_GRAPH_LOOSE_STRIP if loose else 0
+            if linked:
+                core = g.subgraph(linked)
+                spread = self.config.VIDEO_GRAPH_SPREAD / math.sqrt(max(1, len(linked)))
+                pos = nx.spring_layout(core, seed=7, iterations=200, k=spread)
+                xs = sorted(p[0] for p in pos.values())
+                ys = sorted(p[1] for p in pos.values())
+                trim = int(len(xs) * self.config.VIDEO_GRAPH_TRIM_FRACTION)
+                lo_x, hi_x = xs[trim], xs[len(xs) - 1 - trim]
+                lo_y, hi_y = ys[trim], ys[len(ys) - 1 - trim]
+                for nid, (px, py) in pos.items():
+                    fx = min(1.0, max(0.0, (px - lo_x) / ((hi_x - lo_x) or 1)))
+                    fy = min(1.0, max(0.0, (py - lo_y) / ((hi_y - lo_y) or 1)))
+                    out[nid] = (x0 + 60 + fx * (x1 - x0 - 120), y0 + 50 + fy * (y1 - y0 - 100 - strip))
+            for i, nid in enumerate(loose):
+                fx = (i + 0.5) / len(loose)
+                out[nid] = (x0 + 60 + fx * (x1 - x0 - 120), y1 - 30)
             return out
         except ImportError:
             out = {}
@@ -671,24 +694,46 @@ class CinematicVideoRenderer:
             return out
 
     def tree_positions(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> Dict[str, Tuple[float, float]]:
-        """Compute tidy tree positions for the BFS dependency tree."""
+        """Place the full BFS tree radially: root in the center, one ring per depth.
+
+        Each node gets an angular sector proportional to its number of
+        leaves, so every dependent fits on screen without truncation.
+        """
         tree = data.get("dep_tree", {})
         order: List[str] = tree.get("order", [])
+        parent: Dict[str, Optional[str]] = tree.get("parent", {})
         depth: Dict[str, int] = tree.get("depth", {})
         if not order:
             return {}
         x0, y0, x1, y1 = box
-        max_depth = max(depth.values()) if depth else 0
-        by_depth: Dict[int, List[str]] = {}
+        children: Dict[str, List[str]] = {}
         for nid in order:
-            by_depth.setdefault(depth.get(nid, 0), []).append(nid)
+            par = parent.get(nid)
+            if par is not None:
+                children.setdefault(par, []).append(nid)
+        leaves: Dict[str, int] = {}
+        for nid in reversed(order):
+            kids = children.get(nid, [])
+            leaves[nid] = sum(leaves[k] for k in kids) if kids else 1
+        max_depth = max(depth.values()) if depth else 0
+        cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+        margin = self.config.VIDEO_TREE_RING_MARGIN
+        rx = max(1.0, (x1 - x0) / 2 - margin * 3)
+        ry = max(1.0, (y1 - y0) / 2 - margin)
         out: Dict[str, Tuple[float, float]] = {}
-        lane_h = (y1 - y0 - 60) / max(1, max_depth)
-        for dep, members in by_depth.items():
-            y = y0 + 40 + dep * lane_h
-            for i, nid in enumerate(members):
-                fx = (i + 0.5) / max(1, len(members))
-                out[nid] = (x0 + 60 + fx * (x1 - x0 - 200), y)
+        span: Dict[str, Tuple[float, float]] = {order[0]: (-math.pi / 2, 3 * math.pi / 2)}
+        for nid in order:
+            lo, hi = span[nid]
+            mid = (lo + hi) / 2
+            frac = math.sqrt(depth.get(nid, 0) / max(1, max_depth))
+            out[nid] = (cx + rx * frac * math.cos(mid), cy + ry * frac * math.sin(mid))
+            kids = children.get(nid, [])
+            total = sum(leaves[k] for k in kids) or 1
+            cursor = lo
+            for kid in kids:
+                width = (hi - lo) * leaves[kid] / total
+                span[kid] = (cursor, cursor + width)
+                cursor += width
         return out
 
     def render_single_frame(self, data: Dict[str, Any], frame_index: int) -> bytes:
@@ -903,14 +948,14 @@ def _scene_tree(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> N
     """The true dependency tree: BFS spanning tree grown from the hub file."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
-    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT III // THE REAL TREE", fonts, cfg.VIDEO_WIDTH)
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT III // THE BLAST RADIUS", fonts, cfg.VIDEO_WIDTH)
     tree = data.get("dep_tree", {})
     order: List[str] = tree.get("order", [])
     parent: Dict[str, Optional[str]] = tree.get("parent", {})
     depth: Dict[str, int] = tree.get("depth", {})
     root = tree.get("root", "")
     left, right = _split_boxes(cfg)
-    hud_panel(d, left, f"true imports, grown by BFS from {short_label(root, 22) or '…'}", fonts, MAGENTA)
+    hud_panel(d, left, f"files that import {short_label(root, 22) or '...'} (BFS over real imports)", fonts, MAGENTA)
     hud_panel(d, right, "focus file // real symbols", fonts, CYAN)
     pos = data.get("tree_pos", {})
     p = ease((lt - 0.5) / max(0.5, sc["dur"] - 2.5))
@@ -924,28 +969,40 @@ def _scene_tree(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> N
         px, py = pos[par]
         x, y = pos[nid]
         col = CYAN if depth.get(nid, 0) > 1 else MAGENTA
-        d.line((px, py, px, py + (y - py) * 0.5), fill=alpha(col, 0.8), width=2)
-        d.line((px, py + (y - py) * 0.5, x, py + (y - py) * 0.5), fill=alpha(col, 0.8), width=2)
-        d.line((x, py + (y - py) * 0.5, x, y), fill=alpha(col, 0.8), width=2)
+        d.line((px, py, x, y), fill=alpha(col, 0.55), width=1 if depth.get(nid, 0) > 1 else 2)
+    placed: List[Tuple[float, float, float, float]] = []
+    gap = cfg.VIDEO_TREE_LABEL_GAP
+    by_rank = sorted(range(len(shown)), key=lambda i: (depth.get(shown[i], 0), i))
     for i, nid in enumerate(shown):
         if nid not in pos:
             continue
         x, y = pos[nid]
         age = p * len(order) - i
         flash = max(0.0, 1 - age / 2)
-        r = 5 + 5 * flash
-        is_root = nid == root
-        d.ellipse((x - r, y - r, x + r, y + r), fill=YELLOW if is_root else CYAN,
+        dep = depth.get(nid, 0)
+        r = (9 if nid == root else 6 if dep == 1 else 4) + 4 * flash
+        col = YELLOW if nid == root else (MAGENTA if dep == 1 else CYAN)
+        d.ellipse((x - r, y - r, x + r, y + r), fill=col,
                   outline=(255, 255, 255) if flash > 0 else None, width=2)
-        base = nid.rpartition("/")[2] or nid
-        d.text((x + 10, y - 10), short_label(base, 20), font=fonts["tiny_b"],
-               fill=alpha(TXT, 0.95))
-        d.text((x + 10, y + 6), f"depth {depth.get(nid, 0)}", font=fonts["tiny"], fill=alpha(DIM, 0.9))
+    for i in by_rank:
+        nid = shown[i]
+        if nid not in pos:
+            continue
+        x, y = pos[nid]
+        base = short_label(nid.rpartition("/")[2] or nid, 20)
+        w = len(base) * cfg.VIDEO_TREE_CHAR_PX
+        rect = (x + 8, y - 9, x + 8 + w, y + 9)
+        if any(not (rect[2] + gap < q[0] or q[2] + gap < rect[0] or rect[3] < q[1] or q[3] < rect[1]) for q in placed):
+            continue
+        placed.append(rect)
+        d.text((x + 8, y - 9), base, font=fonts["tiny_b"], fill=alpha(TXT, 0.95))
     if not order:
         d.text(((left[0] + left[2]) / 2, (left[1] + left[3]) / 2), "no resolved imports: flat project",
                font=fonts["cap"], fill=DIM, anchor="mm")
-    focus = shown[-1] if shown else ""
-    syms = data.get("node_symbols", {}).get(focus, [])
+    symbol_map = data.get("node_symbols", {})
+    with_symbols = [nid for nid in shown if symbol_map.get(nid)]
+    focus = with_symbols[-1] if with_symbols else (shown[-1] if shown else "")
+    syms = symbol_map.get(focus, [])
     d.text((right[0] + 20, right[1] + 44), short_label(focus, 30) or "…", font=fonts["small_b"], fill=TXT)
     ry = right[1] + 72
     for name, kind, line in syms[:12]:
@@ -956,7 +1013,8 @@ def _scene_tree(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> N
         ry += 22
     if focus and not syms:
         d.text((right[0] + 20, ry), "no symbols extracted", font=fonts["tiny"], fill=DIM)
-    _verdict_badge(d, left, f"{len(order)} files reachable from {short_label(root, 18)}", fonts, lt, sc["dur"], MAGENTA)
+    rings = max(depth.values()) if depth else 0
+    _verdict_badge(d, left, f"all {max(0, len(order) - 1)} dependents of {short_label(root.rpartition('/')[2] or root, 18)} shown, {rings} rings deep", fonts, lt, sc["dur"], MAGENTA)
     draw_caption(d, "every edge is a real import: this is how the code actually hangs together", lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
 
 
@@ -967,7 +1025,7 @@ def _scene_communities(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any
     draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT IV // COMMUNITIES", fonts, cfg.VIDEO_WIDTH)
     comms = data["communities"][:6]
     panel = _panel(cfg)
-    hud_panel(d, panel, "import neighbourhoods // label propagation on real edges", fonts, GREEN)
+    hud_panel(d, panel, "import neighbourhoods // louvain modularity on real edges", fonts, GREEN)
     if not comms:
         d.text((cfg.VIDEO_WIDTH / 2, (panel[1] + panel[3]) / 2), "one flat graph: no communities separated", font=fonts["cap"], fill=DIM, anchor="mm")
     cols = 3
@@ -978,7 +1036,8 @@ def _scene_communities(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any
         cx = panel[0] + 15 + (i % cols) * cw
         cy = panel[1] + 45 + (i // cols) * (card_h + 15)
         d.rectangle((cx, cy, cx + cw - 20, cy + card_h), fill=(12, 8, 30, int(220 * reveal)), outline=alpha(GREEN, reveal), width=2)
-        d.text((cx + 14, cy + 10), f"C{i}: {short_label(c['label'], 16)}", font=fonts["small_b"], fill=alpha(GREEN, reveal))
+        name = c["label"].rpartition(": ")[2] or c["label"]
+        d.text((cx + 14, cy + 10), f"C{i}: {short_label(name, 24)}", font=fonts["small_b"], fill=alpha(GREEN, reveal))
         d.text((cx + 14, cy + 32), f"{c['size']} files · cohesion {c['cohesion']:.2f}",
                font=fonts["tiny_b"], fill=alpha(TXT, reveal))
         coh_w = (cw - 48) * max(0.0, min(1.0, c["cohesion"])) * reveal
@@ -1069,11 +1128,15 @@ def _scene_dna(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> No
     grid_box, sec_box = _dna_boxes(cfg)
     hud_panel(d, grid_box, "sha256 per file // color = fingerprint", fonts, YELLOW)
     hud_panel(d, sec_box, "security // pattern scan", fonts, RED)
-    avail_w = grid_box[2] - grid_box[0] - 60
-    cols = 24
-    cell = max(6, min(34, avail_w // cols - 3))
+    avail_w = max(1, grid_box[2] - grid_box[0] - 60)
+    avail_h = max(1, grid_box[3] - grid_box[1] - 45 - 78)
+    dna = data["dna"]
+    count = max(1, len(dna))
+    cell = max(2, min(cfg.VIDEO_DNA_MAX_CELL, int(math.sqrt(avail_w * avail_h / count)) - 3))
+    while cell > 2 and math.ceil(count / max(1, avail_w // (cell + 3))) * (cell + 3) > avail_h:
+        cell -= 1
+    cols = max(1, avail_w // (cell + 3))
     top = grid_box[1] + 45
-    dna = data["dna"][:144]
     fill_p = ease(lt / 3.0)
     scan_p = ease((lt - 3.0) / max(0.5, sc["dur"] - 4.0))
     scan = int(scan_p * max(1, len(dna)))

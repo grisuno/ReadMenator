@@ -126,7 +126,7 @@ tests/
 - Site media settings (SITE_VIDEO_ENABLED, SITE_VIDEO_FILENAME, SITE_DOCS_ENABLED, SITE_DOCS_SUBDIR, SITE_MAX_DOCS, SITE_MD_PREVIEW_CHARS)
 - Cinematic video settings (VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS)
 - Video act durations (VIDEO_TITLE_S, VIDEO_CARD_S, VIDEO_LAYER_S, VIDEO_GOD_S, VIDEO_TREE_S, VIDEO_COMM_S, VIDEO_GRAPH_S, VIDEO_DNA_S, VIDEO_OUTRO_S)
-- Video scope settings (VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
+- Video scope settings (VIDEO_MAX_GRAPH_NODES 0 = all, VIDEO_TREE_MAX_NODES 0 = all, VIDEO_TREE_RING_MARGIN, VIDEO_TREE_LABEL_GAP, VIDEO_TREE_CHAR_PX, VIDEO_GRAPH_TRIM_FRACTION, VIDEO_GRAPH_SPREAD, VIDEO_GRAPH_LOOSE_STRIP, VIDEO_DNA_MAX_CELL, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
 - Agent budget settings (AGENT_OUTPUT_MAX_LINES, AGENT_PURPOSE_MAX_CHARS, AGENT_DOC_MAX_CHARS, AGENT_SIGNATURE_MAX_CHARS, AGENT_GOTCHAS_TOP_N, AGENT_GOTCHAS_EXCLUDE_LAYERS, AGENT_API_PUBLIC_ONLY, AGENT_API_EXCLUDE_LAYERS, AGENT_CHARS_PER_TOKEN, AGENT_ENTRYPOINT_FILENAMES)
 - Generated artifact settings (GENERATED_FILE_PREFIXES, SKIP_GENERATED_OUTPUTS, REFACTORIZER_SCRIPT_PREFIX)
 - Site agent settings (SITE_LLMS_TXT_ENABLED, SITE_LLMS_TXT_FILENAME, SITE_REFRESH_ON_REBUILD)
@@ -522,6 +522,8 @@ tests/
 - Canvas uses the darkest token with lifted node panels; edge labels carry halo strokes for readability
 - Four visual presets with identity (classic, signal-flow glow, blueprint grid with square nodes, warm editorial) and dark/light themes from Config
 - VisNetworkRenderer class with render(map) returning a physics-driven vis.js document
+- Live maps color nodes by code community (legend with counts, click isolates, #community=id deep link, C toggles to role colors), size dots by link count, always label the DIAGRAM_VIS_LABEL_TOP_N most connected files and reveal the rest on zoom, dim edges that light up on hover/selection, forceAtlas2Based physics from DIAGRAM_VIS_* settings
+- Layer roles are honest: utility -> core, testing -> test (never "external" for project files)
 - Default export format for `diagrams`, `diagram`, and `pages` (CDN bundle URLs from Config, pages need network access)
 - Map nodes carry documentation payloads: file doc, language, symbol records with signatures, total counts
 - Tooltips show docs plus top symbols; focus passport renders the symbol table with docs, neighbor lists, and counts
@@ -554,6 +556,7 @@ tests/
 - Configurable via DIAGRAM_ENABLED, DIAGRAM_OUTPUT_DIR, and all DIAGRAM_* geometry/scope/style settings
 - Full mode (`DIAGRAM_FULL_MODE=True` or `diagrams --full` / `diagram <kind> --full` / `pages --full`): zero exclusions, every scanned file in every map, grown per-map canvas, size-limit checks D004/D008 skipped, gallery cards report "full scope"
 - `run`/`rebuild` always export full maps (`export_diagrams(full=True)`), so default `KNOWLEDGE_BASE.md` regeneration never ships truncated doom-only diagrams
+- `run`/`rebuild` render the video before exporting maps and refreshing the site, so every published gallery embeds the video of the same run
 
 ### GitHub Wiki Publisher Contract
 - GitHubWikiPublisher class with render(project_root, remote) and publish(project_root, dry_run) entry points (readmenator/_gh_wiki.py)
@@ -572,7 +575,9 @@ tests/
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
 - Six acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V resolved import graph with packets + hottest ranking, VI code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, outro telemetry
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
-- Fit by construction: all panels/boxes derived from VIDEO_WIDTH/HEIGHT, graph capped at VIDEO_MAX_GRAPH_NODES, DNA capped at 144 cells, labels truncated to VIDEO_MAX_LABEL_CHARS
+- No truncation of reality: act III is the full blast-radius tree (every file that transitively imports the hub, BFS over dependents, VIDEO_TREE_MAX_NODES 0 = all) in a radial layout (one ring per depth, sectors by leaf count); act V graph shows every file and every resolved import (VIDEO_MAX_GRAPH_NODES 0 = all), spring layout on connected files with isolated files in a bottom strip; act VI DNA grid sizes cells so every file fits (VIDEO_DNA_MAX_CELL)
+- Labels never overlap: tree labels placed greedily by depth and skipped only when they would collide (nodes are always drawn); labels truncated to VIDEO_MAX_LABEL_CHARS
+- Fit by construction: all panels/boxes derived from VIDEO_WIDTH/HEIGHT
 - Optional dependency: dependencies_available() checks PIL + ffmpeg; run()/rebuild() skip with a warning when missing, never fail the KB pipeline
 - AnalyzerFactory exposes video (lazy init); app.export_video(target) renders standalone, run()/rebuild() auto-render to VIDEO_OUTPUT unless VIDEO_ENABLED=False
 - CLI: `video` renders the mp4, `--video` forces it, `--no-video` skips it (including on the `--rebuild` path)

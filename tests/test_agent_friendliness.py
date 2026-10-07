@@ -496,3 +496,43 @@ class TestGalleryIndex(unittest.TestCase):
         text = "# Title\n\n| a | b |\n|---|---|\nPages: [x](x)\n\nThe **real** sentence about [this](y.md) module.\n"
         self.assertEqual(publisher._doc_preview(text), "The real sentence about this module.")
         self.assertEqual(publisher._doc_title("# API (page 1 of 3)\n"), "API")
+
+
+class TestLiveMapCommunities(unittest.TestCase):
+    """Live maps color by code community, size by degree, and map layers to honest roles."""
+
+    def _inputs(self):
+        """Two communities of files with resolved imports and layers."""
+        from readmenator._analyzer import GraphAnalyzer
+
+        files = [f"left/m{i}.py" for i in range(5)] + [f"right/m{i}.py" for i in range(5)]
+        nodes = [_node(f) for f in files]
+        resolved = []
+        for side in ("left", "right"):
+            group = [f for f in files if f.startswith(side)]
+            for i, src in enumerate(group):
+                for tgt in group[i + 1:]:
+                    resolved.append(_edge(src, tgt, "resolved_imports"))
+        analysis = GraphAnalyzer(Config()).analyze(nodes, [], resolved)
+        layers = {f: "utility" for f in files}
+        return nodes, resolved, layers, analysis
+
+    def test_built_maps_carry_community_and_core_role(self) -> None:
+        from readmenator._diagrams import SystemMapBuilder
+
+        nodes, resolved, layers, analysis = self._inputs()
+        system_map = SystemMapBuilder(Config()).build(nodes, [], resolved, layers, [], analysis, "architecture", True)
+        self.assertTrue(system_map.nodes)
+        self.assertTrue(all(n.community >= 0 for n in system_map.nodes))
+        self.assertNotIn("external", {n.role for n in system_map.nodes})
+
+    def test_vis_render_includes_legend_and_dot_scaling(self) -> None:
+        from readmenator._diagrams import SystemMapBuilder, VisNetworkRenderer
+
+        nodes, resolved, layers, analysis = self._inputs()
+        system_map = SystemMapBuilder(Config()).build(nodes, [], resolved, layers, [], analysis, "architecture", True)
+        html = VisNetworkRenderer(Config()).render(system_map)
+        self.assertIn('"communities"', html)
+        self.assertIn('shape:"dot"', html)
+        self.assertIn('data-action="color"', html)
+        self.assertIn("#community=", html)

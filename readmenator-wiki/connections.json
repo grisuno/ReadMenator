@@ -155,7 +155,7 @@
     "community_a": 4,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py and layer utility) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   }

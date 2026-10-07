@@ -1,6 +1,30 @@
 # Subsystem: tests (page 3 of 3)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_refactorizer.py
+- Doc: Contract tests for the MonolithRefactorizer.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMonolithRefactorizerContract` (class, line 18) `class TestMonolithRefactorizerContract(TestCase)`
+  - `setUp` (method, line 21) `def setUp(self)`
+  - `_make_symbol` (method, line 25) `def _make_symbol(self, name, kind, line)`
+  - `_make_node` (method, line 28) `def _make_node(self, nid, symbols)`
+  - `_make_edge` (method, line 37) `def _make_edge(self, src, tgt)`
+  - `test_analyze_empty_graph_returns_empty` (method, line 40) `def test_analyze_empty_graph_returns_empty(self)`
+  - `test_analyze_ignores_small_files` (method, line 44) `def test_analyze_ignores_small_files(self)`
+  - `test_analyze_detects_large_file` (method, line 50) `def test_analyze_detects_large_file(self)`
+  - `test_analyze_generates_extract_class_for_multiple_classes` (method, line 59) `def test_analyze_generates_extract_class_for_multiple_classes(self)`
+  - `test_analyze_generates_extract_function_for_multiple_functions` (method, line 74) `def test_analyze_generates_extract_function_for_multiple_functions(self)`
+  - `test_analyze_splits_file_with_many_symbols` (method, line 89) `def test_analyze_splits_file_with_many_symbols(self)`
+  - `test_analyze_estimates_impact_from_resolved_edges` (method, line 97) `def test_analyze_estimates_impact_from_resolved_edges(self)`
+  - `test_generate_script_contains_shebang` (method, line 109) `def test_generate_script_contains_shebang(self)`
+  - `test_generate_script_contains_set_e` (method, line 129) `def test_generate_script_contains_set_e(self)`
+  - `test_generate_script_contains_sed_commands` (method, line 140) `def test_generate_script_contains_sed_commands(self)`
+  - `test_analyze_sorted_by_line_count` (method, line 160) `def test_analyze_sorted_by_line_count(self)`
+  - `test_analyze_respects_max_files_limit` (method, line 173) `def test_analyze_respects_max_files_limit(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_refactorizer.py`
+
 ## tests/test_resolver.py
 - Doc: Contract tests for the ImportResolver.
 - Layer: testing

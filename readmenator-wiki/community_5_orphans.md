@@ -57,7 +57,7 @@ This community groups 2 file(s) rooted at `tests` with dominant language py (coh
 - [INFERRED] shares_context community 1 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator: _dataflow) and community 5 (orphans).
 - [INFERRED] shares_context community 2 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 2 (readmenator: _pipeline) and community 5 (orphans).
 - [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 3 (readmenator: _diagrams) and community 5 (orphans).
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
+- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
 
 ## Risks
 

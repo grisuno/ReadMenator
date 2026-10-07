@@ -193,16 +193,16 @@ class readmenatorApplication:
             except Exception:
                 logger.debug("Agent wiki skipped", exc_info=True)
 
+        self._maybe_export_video(
+            root, nodes, edges, resolved_edges, analysis,
+            layers, findings, analysis_v2, content_map,
+        )
+
         if self._config.DIAGRAM_ENABLED:
             try:
                 self.export_diagrams(str(root), full=True)
             except Exception:
                 logger.debug("Interactive maps skipped", exc_info=True)
-
-        self._maybe_export_video(
-            root, nodes, edges, resolved_edges, analysis,
-            layers, findings, analysis_v2, content_map,
-        )
 
         self._inject_readme_link(root)
         self._inject_agent_files(root)

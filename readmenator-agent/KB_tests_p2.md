@@ -1,6 +1,30 @@
 # Subsystem: tests (page 2 of 3)
 Previous: [KB_tests.md](KB_tests.md)
 
+## tests/test_gh_wiki.py
+- Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_FakeRunner` (class, line 14) `class _FakeRunner`
+  - `_project` (method, line 41) `def _project(root, config)`
+  - `TestGitHubWikiPages` (class, line 61) `class TestGitHubWikiPages(TestCase)`
+  - `TestGitHubWikiPublish` (class, line 115) `class TestGitHubWikiPublish(TestCase)`
+  - `__init__` (method, line 17) `def __init__(self, origin, clone_ok, dirty)`
+  - `__call__` (method, line 24) `def __call__(self, command, cwd)`
+  - `test_gh_wiki_page_names_are_flat_and_prefixed` (method, line 64) `def test_gh_wiki_page_names_are_flat_and_prefixed(self)`
+  - `test_gh_wiki_render_rewrites_links_and_permalinks` (method, line 71) `def test_gh_wiki_render_rewrites_links_and_permalinks(self)`
+  - `test_gh_wiki_permalinks_never_escape_project_root` (method, line 88) `def test_gh_wiki_permalinks_never_escape_project_root(self)`
+  - `test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages` (method, line 96) `def test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages(self)`
+  - `test_gh_wiki_publish_clones_commits_and_pushes` (method, line 118) `def test_gh_wiki_publish_clones_commits_and_pushes(self)`
+  - `test_gh_wiki_publish_skips_push_when_unchanged` (method, line 130) `def test_gh_wiki_publish_skips_push_when_unchanged(self)`
+  - `test_gh_wiki_publish_explains_uninitialized_wiki` (method, line 139) `def test_gh_wiki_publish_explains_uninitialized_wiki(self)`
+  - `test_gh_wiki_rejects_malformed_configured_remote` (method, line 147) `def test_gh_wiki_rejects_malformed_configured_remote(self)`
+  - `test_gh_wiki_enabled_by_default` (method, line 154) `def test_gh_wiki_enabled_by_default(self)`
+  - `test_rebuild_skips_wiki_outside_git_checkout` (method, line 157) `def test_rebuild_skips_wiki_outside_git_checkout(self)`
+  - `test_rebuild_publishes_wiki_in_git_checkout` (method, line 167) `def test_rebuild_publishes_wiki_in_git_checkout(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_gh_wiki.py`
+
 ## tests/test_hotspots.py
 - Doc: TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact.
 - Layer: testing
@@ -453,30 +477,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_inject_into_empty_readme` (method, line 152) `def test_inject_into_empty_readme(self)`
   - `test_custom_kb_filename_works` (method, line 160) `def test_custom_kb_filename_works(self)`
 - Depends on: `readmenator/_readme_injector.py`
-
-## tests/test_refactorizer.py
-- Doc: Contract tests for the MonolithRefactorizer.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestMonolithRefactorizerContract` (class, line 18) `class TestMonolithRefactorizerContract(TestCase)`
-  - `setUp` (method, line 21) `def setUp(self)`
-  - `_make_symbol` (method, line 25) `def _make_symbol(self, name, kind, line)`
-  - `_make_node` (method, line 28) `def _make_node(self, nid, symbols)`
-  - `_make_edge` (method, line 37) `def _make_edge(self, src, tgt)`
-  - `test_analyze_empty_graph_returns_empty` (method, line 40) `def test_analyze_empty_graph_returns_empty(self)`
-  - `test_analyze_ignores_small_files` (method, line 44) `def test_analyze_ignores_small_files(self)`
-  - `test_analyze_detects_large_file` (method, line 50) `def test_analyze_detects_large_file(self)`
-  - `test_analyze_generates_extract_class_for_multiple_classes` (method, line 59) `def test_analyze_generates_extract_class_for_multiple_classes(self)`
-  - `test_analyze_generates_extract_function_for_multiple_functions` (method, line 74) `def test_analyze_generates_extract_function_for_multiple_functions(self)`
-  - `test_analyze_splits_file_with_many_symbols` (method, line 89) `def test_analyze_splits_file_with_many_symbols(self)`
-  - `test_analyze_estimates_impact_from_resolved_edges` (method, line 97) `def test_analyze_estimates_impact_from_resolved_edges(self)`
-  - `test_generate_script_contains_shebang` (method, line 109) `def test_generate_script_contains_shebang(self)`
-  - `test_generate_script_contains_set_e` (method, line 129) `def test_generate_script_contains_set_e(self)`
-  - `test_generate_script_contains_sed_commands` (method, line 140) `def test_generate_script_contains_sed_commands(self)`
-  - `test_analyze_sorted_by_line_count` (method, line 160) `def test_analyze_sorted_by_line_count(self)`
-  - `test_analyze_respects_max_files_limit` (method, line 173) `def test_analyze_respects_max_files_limit(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_refactorizer.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

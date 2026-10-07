@@ -34,27 +34,27 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `draw_header` (method, line 401) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
   - `draw_caption` (method, line 415) `def draw_caption(d, text, lt, dur, fonts, width, y)`
   - `CinematicVideoRenderer` (class, line 431) `class CinematicVideoRenderer`
-  - `_render_frame_bytes` (method, line 752) `def _render_frame_bytes(fi)`
-  - `_draw_frame` (method, line 757) `def _draw_frame(fi)`
-  - `_scene_title` (method, line 785) `def _scene_title(img, d, lt, gt, sc)`
-  - `_scene_card` (method, line 820) `def _scene_card(img, d, lt, gt, sc)`
-  - `_scene_layers` (method, line 834) `def _scene_layers(img, d, lt, gt, sc)`
-  - `_scene_gods` (method, line 859) `def _scene_gods(img, d, lt, gt, sc)`
-  - `_scene_tree` (method, line 902) `def _scene_tree(img, d, lt, gt, sc)`
-  - `_scene_communities` (method, line 963) `def _scene_communities(img, d, lt, gt, sc)`
-  - `_scene_graph` (method, line 1006) `def _scene_graph(img, d, lt, gt, sc)`
-  - `_scene_dna` (method, line 1064) `def _scene_dna(img, d, lt, gt, sc)`
-  - `_scene_outro` (method, line 1119) `def _scene_outro(img, d, lt, gt, sc)`
+  - `_render_frame_bytes` (method, line 797) `def _render_frame_bytes(fi)`
+  - `_draw_frame` (method, line 802) `def _draw_frame(fi)`
+  - `_scene_title` (method, line 830) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (method, line 865) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (method, line 879) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (method, line 904) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (method, line 947) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (method, line 1021) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (method, line 1065) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_dna` (method, line 1123) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (method, line 1182) `def _scene_outro(img, d, lt, gt, sc)`
   - `_find` (method, line 201) `def _find(style)`
   - `__init__` (method, line 239) `def __init__(self, width, height)`
   - `_sun` (method, line 277) `def _sun(self, r)`
   - `collect` (method, line 436) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map)`
   - `_build_dep_tree` (method, line 572) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
-  - `build_scenes` (method, line 612) `def build_scenes(self, data)`
-  - `graph_positions` (method, line 638) `def graph_positions(self, data, box)`
-  - `tree_positions` (method, line 673) `def tree_positions(self, data, box)`
-  - `render_single_frame` (method, line 694) `def render_single_frame(self, data, frame_index)`
-  - `render` (method, line 712) `def render(self, data, output_path)`
+  - `build_scenes` (method, line 623) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 649) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 696) `def tree_positions(self, data, box)`
+  - `render_single_frame` (method, line 739) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 757) `def render(self, data, output_path)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
 

@@ -25,6 +25,7 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `TestSiteDocsPruning` (class, line 394) `class TestSiteDocsPruning(TestCase)`
   - `TestLouvainCommunities` (class, line 411) `class TestLouvainCommunities(TestCase)`
   - `TestGalleryIndex` (class, line 456) `class TestGalleryIndex(TestCase)`
+  - `TestLiveMapCommunities` (class, line 501) `class TestLiveMapCommunities(TestCase)`
   - `test_agent_output_pages_respect_line_cap_on_large_projects` (method, line 58) `def test_agent_output_pages_respect_line_cap_on_large_projects(self)`
   - `test_agent_output_pagination_keeps_every_symbol_greppable` (method, line 71) `def test_agent_output_pagination_keeps_every_symbol_greppable(self)`
   - `test_agent_output_pages_repeat_table_header_and_link_next` (method, line 84) `def test_agent_output_pages_repeat_table_header_and_link_next(self)`
@@ -64,6 +65,9 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_gallery_video_has_poster_and_start_here` (method, line 480) `def test_gallery_video_has_poster_and_start_here(self)`
   - `test_gallery_has_no_external_resources_and_escapes_titles` (method, line 486) `def test_gallery_has_no_external_resources_and_escapes_titles(self)`
   - `test_doc_preview_skips_markdown_syntax` (method, line 494) `def test_doc_preview_skips_markdown_syntax(self)`
+  - `_inputs` (method, line 504) `def _inputs(self)`
+  - `test_built_maps_carry_community_and_core_role` (method, line 520) `def test_built_maps_carry_community_and_core_role(self)`
+  - `test_vis_render_includes_legend_and_dot_scaling` (method, line 529) `def test_vis_render_includes_legend_and_dot_scaling(self)`
 - Depends on: `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
 
 ## tests/test_agent_injector.py
@@ -468,30 +472,6 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_to_svg_includes_readmenator_title` (method, line 154) `def test_to_svg_includes_readmenator_title(self)`
   - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
-
-## tests/test_gh_wiki.py
-- Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_FakeRunner` (class, line 14) `class _FakeRunner`
-  - `_project` (method, line 41) `def _project(root, config)`
-  - `TestGitHubWikiPages` (class, line 61) `class TestGitHubWikiPages(TestCase)`
-  - `TestGitHubWikiPublish` (class, line 115) `class TestGitHubWikiPublish(TestCase)`
-  - `__init__` (method, line 17) `def __init__(self, origin, clone_ok, dirty)`
-  - `__call__` (method, line 24) `def __call__(self, command, cwd)`
-  - `test_gh_wiki_page_names_are_flat_and_prefixed` (method, line 64) `def test_gh_wiki_page_names_are_flat_and_prefixed(self)`
-  - `test_gh_wiki_render_rewrites_links_and_permalinks` (method, line 71) `def test_gh_wiki_render_rewrites_links_and_permalinks(self)`
-  - `test_gh_wiki_permalinks_never_escape_project_root` (method, line 88) `def test_gh_wiki_permalinks_never_escape_project_root(self)`
-  - `test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages` (method, line 96) `def test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages(self)`
-  - `test_gh_wiki_publish_clones_commits_and_pushes` (method, line 118) `def test_gh_wiki_publish_clones_commits_and_pushes(self)`
-  - `test_gh_wiki_publish_skips_push_when_unchanged` (method, line 130) `def test_gh_wiki_publish_skips_push_when_unchanged(self)`
-  - `test_gh_wiki_publish_explains_uninitialized_wiki` (method, line 139) `def test_gh_wiki_publish_explains_uninitialized_wiki(self)`
-  - `test_gh_wiki_rejects_malformed_configured_remote` (method, line 147) `def test_gh_wiki_rejects_malformed_configured_remote(self)`
-  - `test_gh_wiki_enabled_by_default` (method, line 154) `def test_gh_wiki_enabled_by_default(self)`
-  - `test_rebuild_skips_wiki_outside_git_checkout` (method, line 157) `def test_rebuild_skips_wiki_outside_git_checkout(self)`
-  - `test_rebuild_publishes_wiki_in_git_checkout` (method, line 167) `def test_rebuild_publishes_wiki_in_git_checkout(self)`
-- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_gh_wiki.py`
 
 
 Next: [KB_tests_p2.md](KB_tests_p2.md)

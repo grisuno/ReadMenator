@@ -3,6 +3,12 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `setUp` | method | `tests/test_analyzer.py:19` | `def setUp(self)` |
+| `test_analyze_computes_god_nodes` | method | `tests/test_analyzer.py:48` | `def test_analyze_computes_god_nodes(self)` |
+| `test_analyze_detects_communities_for_connected_graph` | method | `tests/test_analyzer.py:34` | `def test_analyze_detects_communities_for_connected_graph(self)` |
+| `test_analyze_empty_graph_returns_empty_result` | method | `tests/test_analyzer.py:29` | `def test_analyze_empty_graph_returns_empty_result(self)` |
+| `test_analyze_finds_surprising_connections` | method | `tests/test_analyzer.py:64` | `def test_analyze_finds_surprising_connections(self)` |
+| `test_analyze_generates_questions` | method | `tests/test_analyzer.py:81` | `def test_analyze_generates_questions(self)` |
 | `test_analyze_is_repeatable` | method | `tests/test_analyzer.py:130` | `def test_analyze_is_repeatable(self)` |
 | `test_analyze_with_resolved_edges_counts_them` | method | `tests/test_analyzer.py:116` | `def test_analyze_with_resolved_edges_counts_them(self)` |
 | `test_community_cohesion_is_between_zero_and_one` | method | `tests/test_analyzer.py:92` | `def test_community_cohesion_is_between_zero_and_one(self)` |
@@ -490,11 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `map` | method | `tests/test_parsers_property.py:56` | `def map(self)` |
 | `setUp` | method | `tests/test_parsers_property.py:291` | `def setUp(self)` |
 | `settings` | method | `tests/test_parsers_property.py:75` | `def settings()` |
-| `test_empty_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:198` | `def test_empty_code_returns_empty_or_valid(self, ext)` |
-| `test_never_crashes_on_malformed_code` | method | `tests/test_parsers_property.py:162` | `def test_never_crashes_on_malformed_code(self, ext, code)` |
-| `test_never_crashes_on_many_lines` | method | `tests/test_parsers_property.py:220` | `def test_never_crashes_on_many_lines(self, ext, lines)` |
-| `test_never_crashes_on_unicode_code` | method | `tests/test_parsers_property.py:180` | `def test_never_crashes_on_unicode_code(self, ext, code)` |
-| `test_parser_imports_is_list_of_strings` | method | `tests/test_parsers_property.py:257` | `def test_parser_imports_is_list_of_strings(self, ext)` |
-| `test_python_never_crashes_on_any_text` | method | `tests/test_parsers_property.py:310` | `def test_python_never_crashes_on_any_text(self, code)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

@@ -394,6 +394,20 @@ class Config:
 
     DIAGRAM_VIS_STABILIZE_ITERATIONS: int = 250
 
+    DIAGRAM_VIS_GRAVITY: float = -90.0
+
+    DIAGRAM_VIS_CENTRAL_GRAVITY: float = 0.012
+
+    DIAGRAM_VIS_SPRING_LENGTH: float = 120.0
+
+    DIAGRAM_VIS_SPRING_CONSTANT: float = 0.06
+
+    DIAGRAM_VIS_DAMPING: float = 0.55
+
+    DIAGRAM_VIS_AVOID_OVERLAP: float = 0.6
+
+    DIAGRAM_VIS_LABEL_TOP_N: int = 25
+
     DIAGRAM_MOTION_ENABLED: bool = True
 
     DIAGRAM_SHARE_WIDTH: int = 1200
@@ -436,7 +450,7 @@ class Config:
 
     DIAGRAM_ROLES: Tuple[str, ...] = (
         "frontend", "backend", "database", "cloud",
-        "security", "messagebus", "external",
+        "security", "messagebus", "external", "core", "test",
     )
 
     DIAGRAM_ROLE_COLORS: Tuple[Tuple[str, str], ...] = (
@@ -447,6 +461,13 @@ class Config:
         ("security", "#fb7185"),
         ("messagebus", "#fb923c"),
         ("external", "#94a3b8"),
+        ("core", "#38bdf8"),
+        ("test", "#64748b"),
+    )
+
+    DIAGRAM_COMMUNITY_COLORS: Tuple[str, ...] = (
+        "#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#a78bfa",
+        "#fb923c", "#34d399", "#f87171", "#60a5fa", "#e879f9",
     )
 
     VIDEO_ENABLED: bool = True
@@ -475,6 +496,22 @@ class Config:
 
     VIDEO_PREVIEW_LINES: int = 24
 
+    VIDEO_TREE_MAX_NODES: int = 0
+
+    VIDEO_TREE_RING_MARGIN: int = 40
+
+    VIDEO_TREE_LABEL_GAP: int = 6
+
+    VIDEO_TREE_CHAR_PX: int = 9
+
+    VIDEO_DNA_MAX_CELL: int = 64
+
+    VIDEO_GRAPH_TRIM_FRACTION: float = 0.05
+
+    VIDEO_GRAPH_SPREAD: float = 2.2
+
+    VIDEO_GRAPH_LOOSE_STRIP: int = 60
+
     VIDEO_COMM_S: float = 9.0
 
     VIDEO_GRAPH_S: float = 12.0
@@ -483,7 +520,7 @@ class Config:
 
     VIDEO_OUTRO_S: float = 7.0
 
-    VIDEO_MAX_GRAPH_NODES: int = 60
+    VIDEO_MAX_GRAPH_NODES: int = 0
 
     VIDEO_MAX_LABEL_CHARS: int = 28
 

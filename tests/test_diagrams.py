@@ -538,7 +538,7 @@ class TestVisNetworkRendererContract(unittest.TestCase):
         self.assertIn("vis.Network", output)
         self.assertIn("vis.DataSet", output)
         self.assertIn("physics", output)
-        self.assertIn("barnesHut", output)
+        self.assertIn("forceAtlas2Based", output)
 
     def test_renderer_links_gallery_home_when_configured(self) -> None:
         """Vis maps with a home target expose a gallery back link."""

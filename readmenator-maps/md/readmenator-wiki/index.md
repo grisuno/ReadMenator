@@ -18,13 +18,13 @@ Open work clusters around documentation (82% file coverage), 0 security findings
 | Metric | Value |
 |--------|-------|
 | Files | 105 |
-| Symbols | 1878 |
-| Resolved imports | 354 |
+| Symbols | 1884 |
+| Resolved imports | 357 |
 | Languages | py |
 | Communities | 6 |
 | Doc coverage | 82% (86/105 files) |
 | Security findings | 0 |
-| Estimated read cost | ~40460 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~40704 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 

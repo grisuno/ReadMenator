@@ -133,28 +133,28 @@ Imported by: `readmenator/_app.py`, `tests/test_dead_code.py`
 ## readmenator/_diagrams.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`
-- `SystemMapValidator.__init__` (method) `readmenator/_diagrams.py:212` `def __init__(self, config)` -- Initialise the validator with application configuration.
-- `SystemMapValidator.validate` (method) `readmenator/_diagrams.py:241` `def validate(self, system_map)` -- Validate a system map and return a deterministic receipt.
-- `SystemMapBuilder.__init__` (method) `readmenator/_diagrams.py:462` `def __init__(self, config)` -- Initialise the builder with application configuration.
-- `SystemMapBuilder.supported_kinds` (method) `readmenator/_diagrams.py:471` `def supported_kinds(self)` -- Return the supported diagram kind identifiers.
-- `SystemMapBuilder.build` (method) `readmenator/_diagrams.py:492` `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` -- Build one deterministic system map of the requested kind.
-- `SystemMapBuilder.build_all` (method) `readmenator/_diagrams.py:530` `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` -- Build all five diagram kinds deterministically.
-- `SystemMapBuilder.compare` (method) `readmenator/_diagrams.py:561` `def compare(self, base, head)` -- Compare two maps of the same kind as before, delta, and after.
-- `InteractiveMapRenderer.__init__` (method) `readmenator/_diagrams.py:1481` `def __init__(self, config)` -- Initialise the renderer with application configuration.
-- `InteractiveMapRenderer.render` (method) `readmenator/_diagrams.py:1510` `def render(self, system_map)` -- Render a system map as a self-contained HTML document.
-- `InteractiveMapRenderer.write` (method) `readmenator/_diagrams.py:1612` `def write(self, system_map, output_path)` -- Render a system map and write it to a relative output path.
-- `VisNetworkRenderer.__init__` (method) `readmenator/_diagrams.py:2201` `def __init__(self, config)` -- Initialise the renderer with application configuration.
-- `VisNetworkRenderer.render` (method) `readmenator/_diagrams.py:2209` `def render(self, system_map)` -- Render a system map as a vis.js network HTML document.
-- `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2310` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
-- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:2913` `def __init__(self, config)` -- Initialise the publisher with application configuration.
-- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:2923` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
-- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:2937` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` -- Publish maps and a gallery index into a documentation directory.
-- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3027` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
-- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3053` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
-- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3222` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
-- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3270` `def order(entry)` -- Sort entry points first, then alphabetically.
-- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3298` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` -- Render the gallery index page for published maps.
-- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3489` `def doc_order(base)` -- Entry points first, then alphabetical.
+- `SystemMapValidator.__init__` (method) `readmenator/_diagrams.py:214` `def __init__(self, config)` -- Initialise the validator with application configuration.
+- `SystemMapValidator.validate` (method) `readmenator/_diagrams.py:243` `def validate(self, system_map)` -- Validate a system map and return a deterministic receipt.
+- `SystemMapBuilder.__init__` (method) `readmenator/_diagrams.py:464` `def __init__(self, config)` -- Initialise the builder with application configuration.
+- `SystemMapBuilder.supported_kinds` (method) `readmenator/_diagrams.py:473` `def supported_kinds(self)` -- Return the supported diagram kind identifiers.
+- `SystemMapBuilder.build` (method) `readmenator/_diagrams.py:494` `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` -- Build one deterministic system map of the requested kind.
+- `SystemMapBuilder.build_all` (method) `readmenator/_diagrams.py:553` `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` -- Build all five diagram kinds deterministically.
+- `SystemMapBuilder.compare` (method) `readmenator/_diagrams.py:584` `def compare(self, base, head)` -- Compare two maps of the same kind as before, delta, and after.
+- `InteractiveMapRenderer.__init__` (method) `readmenator/_diagrams.py:1504` `def __init__(self, config)` -- Initialise the renderer with application configuration.
+- `InteractiveMapRenderer.render` (method) `readmenator/_diagrams.py:1533` `def render(self, system_map)` -- Render a system map as a self-contained HTML document.
+- `InteractiveMapRenderer.write` (method) `readmenator/_diagrams.py:1635` `def write(self, system_map, output_path)` -- Render a system map and write it to a relative output path.
+- `VisNetworkRenderer.__init__` (method) `readmenator/_diagrams.py:2224` `def __init__(self, config)` -- Initialise the renderer with application configuration.
+- `VisNetworkRenderer.render` (method) `readmenator/_diagrams.py:2232` `def render(self, system_map)` -- Render a system map as a vis.js network HTML document.
+- `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2360` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
+- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:3009` `def __init__(self, config)` -- Initialise the publisher with application configuration.
+- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:3019` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
+- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:3033` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` -- Publish maps and a gallery index into a documentation directory.
+- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3123` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
+- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3149` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
+- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3318` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
+- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3366` `def order(entry)` -- Sort entry points first, then alphabetically.
+- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3394` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` -- Render the gallery index page for published maps.
+- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3585` `def doc_order(base)` -- Entry points first, then alphabetical.
 
 ## readmenator/_documentation.py
 Depends on: `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
@@ -423,11 +423,11 @@ Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_vide
 - `Backdrop.draw_header` (method) `readmenator/_video.py:401` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
 - `Backdrop.draw_caption` (method) `readmenator/_video.py:415` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
 - `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:436` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map)` -- Collect every number each scene draws, from real scan data.
-- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:612` `def build_scenes(self, data)` -- Lay every scene on the global clock.
-- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:638` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
-- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:673` `def tree_positions(self, data, box)` -- Compute tidy tree positions for the BFS dependency tree.
-- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:694` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
-- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:712` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
+- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:623` `def build_scenes(self, data)` -- Lay every scene on the global clock.
+- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:649` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
+- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:696` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
+- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:739` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
+- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:757` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
 
 ## readmenator/_watcher.py
 Depends on: `readmenator/_config.py`

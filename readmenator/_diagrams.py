@@ -94,6 +94,8 @@ class MapNode:
     doc: str = ""
     symbols: List[Dict[str, str]] = field(default_factory=list)
     symbol_total: int = 0
+    community: int = -1
+    community_label: str = ""
 
 
 @dataclass
@@ -447,8 +449,8 @@ class SystemMapBuilder:
         ("business_logic", "backend"),
         ("data_access", "database"),
         ("infrastructure", "cloud"),
-        ("testing", "external"),
-        ("utility", "external"),
+        ("testing", "test"),
+        ("utility", "core"),
     )
 
     _KIND_TITLES: Tuple[Tuple[str, str], ...] = (
@@ -518,14 +520,35 @@ class SystemMapBuilder:
         normalized = kind if kind in self.supported_kinds() else "architecture"
         use_full = self._is_full(full)
         if normalized == "architecture":
-            return self._build_architecture(nodes, resolved_edges or edges, layers, findings, analysis, use_full)
-        if normalized == "workflow":
-            return self._build_workflow(nodes, resolved_edges or edges, layers, findings, use_full)
-        if normalized == "sequence":
-            return self._build_sequence(nodes, resolved_edges or edges, layers, analysis, use_full)
-        if normalized == "dataflow":
-            return self._build_dataflow(nodes, resolved_edges or edges, layers, findings, use_full)
-        return self._build_lifecycle(nodes, resolved_edges or edges, layers, findings, use_full)
+            built = self._build_architecture(nodes, resolved_edges or edges, layers, findings, analysis, use_full)
+        elif normalized == "workflow":
+            built = self._build_workflow(nodes, resolved_edges or edges, layers, findings, use_full)
+        elif normalized == "sequence":
+            built = self._build_sequence(nodes, resolved_edges or edges, layers, analysis, use_full)
+        elif normalized == "dataflow":
+            built = self._build_dataflow(nodes, resolved_edges or edges, layers, findings, use_full)
+        else:
+            built = self._build_lifecycle(nodes, resolved_edges or edges, layers, findings, use_full)
+        self._annotate_communities(built, analysis)
+        return built
+
+    @staticmethod
+    def _annotate_communities(system_map: "SystemMap", analysis: Optional[AnalysisResult]) -> None:
+        """Tag map nodes with their code community so renderers can color clusters.
+
+        Args:
+            system_map: Freshly built map whose nodes are annotated in place.
+            analysis: Graph analysis holding detected communities.
+        """
+        if analysis is None:
+            return
+        owner: Dict[str, Tuple[int, str]] = {}
+        for community in analysis.communities:
+            for file_id in community.file_ids:
+                owner[file_id] = (community.community_id, community.label)
+        for node in system_map.nodes:
+            if node.node_id in owner:
+                node.community, node.community_label = owner[node.node_id]
 
     def build_all(
         self,
@@ -2225,6 +2248,8 @@ class VisNetworkRenderer:
                 "doc": node.doc,
                 "symbols": node.symbols,
                 "symbolTotal": node.symbol_total,
+                "community": node.community,
+                "communityLabel": node.community_label,
             }
             for node in system_map.nodes
         ]
@@ -2255,11 +2280,14 @@ class VisNetworkRenderer:
         if self._config.DIAGRAM_VIS_PHYSICS_ENABLED:
             physics = {
                 "enabled": True,
-                "barnesHut": {
-                    "gravitationalConstant": -60000,
-                    "centralGravity": 0.15,
-                    "springLength": 320,
-                    "damping": 0.12,
+                "solver": "forceAtlas2Based",
+                "forceAtlas2Based": {
+                    "gravitationalConstant": self._config.DIAGRAM_VIS_GRAVITY,
+                    "centralGravity": self._config.DIAGRAM_VIS_CENTRAL_GRAVITY,
+                    "springLength": self._config.DIAGRAM_VIS_SPRING_LENGTH,
+                    "springConstant": self._config.DIAGRAM_VIS_SPRING_CONSTANT,
+                    "damping": self._config.DIAGRAM_VIS_DAMPING,
+                    "avoidOverlap": self._config.DIAGRAM_VIS_AVOID_OVERLAP,
                 },
                 "stabilization": {
                     "iterations": self._config.DIAGRAM_VIS_STABILIZE_ITERATIONS
@@ -2297,6 +2325,8 @@ class VisNetworkRenderer:
                     "edgeCount": len(system_map.edges),
                     "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
                     "neighbors": self._config.DIAGRAM_NEIGHBOR_NAMES,
+                    "communities": self._community_legend(system_map),
+                    "labelTopN": self._config.DIAGRAM_VIS_LABEL_TOP_N,
                 }
             ),
         )
@@ -2306,6 +2336,26 @@ class VisNetworkRenderer:
             _json_payload(dict(self._config.DIAGRAM_ROLE_COLORS)),
         )
         return document
+
+    def _community_legend(self, system_map: SystemMap) -> List[Dict[str, object]]:
+        """Return community legend entries (id, label, color, size) for the map nodes."""
+        palette = list(self._config.DIAGRAM_COMMUNITY_COLORS)
+        sizes: Dict[int, int] = {}
+        labels: Dict[int, str] = {}
+        for node in system_map.nodes:
+            if node.community < 0:
+                continue
+            sizes[node.community] = sizes.get(node.community, 0) + 1
+            labels[node.community] = node.community_label
+        return [
+            {
+                "id": cid,
+                "label": labels[cid] or "community " + str(cid),
+                "color": palette[cid % len(palette)] if palette else "#94a3b8",
+                "size": sizes[cid],
+            }
+            for cid in sorted(sizes)
+        ]
 
     def write(self, system_map: SystemMap, output_path: str) -> str:
         """Render a vis.js map and write it to a relative output path.
@@ -2399,6 +2449,10 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains M
 .passport .row{font-size:12px;color:var(--muted);margin:6px 0;line-height:1.7}
 .counts{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .chip{border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:11px;color:var(--ink);background:transparent;cursor:pointer;font:inherit}
+.legend-title{width:100%;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:6px 0 2px}
+.legend-item{display:flex;align-items:center;gap:8px;width:100%;text-align:left;background:transparent;color:var(--ink);border:1px solid transparent;border-radius:8px;padding:5px 6px;font:inherit;font-size:12px;cursor:pointer}
+.legend-item:hover,.legend-item:focus-visible{border-color:var(--border);background:var(--canvas);outline:none}
+.swatch{flex:none;width:12px;height:12px;border-radius:50%;box-shadow:0 0 10px currentColor}
 .views{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
 .views button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:6px 9px;font:inherit;font-size:11px;cursor:pointer}
 .journey{font-size:12px;line-height:1.7}
@@ -2423,8 +2477,10 @@ __HOME_LINK__
 <button type="button" data-action="reach-up" aria-label="Trace upstream reach" title="Show everything that reaches the focused node (authored relationships only)">Upstream</button>
 <button type="button" data-action="reach-down" aria-label="Trace downstream reach" title="Show everything the focused node reaches (authored relationships only)">Downstream</button>
 <button type="button" data-action="lens" aria-label="Compare roles" title="Highlight one semantic role and compare counts; activate again to clear">Lens</button>
-<button type="button" data-action="views-prev" aria-label="Previous chapter" title="Show the previous guided chapter">[</button>
-<button type="button" data-action="views-next" aria-label="Next chapter" title="Show the next guided chapter">]</button>
+<button type="button" data-action="views-prev" aria-label="Previous chapter" title="Show the previous guided chapter ( [ )">Prev</button>
+<button type="button" data-action="views-next" aria-label="Next chapter" title="Show the next guided chapter ( ] )">Next</button>
+<button type="button" data-action="color" aria-label="Toggle color mode" title="Color nodes by code community or by architectural role ( C )">Color</button>
+<button type="button" data-action="show-all" aria-label="Show all nodes" title="Clear focus, lens, and filters ( Esc )">Show all</button>
 <button type="button" data-action="play" aria-label="Play guided story" title="Play all guided chapters in order">Play</button>
 <button type="button" data-action="stabilize" aria-label="Stabilize layout" title="Re-run the physics stabilization">Stabilize</button>
 <button type="button" data-action="physics" aria-label="Toggle physics" title="Freeze or resume the live physics engine">Physics</button>
@@ -2443,6 +2499,7 @@ __HOME_LINK__
 <div class="row" id="passport-meta"></div>
 <div class="views" id="chapters"></div>
 <div class="counts" id="role-counts"></div>
+<div class="row">Node size = number of links. Color = code community (press C for roles). Labels show the most connected files; zoom in for the rest.</div>
 <div class="row">1. Drag any node; physics settles the rest. 2. Click a node to focus it. 3. Upstream and Downstream trace authored reach. 4. Path probes the exact route between two ids. 5. Play walks the guided chapters. Press ? for every shortcut. This page loads its network engine from a CDN and needs network access.</div>
 <div class="routebox"><input id="route-from" placeholder="route from id" aria-label="Route source" title="Source node id for the route probe"><input id="route-to" placeholder="route to id" aria-label="Route target" title="Target node id for the route probe"><button type="button" data-action="route" aria-label="Probe directed route" title="Highlight the shortest authored directed path">Path</button></div>
 <div class="journey" id="journey"></div>
@@ -2452,7 +2509,7 @@ __HOME_LINK__
 </div>
 <dialog id="guide" aria-label="Diagram guide dialog">
 <h2>Diagram guide</h2>
-<p><kbd>/</kbd> search &middot; <kbd>R</kbd> route probe &middot; <kbd>L</kbd> role lens &middot; <kbd>P</kbd> play &middot; <kbd>[</kbd> <kbd>]</kbd> chapters &middot; <kbd>F</kbd> present &middot; <kbd>S</kbd> style &middot; <kbd>T</kbd> theme &middot; <kbd>E</kbd> export &middot; <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd> zoom &middot; <kbd>B</kbd> physics</p>
+<p><kbd>/</kbd> search &middot; <kbd>R</kbd> route probe &middot; <kbd>L</kbd> role lens &middot; <kbd>P</kbd> play &middot; <kbd>[</kbd> <kbd>]</kbd> chapters &middot; <kbd>C</kbd> color by community or role &middot; <kbd>Esc</kbd> show all &middot; <kbd>F</kbd> present &middot; <kbd>S</kbd> style &middot; <kbd>T</kbd> theme &middot; <kbd>E</kbd> export &middot; <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd> zoom &middot; <kbd>B</kbd> physics</p>
 <p>Drag nodes freely; Stabilize re-runs the physics engine and Physics freezes it. Reach, routes, lens, and chapters reuse authored relationships only. Deep links restore <code>#focus=id</code>, <code>#focus=id&amp;reach=upstream|downstream</code>, <code>#route=a~b</code>, <code>#lens=role</code>, and <code>#view=id</code>.</p>
 <button type="button" data-action="close-guide" title="Close the diagram guide">Close</button>
 </dialog>
@@ -2493,19 +2550,33 @@ var exportsDialog=document.getElementById("exports");
 var state={focus:null,reach:null,lens:null,view:-1,physicsOn:true};
 var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function themeBox(){return root.getAttribute("data-theme")==="light"?{box:"#ffffff",ink:"#0f172a"}:{box:"#0f172a",ink:"#ffffff"};}
+var communities=meta.communities||[];
+var communityColor={};communities.forEach(function(c){communityColor[c.id]=c.color;});
+state.colorMode=communities.length?"community":"role";
+var degree={};rawNodes.forEach(function(n){degree[n.id]=0;});
+rawEdges.forEach(function(e){if(e.from in degree){degree[e.from]++;}if(e.to in degree){degree[e.to]++;}});
+var ranked=rawNodes.slice().sort(function(a,b){return (degree[b.id]-degree[a.id])||(a.id<b.id?-1:1);});
+var labelled={};ranked.slice(0,meta.labelTopN||25).forEach(function(n){labelled[n.id]=true;});
+function plainTitle(n){var t=document.createElement("div");t.style.maxWidth="360px";t.style.whiteSpace="normal";
+t.textContent=n.id+(n.communityLabel?" | "+n.communityLabel:"")+" | "+degree[n.id]+" links"+(n.doc?" | "+n.doc.slice(0,220):"");return t;}
+function colorFor(n){if(state.colorMode==="community"&&n.community>=0&&communityColor[n.community]){return communityColor[n.community];}return roleColors[n.group]||"#94a3b8";}
 function paintNodes(){
 var palette=themeBox();
-var update=rawNodes.map(function(n){
-return {id:n.id,color:{background:palette.box,border:roleColors[n.group]||"#94a3b8",highlight:{background:palette.box,border:roleColors[n.group]||"#94a3b8"}},font:{color:palette.ink,size:13,face:"monospace"}};});
-visNodes.update(update);}
-var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:n.label,title:n.title,group:n.group,shape:"box"};}));
-var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,title:e.label,arrows:"to",dashes:!!e.dashes,smooth:{type:"dynamic"},color:{opacity:0.7}};}));
-paintNodes();
+var update=rawNodes.map(function(n){var c=colorFor(n);
+return {id:n.id,color:{background:c,border:palette.box,highlight:{background:c,border:palette.ink},hover:{background:c,border:palette.ink}},
+font:{color:palette.ink,size:labelled[n.id]?22:14,face:"monospace",strokeWidth:5,strokeColor:palette.box}};});
+visNodes.update(update);renderLegend();}
+var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:labelled[n.id]?n.label:" ",title:plainTitle(n),group:n.group,shape:"dot",value:1+degree[n.id]};}));
+var allLabels=false;
+function syncLabels(scale){var want=scale>=1.1;if(want===allLabels){return;}allLabels=want;
+visNodes.update(rawNodes.filter(function(n){return !labelled[n.id];}).map(function(n){return {id:n.id,label:want?n.label:" "};}));}
+var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,title:e.label,arrows:{to:{enabled:true,scaleFactor:0.45}},dashes:!!e.dashes,smooth:{type:"continuous"},color:{color:"#64748b",opacity:0.28,highlight:"#22d3ee",hover:"#22d3ee",inherit:false},width:1,selectionWidth:2,hoverWidth:1.5};}));
 var network=new vis.Network(container,{nodes:visNodes,edges:visEdges},{
 physics:physics,
-interaction:{hover:true,navigationButtons:false,keyboard:false},
-nodes:{shape:"box",borderWidth:2,margin:10},
-edges:{arrows:{to:{enabled:true}},smooth:{type:"dynamic"}}});
+interaction:{hover:true,hoverConnectedEdges:true,selectConnectedEdges:true,navigationButtons:false,keyboard:false,tooltipDelay:120},
+nodes:{shape:"dot",borderWidth:2,scaling:{min:7,max:38,label:{enabled:false}}},
+edges:{smooth:{type:"continuous"}}});
+paintNodes();
 if(reduced&&physics.enabled){try{network.stabilize(50);}catch(e){}}
 function outgoing(id){return rawEdges.filter(function(e){return e.from===id;});}
 function incoming(id){return rawEdges.filter(function(e){return e.to===id;});}
@@ -2621,7 +2692,26 @@ setHash("#view="+encodeURIComponent(view.id));}
 function renderChapters(){
 chapters.innerHTML="";
 views.forEach(function(view,index){var b=document.createElement("button");b.type="button";b.textContent=view.title;b.setAttribute("aria-label","Show chapter "+view.title);b.setAttribute("title","Focus the "+view.title+" chapter");b.addEventListener("click",function(){showView(index);});chapters.appendChild(b);});}
-function renderRoleCounts(){
+function renderLegend(){
+if(!roleCounts){return;}
+roleCounts.innerHTML="";
+var title=document.createElement("div");title.className="legend-title";
+title.textContent=state.colorMode==="community"?"Communities (click to isolate)":"Roles (click to isolate)";roleCounts.appendChild(title);
+var items=[];
+if(state.colorMode==="community"){communities.forEach(function(c){items.push({key:"c"+c.id,label:c.label,color:c.color,count:c.size,pick:function(){isolateCommunity(c.id,c.label);}});});}
+else{var counts={};rawNodes.forEach(function(n){counts[n.group]=(counts[n.group]||0)+1;});
+Object.keys(counts).sort().forEach(function(role){items.push({key:role,label:role,color:roleColors[role]||"#94a3b8",count:counts[role],pick:function(){applyLens(role);}});});}
+items.forEach(function(item){var b=document.createElement("button");b.type="button";b.className="legend-item";
+var sw=document.createElement("span");sw.className="swatch";sw.style.background=item.color;b.appendChild(sw);
+var tx=document.createElement("span");tx.textContent=item.label+" ("+item.count+")";b.appendChild(tx);
+b.setAttribute("title","Show only "+item.label);b.addEventListener("click",item.pick);roleCounts.appendChild(b);});}
+function isolateCommunity(cid,label){
+var allowed={};var count=0;rawNodes.forEach(function(n){if(n.community===cid){allowed[n.id]=true;count++;}});
+showOnly(allowed);try{network.fit({nodes:Object.keys(allowed),animation:reduced?false:{duration:600}});}catch(e){}
+receipt.textContent="Community "+label+": "+count+" of "+rawNodes.length+" nodes. Press Esc or Show all to reset.";
+setHash("#community="+cid);}
+function toggleColorMode(){state.colorMode=state.colorMode==="community"?"role":"community";if(!communities.length){state.colorMode="role";}paintNodes();}
+function renderRoleCounts(){renderLegend();return;
 var counts={};rawNodes.forEach(function(n){counts[n.group]=(counts[n.group]||0)+1;});
 roleCounts.innerHTML="";
 Object.keys(counts).sort().forEach(function(role){var s=document.createElement("button");s.type="button";s.className="chip";s.textContent=role+": "+counts[role];s.setAttribute("aria-label","Filter role "+role);s.setAttribute("title","Highlight the "+role+" role");s.addEventListener("click",function(){applyLens(role);});roleCounts.appendChild(s);});}
@@ -2655,10 +2745,12 @@ function readHash(){
 var hash=location.hash||"";
 if(hash.indexOf("#route=")===0){var parts=hash.slice(7).split("~");if(parts.length===2){document.getElementById("route-from").value=decodeURIComponent(parts[0]);document.getElementById("route-to").value=decodeURIComponent(parts[1]);probeRoute();}return;}
 if(hash.indexOf("#lens=")===0){applyLens(decodeURIComponent(hash.slice(6)));return;}
+if(hash.indexOf("#community=")===0){var cid=parseInt(hash.slice(11),10);communities.forEach(function(c){if(c.id===cid){isolateCommunity(c.id,c.label);}});return;}
 if(hash.indexOf("#view=")===0){var id=decodeURIComponent(hash.slice(6));for(var i=0;i<views.length;i++){if(views[i].id===id){showView(i);return;}}return;}
 if(hash.indexOf("#focus=")===0){var rest=hash.slice(7).split("&reach=");focusNode(decodeURIComponent(rest[0]),rest[1]?decodeURIComponent(rest[1]):null);return;}}
 network.on("click",function(params){
 if(params.nodes.length>0){focusNode(params.nodes[0]);}});
+network.on("zoom",function(p){syncLabels(p.scale);});
 network.on("stabilized",function(){receipt.textContent="Physics stabilized: "+rawNodes.length+" nodes placed.";});
 document.querySelectorAll("[data-action]").forEach(function(btn){
 btn.addEventListener("click",function(){
@@ -2667,6 +2759,8 @@ if(action==="reach-up"&&state.focus){focusNode(state.focus,"upstream");}
 else if(action==="reach-down"&&state.focus){focusNode(state.focus,"downstream");}
 else if(action==="route"){probeRoute();}
 else if(action==="lens"){applyLens(state.lens?null:"backend");}
+else if(action==="color"){toggleColorMode();}
+else if(action==="show-all"){showAll();state.focus=null;try{network.fit({animation:reduced?false:{duration:500}});}catch(e){}receipt.textContent="Showing all "+rawNodes.length+" nodes.";setHash("#");}
 else if(action==="views-prev"){showView(state.view-1);}
 else if(action==="views-next"){showView(state.view+1);}
 else if(action==="play"){var i=0;var step=function(){if(i>=views.length){return;}showView(i);i++;if(!reduced){setTimeout(step,1400);}};step();}
@@ -2703,7 +2797,9 @@ else if(ev.key==="E"||ev.key==="e"){if(typeof exportsDialog.showModal==="functio
 else if(ev.key==="?"){if(typeof guide.showModal==="function"){guide.showModal();}}
 else if(ev.key==="+"){try{network.zoomIn();}catch(e){}}
 else if(ev.key==="-"){try{network.zoomOut();}catch(e){}}
-else if(ev.key==="0"){try{network.fit();}catch(e){}}});
+else if(ev.key==="0"){try{network.fit();}catch(e){}}
+else if(ev.key==="C"||ev.key==="c"){toggleColorMode();}
+else if(ev.key==="Escape"){showAll();state.focus=null;}});
 passportMeta.textContent=(meta.nodeCount||rawNodes.length)+" of "+(meta.totalFiles||rawNodes.length)+" files | "+(meta.edgeCount||rawEdges.length)+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
 receipt.textContent="Live physics network. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
 renderChapters();renderRoleCounts();readHash();

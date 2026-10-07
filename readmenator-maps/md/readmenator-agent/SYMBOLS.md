@@ -206,93 +206,95 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `_build_in_degree_map` | method | `readmenator/_dead_code.py:64` | `def _build_in_degree_map(self, nodes, resolved_edges)` |
 | `_classify_recommendation` | method | `readmenator/_dead_code.py:88` | `def _classify_recommendation(self, symbol)` |
 | `identify` | method | `readmenator/_dead_code.py:28` | `def identify(self, nodes, edges, resolved_edges)` |
-| `DocsSitePublisher` | class | `readmenator/_diagrams.py:2896` | `class DocsSitePublisher` |
-| `InteractiveMapRenderer` | class | `readmenator/_diagrams.py:1478` | `class InteractiveMapRenderer` |
-| `MapDelta` | class | `readmenator/_diagrams.py:189` | `class MapDelta` |
-| `MapDiagnostic` | class | `readmenator/_diagrams.py:155` | `class MapDiagnostic` |
-| `MapEdge` | class | `readmenator/_diagrams.py:100` | `class MapEdge` |
+| `DocsSitePublisher` | class | `readmenator/_diagrams.py:2992` | `class DocsSitePublisher` |
+| `InteractiveMapRenderer` | class | `readmenator/_diagrams.py:1501` | `class InteractiveMapRenderer` |
+| `MapDelta` | class | `readmenator/_diagrams.py:191` | `class MapDelta` |
+| `MapDiagnostic` | class | `readmenator/_diagrams.py:157` | `class MapDiagnostic` |
+| `MapEdge` | class | `readmenator/_diagrams.py:102` | `class MapEdge` |
 | `MapNode` | class | `readmenator/_diagrams.py:69` | `class MapNode` |
-| `MapReceipt` | class | `readmenator/_diagrams.py:172` | `class MapReceipt` |
-| `MapView` | class | `readmenator/_diagrams.py:117` | `class MapView` |
-| `SystemMap` | class | `readmenator/_diagrams.py:134` | `class SystemMap` |
-| `SystemMapBuilder` | class | `readmenator/_diagrams.py:433` | `class SystemMapBuilder` |
-| `SystemMapValidator` | class | `readmenator/_diagrams.py:209` | `class SystemMapValidator` |
-| `VisNetworkRenderer` | class | `readmenator/_diagrams.py:2193` | `class VisNetworkRenderer` |
-| `__init__` | method | `readmenator/_diagrams.py:212` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_diagrams.py:462` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_diagrams.py:1481` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_diagrams.py:2201` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_diagrams.py:2913` | `def __init__(self, config)` |
-| `_build_architecture` | method | `readmenator/_diagrams.py:1080` | `def _build_architecture(self, nodes, links, layers, findings, analysis, full)` |
-| `_build_dataflow` | method | `readmenator/_diagrams.py:1302` | `def _build_dataflow(self, nodes, links, layers, findings, full)` |
-| `_build_lifecycle` | method | `readmenator/_diagrams.py:1385` | `def _build_lifecycle(self, nodes, links, layers, findings, full)` |
-| `_build_sequence` | method | `readmenator/_diagrams.py:1220` | `def _build_sequence(self, nodes, links, layers, analysis, full)` |
-| `_build_workflow` | method | `readmenator/_diagrams.py:1140` | `def _build_workflow(self, nodes, links, layers, findings, full)` |
-| `_canvas_for` | method | `readmenator/_diagrams.py:967` | `def _canvas_for(self, positions, full)` |
-| `_canvas_size` | method | `readmenator/_diagrams.py:1489` | `def _canvas_size(self, system_map)` |
-| `_cap_lane_scope` | method | `readmenator/_diagrams.py:872` | `def _cap_lane_scope(self, ranked, layer_of)` |
-| `_card` | method | `readmenator/_diagrams.py:3592` | `def _card(self, kind, system_map, href_prefix)` |
-| `_doc_group` | method | `readmenator/_diagrams.py:3453` | `def _doc_group(self, name)` |
-| `_doc_preview` | method | `readmenator/_diagrams.py:3169` | `def _doc_preview(self, text)` |
-| `_doc_title` | method | `readmenator/_diagrams.py:3160` | `def _doc_title(text)` |
-| `_docs_section` | method | `readmenator/_diagrams.py:3463` | `def _docs_section(self, doc_entries)` |
-| `_edge_path` | method | `readmenator/_diagrams.py:1664` | `def _edge_path(self, x1, y1, x2, y2)` |
-| `_edges_svg` | method | `readmenator/_diagrams.py:1748` | `def _edges_svg(self, system_map)` |
-| `_effective_canvas` | method | `readmenator/_diagrams.py:220` | `def _effective_canvas(self, system_map)` |
-| `_escape` | method | `readmenator/_diagrams.py:1642` | `def _escape(self, value)` |
-| `_escape` | method | `readmenator/_diagrams.py:3647` | `def _escape(self, value)` |
+| `MapReceipt` | class | `readmenator/_diagrams.py:174` | `class MapReceipt` |
+| `MapView` | class | `readmenator/_diagrams.py:119` | `class MapView` |
+| `SystemMap` | class | `readmenator/_diagrams.py:136` | `class SystemMap` |
+| `SystemMapBuilder` | class | `readmenator/_diagrams.py:435` | `class SystemMapBuilder` |
+| `SystemMapValidator` | class | `readmenator/_diagrams.py:211` | `class SystemMapValidator` |
+| `VisNetworkRenderer` | class | `readmenator/_diagrams.py:2216` | `class VisNetworkRenderer` |
+| `__init__` | method | `readmenator/_diagrams.py:214` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_diagrams.py:464` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_diagrams.py:1504` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_diagrams.py:2224` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_diagrams.py:3009` | `def __init__(self, config)` |
+| `_annotate_communities` | method | `readmenator/_diagrams.py:536` | `def _annotate_communities(system_map, analysis)` |
+| `_build_architecture` | method | `readmenator/_diagrams.py:1103` | `def _build_architecture(self, nodes, links, layers, findings, analysis, full)` |
+| `_build_dataflow` | method | `readmenator/_diagrams.py:1325` | `def _build_dataflow(self, nodes, links, layers, findings, full)` |
+| `_build_lifecycle` | method | `readmenator/_diagrams.py:1408` | `def _build_lifecycle(self, nodes, links, layers, findings, full)` |
+| `_build_sequence` | method | `readmenator/_diagrams.py:1243` | `def _build_sequence(self, nodes, links, layers, analysis, full)` |
+| `_build_workflow` | method | `readmenator/_diagrams.py:1163` | `def _build_workflow(self, nodes, links, layers, findings, full)` |
+| `_canvas_for` | method | `readmenator/_diagrams.py:990` | `def _canvas_for(self, positions, full)` |
+| `_canvas_size` | method | `readmenator/_diagrams.py:1512` | `def _canvas_size(self, system_map)` |
+| `_cap_lane_scope` | method | `readmenator/_diagrams.py:895` | `def _cap_lane_scope(self, ranked, layer_of)` |
+| `_card` | method | `readmenator/_diagrams.py:3688` | `def _card(self, kind, system_map, href_prefix)` |
+| `_community_legend` | method | `readmenator/_diagrams.py:2340` | `def _community_legend(self, system_map)` |
+| `_doc_group` | method | `readmenator/_diagrams.py:3549` | `def _doc_group(self, name)` |
+| `_doc_preview` | method | `readmenator/_diagrams.py:3265` | `def _doc_preview(self, text)` |
+| `_doc_title` | method | `readmenator/_diagrams.py:3256` | `def _doc_title(text)` |
+| `_docs_section` | method | `readmenator/_diagrams.py:3559` | `def _docs_section(self, doc_entries)` |
+| `_edge_path` | method | `readmenator/_diagrams.py:1687` | `def _edge_path(self, x1, y1, x2, y2)` |
+| `_edges_svg` | method | `readmenator/_diagrams.py:1771` | `def _edges_svg(self, system_map)` |
+| `_effective_canvas` | method | `readmenator/_diagrams.py:222` | `def _effective_canvas(self, system_map)` |
+| `_escape` | method | `readmenator/_diagrams.py:1665` | `def _escape(self, value)` |
+| `_escape` | method | `readmenator/_diagrams.py:3743` | `def _escape(self, value)` |
 | `_escape_markup` | function | `readmenator/_diagrams.py:31` | `def _escape_markup(value)` |
-| `_fitted_gap` | method | `readmenator/_diagrams.py:834` | `def _fitted_gap(self, count, item, gap, total, margin)` |
-| `_glyph` | method | `readmenator/_diagrams.py:3574` | `def _glyph(self, kind)` |
-| `_href_prefix` | method | `readmenator/_diagrams.py:3544` | `def _href_prefix(self)` |
-| `_internal_links` | method | `readmenator/_diagrams.py:709` | `def _internal_links(self, edges, selected, full)` |
-| `_is_full` | method | `readmenator/_diagrams.py:479` | `def _is_full(self, full)` |
+| `_fitted_gap` | method | `readmenator/_diagrams.py:857` | `def _fitted_gap(self, count, item, gap, total, margin)` |
+| `_glyph` | method | `readmenator/_diagrams.py:3670` | `def _glyph(self, kind)` |
+| `_href_prefix` | method | `readmenator/_diagrams.py:3640` | `def _href_prefix(self)` |
+| `_internal_links` | method | `readmenator/_diagrams.py:732` | `def _internal_links(self, edges, selected, full)` |
+| `_is_full` | method | `readmenator/_diagrams.py:481` | `def _is_full(self, full)` |
 | `_json_payload` | function | `readmenator/_diagrams.py:43` | `def _json_payload(payload)` |
-| `_lane_capacity` | method | `readmenator/_diagrams.py:858` | `def _lane_capacity(self)` |
-| `_lanes_that_fit` | method | `readmenator/_diagrams.py:817` | `def _lanes_that_fit(self, lanes)` |
-| `_layout_columns` | method | `readmenator/_diagrams.py:769` | `def _layout_columns(self, items, kind, full)` |
-| `_layout_sequence` | method | `readmenator/_diagrams.py:896` | `def _layout_sequence(self, ordered, full)` |
-| `_make_views` | method | `readmenator/_diagrams.py:1008` | `def _make_views(self, kind, primary, links)` |
-| `_meta_for` | method | `readmenator/_diagrams.py:985` | `def _meta_for(self, kind, placed, links, total, positions, full)` |
-| `_nodes_svg` | method | `readmenator/_diagrams.py:1700` | `def _nodes_svg(self, system_map)` |
-| `_place` | method | `readmenator/_diagrams.py:947` | `def _place(self, ranked, layer_of, kind, full)` |
-| `_prune_stale_docs` | method | `readmenator/_diagrams.py:3205` | `def _prune_stale_docs(docs_root, keep)` |
-| `_ranked_file_ids` | method | `readmenator/_diagrams.py:648` | `def _ranked_file_ids(self, nodes, links, analysis)` |
-| `_render_poster` | method | `readmenator/_diagrams.py:3122` | `def _render_poster(self, video, site_root)` |
+| `_lane_capacity` | method | `readmenator/_diagrams.py:881` | `def _lane_capacity(self)` |
+| `_lanes_that_fit` | method | `readmenator/_diagrams.py:840` | `def _lanes_that_fit(self, lanes)` |
+| `_layout_columns` | method | `readmenator/_diagrams.py:792` | `def _layout_columns(self, items, kind, full)` |
+| `_layout_sequence` | method | `readmenator/_diagrams.py:919` | `def _layout_sequence(self, ordered, full)` |
+| `_make_views` | method | `readmenator/_diagrams.py:1031` | `def _make_views(self, kind, primary, links)` |
+| `_meta_for` | method | `readmenator/_diagrams.py:1008` | `def _meta_for(self, kind, placed, links, total, positions, full)` |
+| `_nodes_svg` | method | `readmenator/_diagrams.py:1723` | `def _nodes_svg(self, system_map)` |
+| `_place` | method | `readmenator/_diagrams.py:970` | `def _place(self, ranked, layer_of, kind, full)` |
+| `_prune_stale_docs` | method | `readmenator/_diagrams.py:3301` | `def _prune_stale_docs(docs_root, keep)` |
+| `_ranked_file_ids` | method | `readmenator/_diagrams.py:671` | `def _ranked_file_ids(self, nodes, links, analysis)` |
+| `_render_poster` | method | `readmenator/_diagrams.py:3218` | `def _render_poster(self, video, site_root)` |
 | `_role_color` | function | `readmenator/_diagrams.py:55` | `def _role_color(role, config)` |
-| `_role_color` | method | `readmenator/_diagrams.py:1653` | `def _role_color(self, role)` |
-| `_role_for` | method | `readmenator/_diagrams.py:614` | `def _role_for(self, group, sensitive)` |
-| `_safe_json` | method | `readmenator/_diagrams.py:1631` | `def _safe_json(self, payload)` |
-| `_select_primary` | method | `readmenator/_diagrams.py:683` | `def _select_primary(self, nodes, links, analysis, full)` |
-| `_sensitive_files` | method | `readmenator/_diagrams.py:631` | `def _sensitive_files(self, findings)` |
-| `_sequence_capacity` | method | `readmenator/_diagrams.py:933` | `def _sequence_capacity(self)` |
-| `_short_label` | method | `readmenator/_diagrams.py:754` | `def _short_label(self, value)` |
-| `_start_here` | method | `readmenator/_diagrams.py:3386` | `def _start_here(self, entries, video_rel)` |
-| `_stat_tiles` | method | `readmenator/_diagrams.py:3366` | `def _stat_tiles(self, stats)` |
-| `_stats_line` | method | `readmenator/_diagrams.py:3633` | `def _stats_line(self, stats)` |
-| `_symbol_records` | method | `readmenator/_diagrams.py:732` | `def _symbol_records(self, node)` |
-| `_template` | method | `readmenator/_diagrams.py:1795` | `def _template(self)` |
-| `_template` | method | `readmenator/_diagrams.py:2358` | `def _template(self)` |
-| `_title_for` | method | `readmenator/_diagrams.py:600` | `def _title_for(self, kind)` |
-| `_tooltip` | method | `readmenator/_diagrams.py:2327` | `def _tooltip(self, node)` |
-| `_video_section` | method | `readmenator/_diagrams.py:3426` | `def _video_section(self, video_rel, poster_rel)` |
-| `build` | method | `readmenator/_diagrams.py:492` | `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` |
-| `build_all` | method | `readmenator/_diagrams.py:530` | `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` |
-| `collect_doc_sources` | method | `readmenator/_diagrams.py:3027` | `def collect_doc_sources(self, project_root)` |
-| `compare` | method | `readmenator/_diagrams.py:561` | `def compare(self, base, head)` |
-| `description_for` | method | `readmenator/_diagrams.py:2923` | `def description_for(self, kind)` |
-| `doc_order` | method | `readmenator/_diagrams.py:3489` | `def doc_order(base)` |
-| `order` | method | `readmenator/_diagrams.py:3270` | `def order(entry)` |
-| `publish` | method | `readmenator/_diagrams.py:2937` | `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` |
-| `publish_assets` | method | `readmenator/_diagrams.py:3053` | `def publish_assets(self, project_root, output_dir)` |
-| `render` | method | `readmenator/_diagrams.py:1510` | `def render(self, system_map)` |
-| `render` | method | `readmenator/_diagrams.py:2209` | `def render(self, system_map)` |
-| `render_index` | method | `readmenator/_diagrams.py:3298` | `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` |
-| `render_llms_txt` | method | `readmenator/_diagrams.py:3222` | `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` |
-| `supported_kinds` | method | `readmenator/_diagrams.py:471` | `def supported_kinds(self)` |
-| `validate` | method | `readmenator/_diagrams.py:241` | `def validate(self, system_map)` |
-| `write` | method | `readmenator/_diagrams.py:1612` | `def write(self, system_map, output_path)` |
-| `write` | method | `readmenator/_diagrams.py:2310` | `def write(self, system_map, output_path)` |
+| `_role_color` | method | `readmenator/_diagrams.py:1676` | `def _role_color(self, role)` |
+| `_role_for` | method | `readmenator/_diagrams.py:637` | `def _role_for(self, group, sensitive)` |
+| `_safe_json` | method | `readmenator/_diagrams.py:1654` | `def _safe_json(self, payload)` |
+| `_select_primary` | method | `readmenator/_diagrams.py:706` | `def _select_primary(self, nodes, links, analysis, full)` |
+| `_sensitive_files` | method | `readmenator/_diagrams.py:654` | `def _sensitive_files(self, findings)` |
+| `_sequence_capacity` | method | `readmenator/_diagrams.py:956` | `def _sequence_capacity(self)` |
+| `_short_label` | method | `readmenator/_diagrams.py:777` | `def _short_label(self, value)` |
+| `_start_here` | method | `readmenator/_diagrams.py:3482` | `def _start_here(self, entries, video_rel)` |
+| `_stat_tiles` | method | `readmenator/_diagrams.py:3462` | `def _stat_tiles(self, stats)` |
+| `_stats_line` | method | `readmenator/_diagrams.py:3729` | `def _stats_line(self, stats)` |
+| `_symbol_records` | method | `readmenator/_diagrams.py:755` | `def _symbol_records(self, node)` |
+| `_template` | method | `readmenator/_diagrams.py:1818` | `def _template(self)` |
+| `_template` | method | `readmenator/_diagrams.py:2408` | `def _template(self)` |
+| `_title_for` | method | `readmenator/_diagrams.py:623` | `def _title_for(self, kind)` |
+| `_tooltip` | method | `readmenator/_diagrams.py:2377` | `def _tooltip(self, node)` |
+| `_video_section` | method | `readmenator/_diagrams.py:3522` | `def _video_section(self, video_rel, poster_rel)` |
+| `build` | method | `readmenator/_diagrams.py:494` | `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)` |
+| `build_all` | method | `readmenator/_diagrams.py:553` | `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)` |
+| `collect_doc_sources` | method | `readmenator/_diagrams.py:3123` | `def collect_doc_sources(self, project_root)` |
+| `compare` | method | `readmenator/_diagrams.py:584` | `def compare(self, base, head)` |
+| `description_for` | method | `readmenator/_diagrams.py:3019` | `def description_for(self, kind)` |
+| `doc_order` | method | `readmenator/_diagrams.py:3585` | `def doc_order(base)` |
+| `order` | method | `readmenator/_diagrams.py:3366` | `def order(entry)` |
+| `publish` | method | `readmenator/_diagrams.py:3033` | `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` |
+| `publish_assets` | method | `readmenator/_diagrams.py:3149` | `def publish_assets(self, project_root, output_dir)` |
+| `render` | method | `readmenator/_diagrams.py:1533` | `def render(self, system_map)` |
+| `render` | method | `readmenator/_diagrams.py:2232` | `def render(self, system_map)` |
+| `render_index` | method | `readmenator/_diagrams.py:3394` | `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` |
+| `render_llms_txt` | method | `readmenator/_diagrams.py:3318` | `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` |
+| `supported_kinds` | method | `readmenator/_diagrams.py:473` | `def supported_kinds(self)` |
+| `validate` | method | `readmenator/_diagrams.py:243` | `def validate(self, system_map)` |
+| `write` | method | `readmenator/_diagrams.py:1635` | `def write(self, system_map, output_path)` |
+| `write` | method | `readmenator/_diagrams.py:2360` | `def write(self, system_map, output_path)` |
 | `DocumentationGenerator` | class | `readmenator/_documentation.py:33` | `class DocumentationGenerator` |
 | `__init__` | method | `readmenator/_documentation.py:45` | `def __init__(self, config)` |
 | `_apply_context_budget` | method | `readmenator/_documentation.py:178` | `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)` |
@@ -494,7 +496,5 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `taint` | method | `readmenator/_pipeline.py:118` | `def taint(self)` |
 | `uml` | method | `readmenator/_pipeline.py:170` | `def uml(self)` |
 | `video` | method | `readmenator/_pipeline.py:251` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:244` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:176` | `def wiki(self)` |
 
 Next: [SYMBOLS_p2.md](SYMBOLS_p2.md)

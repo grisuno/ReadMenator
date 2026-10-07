@@ -312,89 +312,91 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `_json_payload` (function, line 43) `def _json_payload(payload)`
   - `_role_color` (function, line 55) `def _role_color(role, config)`
   - `MapNode` (class, line 69) `class MapNode`
-  - `MapEdge` (class, line 100) `class MapEdge`
-  - `MapView` (class, line 117) `class MapView`
-  - `SystemMap` (class, line 134) `class SystemMap`
-  - `MapDiagnostic` (class, line 155) `class MapDiagnostic`
-  - `MapReceipt` (class, line 172) `class MapReceipt`
-  - `MapDelta` (class, line 189) `class MapDelta`
-  - `SystemMapValidator` (class, line 209) `class SystemMapValidator`
-  - `SystemMapBuilder` (class, line 433) `class SystemMapBuilder`
-  - `InteractiveMapRenderer` (class, line 1478) `class InteractiveMapRenderer`
-  - `VisNetworkRenderer` (class, line 2193) `class VisNetworkRenderer`
-  - `DocsSitePublisher` (class, line 2896) `class DocsSitePublisher`
-  - `__init__` (method, line 212) `def __init__(self, config)`
-  - `_effective_canvas` (method, line 220) `def _effective_canvas(self, system_map)`
-  - `validate` (method, line 241) `def validate(self, system_map)`
-  - `__init__` (method, line 462) `def __init__(self, config)`
-  - `supported_kinds` (method, line 471) `def supported_kinds(self)`
-  - `_is_full` (method, line 479) `def _is_full(self, full)`
-  - `build` (method, line 492) `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)`
-  - `build_all` (method, line 530) `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)`
-  - `compare` (method, line 561) `def compare(self, base, head)`
-  - `_title_for` (method, line 600) `def _title_for(self, kind)`
-  - `_role_for` (method, line 614) `def _role_for(self, group, sensitive)`
-  - `_sensitive_files` (method, line 631) `def _sensitive_files(self, findings)`
-  - `_ranked_file_ids` (method, line 648) `def _ranked_file_ids(self, nodes, links, analysis)`
-  - `_select_primary` (method, line 683) `def _select_primary(self, nodes, links, analysis, full)`
-  - `_internal_links` (method, line 709) `def _internal_links(self, edges, selected, full)`
-  - `_symbol_records` (method, line 732) `def _symbol_records(self, node)`
-  - `_short_label` (method, line 754) `def _short_label(self, value)`
-  - `_layout_columns` (method, line 769) `def _layout_columns(self, items, kind, full)`
-  - `_lanes_that_fit` (method, line 817) `def _lanes_that_fit(self, lanes)`
-  - `_fitted_gap` (method, line 834) `def _fitted_gap(self, count, item, gap, total, margin)`
-  - `_lane_capacity` (method, line 858) `def _lane_capacity(self)`
-  - `_cap_lane_scope` (method, line 872) `def _cap_lane_scope(self, ranked, layer_of)`
-  - `_layout_sequence` (method, line 896) `def _layout_sequence(self, ordered, full)`
-  - `_sequence_capacity` (method, line 933) `def _sequence_capacity(self)`
-  - `_place` (method, line 947) `def _place(self, ranked, layer_of, kind, full)`
-  - `_canvas_for` (method, line 967) `def _canvas_for(self, positions, full)`
-  - `_meta_for` (method, line 985) `def _meta_for(self, kind, placed, links, total, positions, full)`
-  - `_make_views` (method, line 1008) `def _make_views(self, kind, primary, links)`
-  - `_build_architecture` (method, line 1080) `def _build_architecture(self, nodes, links, layers, findings, analysis, full)`
-  - `_build_workflow` (method, line 1140) `def _build_workflow(self, nodes, links, layers, findings, full)`
-  - `_build_sequence` (method, line 1220) `def _build_sequence(self, nodes, links, layers, analysis, full)`
-  - `_build_dataflow` (method, line 1302) `def _build_dataflow(self, nodes, links, layers, findings, full)`
-  - `_build_lifecycle` (method, line 1385) `def _build_lifecycle(self, nodes, links, layers, findings, full)`
-  - `__init__` (method, line 1481) `def __init__(self, config)`
-  - `_canvas_size` (method, line 1489) `def _canvas_size(self, system_map)`
-  - `render` (method, line 1510) `def render(self, system_map)`
-  - `write` (method, line 1612) `def write(self, system_map, output_path)`
-  - `_safe_json` (method, line 1631) `def _safe_json(self, payload)`
-  - `_escape` (method, line 1642) `def _escape(self, value)`
-  - `_role_color` (method, line 1653) `def _role_color(self, role)`
-  - `_edge_path` (method, line 1664) `def _edge_path(self, x1, y1, x2, y2)`
-  - `_nodes_svg` (method, line 1700) `def _nodes_svg(self, system_map)`
-  - `_edges_svg` (method, line 1748) `def _edges_svg(self, system_map)`
-  - `_template` (method, line 1795) `def _template(self)`
-  - `__init__` (method, line 2201) `def __init__(self, config)`
-  - `render` (method, line 2209) `def render(self, system_map)`
-  - `write` (method, line 2310) `def write(self, system_map, output_path)`
-  - `_tooltip` (method, line 2327) `def _tooltip(self, node)`
-  - `_template` (method, line 2358) `def _template(self)`
-  - `__init__` (method, line 2913) `def __init__(self, config)`
-  - `description_for` (method, line 2923) `def description_for(self, kind)`
-  - `publish` (method, line 2937) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)`
-  - `collect_doc_sources` (method, line 3027) `def collect_doc_sources(self, project_root)`
-  - `publish_assets` (method, line 3053) `def publish_assets(self, project_root, output_dir)`
-  - `_render_poster` (method, line 3122) `def _render_poster(self, video, site_root)`
-  - `_doc_title` (method, line 3160) `def _doc_title(text)`
-  - `_doc_preview` (method, line 3169) `def _doc_preview(self, text)`
-  - `_prune_stale_docs` (method, line 3205) `def _prune_stale_docs(docs_root, keep)`
-  - `render_llms_txt` (method, line 3222) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
-  - `render_index` (method, line 3298) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)`
-  - `_stat_tiles` (method, line 3366) `def _stat_tiles(self, stats)`
-  - `_start_here` (method, line 3386) `def _start_here(self, entries, video_rel)`
-  - `_video_section` (method, line 3426) `def _video_section(self, video_rel, poster_rel)`
-  - `_doc_group` (method, line 3453) `def _doc_group(self, name)`
-  - `_docs_section` (method, line 3463) `def _docs_section(self, doc_entries)`
-  - `_href_prefix` (method, line 3544) `def _href_prefix(self)`
-  - `_glyph` (method, line 3574) `def _glyph(self, kind)`
-  - `_card` (method, line 3592) `def _card(self, kind, system_map, href_prefix)`
-  - `_stats_line` (method, line 3633) `def _stats_line(self, stats)`
-  - `_escape` (method, line 3647) `def _escape(self, value)`
-  - `order` (method, line 3270) `def order(entry)`
-  - `doc_order` (method, line 3489) `def doc_order(base)`
+  - `MapEdge` (class, line 102) `class MapEdge`
+  - `MapView` (class, line 119) `class MapView`
+  - `SystemMap` (class, line 136) `class SystemMap`
+  - `MapDiagnostic` (class, line 157) `class MapDiagnostic`
+  - `MapReceipt` (class, line 174) `class MapReceipt`
+  - `MapDelta` (class, line 191) `class MapDelta`
+  - `SystemMapValidator` (class, line 211) `class SystemMapValidator`
+  - `SystemMapBuilder` (class, line 435) `class SystemMapBuilder`
+  - `InteractiveMapRenderer` (class, line 1501) `class InteractiveMapRenderer`
+  - `VisNetworkRenderer` (class, line 2216) `class VisNetworkRenderer`
+  - `DocsSitePublisher` (class, line 2992) `class DocsSitePublisher`
+  - `__init__` (method, line 214) `def __init__(self, config)`
+  - `_effective_canvas` (method, line 222) `def _effective_canvas(self, system_map)`
+  - `validate` (method, line 243) `def validate(self, system_map)`
+  - `__init__` (method, line 464) `def __init__(self, config)`
+  - `supported_kinds` (method, line 473) `def supported_kinds(self)`
+  - `_is_full` (method, line 481) `def _is_full(self, full)`
+  - `build` (method, line 494) `def build(self, nodes, edges, resolved_edges, layers, findings, analysis, kind, full)`
+  - `_annotate_communities` (method, line 536) `def _annotate_communities(system_map, analysis)`
+  - `build_all` (method, line 553) `def build_all(self, nodes, edges, resolved_edges, layers, findings, analysis, full)`
+  - `compare` (method, line 584) `def compare(self, base, head)`
+  - `_title_for` (method, line 623) `def _title_for(self, kind)`
+  - `_role_for` (method, line 637) `def _role_for(self, group, sensitive)`
+  - `_sensitive_files` (method, line 654) `def _sensitive_files(self, findings)`
+  - `_ranked_file_ids` (method, line 671) `def _ranked_file_ids(self, nodes, links, analysis)`
+  - `_select_primary` (method, line 706) `def _select_primary(self, nodes, links, analysis, full)`
+  - `_internal_links` (method, line 732) `def _internal_links(self, edges, selected, full)`
+  - `_symbol_records` (method, line 755) `def _symbol_records(self, node)`
+  - `_short_label` (method, line 777) `def _short_label(self, value)`
+  - `_layout_columns` (method, line 792) `def _layout_columns(self, items, kind, full)`
+  - `_lanes_that_fit` (method, line 840) `def _lanes_that_fit(self, lanes)`
+  - `_fitted_gap` (method, line 857) `def _fitted_gap(self, count, item, gap, total, margin)`
+  - `_lane_capacity` (method, line 881) `def _lane_capacity(self)`
+  - `_cap_lane_scope` (method, line 895) `def _cap_lane_scope(self, ranked, layer_of)`
+  - `_layout_sequence` (method, line 919) `def _layout_sequence(self, ordered, full)`
+  - `_sequence_capacity` (method, line 956) `def _sequence_capacity(self)`
+  - `_place` (method, line 970) `def _place(self, ranked, layer_of, kind, full)`
+  - `_canvas_for` (method, line 990) `def _canvas_for(self, positions, full)`
+  - `_meta_for` (method, line 1008) `def _meta_for(self, kind, placed, links, total, positions, full)`
+  - `_make_views` (method, line 1031) `def _make_views(self, kind, primary, links)`
+  - `_build_architecture` (method, line 1103) `def _build_architecture(self, nodes, links, layers, findings, analysis, full)`
+  - `_build_workflow` (method, line 1163) `def _build_workflow(self, nodes, links, layers, findings, full)`
+  - `_build_sequence` (method, line 1243) `def _build_sequence(self, nodes, links, layers, analysis, full)`
+  - `_build_dataflow` (method, line 1325) `def _build_dataflow(self, nodes, links, layers, findings, full)`
+  - `_build_lifecycle` (method, line 1408) `def _build_lifecycle(self, nodes, links, layers, findings, full)`
+  - `__init__` (method, line 1504) `def __init__(self, config)`
+  - `_canvas_size` (method, line 1512) `def _canvas_size(self, system_map)`
+  - `render` (method, line 1533) `def render(self, system_map)`
+  - `write` (method, line 1635) `def write(self, system_map, output_path)`
+  - `_safe_json` (method, line 1654) `def _safe_json(self, payload)`
+  - `_escape` (method, line 1665) `def _escape(self, value)`
+  - `_role_color` (method, line 1676) `def _role_color(self, role)`
+  - `_edge_path` (method, line 1687) `def _edge_path(self, x1, y1, x2, y2)`
+  - `_nodes_svg` (method, line 1723) `def _nodes_svg(self, system_map)`
+  - `_edges_svg` (method, line 1771) `def _edges_svg(self, system_map)`
+  - `_template` (method, line 1818) `def _template(self)`
+  - `__init__` (method, line 2224) `def __init__(self, config)`
+  - `render` (method, line 2232) `def render(self, system_map)`
+  - `_community_legend` (method, line 2340) `def _community_legend(self, system_map)`
+  - `write` (method, line 2360) `def write(self, system_map, output_path)`
+  - `_tooltip` (method, line 2377) `def _tooltip(self, node)`
+  - `_template` (method, line 2408) `def _template(self)`
+  - `__init__` (method, line 3009) `def __init__(self, config)`
+  - `description_for` (method, line 3019) `def description_for(self, kind)`
+  - `publish` (method, line 3033) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)`
+  - `collect_doc_sources` (method, line 3123) `def collect_doc_sources(self, project_root)`
+  - `publish_assets` (method, line 3149) `def publish_assets(self, project_root, output_dir)`
+  - `_render_poster` (method, line 3218) `def _render_poster(self, video, site_root)`
+  - `_doc_title` (method, line 3256) `def _doc_title(text)`
+  - `_doc_preview` (method, line 3265) `def _doc_preview(self, text)`
+  - `_prune_stale_docs` (method, line 3301) `def _prune_stale_docs(docs_root, keep)`
+  - `render_llms_txt` (method, line 3318) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
+  - `render_index` (method, line 3394) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)`
+  - `_stat_tiles` (method, line 3462) `def _stat_tiles(self, stats)`
+  - `_start_here` (method, line 3482) `def _start_here(self, entries, video_rel)`
+  - `_video_section` (method, line 3522) `def _video_section(self, video_rel, poster_rel)`
+  - `_doc_group` (method, line 3549) `def _doc_group(self, name)`
+  - `_docs_section` (method, line 3559) `def _docs_section(self, doc_entries)`
+  - `_href_prefix` (method, line 3640) `def _href_prefix(self)`
+  - `_glyph` (method, line 3670) `def _glyph(self, kind)`
+  - `_card` (method, line 3688) `def _card(self, kind, system_map, href_prefix)`
+  - `_stats_line` (method, line 3729) `def _stats_line(self, stats)`
+  - `_escape` (method, line 3743) `def _escape(self, value)`
+  - `order` (method, line 3366) `def order(entry)`
+  - `doc_order` (method, line 3585) `def doc_order(base)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`
 

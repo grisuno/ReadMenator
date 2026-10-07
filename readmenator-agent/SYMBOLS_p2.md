@@ -3,6 +3,8 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `vis_renderer` | method | `readmenator/_pipeline.py:244` | `def vis_renderer(self)` |
+| `wiki` | method | `readmenator/_pipeline.py:176` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -191,28 +193,28 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_caption_y` | function | `readmenator/_video.py:116` | `def _caption_y(cfg)` |
 | `_code_tint` | function | `readmenator/_video.py:172` | `def _code_tint(line)` |
 | `_dna_boxes` | function | `readmenator/_video.py:130` | `def _dna_boxes(cfg)` |
-| `_draw_frame` | method | `readmenator/_video.py:757` | `def _draw_frame(fi)` |
+| `_draw_frame` | method | `readmenator/_video.py:802` | `def _draw_frame(fi)` |
 | `_find` | method | `readmenator/_video.py:201` | `def _find(style)` |
 | `_graph_boxes` | function | `readmenator/_video.py:121` | `def _graph_boxes(cfg)` |
 | `_img` | method | `readmenator/_video.py:292` | `def _img()` |
 | `_packet_offset` | function | `readmenator/_video.py:182` | `def _packet_offset(a, b, k)` |
 | `_panel` | function | `readmenator/_video.py:111` | `def _panel(cfg)` |
-| `_render_frame_bytes` | method | `readmenator/_video.py:752` | `def _render_frame_bytes(fi)` |
+| `_render_frame_bytes` | method | `readmenator/_video.py:797` | `def _render_frame_bytes(fi)` |
 | `_scan_cursor` | function | `readmenator/_video.py:163` | `def _scan_cursor(d, box, progress, col)` |
-| `_scene_card` | method | `readmenator/_video.py:820` | `def _scene_card(img, d, lt, gt, sc)` |
-| `_scene_communities` | method | `readmenator/_video.py:963` | `def _scene_communities(img, d, lt, gt, sc)` |
-| `_scene_dna` | method | `readmenator/_video.py:1064` | `def _scene_dna(img, d, lt, gt, sc)` |
-| `_scene_gods` | method | `readmenator/_video.py:859` | `def _scene_gods(img, d, lt, gt, sc)` |
-| `_scene_graph` | method | `readmenator/_video.py:1006` | `def _scene_graph(img, d, lt, gt, sc)` |
-| `_scene_layers` | method | `readmenator/_video.py:834` | `def _scene_layers(img, d, lt, gt, sc)` |
-| `_scene_outro` | method | `readmenator/_video.py:1119` | `def _scene_outro(img, d, lt, gt, sc)` |
-| `_scene_title` | method | `readmenator/_video.py:785` | `def _scene_title(img, d, lt, gt, sc)` |
-| `_scene_tree` | method | `readmenator/_video.py:902` | `def _scene_tree(img, d, lt, gt, sc)` |
+| `_scene_card` | method | `readmenator/_video.py:865` | `def _scene_card(img, d, lt, gt, sc)` |
+| `_scene_communities` | method | `readmenator/_video.py:1021` | `def _scene_communities(img, d, lt, gt, sc)` |
+| `_scene_dna` | method | `readmenator/_video.py:1123` | `def _scene_dna(img, d, lt, gt, sc)` |
+| `_scene_gods` | method | `readmenator/_video.py:904` | `def _scene_gods(img, d, lt, gt, sc)` |
+| `_scene_graph` | method | `readmenator/_video.py:1065` | `def _scene_graph(img, d, lt, gt, sc)` |
+| `_scene_layers` | method | `readmenator/_video.py:879` | `def _scene_layers(img, d, lt, gt, sc)` |
+| `_scene_outro` | method | `readmenator/_video.py:1182` | `def _scene_outro(img, d, lt, gt, sc)` |
+| `_scene_title` | method | `readmenator/_video.py:830` | `def _scene_title(img, d, lt, gt, sc)` |
+| `_scene_tree` | method | `readmenator/_video.py:947` | `def _scene_tree(img, d, lt, gt, sc)` |
 | `_split_boxes` | function | `readmenator/_video.py:139` | `def _split_boxes(cfg)` |
 | `_sun` | method | `readmenator/_video.py:277` | `def _sun(self, r)` |
 | `_verdict_badge` | function | `readmenator/_video.py:148` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
 | `alpha` | function | `readmenator/_video.py:89` | `def alpha(c, a)` |
-| `build_scenes` | method | `readmenator/_video.py:612` | `def build_scenes(self, data)` |
+| `build_scenes` | method | `readmenator/_video.py:623` | `def build_scenes(self, data)` |
 | `chroma_text` | method | `readmenator/_video.py:377` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
 | `collect` | method | `readmenator/_video.py:436` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map)` |
 | `dependencies_available` | function | `readmenator/_video.py:188` | `def dependencies_available()` |
@@ -223,16 +225,16 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `ease` | function | `readmenator/_video.py:73` | `def ease(x)` |
 | `fmt_int` | function | `readmenator/_video.py:79` | `def fmt_int(n)` |
 | `glitch_fx` | method | `readmenator/_video.py:354` | `def glitch_fx(img, amount, seed)` |
-| `graph_positions` | method | `readmenator/_video.py:638` | `def graph_positions(self, data, box)` |
+| `graph_positions` | method | `readmenator/_video.py:649` | `def graph_positions(self, data, box)` |
 | `hash_color` | function | `readmenator/_video.py:94` | `def hash_color(digest)` |
 | `hud_panel` | method | `readmenator/_video.py:388` | `def hud_panel(d, box, title, fonts, col)` |
 | `mix` | function | `readmenator/_video.py:84` | `def mix(a, b, t)` |
 | `post` | method | `readmenator/_video.py:336` | `def post(img, glitch, seed)` |
-| `render` | method | `readmenator/_video.py:712` | `def render(self, data, output_path)` |
-| `render_single_frame` | method | `readmenator/_video.py:694` | `def render_single_frame(self, data, frame_index)` |
+| `render` | method | `readmenator/_video.py:757` | `def render(self, data, output_path)` |
+| `render_single_frame` | method | `readmenator/_video.py:739` | `def render_single_frame(self, data, frame_index)` |
 | `resolve_fonts` | function | `readmenator/_video.py:197` | `def resolve_fonts()` |
 | `short_label` | function | `readmenator/_video.py:103` | `def short_label(text, limit)` |
-| `tree_positions` | method | `readmenator/_video.py:673` | `def tree_positions(self, data, box)` |
+| `tree_positions` | method | `readmenator/_video.py:696` | `def tree_positions(self, data, box)` |
 | `DirectoryWatcher` | class | `readmenator/_watcher.py:21` | `class DirectoryWatcher` |
 | `__init__` | method | `readmenator/_watcher.py:29` | `def __init__(self, root, config, callback, interval_seconds)` |
 | `_compute_snapshot` | method | `readmenator/_watcher.py:51` | `def _compute_snapshot(self)` |
@@ -355,6 +357,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
 | `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
 | `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
+| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:501` | `class TestLiveMapCommunities(TestCase)` |
 | `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
 | `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
 | `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
@@ -366,6 +369,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_edge` | function | `tests/test_agent_friendliness.py:29` | `def _edge(source, target, relation)` |
 | `_entries` | method | `tests/test_agent_friendliness.py:459` | `def _entries(self)` |
 | `_git_repo` | method | `tests/test_agent_friendliness.py:202` | `def _git_repo(self, root, packed)` |
+| `_inputs` | method | `tests/test_agent_friendliness.py:504` | `def _inputs(self)` |
 | `_node` | function | `tests/test_agent_friendliness.py:21` | `def _node(node_id, doc, symbols)` |
 | `_two_cliques` | method | `tests/test_agent_friendliness.py:414` | `def _two_cliques(self)` |
 | `test_agent_output_pages_repeat_table_header_and_link_next` | method | `tests/test_agent_friendliness.py:84` | `def test_agent_output_pages_repeat_table_header_and_link_next(self)` |
@@ -376,6 +380,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `test_api_skips_private_helpers_and_test_layer` | method | `tests/test_agent_friendliness.py:122` | `def test_api_skips_private_helpers_and_test_layer(self)` |
 | `test_api_states_dependencies_once_per_file` | method | `tests/test_agent_friendliness.py:113` | `def test_api_states_dependencies_once_per_file(self)` |
 | `test_architecture_external_excludes_internally_resolved_imports` | method | `tests/test_agent_friendliness.py:144` | `def test_architecture_external_excludes_internally_resolved_imports(self)` |
+| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:520` | `def test_built_maps_carry_community_and_core_role(self)` |
 | `test_check_freshness_detects_source_edits` | method | `tests/test_agent_friendliness.py:343` | `def test_check_freshness_detects_source_edits(self)` |
 | `test_communities_survive_a_shared_hub` | method | `tests/test_agent_friendliness.py:311` | `def test_communities_survive_a_shared_hub(self)` |
 | `test_community_label_ignores_test_directory` | method | `tests/test_agent_friendliness.py:446` | `def test_community_label_ignores_test_directory(self)` |
@@ -404,6 +409,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `test_scanner_skips_own_generated_outputs` | method | `tests/test_agent_friendliness.py:247` | `def test_scanner_skips_own_generated_outputs(self)` |
 | `test_shared_directory_labels_use_core_file` | method | `tests/test_agent_friendliness.py:380` | `def test_shared_directory_labels_use_core_file(self)` |
 | `test_small_community_merges_into_best_connected_neighbor` | method | `tests/test_agent_friendliness.py:366` | `def test_small_community_merges_into_best_connected_neighbor(self)` |
+| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:529` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
 | `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:248` | `class TestAgentInjectorEdgeCases(TestCase)` |
 | `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:211` | `class TestAgentInjectorFindFiles(TestCase)` |
 | `TestAgentInjectorInjectBehavior` | class | `tests/test_agent_injector.py:19` | `class TestAgentInjectorInjectBehavior(TestCase)` |
@@ -490,11 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TestGraphAnalyzerContract` | class | `tests/test_analyzer.py:16` | `class TestGraphAnalyzerContract(TestCase)` |
 | `_make_edge` | method | `tests/test_analyzer.py:26` | `def _make_edge(self, src, tgt, rel)` |
 | `_make_node` | method | `tests/test_analyzer.py:23` | `def _make_node(self, nid, label, lang)` |
-| `setUp` | method | `tests/test_analyzer.py:19` | `def setUp(self)` |
-| `test_analyze_computes_god_nodes` | method | `tests/test_analyzer.py:48` | `def test_analyze_computes_god_nodes(self)` |
-| `test_analyze_detects_communities_for_connected_graph` | method | `tests/test_analyzer.py:34` | `def test_analyze_detects_communities_for_connected_graph(self)` |
-| `test_analyze_empty_graph_returns_empty_result` | method | `tests/test_analyzer.py:29` | `def test_analyze_empty_graph_returns_empty_result(self)` |
-| `test_analyze_finds_surprising_connections` | method | `tests/test_analyzer.py:64` | `def test_analyze_finds_surprising_connections(self)` |
-| `test_analyze_generates_questions` | method | `tests/test_analyzer.py:81` | `def test_analyze_generates_questions(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

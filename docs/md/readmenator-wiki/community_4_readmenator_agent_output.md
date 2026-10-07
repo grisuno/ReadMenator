@@ -19,7 +19,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_scanner.py` | py | utility | 14 | yes |
 | `readmenator/_security.py` | py | utility | 32 | yes |
 | `readmenator/_wiki.py` | py | utility | 31 | yes |
-| `tests/test_agent_friendliness.py` | py | testing | 54 | yes |
+| `tests/test_agent_friendliness.py` | py | testing | 58 | yes |
 | `tests/test_analyzer.py` | py | testing | 14 | yes |
 | `tests/test_cache.py` | py | testing | 22 | yes |
 | `tests/test_resolver.py` | py | testing | 22 | yes |
@@ -63,8 +63,8 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 33
-- Cross-boundary resolved imports (EXTRACTED): 42
+- Internal resolved imports (EXTRACTED): 34
+- Cross-boundary resolved imports (EXTRACTED): 44
 
 ## Connections
 
@@ -74,7 +74,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 - [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
 - [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
 - [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
+- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
 
 ## Risks
 

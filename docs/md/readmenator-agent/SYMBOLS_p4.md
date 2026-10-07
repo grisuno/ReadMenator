@@ -3,6 +3,12 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_empty_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:198` | `def test_empty_code_returns_empty_or_valid(self, ext)` |
+| `test_never_crashes_on_malformed_code` | method | `tests/test_parsers_property.py:162` | `def test_never_crashes_on_malformed_code(self, ext, code)` |
+| `test_never_crashes_on_many_lines` | method | `tests/test_parsers_property.py:220` | `def test_never_crashes_on_many_lines(self, ext, lines)` |
+| `test_never_crashes_on_unicode_code` | method | `tests/test_parsers_property.py:180` | `def test_never_crashes_on_unicode_code(self, ext, code)` |
+| `test_parser_imports_is_list_of_strings` | method | `tests/test_parsers_property.py:257` | `def test_parser_imports_is_list_of_strings(self, ext)` |
+| `test_python_never_crashes_on_any_text` | method | `tests/test_parsers_property.py:310` | `def test_python_never_crashes_on_any_text(self, code)` |
 | `test_python_never_crashes_on_weird_ascii` | method | `tests/test_parsers_property.py:296` | `def test_python_never_crashes_on_weird_ascii(self, code)` |
 | `test_repeated_keywords_no_crash` | method | `tests/test_parsers_property.py:238` | `def test_repeated_keywords_no_crash(self, ext)` |
 | `test_unknown_extension_returns_none` | method | `tests/test_parsers_property.py:269` | `def test_unknown_extension_returns_none(self)` |
