@@ -4,7 +4,7 @@
 Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 Imported by: `readmenator.py`
 - `build_parser` (function) `readmenator/__main__.py:18` `def build_parser()`
-- `main` (function) `readmenator/__main__.py:136` `def main()`
+- `main` (function) `readmenator/__main__.py:134` `def main()`
 
 ## readmenator/_agent_injector.py
 Imported by: `readmenator/_pipeline.py`, `tests/test_agent_injector.py`, `tests/test_agent_output.py`
@@ -30,45 +30,45 @@ Imported by: `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_age
 - `GraphAnalyzer.is_test` (method) `readmenator/_analyzer.py:314` `def is_test(fid)` -- Return whether a path looks like a test file.
 
 ## readmenator/_app.py
-Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
-Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
-- `readmenatorApplication.__init__` (method) `readmenator/_app.py:44` `def __init__(self, config)`
-- `readmenatorApplication.run` (method) `readmenator/_app.py:90` `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
-- `readmenatorApplication.check_freshness` (method) `readmenator/_app.py:214` `def check_freshness(self, target_dir)` -- Compare the MANIFEST source fingerprint against the current sources.
-- `readmenatorApplication.publish_github_wiki` (method) `readmenator/_app.py:265` `def publish_github_wiki(self, target_dir, dry_run)` -- Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
-- `readmenatorApplication.generate_uml_code` (method) `readmenator/_app.py:321` `def generate_uml_code(self, target_dir, language, output_path)`
-- `readmenatorApplication.update` (method) `readmenator/_app.py:388` `def update(self, target_dir, run_security)`
-- `readmenatorApplication.query` (method) `readmenator/_app.py:511` `def query(self, target_dir, question)`
-- `readmenatorApplication.explain` (method) `readmenator/_app.py:516` `def explain(self, target_dir, symbol_name)`
-- `readmenatorApplication.find_path` (method) `readmenator/_app.py:528` `def find_path(self, target_dir, symbol_a, symbol_b)`
-- `readmenatorApplication.summary` (method) `readmenator/_app.py:541` `def summary(self, target_dir)`
-- `readmenatorApplication.rank_query` (method) `readmenator/_app.py:546` `def rank_query(self, target_dir, query, top_n)` -- Run a ranked query against the knowledge graph.
-- `readmenatorApplication.rebuild` (method) `readmenator/_app.py:576` `def rebuild(self, target_dir, run_security)`
-- `readmenatorApplication.analyze` (method) `readmenator/_app.py:579` `def analyze(self, target_dir)`
-- `readmenatorApplication.export_json` (method) `readmenator/_app.py:583` `def export_json(self, target_dir, output_path)`
-- `readmenatorApplication.export_html` (method) `readmenator/_app.py:594` `def export_html(self, target_dir, output_path)`
-- `readmenatorApplication.export_svg` (method) `readmenator/_app.py:605` `def export_svg(self, target_dir, output_path)`
-- `readmenatorApplication.export` (method) `readmenator/_app.py:616` `def export(self, target_dir)`
-- `readmenatorApplication.export_graphml` (method) `readmenator/_app.py:621` `def export_graphml(self, target_dir, output_path)`
-- `readmenatorApplication.export_cypher` (method) `readmenator/_app.py:632` `def export_cypher(self, target_dir, output_path)`
-- `readmenatorApplication.export_obsidian` (method) `readmenator/_app.py:645` `def export_obsidian(self, target_dir, output_dir)`
-- `readmenatorApplication.export_wiki` (method) `readmenator/_app.py:655` `def export_wiki(self, target_dir, output_dir)` -- Generate the navigable agent wiki for the target project.
-- `readmenatorApplication.lint_wiki` (method) `readmenator/_app.py:678` `def lint_wiki(self, target_dir)` -- Check wiki health and log reported issues.
-- `readmenatorApplication.export_diagrams` (method) `readmenator/_app.py:696` `def export_diagrams(self, target_dir, output_dir, full)` -- Export all five interactive system maps plus a gallery index.
-- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:748` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
-- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:787` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
-- `readmenatorApplication.export_video` (method) `readmenator/_app.py:826` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
-- `readmenatorApplication.watch` (method) `readmenator/_app.py:890` `def watch(self, target_dir)`
-- `readmenatorApplication.on_change` (method) `readmenator/_app.py:894` `def on_change()`
-- `readmenatorApplication.audit` (method) `readmenator/_app.py:900` `def audit(self, target_dir)`
-- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:907` `def audit_deep(self, target_dir)`
-- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:927` `def export_sarif(self, target_dir, output_path)`
-- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:937` `def export_rules(self, target_dir, output_dir)`
-- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:947` `def detect_layers(self, target_dir)`
-- `readmenatorApplication.lint` (method) `readmenator/_app.py:957` `def lint(self, target_dir)`
-- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:970` `def strip_dead_code(self, target_dir)`
-- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:980` `def generate_cursorrules(self, target_dir)`
-- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:995` `def refactor_monolith(self, target_dir)`
+Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
+Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
+- `readmenatorApplication.__init__` (method) `readmenator/_app.py:45` `def __init__(self, config)`
+- `readmenatorApplication.run` (method) `readmenator/_app.py:91` `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
+- `readmenatorApplication.check_freshness` (method) `readmenator/_app.py:215` `def check_freshness(self, target_dir)` -- Compare the MANIFEST source fingerprint against the current sources.
+- `readmenatorApplication.publish_github_wiki` (method) `readmenator/_app.py:278` `def publish_github_wiki(self, target_dir, dry_run)` -- Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
+- `readmenatorApplication.generate_uml_code` (method) `readmenator/_app.py:334` `def generate_uml_code(self, target_dir, language, output_path)`
+- `readmenatorApplication.update` (method) `readmenator/_app.py:401` `def update(self, target_dir, run_security)`
+- `readmenatorApplication.query` (method) `readmenator/_app.py:524` `def query(self, target_dir, question)`
+- `readmenatorApplication.explain` (method) `readmenator/_app.py:529` `def explain(self, target_dir, symbol_name)`
+- `readmenatorApplication.find_path` (method) `readmenator/_app.py:541` `def find_path(self, target_dir, symbol_a, symbol_b)`
+- `readmenatorApplication.summary` (method) `readmenator/_app.py:554` `def summary(self, target_dir)`
+- `readmenatorApplication.rank_query` (method) `readmenator/_app.py:559` `def rank_query(self, target_dir, query, top_n)` -- Run a ranked query against the knowledge graph.
+- `readmenatorApplication.rebuild` (method) `readmenator/_app.py:589` `def rebuild(self, target_dir, run_security)`
+- `readmenatorApplication.analyze` (method) `readmenator/_app.py:592` `def analyze(self, target_dir)`
+- `readmenatorApplication.export_json` (method) `readmenator/_app.py:596` `def export_json(self, target_dir, output_path)`
+- `readmenatorApplication.export_html` (method) `readmenator/_app.py:607` `def export_html(self, target_dir, output_path)`
+- `readmenatorApplication.export_svg` (method) `readmenator/_app.py:618` `def export_svg(self, target_dir, output_path)`
+- `readmenatorApplication.export` (method) `readmenator/_app.py:629` `def export(self, target_dir)`
+- `readmenatorApplication.export_graphml` (method) `readmenator/_app.py:634` `def export_graphml(self, target_dir, output_path)`
+- `readmenatorApplication.export_cypher` (method) `readmenator/_app.py:645` `def export_cypher(self, target_dir, output_path)`
+- `readmenatorApplication.export_obsidian` (method) `readmenator/_app.py:658` `def export_obsidian(self, target_dir, output_dir)`
+- `readmenatorApplication.export_wiki` (method) `readmenator/_app.py:668` `def export_wiki(self, target_dir, output_dir)` -- Generate the navigable agent wiki for the target project.
+- `readmenatorApplication.lint_wiki` (method) `readmenator/_app.py:691` `def lint_wiki(self, target_dir)` -- Check wiki health and log reported issues.
+- `readmenatorApplication.export_diagrams` (method) `readmenator/_app.py:709` `def export_diagrams(self, target_dir, output_dir, full)` -- Export all five interactive system maps plus a gallery index.
+- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:761` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
+- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:800` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
+- `readmenatorApplication.export_video` (method) `readmenator/_app.py:839` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
+- `readmenatorApplication.watch` (method) `readmenator/_app.py:903` `def watch(self, target_dir)`
+- `readmenatorApplication.on_change` (method) `readmenator/_app.py:907` `def on_change()`
+- `readmenatorApplication.audit` (method) `readmenator/_app.py:913` `def audit(self, target_dir)`
+- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:920` `def audit_deep(self, target_dir)`
+- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:940` `def export_sarif(self, target_dir, output_path)`
+- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:950` `def export_rules(self, target_dir, output_dir)`
+- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:960` `def detect_layers(self, target_dir)`
+- `readmenatorApplication.lint` (method) `readmenator/_app.py:970` `def lint(self, target_dir)`
+- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:983` `def strip_dead_code(self, target_dir)`
+- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:993` `def generate_cursorrules(self, target_dir)`
+- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:1008` `def refactor_monolith(self, target_dir)`
 
 ## readmenator/_cache.py
 Depends on: `readmenator/_config.py`
@@ -193,7 +193,7 @@ Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_gh_w
 - `GitHubWikiPublisher.publish` (method) `readmenator/_gh_wiki.py:313` `def publish(self, project_root, dry_run)` -- Render pages and push them to the GitHub wiki (or a local folder).
 
 ## readmenator/_gitmeta.py
-Imported by: `readmenator/_agent_output.py`, `readmenator/_gh_wiki.py`, `tests/test_agent_friendliness.py`
+Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_gh_wiki.py`, `tests/test_agent_friendliness.py`
 - `read_git_head` (function) `readmenator/_gitmeta.py:84` `def read_git_head(project_root)` -- Return the current commit and branch of a project, when available.
 
 ## readmenator/_hotspots.py

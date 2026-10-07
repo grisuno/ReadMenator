@@ -1,6 +1,6 @@
 # orphans
 
-*Community 7 | 2 files | cohesion 0.00*
+*Community 3 | 2 files | cohesion 0.00*
 
 ## Definition
 
@@ -53,7 +53,9 @@ This community groups 2 file(s) rooted at `tests` with dominant language py (coh
 
 ## Connections
 
-- [INFERRED] shares_context community 0 <-> 7 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _diagrams) and community 7 (orphans).
+- [INFERRED] shares_context community 0 <-> 3 (strength 0.5): Inferred shared context (language py and layer testing) with no import path between community 0 (readmenator: _diagrams) and community 3 (orphans).
+- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator: _category) and community 3 (orphans).
+- [INFERRED] shares_context community 2 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).
 
 ## Risks
 

@@ -1,63 +1,13 @@
 # Subsystem: root
 
-## .refactor__app.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_app.py Current lines: 643 Estimated impact: 5 files
-- Language: sh
-
-## .refactor__documentation.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_documentation.py Current lines: 1087 Estimated impact: 2 files
-- Language: sh
-
-## .refactor__exporter.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_exporter.py Current lines: 898 Estimated impact: 2 files
-- Language: sh
-
-## .refactor__mcp_server.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_mcp_server.py Current lines: 813 Estimated impact: 3 files
-- Language: sh
-
-## .refactor__rank.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_rank.py Current lines: 537 Estimated impact: 7 files
-- Language: sh
-
-## .refactor__security.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_security.py Current lines: 583 Estimated impact: 2 files
-- Language: sh
-
-## .refactor__uml.sh
-- Layer: utility
-- Doc: Refactoring plan for readmenator/_uml.py Current lines: 599 Estimated impact: 4 files
-- Language: sh
-
-## .refactor_test_parsers.sh
-- Layer: testing
-- Doc: Refactoring plan for tests/test_parsers.py Current lines: 487 Estimated impact: 0 files
-- Language: sh
-
-## .refactor_test_ranking.sh
-- Layer: testing
-- Doc: Refactoring plan for tests/test_ranking.py Current lines: 666 Estimated impact: 0 files
-- Language: sh
-
-## .refactor_test_uml.sh
-- Layer: testing
-- Doc: Refactoring plan for tests/test_uml.py Current lines: 488 Estimated impact: 0 files
-- Language: sh
-
 ## readmenator.py
-- Layer: utility
 - Doc: Launcher shim that runs the readmenator CLI from a source checkout.
+- Layer: utility
 - Language: py
 - Depends on: `readmenator/__main__.py`
 
 ## readmenator_orchestrator.py
-- Layer: testing
+- Layer: utility
 - Language: py
 - Symbols:
   - `Config` (class, line 21) `class Config`

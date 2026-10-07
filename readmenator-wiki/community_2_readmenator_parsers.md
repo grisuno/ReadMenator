@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 1 | 22 files | cohesion 0.68*
+*Community 2 | 24 files | cohesion 0.69*
 
 ## Definition
 
-This community groups 22 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.68). Central symbols: `AssemblyParser`, `CParser`, `CSharpParser`, `DartParser`, `ElixirParser`, `GDScriptParser`, `GoParser`, `JavaParser`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Parser factory: maps file extensions to per-language LanguageParser classes..
+This community groups 24 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.69). Central symbols: `AssemblyParser`, `CParser`, `CSharpParser`, `DartParser`, `ElixirParser`, `GDScriptParser`, `GoParser`, `JavaParser`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Parser factory: maps file extensions to per-language LanguageParser classes..
 
 ## Files
 
@@ -29,16 +29,16 @@ This community groups 22 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/parsers/_php.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_python.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_ruby.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_rust.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_scala.py` | py | utility | 2 | yes |
 
-### `tests` (1 files)
+### `tests` (3 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `tests/test_parsers.py` | py | testing | 87 | no |
+| `tests/test_parsers_new.py` | py | testing | 36 | yes |
 | `tests/test_parsers_property.py` | py | testing | 27 | yes |
 
-*... and 2 more files in this community.*
+*... and 4 more files in this community.*
 
 
 ## Key Symbols
@@ -76,18 +76,14 @@ This community groups 22 file(s) rooted at `readmenator/parsers` with dominant l
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 57
+- Internal resolved imports (EXTRACTED): 59
 - Cross-boundary resolved imports (EXTRACTED): 27
 
 ## Connections
 
-- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_scanner.py imports readmenator/parsers/__init__.py.
-- [INFERRED] bridges community 0 <-> 1 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches readmenator/parsers/__init__.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/parsers/__init__.py reaches tests/test_agent_injector.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/parsers/__init__.py reaches tests/test_readme_injector.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/parsers/_assembly.py reaches tests/test_agent_injector.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/parsers/_assembly.py reaches tests/test_readme_injector.py in 4 hops.
-- [INFERRED] shares_context community 1 <-> 2 (strength 0.5): Inferred shared context (layer utility) with no import path between community 1 (readmenator/parsers) and community 2 (orphans).
+- [EXTRACTED] depends_on community 0 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_scanner.py imports readmenator/parsers/__init__.py.
+- [INFERRED] bridges community 1 <-> 2 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches readmenator/parsers/__init__.py in 4 hops.
+- [INFERRED] shares_context community 2 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).
 
 ## Risks
 
@@ -95,8 +91,9 @@ This community groups 22 file(s) rooted at `readmenator/parsers` with dominant l
 
 ## Open Questions
 
+- Why do 1 file(s) lack file-level docs (e.g. `tests/test_parsers.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.68?
+- Should readmenator/parsers be split, given cohesion 0.69?
 
 ## Sources
 
@@ -120,4 +117,4 @@ This community groups 22 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/parsers/_rust.py`
 - `readmenator/parsers/_scala.py`
 - `readmenator/parsers/_shell.py`
-- *... and 2 more*
+- *... and 4 more*

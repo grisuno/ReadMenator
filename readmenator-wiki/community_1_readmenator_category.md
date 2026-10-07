@@ -1,10 +1,10 @@
 # readmenator: _category
 
-*Community 3 | 5 files | cohesion 0.42*
+*Community 1 | 7 files | cohesion 0.46*
 
 ## Definition
 
-This community groups 5 file(s) rooted at `readmenator` with dominant language py (cohesion 0.42). Central symbols: `Category`, `CompositeRanker`, `DocProjection`, `EdgeKind`, `IdentityProjection`, `Morphism`, `Projection`, `RankConfig`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: Category theory model for the readmenator code graph.  Defines typed morphisms (edges with semantic kind), objects (file nodes), and a Category class for algebr.
+This community groups 7 file(s) rooted at `readmenator` with dominant language py (cohesion 0.46). Central symbols: `Category`, `CompositeRanker`, `DocProjection`, `EdgeKind`, `IdentityProjection`, `Morphism`, `Projection`, `QueryEngine`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: Category theory model for the readmenator code graph.  Defines typed morphisms (edges with semantic kind), objects (file nodes), and a Category class for algebr.
 
 ## Files
 
@@ -13,7 +13,9 @@ This community groups 5 file(s) rooted at `readmenator` with dominant language p
 | `readmenator/_category.py` | py | utility | 26 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
 | `readmenator/_projections.py` | py | utility | 15 | yes |
+| `readmenator/_query.py` | py | data_access | 17 | yes |
 | `readmenator/_rank.py` | py | utility | 17 | yes |
+| `tests/test_query.py` | py | testing | 18 | no |
 | `tests/test_ranking.py` | py | testing | 72 | yes |
 
 ## Key Symbols
@@ -51,14 +53,18 @@ This community groups 5 file(s) rooted at `readmenator` with dominant language p
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 8
-- Cross-boundary resolved imports (EXTRACTED): 11
+- Internal resolved imports (EXTRACTED): 11
+- Cross-boundary resolved imports (EXTRACTED): 13
 
 ## Connections
 
-- [EXTRACTED] depends_on community 0 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_category.py.
-- [EXTRACTED] depends_on community 4 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_rank.py.
-- [EXTRACTED] depends_on community 5 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_models.py imports readmenator/_category.py.
+- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_category.py.
+- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_category.py reaches tests/test_resolver.py in 4 hops.
+- [INFERRED] bridges community 1 <-> 2 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches readmenator/parsers/__init__.py in 4 hops.
+- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_agent_injector.py in 4 hops.
+- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_cache.py in 4 hops.
+- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_config.py in 4 hops.
+- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (language py) with no import path between community 1 (readmenator: _category) and community 3 (orphans).
 
 ## Risks
 
@@ -68,13 +74,16 @@ This community groups 5 file(s) rooted at `readmenator` with dominant language p
 
 ## Open Questions
 
+- Why do 1 file(s) lack file-level docs (e.g. `tests/test_query.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _category changed?
-- Should readmenator: _category be split, given cohesion 0.42?
+- Should readmenator: _category be split, given cohesion 0.46?
 
 ## Sources
 
 - `readmenator/_category.py`
 - `readmenator/_explain.py`
 - `readmenator/_projections.py`
+- `readmenator/_query.py`
 - `readmenator/_rank.py`
+- `tests/test_query.py`
 - `tests/test_ranking.py`

@@ -18,6 +18,7 @@ from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher, SystemMap
 from readmenator._gh_wiki import WikiPublishResult
+from readmenator._gitmeta import read_git_head
 from readmenator._layers import LayerDetector
 from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
@@ -257,10 +258,22 @@ class readmenatorApplication:
             logger.warning("Documentation site refresh failed", exc_info=True)
 
     def _maybe_publish_github_wiki(self, root: Path) -> None:
-        """Publish generated docs to the GitHub wiki when GH_WIKI_ENABLED is set."""
+        """Publish generated docs to the GitHub wiki on every run of a git checkout.
+
+        Skipped when GH_WIKI_ENABLED is off or the root is not a git
+        repository; publish failures are logged and never fail the run.
+        """
         if not self._config.GH_WIKI_ENABLED:
             return
-        self.publish_github_wiki(str(root))
+        if not read_git_head(str(root))["commit"]:
+            return
+        try:
+            result = self.publish_github_wiki(str(root))
+        except Exception:
+            logger.warning("GitHub wiki publish failed", exc_info=True)
+            return
+        if not result.pushed and "up to date" not in result.message:
+            logger.warning("%s", result.message)
 
     def publish_github_wiki(self, target_dir: str, dry_run: bool = False) -> WikiPublishResult:
         """Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.

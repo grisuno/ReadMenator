@@ -30,6 +30,7 @@
 - `readmenator/_app.py` -> `readmenator/_dead_code.py`
 - `readmenator/_app.py` -> `readmenator/_diagrams.py`
 - `readmenator/_app.py` -> `readmenator/_gh_wiki.py`
+- `readmenator/_app.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_app.py` -> `readmenator/_layers.py`
 - `readmenator/_app.py` -> `readmenator/_linter.py`
 - `readmenator/_app.py` -> `readmenator/_models.py`
@@ -240,6 +241,7 @@
 - `tests/test_exporter.py` -> `readmenator/_config.py`
 - `tests/test_exporter.py` -> `readmenator/_exporter.py`
 - `tests/test_exporter.py` -> `readmenator/_models.py`
+- `tests/test_gh_wiki.py` -> `readmenator/_app.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_config.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_gh_wiki.py`
 - `tests/test_hotspots.py` -> `readmenator/_config.py`
@@ -406,7 +408,7 @@
 - `tests/test_diagrams.py` -> __future__, dataclasses, json, pathlib, re, tempfile, unittest
 - `tests/test_documentation.py` -> __future__, unittest
 - `tests/test_exporter.py` -> __future__, json, unittest
-- `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest
+- `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
 - `tests/test_hotspots.py` -> __future__, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest

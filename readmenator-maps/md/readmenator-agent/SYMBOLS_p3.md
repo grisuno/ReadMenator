@@ -216,8 +216,8 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `__call__` | method | `tests/test_gh_wiki.py:24` | `def __call__(self, command, cwd)` |
 | `__init__` | method | `tests/test_gh_wiki.py:17` | `def __init__(self, origin, clone_ok, dirty)` |
 | `_project` | method | `tests/test_gh_wiki.py:41` | `def _project(root, config)` |
-| `test_gh_wiki_disabled_by_default` | method | `tests/test_gh_wiki.py:154` | `def test_gh_wiki_disabled_by_default(self)` |
 | `test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages` | method | `tests/test_gh_wiki.py:96` | `def test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages(self)` |
+| `test_gh_wiki_enabled_by_default` | method | `tests/test_gh_wiki.py:154` | `def test_gh_wiki_enabled_by_default(self)` |
 | `test_gh_wiki_page_names_are_flat_and_prefixed` | method | `tests/test_gh_wiki.py:64` | `def test_gh_wiki_page_names_are_flat_and_prefixed(self)` |
 | `test_gh_wiki_permalinks_never_escape_project_root` | method | `tests/test_gh_wiki.py:88` | `def test_gh_wiki_permalinks_never_escape_project_root(self)` |
 | `test_gh_wiki_publish_clones_commits_and_pushes` | method | `tests/test_gh_wiki.py:118` | `def test_gh_wiki_publish_clones_commits_and_pushes(self)` |
@@ -225,6 +225,8 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_gh_wiki_publish_skips_push_when_unchanged` | method | `tests/test_gh_wiki.py:130` | `def test_gh_wiki_publish_skips_push_when_unchanged(self)` |
 | `test_gh_wiki_rejects_malformed_configured_remote` | method | `tests/test_gh_wiki.py:147` | `def test_gh_wiki_rejects_malformed_configured_remote(self)` |
 | `test_gh_wiki_render_rewrites_links_and_permalinks` | method | `tests/test_gh_wiki.py:71` | `def test_gh_wiki_render_rewrites_links_and_permalinks(self)` |
+| `test_rebuild_publishes_wiki_in_git_checkout` | method | `tests/test_gh_wiki.py:167` | `def test_rebuild_publishes_wiki_in_git_checkout(self)` |
+| `test_rebuild_skips_wiki_outside_git_checkout` | method | `tests/test_gh_wiki.py:157` | `def test_rebuild_skips_wiki_outside_git_checkout(self)` |
 | `TestHotspotAnalyzerContract` | class | `tests/test_hotspots.py:10` | `class TestHotspotAnalyzerContract(TestCase)` |
 | `_make_node` | method | `tests/test_hotspots.py:17` | `def _make_node(self, nid, label, sym_count)` |
 | `setUp` | method | `tests/test_hotspots.py:13` | `def setUp(self)` |
@@ -494,7 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
 | `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
 | `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
-| `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
-| `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

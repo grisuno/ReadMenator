@@ -1,21 +1,17 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 105 files, 12169 imports, 1852 symbols.
+> Static analysis knowledge base for ReadMenator: 105 files, 12193 imports, 1854 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
-- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): # Second Brain *Last synthesized: 2026-10-07 | 105 files | 8 concept pages | offline, zero tokens* > Raw sources -> read
+- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): # Second Brain *Last synthesized: 2026-10-07 | 105 files | 4 concept pages | offline, zero tokens* > Raw sources -> read
 - [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): # Audit Report *Project: ReadMenator | 2026-10-07 | offline, deterministic* ## Confidence Trail Every edge is tagged. Ex
-- [readmenator-wiki/community_0_readmenator_diagrams.md](md/readmenator-wiki/community_0_readmenator_diagrams.md): # readmenator: _diagrams *Community 0 | 50 files | cohesion 0.55* ## Definition This community groups 50 file(s) rooted
-- [readmenator-wiki/community_1_tests_agent_injector.md](md/readmenator-wiki/community_1_tests_agent_injector.md): # tests: _agent_injector *Community 1 | 3 files | cohesion 0.29* ## Definition This community groups 3 file(s) rooted at
-- [readmenator-wiki/community_2_readmenator_agent_output.md](md/readmenator-wiki/community_2_readmenator_agent_output.md): # readmenator: _agent_output *Community 2 | 10 files | cohesion 0.35* ## Definition This community groups 10 file(s) roo
-- [readmenator-wiki/community_3_readmenator_category.md](md/readmenator-wiki/community_3_readmenator_category.md): # readmenator: _category *Community 3 | 5 files | cohesion 0.42* ## Definition This community groups 5 file(s) rooted at
-- [readmenator-wiki/community_4_readmenator_documentation.md](md/readmenator-wiki/community_4_readmenator_documentation.md): # readmenator: _documentation *Community 4 | 4 files | cohesion 0.23* ## Definition This community groups 4 file(s) root
-- [readmenator-wiki/community_5_readmenator_parsers.md](md/readmenator-wiki/community_5_readmenator_parsers.md): # readmenator/parsers *Community 5 | 26 files | cohesion 0.56* ## Definition This community groups 26 file(s) rooted at
-- [readmenator-wiki/community_6_tests_scanner.md](md/readmenator-wiki/community_6_tests_scanner.md): # tests: _scanner *Community 6 | 5 files | cohesion 0.21* ## Definition This community groups 5 file(s) rooted at `tests
-- [readmenator-wiki/community_7_orphans.md](md/readmenator-wiki/community_7_orphans.md): # orphans *Community 7 | 2 files | cohesion 0.00* ## Definition This community groups 2 file(s) rooted at `tests` with d
+- [readmenator-wiki/community_0_readmenator_diagrams.md](md/readmenator-wiki/community_0_readmenator_diagrams.md): # readmenator: _diagrams *Community 0 | 72 files | cohesion 0.84* ## Definition This community groups 72 file(s) rooted
+- [readmenator-wiki/community_1_readmenator_category.md](md/readmenator-wiki/community_1_readmenator_category.md): # readmenator: _category *Community 1 | 7 files | cohesion 0.46* ## Definition This community groups 7 file(s) rooted at
+- [readmenator-wiki/community_2_readmenator_parsers.md](md/readmenator-wiki/community_2_readmenator_parsers.md): # readmenator/parsers *Community 2 | 24 files | cohesion 0.69* ## Definition This community groups 24 file(s) rooted at
+- [readmenator-wiki/community_3_orphans.md](md/readmenator-wiki/community_3_orphans.md): # orphans *Community 3 | 2 files | cohesion 0.00* ## Definition This community groups 2 file(s) rooted at `tests` with d
 - [readmenator-wiki/queries.md](md/readmenator-wiki/queries.md): # Queries Log each answered question here so the wiki compounds. Format: question, answer, cited files. ## Suggested ###
 
 ## Agent Docs
@@ -45,7 +41,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 
 ## Project Docs
 
-- [KNOWLEDGE_BASE.md](md/KNOWLEDGE_BASE.md): # Polyglot Codebase Knowledge Graph > Generated offline by **readmenator**. 105 files, 1852 symbols, 788 imports. Suppor
+- [KNOWLEDGE_BASE.md](md/KNOWLEDGE_BASE.md): # Polyglot Codebase Knowledge Graph > Generated offline by **readmenator**. 105 files, 1854 symbols, 793 imports. Suppor
 - [README.md](md/README.md): # ReadMenator <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-4
 - [SECURITY.md](md/SECURITY.md): # Security Policy ## Supported Versions Use this section to tell people about which versions of your project are current
 - [SKILL.md](md/SKILL.md): --- name: readmenator description: "Zero-token static analysis codebase context. MCP-native AI agent integration. Use MC

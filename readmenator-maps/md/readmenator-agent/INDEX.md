@@ -8,7 +8,7 @@
 | `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 3 |
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 32 | 3 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 18 | 4 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 50 | 8 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 50 | 9 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 4 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 8 |
 | `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 61 |
@@ -21,7 +21,7 @@
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 15 | 2 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 3 |
-| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 3 |
+| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 4 |
 | `readmenator/_hotspots.py` | Hotspot, dependency cycle, and change impact analysis. | readmenator | 7 | 2 |
 | `readmenator/_layer_rules.py` | Architecture layer rule engine: forbidden and warning edges between layers. | readmenator | 4 | 2 |
 | `readmenator/_layers.py` | Architectural layer detection for the readmenator knowledge graph. | readmenator | 7 | 6 |
@@ -82,7 +82,7 @@
 | `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 69 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
-| `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 15 | 0 |
+| `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |

@@ -5,8 +5,8 @@ into flat GitHub wiki pages (Home, _Sidebar, _Footer), rewrites relative
 markdown links to wiki page names, and turns backticked project paths
 into commit-pinned source permalinks. Publishing clones
 ``<repo>.wiki.git``, replaces only pages it generated before (tracked in
-a state file), commits, and pushes. It is opt-in, never runs during
-analysis, and shells out with argument lists only (no shell).
+a state file), commits, and pushes. It runs after every rebuild of a git
+checkout (GH_WIKI_ENABLED), never during analysis, and shells out with argument lists only (no shell).
 """
 
 from __future__ import annotations
@@ -243,7 +243,7 @@ class GitHubWikiPublisher:
         commit = git.get("commit", "")[:12] or "unknown"
         return (
             f"Generated offline by readmenator from commit `{commit}`. "
-            "Edits here are overwritten by `readmenator . --rebuild --publish-wiki`.\n"
+            "Edits here are overwritten by `readmenator . --rebuild`.\n"
         )
 
     def wiki_remote(self, project_root: str) -> str:
@@ -347,7 +347,7 @@ class GitHubWikiPublisher:
             if self._call(["git", "clone", "--depth", "1", wiki_remote, str(clone)], cwd=str(workdir)) is None:
                 result.message = (
                     "GitHub wiki clone failed. Enable the wiki and create its first page "
-                    "once in the web UI, then rerun with --publish-wiki"
+                    "once in the web UI, then rerun readmenator . --rebuild"
                 )
                 return result
             pages = self.render(project_root, origin)

@@ -6,8 +6,8 @@ These files have the most connections. Changes here have high blast radius.
 
 - `readmenator/_models.py` (score: 160.00, imported by 78 files)
 - `readmenator/_config.py` (score: 122.10, imported by 61 files)
+- `readmenator/_app.py` (score: 57.00, imported by 9 files)
 - `readmenator/_pipeline.py` (score: 55.40, imported by 1 files)
-- `readmenator/_app.py` (score: 53.00, imported by 8 files)
 - `readmenator/parsers/__init__.py` (score: 48.20, imported by 3 files)
 - `readmenator/parsers/_base.py` (score: 44.60, imported by 20 files)
 - `readmenator/_agent_output.py` (score: 23.20, imported by 3 files)
@@ -20,13 +20,13 @@ Editing these files can break the listed number of dependents. Run their tests a
 - `readmenator/_category.py` -- 8 direct, 81 total dependents
 - `readmenator/_models.py` -- 50 direct, 78 total dependents
 - `readmenator/_config.py` -- 50 direct, 61 total dependents
-- `readmenator/parsers/_base.py` -- 20 direct, 37 total dependents
-- `readmenator/parsers/_c.py` -- 2 direct, 18 total dependents
-- `readmenator/parsers/_csharp.py` -- 2 direct, 18 total dependents
-- `readmenator/parsers/_dart.py` -- 2 direct, 18 total dependents
-- `readmenator/parsers/_elixir.py` -- 2 direct, 18 total dependents
-- `readmenator/parsers/_gdscript.py` -- 2 direct, 18 total dependents
-- `readmenator/parsers/_go.py` -- 2 direct, 18 total dependents
+- `readmenator/parsers/_base.py` -- 20 direct, 38 total dependents
+- `readmenator/parsers/_c.py` -- 2 direct, 19 total dependents
+- `readmenator/parsers/_csharp.py` -- 2 direct, 19 total dependents
+- `readmenator/parsers/_dart.py` -- 2 direct, 19 total dependents
+- `readmenator/parsers/_elixir.py` -- 2 direct, 19 total dependents
+- `readmenator/parsers/_gdscript.py` -- 2 direct, 19 total dependents
+- `readmenator/parsers/_go.py` -- 2 direct, 19 total dependents
 
 ## Hotspots (complexity + centrality)
 

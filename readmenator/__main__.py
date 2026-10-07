@@ -50,7 +50,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  lint-wiki               Health-check the agent wiki\n"
             "  video                   Render cinematic overview video (synthwave mp4)\n"
             "  fresh                   Exit 0 if generated docs match current sources, else 1\n"
-            "  gh-wiki                 Publish wiki + agent docs + KB to the GitHub wiki (git push)\n"
+            "  gh-wiki                 Publish the GitHub wiki now (--rebuild already does this)\n"
             "  gh-wiki --dry-run       Render GitHub wiki pages locally, no git calls\n"
             "\n"
             "Flags:\n"
@@ -67,7 +67,6 @@ def build_parser() -> argparse.ArgumentParser:
             "  --video / --no-video    Force enable/disable overview video render\n"
             "  --no-agent-injection    Skip injecting KB reference into AI agent files\n"
             "  --no-agent-output       Skip generating agent-friendly output directory\n"
-            "  --publish-wiki          After --rebuild, push generated docs to the GitHub wiki\n"
             "  --sarif                 Generate SARIF audit file\n"
             "  --context-budget N      Target token budget for KB (0 = full output)\n"
             "  --c++                   Generate C++ class declarations from UML\n"
@@ -100,7 +99,6 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-video", dest="video", action="store_false", help="Skip overview video render")
     parser.add_argument("--no-agent-injection", dest="no_agent_injection", action="store_true", help="Skip injecting KB reference into AI agent files")
     parser.add_argument("--no-agent-output", dest="no_agent_output", action="store_true", help="Skip generating agent-friendly output directory")
-    parser.add_argument("--publish-wiki", dest="publish_wiki", action="store_true", help="After generation, publish docs to the GitHub wiki (git push)")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF audit file alongside KNOWLEDGE_BASE.md")
     parser.add_argument("--context-budget", type=int, default=0, help="Target token budget for KNOWLEDGE_BASE.md summary (0 = full output)")
     parser.add_argument("--c++", dest="cpp", action="store_true", help="Generate C++ class declarations from UML")
@@ -312,10 +310,8 @@ def main() -> None:
         elif command == "--rebuild":
             argset = set(sys.argv[3:])
             run_security = True if "--audit" in argset else None
-            app = readmenatorApplication(Config(
-                VIDEO_ENABLED="--no-video" not in argset,
-                GH_WIKI_ENABLED="--publish-wiki" in argset,
-            ))
+            if "--no-video" in argset:
+                app = readmenatorApplication(Config(VIDEO_ENABLED=False))
             app.rebuild(target, run_security=run_security)
             return
         elif command.startswith("--"):
@@ -377,8 +373,6 @@ def main() -> None:
 
     if args.rebuild or not output_path.exists():
         app.run(target, run_analysis=not args.no_analysis, run_security=args.audit)
-        if args.publish_wiki:
-            app.publish_github_wiki(target)
     else:
         if args.context_budget > 0:
             app = readmenatorApplication(Config(

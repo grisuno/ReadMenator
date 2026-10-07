@@ -12,15 +12,15 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: What does _pipeline.py depend on, and what depends on it? (26 connections)
+### Q: What does _app.py depend on, and what depends on it? (26 connections)
 
 - Status: unanswered
 
-### Q: How are the 81 files in 'readmenator' related to each other?
+### Q: How are the 72 files in 'readmenator: _diagrams' related to each other?
 
 - Status: unanswered
 
-### Q: Why are _explain.py and __init__.py connected through 4 hops across 2 communities?
+### Q: Why are _category.py and test_resolver.py connected through 4 hops across 2 communities?
 
 - Status: unanswered
 

@@ -3,9 +3,9 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `_run_tests` | function | `readmenator/__main__.py:121` | `def _run_tests()` |
+| `_run_tests` | function | `readmenator/__main__.py:119` | `def _run_tests()` |
 | `build_parser` | function | `readmenator/__main__.py:18` | `def build_parser()` |
-| `main` | function | `readmenator/__main__.py:136` | `def main()` |
+| `main` | function | `readmenator/__main__.py:134` | `def main()` |
 | `AgentInjector` | class | `readmenator/_agent_injector.py:123` | `class AgentInjector` |
 | `__init__` | method | `readmenator/_agent_injector.py:134` | `def __init__(self, kb_filename, agent_output_dir, agent_files, agent_globs, wiki_output_dir)` |
 | `_build_injection` | method | `readmenator/_agent_injector.py:270` | `def _build_injection(self, fmt)` |
@@ -70,56 +70,56 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `analyze` | method | `readmenator/_analyzer.py:56` | `def analyze(self, nodes, edges, resolved_edges)` |
 | `dominant_directory` | function | `readmenator/_analyzer.py:22` | `def dominant_directory(file_ids)` |
 | `is_test` | method | `readmenator/_analyzer.py:314` | `def is_test(fid)` |
-| `__init__` | method | `readmenator/_app.py:44` | `def __init__(self, config)` |
-| `_inject_agent_files` | method | `readmenator/_app.py:313` | `def _inject_agent_files(self, root)` |
-| `_inject_readme_link` | method | `readmenator/_app.py:305` | `def _inject_readme_link(self, root)` |
-| `_live_renderer` | method | `readmenator/_app.py:738` | `def _live_renderer(self)` |
-| `_log_summary` | method | `readmenator/_app.py:333` | `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)` |
-| `_maybe_export_video` | method | `readmenator/_app.py:850` | `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
-| `_maybe_publish_github_wiki` | method | `readmenator/_app.py:259` | `def _maybe_publish_github_wiki(self, root)` |
-| `_maybe_refresh_pages` | method | `readmenator/_app.py:241` | `def _maybe_refresh_pages(self, root)` |
-| `_resolve_imports` | method | `readmenator/_app.py:71` | `def _resolve_imports(self, nodes, edges, target_dir)` |
-| `_scan` | method | `readmenator/_app.py:53` | `def _scan(self, target_dir)` |
-| `_scan_for_cache` | method | `readmenator/_app.py:493` | `def _scan_for_cache(self, root, cache)` |
-| `_scan_with_content` | method | `readmenator/_app.py:61` | `def _scan_with_content(self, target_dir)` |
-| `_write_sidecar_outputs` | method | `readmenator/_app.py:279` | `def _write_sidecar_outputs(self, root, findings, analysis_v2)` |
-| `analyze` | method | `readmenator/_app.py:579` | `def analyze(self, target_dir)` |
-| `audit` | method | `readmenator/_app.py:900` | `def audit(self, target_dir)` |
-| `audit_deep` | method | `readmenator/_app.py:907` | `def audit_deep(self, target_dir)` |
-| `check_freshness` | method | `readmenator/_app.py:214` | `def check_freshness(self, target_dir)` |
-| `detect_layers` | method | `readmenator/_app.py:947` | `def detect_layers(self, target_dir)` |
-| `explain` | method | `readmenator/_app.py:516` | `def explain(self, target_dir, symbol_name)` |
-| `export` | method | `readmenator/_app.py:616` | `def export(self, target_dir)` |
-| `export_cypher` | method | `readmenator/_app.py:632` | `def export_cypher(self, target_dir, output_path)` |
-| `export_diagram` | method | `readmenator/_app.py:748` | `def export_diagram(self, target_dir, kind, output_path, full)` |
-| `export_diagrams` | method | `readmenator/_app.py:696` | `def export_diagrams(self, target_dir, output_dir, full)` |
-| `export_graphml` | method | `readmenator/_app.py:621` | `def export_graphml(self, target_dir, output_path)` |
-| `export_html` | method | `readmenator/_app.py:594` | `def export_html(self, target_dir, output_path)` |
-| `export_json` | method | `readmenator/_app.py:583` | `def export_json(self, target_dir, output_path)` |
-| `export_obsidian` | method | `readmenator/_app.py:645` | `def export_obsidian(self, target_dir, output_dir)` |
-| `export_pages` | method | `readmenator/_app.py:787` | `def export_pages(self, target_dir, output_dir, full)` |
-| `export_rules` | method | `readmenator/_app.py:937` | `def export_rules(self, target_dir, output_dir)` |
-| `export_sarif` | method | `readmenator/_app.py:927` | `def export_sarif(self, target_dir, output_path)` |
-| `export_svg` | method | `readmenator/_app.py:605` | `def export_svg(self, target_dir, output_path)` |
-| `export_video` | method | `readmenator/_app.py:826` | `def export_video(self, target_dir, output_path)` |
-| `export_wiki` | method | `readmenator/_app.py:655` | `def export_wiki(self, target_dir, output_dir)` |
-| `find_path` | method | `readmenator/_app.py:528` | `def find_path(self, target_dir, symbol_a, symbol_b)` |
-| `generate_cursorrules` | method | `readmenator/_app.py:980` | `def generate_cursorrules(self, target_dir)` |
-| `generate_uml_code` | method | `readmenator/_app.py:321` | `def generate_uml_code(self, target_dir, language, output_path)` |
-| `lint` | method | `readmenator/_app.py:957` | `def lint(self, target_dir)` |
-| `lint_wiki` | method | `readmenator/_app.py:678` | `def lint_wiki(self, target_dir)` |
-| `on_change` | method | `readmenator/_app.py:894` | `def on_change()` |
-| `publish_github_wiki` | method | `readmenator/_app.py:265` | `def publish_github_wiki(self, target_dir, dry_run)` |
-| `query` | method | `readmenator/_app.py:511` | `def query(self, target_dir, question)` |
-| `rank_query` | method | `readmenator/_app.py:546` | `def rank_query(self, target_dir, query, top_n)` |
-| `readmenatorApplication` | class | `readmenator/_app.py:43` | `class readmenatorApplication` |
-| `rebuild` | method | `readmenator/_app.py:576` | `def rebuild(self, target_dir, run_security)` |
-| `refactor_monolith` | method | `readmenator/_app.py:995` | `def refactor_monolith(self, target_dir)` |
-| `run` | method | `readmenator/_app.py:90` | `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)` |
-| `strip_dead_code` | method | `readmenator/_app.py:970` | `def strip_dead_code(self, target_dir)` |
-| `summary` | method | `readmenator/_app.py:541` | `def summary(self, target_dir)` |
-| `update` | method | `readmenator/_app.py:388` | `def update(self, target_dir, run_security)` |
-| `watch` | method | `readmenator/_app.py:890` | `def watch(self, target_dir)` |
+| `__init__` | method | `readmenator/_app.py:45` | `def __init__(self, config)` |
+| `_inject_agent_files` | method | `readmenator/_app.py:326` | `def _inject_agent_files(self, root)` |
+| `_inject_readme_link` | method | `readmenator/_app.py:318` | `def _inject_readme_link(self, root)` |
+| `_live_renderer` | method | `readmenator/_app.py:751` | `def _live_renderer(self)` |
+| `_log_summary` | method | `readmenator/_app.py:346` | `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)` |
+| `_maybe_export_video` | method | `readmenator/_app.py:863` | `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
+| `_maybe_publish_github_wiki` | method | `readmenator/_app.py:260` | `def _maybe_publish_github_wiki(self, root)` |
+| `_maybe_refresh_pages` | method | `readmenator/_app.py:242` | `def _maybe_refresh_pages(self, root)` |
+| `_resolve_imports` | method | `readmenator/_app.py:72` | `def _resolve_imports(self, nodes, edges, target_dir)` |
+| `_scan` | method | `readmenator/_app.py:54` | `def _scan(self, target_dir)` |
+| `_scan_for_cache` | method | `readmenator/_app.py:506` | `def _scan_for_cache(self, root, cache)` |
+| `_scan_with_content` | method | `readmenator/_app.py:62` | `def _scan_with_content(self, target_dir)` |
+| `_write_sidecar_outputs` | method | `readmenator/_app.py:292` | `def _write_sidecar_outputs(self, root, findings, analysis_v2)` |
+| `analyze` | method | `readmenator/_app.py:592` | `def analyze(self, target_dir)` |
+| `audit` | method | `readmenator/_app.py:913` | `def audit(self, target_dir)` |
+| `audit_deep` | method | `readmenator/_app.py:920` | `def audit_deep(self, target_dir)` |
+| `check_freshness` | method | `readmenator/_app.py:215` | `def check_freshness(self, target_dir)` |
+| `detect_layers` | method | `readmenator/_app.py:960` | `def detect_layers(self, target_dir)` |
+| `explain` | method | `readmenator/_app.py:529` | `def explain(self, target_dir, symbol_name)` |
+| `export` | method | `readmenator/_app.py:629` | `def export(self, target_dir)` |
+| `export_cypher` | method | `readmenator/_app.py:645` | `def export_cypher(self, target_dir, output_path)` |
+| `export_diagram` | method | `readmenator/_app.py:761` | `def export_diagram(self, target_dir, kind, output_path, full)` |
+| `export_diagrams` | method | `readmenator/_app.py:709` | `def export_diagrams(self, target_dir, output_dir, full)` |
+| `export_graphml` | method | `readmenator/_app.py:634` | `def export_graphml(self, target_dir, output_path)` |
+| `export_html` | method | `readmenator/_app.py:607` | `def export_html(self, target_dir, output_path)` |
+| `export_json` | method | `readmenator/_app.py:596` | `def export_json(self, target_dir, output_path)` |
+| `export_obsidian` | method | `readmenator/_app.py:658` | `def export_obsidian(self, target_dir, output_dir)` |
+| `export_pages` | method | `readmenator/_app.py:800` | `def export_pages(self, target_dir, output_dir, full)` |
+| `export_rules` | method | `readmenator/_app.py:950` | `def export_rules(self, target_dir, output_dir)` |
+| `export_sarif` | method | `readmenator/_app.py:940` | `def export_sarif(self, target_dir, output_path)` |
+| `export_svg` | method | `readmenator/_app.py:618` | `def export_svg(self, target_dir, output_path)` |
+| `export_video` | method | `readmenator/_app.py:839` | `def export_video(self, target_dir, output_path)` |
+| `export_wiki` | method | `readmenator/_app.py:668` | `def export_wiki(self, target_dir, output_dir)` |
+| `find_path` | method | `readmenator/_app.py:541` | `def find_path(self, target_dir, symbol_a, symbol_b)` |
+| `generate_cursorrules` | method | `readmenator/_app.py:993` | `def generate_cursorrules(self, target_dir)` |
+| `generate_uml_code` | method | `readmenator/_app.py:334` | `def generate_uml_code(self, target_dir, language, output_path)` |
+| `lint` | method | `readmenator/_app.py:970` | `def lint(self, target_dir)` |
+| `lint_wiki` | method | `readmenator/_app.py:691` | `def lint_wiki(self, target_dir)` |
+| `on_change` | method | `readmenator/_app.py:907` | `def on_change()` |
+| `publish_github_wiki` | method | `readmenator/_app.py:278` | `def publish_github_wiki(self, target_dir, dry_run)` |
+| `query` | method | `readmenator/_app.py:524` | `def query(self, target_dir, question)` |
+| `rank_query` | method | `readmenator/_app.py:559` | `def rank_query(self, target_dir, query, top_n)` |
+| `readmenatorApplication` | class | `readmenator/_app.py:44` | `class readmenatorApplication` |
+| `rebuild` | method | `readmenator/_app.py:589` | `def rebuild(self, target_dir, run_security)` |
+| `refactor_monolith` | method | `readmenator/_app.py:1008` | `def refactor_monolith(self, target_dir)` |
+| `run` | method | `readmenator/_app.py:91` | `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)` |
+| `strip_dead_code` | method | `readmenator/_app.py:983` | `def strip_dead_code(self, target_dir)` |
+| `summary` | method | `readmenator/_app.py:554` | `def summary(self, target_dir)` |
+| `update` | method | `readmenator/_app.py:401` | `def update(self, target_dir, run_security)` |
+| `watch` | method | `readmenator/_app.py:903` | `def watch(self, target_dir)` |
 | `FileCache` | class | `readmenator/_cache.py:20` | `class FileCache` |
 | `__init__` | method | `readmenator/_cache.py:31` | `def __init__(self, config, project_root)` |
 | `_prune_analysis_cache` | method | `readmenator/_cache.py:155` | `def _prune_analysis_cache(self, current_file_ids)` |

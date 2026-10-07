@@ -477,8 +477,10 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_gh_wiki_publish_skips_push_when_unchanged` (method, line 130) `def test_gh_wiki_publish_skips_push_when_unchanged(self)`
   - `test_gh_wiki_publish_explains_uninitialized_wiki` (method, line 139) `def test_gh_wiki_publish_explains_uninitialized_wiki(self)`
   - `test_gh_wiki_rejects_malformed_configured_remote` (method, line 147) `def test_gh_wiki_rejects_malformed_configured_remote(self)`
-  - `test_gh_wiki_disabled_by_default` (method, line 154) `def test_gh_wiki_disabled_by_default(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_gh_wiki.py`
+  - `test_gh_wiki_enabled_by_default` (method, line 154) `def test_gh_wiki_enabled_by_default(self)`
+  - `test_rebuild_skips_wiki_outside_git_checkout` (method, line 157) `def test_rebuild_skips_wiki_outside_git_checkout(self)`
+  - `test_rebuild_publishes_wiki_in_git_checkout` (method, line 167) `def test_rebuild_publishes_wiki_in_git_checkout(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_gh_wiki.py`
 
 
 Next: [KB_tests_p2.md](KB_tests_p2.md)

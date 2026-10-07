@@ -176,9 +176,9 @@ repository's GitHub wiki. Pages get a sidebar, cross-links, and source
 permalinks pinned to the current commit:
 
 ```bash
+readmenator . --rebuild                  # regenerates everything AND publishes the GitHub wiki
+readmenator . gh-wiki                    # publish the wiki only
 readmenator . gh-wiki --dry-run          # render pages into readmenator-ghwiki/ (no git calls)
-readmenator . gh-wiki                    # clone <repo>.wiki.git, commit, push
-readmenator . --rebuild --publish-wiki   # regenerate everything, then publish the wiki
 ```
 
 Requirements: the wiki is enabled, its first page was created once in the web

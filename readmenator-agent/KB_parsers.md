@@ -1,8 +1,8 @@
 # Subsystem: parsers
 
 ## readmenator/parsers/__init__.py
-- Layer: utility
 - Doc: Parser factory: maps file extensions to per-language LanguageParser classes.
+- Layer: utility
 - Language: py
 - Symbols:
   - `_init_parser_map` (function, line 34) `def _init_parser_map()`
@@ -11,8 +11,8 @@
 - Imported by: `readmenator/_scanner.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`
 
 ## readmenator/parsers/_assembly.py
-- Layer: utility
 - Doc: Assembly parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `AssemblyParser` (class, line 11) `class AssemblyParser(LanguageParser)`
@@ -21,8 +21,8 @@
 - Imported by: `readmenator/parsers/__init__.py`
 
 ## readmenator/parsers/_base.py
-- Layer: utility
 - Doc: LanguageParser base class with shared docstring and signature extraction.
+- Layer: utility
 - Language: py
 - Symbols:
   - `LanguageParser` (class, line 12) `class LanguageParser`
@@ -35,8 +35,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ## readmenator/parsers/_c.py
-- Layer: utility
 - Doc: C and C++ parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `_has_type_prefix` (function, line 18) `def _has_type_prefix(prefix)`
@@ -46,8 +46,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_csharp.py
-- Layer: utility
 - Doc: C# parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `CSharpParser` (class, line 11) `class CSharpParser(LanguageParser)`
@@ -56,8 +56,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_dart.py
-- Layer: utility
 - Doc: Dart parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `DartParser` (class, line 11) `class DartParser(LanguageParser)`
@@ -66,8 +66,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_elixir.py
-- Layer: utility
 - Doc: Elixir parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `ElixirParser` (class, line 11) `class ElixirParser(LanguageParser)`
@@ -76,8 +76,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_gdscript.py
-- Layer: utility
 - Doc: GDScript parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `GDScriptParser` (class, line 11) `class GDScriptParser(LanguageParser)`
@@ -86,8 +86,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_go.py
-- Layer: utility
 - Doc: Go parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `GoParser` (class, line 11) `class GoParser(LanguageParser)`
@@ -96,8 +96,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_java.py
-- Layer: utility
 - Doc: Java parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `JavaParser` (class, line 11) `class JavaParser(LanguageParser)`
@@ -106,8 +106,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_javascript.py
-- Layer: utility
 - Doc: JavaScript and TypeScript parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `JavaScriptParser` (class, line 11) `class JavaScriptParser(LanguageParser)`
@@ -116,8 +116,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_kotlin.py
-- Layer: utility
 - Doc: Kotlin parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `KotlinParser` (class, line 11) `class KotlinParser(LanguageParser)`
@@ -126,8 +126,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_lua.py
-- Layer: utility
 - Doc: Lua parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `LuaParser` (class, line 11) `class LuaParser(LanguageParser)`
@@ -136,8 +136,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_nim.py
-- Layer: utility
 - Doc: Nim parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `NimParser` (class, line 11) `class NimParser(LanguageParser)`
@@ -146,8 +146,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_php.py
-- Layer: utility
 - Doc: PHP parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `PHPParser` (class, line 11) `class PHPParser(LanguageParser)`
@@ -156,8 +156,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_python.py
-- Layer: utility
 - Doc: Python parser: native ast extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `PythonParser` (class, line 12) `class PythonParser(LanguageParser)`
@@ -166,8 +166,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_ruby.py
-- Layer: utility
 - Doc: Ruby parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `RubyParser` (class, line 11) `class RubyParser(LanguageParser)`
@@ -176,8 +176,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_rust.py
-- Layer: utility
 - Doc: Rust parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `RustParser` (class, line 11) `class RustParser(LanguageParser)`
@@ -186,8 +186,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_scala.py
-- Layer: utility
 - Doc: Scala parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `ScalaParser` (class, line 11) `class ScalaParser(LanguageParser)`
@@ -196,8 +196,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_shell.py
-- Layer: utility
 - Doc: Shell parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `ShellParser` (class, line 11) `class ShellParser(LanguageParser)`
@@ -206,8 +206,8 @@
 - Imported by: `readmenator/parsers/__init__.py`, `tests/test_parsers_property.py`
 
 ## readmenator/parsers/_swift.py
-- Layer: utility
 - Doc: Swift parser: regex extraction of symbols, signatures, docstrings, and imports.
+- Layer: utility
 - Language: py
 - Symbols:
   - `SwiftParser` (class, line 11) `class SwiftParser(LanguageParser)`

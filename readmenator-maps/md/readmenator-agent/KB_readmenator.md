@@ -13,8 +13,8 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Language: py
 - Symbols:
   - `build_parser` (function, line 18) `def build_parser()`
-  - `_run_tests` (function, line 121) `def _run_tests()`
-  - `main` (function, line 136) `def main()`
+  - `_run_tests` (function, line 119) `def _run_tests()`
+  - `main` (function, line 134) `def main()`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
@@ -110,58 +110,58 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Layer: utility
 - Language: py
 - Symbols:
-  - `readmenatorApplication` (class, line 43) `class readmenatorApplication`
-  - `__init__` (method, line 44) `def __init__(self, config)`
-  - `_scan` (method, line 53) `def _scan(self, target_dir)`
-  - `_scan_with_content` (method, line 61) `def _scan_with_content(self, target_dir)`
-  - `_resolve_imports` (method, line 71) `def _resolve_imports(self, nodes, edges, target_dir)`
-  - `run` (method, line 90) `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
-  - `check_freshness` (method, line 214) `def check_freshness(self, target_dir)`
-  - `_maybe_refresh_pages` (method, line 241) `def _maybe_refresh_pages(self, root)`
-  - `_maybe_publish_github_wiki` (method, line 259) `def _maybe_publish_github_wiki(self, root)`
-  - `publish_github_wiki` (method, line 265) `def publish_github_wiki(self, target_dir, dry_run)`
-  - `_write_sidecar_outputs` (method, line 279) `def _write_sidecar_outputs(self, root, findings, analysis_v2)`
-  - `_inject_readme_link` (method, line 305) `def _inject_readme_link(self, root)`
-  - `_inject_agent_files` (method, line 313) `def _inject_agent_files(self, root)`
-  - `generate_uml_code` (method, line 321) `def generate_uml_code(self, target_dir, language, output_path)`
-  - `_log_summary` (method, line 333) `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)`
-  - `update` (method, line 388) `def update(self, target_dir, run_security)`
-  - `_scan_for_cache` (method, line 493) `def _scan_for_cache(self, root, cache)`
-  - `query` (method, line 511) `def query(self, target_dir, question)`
-  - `explain` (method, line 516) `def explain(self, target_dir, symbol_name)`
-  - `find_path` (method, line 528) `def find_path(self, target_dir, symbol_a, symbol_b)`
-  - `summary` (method, line 541) `def summary(self, target_dir)`
-  - `rank_query` (method, line 546) `def rank_query(self, target_dir, query, top_n)`
-  - `rebuild` (method, line 576) `def rebuild(self, target_dir, run_security)`
-  - `analyze` (method, line 579) `def analyze(self, target_dir)`
-  - `export_json` (method, line 583) `def export_json(self, target_dir, output_path)`
-  - `export_html` (method, line 594) `def export_html(self, target_dir, output_path)`
-  - `export_svg` (method, line 605) `def export_svg(self, target_dir, output_path)`
-  - `export` (method, line 616) `def export(self, target_dir)`
-  - `export_graphml` (method, line 621) `def export_graphml(self, target_dir, output_path)`
-  - `export_cypher` (method, line 632) `def export_cypher(self, target_dir, output_path)`
-  - `export_obsidian` (method, line 645) `def export_obsidian(self, target_dir, output_dir)`
-  - `export_wiki` (method, line 655) `def export_wiki(self, target_dir, output_dir)`
-  - `lint_wiki` (method, line 678) `def lint_wiki(self, target_dir)`
-  - `export_diagrams` (method, line 696) `def export_diagrams(self, target_dir, output_dir, full)`
-  - `_live_renderer` (method, line 738) `def _live_renderer(self)`
-  - `export_diagram` (method, line 748) `def export_diagram(self, target_dir, kind, output_path, full)`
-  - `export_pages` (method, line 787) `def export_pages(self, target_dir, output_dir, full)`
-  - `export_video` (method, line 826) `def export_video(self, target_dir, output_path)`
-  - `_maybe_export_video` (method, line 850) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
-  - `watch` (method, line 890) `def watch(self, target_dir)`
-  - `audit` (method, line 900) `def audit(self, target_dir)`
-  - `audit_deep` (method, line 907) `def audit_deep(self, target_dir)`
-  - `export_sarif` (method, line 927) `def export_sarif(self, target_dir, output_path)`
-  - `export_rules` (method, line 937) `def export_rules(self, target_dir, output_dir)`
-  - `detect_layers` (method, line 947) `def detect_layers(self, target_dir)`
-  - `lint` (method, line 957) `def lint(self, target_dir)`
-  - `strip_dead_code` (method, line 970) `def strip_dead_code(self, target_dir)`
-  - `generate_cursorrules` (method, line 980) `def generate_cursorrules(self, target_dir)`
-  - `refactor_monolith` (method, line 995) `def refactor_monolith(self, target_dir)`
-  - `on_change` (method, line 894) `def on_change()`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
+  - `readmenatorApplication` (class, line 44) `class readmenatorApplication`
+  - `__init__` (method, line 45) `def __init__(self, config)`
+  - `_scan` (method, line 54) `def _scan(self, target_dir)`
+  - `_scan_with_content` (method, line 62) `def _scan_with_content(self, target_dir)`
+  - `_resolve_imports` (method, line 72) `def _resolve_imports(self, nodes, edges, target_dir)`
+  - `run` (method, line 91) `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
+  - `check_freshness` (method, line 215) `def check_freshness(self, target_dir)`
+  - `_maybe_refresh_pages` (method, line 242) `def _maybe_refresh_pages(self, root)`
+  - `_maybe_publish_github_wiki` (method, line 260) `def _maybe_publish_github_wiki(self, root)`
+  - `publish_github_wiki` (method, line 278) `def publish_github_wiki(self, target_dir, dry_run)`
+  - `_write_sidecar_outputs` (method, line 292) `def _write_sidecar_outputs(self, root, findings, analysis_v2)`
+  - `_inject_readme_link` (method, line 318) `def _inject_readme_link(self, root)`
+  - `_inject_agent_files` (method, line 326) `def _inject_agent_files(self, root)`
+  - `generate_uml_code` (method, line 334) `def generate_uml_code(self, target_dir, language, output_path)`
+  - `_log_summary` (method, line 346) `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)`
+  - `update` (method, line 401) `def update(self, target_dir, run_security)`
+  - `_scan_for_cache` (method, line 506) `def _scan_for_cache(self, root, cache)`
+  - `query` (method, line 524) `def query(self, target_dir, question)`
+  - `explain` (method, line 529) `def explain(self, target_dir, symbol_name)`
+  - `find_path` (method, line 541) `def find_path(self, target_dir, symbol_a, symbol_b)`
+  - `summary` (method, line 554) `def summary(self, target_dir)`
+  - `rank_query` (method, line 559) `def rank_query(self, target_dir, query, top_n)`
+  - `rebuild` (method, line 589) `def rebuild(self, target_dir, run_security)`
+  - `analyze` (method, line 592) `def analyze(self, target_dir)`
+  - `export_json` (method, line 596) `def export_json(self, target_dir, output_path)`
+  - `export_html` (method, line 607) `def export_html(self, target_dir, output_path)`
+  - `export_svg` (method, line 618) `def export_svg(self, target_dir, output_path)`
+  - `export` (method, line 629) `def export(self, target_dir)`
+  - `export_graphml` (method, line 634) `def export_graphml(self, target_dir, output_path)`
+  - `export_cypher` (method, line 645) `def export_cypher(self, target_dir, output_path)`
+  - `export_obsidian` (method, line 658) `def export_obsidian(self, target_dir, output_dir)`
+  - `export_wiki` (method, line 668) `def export_wiki(self, target_dir, output_dir)`
+  - `lint_wiki` (method, line 691) `def lint_wiki(self, target_dir)`
+  - `export_diagrams` (method, line 709) `def export_diagrams(self, target_dir, output_dir, full)`
+  - `_live_renderer` (method, line 751) `def _live_renderer(self)`
+  - `export_diagram` (method, line 761) `def export_diagram(self, target_dir, kind, output_path, full)`
+  - `export_pages` (method, line 800) `def export_pages(self, target_dir, output_dir, full)`
+  - `export_video` (method, line 839) `def export_video(self, target_dir, output_path)`
+  - `_maybe_export_video` (method, line 863) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
+  - `watch` (method, line 903) `def watch(self, target_dir)`
+  - `audit` (method, line 913) `def audit(self, target_dir)`
+  - `audit_deep` (method, line 920) `def audit_deep(self, target_dir)`
+  - `export_sarif` (method, line 940) `def export_sarif(self, target_dir, output_path)`
+  - `export_rules` (method, line 950) `def export_rules(self, target_dir, output_dir)`
+  - `detect_layers` (method, line 960) `def detect_layers(self, target_dir)`
+  - `lint` (method, line 970) `def lint(self, target_dir)`
+  - `strip_dead_code` (method, line 983) `def strip_dead_code(self, target_dir)`
+  - `generate_cursorrules` (method, line 993) `def generate_cursorrules(self, target_dir)`
+  - `refactor_monolith` (method, line 1008) `def refactor_monolith(self, target_dir)`
+  - `on_change` (method, line 907) `def on_change()`
+- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
 
 ## readmenator/_cache.py
 - Doc: File-content hash cache for incremental scanning and analysis caching.
@@ -490,7 +490,7 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `_git_dir` (function, line 38) `def _git_dir(root)`
   - `_packed_ref` (function, line 59) `def _packed_ref(git_dir, ref)`
   - `read_git_head` (function, line 84) `def read_git_head(project_root)`
-- Imported by: `readmenator/_agent_output.py`, `readmenator/_gh_wiki.py`, `tests/test_agent_friendliness.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_gh_wiki.py`, `tests/test_agent_friendliness.py`
 
 
 Next: [KB_readmenator_p2.md](KB_readmenator_p2.md)

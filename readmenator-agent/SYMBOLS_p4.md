@@ -3,6 +3,8 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
+| `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
 | `TestEdgeKind` | class | `tests/test_ranking.py:60` | `class TestEdgeKind` |
 | `TestExplain` | class | `tests/test_ranking.py:539` | `class TestExplain` |
 | `TestGlobalPageRank` | class | `tests/test_ranking.py:247` | `class TestGlobalPageRank` |

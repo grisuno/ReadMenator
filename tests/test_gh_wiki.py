@@ -151,8 +151,29 @@ class TestGitHubWikiPublish(unittest.TestCase):
             self.assertFalse(result.pushed)
             self.assertEqual(result.remote, "")
 
-    def test_gh_wiki_disabled_by_default(self) -> None:
-        self.assertFalse(Config().GH_WIKI_ENABLED)
+    def test_gh_wiki_enabled_by_default(self) -> None:
+        self.assertTrue(Config().GH_WIKI_ENABLED)
+
+    def test_rebuild_skips_wiki_outside_git_checkout(self) -> None:
+        from unittest.mock import patch
+        from readmenator._app import readmenatorApplication
+
+        app = readmenatorApplication(Config())
+        with tempfile.TemporaryDirectory() as tmpdir, \
+                patch.object(readmenatorApplication, "publish_github_wiki") as publish:
+            app._maybe_publish_github_wiki(Path(tmpdir))
+            publish.assert_not_called()
+
+    def test_rebuild_publishes_wiki_in_git_checkout(self) -> None:
+        from unittest.mock import patch
+        from readmenator._app import readmenatorApplication
+
+        app = readmenatorApplication(Config())
+        with tempfile.TemporaryDirectory() as tmpdir, \
+                patch.object(readmenatorApplication, "publish_github_wiki") as publish:
+            _project(Path(tmpdir), Config())
+            app._maybe_publish_github_wiki(Path(tmpdir))
+            publish.assert_called_once()
 
 
 if __name__ == "__main__":

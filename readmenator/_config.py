@@ -304,7 +304,7 @@ class Config:
 
     WIKI_MAX_CONNECTIONS: int = 20
 
-    GH_WIKI_ENABLED: bool = False
+    GH_WIKI_ENABLED: bool = True
 
     GH_WIKI_REMOTE: str = ""
 
