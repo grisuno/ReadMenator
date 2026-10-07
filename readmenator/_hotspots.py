@@ -1,3 +1,9 @@
+"""Hotspot, dependency cycle, and change impact analysis.
+
+Scores files by complexity plus centrality, finds import cycles with DFS,
+and measures transitive dependents with bounded BFS.
+"""
+
 from __future__ import annotations
 
 from collections import defaultdict, deque

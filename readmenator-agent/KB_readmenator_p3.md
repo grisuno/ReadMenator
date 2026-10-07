@@ -1,0 +1,112 @@
+# Subsystem: readmenator (page 3 of 3)
+Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
+
+## readmenator/_video.py
+- Doc: Cinematic codebase overview video, general purpose.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ease` (function, line 73) `def ease(x)`
+  - `fmt_int` (function, line 79) `def fmt_int(n)`
+  - `mix` (function, line 84) `def mix(a, b, t)`
+  - `alpha` (function, line 89) `def alpha(c, a)`
+  - `hash_color` (function, line 94) `def hash_color(digest)`
+  - `short_label` (function, line 103) `def short_label(text, limit)`
+  - `_panel` (function, line 111) `def _panel(cfg)`
+  - `_caption_y` (function, line 116) `def _caption_y(cfg)`
+  - `_graph_boxes` (function, line 121) `def _graph_boxes(cfg)`
+  - `_dna_boxes` (function, line 130) `def _dna_boxes(cfg)`
+  - `_split_boxes` (function, line 139) `def _split_boxes(cfg)`
+  - `_verdict_badge` (function, line 148) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
+  - `_scan_cursor` (function, line 163) `def _scan_cursor(d, box, progress, col)`
+  - `_code_tint` (function, line 172) `def _code_tint(line)`
+  - `_packet_offset` (function, line 182) `def _packet_offset(a, b, k)`
+  - `dependencies_available` (function, line 188) `def dependencies_available()`
+  - `resolve_fonts` (function, line 197) `def resolve_fonts()`
+  - `Backdrop` (class, line 236) `class Backdrop`
+  - `_img` (method, line 292) `def _img()`
+  - `draw_grid` (method, line 299) `def draw_grid(img, t, strength, bd)`
+  - `draw_sun` (method, line 319) `def draw_sun(img, a, bd, cy)`
+  - `post` (method, line 336) `def post(img, glitch, seed)`
+  - `glitch_fx` (method, line 354) `def glitch_fx(img, amount, seed)`
+  - `chroma_text` (method, line 377) `def chroma_text(img, xy, text, font, col, spread, anchor)`
+  - `hud_panel` (method, line 388) `def hud_panel(d, box, title, fonts, col)`
+  - `draw_header` (method, line 401) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
+  - `draw_caption` (method, line 415) `def draw_caption(d, text, lt, dur, fonts, width, y)`
+  - `CinematicVideoRenderer` (class, line 431) `class CinematicVideoRenderer`
+  - `_render_frame_bytes` (method, line 752) `def _render_frame_bytes(fi)`
+  - `_draw_frame` (method, line 757) `def _draw_frame(fi)`
+  - `_scene_title` (method, line 785) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (method, line 820) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (method, line 834) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (method, line 859) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (method, line 902) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (method, line 963) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (method, line 1006) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_dna` (method, line 1064) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (method, line 1119) `def _scene_outro(img, d, lt, gt, sc)`
+  - `_find` (method, line 201) `def _find(style)`
+  - `__init__` (method, line 239) `def __init__(self, width, height)`
+  - `_sun` (method, line 277) `def _sun(self, r)`
+  - `collect` (method, line 436) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map)`
+  - `_build_dep_tree` (method, line 572) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
+  - `build_scenes` (method, line 612) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 638) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 673) `def tree_positions(self, data, box)`
+  - `render_single_frame` (method, line 694) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 712) `def render(self, data, output_path)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
+
+## readmenator/_watcher.py
+- Doc: Filesystem watcher for auto-rebuilding the knowledge base.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `DirectoryWatcher` (class, line 21) `class DirectoryWatcher`
+  - `__init__` (method, line 29) `def __init__(self, root, config, callback, interval_seconds)`
+  - `_compute_snapshot` (method, line 51) `def _compute_snapshot(self)`
+  - `start` (method, line 80) `def start(self)`
+  - `stop` (method, line 97) `def stop(self)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`
+
+## readmenator/_wiki.py
+- Doc: Deterministic agent wiki generator for readmenator.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `_is_garbage_purpose` (function, line 47) `def _is_garbage_purpose(text)`
+  - `_slug` (function, line 55) `def _slug(text)`
+  - `existing_ids` (function, line 62) `def existing_ids(connections)`
+  - `_display_names` (function, line 72) `def _display_names(communities)`
+  - `WikiGenerator` (class, line 86) `class WikiGenerator`
+  - `__init__` (method, line 89) `def __init__(self, config)`
+  - `generate` (method, line 94) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)`
+  - `_prune_stale_pages` (method, line 142) `def _prune_stale_pages(self, out_dir, current)`
+  - `lint` (method, line 151) `def lint(self, project_root)`
+  - `_resolve_communities` (method, line 174) `def _resolve_communities(self, nodes, analysis, resolved)`
+  - `_community_of` (method, line 200) `def _community_of(self, node_id, communities)`
+  - `_build_connections` (method, line 209) `def _build_connections(self, communities, resolved, analysis, node_map, layers)`
+  - `_duplicate_links` (method, line 274) `def _duplicate_links(communities, node_map, skip_pairs)`
+  - `_shared_context_links` (method, line 317) `def _shared_context_links(self, communities, existing, node_map, layers)`
+  - `_shared_context` (method, line 353) `def _shared_context(first, second, node_map, layers)`
+  - `_build_connections_json` (method, line 386) `def _build_connections_json(self, connections)`
+  - `_definition_for` (method, line 390) `def _definition_for(self, community, node_map)`
+  - `_file_row` (method, line 419) `def _file_row(self, fid, node_map, layers)`
+  - `_build_grouped_files` (method, line 433) `def _build_grouped_files(self, members, node_map, layers, max_files)`
+  - `_build_community_page` (method, line 482) `def _build_community_page(self, community, node_map, resolved, analysis, layers, findings, analysis_v2, connections)`
+  - `_questions_for` (method, line 635) `def _questions_for(self, community, node_map, member_set, analysis_v2)`
+  - `_large_files` (method, line 673) `def _large_files(self, nodes, project_root)`
+  - `_build_index` (method, line 686) `def _build_index(self, nodes, resolved, analysis, layers, findings, analysis_v2, communities, pages, connections...`
+  - `_overview_paragraph` (method, line 798) `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)`
+  - `_connective_paragraph` (method, line 831) `def _connective_paragraph(self, communities, connections)`
+  - `_questions_paragraph` (method, line 852) `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)`
+  - `_build_queries` (method, line 868) `def _build_queries(self, analysis)`
+  - `_build_report` (method, line 893) `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...`
+  - `_estimate_tokens` (method, line 965) `def _estimate_tokens(self, nodes, connections)`
+  - `_write` (method, line 976) `def _write(path, content)`
+  - `dominant` (method, line 360) `def dominant(ids, key)`
+- Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
+

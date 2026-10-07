@@ -1,3 +1,5 @@
+"""Injects a knowledge base section into the project README (Markdown or RST)."""
+
 from __future__ import annotations
 
 import logging

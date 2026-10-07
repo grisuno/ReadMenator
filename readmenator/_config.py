@@ -96,6 +96,16 @@ class Config:
 
     SITE_MD_PREVIEW_CHARS: int = 120
 
+    SITE_LLMS_TXT_ENABLED: bool = True
+
+    SITE_REFRESH_ON_REBUILD: bool = True
+
+    SITE_LLMS_TXT_FILENAME: str = "llms.txt"
+
+    GENERATED_FILE_PREFIXES: Tuple[str, ...] = (".refactor_",)
+
+    SKIP_GENERATED_OUTPUTS: bool = True
+
     SYMBOL_TYPE_PLURALS: Tuple[Tuple[str, str], ...] = (
         ("class", "classes"),
         ("struct", "structs"),
@@ -119,6 +129,12 @@ class Config:
     COMMUNITY_MAX_SIZE_RATIO: float = 0.25
 
     GOD_NODE_TOP_N: int = 10
+
+    COMMUNITY_HUB_DAMPING: bool = True
+
+    COMMUNITY_VOTE_EPSILON: float = 1e-9
+
+    COMMUNITY_MERGE_BELOW: int = 3
 
     SURPRISING_CONNECTION_HOP_THRESHOLD: int = 3
 
@@ -241,6 +257,8 @@ class Config:
 
     REFACTORIZER_MAX_FILES: int = 10
 
+    REFACTORIZER_SCRIPT_PREFIX: str = ".refactor_"
+
     AGENT_INJECTION_ENABLED: bool = True
 
     AGENT_INJECTION_KB_FILENAME: str = "KNOWLEDGE_BASE.md"
@@ -251,6 +269,31 @@ class Config:
 
     AGENT_OUTPUT_MIN_SUBSYSTEM_FILES: int = 2
 
+    AGENT_OUTPUT_MAX_LINES: int = 500
+
+    AGENT_PURPOSE_MAX_CHARS: int = 100
+
+    AGENT_DOC_MAX_CHARS: int = 120
+
+    AGENT_SIGNATURE_MAX_CHARS: int = 120
+
+    AGENT_GOTCHAS_TOP_N: int = 10
+
+    AGENT_GOTCHAS_EXCLUDE_LAYERS: Tuple[str, ...] = ("testing",)
+
+    AGENT_API_PUBLIC_ONLY: bool = True
+
+    AGENT_API_EXCLUDE_LAYERS: Tuple[str, ...] = ("testing",)
+
+    AGENT_CHARS_PER_TOKEN: int = 4
+
+    AGENT_ENTRYPOINT_FILENAMES: Tuple[str, ...] = (
+        "__main__.py", "main.py", "cli.py", "app.py", "manage.py",
+        "main.c", "main.cpp", "main.cc", "kernel.c", "main.go", "main.rs",
+        "lib.rs", "index.js", "index.ts", "server.js", "server.ts",
+        "Main.java", "Program.cs", "main.dart", "main.swift", "Main.kt",
+    )
+
     WIKI_ENABLED: bool = True
 
     WIKI_OUTPUT_DIR: str = "readmenator-wiki"
@@ -260,6 +303,32 @@ class Config:
     WIKI_MAX_SYMBOLS_PER_PAGE: int = 30
 
     WIKI_MAX_CONNECTIONS: int = 20
+
+    GH_WIKI_ENABLED: bool = False
+
+    GH_WIKI_REMOTE: str = ""
+
+    GH_WIKI_GIT_REMOTE_NAME: str = "origin"
+
+    GH_WIKI_HOME_PAGE: str = "Home"
+
+    GH_WIKI_KB_PAGE: str = "Knowledge-Base"
+
+    GH_WIKI_AGENT_PREFIX: str = "Agent-"
+
+    GH_WIKI_RECIPE_PREFIX: str = "Recipe-"
+
+    GH_WIKI_INCLUDE_KB: bool = True
+
+    GH_WIKI_PERMALINKS: bool = True
+
+    GH_WIKI_STATE_FILE: str = ".readmenator-pages"
+
+    GH_WIKI_DRY_RUN_DIR: str = "readmenator-ghwiki"
+
+    GH_WIKI_TIMEOUT_S: int = 120
+
+    GH_WIKI_COMMIT_MESSAGE: str = "docs(wiki): regenerate from readmenator"
 
     WIKI_LARGE_FILE_KB: int = 256
 

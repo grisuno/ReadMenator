@@ -138,6 +138,10 @@ class ImportResolver:
         if candidate:
             return candidate
 
+        candidate = self._resolve_root_package(raw)
+        if candidate:
+            return candidate
+
         candidate = self._resolve_module_dotpath(raw)
         if candidate:
             return candidate
@@ -245,6 +249,21 @@ class ImportResolver:
             candidate = f"{base}/{init_name}"
             if candidate in self._file_ids:
                 return candidate
+        return None
+
+    def _resolve_root_package(self, import_str: str) -> Optional[str]:
+        """Resolve a bare top-level name to a root package ``__init__.py``.
+
+        Python prefers a package directory over a same-named module, so
+        ``import pkg`` must map to ``pkg/__init__.py`` even when a
+        ``pkg.py`` launcher shim exists; stem matching would otherwise
+        pick the shim and fabricate dependency cycles.
+        """
+        if not import_str or any(sep in import_str for sep in ("/", ".", "\\")):
+            return None
+        candidate = f"{import_str}/__init__.py"
+        if candidate in self._file_ids:
+            return candidate
         return None
 
     def _resolve_module_dotpath(self, import_str: str) -> Optional[str]:

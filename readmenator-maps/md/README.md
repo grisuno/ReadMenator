@@ -9,6 +9,8 @@ A token-free, offline, production-grade polyglot codebase knowledge graph & arch
 
 ReadMenator builds production-grade codebase knowledge graphs and architectural health reports 100% offline. Identify structural risks, security flaws, and change impact patterns instantly across 19 languages.
 
+https://github.com/user-attachments/assets/af02cae9-5cb5-427e-84cc-af4d82374116
+
 - [https://pypi.org/project/readmenator/](https://pypi.org/project/readmenator/)
 - [https://grisuno.github.io/ReadMenator/](https://grisuno.github.io/ReadMenator/)
 
@@ -147,6 +149,42 @@ with signatures, and import neighborhoods.
 Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
 Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
 with relative paths, works fully offline, and needs no build step.
+The site also ships `llms.txt` (the [llms.txt](https://llmstxt.org) convention),
+so agents browsing the published site get a plain-markdown map of the wiki,
+agent docs, and knowledge base instead of parsing HTML. Once `docs/` holds a
+gallery, every `--rebuild` refreshes it (video and docs included).
+
+### Agent-Ready Output (zero tokens)
+
+`readmenator-agent/` is built for agents that `grep` and `read`:
+
+- `MANIFEST.json` records `git_commit`: compare it with `git rev-parse HEAD`
+  to know whether the docs are stale before trusting them. It also lists every
+  document with its line count and approximate token cost.
+- Every document stays under 500 lines. Larger ones are paged as `NAME_p2.md`,
+  so grep with `NAME*.md`.
+- `INDEX.md` gives each file a one-sentence purpose and a "Used by" count
+  (blast radius at a glance).
+- `API.md` lists one line per public function, and `GOTCHAS.md` ranks blast
+  radius without counting tests.
+- readmenator never rescans its own generated output.
+
+### GitHub Wiki
+
+Mirror the wiki, agent docs, recipes, and KNOWLEDGE_BASE.md into the
+repository's GitHub wiki. Pages get a sidebar, cross-links, and source
+permalinks pinned to the current commit:
+
+```bash
+readmenator . gh-wiki --dry-run          # render pages into readmenator-ghwiki/ (no git calls)
+readmenator . gh-wiki                    # clone <repo>.wiki.git, commit, push
+readmenator . --rebuild --publish-wiki   # regenerate everything, then publish the wiki
+```
+
+Requirements: the wiki is enabled, its first page was created once in the web
+UI, and git can push (for example after `gh auth setup-git`). Pages written by
+hand are never deleted. Only pages that readmenator generated earlier are
+replaced.
 
 ### Generate Class Stubs in Other Languages
 

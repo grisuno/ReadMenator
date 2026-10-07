@@ -1,3 +1,5 @@
+"""Nim parser: regex extraction of symbols, signatures, docstrings, and imports."""
+
 from __future__ import annotations
 
 from readmenator.parsers._base import LanguageParser

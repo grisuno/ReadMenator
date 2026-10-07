@@ -1,3 +1,5 @@
+"""Python parser: native ast extraction of symbols, signatures, docstrings, and imports."""
+
 from __future__ import annotations
 
 import ast

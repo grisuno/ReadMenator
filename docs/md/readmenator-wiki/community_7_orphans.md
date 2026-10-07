@@ -1,26 +1,16 @@
 # orphans
 
-*Community 3 | 12 files | cohesion 0.00*
+*Community 7 | 2 files | cohesion 0.00*
 
 ## Definition
 
-This community groups 12 file(s) rooted at `root` with dominant language sh (cohesion 0.00). Central symbols: `Config`, `GitHubClient`, `Orchestrator`, `RepositoryProcessor`, `TestOrchestrator`, `__init__`, `_cleanup_temp_dir`, `_clone_repository`. Core file: `readmenator_orchestrator.py` (34 symbols). Documented purpose: Refactoring plan for readmenator/_app.py Current lines: 643 Estimated impact: 5 files.
+This community groups 2 file(s) rooted at `tests` with dominant language py (cohesion 0.00). Central symbols: `Config`, `GitHubClient`, `Orchestrator`, `RepositoryProcessor`, `TestOrchestrator`, `__init__`, `_cleanup_temp_dir`, `_clone_repository`. Core file: `readmenator_orchestrator.py` (34 symbols).
 
 ## Files
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
-| `.refactor__app.sh` | sh | utility | 0 | yes |
-| `.refactor__documentation.sh` | sh | utility | 0 | yes |
-| `.refactor__exporter.sh` | sh | utility | 0 | yes |
-| `.refactor__mcp_server.sh` | sh | utility | 0 | yes |
-| `.refactor__rank.sh` | sh | utility | 0 | yes |
-| `.refactor__security.sh` | sh | utility | 0 | yes |
-| `.refactor__uml.sh` | sh | utility | 0 | yes |
-| `.refactor_test_parsers.sh` | sh | testing | 0 | yes |
-| `.refactor_test_ranking.sh` | sh | testing | 0 | yes |
-| `.refactor_test_uml.sh` | sh | testing | 0 | yes |
-| `readmenator_orchestrator.py` | py | testing | 34 | no |
+| `readmenator_orchestrator.py` | py | utility | 34 | no |
 | `tests/__init__.py` | py | testing | 0 | no |
 
 ## Key Symbols
@@ -63,30 +53,20 @@ This community groups 12 file(s) rooted at `root` with dominant language sh (coh
 
 ## Connections
 
-- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 3 (orphans).
-- [INFERRED] shares_context community 2 <-> 3 (strength 0.5): Inferred shared context (layer utility) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).
+- [INFERRED] shares_context community 0 <-> 7 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _diagrams) and community 7 (orphans).
 
 ## Risks
 
-- No scoped security, taint, cycle, or layer risks.
+- [taint high] `readmenator_orchestrator.py` -> `readmenator_orchestrator.py` via `subprocess` (0 hops)
 
 ## Open Questions
 
 - Why do 2 file(s) lack file-level docs (e.g. `readmenator_orchestrator.py`)? What purpose do they serve?
+- Is the dangerous import `subprocess` in `readmenator_orchestrator.py` still required, or can it be isolated?
 - What would break if the most connected file in orphans changed?
 - Should orphans be split, given cohesion 0.00?
 
 ## Sources
 
-- `.refactor__app.sh`
-- `.refactor__documentation.sh`
-- `.refactor__exporter.sh`
-- `.refactor__mcp_server.sh`
-- `.refactor__rank.sh`
-- `.refactor__security.sh`
-- `.refactor__uml.sh`
-- `.refactor_test_parsers.sh`
-- `.refactor_test_ranking.sh`
-- `.refactor_test_uml.sh`
 - `readmenator_orchestrator.py`
 - `tests/__init__.py`

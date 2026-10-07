@@ -1,3 +1,5 @@
+"""Taint propagation analysis of dangerous imports through the resolved import graph."""
+
 from __future__ import annotations
 
 from collections import deque

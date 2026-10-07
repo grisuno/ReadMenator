@@ -1,3 +1,5 @@
+"""SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible)."""
+
 from __future__ import annotations
 
 import json

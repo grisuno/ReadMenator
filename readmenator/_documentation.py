@@ -1,3 +1,9 @@
+"""KNOWLEDGE_BASE.md generator: the human-facing architecture reference.
+
+Renders the dashboard, layers, communities, CPG, taint, hotspots, cycles,
+security audit, Mermaid graph, and per-file reference sections.
+"""
+
 from __future__ import annotations
 
 import subprocess

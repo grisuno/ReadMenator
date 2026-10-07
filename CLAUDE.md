@@ -38,6 +38,9 @@ readmenator/
   _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
   _agent_injector.py - Injects KB + agent output references into AI agent config files
   _agent_output.py   - Agent-friendly grep-optimized output generator (INDEX.md, API.md, etc.)
+  _purpose.py        - Shared one-sentence file purpose extraction (banner/SPDX cleaning, symbol fallback)
+  _gitmeta.py        - Read-only git HEAD/branch reader for freshness stamps (no subprocess)
+  _gh_wiki.py        - Opt-in GitHub wiki publisher (flat pages, sidebar, permalinks, git push)
   _taint.py         - Taint propagation analysis through import graph
   _hotspots.py      - Hotspot detection, cycle analysis, change impact analysis
   _rule_gen.py      - Suggested linting/security rule generation (Semgrep YAML)
@@ -78,6 +81,8 @@ tests/
   test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
   test_wiki.py - Agent wiki contract tests (index, community pages, connections, orphans, lint, privacy)
   test_dataflow.py - Dataflow analyzer contract tests (def-use, alloc checks, C idioms, span bounds)
+  test_agent_friendliness.py - Agent output budgets, purposes, MANIFEST freshness, noise reduction, llms.txt
+  test_gh_wiki.py - GitHub wiki publisher contract tests (faked git/gh runner, no network)
 ```
 
 ## Contracts
@@ -87,7 +92,7 @@ tests/
 - No magic numbers or hardcoded paths
 - All tuneable parameters in one place
 - Pluralization map for symbol types
-- Graph analysis thresholds (COMMUNITY_MIN_SIZE, GOD_NODE_TOP_N, etc.)
+- Graph analysis thresholds (COMMUNITY_MIN_SIZE, GOD_NODE_TOP_N, COMMUNITY_HUB_DAMPING, COMMUNITY_VOTE_EPSILON, COMMUNITY_MERGE_BELOW, etc.)
 - Export settings (SVG_DPI, SVG_MAX_NODES, HTML_TEMPLATE_STYLE)
 - Cache directory config (CACHE_DIR)
 - Docstrings stored in full, no truncation
@@ -122,6 +127,10 @@ tests/
 - Cinematic video settings (VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS)
 - Video act durations (VIDEO_TITLE_S, VIDEO_CARD_S, VIDEO_LAYER_S, VIDEO_GOD_S, VIDEO_TREE_S, VIDEO_COMM_S, VIDEO_GRAPH_S, VIDEO_DNA_S, VIDEO_OUTRO_S)
 - Video scope settings (VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
+- Agent budget settings (AGENT_OUTPUT_MAX_LINES, AGENT_PURPOSE_MAX_CHARS, AGENT_DOC_MAX_CHARS, AGENT_SIGNATURE_MAX_CHARS, AGENT_GOTCHAS_TOP_N, AGENT_GOTCHAS_EXCLUDE_LAYERS, AGENT_API_PUBLIC_ONLY, AGENT_API_EXCLUDE_LAYERS, AGENT_CHARS_PER_TOKEN, AGENT_ENTRYPOINT_FILENAMES)
+- Generated artifact settings (GENERATED_FILE_PREFIXES, SKIP_GENERATED_OUTPUTS, REFACTORIZER_SCRIPT_PREFIX)
+- Site agent settings (SITE_LLMS_TXT_ENABLED, SITE_LLMS_TXT_FILENAME, SITE_REFRESH_ON_REBUILD)
+- GitHub wiki settings (GH_WIKI_ENABLED default False, GH_WIKI_REMOTE, GH_WIKI_GIT_REMOTE_NAME, GH_WIKI_HOME_PAGE, GH_WIKI_KB_PAGE, GH_WIKI_AGENT_PREFIX, GH_WIKI_RECIPE_PREFIX, GH_WIKI_INCLUDE_KB, GH_WIKI_PERMALINKS, GH_WIKI_STATE_FILE, GH_WIKI_DRY_RUN_DIR, GH_WIKI_TIMEOUT_S, GH_WIKI_COMMIT_MESSAGE)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -168,6 +177,7 @@ tests/
 - Emits progress messages every PROGRESS_REPORT_BATCH files
 - Supports `.gitignore`-aware scanning (GITIGNORE_AWARE)
 - Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
+- Skips its own generated outputs (agent, wiki, rules, maps, site, cache, gh-wiki dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
 - scan_with_content() returns content map for rule gen, taint analysis
 
 ### Import Resolver Contract
@@ -180,6 +190,7 @@ tests/
 - Handles extensionless imports with the full Config extension list (C headers, C++ sources, and all 19 languages)
 - Handles dotted module paths (foo.bar.baz -> foo/bar/baz.py)
 - Handles package __init__.py resolution
+- Bare top-level names prefer a root package (`pkg/__init__.py`) over a same-stem launcher shim (`pkg.py`), mirroring Python import precedence
 - Handles stem matching as fallback with known-extension stripping ("utils.h" -> "utils")
 - Works across all supported languages
 
@@ -229,6 +240,9 @@ tests/
 - analyze(nodes, edges, resolved_edges): returns AnalysisResult
 - Community detection via label propagation
 - Deterministic: content-seeded shuffle order, sorted neighbor traversal, min-label tie-break (stable across runs and hash seeds)
+- Small-group folding: communities under COMMUNITY_MERGE_BELOW join the neighbor sharing the most vote weight (smallest first, lowest label on ties); isolated groups untouched
+- Labels shared by several communities get the core file stem (most symbols, non-test preferred): `pkg: _video`
+- Hub damping (COMMUNITY_HUB_DAMPING): neighbors vote with weight 1/log2(2 + degree), so shared hubs (models, config) do not collapse the project into one community; ties within COMMUNITY_VOTE_EPSILON
 - God node scoring via combined in/out degree + symbol weight
 - Surprising connection discovery via cross-community path analysis
 - Suggested question generation from graph structure
@@ -290,7 +304,7 @@ tests/
 ### AnalyzerFactory Contract (pipeline)
 - Lazy property-based initialization of all analyzer components
 - Each component is created on first access and cached
-- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector, video
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector, video, gh_wiki
 - Decouples the application orchestrator from concrete instantiation
 
 ### DeepAnalysisRunner Contract (pipeline)
@@ -315,6 +329,8 @@ tests/
 - No Config dependency (static patterns only)
 - 5-layer model: presentation, business_logic, data_access, infrastructure, testing
 - Detection via path patterns, naming conventions, and imported frameworks
+- Path patterns match whole words (camelCase and separators split; short patterns like `ui`/`di`/`api` must equal a token), never raw substrings
+- Framework imports match the import root module from `imports` edges only; testing frameworks count only when the path already indicates tests (a CLI importing unittest stays production code)
 - layer_summary: static method, counts files per layer
 
 ### Cache Contract
@@ -326,6 +342,7 @@ tests/
 - Handles missing/deleted files gracefully
 - **Semantic cache**: save_analysis/load_analysis/clear_analysis for caching analysis results
 - **Change-aware analysis**: has_changed_since_last_analysis() for detecting staleness
+- source_fingerprint(project_root, file_ids): order-independent content fingerprint; app.check_freshness(target) compares it with MANIFEST; CLI `fresh` exits 0 (fresh) or 1 (stale), so docs generated before a commit stay fresh after it
 
 ### MCP Server Contract
 - JSON-RPC 2.0 stdio-based MCP protocol server (zero external deps)
@@ -384,6 +401,7 @@ tests/
 - Detects 15 AI agent config files: AGENTS.md, CLAUDE.md, SOUL.md, LLM.md, CONVENTIONS.md, .cursorrules, .instructions.md, .windsurfrules, .aider.conf.yml, SKILL.md, GEMINI.md, AGENTS.override.md, RULES.md, PROJECT_RULES.md, .github/copilot-instructions.md, plus .cursor/rules/*.mdc globs
 - Injects section referencing both KNOWLEDGE_BASE.md and readmenator-agent/ directory
 - Injected section points agents at readmenator-wiki/index.md first (big picture) before grep-friendly files
+- Injected markdown is a 5-step numbered workflow (freshness via MANIFEST git_commit vs `git rev-parse HEAD`, orient, locate with NAME*.md greps, subsystem context, gotchas before editing), kept short because it is paid on every agent session
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - Markdown vs plain text injection based on file suffix (.yml/.yaml = plain, else markdown)
@@ -394,20 +412,23 @@ tests/
 ### Agent Output Contract
 - AgentOutputGenerator class with generate() entry point
 - Generates grep-optimized, flat-markdown files in readmenator-agent/ directory
-- Output layout: INDEX.md, ARCHITECTURE.md, SECURITY.md, API.md, GOTCHAS.md, recipes/*.md, KB_<subsystem>.md
+- Output layout: MANIFEST.json, INDEX.md, SYMBOLS.md, ARCHITECTURE.md, SECURITY.md, API.md, GOTCHAS.md, recipes/*.md, KB_<subsystem>.md
+- Paging: any document over AGENT_OUTPUT_MAX_LINES splits on `## ` section boundaries into NAME.md, NAME_p2.md, ...; table headers repeat per page; pages link Pages/Previous/Next; stale owned pages pruned each run (user files untouched)
+- MANIFEST.json: schema_version, git_commit + git_branch (read from .git, no subprocess), source_fingerprint (_cache.source_fingerprint: sha256 over sorted path + content hashes), freshness_check, relative project_root (never absolute), imports/calls/inherits counted by relation, subsystems, layer-aware entrypoints, read_order, documents inventory (path, lines, approx_tokens)
+- Purposes come from _purpose.file_purpose: first clean sentence, word-boundary truncation (AGENT_PURPOSE_MAX_CHARS), fallback `Symbol: sentence` from the primary documented public symbol
 - **Subsystem inference**: groups nodes by directory, names from last directory component (never hardcoded)
 - Files with >= AGENT_OUTPUT_MIN_SUBSYSTEM_FILES get their own KB_<name>.md
 - Unassigned files go to KB_root.md (flat project) or KB_misc.md (scattered)
-- INDEX.md: table format `| File | Purpose | Subsystem | Symbols |` (grep-friendly)
-- ARCHITECTURE.md: flat list of dependency pairs (no JSON wrapping)
+- INDEX.md: table format `| File | Purpose | Subsystem | Symbols | Used by |` (grep-friendly, pipes escaped, Used by = distinct resolved importers)
+- ARCHITECTURE.md: flat list of internal dependency pairs; External Imports one line per source file, excluding imports that resolve to project files
 - SECURITY.md: findings grouped by severity, flat list (critical->info), each line with enclosing symbol, CWE, and Fix hint
-- API.md: functions/methods with signatures, contracts, dependencies, imported-by
-- GOTCHAS.md: god nodes, hotspots, closed-loop cycles (`a -> b -> a`), layer violations as actionable warnings
-- recipes/: add-function.md, fix-cycle.md, fix-security.md, reduce-complexity.md
+- API.md: one line per public function/method (`Owner.method`, kind, file:line, signature, first doc sentence); Depends on / Imported by stated once per file; private `_helpers` (AGENT_API_PUBLIC_ONLY) and AGENT_API_EXCLUDE_LAYERS files skipped
+- GOTCHAS.md: god nodes (with importer counts), Blast Radius from change impact, hotspots, closed-loop cycles (`a -> b -> a`, never double-closed), layer violations, dataflow leads; AGENT_GOTCHAS_EXCLUDE_LAYERS files (tests) left out of centrality lists
+- recipes/: add-function.md, change-impact.md, fix-cycle.md, fix-security.md, reduce-complexity.md (grep paths use NAME*.md globs)
 - recipes/ are grounded in project data: fix-cycle names the actual cycle + per-file import grep, fix-security lists top 3 findings with fixes, reduce-complexity names the top hotspot
 - All output is plain Markdown, no JSON wrapping, no fenced code blocks around data
 - Every line is greppable
-- No file exceeds 500 lines
+- No file exceeds AGENT_OUTPUT_MAX_LINES (default 500), enforced by paging
 - Configurable via AGENT_OUTPUT_ENABLED, AGENT_OUTPUT_DIR, AGENT_OUTPUT_MIN_SUBSYSTEM_FILES
 
 ### Agent Wiki Contract
@@ -520,11 +541,25 @@ tests/
 - Invalid maps are skipped while the index is still written; empty input yields an empty gallery notice
 - Publish never mutates caller supplied map metadata
 - CLI: `pages` publishes the static site (GitHub Pages ready: serve the output directory directly)
+- publish() writes llms.txt (SITE_LLMS_TXT_FILENAME) at the site root: H1, blockquote summary, Wiki then Agent Docs then Project Docs link sections (entry points first), maps under Optional
+- run()/rebuild() refresh the site only when DIAGRAM_PAGES_DIR already holds a readmenator gallery (index.html + maps dir) and SITE_REFRESH_ON_REBUILD is set; a user's own docs folder is never taken over
 - CLI: `diagrams` exports all five maps, `diagram <kind>` exports one map
 - AnalyzerFactory exposes diagram_builder, diagram_renderer, diagram_validator, vis_renderer (lazy init)
 - Configurable via DIAGRAM_ENABLED, DIAGRAM_OUTPUT_DIR, and all DIAGRAM_* geometry/scope/style settings
 - Full mode (`DIAGRAM_FULL_MODE=True` or `diagrams --full` / `diagram <kind> --full` / `pages --full`): zero exclusions, every scanned file in every map, grown per-map canvas, size-limit checks D004/D008 skipped, gallery cards report "full scope"
 - `run`/`rebuild` always export full maps (`export_diagrams(full=True)`), so default `KNOWLEDGE_BASE.md` regeneration never ships truncated doom-only diagrams
+
+### GitHub Wiki Publisher Contract
+- GitHubWikiPublisher class with render(project_root, remote) and publish(project_root, dry_run) entry points (readmenator/_gh_wiki.py)
+- Sources: KNOWLEDGE_BASE.md (GH_WIKI_INCLUDE_KB), readmenator-wiki/*.md, readmenator-agent/**/*.md; regular non-symlink files only
+- Flat page names: wiki index -> Home, KB -> Knowledge-Base, agent docs -> Agent-<stem>, recipes -> Recipe-<stem>; plus generated _Sidebar.md (Start, Wiki, Agent Docs, Recipes) and _Footer.md (source commit)
+- Relative `.md` links rewritten to page names; backticked existing project paths (optional `:line`) become commit-pinned blob permalinks (GH_WIKI_PERMALINKS); paths outside the project root are never linked
+- Remote: GH_WIKI_REMOTE (validated) else `gh repo view` URL else `git remote get-url origin`, mapped to `<repo>.wiki.git`
+- Publish: shallow clone into a temp dir, write pages, delete only pages listed in GH_WIKI_STATE_FILE from the previous run (hand-written pages kept), commit and push only when `git status` shows changes; temp dir always removed
+- Uninitialized wiki (clone fails) yields an actionable message: create the first page once in the web UI
+- Commands run as argument lists with GH_WIKI_TIMEOUT_S, never through a shell; runner injectable for tests
+- Opt-in: GH_WIKI_ENABLED defaults False; CLI `readmenator . --rebuild --publish-wiki`, `readmenator . gh-wiki`, `readmenator . gh-wiki --dry-run` (renders into GH_WIKI_DRY_RUN_DIR, no git calls)
+- AnalyzerFactory exposes gh_wiki (lazy init); app.publish_github_wiki(target, dry_run) returns WikiPublishResult
 
 ### Cinematic Video Contract
 - CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)

@@ -3,29 +3,13 @@
     "community_a": 0,
     "community_b": 1,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_category.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 0,
-    "community_b": 2,
-    "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_scanner.py imports readmenator/parsers/__init__.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 1,
-    "community_b": 0,
-    "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/_category.py reaches tests/test_resolver.py in 4 hops.",
-    "strength": 0.6,
-    "confidence": "INFERRED"
-  },
-  {
-    "community_a": 1,
-    "community_b": 2,
+    "community_a": 0,
+    "community_b": 1,
     "connection_type": "bridges",
     "explanation": "Inferred cross-community bridge: readmenator/_explain.py reaches readmenator/parsers/__init__.py in 4 hops.",
     "strength": 0.6,
@@ -35,7 +19,7 @@
     "community_a": 1,
     "community_b": 0,
     "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_agent_injector.py in 4 hops.",
+    "explanation": "Inferred cross-community bridge: readmenator/parsers/__init__.py reaches tests/test_agent_injector.py in 4 hops.",
     "strength": 0.6,
     "confidence": "INFERRED"
   },
@@ -43,7 +27,7 @@
     "community_a": 1,
     "community_b": 0,
     "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_cache.py in 4 hops.",
+    "explanation": "Inferred cross-community bridge: readmenator/parsers/__init__.py reaches tests/test_readme_injector.py in 4 hops.",
     "strength": 0.6,
     "confidence": "INFERRED"
   },
@@ -51,23 +35,23 @@
     "community_a": 1,
     "community_b": 0,
     "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_config.py in 4 hops.",
+    "explanation": "Inferred cross-community bridge: readmenator/parsers/_assembly.py reaches tests/test_agent_injector.py in 4 hops.",
     "strength": 0.6,
     "confidence": "INFERRED"
   },
   {
     "community_a": 1,
-    "community_b": 3,
-    "connection_type": "shares_context",
-    "explanation": "Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 3 (orphans).",
-    "strength": 0.5,
+    "community_b": 0,
+    "connection_type": "bridges",
+    "explanation": "Inferred cross-community bridge: readmenator/parsers/_assembly.py reaches tests/test_readme_injector.py in 4 hops.",
+    "strength": 0.6,
     "confidence": "INFERRED"
   },
   {
-    "community_a": 2,
-    "community_b": 3,
+    "community_a": 1,
+    "community_b": 2,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (layer utility) with no import path between community 2 (readmenator/parsers) and community 3 (orphans).",
+    "explanation": "Inferred shared context (layer utility) with no import path between community 1 (readmenator/parsers) and community 2 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   }

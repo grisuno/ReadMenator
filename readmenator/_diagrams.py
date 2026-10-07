@@ -2819,6 +2819,15 @@ class DocsSitePublisher:
             encoding="utf-8",
         )
         written["index"] = str(index_target)
+        if self._config.SITE_LLMS_TXT_ENABLED:
+            llms_target = root / self._config.SITE_LLMS_TXT_FILENAME
+            llms_target.write_text(
+                self.render_llms_txt(
+                    project_name, published, stats or {}, href_prefix, resolved_docs,
+                ),
+                encoding="utf-8",
+            )
+            written["llms"] = str(llms_target)
         nojekyll_target = root / ".nojekyll"
         nojekyll_target.write_text("", encoding="utf-8")
         written["nojekyll"] = str(nojekyll_target)
@@ -2883,7 +2892,11 @@ class DocsSitePublisher:
         if self._config.SITE_DOCS_ENABLED:
             docs_root = root / self._config.SITE_DOCS_SUBDIR.strip().strip("/")
             docs_root.mkdir(parents=True, exist_ok=True)
-            for source in self.collect_doc_sources(str(base)):
+            sources = self.collect_doc_sources(str(base))
+            self._prune_stale_docs(
+                docs_root, {s.relative_to(base).as_posix() for s in sources},
+            )
+            for source in sources:
                 rel = source.relative_to(base).as_posix()
                 target = docs_root / rel
                 target.parent.mkdir(parents=True, exist_ok=True)
@@ -2900,6 +2913,100 @@ class DocsSitePublisher:
                 doc_entries.append({"name": rel, "href": href, "preview": preview})
                 written["doc:" + rel] = str(target)
         return {"video_rel": video_rel, "doc_entries": doc_entries, "written": written}
+
+    @staticmethod
+    def _prune_stale_docs(docs_root: Path, keep: Set[str]) -> None:
+        """Delete copied markdown docs that no longer exist in the project.
+
+        The docs subdirectory is owned by the publisher; without pruning,
+        renamed wiki or paged agent files would linger in the site forever.
+
+        Args:
+            docs_root: Site directory holding copied markdown.
+            keep: Relative paths published in this run.
+        """
+        if docs_root.is_symlink() or not docs_root.is_dir():
+            return
+        for path in sorted(docs_root.rglob("*.md")):
+            rel = path.relative_to(docs_root).as_posix()
+            if rel not in keep and path.is_file() and not path.is_symlink():
+                path.unlink()
+
+    def render_llms_txt(
+        self,
+        project_name: str,
+        maps: Dict[str, SystemMap],
+        stats: Dict[str, int],
+        href_prefix: str,
+        doc_entries: Optional[List[Dict[str, str]]] = None,
+    ) -> str:
+        """Render an llms.txt entry point so agents can navigate the site as text.
+
+        Follows the llms.txt convention: an H1 title, a blockquote summary,
+        then H2 sections of markdown links. Agent-oriented markdown comes
+        first because it is cheaper to read than the HTML maps.
+
+        Args:
+            project_name: Display name used for the title.
+            maps: Mapping of published diagram kind to system map.
+            stats: Project counters summarized in the blockquote.
+            href_prefix: Relative prefix pointing at the map directory.
+            doc_entries: Published markdown docs with name and href.
+
+        Returns:
+            Plain markdown text for llms.txt.
+        """
+        name = " ".join(project_name.split()) or "project"
+        counters = ", ".join(
+            f"{value} {key}" for key, value in sorted(stats.items())
+        )
+        summary = f"Static analysis knowledge base for {name}"
+        lines = [f"# {name}", "", f"> {summary}{': ' + counters if counters else ''}.", ""]
+        lines.append(
+            "Generated offline by readmenator (zero LLM tokens). Start with the "
+            "wiki index for the big picture, then the agent INDEX for file lookup."
+        )
+        lines.append("")
+        agent_dir = self._config.AGENT_OUTPUT_DIR + "/"
+        wiki_dir = self._config.WIKI_OUTPUT_DIR + "/"
+        groups: Dict[str, List[Dict[str, str]]] = {"wiki": [], "agent": [], "other": []}
+        for entry in doc_entries or []:
+            rel = entry.get("name", "")
+            if rel.startswith(wiki_dir):
+                groups["wiki"].append(entry)
+            elif rel.startswith(agent_dir):
+                groups["agent"].append(entry)
+            else:
+                groups["other"].append(entry)
+        priority = ("index.md", "INDEX.md", "MANIFEST.json", "GOTCHAS.md")
+
+        def order(entry: Dict[str, str]) -> Tuple[int, str]:
+            """Sort entry points first, then alphabetically."""
+            base = entry.get("name", "").rsplit("/", 1)[-1]
+            rank = priority.index(base) if base in priority else len(priority)
+            return rank, entry.get("name", "")
+
+        titles = (("wiki", "Wiki"), ("agent", "Agent Docs"), ("other", "Project Docs"))
+        for key, title in titles:
+            if not groups[key]:
+                continue
+            lines.append(f"## {title}")
+            lines.append("")
+            for entry in sorted(groups[key], key=order):
+                preview = " ".join(entry.get("preview", "").split())
+                note = f": {preview}" if preview else ""
+                lines.append(f"- [{entry.get('name', '')}]({entry.get('href', '')}){note}")
+            lines.append("")
+        if maps:
+            lines.append("## Optional")
+            lines.append("")
+            for kind in sorted(maps):
+                lines.append(
+                    f"- [{maps[kind].title}]({href_prefix}{kind}.html): "
+                    f"{self.description_for(kind)} (interactive HTML)"
+                )
+            lines.append("")
+        return "\n".join(lines)
 
     def render_index(
         self,

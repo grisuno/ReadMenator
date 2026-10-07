@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Launcher shim that runs the readmenator CLI from a source checkout."""
+
 import sys
 from pathlib import Path
 

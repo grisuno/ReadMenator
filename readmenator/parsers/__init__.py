@@ -1,3 +1,5 @@
+"""Parser factory: maps file extensions to per-language LanguageParser classes."""
+
 from __future__ import annotations
 
 from typing import Optional

@@ -1,3 +1,5 @@
+"""LanguageParser base class with shared docstring and signature extraction."""
+
 from __future__ import annotations
 
 import re

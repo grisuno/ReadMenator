@@ -1,3 +1,9 @@
+"""AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
+
+Decouples the application orchestrator from concrete analyzers and runs
+the v2 analyses (taint, cycles, impact, hotspots, rules, layers, dataflow).
+"""
+
 from __future__ import annotations
 
 from typing import Dict, List, Optional
@@ -12,6 +18,7 @@ from readmenator._dataflow import DataflowAnalyzer
 from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
 from readmenator._documentation import DocumentationGenerator
 from readmenator._exporter import GraphExporter
+from readmenator._gh_wiki import GitHubWikiPublisher
 from readmenator._hotspots import HotspotAnalyzer
 from readmenator._layer_rules import LayerRuleEngine
 from readmenator._layers import LayerDetector
@@ -67,6 +74,7 @@ class AnalyzerFactory:
         self._readme_injector: ReadmeInjector | None = None
         self._agent_injector: AgentInjector | None = None
         self._agent_output: AgentOutputGenerator | None = None
+        self._gh_wiki: GitHubWikiPublisher | None = None
         self._diagram_builder: SystemMapBuilder | None = None
         self._diagram_renderer: InteractiveMapRenderer | None = None
         self._diagram_validator: SystemMapValidator | None = None
@@ -190,6 +198,13 @@ class AnalyzerFactory:
                 wiki_output_dir=self._config.WIKI_OUTPUT_DIR,
             )
         return self._agent_injector
+
+    @property
+    def gh_wiki(self) -> GitHubWikiPublisher:
+        """Return the lazily initialised GitHub wiki publisher."""
+        if self._gh_wiki is None:
+            self._gh_wiki = GitHubWikiPublisher(self._config)
+        return self._gh_wiki
 
     @property
     def agent_output(self) -> AgentOutputGenerator:

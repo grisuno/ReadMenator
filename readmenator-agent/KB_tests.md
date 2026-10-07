@@ -4,6 +4,56 @@
 - Layer: testing
 - Language: py
 
+## tests/test_agent_friendliness.py
+- Layer: testing
+- Doc: Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
+- Language: py
+- Symbols:
+  - `_node` (function, line 21) `def _node(node_id, doc, symbols)`
+  - `_edge` (function, line 29) `def _edge(source, target, relation)`
+  - `_big_project` (function, line 34) `def _big_project(files, symbols_per_file)`
+  - `TestAgentOutputBudget` (class, line 55) `class TestAgentOutputBudget(TestCase)`
+  - `TestAgentOutputSignal` (class, line 110) `class TestAgentOutputSignal(TestCase)`
+  - `TestPurposeExtraction` (class, line 176) `class TestPurposeExtraction(TestCase)`
+  - `TestManifestFreshness` (class, line 199) `class TestManifestFreshness(TestCase)`
+  - `TestNoiseReduction` (class, line 244) `class TestNoiseReduction(TestCase)`
+  - `TestLlmsTxt` (class, line 281) `class TestLlmsTxt(TestCase)`
+  - `TestCommunityHubDamping` (class, line 308) `class TestCommunityHubDamping(TestCase)`
+  - `TestSourceFreshness` (class, line 329) `class TestSourceFreshness(TestCase)`
+  - `TestCommunityShaping` (class, line 363) `class TestCommunityShaping(TestCase)`
+  - `TestSiteDocsPruning` (class, line 394) `class TestSiteDocsPruning(TestCase)`
+  - `test_agent_output_pages_respect_line_cap_on_large_projects` (method, line 58) `def test_agent_output_pages_respect_line_cap_on_large_projects(self)`
+  - `test_agent_output_pagination_keeps_every_symbol_greppable` (method, line 71) `def test_agent_output_pagination_keeps_every_symbol_greppable(self)`
+  - `test_agent_output_pages_repeat_table_header_and_link_next` (method, line 84) `def test_agent_output_pages_repeat_table_header_and_link_next(self)`
+  - `test_agent_output_prunes_stale_pages` (method, line 96) `def test_agent_output_prunes_stale_pages(self)`
+  - `test_api_states_dependencies_once_per_file` (method, line 113) `def test_api_states_dependencies_once_per_file(self)`
+  - `test_api_skips_private_helpers_and_test_layer` (method, line 122) `def test_api_skips_private_helpers_and_test_layer(self)`
+  - `test_api_qualifies_methods_with_owner_class` (method, line 136) `def test_api_qualifies_methods_with_owner_class(self)`
+  - `test_architecture_external_excludes_internally_resolved_imports` (method, line 144) `def test_architecture_external_excludes_internally_resolved_imports(self)`
+  - `test_index_reports_used_by_count_and_escapes_pipes` (method, line 153) `def test_index_reports_used_by_count_and_escapes_pipes(self)`
+  - `test_gotchas_exclude_test_layer_and_report_blast_radius` (method, line 161) `def test_gotchas_exclude_test_layer_and_report_blast_radius(self)`
+  - `test_purpose_takes_first_sentence` (method, line 179) `def test_purpose_takes_first_sentence(self)`
+  - `test_purpose_skips_banners_and_spdx` (method, line 182) `def test_purpose_skips_banners_and_spdx(self)`
+  - `test_purpose_falls_back_to_primary_public_symbol` (method, line 185) `def test_purpose_falls_back_to_primary_public_symbol(self)`
+  - `test_purpose_truncates_on_word_boundary` (method, line 192) `def test_purpose_truncates_on_word_boundary(self)`
+  - `_git_repo` (method, line 202) `def _git_repo(self, root, packed)`
+  - `test_gitmeta_reads_loose_and_packed_refs` (method, line 214) `def test_gitmeta_reads_loose_and_packed_refs(self)`
+  - `test_gitmeta_outside_repository_is_empty` (method, line 220) `def test_gitmeta_outside_repository_is_empty(self)`
+  - `test_manifest_has_commit_relative_root_and_inventory` (method, line 224) `def test_manifest_has_commit_relative_root_and_inventory(self)`
+  - `test_scanner_skips_own_generated_outputs` (method, line 247) `def test_scanner_skips_own_generated_outputs(self)`
+  - `test_resolver_prefers_root_package_over_launcher_shim` (method, line 260) `def test_resolver_prefers_root_package_over_launcher_shim(self)`
+  - `test_layers_match_whole_words_not_substrings` (method, line 264) `def test_layers_match_whole_words_not_substrings(self)`
+  - `test_layers_test_framework_import_needs_test_path` (method, line 272) `def test_layers_test_framework_import_needs_test_path(self)`
+  - `test_llms_txt_lists_wiki_before_agent_docs` (method, line 284) `def test_llms_txt_lists_wiki_before_agent_docs(self)`
+  - `test_publish_writes_llms_txt` (method, line 296) `def test_publish_writes_llms_txt(self)`
+  - `test_communities_survive_a_shared_hub` (method, line 311) `def test_communities_survive_a_shared_hub(self)`
+  - `test_fingerprint_changes_with_content_not_with_order` (method, line 332) `def test_fingerprint_changes_with_content_not_with_order(self)`
+  - `test_check_freshness_detects_source_edits` (method, line 343) `def test_check_freshness_detects_source_edits(self)`
+  - `test_small_community_merges_into_best_connected_neighbor` (method, line 366) `def test_small_community_merges_into_best_connected_neighbor(self)`
+  - `test_shared_directory_labels_use_core_file` (method, line 380) `def test_shared_directory_labels_use_core_file(self)`
+  - `test_publish_assets_prunes_stale_markdown` (method, line 397) `def test_publish_assets_prunes_stale_markdown(self)`
+- Depends on: `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
+
 ## tests/test_agent_injector.py
 - Layer: testing
 - Doc: Contract tests for AI agent file injection.  SDD + TDD + BDD: Each test validates a specific behavioral contract of the 
@@ -405,6 +455,28 @@
   - `test_to_svg_includes_readmenator_title` (method, line 154) `def test_to_svg_includes_readmenator_title(self)`
   - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
+
+## tests/test_gh_wiki.py
+- Layer: testing
+- Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
+- Language: py
+- Symbols:
+  - `_FakeRunner` (class, line 14) `class _FakeRunner`
+  - `_project` (method, line 41) `def _project(root, config)`
+  - `TestGitHubWikiPages` (class, line 61) `class TestGitHubWikiPages(TestCase)`
+  - `TestGitHubWikiPublish` (class, line 115) `class TestGitHubWikiPublish(TestCase)`
+  - `__init__` (method, line 17) `def __init__(self, origin, clone_ok, dirty)`
+  - `__call__` (method, line 24) `def __call__(self, command, cwd)`
+  - `test_gh_wiki_page_names_are_flat_and_prefixed` (method, line 64) `def test_gh_wiki_page_names_are_flat_and_prefixed(self)`
+  - `test_gh_wiki_render_rewrites_links_and_permalinks` (method, line 71) `def test_gh_wiki_render_rewrites_links_and_permalinks(self)`
+  - `test_gh_wiki_permalinks_never_escape_project_root` (method, line 88) `def test_gh_wiki_permalinks_never_escape_project_root(self)`
+  - `test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages` (method, line 96) `def test_gh_wiki_dry_run_writes_locally_and_prunes_only_owned_pages(self)`
+  - `test_gh_wiki_publish_clones_commits_and_pushes` (method, line 118) `def test_gh_wiki_publish_clones_commits_and_pushes(self)`
+  - `test_gh_wiki_publish_skips_push_when_unchanged` (method, line 130) `def test_gh_wiki_publish_skips_push_when_unchanged(self)`
+  - `test_gh_wiki_publish_explains_uninitialized_wiki` (method, line 139) `def test_gh_wiki_publish_explains_uninitialized_wiki(self)`
+  - `test_gh_wiki_rejects_malformed_configured_remote` (method, line 147) `def test_gh_wiki_rejects_malformed_configured_remote(self)`
+  - `test_gh_wiki_disabled_by_default` (method, line 154) `def test_gh_wiki_disabled_by_default(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_gh_wiki.py`
 
 ## tests/test_hotspots.py
 - Layer: testing

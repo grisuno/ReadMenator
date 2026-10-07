@@ -10,6 +10,7 @@ token-free.
 from __future__ import annotations
 
 import hashlib
+import math
 import random
 from collections import defaultdict, deque
 from typing import Dict, List, Optional, Set, Tuple
@@ -156,9 +157,10 @@ class GraphAnalyzer:
     ) -> Dict[int, List[str]]:
         """Detect communities using label propagation.
 
-        Each node adopts the most frequent community label among its
-        neighbors. Iterates until convergence or max iterations reached.
-        Simple, deterministic, and correct for connected graphs.
+        Each node adopts the label with the highest weighted vote among
+        its neighbors. Iterates until convergence or max iterations reached.
+        Deterministic: content-seeded order, sorted neighbors, min-label
+        tie-break within COMMUNITY_VOTE_EPSILON.
         """
         if not nodes or not adjacency:
             return {}
@@ -169,21 +171,26 @@ class GraphAnalyzer:
             hashlib.sha256("|".join(sorted(file_ids)).encode()).hexdigest(), 16
         ) % (2 ** 32)
         rng = random.Random(seed)
+        weights = self._vote_weights(file_ids, adjacency)
+        epsilon = self._config.COMMUNITY_VOTE_EPSILON
 
         for _iteration in range(50):
             changed = False
             node_list = list(file_ids)
             rng.shuffle(node_list)
             for fid in node_list:
-                neighbor_labels: Dict[int, int] = {}
+                neighbor_labels: Dict[int, float] = {}
                 for neighbor in sorted(adjacency.get(fid, set())):
                     nl = labels.get(neighbor)
                     if nl is not None:
-                        neighbor_labels[nl] = neighbor_labels.get(nl, 0) + 1
+                        neighbor_labels[nl] = neighbor_labels.get(nl, 0.0) + weights[neighbor]
                 if not neighbor_labels:
                     continue
                 max_count = max(neighbor_labels.values())
-                best_labels = [lab for lab, cnt in neighbor_labels.items() if cnt == max_count]
+                best_labels = [
+                    lab for lab, cnt in neighbor_labels.items()
+                    if cnt >= max_count - epsilon
+                ]
                 best_label = min(best_labels) if best_labels else labels[fid]
                 if best_label != labels[fid]:
                     labels[fid] = best_label
@@ -196,6 +203,7 @@ class GraphAnalyzer:
             if lab not in result:
                 result[lab] = []
             result[lab].append(fid)
+        result = self._merge_small_communities(result, adjacency, weights)
 
         filtered: Dict[int, List[str]] = {}
         new_id = 0
@@ -205,6 +213,70 @@ class GraphAnalyzer:
                 new_id += 1
 
         return filtered
+
+    def _merge_small_communities(
+        self,
+        groups: Dict[int, List[str]],
+        adjacency: Dict[str, Set[str]],
+        weights: Dict[str, float],
+    ) -> Dict[int, List[str]]:
+        """Fold communities smaller than COMMUNITY_MERGE_BELOW into their best neighbor.
+
+        Label propagation leaves many module-plus-test pairs; each would
+        become its own wiki page. The smallest group first joins the
+        neighboring community it shares the most vote weight with (ties
+        to the lowest label). Isolated groups are kept unchanged.
+        """
+        threshold = self._config.COMMUNITY_MERGE_BELOW
+        merged = {lab: list(members) for lab, members in groups.items()}
+        if threshold <= 1:
+            return merged
+        owner = {fid: lab for lab, members in merged.items() for fid in members}
+        while True:
+            small = sorted(
+                (len(members), lab) for lab, members in merged.items()
+                if len(members) < threshold
+            )
+            moved = False
+            for _size, lab in small:
+                links: Dict[int, float] = {}
+                for fid in sorted(merged[lab]):
+                    for neighbor in sorted(adjacency.get(fid, set())):
+                        other = owner.get(neighbor)
+                        if other is None or other == lab:
+                            continue
+                        links[other] = links.get(other, 0.0) + weights.get(neighbor, 1.0)
+                if not links:
+                    continue
+                top = max(links.values())
+                target = min(
+                    other for other, weight in links.items()
+                    if weight >= top - self._config.COMMUNITY_VOTE_EPSILON
+                )
+                for fid in merged[lab]:
+                    owner[fid] = target
+                merged[target].extend(merged.pop(lab))
+                moved = True
+                break
+            if not moved:
+                return merged
+
+    def _vote_weights(
+        self, file_ids: List[str], adjacency: Dict[str, Set[str]]
+    ) -> Dict[str, float]:
+        """Return each node's label-propagation vote weight.
+
+        With COMMUNITY_HUB_DAMPING a neighbor votes with weight
+        ``1 / log2(2 + degree)``: hubs such as shared models or config,
+        which nearly every file imports, stop pulling the whole project
+        into one giant community, while ordinary neighbors keep full say.
+        """
+        if not self._config.COMMUNITY_HUB_DAMPING:
+            return {fid: 1.0 for fid in file_ids}
+        return {
+            fid: 1.0 / math.log2(2 + len(adjacency.get(fid, ())))
+            for fid in file_ids
+        }
 
     def _label_communities(
         self, nodes: List[Node], communities: Dict[int, List[str]]
@@ -221,7 +293,37 @@ class GraphAnalyzer:
                 labels[cid] = f"Community {cid}"
                 continue
             labels[cid] = dominant_directory({n.node_id for n in member_nodes})
+        counts: Dict[str, int] = {}
+        for label in labels.values():
+            counts[label] = counts.get(label, 0) + 1
+        for cid, members in communities.items():
+            if counts.get(labels[cid], 0) < 2:
+                continue
+            core = self._core_file(members, node_map)
+            if core:
+                labels[cid] = f"{labels[cid]}: {core}"
         return labels
+
+    @staticmethod
+    def _core_file(members: List[str], node_map: Dict[str, Node]) -> str:
+        """Return the stem of a community's most symbol-rich non-test file.
+
+        Used to tell apart communities that share a dominant directory,
+        so labels read ``pkg: _video`` instead of an opaque number.
+        """
+        def is_test(fid: str) -> bool:
+            """Return whether a path looks like a test file."""
+            base = fid.rsplit("/", 1)[-1].lower()
+            return base.startswith("test") or "_test." in base or "/tests/" in f"/{fid}"
+
+        candidates = [m for m in members if m in node_map and not is_test(m)]
+        if not candidates:
+            candidates = [m for m in members if m in node_map]
+        if not candidates:
+            return ""
+        best = min(candidates, key=lambda m: (-len(node_map[m].symbols), m))
+        stem = best.rsplit("/", 1)[-1]
+        return stem.rsplit(".", 1)[0] if "." in stem else stem
 
     def _build_community_map(
         self, communities: Dict[int, List[str]]

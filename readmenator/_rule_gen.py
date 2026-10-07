@@ -1,3 +1,5 @@
+"""Suggested linting rule generator producing Semgrep YAML from detected antipatterns."""
+
 from __future__ import annotations
 
 import os

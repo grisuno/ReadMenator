@@ -251,10 +251,8 @@ def build_category_from_edges(
     Returns:
         A populated Category instance.
     """
-    from readmenator._models import Edge as EdgeModel
-
     cat = Category()
-    all_edges: List[EdgeModel] = list(edges)
+    all_edges: List["Edge"] = list(edges)
     if resolved_edges:
         all_edges.extend(resolved_edges)
 

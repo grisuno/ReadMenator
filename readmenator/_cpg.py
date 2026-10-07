@@ -1,3 +1,9 @@
+"""Code Property Graph (CPG) generator emitting JSON-LD for AI agents.
+
+Merges symbols, call, import, and inheritance edges, content hashes, and
+optional analysis metadata into one embeddable, zero-token graph.
+"""
+
 from __future__ import annotations
 
 import hashlib

@@ -416,7 +416,7 @@ class TestFullGenerate(unittest.TestCase):
             out = Path(tmpdir) / config.AGENT_OUTPUT_DIR
             for md_file in out.rglob("*.md"):
                 content = md_file.read_text()
-                self.assertNotIn('"', f"{md_file.name} contains double quotes (possible JSON)")
+                self.assertNotIn('{"', content, f"{md_file.name} contains JSON objects")
 
     def test_manifest_workflow_orients_with_ls(self) -> None:
         import json

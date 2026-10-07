@@ -38,6 +38,9 @@ from readmenator._models import (
     Node,
     SecurityFinding,
 )
+from readmenator._purpose import clean_purpose as _clean_purpose
+from readmenator._purpose import escape_cell as _escape
+from readmenator._purpose import is_garbage_doc as _is_garbage_doc
 from readmenator._security import fix_hint_for
 
 
@@ -45,28 +48,6 @@ def _is_garbage_purpose(text: str) -> bool:
     """Return True for file-doc first lines that state no purpose."""
     return _clean_purpose(text) == ""
 
-
-_BANNER_RUN_RE = re.compile(r"(?:[=#*]{4,}|[-_]{8,})")
-_LEADING_FILE_RE = re.compile(
-    r"^[\w\-.]+\.(c|h|py|js|go|rs|sh|s|java|cs|php)\b[\s:.\-]*", re.IGNORECASE
-)
-
-
-def _clean_purpose(text: str) -> str:
-    """Return the purpose signal of a doc first line, or empty string."""
-    stripped = text.strip()
-    if _is_garbage_doc(stripped):
-        return ""
-    lowered = stripped.lower()
-    if lowered.startswith("spdx-license-identifier"):
-        return ""
-    cut = _BANNER_RUN_RE.split(stripped, maxsplit=1)[0].strip()
-    cut = _LEADING_FILE_RE.sub("", cut).strip()
-    if not cut or _is_garbage_doc(cut):
-        return ""
-    if re.fullmatch(r"[\(\[].*[\)\]]", cut):
-        return ""
-    return cut
 
 logger = logging.getLogger(__name__)
 
@@ -76,21 +57,6 @@ def _slug(text: str) -> str:
     slug = re.sub(r"[^a-zA-Z0-9]+", "_", text.strip().lower())
     slug = re.sub(r"_+", "_", slug).strip("_")
     return slug or "community"
-
-
-def _escape(text: str) -> str:
-    """Escape markdown table breaking characters in one line of text."""
-    return text.replace("|", "\\|").replace("\n", " ").strip()
-
-
-def _is_garbage_doc(text: str) -> bool:
-    """Return True for doc lines that carry no purpose signal."""
-    stripped = text.strip()
-    if len(stripped) < 3:
-        return True
-    if re.search(r"coding[:=]", stripped):
-        return True
-    return not re.search(r"[A-Za-z]{3,}", stripped)
 
 
 def existing_ids(connections: List[Dict[str, object]]) -> Set[frozenset]:

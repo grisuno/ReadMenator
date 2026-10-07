@@ -1,3 +1,5 @@
+"""Architecture layer rule engine: forbidden and warning edges between layers."""
+
 from __future__ import annotations
 
 from typing import Dict, List, Optional, Set, Tuple

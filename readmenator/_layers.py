@@ -7,7 +7,9 @@ conventions, and import patterns. No external API calls.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
+import re
+from collections import defaultdict
+from typing import Dict, List, Optional, Set
 
 from readmenator._models import Edge, Node
 
@@ -68,6 +70,16 @@ class LayerDetector:
         "unittest": "testing",
     }
 
+    _EVIDENCE_REQUIRED_LAYERS: Set[str] = {"testing"}
+
+    _PREFIX_MIN_LEN: int = 4
+
+    _CAMEL_RE = re.compile(r"(?<=[a-z0-9])(?=[A-Z])")
+
+    _TOKEN_SPLIT_RE = re.compile(r"[^a-z0-9]+")
+
+    _MODULE_SPLIT_RE = re.compile(r"[./:@\\-]+")
+
     def detect(
         self, nodes: List[Node], edges: List[Edge]
     ) -> Dict[str, str]:
@@ -80,15 +92,64 @@ class LayerDetector:
         Returns:
             Dict mapping node_id to layer name.
         """
+        imports_by_file: Dict[str, Set[str]] = defaultdict(set)
+        for edge in edges:
+            if edge.relation == "imports":
+                imports_by_file[edge.source].add(edge.target)
         layers: Dict[str, str] = {}
         for node in nodes:
-            layer = self._classify_file(node, edges)
+            layer = self._classify_file(
+                node, edges, imports_by_file.get(node.node_id, set()),
+            )
             layers[node.node_id] = layer
         return layers
 
-    def _classify_file(self, node: Node, edges: List[Edge]) -> str:
-        """Classify a single file into an architectural layer."""
-        path_lower = node.node_id.lower()
+    @classmethod
+    def _path_tokens(cls, node_id: str) -> List[str]:
+        """Split a path into lowercase word tokens, honoring camelCase."""
+        spaced = cls._CAMEL_RE.sub("_", node_id).lower()
+        return [t for t in cls._TOKEN_SPLIT_RE.split(spaced) if t]
+
+    @classmethod
+    def _pattern_hits(cls, pattern: str, tokens: List[str], joined: str) -> bool:
+        """Return whether a layer pattern matches path tokens as a whole word.
+
+        Short patterns (``ui``, ``di``, ``api``) must equal a token;
+        longer ones also match token prefixes (``tests``, ``views``).
+        Multi-word patterns match underscore-joined token runs.
+        """
+        if "_" in pattern:
+            return f"_{pattern}_" in f"_{joined}_"
+        if len(pattern) < cls._PREFIX_MIN_LEN:
+            return pattern in tokens
+        return any(t == pattern or t.startswith(pattern) for t in tokens)
+
+    @classmethod
+    def _import_roots(cls, imports: Set[str]) -> Set[str]:
+        """Return the top-level module names of raw import strings."""
+        roots: Set[str] = set()
+        for imp in imports:
+            parts = [p for p in cls._MODULE_SPLIT_RE.split(imp.lower()) if p]
+            if parts:
+                roots.add(parts[0])
+                roots.add(parts[-1])
+        return roots
+
+    def _classify_file(
+        self,
+        node: Node,
+        edges: List[Edge],
+        imports: Optional[Set[str]] = None,
+    ) -> str:
+        """Classify a single file into an architectural layer.
+
+        Path words score one point each, framework imports three, and
+        test-file naming five. Layers in _EVIDENCE_REQUIRED_LAYERS only
+        accept framework points when the path already points there, so a
+        CLI that imports ``unittest`` to run the suite stays production code.
+        """
+        tokens = self._path_tokens(node.node_id)
+        joined = "_".join(tokens)
         scores: Dict[str, int] = {
             "presentation": 0,
             "business_logic": 0,
@@ -99,18 +160,24 @@ class LayerDetector:
 
         for layer, patterns in self._LAYER_PATTERNS.items():
             for pattern in patterns:
-                if pattern in path_lower:
+                if self._pattern_hits(pattern, tokens, joined):
                     scores[layer] += 1
-
-        imports = {
-            e.target.lower() for e in edges if e.source == node.node_id
-        }
-        for fw, layer in self._FRAMEWORK_LAYERS.items():
-            if any(fw in imp for imp in imports):
-                scores[layer] += 3
 
         if node.label.lower().startswith("test") or "_test" in node.label.lower():
             scores["testing"] += 5
+
+        if imports is None:
+            imports = {
+                e.target for e in edges
+                if e.source == node.node_id and e.relation == "imports"
+            }
+        roots = self._import_roots(imports)
+        for fw, layer in self._FRAMEWORK_LAYERS.items():
+            if fw not in roots:
+                continue
+            if layer in self._EVIDENCE_REQUIRED_LAYERS and scores[layer] == 0:
+                continue
+            scores[layer] += 3
 
         max_layer = max(scores, key=scores.get)
         if scores[max_layer] == 0:

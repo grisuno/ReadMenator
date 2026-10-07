@@ -54,6 +54,32 @@ class PolyglotScanner:
             return any(part in always for part in path.parts)
         return any(part in self._config.IGNORE_DIRS for part in path.parts)
 
+    def _is_generated(self, rel_path: Path) -> bool:
+        """Return ``True`` for artifacts readmenator itself wrote into the project.
+
+        Rescanning its own output (agent docs, wiki, rules, maps, refactor
+        scripts) would feed generated noise back into the graph and skew
+        indexes, centrality, and purposes on every rebuild.
+
+        Args:
+            rel_path: Path relative to the scan root.
+
+        Returns:
+            Whether the path belongs to a readmenator-generated artifact.
+        """
+        if not self._config.SKIP_GENERATED_OUTPUTS or not rel_path.parts:
+            return False
+        cfg = self._config
+        output_dirs = {
+            cfg.AGENT_OUTPUT_DIR, cfg.WIKI_OUTPUT_DIR, cfg.RULE_GEN_OUTPUT_DIR,
+            cfg.DIAGRAM_OUTPUT_DIR, cfg.SITE_DIR, cfg.CACHE_DIR,
+            cfg.GH_WIKI_DRY_RUN_DIR,
+        }
+        if rel_path.parts[0] in output_dirs:
+            return True
+        prefixes = tuple(cfg.GENERATED_FILE_PREFIXES) + (cfg.REFACTORIZER_SCRIPT_PREFIX,)
+        return rel_path.name.startswith(prefixes)
+
     def _load_gitignore(self, root: Path) -> None:
         """Parse .gitignore patterns using regex (no external deps)."""
         gitignore_path = root / ".gitignore"
@@ -278,6 +304,7 @@ class PolyglotScanner:
         skip_counts: Dict[str, int] = {
             "security": 0, "ignored_dir": 0, "gitignored": 0,
             "depth": 0, "unsupported_ext": 0, "parse_error": 0,
+            "generated": 0,
         }
         gitignored_examples: List[str] = []
 
@@ -292,6 +319,10 @@ class PolyglotScanner:
             rel_path = file_path.relative_to(root)
             if self._is_ignored(rel_path):
                 skip_counts["ignored_dir"] += 1
+                continue
+
+            if self._is_generated(rel_path):
+                skip_counts["generated"] += 1
                 continue
 
             rel_path_str = rel_path.as_posix()
@@ -380,11 +411,12 @@ class PolyglotScanner:
             logger.info(
                 "Scan coverage: %d files scanned, %d skipped "
                 "(ignored_dir=%d gitignored=%d unsupported_ext=%d "
-                "security=%d depth=%d parse_error=%d)",
+                "security=%d depth=%d parse_error=%d generated=%d)",
                 scanned_count, total_skipped,
                 skip_counts["ignored_dir"], skip_counts["gitignored"],
                 skip_counts["unsupported_ext"], skip_counts["security"],
                 skip_counts["depth"], skip_counts["parse_error"],
+                skip_counts["generated"],
             )
             if gitignored_examples:
                 logger.info(

@@ -1,10 +1,10 @@
-# readmenator
+# readmenator: _category
 
-*Community 1 | 7 files | cohesion 0.46*
+*Community 3 | 5 files | cohesion 0.42*
 
 ## Definition
 
-This community groups 7 file(s) rooted at `readmenator` with dominant language py (cohesion 0.46). Central symbols: `Category`, `CompositeRanker`, `DocProjection`, `EdgeKind`, `IdentityProjection`, `Morphism`, `Projection`, `QueryEngine`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: Category theory model for the readmenator code graph.  Defines typed morphisms (edges with semantic kind), objects (file nodes), and a Category class for algebr.
+This community groups 5 file(s) rooted at `readmenator` with dominant language py (cohesion 0.42). Central symbols: `Category`, `CompositeRanker`, `DocProjection`, `EdgeKind`, `IdentityProjection`, `Morphism`, `Projection`, `RankConfig`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: Category theory model for the readmenator code graph.  Defines typed morphisms (edges with semantic kind), objects (file nodes), and a Category class for algebr.
 
 ## Files
 
@@ -13,9 +13,7 @@ This community groups 7 file(s) rooted at `readmenator` with dominant language p
 | `readmenator/_category.py` | py | utility | 26 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
 | `readmenator/_projections.py` | py | utility | 15 | yes |
-| `readmenator/_query.py` | py | data_access | 17 | yes |
 | `readmenator/_rank.py` | py | utility | 17 | yes |
-| `tests/test_query.py` | py | testing | 18 | no |
 | `tests/test_ranking.py` | py | testing | 72 | yes |
 
 ## Key Symbols
@@ -45,7 +43,7 @@ This community groups 7 file(s) rooted at `readmenator` with dominant language p
 - `transition_weight` (method, `readmenator/_category.py:213`) `def transition_weight(self, source, target)` - Sum of weights of all morphisms from source to target.
 - `stochastic_row` (method, `readmenator/_category.py:221`) `def stochastic_row(self, source)` - Return dict of target -> probability for the row of *source*.
 - `build_category_from_edges` (method, `readmenator/_category.py:236`) `def build_category_from_edges(edges, resolved_edges, node_ids)` - Build a Category from lists of Edge objects.
-- `_infer_edge_kind` (method, `readmenator/_category.py:280`) `def _infer_edge_kind(relation)` - Map a relation string to an EdgeKind.
+- `_infer_edge_kind` (method, `readmenator/_category.py:278`) `def _infer_edge_kind(relation)` - Map a relation string to an EdgeKind.
 - `explain_rank` (function, `readmenator/_explain.py:16`) `def explain_rank(node_id, ranked, category)` - Return a detailed breakdown of why *node_id* has its rank.
 - `rank_summary` (function, `readmenator/_explain.py:140`) `def rank_summary(ranked, top_n)` - Return a short summary of the top-N ranked results.
 - `_find_item` (function, `readmenator/_explain.py:163`) `def _find_item(node_id, items)`
@@ -53,38 +51,30 @@ This community groups 7 file(s) rooted at `readmenator` with dominant language p
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 11
-- Cross-boundary resolved imports (EXTRACTED): 14
+- Internal resolved imports (EXTRACTED): 8
+- Cross-boundary resolved imports (EXTRACTED): 11
 
 ## Connections
 
-- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_category.py.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_category.py reaches tests/test_resolver.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 2 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches readmenator/parsers/__init__.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_agent_injector.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_cache.py in 4 hops.
-- [INFERRED] bridges community 1 <-> 0 (strength 0.6): Inferred cross-community bridge: readmenator/_explain.py reaches tests/test_config.py in 4 hops.
-- [INFERRED] shares_context community 1 <-> 3 (strength 0.5): Inferred shared context (layer utility) with no import path between community 1 (readmenator) and community 3 (orphans).
+- [EXTRACTED] depends_on community 0 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_category.py.
+- [EXTRACTED] depends_on community 4 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_rank.py.
+- [EXTRACTED] depends_on community 5 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_models.py imports readmenator/_category.py.
 
 ## Risks
 
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_query.py` via `subprocess` (4 hops)
-- [taint high] `readmenator/_agent_injector.py` -> `readmenator/_rank.py` via `subprocess` (4 hops)
-- [cycle] `readmenator/_models.py` -> `readmenator/_category.py` -> `readmenator/_models.py`
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_video.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 
 ## Open Questions
 
-- Why do 1 file(s) lack file-level docs (e.g. `tests/test_query.py`)? What purpose do they serve?
-- Can the cycle `readmenator/_models.py` -> `readmenator/_category.py` be broken with an interface?
-- What would break if the most connected file in readmenator changed?
-- Should readmenator be split, given cohesion 0.46?
+- What would break if the most connected file in readmenator: _category changed?
+- Should readmenator: _category be split, given cohesion 0.42?
 
 ## Sources
 
 - `readmenator/_category.py`
 - `readmenator/_explain.py`
 - `readmenator/_projections.py`
-- `readmenator/_query.py`
 - `readmenator/_rank.py`
-- `tests/test_query.py`
 - `tests/test_ranking.py`

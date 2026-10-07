@@ -1,15 +1,23 @@
+"""Application orchestrator: scan, resolve, analyze, and write every output.
+
+Thin facade over AnalyzerFactory that wires the scanner, analyzers, and
+generators into the run, rebuild, update, query, and export commands.
+"""
+
 from __future__ import annotations
 
+import json
 import logging
 from dataclasses import replace
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-from readmenator._cache import FileCache
+from readmenator._cache import FileCache, source_fingerprint
 from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher, SystemMap
+from readmenator._gh_wiki import WikiPublishResult
 from readmenator._layers import LayerDetector
 from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
@@ -197,9 +205,76 @@ class readmenatorApplication:
 
         self._inject_readme_link(root)
         self._inject_agent_files(root)
+        self._maybe_refresh_pages(root)
+        self._maybe_publish_github_wiki(root)
         self._log_summary(
             nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings,
         )
+
+    def check_freshness(self, target_dir: str) -> Tuple[bool, str]:
+        """Compare the MANIFEST source fingerprint against the current sources.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Tuple of (fresh, human-readable reason).
+        """
+        root = Path(target_dir).resolve()
+        manifest_path = root / self._config.AGENT_OUTPUT_DIR / "MANIFEST.json"
+        try:
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return False, f"stale: {manifest_path.name} missing or unreadable"
+        recorded = str(manifest.get("source_fingerprint", ""))
+        if not recorded:
+            return False, "stale: MANIFEST predates source fingerprints"
+        nodes, _ = self._scan(target_dir)
+        current = source_fingerprint(str(root), (n.node_id for n in nodes))
+        if current != recorded:
+            return False, (
+                f"stale: sources changed since {manifest.get('generated_at', 'last run')} "
+                f"({len(nodes)} files now, {manifest.get('files', '?')} documented)"
+            )
+        return True, f"fresh: docs match {len(nodes)} source files"
+
+    def _maybe_refresh_pages(self, root: Path) -> None:
+        """Refresh the static docs site when a previous ``pages`` run created it.
+
+        The site directory is only rewritten when it already holds a
+        readmenator gallery (index plus maps subdirectory), so a user's own
+        docs folder is never taken over by a plain rebuild.
+        """
+        if not self._config.SITE_REFRESH_ON_REBUILD:
+            return
+        site = root / self._config.DIAGRAM_PAGES_DIR
+        maps_dir = site / self._config.DIAGRAM_MAPS_SUBDIR.strip().strip("/")
+        if not (site / "index.html").is_file() or not maps_dir.is_dir():
+            return
+        try:
+            self.export_pages(str(root), full=True)
+        except Exception:
+            logger.warning("Documentation site refresh failed", exc_info=True)
+
+    def _maybe_publish_github_wiki(self, root: Path) -> None:
+        """Publish generated docs to the GitHub wiki when GH_WIKI_ENABLED is set."""
+        if not self._config.GH_WIKI_ENABLED:
+            return
+        self.publish_github_wiki(str(root))
+
+    def publish_github_wiki(self, target_dir: str, dry_run: bool = False) -> WikiPublishResult:
+        """Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
+
+        Args:
+            target_dir: Project root directory with generated outputs.
+            dry_run: Render pages into GH_WIKI_DRY_RUN_DIR without git calls.
+
+        Returns:
+            WikiPublishResult with pages written and push status.
+        """
+        result = self._factory.gh_wiki.publish(target_dir, dry_run=dry_run)
+        logger.info(result.message)
+        return result
 
     def _write_sidecar_outputs(
         self,
@@ -738,7 +813,7 @@ class readmenatorApplication:
         stats = {
             "files": len(nodes),
             "symbols": sum(len(n.symbols) for n in nodes),
-            "imports": len(edges),
+            "imports": sum(1 for e in edges if e.relation == "imports"),
         }
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
@@ -926,7 +1001,7 @@ class readmenatorApplication:
         for plan in plans:
             logger.info("  %s (%d lines, %d actions)", plan.file_path, plan.current_lines, len(plan.actions))
             root = Path(target_dir).resolve()
-            script_path = root / f".refactor_{Path(plan.file_path).stem}.sh"
+            script_path = root / f"{self._config.REFACTORIZER_SCRIPT_PREFIX}{Path(plan.file_path).stem}.sh"
             script_content = refactorizer.generate_script(plan, str(root))
             script_path.write_text(script_content, encoding="utf-8")
             script_path.chmod(0o755)

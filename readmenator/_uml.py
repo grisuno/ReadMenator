@@ -1,3 +1,5 @@
+"""UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator."""
+
 from __future__ import annotations
 
 from collections import defaultdict

@@ -52,9 +52,9 @@
 
 ## readmenator.py
 - Layer: utility
+- Doc: Launcher shim that runs the readmenator CLI from a source checkout.
 - Language: py
 - Depends on: `readmenator/__main__.py`
-- Imported by: `readmenator/_agent_injector.py`
 
 ## readmenator_orchestrator.py
 - Layer: testing

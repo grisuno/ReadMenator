@@ -12,7 +12,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
-from typing import Any, Dict, Optional, Set
+from typing import Any, Dict, Iterable, Optional, Set
 
 from readmenator._config import Config
 
@@ -174,3 +174,31 @@ class FileCache:
             return True
         cached = self.load_analysis("analysis_v2")
         return cached is None
+
+
+def source_fingerprint(project_root: str, file_ids: Iterable[str]) -> str:
+    """Return one SHA256 over the sorted paths and contents of scanned sources.
+
+    Generated documents embed this value; recomputing it later answers
+    "do the docs still describe these sources?" exactly, independent of
+    git commits (docs generated before a commit stay fresh after it).
+
+    Args:
+        project_root: Project root directory.
+        file_ids: Project-relative source paths that were scanned.
+
+    Returns:
+        Hex digest; missing, unreadable, or symlinked files hash as empty.
+    """
+    base = Path(project_root).resolve()
+    outer = hashlib.sha256()
+    for file_id in sorted(set(file_ids)):
+        path = base / file_id
+        digest = ""
+        if path.is_file() and not path.is_symlink():
+            try:
+                digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            except OSError:
+                digest = ""
+        outer.update(f"{file_id}\0{digest}\n".encode("utf-8"))
+    return outer.hexdigest()
