@@ -52,6 +52,13 @@ def build_parser() -> argparse.ArgumentParser:
             "  fresh                   Exit 0 if generated docs match current sources, else 1\n"
             "  gh-wiki                 Publish the GitHub wiki now (--rebuild already does this)\n"
             "  gh-wiki --dry-run       Render GitHub wiki pages locally, no git calls\n"
+            "  explorer                Serve force-graph explorer locally\n"
+            "  forcegraph              Export force-graph explorer HTML (readmenator-maps/graph-force.html)\n"
+            "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
+            "  near <file|text>        Nearest files by scan-text similarity (offline Jaccard)\n"
+            "  scan-text               Print synthesized scan-text blobs per file\n"
+            "  validate-rules          Validate readmenator-rules/yara_rules.yar (T1/T2/T3)\n"
+            "  provenance              Audit security findings by static vs inferred evidence\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -306,6 +313,39 @@ def main() -> None:
             result = app.publish_github_wiki(target, dry_run="--dry-run" in sys.argv)
             if not result.pushed and not result.output_dir:
                 sys.exit(1)
+            return
+        elif command == "explorer":
+            url = app.serve_explorer(target, open_browser="--no-browser" not in sys.argv)
+            logger.info("Explorer: %s", url)
+            return
+        elif command == "forcegraph":
+            out = app.export_forcegraph(target)
+            print(out)
+            return
+        elif command == "analytics":
+            import json as _json
+
+            print(_json.dumps(app.analytics(target), indent=1))
+            return
+        elif command == "near" and len(sys.argv) >= 4:
+            import json as _json
+
+            print(_json.dumps(app.near(target, sys.argv[3]), indent=1))
+            return
+        elif command == "scan-text":
+            texts = app.scan_texts(target)
+            for file_id in sorted(texts):
+                print(f"===== {file_id} =====")
+                print(texts[file_id])
+            return
+        elif command == "validate-rules":
+            import json as _json
+
+            print(_json.dumps(app.validate_yaralite(target), indent=1))
+            return
+        elif command == "provenance":
+            for item in app.audit_provenance(target):
+                print(f"{item.severity}:{item.rule} {item.file_path} [{item.provenance}]")
             return
         elif command == "--rebuild":
             argset = set(sys.argv[3:])

@@ -10,6 +10,7 @@ from typing import Dict, List, Optional
 
 from readmenator._agent_injector import AgentInjector
 from readmenator._agent_output import AgentOutputGenerator
+from readmenator._analytics import AnalyticsBuilder
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._concepts import ConceptExtractor
@@ -18,7 +19,12 @@ from readmenator._cpg import CodePropertyGraph
 from readmenator._dataflow import DataflowAnalyzer
 from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
 from readmenator._documentation import DocumentationGenerator
+from readmenator._embed import Embedder
+from readmenator._exclusions import ExclusionList
 from readmenator._exporter import GraphExporter
+from readmenator._forcegraph import ForceGraphRenderer
+from readmenator._provenance import ProvenanceAuditor
+from readmenator._scantext import ScanTextBuilder
 from readmenator._gh_wiki import GitHubWikiPublisher
 from readmenator._hotspots import HotspotAnalyzer
 from readmenator._layer_rules import LayerRuleEngine
@@ -83,6 +89,12 @@ class AnalyzerFactory:
         self._vis_renderer: VisNetworkRenderer | None = None
         self._video: CinematicVideoRenderer | None = None
         self._concepts: ConceptExtractor | None = None
+        self._forcegraph: ForceGraphRenderer | None = None
+        self._analytics: AnalyticsBuilder | None = None
+        self._scantext: ScanTextBuilder | None = None
+        self._provenance: ProvenanceAuditor | None = None
+        self._exclusions: ExclusionList | None = None
+        self._embedder: Embedder | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -262,6 +274,48 @@ class AnalyzerFactory:
         if self._concepts is None:
             self._concepts = ConceptExtractor(self._config)
         return self._concepts
+
+    @property
+    def forcegraph(self) -> ForceGraphRenderer:
+        """Return the lazily initialised force-graph renderer."""
+        if self._forcegraph is None:
+            self._forcegraph = ForceGraphRenderer(self._config)
+        return self._forcegraph
+
+    @property
+    def analytics(self) -> AnalyticsBuilder:
+        """Return the lazily initialised corpus analytics builder."""
+        if self._analytics is None:
+            self._analytics = AnalyticsBuilder(self._config)
+        return self._analytics
+
+    @property
+    def scantext(self) -> ScanTextBuilder:
+        """Return the lazily initialised scan-text builder."""
+        if self._scantext is None:
+            self._scantext = ScanTextBuilder(self._config)
+        return self._scantext
+
+    @property
+    def provenance(self) -> ProvenanceAuditor:
+        """Return the lazily initialised provenance auditor."""
+        if self._provenance is None:
+            self._provenance = ProvenanceAuditor(self._config)
+        return self._provenance
+
+    @property
+    def exclusions(self) -> ExclusionList:
+        """Return the lazily initialised FP exclusion list."""
+        if self._exclusions is None:
+            self._exclusions = ExclusionList(self._config)
+        return self._exclusions
+
+    @property
+    def embedder(self) -> Embedder:
+        """Return the lazily initialised semantic embedder."""
+        if self._embedder is None:
+            self._embedder = Embedder(self._config)
+        return self._embedder
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

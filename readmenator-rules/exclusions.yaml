@@ -1,0 +1,12 @@
+# readmenator false-positive exclusion blocklist.
+# Entries cleared through investigation are skipped on future runs.
+# Format: list under `exclusions:` with pattern (glob), rule_id, reason.
+exclusions:
+  - pattern: "tests/*"
+    rule_id: "*"
+    reason: "Test fixtures intentionally contain dangerous patterns"
+    reclassified_as: "benign-test"
+  - pattern: "readmenator-rules/*"
+    rule_id: "*"
+    reason: "Rule definitions match their own patterns"
+    reclassified_as: "benign-rules"

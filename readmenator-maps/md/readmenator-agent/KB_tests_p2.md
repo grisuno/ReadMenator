@@ -65,6 +65,53 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_export_sarif_produces_file` (method, line 114) `def test_export_sarif_produces_file(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`
 
+## tests/test_interactive_graph.py
+- Doc: Contract tests for the interactive explorer modules.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 36) `def _node(nid, symbols)`
+  - `TestForceGraphContract` (class, line 48) `class TestForceGraphContract(TestCase)`
+  - `TestScanTextContract` (class, line 129) `class TestScanTextContract(TestCase)`
+  - `self_nodes` (method, line 149) `def self_nodes()`
+  - `TestYaraLiteContract` (class, line 154) `class TestYaraLiteContract(TestCase)`
+  - `TestProvenanceContract` (class, line 207) `class TestProvenanceContract(TestCase)`
+  - `TestExclusionsContract` (class, line 230) `class TestExclusionsContract(TestCase)`
+  - `TestAnalyticsContract` (class, line 250) `class TestAnalyticsContract(TestCase)`
+  - `TestExplorerContract` (class, line 271) `class TestExplorerContract(TestCase)`
+  - `TestEmbedContract` (class, line 286) `class TestEmbedContract(TestCase)`
+  - `TestRebuildContract` (class, line 313) `class TestRebuildContract(TestCase)`
+  - `TestGalleryCardContract` (class, line 365) `class TestGalleryCardContract(TestCase)`
+  - `setUp` (method, line 51) `def setUp(self)`
+  - `test_family_color_is_deterministic` (method, line 57) `def test_family_color_is_deterministic(self)`
+  - `test_node_value_dampens_large_files` (method, line 62) `def test_node_value_dampens_large_files(self)`
+  - `test_build_payload_has_heterogeneous_nodes` (method, line 70) `def test_build_payload_has_heterogeneous_nodes(self)`
+  - `test_build_payload_maps_communities` (method, line 78) `def test_build_payload_maps_communities(self)`
+  - `test_render_produces_standalone_html` (method, line 90) `def test_render_produces_standalone_html(self)`
+  - `test_render_uses_supported_cdn_fallback` (method, line 102) `def test_render_uses_supported_cdn_fallback(self)`
+  - `test_write_copies_vendor_engine` (method, line 108) `def test_write_copies_vendor_engine(self)`
+  - `test_exporter_delegates_to_forcegraph` (method, line 123) `def test_exporter_delegates_to_forcegraph(self)`
+  - `test_build_for_node_includes_sections` (method, line 132) `def test_build_for_node_includes_sections(self)`
+  - `test_build_corpus_maps_every_node` (method, line 142) `def test_build_corpus_maps_every_node(self)`
+  - `test_parse_reports_tiers` (method, line 180) `def test_parse_reports_tiers(self)`
+  - `test_run_matches_any_of_them` (method, line 186) `def test_run_matches_any_of_them(self)`
+  - `test_run_requires_cooccurrence` (method, line 192) `def test_run_requires_cooccurrence(self)`
+  - `test_validate_counts_rules` (method, line 199) `def test_validate_counts_rules(self)`
+  - `test_audit_flags_snippetless_findings` (method, line 210) `def test_audit_flags_snippetless_findings(self)`
+  - `test_summary_counts_classes` (method, line 222) `def test_summary_counts_classes(self)`
+  - `test_parse_and_match_glob` (method, line 233) `def test_parse_and_match_glob(self)`
+  - `test_filter_findings_removes_excluded` (method, line 239) `def test_filter_findings_removes_excluded(self)`
+  - `test_build_has_all_sections` (method, line 253) `def test_build_has_all_sections(self)`
+  - `test_build_state_serves_apis` (method, line 274) `def test_build_state_serves_apis(self)`
+  - `test_near_jaccard_prefers_shared_terms` (method, line 289) `def test_near_jaccard_prefers_shared_terms(self)`
+  - `test_cluster_groups_similar_files` (method, line 300) `def test_cluster_groups_similar_files(self)`
+  - `_run_app` (method, line 316) `def _run_app(self, tmp)`
+  - `test_run_writes_forcegraph_html` (method, line 331) `def test_run_writes_forcegraph_html(self)`
+  - `test_run_skips_forcegraph_when_disabled` (method, line 343) `def test_run_skips_forcegraph_when_disabled(self)`
+  - `test_publish_appends_extra_card` (method, line 368) `def test_publish_appends_extra_card(self)`
+  - `test_export_diagrams_writes_forcegraph_and_card` (method, line 395) `def test_export_diagrams_writes_forcegraph_and_card(self)`
+- Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
+
 ## tests/test_layer_rules.py
 - Doc: TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations.
 - Layer: testing
@@ -444,39 +491,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_ppr_favors_seed` (method, line 625) `def test_ppr_favors_seed(self)`
   - `test_ranker_from_real_data` (method, line 637) `def test_ranker_from_real_data(self)`
 - Depends on: `readmenator/_category.py`, `readmenator/_explain.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_rank.py`
-
-## tests/test_readme_injector.py
-- Doc: Contract tests for README injection into documented projects.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestReadmeInjectorInjectBehavior` (class, line 16) `class TestReadmeInjectorInjectBehavior(TestCase)`
-  - `TestReadmeInjectorRemoveBehavior` (class, line 72) `class TestReadmeInjectorRemoveBehavior(TestCase)`
-  - `TestReadmeInjectorFindReadme` (class, line 105) `class TestReadmeInjectorFindReadme(TestCase)`
-  - `TestReadmeInjectorEdgeCases` (class, line 140) `class TestReadmeInjectorEdgeCases(TestCase)`
-  - `setUp` (method, line 19) `def setUp(self)`
-  - `tearDown` (method, line 24) `def tearDown(self)`
-  - `test_inject_into_markdown_readme_adds_kb_link` (method, line 28) `def test_inject_into_markdown_readme_adds_kb_link(self)`
-  - `test_inject_into_rst_readme_adds_kb_link` (method, line 39) `def test_inject_into_rst_readme_adds_kb_link(self)`
-  - `test_inject_is_idempotent_does_not_duplicate` (method, line 48) `def test_inject_is_idempotent_does_not_duplicate(self)`
-  - `test_inject_no_readme_file_returns_false` (method, line 59) `def test_inject_no_readme_file_returns_false(self)`
-  - `test_inject_preserves_existing_content` (method, line 63) `def test_inject_preserves_existing_content(self)`
-  - `setUp` (method, line 75) `def setUp(self)`
-  - `tearDown` (method, line 80) `def tearDown(self)`
-  - `test_remove_strips_injected_section` (method, line 84) `def test_remove_strips_injected_section(self)`
-  - `test_remove_without_injection_returns_false` (method, line 94) `def test_remove_without_injection_returns_false(self)`
-  - `test_remove_no_readme_returns_false` (method, line 100) `def test_remove_no_readme_returns_false(self)`
-  - `setUp` (method, line 108) `def setUp(self)`
-  - `tearDown` (method, line 112) `def tearDown(self)`
-  - `test_finds_readme_md` (method, line 116) `def test_finds_readme_md(self)`
-  - `test_finds_readme_rst` (method, line 122) `def test_finds_readme_rst(self)`
-  - `test_prefers_readme_md_over_rst` (method, line 128) `def test_prefers_readme_md_over_rst(self)`
-  - `test_returns_none_when_no_readme` (method, line 135) `def test_returns_none_when_no_readme(self)`
-  - `setUp` (method, line 143) `def setUp(self)`
-  - `tearDown` (method, line 148) `def tearDown(self)`
-  - `test_inject_into_empty_readme` (method, line 152) `def test_inject_into_empty_readme(self)`
-  - `test_custom_kb_filename_works` (method, line 160) `def test_custom_kb_filename_works(self)`
-- Depends on: `readmenator/_readme_injector.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

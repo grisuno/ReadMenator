@@ -23,6 +23,8 @@
 - `readmenator/_agent_output.py` -> `readmenator/_purpose.py`
 - `readmenator/_agent_output.py` -> `readmenator/_resolver.py`
 - `readmenator/_agent_output.py` -> `readmenator/_security.py`
+- `readmenator/_analytics.py` -> `readmenator/_config.py`
+- `readmenator/_analytics.py` -> `readmenator/_models.py`
 - `readmenator/_analyzer.py` -> `readmenator/_config.py`
 - `readmenator/_analyzer.py` -> `readmenator/_models.py`
 - `readmenator/_app.py` -> `readmenator/_cache.py`
@@ -30,6 +32,7 @@
 - `readmenator/_app.py` -> `readmenator/_cursorrules_generator.py`
 - `readmenator/_app.py` -> `readmenator/_dead_code.py`
 - `readmenator/_app.py` -> `readmenator/_diagrams.py`
+- `readmenator/_app.py` -> `readmenator/_explorer.py`
 - `readmenator/_app.py` -> `readmenator/_gh_wiki.py`
 - `readmenator/_app.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_app.py` -> `readmenator/_layers.py`
@@ -42,6 +45,7 @@
 - `readmenator/_app.py` -> `readmenator/_resolver.py`
 - `readmenator/_app.py` -> `readmenator/_video.py`
 - `readmenator/_app.py` -> `readmenator/_watcher.py`
+- `readmenator/_app.py` -> `readmenator/_yaralite.py`
 - `readmenator/_cache.py` -> `readmenator/_config.py`
 - `readmenator/_concepts.py` -> `readmenator/_config.py`
 - `readmenator/_concepts.py` -> `readmenator/_models.py`
@@ -55,16 +59,28 @@
 - `readmenator/_dead_code.py` -> `readmenator/_models.py`
 - `readmenator/_diagrams.py` -> `readmenator/_config.py`
 - `readmenator/_diagrams.py` -> `readmenator/_models.py`
+- `readmenator/_documentation.py` -> `readmenator/_analytics.py`
 - `readmenator/_documentation.py` -> `readmenator/_config.py`
 - `readmenator/_documentation.py` -> `readmenator/_cpg.py`
+- `readmenator/_documentation.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_documentation.py` -> `readmenator/_mermaid.py`
 - `readmenator/_documentation.py` -> `readmenator/_models.py`
 - `readmenator/_documentation.py` -> `readmenator/_rank.py`
 - `readmenator/_documentation.py` -> `readmenator/_uml.py`
+- `readmenator/_embed.py` -> `readmenator/_config.py`
+- `readmenator/_exclusions.py` -> `readmenator/_config.py`
 - `readmenator/_explain.py` -> `readmenator/_category.py`
 - `readmenator/_explain.py` -> `readmenator/_rank.py`
+- `readmenator/_explorer.py` -> `readmenator/_analytics.py`
+- `readmenator/_explorer.py` -> `readmenator/_config.py`
+- `readmenator/_explorer.py` -> `readmenator/_forcegraph.py`
+- `readmenator/_explorer.py` -> `readmenator/_models.py`
+- `readmenator/_exporter.py` -> `readmenator/_analytics.py`
 - `readmenator/_exporter.py` -> `readmenator/_config.py`
+- `readmenator/_exporter.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_exporter.py` -> `readmenator/_models.py`
+- `readmenator/_forcegraph.py` -> `readmenator/_config.py`
+- `readmenator/_forcegraph.py` -> `readmenator/_models.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_config.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_hotspots.py` -> `readmenator/_config.py`
@@ -84,6 +100,7 @@
 - `readmenator/_models.py` -> `readmenator/_category.py`
 - `readmenator/_pipeline.py` -> `readmenator/_agent_injector.py`
 - `readmenator/_pipeline.py` -> `readmenator/_agent_output.py`
+- `readmenator/_pipeline.py` -> `readmenator/_analytics.py`
 - `readmenator/_pipeline.py` -> `readmenator/_analyzer.py`
 - `readmenator/_pipeline.py` -> `readmenator/_category.py`
 - `readmenator/_pipeline.py` -> `readmenator/_concepts.py`
@@ -92,17 +109,22 @@
 - `readmenator/_pipeline.py` -> `readmenator/_dataflow.py`
 - `readmenator/_pipeline.py` -> `readmenator/_diagrams.py`
 - `readmenator/_pipeline.py` -> `readmenator/_documentation.py`
+- `readmenator/_pipeline.py` -> `readmenator/_embed.py`
+- `readmenator/_pipeline.py` -> `readmenator/_exclusions.py`
 - `readmenator/_pipeline.py` -> `readmenator/_exporter.py`
+- `readmenator/_pipeline.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_pipeline.py` -> `readmenator/_gh_wiki.py`
 - `readmenator/_pipeline.py` -> `readmenator/_hotspots.py`
 - `readmenator/_pipeline.py` -> `readmenator/_layer_rules.py`
 - `readmenator/_pipeline.py` -> `readmenator/_layers.py`
 - `readmenator/_pipeline.py` -> `readmenator/_models.py`
+- `readmenator/_pipeline.py` -> `readmenator/_provenance.py`
 - `readmenator/_pipeline.py` -> `readmenator/_rank.py`
 - `readmenator/_pipeline.py` -> `readmenator/_readme_injector.py`
 - `readmenator/_pipeline.py` -> `readmenator/_rule_gen.py`
 - `readmenator/_pipeline.py` -> `readmenator/_sarif.py`
 - `readmenator/_pipeline.py` -> `readmenator/_scanner.py`
+- `readmenator/_pipeline.py` -> `readmenator/_scantext.py`
 - `readmenator/_pipeline.py` -> `readmenator/_security.py`
 - `readmenator/_pipeline.py` -> `readmenator/_taint.py`
 - `readmenator/_pipeline.py` -> `readmenator/_uml.py`
@@ -110,6 +132,8 @@
 - `readmenator/_pipeline.py` -> `readmenator/_wiki.py`
 - `readmenator/_projections.py` -> `readmenator/_category.py`
 - `readmenator/_projections.py` -> `readmenator/_models.py`
+- `readmenator/_provenance.py` -> `readmenator/_config.py`
+- `readmenator/_provenance.py` -> `readmenator/_models.py`
 - `readmenator/_purpose.py` -> `readmenator/_models.py`
 - `readmenator/_query.py` -> `readmenator/_category.py`
 - `readmenator/_query.py` -> `readmenator/_models.py`
@@ -124,6 +148,8 @@
 - `readmenator/_scanner.py` -> `readmenator/_config.py`
 - `readmenator/_scanner.py` -> `readmenator/_models.py`
 - `readmenator/_scanner.py` -> `readmenator/parsers/__init__.py`
+- `readmenator/_scantext.py` -> `readmenator/_config.py`
+- `readmenator/_scantext.py` -> `readmenator/_models.py`
 - `readmenator/_security.py` -> `readmenator/_config.py`
 - `readmenator/_security.py` -> `readmenator/_models.py`
 - `readmenator/_taint.py` -> `readmenator/_config.py`
@@ -256,6 +282,19 @@
 - `tests/test_hotspots.py` -> `readmenator/_models.py`
 - `tests/test_integration.py` -> `readmenator/_app.py`
 - `tests/test_integration.py` -> `readmenator/_config.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_analytics.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_app.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_config.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_diagrams.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_embed.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_exclusions.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_explorer.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_exporter.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_forcegraph.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_models.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_provenance.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_scantext.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_yaralite.py`
 - `tests/test_layer_rules.py` -> `readmenator/_config.py`
 - `tests/test_layer_rules.py` -> `readmenator/_layer_rules.py`
 - `tests/test_layer_rules.py` -> `readmenator/_models.py`
@@ -338,9 +377,10 @@
 ## External Imports
 
 - `readmenator.py` -> pathlib, sys
-- `readmenator/__main__.py` -> __future__, argparse, logging, pathlib, sys, unittest
+- `readmenator/__main__.py` -> __future__, argparse, json, logging, pathlib, sys, unittest
 - `readmenator/_agent_injector.py` -> __future__, glob, importlib.util, logging, pathlib, subprocess, sys, typing
 - `readmenator/_agent_output.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
+- `readmenator/_analytics.py` -> __future__, collections, typing
 - `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
 - `readmenator/_app.py` -> __future__, dataclasses, json, logging, pathlib, typing
 - `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
@@ -353,8 +393,12 @@
 - `readmenator/_dead_code.py` -> __future__, collections, typing
 - `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, re, shutil, subprocess, typing
 - `readmenator/_documentation.py` -> __future__, collections, subprocess, typing
+- `readmenator/_embed.py` -> __future__, collections, math, re, sentence_transformers, typing
+- `readmenator/_exclusions.py` -> __future__, dataclasses, fnmatch, pathlib, typing
 - `readmenator/_explain.py` -> __future__, typing
+- `readmenator/_explorer.py` -> __future__, http.server, json, pathlib, socket, typing, urllib.parse, webbrowser
 - `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing
+- `readmenator/_forcegraph.py` -> __future__, html, json, math, pathlib, shutil, typing
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
 - `readmenator/_gitmeta.py` -> __future__, pathlib, typing
 - `readmenator/_hotspots.py` -> __future__, collections, typing
@@ -366,6 +410,7 @@
 - `readmenator/_models.py` -> __future__, dataclasses, typing
 - `readmenator/_pipeline.py` -> __future__, typing
 - `readmenator/_projections.py` -> __future__, typing
+- `readmenator/_provenance.py` -> __future__, dataclasses, typing
 - `readmenator/_purpose.py` -> __future__, re, typing
 - `readmenator/_query.py` -> __future__, collections, typing
 - `readmenator/_rank.py` -> __future__, dataclasses, math, typing
@@ -375,12 +420,14 @@
 - `readmenator/_rule_gen.py` -> __future__, collections, os, pathlib, re, typing
 - `readmenator/_sarif.py` -> __future__, json, typing
 - `readmenator/_scanner.py` -> __future__, logging, pathlib, re, typing
+- `readmenator/_scantext.py` -> __future__, typing
 - `readmenator/_security.py` -> __future__, dataclasses, pathlib, re, typing
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
 - `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, typing
 - `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
 - `readmenator/_wiki.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
+- `readmenator/_yaralite.py` -> __future__, dataclasses, re, typing
 - `readmenator/parsers/__init__.py` -> __future__, typing
 - `readmenator/parsers/_assembly.py` -> __future__, re
 - `readmenator/parsers/_base.py` -> __future__, re, typing
@@ -402,7 +449,7 @@
 - `readmenator/parsers/_scala.py` -> __future__, re
 - `readmenator/parsers/_shell.py` -> __future__, re
 - `readmenator/parsers/_swift.py` -> __future__, re
-- `readmenator_orchestrator.py` -> argparse, dataclasses, datetime, logging, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, typing, unittest
+- `readmenator_orchestrator.py` -> argparse, dataclasses, datetime, logging, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, typing, unittest, unittest.mock
 - `tests/test_agent_friendliness.py` -> dataclasses, json, os, pathlib, tempfile, unittest
 - `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
@@ -420,6 +467,7 @@
 - `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
 - `tests/test_hotspots.py` -> __future__, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
+- `tests/test_interactive_graph.py` -> __future__, json, pathlib, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest
 - `tests/test_linter.py` -> __future__, unittest
 - `tests/test_mcp_server.py` -> __future__, json, pathlib, tempfile, typing, unittest

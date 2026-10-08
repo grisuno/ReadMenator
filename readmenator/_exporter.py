@@ -14,7 +14,9 @@ from pathlib import Path
 from textwrap import dedent
 from typing import Dict, List, Optional, Set, Tuple
 
+from readmenator._analytics import AnalyticsBuilder
 from readmenator._config import Config
+from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._models import (
     AnalysisResult,
     ConceptGraph,
@@ -22,7 +24,6 @@ from readmenator._models import (
     Node,
     SecurityFinding,
 )
-
 
 class GraphExporter:
     """Exports the knowledge graph to JSON, HTML, and SVG formats.
@@ -1002,3 +1003,39 @@ network.on("click", function(params) {{
                 written += 1
 
         return written
+
+    def to_forcegraph(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]] = None,
+        analysis: Optional[AnalysisResult] = None,
+        layers: Optional[Dict[str, str]] = None,
+        findings: Optional[List[SecurityFinding]] = None,
+        analytics: Optional[Dict] = None,
+    ) -> str:
+        """Generate the force-graph explorer HTML document.
+
+        Delegates payload construction and rendering to
+        ForceGraphRenderer with heterogeneous nodes, stable family
+        colors, log2 sizing, and community hull overlays.
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional community analysis.
+            layers: Optional file-to-layer mapping.
+            findings: Optional security findings.
+            analytics: Optional precomputed analytics payload.
+
+        Returns:
+            Complete HTML document as a string.
+        """
+        renderer = ForceGraphRenderer(self._config)
+        payload = renderer.build_payload(nodes, edges, resolved_edges, analysis, layers, findings)
+        if analytics is None and self._config.ANALYTICS_ENABLED:
+            analytics = AnalyticsBuilder(self._config).build(
+                nodes, edges, resolved_edges, analysis, findings, layers
+            )
+        return renderer.render(payload, analytics)

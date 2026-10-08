@@ -1,0 +1,42 @@
+# Subsystem: misc
+
+## readmenator/_vendor/force-graph.min.js
+- Doc: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
+- Layer: utility
+- Language: js
+- Symbols:
+  - `t` (function, line 2)
+  - `n` (function, line 2)
+  - `e` (function, line 5)
+  - `h` (function, line 5)
+  - `s` (function, line 5)
+  - `_` (function, line 5)
+  - `l` (function, line 5)
+  - `Lo` (function, line 5)
+  - `b` (function, line 5)
+  - `h` (function, line 5)
+  - `u` (function, line 5)
+  - `f` (function, line 5)
+  - `i` (function, line 5)
+  - `Ha` (function, line 5)
+  - `o` (function, line 5)
+  - `_n` (function, line 2)
+  - `cr` (function, line 2)
+  - `y` (function, line 2)
+  - `Sr` (function, line 2)
+  - `e` (function, line 2)
+  - `e` (function, line 5)
+  - `n` (function, line 5)
+  - `n` (function, line 5)
+  - `xo` (function, line 5)
+  - `r` (function, line 5)
+  - `n` (function, line 5)
+  - `Ia` (function, line 5)
+  - `La` (function, line 5)
+  - `i` (function, line 5)
+  - `s` (function, line 5)
+  - `Fe` (class, line 2)
+  - `as` (class, line 2)
+  - `as` (class, line 5)
+  - `wa` (class, line 5)
+  - `Na` (class, line 5)

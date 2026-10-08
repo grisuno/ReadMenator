@@ -1,14 +1,6 @@
 [
   {
     "community_a": 2,
-    "community_b": 3,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 2,
     "community_b": 0,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.",
@@ -24,15 +16,15 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 3,
-    "community_b": 0,
+    "community_a": 2,
+    "community_b": 4,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_config.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 4,
+    "community_a": 3,
     "community_b": 0,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.",
@@ -40,7 +32,7 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 4,
+    "community_a": 3,
     "community_b": 1,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.",
@@ -51,69 +43,77 @@
     "community_a": 0,
     "community_b": 1,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_analyzer.py imports readmenator/_models.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 3,
-    "community_b": 4,
+    "community_a": 2,
+    "community_b": 3,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_cache.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 3,
+    "community_a": 0,
+    "community_b": 4,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 4,
+    "community_b": 3,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 4,
     "community_b": 1,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.",
+    "explanation": "Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
     "community_a": 2,
     "community_b": 4,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 3,
-    "community_b": 2,
     "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/__main__.py reaches tests/test_agent_injector.py in 4 hops.",
+    "explanation": "Inferred cross-community bridge: readmenator/__init__.py reaches tests/test_agent_injector.py in 4 hops.",
     "strength": 0.6,
     "confidence": "INFERRED"
   },
   {
-    "community_a": 3,
-    "community_b": 2,
+    "community_a": 2,
+    "community_b": 4,
     "connection_type": "bridges",
     "explanation": "Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
   {
-    "community_a": 3,
-    "community_b": 2,
+    "community_a": 2,
+    "community_b": 4,
     "connection_type": "bridges",
     "explanation": "Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
   {
-    "community_a": 2,
-    "community_b": 4,
+    "community_a": 4,
+    "community_b": 3,
     "connection_type": "bridges",
     "explanation": "Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
   {
-    "community_a": 2,
-    "community_b": 4,
+    "community_a": 4,
+    "community_b": 3,
     "connection_type": "bridges",
     "explanation": "Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.",
     "strength": 0.5,
@@ -123,7 +123,7 @@
     "community_a": 0,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py and layer testing) with no import path between community 0 (readmenator: _security) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py and layer utility) with no import path between community 0 (readmenator: _pipeline) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
@@ -131,7 +131,7 @@
     "community_a": 1,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py) with no import path between community 1 (readmenator/parsers) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py and layer utility) with no import path between community 1 (readmenator/parsers) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
@@ -139,7 +139,7 @@
     "community_a": 2,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py) with no import path between community 2 (readmenator: _pipeline) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py and layer utility) with no import path between community 2 (readmenator: _diagrams) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
@@ -147,7 +147,7 @@
     "community_a": 3,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py) with no import path between community 3 (readmenator: _diagrams) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py) with no import path between community 3 (readmenator: _agent_output) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   },
@@ -155,7 +155,7 @@
     "community_a": 4,
     "community_b": 5,
     "connection_type": "shares_context",
-    "explanation": "Inferred shared context (language py and layer testing) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).",
+    "explanation": "Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_injector) and community 5 (orphans).",
     "strength": 0.5,
     "confidence": "INFERRED"
   }

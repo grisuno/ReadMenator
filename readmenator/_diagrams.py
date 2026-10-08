@@ -3040,6 +3040,7 @@ class DocsSitePublisher:
         project_root: Optional[str] = None,
         video_rel: Optional[str] = None,
         doc_entries: Optional[List[Dict[str, str]]] = None,
+        extra_cards: Optional[List[Dict[str, str]]] = None,
     ) -> Dict[str, str]:
         """Publish maps and a gallery index into a documentation directory.
 
@@ -3052,6 +3053,8 @@ class DocsSitePublisher:
             project_root: Optional project root used to collect video and docs.
             video_rel: Optional precomputed video href relative to the index.
             doc_entries: Optional precomputed doc entries with name and href.
+            extra_cards: Optional extra gallery cards (kind, title, href,
+                description, meta) appended after the map cards.
 
         Returns:
             Mapping of published page identifier to written file path.
@@ -3102,6 +3105,7 @@ class DocsSitePublisher:
             self.render_index(
                 project_name, published, stats or {}, href_prefix,
                 resolved_video, resolved_docs, resolved_poster,
+                extra_cards=extra_cards,
             ),
             encoding="utf-8",
         )
@@ -3400,6 +3404,7 @@ class DocsSitePublisher:
         video_rel: Optional[str] = None,
         doc_entries: Optional[List[Dict[str, str]]] = None,
         poster_rel: Optional[str] = None,
+        extra_cards: Optional[List[Dict[str, str]]] = None,
     ) -> str:
         """Render the gallery index page for published maps.
 
@@ -3411,6 +3416,7 @@ class DocsSitePublisher:
             video_rel: Optional video href relative to the index.
             doc_entries: Optional doc entries with name, href, preview, lines, chars.
             poster_rel: Optional poster image href for the video player.
+            extra_cards: Optional extra gallery cards appended after maps.
 
         Returns:
             Complete standalone HTML gallery document.
@@ -3420,6 +3426,8 @@ class DocsSitePublisher:
         title = self._escape(project_name.strip() or "Project")
         entries = list(doc_entries or [])
         cards = [self._card(kind, maps[kind], href_prefix) for kind in sorted(maps)]
+        for extra in extra_cards or []:
+            cards.append(self._extra_card(extra))
         gallery = "\n".join(cards) if cards else (
             '<p class="empty">No validated maps were published yet.</p>'
         )
@@ -3723,6 +3731,35 @@ class DocsSitePublisher:
             + '">Open '
             + self._escape(kind)
             + " map</a>"
+            + "</article>"
+        )
+
+    def _extra_card(self, entry: Dict[str, str]) -> str:
+        """Render one gallery card for a non-map page such as the explorer.
+
+        Args:
+            entry: Card fields (kind, title, href, description, meta).
+
+        Returns:
+            HTML card fragment with the same gallery styling as map cards.
+        """
+        kind = str(entry.get("kind", "extra"))
+        return (
+            '<article class="card map-card" data-kind="'
+            + self._escape(kind)
+            + '">'
+            + self._glyph(kind)
+            + "<h3>"
+            + self._escape(str(entry.get("title", kind)))
+            + "</h3><p>"
+            + self._escape(str(entry.get("description", "")))
+            + '</p><div class="chips"><span class="chip">'
+            + self._escape(str(entry.get("meta", "")))
+            + '</span></div><a class="stretch" href="'
+            + self._escape(str(entry.get("href", "#")))
+            + '">Open '
+            + self._escape(str(entry.get("title", kind)))
+            + "</a>"
             + "</article>"
         )
 

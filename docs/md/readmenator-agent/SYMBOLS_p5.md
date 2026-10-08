@@ -1,0 +1,141 @@
+# Symbols (page 5 of 5)
+Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
+
+| Symbol | Kind | File:Line | Signature |
+|--------|------|-----------|-----------|
+| `test_summary_with_findings` | method | `tests/test_security.py:383` | `def test_summary_with_findings(self)` |
+| `test_swift_process` | method | `tests/test_security.py:213` | `def test_swift_process(self)` |
+| `test_threshold_filters_low` | method | `tests/test_security.py:298` | `def test_threshold_filters_low(self)` |
+| `test_threshold_info_shows_all` | method | `tests/test_security.py:312` | `def test_threshold_info_shows_all(self)` |
+| `test_unknown_cwe_falls_back` | method | `tests/test_security.py:408` | `def test_unknown_cwe_falls_back(self)` |
+| `test_unsupported_extension` | method | `tests/test_security.py:364` | `def test_unsupported_extension(self)` |
+| `TestTaintAnalyzerContract` | class | `tests/test_taint.py:10` | `class TestTaintAnalyzerContract(TestCase)` |
+| `_make_node` | method | `tests/test_taint.py:17` | `def _make_node(self, nid, label)` |
+| `setUp` | method | `tests/test_taint.py:13` | `def setUp(self)` |
+| `test_dangerous_import_by_language` | method | `tests/test_taint.py:62` | `def test_dangerous_import_by_language(self)` |
+| `test_direct_dangerous_import_found` | method | `tests/test_taint.py:31` | `def test_direct_dangerous_import_found(self)` |
+| `test_empty_graph_returns_empty_result` | method | `tests/test_taint.py:20` | `def test_empty_graph_returns_empty_result(self)` |
+| `test_max_depth_limits_propagation` | method | `tests/test_taint.py:77` | `def test_max_depth_limits_propagation(self)` |
+| `test_no_dangerous_imports_returns_empty` | method | `tests/test_taint.py:25` | `def test_no_dangerous_imports_returns_empty(self)` |
+| `test_taint_path_has_severity` | method | `tests/test_taint.py:70` | `def test_taint_path_has_severity(self)` |
+| `test_taint_propagates_through_resolved_edges` | method | `tests/test_taint.py:38` | `def test_taint_propagates_through_resolved_edges(self)` |
+| `_bkg` | function | `tests/test_taint_bdd.py:112` | `def _bkg()` |
+| `_build_project_files` | function | `tests/test_taint_bdd.py:29` | `def _build_project_files(project, root)` |
+| `_chain_given` | function | `tests/test_taint_bdd.py:144` | `def _chain_given()` |
+| `_chain_given2` | function | `tests/test_taint_bdd.py:163` | `def _chain_given2()` |
+| `_chain_when` | function | `tests/test_taint_bdd.py:148` | `def _chain_when(_taint_result)` |
+| `_check_direct_path` | function | `tests/test_taint_bdd.py:130` | `def _check_direct_path(_taint_result)` |
+| `_check_has_path` | function | `tests/test_taint_bdd.py:125` | `def _check_has_path(_taint_result)` |
+| `_check_js_dangerous` | function | `tests/test_taint_bdd.py:186` | `def _check_js_dangerous(_taint_result)` |
+| `_check_js_source` | function | `tests/test_taint_bdd.py:192` | `def _check_js_source(_taint_result)` |
+| `_check_long_path` | function | `tests/test_taint_bdd.py:152` | `def _check_long_path(_taint_result)` |
+| `_check_shallow` | function | `tests/test_taint_bdd.py:171` | `def _check_shallow(_taint_result)` |
+| `_check_sink` | function | `tests/test_taint_bdd.py:139` | `def _check_sink(_taint_result)` |
+| `_check_src` | function | `tests/test_taint_bdd.py:135` | `def _check_src(_taint_result)` |
+| `_direct_given` | function | `tests/test_taint_bdd.py:117` | `def _direct_given()` |
+| `_direct_when` | function | `tests/test_taint_bdd.py:121` | `def _direct_when(_taint_result)` |
+| `_js_given` | function | `tests/test_taint_bdd.py:178` | `def _js_given()` |
+| `_js_when` | function | `tests/test_taint_bdd.py:182` | `def _js_when(_taint_result)` |
+| `_run_shallow` | function | `tests/test_taint_bdd.py:167` | `def _run_shallow(_shallow_cfg)` |
+| `_run_taint` | function | `tests/test_taint_bdd.py:54` | `def _run_taint(files, cfg)` |
+| `_scan_project` | function | `tests/test_taint_bdd.py:36` | `def _scan_project(root, cfg)` |
+| `_shallow_cfg` | function | `tests/test_taint_bdd.py:159` | `def _shallow_cfg()` |
+| `test_bdd_skipped` | function | `tests/test_taint_bdd.py:87` | `def test_bdd_skipped()` |
+| `test_cross_language_taint` | function | `tests/test_taint_bdd.py:83` | `def test_cross_language_taint()` |
+| `test_direct_dangerous_import` | function | `tests/test_taint_bdd.py:71` | `def test_direct_dangerous_import()` |
+| `test_taint_max_depth` | function | `tests/test_taint_bdd.py:79` | `def test_taint_max_depth()` |
+| `test_taint_propagates_chain` | function | `tests/test_taint_bdd.py:75` | `def test_taint_propagates_chain()` |
+| `TestUmlCodeGenerationCSharp` | class | `tests/test_uml.py:281` | `class TestUmlCodeGenerationCSharp(TestCase)` |
+| `TestUmlCodeGenerationCpp` | class | `tests/test_uml.py:181` | `class TestUmlCodeGenerationCpp(TestCase)` |
+| `TestUmlCodeGenerationGo` | class | `tests/test_uml.py:306` | `class TestUmlCodeGenerationGo(TestCase)` |
+| `TestUmlCodeGenerationJava` | class | `tests/test_uml.py:239` | `class TestUmlCodeGenerationJava(TestCase)` |
+| `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` | class | `tests/test_uml.py:427` | `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)` |
+| `TestUmlCodeGenerationPhp` | class | `tests/test_uml.py:387` | `class TestUmlCodeGenerationPhp(TestCase)` |
+| `TestUmlCodeGenerationRust` | class | `tests/test_uml.py:347` | `class TestUmlCodeGenerationRust(TestCase)` |
+| `TestUmlMermaidDiagram` | class | `tests/test_uml.py:16` | `class TestUmlMermaidDiagram(TestCase)` |
+| `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
+| `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
+| `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
+| `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |
+| `test_generate_cpp_unknown_language_returns_error_message` | method | `tests/test_uml.py:223` | `def test_generate_cpp_unknown_language_returns_error_message(self)` |
+| `test_generate_cpp_with_empty_classes` | method | `tests/test_uml.py:208` | `def test_generate_cpp_with_empty_classes(self)` |
+| `test_generate_csharp_produces_valid_code` | method | `tests/test_uml.py:288` | `def test_generate_csharp_produces_valid_code(self)` |
+| `test_generate_dart_produces_valid_code` | method | `tests/test_uml.py:474` | `def test_generate_dart_produces_valid_code(self)` |
+| `test_generate_go_interface_produces_valid_code` | method | `tests/test_uml.py:330` | `def test_generate_go_interface_produces_valid_code(self)` |
+| `test_generate_go_struct_produces_valid_code` | method | `tests/test_uml.py:313` | `def test_generate_go_struct_produces_valid_code(self)` |
+| `test_generate_java_class_produces_valid_code` | method | `tests/test_uml.py:246` | `def test_generate_java_class_produces_valid_code(self)` |
+| `test_generate_java_interface_produces_interface` | method | `tests/test_uml.py:265` | `def test_generate_java_interface_produces_interface(self)` |
+| `test_generate_kotlin_produces_valid_code` | method | `tests/test_uml.py:446` | `def test_generate_kotlin_produces_valid_code(self)` |
+| `test_generate_php_class_produces_valid_code` | method | `tests/test_uml.py:394` | `def test_generate_php_class_produces_valid_code(self)` |
+| `test_generate_php_interface_produces_valid_code` | method | `tests/test_uml.py:411` | `def test_generate_php_interface_produces_valid_code(self)` |
+| `test_generate_ruby_produces_valid_code` | method | `tests/test_uml.py:480` | `def test_generate_ruby_produces_valid_code(self)` |
+| `test_generate_rust_struct_produces_valid_code` | method | `tests/test_uml.py:354` | `def test_generate_rust_struct_produces_valid_code(self)` |
+| `test_generate_rust_trait_produces_valid_code` | method | `tests/test_uml.py:370` | `def test_generate_rust_trait_produces_valid_code(self)` |
+| `test_generate_scala_produces_valid_code` | method | `tests/test_uml.py:452` | `def test_generate_scala_produces_valid_code(self)` |
+| `test_generate_scala_trait_produces_valid_code` | method | `tests/test_uml.py:458` | `def test_generate_scala_trait_produces_valid_code(self)` |
+| `test_generate_swift_produces_valid_code` | method | `tests/test_uml.py:463` | `def test_generate_swift_produces_valid_code(self)` |
+| `test_generate_swift_protocol_produces_valid_code` | method | `tests/test_uml.py:469` | `def test_generate_swift_protocol_produces_valid_code(self)` |
+| `test_render_empty_nodes_returns_empty_string` | method | `tests/test_uml.py:23` | `def test_render_empty_nodes_returns_empty_string(self)` |
+| `test_render_multiple_classes_from_different_files` | method | `tests/test_uml.py:62` | `def test_render_multiple_classes_from_different_files(self)` |
+| `test_render_no_class_symbols_returns_empty_string` | method | `tests/test_uml.py:27` | `def test_render_no_class_symbols_returns_empty_string(self)` |
+| `test_render_respects_max_classes_limit` | method | `tests/test_uml.py:119` | `def test_render_respects_max_classes_limit(self)` |
+| `test_render_single_class_produces_mermaid_class_diagram` | method | `tests/test_uml.py:42` | `def test_render_single_class_produces_mermaid_class_diagram(self)` |
+| `test_render_with_import_edges_produces_relationships` | method | `tests/test_uml.py:90` | `def test_render_with_import_edges_produces_relationships(self)` |
+| `test_render_with_structs_interfaces_traits` | method | `tests/test_uml.py:137` | `def test_render_with_structs_interfaces_traits(self)` |
+| `test_sanitize_handles_empty_string` | method | `tests/test_uml.py:176` | `def test_sanitize_handles_empty_string(self)` |
+| `test_sanitize_prefixes_digit_start` | method | `tests/test_uml.py:172` | `def test_sanitize_prefixes_digit_start(self)` |
+| `test_sanitize_preserves_alphanumeric` | method | `tests/test_uml.py:164` | `def test_sanitize_preserves_alphanumeric(self)` |
+| `test_sanitize_replaces_special_chars` | method | `tests/test_uml.py:168` | `def test_sanitize_replaces_special_chars(self)` |
+| `TestVideoContract` | class | `tests/test_video.py:35` | `class TestVideoContract(TestCase)` |
+| `_analysis` | function | `tests/test_video.py:23` | `def _analysis()` |
+| `_nodes` | function | `tests/test_video.py:15` | `def _nodes()` |
+| `test_video_all_scenes_render_small_canvas` | method | `tests/test_video.py:88` | `def test_video_all_scenes_render_small_canvas(self)` |
+| `test_video_build_scenes_durations` | method | `tests/test_video.py:78` | `def test_video_build_scenes_durations(self)` |
+| `test_video_collect_counts` | method | `tests/test_video.py:36` | `def test_video_collect_counts(self)` |
+| `test_video_collect_empty_project` | method | `tests/test_video.py:48` | `def test_video_collect_empty_project(self)` |
+| `test_video_collect_enriched_fields` | method | `tests/test_video.py:58` | `def test_video_collect_enriched_fields(self)` |
+| `test_video_dependencies_returns_bool` | method | `tests/test_video.py:143` | `def test_video_dependencies_returns_bool(self)` |
+| `test_video_disabled_skips_without_render` | method | `tests/test_video.py:146` | `def test_video_disabled_skips_without_render(self)` |
+| `test_video_graph_positions_deterministic` | method | `tests/test_video.py:106` | `def test_video_graph_positions_deterministic(self)` |
+| `test_video_hash_color_deterministic` | method | `tests/test_video.py:132` | `def test_video_hash_color_deterministic(self)` |
+| `test_video_short_label_truncates` | method | `tests/test_video.py:138` | `def test_video_short_label_truncates(self)` |
+| `test_video_single_frame_bytes` | method | `tests/test_video.py:117` | `def test_video_single_frame_bytes(self)` |
+| `TestWikiConfigContract` | class | `tests/test_wiki.py:49` | `class TestWikiConfigContract(TestCase)` |
+| `TestWikiGenerationContract` | class | `tests/test_wiki.py:65` | `class TestWikiGenerationContract(TestCase)` |
+| `_make_analysis` | function | `tests/test_wiki.py:27` | `def _make_analysis()` |
+| `_make_node` | function | `tests/test_wiki.py:12` | `def _make_node(node_id, doc, symbols, language)` |
+| `_make_nodes` | function | `tests/test_wiki.py:41` | `def _make_nodes()` |
+| `_make_symbol` | function | `tests/test_wiki.py:23` | `def _make_symbol(name, kind, line, doc)` |
+| `test_community_page_sections` | method | `tests/test_wiki.py:81` | `def test_community_page_sections(self)` |
+| `test_config_defaults` | method | `tests/test_wiki.py:50` | `def test_config_defaults(self)` |
+| `test_config_immutable` | method | `tests/test_wiki.py:58` | `def test_config_immutable(self)` |
+| `test_connections_typed_with_confidence` | method | `tests/test_wiki.py:95` | `def test_connections_typed_with_confidence(self)` |
+| `test_definition_names_core_file` | method | `tests/test_wiki.py:217` | `def test_definition_names_core_file(self)` |
+| `test_deterministic_connections` | method | `tests/test_wiki.py:161` | `def test_deterministic_connections(self)` |
+| `test_duplicate_community_labels_disambiguated` | method | `tests/test_wiki.py:240` | `def test_duplicate_community_labels_disambiguated(self)` |
+| `test_duplicate_god_basenames_disambiguated` | method | `tests/test_wiki.py:259` | `def test_duplicate_god_basenames_disambiguated(self)` |
+| `test_duplicate_symbol_scope_detected` | method | `tests/test_wiki.py:365` | `def test_duplicate_symbol_scope_detected(self)` |
+| `test_fallback_single_community_without_analysis` | method | `tests/test_wiki.py:115` | `def test_fallback_single_community_without_analysis(self)` |
+| `test_garbage_doc_filtered_from_definition` | method | `tests/test_wiki.py:210` | `def test_garbage_doc_filtered_from_definition(self)` |
+| `test_garbage_purpose_filtered` | method | `tests/test_wiki.py:408` | `def test_garbage_purpose_filtered(self)` |
+| `test_generate_writes_all_files` | method | `tests/test_wiki.py:66` | `def test_generate_writes_all_files(self)` |
+| `test_index_entry_point` | method | `tests/test_wiki.py:139` | `def test_index_entry_point(self)` |
+| `test_large_files_flagged_in_index_and_report` | method | `tests/test_wiki.py:302` | `def test_large_files_flagged_in_index_and_report(self)` |
+| `test_leftover_files_covered_by_orphans_community` | method | `tests/test_wiki.py:184` | `def test_leftover_files_covered_by_orphans_community(self)` |
+| `test_lint_healthy_after_generate` | method | `tests/test_wiki.py:152` | `def test_lint_healthy_after_generate(self)` |
+| `test_no_duplicate_link_for_disjoint_scopes` | method | `tests/test_wiki.py:388` | `def test_no_duplicate_link_for_disjoint_scopes(self)` |
+| `test_oversized_community_grouped_by_directory` | method | `tests/test_wiki.py:278` | `def test_oversized_community_grouped_by_directory(self)` |
+| `test_privacy_mode_strips_docs` | method | `tests/test_wiki.py:174` | `def test_privacy_mode_strips_docs(self)` |
+| `test_report_honest_audit_sections` | method | `tests/test_wiki.py:125` | `def test_report_honest_audit_sections(self)` |
+| `test_risks_carry_fix_hint_scope_and_closed_cycle` | method | `tests/test_wiki.py:335` | `def test_risks_carry_fix_hint_scope_and_closed_cycle(self)` |
+| `test_shared_context_link_for_disconnected_communities` | method | `tests/test_wiki.py:194` | `def test_shared_context_link_for_disconnected_communities(self)` |
+| `test_stale_pages_pruned_on_regenerate` | method | `tests/test_wiki.py:323` | `def test_stale_pages_pruned_on_regenerate(self)` |
+

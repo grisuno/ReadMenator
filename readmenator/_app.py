@@ -17,6 +17,8 @@ from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher, SystemMap
+from readmenator._explorer import build_state
+from readmenator._explorer import serve as _serve_explorer
 from readmenator._gh_wiki import WikiPublishResult
 from readmenator._gitmeta import read_git_head
 from readmenator._layers import LayerDetector
@@ -37,6 +39,7 @@ from readmenator._query import QueryEngine
 from readmenator._rank import RankedResult
 from readmenator._refactorizer import MonolithRefactorizer
 from readmenator._resolver import ImportResolver
+from readmenator._yaralite import validate_yaralite_rules
 
 logger = logging.getLogger(__name__)
 
@@ -203,6 +206,10 @@ class readmenatorApplication:
                 self.export_diagrams(str(root), full=True)
             except Exception:
                 logger.debug("Interactive maps skipped", exc_info=True)
+
+        self._maybe_export_forcegraph(
+            root, nodes, edges, resolved_edges, analysis, layers, findings
+        )
 
         self._inject_readme_link(root)
         self._inject_agent_files(root)
@@ -636,6 +643,186 @@ class readmenatorApplication:
         self.export_json(target_dir)
         self.export_html(target_dir)
         self.export_svg(target_dir)
+        if self._config.FORCEGRAPH_ENABLED:
+            self.export_forcegraph(target_dir)
+
+    def _forcegraph_dest(self, target_dir: str, output_path: Optional[str] = None) -> Path:
+        """Resolve the force-graph HTML destination inside the maps directory.
+
+        Args:
+            target_dir: Project root directory.
+            output_path: Optional explicit output file path override.
+
+        Returns:
+            Destination path for the explorer HTML file.
+        """
+        if output_path is not None:
+            out = Path(output_path)
+            return out if out.is_absolute() else Path(target_dir).resolve() / out
+        return Path(target_dir).resolve() / self._config.DIAGRAM_OUTPUT_DIR / self._config.FORCEGRAPH_OUTPUT
+
+    def _write_forcegraph(
+        self,
+        dest: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Dict[str, str],
+        findings: List[SecurityFinding],
+    ) -> Optional[Dict[str, int]]:
+        """Render the explorer payload and write HTML plus vendor engine.
+
+        Args:
+            dest: Destination HTML file path.
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved: Optional resolved-import edges.
+            analysis: Optional community analysis.
+            layers: File-to-layer mapping.
+            findings: Security findings.
+
+        Returns:
+            Node and edge counts, or None when the write fails.
+        """
+        try:
+            payload = self._factory.forcegraph.build_payload(nodes, edges, resolved, analysis, layers, findings)
+            analytics = self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers)
+            self._factory.forcegraph.write(str(dest), payload, analytics)
+            logger.info("Force-graph explorer: %s", dest)
+            return {"nodes": len(payload["nodes"]), "edges": len(payload["edges"])}
+        except Exception:
+            logger.debug("Force-graph explorer skipped", exc_info=True)
+            return None
+
+    def export_forcegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
+        """Export the force-graph explorer HTML document.
+
+        Args:
+            target_dir: Project root directory.
+            output_path: Optional explicit output file path.
+
+        Returns:
+            Output path of the written HTML file.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
+        dest = self._forcegraph_dest(target_dir, output_path)
+        self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings)
+        return str(dest)
+
+    def explorer_state(self, target_dir: str):
+        """Build explorer state for the local HTTP server.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Precomputed explorer state with graph and analytics.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
+        return build_state(self._config, nodes, edges, resolved, analysis, findings, layers)
+
+    def serve_explorer(self, target_dir: str, open_browser: bool = False) -> str:
+        """Serve the local explorer UI until interrupted.
+
+        Args:
+            target_dir: Project root directory.
+            open_browser: Open the URL in a browser when True.
+
+        Returns:
+            Base URL of the running server.
+        """
+        state = self.explorer_state(target_dir)
+        return _serve_explorer(state, host=self._config.EXPLORER_HOST, port=self._config.EXPLORER_PORT, open_browser=open_browser)
+
+    def analytics(self, target_dir: str) -> dict:
+        """Compute the corpus analytics payload.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Analytics dictionary with funnel and distributions.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
+        hotspots = self._factory.hotspots.analyze_hotspots(nodes, edges, resolved)
+        return self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers, None, hotspots)
+
+    def scan_texts(self, target_dir: str) -> dict:
+        """Build scan-text blobs for every file in the project.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Mapping of file identifier to scan-text blob.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        return self._factory.scantext.build_corpus(nodes, content_map, edges)
+
+    def near(self, target_dir: str, query: str, top_k: int = 0) -> list:
+        """Find semantically similar files for a query file or text.
+
+        Args:
+            target_dir: Project root directory.
+            query: File identifier or free text to compare.
+            top_k: Maximum neighbors to return.
+
+        Returns:
+            Neighbor list sorted by descending similarity.
+        """
+        corpus = self.scan_texts(target_dir)
+        return self._factory.embedder.near_jaccard(query, corpus, top_k=top_k)
+
+    def audit_provenance(self, target_dir: str) -> list:
+        """Audit security findings by evidence provenance.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Provenance findings sorted by severity.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        findings = self._factory.security.scan(Path(target_dir).resolve())
+        exclusions = self._factory.exclusions
+        exclusions.load(Path(target_dir).resolve())
+        findings = exclusions.filter_findings(findings)
+        by_node = {node.node_id: node.node_id for node in nodes}
+        content_by_path = {node.node_id: content_map.get(node.node_id, "") for node in nodes}
+        void = {node.label: content_map.get(node.node_id, "") for node in nodes}
+        merged = dict(content_map)
+        merged.update(content_by_path)
+        merged.update(void)
+        for finding in findings:
+            merged.setdefault(finding.file_path, "")
+        return self._factory.provenance.audit(findings, merged)
+
+    def validate_yaralite(self, target_dir: str) -> dict:
+        """Validate the project YARA-lite rules file.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Validation payload with rule counts and errors.
+        """
+        candidate = Path(target_dir).resolve() / self._config.YARALITE_RULES_FILE
+        if not candidate.is_file():
+            return {"valid": False, "rule_count": 0, "rules": [], "tiers": {}, "errors": ["no rules file"]}
+        return validate_yaralite_rules(candidate.read_text(encoding="utf-8"))
 
     def export_graphml(self, target_dir: str, output_path: Optional[str] = None) -> str:
         nodes, edges = self._scan(target_dir)
@@ -748,9 +935,23 @@ class readmenatorApplication:
             dest = root / dest
         stats = self._site_stats(nodes, edges, analysis)
         flat_publisher = DocsSitePublisher(replace(self._config, DIAGRAM_MAPS_SUBDIR="."))
+        extra_cards: List[Dict[str, str]] = []
+        if self._config.FORCEGRAPH_ENABLED:
+            force_dest = dest / self._config.FORCEGRAPH_OUTPUT
+            counts = self._write_forcegraph(force_dest, nodes, edges, resolved, analysis, layers, findings)
+            if counts:
+                extra_cards.append(
+                    {
+                        "kind": "forcegraph",
+                        "title": "Force Graph",
+                        "href": self._config.FORCEGRAPH_OUTPUT,
+                        "description": "Physics-driven explorer over files, communities, layers and externals with community hull overlays.",
+                        "meta": f"{counts['nodes']} nodes | {counts['edges']} edges",
+                    }
+                )
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
-            project_root=str(root),
+            project_root=str(root), extra_cards=extra_cards,
         )
         for kind in sorted(maps):
             if kind not in written:
@@ -917,6 +1118,36 @@ class readmenatorApplication:
         except Exception:
             logger.debug("Overview video skipped", exc_info=True)
             return None
+
+    def _maybe_export_forcegraph(
+        self,
+        root: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
+    ) -> Optional[str]:
+        """Write the force-graph explorer HTML when enabled.
+
+        Args:
+            root: Project root directory (HTML lands in the maps directory).
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional community analysis.
+            layers: Optional file-to-layer mapping.
+            findings: Optional security findings.
+
+        Returns:
+            Output path string, or None when disabled or skipped.
+        """
+        if not self._config.FORCEGRAPH_ENABLED:
+            return None
+        dest = self._forcegraph_dest(str(root))
+        counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [])
+        return str(dest) if counts else None
 
 
     def watch(self, target_dir: str) -> None:

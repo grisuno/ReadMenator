@@ -1,6 +1,166 @@
 # Subsystem: readmenator (page 3 of 3)
 Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 
+## readmenator/_refactorizer.py
+- Doc: Monolithic file refactoring planner for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `MonolithRefactorizer` (class, line 24) `class MonolithRefactorizer`
+  - `__init__` (method, line 32) `def __init__(self, config)`
+  - `analyze` (method, line 35) `def analyze(self, nodes, edges, resolved_edges, content_map)`
+  - `_get_line_count` (method, line 70) `def _get_line_count(self, file_id, content_map)`
+  - `_plan_refactoring` (method, line 82) `def _plan_refactoring(self, node, edges, resolved_edges, content_map)`
+  - `_group_symbols_by_kind` (method, line 126) `def _group_symbols_by_kind(self, symbols)`
+  - `_suggest_target_file` (method, line 132) `def _suggest_target_file(self, source_file, kind)`
+  - `_estimate_impact` (method, line 147) `def _estimate_impact(self, file_id, resolved_edges)`
+  - `generate_script` (method, line 156) `def generate_script(self, plan, project_root)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_app.py`, `tests/test_refactorizer.py`
+
+## readmenator/_resolver.py
+- Doc: Import path resolver for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ImportResolver` (class, line 18) `class ImportResolver`
+  - `__init__` (method, line 61) `def __init__(self, file_ids, root, extensions, include_dirs)`
+  - `_build_stem_index` (method, line 83) `def _build_stem_index(self, file_ids)`
+  - `_build_dir_index` (method, line 93) `def _build_dir_index(self, file_ids)`
+  - `resolve` (method, line 110) `def resolve(self, import_str, source_file)`
+  - `resolve_all` (method, line 163) `def resolve_all(self, import_str, source_file)`
+  - `_resolve_include_dirs` (method, line 179) `def _resolve_include_dirs(self, import_str)`
+  - `_resolve_relative` (method, line 199) `def _resolve_relative(self, import_str, source_file)`
+  - `_resolve_verbatim` (method, line 217) `def _resolve_verbatim(self, import_str, source_file)`
+  - `_resolve_extensionless` (method, line 235) `def _resolve_extensionless(self, import_str, source_file)`
+  - `_resolve_directory_init` (method, line 244) `def _resolve_directory_init(self, import_str, source_file)`
+  - `_resolve_root_package` (method, line 254) `def _resolve_root_package(self, import_str)`
+  - `_resolve_module_dotpath` (method, line 269) `def _resolve_module_dotpath(self, import_str)`
+  - `_resolve_suffix_match` (method, line 291) `def _resolve_suffix_match(self, import_str)`
+  - `_resolve_basename_match` (method, line 306) `def _resolve_basename_match(self, import_str)`
+  - `_resolve_stem_match` (method, line 324) `def _resolve_stem_match(self, import_str)`
+  - `_strip_extension` (method, line 333) `def _strip_extension(self, name)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `tests/test_agent_friendliness.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_rule_gen.py
+- Doc: Suggested linting rule generator producing Semgrep YAML from detected antipatterns.
+- Layer: business_logic
+- Language: py
+- Symbols:
+  - `RuleGenerator` (class, line 14) `class RuleGenerator`
+  - `__init__` (method, line 90) `def __init__(self, config)`
+  - `generate` (method, line 94) `def generate(self, nodes, content_map)`
+  - `write_rules` (method, line 122) `def write_rules(self, rules, output_dir)`
+  - `_group_by_language` (method, line 161) `def _group_by_language(self, nodes)`
+  - `_analyze_language` (method, line 171) `def _analyze_language(self, lang, nodes, content_map)`
+  - `_detect_antipatterns` (method, line 204) `def _detect_antipatterns(self, nodes, content_map)`
+  - `_infer_language_for_rule` (method, line 250) `def _infer_language_for_rule(rule_id)`
+  - `_next_rule_id` (method, line 260) `def _next_rule_id(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_rule_gen.py`
+
+## readmenator/_sarif.py
+- Doc: SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible).
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SarifExporter` (class, line 11) `class SarifExporter`
+  - `__init__` (method, line 30) `def __init__(self, privacy_mode)`
+  - `export` (method, line 33) `def export(self, findings, project_name)`
+  - `_build_rule` (method, line 82) `def _build_rule(self, finding)`
+  - `_build_result` (method, line 106) `def _build_result(self, finding, rule_index)`
+- Depends on: `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_sarif.py`
+
+## readmenator/_scanner.py
+- Doc: Secure polyglot directory traversal and file analysis.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `PolyglotScanner` (class, line 28) `class PolyglotScanner`
+  - `__init__` (method, line 39) `def __init__(self, config)`
+  - `_is_ignored` (method, line 50) `def _is_ignored(self, path)`
+  - `_is_generated` (method, line 57) `def _is_generated(self, rel_path)`
+  - `_load_gitignore` (method, line 83) `def _load_gitignore(self, root)`
+  - `_gitignore_glob_to_regex` (method, line 105) `def _gitignore_glob_to_regex(pattern)`
+  - `_is_gitignored` (method, line 145) `def _is_gitignored(self, rel_path)`
+  - `_validate_path_security` (method, line 154) `def _validate_path_security(self, path)`
+  - `_check_directory_depth` (method, line 167) `def _check_directory_depth(self, path, root)`
+  - `_extract_file_doc` (method, line 175) `def _extract_file_doc(self, content)`
+  - `_emit_progress` (method, line 251) `def _emit_progress(self, count)`
+  - `scan` (method, line 261) `def scan(self, root)`
+  - `scan_with_content` (method, line 275) `def scan_with_content(self, root)`
+  - `_scan_impl` (method, line 286) `def _scan_impl(self, root)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/__init__.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_scantext.py
+- Doc: Synthesized scan-text builder for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ScanTextBuilder` (class, line 16) `class ScanTextBuilder`
+  - `__init__` (method, line 19) `def __init__(self, config)`
+  - `build_for_node` (method, line 27) `def build_for_node(self, node, content, imports)`
+  - `build_corpus` (method, line 67) `def build_corpus(self, nodes, content_map, edges)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+
+## readmenator/_security.py
+- Doc: Pattern-based static security analysis for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SecurityRule` (class, line 24) `class SecurityRule`
+  - `_parse_minimal_yaml` (method, line 46) `def _parse_minimal_yaml(text)`
+  - `_unquote` (method, line 121) `def _unquote(s)`
+  - `_load_rules_from_yaml` (method, line 128) `def _load_rules_from_yaml(yaml_path)`
+  - `_compile` (method, line 148) `def _compile()`
+  - `_python_rules` (method, line 153) `def _python_rules()`
+  - `_javascript_rules` (method, line 182) `def _javascript_rules()`
+  - `_c_rules` (method, line 201) `def _c_rules()`
+  - `_java_rules` (method, line 222) `def _java_rules()`
+  - `_go_rules` (method, line 237) `def _go_rules()`
+  - `_ruby_rules` (method, line 250) `def _ruby_rules()`
+  - `_php_rules` (method, line 267) `def _php_rules()`
+  - `_shell_rules` (method, line 284) `def _shell_rules()`
+  - `_csharp_rules` (method, line 297) `def _csharp_rules()`
+  - `_kotlin_rules` (method, line 310) `def _kotlin_rules()`
+  - `_swift_rules` (method, line 321) `def _swift_rules()`
+  - `_scala_rules` (method, line 332) `def _scala_rules()`
+  - `_lua_rules` (method, line 343) `def _lua_rules()`
+  - `_dart_rules` (method, line 354) `def _dart_rules()`
+  - `_rust_rules` (method, line 365) `def _rust_rules()`
+  - `_nim_rules` (method, line 376) `def _nim_rules()`
+  - `_gdscript_rules` (method, line 387) `def _gdscript_rules()`
+  - `_elixir_rules` (method, line 398) `def _elixir_rules()`
+  - `_build_rules_from_yaml` (method, line 447) `def _build_rules_from_yaml(yaml_path)`
+  - `SecurityAnalyzer` (class, line 486) `class SecurityAnalyzer`
+  - `fix_hint_for` (method, line 620) `def fix_hint_for(finding)`
+  - `__init__` (method, line 496) `def __init__(self, config)`
+  - `_resolve_rules` (method, line 500) `def _resolve_rules(self)`
+  - `_meets_threshold` (method, line 509) `def _meets_threshold(self, severity)`
+  - `scan` (method, line 513) `def scan(self, root)`
+  - `_validate_path` (method, line 555) `def _validate_path(self, path, root)`
+  - `summary` (method, line 572) `def summary(self, findings)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_security.py`
+
+## readmenator/_taint.py
+- Doc: Taint propagation analysis of dangerous imports through the resolved import graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `TaintAnalyzer` (class, line 12) `class TaintAnalyzer`
+  - `__init__` (method, line 73) `def __init__(self, config)`
+  - `analyze` (method, line 77) `def analyze(self, nodes, edges, resolved_edges)`
+  - `_find_direct_sources` (method, line 136) `def _find_direct_sources(self, nodes, edges)`
+  - `_propagate` (method, line 162) `def _propagate(self, source_node_id, danger_import, adj, nodes, max_depth)`
+  - `_build_forward_graph` (method, line 213) `def _build_forward_graph(nodes, resolved_edges)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`
+
 ## readmenator/_uml.py
 - Doc: UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator.
 - Layer: utility
@@ -143,4 +303,31 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `dominant` (method, line 428) `def dominant(ids, key)`
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
+
+## readmenator/_yaralite.py
+- Doc: Zero-dependency YARA-lite rule parser and runner.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `YaraLiteString` (class, line 24) `class YaraLiteString`
+  - `YaraLiteRule` (class, line 33) `class YaraLiteRule`
+  - `YaraLiteHit` (class, line 56) `class YaraLiteHit`
+  - `YaraLiteMatch` (class, line 66) `class YaraLiteMatch`
+  - `parse_yaralite_rules` (method, line 76) `def parse_yaralite_rules(rules_text)`
+  - `run_yaralite_rules` (method, line 112) `def run_yaralite_rules(text, rules)`
+  - `validate_yaralite_rules` (method, line 139) `def validate_yaralite_rules(rules_text)`
+  - `_rule_blocks` (method, line 161) `def _rule_blocks(rules_text)`
+  - `_section` (method, line 182) `def _section(body, start_marker, end_marker)`
+  - `_parse_meta` (method, line 196) `def _parse_meta(meta_body)`
+  - `_parse_strings` (method, line 215) `def _parse_strings(strings_body)`
+  - `_strip_comments` (method, line 233) `def _strip_comments(text)`
+  - `_decode_yara_string` (method, line 238) `def _decode_yara_string(value)`
+  - `_string_hits` (method, line 243) `def _string_hits(text, rule)`
+  - `_condition_matches` (method, line 265) `def _condition_matches(condition, hits)`
+  - `_confidence` (method, line 305) `def _confidence(value)`
+  - `_excerpt` (method, line 322) `def _excerpt(text, offset, length)`
+  - `tier` (method, line 42) `def tier(self)`
+  - `replace_group` (method, line 270) `def replace_group(match)`
+  - `replace_identifier` (method, line 292) `def replace_identifier(match)`
+- Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
 

@@ -10,8 +10,10 @@ import subprocess
 from collections import Counter
 from typing import Dict, List, Optional, Set
 
+from readmenator._analytics import AnalyticsBuilder
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
+from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._mermaid import MermaidRenderer
 from readmenator._uml import UmlGenerator
 from readmenator._models import (
@@ -151,6 +153,8 @@ class DocumentationGenerator:
         lines.extend(self._build_community_analysis(analysis, nodes))
         lines.extend(self._build_surprising_connections(analysis, nodes))
         lines.extend(self._build_suggested_questions(analysis))
+        lines.extend(self._build_forcegraph_section(nodes, edges, resolved_edges, analysis, layers, findings))
+        lines.extend(self._build_analytics_section(nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2))
         lines.extend(self._build_taint_analysis(analysis_v2))
         lines.extend(self._build_hotspots(analysis_v2, ranked))
         lines.extend(self._build_dataflow_analysis(analysis_v2))
@@ -347,6 +351,11 @@ class DocumentationGenerator:
         if analysis and analysis.suggested_questions:
             toc.append(f"{entry}. [Suggested Questions](#suggested-questions)")
             entry += 1
+
+        toc.append(f"{entry}. [Force-Graph Explorer](#force-graph-explorer)")
+        entry += 1
+        toc.append(f"{entry}. [Corpus Analytics](#corpus-analytics)")
+        entry += 1
 
         if analysis_v2 and analysis_v2.taint and analysis_v2.taint.paths:
             toc.append(f"{entry}. [Taint Propagation Map](#taint-propagation-map)")
@@ -620,6 +629,78 @@ class DocumentationGenerator:
         ]
         for q in analysis.suggested_questions:
             lines.append(f"- {q}")
+        lines.extend(["", "---", ""])
+        return lines
+
+    def _build_forcegraph_section(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
+    ) -> List[str]:
+        """Build the force-graph explorer section with payload stats."""
+        if not self._config.FORCEGRAPH_ENABLED:
+            return []
+        payload = ForceGraphRenderer(self._config).build_payload(
+            nodes, edges, resolved_edges, analysis, layers, findings
+        )
+        type_counts: Dict[str, int] = {}
+        for node in payload["nodes"]:
+            node_type = str(node.get("type", "unknown"))
+            type_counts[node_type] = type_counts.get(node_type, 0) + 1
+        breakdown = ", ".join(
+            f"{node_type}: {count}" for node_type, count in sorted(type_counts.items())
+        )
+        return [
+            "## Force-Graph Explorer",
+            "",
+            "Heterogeneous explorer payload (files, communities, "
+            "layers, externals) rendered with force-graph physics, stable "
+            "family colors, log2 node sizing, and convex-hull community "
+            "overlays. Open `readmenator-maps/graph-force.html` (linked from the maps gallery) or run `explorer`.",
+            "",
+            f"- Nodes: {len(payload['nodes'])} ({breakdown})",
+            f"- Edges: {len(payload['edges'])}",
+            "",
+            "---",
+            "",
+        ]
+
+    def _build_analytics_section(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
+        analysis_v2: Optional[AnalysisResultV2],
+    ) -> List[str]:
+        """Build the corpus analytics dashboard section."""
+        if not self._config.ANALYTICS_ENABLED:
+            return []
+        payload = AnalyticsBuilder(self._config).build(
+            nodes, edges, resolved_edges, analysis, findings, layers, analysis_v2
+        )
+        funnel = payload["attribution_funnel"]
+        lines: List[str] = [
+            "## Corpus Analytics",
+            "",
+            "Attribution funnel and distributions for the explorer dashboard.",
+            "",
+            f"- Files: {funnel['total']} | With symbols: {funnel['with_symbols']} | "
+            f"Attributed: {funnel['attributed']} | God nodes: {funnel['god_nodes']} | "
+            f"Symbols: {funnel['total_symbols']}",
+            "",
+        ]
+        for entry in payload["layer_distribution"]:
+            lines.append(f"- Layer `{entry['layer']}`: {entry['count']} files")
+        lines.append("")
+        for entry in payload["language_distribution"][:10]:
+            lines.append(f"- Language `{entry['language']}`: {entry['count']} files")
         lines.extend(["", "---", ""])
         return lines
 

@@ -1,26 +1,112 @@
-# Symbols (page 2 of 4)
+# Symbols (page 2 of 5)
 Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `gh_wiki` | method | `readmenator/_pipeline.py:205` | `def gh_wiki(self)` |
-| `hotspots` | method | `readmenator/_pipeline.py:133` | `def hotspots(self)` |
-| `last_category` | method | `readmenator/_pipeline.py:293` | `def last_category(self)` |
-| `last_typed_graph` | method | `readmenator/_pipeline.py:297` | `def last_typed_graph(self)` |
-| `layer_detector` | method | `readmenator/_pipeline.py:166` | `def layer_detector(self)` |
-| `layer_rules` | method | `readmenator/_pipeline.py:139` | `def layer_rules(self)` |
-| `make_ranker` | method | `readmenator/_pipeline.py:276` | `def make_ranker(self, typed_graph)` |
-| `readme_injector` | method | `readmenator/_pipeline.py:185` | `def readme_injector(self)` |
-| `rule_gen` | method | `readmenator/_pipeline.py:145` | `def rule_gen(self)` |
-| `run` | method | `readmenator/_pipeline.py:313` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
-| `sarif` | method | `readmenator/_pipeline.py:151` | `def sarif(self)` |
-| `scanner` | method | `readmenator/_pipeline.py:90` | `def scanner(self)` |
-| `security` | method | `readmenator/_pipeline.py:108` | `def security(self)` |
-| `taint` | method | `readmenator/_pipeline.py:120` | `def taint(self)` |
-| `uml` | method | `readmenator/_pipeline.py:172` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:253` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:246` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:178` | `def wiki(self)` |
+| `_resource_kb` | method | `readmenator/_mcp_server.py:942` | `def _resource_kb(self)` |
+| `_resource_summary` | method | `readmenator/_mcp_server.py:860` | `def _resource_summary(self)` |
+| `_scan` | method | `readmenator/_mcp_server.py:532` | `def _scan(self)` |
+| `_scan_deep` | method | `readmenator/_mcp_server.py:538` | `def _scan_deep(self)` |
+| `_tool_analytics` | method | `readmenator/_mcp_server.py:792` | `def _tool_analytics(self)` |
+| `_tool_communities` | method | `readmenator/_mcp_server.py:695` | `def _tool_communities(self)` |
+| `_tool_concepts` | method | `readmenator/_mcp_server.py:766` | `def _tool_concepts(self)` |
+| `_tool_cycles` | method | `readmenator/_mcp_server.py:684` | `def _tool_cycles(self)` |
+| `_tool_explain` | method | `readmenator/_mcp_server.py:589` | `def _tool_explain(self, name)` |
+| `_tool_export_json` | method | `readmenator/_mcp_server.py:762` | `def _tool_export_json(self)` |
+| `_tool_findings` | method | `readmenator/_mcp_server.py:612` | `def _tool_findings(self, min_severity)` |
+| `_tool_forcegraph` | method | `readmenator/_mcp_server.py:842` | `def _tool_forcegraph(self)` |
+| `_tool_hotspots` | method | `readmenator/_mcp_server.py:668` | `def _tool_hotspots(self, top_n)` |
+| `_tool_layer_violations` | method | `readmenator/_mcp_server.py:728` | `def _tool_layer_violations(self)` |
+| `_tool_layers` | method | `readmenator/_mcp_server.py:710` | `def _tool_layers(self)` |
+| `_tool_near` | method | `readmenator/_mcp_server.py:812` | `def _tool_near(self, query, top_k)` |
+| `_tool_path` | method | `readmenator/_mcp_server.py:601` | `def _tool_path(self, symbol_a, symbol_b)` |
+| `_tool_provenance` | method | `readmenator/_mcp_server.py:829` | `def _tool_provenance(self)` |
+| `_tool_query` | method | `readmenator/_mcp_server.py:584` | `def _tool_query(self, text)` |
+| `_tool_rebuild` | method | `readmenator/_mcp_server.py:744` | `def _tool_rebuild(self)` |
+| `_tool_security_summary` | method | `readmenator/_mcp_server.py:642` | `def _tool_security_summary(self)` |
+| `_tool_summary` | method | `readmenator/_mcp_server.py:546` | `def _tool_summary(self)` |
+| `_tool_taint` | method | `readmenator/_mcp_server.py:647` | `def _tool_taint(self)` |
+| `_tool_update` | method | `readmenator/_mcp_server.py:754` | `def _tool_update(self)` |
+| `call` | method | `readmenator/_mcp_server.py:115` | `def call(self, arguments)` |
+| `definition` | method | `readmenator/_mcp_server.py:108` | `def definition(self)` |
+| `definition` | method | `readmenator/_mcp_server.py:134` | `def definition(self)` |
+| `dispatch` | method | `readmenator/_mcp_server.py:241` | `def dispatch(self, req)` |
+| `error` | method | `readmenator/_mcp_server.py:85` | `def error(self, code, message, data)` |
+| `is_notification` | method | `readmenator/_mcp_server.py:79` | `def is_notification(self)` |
+| `main` | method | `readmenator/_mcp_server.py:990` | `def main()` |
+| `read` | method | `readmenator/_mcp_server.py:142` | `def read(self)` |
+| `register_resource` | method | `readmenator/_mcp_server.py:158` | `def register_resource(self, resource)` |
+| `register_tool` | method | `readmenator/_mcp_server.py:155` | `def register_tool(self, tool)` |
+| `response` | method | `readmenator/_mcp_server.py:82` | `def response(self, result)` |
+| `run` | method | `readmenator/_mcp_server.py:261` | `def run(self)` |
+| `MermaidRenderer` | class | `readmenator/_mermaid.py:17` | `class MermaidRenderer` |
+| `__init__` | method | `readmenator/_mermaid.py:26` | `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, function_style, external_style...` |
+| `_sanitize_id` | method | `readmenator/_mermaid.py:45` | `def _sanitize_id(node_id)` |
+| `render` | method | `readmenator/_mermaid.py:56` | `def render(self, nodes, edges, resolved_edges, analysis)` |
+| `AnalysisResult` | class | `readmenator/_models.py:130` | `class AnalysisResult` |
+| `AnalysisResultV2` | class | `readmenator/_models.py:284` | `class AnalysisResultV2` |
+| `ChangeImpact` | class | `readmenator/_models.py:200` | `class ChangeImpact` |
+| `CommunityResult` | class | `readmenator/_models.py:111` | `class CommunityResult` |
+| `ConceptGraph` | class | `readmenator/_models.py:442` | `class ConceptGraph` |
+| `ConceptNode` | class | `readmenator/_models.py:404` | `class ConceptNode` |
+| `ConceptRelation` | class | `readmenator/_models.py:421` | `class ConceptRelation` |
+| `DataflowIssue` | class | `readmenator/_models.py:309` | `class DataflowIssue` |
+| `DeadCodeReport` | class | `readmenator/_models.py:349` | `class DeadCodeReport` |
+| `DependencyCycle` | class | `readmenator/_models.py:187` | `class DependencyCycle` |
+| `Edge` | class | `readmenator/_models.py:58` | `class Edge` |
+| `HotspotResult` | class | `readmenator/_models.py:217` | `class HotspotResult` |
+| `LayerViolation` | class | `readmenator/_models.py:263` | `class LayerViolation` |
+| `LinterViolation` | class | `readmenator/_models.py:332` | `class LinterViolation` |
+| `Node` | class | `readmenator/_models.py:37` | `class Node` |
+| `RefactoringAction` | class | `readmenator/_models.py:366` | `class RefactoringAction` |
+| `RefactoringPlan` | class | `readmenator/_models.py:387` | `class RefactoringPlan` |
+| `SecurityFinding` | class | `readmenator/_models.py:77` | `class SecurityFinding` |
+| `SuggestedRule` | class | `readmenator/_models.py:238` | `class SuggestedRule` |
+| `Symbol` | class | `readmenator/_models.py:18` | `class Symbol` |
+| `TaintAnalysisResult` | class | `readmenator/_models.py:172` | `class TaintAnalysisResult` |
+| `TaintPath` | class | `readmenator/_models.py:151` | `class TaintPath` |
+| `pluralize_symbol_kind` | method | `readmenator/_models.py:101` | `def pluralize_symbol_kind(kind, plural_map)` |
+| `AnalyzerFactory` | class | `readmenator/_pipeline.py:56` | `class AnalyzerFactory` |
+| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:355` | `class DeepAnalysisRunner` |
+| `__init__` | method | `readmenator/_pipeline.py:64` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_pipeline.py:364` | `def __init__(self, factory)` |
+| `agent_injector` | method | `readmenator/_pipeline.py:207` | `def agent_injector(self)` |
+| `agent_output` | method | `readmenator/_pipeline.py:224` | `def agent_output(self)` |
+| `analytics` | method | `readmenator/_pipeline.py:286` | `def analytics(self)` |
+| `analyzer` | method | `readmenator/_pipeline.py:114` | `def analyzer(self)` |
+| `build_typed_graph` | method | `readmenator/_pipeline.py:320` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
+| `concepts` | method | `readmenator/_pipeline.py:272` | `def concepts(self)` |
+| `cpg` | method | `readmenator/_pipeline.py:169` | `def cpg(self)` |
+| `dataflow` | method | `readmenator/_pipeline.py:138` | `def dataflow(self)` |
+| `diagram_builder` | method | `readmenator/_pipeline.py:230` | `def diagram_builder(self)` |
+| `diagram_publisher` | method | `readmenator/_pipeline.py:251` | `def diagram_publisher(self)` |
+| `diagram_renderer` | method | `readmenator/_pipeline.py:237` | `def diagram_renderer(self)` |
+| `diagram_validator` | method | `readmenator/_pipeline.py:244` | `def diagram_validator(self)` |
+| `embedder` | method | `readmenator/_pipeline.py:314` | `def embedder(self)` |
+| `exclusions` | method | `readmenator/_pipeline.py:307` | `def exclusions(self)` |
+| `exporter` | method | `readmenator/_pipeline.py:126` | `def exporter(self)` |
+| `forcegraph` | method | `readmenator/_pipeline.py:279` | `def forcegraph(self)` |
+| `generator` | method | `readmenator/_pipeline.py:108` | `def generator(self)` |
+| `gh_wiki` | method | `readmenator/_pipeline.py:217` | `def gh_wiki(self)` |
+| `hotspots` | method | `readmenator/_pipeline.py:145` | `def hotspots(self)` |
+| `last_category` | method | `readmenator/_pipeline.py:347` | `def last_category(self)` |
+| `last_typed_graph` | method | `readmenator/_pipeline.py:351` | `def last_typed_graph(self)` |
+| `layer_detector` | method | `readmenator/_pipeline.py:178` | `def layer_detector(self)` |
+| `layer_rules` | method | `readmenator/_pipeline.py:151` | `def layer_rules(self)` |
+| `make_ranker` | method | `readmenator/_pipeline.py:330` | `def make_ranker(self, typed_graph)` |
+| `provenance` | method | `readmenator/_pipeline.py:300` | `def provenance(self)` |
+| `readme_injector` | method | `readmenator/_pipeline.py:197` | `def readme_injector(self)` |
+| `rule_gen` | method | `readmenator/_pipeline.py:157` | `def rule_gen(self)` |
+| `run` | method | `readmenator/_pipeline.py:367` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `sarif` | method | `readmenator/_pipeline.py:163` | `def sarif(self)` |
+| `scanner` | method | `readmenator/_pipeline.py:102` | `def scanner(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:293` | `def scantext(self)` |
+| `security` | method | `readmenator/_pipeline.py:120` | `def security(self)` |
+| `taint` | method | `readmenator/_pipeline.py:132` | `def taint(self)` |
+| `uml` | method | `readmenator/_pipeline.py:184` | `def uml(self)` |
+| `video` | method | `readmenator/_pipeline.py:265` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:258` | `def vis_renderer(self)` |
+| `wiki` | method | `readmenator/_pipeline.py:190` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -36,6 +122,16 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `map_node` | method | `readmenator/_projections.py:35` | `def map_node(self, node)` |
 | `map_node` | method | `readmenator/_projections.py:52` | `def map_node(self, node)` |
 | `map_node` | method | `readmenator/_projections.py:80` | `def map_node(self, node)` |
+| `ProvenanceAuditor` | class | `readmenator/_provenance.py:46` | `class ProvenanceAuditor` |
+| `ProvenanceFinding` | class | `readmenator/_provenance.py:20` | `class ProvenanceFinding` |
+| `__init__` | method | `readmenator/_provenance.py:49` | `def __init__(self, config)` |
+| `_attach_frequency` | method | `readmenator/_provenance.py:124` | `def _attach_frequency(self, findings, content_map)` |
+| `_corpus_frequency` | method | `readmenator/_provenance.py:153` | `def _corpus_frequency(patterns, rows)` |
+| `_snippet_in_content` | method | `readmenator/_provenance.py:115` | `def _snippet_in_content(self, file_path, snippet, content_map)` |
+| `audit` | method | `readmenator/_provenance.py:57` | `def audit(self, findings, content_map)` |
+| `is_inferred_only` | method | `readmenator/_provenance.py:32` | `def is_inferred_only(self)` |
+| `reading` | method | `readmenator/_provenance.py:37` | `def reading(self)` |
+| `summary` | method | `readmenator/_provenance.py:98` | `def summary(self, findings)` |
 | `_primary_symbol` | function | `readmenator/_purpose.py:116` | `def _primary_symbol(symbols)` |
 | `clean_purpose` | function | `readmenator/_purpose.py:43` | `def clean_purpose(text)` |
 | `escape_cell` | function | `readmenator/_purpose.py:66` | `def escape_cell(text)` |
@@ -139,6 +235,10 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_validate_path_security` | method | `readmenator/_scanner.py:154` | `def _validate_path_security(self, path)` |
 | `scan` | method | `readmenator/_scanner.py:261` | `def scan(self, root)` |
 | `scan_with_content` | method | `readmenator/_scanner.py:275` | `def scan_with_content(self, root)` |
+| `ScanTextBuilder` | class | `readmenator/_scantext.py:16` | `class ScanTextBuilder` |
+| `__init__` | method | `readmenator/_scantext.py:19` | `def __init__(self, config)` |
+| `build_corpus` | method | `readmenator/_scantext.py:67` | `def build_corpus(self, nodes, content_map, edges)` |
+| `build_for_node` | method | `readmenator/_scantext.py:27` | `def build_for_node(self, node, content, imports)` |
 | `SecurityAnalyzer` | class | `readmenator/_security.py:486` | `class SecurityAnalyzer` |
 | `SecurityRule` | class | `readmenator/_security.py:24` | `class SecurityRule` |
 | `__init__` | method | `readmenator/_security.py:496` | `def __init__(self, config)` |
@@ -202,6 +302,41 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_type_map_py_to_target` | method | `readmenator/_uml.py:190` | `def _type_map_py_to_target(target, py_type_hint)` |
 | `generate_code` | method | `readmenator/_uml.py:129` | `def generate_code(self, nodes, edges, target_language)` |
 | `render_mermaid_class_diagram` | method | `readmenator/_uml.py:39` | `def render_mermaid_class_diagram(self, nodes, edges)` |
+| `Fe` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `Ha` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Ia` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `La` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Lo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Na` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Sr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `_` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `_n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `as` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `as` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `b` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `cr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `f` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `l` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `o` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `r` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `t` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `u` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `wa` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `xo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `y` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
 | `Backdrop` | class | `readmenator/_video.py:236` | `class Backdrop` |
 | `CinematicVideoRenderer` | class | `readmenator/_video.py:431` | `class CinematicVideoRenderer` |
 | `__init__` | method | `readmenator/_video.py:239` | `def __init__(self, width, height)` |
@@ -288,6 +423,26 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `existing_ids` | function | `readmenator/_wiki.py:62` | `def existing_ids(connections)` |
 | `generate` | method | `readmenator/_wiki.py:94` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` |
 | `lint` | method | `readmenator/_wiki.py:219` | `def lint(self, project_root)` |
+| `YaraLiteHit` | class | `readmenator/_yaralite.py:56` | `class YaraLiteHit` |
+| `YaraLiteMatch` | class | `readmenator/_yaralite.py:66` | `class YaraLiteMatch` |
+| `YaraLiteRule` | class | `readmenator/_yaralite.py:33` | `class YaraLiteRule` |
+| `YaraLiteString` | class | `readmenator/_yaralite.py:24` | `class YaraLiteString` |
+| `_condition_matches` | method | `readmenator/_yaralite.py:265` | `def _condition_matches(condition, hits)` |
+| `_confidence` | method | `readmenator/_yaralite.py:305` | `def _confidence(value)` |
+| `_decode_yara_string` | method | `readmenator/_yaralite.py:238` | `def _decode_yara_string(value)` |
+| `_excerpt` | method | `readmenator/_yaralite.py:322` | `def _excerpt(text, offset, length)` |
+| `_parse_meta` | method | `readmenator/_yaralite.py:196` | `def _parse_meta(meta_body)` |
+| `_parse_strings` | method | `readmenator/_yaralite.py:215` | `def _parse_strings(strings_body)` |
+| `_rule_blocks` | method | `readmenator/_yaralite.py:161` | `def _rule_blocks(rules_text)` |
+| `_section` | method | `readmenator/_yaralite.py:182` | `def _section(body, start_marker, end_marker)` |
+| `_string_hits` | method | `readmenator/_yaralite.py:243` | `def _string_hits(text, rule)` |
+| `_strip_comments` | method | `readmenator/_yaralite.py:233` | `def _strip_comments(text)` |
+| `parse_yaralite_rules` | method | `readmenator/_yaralite.py:76` | `def parse_yaralite_rules(rules_text)` |
+| `replace_group` | method | `readmenator/_yaralite.py:270` | `def replace_group(match)` |
+| `replace_identifier` | method | `readmenator/_yaralite.py:292` | `def replace_identifier(match)` |
+| `run_yaralite_rules` | method | `readmenator/_yaralite.py:112` | `def run_yaralite_rules(text, rules)` |
+| `tier` | method | `readmenator/_yaralite.py:42` | `def tier(self)` |
+| `validate_yaralite_rules` | method | `readmenator/_yaralite.py:139` | `def validate_yaralite_rules(rules_text)` |
 | `_init_parser_map` | function | `readmenator/parsers/__init__.py:34` | `def _init_parser_map()` |
 | `create_parser` | function | `readmenator/parsers/__init__.py:70` | `def create_parser(extension, filename, config)` |
 | `AssemblyParser` | class | `readmenator/parsers/_assembly.py:11` | `class AssemblyParser(LanguageParser)` |
@@ -336,165 +491,10 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `SwiftParser` | class | `readmenator/parsers/_swift.py:11` | `class SwiftParser(LanguageParser)` |
 | `_extract_specifics` | method | `readmenator/parsers/_swift.py:18` | `def _extract_specifics(self, content)` |
 | `Config` | class | `readmenator_orchestrator.py:21` | `class Config` |
-| `GitHubClient` | class | `readmenator_orchestrator.py:77` | `class GitHubClient` |
-| `Orchestrator` | class | `readmenator_orchestrator.py:341` | `class Orchestrator` |
-| `RepositoryProcessor` | class | `readmenator_orchestrator.py:191` | `class RepositoryProcessor` |
-| `TestOrchestrator` | class | `readmenator_orchestrator.py:396` | `class TestOrchestrator(TestCase)` |
-| `__init__` | method | `readmenator_orchestrator.py:78` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator_orchestrator.py:192` | `def __init__(self, config, github_client)` |
-| `__init__` | method | `readmenator_orchestrator.py:342` | `def __init__(self, config)` |
-| `_cleanup_temp_dir` | method | `readmenator_orchestrator.py:336` | `def _cleanup_temp_dir(temp_dir)` |
-| `_clone_repository` | method | `readmenator_orchestrator.py:241` | `def _clone_repository(self, repo)` |
-| `_commit_and_push` | method | `readmenator_orchestrator.py:290` | `def _commit_and_push(self, repo_dir, repo)` |
-| `_copy_to_docs_dir` | method | `readmenator_orchestrator.py:277` | `def _copy_to_docs_dir(self, repo_dir, generated_file)` |
-| `_get_default_branch` | method | `readmenator_orchestrator.py:225` | `def _get_default_branch(self, repo)` |
-| `_resolve_user` | method | `readmenator_orchestrator.py:83` | `def _resolve_user(self)` |
-| `_run_readmenator` | method | `readmenator_orchestrator.py:257` | `def _run_readmenator(self, repo_dir)` |
-| `_safe_env` | method | `readmenator_orchestrator.py:62` | `def _safe_env()` |
-| `_setup_git_auth` | method | `readmenator_orchestrator.py:104` | `def _setup_git_auth(self)` |
-| `_validate_branch_name` | method | `readmenator_orchestrator.py:56` | `def _validate_branch_name(name)` |
-| `_validate_repo_name` | method | `readmenator_orchestrator.py:50` | `def _validate_repo_name(name)` |
-| `close_existing_prs` | method | `readmenator_orchestrator.py:130` | `def close_existing_prs(self, repo)` |
-| `create_pr` | method | `readmenator_orchestrator.py:170` | `def create_pr(self, repo, default_branch, timestamp)` |
-| `delete_remote_branch` | method | `readmenator_orchestrator.py:158` | `def delete_remote_branch(self, repo)` |
-| `list_repos` | method | `readmenator_orchestrator.py:118` | `def list_repos(self)` |
-| `main` | method | `readmenator_orchestrator.py:455` | `def main()` |
-| `parse_arguments` | method | `readmenator_orchestrator.py:438` | `def parse_arguments()` |
-| `process` | method | `readmenator_orchestrator.py:196` | `def process(self, repo)` |
-| `run` | method | `readmenator_orchestrator.py:347` | `def run(self, dry_run, only_repo)` |
-| `setUp` | method | `readmenator_orchestrator.py:397` | `def setUp(self)` |
-| `tearDown` | method | `readmenator_orchestrator.py:401` | `def tearDown(self)` |
-| `test_branch_name_validation` | method | `readmenator_orchestrator.py:429` | `def test_branch_name_validation(self)` |
-| `test_config_defaults` | method | `readmenator_orchestrator.py:408` | `def test_config_defaults(self)` |
-| `test_config_immutability` | method | `readmenator_orchestrator.py:404` | `def test_config_immutability(self)` |
-| `test_repo_name_validation` | method | `readmenator_orchestrator.py:419` | `def test_repo_name_validation(self)` |
-| `test_skip_repos_logic` | method | `readmenator_orchestrator.py:415` | `def test_skip_repos_logic(self)` |
-| `TestAgentOutputBudget` | class | `tests/test_agent_friendliness.py:55` | `class TestAgentOutputBudget(TestCase)` |
-| `TestAgentOutputSignal` | class | `tests/test_agent_friendliness.py:110` | `class TestAgentOutputSignal(TestCase)` |
-| `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
-| `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
-| `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
-| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:501` | `class TestLiveMapCommunities(TestCase)` |
-| `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
-| `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
-| `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
-| `TestNoiseReduction` | class | `tests/test_agent_friendliness.py:244` | `class TestNoiseReduction(TestCase)` |
-| `TestPurposeExtraction` | class | `tests/test_agent_friendliness.py:176` | `class TestPurposeExtraction(TestCase)` |
-| `TestSiteDocsPruning` | class | `tests/test_agent_friendliness.py:394` | `class TestSiteDocsPruning(TestCase)` |
-| `TestSourceFreshness` | class | `tests/test_agent_friendliness.py:329` | `class TestSourceFreshness(TestCase)` |
-| `_big_project` | function | `tests/test_agent_friendliness.py:34` | `def _big_project(files, symbols_per_file)` |
-| `_edge` | function | `tests/test_agent_friendliness.py:29` | `def _edge(source, target, relation)` |
-| `_entries` | method | `tests/test_agent_friendliness.py:459` | `def _entries(self)` |
-| `_git_repo` | method | `tests/test_agent_friendliness.py:202` | `def _git_repo(self, root, packed)` |
-| `_inputs` | method | `tests/test_agent_friendliness.py:504` | `def _inputs(self)` |
-| `_node` | function | `tests/test_agent_friendliness.py:21` | `def _node(node_id, doc, symbols)` |
-| `_two_cliques` | method | `tests/test_agent_friendliness.py:414` | `def _two_cliques(self)` |
-| `test_agent_output_pages_repeat_table_header_and_link_next` | method | `tests/test_agent_friendliness.py:84` | `def test_agent_output_pages_repeat_table_header_and_link_next(self)` |
-| `test_agent_output_pages_respect_line_cap_on_large_projects` | method | `tests/test_agent_friendliness.py:58` | `def test_agent_output_pages_respect_line_cap_on_large_projects(self)` |
-| `test_agent_output_pagination_keeps_every_symbol_greppable` | method | `tests/test_agent_friendliness.py:71` | `def test_agent_output_pagination_keeps_every_symbol_greppable(self)` |
-| `test_agent_output_prunes_stale_pages` | method | `tests/test_agent_friendliness.py:96` | `def test_agent_output_prunes_stale_pages(self)` |
-| `test_api_qualifies_methods_with_owner_class` | method | `tests/test_agent_friendliness.py:136` | `def test_api_qualifies_methods_with_owner_class(self)` |
-| `test_api_skips_private_helpers_and_test_layer` | method | `tests/test_agent_friendliness.py:122` | `def test_api_skips_private_helpers_and_test_layer(self)` |
-| `test_api_states_dependencies_once_per_file` | method | `tests/test_agent_friendliness.py:113` | `def test_api_states_dependencies_once_per_file(self)` |
-| `test_architecture_external_excludes_internally_resolved_imports` | method | `tests/test_agent_friendliness.py:144` | `def test_architecture_external_excludes_internally_resolved_imports(self)` |
-| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:520` | `def test_built_maps_carry_community_and_core_role(self)` |
-| `test_check_freshness_detects_source_edits` | method | `tests/test_agent_friendliness.py:343` | `def test_check_freshness_detects_source_edits(self)` |
-| `test_communities_survive_a_shared_hub` | method | `tests/test_agent_friendliness.py:311` | `def test_communities_survive_a_shared_hub(self)` |
-| `test_community_label_ignores_test_directory` | method | `tests/test_agent_friendliness.py:446` | `def test_community_label_ignores_test_directory(self)` |
-| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:494` | `def test_doc_preview_skips_markdown_syntax(self)` |
-| `test_fingerprint_changes_with_content_not_with_order` | method | `tests/test_agent_friendliness.py:332` | `def test_fingerprint_changes_with_content_not_with_order(self)` |
-| `test_gallery_groups_docs_and_collapses_pages` | method | `tests/test_agent_friendliness.py:470` | `def test_gallery_groups_docs_and_collapses_pages(self)` |
-| `test_gallery_has_no_external_resources_and_escapes_titles` | method | `tests/test_agent_friendliness.py:486` | `def test_gallery_has_no_external_resources_and_escapes_titles(self)` |
-| `test_gallery_video_has_poster_and_start_here` | method | `tests/test_agent_friendliness.py:480` | `def test_gallery_video_has_poster_and_start_here(self)` |
-| `test_gitmeta_outside_repository_is_empty` | method | `tests/test_agent_friendliness.py:220` | `def test_gitmeta_outside_repository_is_empty(self)` |
-| `test_gitmeta_reads_loose_and_packed_refs` | method | `tests/test_agent_friendliness.py:214` | `def test_gitmeta_reads_loose_and_packed_refs(self)` |
-| `test_gotchas_exclude_test_layer_and_report_blast_radius` | method | `tests/test_agent_friendliness.py:161` | `def test_gotchas_exclude_test_layer_and_report_blast_radius(self)` |
-| `test_index_reports_used_by_count_and_escapes_pipes` | method | `tests/test_agent_friendliness.py:153` | `def test_index_reports_used_by_count_and_escapes_pipes(self)` |
-| `test_layers_match_whole_words_not_substrings` | method | `tests/test_agent_friendliness.py:264` | `def test_layers_match_whole_words_not_substrings(self)` |
-| `test_layers_test_framework_import_needs_test_path` | method | `tests/test_agent_friendliness.py:272` | `def test_layers_test_framework_import_needs_test_path(self)` |
-| `test_llms_txt_lists_wiki_before_agent_docs` | method | `tests/test_agent_friendliness.py:284` | `def test_llms_txt_lists_wiki_before_agent_docs(self)` |
-| `test_louvain_is_deterministic_and_numbered_by_size` | method | `tests/test_agent_friendliness.py:435` | `def test_louvain_is_deterministic_and_numbered_by_size(self)` |
-| `test_louvain_splits_bridged_cliques` | method | `tests/test_agent_friendliness.py:426` | `def test_louvain_splits_bridged_cliques(self)` |
-| `test_manifest_has_commit_relative_root_and_inventory` | method | `tests/test_agent_friendliness.py:224` | `def test_manifest_has_commit_relative_root_and_inventory(self)` |
-| `test_publish_assets_prunes_stale_markdown` | method | `tests/test_agent_friendliness.py:397` | `def test_publish_assets_prunes_stale_markdown(self)` |
-| `test_publish_writes_llms_txt` | method | `tests/test_agent_friendliness.py:296` | `def test_publish_writes_llms_txt(self)` |
-| `test_purpose_falls_back_to_primary_public_symbol` | method | `tests/test_agent_friendliness.py:185` | `def test_purpose_falls_back_to_primary_public_symbol(self)` |
-| `test_purpose_skips_banners_and_spdx` | method | `tests/test_agent_friendliness.py:182` | `def test_purpose_skips_banners_and_spdx(self)` |
-| `test_purpose_takes_first_sentence` | method | `tests/test_agent_friendliness.py:179` | `def test_purpose_takes_first_sentence(self)` |
-| `test_purpose_truncates_on_word_boundary` | method | `tests/test_agent_friendliness.py:192` | `def test_purpose_truncates_on_word_boundary(self)` |
-| `test_resolver_prefers_root_package_over_launcher_shim` | method | `tests/test_agent_friendliness.py:260` | `def test_resolver_prefers_root_package_over_launcher_shim(self)` |
-| `test_scanner_skips_own_generated_outputs` | method | `tests/test_agent_friendliness.py:247` | `def test_scanner_skips_own_generated_outputs(self)` |
-| `test_shared_directory_labels_use_core_file` | method | `tests/test_agent_friendliness.py:380` | `def test_shared_directory_labels_use_core_file(self)` |
-| `test_small_community_merges_into_best_connected_neighbor` | method | `tests/test_agent_friendliness.py:366` | `def test_small_community_merges_into_best_connected_neighbor(self)` |
-| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:529` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
-| `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:248` | `class TestAgentInjectorEdgeCases(TestCase)` |
-| `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:211` | `class TestAgentInjectorFindFiles(TestCase)` |
-| `TestAgentInjectorInjectBehavior` | class | `tests/test_agent_injector.py:19` | `class TestAgentInjectorInjectBehavior(TestCase)` |
-| `TestAgentInjectorRemoveBehavior` | class | `tests/test_agent_injector.py:168` | `class TestAgentInjectorRemoveBehavior(TestCase)` |
-| `setUp` | method | `tests/test_agent_injector.py:22` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:171` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:214` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:251` | `def setUp(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:27` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:176` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:218` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:256` | `def tearDown(self)` |
-| `test_custom_kb_filename_works` | method | `tests/test_agent_injector.py:145` | `def test_custom_kb_filename_works(self)` |
-| `test_finds_agents_md` | method | `tests/test_agent_injector.py:221` | `def test_finds_agents_md(self)` |
-| `test_finds_all_listed_files` | method | `tests/test_agent_injector.py:227` | `def test_finds_all_listed_files(self)` |
-| `test_finds_cursor_rules_glob` | method | `tests/test_agent_injector.py:234` | `def test_finds_cursor_rules_glob(self)` |
-| `test_inject_does_not_execute_commands` | method | `tests/test_agent_injector.py:160` | `def test_inject_does_not_execute_commands(self)` |
-| `test_inject_does_not_touch_unlisted_files` | method | `tests/test_agent_injector.py:275` | `def test_inject_does_not_touch_unlisted_files(self)` |
-| `test_inject_into_agents_md_adds_kb_link` | method | `tests/test_agent_injector.py:30` | `def test_inject_into_agents_md_adds_kb_link(self)` |
-| `test_inject_into_claude_md_adds_kb_link` | method | `tests/test_agent_injector.py:39` | `def test_inject_into_claude_md_adds_kb_link(self)` |
-| `test_inject_into_cursor_rules_mdc_glob` | method | `tests/test_agent_injector.py:96` | `def test_inject_into_cursor_rules_mdc_glob(self)` |
-| `test_inject_into_cursorrules_adds_kb_link` | method | `tests/test_agent_injector.py:49` | `def test_inject_into_cursorrules_adds_kb_link(self)` |
-| `test_inject_into_empty_file` | method | `tests/test_agent_injector.py:259` | `def test_inject_into_empty_file(self)` |
-| `test_inject_into_github_copilot_instructions` | method | `tests/test_agent_injector.py:57` | `def test_inject_into_github_copilot_instructions(self)` |
-| `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_agent_injector.py:106` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
-| `test_inject_multiple_agent_files` | method | `tests/test_agent_injector.py:129` | `def test_inject_multiple_agent_files(self)` |
-| `test_inject_no_agent_files_returns_zero` | method | `tests/test_agent_injector.py:117` | `def test_inject_no_agent_files_returns_zero(self)` |
-| `test_inject_plain_text_format_for_yaml` | method | `tests/test_agent_injector.py:136` | `def test_inject_plain_text_format_for_yaml(self)` |
-| `test_inject_preserves_existing_content` | method | `tests/test_agent_injector.py:121` | `def test_inject_preserves_existing_content(self)` |
-| `test_inject_replaces_old_injection_without_regen_command` | method | `tests/test_agent_injector.py:67` | `def test_inject_replaces_old_injection_without_regen_command(self)` |
-| `test_inject_respects_custom_agent_files_list` | method | `tests/test_agent_injector.py:267` | `def test_inject_respects_custom_agent_files_list(self)` |
-| `test_inject_skips_when_already_up_to_date` | method | `tests/test_agent_injector.py:82` | `def test_inject_skips_when_already_up_to_date(self)` |
-| `test_injection_includes_regeneration_command` | method | `tests/test_agent_injector.py:153` | `def test_injection_includes_regeneration_command(self)` |
-| `test_remove_no_files_returns_zero` | method | `tests/test_agent_injector.py:196` | `def test_remove_no_files_returns_zero(self)` |
-| `test_remove_preserves_original_content` | method | `tests/test_agent_injector.py:200` | `def test_remove_preserves_original_content(self)` |
-| `test_remove_strips_injected_section` | method | `tests/test_agent_injector.py:179` | `def test_remove_strips_injected_section(self)` |
-| `test_remove_without_injection_returns_zero` | method | `tests/test_agent_injector.py:190` | `def test_remove_without_injection_returns_zero(self)` |
-| `test_returns_empty_when_no_files` | method | `tests/test_agent_injector.py:243` | `def test_returns_empty_when_no_files(self)` |
-| `TestAgentOutputContract` | class | `tests/test_agent_output.py:49` | `class TestAgentOutputContract(TestCase)` |
-| `TestApiGeneration` | class | `tests/test_agent_output.py:268` | `class TestApiGeneration(TestCase)` |
-| `TestArchitectureGeneration` | class | `tests/test_agent_output.py:246` | `class TestArchitectureGeneration(TestCase)` |
-| `TestFullGenerate` | class | `tests/test_agent_output.py:362` | `class TestFullGenerate(TestCase)` |
-| `TestGotchasGeneration` | class | `tests/test_agent_output.py:190` | `class TestGotchasGeneration(TestCase)` |
-| `TestIndexGeneration` | class | `tests/test_agent_output.py:117` | `class TestIndexGeneration(TestCase)` |
-| `TestInjectionOutdatedDetection` | class | `tests/test_agent_output.py:434` | `class TestInjectionOutdatedDetection(TestCase)` |
-| `TestRecipesGeneration` | class | `tests/test_agent_output.py:316` | `class TestRecipesGeneration(TestCase)` |
-| `TestSecurityGeneration` | class | `tests/test_agent_output.py:143` | `class TestSecurityGeneration(TestCase)` |
-| `TestSubsystemFileGeneration` | class | `tests/test_agent_output.py:294` | `class TestSubsystemFileGeneration(TestCase)` |
-| `TestSubsystemInference` | class | `tests/test_agent_output.py:63` | `class TestSubsystemInference(TestCase)` |
-| `_make_edge` | function | `tests/test_agent_output.py:30` | `def _make_edge(source, target, relation)` |
-| `_make_finding` | function | `tests/test_agent_output.py:34` | `def _make_finding(file_path, line, severity, rule_id, description, snippet, cwe)` |
-| `_make_node` | function | `tests/test_agent_output.py:19` | `def _make_node(node_id, symbols, doc, language)` |
-| `test_agent_injector_detects_outdated` | method | `tests/test_agent_output.py:435` | `def test_agent_injector_detects_outdated(self)` |
-| `test_agent_injector_skips_identical` | method | `tests/test_agent_output.py:457` | `def test_agent_injector_skips_identical(self)` |
-| `test_all_files_under_500_lines` | method | `tests/test_agent_output.py:394` | `def test_all_files_under_500_lines(self)` |
-| `test_config_defaults` | method | `tests/test_agent_output.py:50` | `def test_config_defaults(self)` |
-| `test_config_immutable` | method | `tests/test_agent_output.py:56` | `def test_config_immutable(self)` |
-| `test_cycle_loop_closed` | method | `tests/test_agent_output.py:230` | `def test_cycle_loop_closed(self)` |
-| `test_cycles_section` | method | `tests/test_agent_output.py:207` | `def test_cycles_section(self)` |
-| `test_empty_findings` | method | `tests/test_agent_output.py:144` | `def test_empty_findings(self)` |
-| `test_empty_gotchas` | method | `tests/test_agent_output.py:224` | `def test_empty_gotchas(self)` |
-| `test_external_imports` | method | `tests/test_agent_output.py:258` | `def test_external_imports(self)` |
-| `test_findings_grouped_by_severity` | method | `tests/test_agent_output.py:150` | `def test_findings_grouped_by_severity(self)` |
-| `test_findings_include_fix_hint_and_scope` | method | `tests/test_agent_output.py:166` | `def test_findings_include_fix_hint_and_scope(self)` |
-| `test_flat_project_single_file` | method | `tests/test_agent_output.py:80` | `def test_flat_project_single_file(self)` |
-| `test_functions_listed` | method | `tests/test_agent_output.py:269` | `def test_functions_listed(self)` |
-| `test_generate_creates_all_files` | method | `tests/test_agent_output.py:363` | `def test_generate_creates_all_files(self)` |
-| `test_god_nodes_section` | method | `tests/test_agent_output.py:191` | `def test_god_nodes_section(self)` |
-| `test_index_lists_all_files` | method | `tests/test_agent_output.py:118` | `def test_index_lists_all_files(self)` |
+| `GitHubClient` | class | `readmenator_orchestrator.py:83` | `class GitHubClient` |
+| `Orchestrator` | class | `readmenator_orchestrator.py:366` | `class Orchestrator` |
+| `RepositoryProcessor` | class | `readmenator_orchestrator.py:197` | `class RepositoryProcessor` |
+| `TestOrchestrator` | class | `readmenator_orchestrator.py:421` | `class TestOrchestrator(TestCase)` |
+| `__init__` | method | `readmenator_orchestrator.py:84` | `def __init__(self, config)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

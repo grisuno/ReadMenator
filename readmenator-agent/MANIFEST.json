@@ -1,28 +1,30 @@
 {
   "tool": "readmenator",
   "schema_version": 2,
-  "generated_at": "2026-10-07T15:27:37Z",
+  "generated_at": "2026-10-08T04:29:26Z",
   "project_root": ".",
   "project_name": "ReadMenator",
-  "git_commit": "4a9a8db313b0eadd22ef8349b9096cdcbb38ddca",
+  "git_commit": "1e0fd0b09c71d3b2bb14bc7fa7336096e4ba1a13",
   "git_branch": "main",
-  "source_fingerprint": "fbf08c161e4df5370044c5cd95be7c43fcebfe29cf8d54f7cc343c4c7c478135",
+  "source_fingerprint": "37f67097dc03d1c4187f9ab7d9b8f0ea46e0a23859f2c1a1c8b85fb20c966039",
   "freshness_check": "readmenator . fresh  # exit 0 = docs match sources, exit 1 = run: readmenator . --rebuild",
-  "files": 107,
-  "symbols": 1909,
-  "imports": 814,
-  "calls": 11848,
-  "inherits": 134,
-  "resolved_imports": 364,
+  "files": 117,
+  "symbols": 2107,
+  "imports": 905,
+  "calls": 15094,
+  "inherits": 146,
+  "resolved_imports": 406,
   "security_findings": 0,
   "languages": {
-    "py": 107
+    "js": 1,
+    "py": 116
   },
   "subsystems": {
+    "misc": 1,
     "parsers": 21,
-    "readmenator": 44,
+    "readmenator": 52,
     "root": 2,
-    "tests": 40
+    "tests": 41
   },
   "entrypoints": [
     "readmenator/__main__.py"
@@ -43,28 +45,38 @@
   "documents": [
     {
       "path": "API.md",
-      "lines": 485,
-      "approx_tokens": 14052
+      "lines": 497,
+      "approx_tokens": 14542
+    },
+    {
+      "path": "API_p2.md",
+      "lines": 125,
+      "approx_tokens": 4072
     },
     {
       "path": "ARCHITECTURE.md",
-      "lines": 444,
-      "approx_tokens": 6722
+      "lines": 492,
+      "approx_tokens": 7502
     },
     {
       "path": "CONCEPTS.md",
       "lines": 120,
-      "approx_tokens": 5182
+      "approx_tokens": 5177
     },
     {
       "path": "GOTCHAS.md",
-      "lines": 42,
-      "approx_tokens": 568
+      "lines": 41,
+      "approx_tokens": 554
     },
     {
       "path": "INDEX.md",
-      "lines": 111,
-      "approx_tokens": 3035
+      "lines": 121,
+      "approx_tokens": 3354
+    },
+    {
+      "path": "KB_misc.md",
+      "lines": 42,
+      "approx_tokens": 281
     },
     {
       "path": "KB_parsers.md",
@@ -73,23 +85,23 @@
     },
     {
       "path": "KB_readmenator.md",
-      "lines": 492,
-      "approx_tokens": 9157
+      "lines": 489,
+      "approx_tokens": 9391
     },
     {
       "path": "KB_readmenator_p2.md",
-      "lines": 498,
-      "approx_tokens": 8141
+      "lines": 497,
+      "approx_tokens": 8162
     },
     {
       "path": "KB_readmenator_p3.md",
-      "lines": 146,
-      "approx_tokens": 2582
+      "lines": 333,
+      "approx_tokens": 5423
     },
     {
       "path": "KB_root.md",
-      "lines": 46,
-      "approx_tokens": 674
+      "lines": 50,
+      "approx_tokens": 786
     },
     {
       "path": "KB_tests.md",
@@ -98,13 +110,13 @@
     },
     {
       "path": "KB_tests_p2.md",
-      "lines": 482,
-      "approx_tokens": 9559
+      "lines": 496,
+      "approx_tokens": 10010
     },
     {
       "path": "KB_tests_p3.md",
-      "lines": 355,
-      "approx_tokens": 7240
+      "lines": 388,
+      "approx_tokens": 7870
     },
     {
       "path": "SECURITY.md",
@@ -114,22 +126,27 @@
     {
       "path": "SYMBOLS.md",
       "lines": 500,
-      "approx_tokens": 12835
+      "approx_tokens": 13112
     },
     {
       "path": "SYMBOLS_p2.md",
       "lines": 500,
-      "approx_tokens": 13494
+      "approx_tokens": 11936
     },
     {
       "path": "SYMBOLS_p3.md",
       "lines": 500,
-      "approx_tokens": 14905
+      "approx_tokens": 15637
     },
     {
       "path": "SYMBOLS_p4.md",
-      "lines": 436,
-      "approx_tokens": 12566
+      "lines": 500,
+      "approx_tokens": 14223
+    },
+    {
+      "path": "SYMBOLS_p5.md",
+      "lines": 141,
+      "approx_tokens": 3971
     },
     {
       "path": "recipes/add-function.md",
@@ -154,7 +171,7 @@
     {
       "path": "recipes/reduce-complexity.md",
       "lines": 9,
-      "approx_tokens": 78
+      "approx_tokens": 86
     }
   ],
   "regenerate": "readmenator . --rebuild"

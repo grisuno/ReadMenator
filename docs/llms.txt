@@ -1,19 +1,19 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 5 communities, 107 files, 814 imports, 1 languages, 1909 symbols.
+> Static analysis knowledge base for ReadMenator: 5 communities, 117 files, 905 imports, 2 languages, 2107 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
-- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 5 layers, dominant utility (58 files) across 6 import-based communities....
-- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-07 | offline, deterministic
-- [readmenator-wiki/community_0_readmenator_security.md](md/readmenator-wiki/community_0_readmenator_security.md): Community 0 | 29 files | cohesion 0.34
-- [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 26 files | cohesion 0.56
-- [readmenator-wiki/community_2_readmenator_pipeline.md](md/readmenator-wiki/community_2_readmenator_pipeline.md): Community 2 | 19 files | cohesion 0.39
-- [readmenator-wiki/community_3_readmenator_diagrams.md](md/readmenator-wiki/community_3_readmenator_diagrams.md): Community 3 | 18 files | cohesion 0.35
-- [readmenator-wiki/community_4_readmenator_agent_output.md](md/readmenator-wiki/community_4_readmenator_agent_output.md): Community 4 | 13 files | cohesion 0.34
-- [readmenator-wiki/community_5_orphans.md](md/readmenator-wiki/community_5_orphans.md): Community 5 | 2 files | cohesion 0.00
+- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 5 layers, dominant utility (67 files) across 6 import-based communities....
+- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-08 | offline, deterministic
+- [readmenator-wiki/community_0_readmenator_pipeline.md](md/readmenator-wiki/community_0_readmenator_pipeline.md): Community 0 | 37 files | cohesion 0.45
+- [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 28 files | cohesion 0.55
+- [readmenator-wiki/community_2_readmenator_diagrams.md](md/readmenator-wiki/community_2_readmenator_diagrams.md): Community 2 | 27 files | cohesion 0.44
+- [readmenator-wiki/community_3_readmenator_agent_output.md](md/readmenator-wiki/community_3_readmenator_agent_output.md): Community 3 | 17 files | cohesion 0.36
+- [readmenator-wiki/community_4_readmenator_agent_injector.md](md/readmenator-wiki/community_4_readmenator_agent_injector.md): Community 4 | 5 files | cohesion 0.40
+- [readmenator-wiki/community_5_orphans.md](md/readmenator-wiki/community_5_orphans.md): Community 5 | 3 files | cohesion 0.00
 - [readmenator-wiki/concepts.md](md/readmenator-wiki/concepts.md): Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
 - [readmenator-wiki/queries.md](md/readmenator-wiki/queries.md): Log each answered question here so the wiki compounds. Format: question, answer, cited files.
 
@@ -22,26 +22,29 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/INDEX.md](md/readmenator-agent/INDEX.md)
 - [readmenator-agent/GOTCHAS.md](md/readmenator-agent/GOTCHAS.md): These files have the most connections. Changes here have high blast radius.
 - [readmenator-agent/API.md](md/readmenator-agent/API.md): Depends on: readmenator/app.py, readmenator/config.py, readmenator/mcpserver.py
+- [readmenator-agent/API_p2.md](md/readmenator-agent/API_p2.md): Depends on: readmenator/config.py, readmenator/models.py
 - [readmenator-agent/ARCHITECTURE.md](md/readmenator-agent/ARCHITECTURE.md): readmenator.py -> readmenator/main.py
 - [readmenator-agent/CONCEPTS.md](md/readmenator-agent/CONCEPTS.md): Nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
+- [readmenator-agent/KB_misc.md](md/readmenator-agent/KB_misc.md): Doc: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
 - [readmenator-agent/KB_parsers.md](md/readmenator-agent/KB_parsers.md): Doc: Parser factory: maps file extensions to per-language LanguageParser classes.
 - [readmenator-agent/KB_readmenator.md](md/readmenator-agent/KB_readmenator.md): Doc: ReadMenator -- Zero-token polyglot codebase knowledge graph generator.
-- [readmenator-agent/KB_readmenator_p2.md](md/readmenator-agent/KB_readmenator_p2.md): Doc: GitHub wiki publisher: mirrors generated knowledge into the repository wiki.
-- [readmenator-agent/KB_readmenator_p3.md](md/readmenator-agent/KB_readmenator_p3.md): Doc: UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator.
+- [readmenator-agent/KB_readmenator_p2.md](md/readmenator-agent/KB_readmenator_p2.md): Doc: Optional semantic embeddings for the readmenator knowledge graph.
+- [readmenator-agent/KB_readmenator_p3.md](md/readmenator-agent/KB_readmenator_p3.md): Doc: Monolithic file refactoring planner for the readmenator knowledge graph.
 - [readmenator-agent/KB_root.md](md/readmenator-agent/KB_root.md): Doc: Launcher shim that runs the readmenator CLI from a source checkout.
 - [readmenator-agent/KB_tests.md](md/readmenator-agent/KB_tests.md): Doc: Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 - [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
-- [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for the MonolithRefactorizer.
+- [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for README injection into documented projects.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)
 - [readmenator-agent/SYMBOLS_p3.md](md/readmenator-agent/SYMBOLS_p3.md)
 - [readmenator-agent/SYMBOLS_p4.md](md/readmenator-agent/SYMBOLS_p4.md)
+- [readmenator-agent/SYMBOLS_p5.md](md/readmenator-agent/SYMBOLS_p5.md)
 - [readmenator-agent/recipes/add-function.md](md/readmenator-agent/recipes/add-function.md): Find the target file by purpose: grep -in '<topic>' readmenator-agent/INDEX.md
-- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (83 dependents)
+- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (89 dependents)
 - [readmenator-agent/recipes/fix-cycle.md](md/readmenator-agent/recipes/fix-cycle.md): Read cycles: grep -A5 'Dependency Cycles' readmenator-agent/GOTCHAS.md
 - [readmenator-agent/recipes/fix-security.md](md/readmenator-agent/recipes/fix-security.md): Read findings: grep -n '<file>' readmenator-agent/SECURITY.md
-- [readmenator-agent/recipes/reduce-complexity.md](md/readmenator-agent/recipes/reduce-complexity.md): Target hotspot: readmenator/models.py
+- [readmenator-agent/recipes/reduce-complexity.md](md/readmenator-agent/recipes/reduce-complexity.md): Target hotspot: readmenator/vendor/force-graph.min.js
 
 ## Project Docs
 

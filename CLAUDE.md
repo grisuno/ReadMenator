@@ -49,6 +49,15 @@ readmenator/
   _app.py           - Application orchestrator (thin facade over AnalyzerFactory)
   _mcp_server.py    - MCP stdio server exposing tools + resources for AI agent queries
   _concepts.py      - Semantic ConceptGraph: nouns as nodes, verbs as edges, atomic zero-token extraction
+  _forcegraph.py    - CAIRN-style heterogeneous force-graph payload + 2D/3D explorer HTML (hulls, log2 sizing)
+  _analytics.py     - Corpus analytics aggregations (funnel, distributions, hotspots, scatter)
+  _scantext.py      - Synthesized scan-text blobs (names, symbols, imports, snippets) for rules/embeddings
+  _yaralite.py      - Zero-dep tiered T1/T2/T3 YARA-lite parser + runner (no native dependency)
+  _provenance.py    - Evidence-provenance audit (static vs inferred-only findings)
+  _exclusions.py    - FP exclusion blocklist loader (glob + rule_id scoping)
+  _explorer.py      - Stdlib HTTP explorer server (/api/graph, /api/analytics, /api/samples)
+  _embed.py         - Optional semantic embeddings with offline Jaccard fallback
+  _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
@@ -85,6 +94,7 @@ tests/
   test_agent_friendliness.py - Agent output budgets, purposes, MANIFEST freshness, noise reduction, llms.txt
   test_gh_wiki.py - GitHub wiki publisher contract tests (faked git/gh runner, no network)
   test_concepts.py - Semantic ConceptGraph contract tests (nouns, verbs, atomic, deterministic, dialectic)
+  test_interactive_graph.py - Interactive explorer contract tests (forcegraph, scantext, yaralite, provenance, exclusions, analytics, explorer, embed, rebuild wiring)
 ```
 
 ## Contracts
@@ -133,6 +143,14 @@ tests/
 - Generated artifact settings (GENERATED_FILE_PREFIXES, SKIP_GENERATED_OUTPUTS, REFACTORIZER_SCRIPT_PREFIX)
 - Site agent settings (SITE_LLMS_TXT_ENABLED, SITE_LLMS_TXT_FILENAME, SITE_REFRESH_ON_REBUILD)
 - GitHub wiki settings (GH_WIKI_ENABLED default True, GH_WIKI_REMOTE, GH_WIKI_GIT_REMOTE_NAME, GH_WIKI_HOME_PAGE, GH_WIKI_KB_PAGE, GH_WIKI_AGENT_PREFIX, GH_WIKI_RECIPE_PREFIX, GH_WIKI_INCLUDE_KB, GH_WIKI_PERMALINKS, GH_WIKI_STATE_FILE, GH_WIKI_DRY_RUN_DIR, GH_WIKI_TIMEOUT_S, GH_WIKI_COMMIT_MESSAGE)
+- Force-graph settings (FORCEGRAPH_ENABLED, FORCEGRAPH_MODE, FORCEGRAPH_OUTPUT, FORCEGRAPH_CDN_JS_2D/3D, FORCEGRAPH_BG, FORCEGRAPH_CHARGE, FORCEGRAPH_LINK_DISTANCE/STRENGTH, FORCEGRAPH_NODE_REL_SIZE, FORCEGRAPH_HULLS_ENABLED/FILL/STROKE/PAD, FORCEGRAPH_PARTICLES_ON_HIGHLIGHT, FORCEGRAPH_DIM_NODE/LINK, FORCEGRAPH_NODE_COLORS, FORCEGRAPH_EDGE_COLORS, FORCEGRAPH_FAMILY_SAT/LIGHT_BASE/SPAN)
+- Analytics settings (ANALYTICS_ENABLED)
+- Scan-text settings (SCANTEXT_ENABLED, SCANTEXT_MAX_SYMBOLS/IMPORTS, SCANTEXT_SNIPPET_CHARS)
+- YARA-lite settings (YARALITE_ENABLED, YARALITE_RULES_FILE, YARALITE_MAX_HITS_PER_ID)
+- Provenance settings (PROVENANCE_ENABLED)
+- Exclusion settings (EXCLUSIONS_ENABLED, EXCLUSIONS_FILE)
+- Explorer settings (EXPLORER_ENABLED, EXPLORER_HOST, EXPLORER_PORT)
+- Embedding settings (EMBED_ENABLED, EMBED_MODEL, EMBED_MIN_CLUSTER_SIZE, EMBED_MAX_NEIGHBORS)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -357,10 +375,21 @@ tests/
 - `notifications/initialized` acknowledged silently (no response)
 - Unknown methods return standard JSON-RPC error codes
 - Uninitialized requests return error code -32000
-- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json, concepts
-- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts
+- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json, concepts, analytics, near, provenance, forcegraph
+- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts, readmenator://forcegraph, readmenator://analytics
 - Integrated with readmenatorApplication for all query/analysis operations
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
+
+### Interactive Explorer Modules Contract
+- ScanTextBuilder (readmenator/_scantext.py): build_for_node/build_corpus flatten names, symbols, signatures, imports, content snippets into labelled blobs; respects PRIVACY_MODE and SCANTEXT_* budgets; CLI `scan-text`
+- YaraLiteEngine (readmenator/_yaralite.py): zero-dep T1/T2/T3 parser + runner (rule headers, meta, strings with nocase, conditions with N-of groups, any-of-them, $identifiers via restricted eval); validate_yaralite_rules reports tier counts; default rules in readmenator-rules/yara_rules.yar; CLI `validate-rules`
+- ProvenanceAuditor (readmenator/_provenance.py): classifies findings as static (snippet present in content) vs inferred_only with corpus frequency and reading guidance; CLI `provenance`
+- ExclusionList (readmenator/_exclusions.py): glob blocklist from readmenator-rules/exclusions.yaml with rule_id scoping; applied in audit_provenance before auditing
+- ForceGraphRenderer (readmenator/_forcegraph.py): heterogeneous payload (file/community/layer/external nodes; member_of/layered_as/imports/resolved_imports/calls/inherits edges) with djb2 stable family colors, log2 node sizing, per-relation edge colors, symbol-scope normalization (calls edges collapsed to files, intra-file calls dropped); render()/write() emit the gallery-styled 2D/3D explorer HTML with vendored engine (readmenator/_vendor, copied to maps/vendor/), hull overlays, dimming, particles, pills, search, theme toggle, PNG/JSON export; CLI `forcegraph`; GraphExporter.to_forcegraph delegates to it; output lives in DIAGRAM_OUTPUT_DIR and is card-linked from the maps gallery index
+- AnalyticsBuilder (readmenator/_analytics.py): attribution funnel, layer/language distributions, community cohesion, hotspot ranking, rule yield, size bands, file scatter; KB Corpus Analytics section; CLI `analytics`
+- ExplorerServer (readmenator/_explorer.py): stdlib HTTPServer with /api/graph, /api/analytics, /api/samples, /vendor/force-graph.min.js plus static write_static(); CLI `explorer` (add --no-browser to skip auto-open)
+- Embedder (readmenator/_embed.py): optional sentence-transformers encode with offline Jaccard near_jaccard/cluster_jaccard/project_jaccard fallback; CLI `near <file|text>`
+- AnalyzerFactory exposes forcegraph, analytics, scantext, provenance, exclusions, embedder (lazy init); app.export_forcegraph/explorer_state/serve_explorer/analytics/scan_texts/near/audit_provenance/validate_yaralite; run()/rebuild() write readmenator-maps/graph-force.html via _maybe_export_forcegraph (skipped when FORCEGRAPH_ENABLED=False); export_diagrams() writes it first and links it from the gallery index; export() also writes it
 
 ### Semantic ConceptGraph Contract
 - ConceptExtractor class with extract(nodes, edges, resolved_edges) entry point (readmenator/_concepts.py)

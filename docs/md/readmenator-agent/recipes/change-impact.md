@@ -1,6 +1,6 @@
 # Recipe: Change a File Safely
 
-Riskiest file: `readmenator/_category.py` (83 dependents)
+Riskiest file: `readmenator/_category.py` (89 dependents)
 
 1. Who depends on it: `grep -n -- '-> `<file>`' readmenator-agent/ARCHITECTURE*.md`
 2. Its public surface: `grep -n '`<file>:' readmenator-agent/API*.md`

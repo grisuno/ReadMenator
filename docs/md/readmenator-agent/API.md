@@ -1,10 +1,11 @@
-# API
+# API (page 1 of 2)
+Pages: [API.md](API.md), [API_p2.md](API_p2.md)
 
 ## readmenator/__main__.py
 Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 Imported by: `readmenator.py`
 - `build_parser` (function) `readmenator/__main__.py:18` `def build_parser()`
-- `main` (function) `readmenator/__main__.py:134` `def main()`
+- `main` (function) `readmenator/__main__.py:141` `def main()`
 
 ## readmenator/_agent_injector.py
 Imported by: `readmenator/_pipeline.py`, `tests/test_agent_injector.py`, `tests/test_agent_output.py`
@@ -21,6 +22,12 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `te
 - `AgentOutputGenerator.generate` (method) `readmenator/_agent_output.py:81` `def generate(self, nodes, edges, resolved_edges, analysis, analysis_v2, findings, layers, project_root)` -- Write all agent output files and return the output directory path.
 - `AgentOutputGenerator.keep` (method) `readmenator/_agent_output.py:523` `def keep(file_id)` -- Return whether a file belongs in the gotcha lists.
 
+## readmenator/_analytics.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `AnalyticsBuilder.__init__` (method) `readmenator/_analytics.py:28` `def __init__(self, config)` -- Initialise with application configuration.
+- `AnalyticsBuilder.build` (method) `readmenator/_analytics.py:36` `def build(self, nodes, edges, resolved_edges, analysis, findings, layers, v2, hotspots)` -- Build the full analytics payload.
+
 ## readmenator/_analyzer.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_agent_friendliness.py`, `tests/test_analyzer.py`
@@ -29,45 +36,53 @@ Imported by: `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_age
 - `GraphAnalyzer.analyze` (method) `readmenator/_analyzer.py:62` `def analyze(self, nodes, edges, resolved_edges)` -- Run the full analysis pipeline and return structured results.
 
 ## readmenator/_app.py
-Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`
-Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
-- `readmenatorApplication.__init__` (method) `readmenator/_app.py:45` `def __init__(self, config)`
-- `readmenatorApplication.run` (method) `readmenator/_app.py:91` `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
-- `readmenatorApplication.check_freshness` (method) `readmenator/_app.py:215` `def check_freshness(self, target_dir)` -- Compare the MANIFEST source fingerprint against the current sources.
-- `readmenatorApplication.publish_github_wiki` (method) `readmenator/_app.py:278` `def publish_github_wiki(self, target_dir, dry_run)` -- Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
-- `readmenatorApplication.generate_uml_code` (method) `readmenator/_app.py:334` `def generate_uml_code(self, target_dir, language, output_path)`
-- `readmenatorApplication.update` (method) `readmenator/_app.py:401` `def update(self, target_dir, run_security)`
-- `readmenatorApplication.query` (method) `readmenator/_app.py:524` `def query(self, target_dir, question)`
-- `readmenatorApplication.explain` (method) `readmenator/_app.py:529` `def explain(self, target_dir, symbol_name)`
-- `readmenatorApplication.find_path` (method) `readmenator/_app.py:541` `def find_path(self, target_dir, symbol_a, symbol_b)`
-- `readmenatorApplication.summary` (method) `readmenator/_app.py:554` `def summary(self, target_dir)`
-- `readmenatorApplication.rank_query` (method) `readmenator/_app.py:559` `def rank_query(self, target_dir, query, top_n)` -- Run a ranked query against the knowledge graph.
-- `readmenatorApplication.rebuild` (method) `readmenator/_app.py:589` `def rebuild(self, target_dir, run_security)`
-- `readmenatorApplication.analyze` (method) `readmenator/_app.py:592` `def analyze(self, target_dir)`
-- `readmenatorApplication.export_json` (method) `readmenator/_app.py:596` `def export_json(self, target_dir, output_path)`
-- `readmenatorApplication.export_html` (method) `readmenator/_app.py:613` `def export_html(self, target_dir, output_path)`
-- `readmenatorApplication.export_svg` (method) `readmenator/_app.py:624` `def export_svg(self, target_dir, output_path)`
-- `readmenatorApplication.export` (method) `readmenator/_app.py:635` `def export(self, target_dir)`
-- `readmenatorApplication.export_graphml` (method) `readmenator/_app.py:640` `def export_graphml(self, target_dir, output_path)`
-- `readmenatorApplication.export_cypher` (method) `readmenator/_app.py:651` `def export_cypher(self, target_dir, output_path)`
-- `readmenatorApplication.export_obsidian` (method) `readmenator/_app.py:667` `def export_obsidian(self, target_dir, output_dir)`
-- `readmenatorApplication.export_wiki` (method) `readmenator/_app.py:682` `def export_wiki(self, target_dir, output_dir)` -- Generate the navigable agent wiki for the target project.
-- `readmenatorApplication.lint_wiki` (method) `readmenator/_app.py:705` `def lint_wiki(self, target_dir)` -- Check wiki health and log reported issues.
-- `readmenatorApplication.export_diagrams` (method) `readmenator/_app.py:723` `def export_diagrams(self, target_dir, output_dir, full)` -- Export all five interactive system maps plus a gallery index.
-- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:784` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
-- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:823` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
-- `readmenatorApplication.export_video` (method) `readmenator/_app.py:858` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
-- `readmenatorApplication.watch` (method) `readmenator/_app.py:922` `def watch(self, target_dir)`
-- `readmenatorApplication.on_change` (method) `readmenator/_app.py:926` `def on_change()`
-- `readmenatorApplication.audit` (method) `readmenator/_app.py:932` `def audit(self, target_dir)`
-- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:939` `def audit_deep(self, target_dir)`
-- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:959` `def export_sarif(self, target_dir, output_path)`
-- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:969` `def export_rules(self, target_dir, output_dir)`
-- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:979` `def detect_layers(self, target_dir)`
-- `readmenatorApplication.lint` (method) `readmenator/_app.py:989` `def lint(self, target_dir)`
-- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:1002` `def strip_dead_code(self, target_dir)`
-- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:1012` `def generate_cursorrules(self, target_dir)`
-- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:1027` `def refactor_monolith(self, target_dir)`
+Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_yaralite.py`
+Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
+- `readmenatorApplication.__init__` (method) `readmenator/_app.py:48` `def __init__(self, config)`
+- `readmenatorApplication.run` (method) `readmenator/_app.py:94` `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
+- `readmenatorApplication.check_freshness` (method) `readmenator/_app.py:222` `def check_freshness(self, target_dir)` -- Compare the MANIFEST source fingerprint against the current sources.
+- `readmenatorApplication.publish_github_wiki` (method) `readmenator/_app.py:285` `def publish_github_wiki(self, target_dir, dry_run)` -- Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
+- `readmenatorApplication.generate_uml_code` (method) `readmenator/_app.py:341` `def generate_uml_code(self, target_dir, language, output_path)`
+- `readmenatorApplication.update` (method) `readmenator/_app.py:408` `def update(self, target_dir, run_security)`
+- `readmenatorApplication.query` (method) `readmenator/_app.py:531` `def query(self, target_dir, question)`
+- `readmenatorApplication.explain` (method) `readmenator/_app.py:536` `def explain(self, target_dir, symbol_name)`
+- `readmenatorApplication.find_path` (method) `readmenator/_app.py:548` `def find_path(self, target_dir, symbol_a, symbol_b)`
+- `readmenatorApplication.summary` (method) `readmenator/_app.py:561` `def summary(self, target_dir)`
+- `readmenatorApplication.rank_query` (method) `readmenator/_app.py:566` `def rank_query(self, target_dir, query, top_n)` -- Run a ranked query against the knowledge graph.
+- `readmenatorApplication.rebuild` (method) `readmenator/_app.py:596` `def rebuild(self, target_dir, run_security)`
+- `readmenatorApplication.analyze` (method) `readmenator/_app.py:599` `def analyze(self, target_dir)`
+- `readmenatorApplication.export_json` (method) `readmenator/_app.py:603` `def export_json(self, target_dir, output_path)`
+- `readmenatorApplication.export_html` (method) `readmenator/_app.py:620` `def export_html(self, target_dir, output_path)`
+- `readmenatorApplication.export_svg` (method) `readmenator/_app.py:631` `def export_svg(self, target_dir, output_path)`
+- `readmenatorApplication.export` (method) `readmenator/_app.py:642` `def export(self, target_dir)`
+- `readmenatorApplication.export_forcegraph` (method) `readmenator/_app.py:698` `def export_forcegraph(self, target_dir, output_path)` -- Export the force-graph explorer HTML document.
+- `readmenatorApplication.explorer_state` (method) `readmenator/_app.py:717` `def explorer_state(self, target_dir)` -- Build explorer state for the local HTTP server.
+- `readmenatorApplication.serve_explorer` (method) `readmenator/_app.py:733` `def serve_explorer(self, target_dir, open_browser)` -- Serve the local explorer UI until interrupted.
+- `readmenatorApplication.analytics` (method) `readmenator/_app.py:746` `def analytics(self, target_dir)` -- Compute the corpus analytics payload.
+- `readmenatorApplication.scan_texts` (method) `readmenator/_app.py:763` `def scan_texts(self, target_dir)` -- Build scan-text blobs for every file in the project.
+- `readmenatorApplication.near` (method) `readmenator/_app.py:775` `def near(self, target_dir, query, top_k)` -- Find semantically similar files for a query file or text.
+- `readmenatorApplication.audit_provenance` (method) `readmenator/_app.py:789` `def audit_provenance(self, target_dir)` -- Audit security findings by evidence provenance.
+- `readmenatorApplication.validate_yaralite` (method) `readmenator/_app.py:813` `def validate_yaralite(self, target_dir)` -- Validate the project YARA-lite rules file.
+- `readmenatorApplication.export_graphml` (method) `readmenator/_app.py:827` `def export_graphml(self, target_dir, output_path)`
+- `readmenatorApplication.export_cypher` (method) `readmenator/_app.py:838` `def export_cypher(self, target_dir, output_path)`
+- `readmenatorApplication.export_obsidian` (method) `readmenator/_app.py:854` `def export_obsidian(self, target_dir, output_dir)`
+- `readmenatorApplication.export_wiki` (method) `readmenator/_app.py:869` `def export_wiki(self, target_dir, output_dir)` -- Generate the navigable agent wiki for the target project.
+- `readmenatorApplication.lint_wiki` (method) `readmenator/_app.py:892` `def lint_wiki(self, target_dir)` -- Check wiki health and log reported issues.
+- `readmenatorApplication.export_diagrams` (method) `readmenator/_app.py:910` `def export_diagrams(self, target_dir, output_dir, full)` -- Export all five interactive system maps plus a gallery index.
+- `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:985` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
+- `readmenatorApplication.export_pages` (method) `readmenator/_app.py:1024` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
+- `readmenatorApplication.export_video` (method) `readmenator/_app.py:1059` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
+- `readmenatorApplication.watch` (method) `readmenator/_app.py:1153` `def watch(self, target_dir)`
+- `readmenatorApplication.on_change` (method) `readmenator/_app.py:1157` `def on_change()`
+- `readmenatorApplication.audit` (method) `readmenator/_app.py:1163` `def audit(self, target_dir)`
+- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:1170` `def audit_deep(self, target_dir)`
+- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:1190` `def export_sarif(self, target_dir, output_path)`
+- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:1200` `def export_rules(self, target_dir, output_dir)`
+- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:1210` `def detect_layers(self, target_dir)`
+- `readmenatorApplication.lint` (method) `readmenator/_app.py:1220` `def lint(self, target_dir)`
+- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:1233` `def strip_dead_code(self, target_dir)`
+- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:1243` `def generate_cursorrules(self, target_dir)`
+- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:1258` `def refactor_monolith(self, target_dir)`
 
 ## readmenator/_cache.py
 Depends on: `readmenator/_config.py`
@@ -139,7 +154,7 @@ Imported by: `readmenator/_app.py`, `tests/test_dead_code.py`
 
 ## readmenator/_diagrams.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`
+Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_interactive_graph.py`
 - `SystemMapValidator.__init__` (method) `readmenator/_diagrams.py:214` `def __init__(self, config)` -- Initialise the validator with application configuration.
 - `SystemMapValidator.validate` (method) `readmenator/_diagrams.py:243` `def validate(self, system_map)` -- Validate a system map and return a deterministic receipt.
 - `SystemMapBuilder.__init__` (method) `readmenator/_diagrams.py:464` `def __init__(self, config)` -- Initialise the builder with application configuration.
@@ -155,19 +170,42 @@ Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pip
 - `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2360` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
 - `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:3009` `def __init__(self, config)` -- Initialise the publisher with application configuration.
 - `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:3019` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
-- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:3033` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries)` -- Publish maps and a gallery index into a documentation directory.
-- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3123` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
-- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3149` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
-- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3318` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
-- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3366` `def order(entry)` -- Sort entry points first, then alphabetically.
-- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3394` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel)` -- Render the gallery index page for published maps.
-- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3585` `def doc_order(base)` -- Entry points first, then alphabetical.
+- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:3033` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)` -- Publish maps and a gallery index into a documentation directory.
+- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3127` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
+- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3153` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
+- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3322` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
+- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3370` `def order(entry)` -- Sort entry points first, then alphabetically.
+- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3398` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)` -- Render the gallery index page for published maps.
+- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3593` `def doc_order(base)` -- Entry points first, then alphabetical.
 
 ## readmenator/_documentation.py
-Depends on: `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
+Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_forcegraph.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
 Imported by: `readmenator/_pipeline.py`, `tests/test_documentation.py`
-- `DocumentationGenerator.__init__` (method) `readmenator/_documentation.py:45` `def __init__(self, config)`
-- `DocumentationGenerator.generate` (method) `readmenator/_documentation.py:91` `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked)`
+- `DocumentationGenerator.__init__` (method) `readmenator/_documentation.py:47` `def __init__(self, config)`
+- `DocumentationGenerator.generate` (method) `readmenator/_documentation.py:93` `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked)`
+
+## readmenator/_embed.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `Embedder.__init__` (method) `readmenator/_embed.py:42` `def __init__(self, config)` -- Initialise with application configuration.
+- `Embedder.dependencies_available` (method) `readmenator/_embed.py:50` `def dependencies_available(self)` -- Return True when sentence-transformers is importable.
+- `Embedder.encode` (method) `readmenator/_embed.py:58` `def encode(self, texts)` -- Encode texts into L2-normalized vectors when available.
+- `Embedder.near_jaccard` (method) `readmenator/_embed.py:75` `def near_jaccard(self, query, corpus, top_k)` -- Find nearest neighbors with offline Jaccard similarity.
+- `Embedder.cluster_jaccard` (method) `readmenator/_embed.py:99` `def cluster_jaccard(self, corpus, threshold)` -- Group files into similarity clusters with union-find.
+- `Embedder.find` (method) `readmenator/_embed.py:115` `def find(item)` -- Find the union-find root for an item.
+- `Embedder.union` (method) `readmenator/_embed.py:122` `def union(left, right)` -- Merge two union-find sets.
+- `Embedder.project_jaccard` (method) `readmenator/_embed.py:138` `def project_jaccard(self, corpus)` -- Project files to 2D with a deterministic radial layout.
+
+## readmenator/_exclusions.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `ExclusionEntry.matches` (method) `readmenator/_exclusions.py:27` `def matches(self, file_path, rule_id)` -- Return True when this entry suppresses the finding.
+- `ExclusionList.__init__` (method) `readmenator/_exclusions.py:47` `def __init__(self, config)` -- Initialise with application configuration.
+- `ExclusionList.entries` (method) `readmenator/_exclusions.py:58` `def entries(self)` -- Return the loaded exclusion entries.
+- `ExclusionList.load` (method) `readmenator/_exclusions.py:62` `def load(self, project_root)` -- Load exclusions from the project blocklist file.
+- `ExclusionList.is_excluded` (method) `readmenator/_exclusions.py:86` `def is_excluded(self, file_path, rule_id)` -- Return True when a finding is suppressed by the blocklist.
+- `ExclusionList.filter_findings` (method) `readmenator/_exclusions.py:98` `def filter_findings(self, findings)` -- Remove excluded findings from a finding list.
+- `ExclusionList.parse_exclusions` (method) `readmenator/_exclusions.py:114` `def parse_exclusions(text)` -- Parse the minimal exclusions YAML into entries.
 
 ## readmenator/_explain.py
 Depends on: `readmenator/_category.py`, `readmenator/_rank.py`
@@ -175,16 +213,46 @@ Imported by: `tests/test_ranking.py`
 - `explain_rank` (function) `readmenator/_explain.py:16` `def explain_rank(node_id, ranked, category)` -- Return a detailed breakdown of why *node_id* has its rank.
 - `rank_summary` (function) `readmenator/_explain.py:140` `def rank_summary(ranked, top_n)` -- Return a short summary of the top-N ranked results.
 
+## readmenator/_explorer.py
+Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`
+Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
+- `ExplorerState.__init__` (method) `readmenator/_explorer.py:26` `def __init__(self, config, nodes, edges, resolved_edges, analysis, findings, layers)` -- Initialise explorer state and precompute payloads.
+- `ExplorerState.samples` (method) `readmenator/_explorer.py:61` `def samples(self)` -- Return a compact per-file sample listing.
+- `_Handler.log_message` (method) `readmenator/_explorer.py:84` `def log_message(self, fmt)` -- Silence the default access log.
+- `_Handler.do_GET` (method) `readmenator/_explorer.py:88` `def do_GET(self)` -- Dispatch GET routes for HTML and JSON APIs.
+- `_Handler.find_free_port` (method) `readmenator/_explorer.py:139` `def find_free_port(preferred)` -- Find a free TCP port, preferring the configured value.
+- `_Handler.serve` (method) `readmenator/_explorer.py:158` `def serve(state, host, port, open_browser)` -- Serve the explorer state until interrupted.
+- `_Handler.build_state` (method) `readmenator/_explorer.py:191` `def build_state(config, nodes, edges, resolved_edges, analysis, findings, layers)` -- Build explorer state without starting the server.
+- `_Handler.write_static` (method) `readmenator/_explorer.py:217` `def write_static(state, output_dir, filename)` -- Write the explorer HTML to a static file.
+
 ## readmenator/_exporter.py
+Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_exporter.py`, `tests/test_interactive_graph.py`
+- `GraphExporter.__init__` (method) `readmenator/_exporter.py:36` `def __init__(self, config)` -- Initialise with application configuration.
+- `GraphExporter.to_json` (method) `readmenator/_exporter.py:44` `def to_json(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as a node-link JSON string.
+- `GraphExporter.to_html` (method) `readmenator/_exporter.py:183` `def to_html(self, nodes, edges, resolved_edges, analysis, findings)` -- Generate a standalone interactive HTML graph page.
+- `GraphExporter.to_svg` (method) `readmenator/_exporter.py:469` `def to_svg(self, nodes, edges, resolved_edges, analysis)` -- Generate a static SVG representation of the graph.
+- `GraphExporter.to_graphml` (method) `readmenator/_exporter.py:683` `def to_graphml(self, nodes, edges, resolved_edges, analysis)` -- Export the graph as GraphML (Gephi/yEd compatible).
+- `GraphExporter.to_cypher` (method) `readmenator/_exporter.py:760` `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as native Cypher CREATE statements.
+- `GraphExporter.to_obsidian` (method) `readmenator/_exporter.py:882` `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)` -- Export the graph as an Obsidian vault with wikilinks.
+- `GraphExporter.to_forcegraph` (method) `readmenator/_exporter.py:1007` `def to_forcegraph(self, nodes, edges, resolved_edges, analysis, layers, findings, analytics)` -- Generate the force-graph explorer HTML document.
+
+## readmenator/_forcegraph.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/_pipeline.py`, `tests/test_exporter.py`
-- `GraphExporter.__init__` (method) `readmenator/_exporter.py:35` `def __init__(self, config)` -- Initialise with application configuration.
-- `GraphExporter.to_json` (method) `readmenator/_exporter.py:43` `def to_json(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as a node-link JSON string.
-- `GraphExporter.to_html` (method) `readmenator/_exporter.py:182` `def to_html(self, nodes, edges, resolved_edges, analysis, findings)` -- Generate a standalone interactive HTML graph page.
-- `GraphExporter.to_svg` (method) `readmenator/_exporter.py:468` `def to_svg(self, nodes, edges, resolved_edges, analysis)` -- Generate a static SVG representation of the graph.
-- `GraphExporter.to_graphml` (method) `readmenator/_exporter.py:682` `def to_graphml(self, nodes, edges, resolved_edges, analysis)` -- Export the graph as GraphML (Gephi/yEd compatible).
-- `GraphExporter.to_cypher` (method) `readmenator/_exporter.py:759` `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as native Cypher CREATE statements.
-- `GraphExporter.to_obsidian` (method) `readmenator/_exporter.py:881` `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)` -- Export the graph as an Obsidian vault with wikilinks.
+Imported by: `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `family_color_from_name` (function) `readmenator/_forcegraph.py:24` `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)` -- Derive a stable, visually-distinct HSL color from a label.
+- `node_value` (function) `readmenator/_forcegraph.py:52` `def node_value(symbols, degree)` -- Scale a node value with log2 dampening.
+- `ForceGraphRenderer.__init__` (method) `readmenator/_forcegraph.py:68` `def __init__(self, config)` -- Initialise with application configuration.
+- `ForceGraphRenderer.node_palette` (method) `readmenator/_forcegraph.py:76` `def node_palette(self)` -- Return the node-type color palette from configuration.
+- `ForceGraphRenderer.edge_palette` (method) `readmenator/_forcegraph.py:80` `def edge_palette(self)` -- Return the edge-relation color palette from configuration.
+- `ForceGraphRenderer.vendor_source` (method) `readmenator/_forcegraph.py:84` `def vendor_source(self)` -- Return the path of the vendored 2D engine shipped in the package.
+- `ForceGraphRenderer.vendor_href` (method) `readmenator/_forcegraph.py:92` `def vendor_href(self)` -- Return the relative vendor script href used beside the page.
+- `ForceGraphRenderer.build_payload` (method) `readmenator/_forcegraph.py:97` `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings)` -- Build a heterogeneous graph payload for the explorer.
+- `ForceGraphRenderer.file_of` (method) `readmenator/_forcegraph.py:131` `def file_of(edge_id)` -- Map a symbol-scoped edge endpoint to its file identifier.
+- `ForceGraphRenderer.add_node` (method) `readmenator/_forcegraph.py:173` `def add_node(node_id, label, node_type)` -- Insert a node unless already present.
+- `ForceGraphRenderer.render` (method) `readmenator/_forcegraph.py:255` `def render(self, payload, analytics, title, home_href)` -- Render the standalone force-graph explorer HTML document.
+- `ForceGraphRenderer.write` (method) `readmenator/_forcegraph.py:315` `def write(self, output_path, payload, analytics, title)` -- Write the explorer HTML plus the vendored engine beside it.
+- `ForceGraphRenderer.copy_vendor` (method) `readmenator/_forcegraph.py:340` `def copy_vendor(self, dest_dir)` -- Copy the vendored 2D engine next to an exported page.
 
 ## readmenator/_gh_wiki.py
 Depends on: `readmenator/_config.py`, `readmenator/_gitmeta.py`
@@ -249,7 +317,7 @@ Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `tests/test_m
 - `MCPServer.register_resource` (method) `readmenator/_mcp_server.py:158` `def register_resource(self, resource)`
 - `MCPServer.dispatch` (method) `readmenator/_mcp_server.py:241` `def dispatch(self, req)`
 - `MCPServer.run` (method) `readmenator/_mcp_server.py:261` `def run(self)`
-- `MCPServer.main` (method) `readmenator/_mcp_server.py:864` `def main()` -- CLI entry point for `readmenator serve <path>`.
+- `MCPServer.main` (method) `readmenator/_mcp_server.py:990` `def main()` -- CLI entry point for `readmenator serve <path>`.
 
 ## readmenator/_mermaid.py
 Depends on: `readmenator/_models.py`
@@ -259,45 +327,51 @@ Imported by: `readmenator/_documentation.py`, `tests/test_mermaid.py`
 
 ## readmenator/_models.py
 Depends on: `readmenator/_category.py`
-Imported by: `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_mermaid.py`, `readmenator/_pipeline.py`, `readmenator/_projections.py`, `readmenator/_purpose.py`, `readmenator/_query.py`, `readmenator/_refactorizer.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_concepts.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_hotspots.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mermaid.py`, `tests/test_models.py`, `tests/test_parsers_property.py`, `tests/test_query.py`, `tests/test_ranking.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
+Imported by: `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_mermaid.py`, `readmenator/_pipeline.py`, `readmenator/_projections.py`, `readmenator/_provenance.py`, `readmenator/_purpose.py`, `readmenator/_query.py`, `readmenator/_refactorizer.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_concepts.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_hotspots.py`, `tests/test_interactive_graph.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mermaid.py`, `tests/test_models.py`, `tests/test_parsers_property.py`, `tests/test_query.py`, `tests/test_ranking.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
 - `SecurityFinding.pluralize_symbol_kind` (method) `readmenator/_models.py:101` `def pluralize_symbol_kind(kind, plural_map)` -- Return the plural form of *kind* according to *plural_map*.
 
 ## readmenator/_pipeline.py
-Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_exporter.py`, `readmenator/_gh_wiki.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`
+Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`
 Imported by: `readmenator/_app.py`
-- `AnalyzerFactory.__init__` (method) `readmenator/_pipeline.py:58` `def __init__(self, config)`
-- `AnalyzerFactory.scanner` (method) `readmenator/_pipeline.py:90` `def scanner(self)`
-- `AnalyzerFactory.generator` (method) `readmenator/_pipeline.py:96` `def generator(self)`
-- `AnalyzerFactory.analyzer` (method) `readmenator/_pipeline.py:102` `def analyzer(self)`
-- `AnalyzerFactory.security` (method) `readmenator/_pipeline.py:108` `def security(self)`
-- `AnalyzerFactory.exporter` (method) `readmenator/_pipeline.py:114` `def exporter(self)`
-- `AnalyzerFactory.taint` (method) `readmenator/_pipeline.py:120` `def taint(self)`
-- `AnalyzerFactory.dataflow` (method) `readmenator/_pipeline.py:126` `def dataflow(self)` -- Return the lazily initialised dataflow analyzer.
-- `AnalyzerFactory.hotspots` (method) `readmenator/_pipeline.py:133` `def hotspots(self)`
-- `AnalyzerFactory.layer_rules` (method) `readmenator/_pipeline.py:139` `def layer_rules(self)`
-- `AnalyzerFactory.rule_gen` (method) `readmenator/_pipeline.py:145` `def rule_gen(self)`
-- `AnalyzerFactory.sarif` (method) `readmenator/_pipeline.py:151` `def sarif(self)`
-- `AnalyzerFactory.cpg` (method) `readmenator/_pipeline.py:157` `def cpg(self)`
-- `AnalyzerFactory.layer_detector` (method) `readmenator/_pipeline.py:166` `def layer_detector(self)`
-- `AnalyzerFactory.uml` (method) `readmenator/_pipeline.py:172` `def uml(self)`
-- `AnalyzerFactory.wiki` (method) `readmenator/_pipeline.py:178` `def wiki(self)` -- Return the lazily initialised agent wiki generator.
-- `AnalyzerFactory.readme_injector` (method) `readmenator/_pipeline.py:185` `def readme_injector(self)`
-- `AnalyzerFactory.agent_injector` (method) `readmenator/_pipeline.py:195` `def agent_injector(self)`
-- `AnalyzerFactory.gh_wiki` (method) `readmenator/_pipeline.py:205` `def gh_wiki(self)` -- Return the lazily initialised GitHub wiki publisher.
-- `AnalyzerFactory.agent_output` (method) `readmenator/_pipeline.py:212` `def agent_output(self)`
-- `AnalyzerFactory.diagram_builder` (method) `readmenator/_pipeline.py:218` `def diagram_builder(self)` -- Return the lazily initialised system map builder.
-- `AnalyzerFactory.diagram_renderer` (method) `readmenator/_pipeline.py:225` `def diagram_renderer(self)` -- Return the lazily initialised interactive map renderer.
-- `AnalyzerFactory.diagram_validator` (method) `readmenator/_pipeline.py:232` `def diagram_validator(self)` -- Return the lazily initialised system map validator.
-- `AnalyzerFactory.diagram_publisher` (method) `readmenator/_pipeline.py:239` `def diagram_publisher(self)` -- Return the lazily initialised documentation site publisher.
-- `AnalyzerFactory.vis_renderer` (method) `readmenator/_pipeline.py:246` `def vis_renderer(self)` -- Return the lazily initialised vis.js network renderer.
-- `AnalyzerFactory.video` (method) `readmenator/_pipeline.py:253` `def video(self)` -- Return the lazily initialised cinematic video renderer.
-- `AnalyzerFactory.concepts` (method) `readmenator/_pipeline.py:260` `def concepts(self)` -- Return the lazily initialised semantic concept extractor.
-- `AnalyzerFactory.build_typed_graph` (method) `readmenator/_pipeline.py:266` `def build_typed_graph(self, nodes, edges, resolved_edges)`
-- `AnalyzerFactory.make_ranker` (method) `readmenator/_pipeline.py:276` `def make_ranker(self, typed_graph)` -- Create a CompositeRanker for the given typed graph.
-- `AnalyzerFactory.last_category` (method) `readmenator/_pipeline.py:293` `def last_category(self)`
-- `AnalyzerFactory.last_typed_graph` (method) `readmenator/_pipeline.py:297` `def last_typed_graph(self)`
-- `DeepAnalysisRunner.__init__` (method) `readmenator/_pipeline.py:310` `def __init__(self, factory)`
-- `DeepAnalysisRunner.run` (method) `readmenator/_pipeline.py:313` `def run(self, nodes, edges, resolved_edges, layers, content_map)`
+- `AnalyzerFactory.__init__` (method) `readmenator/_pipeline.py:64` `def __init__(self, config)`
+- `AnalyzerFactory.scanner` (method) `readmenator/_pipeline.py:102` `def scanner(self)`
+- `AnalyzerFactory.generator` (method) `readmenator/_pipeline.py:108` `def generator(self)`
+- `AnalyzerFactory.analyzer` (method) `readmenator/_pipeline.py:114` `def analyzer(self)`
+- `AnalyzerFactory.security` (method) `readmenator/_pipeline.py:120` `def security(self)`
+- `AnalyzerFactory.exporter` (method) `readmenator/_pipeline.py:126` `def exporter(self)`
+- `AnalyzerFactory.taint` (method) `readmenator/_pipeline.py:132` `def taint(self)`
+- `AnalyzerFactory.dataflow` (method) `readmenator/_pipeline.py:138` `def dataflow(self)` -- Return the lazily initialised dataflow analyzer.
+- `AnalyzerFactory.hotspots` (method) `readmenator/_pipeline.py:145` `def hotspots(self)`
+- `AnalyzerFactory.layer_rules` (method) `readmenator/_pipeline.py:151` `def layer_rules(self)`
+- `AnalyzerFactory.rule_gen` (method) `readmenator/_pipeline.py:157` `def rule_gen(self)`
+- `AnalyzerFactory.sarif` (method) `readmenator/_pipeline.py:163` `def sarif(self)`
+- `AnalyzerFactory.cpg` (method) `readmenator/_pipeline.py:169` `def cpg(self)`
+- `AnalyzerFactory.layer_detector` (method) `readmenator/_pipeline.py:178` `def layer_detector(self)`
+- `AnalyzerFactory.uml` (method) `readmenator/_pipeline.py:184` `def uml(self)`
+- `AnalyzerFactory.wiki` (method) `readmenator/_pipeline.py:190` `def wiki(self)` -- Return the lazily initialised agent wiki generator.
+- `AnalyzerFactory.readme_injector` (method) `readmenator/_pipeline.py:197` `def readme_injector(self)`
+- `AnalyzerFactory.agent_injector` (method) `readmenator/_pipeline.py:207` `def agent_injector(self)`
+- `AnalyzerFactory.gh_wiki` (method) `readmenator/_pipeline.py:217` `def gh_wiki(self)` -- Return the lazily initialised GitHub wiki publisher.
+- `AnalyzerFactory.agent_output` (method) `readmenator/_pipeline.py:224` `def agent_output(self)`
+- `AnalyzerFactory.diagram_builder` (method) `readmenator/_pipeline.py:230` `def diagram_builder(self)` -- Return the lazily initialised system map builder.
+- `AnalyzerFactory.diagram_renderer` (method) `readmenator/_pipeline.py:237` `def diagram_renderer(self)` -- Return the lazily initialised interactive map renderer.
+- `AnalyzerFactory.diagram_validator` (method) `readmenator/_pipeline.py:244` `def diagram_validator(self)` -- Return the lazily initialised system map validator.
+- `AnalyzerFactory.diagram_publisher` (method) `readmenator/_pipeline.py:251` `def diagram_publisher(self)` -- Return the lazily initialised documentation site publisher.
+- `AnalyzerFactory.vis_renderer` (method) `readmenator/_pipeline.py:258` `def vis_renderer(self)` -- Return the lazily initialised vis.js network renderer.
+- `AnalyzerFactory.video` (method) `readmenator/_pipeline.py:265` `def video(self)` -- Return the lazily initialised cinematic video renderer.
+- `AnalyzerFactory.concepts` (method) `readmenator/_pipeline.py:272` `def concepts(self)` -- Return the lazily initialised semantic concept extractor.
+- `AnalyzerFactory.forcegraph` (method) `readmenator/_pipeline.py:279` `def forcegraph(self)` -- Return the lazily initialised force-graph renderer.
+- `AnalyzerFactory.analytics` (method) `readmenator/_pipeline.py:286` `def analytics(self)` -- Return the lazily initialised corpus analytics builder.
+- `AnalyzerFactory.scantext` (method) `readmenator/_pipeline.py:293` `def scantext(self)` -- Return the lazily initialised scan-text builder.
+- `AnalyzerFactory.provenance` (method) `readmenator/_pipeline.py:300` `def provenance(self)` -- Return the lazily initialised provenance auditor.
+- `AnalyzerFactory.exclusions` (method) `readmenator/_pipeline.py:307` `def exclusions(self)` -- Return the lazily initialised FP exclusion list.
+- `AnalyzerFactory.embedder` (method) `readmenator/_pipeline.py:314` `def embedder(self)` -- Return the lazily initialised semantic embedder.
+- `AnalyzerFactory.build_typed_graph` (method) `readmenator/_pipeline.py:320` `def build_typed_graph(self, nodes, edges, resolved_edges)`
+- `AnalyzerFactory.make_ranker` (method) `readmenator/_pipeline.py:330` `def make_ranker(self, typed_graph)` -- Create a CompositeRanker for the given typed graph.
+- `AnalyzerFactory.last_category` (method) `readmenator/_pipeline.py:347` `def last_category(self)`
+- `AnalyzerFactory.last_typed_graph` (method) `readmenator/_pipeline.py:351` `def last_typed_graph(self)`
+- `DeepAnalysisRunner.__init__` (method) `readmenator/_pipeline.py:364` `def __init__(self, factory)`
+- `DeepAnalysisRunner.run` (method) `readmenator/_pipeline.py:367` `def run(self, nodes, edges, resolved_edges, layers, content_map)`
 
 ## readmenator/_projections.py
 Depends on: `readmenator/_category.py`, `readmenator/_models.py`
@@ -313,6 +387,15 @@ Imported by: `tests/test_ranking.py`
 - `RiskProjection.map_node` (method) `readmenator/_projections.py:80` `def map_node(self, node)`
 - `RiskProjection.map_morphism` (method) `readmenator/_projections.py:91` `def map_morphism(self, m)`
 - `RiskProjection.apply_view` (method) `readmenator/_projections.py:95` `def apply_view(category, view_config)` -- Apply a named view to produce a projected category.
+
+## readmenator/_provenance.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `ProvenanceFinding.is_inferred_only` (method) `readmenator/_provenance.py:32` `def is_inferred_only(self)` -- Return True when no static evidence supports the finding.
+- `ProvenanceFinding.reading` (method) `readmenator/_provenance.py:37` `def reading(self)` -- Explain which way an inferred-only hit points.
+- `ProvenanceAuditor.__init__` (method) `readmenator/_provenance.py:49` `def __init__(self, config)` -- Initialise with application configuration.
+- `ProvenanceAuditor.audit` (method) `readmenator/_provenance.py:57` `def audit(self, findings, content_map)` -- Audit findings for evidence provenance.
+- `ProvenanceAuditor.summary` (method) `readmenator/_provenance.py:98` `def summary(self, findings)` -- Summarize provenance findings by provenance class.
 
 ## readmenator/_purpose.py
 Depends on: `readmenator/_models.py`
@@ -389,6 +472,13 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `te
 - `PolyglotScanner.scan` (method) `readmenator/_scanner.py:261` `def scan(self, root)` -- Walk *root* recursively and produce (nodes, edges) for the graph.
 - `PolyglotScanner.scan_with_content` (method) `readmenator/_scanner.py:275` `def scan_with_content(self, root)` -- Scan and also return raw file contents for deeper analysis.
 
+## readmenator/_scantext.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `ScanTextBuilder.__init__` (method) `readmenator/_scantext.py:19` `def __init__(self, config)` -- Initialise with application configuration.
+- `ScanTextBuilder.build_for_node` (method) `readmenator/_scantext.py:27` `def build_for_node(self, node, content, imports)` -- Build the scan-text blob for a single file node.
+- `ScanTextBuilder.build_corpus` (method) `readmenator/_scantext.py:67` `def build_corpus(self, nodes, content_map, edges)` -- Build scan-text blobs for every node in the corpus.
+
 ## readmenator/_security.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/_agent_output.py`, `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_security.py`
@@ -403,83 +493,5 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_taint.py`, `tests/test_tain
 - `TaintAnalyzer.__init__` (method) `readmenator/_taint.py:73` `def __init__(self, config)`
 - `TaintAnalyzer.analyze` (method) `readmenator/_taint.py:77` `def analyze(self, nodes, edges, resolved_edges)` -- Run taint propagation analysis on the codebase.
 
-## readmenator/_uml.py
-Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
-- `UmlGenerator.__init__` (method) `readmenator/_uml.py:36` `def __init__(self, config)`
-- `UmlGenerator.render_mermaid_class_diagram` (method) `readmenator/_uml.py:39` `def render_mermaid_class_diagram(self, nodes, edges)`
-- `UmlGenerator.generate_code` (method) `readmenator/_uml.py:129` `def generate_code(self, nodes, edges, target_language)`
 
-## readmenator/_video.py
-Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
-- `ease` (function) `readmenator/_video.py:73` `def ease(x)` -- Smoothstep clamped to [0, 1].
-- `fmt_int` (function) `readmenator/_video.py:79` `def fmt_int(n)` -- Group thousands with commas.
-- `mix` (function) `readmenator/_video.py:84` `def mix(a, b, t)` -- Linear blend of two RGB colors.
-- `alpha` (function) `readmenator/_video.py:89` `def alpha(c, a)` -- RGB color plus an alpha in [0, 1] as an RGBA tuple.
-- `hash_color` (function) `readmenator/_video.py:94` `def hash_color(digest)` -- Neon color derived from a digest: the file fingerprint.
-- `short_label` (function) `readmenator/_video.py:103` `def short_label(text, limit)` -- Truncate a label to a character budget without newlines.
-- `dependencies_available` (function) `readmenator/_video.py:188` `def dependencies_available()` -- Check that PIL and ffmpeg exist for video rendering.
-- `resolve_fonts` (function) `readmenator/_video.py:197` `def resolve_fonts()` -- Resolve monospace fonts through fontconfig with PIL fallback.
-- `Backdrop.__init__` (method) `readmenator/_video.py:239` `def __init__(self, width, height)` -- Build the gradient sky, star field, sun and CRT mask.
-- `Backdrop.draw_grid` (method) `readmenator/_video.py:299` `def draw_grid(img, t, strength, bd)` -- Draw the scrolling perspective grid below the horizon.
-- `Backdrop.draw_sun` (method) `readmenator/_video.py:319` `def draw_sun(img, a, bd, cy)` -- Paste the striped synthwave sun behind the horizon.
-- `Backdrop.post` (method) `readmenator/_video.py:336` `def post(img, glitch, seed)` -- Apply bloom, scanlines, vignette and optional glitch.
-- `Backdrop.glitch_fx` (method) `readmenator/_video.py:354` `def glitch_fx(img, amount, seed)` -- RGB split plus horizontal slice displacement.
-- `Backdrop.chroma_text` (method) `readmenator/_video.py:377` `def chroma_text(img, xy, text, font, col, spread, anchor)` -- Draw text with red/cyan CRT chromatic aberration.
-- `Backdrop.hud_panel` (method) `readmenator/_video.py:388` `def hud_panel(d, box, title, fonts, col)` -- Draw a translucent HUD panel with neon edge and corner brackets.
-- `Backdrop.draw_header` (method) `readmenator/_video.py:401` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
-- `Backdrop.draw_caption` (method) `readmenator/_video.py:415` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
-- `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:436` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` -- Collect every number each scene draws, from real scan data.
-- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:637` `def build_scenes(self, data)` -- Lay every scene on the global clock.
-- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:663` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
-- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:710` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
-- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:753` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
-- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:771` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
-
-## readmenator/_watcher.py
-Depends on: `readmenator/_config.py`
-Imported by: `readmenator/_app.py`
-- `DirectoryWatcher.__init__` (method) `readmenator/_watcher.py:29` `def __init__(self, root, config, callback, interval_seconds)` -- Initialise the watcher for a project root.
-- `DirectoryWatcher.start` (method) `readmenator/_watcher.py:80` `def start(self)` -- Start watching the directory (blocking).
-- `DirectoryWatcher.stop` (method) `readmenator/_watcher.py:97` `def stop(self)` -- Stop watching.
-
-## readmenator/_wiki.py
-Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
-Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
-- `existing_ids` (function) `readmenator/_wiki.py:62` `def existing_ids(connections)` -- Return community id pairs already linked, to avoid duplicate edges.
-- `WikiGenerator.__init__` (method) `readmenator/_wiki.py:89` `def __init__(self, config)` -- Store configuration for wiki output limits and paths.
-- `WikiGenerator.generate` (method) `readmenator/_wiki.py:94` `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` -- Write all wiki files and return the output directory path.
-- `WikiGenerator.lint` (method) `readmenator/_wiki.py:219` `def lint(self, project_root)` -- Check wiki health and return a list of issue descriptions.
-- `WikiGenerator.dominant` (method) `readmenator/_wiki.py:428` `def dominant(ids, key)`
-
-## readmenator/parsers/__init__.py
-Depends on: `readmenator/_config.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
-Imported by: `readmenator/_scanner.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`
-- `create_parser` (function) `readmenator/parsers/__init__.py:70` `def create_parser(extension, filename, config)` -- Factory: return a parser instance for the given file extension.
-
-## readmenator/parsers/_base.py
-Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/parsers/__init__.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
-- `LanguageParser.__init__` (method) `readmenator/parsers/_base.py:21` `def __init__(self, filename, config)` -- Initialise the parser with a file path and application config.
-- `LanguageParser.parse` (method) `readmenator/parsers/_base.py:36` `def parse(self, content)` -- Parse *content* and populate symbol/import lists.
-
-## readmenator_orchestrator.py
-- `GitHubClient.__init__` (method) `readmenator_orchestrator.py:78` `def __init__(self, config)`
-- `GitHubClient.list_repos` (method) `readmenator_orchestrator.py:118` `def list_repos(self)`
-- `GitHubClient.close_existing_prs` (method) `readmenator_orchestrator.py:130` `def close_existing_prs(self, repo)`
-- `GitHubClient.delete_remote_branch` (method) `readmenator_orchestrator.py:158` `def delete_remote_branch(self, repo)`
-- `GitHubClient.create_pr` (method) `readmenator_orchestrator.py:170` `def create_pr(self, repo, default_branch, timestamp)`
-- `RepositoryProcessor.__init__` (method) `readmenator_orchestrator.py:192` `def __init__(self, config, github_client)`
-- `RepositoryProcessor.process` (method) `readmenator_orchestrator.py:196` `def process(self, repo)`
-- `Orchestrator.__init__` (method) `readmenator_orchestrator.py:342` `def __init__(self, config)`
-- `Orchestrator.run` (method) `readmenator_orchestrator.py:347` `def run(self, dry_run, only_repo)`
-- `TestOrchestrator.setUp` (method) `readmenator_orchestrator.py:397` `def setUp(self)`
-- `TestOrchestrator.tearDown` (method) `readmenator_orchestrator.py:401` `def tearDown(self)`
-- `TestOrchestrator.test_config_immutability` (method) `readmenator_orchestrator.py:404` `def test_config_immutability(self)`
-- `TestOrchestrator.test_config_defaults` (method) `readmenator_orchestrator.py:408` `def test_config_defaults(self)`
-- `TestOrchestrator.test_skip_repos_logic` (method) `readmenator_orchestrator.py:415` `def test_skip_repos_logic(self)`
-- `TestOrchestrator.test_repo_name_validation` (method) `readmenator_orchestrator.py:419` `def test_repo_name_validation(self)`
-- `TestOrchestrator.test_branch_name_validation` (method) `readmenator_orchestrator.py:429` `def test_branch_name_validation(self)`
-- `TestOrchestrator.parse_arguments` (method) `readmenator_orchestrator.py:438` `def parse_arguments()`
-- `TestOrchestrator.main` (method) `readmenator_orchestrator.py:455` `def main()`
+Next: [API_p2.md](API_p2.md)

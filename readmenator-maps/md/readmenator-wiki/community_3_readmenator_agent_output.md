@@ -1,28 +1,32 @@
 # readmenator: _agent_output
 
-*Community 4 | 13 files | cohesion 0.34*
+*Community 3 | 17 files | cohesion 0.36*
 
 ## Definition
 
-This community groups 13 file(s) rooted at `readmenator` with dominant language py (cohesion 0.34). Central symbols: `AgentOutputGenerator`, `FileCache`, `ImportResolver`, `PolyglotScanner`, `TaintAnalyzer`, `TestAgentOutputBudget`, `TestAgentOutputSignal`, `TestCommunityHubDamping`. Core file: `tests/test_agent_friendliness.py` (58 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
+This community groups 17 file(s) rooted at `readmenator` with dominant language py (cohesion 0.36). Central symbols: `AgentOutputGenerator`, `FileCache`, `GraphAnalyzer`, `ImportResolver`, `PolyglotScanner`, `SecurityAnalyzer`, `SecurityRule`, `TestAgentOutputBudget`. Core file: `tests/test_security.py` (68 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
 
 ## Files
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
 | `readmenator/_agent_output.py` | py | utility | 33 | yes |
+| `readmenator/_analyzer.py` | py | utility | 22 | yes |
 | `readmenator/_cache.py` | py | infrastructure | 14 | yes |
 | `readmenator/_gitmeta.py` | py | utility | 4 | yes |
 | `readmenator/_purpose.py` | py | utility | 7 | yes |
 | `readmenator/_resolver.py` | py | utility | 17 | yes |
 | `readmenator/_scanner.py` | py | utility | 14 | yes |
-| `readmenator/_taint.py` | py | utility | 6 | yes |
+| `readmenator/_security.py` | py | utility | 32 | yes |
+| `readmenator/_wiki.py` | py | utility | 32 | yes |
 | `tests/test_agent_friendliness.py` | py | testing | 58 | yes |
+| `tests/test_analyzer.py` | py | testing | 14 | yes |
 | `tests/test_cache.py` | py | testing | 22 | yes |
 | `tests/test_resolver.py` | py | testing | 22 | yes |
 | `tests/test_scanner.py` | py | testing | 21 | no |
-| `tests/test_taint.py` | py | testing | 10 | no |
+| `tests/test_security.py` | py | testing | 68 | yes |
 | `tests/test_taint_bdd.py` | py | testing | 26 | yes |
+| `tests/test_wiki.py` | py | testing | 30 | no |
 
 ## Key Symbols
 
@@ -59,18 +63,18 @@ This community groups 13 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 17
-- Cross-boundary resolved imports (EXTRACTED): 43
+- Internal resolved imports (EXTRACTED): 34
+- Cross-boundary resolved imports (EXTRACTED): 44
 
 ## Connections
 
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_cache.py.
-- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py and layer testing) with no import path between community 4 (readmenator: _agent_output) and community 5 (orphans).
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_cache.py.
+- [EXTRACTED] depends_on community 4 <-> 3 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
+- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
+- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.
+- [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 3 (readmenator: _agent_output) and community 5 (orphans).
 
 ## Risks
 
@@ -80,20 +84,24 @@ This community groups 13 file(s) rooted at `readmenator` with dominant language 
 
 - Why do 2 file(s) lack file-level docs (e.g. `tests/test_scanner.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _agent_output changed?
-- Should readmenator: _agent_output be split, given cohesion 0.34?
+- Should readmenator: _agent_output be split, given cohesion 0.36?
 
 ## Sources
 
 - `readmenator/_agent_output.py`
+- `readmenator/_analyzer.py`
 - `readmenator/_cache.py`
 - `readmenator/_gitmeta.py`
 - `readmenator/_purpose.py`
 - `readmenator/_resolver.py`
 - `readmenator/_scanner.py`
-- `readmenator/_taint.py`
+- `readmenator/_security.py`
+- `readmenator/_wiki.py`
 - `tests/test_agent_friendliness.py`
+- `tests/test_analyzer.py`
 - `tests/test_cache.py`
 - `tests/test_resolver.py`
 - `tests/test_scanner.py`
-- `tests/test_taint.py`
+- `tests/test_security.py`
 - `tests/test_taint_bdd.py`
+- `tests/test_wiki.py`

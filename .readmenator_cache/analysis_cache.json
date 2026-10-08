@@ -3,19 +3,19 @@
     "god_nodes": [
       [
         "readmenator/_models.py",
-        164.3
+        176.3
       ],
       [
         "readmenator/_config.py",
-        126.1
+        142.1
       ],
       [
         "readmenator/_pipeline.py",
-        57.5
+        70.1
       ],
       [
         "readmenator/_app.py",
-        57.1
+        64.2
       ],
       [
         "readmenator/parsers/__init__.py",
@@ -30,163 +30,172 @@
         42.7
       ],
       [
+        "tests/test_interactive_graph.py",
+        30.0
+      ],
+      [
         "tests/test_agent_friendliness.py",
         29.8
       ],
       [
-        "readmenator/_agent_output.py",
-        23.3
-      ],
-      [
         "readmenator/_diagrams.py",
-        22.9
+        25.0
       ]
     ],
     "communities": [
       {
         "id": 0,
-        "label": "readmenator: _security",
+        "label": "readmenator: _pipeline",
         "file_ids": [
-          "readmenator/_config.py",
-          "readmenator/_layer_rules.py",
-          "tests/test_uml.py",
-          "readmenator/_dataflow.py",
-          "readmenator/_wiki.py",
-          "tests/test_dead_code.py",
-          "tests/test_dataflow.py",
-          "readmenator/_concepts.py",
-          "readmenator/_dead_code.py",
-          "tests/test_layer_rules.py",
-          "tests/test_rule_gen.py",
-          "tests/test_analyzer.py",
-          "tests/test_hotspots.py",
-          "tests/test_cpg.py",
-          "readmenator/_security.py",
-          "tests/test_parsers_new.py",
-          "tests/test_concepts.py",
-          "tests/test_config.py",
-          "tests/test_refactorizer.py",
-          "tests/test_documentation.py",
-          "tests/test_security.py",
-          "readmenator/_refactorizer.py",
-          "readmenator/_analyzer.py",
           "readmenator/_exporter.py",
-          "tests/test_exporter.py",
-          "tests/test_parsers.py",
-          "tests/test_wiki.py",
+          "tests/test_config.py",
+          "readmenator/_analytics.py",
+          "readmenator/_forcegraph.py",
+          "readmenator/_documentation.py",
+          "readmenator/_embed.py",
+          "tests/test_concepts.py",
+          "tests/test_hotspots.py",
+          "tests/test_rule_gen.py",
+          "tests/test_uml.py",
+          "readmenator/_pipeline.py",
+          "readmenator/_taint.py",
           "readmenator/_hotspots.py",
-          "readmenator/_rule_gen.py"
+          "readmenator/_provenance.py",
+          "readmenator/_rule_gen.py",
+          "readmenator/_cpg.py",
+          "readmenator/_dataflow.py",
+          "tests/test_interactive_graph.py",
+          "tests/test_documentation.py",
+          "tests/test_layer_rules.py",
+          "readmenator/_explorer.py",
+          "readmenator/_uml.py",
+          "readmenator/_refactorizer.py",
+          "tests/test_cpg.py",
+          "tests/test_parsers.py",
+          "readmenator/_exclusions.py",
+          "tests/test_taint.py",
+          "tests/test_dead_code.py",
+          "tests/test_refactorizer.py",
+          "tests/test_parsers_new.py",
+          "readmenator/_dead_code.py",
+          "readmenator/_concepts.py",
+          "readmenator/_scantext.py",
+          "tests/test_dataflow.py",
+          "readmenator/_layer_rules.py",
+          "readmenator/_config.py",
+          "tests/test_exporter.py"
         ],
-        "cohesion": 0.33884297520661155,
-        "size": 29
+        "cohesion": 0.4540229885057471,
+        "size": 37
       },
       {
         "id": 1,
         "label": "readmenator/parsers",
         "file_ids": [
-          "readmenator/_mermaid.py",
-          "tests/test_mermaid.py",
-          "readmenator/_models.py",
-          "readmenator/parsers/_shell.py",
-          "readmenator/parsers/_gdscript.py",
-          "readmenator/parsers/_go.py",
-          "readmenator/parsers/_base.py",
-          "readmenator/parsers/_csharp.py",
-          "tests/test_parsers_property.py",
-          "readmenator/parsers/_swift.py",
-          "tests/test_models.py",
-          "readmenator/parsers/_javascript.py",
-          "readmenator/parsers/_rust.py",
-          "readmenator/parsers/_assembly.py",
-          "readmenator/parsers/_scala.py",
-          "readmenator/parsers/_dart.py",
-          "readmenator/parsers/_c.py",
-          "readmenator/parsers/_kotlin.py",
-          "readmenator/parsers/__init__.py",
-          "readmenator/parsers/_ruby.py",
-          "readmenator/parsers/_java.py",
-          "readmenator/parsers/_elixir.py",
           "readmenator/parsers/_lua.py",
-          "readmenator/parsers/_php.py",
+          "readmenator/parsers/_gdscript.py",
+          "readmenator/parsers/_c.py",
+          "readmenator/parsers/_swift.py",
+          "readmenator/parsers/_shell.py",
+          "tests/test_mermaid.py",
           "readmenator/parsers/_python.py",
-          "readmenator/parsers/_nim.py"
+          "readmenator/parsers/_php.py",
+          "readmenator/parsers/_kotlin.py",
+          "readmenator/_mermaid.py",
+          "readmenator/parsers/_javascript.py",
+          "readmenator/parsers/_go.py",
+          "readmenator/parsers/_dart.py",
+          "readmenator/parsers/_base.py",
+          "readmenator/_models.py",
+          "tests/test_models.py",
+          "readmenator/parsers/_elixir.py",
+          "tests/test_sarif.py",
+          "readmenator/parsers/_csharp.py",
+          "readmenator/parsers/__init__.py",
+          "tests/test_parsers_property.py",
+          "readmenator/parsers/_java.py",
+          "readmenator/_sarif.py",
+          "readmenator/parsers/_rust.py",
+          "readmenator/parsers/_nim.py",
+          "readmenator/parsers/_scala.py",
+          "readmenator/parsers/_assembly.py",
+          "readmenator/parsers/_ruby.py"
         ],
-        "cohesion": 0.5616438356164384,
-        "size": 26
+        "cohesion": 0.5483870967741935,
+        "size": 28
       },
       {
         "id": 2,
-        "label": "readmenator: _pipeline",
+        "label": "readmenator: _diagrams",
         "file_ids": [
-          "tests/test_readme_injector.py",
-          "readmenator/_agent_injector.py",
-          "readmenator/_readme_injector.py",
-          "tests/test_agent_output.py",
-          "readmenator/__init__.py",
-          "readmenator/_uml.py",
-          "readmenator/_documentation.py",
-          "readmenator/_explain.py",
-          "tests/test_sarif.py",
-          "tests/test_agent_injector.py",
-          "readmenator/_category.py",
-          "readmenator/_query.py",
-          "readmenator/_pipeline.py",
+          "readmenator/_layers.py",
           "readmenator/_rank.py",
+          "readmenator/__main__.py",
+          "tests/test_gh_wiki.py",
+          "tests/test_diagrams.py",
+          "tests/test_cursorrules.py",
+          "readmenator/_category.py",
+          "tests/test_linter.py",
+          "readmenator/_cursorrules_generator.py",
+          "readmenator/_linter.py",
+          "readmenator/__init__.py",
+          "readmenator/_app.py",
+          "readmenator/_watcher.py",
           "tests/test_query.py",
-          "readmenator/_sarif.py",
-          "readmenator/_cpg.py",
-          "tests/test_ranking.py",
-          "readmenator/_projections.py"
+          "readmenator/_mcp_server.py",
+          "tests/test_integration.py",
+          "readmenator/_explain.py",
+          "readmenator/_gh_wiki.py",
+          "tests/test_video.py",
+          "readmenator/_video.py",
+          "readmenator.py",
+          "readmenator/_projections.py",
+          "readmenator/_diagrams.py",
+          "readmenator/_yaralite.py",
+          "tests/test_mcp_server.py",
+          "readmenator/_query.py",
+          "tests/test_ranking.py"
         ],
-        "cohesion": 0.3924050632911392,
-        "size": 19
+        "cohesion": 0.4368932038834951,
+        "size": 27
       },
       {
         "id": 3,
-        "label": "readmenator: _diagrams",
+        "label": "readmenator: _agent_output",
         "file_ids": [
-          "tests/test_cursorrules.py",
-          "tests/test_diagrams.py",
-          "tests/test_linter.py",
-          "readmenator/__main__.py",
-          "readmenator/_app.py",
-          "readmenator/_mcp_server.py",
-          "readmenator.py",
-          "readmenator/_linter.py",
-          "readmenator/_cursorrules_generator.py",
-          "readmenator/_video.py",
-          "readmenator/_layers.py",
-          "readmenator/_diagrams.py",
-          "tests/test_integration.py",
-          "tests/test_mcp_server.py",
-          "readmenator/_watcher.py",
-          "readmenator/_gh_wiki.py",
-          "tests/test_gh_wiki.py",
-          "tests/test_video.py"
+          "tests/test_agent_friendliness.py",
+          "readmenator/_gitmeta.py",
+          "tests/test_analyzer.py",
+          "tests/test_resolver.py",
+          "readmenator/_agent_output.py",
+          "readmenator/_resolver.py",
+          "tests/test_security.py",
+          "readmenator/_analyzer.py",
+          "readmenator/_purpose.py",
+          "readmenator/_cache.py",
+          "tests/test_taint_bdd.py",
+          "readmenator/_wiki.py",
+          "tests/test_wiki.py",
+          "readmenator/_security.py",
+          "tests/test_cache.py",
+          "tests/test_scanner.py",
+          "readmenator/_scanner.py"
         ],
-        "cohesion": 0.3472222222222222,
-        "size": 18
+        "cohesion": 0.359375,
+        "size": 17
       },
       {
         "id": 4,
-        "label": "readmenator: _agent_output",
+        "label": "readmenator: _agent_injector",
         "file_ids": [
-          "readmenator/_cache.py",
-          "tests/test_agent_friendliness.py",
-          "tests/test_taint.py",
-          "readmenator/_taint.py",
-          "readmenator/_purpose.py",
-          "readmenator/_scanner.py",
-          "readmenator/_gitmeta.py",
-          "readmenator/_resolver.py",
-          "tests/test_resolver.py",
-          "tests/test_scanner.py",
-          "tests/test_taint_bdd.py",
-          "readmenator/_agent_output.py",
-          "tests/test_cache.py"
+          "readmenator/_agent_injector.py",
+          "readmenator/_readme_injector.py",
+          "tests/test_agent_injector.py",
+          "tests/test_agent_output.py",
+          "tests/test_readme_injector.py"
         ],
-        "cohesion": 0.34,
-        "size": 13
+        "cohesion": 0.4,
+        "size": 5
       }
     ],
     "surprising_connections": [
@@ -194,19 +203,19 @@
         "readmenator.py",
         "tests/test_agent_injector.py",
         5,
-        "{2, 3}"
+        "{0, 2, 4}"
       ],
       [
         "readmenator.py",
         "tests/test_readme_injector.py",
         5,
-        "{2, 3}"
+        "{2, 4}"
       ],
       [
         "tests/test_agent_injector.py",
         "tests/test_resolver.py",
         5,
-        "{2, 4}"
+        "{0, 3, 4}"
       ],
       [
         "tests/test_readme_injector.py",
@@ -215,18 +224,18 @@
         "{2, 3, 4}"
       ],
       [
-        "readmenator/__main__.py",
+        "readmenator/__init__.py",
         "tests/test_agent_injector.py",
         4,
-        "{2, 3}"
+        "{0, 2, 4}"
       ]
     ],
     "suggested_questions": [
-      "What does _models.py depend on, and what depends on it? (81 connections)",
-      "What does _config.py depend on, and what depends on it? (63 connections)",
-      "What does _pipeline.py depend on, and what depends on it? (27 connections)",
-      "How are the 29 files in 'readmenator: _security' related to each other?",
-      "Why are readmenator.py and test_agent_injector.py connected through 5 hops across 2 communities?"
+      "What does _models.py depend on, and what depends on it? (87 connections)",
+      "What does _config.py depend on, and what depends on it? (71 connections)",
+      "What does _pipeline.py depend on, and what depends on it? (33 connections)",
+      "How are the 37 files in 'readmenator: _pipeline' related to each other?",
+      "Why are readmenator.py and test_agent_injector.py connected through 5 hops across 3 communities?"
     ]
   },
   "layers": {
@@ -234,6 +243,7 @@
     "readmenator/__main__.py": "utility",
     "readmenator/_agent_injector.py": "infrastructure",
     "readmenator/_agent_output.py": "utility",
+    "readmenator/_analytics.py": "utility",
     "readmenator/_analyzer.py": "utility",
     "readmenator/_app.py": "utility",
     "readmenator/_cache.py": "infrastructure",
@@ -246,8 +256,12 @@
     "readmenator/_dead_code.py": "utility",
     "readmenator/_diagrams.py": "utility",
     "readmenator/_documentation.py": "utility",
+    "readmenator/_embed.py": "utility",
+    "readmenator/_exclusions.py": "utility",
     "readmenator/_explain.py": "utility",
+    "readmenator/_explorer.py": "utility",
     "readmenator/_exporter.py": "utility",
+    "readmenator/_forcegraph.py": "utility",
     "readmenator/_gh_wiki.py": "utility",
     "readmenator/_gitmeta.py": "utility",
     "readmenator/_hotspots.py": "utility",
@@ -259,6 +273,7 @@
     "readmenator/_models.py": "business_logic",
     "readmenator/_pipeline.py": "utility",
     "readmenator/_projections.py": "utility",
+    "readmenator/_provenance.py": "utility",
     "readmenator/_purpose.py": "utility",
     "readmenator/_query.py": "data_access",
     "readmenator/_rank.py": "utility",
@@ -268,12 +283,15 @@
     "readmenator/_rule_gen.py": "business_logic",
     "readmenator/_sarif.py": "utility",
     "readmenator/_scanner.py": "utility",
+    "readmenator/_scantext.py": "utility",
     "readmenator/_security.py": "utility",
     "readmenator/_taint.py": "utility",
     "readmenator/_uml.py": "utility",
+    "readmenator/_vendor/force-graph.min.js": "utility",
     "readmenator/_video.py": "utility",
     "readmenator/_watcher.py": "utility",
     "readmenator/_wiki.py": "utility",
+    "readmenator/_yaralite.py": "utility",
     "readmenator/parsers/__init__.py": "utility",
     "readmenator/parsers/_assembly.py": "utility",
     "readmenator/parsers/_base.py": "utility",
@@ -315,6 +333,7 @@
     "tests/test_gh_wiki.py": "testing",
     "tests/test_hotspots.py": "testing",
     "tests/test_integration.py": "testing",
+    "tests/test_interactive_graph.py": "testing",
     "tests/test_layer_rules.py": "testing",
     "tests/test_linter.py": "testing",
     "tests/test_mcp_server.py": "testing",

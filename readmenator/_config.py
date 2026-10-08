@@ -547,3 +547,102 @@ class Config:
         "py", "c", "h", "js", "ts", "src", "lib", "test", "tests",
         "init", "main", "utils", "util", "core", "base", "impl",
     )
+
+    FORCEGRAPH_ENABLED: bool = True
+
+    FORCEGRAPH_MODE: str = "2d"
+
+    FORCEGRAPH_OUTPUT: str = "graph-force.html"
+
+    FORCEGRAPH_CDN_JS_2D: str = "https://cdn.jsdelivr.net/npm/force-graph@1/dist/force-graph.min.js"
+
+    FORCEGRAPH_CDN_JS_3D: str = "https://cdn.jsdelivr.net/npm/3d-force-graph@1/dist/3d-force-graph.min.js"
+
+    FORCEGRAPH_VENDOR_SUBDIR: str = "vendor"
+
+    FORCEGRAPH_VENDOR_JS_2D: str = "force-graph.min.js"
+
+    FORCEGRAPH_BG: str = "#0d0f14"
+
+    FORCEGRAPH_CHARGE: int = -300
+
+    FORCEGRAPH_LINK_DISTANCE: int = 120
+
+    FORCEGRAPH_LINK_STRENGTH: float = 0.3
+
+    FORCEGRAPH_NODE_REL_SIZE: int = 4
+
+    FORCEGRAPH_HULLS_ENABLED: bool = True
+
+    FORCEGRAPH_HULL_FILL_ALPHA: float = 0.07
+
+    FORCEGRAPH_HULL_STROKE_ALPHA: float = 0.5
+
+    FORCEGRAPH_HULL_PAD: int = 18
+
+    FORCEGRAPH_PARTICLES_ON_HIGHLIGHT: int = 4
+
+    FORCEGRAPH_DIM_NODE: str = "rgba(80,85,110,.4)"
+
+    FORCEGRAPH_DIM_LINK: str = "rgba(255,255,255,.04)"
+
+    FORCEGRAPH_NODE_COLORS: Tuple[Tuple[str, str], ...] = (
+        ("file", "#4f8ef7"),
+        ("community", "#7c5aef"),
+        ("layer", "#4fef8e"),
+        ("external", "#efb84f"),
+        ("security", "#ef5a5a"),
+        ("hotspot", "#ef8e4f"),
+    )
+
+    FORCEGRAPH_EDGE_COLORS: Tuple[Tuple[str, str], ...] = (
+        ("imports", "rgba(79,142,247,.45)"),
+        ("resolved_imports", "rgba(79,239,142,.35)"),
+        ("calls", "rgba(239,184,79,.4)"),
+        ("inherits", "rgba(124,90,239,.45)"),
+        ("external", "rgba(255,255,255,.15)"),
+    )
+
+    FORCEGRAPH_FAMILY_SAT_BASE: int = 55
+
+    FORCEGRAPH_FAMILY_SAT_SPAN: int = 12
+
+    FORCEGRAPH_FAMILY_LIGHT_BASE: int = 58
+
+    FORCEGRAPH_FAMILY_LIGHT_SPAN: int = 10
+
+    ANALYTICS_ENABLED: bool = True
+
+    SCANTEXT_ENABLED: bool = True
+
+    SCANTEXT_MAX_SYMBOLS: int = 80
+
+    SCANTEXT_MAX_IMPORTS: int = 80
+
+    SCANTEXT_SNIPPET_CHARS: int = 4000
+
+    YARALITE_ENABLED: bool = True
+
+    YARALITE_RULES_FILE: str = "readmenator-rules/yara_rules.yar"
+
+    YARALITE_MAX_HITS_PER_ID: int = 50
+
+    PROVENANCE_ENABLED: bool = True
+
+    EXCLUSIONS_ENABLED: bool = True
+
+    EXCLUSIONS_FILE: str = "readmenator-rules/exclusions.yaml"
+
+    EXPLORER_ENABLED: bool = True
+
+    EXPLORER_HOST: str = "127.0.0.1"
+
+    EXPLORER_PORT: int = 8421
+
+    EMBED_ENABLED: bool = True
+
+    EMBED_MODEL: str = "all-MiniLM-L6-v2"
+
+    EMBED_MIN_CLUSTER_SIZE: int = 3
+
+    EMBED_MAX_NEIGHBORS: int = 10

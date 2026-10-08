@@ -431,6 +431,42 @@ class MCPServer:
             self._tool_concepts,
             {"type": "object", "properties": {}},
         ))
+        self.register_tool(MCPTool(
+            "readmenator.analytics",
+            "Get the corpus analytics dashboard: attribution funnel, "
+            "layer and language distributions, hotspot ranking, and "
+            "file scatter for the force-graph explorer.",
+            self._tool_analytics,
+            {"type": "object", "properties": {}},
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.near",
+            "Find files similar to a file or free text via scan-text "
+            "similarity (offline Jaccard, optional embeddings).",
+            self._tool_near,
+            {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "File id or free text"},
+                    "top_k": {"type": "integer", "description": "Max neighbors", "default": 10},
+                },
+                "required": ["query"],
+            },
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.provenance",
+            "Audit security findings by evidence provenance: static "
+            "extracts versus inferred-only signals with corpus frequency.",
+            self._tool_provenance,
+            {"type": "object", "properties": {}},
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.forcegraph",
+            "Get the heterogeneous force-graph payload "
+            "(files, communities, layers, externals) for explorer rendering.",
+            self._tool_forcegraph,
+            {"type": "object", "properties": {}},
+        ))
 
         self.register_resource(MCPResource(
             "readmenator://summary",
@@ -473,6 +509,20 @@ class MCPServer:
             "Noun concepts with file sets plus verb edges and dialectic prompts",
             "application/json",
             self._resource_concepts,
+        ))
+        self.register_resource(MCPResource(
+            "readmenator://forcegraph",
+            "Force-Graph Payload",
+            "Heterogeneous explorer payload: files, communities, layers, externals",
+            "application/json",
+            self._resource_forcegraph,
+        ))
+        self.register_resource(MCPResource(
+            "readmenator://analytics",
+            "Corpus Analytics",
+            "Attribution funnel, distributions, hotspot ranking, file scatter",
+            "application/json",
+            self._resource_analytics,
         ))
 
     # ------------------------------------------------------------------
@@ -739,6 +789,70 @@ class MCPServer:
                 lines.append(f"- {question}")
         return "\n".join(lines)
 
+    def _tool_analytics(self) -> str:
+        """Return the corpus analytics dashboard as greppable text."""
+        nodes, edges, resolved = self._scan()
+        layers = LayerDetector().detect(nodes, edges)
+        payload = self._app._factory.analytics.build(nodes, edges, resolved, None, None, layers)
+        funnel = payload["attribution_funnel"]
+        lines = [
+            f"Files: {funnel['total']} | With symbols: {funnel['with_symbols']} | "
+            f"Attributed: {funnel['attributed']} | Symbols: {funnel['total_symbols']}",
+            "",
+            "Layers:",
+        ]
+        for entry in payload["layer_distribution"]:
+            lines.append(f"  {entry['layer']}: {entry['count']} files")
+        lines.append("")
+        lines.append("Hotspots:")
+        for entry in payload["hotspot_ranking"][:10]:
+            lines.append(f"  {entry['file']} (score: {entry['score']})")
+        return "\n".join(lines)
+
+    def _tool_near(self, query: str, top_k: int = 10) -> str:
+        """Return files most similar to a file id or free text."""
+        root = Path(self._target_dir).resolve()
+        nodes, edges = self._app._factory.scanner.scan(root)
+        _edges = edges
+        content = {node.node_id: "" for node in nodes}
+        try:
+            _nodes, _edges, content = self._app._factory.scanner.scan_with_content(root)
+            nodes = _nodes
+        except Exception:
+            pass
+        corpus = self._app._factory.scantext.build_corpus(nodes, content, _edges)
+        neighbors = self._app._factory.embedder.near_jaccard(query, corpus, top_k=top_k)
+        if not neighbors:
+            return f"No similar files found for '{query}'."
+        return "\n".join(f"  {item['file']} (score: {item['score']})" for item in neighbors)
+
+    def _tool_provenance(self) -> str:
+        """Return security findings classified by evidence provenance."""
+        items = self._app.audit_provenance(self._target_dir)
+        summary = self._app._factory.provenance.summary(items)
+        lines = [
+            f"Static: {summary['static']} | Inferred-only: {summary['inferred_only']} "
+            f"across {summary['inferred_only_files']} files",
+            "",
+        ]
+        for item in items[:30]:
+            lines.append(f"  [{item.provenance}] {item.severity}:{item.rule} {item.file_path}")
+        return "\n".join(lines)
+
+    def _tool_forcegraph(self) -> str:
+        """Return the heterogeneous force-graph payload as JSON text."""
+        nodes, edges, resolved = self._scan()
+        layers = LayerDetector().detect(nodes, edges)
+        payload = self._app._factory.forcegraph.build_payload(nodes, edges, resolved, None, layers)
+        return json.dumps(
+            {
+                "nodes": len(payload["nodes"]),
+                "edges": len(payload["edges"]),
+                "types": sorted({node["type"] for node in payload["nodes"]}),
+            },
+            indent=2,
+        )
+
     # ------------------------------------------------------------------
     # Resource handlers
     # ------------------------------------------------------------------
@@ -855,6 +969,18 @@ class MCPServer:
             ],
             "dialectic": list(graph.dialectic_questions),
         }
+
+    def _resource_forcegraph(self) -> dict:
+        """Return the heterogeneous force-graph payload as structured JSON."""
+        nodes, edges, resolved = self._scan()
+        layers = LayerDetector().detect(nodes, edges)
+        return self._app._factory.forcegraph.build_payload(nodes, edges, resolved, None, layers)
+
+    def _resource_analytics(self) -> dict:
+        """Return the corpus analytics payload as structured JSON."""
+        nodes, edges, resolved = self._scan()
+        layers = LayerDetector().detect(nodes, edges)
+        return self._app._factory.analytics.build(nodes, edges, resolved, None, None, layers)
 
     def _get_query_engine(self, nodes, edges, resolved):
         from readmenator._query import QueryEngine
