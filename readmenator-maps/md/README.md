@@ -143,8 +143,19 @@ python -m readmenator /path/to/project pages           # Publish docs/ static si
 ```
 
 Maps are physics-driven vis.js documents (engine loaded from a CDN pinned in
-Config). Click any node for full file documentation: docstring, symbol table
-with signatures, and import neighborhoods.
+Config). Hover a node for a preview card; click it to dim everything outside its
+neighbourhood and open a passport with metric tiles, an ego mini-map (used-by on
+the left, imports on the right, every dot clickable), the docstring, a filterable
+symbol table with signatures, and Back history.
+
+The **Force Graph Explorer** (`readmenator-maps/graph-force.html`, featured in the
+gallery with a real ForceAtlas2 thumbnail) draws every file, community, layer and
+external with readable names (collision-aware labels, PageRank-sized nodes), four
+layouts (force, community clusters, layer rings, dependency tree), community hulls,
+a search box that also matches symbol names, and an inspector: PageRank rank and
+percentile, symbols with signatures and docs, and neighbours grouped by relation
+(used by, imports, calls, inheritance, externals), all clickable, with 1-3 hop reach,
+isolate, and `#node=<id>&layout=cluster` deep links.
 
 Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
 Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
@@ -153,6 +164,53 @@ The site also ships `llms.txt` (the [llms.txt](https://llmstxt.org) convention),
 so agents browsing the published site get a plain-markdown map of the wiki,
 agent docs, and knowledge base instead of parsing HTML. Once `docs/` holds a
 gallery, every `--rebuild` refreshes it (video and docs included).
+
+### Overview Video
+
+`readmenator . video` renders a synthwave mp4 from real scan data in seven acts:
+layers, god nodes, blast-radius tree, communities, **Emergence** (ForceAtlas2
+LinLog with adaptive speed, animated from seeded chaos to convergence, nodes
+sized by PageRank with random-surfer particles on the hottest edges), **The Wiring**
+(Holten hierarchical edge bundling: files on a circle by community, imports routed
+as B-splines through the community tree, a spotlight sweeping each community and a
+live flow ranking), and code DNA.
+
+### GraphRAG for agents (zero tokens to build, cheap to query)
+
+`readmenator-graphrag/` is a GraphRAG index built without any language model:
+entities (files, symbols, concepts, external modules, project memory), typed
+relationships (defines, imports, calls, inherits, documents), source text units
+(each symbol's real code span), and a report hierarchy (Louvain communities,
+Louvain themes over the community graph, a project root) whose sentences are all
+measured facts: PageRank, fan-in, findings, cycles, hotspots, layer violations.
+
+```bash
+readmenator . ask "how are communities detected"      # auto mode
+readmenator . ask "PageRank seeds" --local            # BM25 + Personalized PageRank (HippoRAG style)
+readmenator . ask "main subsystems and risks" --global --budget 1500   # map-reduce over reports
+readmenator . graphrag                                # rebuild only the index
+```
+
+MCP: tool `readmenator.graphrag` and resource `readmenator://graphrag`.
+
+### Project memory and agent skills
+
+`readmenator-agent/MEMORY.md` is the cross-session context file: purpose and
+domain vocabulary, detected workflow commands, declared rules, style norms and
+definition of done quoted from AGENTS.md / CLAUDE.md / CONTRIBUTING.md /
+.cursorrules with `file:line`, measured baselines (docstring coverage, naming,
+findings, cycles), risks, and a **session log preserved across rebuilds**:
+
+```bash
+readmenator . remember "Retries capped at 3: the bank bans clients after 4 failures" --kind business
+readmenator . memory            # print it (MCP: readmenator.memory / readmenator.remember)
+readmenator . skills            # install agent skills into .claude/skills/
+```
+
+Notes are indexed by GraphRAG, so `ask` surfaces recorded business rules next to
+the code they govern. Four packaged skills (`readmenator-orient`, `readmenator-ask`,
+`readmenator-change`, `readmenator-memory`) teach any agent the protocol; `run`
+installs them automatically when the project already has a `.claude/` directory.
 
 ### Agent-Ready Output (zero tokens)
 
@@ -226,6 +284,10 @@ Supported target languages (12): C++, Java, C#, Python, Go, Rust, PHP, Kotlin, S
 | Layers | `_layers.py` | Architectural layer detection (5-layer model) |
 | Watcher | `_watcher.py` | Filesystem polling watcher for auto-rebuild |
 | README Injector | `_readme_injector.py` | Auto-injects KB link into project README |
+| GraphRAG | `_graphrag.py` | Entities, relationships, text units, community report hierarchy, local/global search |
+| Graph layouts | `_graphlayout.py` | ForceAtlas2 snapshots and hierarchical edge bundling |
+| Memory | `_memory.py` | MEMORY.md: declared rules, measured baselines, preserved session log |
+| Skills | `_skill_installer.py` | Installs packaged agent skills from `_skills/` |
 | Application | `_app.py` | Application orchestrator |
 | CLI | `__main__.py` | CLI entry point and argument dispatch |
 

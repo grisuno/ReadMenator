@@ -3,42 +3,153 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `_resource_kb` | method | `readmenator/_mcp_server.py:942` | `def _resource_kb(self)` |
-| `_resource_summary` | method | `readmenator/_mcp_server.py:860` | `def _resource_summary(self)` |
-| `_scan` | method | `readmenator/_mcp_server.py:532` | `def _scan(self)` |
-| `_scan_deep` | method | `readmenator/_mcp_server.py:538` | `def _scan_deep(self)` |
-| `_tool_analytics` | method | `readmenator/_mcp_server.py:792` | `def _tool_analytics(self)` |
-| `_tool_communities` | method | `readmenator/_mcp_server.py:695` | `def _tool_communities(self)` |
-| `_tool_concepts` | method | `readmenator/_mcp_server.py:766` | `def _tool_concepts(self)` |
-| `_tool_cycles` | method | `readmenator/_mcp_server.py:684` | `def _tool_cycles(self)` |
-| `_tool_explain` | method | `readmenator/_mcp_server.py:589` | `def _tool_explain(self, name)` |
-| `_tool_export_json` | method | `readmenator/_mcp_server.py:762` | `def _tool_export_json(self)` |
-| `_tool_findings` | method | `readmenator/_mcp_server.py:612` | `def _tool_findings(self, min_severity)` |
-| `_tool_forcegraph` | method | `readmenator/_mcp_server.py:842` | `def _tool_forcegraph(self)` |
-| `_tool_hotspots` | method | `readmenator/_mcp_server.py:668` | `def _tool_hotspots(self, top_n)` |
-| `_tool_layer_violations` | method | `readmenator/_mcp_server.py:728` | `def _tool_layer_violations(self)` |
-| `_tool_layers` | method | `readmenator/_mcp_server.py:710` | `def _tool_layers(self)` |
-| `_tool_near` | method | `readmenator/_mcp_server.py:812` | `def _tool_near(self, query, top_k)` |
-| `_tool_path` | method | `readmenator/_mcp_server.py:601` | `def _tool_path(self, symbol_a, symbol_b)` |
-| `_tool_provenance` | method | `readmenator/_mcp_server.py:829` | `def _tool_provenance(self)` |
-| `_tool_query` | method | `readmenator/_mcp_server.py:584` | `def _tool_query(self, text)` |
-| `_tool_rebuild` | method | `readmenator/_mcp_server.py:744` | `def _tool_rebuild(self)` |
-| `_tool_security_summary` | method | `readmenator/_mcp_server.py:642` | `def _tool_security_summary(self)` |
-| `_tool_summary` | method | `readmenator/_mcp_server.py:546` | `def _tool_summary(self)` |
-| `_tool_taint` | method | `readmenator/_mcp_server.py:647` | `def _tool_taint(self)` |
-| `_tool_update` | method | `readmenator/_mcp_server.py:754` | `def _tool_update(self)` |
+| `_relation_weight` | method | `readmenator/_graphrag.py:335` | `def _relation_weight(relation)` |
+| `_report_block` | method | `readmenator/_graphrag.py:1163` | `def _report_block(report)` |
+| `_reports` | method | `readmenator/_graphrag.py:659` | `def _reports(self, nodes, resolved_edges, analysis, layers, findings, analysis_v2, file_rank, entities)` |
+| `_risk_score` | method | `readmenator/_graphrag.py:649` | `def _risk_score(self, files, findings)` |
+| `_root_report` | method | `readmenator/_graphrag.py:908` | `def _root_report(self, reports, themes, nodes, analysis)` |
+| `_section` | method | `readmenator/_graphrag.py:1158` | `def _section(title, items)` |
+| `_short` | method | `readmenator/_graphrag.py:340` | `def _short(file_id)` |
+| `_text_units` | method | `readmenator/_graphrag.py:615` | `def _text_units(self, nodes, content_map)` |
+| `_themes` | method | `readmenator/_graphrag.py:864` | `def _themes(self, reports, links)` |
+| `_tok` | method | `readmenator/_graphrag.py:970` | `def _tok(self, text)` |
+| `_undirected_graph` | method | `readmenator/_graphrag.py:585` | `def _undirected_graph(self, ids, relations)` |
+| `_unit_block` | method | `readmenator/_graphrag.py:1170` | `def _unit_block(unit)` |
+| `_walk_graph` | method | `readmenator/_graphrag.py:979` | `def _walk_graph(self)` |
+| `add_relation` | method | `readmenator/_graphrag.py:406` | `def add_relation(source, target, relation, description, confidence)` |
+| `build` | method | `readmenator/_graphrag.py:358` | `def build(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, concept_graph, content_map...` |
+| `choose_mode` | method | `readmenator/_graphrag.py:987` | `def choose_mode(self, query)` |
+| `directory` | method | `readmenator/_graphrag.py:1223` | `def directory(self, project_root)` |
+| `from_dict` | method | `readmenator/_graphrag.py:197` | `def from_dict(cls, data)` |
+| `global_search` | method | `readmenator/_graphrag.py:1106` | `def global_search(self, query, budget_tokens)` |
+| `load` | method | `readmenator/_graphrag.py:1257` | `def load(self, project_root)` |
+| `local_search` | method | `readmenator/_graphrag.py:1025` | `def local_search(self, query, budget_tokens)` |
+| `render_reports` | method | `readmenator/_graphrag.py:1279` | `def render_reports(index)` |
+| `resolve_symbol` | method | `readmenator/_graphrag.py:452` | `def resolve_symbol(file_id, name)` |
+| `scores` | method | `readmenator/_graphrag.py:298` | `def scores(self, query)` |
+| `search` | method | `readmenator/_graphrag.py:1004` | `def search(self, query, mode, budget_tokens)` |
+| `to_dict` | method | `readmenator/_graphrag.py:186` | `def to_dict(self)` |
+| `tokenize` | method | `readmenator/_graphrag.py:240` | `def tokenize(text, min_len, stopwords)` |
+| `write` | method | `readmenator/_graphrag.py:1227` | `def write(self, index, project_root)` |
+| `HotspotAnalyzer` | class | `readmenator/_hotspots.py:22` | `class HotspotAnalyzer` |
+| `__init__` | method | `readmenator/_hotspots.py:31` | `def __init__(self, config)` |
+| `_dfs_visit` | method | `readmenator/_hotspots.py:114` | `def _dfs_visit(current)` |
+| `_record_cycle` | method | `readmenator/_hotspots.py:125` | `def _record_cycle(start, end)` |
+| `analyze_change_impact` | method | `readmenator/_hotspots.py:155` | `def analyze_change_impact(self, nodes, resolved_edges)` |
+| `analyze_hotspots` | method | `readmenator/_hotspots.py:34` | `def analyze_hotspots(self, nodes, edges, resolved_edges)` |
+| `detect_cycles` | method | `readmenator/_hotspots.py:90` | `def detect_cycles(self, nodes, resolved_edges)` |
+| `LayerRuleEngine` | class | `readmenator/_layer_rules.py:11` | `class LayerRuleEngine` |
+| `__init__` | method | `readmenator/_layer_rules.py:36` | `def __init__(self, config)` |
+| `detect_violations` | method | `readmenator/_layer_rules.py:39` | `def detect_violations(self, nodes, edges, resolved_edges, layers)` |
+| `violation_summary` | method | `readmenator/_layer_rules.py:111` | `def violation_summary(violations)` |
+| `LayerDetector` | class | `readmenator/_layers.py:17` | `class LayerDetector` |
+| `_classify_file` | method | `readmenator/_layers.py:138` | `def _classify_file(self, node, edges, imports)` |
+| `_import_roots` | method | `readmenator/_layers.py:128` | `def _import_roots(cls, imports)` |
+| `_path_tokens` | method | `readmenator/_layers.py:108` | `def _path_tokens(cls, node_id)` |
+| `_pattern_hits` | method | `readmenator/_layers.py:114` | `def _pattern_hits(cls, pattern, tokens, joined)` |
+| `detect` | method | `readmenator/_layers.py:83` | `def detect(self, nodes, edges)` |
+| `layer_summary` | method | `readmenator/_layers.py:189` | `def layer_summary(layers)` |
+| `ArchitectureLinter` | class | `readmenator/_linter.py:18` | `class ArchitectureLinter` |
+| `__init__` | method | `readmenator/_linter.py:31` | `def __init__(self, config)` |
+| `_check_circular_dependencies` | method | `readmenator/_linter.py:127` | `def _check_circular_dependencies(self, nodes, resolved_edges)` |
+| `_check_cross_layer_violations` | method | `readmenator/_linter.py:96` | `def _check_cross_layer_violations(self, nodes, edges, resolved_edges, layers)` |
+| `_check_file_length` | method | `readmenator/_linter.py:65` | `def _check_file_length(self, nodes, content_map)` |
+| `_dfs` | method | `readmenator/_linter.py:146` | `def _dfs(current)` |
+| `lint` | method | `readmenator/_linter.py:34` | `def lint(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `MCPError` | class | `readmenator/_mcp_server.py:58` | `class MCPError(Exception)` |
+| `MCPRequest` | class | `readmenator/_mcp_server.py:71` | `class MCPRequest` |
+| `MCPResource` | class | `readmenator/_mcp_server.py:119` | `class MCPResource` |
+| `MCPServer` | class | `readmenator/_mcp_server.py:146` | `class MCPServer` |
+| `MCPTool` | class | `readmenator/_mcp_server.py:92` | `class MCPTool` |
+| `__init__` | method | `readmenator/_mcp_server.py:59` | `def __init__(self, code, message, data)` |
+| `__init__` | method | `readmenator/_mcp_server.py:72` | `def __init__(self, msg)` |
+| `__init__` | method | `readmenator/_mcp_server.py:93` | `def __init__(self, name, description, handler, input_schema)` |
+| `__init__` | method | `readmenator/_mcp_server.py:120` | `def __init__(self, uri, name, description, mime_type, handler)` |
+| `__init__` | method | `readmenator/_mcp_server.py:147` | `def __init__(self, app, target_dir)` |
+| `_ensure_kb` | method | `readmenator/_mcp_server.py:161` | `def _ensure_kb(self)` |
+| `_get_query_engine` | method | `readmenator/_mcp_server.py:1069` | `def _get_query_engine(self, nodes, edges, resolved)` |
+| `_handle_call_tool` | method | `readmenator/_mcp_server.py:192` | `def _handle_call_tool(self, req)` |
+| `_handle_initialize` | method | `readmenator/_mcp_server.py:173` | `def _handle_initialize(self, req)` |
+| `_handle_list_resources` | method | `readmenator/_mcp_server.py:214` | `def _handle_list_resources(self, req)` |
+| `_handle_list_tools` | method | `readmenator/_mcp_server.py:187` | `def _handle_list_tools(self, req)` |
+| `_handle_read_resource` | method | `readmenator/_mcp_server.py:219` | `def _handle_read_resource(self, req)` |
+| `_register_all` | method | `readmenator/_mcp_server.py:285` | `def _register_all(self)` |
+| `_resource_analysis` | method | `readmenator/_mcp_server.py:988` | `def _resource_analysis(self)` |
+| `_resource_analytics` | method | `readmenator/_mcp_server.py:1063` | `def _resource_analytics(self)` |
+| `_resource_concepts` | method | `readmenator/_mcp_server.py:1022` | `def _resource_concepts(self)` |
+| `_resource_findings` | method | `readmenator/_mcp_server.py:972` | `def _resource_findings(self)` |
+| `_resource_forcegraph` | method | `readmenator/_mcp_server.py:1049` | `def _resource_forcegraph(self)` |
+| `_resource_graph` | method | `readmenator/_mcp_server.py:953` | `def _resource_graph(self)` |
+| `_resource_graphrag` | method | `readmenator/_mcp_server.py:1055` | `def _resource_graphrag(self)` |
+| `_resource_kb` | method | `readmenator/_mcp_server.py:1018` | `def _resource_kb(self)` |
+| `_resource_summary` | method | `readmenator/_mcp_server.py:936` | `def _resource_summary(self)` |
+| `_scan` | method | `readmenator/_mcp_server.py:590` | `def _scan(self)` |
+| `_scan_deep` | method | `readmenator/_mcp_server.py:596` | `def _scan_deep(self)` |
+| `_tool_analytics` | method | `readmenator/_mcp_server.py:850` | `def _tool_analytics(self)` |
+| `_tool_communities` | method | `readmenator/_mcp_server.py:753` | `def _tool_communities(self)` |
+| `_tool_concepts` | method | `readmenator/_mcp_server.py:824` | `def _tool_concepts(self)` |
+| `_tool_cycles` | method | `readmenator/_mcp_server.py:742` | `def _tool_cycles(self)` |
+| `_tool_explain` | method | `readmenator/_mcp_server.py:647` | `def _tool_explain(self, name)` |
+| `_tool_export_json` | method | `readmenator/_mcp_server.py:820` | `def _tool_export_json(self)` |
+| `_tool_findings` | method | `readmenator/_mcp_server.py:670` | `def _tool_findings(self, min_severity)` |
+| `_tool_forcegraph` | method | `readmenator/_mcp_server.py:900` | `def _tool_forcegraph(self)` |
+| `_tool_graphrag` | method | `readmenator/_mcp_server.py:925` | `def _tool_graphrag(self, query, mode, budget_tokens)` |
+| `_tool_hotspots` | method | `readmenator/_mcp_server.py:726` | `def _tool_hotspots(self, top_n)` |
+| `_tool_layer_violations` | method | `readmenator/_mcp_server.py:786` | `def _tool_layer_violations(self)` |
+| `_tool_layers` | method | `readmenator/_mcp_server.py:768` | `def _tool_layers(self)` |
+| `_tool_memory` | method | `readmenator/_mcp_server.py:914` | `def _tool_memory(self)` |
+| `_tool_near` | method | `readmenator/_mcp_server.py:870` | `def _tool_near(self, query, top_k)` |
+| `_tool_path` | method | `readmenator/_mcp_server.py:659` | `def _tool_path(self, symbol_a, symbol_b)` |
+| `_tool_provenance` | method | `readmenator/_mcp_server.py:887` | `def _tool_provenance(self)` |
+| `_tool_query` | method | `readmenator/_mcp_server.py:642` | `def _tool_query(self, text)` |
+| `_tool_rebuild` | method | `readmenator/_mcp_server.py:802` | `def _tool_rebuild(self)` |
+| `_tool_remember` | method | `readmenator/_mcp_server.py:918` | `def _tool_remember(self, note, kind)` |
+| `_tool_security_summary` | method | `readmenator/_mcp_server.py:700` | `def _tool_security_summary(self)` |
+| `_tool_summary` | method | `readmenator/_mcp_server.py:604` | `def _tool_summary(self)` |
+| `_tool_taint` | method | `readmenator/_mcp_server.py:705` | `def _tool_taint(self)` |
+| `_tool_update` | method | `readmenator/_mcp_server.py:812` | `def _tool_update(self)` |
 | `call` | method | `readmenator/_mcp_server.py:115` | `def call(self, arguments)` |
 | `definition` | method | `readmenator/_mcp_server.py:108` | `def definition(self)` |
 | `definition` | method | `readmenator/_mcp_server.py:134` | `def definition(self)` |
 | `dispatch` | method | `readmenator/_mcp_server.py:241` | `def dispatch(self, req)` |
 | `error` | method | `readmenator/_mcp_server.py:85` | `def error(self, code, message, data)` |
 | `is_notification` | method | `readmenator/_mcp_server.py:79` | `def is_notification(self)` |
-| `main` | method | `readmenator/_mcp_server.py:990` | `def main()` |
+| `main` | method | `readmenator/_mcp_server.py:1074` | `def main()` |
 | `read` | method | `readmenator/_mcp_server.py:142` | `def read(self)` |
 | `register_resource` | method | `readmenator/_mcp_server.py:158` | `def register_resource(self, resource)` |
 | `register_tool` | method | `readmenator/_mcp_server.py:155` | `def register_tool(self, tool)` |
 | `response` | method | `readmenator/_mcp_server.py:82` | `def response(self, result)` |
 | `run` | method | `readmenator/_mcp_server.py:261` | `def run(self)` |
+| `DeclaredRule` | class | `readmenator/_memory.py:53` | `class DeclaredRule` |
+| `MemoryNote` | class | `readmenator/_memory.py:70` | `class MemoryNote` |
+| `ProjectMemory` | class | `readmenator/_memory.py:102` | `class ProjectMemory` |
+| `__init__` | method | `readmenator/_memory.py:105` | `def __init__(self, config)` |
+| `_categorise` | method | `readmenator/_memory.py:360` | `def _categorise(heading, keywords)` |
+| `_count_severe` | method | `readmenator/_memory.py:606` | `def _count_severe(findings)` |
+| `_declared_section` | method | `readmenator/_memory.py:512` | `def _declared_section(title, rules, category, measured)` |
+| `_deliverable_baselines` | method | `readmenator/_memory.py:559` | `def _deliverable_baselines(self, root, nodes, findings, analysis_v2)` |
+| `_is_test` | method | `readmenator/_memory.py:483` | `def _is_test(file_id)` |
+| `_log_section` | method | `readmenator/_memory.py:190` | `def _log_section(self, block)` |
+| `_notes_block` | method | `readmenator/_memory.py:141` | `def _notes_block(text)` |
+| `_pct` | method | `readmenator/_memory.py:601` | `def _pct(part, whole)` |
+| `_purpose_section` | method | `readmenator/_memory.py:368` | `def _purpose_section(self, root, nodes, analysis, concept_graph)` |
+| `_readme_lead` | method | `readmenator/_memory.py:400` | `def _readme_lead(self, root)` |
+| `_risk_section` | method | `readmenator/_memory.py:579` | `def _risk_section(self, analysis, analysis_v2)` |
+| `_safe_read` | method | `readmenator/_memory.py:473` | `def _safe_read(self, path)` |
+| `_skeleton` | method | `readmenator/_memory.py:182` | `def _skeleton(self)` |
+| `_splice` | method | `readmenator/_memory.py:201` | `def _splice(self, document, block)` |
+| `_style_baselines` | method | `readmenator/_memory.py:524` | `def _style_baselines(self, nodes, content_map)` |
+| `_workflow_section` | method | `readmenator/_memory.py:492` | `def _workflow_section(self, root, nodes)` |
+| `_write` | method | `readmenator/_memory.py:209` | `def _write(self, project_root, text)` |
+| `build` | method | `readmenator/_memory.py:231` | `def build(self, project_root, nodes, analysis, analysis_v2, findings, concept_graph, content_map)` |
+| `detect_commands` | method | `readmenator/_memory.py:419` | `def detect_commands(self, root, nodes)` |
+| `extract_rules` | method | `readmenator/_memory.py:291` | `def extract_rules(self, project_root)` |
+| `notes` | method | `readmenator/_memory.py:124` | `def notes(self, project_root)` |
+| `path` | method | `readmenator/_memory.py:113` | `def path(self, project_root)` |
+| `read` | method | `readmenator/_memory.py:117` | `def read(self, project_root)` |
+| `remember` | method | `readmenator/_memory.py:149` | `def remember(self, project_root, note, kind, today)` |
+| `sanitize_note` | method | `readmenator/_memory.py:84` | `def sanitize_note(text, max_chars)` |
+| `write` | method | `readmenator/_memory.py:218` | `def write(self, project_root, generated)` |
 | `MermaidRenderer` | class | `readmenator/_mermaid.py:17` | `class MermaidRenderer` |
 | `__init__` | method | `readmenator/_mermaid.py:26` | `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, function_style, external_style...` |
 | `_sanitize_id` | method | `readmenator/_mermaid.py:45` | `def _sanitize_id(node_id)` |
@@ -66,47 +177,51 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TaintAnalysisResult` | class | `readmenator/_models.py:172` | `class TaintAnalysisResult` |
 | `TaintPath` | class | `readmenator/_models.py:151` | `class TaintPath` |
 | `pluralize_symbol_kind` | method | `readmenator/_models.py:101` | `def pluralize_symbol_kind(kind, plural_map)` |
-| `AnalyzerFactory` | class | `readmenator/_pipeline.py:56` | `class AnalyzerFactory` |
-| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:355` | `class DeepAnalysisRunner` |
-| `__init__` | method | `readmenator/_pipeline.py:64` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_pipeline.py:364` | `def __init__(self, factory)` |
-| `agent_injector` | method | `readmenator/_pipeline.py:207` | `def agent_injector(self)` |
-| `agent_output` | method | `readmenator/_pipeline.py:224` | `def agent_output(self)` |
-| `analytics` | method | `readmenator/_pipeline.py:286` | `def analytics(self)` |
-| `analyzer` | method | `readmenator/_pipeline.py:114` | `def analyzer(self)` |
-| `build_typed_graph` | method | `readmenator/_pipeline.py:320` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
-| `concepts` | method | `readmenator/_pipeline.py:272` | `def concepts(self)` |
-| `cpg` | method | `readmenator/_pipeline.py:169` | `def cpg(self)` |
-| `dataflow` | method | `readmenator/_pipeline.py:138` | `def dataflow(self)` |
-| `diagram_builder` | method | `readmenator/_pipeline.py:230` | `def diagram_builder(self)` |
-| `diagram_publisher` | method | `readmenator/_pipeline.py:251` | `def diagram_publisher(self)` |
-| `diagram_renderer` | method | `readmenator/_pipeline.py:237` | `def diagram_renderer(self)` |
-| `diagram_validator` | method | `readmenator/_pipeline.py:244` | `def diagram_validator(self)` |
-| `embedder` | method | `readmenator/_pipeline.py:314` | `def embedder(self)` |
-| `exclusions` | method | `readmenator/_pipeline.py:307` | `def exclusions(self)` |
-| `exporter` | method | `readmenator/_pipeline.py:126` | `def exporter(self)` |
-| `forcegraph` | method | `readmenator/_pipeline.py:279` | `def forcegraph(self)` |
-| `generator` | method | `readmenator/_pipeline.py:108` | `def generator(self)` |
-| `gh_wiki` | method | `readmenator/_pipeline.py:217` | `def gh_wiki(self)` |
-| `hotspots` | method | `readmenator/_pipeline.py:145` | `def hotspots(self)` |
-| `last_category` | method | `readmenator/_pipeline.py:347` | `def last_category(self)` |
-| `last_typed_graph` | method | `readmenator/_pipeline.py:351` | `def last_typed_graph(self)` |
-| `layer_detector` | method | `readmenator/_pipeline.py:178` | `def layer_detector(self)` |
-| `layer_rules` | method | `readmenator/_pipeline.py:151` | `def layer_rules(self)` |
-| `make_ranker` | method | `readmenator/_pipeline.py:330` | `def make_ranker(self, typed_graph)` |
-| `provenance` | method | `readmenator/_pipeline.py:300` | `def provenance(self)` |
-| `readme_injector` | method | `readmenator/_pipeline.py:197` | `def readme_injector(self)` |
-| `rule_gen` | method | `readmenator/_pipeline.py:157` | `def rule_gen(self)` |
-| `run` | method | `readmenator/_pipeline.py:367` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
-| `sarif` | method | `readmenator/_pipeline.py:163` | `def sarif(self)` |
-| `scanner` | method | `readmenator/_pipeline.py:102` | `def scanner(self)` |
-| `scantext` | method | `readmenator/_pipeline.py:293` | `def scantext(self)` |
-| `security` | method | `readmenator/_pipeline.py:120` | `def security(self)` |
-| `taint` | method | `readmenator/_pipeline.py:132` | `def taint(self)` |
-| `uml` | method | `readmenator/_pipeline.py:184` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:265` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:258` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:190` | `def wiki(self)` |
+| `AnalyzerFactory` | class | `readmenator/_pipeline.py:59` | `class AnalyzerFactory` |
+| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:390` | `class DeepAnalysisRunner` |
+| `__init__` | method | `readmenator/_pipeline.py:67` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_pipeline.py:399` | `def __init__(self, factory)` |
+| `agent_injector` | method | `readmenator/_pipeline.py:214` | `def agent_injector(self)` |
+| `agent_output` | method | `readmenator/_pipeline.py:231` | `def agent_output(self)` |
+| `analytics` | method | `readmenator/_pipeline.py:293` | `def analytics(self)` |
+| `analyzer` | method | `readmenator/_pipeline.py:121` | `def analyzer(self)` |
+| `build_typed_graph` | method | `readmenator/_pipeline.py:355` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
+| `concepts` | method | `readmenator/_pipeline.py:279` | `def concepts(self)` |
+| `cpg` | method | `readmenator/_pipeline.py:176` | `def cpg(self)` |
+| `dataflow` | method | `readmenator/_pipeline.py:145` | `def dataflow(self)` |
+| `diagram_builder` | method | `readmenator/_pipeline.py:237` | `def diagram_builder(self)` |
+| `diagram_publisher` | method | `readmenator/_pipeline.py:258` | `def diagram_publisher(self)` |
+| `diagram_renderer` | method | `readmenator/_pipeline.py:244` | `def diagram_renderer(self)` |
+| `diagram_validator` | method | `readmenator/_pipeline.py:251` | `def diagram_validator(self)` |
+| `embedder` | method | `readmenator/_pipeline.py:321` | `def embedder(self)` |
+| `exclusions` | method | `readmenator/_pipeline.py:314` | `def exclusions(self)` |
+| `exporter` | method | `readmenator/_pipeline.py:133` | `def exporter(self)` |
+| `forcegraph` | method | `readmenator/_pipeline.py:286` | `def forcegraph(self)` |
+| `generator` | method | `readmenator/_pipeline.py:115` | `def generator(self)` |
+| `gh_wiki` | method | `readmenator/_pipeline.py:224` | `def gh_wiki(self)` |
+| `graphrag` | method | `readmenator/_pipeline.py:328` | `def graphrag(self)` |
+| `graphrag_store` | method | `readmenator/_pipeline.py:335` | `def graphrag_store(self)` |
+| `hotspots` | method | `readmenator/_pipeline.py:152` | `def hotspots(self)` |
+| `last_category` | method | `readmenator/_pipeline.py:382` | `def last_category(self)` |
+| `last_typed_graph` | method | `readmenator/_pipeline.py:386` | `def last_typed_graph(self)` |
+| `layer_detector` | method | `readmenator/_pipeline.py:185` | `def layer_detector(self)` |
+| `layer_rules` | method | `readmenator/_pipeline.py:158` | `def layer_rules(self)` |
+| `make_ranker` | method | `readmenator/_pipeline.py:365` | `def make_ranker(self, typed_graph)` |
+| `memory` | method | `readmenator/_pipeline.py:342` | `def memory(self)` |
+| `provenance` | method | `readmenator/_pipeline.py:307` | `def provenance(self)` |
+| `readme_injector` | method | `readmenator/_pipeline.py:204` | `def readme_injector(self)` |
+| `rule_gen` | method | `readmenator/_pipeline.py:164` | `def rule_gen(self)` |
+| `run` | method | `readmenator/_pipeline.py:402` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `sarif` | method | `readmenator/_pipeline.py:170` | `def sarif(self)` |
+| `scanner` | method | `readmenator/_pipeline.py:109` | `def scanner(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:300` | `def scantext(self)` |
+| `security` | method | `readmenator/_pipeline.py:127` | `def security(self)` |
+| `skills` | method | `readmenator/_pipeline.py:349` | `def skills(self)` |
+| `taint` | method | `readmenator/_pipeline.py:139` | `def taint(self)` |
+| `uml` | method | `readmenator/_pipeline.py:191` | `def uml(self)` |
+| `video` | method | `readmenator/_pipeline.py:272` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:265` | `def vis_renderer(self)` |
+| `wiki` | method | `readmenator/_pipeline.py:197` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -156,23 +271,24 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `query` | method | `readmenator/_query.py:355` | `def query(self, question)` |
 | `ranked_query` | method | `readmenator/_query.py:73` | `def ranked_query(self, query, top_n)` |
 | `summary` | method | `readmenator/_query.py:411` | `def summary(self)` |
-| `CompositeRanker` | class | `readmenator/_rank.py:377` | `class CompositeRanker` |
+| `CompositeRanker` | class | `readmenator/_rank.py:411` | `class CompositeRanker` |
 | `RankConfig` | class | `readmenator/_rank.py:32` | `class RankConfig` |
-| `RankedItem` | class | `readmenator/_rank.py:320` | `class RankedItem` |
-| `RankedResult` | class | `readmenator/_rank.py:349` | `class RankedResult` |
-| `__init__` | method | `readmenator/_rank.py:385` | `def __init__(self, graph, config)` |
-| `_find_justification_paths` | method | `readmenator/_rank.py:486` | `def _find_justification_paths(self, target, seed_ids, category, max_paths)` |
-| `_format_explanation` | method | `readmenator/_rank.py:512` | `def _format_explanation(item, result)` |
-| `_get_global_pr` | method | `readmenator/_rank.py:394` | `def _get_global_pr(self)` |
-| `build_seeds_for_context` | method | `readmenator/_rank.py:286` | `def build_seeds_for_context(node_ids, anchor_patterns)` |
-| `build_seeds_from_query` | method | `readmenator/_rank.py:240` | `def build_seeds_from_query(query, node_ids, node_labels, symbols)` |
-| `explain` | method | `readmenator/_rank.py:369` | `def explain(self, node_id)` |
+| `RankedItem` | class | `readmenator/_rank.py:354` | `class RankedItem` |
+| `RankedResult` | class | `readmenator/_rank.py:383` | `class RankedResult` |
+| `__init__` | method | `readmenator/_rank.py:419` | `def __init__(self, graph, config)` |
+| `_find_justification_paths` | method | `readmenator/_rank.py:520` | `def _find_justification_paths(self, target, seed_ids, category, max_paths)` |
+| `_format_explanation` | method | `readmenator/_rank.py:546` | `def _format_explanation(item, result)` |
+| `_get_global_pr` | method | `readmenator/_rank.py:428` | `def _get_global_pr(self)` |
+| `build_seeds_for_context` | method | `readmenator/_rank.py:320` | `def build_seeds_for_context(node_ids, anchor_patterns)` |
+| `build_seeds_from_query` | method | `readmenator/_rank.py:274` | `def build_seeds_from_query(query, node_ids, node_labels, symbols)` |
+| `explain` | method | `readmenator/_rank.py:403` | `def explain(self, node_id)` |
+| `file_pagerank` | method | `readmenator/_rank.py:119` | `def file_pagerank(file_ids, edges, alpha, max_iter, tolerance)` |
 | `global_pagerank` | method | `readmenator/_rank.py:61` | `def global_pagerank(graph, alpha, max_iter, tolerance)` |
-| `hits` | method | `readmenator/_rank.py:189` | `def hits(graph, max_iter, tolerance)` |
-| `label` | method | `readmenator/_rank.py:344` | `def label(self)` |
-| `personalized_pagerank` | method | `readmenator/_rank.py:119` | `def personalized_pagerank(graph, seeds, alpha, max_iter, tolerance)` |
-| `rank` | method | `readmenator/_rank.py:404` | `def rank(self, query, seeds, category, node_ids, test_coverage, doc_coverage, freshness)` |
-| `top` | method | `readmenator/_rank.py:366` | `def top(self, n)` |
+| `hits` | method | `readmenator/_rank.py:223` | `def hits(graph, max_iter, tolerance)` |
+| `label` | method | `readmenator/_rank.py:378` | `def label(self)` |
+| `personalized_pagerank` | method | `readmenator/_rank.py:153` | `def personalized_pagerank(graph, seeds, alpha, max_iter, tolerance)` |
+| `rank` | method | `readmenator/_rank.py:438` | `def rank(self, query, seeds, category, node_ids, test_coverage, doc_coverage, freshness)` |
+| `top` | method | `readmenator/_rank.py:400` | `def top(self, n)` |
 | `ReadmeInjector` | class | `readmenator/_readme_injector.py:70` | `class ReadmeInjector` |
 | `__init__` | method | `readmenator/_readme_injector.py:78` | `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir)` |
 | `_build_injection` | method | `readmenator/_readme_injector.py:172` | `def _build_injection(self, suffix)` |
@@ -271,6 +387,13 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `fix_hint_for` | method | `readmenator/_security.py:620` | `def fix_hint_for(finding)` |
 | `scan` | method | `readmenator/_security.py:513` | `def scan(self, root)` |
 | `summary` | method | `readmenator/_security.py:572` | `def summary(self, findings)` |
+| `SkillInstaller` | class | `readmenator/_skill_installer.py:22` | `class SkillInstaller` |
+| `__init__` | method | `readmenator/_skill_installer.py:25` | `def __init__(self, config)` |
+| `available` | method | `readmenator/_skill_installer.py:38` | `def available(self)` |
+| `install` | method | `readmenator/_skill_installer.py:61` | `def install(self, project_root, target)` |
+| `maybe_install_on_run` | method | `readmenator/_skill_installer.py:87` | `def maybe_install_on_run(self, project_root)` |
+| `source_dir` | method | `readmenator/_skill_installer.py:34` | `def source_dir()` |
+| `target_dir` | method | `readmenator/_skill_installer.py:48` | `def target_dir(self, project_root, target)` |
 | `TaintAnalyzer` | class | `readmenator/_taint.py:12` | `class TaintAnalyzer` |
 | `__init__` | method | `readmenator/_taint.py:73` | `def __init__(self, config)` |
 | `_build_forward_graph` | method | `readmenator/_taint.py:213` | `def _build_forward_graph(nodes, resolved_edges)` |
@@ -337,164 +460,41 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `wa` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
 | `xo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
 | `y` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `Backdrop` | class | `readmenator/_video.py:236` | `class Backdrop` |
-| `CinematicVideoRenderer` | class | `readmenator/_video.py:431` | `class CinematicVideoRenderer` |
-| `__init__` | method | `readmenator/_video.py:239` | `def __init__(self, width, height)` |
-| `_build_dep_tree` | method | `readmenator/_video.py:586` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
-| `_caption_y` | function | `readmenator/_video.py:116` | `def _caption_y(cfg)` |
-| `_code_tint` | function | `readmenator/_video.py:172` | `def _code_tint(line)` |
-| `_dna_boxes` | function | `readmenator/_video.py:130` | `def _dna_boxes(cfg)` |
-| `_draw_frame` | method | `readmenator/_video.py:816` | `def _draw_frame(fi)` |
-| `_find` | method | `readmenator/_video.py:201` | `def _find(style)` |
-| `_graph_boxes` | function | `readmenator/_video.py:121` | `def _graph_boxes(cfg)` |
-| `_img` | method | `readmenator/_video.py:292` | `def _img()` |
-| `_packet_offset` | function | `readmenator/_video.py:182` | `def _packet_offset(a, b, k)` |
-| `_panel` | function | `readmenator/_video.py:111` | `def _panel(cfg)` |
-| `_render_frame_bytes` | method | `readmenator/_video.py:811` | `def _render_frame_bytes(fi)` |
-| `_scan_cursor` | function | `readmenator/_video.py:163` | `def _scan_cursor(d, box, progress, col)` |
-| `_scene_card` | method | `readmenator/_video.py:879` | `def _scene_card(img, d, lt, gt, sc)` |
-| `_scene_communities` | method | `readmenator/_video.py:1035` | `def _scene_communities(img, d, lt, gt, sc)` |
-| `_scene_dna` | method | `readmenator/_video.py:1137` | `def _scene_dna(img, d, lt, gt, sc)` |
-| `_scene_gods` | method | `readmenator/_video.py:918` | `def _scene_gods(img, d, lt, gt, sc)` |
-| `_scene_graph` | method | `readmenator/_video.py:1079` | `def _scene_graph(img, d, lt, gt, sc)` |
-| `_scene_layers` | method | `readmenator/_video.py:893` | `def _scene_layers(img, d, lt, gt, sc)` |
-| `_scene_outro` | method | `readmenator/_video.py:1196` | `def _scene_outro(img, d, lt, gt, sc)` |
-| `_scene_title` | method | `readmenator/_video.py:844` | `def _scene_title(img, d, lt, gt, sc)` |
-| `_scene_tree` | method | `readmenator/_video.py:961` | `def _scene_tree(img, d, lt, gt, sc)` |
-| `_split_boxes` | function | `readmenator/_video.py:139` | `def _split_boxes(cfg)` |
-| `_sun` | method | `readmenator/_video.py:277` | `def _sun(self, r)` |
-| `_verdict_badge` | function | `readmenator/_video.py:148` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
-| `alpha` | function | `readmenator/_video.py:89` | `def alpha(c, a)` |
-| `build_scenes` | method | `readmenator/_video.py:637` | `def build_scenes(self, data)` |
-| `chroma_text` | method | `readmenator/_video.py:377` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
-| `collect` | method | `readmenator/_video.py:436` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
-| `dependencies_available` | function | `readmenator/_video.py:188` | `def dependencies_available()` |
-| `draw_caption` | method | `readmenator/_video.py:415` | `def draw_caption(d, text, lt, dur, fonts, width, y)` |
-| `draw_grid` | method | `readmenator/_video.py:299` | `def draw_grid(img, t, strength, bd)` |
-| `draw_header` | method | `readmenator/_video.py:401` | `def draw_header(img, d, gt, total, project, act_label, fonts, width)` |
-| `draw_sun` | method | `readmenator/_video.py:319` | `def draw_sun(img, a, bd, cy)` |
-| `ease` | function | `readmenator/_video.py:73` | `def ease(x)` |
-| `fmt_int` | function | `readmenator/_video.py:79` | `def fmt_int(n)` |
-| `glitch_fx` | method | `readmenator/_video.py:354` | `def glitch_fx(img, amount, seed)` |
-| `graph_positions` | method | `readmenator/_video.py:663` | `def graph_positions(self, data, box)` |
-| `hash_color` | function | `readmenator/_video.py:94` | `def hash_color(digest)` |
-| `hud_panel` | method | `readmenator/_video.py:388` | `def hud_panel(d, box, title, fonts, col)` |
-| `mix` | function | `readmenator/_video.py:84` | `def mix(a, b, t)` |
-| `post` | method | `readmenator/_video.py:336` | `def post(img, glitch, seed)` |
-| `render` | method | `readmenator/_video.py:771` | `def render(self, data, output_path)` |
-| `render_single_frame` | method | `readmenator/_video.py:753` | `def render_single_frame(self, data, frame_index)` |
-| `resolve_fonts` | function | `readmenator/_video.py:197` | `def resolve_fonts()` |
-| `short_label` | function | `readmenator/_video.py:103` | `def short_label(text, limit)` |
-| `tree_positions` | method | `readmenator/_video.py:710` | `def tree_positions(self, data, box)` |
-| `DirectoryWatcher` | class | `readmenator/_watcher.py:21` | `class DirectoryWatcher` |
-| `__init__` | method | `readmenator/_watcher.py:29` | `def __init__(self, root, config, callback, interval_seconds)` |
-| `_compute_snapshot` | method | `readmenator/_watcher.py:51` | `def _compute_snapshot(self)` |
-| `start` | method | `readmenator/_watcher.py:80` | `def start(self)` |
-| `stop` | method | `readmenator/_watcher.py:97` | `def stop(self)` |
-| `WikiGenerator` | class | `readmenator/_wiki.py:86` | `class WikiGenerator` |
-| `__init__` | method | `readmenator/_wiki.py:89` | `def __init__(self, config)` |
-| `_build_community_page` | method | `readmenator/_wiki.py:550` | `def _build_community_page(self, community, node_map, resolved, analysis, layers, findings, analysis_v2, connections)` |
-| `_build_connections` | method | `readmenator/_wiki.py:277` | `def _build_connections(self, communities, resolved, analysis, node_map, layers)` |
-| `_build_connections_json` | method | `readmenator/_wiki.py:454` | `def _build_connections_json(self, connections)` |
-| `_build_grouped_files` | method | `readmenator/_wiki.py:501` | `def _build_grouped_files(self, members, node_map, layers, max_files)` |
-| `_build_index` | method | `readmenator/_wiki.py:754` | `def _build_index(self, nodes, resolved, analysis, layers, findings, analysis_v2, communities, pages, connections...` |
-| `_build_queries` | method | `readmenator/_wiki.py:936` | `def _build_queries(self, analysis)` |
-| `_build_report` | method | `readmenator/_wiki.py:961` | `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...` |
-| `_community_of` | method | `readmenator/_wiki.py:268` | `def _community_of(self, node_id, communities)` |
-| `_connective_paragraph` | method | `readmenator/_wiki.py:899` | `def _connective_paragraph(self, communities, connections)` |
-| `_definition_for` | method | `readmenator/_wiki.py:458` | `def _definition_for(self, community, node_map)` |
-| `_display_names` | function | `readmenator/_wiki.py:72` | `def _display_names(communities)` |
-| `_duplicate_links` | method | `readmenator/_wiki.py:342` | `def _duplicate_links(communities, node_map, skip_pairs)` |
-| `_estimate_tokens` | method | `readmenator/_wiki.py:1033` | `def _estimate_tokens(self, nodes, connections)` |
-| `_file_row` | method | `readmenator/_wiki.py:487` | `def _file_row(self, fid, node_map, layers)` |
-| `_is_garbage_purpose` | function | `readmenator/_wiki.py:47` | `def _is_garbage_purpose(text)` |
-| `_large_files` | method | `readmenator/_wiki.py:741` | `def _large_files(self, nodes, project_root)` |
-| `_overview_paragraph` | method | `readmenator/_wiki.py:866` | `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)` |
-| `_prune_stale_pages` | method | `readmenator/_wiki.py:210` | `def _prune_stale_pages(self, out_dir, current)` |
-| `_questions_for` | method | `readmenator/_wiki.py:703` | `def _questions_for(self, community, node_map, member_set, analysis_v2)` |
-| `_questions_paragraph` | method | `readmenator/_wiki.py:920` | `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)` |
-| `_resolve_communities` | method | `readmenator/_wiki.py:242` | `def _resolve_communities(self, nodes, analysis, resolved)` |
-| `_shared_context` | method | `readmenator/_wiki.py:421` | `def _shared_context(first, second, node_map, layers)` |
-| `_shared_context_links` | method | `readmenator/_wiki.py:385` | `def _shared_context_links(self, communities, existing, node_map, layers)` |
-| `_slug` | function | `readmenator/_wiki.py:55` | `def _slug(text)` |
-| `_write` | method | `readmenator/_wiki.py:1044` | `def _write(path, content)` |
-| `_write_concepts` | method | `readmenator/_wiki.py:143` | `def _write_concepts(self, out_dir, analysis_v2)` |
-| `dominant` | method | `readmenator/_wiki.py:428` | `def dominant(ids, key)` |
-| `existing_ids` | function | `readmenator/_wiki.py:62` | `def existing_ids(connections)` |
-| `generate` | method | `readmenator/_wiki.py:94` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` |
-| `lint` | method | `readmenator/_wiki.py:219` | `def lint(self, project_root)` |
-| `YaraLiteHit` | class | `readmenator/_yaralite.py:56` | `class YaraLiteHit` |
-| `YaraLiteMatch` | class | `readmenator/_yaralite.py:66` | `class YaraLiteMatch` |
-| `YaraLiteRule` | class | `readmenator/_yaralite.py:33` | `class YaraLiteRule` |
-| `YaraLiteString` | class | `readmenator/_yaralite.py:24` | `class YaraLiteString` |
-| `_condition_matches` | method | `readmenator/_yaralite.py:265` | `def _condition_matches(condition, hits)` |
-| `_confidence` | method | `readmenator/_yaralite.py:305` | `def _confidence(value)` |
-| `_decode_yara_string` | method | `readmenator/_yaralite.py:238` | `def _decode_yara_string(value)` |
-| `_excerpt` | method | `readmenator/_yaralite.py:322` | `def _excerpt(text, offset, length)` |
-| `_parse_meta` | method | `readmenator/_yaralite.py:196` | `def _parse_meta(meta_body)` |
-| `_parse_strings` | method | `readmenator/_yaralite.py:215` | `def _parse_strings(strings_body)` |
-| `_rule_blocks` | method | `readmenator/_yaralite.py:161` | `def _rule_blocks(rules_text)` |
-| `_section` | method | `readmenator/_yaralite.py:182` | `def _section(body, start_marker, end_marker)` |
-| `_string_hits` | method | `readmenator/_yaralite.py:243` | `def _string_hits(text, rule)` |
-| `_strip_comments` | method | `readmenator/_yaralite.py:233` | `def _strip_comments(text)` |
-| `parse_yaralite_rules` | method | `readmenator/_yaralite.py:76` | `def parse_yaralite_rules(rules_text)` |
-| `replace_group` | method | `readmenator/_yaralite.py:270` | `def replace_group(match)` |
-| `replace_identifier` | method | `readmenator/_yaralite.py:292` | `def replace_identifier(match)` |
-| `run_yaralite_rules` | method | `readmenator/_yaralite.py:112` | `def run_yaralite_rules(text, rules)` |
-| `tier` | method | `readmenator/_yaralite.py:42` | `def tier(self)` |
-| `validate_yaralite_rules` | method | `readmenator/_yaralite.py:139` | `def validate_yaralite_rules(rules_text)` |
-| `_init_parser_map` | function | `readmenator/parsers/__init__.py:34` | `def _init_parser_map()` |
-| `create_parser` | function | `readmenator/parsers/__init__.py:70` | `def create_parser(extension, filename, config)` |
-| `AssemblyParser` | class | `readmenator/parsers/_assembly.py:11` | `class AssemblyParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_assembly.py:19` | `def _extract_specifics(self, content)` |
-| `LanguageParser` | class | `readmenator/parsers/_base.py:12` | `class LanguageParser` |
-| `__init__` | method | `readmenator/parsers/_base.py:21` | `def __init__(self, filename, config)` |
-| `_extract_docstring` | method | `readmenator/parsers/_base.py:49` | `def _extract_docstring(self, line_num)` |
-| `_extract_signature` | method | `readmenator/parsers/_base.py:91` | `def _extract_signature(self, content, match_start, pattern)` |
-| `_extract_specifics` | method | `readmenator/parsers/_base.py:45` | `def _extract_specifics(self, content)` |
-| `parse` | method | `readmenator/parsers/_base.py:36` | `def parse(self, content)` |
-| `CParser` | class | `readmenator/parsers/_c.py:30` | `class CParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_c.py:37` | `def _extract_specifics(self, content)` |
-| `_has_type_prefix` | function | `readmenator/parsers/_c.py:18` | `def _has_type_prefix(prefix)` |
-| `CSharpParser` | class | `readmenator/parsers/_csharp.py:11` | `class CSharpParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_csharp.py:18` | `def _extract_specifics(self, content)` |
-| `DartParser` | class | `readmenator/parsers/_dart.py:11` | `class DartParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_dart.py:18` | `def _extract_specifics(self, content)` |
-| `ElixirParser` | class | `readmenator/parsers/_elixir.py:11` | `class ElixirParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_elixir.py:18` | `def _extract_specifics(self, content)` |
-| `GDScriptParser` | class | `readmenator/parsers/_gdscript.py:11` | `class GDScriptParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_gdscript.py:18` | `def _extract_specifics(self, content)` |
-| `GoParser` | class | `readmenator/parsers/_go.py:11` | `class GoParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_go.py:18` | `def _extract_specifics(self, content)` |
-| `JavaParser` | class | `readmenator/parsers/_java.py:11` | `class JavaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_java.py:18` | `def _extract_specifics(self, content)` |
-| `JavaScriptParser` | class | `readmenator/parsers/_javascript.py:11` | `class JavaScriptParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_javascript.py:19` | `def _extract_specifics(self, content)` |
-| `KotlinParser` | class | `readmenator/parsers/_kotlin.py:11` | `class KotlinParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_kotlin.py:18` | `def _extract_specifics(self, content)` |
-| `LuaParser` | class | `readmenator/parsers/_lua.py:11` | `class LuaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_lua.py:18` | `def _extract_specifics(self, content)` |
-| `NimParser` | class | `readmenator/parsers/_nim.py:11` | `class NimParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_nim.py:18` | `def _extract_specifics(self, content)` |
-| `PHPParser` | class | `readmenator/parsers/_php.py:11` | `class PHPParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_php.py:18` | `def _extract_specifics(self, content)` |
-| `PythonParser` | class | `readmenator/parsers/_python.py:12` | `class PythonParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_python.py:19` | `def _extract_specifics(self, content)` |
-| `RubyParser` | class | `readmenator/parsers/_ruby.py:11` | `class RubyParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_ruby.py:18` | `def _extract_specifics(self, content)` |
-| `RustParser` | class | `readmenator/parsers/_rust.py:11` | `class RustParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_rust.py:18` | `def _extract_specifics(self, content)` |
-| `ScalaParser` | class | `readmenator/parsers/_scala.py:11` | `class ScalaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_scala.py:18` | `def _extract_specifics(self, content)` |
-| `ShellParser` | class | `readmenator/parsers/_shell.py:11` | `class ShellParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_shell.py:18` | `def _extract_specifics(self, content)` |
-| `SwiftParser` | class | `readmenator/parsers/_swift.py:11` | `class SwiftParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_swift.py:18` | `def _extract_specifics(self, content)` |
-| `Config` | class | `readmenator_orchestrator.py:21` | `class Config` |
-| `GitHubClient` | class | `readmenator_orchestrator.py:83` | `class GitHubClient` |
-| `Orchestrator` | class | `readmenator_orchestrator.py:366` | `class Orchestrator` |
-| `RepositoryProcessor` | class | `readmenator_orchestrator.py:197` | `class RepositoryProcessor` |
-| `TestOrchestrator` | class | `readmenator_orchestrator.py:421` | `class TestOrchestrator(TestCase)` |
-| `__init__` | method | `readmenator_orchestrator.py:84` | `def __init__(self, config)` |
+| `Backdrop` | class | `readmenator/_video.py:269` | `class Backdrop` |
+| `CinematicVideoRenderer` | class | `readmenator/_video.py:464` | `class CinematicVideoRenderer` |
+| `__init__` | method | `readmenator/_video.py:272` | `def __init__(self, width, height)` |
+| `_build_dep_tree` | method | `readmenator/_video.py:631` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
+| `_caption_y` | function | `readmenator/_video.py:131` | `def _caption_y(cfg)` |
+| `_code_tint` | function | `readmenator/_video.py:205` | `def _code_tint(line)` |
+| `_dna_boxes` | function | `readmenator/_video.py:145` | `def _dna_boxes(cfg)` |
+| `_draw_frame` | method | `readmenator/_video.py:895` | `def _draw_frame(fi)` |
+| `_find` | method | `readmenator/_video.py:234` | `def _find(style)` |
+| `_graph_boxes` | function | `readmenator/_video.py:136` | `def _graph_boxes(cfg)` |
+| `_img` | method | `readmenator/_video.py:325` | `def _img()` |
+| `_packet_offset` | function | `readmenator/_video.py:215` | `def _packet_offset(a, b, k)` |
+| `_panel` | function | `readmenator/_video.py:126` | `def _panel(cfg)` |
+| `_polyline_point` | function | `readmenator/_video.py:170` | `def _polyline_point(points, f)` |
+| `_prepare_layouts` | method | `readmenator/_video.py:829` | `def _prepare_layouts(self, data)` |
+| `_render_frame_bytes` | method | `readmenator/_video.py:890` | `def _render_frame_bytes(fi)` |
+| `_scan_cursor` | function | `readmenator/_video.py:196` | `def _scan_cursor(d, box, progress, col)` |
+| `_scene_bundle` | method | `readmenator/_video.py:1243` | `def _scene_bundle(img, d, lt, gt, sc)` |
+| `_scene_card` | method | `readmenator/_video.py:957` | `def _scene_card(img, d, lt, gt, sc)` |
+| `_scene_communities` | method | `readmenator/_video.py:1113` | `def _scene_communities(img, d, lt, gt, sc)` |
+| `_scene_dna` | method | `readmenator/_video.py:1329` | `def _scene_dna(img, d, lt, gt, sc)` |
+| `_scene_gods` | method | `readmenator/_video.py:996` | `def _scene_gods(img, d, lt, gt, sc)` |
+| `_scene_graph` | method | `readmenator/_video.py:1157` | `def _scene_graph(img, d, lt, gt, sc)` |
+| `_scene_layers` | method | `readmenator/_video.py:971` | `def _scene_layers(img, d, lt, gt, sc)` |
+| `_scene_outro` | method | `readmenator/_video.py:1388` | `def _scene_outro(img, d, lt, gt, sc)` |
+| `_scene_title` | method | `readmenator/_video.py:922` | `def _scene_title(img, d, lt, gt, sc)` |
+| `_scene_tree` | method | `readmenator/_video.py:1039` | `def _scene_tree(img, d, lt, gt, sc)` |
+| `_split_boxes` | function | `readmenator/_video.py:154` | `def _split_boxes(cfg)` |
+| `_sun` | method | `readmenator/_video.py:310` | `def _sun(self, r)` |
+| `_verdict_badge` | function | `readmenator/_video.py:181` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
+| `alpha` | function | `readmenator/_video.py:104` | `def alpha(c, a)` |
+| `build_scenes` | method | `readmenator/_video.py:682` | `def build_scenes(self, data)` |
+| `bundle_layout` | method | `readmenator/_video.py:810` | `def bundle_layout(self, data, box)` |
+| `chroma_text` | method | `readmenator/_video.py:410` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
+| `collect` | method | `readmenator/_video.py:469` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
+| `community_color` | function | `readmenator/_video.py:163` | `def community_color(index)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

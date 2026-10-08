@@ -25,6 +25,64 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_rebuild_publishes_wiki_in_git_checkout` (method, line 167) `def test_rebuild_publishes_wiki_in_git_checkout(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_gh_wiki.py`
 
+## tests/test_graphlayout.py
+- Doc: Contract tests for ForceAtlas2 and hierarchical edge bundling layouts.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_two_cliques` (function, line 18) `def _two_cliques()`
+  - `TestForceAtlas2Contract` (class, line 27) `class TestForceAtlas2Contract(TestCase)`
+  - `TestEdgeBundlingContract` (class, line 84) `class TestEdgeBundlingContract(TestCase)`
+  - `test_graphlayout_fa2_snapshot_count` (method, line 30) `def test_graphlayout_fa2_snapshot_count(self)`
+  - `test_graphlayout_fa2_is_deterministic` (method, line 37) `def test_graphlayout_fa2_is_deterministic(self)`
+  - `test_graphlayout_fa2_separates_communities` (method, line 43) `def test_graphlayout_fa2_separates_communities(self)`
+  - `test_graphlayout_fa2_python_fallback_runs` (method, line 55) `def test_graphlayout_fa2_python_fallback_runs(self)`
+  - `test_graphlayout_empty_and_single` (method, line 62) `def test_graphlayout_empty_and_single(self)`
+  - `test_graphlayout_fit_frames_stays_in_box` (method, line 67) `def test_graphlayout_fit_frames_stays_in_box(self)`
+  - `test_graphlayout_interpolate_endpoints` (method, line 76) `def test_graphlayout_interpolate_endpoints(self)`
+  - `setUp` (method, line 87) `def setUp(self)`
+  - `test_graphlayout_leaves_on_circle` (method, line 95) `def test_graphlayout_leaves_on_circle(self)`
+  - `test_graphlayout_curves_skip_unknown_and_keep_endpoints` (method, line 100) `def test_graphlayout_curves_skip_unknown_and_keep_endpoints(self)`
+  - `test_graphlayout_cross_group_curve_bends_inward` (method, line 107) `def test_graphlayout_cross_group_curve_bends_inward(self)`
+  - `test_graphlayout_groups_cover_full_circle` (method, line 115) `def test_graphlayout_groups_cover_full_circle(self)`
+  - `mean` (method, line 48) `def mean(pairs)`
+- Depends on: `readmenator/_graphlayout.py`
+
+## tests/test_graphrag.py
+- Doc: Contract tests for the zero-token GraphRAG index and retrieval.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_fixture` (function, line 32) `def _fixture()`
+  - `TestGraphRagIndexContract` (class, line 79) `class TestGraphRagIndexContract(TestCase)`
+  - `TestGraphRagSearchContract` (class, line 159) `class TestGraphRagSearchContract(TestCase)`
+  - `TestGraphRagStoreContract` (class, line 213) `class TestGraphRagStoreContract(TestCase)`
+  - `TestGraphRagPrimitives` (class, line 241) `class TestGraphRagPrimitives(TestCase)`
+  - `setUp` (method, line 82) `def setUp(self)`
+  - `test_graphrag_entities_cover_files_symbols_externals` (method, line 89) `def test_graphrag_entities_cover_files_symbols_externals(self)`
+  - `test_graphrag_relationships_are_typed` (method, line 97) `def test_graphrag_relationships_are_typed(self)`
+  - `test_graphrag_report_hierarchy_has_root` (method, line 104) `def test_graphrag_report_hierarchy_has_root(self)`
+  - `test_graphrag_reports_are_extractive_and_rated` (method, line 112) `def test_graphrag_reports_are_extractive_and_rated(self)`
+  - `test_graphrag_text_units_use_source_spans` (method, line 121) `def test_graphrag_text_units_use_source_spans(self)`
+  - `test_graphrag_text_units_respect_max_lines` (method, line 128) `def test_graphrag_text_units_respect_max_lines(self)`
+  - `test_graphrag_privacy_mode_strips_sources_and_docs` (method, line 133) `def test_graphrag_privacy_mode_strips_sources_and_docs(self)`
+  - `test_graphrag_disabled_returns_empty_index` (method, line 142) `def test_graphrag_disabled_returns_empty_index(self)`
+  - `test_graphrag_build_is_deterministic` (method, line 148) `def test_graphrag_build_is_deterministic(self)`
+  - `test_graphrag_roundtrip_dict` (method, line 153) `def test_graphrag_roundtrip_dict(self)`
+  - `setUp` (method, line 162) `def setUp(self)`
+  - `test_graphrag_local_search_ranks_matching_symbol` (method, line 169) `def test_graphrag_local_search_ranks_matching_symbol(self)`
+  - `test_graphrag_local_search_expands_through_graph` (method, line 177) `def test_graphrag_local_search_expands_through_graph(self)`
+  - `test_graphrag_global_search_uses_reports` (method, line 183) `def test_graphrag_global_search_uses_reports(self)`
+  - `test_graphrag_auto_routes_broad_questions_global` (method, line 190) `def test_graphrag_auto_routes_broad_questions_global(self)`
+  - `test_graphrag_no_match_falls_back_global` (method, line 195) `def test_graphrag_no_match_falls_back_global(self)`
+  - `test_graphrag_budget_never_emits_empty_sections` (method, line 199) `def test_graphrag_budget_never_emits_empty_sections(self)`
+  - `test_graphrag_budget_bounds_markdown` (method, line 207) `def test_graphrag_budget_bounds_markdown(self)`
+  - `test_graphrag_store_writes_and_loads` (method, line 216) `def test_graphrag_store_writes_and_loads(self)`
+  - `test_graphrag_store_rejects_wrong_schema` (method, line 231) `def test_graphrag_store_rejects_wrong_schema(self)`
+  - `test_graphrag_tokenize_splits_camel_and_keeps_whole` (method, line 244) `def test_graphrag_tokenize_splits_camel_and_keeps_whole(self)`
+  - `test_graphrag_bm25_prefers_rare_terms` (method, line 250) `def test_graphrag_bm25_prefers_rare_terms(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_graphrag.py`, `readmenator/_models.py`
+
 ## tests/test_hotspots.py
 - Doc: TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact.
 - Layer: testing
@@ -82,6 +140,7 @@ Previous: [KB_tests.md](KB_tests.md)
   - `TestEmbedContract` (class, line 286) `class TestEmbedContract(TestCase)`
   - `TestRebuildContract` (class, line 313) `class TestRebuildContract(TestCase)`
   - `TestGalleryCardContract` (class, line 365) `class TestGalleryCardContract(TestCase)`
+  - `TestForceGraphInspectorPayload` (class, line 422) `class TestForceGraphInspectorPayload(TestCase)`
   - `setUp` (method, line 51) `def setUp(self)`
   - `test_family_color_is_deterministic` (method, line 57) `def test_family_color_is_deterministic(self)`
   - `test_node_value_dampens_large_files` (method, line 62) `def test_node_value_dampens_large_files(self)`
@@ -110,6 +169,12 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_run_skips_forcegraph_when_disabled` (method, line 343) `def test_run_skips_forcegraph_when_disabled(self)`
   - `test_publish_appends_extra_card` (method, line 368) `def test_publish_appends_extra_card(self)`
   - `test_export_diagrams_writes_forcegraph_and_card` (method, line 395) `def test_export_diagrams_writes_forcegraph_and_card(self)`
+  - `setUp` (method, line 425) `def setUp(self)`
+  - `test_forcegraph_file_nodes_carry_inspector_fields` (method, line 437) `def test_forcegraph_file_nodes_carry_inspector_fields(self)`
+  - `test_forcegraph_externals_exclude_calls_and_internal_imports` (method, line 445) `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)`
+  - `test_forcegraph_privacy_mode_strips_docs` (method, line 450) `def test_forcegraph_privacy_mode_strips_docs(self)`
+  - `test_forcegraph_thumbnail_escapes_colors` (method, line 458) `def test_forcegraph_thumbnail_escapes_colors(self)`
+  - `test_forcegraph_render_has_inspector_and_layouts` (method, line 466) `def test_forcegraph_render_has_inspector_and_layouts(self)`
 - Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
 
 ## tests/test_layer_rules.py
@@ -184,6 +249,30 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
   - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
+
+## tests/test_memory.py
+- Doc: Contract tests for project memory, the session log, and agent skills.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_project` (function, line 17) `def _project(root)`
+  - `TestProjectMemoryContract` (class, line 40) `class TestProjectMemoryContract(TestCase)`
+  - `TestSkillInstallerContract` (class, line 115) `class TestSkillInstallerContract(TestCase)`
+  - `setUp` (method, line 43) `def setUp(self)`
+  - `tearDown` (method, line 50) `def tearDown(self)`
+  - `test_memory_extracts_declared_rules_with_citations` (method, line 54) `def test_memory_extracts_declared_rules_with_citations(self)`
+  - `test_memory_skips_contract_headings_and_injected_blocks` (method, line 61) `def test_memory_skips_contract_headings_and_injected_blocks(self)`
+  - `test_memory_build_has_all_sections` (method, line 67) `def test_memory_build_has_all_sections(self)`
+  - `test_memory_remember_then_rebuild_preserves_log` (method, line 76) `def test_memory_remember_then_rebuild_preserves_log(self)`
+  - `test_memory_remember_rejects_unknown_kind_and_empty` (method, line 86) `def test_memory_remember_rejects_unknown_kind_and_empty(self)`
+  - `test_memory_note_cannot_break_markers` (method, line 93) `def test_memory_note_cannot_break_markers(self)`
+  - `test_memory_sanitize_truncates` (method, line 101) `def test_memory_sanitize_truncates(self)`
+  - `test_memory_notes_feed_graphrag` (method, line 105) `def test_memory_notes_feed_graphrag(self)`
+  - `test_skills_are_packaged_with_frontmatter` (method, line 118) `def test_skills_are_packaged_with_frontmatter(self)`
+  - `test_skills_install_is_idempotent` (method, line 129) `def test_skills_install_is_idempotent(self)`
+  - `test_skills_install_on_run_requires_existing_parent` (method, line 137) `def test_skills_install_on_run_requires_existing_parent(self)`
+  - `test_skills_install_on_run_respects_flag` (method, line 145) `def test_skills_install_on_run_respects_flag(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_skill_installer.py`
 
 ## tests/test_mermaid.py
 - Layer: testing
@@ -388,109 +477,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `wrapper` (method, line 77) `def wrapper(fn)`
   - `builder` (method, line 65) `def builder()`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
-
-## tests/test_query.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_make_node` (function, line 7) `def _make_node(node_id, symbols)`
-  - `_make_sym` (function, line 18) `def _make_sym(name, kind, line)`
-  - `TestQueryEngineContract` (class, line 22) `class TestQueryEngineContract(TestCase)`
-  - `setUp` (method, line 23) `def setUp(self)`
-  - `test_find_exact_symbol` (method, line 36) `def test_find_exact_symbol(self)`
-  - `test_find_symbol_fuzzy` (method, line 42) `def test_find_symbol_fuzzy(self)`
-  - `test_find_symbol_not_found` (method, line 47) `def test_find_symbol_not_found(self)`
-  - `test_explain_returns_details` (method, line 51) `def test_explain_returns_details(self)`
-  - `test_explain_shows_imports` (method, line 58) `def test_explain_shows_imports(self)`
-  - `test_explain_shows_siblings` (method, line 63) `def test_explain_shows_siblings(self)`
-  - `test_explain_unknown_returns_none` (method, line 69) `def test_explain_unknown_returns_none(self)`
-  - `test_find_path_direct_import` (method, line 73) `def test_find_path_direct_import(self)`
-  - `test_find_path_same_file` (method, line 79) `def test_find_path_same_file(self)`
-  - `test_find_path_unknown_returns_none` (method, line 84) `def test_find_path_unknown_returns_none(self)`
-  - `test_summary_shows_counts` (method, line 88) `def test_summary_shows_counts(self)`
-  - `test_summary_shows_top_modules` (method, line 94) `def test_summary_shows_top_modules(self)`
-  - `test_query_returns_matching_symbols` (method, line 98) `def test_query_returns_matching_symbols(self)`
-  - `test_query_returns_file_matches` (method, line 102) `def test_query_returns_file_matches(self)`
-- Depends on: `readmenator/_models.py`, `readmenator/_query.py`
-
-## tests/test_ranking.py
-- Doc: Contract tests for the category theory and ranking system.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestEdgeKind` (class, line 60) `class TestEdgeKind`
-  - `TestMorphism` (class, line 84) `class TestMorphism`
-  - `TestCategory` (class, line 104) `class TestCategory`
-  - `TestTypedGraph` (class, line 183) `class TestTypedGraph`
-  - `_make_test_graph` (method, line 238) `def _make_test_graph()`
-  - `TestGlobalPageRank` (class, line 247) `class TestGlobalPageRank`
-  - `TestPersonalizedPageRank` (class, line 288) `class TestPersonalizedPageRank`
-  - `TestHITS` (class, line 325) `class TestHITS`
-  - `TestSeedGeneration` (class, line 350) `class TestSeedGeneration`
-  - `TestCompositeRanker` (class, line 403) `class TestCompositeRanker`
-  - `TestProjections` (class, line 490) `class TestProjections`
-  - `TestExplain` (class, line 539) `class TestExplain`
-  - `TestIntegration` (class, line 587) `class TestIntegration`
-  - `test_all_edge_kinds_have_weights` (method, line 61) `def test_all_edge_kinds_have_weights(self)`
-  - `test_infer_edge_kind_maps_correctly` (method, line 66) `def test_infer_edge_kind_maps_correctly(self)`
-  - `test_infer_edge_kind_falls_back` (method, line 71) `def test_infer_edge_kind_falls_back(self)`
-  - `test_edge_kind_is_str_enum` (method, line 75) `def test_edge_kind_is_str_enum(self)`
-  - `test_weight_is_edge_weight_times_confidence` (method, line 85) `def test_weight_is_edge_weight_times_confidence(self)`
-  - `test_weight_default_confidence` (method, line 90) `def test_weight_default_confidence(self)`
-  - `test_morphism_is_frozen` (method, line 94) `def test_morphism_is_frozen(self)`
-  - `test_empty_category` (method, line 105) `def test_empty_category(self)`
-  - `test_add_object_and_morphism` (method, line 110) `def test_add_object_and_morphism(self)`
-  - `test_outgoing_and_incoming` (method, line 118) `def test_outgoing_and_incoming(self)`
-  - `test_compose_same_kind` (method, line 130) `def test_compose_same_kind(self)`
-  - `test_compose_imports_then_defines` (method, line 140) `def test_compose_imports_then_defines(self)`
-  - `test_compose_incompatible_returns_none` (method, line 148) `def test_compose_incompatible_returns_none(self)`
-  - `test_compose_mismatched_target_source` (method, line 155) `def test_compose_mismatched_target_source(self)`
-  - `test_paths_finds_composition_chains` (method, line 162) `def test_paths_finds_composition_chains(self)`
-  - `test_paths_empty_when_no_route` (method, line 171) `def test_paths_empty_when_no_route(self)`
-  - `test_empty_graph` (method, line 184) `def test_empty_graph(self)`
-  - `test_stochastic_row_normalizes_to_one` (method, line 190) `def test_stochastic_row_normalizes_to_one(self)`
-  - `test_stochastic_row_empty_for_dangling` (method, line 199) `def test_stochastic_row_empty_for_dangling(self)`
-  - `test_transition_weight_aggregates_parallel_edges` (method, line 205) `def test_transition_weight_aggregates_parallel_edges(self)`
-  - `test_build_category_from_edges` (method, line 214) `def test_build_category_from_edges(self)`
-  - `test_build_category_from_edges_filters_by_node_ids` (method, line 225) `def test_build_category_from_edges_filters_by_node_ids(self)`
-  - `test_scores_sum_to_one` (method, line 248) `def test_scores_sum_to_one(self)`
-  - `test_all_nodes_have_positive_score` (method, line 254) `def test_all_nodes_have_positive_score(self)`
-  - `test_converges_within_max_iter` (method, line 260) `def test_converges_within_max_iter(self)`
-  - `test_stable_across_calls` (method, line 266) `def test_stable_across_calls(self)`
-  - `test_dangling_node_handled` (method, line 273) `def test_dangling_node_handled(self)`
-  - `test_empty_graph` (method, line 284) `def test_empty_graph(self)`
-  - `test_seed_node_gets_highest_score` (method, line 289) `def test_seed_node_gets_highest_score(self)`
-  - `test_scores_sum_to_one` (method, line 296) `def test_scores_sum_to_one(self)`
-  - `test_different_seeds_produce_different_rankings` (method, line 303) `def test_different_seeds_produce_different_rankings(self)`
-  - `test_empty_seeds_uses_uniform` (method, line 310) `def test_empty_seeds_uses_uniform(self)`
-  - `test_multi_seed` (method, line 317) `def test_multi_seed(self)`
-  - `test_authorities_and_hubs_have_positive_scores` (method, line 326) `def test_authorities_and_hubs_have_positive_scores(self)`
-  - `test_authorities_l2_normalized` (method, line 333) `def test_authorities_l2_normalized(self)`
-  - `test_hubs_l2_normalized` (method, line 339) `def test_hubs_l2_normalized(self)`
-  - `test_build_seeds_from_query_matches_node_id` (method, line 351) `def test_build_seeds_from_query_matches_node_id(self)`
-  - `test_build_seeds_from_query_matches_symbol` (method, line 363) `def test_build_seeds_from_query_matches_symbol(self)`
-  - `test_build_seeds_from_query_no_match_returns_empty` (method, line 374) `def test_build_seeds_from_query_no_match_returns_empty(self)`
-  - `test_build_seeds_for_context` (method, line 383) `def test_build_seeds_for_context(self)`
-  - `test_build_seeds_for_context_no_match` (method, line 392) `def test_build_seeds_for_context_no_match(self)`
-  - `test_rank_returns_sorted_results` (method, line 404) `def test_rank_returns_sorted_results(self)`
-  - `test_rank_items_have_all_score_fields` (method, line 421) `def test_rank_items_have_all_score_fields(self)`
-  - `test_noise_penalty_applied` (method, line 447) `def test_noise_penalty_applied(self)`
-  - `test_top_n` (method, line 466) `def test_top_n(self)`
-  - `test_explain_returns_none_for_missing` (method, line 479) `def test_explain_returns_none_for_missing(self)`
-  - `test_identity_projection_passes_all` (method, line 491) `def test_identity_projection_passes_all(self)`
-  - `test_doc_projection_filters_undocumented` (method, line 498) `def test_doc_projection_filters_undocumented(self)`
-  - `test_doc_projection_filters_morphism_kind` (method, line 506) `def test_doc_projection_filters_morphism_kind(self)`
-  - `test_apply_view_architecture` (method, line 512) `def test_apply_view_architecture(self)`
-  - `test_apply_view_reverse` (method, line 521) `def test_apply_view_reverse(self)`
-  - `test_apply_view_empty` (method, line 528) `def test_apply_view_empty(self)`
-  - `test_explain_rank_found` (method, line 540) `def test_explain_rank_found(self)`
-  - `test_explain_rank_not_found` (method, line 559) `def test_explain_rank_not_found(self)`
-  - `test_rank_summary_format` (method, line 565) `def test_rank_summary_format(self)`
-  - `test_category_from_real_edges` (method, line 588) `def test_category_from_real_edges(self)`
-  - `test_pagerank_on_real_category` (method, line 613) `def test_pagerank_on_real_category(self)`
-  - `test_ppr_favors_seed` (method, line 625) `def test_ppr_favors_seed(self)`
-  - `test_ranker_from_real_data` (method, line 637) `def test_ranker_from_real_data(self)`
-- Depends on: `readmenator/_category.py`, `readmenator/_explain.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_rank.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

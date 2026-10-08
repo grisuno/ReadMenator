@@ -53,7 +53,7 @@ class TestVideoContract(unittest.TestCase):
         self.assertEqual(data["dep_tree"]["order"], [])
         scenes, total = renderer.build_scenes(data)
         self.assertTrue(total > 0)
-        self.assertEqual(len(scenes), 14)
+        self.assertEqual(len(scenes), 16)
 
     def test_video_collect_enriched_fields(self) -> None:
         renderer = CinematicVideoRenderer(Config())
@@ -82,7 +82,7 @@ class TestVideoContract(unittest.TestCase):
         scenes, total = renderer.build_scenes(data)
         self.assertAlmostEqual(total, sum(s["dur"] for s in scenes))
         kinds = [s["kind"] for s in scenes]
-        for expected in ("title", "layers", "gods", "tree", "communities", "graph", "dna", "outro"):
+        for expected in ("title", "layers", "gods", "tree", "communities", "graph", "bundle", "dna", "outro"):
             self.assertIn(expected, kinds)
 
     def test_video_all_scenes_render_small_canvas(self) -> None:

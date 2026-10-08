@@ -417,3 +417,54 @@ class TestGalleryCardContract(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestForceGraphInspectorPayload(unittest.TestCase):
+    """Contract: inspector fields, PageRank, no fake externals, safe thumbnail."""
+
+    def setUp(self) -> None:
+        """Build a payload with an unresolved call and an internal dotted import."""
+        self.renderer = ForceGraphRenderer(Config())
+        self.nodes = [_node("pkg/a.py", 3), _node("pkg/b.py", 1)]
+        self.edges = [
+            Edge(source="pkg/a.py", target="pkg/b.py", relation="resolved_imports", confidence="EXTRACTED"),
+            Edge(source="pkg/a.py", target="pkg.b", relation="imports", confidence="EXTRACTED"),
+            Edge(source="pkg/a.py", target="os", relation="imports", confidence="EXTRACTED"),
+            Edge(source="pkg/a.py", target="print", relation="calls", confidence="EXTRACTED"),
+        ]
+        self.payload = self.renderer.build_payload(self.nodes, self.edges)
+
+    def test_forcegraph_file_nodes_carry_inspector_fields(self) -> None:
+        """File nodes expose symbols, purpose, and PageRank position."""
+        node = [n for n in self.payload["nodes"] if n["id"] == "file:pkg/b.py"][0]
+        self.assertEqual(len(node["symbol_list"]), 1)
+        self.assertEqual(node["symbol_list"][0]["n"], "sym0")
+        self.assertEqual(node["rank_pos"], 1)
+        self.assertIn("doc", node)
+
+    def test_forcegraph_externals_exclude_calls_and_internal_imports(self) -> None:
+        """Unresolved calls and imports that resolve to project files are not externals."""
+        externals = {n["label"] for n in self.payload["nodes"] if n["type"] == "external"}
+        self.assertEqual(externals, {"os"})
+
+    def test_forcegraph_privacy_mode_strips_docs(self) -> None:
+        """Privacy mode empties file purposes and symbol docs."""
+        private = ForceGraphRenderer(Config(PRIVACY_MODE=True)).build_payload(self.nodes, self.edges)
+        for node in private["nodes"]:
+            if node["type"] == "file":
+                self.assertEqual(node["doc"], "")
+                self.assertTrue(all("d" not in s for s in node["symbol_list"]))
+
+    def test_forcegraph_thumbnail_escapes_colors(self) -> None:
+        """Thumbnail SVG never emits raw markup from node colors."""
+        for node in self.payload["nodes"]:
+            node["color"] = '"><script>x</script>'
+        svg = self.renderer.thumbnail_svg(self.payload)
+        self.assertTrue(svg.startswith('<svg class="thumb"'))
+        self.assertNotIn("<script>", svg)
+
+    def test_forcegraph_render_has_inspector_and_layouts(self) -> None:
+        """The explorer ships names, inspector, and the four layouts."""
+        html = self.renderer.render(self.payload)
+        for token in ("nodeCanvasObject", 'id="inspector"', 'data-layout="cluster"', 'data-layout="radial"', 'data-layout="dag"', "renderInspector"):
+            self.assertIn(token, html)

@@ -73,7 +73,7 @@ class PolyglotScanner:
         output_dirs = {
             cfg.AGENT_OUTPUT_DIR, cfg.WIKI_OUTPUT_DIR, cfg.RULE_GEN_OUTPUT_DIR,
             cfg.DIAGRAM_OUTPUT_DIR, cfg.SITE_DIR, cfg.CACHE_DIR,
-            cfg.GH_WIKI_DRY_RUN_DIR,
+            cfg.GH_WIKI_DRY_RUN_DIR, cfg.GRAPHRAG_OUTPUT_DIR,
         }
         if rel_path.parts[0] in output_dirs:
             return True

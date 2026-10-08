@@ -1,0 +1,127 @@
+# Architecture (page 2 of 2)
+Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
+
+## External Imports
+
+- `readmenator.py` -> pathlib, sys
+- `readmenator/__main__.py` -> __future__, argparse, json, logging, pathlib, sys, unittest
+- `readmenator/_agent_injector.py` -> __future__, glob, importlib.util, logging, pathlib, subprocess, sys, typing
+- `readmenator/_agent_output.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
+- `readmenator/_analytics.py` -> __future__, collections, typing
+- `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
+- `readmenator/_app.py` -> __future__, dataclasses, json, logging, pathlib, typing
+- `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
+- `readmenator/_category.py` -> __future__, dataclasses, enum, typing
+- `readmenator/_concepts.py` -> __future__, collections, logging, re, typing
+- `readmenator/_config.py` -> __future__, dataclasses, typing
+- `readmenator/_cpg.py` -> __future__, hashlib, json, typing
+- `readmenator/_cursorrules_generator.py` -> __future__, pathlib, typing
+- `readmenator/_dataflow.py` -> __future__, logging, re, typing
+- `readmenator/_dead_code.py` -> __future__, collections, typing
+- `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, re, shutil, subprocess, typing
+- `readmenator/_documentation.py` -> __future__, collections, subprocess, typing
+- `readmenator/_embed.py` -> __future__, collections, math, re, sentence_transformers, typing
+- `readmenator/_exclusions.py` -> __future__, dataclasses, fnmatch, pathlib, typing
+- `readmenator/_explain.py` -> __future__, typing
+- `readmenator/_explorer.py` -> __future__, http.server, json, pathlib, socket, typing, urllib.parse, webbrowser
+- `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing
+- `readmenator/_forcegraph.py` -> __future__, html, json, math, pathlib, shutil, typing
+- `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
+- `readmenator/_gitmeta.py` -> __future__, pathlib, typing
+- `readmenator/_graphlayout.py` -> __future__, dataclasses, math, numpy, random, typing
+- `readmenator/_graphrag.py` -> __future__, dataclasses, json, logging, math, pathlib, re, typing
+- `readmenator/_hotspots.py` -> __future__, collections, typing
+- `readmenator/_layer_rules.py` -> __future__, typing
+- `readmenator/_layers.py` -> __future__, collections, re, typing
+- `readmenator/_linter.py` -> __future__, pathlib, typing
+- `readmenator/_mcp_server.py` -> __future__, json, logging, pathlib, sys, typing
+- `readmenator/_memory.py` -> __future__, dataclasses, datetime, json, pathlib, re, typing
+- `readmenator/_mermaid.py` -> __future__, re, typing
+- `readmenator/_models.py` -> __future__, dataclasses, typing
+- `readmenator/_pipeline.py` -> __future__, typing
+- `readmenator/_projections.py` -> __future__, typing
+- `readmenator/_provenance.py` -> __future__, dataclasses, typing
+- `readmenator/_purpose.py` -> __future__, re, typing
+- `readmenator/_query.py` -> __future__, collections, typing
+- `readmenator/_rank.py` -> __future__, dataclasses, math, typing
+- `readmenator/_readme_injector.py` -> __future__, logging, pathlib, typing
+- `readmenator/_refactorizer.py` -> __future__, pathlib, re, typing
+- `readmenator/_resolver.py` -> __future__, pathlib, posixpath, re, typing
+- `readmenator/_rule_gen.py` -> __future__, collections, os, pathlib, re, typing
+- `readmenator/_sarif.py` -> __future__, json, typing
+- `readmenator/_scanner.py` -> __future__, logging, pathlib, re, typing
+- `readmenator/_scantext.py` -> __future__, typing
+- `readmenator/_security.py` -> __future__, dataclasses, pathlib, re, typing
+- `readmenator/_skill_installer.py` -> __future__, logging, pathlib, typing
+- `readmenator/_taint.py` -> __future__, collections, typing
+- `readmenator/_uml.py` -> __future__, collections, enum, typing
+- `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, typing
+- `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
+- `readmenator/_wiki.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
+- `readmenator/_yaralite.py` -> __future__, dataclasses, re, typing
+- `readmenator/parsers/__init__.py` -> __future__, typing
+- `readmenator/parsers/_assembly.py` -> __future__, re
+- `readmenator/parsers/_base.py` -> __future__, re, typing
+- `readmenator/parsers/_c.py` -> __future__, re
+- `readmenator/parsers/_csharp.py` -> __future__, re
+- `readmenator/parsers/_dart.py` -> __future__, re
+- `readmenator/parsers/_elixir.py` -> __future__, re
+- `readmenator/parsers/_gdscript.py` -> __future__, re
+- `readmenator/parsers/_go.py` -> __future__, re
+- `readmenator/parsers/_java.py` -> __future__, re
+- `readmenator/parsers/_javascript.py` -> __future__, re
+- `readmenator/parsers/_kotlin.py` -> __future__, re
+- `readmenator/parsers/_lua.py` -> __future__, re
+- `readmenator/parsers/_nim.py` -> __future__, re
+- `readmenator/parsers/_php.py` -> __future__, re
+- `readmenator/parsers/_python.py` -> __future__, ast, warnings
+- `readmenator/parsers/_ruby.py` -> __future__, re
+- `readmenator/parsers/_rust.py` -> __future__, re
+- `readmenator/parsers/_scala.py` -> __future__, re
+- `readmenator/parsers/_shell.py` -> __future__, re
+- `readmenator/parsers/_swift.py` -> __future__, re
+- `readmenator_orchestrator.py` -> argparse, dataclasses, datetime, logging, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, typing, unittest, unittest.mock
+- `tests/test_agent_friendliness.py` -> dataclasses, json, os, pathlib, tempfile, unittest
+- `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
+- `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
+- `tests/test_analyzer.py` -> __future__, unittest
+- `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
+- `tests/test_concepts.py` -> unittest
+- `tests/test_config.py` -> dataclasses, unittest
+- `tests/test_cpg.py` -> __future__, json, unittest
+- `tests/test_cursorrules.py` -> __future__, pathlib, tempfile, unittest
+- `tests/test_dataflow.py` -> dataclasses, unittest
+- `tests/test_dead_code.py` -> __future__, unittest
+- `tests/test_diagrams.py` -> __future__, dataclasses, json, pathlib, re, tempfile, unittest
+- `tests/test_documentation.py` -> __future__, unittest
+- `tests/test_exporter.py` -> __future__, json, unittest
+- `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
+- `tests/test_graphlayout.py` -> __future__, math, unittest
+- `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
+- `tests/test_hotspots.py` -> __future__, unittest
+- `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
+- `tests/test_interactive_graph.py` -> __future__, json, pathlib, tempfile, unittest
+- `tests/test_layer_rules.py` -> __future__, unittest
+- `tests/test_linter.py` -> __future__, unittest
+- `tests/test_mcp_server.py` -> __future__, json, pathlib, tempfile, typing, unittest
+- `tests/test_memory.py` -> __future__, dataclasses, pathlib, tempfile, unittest
+- `tests/test_mermaid.py` -> unittest
+- `tests/test_models.py` -> unittest
+- `tests/test_parsers.py` -> unittest, warnings
+- `tests/test_parsers_new.py` -> __future__, unittest
+- `tests/test_parsers_property.py` -> __future__, hypothesis, pathlib, sys, typing, unittest
+- `tests/test_query.py` -> unittest
+- `tests/test_ranking.py` -> __future__, pytest, typing
+- `tests/test_readme_injector.py` -> __future__, pathlib, shutil, tempfile, unittest
+- `tests/test_refactorizer.py` -> __future__, pathlib, tempfile, unittest
+- `tests/test_resolver.py` -> __future__, unittest
+- `tests/test_rule_gen.py` -> __future__, pathlib, tempfile, unittest
+- `tests/test_sarif.py` -> __future__, json, unittest
+- `tests/test_scanner.py` -> os, pathlib, re, shutil, tempfile, unittest
+- `tests/test_security.py` -> __future__, os, pathlib, tempfile, unittest
+- `tests/test_taint.py` -> __future__, unittest
+- `tests/test_taint_bdd.py` -> __future__, pathlib, pytest_bdd, tempfile, typing, unittest
+- `tests/test_uml.py` -> __future__, unittest
+- `tests/test_video.py` -> hashlib, pathlib, unittest
+- `tests/test_wiki.py` -> dataclasses, json, os, pathlib, tempfile, unittest
+

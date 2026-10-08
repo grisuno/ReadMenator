@@ -1921,13 +1921,15 @@ __HOME_LINK__
 <div class="views" id="chapters"></div>
 <div class="counts" id="role-counts"></div>
 <div class="row">1. Search (/) or click a node to focus it. 2. Upstream and Downstream trace authored reach. 3. Path probes the exact route between two ids. 4. Play walks the guided chapters. Drag nodes to rearrange, Settle to relax, ? for every shortcut.</div>
-<div class="routebox"><input id="route-from" placeholder="route from id" aria-label="Route source" title="Source node id for the route probe"><input id="route-to" placeholder="route to id" aria-label="Route target" title="Target node id for the route probe"><button type="button" data-action="route" aria-label="Probe directed route" title="Highlight the shortest authored directed path">Path</button></div>
+<div class="routebox guide"><input id="route-from" placeholder="route from id" aria-label="Route source" title="Source node id for the route probe"><input id="route-to" placeholder="route to id" aria-label="Route target" title="Target node id for the route probe"><button type="button" data-action="route" aria-label="Probe directed route" title="Highlight the shortest authored directed path">Path</button></div>
 <div class="journey" id="journey"></div>
 <div class="receipt" id="receipt"></div>
 </aside>
 </div>
+<div class="peek" id="peek" role="tooltip"></div>
 <dialog id="guide" aria-label="Diagram guide dialog">
 <h2>Diagram guide</h2>
+<p>Hover a node for a preview card; click it to open its passport with a neighbourhood mini-map, metrics, symbols, and clickable neighbours. <kbd>Backspace</kbd> goes back.</p>
 <p><kbd>/</kbd> search &middot; <kbd>R</kbd> route probe &middot; <kbd>L</kbd> role lens &middot; <kbd>M</kbd> overview &middot; <kbd>P</kbd> play &middot; <kbd>[</kbd> <kbd>]</kbd> chapters &middot; <kbd>F</kbd> present &middot; <kbd>G</kbd> settle &middot; <kbd>S</kbd> style &middot; <kbd>T</kbd> theme &middot; <kbd>E</kbd> export &middot; <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd> zoom</p>
 <p>Drag any node to rearrange it; edges follow. Settle relaxes the whole layout with one deterministic force pass. Reload restores the authored layout.</p>
 <p>Deep links restore <code>#focus=id</code>, <code>#focus=id&amp;reach=upstream|downstream</code>, <code>#route=a~b</code>, <code>#lens=role</code>, and <code>#view=id</code>. Motion is finite, honors reduced-motion settings, and never enters exports.</p>
@@ -2462,6 +2464,31 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains M
 .routebox button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font:inherit;font-size:12px;cursor:pointer}
 .present .layout{grid-template-columns:minmax(0,1fr)}
 .present .passport{display:none}
+.passport.focused .guide{display:none!important}
+.filedoc.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.peek{position:fixed;z-index:20;pointer-events:none;max-width:340px;background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:12px;padding:10px 12px;font-size:11.5px;line-height:1.55;box-shadow:0 18px 40px rgba(0,0,0,.35);display:none}
+.peek b{font-size:13px}
+.peek .m{color:var(--muted)}
+.peek .sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.peek ul{margin:6px 0 0;padding-left:16px}
+.detail-nav{display:flex;gap:6px;margin:0 0 10px}
+.detail-nav button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:4px 9px;font:inherit;font-size:11px;cursor:pointer}
+.detail-nav button:disabled{opacity:.4;cursor:default}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.tile{border:1px solid var(--border);border-radius:9px;padding:6px;background:var(--canvas);text-align:center}
+.tile b{display:block;font-size:15px}
+.tile span{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ego{display:block;width:100%;height:auto;margin:6px 0 4px;border:1px solid var(--border);border-radius:10px;background:var(--canvas)}
+.ego g[data-node]{cursor:pointer}
+.ego g[data-node]:hover circle{stroke-width:3}
+.ego text{font-family:inherit;font-size:10.5px;fill:var(--ink)}
+.ego .cap{fill:var(--muted);font-size:9.5px;letter-spacing:.08em}
+.nbs{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 8px}
+.nbs button{display:inline-flex;align-items:center;gap:5px;background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:999px;padding:2px 9px;font:inherit;font-size:11px;cursor:pointer}
+.nbs button:hover,.nbs button:focus-visible{border-color:#22d3ee;outline:none}
+.nbs i{width:8px;height:8px;border-radius:50%}
+.sublabel{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:8px}
+.symfilter{width:100%;background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font:inherit;font-size:11.5px;margin:4px 0 6px}
 dialog{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:12px;max-width:520px}
 dialog kbd{border:1px solid var(--border);border-radius:6px;padding:1px 6px;font-size:11px}
 @media (max-width:960px){.layout{grid-template-columns:minmax(0,1fr)}.passport{border-left:none;border-top:1px solid var(--border)}}
@@ -2497,10 +2524,10 @@ __HOME_LINK__
 <aside class="passport" aria-live="polite" aria-label="Semantic passport">
 <h2 id="passport-title">Diagram guide</h2>
 <div class="row" id="passport-meta"></div>
-<div class="views" id="chapters"></div>
-<div class="counts" id="role-counts"></div>
-<div class="row">Node size = number of links. Color = code community (press C for roles). Labels show the most connected files; zoom in for the rest.</div>
-<div class="row">1. Drag any node; physics settles the rest. 2. Click a node to focus it. 3. Upstream and Downstream trace authored reach. 4. Path probes the exact route between two ids. 5. Play walks the guided chapters. Press ? for every shortcut. This page loads its network engine from a CDN and needs network access.</div>
+<div class="views guide" id="chapters"></div>
+<div class="counts guide" id="role-counts"></div>
+<div class="row guide">Node size = number of links. Color = code community (press C for roles). Labels show the most connected files; zoom in for the rest.</div>
+<div class="row guide">1. Drag any node; physics settles the rest. 2. Click a node to focus it. 3. Upstream and Downstream trace authored reach. 4. Path probes the exact route between two ids. 5. Play walks the guided chapters. Press ? for every shortcut. This page loads its network engine from a CDN and needs network access.</div>
 <div class="routebox"><input id="route-from" placeholder="route from id" aria-label="Route source" title="Source node id for the route probe"><input id="route-to" placeholder="route to id" aria-label="Route target" title="Target node id for the route probe"><button type="button" data-action="route" aria-label="Probe directed route" title="Highlight the shortest authored directed path">Path</button></div>
 <div class="journey" id="journey"></div>
 <div class="symbols" id="node-symbols"></div>
@@ -2557,19 +2584,23 @@ var degree={};rawNodes.forEach(function(n){degree[n.id]=0;});
 rawEdges.forEach(function(e){if(e.from in degree){degree[e.from]++;}if(e.to in degree){degree[e.to]++;}});
 var ranked=rawNodes.slice().sort(function(a,b){return (degree[b.id]-degree[a.id])||(a.id<b.id?-1:1);});
 var labelled={};ranked.slice(0,meta.labelTopN||25).forEach(function(n){labelled[n.id]=true;});
-function plainTitle(n){var t=document.createElement("div");t.style.maxWidth="360px";t.style.whiteSpace="normal";
-t.textContent=n.id+(n.communityLabel?" | "+n.communityLabel:"")+" | "+degree[n.id]+" links"+(n.doc?" | "+n.doc.slice(0,220):"");return t;}
 function colorFor(n){if(state.colorMode==="community"&&n.community>=0&&communityColor[n.community]){return communityColor[n.community];}return roleColors[n.group]||"#94a3b8";}
+var dimSet=null;
 function paintNodes(){
 var palette=themeBox();
-var update=rawNodes.map(function(n){var c=colorFor(n);
-return {id:n.id,color:{background:c,border:palette.box,highlight:{background:c,border:palette.ink},hover:{background:c,border:palette.ink}},
-font:{color:palette.ink,size:labelled[n.id]?22:14,face:"monospace",strokeWidth:5,strokeColor:palette.box}};});
-visNodes.update(update);renderLegend();}
-var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:labelled[n.id]?n.label:" ",title:plainTitle(n),group:n.group,shape:"dot",value:1+degree[n.id]};}));
+var update=rawNodes.map(function(n){var dim=dimSet&&!dimSet[n.id];var c=dim?"rgba(100,116,139,0.18)":colorFor(n);
+return {id:n.id,color:{background:c,border:dim?"rgba(100,116,139,0.25)":palette.box,highlight:{background:colorFor(n),border:palette.ink},hover:{background:colorFor(n),border:palette.ink}},
+font:{color:dim?"rgba(148,163,184,0.35)":palette.ink,size:labelled[n.id]||(dimSet&&!dim)?22:14,face:"monospace",strokeWidth:5,strokeColor:palette.box},
+label:(labelled[n.id]||allLabels||(dimSet&&!dim))?n.label:" "};});
+visNodes.update(update);
+if(typeof visEdges!=="undefined"){visEdges.update(rawEdges.map(function(e,index){var on=dimSet&&dimSet[e.from]&&dimSet[e.to];
+return {id:"e"+index,width:on?2.2:1,color:{color:on?"#22d3ee":"#64748b",opacity:dimSet?(on?0.95:0.08):0.28,highlight:"#22d3ee",hover:"#22d3ee",inherit:false}};}));}
+renderLegend();}
+function setDim(allowed){dimSet=allowed;paintNodes();}
 var allLabels=false;
+var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:labelled[n.id]?n.label:" ",group:n.group,shape:"dot",value:1+degree[n.id]};}));
 function syncLabels(scale){var want=scale>=1.1;if(want===allLabels){return;}allLabels=want;
-visNodes.update(rawNodes.filter(function(n){return !labelled[n.id];}).map(function(n){return {id:n.id,label:want?n.label:" "};}));}
+visNodes.update(rawNodes.filter(function(n){return !labelled[n.id]&&!(dimSet&&dimSet[n.id]);}).map(function(n){return {id:n.id,label:want?n.label:" "};}));}
 var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,title:e.label,arrows:{to:{enabled:true,scaleFactor:0.45}},dashes:!!e.dashes,smooth:{type:"continuous"},color:{color:"#64748b",opacity:0.28,highlight:"#22d3ee",hover:"#22d3ee",inherit:false},width:1,selectionWidth:2,hoverWidth:1.5};}));
 var network=new vis.Network(container,{nodes:visNodes,edges:visEdges},{
 physics:physics,
@@ -2586,26 +2617,56 @@ return String(text==null?"":text).replace(/&/g,"&amp;").replace(/</g,"&lt;").rep
 function neighborNames(ids){
 var cap=(meta.neighbors||8);
 return ids.slice().sort().slice(0,cap).map(function(id){var n=nodeById(id);return escapeHtml(n?n.label:id);});}
+var detailHistory=[];
+function uniq(list){var seen={};return list.filter(function(x){if(seen[x]){return false;}seen[x]=true;return true;});}
+function short(text,n){text=String(text||"");return text.length>n?text.slice(0,n-1)+"…":text;}
+function egoSvg(node,ins,outs){
+var cap=7,rowH=26,leftL=ins.slice(0,cap),rightL=outs.slice(0,cap);
+var rows=Math.max(1,leftL.length,rightL.length);var h=Math.max(120,rows*rowH+46);var w=288,cx=w/2,cy=h/2+6;
+var svg='<svg class="ego" viewBox="0 0 '+w+' '+h+'" role="img" aria-label="Neighbourhood of '+escapeHtml(node.label)+'">';
+svg+='<text class="cap" x="8" y="14">USED BY '+ins.length+'</text><text class="cap" x="'+(w-8)+'" y="14" text-anchor="end">IMPORTS '+outs.length+'</text>';
+function col(list,x,anchor,dir){var out="";var top=cy-((list.length-1)*rowH)/2;
+list.forEach(function(id,i){var n=nodeById(id);var y=top+i*rowH;var c=n?colorFor(n):"#94a3b8";
+out+='<path d="M'+(dir<0?x+6:cx+16)+' '+(dir<0?y:cy)+' C'+(cx+(dir<0?-60:60)*0.5)+' '+(dir<0?y:cy)+' '+(cx+(dir<0?-60:60)*0.5)+' '+(dir<0?cy:y)+' '+(dir<0?cx-16:x-6)+' '+(dir<0?cy:y)+'" fill="none" stroke="'+c+'" stroke-opacity="0.55" stroke-width="1.4"/>';
+out+='<g data-node="'+escapeHtml(id)+'"><title>'+escapeHtml(id)+'</title><circle cx="'+x+'" cy="'+y+'" r="6" fill="'+c+'" stroke="var(--canvas)" stroke-width="2"/>';
+out+='<text x="'+(anchor==="end"?x-10:x+10)+'" y="'+(y+3.5)+'" text-anchor="'+anchor+'">'+escapeHtml(short(n?n.label:id,12))+'</text></g>';});
+return out;}
+svg+=col(leftL,94,"end",-1);svg+=col(rightL,w-94,"start",1);
+if(ins.length>cap){svg+='<text class="cap" x="8" y="'+(h-6)+'">+'+(ins.length-cap)+' more</text>';}
+if(outs.length>cap){svg+='<text class="cap" x="'+(w-8)+'" y="'+(h-6)+'" text-anchor="end">+'+(outs.length-cap)+' more</text>';}
+svg+='<circle cx="'+cx+'" cy="'+cy+'" r="14" fill="'+colorFor(node)+'" stroke="#22d3ee" stroke-width="2.5"/>';
+svg+='<text x="'+cx+'" y="'+(cy-22)+'" text-anchor="middle" style="font-weight:700">'+escapeHtml(short(node.label,18))+'</text>';
+return svg+"</svg>";}
+function chipList(ids){
+var cap=(meta.neighbors||8)*3;
+return '<div class="nbs">'+ids.slice(0,cap).map(function(id){var n=nodeById(id);return '<button type="button" data-goto="'+escapeHtml(id)+'" title="'+escapeHtml(id)+'"><i style="background:'+(n?colorFor(n):"#94a3b8")+'"></i>'+escapeHtml(n?n.label:id)+'</button>';}).join("")+(ids.length>cap?'<span class="sublabel">+'+(ids.length-cap)+' more</span>':"")+"</div>";}
 function renderNodeDetail(node){
 if(!nodeSymbols){return;}
-var ins=incoming(node.id).map(function(e){return e.from;});
-var outs=outgoing(node.id).map(function(e){return e.to;});
-var html="";
-if(node.doc){html+='<p class="filedoc">'+escapeHtml(node.doc)+"</p>";}
+var ins=uniq(incoming(node.id).map(function(e){return e.from;})).sort(function(a,b){return degree[b]-degree[a]||(a<b?-1:1);});
+var outs=uniq(outgoing(node.id).map(function(e){return e.to;})).sort(function(a,b){return degree[b]-degree[a]||(a<b?-1:1);});
+var rank=ranked.indexOf(node)+1;
+var html='<div class="detail-nav"><button type="button" data-detail="back" '+(detailHistory.length?"":"disabled")+' title="Previous node (Backspace)">&larr; Back</button><button type="button" data-detail="fit" title="Zoom to this neighbourhood">Fit</button><button type="button" data-detail="clear" title="Clear focus (Esc)">Clear</button></div>';
+if(node.communityLabel){html+='<div class="nbs"><button type="button" data-community="'+node.community+'" title="Isolate this community"><i style="background:'+(communityColor[node.community]||"#94a3b8")+'"></i>'+escapeHtml(node.communityLabel)+'</button></div>';}
+html+='<div class="tiles"><div class="tile"><b>'+(node.symbolTotal||0)+'</b><span>symbols</span></div><div class="tile"><b>'+ins.length+'</b><span>used by</span></div><div class="tile"><b>'+outs.length+'</b><span>imports</span></div><div class="tile"><b>#'+rank+'</b><span>by links</span></div></div>';
+if(node.doc){html+='<p class="filedoc clamp" title="Click to expand" data-clamp="1">'+escapeHtml(node.doc)+"</p>";}
+html+=egoSvg(node,ins,outs);
+if(ins.length){html+='<div class="sublabel">Used by</div>'+chipList(ins);}
+if(outs.length){html+='<div class="sublabel">Imports</div>'+chipList(outs);}
 var symbols=node.symbols||[];
 if(symbols.length){
-html+="<table><thead><tr><th>Symbol</th><th>Kind</th><th>Line</th></tr></thead><tbody>";
+html+='<div class="sublabel">Symbols</div><input class="symfilter" id="symfilter" type="search" placeholder="filter symbols" aria-label="Filter symbols">';
+html+='<table><thead><tr><th>Symbol</th><th>Kind</th><th>Line</th></tr></thead><tbody id="symrows">';
 symbols.forEach(function(s){
 var docTitle=s.doc?(' title="'+escapeHtml(s.doc)+'"'):"";
-var name="<span"+docTitle+">"+escapeHtml(s.name)+"</span>"+(s.signature?" <code>"+escapeHtml(s.signature)+"</code>":"");
-html+="<tr><td>"+name+"</td><td>"+escapeHtml(s.kind)+"</td><td>"+escapeHtml(s.line)+"</td></tr>";});
+var name="<span"+docTitle+"><b>"+escapeHtml(s.name)+"</b></span>"+(s.signature?" <code>"+escapeHtml(s.signature)+"</code>":"")+(s.doc?'<div class="filedoc" style="margin:2px 0 0">'+escapeHtml(s.doc)+"</div>":"");
+html+='<tr data-name="'+escapeHtml(String(s.name).toLowerCase())+'"><td>'+name+"</td><td>"+escapeHtml(s.kind)+"</td><td>"+escapeHtml(s.line)+"</td></tr>";});
 html+="</tbody></table>";
 var hidden=(node.symbolTotal||symbols.length)-symbols.length;
 if(hidden>0){html+='<p class="filedoc">+'+hidden+' more symbols in source.</p>';}}
 else{html+='<p class="filedoc">No symbols extracted.</p>';}
-html+='<p class="neighbors">Imports '+outs.length+(outs.length?": "+neighborNames(outs).join(", "):"")+"</p>";
-html+='<p class="neighbors">Imported by '+ins.length+(ins.length?": "+neighborNames(ins).join(", "):"")+"</p>";
-nodeSymbols.innerHTML=html;}
+nodeSymbols.innerHTML=html;
+var filter=document.getElementById("symfilter");
+if(filter){filter.addEventListener("input",function(){var q=filter.value.trim().toLowerCase();nodeSymbols.querySelectorAll("#symrows tr").forEach(function(tr){tr.style.display=!q||tr.getAttribute("data-name").indexOf(q)>=0?"":"none";});});}}
 function clearNodeDetail(){
 if(nodeSymbols){nodeSymbols.innerHTML="";}
 passportTitle.textContent="Diagram guide";}
@@ -2632,21 +2693,28 @@ visNodes.update(nodeUpdate);
 var edgeUpdate=rawEdges.map(function(e,index){return {id:"e"+index,hidden:!(allowed[e.from]&&allowed[e.to])};});
 visEdges.update(edgeUpdate);}
 function showAll(){
+var pp=document.querySelector(".passport");if(pp){pp.classList.remove("focused");}
+if(dimSet){dimSet=null;paintNodes();}
 var nodeUpdate=rawNodes.map(function(n){return {id:n.id,hidden:false};});
 visNodes.update(nodeUpdate);
 var edgeUpdate=rawEdges.map(function(e,index){return {id:"e"+index,hidden:false};});
 visEdges.update(edgeUpdate);}
 function setHash(value){try{history.replaceState(null,"",value);}catch(e){location.hash=value;}}
-function focusNode(id,reach){
+function focusNode(id,reach,fromHistory){
 var node=nodeById(id);if(!node){return;}
+if(state.focus&&state.focus!==id&&!fromHistory){detailHistory.push(state.focus);}
 state.focus=id;state.reach=reach||null;
 var allowed={};allowed[id]=true;
 if(state.reach){var found=bfsReach(id,state.reach);found.members.forEach(function(m){allowed[m]=true;});
 var hops=0;for(var k in found.hops){if(found.hops[k]>hops){hops=found.hops[k];}}
 receipt.textContent=(state.reach==="downstream"?"Downstream":"Upstream")+" reach: "+found.members.length+" nodes, "+hops+" max hops. Authored relationships only.";}
-else{receipt.textContent="In: "+incoming(id).length+" | Out: "+outgoing(id).length+" | Views: "+views.length;}
-showOnly(allowed);
+else{receipt.textContent="In: "+incoming(id).length+" | Out: "+outgoing(id).length+" | Views: "+views.length;
+incoming(id).forEach(function(e){allowed[e.from]=true;});outgoing(id).forEach(function(e){allowed[e.to]=true;});}
+if(state.reach){setDim(null);showOnly(allowed);}else{showAll();setDim(allowed);}
+document.querySelector(".passport").classList.add("focused");
 network.selectNodes([id]);
+try{network.fit({nodes:Object.keys(allowed),animation:reduced?false:{duration:600,easingFunction:"easeInOutQuad"}});}catch(e){}
+setTimeout(function(){if(state.focus===id&&dimSet){try{network.fit({nodes:Object.keys(dimSet),animation:reduced?false:{duration:500}});}catch(e){}}},1600);
 passportTitle.textContent=node.label;
 passportMeta.textContent=node.id+" | role "+node.group+" | "+(node.language||"")+" | "+(node.symbolTotal||0)+" symbols";
 renderNodeDetail(node);
@@ -2749,9 +2817,37 @@ if(hash.indexOf("#community=")===0){var cid=parseInt(hash.slice(11),10);communit
 if(hash.indexOf("#view=")===0){var id=decodeURIComponent(hash.slice(6));for(var i=0;i<views.length;i++){if(views[i].id===id){showView(i);return;}}return;}
 if(hash.indexOf("#focus=")===0){var rest=hash.slice(7).split("&reach=");focusNode(decodeURIComponent(rest[0]),rest[1]?decodeURIComponent(rest[1]):null);return;}}
 network.on("click",function(params){
-if(params.nodes.length>0){focusNode(params.nodes[0]);}});
+if(params.nodes.length>0){focusNode(params.nodes[0]);}
+else if(params.edges.length===0&&state.focus&&!state.reach){showAll();state.focus=null;clearNodeDetail();setHash("#");}});
+var peek=document.getElementById("peek");
+network.on("hoverNode",function(params){
+var n=nodeById(params.node);if(!n||!peek){return;}
+var ins=incoming(n.id).length,outs=outgoing(n.id).length;
+var syms=(n.symbols||[]).slice(0,4).map(function(s){return "<li>"+escapeHtml(s.kind)+" <b>"+escapeHtml(s.name)+"</b> L"+escapeHtml(s.line)+"</li>";}).join("");
+peek.innerHTML='<b><span class="sw" style="background:'+colorFor(n)+'"></span>'+escapeHtml(n.label)+'</b><div class="m">'+escapeHtml(n.id)+'</div>'+
+'<div>'+(n.symbolTotal||0)+' symbols &middot; used by '+ins+' &middot; imports '+outs+'</div>'+
+(n.communityLabel?'<div class="m">'+escapeHtml(n.communityLabel)+' &middot; '+escapeHtml(n.group)+'</div>':'<div class="m">'+escapeHtml(n.group)+'</div>')+
+(n.doc?'<div style="margin-top:4px">'+escapeHtml(short(n.doc,220))+'</div>':"")+(syms?"<ul>"+syms+"</ul>":"")+'<div class="m" style="margin-top:4px">click to open passport</div>';
+var p=params.event&&params.event.center?params.event.center:{x:params.pointer.DOM.x+container.getBoundingClientRect().left,y:params.pointer.DOM.y+container.getBoundingClientRect().top};
+peek.style.display="block";
+var left=Math.min(window.innerWidth-peek.offsetWidth-12,p.x+16),top=Math.min(window.innerHeight-peek.offsetHeight-12,p.y+16);
+peek.style.left=Math.max(8,left)+"px";peek.style.top=Math.max(8,top)+"px";});
+network.on("blurNode",function(){if(peek){peek.style.display="none";}});
+network.on("dragStart",function(){if(peek){peek.style.display="none";}});
+nodeSymbols.addEventListener("click",function(ev){
+var clamp=ev.target.closest?ev.target.closest("[data-clamp]"):null;if(clamp){clamp.classList.toggle("clamp");return;}
+var t=ev.target.closest?ev.target.closest("[data-goto],[data-node],[data-detail],[data-community]"):null;if(!t){return;}
+var go=t.getAttribute("data-goto")||t.getAttribute("data-node");
+if(go){focusNode(go);return;}
+var cid=t.getAttribute("data-community");
+if(cid!==null){communities.forEach(function(c){if(String(c.id)===cid){isolateCommunity(c.id,c.label);}});return;}
+var act=t.getAttribute("data-detail");
+if(act==="back"){var prev=detailHistory.pop();if(prev){focusNode(prev,null,true);}}
+else if(act==="fit"){var ids=[state.focus];incoming(state.focus).forEach(function(e){ids.push(e.from);});outgoing(state.focus).forEach(function(e){ids.push(e.to);});try{network.fit({nodes:ids,animation:reduced?false:{duration:500}});}catch(e){}}
+else if(act==="clear"){showAll();state.focus=null;detailHistory=[];clearNodeDetail();setHash("#");}});
 network.on("zoom",function(p){syncLabels(p.scale);});
-network.on("stabilized",function(){receipt.textContent="Physics stabilized: "+rawNodes.length+" nodes placed.";});
+network.on("stabilized",function(){receipt.textContent="Physics stabilized: "+rawNodes.length+" nodes placed.";
+if(state.focus&&dimSet){try{network.fit({nodes:Object.keys(dimSet),animation:reduced?false:{duration:500}});}catch(e){}}});
 document.querySelectorAll("[data-action]").forEach(function(btn){
 btn.addEventListener("click",function(){
 var action=btn.getAttribute("data-action");
@@ -2799,7 +2895,8 @@ else if(ev.key==="+"){try{network.zoomIn();}catch(e){}}
 else if(ev.key==="-"){try{network.zoomOut();}catch(e){}}
 else if(ev.key==="0"){try{network.fit();}catch(e){}}
 else if(ev.key==="C"||ev.key==="c"){toggleColorMode();}
-else if(ev.key==="Escape"){showAll();state.focus=null;}});
+else if(ev.key==="Backspace"){var prev=detailHistory.pop();if(prev){ev.preventDefault();focusNode(prev,null,true);}}
+else if(ev.key==="Escape"){showAll();state.focus=null;detailHistory=[];}});
 passportMeta.textContent=(meta.nodeCount||rawNodes.length)+" of "+(meta.totalFiles||rawNodes.length)+" files | "+(meta.edgeCount||rawEdges.length)+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
 receipt.textContent="Live physics network. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
 renderChapters();renderRoleCounts();readHash();
@@ -2855,6 +2952,12 @@ button{font:inherit}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
 .chip{font-size:10.5px;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:2px 8px}
 .glyph{width:80px;height:64px;fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round}
+.thumb{display:block;width:100%;height:auto;aspect-ratio:32/15;border:1px solid var(--border);border-radius:10px;background:radial-gradient(circle at 50% 40%,var(--glow),transparent 70%),var(--canvas);margin:0 0 10px}
+.card.featured{grid-column:span 2;border-color:color-mix(in srgb,var(--accent) 45%,var(--border))}
+.card.featured:hover .thumb circle{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.55}}
+@media (max-width:720px){.card.featured{grid-column:auto}}
+@media (prefers-reduced-motion:reduce){.card.featured:hover .thumb circle{animation:none}}
 .glyph .flow{stroke:var(--accent2);stroke-dasharray:4 4}
 .map-card:hover .glyph .flow{animation:flow .8s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-16}}
@@ -3139,7 +3242,7 @@ class DocsSitePublisher:
             candidate = base / name
             if candidate.is_file():
                 candidates.append(candidate)
-        for dirname in (self._config.AGENT_OUTPUT_DIR, self._config.WIKI_OUTPUT_DIR):
+        for dirname in (self._config.AGENT_OUTPUT_DIR, self._config.WIKI_OUTPUT_DIR, self._config.GRAPHRAG_OUTPUT_DIR):
             docs_dir = base / dirname
             if not docs_dir.is_dir():
                 continue
@@ -3356,11 +3459,14 @@ class DocsSitePublisher:
         lines.append("")
         agent_dir = self._config.AGENT_OUTPUT_DIR + "/"
         wiki_dir = self._config.WIKI_OUTPUT_DIR + "/"
-        groups: Dict[str, List[Dict[str, str]]] = {"wiki": [], "agent": [], "other": []}
+        graphrag_dir = self._config.GRAPHRAG_OUTPUT_DIR + "/"
+        groups: Dict[str, List[Dict[str, str]]] = {"wiki": [], "graphrag": [], "agent": [], "other": []}
         for entry in doc_entries or []:
             rel = entry.get("name", "")
             if rel.startswith(wiki_dir):
                 groups["wiki"].append(entry)
+            elif rel.startswith(graphrag_dir):
+                groups["graphrag"].append(entry)
             elif rel.startswith(agent_dir):
                 groups["agent"].append(entry)
             else:
@@ -3373,7 +3479,7 @@ class DocsSitePublisher:
             rank = priority.index(base) if base in priority else len(priority)
             return rank, entry.get("name", "")
 
-        titles = (("wiki", "Wiki"), ("agent", "Agent Docs"), ("other", "Project Docs"))
+        titles = (("wiki", "Wiki"), ("graphrag", "GraphRAG"), ("agent", "Agent Docs"), ("other", "Project Docs"))
         for key, title in titles:
             if not groups[key]:
                 continue
@@ -3425,9 +3531,8 @@ class DocsSitePublisher:
             href_prefix = self._href_prefix()
         title = self._escape(project_name.strip() or "Project")
         entries = list(doc_entries or [])
-        cards = [self._card(kind, maps[kind], href_prefix) for kind in sorted(maps)]
-        for extra in extra_cards or []:
-            cards.append(self._extra_card(extra))
+        cards = [self._extra_card(extra) for extra in extra_cards or []]
+        cards.extend(self._card(kind, maps[kind], href_prefix) for kind in sorted(maps))
         gallery = "\n".join(cards) if cards else (
             '<p class="empty">No validated maps were published yet.</p>'
         )
@@ -3558,6 +3663,8 @@ class DocsSitePublisher:
         """Return the gallery group a published document belongs to."""
         if name.startswith(self._config.WIKI_OUTPUT_DIR + "/"):
             return "wiki"
+        if name.startswith(self._config.GRAPHRAG_OUTPUT_DIR + "/"):
+            return "graphrag"
         if name.startswith(self._config.AGENT_OUTPUT_DIR + "/recipes/"):
             return "recipes"
         if name.startswith(self._config.AGENT_OUTPUT_DIR + "/"):
@@ -3587,7 +3694,7 @@ class DocsSitePublisher:
             base = match.group("base") + ".md" if match else name
             page = int(match.group("page")) if match else 1
             pages.setdefault(base, []).append((page, entry))
-        groups: Dict[str, List[str]] = {"wiki": [], "project": [], "agent": [], "recipes": []}
+        groups: Dict[str, List[str]] = {"wiki": [], "graphrag": [], "project": [], "agent": [], "recipes": []}
         lead = ("index.md", "INDEX.md", self._config.OUTPUT_FILENAME, "README.md")
 
         def doc_order(base: str) -> Tuple[int, str]:
@@ -3626,6 +3733,7 @@ class DocsSitePublisher:
             )
         titles = (
             ("wiki", "Wiki", "Concept pages per code community: start with index.md."),
+            ("graphrag", "GraphRAG", "Community report hierarchy for agents. Query it with: readmenator . ask \"question\" (or MCP readmenator.graphrag)."),
             ("project", "Project docs", "Knowledge base, README, and policies."),
             ("agent", "Agent docs", "Grep-friendly indexes for AI agents (also useful for humans)."),
             ("recipes", "Recipes", "Step-by-step tasks grounded in this codebase."),
@@ -3744,11 +3852,13 @@ class DocsSitePublisher:
             HTML card fragment with the same gallery styling as map cards.
         """
         kind = str(entry.get("kind", "extra"))
+        thumb = str(entry.get("thumb", ""))
+        visual = thumb if thumb.startswith('<svg class="thumb"') else self._glyph(kind)
         return (
-            '<article class="card map-card" data-kind="'
+            '<article class="card map-card featured" data-kind="'
             + self._escape(kind)
             + '">'
-            + self._glyph(kind)
+            + visual
             + "<h3>"
             + self._escape(str(entry.get("title", kind)))
             + "</h3><p>"

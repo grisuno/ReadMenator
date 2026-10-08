@@ -16,11 +16,12 @@ from readmenator._cache import FileCache, source_fingerprint
 from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
-from readmenator._diagrams import DocsSitePublisher, SystemMap
+from readmenator._diagrams import DocsSitePublisher
 from readmenator._explorer import build_state
 from readmenator._explorer import serve as _serve_explorer
 from readmenator._gh_wiki import WikiPublishResult
 from readmenator._gitmeta import read_git_head
+from readmenator._graphrag import GraphRagIndex, GraphRagSearcher, RagContext
 from readmenator._layers import LayerDetector
 from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
@@ -134,7 +135,7 @@ class readmenatorApplication:
         ranked: Optional[RankedResult] = None
         if self._config.RANKING_ENABLED:
             try:
-                cat = self._factory.build_typed_graph(nodes, edges, resolved_edges)
+                self._factory.build_typed_graph(nodes, edges, resolved_edges)
                 tg = self._factory.last_typed_graph
                 if tg is not None:
                     ranker = self._factory.make_ranker(tg)
@@ -195,6 +196,20 @@ class readmenatorApplication:
                 )
             except Exception:
                 logger.debug("Agent wiki skipped", exc_info=True)
+
+        self._maybe_write_memory(root, nodes, analysis, analysis_v2, findings, content_map)
+
+        self._maybe_write_graphrag(
+            root, nodes, edges, resolved_edges, analysis,
+            layers, findings, analysis_v2, content_map,
+        )
+
+        try:
+            installed = self._factory.skills.maybe_install_on_run(str(root))
+            if installed:
+                logger.info("Agent skills installed: %d", len(installed))
+        except OSError:
+            logger.warning("Agent skill install skipped", exc_info=True)
 
         self._maybe_export_video(
             root, nodes, edges, resolved_edges, analysis,
@@ -582,7 +597,7 @@ class readmenatorApplication:
         nodes, edges, content_map = self._scan_with_content(target_dir)
         resolved_edges = self._last_resolved_edges
 
-        cat = self._factory.build_typed_graph(nodes, edges, resolved_edges)
+        self._factory.build_typed_graph(nodes, edges, resolved_edges)
         typed_graph = self._factory.last_typed_graph
         if typed_graph is None:
             typed_graph = self._factory.build_typed_graph(nodes, edges, resolved_edges)
@@ -670,7 +685,8 @@ class readmenatorApplication:
         analysis: Optional[AnalysisResult],
         layers: Dict[str, str],
         findings: List[SecurityFinding],
-    ) -> Optional[Dict[str, int]]:
+        home_href: Optional[str] = "index.html",
+    ) -> Optional[Dict[str, object]]:
         """Render the explorer payload and write HTML plus vendor engine.
 
         Args:
@@ -681,19 +697,63 @@ class readmenatorApplication:
             analysis: Optional community analysis.
             layers: File-to-layer mapping.
             findings: Security findings.
+            home_href: Gallery link relative to the page.
 
         Returns:
-            Node and edge counts, or None when the write fails.
+            Node and edge counts plus a thumbnail SVG, or None when the write fails.
         """
         try:
-            payload = self._factory.forcegraph.build_payload(nodes, edges, resolved, analysis, layers, findings)
+            renderer = self._factory.forcegraph
+            payload = renderer.build_payload(nodes, edges, resolved, analysis, layers, findings)
             analytics = self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers)
-            self._factory.forcegraph.write(str(dest), payload, analytics)
+            renderer.write(str(dest), payload, analytics, home_href=home_href)
             logger.info("Force-graph explorer: %s", dest)
-            return {"nodes": len(payload["nodes"]), "edges": len(payload["edges"])}
+            return {"nodes": len(payload["nodes"]), "edges": len(payload["edges"]),
+                    "thumb": renderer.thumbnail_svg(payload)}
         except Exception:
             logger.debug("Force-graph explorer skipped", exc_info=True)
             return None
+
+    def _forcegraph_card(
+        self,
+        dest: Path,
+        href: str,
+        home_href: str,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Dict[str, str],
+        findings: List[SecurityFinding],
+    ) -> Optional[Dict[str, str]]:
+        """Write the explorer page and return its gallery card (None on failure).
+
+        Args:
+            dest: Destination HTML path.
+            href: Card link relative to the gallery index.
+            home_href: Gallery link relative to the explorer page.
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved: Resolved-import edges.
+            analysis: Community analysis.
+            layers: File-to-layer mapping.
+            findings: Security findings.
+
+        Returns:
+            Gallery card fields including a ForceAtlas2 thumbnail.
+        """
+        counts = self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings, home_href)
+        if not counts:
+            return None
+        return {
+            "kind": "forcegraph",
+            "title": "Force Graph Explorer",
+            "href": href,
+            "description": "Every file, community, layer and external with names, PageRank sizing, cluster, "
+                           "layer-ring and tree layouts, and a node inspector with symbols and neighbours.",
+            "meta": f"{counts['nodes']} nodes | {counts['edges']} edges",
+            "thumb": str(counts.get("thumb", "")),
+        }
 
     def export_forcegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
         """Export the force-graph explorer HTML document.
@@ -800,7 +860,6 @@ class readmenatorApplication:
         exclusions = self._factory.exclusions
         exclusions.load(Path(target_dir).resolve())
         findings = exclusions.filter_findings(findings)
-        by_node = {node.node_id: node.node_id for node in nodes}
         content_by_path = {node.node_id: content_map.get(node.node_id, "") for node in nodes}
         void = {node.label: content_map.get(node.node_id, "") for node in nodes}
         merged = dict(content_map)
@@ -938,17 +997,10 @@ class readmenatorApplication:
         extra_cards: List[Dict[str, str]] = []
         if self._config.FORCEGRAPH_ENABLED:
             force_dest = dest / self._config.FORCEGRAPH_OUTPUT
-            counts = self._write_forcegraph(force_dest, nodes, edges, resolved, analysis, layers, findings)
-            if counts:
-                extra_cards.append(
-                    {
-                        "kind": "forcegraph",
-                        "title": "Force Graph",
-                        "href": self._config.FORCEGRAPH_OUTPUT,
-                        "description": "Physics-driven explorer over files, communities, layers and externals with community hull overlays.",
-                        "meta": f"{counts['nodes']} nodes | {counts['edges']} edges",
-                    }
-                )
+            card = self._forcegraph_card(force_dest, self._config.FORCEGRAPH_OUTPUT, "index.html",
+                                         nodes, edges, resolved, analysis, layers, findings)
+            if card:
+                extra_cards.append(card)
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root), extra_cards=extra_cards,
@@ -1048,9 +1100,20 @@ class readmenatorApplication:
         if not dest.is_absolute():
             dest = root / dest
         stats = self._site_stats(nodes, edges, analysis)
+        extra_cards: List[Dict[str, str]] = []
+        if self._config.FORCEGRAPH_ENABLED:
+            subdir = self._config.DIAGRAM_MAPS_SUBDIR.strip().strip("/") or "."
+            card = self._forcegraph_card(
+                dest / subdir / self._config.FORCEGRAPH_OUTPUT,
+                f"{subdir}/{self._config.FORCEGRAPH_OUTPUT}" if subdir != "." else self._config.FORCEGRAPH_OUTPUT,
+                "../index.html" if subdir != "." else "index.html",
+                nodes, edges, resolved, analysis, layers, findings,
+            )
+            if card:
+                extra_cards.append(card)
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
-            project_root=str(root),
+            project_root=str(root), extra_cards=extra_cards,
         )
         logger.info("Documentation site published: %d pages in %s", len(written), dest)
         return written
@@ -1149,6 +1212,167 @@ class readmenatorApplication:
         counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [])
         return str(dest) if counts else None
 
+
+    def _maybe_write_graphrag(
+        self,
+        root: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        findings: Optional[List[SecurityFinding]],
+        analysis_v2: Optional[AnalysisResultV2],
+        content_map: Optional[Dict[str, str]],
+    ) -> Optional[GraphRagIndex]:
+        """Build and persist the GraphRAG index when GRAPHRAG_ENABLED is set.
+
+        Failures are logged and never fail the knowledge base run.
+
+        Returns:
+            The written index, or None when disabled or skipped.
+        """
+        if not self._config.GRAPHRAG_ENABLED:
+            return None
+        try:
+            index = self._factory.graphrag.build(
+                nodes, edges, resolved_edges, analysis, layers, findings,
+                analysis_v2, None, content_map, self._memory_notes(root),
+            )
+            self._factory.graphrag_store.write(index, str(root))
+        except Exception:
+            logger.warning("GraphRAG index skipped", exc_info=True)
+            return None
+        logger.info(
+            "GraphRAG index: %s entities, %s relationships, %s reports",
+            index.meta.get("entities"), index.meta.get("relationships"), len(index.communities),
+        )
+        return index
+
+    def _memory_notes(self, root: Path) -> List[Tuple[str, str, str]]:
+        """Session-log notes from MEMORY.md as (date, kind, text) triples."""
+        if not self._config.MEMORY_ENABLED:
+            return []
+        return [(n.date, n.kind, n.text) for n in self._factory.memory.notes(str(root))]
+
+    def _maybe_write_memory(
+        self,
+        root: Path,
+        nodes: List[Node],
+        analysis: Optional[AnalysisResult],
+        analysis_v2: Optional[AnalysisResultV2],
+        findings: Optional[List[SecurityFinding]],
+        content_map: Optional[Dict[str, str]],
+    ) -> Optional[Path]:
+        """Regenerate MEMORY.md (preserving the session log) when MEMORY_ENABLED.
+
+        Returns:
+            Written path, or None when disabled or failed.
+        """
+        if not self._config.MEMORY_ENABLED:
+            return None
+        try:
+            memory = self._factory.memory
+            text = memory.build(str(root), nodes, analysis, analysis_v2, findings, None, content_map)
+            path = memory.write(str(root), text)
+        except OSError:
+            logger.warning("Project memory skipped", exc_info=True)
+            return None
+        logger.info("Project memory: %s", path)
+        return path
+
+    def memory(self, target_dir: str) -> str:
+        """Return MEMORY.md, generating it first when missing.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Memory document text.
+        """
+        root = Path(target_dir).resolve()
+        memory = self._factory.memory
+        text = memory.read(str(root))
+        if "## 1." not in text:
+            nodes, edges, content_map = self._scan_with_content(target_dir)
+            resolved = self._last_resolved_edges
+            analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+            layers = LayerDetector().detect(nodes, edges)
+            analysis_v2 = self._deep_runner.run(nodes, edges, resolved, layers, content_map)
+            findings = self._factory.security.scan(root) if self._config.SECURITY_ENABLED else []
+            self._maybe_write_memory(root, nodes, analysis, analysis_v2, findings, content_map)
+            text = memory.read(str(root))
+        return text
+
+    def remember(self, target_dir: str, note: str, kind: str = "note") -> str:
+        """Append a note to the preserved MEMORY.md session log.
+
+        Args:
+            target_dir: Project root directory.
+            note: Single-line note.
+            kind: One of MEMORY_NOTE_KINDS.
+
+        Returns:
+            The stored log line.
+        """
+        stored = self._factory.memory.remember(str(Path(target_dir).resolve()), note, kind)
+        return f"- {stored.date} [{stored.kind}] {stored.text}"
+
+    def install_skills(self, target_dir: str, target: Optional[str] = None) -> List[Path]:
+        """Install the packaged agent skills into the project.
+
+        Args:
+            target_dir: Project root directory.
+            target: Optional destination directory (default SKILLS_TARGET_DIR).
+
+        Returns:
+            SKILL.md paths written.
+        """
+        return self._factory.skills.install(str(Path(target_dir).resolve()), target)
+
+    def build_graphrag(self, target_dir: str) -> GraphRagIndex:
+        """Scan, analyse, and write the GraphRAG index for a project.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            The freshly built GraphRagIndex (also written to GRAPHRAG_OUTPUT_DIR).
+        """
+        root = Path(target_dir).resolve()
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(root) if self._config.SECURITY_ENABLED else []
+        analysis_v2 = self._deep_runner.run(nodes, edges, resolved, layers, content_map)
+        index = self._factory.graphrag.build(
+            nodes, edges, resolved, analysis, layers, findings, analysis_v2, None, content_map,
+            self._memory_notes(root),
+        )
+        self._factory.graphrag_store.write(index, str(root))
+        return index
+
+    def graphrag_search(
+        self, target_dir: str, query: str, mode: str = "auto", budget_tokens: int = 0,
+    ) -> RagContext:
+        """Answer a question with GraphRAG retrieval over the persisted index.
+
+        Loads GRAPHRAG_OUTPUT_DIR/index.json and builds it first when missing.
+
+        Args:
+            target_dir: Project root directory.
+            query: Natural-language question.
+            mode: ``auto``, ``local``, or ``global``.
+            budget_tokens: Context budget (0 = GRAPHRAG_CONTEXT_BUDGET_TOKENS).
+
+        Returns:
+            RagContext whose markdown is ready to paste into an agent prompt.
+        """
+        index = self._factory.graphrag_store.load(str(Path(target_dir).resolve()))
+        if index is None:
+            index = self.build_graphrag(target_dir)
+        return GraphRagSearcher(self._config, index).search(query, mode, budget_tokens)
 
     def watch(self, target_dir: str) -> None:
         from readmenator._watcher import DirectoryWatcher

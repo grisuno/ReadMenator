@@ -26,6 +26,9 @@ from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._provenance import ProvenanceAuditor
 from readmenator._scantext import ScanTextBuilder
 from readmenator._gh_wiki import GitHubWikiPublisher
+from readmenator._graphrag import GraphRagBuilder, GraphRagStore
+from readmenator._memory import ProjectMemory
+from readmenator._skill_installer import SkillInstaller
 from readmenator._hotspots import HotspotAnalyzer
 from readmenator._layer_rules import LayerRuleEngine
 from readmenator._layers import LayerDetector
@@ -95,6 +98,10 @@ class AnalyzerFactory:
         self._provenance: ProvenanceAuditor | None = None
         self._exclusions: ExclusionList | None = None
         self._embedder: Embedder | None = None
+        self._graphrag: GraphRagBuilder | None = None
+        self._graphrag_store: GraphRagStore | None = None
+        self._memory: ProjectMemory | None = None
+        self._skills: SkillInstaller | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -316,6 +323,34 @@ class AnalyzerFactory:
         if self._embedder is None:
             self._embedder = Embedder(self._config)
         return self._embedder
+
+    @property
+    def graphrag(self) -> GraphRagBuilder:
+        """Return the lazily initialised GraphRAG index builder."""
+        if self._graphrag is None:
+            self._graphrag = GraphRagBuilder(self._config)
+        return self._graphrag
+
+    @property
+    def graphrag_store(self) -> GraphRagStore:
+        """Return the lazily initialised GraphRAG index store."""
+        if self._graphrag_store is None:
+            self._graphrag_store = GraphRagStore(self._config)
+        return self._graphrag_store
+
+    @property
+    def memory(self) -> ProjectMemory:
+        """Return the lazily initialised project memory."""
+        if self._memory is None:
+            self._memory = ProjectMemory(self._config)
+        return self._memory
+
+    @property
+    def skills(self) -> SkillInstaller:
+        """Return the lazily initialised agent skill installer."""
+        if self._skills is None:
+            self._skills = SkillInstaller(self._config)
+        return self._skills
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

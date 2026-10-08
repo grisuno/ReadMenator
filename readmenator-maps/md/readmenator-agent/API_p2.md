@@ -1,6 +1,71 @@
 # API (page 2 of 2)
 Previous: [API.md](API.md)
 
+## readmenator/_refactorizer.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_app.py`, `tests/test_refactorizer.py`
+- `MonolithRefactorizer.__init__` (method) `readmenator/_refactorizer.py:32` `def __init__(self, config)`
+- `MonolithRefactorizer.analyze` (method) `readmenator/_refactorizer.py:35` `def analyze(self, nodes, edges, resolved_edges, content_map)` -- Identify monolithic files and generate refactoring plans.
+- `MonolithRefactorizer.generate_script` (method) `readmenator/_refactorizer.py:156` `def generate_script(self, plan, project_root)`
+
+## readmenator/_resolver.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `tests/test_agent_friendliness.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+- `ImportResolver.__init__` (method) `readmenator/_resolver.py:61` `def __init__(self, file_ids, root, extensions, include_dirs)` -- Initialise the resolver with all known file paths.
+- `ImportResolver.resolve` (method) `readmenator/_resolver.py:110` `def resolve(self, import_str, source_file)` -- Resolve an import string to a concrete project file path.
+- `ImportResolver.resolve_all` (method) `readmenator/_resolver.py:163` `def resolve_all(self, import_str, source_file)` -- Resolve *import_str* to all possible matching project file paths.
+
+## readmenator/_rule_gen.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_rule_gen.py`
+- `RuleGenerator.__init__` (method) `readmenator/_rule_gen.py:90` `def __init__(self, config)`
+- `RuleGenerator.generate` (method) `readmenator/_rule_gen.py:94` `def generate(self, nodes, content_map)` -- Generate suggested rules by scanning code patterns.
+- `RuleGenerator.write_rules` (method) `readmenator/_rule_gen.py:122` `def write_rules(self, rules, output_dir)` -- Write suggested rules to Semgrep YAML files in output_dir.
+
+## readmenator/_sarif.py
+Depends on: `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_sarif.py`
+- `SarifExporter.__init__` (method) `readmenator/_sarif.py:30` `def __init__(self, privacy_mode)`
+- `SarifExporter.export` (method) `readmenator/_sarif.py:33` `def export(self, findings, project_name)` -- Generate a SARIF v2.1.0 JSON string from security findings.
+
+## readmenator/_scanner.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/__init__.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
+- `PolyglotScanner.__init__` (method) `readmenator/_scanner.py:39` `def __init__(self, config)` -- Initialise the scanner with application configuration.
+- `PolyglotScanner.scan` (method) `readmenator/_scanner.py:261` `def scan(self, root)` -- Walk *root* recursively and produce (nodes, edges) for the graph.
+- `PolyglotScanner.scan_with_content` (method) `readmenator/_scanner.py:275` `def scan_with_content(self, root)` -- Scan and also return raw file contents for deeper analysis.
+
+## readmenator/_scantext.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `ScanTextBuilder.__init__` (method) `readmenator/_scantext.py:19` `def __init__(self, config)` -- Initialise with application configuration.
+- `ScanTextBuilder.build_for_node` (method) `readmenator/_scantext.py:27` `def build_for_node(self, node, content, imports)` -- Build the scan-text blob for a single file node.
+- `ScanTextBuilder.build_corpus` (method) `readmenator/_scantext.py:67` `def build_corpus(self, nodes, content_map, edges)` -- Build scan-text blobs for every node in the corpus.
+
+## readmenator/_security.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_agent_output.py`, `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_security.py`
+- `SecurityAnalyzer.__init__` (method) `readmenator/_security.py:496` `def __init__(self, config)`
+- `SecurityAnalyzer.scan` (method) `readmenator/_security.py:513` `def scan(self, root)`
+- `SecurityAnalyzer.summary` (method) `readmenator/_security.py:572` `def summary(self, findings)`
+- `SecurityAnalyzer.fix_hint_for` (method) `readmenator/_security.py:620` `def fix_hint_for(finding)` -- Return a one-line remediation hint for a security finding.
+
+## readmenator/_skill_installer.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_memory.py`
+- `SkillInstaller.__init__` (method) `readmenator/_skill_installer.py:25` `def __init__(self, config)` -- Initialise with application configuration.
+- `SkillInstaller.source_dir` (method) `readmenator/_skill_installer.py:34` `def source_dir()` -- Return the packaged skills directory.
+- `SkillInstaller.available` (method) `readmenator/_skill_installer.py:38` `def available(self)` -- Return the names of the packaged skills, sorted.
+- `SkillInstaller.target_dir` (method) `readmenator/_skill_installer.py:48` `def target_dir(self, project_root, target)` -- Resolve the destination skills directory.
+- `SkillInstaller.install` (method) `readmenator/_skill_installer.py:61` `def install(self, project_root, target)` -- Write every packaged skill whose content changed.
+- `SkillInstaller.maybe_install_on_run` (method) `readmenator/_skill_installer.py:87` `def maybe_install_on_run(self, project_root)` -- Install during run() only when the project already uses agent skills.
+
+## readmenator/_taint.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`
+- `TaintAnalyzer.__init__` (method) `readmenator/_taint.py:73` `def __init__(self, config)`
+- `TaintAnalyzer.analyze` (method) `readmenator/_taint.py:77` `def analyze(self, nodes, edges, resolved_edges)` -- Run taint propagation analysis on the codebase.
+
 ## readmenator/_uml.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
@@ -39,31 +104,34 @@ Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readme
 - `s` (function) `readmenator/_vendor/force-graph.min.js:5` -- <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 colors and returns...
 
 ## readmenator/_video.py
-Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
 Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
-- `ease` (function) `readmenator/_video.py:73` `def ease(x)` -- Smoothstep clamped to [0, 1].
-- `fmt_int` (function) `readmenator/_video.py:79` `def fmt_int(n)` -- Group thousands with commas.
-- `mix` (function) `readmenator/_video.py:84` `def mix(a, b, t)` -- Linear blend of two RGB colors.
-- `alpha` (function) `readmenator/_video.py:89` `def alpha(c, a)` -- RGB color plus an alpha in [0, 1] as an RGBA tuple.
-- `hash_color` (function) `readmenator/_video.py:94` `def hash_color(digest)` -- Neon color derived from a digest: the file fingerprint.
-- `short_label` (function) `readmenator/_video.py:103` `def short_label(text, limit)` -- Truncate a label to a character budget without newlines.
-- `dependencies_available` (function) `readmenator/_video.py:188` `def dependencies_available()` -- Check that PIL and ffmpeg exist for video rendering.
-- `resolve_fonts` (function) `readmenator/_video.py:197` `def resolve_fonts()` -- Resolve monospace fonts through fontconfig with PIL fallback.
-- `Backdrop.__init__` (method) `readmenator/_video.py:239` `def __init__(self, width, height)` -- Build the gradient sky, star field, sun and CRT mask.
-- `Backdrop.draw_grid` (method) `readmenator/_video.py:299` `def draw_grid(img, t, strength, bd)` -- Draw the scrolling perspective grid below the horizon.
-- `Backdrop.draw_sun` (method) `readmenator/_video.py:319` `def draw_sun(img, a, bd, cy)` -- Paste the striped synthwave sun behind the horizon.
-- `Backdrop.post` (method) `readmenator/_video.py:336` `def post(img, glitch, seed)` -- Apply bloom, scanlines, vignette and optional glitch.
-- `Backdrop.glitch_fx` (method) `readmenator/_video.py:354` `def glitch_fx(img, amount, seed)` -- RGB split plus horizontal slice displacement.
-- `Backdrop.chroma_text` (method) `readmenator/_video.py:377` `def chroma_text(img, xy, text, font, col, spread, anchor)` -- Draw text with red/cyan CRT chromatic aberration.
-- `Backdrop.hud_panel` (method) `readmenator/_video.py:388` `def hud_panel(d, box, title, fonts, col)` -- Draw a translucent HUD panel with neon edge and corner brackets.
-- `Backdrop.draw_header` (method) `readmenator/_video.py:401` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
-- `Backdrop.draw_caption` (method) `readmenator/_video.py:415` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
-- `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:436` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` -- Collect every number each scene draws, from real scan data.
-- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:637` `def build_scenes(self, data)` -- Lay every scene on the global clock.
-- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:663` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
-- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:710` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
-- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:753` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
-- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:771` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
+- `ease` (function) `readmenator/_video.py:88` `def ease(x)` -- Smoothstep clamped to [0, 1].
+- `fmt_int` (function) `readmenator/_video.py:94` `def fmt_int(n)` -- Group thousands with commas.
+- `mix` (function) `readmenator/_video.py:99` `def mix(a, b, t)` -- Linear blend of two RGB colors.
+- `alpha` (function) `readmenator/_video.py:104` `def alpha(c, a)` -- RGB color plus an alpha in [0, 1] as an RGBA tuple.
+- `hash_color` (function) `readmenator/_video.py:109` `def hash_color(digest)` -- Neon color derived from a digest: the file fingerprint.
+- `short_label` (function) `readmenator/_video.py:118` `def short_label(text, limit)` -- Truncate a label to a character budget without newlines.
+- `community_color` (function) `readmenator/_video.py:163` `def community_color(index)` -- Neon color for a community index (grey for unassigned).
+- `dependencies_available` (function) `readmenator/_video.py:221` `def dependencies_available()` -- Check that PIL and ffmpeg exist for video rendering.
+- `resolve_fonts` (function) `readmenator/_video.py:230` `def resolve_fonts()` -- Resolve monospace fonts through fontconfig with PIL fallback.
+- `Backdrop.__init__` (method) `readmenator/_video.py:272` `def __init__(self, width, height)` -- Build the gradient sky, star field, sun and CRT mask.
+- `Backdrop.draw_grid` (method) `readmenator/_video.py:332` `def draw_grid(img, t, strength, bd)` -- Draw the scrolling perspective grid below the horizon.
+- `Backdrop.draw_sun` (method) `readmenator/_video.py:352` `def draw_sun(img, a, bd, cy)` -- Paste the striped synthwave sun behind the horizon.
+- `Backdrop.post` (method) `readmenator/_video.py:369` `def post(img, glitch, seed)` -- Apply bloom, scanlines, vignette and optional glitch.
+- `Backdrop.glitch_fx` (method) `readmenator/_video.py:387` `def glitch_fx(img, amount, seed)` -- RGB split plus horizontal slice displacement.
+- `Backdrop.chroma_text` (method) `readmenator/_video.py:410` `def chroma_text(img, xy, text, font, col, spread, anchor)` -- Draw text with red/cyan CRT chromatic aberration.
+- `Backdrop.hud_panel` (method) `readmenator/_video.py:421` `def hud_panel(d, box, title, fonts, col)` -- Draw a translucent HUD panel with neon edge and corner brackets.
+- `Backdrop.draw_header` (method) `readmenator/_video.py:434` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
+- `Backdrop.draw_caption` (method) `readmenator/_video.py:448` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
+- `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:469` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` -- Collect every number each scene draws, from real scan data.
+- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:682` `def build_scenes(self, data)` -- Lay every scene on the global clock.
+- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:710` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
+- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:757` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
+- `CinematicVideoRenderer.emergence_frames` (method) `readmenator/_video.py:800` `def emergence_frames(self, data, box)` -- ForceAtlas2 snapshots of the resolved import graph fitted to a pixel box.
+- `CinematicVideoRenderer.bundle_layout` (method) `readmenator/_video.py:810` `def bundle_layout(self, data, box)` -- Hierarchical edge bundling of resolved imports grouped by community.
+- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:839` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
+- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:853` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
 
 ## readmenator/_watcher.py
 Depends on: `readmenator/_config.py`

@@ -1,6 +1,6 @@
 # readmenator: _agent_injector
 
-*Community 4 | 5 files | cohesion 0.40*
+*Community 5 | 5 files | cohesion 0.40*
 
 ## Definition
 
@@ -18,20 +18,20 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 
 ## Key Symbols
 
-- `ensure_readmenator_installed` (function, `readmenator/_agent_injector.py:101`) `def ensure_readmenator_installed()` - Check if readmenator is installed via pip; install it if missing.
-- `AgentInjector` (class, `readmenator/_agent_injector.py:123`) `class AgentInjector` - Injects a link to KNOWLEDGE_BASE.md into AI agent instruction files.
-- `__init__` (method, `readmenator/_agent_injector.py:134`) `def __init__(self, kb_filename, agent_output_dir, agent_files, agent_globs, wiki`
-- `inject` (method, `readmenator/_agent_injector.py:148`) `def inject(self, project_root)` - Inject KB reference into all discovered agent files.
-- `remove` (method, `readmenator/_agent_injector.py:166`) `def remove(self, project_root)` - Remove KB injection from all discovered agent files.
-- `find_agent_files` (method, `readmenator/_agent_injector.py:179`) `def find_agent_files(self, project_root)` - Public accessor: return all detected agent files.
-- `_find_agent_files` (method, `readmenator/_agent_injector.py:183`) `def _find_agent_files(self, root)`
-- `_inject_single` (method, `readmenator/_agent_injector.py:197`) `def _inject_single(self, path)`
-- `_extract_current_injection` (method, `readmenator/_agent_injector.py:235`) `def _extract_current_injection(content)`
-- `_remove_old_injection` (method, `readmenator/_agent_injector.py:244`) `def _remove_old_injection(content)`
-- `_remove_single` (method, `readmenator/_agent_injector.py:254`) `def _remove_single(self, path)`
-- `_build_injection` (method, `readmenator/_agent_injector.py:270`) `def _build_injection(self, fmt)`
-- `_build_mdc_injection` (method, `readmenator/_agent_injector.py:282`) `def _build_mdc_injection(self)` - Build Cursor .mdc injection body (frontmatter added separately).
-- `_prepend_mdc_frontmatter` (method, `readmenator/_agent_injector.py:287`) `def _prepend_mdc_frontmatter(content, injection)` - Prepend Cursor frontmatter so the rule is auto-attached.
+- `ensure_readmenator_installed` (function, `readmenator/_agent_injector.py:107`) `def ensure_readmenator_installed()` - Check if readmenator is installed via pip; install it if missing.
+- `AgentInjector` (class, `readmenator/_agent_injector.py:129`) `class AgentInjector` - Injects a link to KNOWLEDGE_BASE.md into AI agent instruction files.
+- `__init__` (method, `readmenator/_agent_injector.py:140`) `def __init__(self, kb_filename, agent_output_dir, agent_files, agent_globs, wiki`
+- `inject` (method, `readmenator/_agent_injector.py:154`) `def inject(self, project_root)` - Inject KB reference into all discovered agent files.
+- `remove` (method, `readmenator/_agent_injector.py:172`) `def remove(self, project_root)` - Remove KB injection from all discovered agent files.
+- `find_agent_files` (method, `readmenator/_agent_injector.py:185`) `def find_agent_files(self, project_root)` - Public accessor: return all detected agent files.
+- `_find_agent_files` (method, `readmenator/_agent_injector.py:189`) `def _find_agent_files(self, root)`
+- `_inject_single` (method, `readmenator/_agent_injector.py:203`) `def _inject_single(self, path)`
+- `_extract_current_injection` (method, `readmenator/_agent_injector.py:241`) `def _extract_current_injection(content)`
+- `_remove_old_injection` (method, `readmenator/_agent_injector.py:250`) `def _remove_old_injection(content)`
+- `_remove_single` (method, `readmenator/_agent_injector.py:260`) `def _remove_single(self, path)`
+- `_build_injection` (method, `readmenator/_agent_injector.py:276`) `def _build_injection(self, fmt)`
+- `_build_mdc_injection` (method, `readmenator/_agent_injector.py:288`) `def _build_mdc_injection(self)` - Build Cursor .mdc injection body (frontmatter added separately).
+- `_prepend_mdc_frontmatter` (method, `readmenator/_agent_injector.py:293`) `def _prepend_mdc_frontmatter(content, injection)` - Prepend Cursor frontmatter so the rule is auto-attached.
 - `ReadmeInjector` (class, `readmenator/_readme_injector.py:70`) `class ReadmeInjector` - Injects a link to KNOWLEDGE_BASE.md into the project README.
 - `__init__` (method, `readmenator/_readme_injector.py:78`) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir)`
 - `inject` (method, `readmenator/_readme_injector.py:88`) `def inject(self, project_root)`
@@ -56,16 +56,14 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 0 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.
-- [EXTRACTED] depends_on community 4 <-> 3 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.6): Inferred cross-community bridge: readmenator/__init__.py reaches tests/test_agent_injector.py in 4 hops.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
-- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: tests/test_readme_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_injector) and community 5 (orphans).
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
+- [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
+- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
+- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
+- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
+- [INFERRED] bridges community 5 <-> 4 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_graphlayout.py in 5 hops.
+- [INFERRED] bridges community 5 <-> 0 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
 
 ## Risks
 

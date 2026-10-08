@@ -265,6 +265,20 @@ class GraphAnalyzer:
             graph = self._aggregate(graph, partition)
         return {fid: membership[i] for i, fid in enumerate(ids)}
 
+    def partition(
+        self, ids: List[str], adjacency: Dict[str, Set[str]]
+    ) -> Dict[str, int]:
+        """Partition an arbitrary undirected id graph with deterministic Louvain.
+
+        Args:
+            ids: Node identifiers to partition.
+            adjacency: Undirected adjacency between identifiers.
+
+        Returns:
+            Mapping of identifier to community index.
+        """
+        return self._louvain(ids, adjacency)
+
     def _louvain_pass(
         self, graph: Dict[int, Dict[int, float]], resolution: float, epsilon: float,
     ) -> Tuple[Dict[int, int], bool]:

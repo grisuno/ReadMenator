@@ -43,6 +43,18 @@ ReadMenator pre-computes a structural map of your codebase (statically, for free
 
 **19 languages:** C, C++, Python, Go, Rust, JavaScript, TypeScript, Java, C#, Shell, PHP, Dart, GDScript, Nim, Assembly, Ruby, Swift, Kotlin, Scala, Lua, Elixir.
 
+## Agent protocol: memory, GraphRAG, skills
+
+1. `cat readmenator-agent/MEMORY.md` (MCP `readmenator.memory`): business rules, workflow,
+   declared constraints quoted with `file:line`, style and done baselines, and the session log.
+2. `readmenator . ask "<question>"` (MCP `readmenator.graphrag`): GraphRAG context with
+   entities, relationships, community reports and real source excerpts; `--global` for overviews.
+3. Before editing: `grep -n '<file>' readmenator-agent/GOTCHAS.md readmenator-agent/SECURITY.md`.
+4. After the task: `readmenator . remember "<decision and why>" --kind decision`
+   (MCP `readmenator.remember`); the session log survives every rebuild.
+5. `readmenator . skills` installs the focused skills `readmenator-orient`, `readmenator-ask`,
+   `readmenator-change`, `readmenator-memory` into `.claude/skills/`.
+
 ## What You Must Do When Invoked
 
 If no path was given, use `.` (current directory). Do not ask the user for a path.
@@ -185,9 +197,10 @@ Use readmenator when you want **zero-token generation + minimal-token queries** 
 
 Generated offline by [ReadMenator](https://github.com/grisuno/ReadMenator) (zero-token static analysis). Humans: `KNOWLEDGE_BASE.md`.
 
+0. Memory: `cat readmenator-agent/MEMORY.md` (business rules, workflow, constraints, style, done criteria, session log). Record new decisions with `readmenator . remember "<note>" --kind decision`.
 1. Freshness: `readmenator . fresh` (exit 1 means stale: run `readmenator . --rebuild`). Without the CLI, compare `git_commit` in `readmenator-agent/MANIFEST.json` with `git log -1`.
 2. Orient: `ls *.md readmenator-agent/ readmenator-wiki/`, then read `readmenator-wiki/index.md` (big picture, communities, god nodes).
-3. Locate: `grep -n '<keyword>' readmenator-agent/INDEX*.md readmenator-agent/SYMBOLS*.md` before any `glob` over sources.
+3. Locate: `grep -n '<keyword>' readmenator-agent/INDEX*.md readmenator-agent/SYMBOLS*.md` before any `glob` over sources; for questions use `readmenator . ask "<question>"` (GraphRAG, `--global` for overviews).
 4. Context: `cat readmenator-agent/KB_<subsystem>.md` for the subsystem you touch.
 5. Before editing: `grep -n '<file>' readmenator-agent/GOTCHAS.md readmenator-agent/SECURITY.md` (blast radius, cycles, findings).
 

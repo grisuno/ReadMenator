@@ -439,6 +439,7 @@ class AgentOutputGenerator:
             "entrypoints": self._entrypoints(nodes, layers or {}),
             "start_here": "INDEX.md",
             "read_order": [
+                f"{agent_dir}/{self._config.MEMORY_FILENAME}  # rules, workflow, done criteria, session log",
                 f"{wiki_dir}/index.md  # big picture, communities, god nodes",
                 f"{agent_dir}/INDEX.md  # file -> purpose -> used-by count",
                 f"{agent_dir}/GOTCHAS.md  # blast radius before editing",
@@ -447,6 +448,7 @@ class AgentOutputGenerator:
             "workflow": [
                 "ls *.md readmenator-*/  # orient: docs first, ignore build noise",
                 "grep -n '<keyword>' INDEX*.md SYMBOLS*.md",
+                "readmenator . ask '<question>'  # GraphRAG context (--global for overviews)",
                 "cat KB_<subsystem>.md",
                 "grep -n '<file>' ARCHITECTURE*.md API*.md",
             ],

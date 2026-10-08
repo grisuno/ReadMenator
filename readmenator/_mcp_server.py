@@ -21,6 +21,9 @@ Tools:
   readmenator.update        — incremental update (SHA256 cache)
   readmenator.export_json   — export graph.json
   readmenator.security_summary — security audit summary
+  readmenator.graphrag      — GraphRAG local/global context retrieval
+  readmenator.memory        — project memory (rules, workflow, session log)
+  readmenator.remember      — append to the preserved session log
 
 Resources:
   readmenator://summary     — structured JSON summary
@@ -30,6 +33,7 @@ Resources:
   readmenator://findings    — security findings
   readmenator://analysis    — full analysis result
   readmenator://kb          — full KNOWLEDGE_BASE.md text
+  readmenator://graphrag    — GraphRAG community reports
 """
 
 from __future__ import annotations
@@ -38,15 +42,11 @@ import json
 import logging
 import sys
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, Optional
 
 from readmenator._app import readmenatorApplication
 from readmenator._config import Config
 from readmenator._layers import LayerDetector
-from readmenator._models import (
-    AnalysisResultV2,
-    SecurityFinding,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -467,6 +467,26 @@ class MCPServer:
             self._tool_forcegraph,
             {"type": "object", "properties": {}},
         ))
+        self.register_tool(MCPTool(
+            "readmenator.graphrag",
+            "GraphRAG retrieval over the zero-token index. Local mode seeds a "
+            "Personalized PageRank walk with BM25 entity and source matches and "
+            "returns entities, relationships, community reports, and source "
+            "excerpts; global mode map-reduces community reports for broad "
+            "questions. Auto picks the mode. Returns budgeted Markdown context.",
+            self._tool_graphrag,
+            {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Natural-language question"},
+                    "mode": {"type": "string", "enum": ["auto", "local", "global"],
+                             "description": "Retrieval strategy (default auto)"},
+                    "budget_tokens": {"type": "integer",
+                                      "description": "Context budget in tokens (0 = default)"},
+                },
+                "required": ["query"],
+            },
+        ))
 
         self.register_resource(MCPResource(
             "readmenator://summary",
@@ -516,6 +536,44 @@ class MCPServer:
             "Heterogeneous explorer payload: files, communities, layers, externals",
             "application/json",
             self._resource_forcegraph,
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.memory",
+            "Project memory for cross-session context: purpose and domain vocabulary, "
+            "workflow commands, declared rules (quoted with file:line), measured style and "
+            "deliverable baselines, risks, and the preserved session log of decisions and "
+            "business rules. Read this at the start of a session.",
+            self._tool_memory,
+            {"type": "object", "properties": {}},
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.remember",
+            "Append one line to the preserved MEMORY.md session log so the next session "
+            "knows it. Use for business rules, decisions with reasons, workflow, gotchas.",
+            self._tool_remember,
+            {
+                "type": "object",
+                "properties": {
+                    "note": {"type": "string", "description": "One self-contained line"},
+                    "kind": {"type": "string",
+                             "description": "business, decision, rule, workflow, style, deliverable, gotcha, todo, note"},
+                },
+                "required": ["note"],
+            },
+        ))
+        self.register_resource(MCPResource(
+            "readmenator://memory",
+            "Project Memory",
+            "MEMORY.md: rules, workflow, style, deliverables, and the session log",
+            "text/markdown",
+            self._tool_memory,
+        ))
+        self.register_resource(MCPResource(
+            "readmenator://graphrag",
+            "GraphRAG Community Reports",
+            "Hierarchical community reports (communities, themes, root) as Markdown",
+            "text/markdown",
+            self._resource_graphrag,
         ))
         self.register_resource(MCPResource(
             "readmenator://analytics",
@@ -853,6 +911,24 @@ class MCPServer:
             indent=2,
         )
 
+    def _tool_memory(self) -> str:
+        """Return the project memory document."""
+        return self._app.memory(self._target_dir)
+
+    def _tool_remember(self, note: str, kind: str = "note") -> str:
+        """Append a note to the preserved session log."""
+        try:
+            return self._app.remember(self._target_dir, note, kind)
+        except ValueError as exc:
+            raise MCPError(INVALID_PARAMS, str(exc))
+
+    def _tool_graphrag(self, query: str, mode: str = "auto", budget_tokens: int = 0) -> str:
+        """Return a GraphRAG context for a question."""
+        if mode not in ("auto", "local", "global"):
+            raise MCPError(INVALID_PARAMS, f"Unknown mode: {mode}")
+        context = self._app.graphrag_search(self._target_dir, query, mode, int(budget_tokens or 0))
+        return context.markdown
+
     # ------------------------------------------------------------------
     # Resource handlers
     # ------------------------------------------------------------------
@@ -975,6 +1051,14 @@ class MCPServer:
         nodes, edges, resolved = self._scan()
         layers = LayerDetector().detect(nodes, edges)
         return self._app._factory.forcegraph.build_payload(nodes, edges, resolved, None, layers)
+
+    def _resource_graphrag(self) -> str:
+        """Return the GraphRAG community report hierarchy as Markdown."""
+        store = self._app._factory.graphrag_store
+        index = store.load(str(Path(self._target_dir).resolve()))
+        if index is None:
+            index = self._app.build_graphrag(self._target_dir)
+        return store.render_reports(index)
 
     def _resource_analytics(self) -> dict:
         """Return the corpus analytics payload as structured JSON."""

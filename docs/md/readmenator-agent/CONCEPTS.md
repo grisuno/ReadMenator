@@ -2,119 +2,119 @@
 
 Nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
 
-- `readmenator` | files=77 | mentions=147 | `readmenator.py`, `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`
-- `returns` | files=70 | mentions=309 | `readmenator/_agent_injector.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `file` | files=64 | mentions=396 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
-- `graph` | files=51 | mentions=210 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`
-- `node` | files=49 | mentions=205 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_explain.py`, `readmenator/_exporter.py`
-- `symbols` | files=49 | mentions=79 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_hotspots.py`, `readmenator/_mcp_server.py`, `readmenator/_models.py`
-- `imports` | files=48 | mentions=69 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_exporter.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`
-- `files` | files=45 | mentions=143 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
-- `import` | files=44 | mentions=164 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `edges` | files=42 | mentions=183 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `nodes` | files=40 | mentions=159 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `contract` | files=40 | mentions=146 | `tests/test_agent_friendliness.py`, `tests/test_agent_injector.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_cache.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`
-- `all` | files=40 | mentions=74 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`
-- `symbol` | files=39 | mentions=116 | `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `when` | files=38 | mentions=93 | `readmenator/_agent_injector.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
-- `empty` | files=38 | mentions=86 | `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`
-- `return` | files=37 | mentions=137 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`
-- `analysis` | files=37 | mentions=135 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`
-- `knowledge` | files=37 | mentions=61 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
-- `args` | files=36 | mentions=187 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `set` | files=36 | mentions=77 | `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`, `readmenator/_query.py`, `readmenator_orchestrator.py`, `tests/test_agent_injector.py`, `tests/test_analyzer.py`
-- `build` | files=35 | mentions=169 | `readmenator/__main__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
-- `content` | files=34 | mentions=63 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_forcegraph.py`
-- `path` | files=33 | mentions=137 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_explain.py`, `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
-- `map` | files=32 | mentions=166 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
-- `extract` | files=32 | mentions=49 | `readmenator/_agent_injector.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`, `readmenator/_readme_injector.py`, `readmenator/_scanner.py`, `readmenator/_uml.py`, `readmenator/_yaralite.py`
-- `project` | files=31 | mentions=128 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`
-- `config` | files=31 | mentions=65 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
+- `readmenator` | files=82 | mentions=157 | `readmenator.py`, `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`
+- `returns` | files=76 | mentions=346 | `readmenator/_agent_injector.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `file` | files=69 | mentions=445 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
+- `graph` | files=56 | mentions=268 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`
+- `node` | files=53 | mentions=214 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_explain.py`, `readmenator/_exporter.py`
+- `symbols` | files=51 | mentions=83 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_mcp_server.py`
+- `imports` | files=51 | mentions=79 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_exporter.py`, `readmenator/_graphrag.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_linter.py`
+- `files` | files=49 | mentions=159 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
+- `import` | files=45 | mentions=170 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `empty` | files=45 | mentions=101 | `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphlayout.py`
+- `edges` | files=44 | mentions=194 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `nodes` | files=44 | mentions=172 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `contract` | files=43 | mentions=166 | `tests/test_agent_friendliness.py`, `tests/test_agent_injector.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_cache.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`
+- `return` | files=43 | mentions=163 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`
+- `when` | files=43 | mentions=119 | `readmenator/_agent_injector.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `all` | files=42 | mentions=76 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_exporter.py`, `readmenator/_hotspots.py`
+- `symbol` | files=41 | mentions=127 | `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `set` | files=41 | mentions=84 | `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py`, `readmenator/_graphrag.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`, `readmenator/_query.py`, `readmenator_orchestrator.py`
+- `args` | files=40 | mentions=226 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `build` | files=40 | mentions=187 | `readmenator/__main__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
+- `project` | files=39 | mentions=181 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`
+- `analysis` | files=39 | mentions=145 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`
+- `knowledge` | files=39 | mentions=66 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`
+- `path` | files=38 | mentions=148 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_explain.py`, `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `content` | files=37 | mentions=66 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_forcegraph.py`
+- `map` | files=36 | mentions=175 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `source` | files=34 | mentions=97 | `readmenator.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `config` | files=34 | mentions=70 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
+- `edge` | files=33 | mentions=85 | `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_graphlayout.py`, `readmenator/_graphrag.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`
+- `extract` | files=33 | mentions=51 | `readmenator/_agent_injector.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_readme_injector.py`, `readmenator/_scanner.py`, `readmenator/_uml.py`
+- `list` | files=32 | mentions=75 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cpg.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `directory` | files=31 | mentions=119 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
+- `without` | files=31 | mentions=54 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_explorer.py`
+- `not` | files=31 | mentions=50 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_dataflow.py`, `readmenator/_exclusions.py`, `readmenator/_explain.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`
+- `single` | files=31 | mentions=49 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_layers.py`
+- `code` | files=30 | mentions=110 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_graphrag.py`, `readmenator/_layers.py`
 - `parser` | files=30 | mentions=97 | `readmenator/__main__.py`, `readmenator/_models.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`, `readmenator/_yaralite.py`, `readmenator/parsers/__init__.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`
-- `list` | files=30 | mentions=72 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cpg.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_gh_wiki.py`, `readmenator/_layer_rules.py`
-- `edge` | files=30 | mentions=70 | `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_query.py`
-- `source` | files=29 | mentions=77 | `readmenator.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
-- `without` | files=29 | mentions=51 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_explorer.py`
-- `single` | files=29 | mentions=44 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_layers.py`
-- `string` | files=28 | mentions=74 | `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_explain.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
-- `code` | files=27 | mentions=107 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_layers.py`, `readmenator/_models.py`
-- `directory` | files=27 | mentions=91 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
-- `resolved` | files=27 | mentions=74 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`
-- `scanned` | files=27 | mentions=61 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
-- `not` | files=27 | mentions=46 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_dataflow.py`, `readmenator/_exclusions.py`, `readmenator/_explain.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`
+- `every` | files=30 | mentions=76 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_exporter.py`, `readmenator/_gh_wiki.py`
+- `resolved` | files=29 | mentions=82 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`
+- `scanned` | files=29 | mentions=65 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`
+- `one` | files=28 | mentions=81 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_concepts.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphlayout.py`
+- `string` | files=28 | mentions=75 | `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_explain.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`
+- `class` | files=27 | mentions=52 | `readmenator/_category.py`, `readmenator/_graphrag.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_query.py`, `readmenator/_uml.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`
+- `language` | files=27 | mentions=51 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_query.py`
 - `extraction` | files=27 | mentions=29 | `readmenator/_concepts.py`, `readmenator/_purpose.py`, `readmenator/_refactorizer.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`
-- `class` | files=26 | mentions=51 | `readmenator/_category.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_query.py`, `readmenator/_uml.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_gdscript.py`
-- `layer` | files=24 | mentions=98 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`
-- `extracts` | files=24 | mentions=84 | `readmenator/_provenance.py`, `readmenator/_refactorizer.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`
-- `mapping` | files=24 | mentions=60 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`
-- `language` | files=24 | mentions=44 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_rule_gen.py`
-- `parsers` | files=24 | mentions=34 | `readmenator/parsers/__init__.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`
-- `docstrings` | files=24 | mentions=25 | `readmenator/_projections.py`, `readmenator/_purpose.py`, `readmenator/_query.py`, `readmenator/_scanner.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`
-- `optional` | files=23 | mentions=109 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_explain.py`
-- `name` | files=23 | mentions=75 | `readmenator/_agent_output.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`
+- `text` | files=26 | mentions=131 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphrag.py`
+- `mapping` | files=26 | mentions=65 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`
+- `run` | files=26 | mentions=53 | `readmenator/__main__.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphlayout.py`, `readmenator/_graphrag.py`, `readmenator/_layers.py`
+- `none` | files=26 | mentions=51 | `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_category.py`, `readmenator/_diagrams.py`, `readmenator/_explain.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphlayout.py`, `readmenator/_graphrag.py`
+- `configuration` | files=26 | mentions=42 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`
 
 ## Verb Edges
 
-- `file` --depends_on--> `readmenator` (strength 1.00)
 - `graph` --depends_on--> `readmenator` (strength 1.00)
-- `returns` --depends_on--> `readmenator` (strength 0.95)
+- `file` --depends_on--> `readmenator` (strength 0.99)
 - `readmenator` --depends_on--> `file` (strength 0.94)
-- `graph` --depends_on--> `file` (strength 0.91)
-- `readmenator` --depends_on--> `import` (strength 0.84)
-- `all` --depends_on--> `readmenator` (strength 0.82)
-- `imports` --depends_on--> `readmenator` (strength 0.82)
-- `return` --depends_on--> `readmenator` (strength 0.82)
+- `graph` --depends_on--> `file` (strength 0.93)
+- `returns` --depends_on--> `readmenator` (strength 0.93)
+- `return` --depends_on--> `readmenator` (strength 0.85)
+- `build` --depends_on--> `readmenator` (strength 0.81)
 - `returns` --depends_on--> `file` (strength 0.81)
 - `map` --depends_on--> `readmenator` (strength 0.80)
-- `node` --depends_on--> `readmenator` (strength 0.80)
-- `readmenator` --depends_on--> `all` (strength 0.80)
-- `readmenator` --depends_on--> `graph` (strength 0.79)
-- `readmenator` --depends_on--> `symbol` (strength 0.79)
-- `file` --depends_on--> `graph` (strength 0.78)
-- `build` --depends_on--> `readmenator` (strength 0.77)
-- `file` --depends_on--> `import` (strength 0.77)
-- `graph` --depends_on--> `analysis` (strength 0.77)
-- `graph` --depends_on--> `import` (strength 0.77)
+- `readmenator` --depends_on--> `import` (strength 0.80)
+- `imports` --depends_on--> `readmenator` (strength 0.79)
+- `node` --depends_on--> `readmenator` (strength 0.79)
+- `all` --depends_on--> `readmenator` (strength 0.78)
+- `readmenator` --depends_on--> `graph` (strength 0.78)
+- `file` --depends_on--> `graph` (strength 0.77)
+- `readmenator` --depends_on--> `all` (strength 0.76)
 - `readmenator` --depends_on--> `source` (strength 0.76)
-- `returns` --depends_on--> `graph` (strength 0.76)
-- `returns` --depends_on--> `import` (strength 0.75)
+- `readmenator` --depends_on--> `symbol` (strength 0.76)
+- `build` --depends_on--> `file` (strength 0.74)
+- `file` --depends_on--> `import` (strength 0.74)
+- `graph` --depends_on--> `analysis` (strength 0.74)
+- `graph` --depends_on--> `import` (strength 0.74)
 - `node` --depends_on--> `file` (strength 0.74)
-- `readmenator` --depends_on--> `analysis` (strength 0.73)
-- `contract` --depends_on--> `readmenator` (strength 0.72)
-- `file` --depends_on--> `analysis` (strength 0.72)
-- `graph` --depends_on--> `map` (strength 0.72)
-- `edges` --depends_on--> `readmenator` (strength 0.71)
+- `project` --depends_on--> `readmenator` (strength 0.74)
+- `returns` --depends_on--> `graph` (strength 0.74)
+- `returns` --depends_on--> `import` (strength 0.72)
 - `files` --depends_on--> `readmenator` (strength 0.71)
-- `graph` --depends_on--> `all` (strength 0.71)
-- `analysis` --depends_on--> `readmenator` (strength 0.70)
-- `build` --depends_on--> `file` (strength 0.70)
-- `file` --depends_on--> `map` (strength 0.70)
-- `graph` --depends_on--> `single` (strength 0.70)
+- `graph` --depends_on--> `every` (strength 0.71)
+- `graph` --depends_on--> `map` (strength 0.71)
+- `file` --depends_on--> `analysis` (strength 0.70)
+- `file` --depends_on--> `source` (strength 0.70)
+- `graph` --depends_on--> `source` (strength 0.70)
 - `graph` --depends_on--> `symbol` (strength 0.70)
-- `returns` --depends_on--> `analysis` (strength 0.70)
-- `file` --depends_on--> `all` (strength 0.69)
-- `file` --depends_on--> `single` (strength 0.69)
-- `file` --depends_on--> `source` (strength 0.69)
-- `imports` --depends_on--> `file` (strength 0.69)
-- `list` --depends_on--> `readmenator` (strength 0.69)
-- `returns` --depends_on--> `all` (strength 0.69)
-- `returns` --depends_on--> `map` (strength 0.69)
-- `graph` --depends_on--> `source` (strength 0.68)
-- `node` --depends_on--> `graph` (strength 0.68)
-- `nodes` --depends_on--> `readmenator` (strength 0.68)
-- `readmenator` --depends_on--> `map` (strength 0.68)
-- `readmenator` --depends_on--> `single` (strength 0.68)
-- `symbols` --depends_on--> `readmenator` (strength 0.68)
+- `project` --depends_on--> `file` (strength 0.70)
+- `readmenator` --depends_on--> `analysis` (strength 0.70)
+- `analysis` --depends_on--> `readmenator` (strength 0.69)
+- `file` --depends_on--> `map` (strength 0.69)
+- `graph` --depends_on--> `all` (strength 0.69)
+- `nodes` --depends_on--> `readmenator` (strength 0.69)
+- `readmenator` --depends_on--> `every` (strength 0.69)
+- `edges` --depends_on--> `readmenator` (strength 0.68)
+- `empty` --depends_on--> `readmenator` (strength 0.68)
+- `files` --depends_on--> `file` (strength 0.68)
+- `graph` --depends_on--> `single` (strength 0.68)
+- `imports` --depends_on--> `file` (strength 0.68)
+- `contract` --depends_on--> `readmenator` (strength 0.67)
+- `file` --depends_on--> `all` (strength 0.67)
+- `file` --depends_on--> `every` (strength 0.67)
+- `file` --depends_on--> `single` (strength 0.67)
+- `file` --depends_on--> `symbol` (strength 0.67)
 
 ## Dialectic
 
-- Thesis: `all` centralizes 40 files; Antithesis: `analysis` pulls 37 files with 19 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `build` pulls 35 files with 20 shared (Jaccard 0.36); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `directory` pulls 27 files with 17 shared (Jaccard 0.34); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `file` pulls 64 files with 31 shared (Jaccard 0.42); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `files` pulls 45 files with 26 shared (Jaccard 0.44); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `graph` pulls 51 files with 23 shared (Jaccard 0.34); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `list` pulls 30 files with 22 shared (Jaccard 0.46); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `map` pulls 32 files with 18 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `nodes` pulls 40 files with 21 shared (Jaccard 0.36); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
-- Thesis: `all` centralizes 40 files; Antithesis: `path` pulls 33 files with 18 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `analysis` pulls 39 files with 19 shared (Jaccard 0.31); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `build` pulls 40 files with 22 shared (Jaccard 0.37); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `directory` pulls 31 files with 18 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `every` pulls 30 files with 17 shared (Jaccard 0.31); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `file` pulls 69 files with 34 shared (Jaccard 0.44); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `files` pulls 49 files with 27 shared (Jaccard 0.42); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `graph` pulls 56 files with 25 shared (Jaccard 0.34); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `list` pulls 32 files with 22 shared (Jaccard 0.42); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `map` pulls 36 files with 19 shared (Jaccard 0.32); Synthesis: should they merge, split by layer, or keep `bridges` explicit?
+- Thesis: `all` centralizes 42 files; Antithesis: `nodes` pulls 44 files with 22 shared (Jaccard 0.34); Synthesis: should they merge, split by layer, or keep `bridges` explicit?

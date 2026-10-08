@@ -27,7 +27,16 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from readmenator._config import Config
+from readmenator._graphlayout import (
+    BundleLayout,
+    ForceAtlas2Settings,
+    fit_frames,
+    forceatlas2_frames,
+    hierarchical_edge_bundling,
+    interpolate_frames,
+)
 from readmenator._models import AnalysisResult, AnalysisResultV2, Edge, Node, SecurityFinding
+from readmenator._rank import file_pagerank
 
 BG_TOP = (6, 3, 16)
 BG_HORIZON = (34, 6, 52)
@@ -44,6 +53,11 @@ ORANGE = (255, 140, 50)
 VIOLET = (170, 100, 255)
 RED = (255, 60, 90)
 
+COMMUNITY_PALETTE = (
+    (0, 234, 255), (255, 46, 151), (57, 255, 136), (255, 225, 60),
+    (170, 100, 255), (255, 140, 50), (90, 160, 255), (255, 110, 200),
+)
+
 LAYER_COLORS = {
     "presentation": (0, 234, 255),
     "business_logic": (57, 255, 136),
@@ -58,8 +72,9 @@ ACT_CARDS = {
     "II": ("ACT II", "GOD NODES", "ranked by measured connections + symbols"),
     "III": ("ACT III", "THE BLAST RADIUS", "who breaks when the hub changes, grown by BFS"),
     "IV": ("ACT IV", "COMMUNITIES", "import neighbourhoods, and why they stick"),
-    "V": ("ACT V", "THE NERVOUS SYSTEM", "every import as a live wire"),
-    "VI": ("ACT VI", "CODE DNA", "each file becomes a color"),
+    "V": ("ACT V", "EMERGENCE", "ForceAtlas2 LinLog: the structure finds its own shape"),
+    "VI": ("ACT VI", "THE WIRING", "hierarchical edge bundling between communities"),
+    "VII": ("ACT VII", "CODE DNA", "each file becomes a color"),
 }
 
 _RENDER_D: Optional[Dict[str, Any]] = None
@@ -143,6 +158,24 @@ def _split_boxes(cfg: Config) -> Tuple[Tuple[int, int, int, int], Tuple[int, int
         (30, 90, cfg.VIDEO_WIDTH - right_w - 20, cfg.VIDEO_HEIGHT - 60),
         (cfg.VIDEO_WIDTH - right_w, 90, cfg.VIDEO_WIDTH - 30, cfg.VIDEO_HEIGHT - 60),
     )
+
+
+def community_color(index: int) -> Tuple[int, int, int]:
+    """Neon color for a community index (grey for unassigned)."""
+    if index < 0:
+        return DIM
+    return COMMUNITY_PALETTE[index % len(COMMUNITY_PALETTE)]
+
+
+def _polyline_point(points: List[Tuple[float, float]], f: float) -> Tuple[float, float]:
+    """Point at fraction f along a sampled polyline (by index)."""
+    if not points:
+        return (0.0, 0.0)
+    pos = max(0.0, min(1.0, f)) * (len(points) - 1)
+    i = int(pos)
+    j = min(i + 1, len(points) - 1)
+    t = pos - i
+    return (points[i][0] + (points[j][0] - points[i][0]) * t, points[i][1] + (points[j][1] - points[i][1]) * t)
 
 
 def _verdict_badge(d: Any, box: Tuple[int, int, int, int], text: str, fonts: Dict[str, Any], lt: float, dur: float, col: Tuple[int, int, int] = GREEN) -> None:
@@ -569,7 +602,19 @@ class CinematicVideoRenderer:
                     "mentions": concept.mention_count,
                 })
             dialectic = list(getattr(active_graph, "dialectic_questions", []) or [])[:3]
+        membership: Dict[str, int] = {}
+        community_labels: List[str] = []
+        if analysis and analysis.communities:
+            for index, community in enumerate(analysis.communities):
+                community_labels.append(community.label)
+                for fid in community.file_ids:
+                    membership[fid] = index
+        rank = file_pagerank([n.node_id for n in nodes], link_set,
+                             self.config.RANKING_ALPHA, self.config.RANKING_MAX_ITER,
+                             self.config.RANKING_TOLERANCE)
         return {"project": short_label(project_name, 40), "files": file_count,
+                "membership": membership, "community_labels": community_labels,
+                "rank": rank,
                 "symbols": symbol_count, "imports": import_count,
                 "languages": top_languages, "layers": layer_counts,
                 "gods": god_names, "god_details": god_details,
@@ -649,6 +694,8 @@ class CinematicVideoRenderer:
                 ("card", c.VIDEO_CARD_S, {"card": "V"}),
                 ("graph", c.VIDEO_GRAPH_S, {}),
                 ("card", c.VIDEO_CARD_S, {"card": "VI"}),
+                ("bundle", c.VIDEO_BUNDLE_S, {}),
+                ("card", c.VIDEO_CARD_S, {"card": "VII"}),
                 ("dna", c.VIDEO_DNA_S, {}),
                 ("outro", c.VIDEO_OUTRO_S, {})]
         out: List[Dict[str, Any]] = []
@@ -750,9 +797,47 @@ class CinematicVideoRenderer:
                 cursor += width
         return out
 
+    def emergence_frames(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> List[Dict[str, Tuple[float, float]]]:
+        """ForceAtlas2 snapshots of the resolved import graph fitted to a pixel box."""
+        c = self.config
+        settings = ForceAtlas2Settings(
+            iterations=c.VIDEO_FA2_ITERATIONS, snapshots=c.VIDEO_FA2_SNAPSHOTS,
+            scaling=c.VIDEO_FA2_SCALING, gravity=c.VIDEO_FA2_GRAVITY, linlog=c.VIDEO_FA2_LINLOG,
+        )
+        raw = forceatlas2_frames(data["graph_nodes"], data["graph_links"], settings)
+        return fit_frames(raw, box, 40.0, c.VIDEO_GRAPH_TRIM_FRACTION)
+
+    def bundle_layout(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> BundleLayout:
+        """Hierarchical edge bundling of resolved imports grouped by community."""
+        membership: Dict[str, int] = data.get("membership", {})
+        labels: List[str] = data.get("community_labels", [])
+        rank: Dict[str, float] = data.get("rank", {})
+        groups: Dict[str, List[str]] = {}
+        for index, label in enumerate(labels):
+            members = [nid for nid, comm in membership.items() if comm == index]
+            groups[f"{index}:{label}"] = sorted(members, key=lambda nid: (-rank.get(nid, 0.0), nid))
+        loose = sorted(nid for nid in data["graph_nodes"] if nid not in membership)
+        if loose:
+            groups["-1:unassigned"] = loose
+        x0, y0, x1, y1 = box
+        radius = max(10.0, min(x1 - x0, y1 - y0) / 2 - 70)
+        return hierarchical_edge_bundling(
+            groups, data["graph_links"], ((x0 + x1) / 2, (y0 + y1) / 2 + 10), radius,
+            beta=self.config.VIDEO_BUNDLE_BETA, samples=self.config.VIDEO_BUNDLE_SAMPLES,
+        )
+
+    def _prepare_layouts(self, data: Dict[str, Any]) -> None:
+        """Precompute every layout the scenes draw (before forking workers)."""
+        cfg = self.config
+        box, _ = _graph_boxes(cfg)
+        data["fa2_frames"] = self.emergence_frames(data, (box[0], box[1] + 30, box[2], box[3] - 10))
+        tbox = _panel(cfg)
+        data["tree_pos"] = self.tree_positions(data, (tbox[0], tbox[1] + 10, tbox[2] - 320, tbox[3] - 10))
+        bbox, _ = _split_boxes(cfg)
+        data["bundle"] = self.bundle_layout(data, (bbox[0], bbox[1] + 30, bbox[2], bbox[3] - 10))
+
     def render_single_frame(self, data: Dict[str, Any], frame_index: int) -> bytes:
         """Render one frame to raw RGB bytes without touching ffmpeg."""
-        from PIL import ImageDraw
 
         cfg = self.config
         scenes, total = self.build_scenes(data)
@@ -761,10 +846,7 @@ class CinematicVideoRenderer:
         global _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL, _RENDER_BD, _RENDER_FONTS, _RENDER_CFG
         _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL = data, scenes, total
         _RENDER_BD, _RENDER_FONTS, _RENDER_CFG = bd, fonts, cfg
-        box, _ = _graph_boxes(cfg)
-        data["graph_pos"] = self.graph_positions(data, (box[0], box[1] + 10, box[2], box[3] - 10))
-        tbox = _panel(cfg)
-        data["tree_pos"] = self.tree_positions(data, (tbox[0], tbox[1] + 10, tbox[2] - 320, tbox[3] - 10))
+        self._prepare_layouts(data)
         img = _draw_frame(frame_index)
         return img.tobytes()
 
@@ -783,10 +865,7 @@ class CinematicVideoRenderer:
         _RENDER_BD = Backdrop(cfg.VIDEO_WIDTH, cfg.VIDEO_HEIGHT)
         _RENDER_FONTS = resolve_fonts()
         _RENDER_CFG = cfg
-        box, _ = _graph_boxes(cfg)
-        data["graph_pos"] = self.graph_positions(data, (box[0], box[1] + 10, box[2], box[3] - 10))
-        tbox = _panel(cfg)
-        data["tree_pos"] = self.tree_positions(data, (tbox[0], tbox[1] + 10, tbox[2] - 320, tbox[3] - 10))
+        self._prepare_layouts(data)
         n_frames = max(1, int(total * cfg.VIDEO_FPS))
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                "-s", f"{cfg.VIDEO_WIDTH}x{cfg.VIDEO_HEIGHT}", "-r", str(cfg.VIDEO_FPS), "-i", "-"]
@@ -819,7 +898,6 @@ def _draw_frame(fi: int) -> Any:
 
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     cfg = _RENDER_CFG
-    fonts = _RENDER_FONTS
     fps = cfg.VIDEO_FPS
     gt = fi / max(1, fps)
     sc = _RENDER_SCENES[-1]
@@ -1077,68 +1155,182 @@ def _scene_communities(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any
 
 
 def _scene_graph(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
-    """The resolved import graph growing node by node, with live packets."""
+    """ForceAtlas2 convergence of the real import graph, then PageRank surfers."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
-    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT V // NERVOUS SYSTEM", fonts, cfg.VIDEO_WIDTH)
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT V // EMERGENCE", fonts, cfg.VIDEO_WIDTH)
     box, side = _graph_boxes(cfg)
-    hud_panel(d, box, "resolved import graph // every wire is a real import", fonts, CYAN)
-    hud_panel(d, side, "telemetry // hottest files", fonts, MAGENTA)
-    pos = data.get("graph_pos", {})
+    hud_panel(d, box, "forceatlas2 linlog // repulsion ~ degree, gravity, adaptive speed", fonts, CYAN)
+    hud_panel(d, side, "telemetry // pagerank", fonts, MAGENTA)
+    frames = data.get("fa2_frames", [])
     ids = data["graph_nodes"]
-    p = ease((lt - 0.5) / max(0.5, sc["dur"] - 2.0))
-    visible = max(0, int(p * len(ids)))
-    shown = set(ids[:visible])
-    hot: Dict[Tuple[str, str], int] = {}
-    for k, (a, b) in enumerate(data["graph_links"]):
-        if a in shown and b in shown and a in pos and b in pos:
-            lit = (k % 3 == 0)
-            d.line((*pos[a], *pos[b]), fill=alpha(CYAN if lit else MAGENTA, 0.55 if lit else 0.25), width=2 if lit else 1)
-            if lit:
-                hot[(a, b)] = k
-    for k, ((a, b), _) in enumerate(hot.items()):
-        for q in range(2):
-            f = (gt * 0.9 + q / 2 + _packet_offset(a, b, q)) % 1.0
+    links = data["graph_links"]
+    membership = data.get("membership", {})
+    rank = data.get("rank", {})
+    settle = max(0.5, sc["dur"] * 0.55)
+    p = ease((lt - 0.4) / settle)
+    pos = interpolate_frames(frames, p)
+    top_rank = max([1e-9] + [rank.get(nid, 0.0) for nid in ids])
+    edge_a = 0.12 + 0.28 * p
+    for a, b in links:
+        if a not in pos or b not in pos:
+            continue
+        ca, cb = membership.get(a, -1), membership.get(b, -1)
+        col = community_color(ca) if ca == cb else (150, 140, 210)
+        d.line((*pos[a], *pos[b]), fill=alpha(col, edge_a if ca == cb else edge_a * 0.6), width=1)
+    after = ease((lt - 0.4 - settle) / 1.2)
+    if after > 0 and links:
+        hot = sorted(links, key=lambda e: (-(rank.get(e[0], 0.0) + rank.get(e[1], 0.0)), e))[: cfg.VIDEO_SURFERS]
+        for k, (a, b) in enumerate(hot):
+            if a not in pos or b not in pos:
+                continue
+            f = (gt * 0.7 + _packet_offset(a, b, k)) % 1.0
             x = pos[a][0] + (pos[b][0] - pos[a][0]) * f
             y = pos[a][1] + (pos[b][1] - pos[a][1]) * f
-            d.ellipse((x - 3, y - 3, x + 3, y + 3), fill=(255, 255, 255))
-    details = {g["file"]: g for g in data.get("god_details", [])}
-    order = sorted(ids[:visible], key=lambda nid: -(details.get(nid, {}).get("in", 0) + details.get(nid, {}).get("out", 0))) or ids[:visible]
+            r = 1.5 + 2.5 * (rank.get(b, 0.0) / top_rank)
+            d.ellipse((x - r, y - r, x + r, y + r), fill=alpha((255, 255, 255), 0.9 * after))
+    order = sorted((nid for nid in ids if nid in pos), key=lambda nid: rank.get(nid, 0.0))
     for nid in order:
-        if nid not in pos:
-            continue
         x, y = pos[nid]
-        g = details.get(nid)
-        r = 5 + (6 if g and (g["in"] + g["out"]) > 0 else 0)
-        col = YELLOW if nid == (data.get("god_details", [{}])[0].get("file")) else CYAN
-        d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, 0.9), outline=col, width=2)
+        weight = math.sqrt(rank.get(nid, 0.0) / top_rank)
+        r = 3 + 10 * weight * (0.4 + 0.6 * p)
+        col = community_color(membership.get(nid, -1))
+        if weight > 0.5 and after > 0:
+            glow = r + 6 + 3 * math.sin(gt * 3 + weight * 5)
+            d.ellipse((x - glow, y - glow, x + glow, y + glow), fill=alpha(col, 0.18 * after))
+        d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, 0.95), outline=alpha((255, 255, 255), 0.5), width=1)
+    ranked = sorted(ids, key=lambda nid: (-rank.get(nid, 0.0), nid))
+    label_a = ease((lt - 0.6 - settle) / 1.0)
+    if label_a > 0:
+        placed: List[Tuple[float, float, float, float]] = []
+        for nid in ranked[: cfg.VIDEO_RANK_LABELS]:
+            if nid not in pos:
+                continue
+            x, y = pos[nid]
+            text = short_label(nid.rpartition("/")[2] or nid, 22)
+            w = fonts["tiny_b"].getlength(text)
+            rect = (x + 10, y - 20, x + 18 + w, y - 2)
+            if any(not (rect[2] < q[0] or q[2] < rect[0] or rect[3] < q[1] or q[3] < rect[1]) for q in placed):
+                continue
+            placed.append(rect)
+            d.rectangle(rect, fill=(6, 3, 18, int(210 * label_a)), outline=alpha(YELLOW, 0.7 * label_a))
+            d.text((x + 14, y - 18), text, font=fonts["tiny_b"], fill=alpha(TXT, label_a))
     x0, _, x1, _ = side
-    chroma_text(img, (x0 + 20, box[1] + 40), fmt_int(len(data["graph_links"])), fonts["mid"], TXT, spread=2)
-    d.text((x0 + 20, box[1] + 85), "import wires", font=fonts["small"], fill=DIM)
-    d.text((x0 + 20, box[1] + 110), f"{visible}/{len(ids)} awake", font=fonts["small_b"], fill=CYAN)
-    ranked = sorted(ids[:visible], key=lambda nid: -(details.get(nid, {}).get("in", 0) + details.get(nid, {}).get("out", 0)))[:7]
-    top_c = max([1] + [details.get(nid, {}).get("in", 0) + details.get(nid, {}).get("out", 0) for nid in ranked])
+    iters = int(p * cfg.VIDEO_FA2_ITERATIONS)
+    chroma_text(img, (x0 + 20, box[1] + 40), fmt_int(iters), fonts["mid"], TXT, spread=2)
+    d.text((x0 + 20, box[1] + 85), f"of {cfg.VIDEO_FA2_ITERATIONS} iterations", font=fonts["small"], fill=DIM)
+    d.text((x0 + 20, box[1] + 110), f"{len(ids)} files · {len(links)} imports", font=fonts["small_b"], fill=CYAN)
     y = box[1] + 148
-    d.text((x0 + 20, y), "HOTTEST", font=fonts["tiny_b"], fill=MAGENTA)
+    d.text((x0 + 20, y), "PAGERANK (random surfer)", font=fonts["tiny_b"], fill=MAGENTA)
     y += 20
-    for nid in ranked:
-        if y + 34 > box[3] - 12:
+    for nid in ranked[:7]:
+        if y + 34 > box[3] - 30:
             break
-        c = details.get(nid, {}).get("in", 0) + details.get(nid, {}).get("out", 0)
-        bw = (x1 - x0 - 60) * c / top_c
+        score = rank.get(nid, 0.0)
+        bw = (x1 - x0 - 60) * score / top_rank * ease((lt - 1.0) / 1.5)
+        col = community_color(membership.get(nid, -1))
         d.text((x0 + 20, y), short_label(nid.rpartition("/")[2] or nid, 18), font=fonts["tiny"], fill=TXT)
-        d.text((x1 - 20, y), f"{c} wires", font=fonts["tiny"], fill=DIM, anchor="ra")
-        d.rectangle((x0 + 20, y + 16, x0 + 20 + bw, y + 22), fill=alpha(MAGENTA, 0.85))
+        d.text((x1 - 20, y), f"{score:.3f}", font=fonts["tiny"], fill=DIM, anchor="ra")
+        d.rectangle((x0 + 20, y + 16, x0 + 20 + max(0, bw), y + 22), fill=alpha(col, 0.9))
         y += 36
-    d.text((x0 + 20, box[3] - 26), "● file   — import   ● packet", font=fonts["tiny"], fill=DIM)
-    draw_caption(d, f"{len(ids)} files, {len(data['graph_links'])} wires: packets ride the hot edges", lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+    d.text((x0 + 20, box[3] - 44), "size  = pagerank", font=fonts["tiny"], fill=DIM)
+    d.text((x0 + 20, box[3] - 26), "color = community", font=fonts["tiny"], fill=DIM)
+    caption = ("no forces tuned by hand: dense groups pull together, hubs push apart"
+               if p < 1 else f"converged: {len(ids)} files settle into their communities, surfers follow PageRank")
+    draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
+def _scene_bundle(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """Hierarchical edge bundling: every import routed through the community tree."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VI // THE WIRING", fonts, cfg.VIDEO_WIDTH)
+    left, right = _split_boxes(cfg)
+    hud_panel(d, left, f"hierarchical edge bundling // beta {cfg.VIDEO_BUNDLE_BETA:.2f}, b-spline through communities", fonts, VIOLET)
+    hud_panel(d, right, "flows // imports between communities", fonts, GREEN)
+    layout: Optional[BundleLayout] = data.get("bundle")
+    membership = data.get("membership", {})
+    if layout is None or not layout.leaves:
+        d.text(((left[0] + left[2]) / 2, (left[1] + left[3]) / 2), "no communities to bundle",
+               font=fonts["cap"], fill=DIM, anchor="mm")
+        draw_caption(d, "flat project: nothing to bundle", lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+        return
+    cx, cy = layout.center
+    rad = layout.radius
+    reveal = ease((lt - 0.4) / max(0.5, sc["dur"] * 0.45))
+    groups = layout.groups
+    cycle_start = 0.5 + sc["dur"] * 0.45
+    spot = -1
+    if lt > cycle_start and groups:
+        span = max(0.5, (sc["dur"] - cycle_start - 1.0) / len(groups))
+        spot = min(len(groups) - 1, int((lt - cycle_start) / span))
+    spot_index = int(groups[spot][0].split(":", 1)[0]) if spot >= 0 else None
+    shown = int(reveal * len(layout.curves))
+    for k, (a, b, pts) in enumerate(layout.curves[:shown]):
+        ca = membership.get(a, -1)
+        cb = membership.get(b, -1)
+        lit = spot_index is None or ca == spot_index or cb == spot_index
+        col = community_color(ca)
+        d.line(pts, fill=alpha(col, (0.32 if lit else 0.05)), width=2 if lit and spot_index is not None else 1)
+    if reveal >= 1:
+        for k, (a, b, pts) in enumerate(layout.curves):
+            ca, cb = membership.get(a, -1), membership.get(b, -1)
+            if ca == cb or (spot_index is not None and spot_index not in (ca, cb)):
+                continue
+            f = (gt * 0.45 + _packet_offset(a, b, k)) % 1.0
+            x, y = _polyline_point(pts, f)
+            d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha((255, 255, 255), 0.85))
+    for label, start, end, count in groups:
+        index = int(label.split(":", 1)[0])
+        col = community_color(index)
+        lit = spot_index is None or spot_index == index
+        steps = max(2, int((end - start) * 40))
+        arc = [(cx + (rad + 14) * math.cos(start + (end - start) * i / steps),
+                cy + (rad + 14) * math.sin(start + (end - start) * i / steps)) for i in range(steps + 1)]
+        d.line(arc, fill=alpha(col, 0.95 if lit else 0.3), width=6 if lit else 4)
+        mid = (start + end) / 2
+        name = short_label(label.split(":", 1)[1].rpartition(": ")[2] or label, 18)
+        tx, ty = cx + (rad + 30) * math.cos(mid), cy + (rad + 30) * math.sin(mid)
+        anchor = "lm" if math.cos(mid) >= 0 else "rm"
+        if count >= 2 or lit:
+            d.text((tx, ty), f"{name} ({count})", font=fonts["tiny_b"], fill=alpha(col, 0.95 if lit else 0.45), anchor=anchor)
+    for nid, (x, y) in layout.leaves.items():
+        col = community_color(membership.get(nid, -1))
+        d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha(col, 0.9))
+    flows: Dict[Tuple[int, int], int] = {}
+    for a, b, _pts in layout.curves:
+        ca, cb = membership.get(a, -1), membership.get(b, -1)
+        if ca != cb:
+            flows[(ca, cb)] = flows.get((ca, cb), 0) + 1
+    labels = data.get("community_labels", [])
+    x0, _, x1, _ = right
+    y = right[1] + 44
+    top_flow = max([1] + list(flows.values()))
+    ordered = sorted(flows.items(), key=lambda kv: (-kv[1], kv[0]))
+    for (ca, cb), n in ordered[:8]:
+        if y + 40 > right[3] - 60:
+            break
+        name_a = short_label((labels[ca] if 0 <= ca < len(labels) else "unassigned").rpartition(": ")[2], 14)
+        name_b = short_label((labels[cb] if 0 <= cb < len(labels) else "unassigned").rpartition(": ")[2], 14)
+        k = ease((lt - 0.8) / 1.2)
+        d.text((x0 + 18, y), f"{name_a} -> {name_b}", font=fonts["tiny_b"], fill=alpha(TXT, k))
+        d.text((x1 - 18, y), f"{n}", font=fonts["tiny"], fill=alpha(DIM, k), anchor="ra")
+        bw = (x1 - x0 - 36) * n / top_flow * k
+        d.rectangle((x0 + 18, y + 17, x0 + 18 + max(0, bw), y + 23), fill=alpha(community_color(ca), 0.9))
+        y += 40
+    internal = sum(1 for a, b, _p in layout.curves if membership.get(a, -1) == membership.get(b, -1))
+    d.text((x0 + 18, right[3] - 44), f"{internal} inside · {sum(flows.values())} crossing", font=fonts["small_b"], fill=GREEN)
+    caption = "thick bundles are the real seams between subsystems"
+    if spot >= 0:
+        caption = f"spotlight: {short_label(groups[spot][0].split(':', 1)[1], 30)} and everything it touches"
+    draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
 
 
 def _scene_dna(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
     """Every file as a color, scanned live, with a zoom on the hub file."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
-    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VI // CODE DNA", fonts, cfg.VIDEO_WIDTH)
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VII // CODE DNA", fonts, cfg.VIDEO_WIDTH)
     grid_box, sec_box = _dna_boxes(cfg)
     hud_panel(d, grid_box, "sha256 per file // color = fingerprint", fonts, YELLOW)
     hud_panel(d, sec_box, "security // pattern scan", fonts, RED)
@@ -1225,4 +1417,5 @@ def _scene_outro(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> 
 
 _SCENE_FN = {"title": _scene_title, "card": _scene_card, "layers": _scene_layers,
              "gods": _scene_gods, "tree": _scene_tree, "communities": _scene_communities,
-             "graph": _scene_graph, "dna": _scene_dna, "outro": _scene_outro}
+             "graph": _scene_graph, "bundle": _scene_bundle, "dna": _scene_dna,
+             "outro": _scene_outro}

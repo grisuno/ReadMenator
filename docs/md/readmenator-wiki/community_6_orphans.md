@@ -1,6 +1,6 @@
 # orphans
 
-*Community 5 | 3 files | cohesion 0.00*
+*Community 6 | 3 files | cohesion 0.00*
 
 ## Definition
 
@@ -54,11 +54,7 @@ This community groups 3 file(s) rooted at `readmenator/_vendor` with dominant la
 
 ## Connections
 
-- [INFERRED] shares_context community 0 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 0 (readmenator: _pipeline) and community 5 (orphans).
-- [INFERRED] shares_context community 1 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 1 (readmenator/parsers) and community 5 (orphans).
-- [INFERRED] shares_context community 2 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 2 (readmenator: _diagrams) and community 5 (orphans).
-- [INFERRED] shares_context community 3 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 3 (readmenator: _agent_output) and community 5 (orphans).
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_injector) and community 5 (orphans).
+- [INFERRED] shares_context community 0 <-> 6 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _agent_output) and community 6 (orphans).
 
 ## Risks
 

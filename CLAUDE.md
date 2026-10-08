@@ -57,6 +57,11 @@ readmenator/
   _exclusions.py    - FP exclusion blocklist loader (glob + rule_id scoping)
   _explorer.py      - Stdlib HTTP explorer server (/api/graph, /api/analytics, /api/samples)
   _embed.py         - Optional semantic embeddings with offline Jaccard fallback
+  _graphrag.py      - Zero-token GraphRAG: entities, relationships, text units, report hierarchy, local/global search
+  _graphlayout.py   - ForceAtlas2 snapshots (numpy optional) and hierarchical edge bundling
+  _memory.py        - MEMORY.md: declared rules (file:line), measured baselines, preserved session log
+  _skill_installer.py - Installs packaged agent skills (readmenator/_skills/*/SKILL.md)
+  _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
   _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
 tests/
   test_config.py        - Config contract tests
@@ -95,6 +100,9 @@ tests/
   test_gh_wiki.py - GitHub wiki publisher contract tests (faked git/gh runner, no network)
   test_concepts.py - Semantic ConceptGraph contract tests (nouns, verbs, atomic, deterministic, dialectic)
   test_interactive_graph.py - Interactive explorer contract tests (forcegraph, scantext, yaralite, provenance, exclusions, analytics, explorer, embed, rebuild wiring)
+  test_graphrag.py - GraphRAG contract tests (entities, relations, reports, text units, privacy, BM25, PPR local, global, store)
+  test_graphlayout.py - ForceAtlas2 and edge bundling contract tests (determinism, separation, bounds, curves)
+  test_memory.py - Project memory and skill installer contract tests (rules, citations, preserved log, marker safety)
 ```
 
 ## Contracts
@@ -151,6 +159,11 @@ tests/
 - Exclusion settings (EXCLUSIONS_ENABLED, EXCLUSIONS_FILE)
 - Explorer settings (EXPLORER_ENABLED, EXPLORER_HOST, EXPLORER_PORT)
 - Embedding settings (EMBED_ENABLED, EMBED_MODEL, EMBED_MIN_CLUSTER_SIZE, EMBED_MAX_NEIGHBORS)
+- GraphRAG settings (GRAPHRAG_ENABLED, GRAPHRAG_OUTPUT_DIR, GRAPHRAG_INCLUDE_SYMBOLS/CONCEPTS/EXTERNALS, GRAPHRAG_TEXT_UNIT_MAX_LINES/CHARS, GRAPHRAG_BM25_K1/B, GRAPHRAG_PPR_ALPHA/MAX_ITER/TOLERANCE, GRAPHRAG_SEED_TOP_K, GRAPHRAG_LOCAL_TOP_*, GRAPHRAG_GLOBAL_TOP_REPORTS, GRAPHRAG_REPORT_*, GRAPHRAG_CONTEXT_BUDGET_TOKENS, GRAPHRAG_LOCAL_SECTION_SHARES, GRAPHRAG_GLOBAL_SECTION_SHARES, GRAPHRAG_RATING_*, GRAPHRAG_SEVERITY_WEIGHTS, GRAPHRAG_GLOBAL_HINTS, GRAPHRAG_STOPWORDS)
+- Force-graph explorer UX (FORCEGRAPH_LABEL_TOP_N, FORCEGRAPH_LABEL_ZOOM, FORCEGRAPH_LABEL_MAX_CHARS, FORCEGRAPH_SYMBOLS_PER_NODE, FORCEGRAPH_DOC_MAX_CHARS, FORCEGRAPH_SIGNATURE_MAX_CHARS, FORCEGRAPH_CLUSTER_STRENGTH, FORCEGRAPH_COLLIDE_PADDING, FORCEGRAPH_DAG_LEVEL_DISTANCE, FORCEGRAPH_FLY_MS, FORCEGRAPH_FLY_ZOOM, FORCEGRAPH_SEARCH_RESULTS, FORCEGRAPH_THUMB_WIDTH/HEIGHT/ITERATIONS)
+- Video layout acts (VIDEO_BUNDLE_S, VIDEO_FA2_ITERATIONS, VIDEO_FA2_SNAPSHOTS, VIDEO_FA2_SCALING, VIDEO_FA2_GRAVITY, VIDEO_FA2_LINLOG, VIDEO_BUNDLE_BETA, VIDEO_BUNDLE_SAMPLES, VIDEO_SURFERS, VIDEO_RANK_LABELS)
+- Memory settings (MEMORY_ENABLED, MEMORY_FILENAME, MEMORY_VOCABULARY_STOPWORDS, MEMORY_NOTE_MAX_CHARS, MEMORY_NOTE_KINDS, MEMORY_RULE_SOURCES, MEMORY_CONSTRAINT/STYLE/DELIVERABLE_KEYWORDS, MEMORY_HEADING_EXCLUDE, MEMORY_MAX_RULES_PER_FILE/CATEGORY, MEMORY_MIN_RULE_CHARS, MEMORY_MAX_COMMANDS, MEMORY_VOCABULARY_TOP_N, MEMORY_SUBSYSTEMS_TOP_N, MEMORY_STYLE_LANGUAGES, MEMORY_RISKS_TOP_N)
+- Skills settings (SKILLS_ENABLED, SKILLS_TARGET_DIR, SKILLS_INSTALL_ON_RUN)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -375,8 +388,8 @@ tests/
 - `notifications/initialized` acknowledged silently (no response)
 - Unknown methods return standard JSON-RPC error codes
 - Uninitialized requests return error code -32000
-- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json, concepts, analytics, near, provenance, forcegraph
-- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts, readmenator://forcegraph, readmenator://analytics
+- Tools: summary, query, explain, path, findings, security_summary, taint, hotspots, cycles, communities, layers, layer_violations, rebuild, update, export_json, concepts, analytics, near, provenance, forcegraph, graphrag, memory, remember
+- Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts, readmenator://forcegraph, readmenator://analytics, readmenator://graphrag, readmenator://memory
 - Integrated with readmenatorApplication for all query/analysis operations
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
 
@@ -389,7 +402,36 @@ tests/
 - AnalyticsBuilder (readmenator/_analytics.py): attribution funnel, layer/language distributions, community cohesion, hotspot ranking, rule yield, size bands, file scatter; KB Corpus Analytics section; CLI `analytics`
 - ExplorerServer (readmenator/_explorer.py): stdlib HTTPServer with /api/graph, /api/analytics, /api/samples, /vendor/force-graph.min.js plus static write_static(); CLI `explorer` (add --no-browser to skip auto-open)
 - Embedder (readmenator/_embed.py): optional sentence-transformers encode with offline Jaccard near_jaccard/cluster_jaccard/project_jaccard fallback; CLI `near <file|text>`
+- Explorer UX: canvas names with collision-aware labels (top FORCEGRAPH_LABEL_TOP_N by PageRank, all past FORCEGRAPH_LABEL_ZOOM), shapes per type, findings badge, hover neighbourhood preview, inspector panel (PageRank position and percentile, metrics, purpose, filterable symbols with signatures and docs, neighbours grouped by relation, clickable, Back history, 1-3 hop reach, isolate), search over labels, paths and symbol names, layouts force / cluster (community anchors) / radial (layer rings) / dag, deep links #node=&layout=; unresolved calls and imports that resolve to project files never become externals; payload file nodes carry rank, rank_pos, doc (empty in privacy mode), symbol_list
+- ForceGraphRenderer.thumbnail_svg(payload): escaped ForceAtlas2 preview used as the featured gallery card in both `diagrams` and `pages`
 - AnalyzerFactory exposes forcegraph, analytics, scantext, provenance, exclusions, embedder (lazy init); app.export_forcegraph/explorer_state/serve_explorer/analytics/scan_texts/near/audit_provenance/validate_yaralite; run()/rebuild() write readmenator-maps/graph-force.html via _maybe_export_forcegraph (skipped when FORCEGRAPH_ENABLED=False); export_diagrams() writes it first and links it from the gallery index; export() also writes it
+
+### GraphRAG Contract
+- GraphRagBuilder.build(nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, concept_graph, content_map, memory_notes) returns a deterministic GraphRagIndex (readmenator/_graphrag.py); zero LLM tokens
+- Entities: file:, sym:<file>::<name>@<line>, concept:, ext: (only imports that do not resolve to project files), memory:log; each with description, level-0 community, degree, global PageRank on the symmetric entity graph
+- Relationships: defines, resolved_imports, calls (symbol-resolved, INFERRED), inherits, documents (concept -> file), imports (file -> external), depends_on (concept verbs); weights from the category EdgeKind model
+- Text units: one per symbol spanning to the next symbol (capped by GRAPHRAG_TEXT_UNIT_MAX_LINES/CHARS) plus file docs; PRIVACY_MODE drops source text and docs; MEMORY.md session-log notes become memory text units
+- Report hierarchy: level 0 = analyzer communities (plus "unassigned files"), level 1 = Louvain themes on the community quotient graph (GraphAnalyzer.partition), level 2 = root; extractive summary and findings (PageRank rank, importers, security counts, hotspots, cycles, layer violations, taint, dataflow, surprising bridges); rating = GRAPHRAG_RATING_CENTRALITY_WEIGHT x PageRank share + GRAPHRAG_RATING_RISK_WEIGHT x capped severity risk
+- GraphRagSearcher: local_search = BM25 over entities and text units -> seeds -> Personalized PageRank (GRAPHRAG_PPR_ALPHA) -> top entities, relations among them, community reports, source units; global_search = BM25 over level-0 reports, findings mapped by query overlap, reduced under the root overview; choose_mode routes broad hints or no entity hit to global
+- Context packing gives each section its GRAPHRAG_*_SECTION_SHARES slice of GRAPHRAG_CONTEXT_BUDGET_TOKENS x AGENT_CHARS_PER_TOKEN plus unused carry; empty sections emit no heading
+- GraphRagStore writes readmenator-graphrag/index.json (schema_version), entities/relationships/communities/text_units.jsonl, REPORTS.md; load() rejects other schema versions
+- Wired into run() (_maybe_write_graphrag), CLI `graphrag` / `ask "<q>" [--local|--global] [--budget N]`, MCP tool readmenator.graphrag + resource readmenator://graphrag, gallery docs group, llms.txt section; scanner skips GRAPHRAG_OUTPUT_DIR
+
+### Project Memory Contract
+- ProjectMemory (readmenator/_memory.py) writes readmenator-agent/MEMORY.md: 1 purpose and domain (README lead with citation, concept vocabulary, subsystems), 2 workflow (commands detected from pyproject, package.json, Makefile, go.mod, Cargo.toml, CI workflows; session protocol), 3 rules and constraints, 4 style norms, 5 minimum deliverables (each Declared + Measured baseline), 6 risks, 7 session log
+- Declared rules: bullet or numbered lines under headings matching MEMORY_*_KEYWORDS in MEMORY_RULE_SOURCES files, quoted verbatim with file:line; MEMORY_HEADING_EXCLUDE headings and readmenator-injected anchor blocks skipped; symlinks and oversized files skipped
+- Session log between NOTES_BEGIN/NOTES_END markers is preserved byte for byte by write(); remember(note, kind) validates MEMORY_NOTE_KINDS, sanitizes to one line (no control chars, comment markers neutralised, MEMORY_NOTE_MAX_CHARS)
+- CLI `memory`, `remember "<note>" --kind <kind>`; MCP tools readmenator.memory, readmenator.remember, resource readmenator://memory; MANIFEST read_order starts with MEMORY.md; agent injection step 0 points at it
+
+### Agent Skills Contract
+- readmenator/_skills/<readmenator-*>/SKILL.md with name + description frontmatter (orient, ask, change, memory)
+- SkillInstaller.install(project_root, target) copies only readmenator-* skills into SKILLS_TARGET_DIR, idempotent, refuses symlinked destinations; maybe_install_on_run installs during run() only when the target's parent (e.g. .claude/) already exists and SKILLS_INSTALL_ON_RUN is set
+- CLI `skills [--target DIR]`
+
+### Graph Layout Contract
+- forceatlas2_frames(ids, edges, settings) (readmenator/_graphlayout.py): Jacomy 2014 ForceAtlas2 with degree-weighted repulsion, LinLog attraction, degree-weighted gravity, swing/traction adaptive speed; seeded start; evenly spaced snapshots incl. start and end; numpy path with pure Python fallback under a budget
+- fit_frames maps snapshots into a pixel box using the final layout's bounds (fixed camera); interpolate_frames blends snapshots
+- hierarchical_edge_bundling(groups, edges, center, radius, beta, samples): leaves on a circle by group, control polygon leaf -> group hub -> center -> group hub -> leaf, straightened by beta, sampled as clamped uniform cubic B-spline
 
 ### Semantic ConceptGraph Contract
 - ConceptExtractor class with extract(nodes, edges, resolved_edges) entry point (readmenator/_concepts.py)
@@ -565,6 +607,7 @@ tests/
 - Canvas uses the darkest token with lifted node panels; edge labels carry halo strokes for readability
 - Four visual presets with identity (classic, signal-flow glow, blueprint grid with square nodes, warm editorial) and dark/light themes from Config
 - VisNetworkRenderer class with render(map) returning a physics-driven vis.js document
+- Live map selection: hover preview card; click dims everything outside the 1-hop neighbourhood (reach modes still filter), fits the camera, and opens a passport with metric tiles, an ego mini-map SVG (used by left, imports right, clickable), clamped doc, neighbour chips, filterable symbol table, Back history (Backspace); guide rows hide while focused
 - Live maps color nodes by code community (legend with counts, click isolates, #community=id deep link, C toggles to role colors), size dots by link count, always label the DIAGRAM_VIS_LABEL_TOP_N most connected files and reveal the rest on zoom, dim edges that light up on hover/selection, forceAtlas2Based physics from DIAGRAM_VIS_* settings
 - Layer roles are honest: utility -> core, testing -> test (never "external" for project files)
 - Default export format for `diagrams`, `diagram`, and `pages` (CDN bundle URLs from Config, pages need network access)
@@ -616,7 +659,7 @@ tests/
 ### Cinematic Video Contract
 - CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
-- Six acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V resolved import graph with packets + hottest ranking, VI code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, outro telemetry
+- Seven acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VII code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, outro telemetry; layouts precomputed before forking frame workers
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
 - No truncation of reality: act III is the full blast-radius tree (every file that transitively imports the hub, BFS over dependents, VIDEO_TREE_MAX_NODES 0 = all) in a radial layout (one ring per depth, sectors by leaf count); act V graph shows every file and every resolved import (VIDEO_MAX_GRAPH_NODES 0 = all), spring layout on connected files with isolated files in a bottom strip; act VI DNA grid sizes cells so every file fits (VIDEO_DNA_MAX_CELL)
 - Labels never overlap: tree labels placed greedily by depth and skipped only when they would collide (nodes are always drawn); labels truncated to VIDEO_MAX_LABEL_CHARS
@@ -696,9 +739,10 @@ When modifying this codebase:
 
 Generated offline by [ReadMenator](https://github.com/grisuno/ReadMenator) (zero-token static analysis). Humans: `KNOWLEDGE_BASE.md`.
 
+0. Memory: `cat readmenator-agent/MEMORY.md` (business rules, workflow, constraints, style, done criteria, session log). Record new decisions with `readmenator . remember "<note>" --kind decision`.
 1. Freshness: `readmenator . fresh` (exit 1 means stale: run `readmenator . --rebuild`). Without the CLI, compare `git_commit` in `readmenator-agent/MANIFEST.json` with `git log -1`.
 2. Orient: `ls *.md readmenator-agent/ readmenator-wiki/`, then read `readmenator-wiki/index.md` (big picture, communities, god nodes).
-3. Locate: `grep -n '<keyword>' readmenator-agent/INDEX*.md readmenator-agent/SYMBOLS*.md` before any `glob` over sources.
+3. Locate: `grep -n '<keyword>' readmenator-agent/INDEX*.md readmenator-agent/SYMBOLS*.md` before any `glob` over sources; for questions use `readmenator . ask "<question>"` (GraphRAG, `--global` for overviews).
 4. Context: `cat readmenator-agent/KB_<subsystem>.md` for the subsystem you touch.
 5. Before editing: `grep -n '<file>' readmenator-agent/GOTCHAS.md readmenator-agent/SECURITY.md` (blast radius, cycles, findings).
 

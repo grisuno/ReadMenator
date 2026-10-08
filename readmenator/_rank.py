@@ -116,6 +116,40 @@ def global_pagerank(
     return {nodes[i]: r[i] for i in range(n)}
 
 
+def file_pagerank(
+    file_ids: List[str],
+    edges: List[Tuple[str, str]],
+    alpha: float = 0.85,
+    max_iter: int = 100,
+    tolerance: float = 1e-6,
+) -> Dict[str, float]:
+    """Directed PageRank over file-to-file dependency pairs.
+
+    A file that many files depend on accumulates authority. Self loops
+    and pairs naming unknown files are ignored.
+
+    Args:
+        file_ids: Every file identifier (isolated files keep teleport mass).
+        edges: (importer, imported) pairs.
+        alpha: Damping factor.
+        max_iter: Maximum power-iteration steps.
+        tolerance: Convergence threshold (L1 norm).
+
+    Returns:
+        Dict mapping file id -> PageRank score; empty for no files.
+    """
+    known = set(file_ids)
+    if not known:
+        return {}
+    category = Category()
+    for fid in sorted(known):
+        category.add_object(fid)
+    for source, target in edges:
+        if source in known and target in known and source != target:
+            category.add_morphism(Morphism(source, target, EdgeKind.RESOLVED_IMPORTS))
+    return global_pagerank(TypedGraph(category), alpha, max_iter, tolerance)
+
+
 def personalized_pagerank(
     graph: TypedGraph,
     seeds: Dict[str, float],

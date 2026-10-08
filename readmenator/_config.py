@@ -646,3 +646,194 @@ class Config:
     EMBED_MIN_CLUSTER_SIZE: int = 3
 
     EMBED_MAX_NEIGHBORS: int = 10
+
+    GRAPHRAG_ENABLED: bool = True
+
+    GRAPHRAG_OUTPUT_DIR: str = "readmenator-graphrag"
+
+    GRAPHRAG_INCLUDE_SYMBOLS: bool = True
+
+    GRAPHRAG_INCLUDE_CONCEPTS: bool = True
+
+    GRAPHRAG_INCLUDE_EXTERNALS: bool = True
+
+    GRAPHRAG_TEXT_UNIT_MAX_LINES: int = 40
+
+    GRAPHRAG_TEXT_UNIT_MAX_CHARS: int = 1600
+
+    GRAPHRAG_DESCRIPTION_MAX_CHARS: int = 240
+
+    GRAPHRAG_MIN_TOKEN_LEN: int = 2
+
+    GRAPHRAG_BM25_K1: float = 1.2
+
+    GRAPHRAG_BM25_B: float = 0.75
+
+    GRAPHRAG_PPR_ALPHA: float = 0.5
+
+    GRAPHRAG_PPR_MAX_ITER: int = 50
+
+    GRAPHRAG_PPR_TOLERANCE: float = 1e-6
+
+    GRAPHRAG_SEED_TOP_K: int = 8
+
+    GRAPHRAG_LOCAL_TOP_ENTITIES: int = 15
+
+    GRAPHRAG_LOCAL_TOP_RELATIONS: int = 20
+
+    GRAPHRAG_LOCAL_TOP_TEXT_UNITS: int = 6
+
+    GRAPHRAG_LOCAL_TOP_REPORTS: int = 3
+
+    GRAPHRAG_GLOBAL_TOP_REPORTS: int = 6
+
+    GRAPHRAG_REPORT_MAX_FINDINGS: int = 8
+
+    GRAPHRAG_REPORT_KEY_ENTITIES: int = 8
+
+    GRAPHRAG_REPORT_KEY_RELATIONS: int = 8
+
+    GRAPHRAG_CONTEXT_BUDGET_TOKENS: int = 4000
+
+    GRAPHRAG_RATING_CENTRALITY_WEIGHT: float = 7.0
+
+    GRAPHRAG_RATING_RISK_WEIGHT: float = 3.0
+
+    GRAPHRAG_RATING_RISK_CAP: float = 10.0
+
+    GRAPHRAG_SEVERITY_WEIGHTS: Tuple[Tuple[str, float], ...] = (
+        ("critical", 4.0),
+        ("high", 2.0),
+        ("medium", 1.0),
+        ("low", 0.25),
+        ("info", 0.1),
+    )
+
+    GRAPHRAG_GLOBAL_HINTS: Tuple[str, ...] = (
+        "architecture", "overview", "overall", "themes", "theme",
+        "structure", "design", "summary", "summarize", "landscape",
+        "communities", "subsystems", "modules", "big", "picture",
+        "main", "risks", "everything", "whole", "project",
+    )
+
+    GRAPHRAG_STOPWORDS: Tuple[str, ...] = (
+        "the", "and", "for", "with", "from", "that", "this", "what",
+        "how", "does", "where", "which", "who", "why", "when", "are",
+        "is", "of", "to", "in", "on", "a", "an", "it", "be", "do",
+        "can", "should", "i", "me", "my", "we", "our", "you", "your",
+        "use", "used", "uses", "using", "about", "into", "there",
+    )
+
+    FORCEGRAPH_LABEL_TOP_N: int = 30
+
+    FORCEGRAPH_LABEL_ZOOM: float = 1.6
+
+    FORCEGRAPH_LABEL_MAX_CHARS: int = 28
+
+    FORCEGRAPH_SYMBOLS_PER_NODE: int = 40
+
+    FORCEGRAPH_DOC_MAX_CHARS: int = 280
+
+    FORCEGRAPH_SIGNATURE_MAX_CHARS: int = 90
+
+    FORCEGRAPH_CLUSTER_STRENGTH: float = 0.6
+
+    FORCEGRAPH_COLLIDE_PADDING: int = 4
+
+    FORCEGRAPH_DAG_LEVEL_DISTANCE: int = 60
+
+    FORCEGRAPH_FLY_MS: int = 700
+
+    FORCEGRAPH_FLY_ZOOM: float = 3.0
+
+    FORCEGRAPH_SEARCH_RESULTS: int = 8
+
+    VIDEO_BUNDLE_S: float = 11.0
+
+    VIDEO_FA2_ITERATIONS: int = 300
+
+    VIDEO_FA2_SNAPSHOTS: int = 60
+
+    VIDEO_FA2_SCALING: float = 2.0
+
+    VIDEO_FA2_GRAVITY: float = 1.0
+
+    VIDEO_FA2_LINLOG: bool = True
+
+    VIDEO_BUNDLE_BETA: float = 0.85
+
+    VIDEO_BUNDLE_SAMPLES: int = 24
+
+    VIDEO_SURFERS: int = 48
+
+    VIDEO_RANK_LABELS: int = 8
+
+    FORCEGRAPH_THUMB_WIDTH: int = 320
+
+    FORCEGRAPH_THUMB_HEIGHT: int = 150
+
+    FORCEGRAPH_THUMB_ITERATIONS: int = 150
+
+    MEMORY_ENABLED: bool = True
+
+    MEMORY_FILENAME: str = "MEMORY.md"
+
+    MEMORY_NOTE_MAX_CHARS: int = 500
+
+    MEMORY_NOTE_KINDS: Tuple[str, ...] = (
+        "business", "decision", "rule", "workflow", "style", "deliverable", "gotcha", "todo", "note",
+    )
+
+    MEMORY_RULE_SOURCES: Tuple[str, ...] = (
+        "AGENTS.md", "CLAUDE.md", "GEMINI.md", "CONVENTIONS.md", "CONTRIBUTING.md",
+        "RULES.md", "PROJECT_RULES.md", ".cursorrules", ".windsurfrules",
+        ".github/copilot-instructions.md", "SECURITY.md", "STYLEGUIDE.md", "docs/CONTRIBUTING.md",
+    )
+
+    MEMORY_CONSTRAINT_KEYWORDS: Tuple[str, ...] = (
+        "rule", "constraint", "principle", "security", "must", "never", "forbidden",
+        "restriction", "policy", "boy scout", "invariant", "dry", "solid",
+    )
+
+    MEMORY_STYLE_KEYWORDS: Tuple[str, ...] = (
+        "style", "convention", "naming", "format", "lint", "code quality", "structured output",
+    )
+
+    MEMORY_DELIVERABLE_KEYWORDS: Tuple[str, ...] = (
+        "definition of done", "done", "checklist", "deliverable", "testing", "test", "review",
+        "pull request", "release", "acceptance",
+    )
+
+    MEMORY_HEADING_EXCLUDE: Tuple[str, ...] = ("contract", "project structure", "knowledge base")
+
+    MEMORY_MAX_RULES_PER_FILE: int = 40
+
+    MEMORY_MAX_RULES_PER_CATEGORY: int = 60
+
+    MEMORY_MIN_RULE_CHARS: int = 12
+
+    MEMORY_MAX_COMMANDS: int = 12
+
+    MEMORY_VOCABULARY_TOP_N: int = 15
+
+    MEMORY_SUBSYSTEMS_TOP_N: int = 8
+
+    MEMORY_STYLE_LANGUAGES: int = 4
+
+    MEMORY_RISKS_TOP_N: int = 5
+
+    SKILLS_ENABLED: bool = True
+
+    SKILLS_TARGET_DIR: str = ".claude/skills"
+
+    SKILLS_INSTALL_ON_RUN: bool = True
+
+    MEMORY_VOCABULARY_STOPWORDS: Tuple[str, ...] = (
+        "returns", "return", "when", "empty", "none", "true", "false", "given", "value",
+        "values", "args", "raises", "list", "dict", "string", "str", "int", "each", "every",
+        "into", "used", "uses", "only", "also", "must", "never", "then", "than", "contract",
+    )
+
+    GRAPHRAG_LOCAL_SECTION_SHARES: Tuple[float, ...] = (0.35, 0.15, 0.2, 0.3)
+
+    GRAPHRAG_GLOBAL_SECTION_SHARES: Tuple[float, ...] = (0.3, 0.7)

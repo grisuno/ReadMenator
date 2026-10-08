@@ -59,6 +59,11 @@ def build_parser() -> argparse.ArgumentParser:
             "  scan-text               Print synthesized scan-text blobs per file\n"
             "  validate-rules          Validate readmenator-rules/yara_rules.yar (T1/T2/T3)\n"
             "  provenance              Audit security findings by static vs inferred evidence\n"
+            "  graphrag                Build the zero-token GraphRAG index (readmenator-graphrag/)\n"
+            "  memory                  Print readmenator-agent/MEMORY.md (rules, workflow, session log)\n"
+            "  remember \"<note>\"       Append to the MEMORY.md session log (--kind decision|business|...)\n"
+            "  skills [--target DIR]   Install agent skills (default .claude/skills)\n"
+            "  ask \"<question>\"        GraphRAG context for agents (--local, --global, --budget N)\n"
             "\n"
             "Flags:\n"
             "  --rebuild               Force full regeneration\n"
@@ -342,6 +347,47 @@ def main() -> None:
             import json as _json
 
             print(_json.dumps(app.validate_yaralite(target), indent=1))
+            return
+        elif command == "graphrag":
+            index = app.build_graphrag(target)
+            print(f"GraphRAG index: {index.meta.get('entities')} entities, "
+                  f"{index.meta.get('relationships')} relationships, "
+                  f"{len(index.communities)} reports, {index.meta.get('text_units')} text units")
+            return
+        elif command == "ask" and len(sys.argv) >= 4:
+            mode = "local" if "--local" in sys.argv else ("global" if "--global" in sys.argv else "auto")
+            budget = 0
+            if "--budget" in sys.argv:
+                position = sys.argv.index("--budget")
+                if position + 1 < len(sys.argv) and sys.argv[position + 1].isdigit():
+                    budget = int(sys.argv[position + 1])
+            print(app.graphrag_search(target, sys.argv[3], mode, budget).markdown)
+            return
+        elif command == "memory":
+            print(app.memory(target))
+            return
+        elif command == "remember" and len(sys.argv) >= 4:
+            kind = "note"
+            if "--kind" in sys.argv:
+                position = sys.argv.index("--kind")
+                if position + 1 < len(sys.argv):
+                    kind = sys.argv[position + 1]
+            try:
+                print(app.remember(target, sys.argv[3], kind))
+            except ValueError as exc:
+                print(f"remember failed: {exc}", file=sys.stderr)
+                sys.exit(2)
+            return
+        elif command == "skills":
+            dest = None
+            if "--target" in sys.argv:
+                position = sys.argv.index("--target")
+                if position + 1 < len(sys.argv):
+                    dest = sys.argv[position + 1]
+            written = app.install_skills(target, dest)
+            for path in written:
+                print(path)
+            print(f"{len(written)} skill files written ({len(app._factory.skills.available())} available)")
             return
         elif command == "provenance":
             for item in app.audit_provenance(target):

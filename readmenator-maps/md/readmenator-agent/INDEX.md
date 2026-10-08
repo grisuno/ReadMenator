@@ -8,12 +8,12 @@
 | `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 3 |
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 33 | 3 |
 | `readmenator/_analytics.py` | Corpus analytics aggregations for the readmenator knowledge graph. | readmenator | 9 | 5 |
-| `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 22 | 4 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 62 | 10 |
+| `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 23 | 5 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 71 | 10 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 4 |
-| `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 8 |
+| `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 71 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 76 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
@@ -25,34 +25,38 @@
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_explorer.py` | Stdlib explorer HTTP server for the readmenator knowledge graph. | readmenator | 13 | 2 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 16 | 3 |
-| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 15 | 5 |
+| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 18 | 5 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 3 |
-| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 4 |
+| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 5 |
+| `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 11 | 3 |
+| `readmenator/_graphrag.py` | Zero-token GraphRAG index and retrieval for AI agents. | readmenator | 53 | 4 |
 | `readmenator/_hotspots.py` | Hotspot, dependency cycle, and change impact analysis. | readmenator | 7 | 2 |
 | `readmenator/_layer_rules.py` | Architecture layer rule engine: forbidden and warning edges between layers. | readmenator | 4 | 2 |
 | `readmenator/_layers.py` | Architectural layer detection for the readmenator knowledge graph. | readmenator | 7 | 6 |
 | `readmenator/_linter.py` | Architecture linter for the readmenator knowledge graph. | readmenator | 7 | 2 |
-| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 60 | 3 |
+| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 64 | 3 |
+| `readmenator/_memory.py` | Persistent project memory for agents, generated with zero tokens. | readmenator | 30 | 2 |
 | `readmenator/_mermaid.py` | Mermaid graph renderer with intelligent pruning. | readmenator | 4 | 2 |
-| `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 23 | 86 |
-| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 41 | 1 |
+| `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 23 | 89 |
+| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 45 | 1 |
 | `readmenator/_projections.py` | Functors and projections for the readmenator code category. | readmenator | 15 | 1 |
 | `readmenator/_provenance.py` | Evidence-provenance audit for readmenator security findings. | readmenator | 10 | 2 |
-| `readmenator/_purpose.py` | Purpose extraction shared by every agent-facing document generator. | readmenator | 7 | 3 |
+| `readmenator/_purpose.py` | Purpose extraction shared by every agent-facing document generator. | readmenator | 7 | 6 |
 | `readmenator/_query.py` | Query engine for the readmenator knowledge base. | readmenator | 17 | 3 |
-| `readmenator/_rank.py` | PageRank, Personalized PageRank, HITS, and composite scoring. | readmenator | 17 | 7 |
+| `readmenator/_rank.py` | PageRank, Personalized PageRank, HITS, and composite scoring. | readmenator | 18 | 10 |
 | `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 8 | 4 |
 | `readmenator/_refactorizer.py` | Monolithic file refactoring planner for the readmenator knowledge graph. | readmenator | 9 | 2 |
-| `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 5 |
+| `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 7 |
 | `readmenator/_rule_gen.py` | Suggested linting rule generator producing Semgrep YAML from detected antipatterns. | readmenator | 9 | 2 |
 | `readmenator/_sarif.py` | SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible). | readmenator | 5 | 2 |
 | `readmenator/_scanner.py` | Secure polyglot directory traversal and file analysis. | readmenator | 14 | 4 |
 | `readmenator/_scantext.py` | Synthesized scan-text builder for the readmenator knowledge graph. | readmenator | 4 | 2 |
 | `readmenator/_security.py` | Pattern-based static security analysis for the readmenator knowledge graph. | readmenator | 32 | 4 |
+| `readmenator/_skill_installer.py` | Installs the packaged ReadMenator agent skills into a project. | readmenator | 7 | 2 |
 | `readmenator/_taint.py` | Taint propagation analysis of dangerous imports through the resolved import graph. | readmenator | 6 | 3 |
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_vendor/force-graph.min.js` | Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph | misc | 35 | 0 |
-| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 49 | 3 |
+| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 55 | 3 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
 | `readmenator/_yaralite.py` | Zero-dependency YARA-lite rule parser and runner. | readmenator | 20 | 2 |
@@ -94,12 +98,15 @@
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
+| `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 16 | 0 |
+| `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
-| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 40 | 0 |
+| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 47 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |
 | `tests/test_linter.py` | Contract tests for the ArchitectureLinter. | tests | 14 | 0 |
 | `tests/test_mcp_server.py` | Contract tests for the MCP server protocol and tool dispatch. | tests | 25 | 0 |
+| `tests/test_memory.py` | Contract tests for project memory, the session log, and agent skills. | tests | 17 | 0 |
 | `tests/test_mermaid.py` | - | tests | 11 | 0 |
 | `tests/test_models.py` | - | tests | 11 | 0 |
 | `tests/test_parsers.py` | - | tests | 87 | 0 |
