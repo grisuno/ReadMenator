@@ -1,17 +1,17 @@
 {
   "tool": "readmenator",
   "schema_version": 2,
-  "generated_at": "2026-10-08T20:25:48Z",
+  "generated_at": "2026-10-08T23:59:38Z",
   "project_root": ".",
   "project_name": "ReadMenator",
-  "git_commit": "af9f4048b6ec7addb6a2430b5031e23e4c148992",
+  "git_commit": "b3f9b9da0bd304ac724876e9d2875e90fb286494",
   "git_branch": "main",
-  "source_fingerprint": "4de2c7986d2d16bd38a848ff99693cb65ddd2c94e0641d9376964fdcac1a3a64",
+  "source_fingerprint": "cbef57339ca6346d385d92703bd17f5205ad424847f71501ab0bde0a546fcefc",
   "freshness_check": "readmenator . fresh  # exit 0 = docs match sources, exit 1 = run: readmenator . --rebuild",
   "files": 124,
-  "symbols": 2304,
+  "symbols": 2305,
   "imports": 974,
-  "calls": 16612,
+  "calls": 16617,
   "inherits": 155,
   "resolved_imports": 436,
   "security_findings": 0,
@@ -117,8 +117,8 @@
     },
     {
       "path": "KB_tests.md",
-      "lines": 492,
-      "approx_tokens": 10858
+      "lines": 493,
+      "approx_tokens": 10885
     },
     {
       "path": "KB_tests_p2.md",
@@ -158,12 +158,12 @@
     {
       "path": "SYMBOLS_p4.md",
       "lines": 500,
-      "approx_tokens": 14760
+      "approx_tokens": 14763
     },
     {
       "path": "SYMBOLS_p5.md",
-      "lines": 338,
-      "approx_tokens": 9781
+      "lines": 339,
+      "approx_tokens": 9811
     },
     {
       "path": "recipes/add-function.md",

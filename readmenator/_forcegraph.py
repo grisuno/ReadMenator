@@ -856,7 +856,7 @@ function build3D(el,data){
     .onNodeClick(n=>select(n.id,{fly:false})).onBackgroundClick(()=>clearSelection()).backgroundColor("rgba(0,0,0,0)");
 }
 function mount(){
-  const el=$("graph");el.innerHTML="";g2=null;g3=null;
+  const el=$("graph");clearEl(el);g2=null;g3=null;
   const data=visible();
   try{if(is3d)build3D(el,data);else build2D(el,data);}catch(err){fail("Graph engine failed to start: "+(err&&err.message||err));return;}
   resize();hud();
@@ -870,7 +870,12 @@ function warmFit(){if(started||!g2)return;try{g2.zoomToFit(0,48);}catch(e){}}
 function hud(){
   const g=cur();const d=g?g.graphData():{nodes:[],links:[]};
   const sel=S.selected&&byId[S.selected];
-  $("hud").innerHTML=`<span><b>${d.nodes.length}</b> nodes</span><span><b>${d.links.length}</b> edges</span><span>${S.layout}</span>`+(S.hl.size?`<span><b>${S.hl.size}</b> highlighted</span>`:"")+(sel?`<span>focus <b>${esc(short(sel.label,24))}</b></span>`:"");
+  const box=$("hud");clearEl(box);
+function stat(num,label){const s=mkEl("span");s.appendChild(mkEl("b",null,String(num)));s.appendChild(document.createTextNode(" "+label));return s;}
+  box.appendChild(stat(d.nodes.length,"nodes"));box.appendChild(stat(d.links.length,"edges"));
+  box.appendChild(mkEl("span",null,S.layout));
+  if(S.hl.size)box.appendChild(stat(S.hl.size,"highlighted"));
+  if(sel){const s=mkEl("span");s.appendChild(document.createTextNode("focus "));s.appendChild(mkEl("b",null,short(sel.label,24)));box.appendChild(s);}
 }
 function onHover(n){
   S.hover=n?n.id:null;
@@ -903,8 +908,6 @@ function focusFamily(fam){
   if(!is3d&&g2){try{g2.zoomToFit(fly,60,n=>ids.has(n.id));}catch(e){}}
 }
 function markFamilies(){document.querySelectorAll(".fam").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.fam===S.famFocus)));}
-function nbButton(id,meta){const n=byId[id];if(!n)return"";return `<button type="button" class="nb" data-node="${esc(id)}" title="${esc(n.file||n.label)}"><i style="background:${esc(colorOf(n))}"></i><span>${esc(n.label)}</span><em>${esc(meta||"")}</em></button>`;}
-function section(title,items,open){if(!items.length)return"";return `<details${open?" open":""}><summary><span>${esc(title)} (${items.length})</span></summary><div class="list">${items.join("")}</div></details>`;}
 function grouped(id){
   const res={importedBy:[],imports:[],calls:[],calledBy:[],inherits:[],externals:[],members:[],other:[]};
   (inn[id]||[]).forEach(e=>{const s=byId[e.source];if(!s)return;
@@ -921,44 +924,65 @@ function grouped(id){
   Object.keys(res).forEach(k=>{res[k]=[...new Set(res[k])].sort((a,b)=>((byId[b].rank||0)-(byId[a].rank||0))||String(byId[a].label).localeCompare(byId[b].label));});
   return res;
 }
-function navBar(){return `<div class="insp-nav"><button type="button" data-act="back" ${S.history.length?"":"disabled"} title="Previous node ( Backspace )">← Back</button><button type="button" data-act="clear" title="Clear selection ( Esc )">Clear</button></div>`;}
+function clearEl(el){if(el.replaceChildren){el.replaceChildren();}else{while(el.firstChild){el.removeChild(el.firstChild);}}}
+function mkEl(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined&&text!==null)e.textContent=text;return e;}
+function navBarEl(){const d=mkEl("div","insp-nav");const b=mkEl("button",null,"← Back");b.type="button";b.dataset.act="back";b.title="Previous node ( Backspace )";if(!S.history.length)b.disabled=true;d.appendChild(b);const c=mkEl("button",null,"Clear");c.type="button";c.dataset.act="clear";c.title="Clear selection ( Esc )";d.appendChild(c);return d;}
+function nbButtonEl(id,meta){const n=byId[id];if(!n)return null;const b=mkEl("button","nb");b.type="button";b.dataset.node=id;b.title=n.file||n.label;const dot=mkEl("i");dot.style.background=colorOf(n);b.appendChild(dot);b.appendChild(mkEl("span",null,n.label));if(meta)b.appendChild(mkEl("em",null,meta));return b;}
+function sectionEl(title,entries,open){if(!entries.length)return null;const det=document.createElement("details");if(open)det.open=true;const sum=document.createElement("summary");sum.appendChild(mkEl("span",null,title+" ("+entries.length+")"));det.appendChild(sum);const list=mkEl("div","list");entries.forEach(en=>{const b=nbButtonEl(en.id,en.meta);if(b)list.appendChild(b);});det.appendChild(list);return det;}
+function metricEl(num,label,warn){const d=mkEl("div","metric"+(warn?" warn":""));d.appendChild(mkEl("b",null,String(num)));d.appendChild(mkEl("span",null,label));return d;}
 function renderInspector(n){
   const g=grouped(n.id);
   const totalFiles=files.length||1;
-  let h=`<div class="insp-head">${navBar()}<div class="type"><i style="background:${esc(colorOf(n))}"></i>${esc(n.type)}</div><h2>${esc(n.label)}</h2>`;
-  if(n.file)h+=`<div class="path"><span>${esc(n.file)}</span><button type="button" data-act="copy" data-copy="${esc(n.file)}" title="Copy path">copy</button></div>`;
-  if(n.type==="file"){h+=`<div class="badges"><span class="badge">${esc(n.language||"?")}</span><span class="badge">${esc(String(n.layer||"").replace(/_/g," "))}</span>`+(n.community_label?`<button type="button" class="badge" data-fam="${esc(n.family)}" style="border-color:${esc(colorOf(n))}" title="Focus this community">${esc(n.community_label)}</button>`:"")+`</div>`;}
-  h+=`</div>`;
+  const root=$("inspector");clearEl(root);
+  const head=mkEl("div","insp-head");head.appendChild(navBarEl());
+  const type=mkEl("div","type");const dot=mkEl("i");dot.style.background=colorOf(n);type.appendChild(dot);type.appendChild(mkEl("span",null,n.type));head.appendChild(type);
+  head.appendChild(mkEl("h2",null,n.label));
+  if(n.file){const p=mkEl("div","path");p.appendChild(mkEl("span",null,n.file));const cp=mkEl("button",null,"copy");cp.type="button";cp.dataset.act="copy";cp.dataset.copy=n.file;cp.title="Copy path";p.appendChild(cp);head.appendChild(p);}
+  if(n.type==="file"){const badges=mkEl("div","badges");badges.appendChild(mkEl("span","badge",n.language||"?"));badges.appendChild(mkEl("span","badge",String(n.layer||"").replace(/_/g," ")));if(n.community_label){const cf=mkEl("button","badge",n.community_label);cf.type="button";cf.dataset.fam=n.family;cf.style.borderColor=colorOf(n);cf.title="Focus this community";badges.appendChild(cf);}head.appendChild(badges);}
+  root.appendChild(head);
+  const metrics=mkEl("div","metrics");
   if(n.type==="file"){
     const pct=n.rank_pos?Math.round((1-(n.rank_pos-1)/totalFiles)*100):0;
-    h+=`<div class="metrics"><div class="metric"><b>${n.symbols||0}</b><span>symbols</span></div><div class="metric"><b>${g.importedBy.length}</b><span>used by</span></div><div class="metric"><b>${g.imports.length}</b><span>imports</span></div>`+
-       `<div class="metric"><b>${g.calls.length+g.calledBy.length}</b><span>call links</span></div><div class="metric"><b>${g.externals.length}</b><span>externals</span></div><div class="metric${n.findings?" warn":""}"><b>${n.findings||0}</b><span>findings</span></div>`+
-       `<div class="rankbar">PageRank #${n.rank_pos||"-"} of ${totalFiles} · more central than ${pct}% of files<div><i style="width:${pct}%"></i></div></div></div>`;
-    if(n.doc)h+=`<div class="doc">${esc(n.doc)}</div>`;
+    metrics.appendChild(metricEl(n.symbols||0,"symbols"));
+    metrics.appendChild(metricEl(g.importedBy.length,"used by"));
+    metrics.appendChild(metricEl(g.imports.length,"imports"));
+    metrics.appendChild(metricEl(g.calls.length+g.calledBy.length,"call links"));
+    metrics.appendChild(metricEl(g.externals.length,"externals"));
+    metrics.appendChild(metricEl(n.findings||0,"findings",!!n.findings));
+    const rb=mkEl("div","rankbar","PageRank #"+(n.rank_pos||"-")+" of "+totalFiles+" · more central than "+pct+"% of files");const bar=mkEl("div");const fill=mkEl("i");fill.style.width=pct+"%";bar.appendChild(fill);rb.appendChild(bar);metrics.appendChild(rb);
+    root.appendChild(metrics);
+    if(n.doc)root.appendChild(mkEl("div","doc",n.doc));
   }else if(n.type==="community"){
-    h+=`<div class="metrics"><div class="metric"><b>${n.size||g.members.length}</b><span>files</span></div><div class="metric"><b>${g.members.reduce((a,id)=>a+(byId[id].symbols||0),0)}</b><span>symbols</span></div><div class="metric"><b>${g.members.reduce((a,id)=>a+(byId[id].findings||0),0)}</b><span>findings</span></div></div>`;
+    metrics.appendChild(metricEl(n.size||g.members.length,"files"));
+    metrics.appendChild(metricEl(g.members.reduce((a,id)=>a+(byId[id].symbols||0),0),"symbols"));
+    metrics.appendChild(metricEl(g.members.reduce((a,id)=>a+(byId[id].findings||0),0),"findings"));
+    root.appendChild(metrics);
   }else{
-    h+=`<div class="metrics"><div class="metric"><b>${(inn[n.id]||[]).length}</b><span>incoming</span></div><div class="metric"><b>${(out[n.id]||[]).length}</b><span>outgoing</span></div><div class="metric"><b>${S.hl.size}</b><span>in reach</span></div></div>`;
+    metrics.appendChild(metricEl((inn[n.id]||[]).length,"incoming"));
+    metrics.appendChild(metricEl((out[n.id]||[]).length,"outgoing"));
+    metrics.appendChild(metricEl(S.hl.size,"in reach"));
+    root.appendChild(metrics);
   }
-  h+=`<div class="actions"><label>Reach</label>`+[1,2,3].map(d=>`<button type="button" data-depth="${d}" aria-pressed="${S.depth===d}" title="Highlight ${d}-hop neighbourhood">${d} hop</button>`).join("")+
-     `<button type="button" data-act="isolate" aria-pressed="${S.isolate}" title="Show only the highlighted neighbourhood ( I )">Isolate</button><button type="button" data-act="fit" title="Fit the neighbourhood">Fit</button></div>`;
+  const actions=mkEl("div","actions");actions.appendChild(mkEl("label",null,"Reach"));
+  [1,2,3].forEach(d=>{const b=mkEl("button",null,d+" hop");b.type="button";b.dataset.depth=String(d);b.setAttribute("aria-pressed",String(S.depth===d));b.title="Highlight "+d+"-hop neighbourhood";actions.appendChild(b);});
+  const iso=mkEl("button",null,"Isolate");iso.type="button";iso.dataset.act="isolate";iso.setAttribute("aria-pressed",String(S.isolate));iso.title="Show only the highlighted neighbourhood ( I )";actions.appendChild(iso);
+  const fit=mkEl("button",null,"Fit");fit.type="button";fit.dataset.act="fit";fit.title="Fit the neighbourhood";actions.appendChild(fit);
+  root.appendChild(actions);
   const rk=id=>byId[id].rank_pos?"#"+byId[id].rank_pos:"";
-  h+=section("Used by",g.importedBy.map(id=>nbButton(id,rk(id))),true);
-  h+=section("Imports",g.imports.map(id=>nbButton(id,rk(id))),true);
-  h+=section("Called by",g.calledBy.map(id=>nbButton(id,"calls")),false);
-  h+=section("Calls",g.calls.map(id=>nbButton(id,"calls")),false);
-  h+=section("Inheritance",g.inherits.map(id=>nbButton(id,"")),false);
-  h+=section(n.type==="community"||n.type==="layer"?"Members":"Members",g.members.map(id=>nbButton(id,(byId[id].symbols||0)+" sym")),n.type!=="file");
-  h+=section("External modules",g.externals.map(id=>nbButton(id,"")),false);
-  h+=section("Groups",g.other.map(id=>nbButton(id,byId[id].type)),false);
+  const ent=ids=>ids.map(id=>({id,meta:rk(id)}));
+  const entMeta=(ids,meta)=>ids.map(id=>({id,meta}));
+  [["Used by",ent(g.importedBy),true],["Imports",ent(g.imports),true],["Called by",entMeta(g.calledBy,"calls"),false],["Calls",entMeta(g.calls,"calls"),false],["Inheritance",entMeta(g.inherits,""),false],["Members",g.members.map(id=>({id,meta:(byId[id].symbols||0)+" sym"})),n.type!=="file"],["External modules",entMeta(g.externals,""),false],["Groups",g.other.map(id=>({id,meta:byId[id].type})),false]].forEach(t=>{const s=sectionEl(t[0],t[1],t[2]);if(s)root.appendChild(s);});
   const syms=n.symbol_list||[];
   if(syms.length){
     const hidden=Math.max(0,(n.symbols||0)-syms.length);
-    h+=`<details open><summary><span>Symbols (${n.symbols||syms.length})</span></summary><div class="list"><input class="symfilter" id="symfilter" type="search" placeholder="filter symbols" aria-label="Filter symbols"><div id="symlist">`+
-       syms.map(s=>`<div class="sym" data-name="${esc(String(s.n).toLowerCase())}"><span class="k">${esc(s.k)}</span><b>${esc(s.n)}</b><span class="ln">L${esc(s.l)}</span>${s.s?`<code>${esc(s.s)}</code>`:""}${s.d?`<p>${esc(s.d)}</p>`:""}</div>`).join("")+
-       `</div>${hidden?`<div class="more">+${hidden} more symbols in source</div>`:""}</div></details>`;
+    const det=document.createElement("details");det.open=true;const sum=document.createElement("summary");sum.appendChild(mkEl("span",null,"Symbols ("+(n.symbols||syms.length)+")"));det.appendChild(sum);
+    const list=mkEl("div","list");const filt=mkEl("input");filt.className="symfilter";filt.id="symfilter";filt.type="search";filt.placeholder="filter symbols";filt.setAttribute("aria-label","Filter symbols");list.appendChild(filt);
+    const sl=mkEl("div");sl.id="symlist";
+    syms.forEach(s=>{const row=mkEl("div","sym");row.dataset.name=String(s.n).toLowerCase();row.appendChild(mkEl("span","k",s.k));row.appendChild(mkEl("b",null,s.n));row.appendChild(mkEl("span","ln","L"+s.l));if(s.s)row.appendChild(mkEl("code",null,s.s));if(s.d)row.appendChild(mkEl("p",null,s.d));sl.appendChild(row);});
+    list.appendChild(sl);
+    if(hidden)list.appendChild(mkEl("div","more","+"+hidden+" more symbols in source"));
+    det.appendChild(list);root.appendChild(det);
   }
-  $("inspector").innerHTML=h;
   const f=$("symfilter");if(f)f.addEventListener("input",()=>{const q=f.value.trim().toLowerCase();document.querySelectorAll("#symlist .sym").forEach(el=>{el.style.display=!q||el.dataset.name.includes(q)?"":"none";});});
 }
 function renderFamily(fam){
@@ -966,20 +990,31 @@ function renderFamily(fam){
   const sym=ids.reduce((a,id)=>a+(byId[id].symbols||0),0),fnd=ids.reduce((a,id)=>a+(byId[id].findings||0),0);
   let internal=0,crossing=0;const set=new Set(ids);
   RAW.edges.forEach(e=>{if(e.type!=="resolved_imports")return;const a=set.has(e.source),b=set.has(e.target);if(a&&b)internal++;else if(a!==b)crossing++;});
-  let h=`<div class="insp-head">${navBar()}<div class="type"><i style="background:${esc(famColor[fam]||"#888")}"></i>community</div><h2>${esc(fam)}</h2></div>`+
-    `<div class="metrics"><div class="metric"><b>${ids.length}</b><span>files</span></div><div class="metric"><b>${sym}</b><span>symbols</span></div><div class="metric${fnd?" warn":""}"><b>${fnd}</b><span>findings</span></div>`+
-    `<div class="rankbar">Cohesion ${internal+crossing?Math.round(internal/(internal+crossing)*100):0}% · ${internal} internal imports, ${crossing} crossing<div><i style="width:${internal+crossing?Math.round(internal/(internal+crossing)*100):0}%"></i></div></div></div>`;
-  h+=section("Files by PageRank",ids.map(id=>nbButton(id,byId[id].rank_pos?"#"+byId[id].rank_pos:"")),true);
-  $("inspector").innerHTML=h;
+  const root=$("inspector");clearEl(root);
+  const head=mkEl("div","insp-head");head.appendChild(navBarEl());
+  const type=mkEl("div","type");const dot=mkEl("i");dot.style.background=famColor[fam]||"#888";type.appendChild(dot);type.appendChild(mkEl("span",null,"community"));head.appendChild(type);
+  head.appendChild(mkEl("h2",null,fam));root.appendChild(head);
+  const metrics=mkEl("div","metrics");
+  metrics.appendChild(metricEl(ids.length,"files"));metrics.appendChild(metricEl(sym,"symbols"));metrics.appendChild(metricEl(fnd,"findings",!!fnd));
+  const pct=internal+crossing?Math.round(internal/(internal+crossing)*100):0;
+  const rb=mkEl("div","rankbar","Cohesion "+pct+"% · "+internal+" internal imports, "+crossing+" crossing");const bar=mkEl("div");const fill=mkEl("i");fill.style.width=pct+"%";bar.appendChild(fill);rb.appendChild(bar);metrics.appendChild(rb);
+  root.appendChild(metrics);
+  const s=sectionEl("Files by PageRank",ids.map(id=>({id,meta:byId[id].rank_pos?"#"+byId[id].rank_pos:""})),true);if(s)root.appendChild(s);
 }
 function renderEmpty(){
   const f=ANALYTICS&&ANALYTICS.attribution_funnel?ANALYTICS.attribution_funnel:null;
   const top=files.slice().sort((a,b)=>(a.rank_pos||1e9)-(b.rank_pos||1e9)).slice(0,10);
-  let h=`<div class="insp-empty"><h2>Inspect any node</h2>Hover a node to preview its neighbourhood; click to open its passport: purpose, metrics, PageRank, symbols with signatures, and every neighbour grouped by relation. Neighbours are clickable, so you can walk the graph from here.</div>`;
-  if(f)h+=`<div class="chips"><span class="chip">files ${esc(f.total)}</span><span class="chip">symbols ${esc(f.total_symbols)}</span><span class="chip">god nodes ${esc(f.god_nodes)}</span><span class="chip">attributed ${esc(f.attributed)}</span></div>`;
-  h+=section("Most central files (PageRank)",top.map(n=>nbButton(n.id,"#"+(n.rank_pos||"-"))),true);
-  h+=`<div class="help"><kbd>/</kbd> find · <kbd>Esc</kbd> clear · <kbd>Backspace</kbd> back · <kbd>1</kbd>-<kbd>4</kbd> layouts · <kbd>L</kbd> names · <kbd>H</kbd> hulls · <kbd>I</kbd> isolate · <kbd>F</kbd> fit · <kbd>Space</kbd> freeze · <kbd>T</kbd> theme. Drag pins a node; right-click releases it. Deep links: <code>#node=&lt;id&gt;&amp;layout=cluster|radial|dag</code>.</div>`;
-  $("inspector").innerHTML=h;
+  const root=$("inspector");clearEl(root);
+  const box=mkEl("div","insp-empty");box.appendChild(mkEl("h2",null,"Inspect any node"));
+  box.appendChild(mkEl("div",null,"Hover a node to preview its neighbourhood; click to open its passport: purpose, metrics, PageRank, symbols with signatures, and every neighbour grouped by relation. Neighbours are clickable, so you can walk the graph from here."));
+  root.appendChild(box);
+  if(f){const chips=mkEl("div","chips");[["files",f.total],["symbols",f.total_symbols],["god nodes",f.god_nodes],["attributed",f.attributed]].forEach(p=>chips.appendChild(mkEl("span","chip",p[0]+" "+p[1])));root.appendChild(chips);}
+  const s=sectionEl("Most central files (PageRank)",top.map(n=>({id:n.id,meta:"#"+(n.rank_pos||"-")})),true);if(s)root.appendChild(s);
+  const help=mkEl("div","help");
+  function kbdEl(t){const k=document.createElement("kbd");k.textContent=t;return k;}
+  [["k","/"],["t"," find · "],["k","Esc"],["t"," clear · "],["k","Backspace"],["t"," back · "],["k","1"],["t","-"],["k","4"],["t"," layouts · "],["k","L"],["t"," names · "],["k","H"],["t"," hulls · "],["k","I"],["t"," isolate · "],["k","F"],["t"," fit · "],["k","Space"],["t"," freeze · "],["k","T"],["t"," theme. Drag pins a node; right-click releases it. Deep links: "]].forEach(p=>{help.appendChild(p[0]==="k"?kbdEl(p[1]):document.createTextNode(p[1]));});
+  help.appendChild(mkEl("code",null,"#node=<id>&layout=cluster|radial|dag"));help.appendChild(document.createTextNode("."));
+  root.appendChild(help);
 }
 $("inspector").addEventListener("click",ev=>{
   const t=ev.target.closest("button");if(!t)return;
@@ -997,7 +1032,7 @@ function goBack(){const prev=S.history.pop();if(prev)select(prev,{fly:true,fromH
 let hits=[],hitIdx=0;
 function runSearch(){
   const q=$("search").value.trim().toLowerCase();const box=$("results");
-  if(!q){hits=[];S.hits=new Set();box.classList.remove("open");box.innerHTML="";refresh();return;}
+  if(!q){hits=[];S.hits=new Set();box.classList.remove("open");clearEl(box);refresh();return;}
   const scored=[];
   RAW.nodes.forEach(n=>{const label=String(n.label).toLowerCase(),path=String(n.file||n.id).toLowerCase();let s=0,via="";
     if(label===q)s=100;else if(label.startsWith(q))s=60;else if(label.includes(q))s=40;else if(path.includes(q))s=25;
@@ -1006,7 +1041,9 @@ function runSearch(){
   scored.sort((a,b)=>b.s-a.s||String(a.n.label).localeCompare(b.n.label));
   hits=scored.slice(0,SETTINGS.searchResults);hitIdx=0;
   S.hits=new Set(scored.map(x=>x.n.id));refresh();
-  box.innerHTML=hits.length?hits.map((x,i)=>`<div class="result" role="option" data-i="${i}" aria-selected="${i===0}"><i class="dot" style="background:${esc(colorOf(x.n))}"></i><span class="name">${esc(x.n.label)}</span><span class="sub">${esc(x.via?("symbol "+x.via):(x.n.file||x.n.type))}</span></div>`).join(""):`<div class="result"><span class="sub" style="margin:0">no match</span></div>`;
+  clearEl(box);
+  if(hits.length){hits.forEach((x,i)=>{const r=mkEl("div","result");r.setAttribute("role","option");r.dataset.i=String(i);r.setAttribute("aria-selected",String(i===0));const dot=mkEl("i","dot");dot.style.background=colorOf(x.n);r.appendChild(dot);r.appendChild(mkEl("span","name",x.n.label));r.appendChild(mkEl("span","sub",x.via?("symbol "+x.via):(x.n.file||x.n.type)));box.appendChild(r);});}
+  else{const r=mkEl("div","result");const sub=mkEl("span","sub","no match");sub.style.margin="0";r.appendChild(sub);box.appendChild(r);}
   box.classList.add("open");
 }
 function pickHit(i){const x=hits[i];if(!x)return;$("results").classList.remove("open");select(x.n.id,{fly:true});}
@@ -1074,7 +1111,7 @@ document.addEventListener("keydown",e=>{
   const fams=Object.keys(famMembers).sort((a,b)=>famMembers[b].length-famMembers[a].length||a.localeCompare(b));
   if(!fams.length){$("legend-hint").textContent="none";return;}
   fams.forEach(f=>{const b=document.createElement("button");b.type="button";b.className="fam";b.dataset.fam=f;b.setAttribute("aria-pressed","false");b.title="Focus "+f;
-    b.innerHTML=`<i style="background:${esc(famColor[f])};color:${esc(famColor[f])}"></i><span>${esc(f)}</span><em>${famMembers[f].length}</em>`;
+    const dot=mkEl("i");dot.style.background=famColor[f];dot.style.color=famColor[f];b.appendChild(dot);b.appendChild(mkEl("span",null,f));b.appendChild(mkEl("em",null,String(famMembers[f].length)));
     b.addEventListener("click",()=>focusFamily(f));box.appendChild(b);});
 })();
 function readHash(){

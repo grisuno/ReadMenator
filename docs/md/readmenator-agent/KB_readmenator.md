@@ -377,7 +377,7 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `SystemMapBuilder` (class, line 435) `class SystemMapBuilder`
   - `InteractiveMapRenderer` (class, line 1501) `class InteractiveMapRenderer`
   - `VisNetworkRenderer` (class, line 2218) `class VisNetworkRenderer`
-  - `DocsSitePublisher` (class, line 3095) `class DocsSitePublisher`
+  - `DocsSitePublisher` (class, line 3142) `class DocsSitePublisher`
   - `__init__` (method, line 214) `def __init__(self, config)`
   - `_effective_canvas` (method, line 222) `def _effective_canvas(self, system_map)`
   - `validate` (method, line 243) `def validate(self, system_map)`
@@ -429,30 +429,30 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `write` (method, line 2362) `def write(self, system_map, output_path)`
   - `_tooltip` (method, line 2379) `def _tooltip(self, node)`
   - `_template` (method, line 2410) `def _template(self)`
-  - `__init__` (method, line 3112) `def __init__(self, config)`
-  - `description_for` (method, line 3122) `def description_for(self, kind)`
-  - `publish` (method, line 3136) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)`
-  - `collect_doc_sources` (method, line 3230) `def collect_doc_sources(self, project_root)`
-  - `publish_assets` (method, line 3256) `def publish_assets(self, project_root, output_dir)`
-  - `_render_poster` (method, line 3325) `def _render_poster(self, video, site_root)`
-  - `_doc_title` (method, line 3363) `def _doc_title(text)`
-  - `_doc_preview` (method, line 3372) `def _doc_preview(self, text)`
-  - `_prune_stale_docs` (method, line 3408) `def _prune_stale_docs(docs_root, keep)`
-  - `render_llms_txt` (method, line 3425) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
-  - `render_index` (method, line 3504) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)`
-  - `_stat_tiles` (method, line 3575) `def _stat_tiles(self, stats)`
-  - `_start_here` (method, line 3595) `def _start_here(self, entries, video_rel)`
-  - `_video_section` (method, line 3635) `def _video_section(self, video_rel, poster_rel)`
-  - `_doc_group` (method, line 3662) `def _doc_group(self, name)`
-  - `_docs_section` (method, line 3674) `def _docs_section(self, doc_entries)`
-  - `_href_prefix` (method, line 3756) `def _href_prefix(self)`
-  - `_glyph` (method, line 3786) `def _glyph(self, kind)`
-  - `_card` (method, line 3804) `def _card(self, kind, system_map, href_prefix)`
-  - `_extra_card` (method, line 3845) `def _extra_card(self, entry)`
-  - `_stats_line` (method, line 3876) `def _stats_line(self, stats)`
-  - `_escape` (method, line 3890) `def _escape(self, value)`
-  - `order` (method, line 3476) `def order(entry)`
-  - `doc_order` (method, line 3700) `def doc_order(base)`
+  - `__init__` (method, line 3159) `def __init__(self, config)`
+  - `description_for` (method, line 3169) `def description_for(self, kind)`
+  - `publish` (method, line 3183) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)`
+  - `collect_doc_sources` (method, line 3277) `def collect_doc_sources(self, project_root)`
+  - `publish_assets` (method, line 3303) `def publish_assets(self, project_root, output_dir)`
+  - `_render_poster` (method, line 3372) `def _render_poster(self, video, site_root)`
+  - `_doc_title` (method, line 3410) `def _doc_title(text)`
+  - `_doc_preview` (method, line 3419) `def _doc_preview(self, text)`
+  - `_prune_stale_docs` (method, line 3455) `def _prune_stale_docs(docs_root, keep)`
+  - `render_llms_txt` (method, line 3472) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
+  - `render_index` (method, line 3551) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)`
+  - `_stat_tiles` (method, line 3622) `def _stat_tiles(self, stats)`
+  - `_start_here` (method, line 3642) `def _start_here(self, entries, video_rel)`
+  - `_video_section` (method, line 3682) `def _video_section(self, video_rel, poster_rel)`
+  - `_doc_group` (method, line 3709) `def _doc_group(self, name)`
+  - `_docs_section` (method, line 3721) `def _docs_section(self, doc_entries)`
+  - `_href_prefix` (method, line 3803) `def _href_prefix(self)`
+  - `_glyph` (method, line 3833) `def _glyph(self, kind)`
+  - `_card` (method, line 3851) `def _card(self, kind, system_map, href_prefix)`
+  - `_extra_card` (method, line 3892) `def _extra_card(self, entry)`
+  - `_stats_line` (method, line 3923) `def _stats_line(self, stats)`
+  - `_escape` (method, line 3937) `def _escape(self, value)`
+  - `order` (method, line 3523) `def order(entry)`
+  - `doc_order` (method, line 3747) `def doc_order(base)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_interactive_graph.py`
 

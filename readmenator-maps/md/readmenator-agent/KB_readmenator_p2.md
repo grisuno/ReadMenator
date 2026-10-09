@@ -83,14 +83,14 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `_community_color_map` (method, line 272) `def _community_color_map(self, analysis)`
   - `_lighten` (method, line 290) `def _lighten(hex_color)`
   - `_render_html` (method, line 298) `def _render_html(self, vis_nodes, vis_edges, analysis, findings)`
-  - `to_svg` (method, line 469) `def to_svg(self, nodes, edges, resolved_edges, analysis)`
-  - `_render_truncated_svg` (method, line 587) `def _render_truncated_svg(self, total_nodes)`
-  - `_layout_spring` (method, line 602) `def _layout_spring(self, nodes, edges, node_map)`
-  - `to_graphml` (method, line 683) `def to_graphml(self, nodes, edges, resolved_edges, analysis)`
-  - `to_cypher` (method, line 760) `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)`
-  - `to_obsidian` (method, line 882) `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)`
-  - `to_forcegraph` (method, line 1007) `def to_forcegraph(self, nodes, edges, resolved_edges, analysis, layers, findings, analytics)`
-  - `_project` (method, line 531) `def _project(pos)`
+  - `to_svg` (method, line 482) `def to_svg(self, nodes, edges, resolved_edges, analysis)`
+  - `_render_truncated_svg` (method, line 600) `def _render_truncated_svg(self, total_nodes)`
+  - `_layout_spring` (method, line 615) `def _layout_spring(self, nodes, edges, node_map)`
+  - `to_graphml` (method, line 696) `def to_graphml(self, nodes, edges, resolved_edges, analysis)`
+  - `to_cypher` (method, line 773) `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)`
+  - `to_obsidian` (method, line 895) `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)`
+  - `to_forcegraph` (method, line 1020) `def to_forcegraph(self, nodes, edges, resolved_edges, analysis, layers, findings, analytics)`
+  - `_project` (method, line 544) `def _project(pos)`
   - `_sev_span` (method, line 370) `def _sev_span(sev, count)`
 - Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_exporter.py`, `tests/test_interactive_graph.py`

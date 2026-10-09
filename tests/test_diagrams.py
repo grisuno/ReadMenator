@@ -260,6 +260,13 @@ class TestInteractiveMapRendererContract(unittest.TestCase):
         self.assertIn("<svg", output)
         self.assertIn("map-nodes", output)
 
+    def test_renderer_never_uses_inner_html(self) -> None:
+        """No innerHTML sink exists for CodeQL DOM-text-reinterpreted-as-HTML."""
+        for kind in ("architecture", "workflow", "sequence", "dataflow", "lifecycle"):
+            output = self.renderer.render(self._map(kind))
+            self.assertNotIn("innerHTML", output)
+            self.assertNotIn("outerHTML", output)
+
     def test_renderer_has_no_external_requests(self) -> None:
         """Output performs no external fetches or CDN references."""
         output = self.renderer.render(self._map())
@@ -613,7 +620,8 @@ class TestVisNetworkRendererContract(unittest.TestCase):
         output = self.renderer.render(system_map)
         self.assertNotIn("<img src=x onerror=alert(1)>", output)
         self.assertIn("\\u003cimg", output)
-        self.assertIn("escapeHtml(s.doc)", output)
+        self.assertNotIn("innerHTML", output)
+        self.assertIn("textContent", output)
 
 
 class TestDiagramVariantsContract(unittest.TestCase):

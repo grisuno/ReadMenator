@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_empty_seeds_uses_uniform` | method | `tests/test_ranking.py:310` | `def test_empty_seeds_uses_uniform(self)` |
 | `test_explain_rank_found` | method | `tests/test_ranking.py:540` | `def test_explain_rank_found(self)` |
 | `test_explain_rank_not_found` | method | `tests/test_ranking.py:559` | `def test_explain_rank_not_found(self)` |
 | `test_explain_returns_none_for_missing` | method | `tests/test_ranking.py:479` | `def test_explain_returns_none_for_missing(self)` |

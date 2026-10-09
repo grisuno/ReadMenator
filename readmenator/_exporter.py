@@ -449,17 +449,30 @@ network.on("click", function(params) {{
      if (params.nodes.length > 0) {{
          var node = nodes.get(params.nodes[0]);
          var d = node.detail || {{}};
-         var esc = function(s) {{ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }};
-         var rows = (d.symbols||[]).slice(0,20).map(function(s) {{
-             return "<tr><td><code>"+esc(s.name)+"</code></td><td>"+esc(s.kind)+"</td><td>"+s.line+"</td><td><code>"+esc((s.signature||"").slice(0,80))+"</code></td></tr>";
-         }}).join("");
+         var mk = function(tag, text) {{ var e = document.createElement(tag); if (text !== undefined && text !== null) e.textContent = text; return e; }};
          var panel = document.getElementById('inspector');
          panel.style.display = 'block';
-         panel.innerHTML = "<h3 style='color:#4ec9b0;margin-top:0;'>"+esc(d.label||node.label)+"</h3>"
-             + "<p style='color:#888;'>"+esc(d.id||"")+" | "+esc(d.language||"")+" | "+(d.symbol_total||0)+" symbols</p>"
-             + (d.doc ? "<p><i>"+esc(d.doc.slice(0,300))+"</i></p>" : "")
-             + "<table style='width:100%;font-size:11px;border-collapse:collapse;'><thead><tr><th>Symbol</th><th>Kind</th><th>Ln</th><th>Sig</th></tr></thead><tbody>"+rows+"</tbody></table>"
-             + "<button onclick=\"document.getElementById('inspector').style.display='none'\" style='margin-top:8px;'>Close</button>";
+         if (panel.replaceChildren) panel.replaceChildren(); else while (panel.firstChild) panel.removeChild(panel.firstChild);
+         var h = mk('h3', d.label || node.label); h.style.cssText = 'color:#4ec9b0;margin-top:0;'; panel.appendChild(h);
+         var meta = mk('p', (d.id||"")+" | "+(d.language||"")+" | "+(d.symbol_total||0)+" symbols"); meta.style.cssText = 'color:#888;'; panel.appendChild(meta);
+         if (d.doc) {{ var dp = mk('p'); var it = mk('i', String(d.doc).slice(0,300)); dp.appendChild(it); panel.appendChild(dp); }}
+         var table = mk('table'); table.style.cssText = 'width:100%;font-size:11px;border-collapse:collapse;';
+         var thead = mk('thead'); var hr = mk('tr');
+         ["Symbol","Kind","Ln","Sig"].forEach(function(t) {{ hr.appendChild(mk('th', t)); }});
+         thead.appendChild(hr); table.appendChild(thead);
+         var tb = mk('tbody');
+         (d.symbols||[]).slice(0,20).forEach(function(s) {{
+             var tr = mk('tr');
+             var c0 = mk('td'); c0.appendChild(mk('code', s.name)); tr.appendChild(c0);
+             tr.appendChild(mk('td', s.kind));
+             tr.appendChild(mk('td', String(s.line)));
+             var c3 = mk('td'); c3.appendChild(mk('code', String(s.signature||"").slice(0,80))); tr.appendChild(c3);
+             tb.appendChild(tr);
+         }});
+         table.appendChild(tb); panel.appendChild(table);
+         var close = mk('button', 'Close'); close.style.cssText = 'margin-top:8px;';
+         close.addEventListener('click', function() {{ panel.style.display = 'none'; }});
+         panel.appendChild(close);
      }}
 }});
 </script>

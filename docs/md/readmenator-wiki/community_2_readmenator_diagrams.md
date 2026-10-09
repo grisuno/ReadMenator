@@ -25,7 +25,7 @@ This community groups 20 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_yaralite.py` | py | utility | 20 | yes |
 | `tests/test_concepts.py` | py | testing | 8 | no |
 | `tests/test_cursorrules.py` | py | testing | 12 | yes |
-| `tests/test_diagrams.py` | py | testing | 69 | yes |
+| `tests/test_diagrams.py` | py | testing | 70 | yes |
 | `tests/test_gh_wiki.py` | py | testing | 17 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
 | `tests/test_linter.py` | py | testing | 14 | yes |
@@ -83,8 +83,8 @@ This community groups 20 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gh_wiki.py` via `subprocess` (0 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_config.py` via `subprocess` (1 hops)

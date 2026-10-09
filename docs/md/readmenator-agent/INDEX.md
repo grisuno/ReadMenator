@@ -94,7 +94,7 @@
 | `tests/test_cursorrules.py` | Contract tests for the CursorRulesGenerator. | tests | 12 | 0 |
 | `tests/test_dataflow.py` | - | tests | 47 | 0 |
 | `tests/test_dead_code.py` | Contract tests for the DeadCodeStripper. | tests | 15 | 0 |
-| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 69 | 0 |
+| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 70 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |

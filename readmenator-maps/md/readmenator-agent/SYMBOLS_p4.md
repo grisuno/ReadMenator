@@ -3,13 +3,14 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:314` | `def test_renderer_links_gallery_home_when_configured(self)` |
-| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:543` | `def test_renderer_links_gallery_home_when_configured(self)` |
-| `test_renderer_omits_gallery_home_by_default` | method | `tests/test_diagrams.py:321` | `def test_renderer_omits_gallery_home_by_default(self)` |
+| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:321` | `def test_renderer_links_gallery_home_when_configured(self)` |
+| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:550` | `def test_renderer_links_gallery_home_when_configured(self)` |
+| `test_renderer_never_uses_inner_html` | method | `tests/test_diagrams.py:263` | `def test_renderer_never_uses_inner_html(self)` |
+| `test_renderer_omits_gallery_home_by_default` | method | `tests/test_diagrams.py:328` | `def test_renderer_omits_gallery_home_by_default(self)` |
 | `test_renderer_produces_standalone_document` | method | `tests/test_diagrams.py:256` | `def test_renderer_produces_standalone_document(self)` |
-| `test_renderer_sanitizes_viewer_state_on_export` | method | `tests/test_diagrams.py:342` | `def test_renderer_sanitizes_viewer_state_on_export(self)` |
-| `test_renderer_supports_drag_and_settle` | method | `tests/test_diagrams.py:334` | `def test_renderer_supports_drag_and_settle(self)` |
-| `test_renderer_uses_configured_cdn_urls` | method | `tests/test_diagrams.py:522` | `def test_renderer_uses_configured_cdn_urls(self)` |
+| `test_renderer_sanitizes_viewer_state_on_export` | method | `tests/test_diagrams.py:349` | `def test_renderer_sanitizes_viewer_state_on_export(self)` |
+| `test_renderer_supports_drag_and_settle` | method | `tests/test_diagrams.py:341` | `def test_renderer_supports_drag_and_settle(self)` |
+| `test_renderer_uses_configured_cdn_urls` | method | `tests/test_diagrams.py:529` | `def test_renderer_uses_configured_cdn_urls(self)` |
 | `test_validator_passes_valid_map` | method | `tests/test_diagrams.py:197` | `def test_validator_passes_valid_map(self)` |
 | `test_validator_rejects_dangling_edge` | method | `tests/test_diagrams.py:214` | `def test_validator_rejects_dangling_edge(self)` |
 | `test_validator_rejects_duplicate_node_ids` | method | `tests/test_diagrams.py:204` | `def test_validator_rejects_duplicate_node_ids(self)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_empty_category` | method | `tests/test_ranking.py:105` | `def test_empty_category(self)` |
 | `test_empty_graph` | method | `tests/test_ranking.py:184` | `def test_empty_graph(self)` |
 | `test_empty_graph` | method | `tests/test_ranking.py:284` | `def test_empty_graph(self)` |
-| `test_empty_seeds_uses_uniform` | method | `tests/test_ranking.py:310` | `def test_empty_seeds_uses_uniform(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

@@ -174,15 +174,15 @@ Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pip
 - `VisNetworkRenderer.__init__` (method) `readmenator/_diagrams.py:2226` `def __init__(self, config)` -- Initialise the renderer with application configuration.
 - `VisNetworkRenderer.render` (method) `readmenator/_diagrams.py:2234` `def render(self, system_map)` -- Render a system map as a vis.js network HTML document.
 - `VisNetworkRenderer.write` (method) `readmenator/_diagrams.py:2362` `def write(self, system_map, output_path)` -- Render a vis.js map and write it to a relative output path.
-- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:3112` `def __init__(self, config)` -- Initialise the publisher with application configuration.
-- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:3122` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
-- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:3136` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)` -- Publish maps and a gallery index into a documentation directory.
-- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3230` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
-- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3256` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
-- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3425` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
-- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3476` `def order(entry)` -- Sort entry points first, then alphabetically.
-- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3504` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)` -- Render the gallery index page for published maps.
-- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3700` `def doc_order(base)` -- Entry points first, then alphabetical.
+- `DocsSitePublisher.__init__` (method) `readmenator/_diagrams.py:3159` `def __init__(self, config)` -- Initialise the publisher with application configuration.
+- `DocsSitePublisher.description_for` (method) `readmenator/_diagrams.py:3169` `def description_for(self, kind)` -- Return the gallery description for a diagram kind.
+- `DocsSitePublisher.publish` (method) `readmenator/_diagrams.py:3183` `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)` -- Publish maps and a gallery index into a documentation directory.
+- `DocsSitePublisher.collect_doc_sources` (method) `readmenator/_diagrams.py:3277` `def collect_doc_sources(self, project_root)` -- Collect generated markdown sources for the static site.
+- `DocsSitePublisher.publish_assets` (method) `readmenator/_diagrams.py:3303` `def publish_assets(self, project_root, output_dir)` -- Copy overview video and markdown docs into the static site.
+- `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3472` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
+- `DocsSitePublisher.order` (method) `readmenator/_diagrams.py:3523` `def order(entry)` -- Sort entry points first, then alphabetically.
+- `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3551` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)` -- Render the gallery index page for published maps.
+- `DocsSitePublisher.doc_order` (method) `readmenator/_diagrams.py:3747` `def doc_order(base)` -- Entry points first, then alphabetical.
 
 ## readmenator/_documentation.py
 Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_forcegraph.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
@@ -237,11 +237,11 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_exporter.py`, `tests/test_i
 - `GraphExporter.__init__` (method) `readmenator/_exporter.py:36` `def __init__(self, config)` -- Initialise with application configuration.
 - `GraphExporter.to_json` (method) `readmenator/_exporter.py:44` `def to_json(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as a node-link JSON string.
 - `GraphExporter.to_html` (method) `readmenator/_exporter.py:183` `def to_html(self, nodes, edges, resolved_edges, analysis, findings)` -- Generate a standalone interactive HTML graph page.
-- `GraphExporter.to_svg` (method) `readmenator/_exporter.py:469` `def to_svg(self, nodes, edges, resolved_edges, analysis)` -- Generate a static SVG representation of the graph.
-- `GraphExporter.to_graphml` (method) `readmenator/_exporter.py:683` `def to_graphml(self, nodes, edges, resolved_edges, analysis)` -- Export the graph as GraphML (Gephi/yEd compatible).
-- `GraphExporter.to_cypher` (method) `readmenator/_exporter.py:760` `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as native Cypher CREATE statements.
-- `GraphExporter.to_obsidian` (method) `readmenator/_exporter.py:882` `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)` -- Export the graph as an Obsidian vault with wikilinks.
-- `GraphExporter.to_forcegraph` (method) `readmenator/_exporter.py:1007` `def to_forcegraph(self, nodes, edges, resolved_edges, analysis, layers, findings, analytics)` -- Generate the force-graph explorer HTML document.
+- `GraphExporter.to_svg` (method) `readmenator/_exporter.py:482` `def to_svg(self, nodes, edges, resolved_edges, analysis)` -- Generate a static SVG representation of the graph.
+- `GraphExporter.to_graphml` (method) `readmenator/_exporter.py:696` `def to_graphml(self, nodes, edges, resolved_edges, analysis)` -- Export the graph as GraphML (Gephi/yEd compatible).
+- `GraphExporter.to_cypher` (method) `readmenator/_exporter.py:773` `def to_cypher(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` -- Export the graph as native Cypher CREATE statements.
+- `GraphExporter.to_obsidian` (method) `readmenator/_exporter.py:895` `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)` -- Export the graph as an Obsidian vault with wikilinks.
+- `GraphExporter.to_forcegraph` (method) `readmenator/_exporter.py:1020` `def to_forcegraph(self, nodes, edges, resolved_edges, analysis, layers, findings, analytics)` -- Generate the force-graph explorer HTML document.
 
 ## readmenator/_forcegraph.py
 Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`

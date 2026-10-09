@@ -1648,6 +1648,44 @@
       "confidence": "EXTRACTED"
     },
     {
+      "name": "code",
+      "files": [
+        "readmenator/_agent_output.py",
+        "readmenator/_analytics.py",
+        "readmenator/_app.py",
+        "readmenator/_category.py",
+        "readmenator/_cpg.py",
+        "readmenator/_dataflow.py",
+        "readmenator/_dead_code.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_layers.py",
+        "readmenator/_memory.py",
+        "readmenator/_models.py",
+        "readmenator/_projections.py",
+        "readmenator/_purpose.py",
+        "readmenator/_rank.py",
+        "readmenator/_rule_gen.py",
+        "readmenator/_sarif.py",
+        "readmenator/_security.py",
+        "readmenator/_skill_installer.py",
+        "readmenator/_uml.py",
+        "readmenator/_video.py",
+        "readmenator/_yaralite.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_cpg.py",
+        "tests/test_dead_code.py",
+        "tests/test_diagrams.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_parsers_property.py",
+        "tests/test_scanner.py",
+        "tests/test_security.py",
+        "tests/test_uml.py"
+      ],
+      "mentions": 111,
+      "confidence": "EXTRACTED"
+    },
+    {
       "name": "without",
       "files": [
         "readmenator/__init__.py",
@@ -1759,43 +1797,6 @@
         "tests/test_wiki.py"
       ],
       "mentions": 49,
-      "confidence": "EXTRACTED"
-    },
-    {
-      "name": "code",
-      "files": [
-        "readmenator/_agent_output.py",
-        "readmenator/_analytics.py",
-        "readmenator/_app.py",
-        "readmenator/_category.py",
-        "readmenator/_cpg.py",
-        "readmenator/_dataflow.py",
-        "readmenator/_dead_code.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_layers.py",
-        "readmenator/_memory.py",
-        "readmenator/_models.py",
-        "readmenator/_projections.py",
-        "readmenator/_purpose.py",
-        "readmenator/_rank.py",
-        "readmenator/_rule_gen.py",
-        "readmenator/_sarif.py",
-        "readmenator/_security.py",
-        "readmenator/_skill_installer.py",
-        "readmenator/_uml.py",
-        "readmenator/_video.py",
-        "readmenator/_yaralite.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_cpg.py",
-        "tests/test_dead_code.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_parsers_property.py",
-        "tests/test_scanner.py",
-        "tests/test_security.py",
-        "tests/test_uml.py"
-      ],
-      "mentions": 110,
       "confidence": "EXTRACTED"
     },
     {
@@ -2015,6 +2016,40 @@
       "confidence": "EXTRACTED"
     },
     {
+      "name": "text",
+      "files": [
+        "readmenator/_agent_injector.py",
+        "readmenator/_agent_output.py",
+        "readmenator/_app.py",
+        "readmenator/_concepts.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_embed.py",
+        "readmenator/_exclusions.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_mcp_server.py",
+        "readmenator/_memory.py",
+        "readmenator/_pipeline.py",
+        "readmenator/_purpose.py",
+        "readmenator/_query.py",
+        "readmenator/_rank.py",
+        "readmenator/_scanner.py",
+        "readmenator/_scantext.py",
+        "readmenator/_video.py",
+        "readmenator/_yaralite.py",
+        "tests/test_agent_injector.py",
+        "tests/test_diagrams.py",
+        "tests/test_graphrag.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_mcp_server.py",
+        "tests/test_memory.py",
+        "tests/test_parsers_property.py"
+      ],
+      "mentions": 132,
+      "confidence": "EXTRACTED"
+    },
+    {
       "name": "class",
       "files": [
         "readmenator/_category.py",
@@ -2114,39 +2149,6 @@
         "tests/test_parsers_new.py"
       ],
       "mentions": 29,
-      "confidence": "EXTRACTED"
-    },
-    {
-      "name": "text",
-      "files": [
-        "readmenator/_agent_injector.py",
-        "readmenator/_agent_output.py",
-        "readmenator/_app.py",
-        "readmenator/_concepts.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_embed.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_mcp_server.py",
-        "readmenator/_memory.py",
-        "readmenator/_pipeline.py",
-        "readmenator/_purpose.py",
-        "readmenator/_query.py",
-        "readmenator/_rank.py",
-        "readmenator/_scanner.py",
-        "readmenator/_scantext.py",
-        "readmenator/_video.py",
-        "readmenator/_yaralite.py",
-        "tests/test_agent_injector.py",
-        "tests/test_graphrag.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_mcp_server.py",
-        "tests/test_memory.py",
-        "tests/test_parsers_property.py"
-      ],
-      "mentions": 131,
       "confidence": "EXTRACTED"
     },
     {
@@ -3633,6 +3635,25 @@
       ]
     },
     {
+      "source": "text",
+      "target": "readmenator",
+      "verb": "depends_on",
+      "strength": 0.64,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/_agent_output.py->readmenator/_cache.py",
+        "readmenator/_agent_output.py->readmenator/_config.py",
+        "readmenator/_agent_output.py->readmenator/_gitmeta.py",
+        "readmenator/_agent_output.py->readmenator/_models.py",
+        "readmenator/_agent_output.py->readmenator/_purpose.py",
+        "readmenator/_agent_output.py->readmenator/_resolver.py",
+        "readmenator/_agent_output.py->readmenator/_security.py",
+        "readmenator/_app.py->readmenator/_cache.py",
+        "readmenator/_app.py->readmenator/_config.py",
+        "readmenator/_app.py->readmenator/_cursorrules_generator.py"
+      ]
+    },
+    {
       "source": "edge",
       "target": "readmenator",
       "verb": "depends_on",
@@ -3763,25 +3784,6 @@
         "readmenator/_app.py->readmenator/_models.py",
         "readmenator/_app.py->readmenator/_rank.py",
         "readmenator/_app.py->readmenator/_video.py"
-      ]
-    },
-    {
-      "source": "text",
-      "target": "readmenator",
-      "verb": "depends_on",
-      "strength": 0.62,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/_agent_output.py->readmenator/_cache.py",
-        "readmenator/_agent_output.py->readmenator/_config.py",
-        "readmenator/_agent_output.py->readmenator/_gitmeta.py",
-        "readmenator/_agent_output.py->readmenator/_models.py",
-        "readmenator/_agent_output.py->readmenator/_purpose.py",
-        "readmenator/_agent_output.py->readmenator/_resolver.py",
-        "readmenator/_agent_output.py->readmenator/_security.py",
-        "readmenator/_app.py->readmenator/_cache.py",
-        "readmenator/_app.py->readmenator/_config.py",
-        "readmenator/_app.py->readmenator/_cursorrules_generator.py"
       ]
     },
     {
