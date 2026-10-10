@@ -1,5 +1,5 @@
-# Subsystem: tests (page 1 of 3)
-Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p3.md](KB_tests_p3.md)
+# Subsystem: tests (page 1 of 4)
+Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p3.md](KB_tests_p3.md), [KB_tests_p4.md](KB_tests_p4.md)
 
 ## tests/__init__.py
 - Layer: testing
@@ -186,6 +186,40 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_analyze_is_repeatable` (method, line 130) `def test_analyze_is_repeatable(self)`
   - `test_dominant_directory_prefers_specific_on_tie` (method, line 141) `def test_dominant_directory_prefers_specific_on_tie(self)`
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`
+
+## tests/test_bundlegraph.py
+- Doc: Contract tests for the edge bundle explorer (circle and sphere views).
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 18) `def _node(nid, doc)`
+  - `_fixture` (function, line 23) `def _fixture(config)`
+  - `_script_json` (function, line 48) `def _script_json(html, name)`
+  - `TestBundleGraphPayloadContract` (class, line 55) `class TestBundleGraphPayloadContract(TestCase)`
+  - `TestBundleGraphRenderContract` (class, line 105) `class TestBundleGraphRenderContract(TestCase)`
+  - `TestBundleGraphAppContract` (class, line 169) `class TestBundleGraphAppContract(TestCase)`
+  - `setUp` (method, line 58) `def setUp(self)`
+  - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 64) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
+  - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 70) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
+  - `test_bundlegraph_nodes_on_circle_and_sphere` (method, line 78) `def test_bundlegraph_nodes_on_circle_and_sphere(self)`
+  - `test_bundlegraph_hub_leads_its_arc` (method, line 84) `def test_bundlegraph_hub_leads_its_arc(self)`
+  - `test_bundlegraph_empty_payload` (method, line 92) `def test_bundlegraph_empty_payload(self)`
+  - `test_bundlegraph_privacy_mode_strips_docs` (method, line 98) `def test_bundlegraph_privacy_mode_strips_docs(self)`
+  - `setUp` (method, line 108) `def setUp(self)`
+  - `test_bundlegraph_render_fills_placeholders` (method, line 115) `def test_bundlegraph_render_fills_placeholders(self)`
+  - `test_bundlegraph_render_has_no_network_requests` (method, line 124) `def test_bundlegraph_render_has_no_network_requests(self)`
+  - `test_bundlegraph_render_has_both_views_and_controls` (method, line 131) `def test_bundlegraph_render_has_both_views_and_controls(self)`
+  - `test_bundlegraph_render_escapes_untrusted_text` (method, line 137) `def test_bundlegraph_render_escapes_untrusted_text(self)`
+  - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 148) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
+  - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 154) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
+  - `test_bundlegraph_write_creates_parent` (method, line 161) `def test_bundlegraph_write_creates_parent(self)`
+  - `_project` (method, line 172) `def _project(self, tmp)`
+  - `_config` (method, line 177) `def _config(self)`
+  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 182) `def test_export_diagrams_writes_bundle_page_and_card(self)`
+  - `test_bundle_page_skipped_when_disabled` (method, line 198) `def test_bundle_page_skipped_when_disabled(self)`
+  - `test_export_bundlegraph_cli_entry` (method, line 209) `def test_export_bundlegraph_cli_entry(self)`
+  - `test_pages_subdir_card_points_into_maps_dir` (method, line 219) `def test_pages_subdir_card_points_into_maps_dir(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`
 
 ## tests/test_cache.py
 - Doc: Contract tests for the FileCache.
@@ -433,63 +467,6 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_export_diagrams_writes_vis_maps_by_default` (method, line 658) `def test_export_diagrams_writes_vis_maps_by_default(self)`
   - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 672) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
-
-## tests/test_documentation.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestDocumentationGeneratorContract` (class, line 17) `class TestDocumentationGeneratorContract(TestCase)`
-  - `setUp` (method, line 18) `def setUp(self)`
-  - `test_contains_header` (method, line 22) `def test_contains_header(self)`
-  - `test_contains_metadata_line` (method, line 26) `def test_contains_metadata_line(self)`
-  - `test_contains_mermaid_block` (method, line 32) `def test_contains_mermaid_block(self)`
-  - `test_contains_architecture_reference` (method, line 37) `def test_contains_architecture_reference(self)`
-  - `test_contains_cpg_block` (method, line 41) `def test_contains_cpg_block(self)`
-  - `test_contains_statistics_dashboard` (method, line 46) `def test_contains_statistics_dashboard(self)`
-  - `test_groups_files_by_language` (method, line 51) `def test_groups_files_by_language(self)`
-  - `test_lists_symbols_under_file` (method, line 70) `def test_lists_symbols_under_file(self)`
-  - `test_class_symbol_is_pluralized_correctly` (method, line 83) `def test_class_symbol_is_pluralized_correctly(self)`
-  - `test_function_pluralization` (method, line 97) `def test_function_pluralization(self)`
-  - `test_method_pluralization` (method, line 109) `def test_method_pluralization(self)`
-  - `test_shows_no_symbols_for_empty_files` (method, line 121) `def test_shows_no_symbols_for_empty_files(self)`
-  - `test_includes_file_path` (method, line 132) `def test_includes_file_path(self)`
-  - `test_docstring_in_output` (method, line 143) `def test_docstring_in_output(self)`
-  - `test_truncation_note_when_limited` (method, line 155) `def test_truncation_note_when_limited(self)`
-  - `test_taint_propagation_section_present` (method, line 165) `def test_taint_propagation_section_present(self)`
-  - `test_hotspot_section_present` (method, line 185) `def test_hotspot_section_present(self)`
-  - `test_no_taint_section_when_empty` (method, line 203) `def test_no_taint_section_when_empty(self)`
-  - `test_no_hotspot_section_when_empty` (method, line 207) `def test_no_hotspot_section_when_empty(self)`
-  - `test_cpg_block_disabled_via_config` (method, line 211) `def test_cpg_block_disabled_via_config(self)`
-  - `test_architectural_layers_section` (method, line 217) `def test_architectural_layers_section(self)`
-  - `test_security_findings_section` (method, line 229) `def test_security_findings_section(self)`
-  - `test_context_budget_zero_returns_full_content` (method, line 252) `def test_context_budget_zero_returns_full_content(self)`
-  - `test_context_budget_returns_compact_summary` (method, line 260) `def test_context_budget_returns_compact_summary(self)`
-  - `test_context_budget_prioritizes_god_nodes` (method, line 268) `def test_context_budget_prioritizes_god_nodes(self)`
-  - `test_context_budget_truncates_at_limit` (method, line 285) `def test_context_budget_truncates_at_limit(self)`
-  - `test_context_budget_includes_security_findings` (method, line 293) `def test_context_budget_includes_security_findings(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_models.py`
-
-## tests/test_exporter.py
-- Doc: Contract tests for the GraphExporter.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestGraphExporterContract` (class, line 23) `class TestGraphExporterContract(TestCase)`
-  - `setUp` (method, line 26) `def setUp(self)`
-  - `_make_node` (method, line 30) `def _make_node(self, nid, label, lang, symbols)`
-  - `_make_sym` (method, line 42) `def _make_sym(self, name, kind, line)`
-  - `test_to_json_produces_valid_json` (method, line 47) `def test_to_json_produces_valid_json(self)`
-  - `test_to_json_includes_symbol_data` (method, line 56) `def test_to_json_includes_symbol_data(self)`
-  - `test_to_json_includes_metadata` (method, line 65) `def test_to_json_includes_metadata(self)`
-  - `test_to_json_includes_analysis_metadata` (method, line 76) `def test_to_json_includes_analysis_metadata(self)`
-  - `test_to_html_produces_standalone_page` (method, line 101) `def test_to_html_produces_standalone_page(self)`
-  - `test_to_html_includes_node_data` (method, line 109) `def test_to_html_includes_node_data(self)`
-  - `test_to_html_includes_community_legend_when_analysis` (method, line 116) `def test_to_html_includes_community_legend_when_analysis(self)`
-  - `test_to_svg_produces_svg_string` (method, line 138) `def test_to_svg_produces_svg_string(self)`
-  - `test_to_svg_render_truncation_for_large_graph` (method, line 145) `def test_to_svg_render_truncation_for_large_graph(self)`
-  - `test_to_svg_includes_readmenator_title` (method, line 154) `def test_to_svg_includes_readmenator_title(self)`
-  - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
 
 
 Next: [KB_tests_p2.md](KB_tests_p2.md)

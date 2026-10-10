@@ -28,6 +28,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_analytics.py` -> `readmenator/_models.py`
 - `readmenator/_analyzer.py` -> `readmenator/_config.py`
 - `readmenator/_analyzer.py` -> `readmenator/_models.py`
+- `readmenator/_app.py` -> `readmenator/_bundlegraph.py`
 - `readmenator/_app.py` -> `readmenator/_cache.py`
 - `readmenator/_app.py` -> `readmenator/_config.py`
 - `readmenator/_app.py` -> `readmenator/_cursorrules_generator.py`
@@ -48,6 +49,10 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_app.py` -> `readmenator/_video.py`
 - `readmenator/_app.py` -> `readmenator/_watcher.py`
 - `readmenator/_app.py` -> `readmenator/_yaralite.py`
+- `readmenator/_bundlegraph.py` -> `readmenator/_bundlegraph_page.py`
+- `readmenator/_bundlegraph.py` -> `readmenator/_config.py`
+- `readmenator/_bundlegraph.py` -> `readmenator/_forcegraph.py`
+- `readmenator/_bundlegraph.py` -> `readmenator/_graphlayout.py`
 - `readmenator/_cache.py` -> `readmenator/_config.py`
 - `readmenator/_concepts.py` -> `readmenator/_config.py`
 - `readmenator/_concepts.py` -> `readmenator/_models.py`
@@ -119,6 +124,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_pipeline.py` -> `readmenator/_agent_output.py`
 - `readmenator/_pipeline.py` -> `readmenator/_analytics.py`
 - `readmenator/_pipeline.py` -> `readmenator/_analyzer.py`
+- `readmenator/_pipeline.py` -> `readmenator/_bundlegraph.py`
 - `readmenator/_pipeline.py` -> `readmenator/_category.py`
 - `readmenator/_pipeline.py` -> `readmenator/_concepts.py`
 - `readmenator/_pipeline.py` -> `readmenator/_config.py`
@@ -269,6 +275,11 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_analyzer.py` -> `readmenator/_analyzer.py`
 - `tests/test_analyzer.py` -> `readmenator/_config.py`
 - `tests/test_analyzer.py` -> `readmenator/_models.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_app.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_bundlegraph.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_config.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_forcegraph.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_models.py`
 - `tests/test_cache.py` -> `readmenator/_cache.py`
 - `tests/test_cache.py` -> `readmenator/_config.py`
 - `tests/test_concepts.py` -> `readmenator/_concepts.py`

@@ -12,6 +12,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from readmenator._bundlegraph import UNASSIGNED_KEY
 from readmenator._cache import FileCache, source_fingerprint
 from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
@@ -689,6 +690,9 @@ class readmenatorApplication:
     ) -> Optional[Dict[str, object]]:
         """Render the explorer payload and write HTML plus vendor engine.
 
+        The edge bundle explorer (BUNDLEGRAPH_OUTPUT) is written beside it
+        from the same payload when BUNDLEGRAPH_ENABLED is set.
+
         Args:
             dest: Destination HTML file path.
             nodes: Scanned file nodes.
@@ -700,7 +704,8 @@ class readmenatorApplication:
             home_href: Gallery link relative to the page.
 
         Returns:
-            Node and edge counts plus a thumbnail SVG, or None when the write fails.
+            Node and edge counts plus thumbnails (and a "bundle" entry when
+            the bundle page was written), or None when the write fails.
         """
         try:
             renderer = self._factory.forcegraph
@@ -708,13 +713,51 @@ class readmenatorApplication:
             analytics = self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers)
             renderer.write(str(dest), payload, analytics, home_href=home_href)
             logger.info("Force-graph explorer: %s", dest)
-            return {"nodes": len(payload["nodes"]), "edges": len(payload["edges"]),
-                    "thumb": renderer.thumbnail_svg(payload)}
+            counts: Dict[str, object] = {"nodes": len(payload["nodes"]), "edges": len(payload["edges"]),
+                                         "thumb": renderer.thumbnail_svg(payload)}
         except Exception:
             logger.debug("Force-graph explorer skipped", exc_info=True)
             return None
+        bundle = self._write_bundlegraph(dest.parent / self._config.BUNDLEGRAPH_OUTPUT, payload,
+                                         home_href, dest.name)
+        if bundle:
+            counts["bundle"] = bundle
+        return counts
 
-    def _forcegraph_card(
+    def _write_bundlegraph(
+        self,
+        dest: Path,
+        force_payload: Dict[str, list],
+        home_href: Optional[str],
+        explorer_href: Optional[str],
+    ) -> Optional[Dict[str, object]]:
+        """Write the edge bundle explorer page from a force-graph payload.
+
+        Args:
+            dest: Destination HTML file path.
+            force_payload: Payload from ForceGraphRenderer.build_payload.
+            home_href: Gallery link relative to the page.
+            explorer_href: Force-graph explorer link relative to the page.
+
+        Returns:
+            File, edge and community counts plus a thumbnail, or None when
+            disabled or the write fails.
+        """
+        if not self._config.BUNDLEGRAPH_ENABLED:
+            return None
+        try:
+            renderer = self._factory.bundlegraph
+            renderer.write(str(dest), force_payload, home_href=home_href, explorer_href=explorer_href)
+            bundle = renderer.build_payload(force_payload)
+            logger.info("Edge bundle explorer: %s", dest)
+            communities = sum(1 for group in bundle["groups"] if group["k"] != UNASSIGNED_KEY)
+            return {"files": len(bundle["nodes"]), "edges": len(bundle["edges"]),
+                    "groups": communities, "thumb": renderer.thumbnail_svg(force_payload)}
+        except Exception:
+            logger.debug("Edge bundle explorer skipped", exc_info=True)
+            return None
+
+    def _explorer_cards(
         self,
         dest: Path,
         href: str,
@@ -725,13 +768,13 @@ class readmenatorApplication:
         analysis: Optional[AnalysisResult],
         layers: Dict[str, str],
         findings: List[SecurityFinding],
-    ) -> Optional[Dict[str, str]]:
-        """Write the explorer page and return its gallery card (None on failure).
+    ) -> List[Dict[str, str]]:
+        """Write the explorer pages and return their gallery cards.
 
         Args:
-            dest: Destination HTML path.
-            href: Card link relative to the gallery index.
-            home_href: Gallery link relative to the explorer page.
+            dest: Destination HTML path of the force-graph explorer.
+            href: Force-graph card link relative to the gallery index.
+            home_href: Gallery link relative to the explorer pages.
             nodes: Scanned file nodes.
             edges: Import edges.
             resolved: Resolved-import edges.
@@ -740,12 +783,13 @@ class readmenatorApplication:
             findings: Security findings.
 
         Returns:
-            Gallery card fields including a ForceAtlas2 thumbnail.
+            Force-graph card plus the edge bundle card when it was written;
+            empty when the explorer write fails.
         """
         counts = self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings, home_href)
         if not counts:
-            return None
-        return {
+            return []
+        cards = [{
             "kind": "forcegraph",
             "title": "Force Graph Explorer",
             "href": href,
@@ -754,7 +798,21 @@ class readmenatorApplication:
                            "and lenses for import cycles, files nothing imports, and hubs.",
             "meta": f"{counts['nodes']} nodes | {counts['edges']} edges",
             "thumb": str(counts.get("thumb", "")),
-        }
+        }]
+        bundle = counts.get("bundle")
+        if isinstance(bundle, dict):
+            prefix = href.rpartition("/")[0]
+            cards.append({
+                "kind": "bundle",
+                "title": "Edge Bundle Explorer",
+                "href": (prefix + "/" if prefix else "") + self._config.BUNDLEGRAPH_OUTPUT,
+                "description": "Hierarchical edge bundling on a circle or a 3D sphere of community caps: "
+                               "every import routed through its community, thick bundles mark the seams "
+                               "between subsystems, live bundling strength, crossing-only filter.",
+                "meta": f"{bundle['files']} files | {bundle['edges']} wires | {bundle['groups']} communities",
+                "thumb": str(bundle.get("thumb", "")),
+            })
+        return cards
 
     def export_forcegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
         """Export the force-graph explorer HTML document.
@@ -773,6 +831,32 @@ class readmenatorApplication:
         findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
         dest = self._forcegraph_dest(target_dir, output_path)
         self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings)
+        return str(dest)
+
+    def export_bundlegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
+        """Export the edge bundle explorer HTML document (circle and sphere views).
+
+        Args:
+            target_dir: Project root directory.
+            output_path: Optional explicit output file path.
+
+        Returns:
+            Output path of the written HTML file.
+        """
+        nodes, edges, _content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        layers = LayerDetector().detect(nodes, edges)
+        findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
+        root = Path(target_dir).resolve()
+        if output_path is None:
+            dest = root / self._config.DIAGRAM_OUTPUT_DIR / self._config.BUNDLEGRAPH_OUTPUT
+        else:
+            dest = Path(output_path) if Path(output_path).is_absolute() else root / output_path
+        payload = self._factory.forcegraph.build_payload(nodes, edges, resolved, analysis, layers, findings)
+        explorer = self._config.FORCEGRAPH_OUTPUT if self._config.FORCEGRAPH_ENABLED else None
+        self._factory.bundlegraph.write(str(dest), payload, home_href="index.html", explorer_href=explorer)
+        logger.info("Edge bundle explorer: %s", dest)
         return str(dest)
 
     def explorer_state(self, target_dir: str):
@@ -998,10 +1082,8 @@ class readmenatorApplication:
         extra_cards: List[Dict[str, str]] = []
         if self._config.FORCEGRAPH_ENABLED:
             force_dest = dest / self._config.FORCEGRAPH_OUTPUT
-            card = self._forcegraph_card(force_dest, self._config.FORCEGRAPH_OUTPUT, "index.html",
-                                         nodes, edges, resolved, analysis, layers, findings)
-            if card:
-                extra_cards.append(card)
+            extra_cards.extend(self._explorer_cards(force_dest, self._config.FORCEGRAPH_OUTPUT, "index.html",
+                                                    nodes, edges, resolved, analysis, layers, findings))
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root), extra_cards=extra_cards,
@@ -1104,14 +1186,12 @@ class readmenatorApplication:
         extra_cards: List[Dict[str, str]] = []
         if self._config.FORCEGRAPH_ENABLED:
             subdir = self._config.DIAGRAM_MAPS_SUBDIR.strip().strip("/") or "."
-            card = self._forcegraph_card(
+            extra_cards.extend(self._explorer_cards(
                 dest / subdir / self._config.FORCEGRAPH_OUTPUT,
                 f"{subdir}/{self._config.FORCEGRAPH_OUTPUT}" if subdir != "." else self._config.FORCEGRAPH_OUTPUT,
                 "../index.html" if subdir != "." else "index.html",
                 nodes, edges, resolved, analysis, layers, findings,
-            )
-            if card:
-                extra_cards.append(card)
+            ))
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root), extra_cards=extra_cards,

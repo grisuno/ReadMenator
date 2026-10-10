@@ -13,8 +13,8 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Language: py
 - Symbols:
   - `build_parser` (function, line 18) `def build_parser()`
-  - `_run_tests` (function, line 131) `def _run_tests()`
-  - `main` (function, line 146) `def main()`
+  - `_run_tests` (function, line 132) `def _run_tests()`
+  - `main` (function, line 147) `def main()`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 - Imported by: `readmenator.py`
 
@@ -133,79 +133,103 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Layer: utility
 - Language: py
 - Symbols:
-  - `readmenatorApplication` (class, line 48) `class readmenatorApplication`
-  - `__init__` (method, line 49) `def __init__(self, config)`
-  - `_scan` (method, line 58) `def _scan(self, target_dir)`
-  - `_scan_with_content` (method, line 66) `def _scan_with_content(self, target_dir)`
-  - `_resolve_imports` (method, line 76) `def _resolve_imports(self, nodes, edges, target_dir)`
-  - `run` (method, line 95) `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
-  - `check_freshness` (method, line 237) `def check_freshness(self, target_dir)`
-  - `_maybe_refresh_pages` (method, line 264) `def _maybe_refresh_pages(self, root)`
-  - `_maybe_publish_github_wiki` (method, line 282) `def _maybe_publish_github_wiki(self, root)`
-  - `publish_github_wiki` (method, line 300) `def publish_github_wiki(self, target_dir, dry_run)`
-  - `_write_sidecar_outputs` (method, line 314) `def _write_sidecar_outputs(self, root, findings, analysis_v2)`
-  - `_inject_readme_link` (method, line 340) `def _inject_readme_link(self, root)`
-  - `_inject_agent_files` (method, line 348) `def _inject_agent_files(self, root)`
-  - `generate_uml_code` (method, line 356) `def generate_uml_code(self, target_dir, language, output_path)`
-  - `_log_summary` (method, line 368) `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)`
-  - `update` (method, line 423) `def update(self, target_dir, run_security)`
-  - `_scan_for_cache` (method, line 528) `def _scan_for_cache(self, root, cache)`
-  - `query` (method, line 546) `def query(self, target_dir, question)`
-  - `explain` (method, line 551) `def explain(self, target_dir, symbol_name)`
-  - `find_path` (method, line 563) `def find_path(self, target_dir, symbol_a, symbol_b)`
-  - `summary` (method, line 576) `def summary(self, target_dir)`
-  - `rank_query` (method, line 581) `def rank_query(self, target_dir, query, top_n)`
-  - `rebuild` (method, line 611) `def rebuild(self, target_dir, run_security)`
-  - `analyze` (method, line 614) `def analyze(self, target_dir)`
-  - `export_json` (method, line 618) `def export_json(self, target_dir, output_path)`
-  - `export_html` (method, line 635) `def export_html(self, target_dir, output_path)`
-  - `export_svg` (method, line 646) `def export_svg(self, target_dir, output_path)`
-  - `export` (method, line 657) `def export(self, target_dir)`
-  - `_forcegraph_dest` (method, line 664) `def _forcegraph_dest(self, target_dir, output_path)`
-  - `_write_forcegraph` (method, line 679) `def _write_forcegraph(self, dest, nodes, edges, resolved, analysis, layers, findings, home_href)`
-  - `_forcegraph_card` (method, line 717) `def _forcegraph_card(self, dest, href, home_href, nodes, edges, resolved, analysis, layers, findings)`
-  - `export_forcegraph` (method, line 759) `def export_forcegraph(self, target_dir, output_path)`
-  - `explorer_state` (method, line 778) `def explorer_state(self, target_dir)`
-  - `serve_explorer` (method, line 794) `def serve_explorer(self, target_dir, open_browser)`
-  - `analytics` (method, line 807) `def analytics(self, target_dir)`
-  - `scan_texts` (method, line 824) `def scan_texts(self, target_dir)`
-  - `near` (method, line 836) `def near(self, target_dir, query, top_k)`
-  - `audit_provenance` (method, line 850) `def audit_provenance(self, target_dir)`
-  - `validate_yaralite` (method, line 873) `def validate_yaralite(self, target_dir)`
-  - `export_graphml` (method, line 887) `def export_graphml(self, target_dir, output_path)`
-  - `export_cypher` (method, line 898) `def export_cypher(self, target_dir, output_path)`
-  - `export_obsidian` (method, line 914) `def export_obsidian(self, target_dir, output_dir)`
-  - `export_wiki` (method, line 929) `def export_wiki(self, target_dir, output_dir)`
-  - `lint_wiki` (method, line 952) `def lint_wiki(self, target_dir)`
-  - `export_diagrams` (method, line 970) `def export_diagrams(self, target_dir, output_dir, full)`
-  - `_site_stats` (method, line 1016) `def _site_stats(nodes, edges, analysis)`
-  - `_live_renderer` (method, line 1028) `def _live_renderer(self)`
-  - `export_diagram` (method, line 1038) `def export_diagram(self, target_dir, kind, output_path, full)`
-  - `export_pages` (method, line 1077) `def export_pages(self, target_dir, output_dir, full)`
-  - `export_video` (method, line 1123) `def export_video(self, target_dir, output_path)`
-  - `_maybe_export_video` (method, line 1147) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
-  - `_maybe_export_forcegraph` (method, line 1186) `def _maybe_export_forcegraph(self, root, nodes, edges, resolved_edges, analysis, layers, findings)`
-  - `_maybe_write_graphrag` (method, line 1217) `def _maybe_write_graphrag(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
-  - `_memory_notes` (method, line 1253) `def _memory_notes(self, root)`
-  - `_maybe_write_memory` (method, line 1259) `def _maybe_write_memory(self, root, nodes, analysis, analysis_v2, findings, content_map)`
-  - `memory` (method, line 1285) `def memory(self, target_dir)`
-  - `remember` (method, line 1308) `def remember(self, target_dir, note, kind)`
-  - `install_skills` (method, line 1322) `def install_skills(self, target_dir, target)`
-  - `build_graphrag` (method, line 1334) `def build_graphrag(self, target_dir)`
-  - `graphrag_search` (method, line 1357) `def graphrag_search(self, target_dir, query, mode, budget_tokens)`
-  - `watch` (method, line 1378) `def watch(self, target_dir)`
-  - `audit` (method, line 1388) `def audit(self, target_dir)`
-  - `audit_deep` (method, line 1395) `def audit_deep(self, target_dir)`
-  - `export_sarif` (method, line 1415) `def export_sarif(self, target_dir, output_path)`
-  - `export_rules` (method, line 1425) `def export_rules(self, target_dir, output_dir)`
-  - `detect_layers` (method, line 1435) `def detect_layers(self, target_dir)`
-  - `lint` (method, line 1445) `def lint(self, target_dir)`
-  - `strip_dead_code` (method, line 1458) `def strip_dead_code(self, target_dir)`
-  - `generate_cursorrules` (method, line 1468) `def generate_cursorrules(self, target_dir)`
-  - `refactor_monolith` (method, line 1483) `def refactor_monolith(self, target_dir)`
-  - `on_change` (method, line 1382) `def on_change()`
-- Depends on: `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphrag.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_yaralite.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
+  - `readmenatorApplication` (class, line 49) `class readmenatorApplication`
+  - `__init__` (method, line 50) `def __init__(self, config)`
+  - `_scan` (method, line 59) `def _scan(self, target_dir)`
+  - `_scan_with_content` (method, line 67) `def _scan_with_content(self, target_dir)`
+  - `_resolve_imports` (method, line 77) `def _resolve_imports(self, nodes, edges, target_dir)`
+  - `run` (method, line 96) `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)`
+  - `check_freshness` (method, line 238) `def check_freshness(self, target_dir)`
+  - `_maybe_refresh_pages` (method, line 265) `def _maybe_refresh_pages(self, root)`
+  - `_maybe_publish_github_wiki` (method, line 283) `def _maybe_publish_github_wiki(self, root)`
+  - `publish_github_wiki` (method, line 301) `def publish_github_wiki(self, target_dir, dry_run)`
+  - `_write_sidecar_outputs` (method, line 315) `def _write_sidecar_outputs(self, root, findings, analysis_v2)`
+  - `_inject_readme_link` (method, line 341) `def _inject_readme_link(self, root)`
+  - `_inject_agent_files` (method, line 349) `def _inject_agent_files(self, root)`
+  - `generate_uml_code` (method, line 357) `def generate_uml_code(self, target_dir, language, output_path)`
+  - `_log_summary` (method, line 369) `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)`
+  - `update` (method, line 424) `def update(self, target_dir, run_security)`
+  - `_scan_for_cache` (method, line 529) `def _scan_for_cache(self, root, cache)`
+  - `query` (method, line 547) `def query(self, target_dir, question)`
+  - `explain` (method, line 552) `def explain(self, target_dir, symbol_name)`
+  - `find_path` (method, line 564) `def find_path(self, target_dir, symbol_a, symbol_b)`
+  - `summary` (method, line 577) `def summary(self, target_dir)`
+  - `rank_query` (method, line 582) `def rank_query(self, target_dir, query, top_n)`
+  - `rebuild` (method, line 612) `def rebuild(self, target_dir, run_security)`
+  - `analyze` (method, line 615) `def analyze(self, target_dir)`
+  - `export_json` (method, line 619) `def export_json(self, target_dir, output_path)`
+  - `export_html` (method, line 636) `def export_html(self, target_dir, output_path)`
+  - `export_svg` (method, line 647) `def export_svg(self, target_dir, output_path)`
+  - `export` (method, line 658) `def export(self, target_dir)`
+  - `_forcegraph_dest` (method, line 665) `def _forcegraph_dest(self, target_dir, output_path)`
+  - `_write_forcegraph` (method, line 680) `def _write_forcegraph(self, dest, nodes, edges, resolved, analysis, layers, findings, home_href)`
+  - `_write_bundlegraph` (method, line 727) `def _write_bundlegraph(self, dest, force_payload, home_href, explorer_href)`
+  - `_explorer_cards` (method, line 760) `def _explorer_cards(self, dest, href, home_href, nodes, edges, resolved, analysis, layers, findings)`
+  - `export_forcegraph` (method, line 817) `def export_forcegraph(self, target_dir, output_path)`
+  - `export_bundlegraph` (method, line 836) `def export_bundlegraph(self, target_dir, output_path)`
+  - `explorer_state` (method, line 862) `def explorer_state(self, target_dir)`
+  - `serve_explorer` (method, line 878) `def serve_explorer(self, target_dir, open_browser)`
+  - `analytics` (method, line 891) `def analytics(self, target_dir)`
+  - `scan_texts` (method, line 908) `def scan_texts(self, target_dir)`
+  - `near` (method, line 920) `def near(self, target_dir, query, top_k)`
+  - `audit_provenance` (method, line 934) `def audit_provenance(self, target_dir)`
+  - `validate_yaralite` (method, line 957) `def validate_yaralite(self, target_dir)`
+  - `export_graphml` (method, line 971) `def export_graphml(self, target_dir, output_path)`
+  - `export_cypher` (method, line 982) `def export_cypher(self, target_dir, output_path)`
+  - `export_obsidian` (method, line 998) `def export_obsidian(self, target_dir, output_dir)`
+  - `export_wiki` (method, line 1013) `def export_wiki(self, target_dir, output_dir)`
+  - `lint_wiki` (method, line 1036) `def lint_wiki(self, target_dir)`
+  - `export_diagrams` (method, line 1054) `def export_diagrams(self, target_dir, output_dir, full)`
+  - `_site_stats` (method, line 1098) `def _site_stats(nodes, edges, analysis)`
+  - `_live_renderer` (method, line 1110) `def _live_renderer(self)`
+  - `export_diagram` (method, line 1120) `def export_diagram(self, target_dir, kind, output_path, full)`
+  - `export_pages` (method, line 1159) `def export_pages(self, target_dir, output_dir, full)`
+  - `export_video` (method, line 1203) `def export_video(self, target_dir, output_path)`
+  - `_maybe_export_video` (method, line 1227) `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
+  - `_maybe_export_forcegraph` (method, line 1266) `def _maybe_export_forcegraph(self, root, nodes, edges, resolved_edges, analysis, layers, findings)`
+  - `_maybe_write_graphrag` (method, line 1297) `def _maybe_write_graphrag(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...`
+  - `_memory_notes` (method, line 1333) `def _memory_notes(self, root)`
+  - `_maybe_write_memory` (method, line 1339) `def _maybe_write_memory(self, root, nodes, analysis, analysis_v2, findings, content_map)`
+  - `memory` (method, line 1365) `def memory(self, target_dir)`
+  - `remember` (method, line 1388) `def remember(self, target_dir, note, kind)`
+  - `install_skills` (method, line 1402) `def install_skills(self, target_dir, target)`
+  - `build_graphrag` (method, line 1414) `def build_graphrag(self, target_dir)`
+  - `graphrag_search` (method, line 1437) `def graphrag_search(self, target_dir, query, mode, budget_tokens)`
+  - `watch` (method, line 1458) `def watch(self, target_dir)`
+  - `audit` (method, line 1468) `def audit(self, target_dir)`
+  - `audit_deep` (method, line 1475) `def audit_deep(self, target_dir)`
+  - `export_sarif` (method, line 1495) `def export_sarif(self, target_dir, output_path)`
+  - `export_rules` (method, line 1505) `def export_rules(self, target_dir, output_dir)`
+  - `detect_layers` (method, line 1515) `def detect_layers(self, target_dir)`
+  - `lint` (method, line 1525) `def lint(self, target_dir)`
+  - `strip_dead_code` (method, line 1538) `def strip_dead_code(self, target_dir)`
+  - `generate_cursorrules` (method, line 1548) `def generate_cursorrules(self, target_dir)`
+  - `refactor_monolith` (method, line 1563) `def refactor_monolith(self, target_dir)`
+  - `on_change` (method, line 1462) `def on_change()`
+- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphrag.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_yaralite.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_bundlegraph.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_mcp_server.py`, `tests/test_video.py`
+
+## readmenator/_bundlegraph.py
+- Doc: Edge bundle explorer: circle and sphere hierarchical edge bundling pages.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `_json_script` (function, line 36) `def _json_script(value)`
+  - `BundleGraphRenderer` (class, line 48) `class BundleGraphRenderer`
+  - `__init__` (method, line 51) `def __init__(self, config)`
+  - `build_payload` (method, line 60) `def build_payload(self, force_payload)`
+  - `page_settings` (method, line 147) `def page_settings(self, force_payload, explorer_href)`
+  - `render` (method, line 186) `def render(self, force_payload, title, home_href, explorer_href)`
+  - `write` (method, line 222) `def write(self, output_path, force_payload, title, home_href, explorer_href)`
+  - `thumbnail_svg` (method, line 248) `def thumbnail_svg(self, force_payload)`
+- Depends on: `readmenator/_bundlegraph_page.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_graphlayout.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`
+
+## readmenator/_bundlegraph_page.py
+- Doc: HTML page template for the edge bundle explorer.
+- Layer: presentation
+- Language: py
+- Imported by: `readmenator/_bundlegraph.py`
 
 ## readmenator/_cache.py
 - Doc: File-content hash cache for incremental scanning and analysis caching.
@@ -284,7 +308,7 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Language: py
 - Symbols:
   - `Config` (class, line 15) `class Config`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_memory.py`, `readmenator/_pipeline.py`, `readmenator/_provenance.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_rule_gen.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_wiki.py`, `readmenator/parsers/__init__.py`, `readmenator/parsers/_base.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_cache.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_gh_wiki.py`, `tests/test_graphrag.py`, `tests/test_hotspots.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mcp_server.py`, `tests/test_memory.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`, `tests/test_parsers_property.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_memory.py`, `readmenator/_pipeline.py`, `readmenator/_provenance.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_rule_gen.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_wiki.py`, `readmenator/parsers/__init__.py`, `readmenator/parsers/_base.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_bundlegraph.py`, `tests/test_cache.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_gh_wiki.py`, `tests/test_graphrag.py`, `tests/test_hotspots.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_layer_rules.py`, `tests/test_linter.py`, `tests/test_mcp_server.py`, `tests/test_memory.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`, `tests/test_parsers_property.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
 
 ## readmenator/_cpg.py
 - Doc: Code Property Graph (CPG) generator emitting JSON-LD for AI agents.
@@ -456,45 +480,6 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `doc_order` (method, line 3805) `def doc_order(base)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_diagrams.py`, `tests/test_interactive_graph.py`
-
-## readmenator/_documentation.py
-- Doc: KNOWLEDGE_BASE.md generator: the human-facing architecture reference.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `DocumentationGenerator` (class, line 35) `class DocumentationGenerator`
-  - `__init__` (method, line 47) `def __init__(self, config)`
-  - `_ranking_version` (method, line 65) `def _ranking_version(self)`
-  - `_get_git_commit` (method, line 83) `def _get_git_commit()`
-  - `generate` (method, line 93) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked)`
-  - `_apply_context_budget` (method, line 183) `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)`
-  - `_build_toc` (method, line 321) `def _build_toc(self, nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked)`
-  - `_build_layers` (method, line 419) `def _build_layers(self, layers, nodes)`
-  - `_build_dashboard` (method, line 453) `def _build_dashboard(self, nodes, edges, resolved_edges)`
-  - `_build_god_nodes` (method, line 533) `def _build_god_nodes(self, analysis, ranked)`
-  - `_build_community_analysis` (method, line 561) `def _build_community_analysis(self, analysis, nodes)`
-  - `_build_surprising_connections` (method, line 594) `def _build_surprising_connections(self, analysis, nodes)`
-  - `_build_suggested_questions` (method, line 619) `def _build_suggested_questions(self, analysis)`
-  - `_build_forcegraph_section` (method, line 635) `def _build_forcegraph_section(self, nodes, edges, resolved_edges, analysis, layers, findings)`
-  - `_build_analytics_section` (method, line 672) `def _build_analytics_section(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2)`
-  - `_build_ranked_context` (method, line 707) `def _build_ranked_context(self, ranked)`
-  - `_build_orphans` (method, line 753) `def _build_orphans(self, nodes, analysis_v2, ranked)`
-  - `_build_query_recipes` (method, line 803) `def _build_query_recipes(self)`
-  - `_build_taint_analysis` (method, line 845) `def _build_taint_analysis(self, analysis_v2)`
-  - `_build_hotspots` (method, line 880) `def _build_hotspots(self, analysis_v2, ranked)`
-  - `_build_dataflow_analysis` (method, line 918) `def _build_dataflow_analysis(self, analysis_v2)`
-  - `_build_concept_graph` (method, line 949) `def _build_concept_graph(self, analysis_v2)`
-  - `_build_dependency_cycles` (method, line 996) `def _build_dependency_cycles(self, analysis_v2)`
-  - `_build_change_impact` (method, line 1017) `def _build_change_impact(self, analysis_v2)`
-  - `_build_layer_violations` (method, line 1042) `def _build_layer_violations(self, analysis_v2)`
-  - `_build_suggested_rules` (method, line 1070) `def _build_suggested_rules(self, analysis_v2)`
-  - `_build_security_findings` (method, line 1095) `def _build_security_findings(self, findings)`
-  - `_build_mermaid_section` (method, line 1142) `def _build_mermaid_section(self, graph_output, is_truncated)`
-  - `_build_uml_diagram` (method, line 1165) `def _build_uml_diagram(self, nodes, edges)`
-  - `_build_cpg_block` (method, line 1191) `def _build_cpg_block(self, nodes, edges, resolved_edges, analysis)`
-  - `_build_architecture_reference` (method, line 1217) `def _build_architecture_reference(self, nodes, edges)`
-- Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_forcegraph.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
-- Imported by: `readmenator/_pipeline.py`, `tests/test_documentation.py`
 
 
 Next: [KB_readmenator_p2.md](KB_readmenator_p2.md)

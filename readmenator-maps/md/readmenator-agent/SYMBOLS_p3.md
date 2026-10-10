@@ -3,29 +3,69 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `bundle_layout` | method | `readmenator/_video.py:810` | `def bundle_layout(self, data, box)` |
-| `chroma_text` | method | `readmenator/_video.py:410` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
-| `collect` | method | `readmenator/_video.py:469` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
-| `community_color` | function | `readmenator/_video.py:163` | `def community_color(index)` |
-| `dependencies_available` | function | `readmenator/_video.py:221` | `def dependencies_available()` |
-| `draw_caption` | method | `readmenator/_video.py:448` | `def draw_caption(d, text, lt, dur, fonts, width, y)` |
-| `draw_grid` | method | `readmenator/_video.py:332` | `def draw_grid(img, t, strength, bd)` |
-| `draw_header` | method | `readmenator/_video.py:434` | `def draw_header(img, d, gt, total, project, act_label, fonts, width)` |
-| `draw_sun` | method | `readmenator/_video.py:352` | `def draw_sun(img, a, bd, cy)` |
-| `ease` | function | `readmenator/_video.py:88` | `def ease(x)` |
-| `emergence_frames` | method | `readmenator/_video.py:800` | `def emergence_frames(self, data, box)` |
-| `fmt_int` | function | `readmenator/_video.py:94` | `def fmt_int(n)` |
-| `glitch_fx` | method | `readmenator/_video.py:387` | `def glitch_fx(img, amount, seed)` |
-| `graph_positions` | method | `readmenator/_video.py:710` | `def graph_positions(self, data, box)` |
-| `hash_color` | function | `readmenator/_video.py:109` | `def hash_color(digest)` |
-| `hud_panel` | method | `readmenator/_video.py:421` | `def hud_panel(d, box, title, fonts, col)` |
-| `mix` | function | `readmenator/_video.py:99` | `def mix(a, b, t)` |
-| `post` | method | `readmenator/_video.py:369` | `def post(img, glitch, seed)` |
-| `render` | method | `readmenator/_video.py:853` | `def render(self, data, output_path)` |
-| `render_single_frame` | method | `readmenator/_video.py:839` | `def render_single_frame(self, data, frame_index)` |
-| `resolve_fonts` | function | `readmenator/_video.py:230` | `def resolve_fonts()` |
-| `short_label` | function | `readmenator/_video.py:118` | `def short_label(text, limit)` |
-| `tree_positions` | method | `readmenator/_video.py:757` | `def tree_positions(self, data, box)` |
+| `_graph_boxes` | function | `readmenator/_video.py:143` | `def _graph_boxes(cfg)` |
+| `_img` | method | `readmenator/_video.py:664` | `def _img()` |
+| `_language_color` | function | `readmenator/_video.py:222` | `def _language_color(language)` |
+| `_lerp3` | function | `readmenator/_video.py:236` | `def _lerp3(a, b, t)` |
+| `_orbit_plan` | method | `readmenator/_video.py:1713` | `def _orbit_plan(dur)` |
+| `_packet_offset` | function | `readmenator/_video.py:554` | `def _packet_offset(a, b, k)` |
+| `_panel` | function | `readmenator/_video.py:133` | `def _panel(cfg)` |
+| `_place_label` | function | `readmenator/_video.py:252` | `def _place_label(d, placed, x, y, text, font, col, a)` |
+| `_polyline_point` | function | `readmenator/_video.py:177` | `def _polyline_point(points, f)` |
+| `_prepare_layouts` | method | `readmenator/_video.py:1209` | `def _prepare_layouts(self, data)` |
+| `_render_frame_bytes` | method | `readmenator/_video.py:1274` | `def _render_frame_bytes(fi)` |
+| `_scan_cursor` | function | `readmenator/_video.py:535` | `def _scan_cursor(d, box, progress, col)` |
+| `_scene_bundle` | method | `readmenator/_video.py:1627` | `def _scene_bundle(img, d, lt, gt, sc)` |
+| `_scene_card` | method | `readmenator/_video.py:1341` | `def _scene_card(img, d, lt, gt, sc)` |
+| `_scene_communities` | method | `readmenator/_video.py:1497` | `def _scene_communities(img, d, lt, gt, sc)` |
+| `_scene_dna` | method | `readmenator/_video.py:1942` | `def _scene_dna(img, d, lt, gt, sc)` |
+| `_scene_gods` | method | `readmenator/_video.py:1380` | `def _scene_gods(img, d, lt, gt, sc)` |
+| `_scene_graph` | method | `readmenator/_video.py:1541` | `def _scene_graph(img, d, lt, gt, sc)` |
+| `_scene_invite` | method | `readmenator/_video.py:1895` | `def _scene_invite(img, d, lt, gt, sc)` |
+| `_scene_layers` | method | `readmenator/_video.py:1355` | `def _scene_layers(img, d, lt, gt, sc)` |
+| `_scene_orbit` | method | `readmenator/_video.py:1718` | `def _scene_orbit(img, d, lt, gt, sc)` |
+| `_scene_outro` | method | `readmenator/_video.py:2001` | `def _scene_outro(img, d, lt, gt, sc)` |
+| `_scene_sphere` | method | `readmenator/_video.py:1834` | `def _scene_sphere(img, d, lt, gt, sc)` |
+| `_scene_title` | method | `readmenator/_video.py:1306` | `def _scene_title(img, d, lt, gt, sc)` |
+| `_scene_tree` | method | `readmenator/_video.py:1423` | `def _scene_tree(img, d, lt, gt, sc)` |
+| `_sphere_core` | function | `readmenator/_video.py:435` | `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)` |
+| `_split_boxes` | function | `readmenator/_video.py:161` | `def _split_boxes(cfg)` |
+| `_sun` | method | `readmenator/_video.py:649` | `def _sun(self, r)` |
+| `_verdict_badge` | function | `readmenator/_video.py:520` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
+| `alpha` | function | `readmenator/_video.py:111` | `def alpha(c, a)` |
+| `build_scenes` | method | `readmenator/_video.py:1023` | `def build_scenes(self, data)` |
+| `bundle_groups` | method | `readmenator/_video.py:1152` | `def bundle_groups(self, data)` |
+| `bundle_layout` | method | `readmenator/_video.py:1167` | `def bundle_layout(self, data, box)` |
+| `chroma_text` | method | `readmenator/_video.py:749` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
+| `collect` | method | `readmenator/_video.py:808` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
+| `community_color` | function | `readmenator/_video.py:170` | `def community_color(index)` |
+| `dependencies_available` | function | `readmenator/_video.py:560` | `def dependencies_available()` |
+| `draw_caption` | method | `readmenator/_video.py:787` | `def draw_caption(d, text, lt, dur, fonts, width, y)` |
+| `draw_cloud3d` | function | `readmenator/_video.py:276` | `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
+| `draw_grid` | method | `readmenator/_video.py:671` | `def draw_grid(img, t, strength, bd)` |
+| `draw_header` | method | `readmenator/_video.py:773` | `def draw_header(img, d, gt, total, project, act_label, fonts, width)` |
+| `draw_sphere3d` | function | `readmenator/_video.py:396` | `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)` |
+| `draw_sun` | method | `readmenator/_video.py:691` | `def draw_sun(img, a, bd, cy)` |
+| `ease` | function | `readmenator/_video.py:95` | `def ease(x)` |
+| `emergence_frames` | method | `readmenator/_video.py:1142` | `def emergence_frames(self, data, box)` |
+| `fmt_int` | function | `readmenator/_video.py:101` | `def fmt_int(n)` |
+| `glitch_fx` | method | `readmenator/_video.py:726` | `def glitch_fx(img, amount, seed)` |
+| `graph_positions` | method | `readmenator/_video.py:1052` | `def graph_positions(self, data, box)` |
+| `hash_color` | function | `readmenator/_video.py:116` | `def hash_color(digest)` |
+| `hud_panel` | method | `readmenator/_video.py:760` | `def hud_panel(d, box, title, fonts, col)` |
+| `mix` | function | `readmenator/_video.py:106` | `def mix(a, b, t)` |
+| `mode_color` | function | `readmenator/_video.py:227` | `def mode_color(data, nid, mode)` |
+| `orbit_positions` | method | `readmenator/_video.py:1176` | `def orbit_positions(self, data)` |
+| `orbit_stops` | method | `readmenator/_video.py:1194` | `def orbit_stops(self, data, positions)` |
+| `post` | method | `readmenator/_video.py:708` | `def post(img, glitch, seed)` |
+| `pr` | method | `readmenator/_video.py:463` | `def pr(p)` |
+| `project3d` | function | `readmenator/_video.py:188` | `def project3d(p, yaw, pitch, target, scale, center, perspective)` |
+| `render` | method | `readmenator/_video.py:1237` | `def render(self, data, output_path)` |
+| `render_single_frame` | method | `readmenator/_video.py:1223` | `def render_single_frame(self, data, frame_index)` |
+| `resolve_fonts` | function | `readmenator/_video.py:569` | `def resolve_fonts()` |
+| `short_label` | function | `readmenator/_video.py:125` | `def short_label(text, limit)` |
+| `sphere_layout` | method | `readmenator/_video.py:1186` | `def sphere_layout(self, data)` |
+| `tree_positions` | method | `readmenator/_video.py:1099` | `def tree_positions(self, data, box)` |
 | `DirectoryWatcher` | class | `readmenator/_watcher.py:21` | `class DirectoryWatcher` |
 | `__init__` | method | `readmenator/_watcher.py:29` | `def __init__(self, root, config, callback, interval_seconds)` |
 | `_compute_snapshot` | method | `readmenator/_watcher.py:51` | `def _compute_snapshot(self)` |
@@ -322,6 +362,33 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_community_cohesion_is_between_zero_and_one` | method | `tests/test_analyzer.py:92` | `def test_community_cohesion_is_between_zero_and_one(self)` |
 | `test_dominant_directory_prefers_specific_on_tie` | method | `tests/test_analyzer.py:141` | `def test_dominant_directory_prefers_specific_on_tie(self)` |
 | `test_isolated_nodes_do_not_form_communities` | method | `tests/test_analyzer.py:107` | `def test_isolated_nodes_do_not_form_communities(self)` |
+| `TestBundleGraphAppContract` | class | `tests/test_bundlegraph.py:169` | `class TestBundleGraphAppContract(TestCase)` |
+| `TestBundleGraphPayloadContract` | class | `tests/test_bundlegraph.py:55` | `class TestBundleGraphPayloadContract(TestCase)` |
+| `TestBundleGraphRenderContract` | class | `tests/test_bundlegraph.py:105` | `class TestBundleGraphRenderContract(TestCase)` |
+| `_config` | method | `tests/test_bundlegraph.py:177` | `def _config(self)` |
+| `_fixture` | function | `tests/test_bundlegraph.py:23` | `def _fixture(config)` |
+| `_node` | function | `tests/test_bundlegraph.py:18` | `def _node(nid, doc)` |
+| `_project` | method | `tests/test_bundlegraph.py:172` | `def _project(self, tmp)` |
+| `_script_json` | function | `tests/test_bundlegraph.py:48` | `def _script_json(html, name)` |
+| `setUp` | method | `tests/test_bundlegraph.py:58` | `def setUp(self)` |
+| `setUp` | method | `tests/test_bundlegraph.py:108` | `def setUp(self)` |
+| `test_bundle_page_skipped_when_disabled` | method | `tests/test_bundlegraph.py:198` | `def test_bundle_page_skipped_when_disabled(self)` |
+| `test_bundlegraph_edges_are_distinct_file_pairs` | method | `tests/test_bundlegraph.py:70` | `def test_bundlegraph_edges_are_distinct_file_pairs(self)` |
+| `test_bundlegraph_empty_payload` | method | `tests/test_bundlegraph.py:92` | `def test_bundlegraph_empty_payload(self)` |
+| `test_bundlegraph_groups_follow_community_order_with_unassigned_last` | method | `tests/test_bundlegraph.py:64` | `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)` |
+| `test_bundlegraph_hub_leads_its_arc` | method | `tests/test_bundlegraph.py:84` | `def test_bundlegraph_hub_leads_its_arc(self)` |
+| `test_bundlegraph_nodes_on_circle_and_sphere` | method | `tests/test_bundlegraph.py:78` | `def test_bundlegraph_nodes_on_circle_and_sphere(self)` |
+| `test_bundlegraph_privacy_mode_strips_docs` | method | `tests/test_bundlegraph.py:98` | `def test_bundlegraph_privacy_mode_strips_docs(self)` |
+| `test_bundlegraph_render_escapes_untrusted_text` | method | `tests/test_bundlegraph.py:137` | `def test_bundlegraph_render_escapes_untrusted_text(self)` |
+| `test_bundlegraph_render_fills_placeholders` | method | `tests/test_bundlegraph.py:115` | `def test_bundlegraph_render_fills_placeholders(self)` |
+| `test_bundlegraph_render_has_both_views_and_controls` | method | `tests/test_bundlegraph.py:131` | `def test_bundlegraph_render_has_both_views_and_controls(self)` |
+| `test_bundlegraph_render_has_no_network_requests` | method | `tests/test_bundlegraph.py:124` | `def test_bundlegraph_render_has_no_network_requests(self)` |
+| `test_bundlegraph_render_payload_naming_a_token_stays_literal` | method | `tests/test_bundlegraph.py:148` | `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)` |
+| `test_bundlegraph_thumbnail_is_safe_svg` | method | `tests/test_bundlegraph.py:154` | `def test_bundlegraph_thumbnail_is_safe_svg(self)` |
+| `test_bundlegraph_write_creates_parent` | method | `tests/test_bundlegraph.py:161` | `def test_bundlegraph_write_creates_parent(self)` |
+| `test_export_bundlegraph_cli_entry` | method | `tests/test_bundlegraph.py:209` | `def test_export_bundlegraph_cli_entry(self)` |
+| `test_export_diagrams_writes_bundle_page_and_card` | method | `tests/test_bundlegraph.py:182` | `def test_export_diagrams_writes_bundle_page_and_card(self)` |
+| `test_pages_subdir_card_points_into_maps_dir` | method | `tests/test_bundlegraph.py:219` | `def test_pages_subdir_card_points_into_maps_dir(self)` |
 | `TestFileCacheContract` | class | `tests/test_cache.py:18` | `class TestFileCacheContract(TestCase)` |
 | `_write` | method | `tests/test_cache.py:30` | `def _write(self, rel_path, content)` |
 | `setUp` | method | `tests/test_cache.py:21` | `def setUp(self)` |
@@ -429,72 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_uninit_use_detected` | method | `tests/test_dataflow.py:37` | `def test_uninit_use_detected(self)` |
 | `test_url_string_does_not_truncate_line` | method | `tests/test_dataflow.py:344` | `def test_url_string_does_not_truncate_line(self)` |
 | `TestDeadCodeStripperContract` | class | `tests/test_dead_code.py:16` | `class TestDeadCodeStripperContract(TestCase)` |
-| `_make_edge` | method | `tests/test_dead_code.py:35` | `def _make_edge(self, src, tgt)` |
-| `_make_node` | method | `tests/test_dead_code.py:26` | `def _make_node(self, nid, symbols)` |
-| `_make_symbol` | method | `tests/test_dead_code.py:23` | `def _make_symbol(self, name, kind)` |
-| `setUp` | method | `tests/test_dead_code.py:19` | `def setUp(self)` |
-| `test_all_symbols_imported_returns_empty` | method | `tests/test_dead_code.py:101` | `def test_all_symbols_imported_returns_empty(self)` |
-| `test_identify_empty_graph_returns_empty` | method | `tests/test_dead_code.py:38` | `def test_identify_empty_graph_returns_empty(self)` |
-| `test_identify_excludes_app_entry_point` | method | `tests/test_dead_code.py:61` | `def test_identify_excludes_app_entry_point(self)` |
-| `test_identify_excludes_entry_points` | method | `tests/test_dead_code.py:53` | `def test_identify_excludes_entry_points(self)` |
-| `test_identify_excludes_init_entry_point` | method | `tests/test_dead_code.py:69` | `def test_identify_excludes_init_entry_point(self)` |
-| `test_identify_finds_dead_symbol` | method | `tests/test_dead_code.py:42` | `def test_identify_finds_dead_symbol(self)` |
-| `test_identify_recommends_review_for_classes` | method | `tests/test_dead_code.py:77` | `def test_identify_recommends_review_for_classes(self)` |
-| `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
-| `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
-| `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
-| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:650` | `class TestDiagramVariantsContract(TestCase)` |
-| `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
-| `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
-| `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
-| `TestSystemMapValidatorContract` | class | `tests/test_diagrams.py:176` | `class TestSystemMapValidatorContract(TestCase)` |
-| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:510` | `class TestVisNetworkRendererContract(TestCase)` |
-| `_make_graph` | method | `tests/test_diagrams.py:38` | `def _make_graph(self)` |
-| `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
-| `_map` | method | `tests/test_diagrams.py:519` | `def _map(self, kind)` |
-| `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
-| `_project` | method | `tests/test_diagrams.py:653` | `def _project(self, tmp)` |
-| `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
-| `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:240` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:370` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:513` | `def setUp(self)` |
-| `test_builder_attaches_symbols_and_docs` | method | `tests/test_diagrams.py:126` | `def test_builder_attaches_symbols_and_docs(self)` |
-| `test_builder_is_deterministic` | method | `tests/test_diagrams.py:68` | `def test_builder_is_deterministic(self)` |
-| `test_builder_orders_links_deterministically` | method | `tests/test_diagrams.py:80` | `def test_builder_orders_links_deterministically(self)` |
-| `test_builder_produces_all_kinds` | method | `tests/test_diagrams.py:59` | `def test_builder_produces_all_kinds(self)` |
-| `test_builder_reports_total_scope` | method | `tests/test_diagrams.py:119` | `def test_builder_reports_total_scope(self)` |
-| `test_builder_supports_five_kinds` | method | `tests/test_diagrams.py:52` | `def test_builder_supports_five_kinds(self)` |
-| `test_builder_truncates_symbols_per_node` | method | `tests/test_diagrams.py:143` | `def test_builder_truncates_symbols_per_node(self)` |
-| `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
-| `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
-| `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
-| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:672` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
-| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:658` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
-| `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:501` | `def test_publish_card_reports_primary_scope(self)` |
-| `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:462` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
-| `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:430` | `def test_publish_escapes_malicious_project_name(self)` |
-| `test_publish_escapes_malicious_stat_keys` | method | `tests/test_diagrams.py:439` | `def test_publish_escapes_malicious_stat_keys(self)` |
-| `test_publish_flat_subdir_keeps_links_relative` | method | `tests/test_diagrams.py:480` | `def test_publish_flat_subdir_keeps_links_relative(self)` |
-| `test_publish_index_explains_how_to_read` | method | `tests/test_diagrams.py:493` | `def test_publish_index_explains_how_to_read(self)` |
-| `test_publish_index_links_every_map` | method | `tests/test_diagrams.py:397` | `def test_publish_index_links_every_map(self)` |
-| `test_publish_is_deterministic` | method | `tests/test_diagrams.py:419` | `def test_publish_is_deterministic(self)` |
-| `test_publish_leaves_input_maps_unmodified` | method | `tests/test_diagrams.py:471` | `def test_publish_leaves_input_maps_unmodified(self)` |
-| `test_publish_output_has_no_external_requests` | method | `tests/test_diagrams.py:406` | `def test_publish_output_has_no_external_requests(self)` |
-| `test_publish_skips_invalid_maps` | method | `tests/test_diagrams.py:450` | `def test_publish_skips_invalid_maps(self)` |
-| `test_publish_writes_index_plus_five_maps` | method | `tests/test_diagrams.py:386` | `def test_publish_writes_index_plus_five_maps(self)` |
-| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:565` | `def test_renderer_builds_vis_network_with_physics(self)` |
-| `test_renderer_buttons_explain_their_purpose` | method | `tests/test_diagrams.py:355` | `def test_renderer_buttons_explain_their_purpose(self)` |
-| `test_renderer_covers_all_five_kinds` | method | `tests/test_diagrams.py:314` | `def test_renderer_covers_all_five_kinds(self)` |
-| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:581` | `def test_renderer_disables_physics_from_config(self)` |
-| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:620` | `def test_renderer_documents_symbols_per_file(self)` |
-| `test_renderer_embeds_valid_json_payloads` | method | `tests/test_diagrams.py:305` | `def test_renderer_embeds_valid_json_payloads(self)` |
-| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:612` | `def test_renderer_embeds_valid_payloads(self)` |
-| `test_renderer_escapes_malicious_labels` | method | `tests/test_diagrams.py:292` | `def test_renderer_escapes_malicious_labels(self)` |
-| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:636` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
-| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:588` | `def test_renderer_escapes_malicious_titles(self)` |
-| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:601` | `def test_renderer_exposes_reader_controls(self)` |
-| `test_renderer_has_no_external_requests` | method | `tests/test_diagrams.py:270` | `def test_renderer_has_no_external_requests(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

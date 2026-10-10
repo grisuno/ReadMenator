@@ -17,6 +17,7 @@ from readmenator._concepts import ConceptExtractor
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
 from readmenator._dataflow import DataflowAnalyzer
+from readmenator._bundlegraph import BundleGraphRenderer
 from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
 from readmenator._documentation import DocumentationGenerator
 from readmenator._embed import Embedder
@@ -93,6 +94,7 @@ class AnalyzerFactory:
         self._video: CinematicVideoRenderer | None = None
         self._concepts: ConceptExtractor | None = None
         self._forcegraph: ForceGraphRenderer | None = None
+        self._bundlegraph: BundleGraphRenderer | None = None
         self._analytics: AnalyticsBuilder | None = None
         self._scantext: ScanTextBuilder | None = None
         self._provenance: ProvenanceAuditor | None = None
@@ -288,6 +290,13 @@ class AnalyzerFactory:
         if self._forcegraph is None:
             self._forcegraph = ForceGraphRenderer(self._config)
         return self._forcegraph
+
+    @property
+    def bundlegraph(self) -> BundleGraphRenderer:
+        """Return the lazily initialised edge bundle explorer renderer."""
+        if self._bundlegraph is None:
+            self._bundlegraph = BundleGraphRenderer(self._config)
+        return self._bundlegraph
 
     @property
     def analytics(self) -> AnalyticsBuilder:

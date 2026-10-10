@@ -30,10 +30,13 @@ from readmenator._config import Config
 from readmenator._graphlayout import (
     BundleLayout,
     ForceAtlas2Settings,
+    SphereBundleLayout,
     fit_frames,
     forceatlas2_frames,
     hierarchical_edge_bundling,
     interpolate_frames,
+    normalize_cloud,
+    spherical_edge_bundling,
 )
 from readmenator._models import AnalysisResult, AnalysisResultV2, Edge, Node, SecurityFinding
 from readmenator._rank import file_pagerank
@@ -73,9 +76,13 @@ ACT_CARDS = {
     "III": ("ACT III", "THE BLAST RADIUS", "who breaks when the hub changes, grown by BFS"),
     "IV": ("ACT IV", "COMMUNITIES", "import neighbourhoods, and why they stick"),
     "V": ("ACT V", "EMERGENCE", "ForceAtlas2 LinLog: the structure finds its own shape"),
-    "VI": ("ACT VI", "THE WIRING", "hierarchical edge bundling between communities"),
-    "VII": ("ACT VII", "CODE DNA", "each file becomes a color"),
+    "VI": ("ACT VI", "ORBIT", "the force graph in 3D, flown community by community"),
+    "VII": ("ACT VII", "THE WIRING", "hierarchical edge bundling between communities"),
+    "VIII": ("ACT VIII", "THE SPHERE", "every import bundled through a globe of communities"),
+    "IX": ("ACT IX", "CODE DNA", "each file becomes a color"),
 }
+
+COLOR_MODES = ("community", "layer", "language")
 
 _RENDER_D: Optional[Dict[str, Any]] = None
 _RENDER_SCENES: List[Dict[str, Any]] = []
@@ -176,6 +183,338 @@ def _polyline_point(points: List[Tuple[float, float]], f: float) -> Tuple[float,
     j = min(i + 1, len(points) - 1)
     t = pos - i
     return (points[i][0] + (points[j][0] - points[i][0]) * t, points[i][1] + (points[j][1] - points[i][1]) * t)
+
+
+def project3d(
+    p: Tuple[float, ...],
+    yaw: float,
+    pitch: float,
+    target: Tuple[float, ...],
+    scale: float,
+    center: Tuple[float, float],
+    perspective: float,
+) -> Tuple[float, float, float, float]:
+    """Project a 3D point through an orbiting perspective camera.
+
+    The camera looks at target from the -z side after rotating the
+    world by yaw (around y) and pitch (around x).
+
+    Returns:
+        Screen x, screen y, view depth (smaller is nearer), and the
+        perspective scale factor.
+    """
+    x, y, z = p[0] - target[0], p[1] - target[1], p[2] - target[2]
+    cy, sy = math.cos(yaw), math.sin(yaw)
+    cp, sp = math.cos(pitch), math.sin(pitch)
+    x1 = x * cy + z * sy
+    z1 = -x * sy + z * cy
+    y2 = y * cp - z1 * sp
+    z2 = y * sp + z1 * cp
+    k = perspective / max(0.2, perspective + z2)
+    return (center[0] + x1 * scale * k, center[1] + y2 * scale * k, z2, k)
+
+
+def _depth_alpha(z: float, fade: float) -> float:
+    """Opacity multiplier that fades points further from the camera."""
+    return 1.0 - fade * max(0.0, min(1.0, (z + 1.0) / 2.0))
+
+
+def _language_color(language: str) -> Tuple[int, int, int]:
+    """Stable neon color for a language name."""
+    return hash_color(hashlib.sha256(language.encode("utf-8", "replace")).digest())
+
+
+def mode_color(data: Dict[str, Any], nid: str, mode: str) -> Tuple[int, int, int]:
+    """Node color under an explorer color mode (community, layer, language)."""
+    if mode == "layer":
+        return LAYER_COLORS.get(data.get("node_layer", {}).get(nid, ""), DIM)
+    if mode == "language":
+        return _language_color(data.get("node_language", {}).get(nid, "unknown"))
+    return community_color(data.get("membership", {}).get(nid, -1))
+
+
+def _lerp3(a: Tuple[float, ...], b: Tuple[float, ...], t: float) -> Tuple[float, float, float]:
+    """Linear blend of two 3D points."""
+    return (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t)
+
+
+def _camera_track(keys: List[Tuple[float, Tuple[float, ...], float]], f: float) -> Tuple[Tuple[float, float, float], float]:
+    """Eased camera target and zoom at progress f from (time, target, zoom) keys."""
+    if f <= keys[0][0]:
+        return (tuple(keys[0][1]), keys[0][2])
+    for (t0, p0, z0), (t1, p1, z1) in zip(keys, keys[1:]):
+        if t0 <= f <= t1:
+            u = ease((f - t0) / max(1e-9, t1 - t0))
+            return (_lerp3(p0, p1, u), z0 + (z1 - z0) * u)
+    return (tuple(keys[-1][1]), keys[-1][2])
+
+
+def _place_label(d: Any, placed: List[Tuple[float, float, float, float]], x: float, y: float, text: str,
+                 font: Any, col: Tuple[int, int, int], a: float) -> None:
+    """Draw a boxed label beside a point unless it collides with one already placed."""
+    w = font.getlength(text)
+    rect = (x + 8, y - 18, x + 16 + w, y)
+    if any(not (rect[2] < q[0] or q[2] < rect[0] or rect[3] < q[1] or q[3] < rect[1]) for q in placed):
+        return
+    placed.append(rect)
+    d.rectangle(rect, fill=(6, 3, 18, int(210 * a)), outline=alpha(col, 0.7 * a))
+    d.text((x + 12, y - 16), text, font=font, fill=alpha(TXT, a))
+
+
+def _clipped(img: Any, box: Tuple[int, int, int, int], paint: Any) -> None:
+    """Run paint(draw, local_box) on a crop of img and paste it back (clips to box)."""
+    from PIL import ImageDraw
+
+    x0, y0, x1, y1 = (int(v) for v in box)
+    if x1 <= x0 or y1 <= y0:
+        return
+    crop = img.crop((x0, y0, x1, y1))
+    paint(ImageDraw.Draw(crop, "RGBA"), (0, 0, x1 - x0, y1 - y0))
+    img.paste(crop, (x0, y0))
+
+
+def draw_cloud3d(
+    img: Any,
+    data: Dict[str, Any],
+    box: Tuple[int, int, int, int],
+    cfg: Config,
+    yaw: float,
+    pitch: float,
+    target: Tuple[float, ...],
+    zoom: float,
+    mode: str,
+    lit_nodes: Optional[set],
+    edge_lit: Optional[Any],
+    gt: float,
+    fonts: Dict[str, Any],
+    appear: float = 1.0,
+    labels: int = 0,
+) -> None:
+    """Draw the 3D force graph (graph-force 3D view) through an orbiting camera.
+
+    Drawing is clipped to box.
+
+    Args:
+        img: Frame image.
+        data: Collected scene data with orbit_pos.
+        box: Pixel box the cloud is fitted into.
+        cfg: Video settings.
+        yaw: Camera yaw in radians.
+        pitch: Camera pitch in radians.
+        target: Look-at point in layout space.
+        zoom: Scale multiplier.
+        mode: Color mode (community, layer, language).
+        lit_nodes: Highlighted node ids, or None for no focus.
+        edge_lit: Predicate (a, b) -> bool for highlighted edges, or None.
+        gt: Global time for particles and pulses.
+        fonts: Font set.
+        appear: Assembly progress in [0, 1] (nodes grow out of the center).
+        labels: Number of PageRank-ranked labels to place.
+    """
+    if not data.get("orbit_pos"):
+        return
+    _clipped(img, box, lambda d, local: _cloud_core(d, data, local, cfg, yaw, pitch, target, zoom, mode,
+                                                     lit_nodes, edge_lit, gt, fonts, appear, labels))
+
+
+def _cloud_core(
+    d: Any,
+    data: Dict[str, Any],
+    box: Tuple[int, int, int, int],
+    cfg: Config,
+    yaw: float,
+    pitch: float,
+    target: Tuple[float, ...],
+    zoom: float,
+    mode: str,
+    lit_nodes: Optional[set],
+    edge_lit: Optional[Any],
+    gt: float,
+    fonts: Dict[str, Any],
+    appear: float,
+    labels: int,
+) -> None:
+    """Paint the 3D force graph into a local box (see draw_cloud3d)."""
+    pos: Dict[str, Tuple[float, float, float]] = data.get("orbit_pos", {})
+    rank: Dict[str, float] = data.get("rank", {})
+    top_rank = max([1e-9] + list(rank.values()))
+    x0, y0, x1, y1 = box
+    persp = cfg.VIDEO_ORBIT_PERSPECTIVE
+    scale = min(x1 - x0, y1 - y0) / 2 * 0.8 * zoom
+    center = ((x0 + x1) / 2, (y0 + y1) / 2)
+    grow = ease(appear)
+    proj = {nid: project3d((p[0] * grow, p[1] * grow, p[2] * grow), yaw, pitch, target, scale, center, persp)
+            for nid, p in pos.items()}
+    fade = cfg.VIDEO_ORBIT_DEPTH_FADE
+    links = data["graph_links"]
+    hot: List[Tuple[str, str]] = []
+    for a, b in links:
+        if a not in proj or b not in proj or a == b:
+            continue
+        pa, pb = proj[a], proj[b]
+        on = edge_lit is None or edge_lit(a, b)
+        if on and edge_lit is not None:
+            hot.append((a, b))
+            continue
+        depth = _depth_alpha((pa[2] + pb[2]) / 2, fade)
+        strength = (0.22 if edge_lit is None else 0.05) * depth * grow
+        d.line((pa[0], pa[1], pb[0], pb[1]), fill=alpha(mode_color(data, a, mode), strength), width=1)
+    for k, (a, b) in enumerate(hot):
+        pa, pb = proj[a], proj[b]
+        depth = _depth_alpha((pa[2] + pb[2]) / 2, fade)
+        d.line((pa[0], pa[1], pb[0], pb[1]), fill=alpha(mode_color(data, a, mode), 0.75 * depth), width=2)
+    for k, (a, b) in enumerate(hot[: cfg.VIDEO_SURFERS]):
+        pa, pb = proj[a], proj[b]
+        f = (gt * 0.6 + _packet_offset(a, b, k)) % 1.0
+        x, y = pa[0] + (pb[0] - pa[0]) * f, pa[1] + (pb[1] - pa[1]) * f
+        d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha((255, 255, 255), 0.9))
+    order = sorted(proj, key=lambda nid: -proj[nid][2])
+    for nid in order:
+        x, y, z, k = proj[nid]
+        if not (x0 - 20 < x < x1 + 20 and y0 - 20 < y < y1 + 20):
+            continue
+        weight = math.sqrt(rank.get(nid, 0.0) / top_rank)
+        r = (2.0 + 7.0 * weight) * k * math.sqrt(zoom) * (0.3 + 0.7 * grow)
+        on = lit_nodes is None or nid in lit_nodes
+        a = (0.95 if on else 0.18) * _depth_alpha(z, fade)
+        col = mode_color(data, nid, mode)
+        if on and lit_nodes is not None and weight > 0.3:
+            glow = r + 5 + 2 * math.sin(gt * 3 + weight * 5)
+            d.ellipse((x - glow, y - glow, x + glow, y + glow), fill=alpha(col, 0.2 * a))
+        d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, a), outline=alpha((255, 255, 255), 0.45 * a), width=1)
+    if labels > 0 and grow >= 1:
+        placed: List[Tuple[float, float, float, float]] = []
+        pool = [nid for nid in proj if lit_nodes is None or nid in lit_nodes]
+        for nid in sorted(pool, key=lambda n: (-rank.get(n, 0.0), n))[:labels]:
+            x, y, z, _k = proj[nid]
+            if z > 0.4 or not (x0 < x < x1 - 120 and y0 + 20 < y < y1):
+                continue
+            _place_label(d, placed, x, y, short_label(nid.rpartition("/")[2] or nid, 22), fonts["tiny_b"],
+                         mode_color(data, nid, mode), _depth_alpha(z, fade))
+
+
+def draw_sphere3d(
+    img: Any,
+    data: Dict[str, Any],
+    box: Tuple[int, int, int, int],
+    cfg: Config,
+    yaw: float,
+    pitch: float,
+    morph: float,
+    reveal: float,
+    spot: Optional[int],
+    gt: float,
+    fonts: Dict[str, Any],
+    group_labels: bool = True,
+) -> None:
+    """Draw the bundled sphere, optionally morphing out of the 3D force layout.
+
+    Drawing is clipped to box.
+
+    Args:
+        img: Frame image.
+        data: Collected scene data with sphere and orbit_pos.
+        box: Pixel box the sphere is fitted into.
+        cfg: Video settings.
+        yaw: Camera yaw in radians.
+        pitch: Camera pitch in radians.
+        morph: 0 = force layout positions, 1 = sphere positions.
+        reveal: Fraction of each bundled curve drawn.
+        spot: Community index in the spotlight, or None.
+        gt: Global time for particles.
+        fonts: Font set.
+        group_labels: Draw cap labels when the morph is complete.
+    """
+    layout: Optional[SphereBundleLayout] = data.get("sphere")
+    if layout is None or not layout.leaves:
+        return
+    _clipped(img, box, lambda d, local: _sphere_core(d, data, layout, local, cfg, yaw, pitch, morph,
+                                                      reveal, spot, gt, fonts, group_labels))
+
+
+def _sphere_core(
+    d: Any,
+    data: Dict[str, Any],
+    layout: SphereBundleLayout,
+    box: Tuple[int, int, int, int],
+    cfg: Config,
+    yaw: float,
+    pitch: float,
+    morph: float,
+    reveal: float,
+    spot: Optional[int],
+    gt: float,
+    fonts: Dict[str, Any],
+    group_labels: bool,
+) -> None:
+    """Paint the bundled sphere into a local box (see draw_sphere3d)."""
+    membership: Dict[str, int] = data.get("membership", {})
+    rank: Dict[str, float] = data.get("rank", {})
+    top_rank = max([1e-9] + list(rank.values()))
+    orbit: Dict[str, Tuple[float, float, float]] = data.get("orbit_pos", {})
+    x0, y0, x1, y1 = box
+    persp = cfg.VIDEO_ORBIT_PERSPECTIVE
+    scale = min(x1 - x0, y1 - y0) / 2 * 0.7
+    center = ((x0 + x1) / 2, (y0 + y1) / 2)
+    origin = (0.0, 0.0, 0.0)
+    fade = cfg.VIDEO_ORBIT_DEPTH_FADE
+    m = ease(morph)
+
+    def pr(p: Tuple[float, ...]) -> Tuple[float, float, float, float]:
+        """Project a layout point through the scene camera."""
+        return project3d(p, yaw, pitch, origin, scale, center, persp)
+
+    if m > 0:
+        for lat in (-60, -30, 0, 30, 60):
+            c, sn = math.cos(math.radians(lat)), math.sin(math.radians(lat))
+            ring = [pr((c * math.cos(t * math.pi / 24), sn, c * math.sin(t * math.pi / 24))) for t in range(49)]
+            d.line([(q[0], q[1]) for q in ring], fill=alpha(FAINT, 0.35 * m), width=1)
+    pos = {nid: _lerp3(orbit.get(nid, leaf), leaf, m) for nid, leaf in layout.leaves.items()}
+    proj = {nid: pr(p) for nid, p in pos.items()}
+    if reveal < 1:
+        for a, b in data["graph_links"]:
+            if a in proj and b in proj and a != b:
+                pa, pb = proj[a], proj[b]
+                d.line((pa[0], pa[1], pb[0], pb[1]),
+                       fill=alpha(community_color(membership.get(a, -1)), 0.2 * (1 - reveal)), width=1)
+    if reveal > 0:
+        hot: List[Tuple[int, List[Tuple[float, float]]]] = []
+        for k, (a, b, pts) in enumerate(layout.curves):
+            ca, cb = membership.get(a, -1), membership.get(b, -1)
+            stop = max(2, int(math.ceil(len(pts) * reveal)))
+            q = [pr(p) for p in pts[:stop]]
+            depth = _depth_alpha(sum(v[2] for v in q) / len(q), fade)
+            lit = spot is None or spot in (ca, cb)
+            flat = [(v[0], v[1]) for v in q]
+            if spot is not None and lit:
+                hot.append((k, flat))
+                continue
+            d.line(flat, fill=alpha(community_color(ca), (0.3 if lit else 0.05) * depth), width=1)
+        for k, flat in hot:
+            a, b, _pts = layout.curves[k]
+            d.line(flat, fill=alpha(community_color(membership.get(a, -1)), 0.8), width=2)
+            if reveal >= 1 and membership.get(a, -1) != membership.get(b, -1):
+                f = (gt * 0.45 + _packet_offset(a, b, k)) % 1.0
+                x, y = _polyline_point(flat, f)
+                d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha((255, 255, 255), 0.9))
+    for nid in sorted(proj, key=lambda n: -proj[n][2]):
+        x, y, z, k = proj[nid]
+        comm = membership.get(nid, -1)
+        on = spot is None or comm == spot
+        r = (1.8 + 4.5 * math.sqrt(rank.get(nid, 0.0) / top_rank)) * k
+        d.ellipse((x - r, y - r, x + r, y + r),
+                  fill=alpha(community_color(comm), (0.95 if on else 0.25) * _depth_alpha(z, fade)))
+    if group_labels and m >= 1:
+        placed: List[Tuple[float, float, float, float]] = []
+        for label, cap, count in layout.groups:
+            index = int(label.split(":", 1)[0])
+            x, y, z, _k = pr((cap[0] * 1.12, cap[1] * 1.12, cap[2] * 1.12))
+            if z > 0.15 or (count < 2 and spot != index):
+                continue
+            name = short_label(label.split(":", 1)[1].rpartition(": ")[2] or label, 16)
+            on = spot is None or spot == index
+            _place_label(d, placed, x, y, f"{name} ({count})", fonts["tiny_b"], community_color(index),
+                         (0.95 if on else 0.4) * _depth_alpha(z, fade))
 
 
 def _verdict_badge(d: Any, box: Tuple[int, int, int, int], text: str, fonts: Dict[str, Any], lt: float, dur: float, col: Tuple[int, int, int] = GREEN) -> None:
@@ -625,6 +964,8 @@ class CinematicVideoRenderer:
                 "graph_links": graph_links, "dep_tree": dep_tree,
                 "preview_file": preview_file, "preview_lines": preview_lines,
                 "concepts": concepts, "dialectic": dialectic,
+                "node_layer": {nid: (layers or {}).get(nid, "unknown") for nid in node_by_id},
+                "node_language": {nid: node.language or "unknown" for nid, node in node_by_id.items()},
                 "node_symbols": {nid: [(s.name, s.kind, s.line) for s in node.symbols[:12]]
                                  for nid, node in node_by_id.items() if node.symbols}}
 
@@ -680,24 +1021,25 @@ class CinematicVideoRenderer:
                 "depth": depth, "max_depth": max_depth}
 
     def build_scenes(self, data: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], float]:
-        """Lay every scene on the global clock."""
+        """Lay every scene on the global clock.
+
+        Acts with a non-positive duration are skipped together with their card.
+        """
         c = self.config
-        plan = [("title", c.VIDEO_TITLE_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "I"}),
-                ("layers", c.VIDEO_LAYER_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "II"}),
-                ("gods", c.VIDEO_GOD_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "III"}),
-                ("tree", c.VIDEO_TREE_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "IV"}),
-                ("communities", c.VIDEO_COMM_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "V"}),
-                ("graph", c.VIDEO_GRAPH_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "VI"}),
-                ("bundle", c.VIDEO_BUNDLE_S, {}),
-                ("card", c.VIDEO_CARD_S, {"card": "VII"}),
-                ("dna", c.VIDEO_DNA_S, {}),
-                ("outro", c.VIDEO_OUTRO_S, {})]
+        acts = [("I", "layers", c.VIDEO_LAYER_S), ("II", "gods", c.VIDEO_GOD_S),
+                ("III", "tree", c.VIDEO_TREE_S), ("IV", "communities", c.VIDEO_COMM_S),
+                ("V", "graph", c.VIDEO_GRAPH_S), ("VI", "orbit", c.VIDEO_ORBIT_S),
+                ("VII", "bundle", c.VIDEO_BUNDLE_S), ("VIII", "sphere", c.VIDEO_SPHERE_S),
+                ("IX", "dna", c.VIDEO_DNA_S)]
+        plan: List[Tuple[str, float, Dict[str, Any]]] = [("title", c.VIDEO_TITLE_S, {})]
+        for card, kind, dur in acts:
+            if dur <= 0:
+                continue
+            plan.append(("card", c.VIDEO_CARD_S, {"card": card}))
+            plan.append((kind, dur, {"act": card}))
+        if c.VIDEO_INVITE_S > 0:
+            plan.append(("invite", c.VIDEO_INVITE_S, {}))
+        plan.append(("outro", c.VIDEO_OUTRO_S, {}))
         out: List[Dict[str, Any]] = []
         t = 0.0
         for kind, dur, extra in plan:
@@ -807,24 +1149,62 @@ class CinematicVideoRenderer:
         raw = forceatlas2_frames(data["graph_nodes"], data["graph_links"], settings)
         return fit_frames(raw, box, 40.0, c.VIDEO_GRAPH_TRIM_FRACTION)
 
-    def bundle_layout(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> BundleLayout:
-        """Hierarchical edge bundling of resolved imports grouped by community."""
+    def bundle_groups(self, data: Dict[str, Any]) -> Dict[str, List[str]]:
+        """Group graph files by community (hubs first), unassigned files last."""
         membership: Dict[str, int] = data.get("membership", {})
         labels: List[str] = data.get("community_labels", [])
         rank: Dict[str, float] = data.get("rank", {})
+        keep = set(data["graph_nodes"])
         groups: Dict[str, List[str]] = {}
         for index, label in enumerate(labels):
-            members = [nid for nid, comm in membership.items() if comm == index]
+            members = [nid for nid, comm in membership.items() if comm == index and nid in keep]
             groups[f"{index}:{label}"] = sorted(members, key=lambda nid: (-rank.get(nid, 0.0), nid))
         loose = sorted(nid for nid in data["graph_nodes"] if nid not in membership)
         if loose:
             groups["-1:unassigned"] = loose
+        return groups
+
+    def bundle_layout(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> BundleLayout:
+        """Hierarchical edge bundling of resolved imports grouped by community."""
         x0, y0, x1, y1 = box
         radius = max(10.0, min(x1 - x0, y1 - y0) / 2 - 70)
         return hierarchical_edge_bundling(
-            groups, data["graph_links"], ((x0 + x1) / 2, (y0 + y1) / 2 + 10), radius,
+            self.bundle_groups(data), data["graph_links"], ((x0 + x1) / 2, (y0 + y1) / 2 + 10), radius,
             beta=self.config.VIDEO_BUNDLE_BETA, samples=self.config.VIDEO_BUNDLE_SAMPLES,
         )
+
+    def orbit_positions(self, data: Dict[str, Any]) -> Dict[str, Tuple[float, float, float]]:
+        """3D ForceAtlas2 layout of the graph, centered and scaled to the unit sphere."""
+        c = self.config
+        settings = ForceAtlas2Settings(
+            iterations=c.VIDEO_ORBIT_FA2_ITERATIONS, snapshots=2, scaling=c.VIDEO_FA2_SCALING,
+            gravity=c.VIDEO_FA2_GRAVITY, linlog=c.VIDEO_FA2_LINLOG, dims=3,
+        )
+        frames = forceatlas2_frames(data["graph_nodes"], data["graph_links"], settings)
+        return normalize_cloud(frames[-1]) if frames else {}
+
+    def sphere_layout(self, data: Dict[str, Any]) -> SphereBundleLayout:
+        """Spherical edge bundling of resolved imports on community caps."""
+        c = self.config
+        return spherical_edge_bundling(
+            self.bundle_groups(data), data["graph_links"], 1.0, beta=c.VIDEO_BUNDLE_BETA,
+            samples=c.VIDEO_SPHERE_SAMPLES, inner_ratio=c.BUNDLEGRAPH_INNER_RATIO,
+        )
+
+    def orbit_stops(self, data: Dict[str, Any], positions: Dict[str, Tuple[float, float, float]]) -> List[Dict[str, Any]]:
+        """Camera tour stops: the largest communities with their 3D centroid."""
+        membership: Dict[str, int] = data.get("membership", {})
+        stops: List[Dict[str, Any]] = []
+        for index, comm in enumerate(data.get("communities", [])[: self.config.VIDEO_ORBIT_TOUR_STOPS]):
+            members = [nid for nid, ci in membership.items() if ci == index and nid in positions]
+            if not members:
+                continue
+            centroid = tuple(sum(positions[m][k] for m in members) / len(members) for k in range(3))
+            stops.append({"index": index, "label": comm["label"], "size": comm["size"],
+                          "cohesion": comm["cohesion"], "hub": comm["hub"],
+                          "internal": comm["internal"], "external": comm["external"],
+                          "target": centroid})
+        return stops
 
     def _prepare_layouts(self, data: Dict[str, Any]) -> None:
         """Precompute every layout the scenes draw (before forking workers)."""
@@ -835,6 +1215,10 @@ class CinematicVideoRenderer:
         data["tree_pos"] = self.tree_positions(data, (tbox[0], tbox[1] + 10, tbox[2] - 320, tbox[3] - 10))
         bbox, _ = _split_boxes(cfg)
         data["bundle"] = self.bundle_layout(data, (bbox[0], bbox[1] + 30, bbox[2], bbox[3] - 10))
+        if cfg.VIDEO_ORBIT_S > 0 or cfg.VIDEO_SPHERE_S > 0 or cfg.VIDEO_INVITE_S > 0:
+            data["orbit_pos"] = self.orbit_positions(data)
+            data["orbit_stops"] = self.orbit_stops(data, data["orbit_pos"])
+            data["sphere"] = self.sphere_layout(data)
 
     def render_single_frame(self, data: Dict[str, Any], frame_index: int) -> bytes:
         """Render one frame to raw RGB bytes without touching ffmpeg."""
@@ -907,7 +1291,7 @@ def _draw_frame(fi: int) -> Any:
             break
     lt = gt - sc["start"]
     img = _RENDER_BD.base.copy()
-    if sc["kind"] not in ("title", "card", "outro"):
+    if sc["kind"] not in ("title", "card", "outro", "invite"):
         draw_grid(img, gt, 0.35, _RENDER_BD)
     d = ImageDraw.Draw(img, "RGBA")
     _SCENE_FN[sc["kind"]](img, d, lt, gt, sc)
@@ -1244,7 +1628,7 @@ def _scene_bundle(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
     """Hierarchical edge bundling: every import routed through the community tree."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
-    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VI // THE WIRING", fonts, cfg.VIDEO_WIDTH)
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VII // THE WIRING", fonts, cfg.VIDEO_WIDTH)
     left, right = _split_boxes(cfg)
     hud_panel(d, left, f"hierarchical edge bundling // beta {cfg.VIDEO_BUNDLE_BETA:.2f}, b-spline through communities", fonts, VIOLET)
     hud_panel(d, right, "flows // imports between communities", fonts, GREEN)
@@ -1326,11 +1710,240 @@ def _scene_bundle(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
     draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
 
 
+def _orbit_plan(dur: float) -> Tuple[float, float, float]:
+    """Phase boundaries of the orbit act: assemble, color modes, community tour, hub reach."""
+    return (0.14 * dur, 0.30 * dur, 0.80 * dur)
+
+
+def _scene_orbit(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """Camera tour of the 3D force graph: color modes, communities, hub reach."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VI // ORBIT", fonts, cfg.VIDEO_WIDTH)
+    box, side = _graph_boxes(cfg)
+    hud_panel(d, box, "graph-force // 3d view, camera tour", fonts, CYAN)
+    hud_panel(d, side, "explorer // live state", fonts, MAGENTA)
+    pos = data.get("orbit_pos", {})
+    if not pos:
+        d.text(((box[0] + box[2]) / 2, (box[1] + box[3]) / 2), "no graph to orbit", font=fonts["cap"], fill=DIM, anchor="mm")
+        draw_caption(d, "nothing to fly through yet", lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+        return
+    dur = sc["dur"]
+    a_end, b_end, c_end = _orbit_plan(dur)
+    f = lt / max(1e-9, dur)
+    yaw = 0.6 + cfg.VIDEO_ORBIT_TURNS * 2 * math.pi * f
+    pitch = -math.radians(cfg.VIDEO_ORBIT_PITCH_DEG) * (0.6 + 0.4 * math.sin(f * math.pi))
+    stops: List[Dict[str, Any]] = data.get("orbit_stops", [])
+    origin = (0.0, 0.0, 0.0)
+    hub = next((g["file"] for g in data.get("god_details", []) if g["file"] in pos), "")
+    zoom_in = cfg.VIDEO_ORBIT_ZOOM
+    keys: List[Tuple[float, Tuple[float, ...], float]] = [(0.0, origin, 1.0), (b_end / dur, origin, 1.0)]
+    span = (c_end - b_end) / max(1, len(stops))
+    for k, stop in enumerate(stops):
+        start = (b_end + k * span) / dur
+        keys.append((start + 0.35 * span / dur, stop["target"], zoom_in))
+        keys.append((start + 0.95 * span / dur, stop["target"], zoom_in))
+    if hub:
+        keys.append(((c_end + 0.3 * (dur - c_end)) / dur, pos[hub], zoom_in * 1.15))
+        keys.append(((c_end + 0.75 * (dur - c_end)) / dur, pos[hub], zoom_in * 1.15))
+    keys.append((1.0, origin, 1.0))
+    target, zoom = _camera_track(keys, f)
+    mode = "community"
+    if a_end <= lt < b_end:
+        mode = COLOR_MODES[min(len(COLOR_MODES) - 1, int((lt - a_end) / max(1e-9, b_end - a_end) * len(COLOR_MODES)))]
+    membership = data.get("membership", {})
+    links = data["graph_links"]
+    lit: Optional[set] = None
+    edge_lit: Optional[Any] = None
+    stop: Optional[Dict[str, Any]] = None
+    if b_end <= lt < c_end and stops:
+        stop = stops[min(len(stops) - 1, int((lt - b_end) / max(1e-9, span)))]
+        index = stop["index"]
+        lit = {nid for nid, ci in membership.items() if ci == index}
+        edge_lit = lambda a, b, i=index: membership.get(a, -1) == i or membership.get(b, -1) == i
+    elif lt >= c_end and hub:
+        uses = sorted({b for a, b in links if a == hub and b != hub})
+        users = sorted({a for a, b in links if b == hub and a != hub})
+        lit = {hub, *uses, *users}
+        edge_lit = lambda a, b: a == hub or b == hub
+    draw_cloud3d(img, data, (box[0] + 2, box[1] + 31, box[2] - 2, box[3] - 34), cfg, yaw, pitch, target, zoom, mode,
+                 lit, edge_lit, gt, fonts, appear=lt / max(1e-9, a_end), labels=cfg.VIDEO_ORBIT_LABELS)
+    hint = "drag to orbit  ·  click a node to inspect  ·  C recolors  ·  reach  ·  path finder"
+    d.text(((box[0] + box[2]) / 2, box[3] - 18), hint, font=fonts["tiny"], fill=alpha(DIM, 0.9), anchor="mm")
+    x0, _, x1, _ = side
+    y = side[1] + 42
+    d.text((x0 + 16, y), "COLOR BY", font=fonts["tiny_b"], fill=MAGENTA)
+    y += 20
+    px = x0 + 16
+    for name in COLOR_MODES:
+        w = fonts["tiny_b"].getlength(name) + 14
+        on = name == mode
+        d.rectangle((px, y, px + w, y + 20), fill=alpha(CYAN, 0.25) if on else (12, 8, 30, 200),
+                    outline=alpha(CYAN if on else FAINT, 0.9))
+        d.text((px + 7, y + 3), name, font=fonts["tiny_b"], fill=TXT if on else DIM)
+        px += w + 6
+    y += 36
+    d.text((x0 + 16, y), f"{len(pos)} files · {len(links)} imports", font=fonts["tiny_b"], fill=CYAN)
+    y += 28
+    if stop is not None:
+        d.text((x0 + 16, y), f"STOP {stops.index(stop) + 1}/{len(stops)}", font=fonts["tiny_b"], fill=YELLOW)
+        y += 20
+        d.text((x0 + 16, y), short_label(stop["label"].rpartition(": ")[2] or stop["label"], 20),
+               font=fonts["small_b"], fill=community_color(stop["index"]))
+        y += 28
+        d.text((x0 + 16, y), f"{stop['size']} files · cohesion {stop['cohesion']:.0%}", font=fonts["tiny"], fill=TXT)
+        y += 18
+        bw = (x1 - x0 - 32) * max(0.0, min(1.0, stop["cohesion"]))
+        d.rectangle((x0 + 16, y, x0 + 16 + bw, y + 6), fill=alpha(community_color(stop["index"]), 0.9))
+        y += 18
+        d.text((x0 + 16, y), f"hub {short_label(stop['hub'].rpartition('/')[2], 18)}", font=fonts["tiny"], fill=DIM)
+        y += 18
+        d.text((x0 + 16, y), f"{stop['internal']} inside · {stop['external']} crossing", font=fonts["tiny"], fill=DIM)
+    elif lt >= c_end and hub:
+        uses = sorted({b for a, b in links if a == hub and b != hub})
+        users = sorted({a for a, b in links if b == hub and a != hub})
+        d.text((x0 + 16, y), "REACH // 1 hop", font=fonts["tiny_b"], fill=YELLOW)
+        y += 20
+        d.text((x0 + 16, y), short_label(hub.rpartition("/")[2] or hub, 20), font=fonts["small_b"], fill=TXT)
+        y += 28
+        d.text((x0 + 16, y), f"upstream   {len(users)} use it", font=fonts["tiny"], fill=MAGENTA)
+        y += 18
+        d.text((x0 + 16, y), f"downstream {len(uses)} it uses", font=fonts["tiny"], fill=CYAN)
+        y += 24
+        for nid in users[:4]:
+            if y + 18 > side[3] - 70:
+                break
+            d.text((x0 + 16, y), "<- " + short_label(nid.rpartition("/")[2] or nid, 18), font=fonts["tiny"], fill=DIM)
+            y += 17
+    d.text((x0 + 16, side[3] - 50), "LIVE", font=fonts["tiny_b"], fill=GREEN)
+    d.text((x0 + 16, side[3] - 32), short_label(f"{cfg.DIAGRAM_OUTPUT_DIR}/{cfg.FORCEGRAPH_OUTPUT}", 26),
+           font=fonts["tiny"], fill=TXT)
+    if lt < a_end:
+        caption = f"{len(pos)} files, {len(links)} imports: the explorer's 3D view, measured offline"
+    elif lt < b_end:
+        caption = f"color by {mode}: the same graph, three readings"
+    elif stop is not None:
+        caption = f"stop {stops.index(stop) + 1}/{len(stops)}: {short_label(stop['label'], 30)}, {stop['size']} files"
+    elif hub:
+        caption = f"reach of {short_label(hub.rpartition('/')[2], 24)}: everything one hop away lights up"
+    else:
+        caption = "every file, every import, in orbit"
+    draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
+def _scene_sphere(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """The 3D force layout folds onto a globe of community caps and bundles its imports."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VIII // THE SPHERE", fonts, cfg.VIDEO_WIDTH)
+    left, right = _split_boxes(cfg)
+    hud_panel(d, left, f"spherical edge bundling // community caps, beta {cfg.VIDEO_BUNDLE_BETA:.2f}", fonts, VIOLET)
+    hud_panel(d, right, "globe // caps and seams", fonts, GREEN)
+    layout: Optional[SphereBundleLayout] = data.get("sphere")
+    if layout is None or not layout.leaves:
+        d.text(((left[0] + left[2]) / 2, (left[1] + left[3]) / 2), "no communities to wrap",
+               font=fonts["cap"], fill=DIM, anchor="mm")
+        draw_caption(d, "flat project: nothing to bundle", lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+        return
+    dur = sc["dur"]
+    morph = ease(lt / max(1e-9, 0.25 * dur))
+    reveal = ease((lt - 0.2 * dur) / max(1e-9, 0.3 * dur))
+    yaw = 0.4 + cfg.VIDEO_SPHERE_TURNS * 2 * math.pi * lt / max(1e-9, dur)
+    pitch = -0.35
+    groups = layout.groups
+    cycle_start = 0.55 * dur
+    spot_pos = -1
+    if lt > cycle_start and groups:
+        span = max(0.5, (dur - cycle_start - 0.6) / len(groups))
+        spot_pos = min(len(groups) - 1, int((lt - cycle_start) / span))
+    spot = int(groups[spot_pos][0].split(":", 1)[0]) if spot_pos >= 0 else None
+    draw_sphere3d(img, data, (left[0] + 2, left[1] + 31, left[2] - 2, left[3] - 2), cfg, yaw, pitch,
+                  morph, reveal, spot, gt, fonts)
+    membership = data.get("membership", {})
+    x0, _, x1, _ = right
+    y = right[1] + 44
+    top = max([1] + [count for _l, _c, count in groups])
+    for label, _cap, count in groups:
+        if y + 30 > right[3] - 80:
+            break
+        index = int(label.split(":", 1)[0])
+        on = spot is None or spot == index
+        k = ease((lt - 0.4) / 1.0)
+        name = short_label(label.split(":", 1)[1].rpartition(": ")[2] or label, 22)
+        d.text((x0 + 18, y), name, font=fonts["tiny_b"], fill=alpha(TXT if on else DIM, k))
+        d.text((x1 - 18, y), str(count), font=fonts["tiny"], fill=alpha(DIM, k), anchor="ra")
+        bw = (x1 - x0 - 36) * count / top * k
+        d.rectangle((x0 + 18, y + 16, x0 + 18 + max(0, bw), y + 21),
+                    fill=alpha(community_color(index), 0.9 if on else 0.35))
+        y += 32
+    if spot is not None:
+        out_n = sum(1 for a, b in data["graph_links"] if membership.get(a, -1) == spot and membership.get(b, -1) != spot)
+        in_n = sum(1 for a, b in data["graph_links"] if membership.get(b, -1) == spot and membership.get(a, -1) != spot)
+        d.text((x0 + 18, right[3] - 72), f"spotlight: {out_n} out · {in_n} in", font=fonts["small_b"], fill=GREEN)
+    d.text((x0 + 18, right[3] - 44), "LIVE " + short_label(f"{cfg.DIAGRAM_OUTPUT_DIR}/{cfg.BUNDLEGRAPH_OUTPUT}", 34),
+           font=fonts["tiny_b"], fill=TXT)
+    d.text((x0 + 18, right[3] - 26), "#view=3d · beta slider · crossing only", font=fonts["tiny"], fill=DIM)
+    if morph < 1:
+        caption = "the force layout folds onto a globe: one cap per community"
+    elif spot is None:
+        caption = "every import leaves its cap, dives through the core, and lands on its target"
+    else:
+        caption = f"spotlight: {short_label(groups[spot_pos][0].split(':', 1)[1], 30)} and every seam it crosses"
+    draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
+def _scene_invite(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """Invitation to open the live explorers, with both 3D views spinning."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    w, h = cfg.VIDEO_WIDTH, cfg.VIDEO_HEIGHT
+    a = ease(lt / 0.6) * (1 - ease((lt - (sc["dur"] - 0.4)) / 0.4))
+    draw_grid(img, gt, 0.6, _RENDER_BD)
+    chroma_text(img, (w / 2, h * 0.09), "NOW FLY IT YOURSELF", fonts["mid"], alpha(TXT, a), spread=3, anchor="mm")
+    d.text((w / 2, h * 0.16), "every view in this video is a live page you can click, drag and search",
+           font=fonts["small"], fill=alpha(CYAN, a), anchor="mm")
+    gap = 24
+    top, bottom = int(h * 0.22), h - 70
+    left = (40, top, w // 2 - gap // 2, bottom)
+    right = (w // 2 + gap // 2, top, w - 40, bottom)
+    out = cfg.DIAGRAM_OUTPUT_DIR
+    cards = [
+        (left, "graph force // 2d + 3d", CYAN, f"{out}/{cfg.FORCEGRAPH_OUTPUT}",
+         ["click any file: purpose, symbols, neighbours", "reach upstream / downstream, path finder",
+          "lenses: cycles, orphans, hubs  ·  color by 3 modes"]),
+        (right, "edge bundles // circle + sphere", VIOLET, f"{out}/{cfg.BUNDLEGRAPH_OUTPUT}",
+         ["every import routed through its community", "beta slider: straight chords to full bundles",
+          "crossing-only: just the seams between subsystems"]),
+    ]
+    for k, (box, title, col, path, lines) in enumerate(cards):
+        ka = a * ease((lt - 0.3 - 0.25 * k) / 0.6)
+        if ka <= 0:
+            continue
+        hud_panel(d, box, title, fonts, col)
+        x0, y0, x1, y1 = box
+        stage = (x0 + 10, y0 + 34, x1 - 10, y1 - 112)
+        spin = 0.5 + lt * 0.5
+        if k == 0:
+            mode = COLOR_MODES[int(lt / 1.6) % len(COLOR_MODES)]
+            draw_cloud3d(img, data, stage, cfg, spin, -0.3, (0.0, 0.0, 0.0), 1.0, mode, None, None, gt, fonts)
+        else:
+            draw_sphere3d(img, data, stage, cfg, spin, -0.35, 1.0, 1.0, None, gt, fonts, group_labels=False)
+        y = y1 - 104
+        d.text((x0 + 16, y), short_label(path, 44), font=fonts["small_b"], fill=alpha(col, ka))
+        y += 30
+        for line in lines:
+            d.text((x0 + 16, y), "> " + line, font=fonts["tiny"], fill=alpha(TXT, ka))
+            y += 20
+    k2 = ease((lt - 1.2) / 0.6) * a
+    d.text((w / 2, h - 38), f"start at {out}/index.html  ·  maps, video, wiki and agent docs in one gallery",
+           font=fonts["small_b"], fill=alpha(GREEN, k2), anchor="mm")
+
+
 def _scene_dna(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
     """Every file as a color, scanned live, with a zoom on the hub file."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
     data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
-    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT VII // CODE DNA", fonts, cfg.VIDEO_WIDTH)
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT IX // CODE DNA", fonts, cfg.VIDEO_WIDTH)
     grid_box, sec_box = _dna_boxes(cfg)
     hud_panel(d, grid_box, "sha256 per file // color = fingerprint", fonts, YELLOW)
     hud_panel(d, sec_box, "security // pattern scan", fonts, RED)
@@ -1417,5 +2030,6 @@ def _scene_outro(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> 
 
 _SCENE_FN = {"title": _scene_title, "card": _scene_card, "layers": _scene_layers,
              "gods": _scene_gods, "tree": _scene_tree, "communities": _scene_communities,
-             "graph": _scene_graph, "bundle": _scene_bundle, "dna": _scene_dna,
+             "graph": _scene_graph, "orbit": _scene_orbit, "bundle": _scene_bundle,
+             "sphere": _scene_sphere, "dna": _scene_dna, "invite": _scene_invite,
              "outro": _scene_outro}

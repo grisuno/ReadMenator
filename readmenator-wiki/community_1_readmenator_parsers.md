@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 1 | 28 files | cohesion 0.54*
+*Community 1 | 28 files | cohesion 0.53*
 
 ## Definition
 
-This community groups 28 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.54). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
+This community groups 28 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
 
 ## Files
 
@@ -82,13 +82,13 @@ This community groups 28 file(s) rooted at `readmenator/parsers` with dominant l
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 85
-- Cross-boundary resolved imports (EXTRACTED): 86
+- Cross-boundary resolved imports (EXTRACTED): 87
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_graphrag.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
 
@@ -102,7 +102,7 @@ This community groups 28 file(s) rooted at `readmenator/parsers` with dominant l
 
 - Why do 3 file(s) lack file-level docs (e.g. `tests/test_mermaid.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.54?
+- Should readmenator/parsers be split, given cohesion 0.53?
 
 ## Sources
 

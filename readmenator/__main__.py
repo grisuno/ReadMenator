@@ -54,6 +54,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  gh-wiki --dry-run       Render GitHub wiki pages locally, no git calls\n"
             "  explorer                Serve force-graph explorer locally\n"
             "  forcegraph              Export force-graph explorer HTML (readmenator-maps/graph-force.html)\n"
+            "  bundles                 Export edge bundle explorer HTML, circle + sphere (readmenator-maps/graph-bundle.html)\n"
             "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
             "  near <file|text>        Nearest files by scan-text similarity (offline Jaccard)\n"
             "  scan-text               Print synthesized scan-text blobs per file\n"
@@ -325,6 +326,10 @@ def main() -> None:
             return
         elif command == "forcegraph":
             out = app.export_forcegraph(target)
+            print(out)
+            return
+        elif command == "bundles":
+            out = app.export_bundlegraph(target)
             print(out)
             return
         elif command == "analytics":

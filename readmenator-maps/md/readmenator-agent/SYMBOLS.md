@@ -3,9 +3,9 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `_run_tests` | function | `readmenator/__main__.py:131` | `def _run_tests()` |
+| `_run_tests` | function | `readmenator/__main__.py:132` | `def _run_tests()` |
 | `build_parser` | function | `readmenator/__main__.py:18` | `def build_parser()` |
-| `main` | function | `readmenator/__main__.py:146` | `def main()` |
+| `main` | function | `readmenator/__main__.py:147` | `def main()` |
 | `AgentInjector` | class | `readmenator/_agent_injector.py:129` | `class AgentInjector` |
 | `__init__` | method | `readmenator/_agent_injector.py:140` | `def __init__(self, kb_filename, agent_output_dir, agent_files, agent_globs, wiki_output_dir)` |
 | `_build_injection` | method | `readmenator/_agent_injector.py:276` | `def _build_injection(self, fmt)` |
@@ -85,77 +85,87 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `analyze` | method | `readmenator/_analyzer.py:62` | `def analyze(self, nodes, edges, resolved_edges)` |
 | `dominant_directory` | function | `readmenator/_analyzer.py:22` | `def dominant_directory(file_ids)` |
 | `partition` | method | `readmenator/_analyzer.py:268` | `def partition(self, ids, adjacency)` |
-| `__init__` | method | `readmenator/_app.py:49` | `def __init__(self, config)` |
-| `_forcegraph_card` | method | `readmenator/_app.py:717` | `def _forcegraph_card(self, dest, href, home_href, nodes, edges, resolved, analysis, layers, findings)` |
-| `_forcegraph_dest` | method | `readmenator/_app.py:664` | `def _forcegraph_dest(self, target_dir, output_path)` |
-| `_inject_agent_files` | method | `readmenator/_app.py:348` | `def _inject_agent_files(self, root)` |
-| `_inject_readme_link` | method | `readmenator/_app.py:340` | `def _inject_readme_link(self, root)` |
-| `_live_renderer` | method | `readmenator/_app.py:1028` | `def _live_renderer(self)` |
-| `_log_summary` | method | `readmenator/_app.py:368` | `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)` |
-| `_maybe_export_forcegraph` | method | `readmenator/_app.py:1186` | `def _maybe_export_forcegraph(self, root, nodes, edges, resolved_edges, analysis, layers, findings)` |
-| `_maybe_export_video` | method | `readmenator/_app.py:1147` | `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
-| `_maybe_publish_github_wiki` | method | `readmenator/_app.py:282` | `def _maybe_publish_github_wiki(self, root)` |
-| `_maybe_refresh_pages` | method | `readmenator/_app.py:264` | `def _maybe_refresh_pages(self, root)` |
-| `_maybe_write_graphrag` | method | `readmenator/_app.py:1217` | `def _maybe_write_graphrag(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
-| `_maybe_write_memory` | method | `readmenator/_app.py:1259` | `def _maybe_write_memory(self, root, nodes, analysis, analysis_v2, findings, content_map)` |
-| `_memory_notes` | method | `readmenator/_app.py:1253` | `def _memory_notes(self, root)` |
-| `_resolve_imports` | method | `readmenator/_app.py:76` | `def _resolve_imports(self, nodes, edges, target_dir)` |
-| `_scan` | method | `readmenator/_app.py:58` | `def _scan(self, target_dir)` |
-| `_scan_for_cache` | method | `readmenator/_app.py:528` | `def _scan_for_cache(self, root, cache)` |
-| `_scan_with_content` | method | `readmenator/_app.py:66` | `def _scan_with_content(self, target_dir)` |
-| `_site_stats` | method | `readmenator/_app.py:1016` | `def _site_stats(nodes, edges, analysis)` |
-| `_write_forcegraph` | method | `readmenator/_app.py:679` | `def _write_forcegraph(self, dest, nodes, edges, resolved, analysis, layers, findings, home_href)` |
-| `_write_sidecar_outputs` | method | `readmenator/_app.py:314` | `def _write_sidecar_outputs(self, root, findings, analysis_v2)` |
-| `analytics` | method | `readmenator/_app.py:807` | `def analytics(self, target_dir)` |
-| `analyze` | method | `readmenator/_app.py:614` | `def analyze(self, target_dir)` |
-| `audit` | method | `readmenator/_app.py:1388` | `def audit(self, target_dir)` |
-| `audit_deep` | method | `readmenator/_app.py:1395` | `def audit_deep(self, target_dir)` |
-| `audit_provenance` | method | `readmenator/_app.py:850` | `def audit_provenance(self, target_dir)` |
-| `build_graphrag` | method | `readmenator/_app.py:1334` | `def build_graphrag(self, target_dir)` |
-| `check_freshness` | method | `readmenator/_app.py:237` | `def check_freshness(self, target_dir)` |
-| `detect_layers` | method | `readmenator/_app.py:1435` | `def detect_layers(self, target_dir)` |
-| `explain` | method | `readmenator/_app.py:551` | `def explain(self, target_dir, symbol_name)` |
-| `explorer_state` | method | `readmenator/_app.py:778` | `def explorer_state(self, target_dir)` |
-| `export` | method | `readmenator/_app.py:657` | `def export(self, target_dir)` |
-| `export_cypher` | method | `readmenator/_app.py:898` | `def export_cypher(self, target_dir, output_path)` |
-| `export_diagram` | method | `readmenator/_app.py:1038` | `def export_diagram(self, target_dir, kind, output_path, full)` |
-| `export_diagrams` | method | `readmenator/_app.py:970` | `def export_diagrams(self, target_dir, output_dir, full)` |
-| `export_forcegraph` | method | `readmenator/_app.py:759` | `def export_forcegraph(self, target_dir, output_path)` |
-| `export_graphml` | method | `readmenator/_app.py:887` | `def export_graphml(self, target_dir, output_path)` |
-| `export_html` | method | `readmenator/_app.py:635` | `def export_html(self, target_dir, output_path)` |
-| `export_json` | method | `readmenator/_app.py:618` | `def export_json(self, target_dir, output_path)` |
-| `export_obsidian` | method | `readmenator/_app.py:914` | `def export_obsidian(self, target_dir, output_dir)` |
-| `export_pages` | method | `readmenator/_app.py:1077` | `def export_pages(self, target_dir, output_dir, full)` |
-| `export_rules` | method | `readmenator/_app.py:1425` | `def export_rules(self, target_dir, output_dir)` |
-| `export_sarif` | method | `readmenator/_app.py:1415` | `def export_sarif(self, target_dir, output_path)` |
-| `export_svg` | method | `readmenator/_app.py:646` | `def export_svg(self, target_dir, output_path)` |
-| `export_video` | method | `readmenator/_app.py:1123` | `def export_video(self, target_dir, output_path)` |
-| `export_wiki` | method | `readmenator/_app.py:929` | `def export_wiki(self, target_dir, output_dir)` |
-| `find_path` | method | `readmenator/_app.py:563` | `def find_path(self, target_dir, symbol_a, symbol_b)` |
-| `generate_cursorrules` | method | `readmenator/_app.py:1468` | `def generate_cursorrules(self, target_dir)` |
-| `generate_uml_code` | method | `readmenator/_app.py:356` | `def generate_uml_code(self, target_dir, language, output_path)` |
-| `graphrag_search` | method | `readmenator/_app.py:1357` | `def graphrag_search(self, target_dir, query, mode, budget_tokens)` |
-| `install_skills` | method | `readmenator/_app.py:1322` | `def install_skills(self, target_dir, target)` |
-| `lint` | method | `readmenator/_app.py:1445` | `def lint(self, target_dir)` |
-| `lint_wiki` | method | `readmenator/_app.py:952` | `def lint_wiki(self, target_dir)` |
-| `memory` | method | `readmenator/_app.py:1285` | `def memory(self, target_dir)` |
-| `near` | method | `readmenator/_app.py:836` | `def near(self, target_dir, query, top_k)` |
-| `on_change` | method | `readmenator/_app.py:1382` | `def on_change()` |
-| `publish_github_wiki` | method | `readmenator/_app.py:300` | `def publish_github_wiki(self, target_dir, dry_run)` |
-| `query` | method | `readmenator/_app.py:546` | `def query(self, target_dir, question)` |
-| `rank_query` | method | `readmenator/_app.py:581` | `def rank_query(self, target_dir, query, top_n)` |
-| `readmenatorApplication` | class | `readmenator/_app.py:48` | `class readmenatorApplication` |
-| `rebuild` | method | `readmenator/_app.py:611` | `def rebuild(self, target_dir, run_security)` |
-| `refactor_monolith` | method | `readmenator/_app.py:1483` | `def refactor_monolith(self, target_dir)` |
-| `remember` | method | `readmenator/_app.py:1308` | `def remember(self, target_dir, note, kind)` |
-| `run` | method | `readmenator/_app.py:95` | `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)` |
-| `scan_texts` | method | `readmenator/_app.py:824` | `def scan_texts(self, target_dir)` |
-| `serve_explorer` | method | `readmenator/_app.py:794` | `def serve_explorer(self, target_dir, open_browser)` |
-| `strip_dead_code` | method | `readmenator/_app.py:1458` | `def strip_dead_code(self, target_dir)` |
-| `summary` | method | `readmenator/_app.py:576` | `def summary(self, target_dir)` |
-| `update` | method | `readmenator/_app.py:423` | `def update(self, target_dir, run_security)` |
-| `validate_yaralite` | method | `readmenator/_app.py:873` | `def validate_yaralite(self, target_dir)` |
-| `watch` | method | `readmenator/_app.py:1378` | `def watch(self, target_dir)` |
+| `__init__` | method | `readmenator/_app.py:50` | `def __init__(self, config)` |
+| `_explorer_cards` | method | `readmenator/_app.py:760` | `def _explorer_cards(self, dest, href, home_href, nodes, edges, resolved, analysis, layers, findings)` |
+| `_forcegraph_dest` | method | `readmenator/_app.py:665` | `def _forcegraph_dest(self, target_dir, output_path)` |
+| `_inject_agent_files` | method | `readmenator/_app.py:349` | `def _inject_agent_files(self, root)` |
+| `_inject_readme_link` | method | `readmenator/_app.py:341` | `def _inject_readme_link(self, root)` |
+| `_live_renderer` | method | `readmenator/_app.py:1110` | `def _live_renderer(self)` |
+| `_log_summary` | method | `readmenator/_app.py:369` | `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summary, analysis_v2, findings)` |
+| `_maybe_export_forcegraph` | method | `readmenator/_app.py:1266` | `def _maybe_export_forcegraph(self, root, nodes, edges, resolved_edges, analysis, layers, findings)` |
+| `_maybe_export_video` | method | `readmenator/_app.py:1227` | `def _maybe_export_video(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
+| `_maybe_publish_github_wiki` | method | `readmenator/_app.py:283` | `def _maybe_publish_github_wiki(self, root)` |
+| `_maybe_refresh_pages` | method | `readmenator/_app.py:265` | `def _maybe_refresh_pages(self, root)` |
+| `_maybe_write_graphrag` | method | `readmenator/_app.py:1297` | `def _maybe_write_graphrag(self, root, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2...` |
+| `_maybe_write_memory` | method | `readmenator/_app.py:1339` | `def _maybe_write_memory(self, root, nodes, analysis, analysis_v2, findings, content_map)` |
+| `_memory_notes` | method | `readmenator/_app.py:1333` | `def _memory_notes(self, root)` |
+| `_resolve_imports` | method | `readmenator/_app.py:77` | `def _resolve_imports(self, nodes, edges, target_dir)` |
+| `_scan` | method | `readmenator/_app.py:59` | `def _scan(self, target_dir)` |
+| `_scan_for_cache` | method | `readmenator/_app.py:529` | `def _scan_for_cache(self, root, cache)` |
+| `_scan_with_content` | method | `readmenator/_app.py:67` | `def _scan_with_content(self, target_dir)` |
+| `_site_stats` | method | `readmenator/_app.py:1098` | `def _site_stats(nodes, edges, analysis)` |
+| `_write_bundlegraph` | method | `readmenator/_app.py:727` | `def _write_bundlegraph(self, dest, force_payload, home_href, explorer_href)` |
+| `_write_forcegraph` | method | `readmenator/_app.py:680` | `def _write_forcegraph(self, dest, nodes, edges, resolved, analysis, layers, findings, home_href)` |
+| `_write_sidecar_outputs` | method | `readmenator/_app.py:315` | `def _write_sidecar_outputs(self, root, findings, analysis_v2)` |
+| `analytics` | method | `readmenator/_app.py:891` | `def analytics(self, target_dir)` |
+| `analyze` | method | `readmenator/_app.py:615` | `def analyze(self, target_dir)` |
+| `audit` | method | `readmenator/_app.py:1468` | `def audit(self, target_dir)` |
+| `audit_deep` | method | `readmenator/_app.py:1475` | `def audit_deep(self, target_dir)` |
+| `audit_provenance` | method | `readmenator/_app.py:934` | `def audit_provenance(self, target_dir)` |
+| `build_graphrag` | method | `readmenator/_app.py:1414` | `def build_graphrag(self, target_dir)` |
+| `check_freshness` | method | `readmenator/_app.py:238` | `def check_freshness(self, target_dir)` |
+| `detect_layers` | method | `readmenator/_app.py:1515` | `def detect_layers(self, target_dir)` |
+| `explain` | method | `readmenator/_app.py:552` | `def explain(self, target_dir, symbol_name)` |
+| `explorer_state` | method | `readmenator/_app.py:862` | `def explorer_state(self, target_dir)` |
+| `export` | method | `readmenator/_app.py:658` | `def export(self, target_dir)` |
+| `export_bundlegraph` | method | `readmenator/_app.py:836` | `def export_bundlegraph(self, target_dir, output_path)` |
+| `export_cypher` | method | `readmenator/_app.py:982` | `def export_cypher(self, target_dir, output_path)` |
+| `export_diagram` | method | `readmenator/_app.py:1120` | `def export_diagram(self, target_dir, kind, output_path, full)` |
+| `export_diagrams` | method | `readmenator/_app.py:1054` | `def export_diagrams(self, target_dir, output_dir, full)` |
+| `export_forcegraph` | method | `readmenator/_app.py:817` | `def export_forcegraph(self, target_dir, output_path)` |
+| `export_graphml` | method | `readmenator/_app.py:971` | `def export_graphml(self, target_dir, output_path)` |
+| `export_html` | method | `readmenator/_app.py:636` | `def export_html(self, target_dir, output_path)` |
+| `export_json` | method | `readmenator/_app.py:619` | `def export_json(self, target_dir, output_path)` |
+| `export_obsidian` | method | `readmenator/_app.py:998` | `def export_obsidian(self, target_dir, output_dir)` |
+| `export_pages` | method | `readmenator/_app.py:1159` | `def export_pages(self, target_dir, output_dir, full)` |
+| `export_rules` | method | `readmenator/_app.py:1505` | `def export_rules(self, target_dir, output_dir)` |
+| `export_sarif` | method | `readmenator/_app.py:1495` | `def export_sarif(self, target_dir, output_path)` |
+| `export_svg` | method | `readmenator/_app.py:647` | `def export_svg(self, target_dir, output_path)` |
+| `export_video` | method | `readmenator/_app.py:1203` | `def export_video(self, target_dir, output_path)` |
+| `export_wiki` | method | `readmenator/_app.py:1013` | `def export_wiki(self, target_dir, output_dir)` |
+| `find_path` | method | `readmenator/_app.py:564` | `def find_path(self, target_dir, symbol_a, symbol_b)` |
+| `generate_cursorrules` | method | `readmenator/_app.py:1548` | `def generate_cursorrules(self, target_dir)` |
+| `generate_uml_code` | method | `readmenator/_app.py:357` | `def generate_uml_code(self, target_dir, language, output_path)` |
+| `graphrag_search` | method | `readmenator/_app.py:1437` | `def graphrag_search(self, target_dir, query, mode, budget_tokens)` |
+| `install_skills` | method | `readmenator/_app.py:1402` | `def install_skills(self, target_dir, target)` |
+| `lint` | method | `readmenator/_app.py:1525` | `def lint(self, target_dir)` |
+| `lint_wiki` | method | `readmenator/_app.py:1036` | `def lint_wiki(self, target_dir)` |
+| `memory` | method | `readmenator/_app.py:1365` | `def memory(self, target_dir)` |
+| `near` | method | `readmenator/_app.py:920` | `def near(self, target_dir, query, top_k)` |
+| `on_change` | method | `readmenator/_app.py:1462` | `def on_change()` |
+| `publish_github_wiki` | method | `readmenator/_app.py:301` | `def publish_github_wiki(self, target_dir, dry_run)` |
+| `query` | method | `readmenator/_app.py:547` | `def query(self, target_dir, question)` |
+| `rank_query` | method | `readmenator/_app.py:582` | `def rank_query(self, target_dir, query, top_n)` |
+| `readmenatorApplication` | class | `readmenator/_app.py:49` | `class readmenatorApplication` |
+| `rebuild` | method | `readmenator/_app.py:612` | `def rebuild(self, target_dir, run_security)` |
+| `refactor_monolith` | method | `readmenator/_app.py:1563` | `def refactor_monolith(self, target_dir)` |
+| `remember` | method | `readmenator/_app.py:1388` | `def remember(self, target_dir, note, kind)` |
+| `run` | method | `readmenator/_app.py:96` | `def run(self, target_dir, resolve_imports, run_analysis, run_security, run_v2_analysis)` |
+| `scan_texts` | method | `readmenator/_app.py:908` | `def scan_texts(self, target_dir)` |
+| `serve_explorer` | method | `readmenator/_app.py:878` | `def serve_explorer(self, target_dir, open_browser)` |
+| `strip_dead_code` | method | `readmenator/_app.py:1538` | `def strip_dead_code(self, target_dir)` |
+| `summary` | method | `readmenator/_app.py:577` | `def summary(self, target_dir)` |
+| `update` | method | `readmenator/_app.py:424` | `def update(self, target_dir, run_security)` |
+| `validate_yaralite` | method | `readmenator/_app.py:957` | `def validate_yaralite(self, target_dir)` |
+| `watch` | method | `readmenator/_app.py:1458` | `def watch(self, target_dir)` |
+| `BundleGraphRenderer` | class | `readmenator/_bundlegraph.py:48` | `class BundleGraphRenderer` |
+| `__init__` | method | `readmenator/_bundlegraph.py:51` | `def __init__(self, config)` |
+| `_json_script` | function | `readmenator/_bundlegraph.py:36` | `def _json_script(value)` |
+| `build_payload` | method | `readmenator/_bundlegraph.py:60` | `def build_payload(self, force_payload)` |
+| `page_settings` | method | `readmenator/_bundlegraph.py:147` | `def page_settings(self, force_payload, explorer_href)` |
+| `render` | method | `readmenator/_bundlegraph.py:186` | `def render(self, force_payload, title, home_href, explorer_href)` |
+| `thumbnail_svg` | method | `readmenator/_bundlegraph.py:248` | `def thumbnail_svg(self, force_payload)` |
+| `write` | method | `readmenator/_bundlegraph.py:222` | `def write(self, output_path, force_payload, title, home_href, explorer_href)` |
 | `FileCache` | class | `readmenator/_cache.py:20` | `class FileCache` |
 | `__init__` | method | `readmenator/_cache.py:31` | `def __init__(self, config, project_root)` |
 | `_prune_analysis_cache` | method | `readmenator/_cache.py:155` | `def _prune_analysis_cache(self, current_file_ids)` |
@@ -423,14 +433,15 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `to_svg` | method | `readmenator/_exporter.py:482` | `def to_svg(self, nodes, edges, resolved_edges, analysis)` |
 | `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:75` | `class ForceGraphRenderer` |
 | `__init__` | method | `readmenator/_forcegraph.py:78` | `def __init__(self, config)` |
-| `_family_color` | method | `readmenator/_forcegraph.py:418` | `def _family_color(self, name)` |
-| `_file_color` | method | `readmenator/_forcegraph.py:540` | `def _file_color(self, node_id, family, layer, palette)` |
-| `_node_doc` | method | `readmenator/_forcegraph.py:521` | `def _node_doc(self, node)` |
-| `_symbol_list` | method | `readmenator/_forcegraph.py:527` | `def _symbol_list(self, node)` |
+| `_family_color` | method | `readmenator/_forcegraph.py:429` | `def _family_color(self, name)` |
+| `_file_color` | method | `readmenator/_forcegraph.py:551` | `def _file_color(self, node_id, family, layer, palette)` |
+| `_node_doc` | method | `readmenator/_forcegraph.py:532` | `def _node_doc(self, node)` |
+| `_symbol_list` | method | `readmenator/_forcegraph.py:538` | `def _symbol_list(self, node)` |
 | `add_node` | method | `readmenator/_forcegraph.py:195` | `def add_node(node_id, label, node_type)` |
 | `build_payload` | method | `readmenator/_forcegraph.py:107` | `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings)` |
-| `copy_vendor` | method | `readmenator/_forcegraph.py:502` | `def copy_vendor(self, dest_dir)` |
+| `copy_vendor` | method | `readmenator/_forcegraph.py:513` | `def copy_vendor(self, dest_dir)` |
 | `edge_palette` | method | `readmenator/_forcegraph.py:90` | `def edge_palette(self)` |
+| `family_color` | method | `readmenator/_forcegraph.py:418` | `def family_color(self, name)` |
 | `family_color_from_name` | function | `readmenator/_forcegraph.py:34` | `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)` |
 | `file_of` | method | `readmenator/_forcegraph.py:141` | `def file_of(edge_id)` |
 | `group_colors` | method | `readmenator/_forcegraph.py:326` | `def group_colors(self, payload)` |
@@ -438,10 +449,10 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `node_value` | function | `readmenator/_forcegraph.py:62` | `def node_value(symbols, degree)` |
 | `page_settings` | method | `readmenator/_forcegraph.py:349` | `def page_settings(self, payload)` |
 | `render` | method | `readmenator/_forcegraph.py:283` | `def render(self, payload, analytics, title, home_href)` |
-| `thumbnail_svg` | method | `readmenator/_forcegraph.py:435` | `def thumbnail_svg(self, payload)` |
+| `thumbnail_svg` | method | `readmenator/_forcegraph.py:446` | `def thumbnail_svg(self, payload)` |
 | `vendor_href` | method | `readmenator/_forcegraph.py:102` | `def vendor_href(self)` |
 | `vendor_source` | method | `readmenator/_forcegraph.py:94` | `def vendor_source(self)` |
-| `write` | method | `readmenator/_forcegraph.py:475` | `def write(self, output_path, payload, analytics, title, home_href)` |
+| `write` | method | `readmenator/_forcegraph.py:486` | `def write(self, output_path, payload, analytics, title, home_href)` |
 | `GitHubWikiPublisher` | class | `readmenator/_gh_wiki.py:59` | `class GitHubWikiPublisher` |
 | `WikiPublishResult` | class | `readmenator/_gh_wiki.py:39` | `class WikiPublishResult` |
 | `__init__` | method | `readmenator/_gh_wiki.py:62` | `def __init__(self, config, runner)` |
@@ -464,37 +475,26 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `_packed_ref` | function | `readmenator/_gitmeta.py:59` | `def _packed_ref(git_dir, ref)` |
 | `_read_small` | function | `readmenator/_gitmeta.py:19` | `def _read_small(path)` |
 | `read_git_head` | function | `readmenator/_gitmeta.py:84` | `def read_git_head(project_root)` |
-| `BundleLayout` | class | `readmenator/_graphlayout.py:269` | `class BundleLayout` |
-| `ForceAtlas2Settings` | class | `readmenator/_graphlayout.py:31` | `class ForceAtlas2Settings` |
-| `_bspline` | method | `readmenator/_graphlayout.py:289` | `def _bspline(control, samples)` |
-| `_fa2_numpy` | method | `readmenator/_graphlayout.py:105` | `def _fa2_numpy(n, pairs, start, cfg)` |
-| `_fa2_python` | method | `readmenator/_graphlayout.py:152` | `def _fa2_python(n, pairs, start, cfg)` |
-| `_initial_positions` | method | `readmenator/_graphlayout.py:55` | `def _initial_positions(n, seed)` |
-| `_snapshot_steps` | method | `readmenator/_graphlayout.py:99` | `def _snapshot_steps(iterations, snapshots)` |
-| `fit_frames` | method | `readmenator/_graphlayout.py:209` | `def fit_frames(frames, box, margin, trim)` |
-| `forceatlas2_frames` | method | `readmenator/_graphlayout.py:62` | `def forceatlas2_frames(ids, edges, settings)` |
-| `hierarchical_edge_bundling` | method | `readmenator/_graphlayout.py:314` | `def hierarchical_edge_bundling(groups, edges, center, radius, beta, samples, group_gap, inner_ratio)` |
-| `interpolate_frames` | method | `readmenator/_graphlayout.py:254` | `def interpolate_frames(frames, t)` |
+| `BundleLayout` | class | `readmenator/_graphlayout.py:278` | `class BundleLayout` |
+| `ForceAtlas2Settings` | class | `readmenator/_graphlayout.py:37` | `class ForceAtlas2Settings` |
+| `SphereBundleLayout` | class | `readmenator/_graphlayout.py:458` | `class SphereBundleLayout` |
+| `_bspline` | method | `readmenator/_graphlayout.py:298` | `def _bspline(control, samples)` |
+| `_bundle_curves` | method | `readmenator/_graphlayout.py:321` | `def _bundle_curves(leaves, member_group, hub, root, edges, beta, samples)` |
+| `_fa2_numpy` | method | `readmenator/_graphlayout.py:116` | `def _fa2_numpy(n, pairs, start, cfg)` |
+| `_fa2_python` | method | `readmenator/_graphlayout.py:163` | `def _fa2_python(n, pairs, start, cfg)` |
+| `_initial_positions` | method | `readmenator/_graphlayout.py:63` | `def _initial_positions(n, seed, dims)` |
+| `_snapshot_steps` | method | `readmenator/_graphlayout.py:110` | `def _snapshot_steps(iterations, snapshots)` |
+| `_split_caps` | method | `readmenator/_graphlayout.py:476` | `def _split_caps(labels, sizes, points, lattice, out)` |
+| `_unit` | method | `readmenator/_graphlayout.py:449` | `def _unit(v)` |
+| `fibonacci_sphere` | method | `readmenator/_graphlayout.py:426` | `def fibonacci_sphere(count)` |
+| `fit_frames` | method | `readmenator/_graphlayout.py:218` | `def fit_frames(frames, box, margin, trim)` |
+| `forceatlas2_frames` | method | `readmenator/_graphlayout.py:70` | `def forceatlas2_frames(ids, edges, settings)` |
+| `hierarchical_edge_bundling` | method | `readmenator/_graphlayout.py:371` | `def hierarchical_edge_bundling(groups, edges, center, radius, beta, samples, group_gap, inner_ratio)` |
+| `interpolate_frames` | method | `readmenator/_graphlayout.py:263` | `def interpolate_frames(frames, t)` |
+| `normalize_cloud` | method | `readmenator/_graphlayout.py:571` | `def normalize_cloud(points, quantile, max_radius)` |
+| `spherical_edge_bundling` | method | `readmenator/_graphlayout.py:513` | `def spherical_edge_bundling(groups, edges, radius, beta, samples, inner_ratio)` |
 | `Bm25Index` | class | `readmenator/_graphrag.py:267` | `class Bm25Index` |
 | `GraphRagBuilder` | class | `readmenator/_graphrag.py:345` | `class GraphRagBuilder` |
 | `GraphRagIndex` | class | `readmenator/_graphrag.py:169` | `class GraphRagIndex` |
-| `GraphRagSearcher` | class | `readmenator/_graphrag.py:942` | `class GraphRagSearcher` |
-| `GraphRagStore` | class | `readmenator/_graphrag.py:1212` | `class GraphRagStore` |
-| `RagCommunity` | class | `readmenator/_graphrag.py:136` | `class RagCommunity` |
-| `RagContext` | class | `readmenator/_graphrag.py:216` | `class RagContext` |
-| `RagEntity` | class | `readmenator/_graphrag.py:67` | `class RagEntity` |
-| `RagRelation` | class | `readmenator/_graphrag.py:94` | `class RagRelation` |
-| `RagTextUnit` | class | `readmenator/_graphrag.py:115` | `class RagTextUnit` |
-| `__init__` | method | `readmenator/_graphrag.py:270` | `def __init__(self, documents, k1, b)` |
-| `__init__` | method | `readmenator/_graphrag.py:348` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_graphrag.py:945` | `def __init__(self, config, index)` |
-| `__init__` | method | `readmenator/_graphrag.py:1215` | `def __init__(self, config)` |
-| `_budget_chars` | method | `readmenator/_graphrag.py:1020` | `def _budget_chars(self, budget_tokens)` |
-| `_community_report` | method | `readmenator/_graphrag.py:704` | `def _community_report(self, index, label, members, node_by_id, resolved_edges, layers, findings, analysis_v2...` |
-| `_edge_kind` | method | `readmenator/_graphrag.py:327` | `def _edge_kind(relation)` |
-| `_entity_doc` | method | `readmenator/_graphrag.py:974` | `def _entity_doc(self, entity)` |
-| `_entity_rank` | method | `readmenator/_graphrag.py:597` | `def _entity_rank(self, ids, relations)` |
-| `_file_entity` | method | `readmenator/_graphrag.py:322` | `def _file_entity(file_id)` |
-| `_file_rank` | method | `readmenator/_graphrag.py:608` | `def _file_rank(self, nodes, resolved_edges)` |
 
 Next: [SYMBOLS_p2.md](SYMBOLS_p2.md)

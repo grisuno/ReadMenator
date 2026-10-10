@@ -3,6 +3,90 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_extracts_def` | method | `tests/test_parsers_new.py:95` | `def test_extracts_def(self)` |
+| `test_extracts_defmodule` | method | `tests/test_parsers_new.py:121` | `def test_extracts_defmodule(self)` |
+| `test_extracts_fun` | method | `tests/test_parsers_new.py:78` | `def test_extracts_fun(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:55` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:106` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:127` | `def test_extracts_function(self)` |
+| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
+| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
+| `test_extracts_module` | method | `tests/test_parsers_new.py:27` | `def test_extracts_module(self)` |
+| `test_extracts_object` | method | `tests/test_parsers_new.py:89` | `def test_extracts_object(self)` |
+| `test_extracts_protocol` | method | `tests/test_parsers_new.py:61` | `def test_extracts_protocol(self)` |
+| `test_extracts_require` | method | `tests/test_parsers_new.py:39` | `def test_extracts_require(self)` |
+| `test_extracts_require` | method | `tests/test_parsers_new.py:111` | `def test_extracts_require(self)` |
+| `test_kotlin_extension_maps_correctly` | method | `tests/test_parsers_new.py:146` | `def test_kotlin_extension_maps_correctly(self)` |
+| `test_ruby_extension_maps_correctly` | method | `tests/test_parsers_new.py:138` | `def test_ruby_extension_maps_correctly(self)` |
+| `test_swift_extension_maps_correctly` | method | `tests/test_parsers_new.py:142` | `def test_swift_extension_maps_correctly(self)` |
+| `TestParserHypothesisContract` | class | `tests/test_parsers_property.py:155` | `class TestParserHypothesisContract(TestCase)` |
+| `TestPythonParserProperty` | class | `tests/test_parsers_property.py:288` | `class TestPythonParserProperty(TestCase)` |
+| `_StrategyPlaceholder` | class | `tests/test_parsers_property.py:45` | `class _StrategyPlaceholder` |
+| `_UnavailableStrategies` | class | `tests/test_parsers_property.py:60` | `class _UnavailableStrategies` |
+| `__getattr__` | method | `tests/test_parsers_property.py:63` | `def __getattr__(self, name)` |
+| `__or__` | method | `tests/test_parsers_property.py:48` | `def __or__(self, other)` |
+| `__ror__` | method | `tests/test_parsers_property.py:52` | `def __ror__(self, other)` |
+| `_assert_valid_symbols` | method | `tests/test_parsers_property.py:275` | `def _assert_valid_symbols(self, symbols)` |
+| `_create_parser` | function | `tests/test_parsers_property.py:142` | `def _create_parser(ext)` |
+| `_generate_multiline_code` | function | `tests/test_parsers_property.py:105` | `def _generate_multiline_code(lines, line_strategy)` |
+| `builder` | method | `tests/test_parsers_property.py:65` | `def builder()` |
+| `given` | method | `tests/test_parsers_property.py:69` | `def given()` |
+| `map` | method | `tests/test_parsers_property.py:56` | `def map(self)` |
+| `setUp` | method | `tests/test_parsers_property.py:291` | `def setUp(self)` |
+| `settings` | method | `tests/test_parsers_property.py:75` | `def settings()` |
+| `test_empty_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:198` | `def test_empty_code_returns_empty_or_valid(self, ext)` |
+| `test_never_crashes_on_malformed_code` | method | `tests/test_parsers_property.py:162` | `def test_never_crashes_on_malformed_code(self, ext, code)` |
+| `test_never_crashes_on_many_lines` | method | `tests/test_parsers_property.py:220` | `def test_never_crashes_on_many_lines(self, ext, lines)` |
+| `test_never_crashes_on_unicode_code` | method | `tests/test_parsers_property.py:180` | `def test_never_crashes_on_unicode_code(self, ext, code)` |
+| `test_parser_imports_is_list_of_strings` | method | `tests/test_parsers_property.py:257` | `def test_parser_imports_is_list_of_strings(self, ext)` |
+| `test_python_never_crashes_on_any_text` | method | `tests/test_parsers_property.py:310` | `def test_python_never_crashes_on_any_text(self, code)` |
+| `test_python_never_crashes_on_weird_ascii` | method | `tests/test_parsers_property.py:296` | `def test_python_never_crashes_on_weird_ascii(self, code)` |
+| `test_repeated_keywords_no_crash` | method | `tests/test_parsers_property.py:238` | `def test_repeated_keywords_no_crash(self, ext)` |
+| `test_unknown_extension_returns_none` | method | `tests/test_parsers_property.py:269` | `def test_unknown_extension_returns_none(self)` |
+| `test_whitespace_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:208` | `def test_whitespace_code_returns_empty_or_valid(self, ext)` |
+| `wrapper` | method | `tests/test_parsers_property.py:71` | `def wrapper(fn)` |
+| `wrapper` | method | `tests/test_parsers_property.py:77` | `def wrapper(fn)` |
+| `TestQueryEngineContract` | class | `tests/test_query.py:22` | `class TestQueryEngineContract(TestCase)` |
+| `_make_node` | function | `tests/test_query.py:7` | `def _make_node(node_id, symbols)` |
+| `_make_sym` | function | `tests/test_query.py:18` | `def _make_sym(name, kind, line)` |
+| `setUp` | method | `tests/test_query.py:23` | `def setUp(self)` |
+| `test_explain_returns_details` | method | `tests/test_query.py:51` | `def test_explain_returns_details(self)` |
+| `test_explain_shows_imports` | method | `tests/test_query.py:58` | `def test_explain_shows_imports(self)` |
+| `test_explain_shows_siblings` | method | `tests/test_query.py:63` | `def test_explain_shows_siblings(self)` |
+| `test_explain_unknown_returns_none` | method | `tests/test_query.py:69` | `def test_explain_unknown_returns_none(self)` |
+| `test_find_exact_symbol` | method | `tests/test_query.py:36` | `def test_find_exact_symbol(self)` |
+| `test_find_path_direct_import` | method | `tests/test_query.py:73` | `def test_find_path_direct_import(self)` |
+| `test_find_path_same_file` | method | `tests/test_query.py:79` | `def test_find_path_same_file(self)` |
+| `test_find_path_unknown_returns_none` | method | `tests/test_query.py:84` | `def test_find_path_unknown_returns_none(self)` |
+| `test_find_symbol_fuzzy` | method | `tests/test_query.py:42` | `def test_find_symbol_fuzzy(self)` |
+| `test_find_symbol_not_found` | method | `tests/test_query.py:47` | `def test_find_symbol_not_found(self)` |
+| `test_query_returns_file_matches` | method | `tests/test_query.py:102` | `def test_query_returns_file_matches(self)` |
+| `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
+| `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
+| `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
+| `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
+| `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
+| `TestEdgeKind` | class | `tests/test_ranking.py:60` | `class TestEdgeKind` |
+| `TestExplain` | class | `tests/test_ranking.py:539` | `class TestExplain` |
+| `TestGlobalPageRank` | class | `tests/test_ranking.py:247` | `class TestGlobalPageRank` |
+| `TestHITS` | class | `tests/test_ranking.py:325` | `class TestHITS` |
+| `TestIntegration` | class | `tests/test_ranking.py:587` | `class TestIntegration` |
+| `TestMorphism` | class | `tests/test_ranking.py:84` | `class TestMorphism` |
+| `TestPersonalizedPageRank` | class | `tests/test_ranking.py:288` | `class TestPersonalizedPageRank` |
+| `TestProjections` | class | `tests/test_ranking.py:490` | `class TestProjections` |
+| `TestSeedGeneration` | class | `tests/test_ranking.py:350` | `class TestSeedGeneration` |
+| `TestTypedGraph` | class | `tests/test_ranking.py:183` | `class TestTypedGraph` |
+| `_make_test_graph` | method | `tests/test_ranking.py:238` | `def _make_test_graph()` |
+| `test_add_object_and_morphism` | method | `tests/test_ranking.py:110` | `def test_add_object_and_morphism(self)` |
+| `test_all_edge_kinds_have_weights` | method | `tests/test_ranking.py:61` | `def test_all_edge_kinds_have_weights(self)` |
+| `test_all_nodes_have_positive_score` | method | `tests/test_ranking.py:254` | `def test_all_nodes_have_positive_score(self)` |
+| `test_apply_view_architecture` | method | `tests/test_ranking.py:512` | `def test_apply_view_architecture(self)` |
+| `test_apply_view_empty` | method | `tests/test_ranking.py:528` | `def test_apply_view_empty(self)` |
+| `test_apply_view_reverse` | method | `tests/test_ranking.py:521` | `def test_apply_view_reverse(self)` |
+| `test_authorities_and_hubs_have_positive_scores` | method | `tests/test_ranking.py:326` | `def test_authorities_and_hubs_have_positive_scores(self)` |
+| `test_authorities_l2_normalized` | method | `tests/test_ranking.py:333` | `def test_authorities_l2_normalized(self)` |
+| `test_build_category_from_edges` | method | `tests/test_ranking.py:214` | `def test_build_category_from_edges(self)` |
+| `test_build_category_from_edges_filters_by_node_ids` | method | `tests/test_ranking.py:225` | `def test_build_category_from_edges_filters_by_node_ids(self)` |
 | `test_build_seeds_for_context` | method | `tests/test_ranking.py:383` | `def test_build_seeds_for_context(self)` |
 | `test_build_seeds_for_context_no_match` | method | `tests/test_ranking.py:392` | `def test_build_seeds_for_context_no_match(self)` |
 | `test_build_seeds_from_query_matches_node_id` | method | `tests/test_ranking.py:351` | `def test_build_seeds_from_query_matches_node_id(self)` |
@@ -311,20 +395,24 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_sanitize_prefixes_digit_start` | method | `tests/test_uml.py:172` | `def test_sanitize_prefixes_digit_start(self)` |
 | `test_sanitize_preserves_alphanumeric` | method | `tests/test_uml.py:164` | `def test_sanitize_preserves_alphanumeric(self)` |
 | `test_sanitize_replaces_special_chars` | method | `tests/test_uml.py:168` | `def test_sanitize_replaces_special_chars(self)` |
-| `TestVideoContract` | class | `tests/test_video.py:35` | `class TestVideoContract(TestCase)` |
-| `_analysis` | function | `tests/test_video.py:23` | `def _analysis()` |
-| `_nodes` | function | `tests/test_video.py:15` | `def _nodes()` |
-| `test_video_all_scenes_render_small_canvas` | method | `tests/test_video.py:88` | `def test_video_all_scenes_render_small_canvas(self)` |
-| `test_video_build_scenes_durations` | method | `tests/test_video.py:78` | `def test_video_build_scenes_durations(self)` |
-| `test_video_collect_counts` | method | `tests/test_video.py:36` | `def test_video_collect_counts(self)` |
-| `test_video_collect_empty_project` | method | `tests/test_video.py:48` | `def test_video_collect_empty_project(self)` |
-| `test_video_collect_enriched_fields` | method | `tests/test_video.py:58` | `def test_video_collect_enriched_fields(self)` |
-| `test_video_dependencies_returns_bool` | method | `tests/test_video.py:143` | `def test_video_dependencies_returns_bool(self)` |
-| `test_video_disabled_skips_without_render` | method | `tests/test_video.py:146` | `def test_video_disabled_skips_without_render(self)` |
-| `test_video_graph_positions_deterministic` | method | `tests/test_video.py:106` | `def test_video_graph_positions_deterministic(self)` |
-| `test_video_hash_color_deterministic` | method | `tests/test_video.py:132` | `def test_video_hash_color_deterministic(self)` |
-| `test_video_short_label_truncates` | method | `tests/test_video.py:138` | `def test_video_short_label_truncates(self)` |
-| `test_video_single_frame_bytes` | method | `tests/test_video.py:117` | `def test_video_single_frame_bytes(self)` |
+| `TestVideoContract` | class | `tests/test_video.py:37` | `class TestVideoContract(TestCase)` |
+| `_analysis` | function | `tests/test_video.py:25` | `def _analysis()` |
+| `_nodes` | function | `tests/test_video.py:17` | `def _nodes()` |
+| `test_video_all_scenes_render_small_canvas` | method | `tests/test_video.py:92` | `def test_video_all_scenes_render_small_canvas(self)` |
+| `test_video_build_scenes_durations` | method | `tests/test_video.py:80` | `def test_video_build_scenes_durations(self)` |
+| `test_video_collect_counts` | method | `tests/test_video.py:38` | `def test_video_collect_counts(self)` |
+| `test_video_collect_empty_project` | method | `tests/test_video.py:50` | `def test_video_collect_empty_project(self)` |
+| `test_video_collect_enriched_fields` | method | `tests/test_video.py:60` | `def test_video_collect_enriched_fields(self)` |
+| `test_video_dependencies_returns_bool` | method | `tests/test_video.py:205` | `def test_video_dependencies_returns_bool(self)` |
+| `test_video_disabled_skips_without_render` | method | `tests/test_video.py:208` | `def test_video_disabled_skips_without_render(self)` |
+| `test_video_graph_positions_deterministic` | method | `tests/test_video.py:168` | `def test_video_graph_positions_deterministic(self)` |
+| `test_video_hash_color_deterministic` | method | `tests/test_video.py:194` | `def test_video_hash_color_deterministic(self)` |
+| `test_video_new_scenes_render_every_phase` | method | `tests/test_video.py:111` | `def test_video_new_scenes_render_every_phase(self)` |
+| `test_video_orbit_layout_is_normalized_and_stable` | method | `tests/test_video.py:141` | `def test_video_orbit_layout_is_normalized_and_stable(self)` |
+| `test_video_project3d_centers_target` | method | `tests/test_video.py:159` | `def test_video_project3d_centers_target(self)` |
+| `test_video_short_label_truncates` | method | `tests/test_video.py:200` | `def test_video_short_label_truncates(self)` |
+| `test_video_single_frame_bytes` | method | `tests/test_video.py:179` | `def test_video_single_frame_bytes(self)` |
+| `test_video_zero_duration_act_skips_its_card` | method | `tests/test_video.py:130` | `def test_video_zero_duration_act_skips_its_card(self)` |
 | `TestWikiConfigContract` | class | `tests/test_wiki.py:49` | `class TestWikiConfigContract(TestCase)` |
 | `TestWikiGenerationContract` | class | `tests/test_wiki.py:65` | `class TestWikiGenerationContract(TestCase)` |
 | `_make_analysis` | function | `tests/test_wiki.py:27` | `def _make_analysis()` |

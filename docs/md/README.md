@@ -179,6 +179,28 @@ external in a 2D map or a 3D space:
   `#path=<a>~<b>`, `#lens=cycles`, `#edge=<key>`. The page also exposes
   `window.ReadmenatorExplorer` for console scripting.
 
+The **Edge Bundle Explorer** (`readmenator-maps/graph-bundle.html`, its own gallery
+card next to the force graph, `readmenator . bundles` to export it alone) is the
+hierarchical edge bundling view from the video, live. It needs no network: one
+canvas, no CDN.
+
+- **Circle (2D).** Files sit on a ring grouped into community arcs (hubs first);
+  every resolved import is a B-spline routed through the community tree, so thick
+  bundles are the real seams between subsystems.
+- **Sphere (3D).** The same hierarchy on a globe: each community owns a contiguous
+  cap sized by its file count, wires dive through the core between caps. Drag to
+  rotate, wheel to zoom, optional auto-rotate; selecting a file or community flies
+  the camera to face it.
+- **Reading it.** Hover a file: cyan wires are what it imports, pink what imports it.
+  Click to pin it (imports and importers listed, one click to open it in the force
+  graph in 2D or 3D). Click an arc, cap label or legend row to focus a community
+  (inside/out/in counts, cohesion, top flows to other communities).
+- **Controls.** Beta slider (0 straight chords, 1 fully bundled, recomputed live),
+  crossing-only filter, direction (both, imports, imported by), color by community,
+  layer or language, search, PNG export, light/dark theme. Deep links:
+  `#view=3d&node=<id>&group=<key>&beta=0.7&color=layer&dir=out&cross=1`; console API
+  `window.ReadmenatorBundles`.
+
 Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
 Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
 with relative paths, works fully offline, and needs no build step.
@@ -189,13 +211,20 @@ gallery, every `--rebuild` refreshes it (video and docs included).
 
 ### Overview Video
 
-`readmenator . video` renders a synthwave mp4 from real scan data in seven acts:
+`readmenator . video` renders a synthwave mp4 from real scan data in nine acts:
 layers, god nodes, blast-radius tree, communities, **Emergence** (ForceAtlas2
 LinLog with adaptive speed, animated from seeded chaos to convergence, nodes
-sized by PageRank with random-surfer particles on the hottest edges), **The Wiring**
-(Holten hierarchical edge bundling: files on a circle by community, imports routed
-as B-splines through the community tree, a spotlight sweeping each community and a
-live flow ranking), and code DNA.
+sized by PageRank with random-surfer particles on the hottest edges), **Orbit**
+(the force graph laid out by ForceAtlas2 in 3D and flown by a camera: color by
+community, layer and language in turn, a tour that zooms into the largest
+communities with their cohesion and seams, then the 1-hop reach of the top hub),
+**The Wiring** (Holten hierarchical edge bundling: files on a circle by community,
+imports routed as B-splines through the community tree, a spotlight sweeping each
+community and a live flow ranking), **The Sphere** (the 3D layout folds onto a globe
+of community caps and every import bundles through its core), and code DNA. A
+closing invitation shows both explorers spinning with their paths, so viewers know
+where to go next. Set an act's duration (`VIDEO_ORBIT_S`, `VIDEO_SPHERE_S`,
+`VIDEO_INVITE_S`, ...) to 0 to drop it with its card.
 
 ### GraphRAG for agents (zero tokens to build, cheap to query)
 
@@ -307,7 +336,9 @@ Supported target languages (12): C++, Java, C#, Python, Go, Rust, PHP, Kotlin, S
 | Watcher | `_watcher.py` | Filesystem polling watcher for auto-rebuild |
 | README Injector | `_readme_injector.py` | Auto-injects KB link into project README |
 | GraphRAG | `_graphrag.py` | Entities, relationships, text units, community report hierarchy, local/global search |
-| Graph layouts | `_graphlayout.py` | ForceAtlas2 snapshots and hierarchical edge bundling |
+| Graph layouts | `_graphlayout.py` | ForceAtlas2 (2D/3D) snapshots, circular and spherical hierarchical edge bundling |
+| Edge bundles | `_bundlegraph.py` | Circle + sphere bundle payload, settings, thumbnail |
+| Bundle page | `_bundlegraph_page.py` | Self-contained canvas page: 2D circle, 3D sphere, live beta, focus panels |
 | Force graph | `_forcegraph.py` | Heterogeneous explorer payload, settings, thumbnail |
 | Explorer page | `_forcegraph_page.py` | 2D/3D explorer HTML: hit-testing, overlay glyphs, node and edge actions |
 | Memory | `_memory.py` | MEMORY.md: declared rules, measured baselines, preserved session log |

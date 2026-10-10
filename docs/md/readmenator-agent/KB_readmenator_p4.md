@@ -1,6 +1,103 @@
 # Subsystem: readmenator (page 4 of 4)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_video.py
+- Doc: Cinematic codebase overview video, general purpose.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ease` (function, line 95) `def ease(x)`
+  - `fmt_int` (function, line 101) `def fmt_int(n)`
+  - `mix` (function, line 106) `def mix(a, b, t)`
+  - `alpha` (function, line 111) `def alpha(c, a)`
+  - `hash_color` (function, line 116) `def hash_color(digest)`
+  - `short_label` (function, line 125) `def short_label(text, limit)`
+  - `_panel` (function, line 133) `def _panel(cfg)`
+  - `_caption_y` (function, line 138) `def _caption_y(cfg)`
+  - `_graph_boxes` (function, line 143) `def _graph_boxes(cfg)`
+  - `_dna_boxes` (function, line 152) `def _dna_boxes(cfg)`
+  - `_split_boxes` (function, line 161) `def _split_boxes(cfg)`
+  - `community_color` (function, line 170) `def community_color(index)`
+  - `_polyline_point` (function, line 177) `def _polyline_point(points, f)`
+  - `project3d` (function, line 188) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
+  - `_depth_alpha` (function, line 217) `def _depth_alpha(z, fade)`
+  - `_language_color` (function, line 222) `def _language_color(language)`
+  - `mode_color` (function, line 227) `def mode_color(data, nid, mode)`
+  - `_lerp3` (function, line 236) `def _lerp3(a, b, t)`
+  - `_camera_track` (function, line 241) `def _camera_track(keys, f)`
+  - `_place_label` (function, line 252) `def _place_label(d, placed, x, y, text, font, col, a)`
+  - `_clipped` (function, line 264) `def _clipped(img, box, paint)`
+  - `draw_cloud3d` (function, line 276) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `_cloud_core` (function, line 320) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `draw_sphere3d` (function, line 396) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
+  - `_sphere_core` (function, line 435) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
+  - `_verdict_badge` (function, line 520) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
+  - `_scan_cursor` (function, line 535) `def _scan_cursor(d, box, progress, col)`
+  - `_code_tint` (function, line 544) `def _code_tint(line)`
+  - `_packet_offset` (function, line 554) `def _packet_offset(a, b, k)`
+  - `dependencies_available` (function, line 560) `def dependencies_available()`
+  - `resolve_fonts` (function, line 569) `def resolve_fonts()`
+  - `Backdrop` (class, line 608) `class Backdrop`
+  - `_img` (method, line 664) `def _img()`
+  - `draw_grid` (method, line 671) `def draw_grid(img, t, strength, bd)`
+  - `draw_sun` (method, line 691) `def draw_sun(img, a, bd, cy)`
+  - `post` (method, line 708) `def post(img, glitch, seed)`
+  - `glitch_fx` (method, line 726) `def glitch_fx(img, amount, seed)`
+  - `chroma_text` (method, line 749) `def chroma_text(img, xy, text, font, col, spread, anchor)`
+  - `hud_panel` (method, line 760) `def hud_panel(d, box, title, fonts, col)`
+  - `draw_header` (method, line 773) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
+  - `draw_caption` (method, line 787) `def draw_caption(d, text, lt, dur, fonts, width, y)`
+  - `CinematicVideoRenderer` (class, line 803) `class CinematicVideoRenderer`
+  - `_render_frame_bytes` (method, line 1274) `def _render_frame_bytes(fi)`
+  - `_draw_frame` (method, line 1279) `def _draw_frame(fi)`
+  - `_scene_title` (method, line 1306) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (method, line 1341) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (method, line 1355) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (method, line 1380) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (method, line 1423) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (method, line 1497) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (method, line 1541) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_bundle` (method, line 1627) `def _scene_bundle(img, d, lt, gt, sc)`
+  - `_orbit_plan` (method, line 1713) `def _orbit_plan(dur)`
+  - `_scene_orbit` (method, line 1718) `def _scene_orbit(img, d, lt, gt, sc)`
+  - `_scene_sphere` (method, line 1834) `def _scene_sphere(img, d, lt, gt, sc)`
+  - `_scene_invite` (method, line 1895) `def _scene_invite(img, d, lt, gt, sc)`
+  - `_scene_dna` (method, line 1942) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (method, line 2001) `def _scene_outro(img, d, lt, gt, sc)`
+  - `pr` (method, line 463) `def pr(p)`
+  - `_find` (method, line 573) `def _find(style)`
+  - `__init__` (method, line 611) `def __init__(self, width, height)`
+  - `_sun` (method, line 649) `def _sun(self, r)`
+  - `collect` (method, line 808) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
+  - `_build_dep_tree` (method, line 972) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
+  - `build_scenes` (method, line 1023) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 1052) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 1099) `def tree_positions(self, data, box)`
+  - `emergence_frames` (method, line 1142) `def emergence_frames(self, data, box)`
+  - `bundle_groups` (method, line 1152) `def bundle_groups(self, data)`
+  - `bundle_layout` (method, line 1167) `def bundle_layout(self, data, box)`
+  - `orbit_positions` (method, line 1176) `def orbit_positions(self, data)`
+  - `sphere_layout` (method, line 1186) `def sphere_layout(self, data)`
+  - `orbit_stops` (method, line 1194) `def orbit_stops(self, data, positions)`
+  - `_prepare_layouts` (method, line 1209) `def _prepare_layouts(self, data)`
+  - `render_single_frame` (method, line 1223) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 1237) `def render(self, data, output_path)`
+- Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
+
+## readmenator/_watcher.py
+- Doc: Filesystem watcher for auto-rebuilding the knowledge base.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `DirectoryWatcher` (class, line 21) `class DirectoryWatcher`
+  - `__init__` (method, line 29) `def __init__(self, root, config, callback, interval_seconds)`
+  - `_compute_snapshot` (method, line 51) `def _compute_snapshot(self)`
+  - `start` (method, line 80) `def start(self)`
+  - `stop` (method, line 97) `def stop(self)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`
+
 ## readmenator/_wiki.py
 - Doc: Deterministic agent wiki generator for readmenator.
 - Layer: utility

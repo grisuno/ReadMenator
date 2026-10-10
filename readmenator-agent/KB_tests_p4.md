@@ -1,0 +1,120 @@
+# Subsystem: tests (page 4 of 4)
+Previous: [KB_tests_p3.md](KB_tests_p3.md)
+
+## tests/test_uml.py
+- Doc: Contract tests for UML class diagram generation and language code generation.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestUmlMermaidDiagram` (class, line 16) `class TestUmlMermaidDiagram(TestCase)`
+  - `TestUmlSanitizeId` (class, line 157) `class TestUmlSanitizeId(TestCase)`
+  - `TestUmlCodeGenerationCpp` (class, line 181) `class TestUmlCodeGenerationCpp(TestCase)`
+  - `TestUmlCodeGenerationJava` (class, line 239) `class TestUmlCodeGenerationJava(TestCase)`
+  - `TestUmlCodeGenerationCSharp` (class, line 281) `class TestUmlCodeGenerationCSharp(TestCase)`
+  - `TestUmlCodeGenerationGo` (class, line 306) `class TestUmlCodeGenerationGo(TestCase)`
+  - `TestUmlCodeGenerationRust` (class, line 347) `class TestUmlCodeGenerationRust(TestCase)`
+  - `TestUmlCodeGenerationPhp` (class, line 387) `class TestUmlCodeGenerationPhp(TestCase)`
+  - `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` (class, line 427) `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `test_render_empty_nodes_returns_empty_string` (method, line 23) `def test_render_empty_nodes_returns_empty_string(self)`
+  - `test_render_no_class_symbols_returns_empty_string` (method, line 27) `def test_render_no_class_symbols_returns_empty_string(self)`
+  - `test_render_single_class_produces_mermaid_class_diagram` (method, line 42) `def test_render_single_class_produces_mermaid_class_diagram(self)`
+  - `test_render_multiple_classes_from_different_files` (method, line 62) `def test_render_multiple_classes_from_different_files(self)`
+  - `test_render_with_import_edges_produces_relationships` (method, line 90) `def test_render_with_import_edges_produces_relationships(self)`
+  - `test_render_respects_max_classes_limit` (method, line 119) `def test_render_respects_max_classes_limit(self)`
+  - `test_render_with_structs_interfaces_traits` (method, line 137) `def test_render_with_structs_interfaces_traits(self)`
+  - `setUp` (method, line 160) `def setUp(self)`
+  - `test_sanitize_preserves_alphanumeric` (method, line 164) `def test_sanitize_preserves_alphanumeric(self)`
+  - `test_sanitize_replaces_special_chars` (method, line 168) `def test_sanitize_replaces_special_chars(self)`
+  - `test_sanitize_prefixes_digit_start` (method, line 172) `def test_sanitize_prefixes_digit_start(self)`
+  - `test_sanitize_handles_empty_string` (method, line 176) `def test_sanitize_handles_empty_string(self)`
+  - `setUp` (method, line 184) `def setUp(self)`
+  - `test_generate_cpp_produces_valid_code` (method, line 188) `def test_generate_cpp_produces_valid_code(self)`
+  - `test_generate_cpp_with_empty_classes` (method, line 208) `def test_generate_cpp_with_empty_classes(self)`
+  - `test_generate_cpp_unknown_language_returns_error_message` (method, line 223) `def test_generate_cpp_unknown_language_returns_error_message(self)`
+  - `setUp` (method, line 242) `def setUp(self)`
+  - `test_generate_java_class_produces_valid_code` (method, line 246) `def test_generate_java_class_produces_valid_code(self)`
+  - `test_generate_java_interface_produces_interface` (method, line 265) `def test_generate_java_interface_produces_interface(self)`
+  - `setUp` (method, line 284) `def setUp(self)`
+  - `test_generate_csharp_produces_valid_code` (method, line 288) `def test_generate_csharp_produces_valid_code(self)`
+  - `setUp` (method, line 309) `def setUp(self)`
+  - `test_generate_go_struct_produces_valid_code` (method, line 313) `def test_generate_go_struct_produces_valid_code(self)`
+  - `test_generate_go_interface_produces_valid_code` (method, line 330) `def test_generate_go_interface_produces_valid_code(self)`
+  - `setUp` (method, line 350) `def setUp(self)`
+  - `test_generate_rust_struct_produces_valid_code` (method, line 354) `def test_generate_rust_struct_produces_valid_code(self)`
+  - `test_generate_rust_trait_produces_valid_code` (method, line 370) `def test_generate_rust_trait_produces_valid_code(self)`
+  - `setUp` (method, line 390) `def setUp(self)`
+  - `test_generate_php_class_produces_valid_code` (method, line 394) `def test_generate_php_class_produces_valid_code(self)`
+  - `test_generate_php_interface_produces_valid_code` (method, line 411) `def test_generate_php_interface_produces_valid_code(self)`
+  - `setUp` (method, line 430) `def setUp(self)`
+  - `_make_class_node` (method, line 434) `def _make_class_node(self, name, lang, kind)`
+  - `test_generate_kotlin_produces_valid_code` (method, line 446) `def test_generate_kotlin_produces_valid_code(self)`
+  - `test_generate_scala_produces_valid_code` (method, line 452) `def test_generate_scala_produces_valid_code(self)`
+  - `test_generate_scala_trait_produces_valid_code` (method, line 458) `def test_generate_scala_trait_produces_valid_code(self)`
+  - `test_generate_swift_produces_valid_code` (method, line 463) `def test_generate_swift_produces_valid_code(self)`
+  - `test_generate_swift_protocol_produces_valid_code` (method, line 469) `def test_generate_swift_protocol_produces_valid_code(self)`
+  - `test_generate_dart_produces_valid_code` (method, line 474) `def test_generate_dart_produces_valid_code(self)`
+  - `test_generate_ruby_produces_valid_code` (method, line 480) `def test_generate_ruby_produces_valid_code(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_uml.py`
+
+## tests/test_video.py
+- Doc: Contract tests for the cinematic overview video renderer.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_nodes` (function, line 17) `def _nodes()`
+  - `_analysis` (function, line 25) `def _analysis()`
+  - `TestVideoContract` (class, line 37) `class TestVideoContract(TestCase)`
+  - `test_video_collect_counts` (method, line 38) `def test_video_collect_counts(self)`
+  - `test_video_collect_empty_project` (method, line 50) `def test_video_collect_empty_project(self)`
+  - `test_video_collect_enriched_fields` (method, line 60) `def test_video_collect_enriched_fields(self)`
+  - `test_video_build_scenes_durations` (method, line 80) `def test_video_build_scenes_durations(self)`
+  - `test_video_all_scenes_render_small_canvas` (method, line 92) `def test_video_all_scenes_render_small_canvas(self)`
+  - `test_video_new_scenes_render_every_phase` (method, line 111) `def test_video_new_scenes_render_every_phase(self)`
+  - `test_video_zero_duration_act_skips_its_card` (method, line 130) `def test_video_zero_duration_act_skips_its_card(self)`
+  - `test_video_orbit_layout_is_normalized_and_stable` (method, line 141) `def test_video_orbit_layout_is_normalized_and_stable(self)`
+  - `test_video_project3d_centers_target` (method, line 159) `def test_video_project3d_centers_target(self)`
+  - `test_video_graph_positions_deterministic` (method, line 168) `def test_video_graph_positions_deterministic(self)`
+  - `test_video_single_frame_bytes` (method, line 179) `def test_video_single_frame_bytes(self)`
+  - `test_video_hash_color_deterministic` (method, line 194) `def test_video_hash_color_deterministic(self)`
+  - `test_video_short_label_truncates` (method, line 200) `def test_video_short_label_truncates(self)`
+  - `test_video_dependencies_returns_bool` (method, line 205) `def test_video_dependencies_returns_bool(self)`
+  - `test_video_disabled_skips_without_render` (method, line 208) `def test_video_disabled_skips_without_render(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_video.py`
+
+## tests/test_wiki.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_make_node` (function, line 12) `def _make_node(node_id, doc, symbols, language)`
+  - `_make_symbol` (function, line 23) `def _make_symbol(name, kind, line, doc)`
+  - `_make_analysis` (function, line 27) `def _make_analysis()`
+  - `_make_nodes` (function, line 41) `def _make_nodes()`
+  - `TestWikiConfigContract` (class, line 49) `class TestWikiConfigContract(TestCase)`
+  - `TestWikiGenerationContract` (class, line 65) `class TestWikiGenerationContract(TestCase)`
+  - `test_config_defaults` (method, line 50) `def test_config_defaults(self)`
+  - `test_config_immutable` (method, line 58) `def test_config_immutable(self)`
+  - `test_generate_writes_all_files` (method, line 66) `def test_generate_writes_all_files(self)`
+  - `test_community_page_sections` (method, line 81) `def test_community_page_sections(self)`
+  - `test_connections_typed_with_confidence` (method, line 95) `def test_connections_typed_with_confidence(self)`
+  - `test_fallback_single_community_without_analysis` (method, line 115) `def test_fallback_single_community_without_analysis(self)`
+  - `test_report_honest_audit_sections` (method, line 125) `def test_report_honest_audit_sections(self)`
+  - `test_index_entry_point` (method, line 139) `def test_index_entry_point(self)`
+  - `test_lint_healthy_after_generate` (method, line 152) `def test_lint_healthy_after_generate(self)`
+  - `test_deterministic_connections` (method, line 161) `def test_deterministic_connections(self)`
+  - `test_privacy_mode_strips_docs` (method, line 174) `def test_privacy_mode_strips_docs(self)`
+  - `test_leftover_files_covered_by_orphans_community` (method, line 184) `def test_leftover_files_covered_by_orphans_community(self)`
+  - `test_shared_context_link_for_disconnected_communities` (method, line 194) `def test_shared_context_link_for_disconnected_communities(self)`
+  - `test_garbage_doc_filtered_from_definition` (method, line 210) `def test_garbage_doc_filtered_from_definition(self)`
+  - `test_definition_names_core_file` (method, line 217) `def test_definition_names_core_file(self)`
+  - `test_duplicate_community_labels_disambiguated` (method, line 240) `def test_duplicate_community_labels_disambiguated(self)`
+  - `test_duplicate_god_basenames_disambiguated` (method, line 259) `def test_duplicate_god_basenames_disambiguated(self)`
+  - `test_oversized_community_grouped_by_directory` (method, line 278) `def test_oversized_community_grouped_by_directory(self)`
+  - `test_large_files_flagged_in_index_and_report` (method, line 302) `def test_large_files_flagged_in_index_and_report(self)`
+  - `test_stale_pages_pruned_on_regenerate` (method, line 323) `def test_stale_pages_pruned_on_regenerate(self)`
+  - `test_risks_carry_fix_hint_scope_and_closed_cycle` (method, line 335) `def test_risks_carry_fix_hint_scope_and_closed_cycle(self)`
+  - `test_duplicate_symbol_scope_detected` (method, line 365) `def test_duplicate_symbol_scope_detected(self)`
+  - `test_no_duplicate_link_for_disjoint_scopes` (method, line 388) `def test_no_duplicate_link_for_disjoint_scopes(self)`
+  - `test_garbage_purpose_filtered` (method, line 408) `def test_garbage_purpose_filtered(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_wiki.py`
+

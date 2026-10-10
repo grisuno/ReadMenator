@@ -3,6 +3,73 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_make_edge` | method | `tests/test_dead_code.py:35` | `def _make_edge(self, src, tgt)` |
+| `_make_node` | method | `tests/test_dead_code.py:26` | `def _make_node(self, nid, symbols)` |
+| `_make_symbol` | method | `tests/test_dead_code.py:23` | `def _make_symbol(self, name, kind)` |
+| `setUp` | method | `tests/test_dead_code.py:19` | `def setUp(self)` |
+| `test_all_symbols_imported_returns_empty` | method | `tests/test_dead_code.py:101` | `def test_all_symbols_imported_returns_empty(self)` |
+| `test_identify_empty_graph_returns_empty` | method | `tests/test_dead_code.py:38` | `def test_identify_empty_graph_returns_empty(self)` |
+| `test_identify_excludes_app_entry_point` | method | `tests/test_dead_code.py:61` | `def test_identify_excludes_app_entry_point(self)` |
+| `test_identify_excludes_entry_points` | method | `tests/test_dead_code.py:53` | `def test_identify_excludes_entry_points(self)` |
+| `test_identify_excludes_init_entry_point` | method | `tests/test_dead_code.py:69` | `def test_identify_excludes_init_entry_point(self)` |
+| `test_identify_finds_dead_symbol` | method | `tests/test_dead_code.py:42` | `def test_identify_finds_dead_symbol(self)` |
+| `test_identify_recommends_review_for_classes` | method | `tests/test_dead_code.py:77` | `def test_identify_recommends_review_for_classes(self)` |
+| `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
+| `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
+| `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
+| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:650` | `class TestDiagramVariantsContract(TestCase)` |
+| `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
+| `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
+| `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
+| `TestSystemMapValidatorContract` | class | `tests/test_diagrams.py:176` | `class TestSystemMapValidatorContract(TestCase)` |
+| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:510` | `class TestVisNetworkRendererContract(TestCase)` |
+| `_make_graph` | method | `tests/test_diagrams.py:38` | `def _make_graph(self)` |
+| `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
+| `_map` | method | `tests/test_diagrams.py:519` | `def _map(self, kind)` |
+| `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
+| `_project` | method | `tests/test_diagrams.py:653` | `def _project(self, tmp)` |
+| `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
+| `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:240` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:370` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:513` | `def setUp(self)` |
+| `test_builder_attaches_symbols_and_docs` | method | `tests/test_diagrams.py:126` | `def test_builder_attaches_symbols_and_docs(self)` |
+| `test_builder_is_deterministic` | method | `tests/test_diagrams.py:68` | `def test_builder_is_deterministic(self)` |
+| `test_builder_orders_links_deterministically` | method | `tests/test_diagrams.py:80` | `def test_builder_orders_links_deterministically(self)` |
+| `test_builder_produces_all_kinds` | method | `tests/test_diagrams.py:59` | `def test_builder_produces_all_kinds(self)` |
+| `test_builder_reports_total_scope` | method | `tests/test_diagrams.py:119` | `def test_builder_reports_total_scope(self)` |
+| `test_builder_supports_five_kinds` | method | `tests/test_diagrams.py:52` | `def test_builder_supports_five_kinds(self)` |
+| `test_builder_truncates_symbols_per_node` | method | `tests/test_diagrams.py:143` | `def test_builder_truncates_symbols_per_node(self)` |
+| `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
+| `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
+| `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
+| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:672` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
+| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:658` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
+| `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:501` | `def test_publish_card_reports_primary_scope(self)` |
+| `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:462` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
+| `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:430` | `def test_publish_escapes_malicious_project_name(self)` |
+| `test_publish_escapes_malicious_stat_keys` | method | `tests/test_diagrams.py:439` | `def test_publish_escapes_malicious_stat_keys(self)` |
+| `test_publish_flat_subdir_keeps_links_relative` | method | `tests/test_diagrams.py:480` | `def test_publish_flat_subdir_keeps_links_relative(self)` |
+| `test_publish_index_explains_how_to_read` | method | `tests/test_diagrams.py:493` | `def test_publish_index_explains_how_to_read(self)` |
+| `test_publish_index_links_every_map` | method | `tests/test_diagrams.py:397` | `def test_publish_index_links_every_map(self)` |
+| `test_publish_is_deterministic` | method | `tests/test_diagrams.py:419` | `def test_publish_is_deterministic(self)` |
+| `test_publish_leaves_input_maps_unmodified` | method | `tests/test_diagrams.py:471` | `def test_publish_leaves_input_maps_unmodified(self)` |
+| `test_publish_output_has_no_external_requests` | method | `tests/test_diagrams.py:406` | `def test_publish_output_has_no_external_requests(self)` |
+| `test_publish_skips_invalid_maps` | method | `tests/test_diagrams.py:450` | `def test_publish_skips_invalid_maps(self)` |
+| `test_publish_writes_index_plus_five_maps` | method | `tests/test_diagrams.py:386` | `def test_publish_writes_index_plus_five_maps(self)` |
+| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:565` | `def test_renderer_builds_vis_network_with_physics(self)` |
+| `test_renderer_buttons_explain_their_purpose` | method | `tests/test_diagrams.py:355` | `def test_renderer_buttons_explain_their_purpose(self)` |
+| `test_renderer_covers_all_five_kinds` | method | `tests/test_diagrams.py:314` | `def test_renderer_covers_all_five_kinds(self)` |
+| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:581` | `def test_renderer_disables_physics_from_config(self)` |
+| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:620` | `def test_renderer_documents_symbols_per_file(self)` |
+| `test_renderer_embeds_valid_json_payloads` | method | `tests/test_diagrams.py:305` | `def test_renderer_embeds_valid_json_payloads(self)` |
+| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:612` | `def test_renderer_embeds_valid_payloads(self)` |
+| `test_renderer_escapes_malicious_labels` | method | `tests/test_diagrams.py:292` | `def test_renderer_escapes_malicious_labels(self)` |
+| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:636` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
+| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:588` | `def test_renderer_escapes_malicious_titles(self)` |
+| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:601` | `def test_renderer_exposes_reader_controls(self)` |
+| `test_renderer_has_no_external_requests` | method | `tests/test_diagrams.py:270` | `def test_renderer_has_no_external_requests(self)` |
 | `test_renderer_includes_interaction_controls` | method | `tests/test_diagrams.py:277` | `def test_renderer_includes_interaction_controls(self)` |
 | `test_renderer_includes_keyboard_and_deep_links` | method | `tests/test_diagrams.py:283` | `def test_renderer_includes_keyboard_and_deep_links(self)` |
 | `test_renderer_is_deterministic` | method | `tests/test_diagrams.py:607` | `def test_renderer_is_deterministic(self)` |
@@ -83,22 +150,39 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_gh_wiki_render_rewrites_links_and_permalinks` | method | `tests/test_gh_wiki.py:71` | `def test_gh_wiki_render_rewrites_links_and_permalinks(self)` |
 | `test_rebuild_publishes_wiki_in_git_checkout` | method | `tests/test_gh_wiki.py:167` | `def test_rebuild_publishes_wiki_in_git_checkout(self)` |
 | `test_rebuild_skips_wiki_outside_git_checkout` | method | `tests/test_gh_wiki.py:157` | `def test_rebuild_skips_wiki_outside_git_checkout(self)` |
-| `TestEdgeBundlingContract` | class | `tests/test_graphlayout.py:84` | `class TestEdgeBundlingContract(TestCase)` |
-| `TestForceAtlas2Contract` | class | `tests/test_graphlayout.py:27` | `class TestForceAtlas2Contract(TestCase)` |
-| `_two_cliques` | function | `tests/test_graphlayout.py:18` | `def _two_cliques()` |
-| `mean` | method | `tests/test_graphlayout.py:48` | `def mean(pairs)` |
-| `setUp` | method | `tests/test_graphlayout.py:87` | `def setUp(self)` |
-| `test_graphlayout_cross_group_curve_bends_inward` | method | `tests/test_graphlayout.py:107` | `def test_graphlayout_cross_group_curve_bends_inward(self)` |
-| `test_graphlayout_curves_skip_unknown_and_keep_endpoints` | method | `tests/test_graphlayout.py:100` | `def test_graphlayout_curves_skip_unknown_and_keep_endpoints(self)` |
-| `test_graphlayout_empty_and_single` | method | `tests/test_graphlayout.py:62` | `def test_graphlayout_empty_and_single(self)` |
-| `test_graphlayout_fa2_is_deterministic` | method | `tests/test_graphlayout.py:37` | `def test_graphlayout_fa2_is_deterministic(self)` |
-| `test_graphlayout_fa2_python_fallback_runs` | method | `tests/test_graphlayout.py:55` | `def test_graphlayout_fa2_python_fallback_runs(self)` |
-| `test_graphlayout_fa2_separates_communities` | method | `tests/test_graphlayout.py:43` | `def test_graphlayout_fa2_separates_communities(self)` |
-| `test_graphlayout_fa2_snapshot_count` | method | `tests/test_graphlayout.py:30` | `def test_graphlayout_fa2_snapshot_count(self)` |
-| `test_graphlayout_fit_frames_stays_in_box` | method | `tests/test_graphlayout.py:67` | `def test_graphlayout_fit_frames_stays_in_box(self)` |
-| `test_graphlayout_groups_cover_full_circle` | method | `tests/test_graphlayout.py:115` | `def test_graphlayout_groups_cover_full_circle(self)` |
-| `test_graphlayout_interpolate_endpoints` | method | `tests/test_graphlayout.py:76` | `def test_graphlayout_interpolate_endpoints(self)` |
-| `test_graphlayout_leaves_on_circle` | method | `tests/test_graphlayout.py:95` | `def test_graphlayout_leaves_on_circle(self)` |
+| `TestEdgeBundlingContract` | class | `tests/test_graphlayout.py:88` | `class TestEdgeBundlingContract(TestCase)` |
+| `TestForceAtlas2Contract` | class | `tests/test_graphlayout.py:31` | `class TestForceAtlas2Contract(TestCase)` |
+| `TestForceAtlas2ThreeDContract` | class | `tests/test_graphlayout.py:126` | `class TestForceAtlas2ThreeDContract(TestCase)` |
+| `TestSphericalBundlingContract` | class | `tests/test_graphlayout.py:167` | `class TestSphericalBundlingContract(TestCase)` |
+| `_two_cliques` | function | `tests/test_graphlayout.py:22` | `def _two_cliques()` |
+| `mean` | method | `tests/test_graphlayout.py:52` | `def mean(pairs)` |
+| `setUp` | method | `tests/test_graphlayout.py:91` | `def setUp(self)` |
+| `setUp` | method | `tests/test_graphlayout.py:170` | `def setUp(self)` |
+| `test_graphlayout_cross_group_curve_bends_inward` | method | `tests/test_graphlayout.py:111` | `def test_graphlayout_cross_group_curve_bends_inward(self)` |
+| `test_graphlayout_curves_skip_unknown_and_keep_endpoints` | method | `tests/test_graphlayout.py:104` | `def test_graphlayout_curves_skip_unknown_and_keep_endpoints(self)` |
+| `test_graphlayout_empty_and_single` | method | `tests/test_graphlayout.py:66` | `def test_graphlayout_empty_and_single(self)` |
+| `test_graphlayout_fa2_2d_seed_unchanged_by_dims` | method | `tests/test_graphlayout.py:149` | `def test_graphlayout_fa2_2d_seed_unchanged_by_dims(self)` |
+| `test_graphlayout_fa2_3d_is_deterministic` | method | `tests/test_graphlayout.py:137` | `def test_graphlayout_fa2_3d_is_deterministic(self)` |
+| `test_graphlayout_fa2_3d_python_fallback_runs` | method | `tests/test_graphlayout.py:143` | `def test_graphlayout_fa2_3d_python_fallback_runs(self)` |
+| `test_graphlayout_fa2_3d_returns_triples` | method | `tests/test_graphlayout.py:129` | `def test_graphlayout_fa2_3d_returns_triples(self)` |
+| `test_graphlayout_fa2_is_deterministic` | method | `tests/test_graphlayout.py:41` | `def test_graphlayout_fa2_is_deterministic(self)` |
+| `test_graphlayout_fa2_python_fallback_runs` | method | `tests/test_graphlayout.py:59` | `def test_graphlayout_fa2_python_fallback_runs(self)` |
+| `test_graphlayout_fa2_separates_communities` | method | `tests/test_graphlayout.py:47` | `def test_graphlayout_fa2_separates_communities(self)` |
+| `test_graphlayout_fa2_snapshot_count` | method | `tests/test_graphlayout.py:34` | `def test_graphlayout_fa2_snapshot_count(self)` |
+| `test_graphlayout_fibonacci_sphere_unit_vectors` | method | `tests/test_graphlayout.py:180` | `def test_graphlayout_fibonacci_sphere_unit_vectors(self)` |
+| `test_graphlayout_fit_frames_stays_in_box` | method | `tests/test_graphlayout.py:71` | `def test_graphlayout_fit_frames_stays_in_box(self)` |
+| `test_graphlayout_groups_cover_full_circle` | method | `tests/test_graphlayout.py:119` | `def test_graphlayout_groups_cover_full_circle(self)` |
+| `test_graphlayout_interpolate_endpoints` | method | `tests/test_graphlayout.py:80` | `def test_graphlayout_interpolate_endpoints(self)` |
+| `test_graphlayout_leaves_on_circle` | method | `tests/test_graphlayout.py:99` | `def test_graphlayout_leaves_on_circle(self)` |
+| `test_graphlayout_normalize_cloud_bounds_outliers` | method | `tests/test_graphlayout.py:158` | `def test_graphlayout_normalize_cloud_bounds_outliers(self)` |
+| `test_graphlayout_single_node_3d_at_origin` | method | `tests/test_graphlayout.py:153` | `def test_graphlayout_single_node_3d_at_origin(self)` |
+| `test_graphlayout_sphere_caps_are_compact` | method | `tests/test_graphlayout.py:199` | `def test_graphlayout_sphere_caps_are_compact(self)` |
+| `test_graphlayout_sphere_caps_have_exact_sizes` | method | `tests/test_graphlayout.py:195` | `def test_graphlayout_sphere_caps_have_exact_sizes(self)` |
+| `test_graphlayout_sphere_cross_curve_dives_inside` | method | `tests/test_graphlayout.py:223` | `def test_graphlayout_sphere_cross_curve_dives_inside(self)` |
+| `test_graphlayout_sphere_curves_skip_unknown_and_self` | method | `tests/test_graphlayout.py:215` | `def test_graphlayout_sphere_curves_skip_unknown_and_self(self)` |
+| `test_graphlayout_sphere_hub_is_closest_to_cap_center` | method | `tests/test_graphlayout.py:209` | `def test_graphlayout_sphere_hub_is_closest_to_cap_center(self)` |
+| `test_graphlayout_sphere_is_deterministic_and_empty_safe` | method | `tests/test_graphlayout.py:228` | `def test_graphlayout_sphere_is_deterministic_and_empty_safe(self)` |
+| `test_graphlayout_sphere_leaves_on_surface` | method | `tests/test_graphlayout.py:188` | `def test_graphlayout_sphere_leaves_on_surface(self)` |
 | `TestGraphRagIndexContract` | class | `tests/test_graphrag.py:79` | `class TestGraphRagIndexContract(TestCase)` |
 | `TestGraphRagPrimitives` | class | `tests/test_graphrag.py:241` | `class TestGraphRagPrimitives(TestCase)` |
 | `TestGraphRagSearchContract` | class | `tests/test_graphrag.py:159` | `class TestGraphRagSearchContract(TestCase)` |
@@ -412,89 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_extracts_class` | method | `tests/test_parsers_new.py:72` | `def test_extracts_class(self)` |
 | `test_extracts_class_inheritance` | method | `tests/test_parsers_new.py:155` | `def test_extracts_class_inheritance(self)` |
 | `test_extracts_class_with_inheritance` | method | `tests/test_parsers_new.py:19` | `def test_extracts_class_with_inheritance(self)` |
-| `test_extracts_def` | method | `tests/test_parsers_new.py:95` | `def test_extracts_def(self)` |
-| `test_extracts_defmodule` | method | `tests/test_parsers_new.py:121` | `def test_extracts_defmodule(self)` |
-| `test_extracts_fun` | method | `tests/test_parsers_new.py:78` | `def test_extracts_fun(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:55` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:106` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:127` | `def test_extracts_function(self)` |
-| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
-| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
-| `test_extracts_module` | method | `tests/test_parsers_new.py:27` | `def test_extracts_module(self)` |
-| `test_extracts_object` | method | `tests/test_parsers_new.py:89` | `def test_extracts_object(self)` |
-| `test_extracts_protocol` | method | `tests/test_parsers_new.py:61` | `def test_extracts_protocol(self)` |
-| `test_extracts_require` | method | `tests/test_parsers_new.py:39` | `def test_extracts_require(self)` |
-| `test_extracts_require` | method | `tests/test_parsers_new.py:111` | `def test_extracts_require(self)` |
-| `test_kotlin_extension_maps_correctly` | method | `tests/test_parsers_new.py:146` | `def test_kotlin_extension_maps_correctly(self)` |
-| `test_ruby_extension_maps_correctly` | method | `tests/test_parsers_new.py:138` | `def test_ruby_extension_maps_correctly(self)` |
-| `test_swift_extension_maps_correctly` | method | `tests/test_parsers_new.py:142` | `def test_swift_extension_maps_correctly(self)` |
-| `TestParserHypothesisContract` | class | `tests/test_parsers_property.py:155` | `class TestParserHypothesisContract(TestCase)` |
-| `TestPythonParserProperty` | class | `tests/test_parsers_property.py:288` | `class TestPythonParserProperty(TestCase)` |
-| `_StrategyPlaceholder` | class | `tests/test_parsers_property.py:45` | `class _StrategyPlaceholder` |
-| `_UnavailableStrategies` | class | `tests/test_parsers_property.py:60` | `class _UnavailableStrategies` |
-| `__getattr__` | method | `tests/test_parsers_property.py:63` | `def __getattr__(self, name)` |
-| `__or__` | method | `tests/test_parsers_property.py:48` | `def __or__(self, other)` |
-| `__ror__` | method | `tests/test_parsers_property.py:52` | `def __ror__(self, other)` |
-| `_assert_valid_symbols` | method | `tests/test_parsers_property.py:275` | `def _assert_valid_symbols(self, symbols)` |
-| `_create_parser` | function | `tests/test_parsers_property.py:142` | `def _create_parser(ext)` |
-| `_generate_multiline_code` | function | `tests/test_parsers_property.py:105` | `def _generate_multiline_code(lines, line_strategy)` |
-| `builder` | method | `tests/test_parsers_property.py:65` | `def builder()` |
-| `given` | method | `tests/test_parsers_property.py:69` | `def given()` |
-| `map` | method | `tests/test_parsers_property.py:56` | `def map(self)` |
-| `setUp` | method | `tests/test_parsers_property.py:291` | `def setUp(self)` |
-| `settings` | method | `tests/test_parsers_property.py:75` | `def settings()` |
-| `test_empty_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:198` | `def test_empty_code_returns_empty_or_valid(self, ext)` |
-| `test_never_crashes_on_malformed_code` | method | `tests/test_parsers_property.py:162` | `def test_never_crashes_on_malformed_code(self, ext, code)` |
-| `test_never_crashes_on_many_lines` | method | `tests/test_parsers_property.py:220` | `def test_never_crashes_on_many_lines(self, ext, lines)` |
-| `test_never_crashes_on_unicode_code` | method | `tests/test_parsers_property.py:180` | `def test_never_crashes_on_unicode_code(self, ext, code)` |
-| `test_parser_imports_is_list_of_strings` | method | `tests/test_parsers_property.py:257` | `def test_parser_imports_is_list_of_strings(self, ext)` |
-| `test_python_never_crashes_on_any_text` | method | `tests/test_parsers_property.py:310` | `def test_python_never_crashes_on_any_text(self, code)` |
-| `test_python_never_crashes_on_weird_ascii` | method | `tests/test_parsers_property.py:296` | `def test_python_never_crashes_on_weird_ascii(self, code)` |
-| `test_repeated_keywords_no_crash` | method | `tests/test_parsers_property.py:238` | `def test_repeated_keywords_no_crash(self, ext)` |
-| `test_unknown_extension_returns_none` | method | `tests/test_parsers_property.py:269` | `def test_unknown_extension_returns_none(self)` |
-| `test_whitespace_code_returns_empty_or_valid` | method | `tests/test_parsers_property.py:208` | `def test_whitespace_code_returns_empty_or_valid(self, ext)` |
-| `wrapper` | method | `tests/test_parsers_property.py:71` | `def wrapper(fn)` |
-| `wrapper` | method | `tests/test_parsers_property.py:77` | `def wrapper(fn)` |
-| `TestQueryEngineContract` | class | `tests/test_query.py:22` | `class TestQueryEngineContract(TestCase)` |
-| `_make_node` | function | `tests/test_query.py:7` | `def _make_node(node_id, symbols)` |
-| `_make_sym` | function | `tests/test_query.py:18` | `def _make_sym(name, kind, line)` |
-| `setUp` | method | `tests/test_query.py:23` | `def setUp(self)` |
-| `test_explain_returns_details` | method | `tests/test_query.py:51` | `def test_explain_returns_details(self)` |
-| `test_explain_shows_imports` | method | `tests/test_query.py:58` | `def test_explain_shows_imports(self)` |
-| `test_explain_shows_siblings` | method | `tests/test_query.py:63` | `def test_explain_shows_siblings(self)` |
-| `test_explain_unknown_returns_none` | method | `tests/test_query.py:69` | `def test_explain_unknown_returns_none(self)` |
-| `test_find_exact_symbol` | method | `tests/test_query.py:36` | `def test_find_exact_symbol(self)` |
-| `test_find_path_direct_import` | method | `tests/test_query.py:73` | `def test_find_path_direct_import(self)` |
-| `test_find_path_same_file` | method | `tests/test_query.py:79` | `def test_find_path_same_file(self)` |
-| `test_find_path_unknown_returns_none` | method | `tests/test_query.py:84` | `def test_find_path_unknown_returns_none(self)` |
-| `test_find_symbol_fuzzy` | method | `tests/test_query.py:42` | `def test_find_symbol_fuzzy(self)` |
-| `test_find_symbol_not_found` | method | `tests/test_query.py:47` | `def test_find_symbol_not_found(self)` |
-| `test_query_returns_file_matches` | method | `tests/test_query.py:102` | `def test_query_returns_file_matches(self)` |
-| `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
-| `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
-| `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
-| `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
-| `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
-| `TestEdgeKind` | class | `tests/test_ranking.py:60` | `class TestEdgeKind` |
-| `TestExplain` | class | `tests/test_ranking.py:539` | `class TestExplain` |
-| `TestGlobalPageRank` | class | `tests/test_ranking.py:247` | `class TestGlobalPageRank` |
-| `TestHITS` | class | `tests/test_ranking.py:325` | `class TestHITS` |
-| `TestIntegration` | class | `tests/test_ranking.py:587` | `class TestIntegration` |
-| `TestMorphism` | class | `tests/test_ranking.py:84` | `class TestMorphism` |
-| `TestPersonalizedPageRank` | class | `tests/test_ranking.py:288` | `class TestPersonalizedPageRank` |
-| `TestProjections` | class | `tests/test_ranking.py:490` | `class TestProjections` |
-| `TestSeedGeneration` | class | `tests/test_ranking.py:350` | `class TestSeedGeneration` |
-| `TestTypedGraph` | class | `tests/test_ranking.py:183` | `class TestTypedGraph` |
-| `_make_test_graph` | method | `tests/test_ranking.py:238` | `def _make_test_graph()` |
-| `test_add_object_and_morphism` | method | `tests/test_ranking.py:110` | `def test_add_object_and_morphism(self)` |
-| `test_all_edge_kinds_have_weights` | method | `tests/test_ranking.py:61` | `def test_all_edge_kinds_have_weights(self)` |
-| `test_all_nodes_have_positive_score` | method | `tests/test_ranking.py:254` | `def test_all_nodes_have_positive_score(self)` |
-| `test_apply_view_architecture` | method | `tests/test_ranking.py:512` | `def test_apply_view_architecture(self)` |
-| `test_apply_view_empty` | method | `tests/test_ranking.py:528` | `def test_apply_view_empty(self)` |
-| `test_apply_view_reverse` | method | `tests/test_ranking.py:521` | `def test_apply_view_reverse(self)` |
-| `test_authorities_and_hubs_have_positive_scores` | method | `tests/test_ranking.py:326` | `def test_authorities_and_hubs_have_positive_scores(self)` |
-| `test_authorities_l2_normalized` | method | `tests/test_ranking.py:333` | `def test_authorities_l2_normalized(self)` |
-| `test_build_category_from_edges` | method | `tests/test_ranking.py:214` | `def test_build_category_from_edges(self)` |
-| `test_build_category_from_edges_filters_by_node_ids` | method | `tests/test_ranking.py:225` | `def test_build_category_from_edges_filters_by_node_ids(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

@@ -1,10 +1,10 @@
 # readmenator: _agent_output
 
-*Community 0 | 38 files | cohesion 0.41*
+*Community 0 | 38 files | cohesion 0.40*
 
 ## Definition
 
-This community groups 38 file(s) rooted at `readmenator` with dominant language py (cohesion 0.41). Central symbols: `AgentOutputGenerator`, `Config`, `DataflowAnalyzer`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`, `GraphAnalyzer`, `HotspotAnalyzer`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
+This community groups 38 file(s) rooted at `readmenator` with dominant language py (cohesion 0.40). Central symbols: `AgentOutputGenerator`, `Config`, `DataflowAnalyzer`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`, `GraphAnalyzer`, `HotspotAnalyzer`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
 
 ## Files
 
@@ -77,13 +77,13 @@ This community groups 38 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 80
-- Cross-boundary resolved imports (EXTRACTED): 109
+- Cross-boundary resolved imports (EXTRACTED): 111
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
 - [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
 - [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_graphrag.py imports readmenator/_analyzer.py.
 - [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
 - [INFERRED] bridges community 5 <-> 0 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
@@ -100,7 +100,7 @@ This community groups 38 file(s) rooted at `readmenator` with dominant language 
 
 - Why do 9 file(s) lack file-level docs (e.g. `tests/test_config.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _agent_output changed?
-- Should readmenator: _agent_output be split, given cohesion 0.41?
+- Should readmenator: _agent_output be split, given cohesion 0.40?
 
 ## Sources
 

@@ -415,6 +415,17 @@ class ForceGraphRenderer:
             "groupColors": self.group_colors(payload),
         }
 
+    def family_color(self, name: str) -> str:
+        """Return the configured stable hash color for a group name.
+
+        Args:
+            name: Group label to hash.
+
+        Returns:
+            CSS hsl() color string.
+        """
+        return self._family_color(name)
+
     def _family_color(self, name: str) -> str:
         """Return the configured stable hash color for a group name.
 

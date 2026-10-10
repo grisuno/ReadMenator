@@ -10,6 +10,8 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_analytics.py` -> __future__, collections, typing
 - `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
 - `readmenator/_app.py` -> __future__, dataclasses, json, logging, pathlib, typing
+- `readmenator/_bundlegraph.py` -> __future__, html, json, math, pathlib, re, typing
+- `readmenator/_bundlegraph_page.py` -> __future__
 - `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
 - `readmenator/_category.py` -> __future__, dataclasses, enum, typing
 - `readmenator/_concepts.py` -> __future__, collections, logging, re, typing
@@ -86,6 +88,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest
+- `tests/test_bundlegraph.py` -> __future__, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
 - `tests/test_concepts.py` -> unittest
 - `tests/test_config.py` -> dataclasses, unittest
@@ -123,6 +126,6 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_taint.py` -> __future__, unittest
 - `tests/test_taint_bdd.py` -> __future__, pathlib, pytest_bdd, tempfile, typing, unittest
 - `tests/test_uml.py` -> __future__, unittest
-- `tests/test_video.py` -> hashlib, pathlib, unittest
+- `tests/test_video.py` -> hashlib, math, pathlib, unittest
 - `tests/test_wiki.py` -> dataclasses, json, os, pathlib, tempfile, unittest
 

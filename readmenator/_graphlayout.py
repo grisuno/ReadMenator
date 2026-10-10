@@ -10,6 +10,11 @@ Implements two layout families used by the cinematic video:
   grouped by community, every edge routed through the community
   hierarchy as a control polygon, straightened by the bundling
   strength beta, and sampled as a uniform cubic B-spline.
+- Spherical edge bundling: the same hierarchy on a unit sphere, each
+  community owning a cap of Fibonacci lattice points sized by its
+  member count, hubs inside the sphere and the root at its center.
+
+ForceAtlas2 runs in two or three dimensions (settings.dims).
 
 numpy is used when available for the O(n^2) force pass; a pure Python
 path keeps the module dependency-free (the iteration budget shrinks
@@ -25,6 +30,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Tuple
 
 Point = Tuple[float, float]
+Point3 = Tuple[float, float, float]
 
 
 @dataclass(frozen=True)
@@ -40,6 +46,7 @@ class ForceAtlas2Settings:
         tolerance: Swing tolerance of the adaptive speed.
         seed: Random seed for the initial positions.
         fallback_budget: Max n^2 * iterations for the pure Python path.
+        dims: Layout dimensions (2 or 3).
     """
 
     iterations: int = 300
@@ -50,20 +57,21 @@ class ForceAtlas2Settings:
     tolerance: float = 1.0
     seed: int = 7
     fallback_budget: int = 20_000_000
+    dims: int = 2
 
 
-def _initial_positions(n: int, seed: int) -> List[Point]:
-    """Seeded uniform positions inside a square scaled to sqrt(n)."""
+def _initial_positions(n: int, seed: int, dims: int = 2) -> List[Tuple[float, ...]]:
+    """Seeded uniform positions inside a cube scaled to sqrt(n)."""
     rng = random.Random(seed)
     span = max(1.0, math.sqrt(n)) * 10.0
-    return [(rng.uniform(-span, span), rng.uniform(-span, span)) for _ in range(n)]
+    return [tuple(rng.uniform(-span, span) for _ in range(dims)) for _ in range(n)]
 
 
 def forceatlas2_frames(
     ids: Sequence[str],
     edges: Sequence[Tuple[str, str]],
     settings: Optional[ForceAtlas2Settings] = None,
-) -> List[Dict[str, Point]]:
+) -> List[Dict[str, Tuple[float, ...]]]:
     """Run ForceAtlas2 and return evenly spaced layout snapshots.
 
     Args:
@@ -73,9 +81,11 @@ def forceatlas2_frames(
 
     Returns:
         Snapshots from the seeded start to the converged layout; each
-        maps node id to raw (x, y) coordinates. Empty for no nodes.
+        maps node id to raw coordinates ((x, y), or (x, y, z) when
+        settings.dims is 3). Empty for no nodes.
     """
     cfg = settings or ForceAtlas2Settings()
+    dims = 3 if cfg.dims == 3 else 2
     ids = list(ids)
     n = len(ids)
     if n == 0:
@@ -85,15 +95,16 @@ def forceatlas2_frames(
         (min(index[a], index[b]), max(index[a], index[b]))
         for a, b in edges if a in index and b in index and a != b
     })
-    start = _initial_positions(n, cfg.seed)
+    start = _initial_positions(n, cfg.seed, dims)
     if n == 1:
-        return [{ids[0]: (0.0, 0.0)}, {ids[0]: (0.0, 0.0)}]
+        origin = tuple(0.0 for _ in range(dims))
+        return [{ids[0]: origin}, {ids[0]: origin}]
     try:
         import numpy as np  # noqa: F401
         raw = _fa2_numpy(n, pairs, start, cfg)
     except ImportError:
         raw = _fa2_python(n, pairs, start, cfg)
-    return [{ids[i]: (float(p[i][0]), float(p[i][1])) for i in range(n)} for p in raw]
+    return [{ids[i]: tuple(float(v) for v in p[i]) for i in range(n)} for p in raw]
 
 
 def _snapshot_steps(iterations: int, snapshots: int) -> List[int]:
@@ -102,7 +113,7 @@ def _snapshot_steps(iterations: int, snapshots: int) -> List[int]:
     return sorted({round(i * iterations / (count - 1)) for i in range(count)})
 
 
-def _fa2_numpy(n: int, pairs: List[Tuple[int, int]], start: List[Point], cfg: ForceAtlas2Settings) -> List[List[Point]]:
+def _fa2_numpy(n: int, pairs: List[Tuple[int, int]], start: List[Tuple[float, ...]], cfg: ForceAtlas2Settings) -> List[List[Tuple[float, ...]]]:
     """Vectorised ForceAtlas2 with adaptive global speed."""
     import numpy as np
 
@@ -118,10 +129,10 @@ def _fa2_numpy(n: int, pairs: List[Tuple[int, int]], start: List[Point], cfg: Fo
     old = np.zeros_like(pos)
     speed = 1.0
     record = set(_snapshot_steps(cfg.iterations, cfg.snapshots))
-    frames: List[List[Point]] = []
+    frames: List[List[Tuple[float, ...]]] = []
     for step in range(cfg.iterations + 1):
         if step in record:
-            frames.append([(float(x), float(y)) for x, y in pos])
+            frames.append([tuple(float(v) for v in row) for row in pos])
         if step == cfg.iterations:
             break
         delta = pos[:, None, :] - pos[None, :, :]
@@ -149,60 +160,58 @@ def _fa2_numpy(n: int, pairs: List[Tuple[int, int]], start: List[Point], cfg: Fo
     return frames
 
 
-def _fa2_python(n: int, pairs: List[Tuple[int, int]], start: List[Point], cfg: ForceAtlas2Settings) -> List[List[Point]]:
-    """Pure Python ForceAtlas2 with a bounded iteration budget."""
+def _fa2_python(n: int, pairs: List[Tuple[int, int]], start: List[Tuple[float, ...]], cfg: ForceAtlas2Settings) -> List[List[Tuple[float, ...]]]:
+    """Pure Python ForceAtlas2 with a bounded iteration budget (any dimension)."""
     iterations = max(10, min(cfg.iterations, cfg.fallback_budget // max(1, n * n)))
-    xs = [p[0] for p in start]
-    ys = [p[1] for p in start]
+    dims = len(start[0]) if start else 2
+    axes = range(dims)
+    pos = [list(p) for p in start]
     mass = [1.0] * n
     for a, b in pairs:
         mass[a] += 1.0
         mass[b] += 1.0
-    old = [(0.0, 0.0)] * n
+    old = [[0.0] * dims for _ in range(n)]
     speed = 1.0
     record = set(_snapshot_steps(iterations, cfg.snapshots))
-    frames: List[List[Point]] = []
+    frames: List[List[Tuple[float, ...]]] = []
     for step in range(iterations + 1):
         if step in record:
-            frames.append(list(zip(xs, ys)))
+            frames.append([tuple(p) for p in pos])
         if step == iterations:
             break
-        fx = [0.0] * n
-        fy = [0.0] * n
+        force = [[0.0] * dims for _ in range(n)]
         for i in range(n):
             for j in range(i + 1, n):
-                dx, dy = xs[i] - xs[j], ys[i] - ys[j]
-                d2 = dx * dx + dy * dy + 1e-9
+                delta = [pos[i][k] - pos[j][k] for k in axes]
+                d2 = sum(v * v for v in delta) + 1e-9
                 f = cfg.scaling * mass[i] * mass[j] / d2
-                fx[i] += dx * f
-                fy[i] += dy * f
-                fx[j] -= dx * f
-                fy[j] -= dy * f
+                for k in axes:
+                    force[i][k] += delta[k] * f
+                    force[j][k] -= delta[k] * f
         for a, b in pairs:
-            dx, dy = xs[b] - xs[a], ys[b] - ys[a]
-            d = math.hypot(dx, dy) + 1e-9
+            delta = [pos[b][k] - pos[a][k] for k in axes]
+            d = math.hypot(*delta) + 1e-9
             mag = math.log1p(d) / d if cfg.linlog else 1.0
-            fx[a] += dx * mag
-            fy[a] += dy * mag
-            fx[b] -= dx * mag
-            fy[b] -= dy * mag
+            for k in axes:
+                force[a][k] += delta[k] * mag
+                force[b][k] -= delta[k] * mag
         total_swing = total_traction = 0.0
         swings = []
         for i in range(n):
-            norm = math.hypot(xs[i], ys[i]) + 1e-9
-            fx[i] -= xs[i] / norm * cfg.gravity * mass[i]
-            fy[i] -= ys[i] / norm * cfg.gravity * mass[i]
-            sw = mass[i] * math.hypot(fx[i] - old[i][0], fy[i] - old[i][1])
+            norm = math.hypot(*pos[i]) + 1e-9
+            for k in axes:
+                force[i][k] -= pos[i][k] / norm * cfg.gravity * mass[i]
+            sw = mass[i] * math.hypot(*[force[i][k] - old[i][k] for k in axes])
             swings.append(sw)
             total_swing += sw
-            total_traction += mass[i] * math.hypot(fx[i] + old[i][0], fy[i] + old[i][1]) / 2.0
+            total_traction += mass[i] * math.hypot(*[force[i][k] + old[i][k] for k in axes]) / 2.0
         target = cfg.tolerance * total_traction / (total_swing + 1e-9)
         speed = speed + min(target - speed, 0.5 * speed)
         for i in range(n):
             local = speed / (1.0 + math.sqrt(speed * swings[i]))
-            xs[i] += fx[i] * local
-            ys[i] += fy[i] * local
-        old = list(zip(fx, fy))
+            for k in axes:
+                pos[i][k] += force[i][k] * local
+        old = force
     return frames
 
 
@@ -286,14 +295,15 @@ class BundleLayout:
     radius: float
 
 
-def _bspline(control: List[Point], samples: int) -> List[Point]:
-    """Sample a clamped uniform cubic B-spline through a control polygon."""
+def _bspline(control: Sequence[Tuple[float, ...]], samples: int) -> List[Tuple[float, ...]]:
+    """Sample a clamped uniform cubic B-spline through a control polygon (any dimension)."""
+    dims = range(len(control[0]))
     if len(control) < 3:
         a, b = control[0], control[-1]
-        return [(a[0] + (b[0] - a[0]) * k / samples, a[1] + (b[1] - a[1]) * k / samples) for k in range(samples + 1)]
-    pts = [control[0], control[0]] + control + [control[-1], control[-1]]
+        return [tuple(a[i] + (b[i] - a[i]) * k / samples for i in dims) for k in range(samples + 1)]
+    pts = [control[0], control[0]] + list(control) + [control[-1], control[-1]]
     segments = len(pts) - 3
-    out: List[Point] = []
+    out: List[Tuple[float, ...]] = []
     per = max(2, samples // max(1, segments))
     for s in range(segments):
         p0, p1, p2, p3 = pts[s], pts[s + 1], pts[s + 2], pts[s + 3]
@@ -304,11 +314,58 @@ def _bspline(control: List[Point], samples: int) -> List[Point]:
             b1 = (3 * t3 - 6 * t2 + 4) / 6
             b2 = (-3 * t3 + 3 * t2 + 3 * t + 1) / 6
             b3 = t3 / 6
-            out.append((
-                b0 * p0[0] + b1 * p1[0] + b2 * p2[0] + b3 * p3[0],
-                b0 * p0[1] + b1 * p1[1] + b2 * p2[1] + b3 * p3[1],
-            ))
+            out.append(tuple(b0 * p0[i] + b1 * p1[i] + b2 * p2[i] + b3 * p3[i] for i in dims))
     return out
+
+
+def _bundle_curves(
+    leaves: Dict[str, Tuple[float, ...]],
+    member_group: Dict[str, str],
+    hub: Dict[str, Tuple[float, ...]],
+    root: Tuple[float, ...],
+    edges: Sequence[Tuple[str, str]],
+    beta: float,
+    samples: int,
+) -> List[Tuple[str, str, List[Tuple[float, ...]]]]:
+    """Route every edge through the group hierarchy and sample it as a B-spline.
+
+    Cross-group edges follow leaf -> source hub -> root -> target hub -> leaf;
+    same-group edges bend through the centroid of their hub and both leaves.
+    The control polygon is blended toward the straight chord by 1 - beta.
+
+    Args:
+        leaves: Leaf positions (2D or 3D).
+        member_group: Leaf id to group label.
+        hub: Group label to hub position.
+        root: Hierarchy root position.
+        edges: (source, target) pairs; unknown ids and self loops are skipped.
+        beta: Bundling strength in [0, 1].
+        samples: Points per sampled curve.
+
+    Returns:
+        One (source, target, points) entry per kept edge.
+    """
+    beta = max(0.0, min(1.0, beta))
+    curves: List[Tuple[str, str, List[Tuple[float, ...]]]] = []
+    for a, b in edges:
+        if a not in leaves or b not in leaves or a == b:
+            continue
+        la, lb = leaves[a], leaves[b]
+        dims = range(len(la))
+        ga, gb = member_group[a], member_group[b]
+        if ga == gb:
+            mid = hub[ga]
+            inner = tuple((mid[i] + la[i] + lb[i]) / 3 for i in dims)
+            control = [la, inner, lb]
+        else:
+            control = [la, hub[ga], root, hub[gb], lb]
+        m = len(control) - 1
+        straightened = [
+            tuple(beta * p[i] + (1 - beta) * (la[i] + j / m * (lb[i] - la[i])) for i in dims)
+            for j, p in enumerate(control)
+        ]
+        curves.append((a, b, _bspline(straightened, samples)))
+    return curves
 
 
 def hierarchical_edge_bundling(
@@ -362,24 +419,187 @@ def hierarchical_edge_bundling(
         hub[label] = (cx + radius * inner_ratio * math.cos(mid), cy + radius * inner_ratio * math.sin(mid))
         arcs.append((label, start, end, len(groups[label])))
         angle += group_gap
-    curves: List[Tuple[str, str, List[Point]]] = []
-    beta = max(0.0, min(1.0, beta))
-    for a, b in edges:
-        if a not in leaves or b not in leaves or a == b:
-            continue
-        ga, gb = member_group[a], member_group[b]
-        if ga == gb:
-            mid = hub[ga]
-            inner = ((mid[0] + leaves[a][0] + leaves[b][0]) / 3, (mid[1] + leaves[a][1] + leaves[b][1]) / 3)
-            control = [leaves[a], inner, leaves[b]]
-        else:
-            control = [leaves[a], hub[ga], (cx, cy), hub[gb], leaves[b]]
-        p0, pn = control[0], control[-1]
-        m = len(control) - 1
-        straightened = [
-            (beta * p[0] + (1 - beta) * (p0[0] + i / m * (pn[0] - p0[0])),
-             beta * p[1] + (1 - beta) * (p0[1] + i / m * (pn[1] - p0[1])))
-            for i, p in enumerate(control)
-        ]
-        curves.append((a, b, _bspline(straightened, samples)))
+    curves = _bundle_curves(leaves, member_group, hub, (cx, cy), edges, beta, samples)
     return BundleLayout(leaves, angles, arcs, curves, center, radius)
+
+
+def fibonacci_sphere(count: int) -> List[Point3]:
+    """Return count nearly uniform unit vectors on a golden-angle spiral.
+
+    Args:
+        count: Number of points.
+
+    Returns:
+        Unit vectors ordered from the north pole to the south pole.
+    """
+    if count <= 0:
+        return []
+    if count == 1:
+        return [(0.0, -1.0, 0.0)]
+    golden = math.pi * (3.0 - math.sqrt(5.0))
+    out: List[Point3] = []
+    for i in range(count):
+        y = 1.0 - 2.0 * (i + 0.5) / count
+        ring = math.sqrt(max(0.0, 1.0 - y * y))
+        theta = golden * i
+        out.append((ring * math.cos(theta), y, ring * math.sin(theta)))
+    return out
+
+
+def _unit(v: Sequence[float]) -> Point3:
+    """Normalize a 3D vector (zero vectors map to the north pole)."""
+    norm = math.sqrt(sum(c * c for c in v))
+    if norm < 1e-12:
+        return (0.0, -1.0, 0.0)
+    return (v[0] / norm, v[1] / norm, v[2] / norm)
+
+
+@dataclass(frozen=True)
+class SphereBundleLayout:
+    """Spherical hierarchical edge bundling result.
+
+    Attributes:
+        leaves: Leaf positions on the sphere surface.
+        groups: Group caps as (label, unit center, member count).
+        hubs: Group hub positions inside the sphere.
+        curves: One sampled 3D polyline per edge as (source, target, points).
+        radius: Sphere radius.
+    """
+
+    leaves: Dict[str, Point3]
+    groups: List[Tuple[str, Point3, int]]
+    hubs: Dict[str, Point3]
+    curves: List[Tuple[str, str, List[Tuple[float, ...]]]]
+    radius: float
+
+
+def _split_caps(
+    labels: List[str],
+    sizes: Dict[str, int],
+    points: List[int],
+    lattice: List[Point3],
+    out: Dict[str, List[int]],
+) -> None:
+    """Recursively bisect lattice points between runs of groups of matching size.
+
+    Args:
+        labels: Group labels in caller order.
+        sizes: Group label to member count (sums to len(points)).
+        points: Lattice indices to distribute.
+        lattice: Unit vectors of the full lattice.
+        out: Receives group label to its lattice indices.
+    """
+    if len(labels) == 1:
+        out[labels[0]] = points
+        return
+    total = sum(sizes[label] for label in labels)
+    best, cut, running = total, 1, 0
+    for i in range(1, len(labels)):
+        running += sizes[labels[i - 1]]
+        gap = abs(2 * running - total)
+        if gap < best:
+            best, cut = gap, i
+    left_count = sum(sizes[label] for label in labels[:cut])
+    spread = []
+    for k in range(3):
+        values = [lattice[pi][k] for pi in points]
+        spread.append(max(values) - min(values))
+    axis = max(range(3), key=lambda k: (spread[k], -k))
+    ordered = sorted(points, key=lambda pi: (lattice[pi][axis], pi))
+    _split_caps(labels[:cut], sizes, ordered[:left_count], lattice, out)
+    _split_caps(labels[cut:], sizes, ordered[left_count:], lattice, out)
+
+
+def spherical_edge_bundling(
+    groups: Dict[str, List[str]],
+    edges: Sequence[Tuple[str, str]],
+    radius: float = 1.0,
+    beta: float = 0.85,
+    samples: int = 24,
+    inner_ratio: float = 0.55,
+) -> SphereBundleLayout:
+    """Lay leaves on a sphere in community caps and bundle edges through the hierarchy.
+
+    Leaves occupy a Fibonacci lattice with one point per member. The
+    lattice is split recursively: the groups are cut into two runs of
+    nearly equal total size, the points are sorted along their axis of
+    largest spread and cut at the same count, and each half recurses.
+    Every community therefore owns one contiguous cap whose area matches
+    its size exactly. Inside a cap the points nearest its mean direction
+    go to the members listed first (callers list hubs first). Each hub
+    sits at the cap's mean direction scaled by inner_ratio; the root is
+    the sphere center.
+
+    Args:
+        groups: Ordered mapping of group label to member ids.
+        edges: (source, target) pairs between members.
+        radius: Sphere radius.
+        beta: Bundling strength in [0, 1].
+        samples: Points per sampled curve.
+        inner_ratio: Radius ratio of the group hubs.
+
+    Returns:
+        SphereBundleLayout with leaf positions, caps, hubs, and curves.
+    """
+    labels = [g for g in groups if groups[g]]
+    total = sum(len(groups[g]) for g in labels)
+    if total == 0:
+        return SphereBundleLayout({}, [], {}, [], radius)
+    lattice = fibonacci_sphere(total)
+    regions: Dict[str, List[int]] = {}
+    _split_caps(labels, {label: len(groups[label]) for label in labels},
+                list(range(total)), lattice, regions)
+    leaves: Dict[str, Point3] = {}
+    hubs: Dict[str, Point3] = {}
+    caps: List[Tuple[str, Point3, int]] = []
+    member_group: Dict[str, str] = {}
+    for label in labels:
+        region = regions[label]
+        center = _unit([sum(lattice[pi][k] for pi in region) for k in range(3)])
+        points = sorted(region, key=lambda pi: (-sum(lattice[pi][k] * center[k] for k in range(3)), pi))
+        for nid, pi in zip(groups[label], points):
+            p = lattice[pi]
+            leaves[nid] = (p[0] * radius, p[1] * radius, p[2] * radius)
+            member_group[nid] = label
+        hubs[label] = (center[0] * radius * inner_ratio, center[1] * radius * inner_ratio,
+                       center[2] * radius * inner_ratio)
+        caps.append((label, center, len(groups[label])))
+    curves = _bundle_curves(leaves, member_group, hubs, (0.0, 0.0, 0.0), edges, beta, samples)
+    return SphereBundleLayout(leaves, caps, hubs, curves, radius)
+
+
+def normalize_cloud(
+    points: Dict[str, Tuple[float, ...]],
+    quantile: float = 0.85,
+    max_radius: float = 1.3,
+) -> Dict[str, Point3]:
+    """Center a 3D point cloud, scale a radius quantile to 1, and pull outliers in.
+
+    Force layouts push isolated files far from the core; scaling by the
+    full extent would shrink the core to a dot. Points beyond radius 1
+    are compressed smoothly (tanh) so none lies past max_radius.
+
+    Args:
+        points: Raw 3D positions.
+        quantile: Fraction of points that end up inside the unit sphere.
+        max_radius: Hard bound on the radius after compression (> 1).
+
+    Returns:
+        Normalized positions (empty for no points).
+    """
+    if not points:
+        return {}
+    n = len(points)
+    mean = [sum(p[k] for p in points.values()) / n for k in range(3)]
+    radii = sorted(math.sqrt(sum((p[k] - mean[k]) ** 2 for k in range(3))) for p in points.values())
+    cut = radii[min(n - 1, int(n * max(0.0, min(1.0, quantile))))] or 1.0
+    room = max(1e-9, max_radius - 1.0)
+    out: Dict[str, Point3] = {}
+    for nid, p in points.items():
+        v = [(p[k] - mean[k]) / cut for k in range(3)]
+        r = math.sqrt(sum(c * c for c in v))
+        if r > 1.0:
+            factor = (1.0 + room * math.tanh((r - 1.0) / room)) / r
+            v = [c * factor for c in v]
+        out[nid] = (v[0], v[1], v[2])
+    return out

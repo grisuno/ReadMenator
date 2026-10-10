@@ -1,5 +1,62 @@
-# Subsystem: tests (page 2 of 3)
+# Subsystem: tests (page 2 of 4)
 Previous: [KB_tests.md](KB_tests.md)
+
+## tests/test_documentation.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestDocumentationGeneratorContract` (class, line 17) `class TestDocumentationGeneratorContract(TestCase)`
+  - `setUp` (method, line 18) `def setUp(self)`
+  - `test_contains_header` (method, line 22) `def test_contains_header(self)`
+  - `test_contains_metadata_line` (method, line 26) `def test_contains_metadata_line(self)`
+  - `test_contains_mermaid_block` (method, line 32) `def test_contains_mermaid_block(self)`
+  - `test_contains_architecture_reference` (method, line 37) `def test_contains_architecture_reference(self)`
+  - `test_contains_cpg_block` (method, line 41) `def test_contains_cpg_block(self)`
+  - `test_contains_statistics_dashboard` (method, line 46) `def test_contains_statistics_dashboard(self)`
+  - `test_groups_files_by_language` (method, line 51) `def test_groups_files_by_language(self)`
+  - `test_lists_symbols_under_file` (method, line 70) `def test_lists_symbols_under_file(self)`
+  - `test_class_symbol_is_pluralized_correctly` (method, line 83) `def test_class_symbol_is_pluralized_correctly(self)`
+  - `test_function_pluralization` (method, line 97) `def test_function_pluralization(self)`
+  - `test_method_pluralization` (method, line 109) `def test_method_pluralization(self)`
+  - `test_shows_no_symbols_for_empty_files` (method, line 121) `def test_shows_no_symbols_for_empty_files(self)`
+  - `test_includes_file_path` (method, line 132) `def test_includes_file_path(self)`
+  - `test_docstring_in_output` (method, line 143) `def test_docstring_in_output(self)`
+  - `test_truncation_note_when_limited` (method, line 155) `def test_truncation_note_when_limited(self)`
+  - `test_taint_propagation_section_present` (method, line 165) `def test_taint_propagation_section_present(self)`
+  - `test_hotspot_section_present` (method, line 185) `def test_hotspot_section_present(self)`
+  - `test_no_taint_section_when_empty` (method, line 203) `def test_no_taint_section_when_empty(self)`
+  - `test_no_hotspot_section_when_empty` (method, line 207) `def test_no_hotspot_section_when_empty(self)`
+  - `test_cpg_block_disabled_via_config` (method, line 211) `def test_cpg_block_disabled_via_config(self)`
+  - `test_architectural_layers_section` (method, line 217) `def test_architectural_layers_section(self)`
+  - `test_security_findings_section` (method, line 229) `def test_security_findings_section(self)`
+  - `test_context_budget_zero_returns_full_content` (method, line 252) `def test_context_budget_zero_returns_full_content(self)`
+  - `test_context_budget_returns_compact_summary` (method, line 260) `def test_context_budget_returns_compact_summary(self)`
+  - `test_context_budget_prioritizes_god_nodes` (method, line 268) `def test_context_budget_prioritizes_god_nodes(self)`
+  - `test_context_budget_truncates_at_limit` (method, line 285) `def test_context_budget_truncates_at_limit(self)`
+  - `test_context_budget_includes_security_findings` (method, line 293) `def test_context_budget_includes_security_findings(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_models.py`
+
+## tests/test_exporter.py
+- Doc: Contract tests for the GraphExporter.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestGraphExporterContract` (class, line 23) `class TestGraphExporterContract(TestCase)`
+  - `setUp` (method, line 26) `def setUp(self)`
+  - `_make_node` (method, line 30) `def _make_node(self, nid, label, lang, symbols)`
+  - `_make_sym` (method, line 42) `def _make_sym(self, name, kind, line)`
+  - `test_to_json_produces_valid_json` (method, line 47) `def test_to_json_produces_valid_json(self)`
+  - `test_to_json_includes_symbol_data` (method, line 56) `def test_to_json_includes_symbol_data(self)`
+  - `test_to_json_includes_metadata` (method, line 65) `def test_to_json_includes_metadata(self)`
+  - `test_to_json_includes_analysis_metadata` (method, line 76) `def test_to_json_includes_analysis_metadata(self)`
+  - `test_to_html_produces_standalone_page` (method, line 101) `def test_to_html_produces_standalone_page(self)`
+  - `test_to_html_includes_node_data` (method, line 109) `def test_to_html_includes_node_data(self)`
+  - `test_to_html_includes_community_legend_when_analysis` (method, line 116) `def test_to_html_includes_community_legend_when_analysis(self)`
+  - `test_to_svg_produces_svg_string` (method, line 138) `def test_to_svg_produces_svg_string(self)`
+  - `test_to_svg_render_truncation_for_large_graph` (method, line 145) `def test_to_svg_render_truncation_for_large_graph(self)`
+  - `test_to_svg_includes_readmenator_title` (method, line 154) `def test_to_svg_includes_readmenator_title(self)`
+  - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
 
 ## tests/test_gh_wiki.py
 - Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
@@ -30,22 +87,39 @@ Previous: [KB_tests.md](KB_tests.md)
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_two_cliques` (function, line 18) `def _two_cliques()`
-  - `TestForceAtlas2Contract` (class, line 27) `class TestForceAtlas2Contract(TestCase)`
-  - `TestEdgeBundlingContract` (class, line 84) `class TestEdgeBundlingContract(TestCase)`
-  - `test_graphlayout_fa2_snapshot_count` (method, line 30) `def test_graphlayout_fa2_snapshot_count(self)`
-  - `test_graphlayout_fa2_is_deterministic` (method, line 37) `def test_graphlayout_fa2_is_deterministic(self)`
-  - `test_graphlayout_fa2_separates_communities` (method, line 43) `def test_graphlayout_fa2_separates_communities(self)`
-  - `test_graphlayout_fa2_python_fallback_runs` (method, line 55) `def test_graphlayout_fa2_python_fallback_runs(self)`
-  - `test_graphlayout_empty_and_single` (method, line 62) `def test_graphlayout_empty_and_single(self)`
-  - `test_graphlayout_fit_frames_stays_in_box` (method, line 67) `def test_graphlayout_fit_frames_stays_in_box(self)`
-  - `test_graphlayout_interpolate_endpoints` (method, line 76) `def test_graphlayout_interpolate_endpoints(self)`
-  - `setUp` (method, line 87) `def setUp(self)`
-  - `test_graphlayout_leaves_on_circle` (method, line 95) `def test_graphlayout_leaves_on_circle(self)`
-  - `test_graphlayout_curves_skip_unknown_and_keep_endpoints` (method, line 100) `def test_graphlayout_curves_skip_unknown_and_keep_endpoints(self)`
-  - `test_graphlayout_cross_group_curve_bends_inward` (method, line 107) `def test_graphlayout_cross_group_curve_bends_inward(self)`
-  - `test_graphlayout_groups_cover_full_circle` (method, line 115) `def test_graphlayout_groups_cover_full_circle(self)`
-  - `mean` (method, line 48) `def mean(pairs)`
+  - `_two_cliques` (function, line 22) `def _two_cliques()`
+  - `TestForceAtlas2Contract` (class, line 31) `class TestForceAtlas2Contract(TestCase)`
+  - `TestEdgeBundlingContract` (class, line 88) `class TestEdgeBundlingContract(TestCase)`
+  - `TestForceAtlas2ThreeDContract` (class, line 126) `class TestForceAtlas2ThreeDContract(TestCase)`
+  - `TestSphericalBundlingContract` (class, line 167) `class TestSphericalBundlingContract(TestCase)`
+  - `test_graphlayout_fa2_snapshot_count` (method, line 34) `def test_graphlayout_fa2_snapshot_count(self)`
+  - `test_graphlayout_fa2_is_deterministic` (method, line 41) `def test_graphlayout_fa2_is_deterministic(self)`
+  - `test_graphlayout_fa2_separates_communities` (method, line 47) `def test_graphlayout_fa2_separates_communities(self)`
+  - `test_graphlayout_fa2_python_fallback_runs` (method, line 59) `def test_graphlayout_fa2_python_fallback_runs(self)`
+  - `test_graphlayout_empty_and_single` (method, line 66) `def test_graphlayout_empty_and_single(self)`
+  - `test_graphlayout_fit_frames_stays_in_box` (method, line 71) `def test_graphlayout_fit_frames_stays_in_box(self)`
+  - `test_graphlayout_interpolate_endpoints` (method, line 80) `def test_graphlayout_interpolate_endpoints(self)`
+  - `setUp` (method, line 91) `def setUp(self)`
+  - `test_graphlayout_leaves_on_circle` (method, line 99) `def test_graphlayout_leaves_on_circle(self)`
+  - `test_graphlayout_curves_skip_unknown_and_keep_endpoints` (method, line 104) `def test_graphlayout_curves_skip_unknown_and_keep_endpoints(self)`
+  - `test_graphlayout_cross_group_curve_bends_inward` (method, line 111) `def test_graphlayout_cross_group_curve_bends_inward(self)`
+  - `test_graphlayout_groups_cover_full_circle` (method, line 119) `def test_graphlayout_groups_cover_full_circle(self)`
+  - `test_graphlayout_fa2_3d_returns_triples` (method, line 129) `def test_graphlayout_fa2_3d_returns_triples(self)`
+  - `test_graphlayout_fa2_3d_is_deterministic` (method, line 137) `def test_graphlayout_fa2_3d_is_deterministic(self)`
+  - `test_graphlayout_fa2_3d_python_fallback_runs` (method, line 143) `def test_graphlayout_fa2_3d_python_fallback_runs(self)`
+  - `test_graphlayout_fa2_2d_seed_unchanged_by_dims` (method, line 149) `def test_graphlayout_fa2_2d_seed_unchanged_by_dims(self)`
+  - `test_graphlayout_single_node_3d_at_origin` (method, line 153) `def test_graphlayout_single_node_3d_at_origin(self)`
+  - `test_graphlayout_normalize_cloud_bounds_outliers` (method, line 158) `def test_graphlayout_normalize_cloud_bounds_outliers(self)`
+  - `setUp` (method, line 170) `def setUp(self)`
+  - `test_graphlayout_fibonacci_sphere_unit_vectors` (method, line 180) `def test_graphlayout_fibonacci_sphere_unit_vectors(self)`
+  - `test_graphlayout_sphere_leaves_on_surface` (method, line 188) `def test_graphlayout_sphere_leaves_on_surface(self)`
+  - `test_graphlayout_sphere_caps_have_exact_sizes` (method, line 195) `def test_graphlayout_sphere_caps_have_exact_sizes(self)`
+  - `test_graphlayout_sphere_caps_are_compact` (method, line 199) `def test_graphlayout_sphere_caps_are_compact(self)`
+  - `test_graphlayout_sphere_hub_is_closest_to_cap_center` (method, line 209) `def test_graphlayout_sphere_hub_is_closest_to_cap_center(self)`
+  - `test_graphlayout_sphere_curves_skip_unknown_and_self` (method, line 215) `def test_graphlayout_sphere_curves_skip_unknown_and_self(self)`
+  - `test_graphlayout_sphere_cross_curve_dives_inside` (method, line 223) `def test_graphlayout_sphere_cross_curve_dives_inside(self)`
+  - `test_graphlayout_sphere_is_deterministic_and_empty_safe` (method, line 228) `def test_graphlayout_sphere_is_deterministic_and_empty_safe(self)`
+  - `mean` (method, line 52) `def mean(pairs)`
 - Depends on: `readmenator/_graphlayout.py`
 
 ## tests/test_graphrag.py
@@ -413,83 +487,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_returns_rust_parser_for_rs` (method, line 502) `def test_returns_rust_parser_for_rs(self)`
   - `test_case_insensitive_extension` (method, line 507) `def test_case_insensitive_extension(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
-
-## tests/test_parsers_new.py
-- Doc: Contract tests for the 6 new language parsers.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestRubyParserContract` (class, line 15) `class TestRubyParserContract(TestCase)`
-  - `TestSwiftParserContract` (class, line 45) `class TestSwiftParserContract(TestCase)`
-  - `TestKotlinParserContract` (class, line 68) `class TestKotlinParserContract(TestCase)`
-  - `TestScalaParserContract` (class, line 85) `class TestScalaParserContract(TestCase)`
-  - `TestLuaParserContract` (class, line 102) `class TestLuaParserContract(TestCase)`
-  - `TestElixirParserContract` (class, line 117) `class TestElixirParserContract(TestCase)`
-  - `TestNewParserFactoryContract` (class, line 134) `class TestNewParserFactoryContract(TestCase)`
-  - `TestPythonCallExtractionContract` (class, line 151) `class TestPythonCallExtractionContract(TestCase)`
-  - `setUp` (method, line 16) `def setUp(self)`
-  - `test_extracts_class_with_inheritance` (method, line 19) `def test_extracts_class_with_inheritance(self)`
-  - `test_extracts_module` (method, line 27) `def test_extracts_module(self)`
-  - `test_extracts_method` (method, line 33) `def test_extracts_method(self)`
-  - `test_extracts_require` (method, line 39) `def test_extracts_require(self)`
-  - `setUp` (method, line 46) `def setUp(self)`
-  - `test_extracts_class` (method, line 49) `def test_extracts_class(self)`
-  - `test_extracts_function` (method, line 55) `def test_extracts_function(self)`
-  - `test_extracts_protocol` (method, line 61) `def test_extracts_protocol(self)`
-  - `setUp` (method, line 69) `def setUp(self)`
-  - `test_extracts_class` (method, line 72) `def test_extracts_class(self)`
-  - `test_extracts_fun` (method, line 78) `def test_extracts_fun(self)`
-  - `setUp` (method, line 86) `def setUp(self)`
-  - `test_extracts_object` (method, line 89) `def test_extracts_object(self)`
-  - `test_extracts_def` (method, line 95) `def test_extracts_def(self)`
-  - `setUp` (method, line 103) `def setUp(self)`
-  - `test_extracts_function` (method, line 106) `def test_extracts_function(self)`
-  - `test_extracts_require` (method, line 111) `def test_extracts_require(self)`
-  - `setUp` (method, line 118) `def setUp(self)`
-  - `test_extracts_defmodule` (method, line 121) `def test_extracts_defmodule(self)`
-  - `test_extracts_function` (method, line 127) `def test_extracts_function(self)`
-  - `setUp` (method, line 135) `def setUp(self)`
-  - `test_ruby_extension_maps_correctly` (method, line 138) `def test_ruby_extension_maps_correctly(self)`
-  - `test_swift_extension_maps_correctly` (method, line 142) `def test_swift_extension_maps_correctly(self)`
-  - `test_kotlin_extension_maps_correctly` (method, line 146) `def test_kotlin_extension_maps_correctly(self)`
-  - `setUp` (method, line 152) `def setUp(self)`
-  - `test_extracts_class_inheritance` (method, line 155) `def test_extracts_class_inheritance(self)`
-  - `test_extracts_function_calls` (method, line 160) `def test_extracts_function_calls(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
-
-## tests/test_parsers_property.py
-- Doc: Property-based contract tests for all 19 language parsers.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_generate_multiline_code` (function, line 105) `def _generate_multiline_code(lines, line_strategy)`
-  - `_create_parser` (function, line 142) `def _create_parser(ext)`
-  - `TestParserHypothesisContract` (class, line 155) `class TestParserHypothesisContract(TestCase)`
-  - `TestPythonParserProperty` (class, line 288) `class TestPythonParserProperty(TestCase)`
-  - `test_never_crashes_on_malformed_code` (method, line 162) `def test_never_crashes_on_malformed_code(self, ext, code)`
-  - `test_never_crashes_on_unicode_code` (method, line 180) `def test_never_crashes_on_unicode_code(self, ext, code)`
-  - `test_empty_code_returns_empty_or_valid` (method, line 198) `def test_empty_code_returns_empty_or_valid(self, ext)`
-  - `test_whitespace_code_returns_empty_or_valid` (method, line 208) `def test_whitespace_code_returns_empty_or_valid(self, ext)`
-  - `test_never_crashes_on_many_lines` (method, line 220) `def test_never_crashes_on_many_lines(self, ext, lines)`
-  - `test_repeated_keywords_no_crash` (method, line 238) `def test_repeated_keywords_no_crash(self, ext)`
-  - `test_parser_imports_is_list_of_strings` (method, line 257) `def test_parser_imports_is_list_of_strings(self, ext)`
-  - `test_unknown_extension_returns_none` (method, line 269) `def test_unknown_extension_returns_none(self)`
-  - `_assert_valid_symbols` (method, line 275) `def _assert_valid_symbols(self, symbols)`
-  - `setUp` (method, line 291) `def setUp(self)`
-  - `test_python_never_crashes_on_weird_ascii` (method, line 296) `def test_python_never_crashes_on_weird_ascii(self, code)`
-  - `test_python_never_crashes_on_any_text` (method, line 310) `def test_python_never_crashes_on_any_text(self, code)`
-  - `_StrategyPlaceholder` (class, line 45) `class _StrategyPlaceholder`
-  - `_UnavailableStrategies` (class, line 60) `class _UnavailableStrategies`
-  - `given` (method, line 69) `def given()`
-  - `settings` (method, line 75) `def settings()`
-  - `__or__` (method, line 48) `def __or__(self, other)`
-  - `__ror__` (method, line 52) `def __ror__(self, other)`
-  - `map` (method, line 56) `def map(self)`
-  - `__getattr__` (method, line 63) `def __getattr__(self, name)`
-  - `wrapper` (method, line 71) `def wrapper(fn)`
-  - `wrapper` (method, line 77) `def wrapper(fn)`
-  - `builder` (method, line 65) `def builder()`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

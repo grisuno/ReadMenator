@@ -51,6 +51,8 @@ readmenator/
   _concepts.py      - Semantic ConceptGraph: nouns as nodes, verbs as edges, atomic zero-token extraction
   _forcegraph.py    - CAIRN-style heterogeneous force-graph payload, page settings, thumbnail (hulls, log2 sizing)
   _forcegraph_page.py - 2D/3D explorer HTML template: page-side hit-testing, 3D overlay glyphs, node/edge/path/lens actions
+  _bundlegraph.py   - Edge bundle explorer: circle + sphere bundle payload from the force-graph payload, settings, thumbnail
+  _bundlegraph_page.py - Self-contained edge bundle page (canvas, 2D circle, 3D sphere camera, live beta, focus panels)
   _analytics.py     - Corpus analytics aggregations (funnel, distributions, hotspots, scatter)
   _scantext.py      - Synthesized scan-text blobs (names, symbols, imports, snippets) for rules/embeddings
   _yaralite.py      - Zero-dep tiered T1/T2/T3 YARA-lite parser + runner (no native dependency)
@@ -59,7 +61,7 @@ readmenator/
   _explorer.py      - Stdlib HTTP explorer server (/api/graph, /api/analytics, /api/samples)
   _embed.py         - Optional semantic embeddings with offline Jaccard fallback
   _graphrag.py      - Zero-token GraphRAG: entities, relationships, text units, report hierarchy, local/global search
-  _graphlayout.py   - ForceAtlas2 snapshots (numpy optional) and hierarchical edge bundling
+  _graphlayout.py   - ForceAtlas2 snapshots in 2D/3D (numpy optional), circular and spherical hierarchical edge bundling
   _memory.py        - MEMORY.md: declared rules (file:line), measured baselines, preserved session log
   _skill_installer.py - Installs packaged agent skills (readmenator/_skills/*/SKILL.md)
   _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
@@ -102,7 +104,8 @@ tests/
   test_concepts.py - Semantic ConceptGraph contract tests (nouns, verbs, atomic, deterministic, dialectic)
   test_interactive_graph.py - Interactive explorer contract tests (forcegraph, explorer hit-testing/3D overlay/actions, scantext, yaralite, provenance, exclusions, analytics, explorer, embed, rebuild wiring)
   test_graphrag.py - GraphRAG contract tests (entities, relations, reports, text units, privacy, BM25, PPR local, global, store)
-  test_graphlayout.py - ForceAtlas2 and edge bundling contract tests (determinism, separation, bounds, curves)
+  test_graphlayout.py - ForceAtlas2 (2D/3D) and circular/spherical edge bundling contract tests (determinism, separation, bounds, caps, curves)
+  test_bundlegraph.py - Edge bundle explorer contract tests (payload, escaping, no network, gallery card, disable flag)
   test_memory.py - Project memory and skill installer contract tests (rules, citations, preserved log, marker safety)
 ```
 
@@ -165,6 +168,8 @@ tests/
 - Explorer 3D view (FORCEGRAPH_CDN_JS_3D pinned to an exact release, FORCEGRAPH_3D_LINK_OPACITY, FORCEGRAPH_3D_LINK_WIDTH_HIGHLIGHT/ACTIVE, FORCEGRAPH_3D_PARTICLE_WIDTH, FORCEGRAPH_3D_DEPTH_FADE, FORCEGRAPH_3D_MIN_GLYPH_PX, FORCEGRAPH_3D_LABEL_PX, FORCEGRAPH_3D_ORBIT_SPEED, FORCEGRAPH_3D_FLY_DISTANCE)
 - Force-graph explorer UX (FORCEGRAPH_LABEL_TOP_N, FORCEGRAPH_LABEL_ZOOM, FORCEGRAPH_LABEL_MAX_CHARS, FORCEGRAPH_SYMBOLS_PER_NODE, FORCEGRAPH_DOC_MAX_CHARS, FORCEGRAPH_SIGNATURE_MAX_CHARS, FORCEGRAPH_CLUSTER_STRENGTH, FORCEGRAPH_COLLIDE_PADDING, FORCEGRAPH_DAG_LEVEL_DISTANCE, FORCEGRAPH_FLY_MS, FORCEGRAPH_FLY_ZOOM, FORCEGRAPH_SEARCH_RESULTS, FORCEGRAPH_THUMB_WIDTH/HEIGHT/ITERATIONS)
 - Video layout acts (VIDEO_BUNDLE_S, VIDEO_FA2_ITERATIONS, VIDEO_FA2_SNAPSHOTS, VIDEO_FA2_SCALING, VIDEO_FA2_GRAVITY, VIDEO_FA2_LINLOG, VIDEO_BUNDLE_BETA, VIDEO_BUNDLE_SAMPLES, VIDEO_SURFERS, VIDEO_RANK_LABELS)
+- Video 3D acts (VIDEO_ORBIT_S, VIDEO_SPHERE_S, VIDEO_INVITE_S, VIDEO_ORBIT_FA2_ITERATIONS, VIDEO_ORBIT_TOUR_STOPS, VIDEO_ORBIT_TURNS, VIDEO_ORBIT_PITCH_DEG, VIDEO_ORBIT_PERSPECTIVE, VIDEO_ORBIT_ZOOM, VIDEO_ORBIT_DEPTH_FADE, VIDEO_ORBIT_LABELS, VIDEO_SPHERE_TURNS, VIDEO_SPHERE_SAMPLES)
+- Edge bundle explorer (BUNDLEGRAPH_ENABLED, BUNDLEGRAPH_OUTPUT, BUNDLEGRAPH_MODE, BUNDLEGRAPH_BETA, BUNDLEGRAPH_SAMPLES, BUNDLEGRAPH_INNER_RATIO, BUNDLEGRAPH_GROUP_GAP, BUNDLEGRAPH_EDGE_ALPHA, BUNDLEGRAPH_DIM_ALPHA, BUNDLEGRAPH_LABEL_ALL_MAX, BUNDLEGRAPH_LABEL_TOP_N, BUNDLEGRAPH_LABEL_MAX_CHARS, BUNDLEGRAPH_NODE_MIN_PX/MAX_PX, BUNDLEGRAPH_HIT_PX, BUNDLEGRAPH_ROTATE_SPEED, BUNDLEGRAPH_PERSPECTIVE, BUNDLEGRAPH_DEPTH_FADE, BUNDLEGRAPH_PARTICLES, BUNDLEGRAPH_REVEAL_MS, BUNDLEGRAPH_FLOW_TOP_N, BUNDLEGRAPH_LIST_MAX, BUNDLEGRAPH_THUMB_EDGES, BUNDLEGRAPH_THUMB_SAMPLES)
 - Memory settings (MEMORY_ENABLED, MEMORY_FILENAME, MEMORY_VOCABULARY_STOPWORDS, MEMORY_NOTE_MAX_CHARS, MEMORY_NOTE_KINDS, MEMORY_RULE_SOURCES, MEMORY_CONSTRAINT/STYLE/DELIVERABLE_KEYWORDS, MEMORY_HEADING_EXCLUDE, MEMORY_MAX_RULES_PER_FILE/CATEGORY, MEMORY_MIN_RULE_CHARS, MEMORY_MAX_COMMANDS, MEMORY_VOCABULARY_TOP_N, MEMORY_SUBSYSTEMS_TOP_N, MEMORY_STYLE_LANGUAGES, MEMORY_RISKS_TOP_N)
 - Skills settings (SKILLS_ENABLED, SKILLS_TARGET_DIR, SKILLS_INSTALL_ON_RUN)
 
@@ -436,9 +441,18 @@ tests/
 - CLI `skills [--target DIR]`
 
 ### Graph Layout Contract
-- forceatlas2_frames(ids, edges, settings) (readmenator/_graphlayout.py): Jacomy 2014 ForceAtlas2 with degree-weighted repulsion, LinLog attraction, degree-weighted gravity, swing/traction adaptive speed; seeded start; evenly spaced snapshots incl. start and end; numpy path with pure Python fallback under a budget
+- forceatlas2_frames(ids, edges, settings) (readmenator/_graphlayout.py): Jacomy 2014 ForceAtlas2 with degree-weighted repulsion, LinLog attraction, degree-weighted gravity, swing/traction adaptive speed; seeded start; evenly spaced snapshots incl. start and end; numpy path with pure Python fallback under a budget; settings.dims 2 (default, unchanged random sequence) or 3
+- normalize_cloud(points, quantile, max_radius): centers a 3D cloud, scales the radius quantile to 1, tanh-compresses outliers so none exceeds max_radius
+- spherical_edge_bundling(groups, edges, radius, beta, samples, inner_ratio): one Fibonacci lattice point per member; recursive balanced bisection (group runs of near-equal size vs points sorted on their widest axis) gives every group one contiguous cap of exact size; first-listed members (hubs) take the points nearest the cap center; hubs at cap mean direction x inner_ratio, root at the center; same control polygon and B-spline as the circle (shared, dimension-agnostic)
 - fit_frames maps snapshots into a pixel box using the final layout's bounds (fixed camera); interpolate_frames blends snapshots
 - hierarchical_edge_bundling(groups, edges, center, radius, beta, samples): leaves on a circle by group, control polygon leaf -> group hub -> center -> group hub -> leaf, straightened by beta, sampled as clamped uniform cubic B-spline
+
+### Edge Bundle Explorer Contract
+- BundleGraphRenderer (readmenator/_bundlegraph.py) derives its payload from ForceGraphRenderer.build_payload: file nodes (id = force-graph id for deep links, path, label, group, color, layer, language, PageRank, findings, purpose; "" in privacy mode), groups in analyzer community order plus a trailing "unassigned" group, members by PageRank, distinct directed file pairs from resolved_imports/imports/calls/inherits
+- Each node carries a circle angle (hierarchical_edge_bundling) and a unit-sphere position (spherical_edge_bundling); each group carries its arc, 2D and 3D hub, and cap center; the page builds the B-splines itself so beta is live
+- Page (readmenator/_bundlegraph_page.py): one canvas, zero external requests; 2D circle (radial labels for all files up to BUNDLEGRAPH_LABEL_ALL_MAX, community arcs) and 3D sphere (perspective camera, drag rotate, wheel zoom, auto-rotate, depth fade, fly-to on focus); hover/click hit-testing on drawn positions; cyan = imports, pink = imported by; node panel (metrics, purpose, imports and importers, links into graph-force.html #node= in 2D/3D), community panel (inside/out/in, cohesion, flows, members); crossing-only, direction, color by community/layer/language, search, PNG, theme; deep links view, node, group, beta, color, dir, cross; prefers-reduced-motion disables reveal, rotation and particles; window.ReadmenatorBundles
+- Placeholders filled in one regex pass; payload JSON escapes angle brackets; titles and hrefs HTML-escaped
+- Written beside graph-force.html from the same payload by app._write_forcegraph whenever BUNDLEGRAPH_ENABLED (run/rebuild, export, diagrams, pages); gallery gets a featured "Edge Bundle Explorer" card with a circular bundle thumbnail; CLI `bundles`; AnalyzerFactory exposes bundlegraph (lazy init)
 
 ### Semantic ConceptGraph Contract
 - ConceptExtractor class with extract(nodes, edges, resolved_edges) entry point (readmenator/_concepts.py)
@@ -668,7 +682,8 @@ tests/
 ### Cinematic Video Contract
 - CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
-- Seven acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VII code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, outro telemetry; layouts precomputed before forking frame workers
+- Nine acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
+- An act with duration <= 0 is skipped together with its card; VIDEO_INVITE_S <= 0 drops the invite
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
 - No truncation of reality: act III is the full blast-radius tree (every file that transitively imports the hub, BFS over dependents, VIDEO_TREE_MAX_NODES 0 = all) in a radial layout (one ring per depth, sectors by leaf count); act V graph shows every file and every resolved import (VIDEO_MAX_GRAPH_NODES 0 = all), spring layout on connected files with isolated files in a bottom strip; act VI DNA grid sizes cells so every file fits (VIDEO_DNA_MAX_CELL)
 - Labels never overlap: tree labels placed greedily by depth and skipped only when they would collide (nodes are always drawn); labels truncated to VIDEO_MAX_LABEL_CHARS
