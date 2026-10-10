@@ -82,6 +82,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_exporter.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_exporter.py` -> `readmenator/_models.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_config.py`
+- `readmenator/_forcegraph.py` -> `readmenator/_forcegraph_page.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_graphlayout.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_models.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_purpose.py`

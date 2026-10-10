@@ -52,6 +52,25 @@ def _json_payload(payload: object) -> str:
     return json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
 
 
+def _fill_template(template: str, values: Dict[str, str]) -> str:
+    """Substitute __KEY__ placeholders in a single pass.
+
+    Inserted values are never rescanned, so payload text that happens to
+    mention a placeholder name cannot pull another payload into itself.
+
+    Args:
+        template: Document containing __KEY__ placeholders.
+        values: Mapping of full placeholder token to replacement text.
+
+    Returns:
+        Template with every known placeholder replaced exactly once.
+    """
+    if not values:
+        return template
+    pattern = re.compile("|".join(re.escape(key) for key in sorted(values, key=len, reverse=True)))
+    return pattern.sub(lambda match: values[match.group(0)], template)
+
+
 def _role_color(role: str, config: Config) -> str:
     """Return the stroke color for a semantic role.
 
@@ -1589,48 +1608,37 @@ class InteractiveMapRenderer:
             )
         else:
             home_link = ""
-        document = self._template()
-        document = document.replace("__HOME_LINK__", home_link)
-        document = document.replace("__MAP_KIND__", html.escape(system_map.kind))
-        document = document.replace("__MAP_TITLE__", html.escape(system_map.title))
-        document = document.replace("__MAP_PRESET__", html.escape(preset))
-        document = document.replace("__MAP_THEME__", html.escape(theme))
-        document = document.replace("__NODES_SVG__", self._nodes_svg(system_map))
-        document = document.replace("__EDGES_SVG__", self._edges_svg(system_map))
-        document = document.replace(
-            "__NODES_JSON__", self._safe_json(nodes_payload)
+        values: Dict[str, str] = {}
+        values["__HOME_LINK__"] = home_link
+        values["__MAP_KIND__"] = html.escape(system_map.kind)
+        values["__MAP_TITLE__"] = html.escape(system_map.title)
+        values["__MAP_PRESET__"] = html.escape(preset)
+        values["__MAP_THEME__"] = html.escape(theme)
+        values["__NODES_SVG__"] = self._nodes_svg(system_map)
+        values["__EDGES_SVG__"] = self._edges_svg(system_map)
+        values["__NODES_JSON__"] = self._safe_json(nodes_payload)
+        values["__EDGES_JSON__"] = self._safe_json(edges_payload)
+        values["__VIEWS_JSON__"] = self._safe_json(views_payload)
+        values["__META_JSON__"] = self._safe_json(
+            {
+                "kind": system_map.kind,
+                "title": system_map.title,
+                "nodeCount": len(system_map.nodes),
+                "edgeCount": len(system_map.edges),
+                "shareWidth": self._config.DIAGRAM_SHARE_WIDTH,
+                "shareHeight": self._config.DIAGRAM_SHARE_HEIGHT,
+                "motion": bool(self._config.DIAGRAM_MOTION_ENABLED),
+                "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
+                "nodeWidth": self._config.DIAGRAM_NODE_WIDTH,
+                "nodeHeight": self._config.DIAGRAM_NODE_HEIGHT,
+                "canvasWidth": canvas_w,
+                "canvasHeight": canvas_h,
+            }
         )
-        document = document.replace(
-            "__EDGES_JSON__", self._safe_json(edges_payload)
-        )
-        document = document.replace(
-            "__VIEWS_JSON__", self._safe_json(views_payload)
-        )
-        document = document.replace(
-            "__META_JSON__",
-            self._safe_json(
-                {
-                    "kind": system_map.kind,
-                    "title": system_map.title,
-                    "nodeCount": len(system_map.nodes),
-                    "edgeCount": len(system_map.edges),
-                    "shareWidth": self._config.DIAGRAM_SHARE_WIDTH,
-                    "shareHeight": self._config.DIAGRAM_SHARE_HEIGHT,
-                    "motion": bool(self._config.DIAGRAM_MOTION_ENABLED),
-                    "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
-                    "nodeWidth": self._config.DIAGRAM_NODE_WIDTH,
-                    "nodeHeight": self._config.DIAGRAM_NODE_HEIGHT,
-                    "canvasWidth": canvas_w,
-                    "canvasHeight": canvas_h,
-                }
-            ),
-        )
-        document = document.replace(
-            "__PRESETS_JSON__", self._safe_json(list(self._config.DIAGRAM_PRESETS))
-        )
-        document = document.replace("__CANVAS_W__", str(canvas_w))
-        document = document.replace("__CANVAS_H__", str(canvas_h))
-        return document
+        values["__PRESETS_JSON__"] = self._safe_json(list(self._config.DIAGRAM_PRESETS))
+        values["__CANVAS_W__"] = str(canvas_w)
+        values["__CANVAS_H__"] = str(canvas_h)
+        return _fill_template(self._template(), values)
 
     def write(
         self, system_map: SystemMap, output_path: str
@@ -2306,38 +2314,32 @@ class VisNetworkRenderer:
             )
         else:
             home_link = ""
-        document = self._template()
-        document = document.replace("__HOME_LINK__", home_link)
-        document = document.replace("__VIS_JS__", _escape_markup(self._config.DIAGRAM_VIS_CDN_JS))
-        document = document.replace("__VIS_CSS__", _escape_markup(self._config.DIAGRAM_VIS_CDN_CSS))
-        document = document.replace("__MAP_KIND__", _escape_markup(system_map.kind))
-        document = document.replace("__MAP_TITLE__", _escape_markup(system_map.title))
-        document = document.replace("__MAP_PRESET__", _escape_markup(preset))
-        document = document.replace("__MAP_THEME__", _escape_markup(theme))
-        document = document.replace("__NODES_JSON__", _json_payload(nodes_payload))
-        document = document.replace("__EDGES_JSON__", _json_payload(edges_payload))
-        document = document.replace("__VIEWS_JSON__", _json_payload(views_payload))
-        document = document.replace(
-            "__META_JSON__",
-            _json_payload(
-                {
-                    "kind": system_map.kind,
-                    "title": system_map.title,
-                    "nodeCount": len(system_map.nodes),
-                    "edgeCount": len(system_map.edges),
-                    "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
-                    "neighbors": self._config.DIAGRAM_NEIGHBOR_NAMES,
-                    "communities": self._community_legend(system_map),
-                    "labelTopN": self._config.DIAGRAM_VIS_LABEL_TOP_N,
-                }
-            ),
+        values: Dict[str, str] = {}
+        values["__HOME_LINK__"] = home_link
+        values["__VIS_JS__"] = _escape_markup(self._config.DIAGRAM_VIS_CDN_JS)
+        values["__VIS_CSS__"] = _escape_markup(self._config.DIAGRAM_VIS_CDN_CSS)
+        values["__MAP_KIND__"] = _escape_markup(system_map.kind)
+        values["__MAP_TITLE__"] = _escape_markup(system_map.title)
+        values["__MAP_PRESET__"] = _escape_markup(preset)
+        values["__MAP_THEME__"] = _escape_markup(theme)
+        values["__NODES_JSON__"] = _json_payload(nodes_payload)
+        values["__EDGES_JSON__"] = _json_payload(edges_payload)
+        values["__VIEWS_JSON__"] = _json_payload(views_payload)
+        values["__META_JSON__"] = _json_payload(
+            {
+                "kind": system_map.kind,
+                "title": system_map.title,
+                "nodeCount": len(system_map.nodes),
+                "edgeCount": len(system_map.edges),
+                "totalFiles": system_map.meta.get("total", str(len(system_map.nodes))),
+                "neighbors": self._config.DIAGRAM_NEIGHBOR_NAMES,
+                "communities": self._community_legend(system_map),
+                "labelTopN": self._config.DIAGRAM_VIS_LABEL_TOP_N,
+            }
         )
-        document = document.replace("__PHYSICS_JSON__", _json_payload(physics))
-        document = document.replace(
-            "__ROLES_JSON__",
-            _json_payload(dict(self._config.DIAGRAM_ROLE_COLORS)),
-        )
-        return document
+        values["__PHYSICS_JSON__"] = _json_payload(physics)
+        values["__ROLES_JSON__"] = _json_payload(dict(self._config.DIAGRAM_ROLE_COLORS))
+        return _fill_template(self._template(), values)
 
     def _community_legend(self, system_map: SystemMap) -> List[Dict[str, object]]:
         """Return community legend entries (id, label, color, size) for the map nodes."""
@@ -2471,6 +2473,9 @@ body{margin:0;background:var(--canvas);color:var(--ink);font-family:"JetBrains M
 .peek .m{color:var(--muted)}
 .peek .sw{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
 .peek ul{margin:6px 0 0;padding-left:16px}
+.peek .warn{color:#fbbf24}
+.insight{margin:6px 0;padding:6px 9px;border:1px solid var(--border);border-left:3px solid #22d3ee;border-radius:8px;font-size:11.5px;line-height:1.6;color:var(--ink);background:var(--canvas)}
+.insight.bad{border-left-color:#fb7185}
 .detail-nav{display:flex;gap:6px;margin:0 0 10px}
 .detail-nav button{background:var(--canvas);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:4px 9px;font:inherit;font-size:11px;cursor:pointer}
 .detail-nav button:disabled{opacity:.4;cursor:default}
@@ -2553,6 +2558,7 @@ __HOME_LINK__
 <script type="application/json" id="vis-meta">__META_JSON__</script>
 <script type="application/json" id="vis-physics">__PHYSICS_JSON__</script>
 <script type="application/json" id="vis-roles">__ROLES_JSON__</script>
+<div class="peek" id="peek" role="tooltip"></div>
 <script>
 (function(){
 "use strict";
@@ -2574,7 +2580,7 @@ var roleCounts=document.getElementById("role-counts");
 var nodeSymbols=document.getElementById("node-symbols");
 var guide=document.getElementById("guide");
 var exportsDialog=document.getElementById("exports");
-var state={focus:null,reach:null,lens:null,view:-1,physicsOn:true};
+var state={focus:null,reach:null,lens:null,view:-1,physicsOn:true,edge:null};
 var reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function themeBox(){return root.getAttribute("data-theme")==="light"?{box:"#ffffff",ink:"#0f172a"}:{box:"#0f172a",ink:"#ffffff"};}
 var communities=meta.communities||[];
@@ -2601,7 +2607,7 @@ var allLabels=false;
 var visNodes=new vis.DataSet(rawNodes.map(function(n){return {id:n.id,label:labelled[n.id]?n.label:" ",group:n.group,shape:"dot",value:1+degree[n.id]};}));
 function syncLabels(scale){var want=scale>=1.1;if(want===allLabels){return;}allLabels=want;
 visNodes.update(rawNodes.filter(function(n){return !labelled[n.id]&&!(dimSet&&dimSet[n.id]);}).map(function(n){return {id:n.id,label:want?n.label:" "};}));}
-var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,title:e.label,arrows:{to:{enabled:true,scaleFactor:0.45}},dashes:!!e.dashes,smooth:{type:"continuous"},color:{color:"#64748b",opacity:0.28,highlight:"#22d3ee",hover:"#22d3ee",inherit:false},width:1,selectionWidth:2,hoverWidth:1.5};}));
+var visEdges=new vis.DataSet(rawEdges.map(function(e,index){return {id:"e"+index,from:e.from,to:e.to,arrows:{to:{enabled:true,scaleFactor:0.45}},dashes:!!e.dashes,smooth:{type:"continuous"},color:{color:"#64748b",opacity:0.28,highlight:"#22d3ee",hover:"#22d3ee",inherit:false},width:1,selectionWidth:2,hoverWidth:1.5};}));
 var network=new vis.Network(container,{nodes:visNodes,edges:visEdges},{
 physics:physics,
 interaction:{hover:true,hoverConnectedEdges:true,selectConnectedEdges:true,navigationButtons:false,keyboard:false,tooltipDelay:120},
@@ -2725,7 +2731,7 @@ function setHash(value){try{history.replaceState(null,"",value);}catch(e){locati
 function focusNode(id,reach,fromHistory){
 var node=nodeById(id);if(!node){return;}
 if(state.focus&&state.focus!==id&&!fromHistory){detailHistory.push(state.focus);}
-state.focus=id;state.reach=reach||null;
+state.focus=id;state.reach=reach||null;state.edge=null;
 var allowed={};allowed[id]=true;
 if(state.reach){var found=bfsReach(id,state.reach);found.members.forEach(function(m){allowed[m]=true;});
 var hops=0;for(var k in found.hops){if(found.hops[k]>hops){hops=found.hops[k];}}
@@ -2743,6 +2749,41 @@ renderNodeDetail(node);
 var hash="#focus="+encodeURIComponent(id);
 if(state.reach){hash+="&reach="+state.reach;}
 setHash(hash);}
+function relText(t){var names={resolved_imports:"imports",imports:"imports",calls:"calls into",inherits:"inherits from"};return names[t]||String(t||"links to").replace(/_/g," ");}
+function edgeByVisId(eid){var i=parseInt(String(eid).slice(1),10);return isNaN(i)||!rawEdges[i]?null:{index:i,edge:rawEdges[i]};}
+function isMutual(e){return rawEdges.some(function(x){return x.from===e.to&&x.to===e.from;});}
+function edgeIdFor(from,to){for(var i=0;i<rawEdges.length;i++){if(rawEdges[i].from===from&&rawEdges[i].to===to){return "e"+i;}}return null;}
+function focusEdge(eid){
+var hit=edgeByVisId(eid);if(!hit){return;}var e=hit.edge,a=nodeById(e.from),b=nodeById(e.to);if(!a||!b){return;}
+if(state.focus){detailHistory.push(state.focus);}
+state.focus=null;state.reach=null;state.edge=eid;
+var allowed={};allowed[e.from]=true;allowed[e.to]=true;showAll();setDim(allowed);
+document.querySelector(".passport").classList.add("focused");
+try{network.selectEdges([eid]);}catch(x){}
+try{network.fit({nodes:[e.from,e.to],animation:reduced?false:{duration:600,easingFunction:"easeInOutQuad"}});}catch(x){}
+passportTitle.textContent=a.label+" -> "+b.label;
+passportMeta.textContent="link | "+relText(e.title)+" | "+a.group+" -> "+b.group;
+receipt.textContent="Link focus: "+a.label+" -> "+b.label+". Click an endpoint to walk on.";
+renderEdgeDetail(e);
+setHash("#edge="+encodeURIComponent(e.from)+"~"+encodeURIComponent(e.to));}
+function renderEdgeDetail(e){
+if(!nodeSymbols){return;}clearEl(nodeSymbols);
+var a=nodeById(e.from),b=nodeById(e.to);
+var nav=mk("div",{class:"detail-nav"});
+var back=mk("button",{type:"button","data-detail":"back",title:"Previous node (Backspace)"},"Back");if(!detailHistory.length){back.disabled=true;}nav.appendChild(back);
+nav.appendChild(mk("button",{type:"button","data-detail":"fitedge",title:"Zoom to both ends"},"Fit"));
+nav.appendChild(mk("button",{type:"button","data-detail":"edgehood",title:"Highlight everything linked to either end"},"Both neighbourhoods"));
+nav.appendChild(mk("button",{type:"button","data-detail":"clear",title:"Clear focus (Esc)"},"Clear"));
+nodeSymbols.appendChild(nav);
+var sentence=mk("p",{class:"filedoc"});sentence.appendChild(mk("b",{},a.label));sentence.appendChild(document.createTextNode(" "+relText(e.title)+" "));sentence.appendChild(mk("b",{},b.label));sentence.appendChild(document.createTextNode("."));nodeSymbols.appendChild(sentence);
+nodeSymbols.appendChild(mk("div",{class:"sublabel"},"Endpoints"));nodeSymbols.appendChild(chipListEl([e.from,e.to]));
+var notes=[];
+if(isMutual(e)){notes.push(["bad","Mutual dependency: "+b.label+" also links back to "+a.label+". Two nodes that need each other form the smallest possible cycle."]);}
+if(a.community!==b.community&&a.communityLabel&&b.communityLabel){notes.push(["","Bridges communities "+a.communityLabel+" and "+b.communityLabel+". Bridges are where responsibilities leak between modules."]);}
+if(a.group!==b.group){notes.push(["","Crosses roles: "+a.group+" -> "+b.group+"."]);}
+if(notes.length){nodeSymbols.appendChild(mk("div",{class:"sublabel"},"Insights"));notes.forEach(function(n){nodeSymbols.appendChild(mk("p",{class:"insight"+(n[0]?" "+n[0]:"")},n[1]));});}
+var others=rawEdges.filter(function(x){return x!==e&&((x.from===e.from&&x.to===e.to)||(x.from===e.to&&x.to===e.from));});
+if(others.length){nodeSymbols.appendChild(mk("div",{class:"sublabel"},"Other links between them"));var w=mk("div",{class:"nbs"});others.forEach(function(x){var id=edgeIdFor(x.from,x.to);var bt=mk("button",{type:"button","data-edge":id||"",title:"Inspect this link"},(x.from===e.from?"-> ":"<- ")+relText(x.title));w.appendChild(bt);});nodeSymbols.appendChild(w);}}
 function probeRoute(){
 var from=document.getElementById("route-from").value.trim();
 var to=document.getElementById("route-to").value.trim();
@@ -2837,10 +2878,12 @@ if(hash.indexOf("#route=")===0){var parts=hash.slice(7).split("~");if(parts.leng
 if(hash.indexOf("#lens=")===0){applyLens(decodeURIComponent(hash.slice(6)));return;}
 if(hash.indexOf("#community=")===0){var cid=parseInt(hash.slice(11),10);communities.forEach(function(c){if(c.id===cid){isolateCommunity(c.id,c.label);}});return;}
 if(hash.indexOf("#view=")===0){var id=decodeURIComponent(hash.slice(6));for(var i=0;i<views.length;i++){if(views[i].id===id){showView(i);return;}}return;}
+if(hash.indexOf("#edge=")===0){var ends=hash.slice(6).split("~");if(ends.length===2){var eid=edgeIdFor(decodeURIComponent(ends[0]),decodeURIComponent(ends[1]));if(eid){focusEdge(eid);}}return;}
 if(hash.indexOf("#focus=")===0){var rest=hash.slice(7).split("&reach=");focusNode(decodeURIComponent(rest[0]),rest[1]?decodeURIComponent(rest[1]):null);return;}}
 network.on("click",function(params){
 if(params.nodes.length>0){focusNode(params.nodes[0]);}
-else if(params.edges.length===0&&state.focus&&!state.reach){showAll();state.focus=null;clearNodeDetail();setHash("#");}});
+else if(params.edges.length>0){focusEdge(params.edges[0]);}
+else if((state.focus&&!state.reach)||state.edge){showAll();state.focus=null;state.edge=null;clearNodeDetail();setHash("#");}});
 var peek=document.getElementById("peek");
 network.on("hoverNode",function(params){
 var n=nodeById(params.node);if(!n||!peek){return;}
@@ -2854,23 +2897,38 @@ if(n.doc){var pd=mk("div",{},short(n.doc,220));pd.style.marginTop="4px";peek.app
 var syms=(n.symbols||[]).slice(0,4);
 if(syms.length){var ul=mk("ul",{});syms.forEach(function(s){var li=mk("li",{});li.appendChild(mk("span",{},s.kind+" "));li.appendChild(mk("b",{},s.name));li.appendChild(mk("span",{}," L"+s.line));ul.appendChild(li);});peek.appendChild(ul);}
 var hint=mk("div",{class:"m"},"click to open passport");hint.style.marginTop="4px";peek.appendChild(hint);
+placePeek(params);});
+function placePeek(params){
 var p=params.event&&params.event.center?params.event.center:{x:params.pointer.DOM.x+container.getBoundingClientRect().left,y:params.pointer.DOM.y+container.getBoundingClientRect().top};
 peek.style.display="block";
 var left=Math.min(window.innerWidth-peek.offsetWidth-12,p.x+16),top=Math.min(window.innerHeight-peek.offsetHeight-12,p.y+16);
-peek.style.left=Math.max(8,left)+"px";peek.style.top=Math.max(8,top)+"px";});
+peek.style.left=Math.max(8,left)+"px";peek.style.top=Math.max(8,top)+"px";}
+network.on("hoverEdge",function(params){
+var hit=edgeByVisId(params.edge);if(!hit||!peek){return;}
+var e=hit.edge,a=nodeById(e.from),b=nodeById(e.to);if(!a||!b){return;}
+clearEl(peek);
+var head=mk("div",{});head.appendChild(mk("b",{},a.label));head.appendChild(mk("span",{class:"m"}," "+relText(e.title)+" "));head.appendChild(mk("b",{},b.label));peek.appendChild(head);
+if(isMutual(e)){peek.appendChild(mk("div",{class:"warn"},"mutual dependency"));}
+peek.appendChild(mk("div",{class:"m"},a.group+" -> "+b.group+(a.community!==b.community&&a.communityLabel&&b.communityLabel?" | bridges communities":"")));
+var eh=mk("div",{class:"m"},"click to inspect the link");eh.style.marginTop="4px";peek.appendChild(eh);
+placePeek(params);});
+network.on("blurEdge",function(){if(peek){peek.style.display="none";}});
 network.on("blurNode",function(){if(peek){peek.style.display="none";}});
 network.on("dragStart",function(){if(peek){peek.style.display="none";}});
 nodeSymbols.addEventListener("click",function(ev){
 var clamp=ev.target.closest?ev.target.closest("[data-clamp]"):null;if(clamp){clamp.classList.toggle("clamp");return;}
-var t=ev.target.closest?ev.target.closest("[data-goto],[data-node],[data-detail],[data-community]"):null;if(!t){return;}
+var t=ev.target.closest?ev.target.closest("[data-goto],[data-node],[data-detail],[data-community],[data-edge]"):null;if(!t){return;}
 var go=t.getAttribute("data-goto")||t.getAttribute("data-node");
 if(go){focusNode(go);return;}
+var eg=t.getAttribute("data-edge");if(eg){focusEdge(eg);return;}
 var cid=t.getAttribute("data-community");
 if(cid!==null){communities.forEach(function(c){if(String(c.id)===cid){isolateCommunity(c.id,c.label);}});return;}
 var act=t.getAttribute("data-detail");
 if(act==="back"){var prev=detailHistory.pop();if(prev){focusNode(prev,null,true);}}
 else if(act==="fit"){var ids=[state.focus];incoming(state.focus).forEach(function(e){ids.push(e.from);});outgoing(state.focus).forEach(function(e){ids.push(e.to);});try{network.fit({nodes:ids,animation:reduced?false:{duration:500}});}catch(e){}}
-else if(act==="clear"){showAll();state.focus=null;detailHistory=[];clearNodeDetail();setHash("#");}});
+else if(act==="clear"){showAll();state.focus=null;state.edge=null;detailHistory=[];clearNodeDetail();setHash("#");}
+else if(act==="fitedge"&&state.edge){var fe=edgeByVisId(state.edge);if(fe){try{network.fit({nodes:[fe.edge.from,fe.edge.to],animation:reduced?false:{duration:500}});}catch(e){}}}
+else if(act==="edgehood"&&state.edge){var he=edgeByVisId(state.edge);if(he){var hood={};[he.edge.from,he.edge.to].forEach(function(id){hood[id]=true;incoming(id).forEach(function(x){hood[x.from]=true;});outgoing(id).forEach(function(x){hood[x.to]=true;});});setDim(hood);try{network.fit({nodes:Object.keys(hood),animation:reduced?false:{duration:500}});}catch(e){}}}});
 network.on("zoom",function(p){syncLabels(p.scale);});
 network.on("stabilized",function(){receipt.textContent="Physics stabilized: "+rawNodes.length+" nodes placed.";
 if(state.focus&&dimSet){try{network.fit({nodes:Object.keys(dimSet),animation:reduced?false:{duration:500}});}catch(e){}}});
@@ -2922,7 +2980,7 @@ else if(ev.key==="-"){try{network.zoomOut();}catch(e){}}
 else if(ev.key==="0"){try{network.fit();}catch(e){}}
 else if(ev.key==="C"||ev.key==="c"){toggleColorMode();}
 else if(ev.key==="Backspace"){var prev=detailHistory.pop();if(prev){ev.preventDefault();focusNode(prev,null,true);}}
-else if(ev.key==="Escape"){showAll();state.focus=null;detailHistory=[];}});
+else if(ev.key==="Escape"){showAll();state.focus=null;state.edge=null;detailHistory=[];clearNodeDetail();setHash("#");}});
 passportMeta.textContent=(meta.nodeCount||rawNodes.length)+" of "+(meta.totalFiles||rawNodes.length)+" files | "+(meta.edgeCount||rawEdges.length)+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
 receipt.textContent="Live physics network. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
 renderChapters();renderRoleCounts();readHash();

@@ -1,10 +1,10 @@
 # readmenator: _pipeline
 
-*Community 3 | 17 files | cohesion 0.31*
+*Community 3 | 18 files | cohesion 0.32*
 
 ## Definition
 
-This community groups 17 file(s) rooted at `readmenator` with dominant language py (cohesion 0.31). Central symbols: `AnalyticsBuilder`, `AnalyzerFactory`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`, `ExclusionEntry`, `ExclusionList`. Core file: `tests/test_uml.py` (49 symbols). Documented purpose: Corpus analytics aggregations for the readmenator knowledge graph.  Computes the explorer dashboard payloads (attribution funnel, distributions, scatter, rule y.
+This community groups 18 file(s) rooted at `readmenator` with dominant language py (cohesion 0.32). Central symbols: `AnalyticsBuilder`, `AnalyzerFactory`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`, `ExclusionEntry`, `ExclusionList`. Core file: `tests/test_interactive_graph.py` (60 symbols). Documented purpose: Corpus analytics aggregations for the readmenator knowledge graph.  Computes the explorer dashboard payloads (attribution funnel, distributions, scatter, rule y.
 
 ## Files
 
@@ -17,7 +17,8 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_exclusions.py` | py | utility | 11 | yes |
 | `readmenator/_explorer.py` | py | utility | 13 | yes |
 | `readmenator/_exporter.py` | py | utility | 16 | yes |
-| `readmenator/_forcegraph.py` | py | utility | 18 | yes |
+| `readmenator/_forcegraph.py` | py | utility | 21 | yes |
+| `readmenator/_forcegraph_page.py` | py | presentation | 0 | yes |
 | `readmenator/_pipeline.py` | py | utility | 45 | yes |
 | `readmenator/_provenance.py` | py | utility | 10 | yes |
 | `readmenator/_scantext.py` | py | utility | 4 | yes |
@@ -25,7 +26,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 | `tests/test_cpg.py` | py | testing | 11 | no |
 | `tests/test_documentation.py` | py | testing | 29 | no |
 | `tests/test_exporter.py` | py | testing | 15 | yes |
-| `tests/test_interactive_graph.py` | py | testing | 47 | yes |
+| `tests/test_interactive_graph.py` | py | testing | 60 | yes |
 | `tests/test_uml.py` | py | testing | 49 | yes |
 
 ## Key Symbols
@@ -63,7 +64,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 30
+- Internal resolved imports (EXTRACTED): 31
 - Cross-boundary resolved imports (EXTRACTED): 73
 
 ## Connections
@@ -77,16 +78,17 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_graphlayout.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph_page.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_purpose.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_resolver.py` via `subprocess` (2 hops)
 
@@ -95,7 +97,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 - Why do 2 file(s) lack file-level docs (e.g. `tests/test_cpg.py`)? What purpose do they serve?
 - Is the dangerous import `subprocess` in `readmenator/_documentation.py` still required, or can it be isolated?
 - What would break if the most connected file in readmenator: _pipeline changed?
-- Should readmenator: _pipeline be split, given cohesion 0.31?
+- Should readmenator: _pipeline be split, given cohesion 0.32?
 
 ## Sources
 
@@ -107,6 +109,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_explorer.py`
 - `readmenator/_exporter.py`
 - `readmenator/_forcegraph.py`
+- `readmenator/_forcegraph_page.py`
 - `readmenator/_pipeline.py`
 - `readmenator/_provenance.py`
 - `readmenator/_scantext.py`

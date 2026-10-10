@@ -9,6 +9,9 @@ similarity, and the rebuild wiring into the maps directory.
 from __future__ import annotations
 
 import json
+import re
+import shutil
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -468,3 +471,99 @@ class TestForceGraphInspectorPayload(unittest.TestCase):
         html = self.renderer.render(self.payload)
         for token in ("nodeCanvasObject", 'id="inspector"', 'data-layout="cluster"', 'data-layout="radial"', 'data-layout="dag"', "renderInspector"):
             self.assertIn(token, html)
+
+
+def _inline_script(html: str) -> str:
+    """Return the body of the last inline script block of an explorer page."""
+    return html.rsplit("<script>", 1)[1].split("</script>", 1)[0]
+
+
+def _const_json(html: str, name: str) -> object:
+    """Parse the JSON literal assigned to a top-level const in the explorer script."""
+    match = re.search(r"^const " + name + r"=(.*);$", _inline_script(html), re.MULTILINE)
+    if match is None:
+        raise AssertionError(f"const {name} not found")
+    return json.loads(match.group(1))
+
+
+class TestForceGraphExplorerInteraction(unittest.TestCase):
+    """Contract: page-side hit-testing, 3D overlay glyphs, edge and path actions."""
+
+    def setUp(self) -> None:
+        """Build a payload with a mutual dependency and a layer crossing."""
+        self.config = Config()
+        self.renderer = ForceGraphRenderer(self.config)
+        self.nodes = [_node("pkg/a.py", 3), _node("pkg/b.py", 2), _node("pkg/c.py", 1)]
+        self.edges = [
+            Edge(source="pkg/a.py", target="pkg/b.py", relation="resolved_imports", confidence="EXTRACTED"),
+            Edge(source="pkg/b.py", target="pkg/a.py", relation="resolved_imports", confidence="EXTRACTED"),
+            Edge(source="pkg/c.py", target="pkg/a.py", relation="resolved_imports", confidence="EXTRACTED"),
+        ]
+        self.layers = {"pkg/a.py": "presentation", "pkg/b.py": "data_access", "pkg/c.py": "utility"}
+        self.payload = self.renderer.build_payload(self.nodes, self.edges, self.edges, layers=self.layers)
+        self.html = self.renderer.render(self.payload)
+
+    def test_explorer_hit_tests_against_live_positions(self) -> None:
+        """The engine's throttled shadow-canvas picking is off; the page hit-tests itself."""
+        for token in ("enablePointerInteraction(false)", "function hit2D", "function hit3D", "screen2GraphCoords", "__controlPoints"):
+            self.assertIn(token, self.html)
+
+    def test_explorer_3d_draws_flat_glyphs_on_overlay(self) -> None:
+        """3D hides engine spheres and paints glyphs on a synced overlay canvas."""
+        for token in ("nodeVisibility(false)", 'id="overlay"', "function paint3D", "r.render=function", 'controlType:"orbit"'):
+            self.assertIn(token, self.html)
+
+    def test_explorer_3d_engine_is_pinned(self) -> None:
+        """The 3D CDN URL names an exact release, never a floating major."""
+        pinned = re.compile(r"3d-force-graph@\d+\.\d+\.\d+/")
+        self.assertRegex(self.config.FORCEGRAPH_CDN_JS_3D, pinned)
+        self.assertRegex(self.html, pinned)
+
+    def test_explorer_ships_edge_path_and_lens_actions(self) -> None:
+        """Edges, routes, lenses, reach direction, and color modes are wired in."""
+        for token in ("function renderEdge", "function renderPath", "function runPath", "stronglyConnected", "LENSES", 'data-color="layer"', 'data-color="language"', 'data-view="3d"', 'id="ctx"', "function setDir", "Path to..."):
+            self.assertIn(token, self.html)
+
+    def test_explorer_settings_come_from_config(self) -> None:
+        """Every hit-testing and 3D tuneable is serialized from Config."""
+        settings = _const_json(self.html, "SETTINGS")
+        self.assertEqual(settings["hitPad"], self.config.FORCEGRAPH_HIT_PADDING_PX)
+        self.assertEqual(settings["edgeHitPx"], self.config.FORCEGRAPH_EDGE_HIT_PX)
+        self.assertEqual(settings["depthFade"], self.config.FORCEGRAPH_3D_DEPTH_FADE)
+        self.assertEqual(settings["flyDistance3d"], self.config.FORCEGRAPH_3D_FLY_DISTANCE)
+        self.assertEqual(settings["fitMaxZoom"], self.config.FORCEGRAPH_FIT_MAX_ZOOM)
+        self.assertEqual(settings["groupColors"]["layer"]["presentation"], dict(self.config.FORCEGRAPH_LAYER_COLORS)["presentation"])
+        self.assertEqual(set(settings["groupColors"]["language"]), {"py"})
+
+    def test_explorer_structural_edges_use_their_own_colors(self) -> None:
+        """Membership edges no longer borrow the resolved-import color."""
+        palette = dict(self.config.FORCEGRAPH_EDGE_COLORS)
+        colors = {e["type"]: e["color"] for e in self.payload["edges"]}
+        self.assertEqual(colors["layered_as"], palette["layered_as"])
+        self.assertNotEqual(colors["layered_as"], palette["resolved_imports"])
+
+    def test_explorer_placeholders_inside_data_are_left_alone(self) -> None:
+        """A doc that mentions template tokens cannot inject JSON into the page."""
+        node = [n for n in self.payload["nodes"] if n["type"] == "file"][0]
+        node["doc"] = "Fills __SETTINGS__, __DATA__ and __TITLE__ placeholders."
+        html = self.renderer.render(self.payload, title="T")
+        raw = _const_json(html, "RAW")
+        docs = [n.get("doc") for n in raw["nodes"]]
+        self.assertIn("Fills __SETTINGS__, __DATA__ and __TITLE__ placeholders.", docs)
+        self.assertIsInstance(_const_json(html, "SETTINGS"), dict)
+
+    def test_explorer_data_cannot_close_the_script(self) -> None:
+        """Angle brackets in payload text are unicode-escaped in the inline script."""
+        node = [n for n in self.payload["nodes"] if n["type"] == "file"][0]
+        node["doc"] = "</script><script>alert(1)</script>"
+        html = self.renderer.render(self.payload)
+        self.assertNotIn("</script><script>alert(1)", html)
+
+    @unittest.skipUnless(shutil.which("node"), "node is not installed")
+    def test_explorer_script_is_valid_javascript(self) -> None:
+        """The inline explorer script parses cleanly with node --check."""
+        with tempfile.TemporaryDirectory() as tmp:
+            script = Path(tmp) / "explorer.js"
+            script.write_text(_inline_script(self.html), encoding="utf-8")
+            result = subprocess.run(["node", "--check", str(script)], capture_output=True, text=True, timeout=60)
+            self.assertEqual(result.returncode, 0, result.stderr)

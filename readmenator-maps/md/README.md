@@ -146,16 +146,38 @@ Maps are physics-driven vis.js documents (engine loaded from a CDN pinned in
 Config). Hover a node for a preview card; click it to dim everything outside its
 neighbourhood and open a passport with metric tiles, an ego mini-map (used-by on
 the left, imports on the right, every dot clickable), the docstring, a filterable
-symbol table with signatures, and Back history.
+symbol table with signatures, and Back history. Links are first-class too: hover
+one for a card, click it for a link passport (what depends on what, mutual
+dependencies, community bridges, role crossings, parallel links, both
+neighbourhoods) and share it with `#edge=<from>~<to>`.
 
 The **Force Graph Explorer** (`readmenator-maps/graph-force.html`, featured in the
 gallery with a real ForceAtlas2 thumbnail) draws every file, community, layer and
-external with readable names (collision-aware labels, PageRank-sized nodes), four
-layouts (force, community clusters, layer rings, dependency tree), community hulls,
-a search box that also matches symbol names, and an inspector: PageRank rank and
-percentile, symbols with signatures and docs, and neighbours grouped by relation
-(used by, imports, calls, inheritance, externals), all clickable, with 1-3 hop reach,
-isolate, and `#node=<id>&layout=cluster` deep links.
+external in a 2D map or a 3D space:
+
+- **Exact selection.** Hover, click, drag and right-click are hit-tested in the page
+  against the positions drawn in the same frame, so the pointer always picks what is
+  under it, including labels and curved edges, in both 2D and 3D.
+- **3D without planets.** The 3D view keeps the WebGL engine for links, arrows and
+  flow particles, but draws files as flat document tiles (communities as hexagons,
+  layers as diamonds, externals as triangles) on an overlay synced to the camera, with
+  depth fade, group halos, readable labels, camera fly-to and an optional orbit.
+- **Node actions.** Passport with PageRank, symbols, docs and grouped neighbours;
+  reach Upstream (used by, the blast radius), Downstream (uses) or Both at 1, 2, 3 or
+  all hops; isolate, hide, pin by dragging (2D), copy path; right-click menu for all of
+  it; double-click isolates.
+- **Edge actions.** Hover and click any dependency edge for a passport that reads the
+  relation as a sentence and flags mutual dependencies, edges that close an import
+  cycle, upward layer crossings and community bridges.
+- **Exploration.** Path finder (Shift+click, `P`, or the menu) that prefers a directed
+  route and explains it hop by hop; color by community, layer or language (clusters
+  follow the grouping); node and edge type filters; layouts force, clusters, layer
+  rings (shells in 3D) and dependency tree.
+- **Lenses for logic bugs.** Import cycles (Tarjan SCC), files nothing imports
+  (entry points or dead code), disconnected files, and PageRank hubs.
+- Deep links restore the view: `#node=<id>&view=3d&layout=cluster&color=layer&dir=up&depth=2`,
+  `#path=<a>~<b>`, `#lens=cycles`, `#edge=<key>`. The page also exposes
+  `window.ReadmenatorExplorer` for console scripting.
 
 Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
 Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
@@ -286,6 +308,8 @@ Supported target languages (12): C++, Java, C#, Python, Go, Rust, PHP, Kotlin, S
 | README Injector | `_readme_injector.py` | Auto-injects KB link into project README |
 | GraphRAG | `_graphrag.py` | Entities, relationships, text units, community report hierarchy, local/global search |
 | Graph layouts | `_graphlayout.py` | ForceAtlas2 snapshots and hierarchical edge bundling |
+| Force graph | `_forcegraph.py` | Heterogeneous explorer payload, settings, thumbnail |
+| Explorer page | `_forcegraph_page.py` | 2D/3D explorer HTML: hit-testing, overlay glyphs, node and edge actions |
 | Memory | `_memory.py` | MEMORY.md: declared rules, measured baselines, preserved session log |
 | Skills | `_skill_installer.py` | Installs packaged agent skills from `_skills/` |
 | Application | `_app.py` | Application orchestrator |

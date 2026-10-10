@@ -25,7 +25,8 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_explain.py` -> __future__, typing
 - `readmenator/_explorer.py` -> __future__, http.server, json, pathlib, socket, typing, urllib.parse, webbrowser
 - `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing
-- `readmenator/_forcegraph.py` -> __future__, html, json, math, pathlib, shutil, typing
+- `readmenator/_forcegraph.py` -> __future__, html, json, math, pathlib, re, shutil, typing
+- `readmenator/_forcegraph_page.py` -> __future__
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
 - `readmenator/_gitmeta.py` -> __future__, pathlib, typing
 - `readmenator/_graphlayout.py` -> __future__, dataclasses, math, numpy, random, typing
@@ -100,7 +101,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
 - `tests/test_hotspots.py` -> __future__, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
-- `tests/test_interactive_graph.py` -> __future__, json, pathlib, tempfile, unittest
+- `tests/test_interactive_graph.py` -> __future__, json, pathlib, re, shutil, subprocess, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest
 - `tests/test_linter.py` -> __future__, unittest
 - `tests/test_mcp_server.py` -> __future__, json, pathlib, tempfile, typing, unittest

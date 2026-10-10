@@ -49,7 +49,8 @@ readmenator/
   _app.py           - Application orchestrator (thin facade over AnalyzerFactory)
   _mcp_server.py    - MCP stdio server exposing tools + resources for AI agent queries
   _concepts.py      - Semantic ConceptGraph: nouns as nodes, verbs as edges, atomic zero-token extraction
-  _forcegraph.py    - CAIRN-style heterogeneous force-graph payload + 2D/3D explorer HTML (hulls, log2 sizing)
+  _forcegraph.py    - CAIRN-style heterogeneous force-graph payload, page settings, thumbnail (hulls, log2 sizing)
+  _forcegraph_page.py - 2D/3D explorer HTML template: page-side hit-testing, 3D overlay glyphs, node/edge/path/lens actions
   _analytics.py     - Corpus analytics aggregations (funnel, distributions, hotspots, scatter)
   _scantext.py      - Synthesized scan-text blobs (names, symbols, imports, snippets) for rules/embeddings
   _yaralite.py      - Zero-dep tiered T1/T2/T3 YARA-lite parser + runner (no native dependency)
@@ -99,7 +100,7 @@ tests/
   test_agent_friendliness.py - Agent output budgets, purposes, MANIFEST freshness, noise reduction, llms.txt
   test_gh_wiki.py - GitHub wiki publisher contract tests (faked git/gh runner, no network)
   test_concepts.py - Semantic ConceptGraph contract tests (nouns, verbs, atomic, deterministic, dialectic)
-  test_interactive_graph.py - Interactive explorer contract tests (forcegraph, scantext, yaralite, provenance, exclusions, analytics, explorer, embed, rebuild wiring)
+  test_interactive_graph.py - Interactive explorer contract tests (forcegraph, explorer hit-testing/3D overlay/actions, scantext, yaralite, provenance, exclusions, analytics, explorer, embed, rebuild wiring)
   test_graphrag.py - GraphRAG contract tests (entities, relations, reports, text units, privacy, BM25, PPR local, global, store)
   test_graphlayout.py - ForceAtlas2 and edge bundling contract tests (determinism, separation, bounds, curves)
   test_memory.py - Project memory and skill installer contract tests (rules, citations, preserved log, marker safety)
@@ -160,6 +161,8 @@ tests/
 - Explorer settings (EXPLORER_ENABLED, EXPLORER_HOST, EXPLORER_PORT)
 - Embedding settings (EMBED_ENABLED, EMBED_MODEL, EMBED_MIN_CLUSTER_SIZE, EMBED_MAX_NEIGHBORS)
 - GraphRAG settings (GRAPHRAG_ENABLED, GRAPHRAG_OUTPUT_DIR, GRAPHRAG_INCLUDE_SYMBOLS/CONCEPTS/EXTERNALS, GRAPHRAG_TEXT_UNIT_MAX_LINES/CHARS, GRAPHRAG_BM25_K1/B, GRAPHRAG_PPR_ALPHA/MAX_ITER/TOLERANCE, GRAPHRAG_SEED_TOP_K, GRAPHRAG_LOCAL_TOP_*, GRAPHRAG_GLOBAL_TOP_REPORTS, GRAPHRAG_REPORT_*, GRAPHRAG_CONTEXT_BUDGET_TOKENS, GRAPHRAG_LOCAL_SECTION_SHARES, GRAPHRAG_GLOBAL_SECTION_SHARES, GRAPHRAG_RATING_*, GRAPHRAG_SEVERITY_WEIGHTS, GRAPHRAG_GLOBAL_HINTS, GRAPHRAG_STOPWORDS)
+- Explorer interaction (FORCEGRAPH_LAYER_COLORS, FORCEGRAPH_HIT_PADDING_PX, FORCEGRAPH_MIN_HIT_PX, FORCEGRAPH_EDGE_HIT_PX, FORCEGRAPH_DRAG_THRESHOLD_PX, FORCEGRAPH_CURVE_STEP/SAMPLES, FORCEGRAPH_ARROW_LENGTH/ZOOM, FORCEGRAPH_COOLDOWN_TICKS(_REDUCED), FORCEGRAPH_COLLIDE_MAX_NODES, FORCEGRAPH_LABEL_HIGHLIGHT_MAX, FORCEGRAPH_DOC_LINES_PX, FORCEGRAPH_TIP_DOC_CHARS, FORCEGRAPH_HUB_TOP_N, FORCEGRAPH_FIT_PADDING_PX/MAX_ZOOM/LEGEND_MIN_WIDTH)
+- Explorer 3D view (FORCEGRAPH_CDN_JS_3D pinned to an exact release, FORCEGRAPH_3D_LINK_OPACITY, FORCEGRAPH_3D_LINK_WIDTH_HIGHLIGHT/ACTIVE, FORCEGRAPH_3D_PARTICLE_WIDTH, FORCEGRAPH_3D_DEPTH_FADE, FORCEGRAPH_3D_MIN_GLYPH_PX, FORCEGRAPH_3D_LABEL_PX, FORCEGRAPH_3D_ORBIT_SPEED, FORCEGRAPH_3D_FLY_DISTANCE)
 - Force-graph explorer UX (FORCEGRAPH_LABEL_TOP_N, FORCEGRAPH_LABEL_ZOOM, FORCEGRAPH_LABEL_MAX_CHARS, FORCEGRAPH_SYMBOLS_PER_NODE, FORCEGRAPH_DOC_MAX_CHARS, FORCEGRAPH_SIGNATURE_MAX_CHARS, FORCEGRAPH_CLUSTER_STRENGTH, FORCEGRAPH_COLLIDE_PADDING, FORCEGRAPH_DAG_LEVEL_DISTANCE, FORCEGRAPH_FLY_MS, FORCEGRAPH_FLY_ZOOM, FORCEGRAPH_SEARCH_RESULTS, FORCEGRAPH_THUMB_WIDTH/HEIGHT/ITERATIONS)
 - Video layout acts (VIDEO_BUNDLE_S, VIDEO_FA2_ITERATIONS, VIDEO_FA2_SNAPSHOTS, VIDEO_FA2_SCALING, VIDEO_FA2_GRAVITY, VIDEO_FA2_LINLOG, VIDEO_BUNDLE_BETA, VIDEO_BUNDLE_SAMPLES, VIDEO_SURFERS, VIDEO_RANK_LABELS)
 - Memory settings (MEMORY_ENABLED, MEMORY_FILENAME, MEMORY_VOCABULARY_STOPWORDS, MEMORY_NOTE_MAX_CHARS, MEMORY_NOTE_KINDS, MEMORY_RULE_SOURCES, MEMORY_CONSTRAINT/STYLE/DELIVERABLE_KEYWORDS, MEMORY_HEADING_EXCLUDE, MEMORY_MAX_RULES_PER_FILE/CATEGORY, MEMORY_MIN_RULE_CHARS, MEMORY_MAX_COMMANDS, MEMORY_VOCABULARY_TOP_N, MEMORY_SUBSYSTEMS_TOP_N, MEMORY_STYLE_LANGUAGES, MEMORY_RISKS_TOP_N)
@@ -404,6 +407,10 @@ tests/
 - Embedder (readmenator/_embed.py): optional sentence-transformers encode with offline Jaccard near_jaccard/cluster_jaccard/project_jaccard fallback; CLI `near <file|text>`
 - Explorer UX: canvas names with collision-aware labels (top FORCEGRAPH_LABEL_TOP_N by PageRank, all past FORCEGRAPH_LABEL_ZOOM), shapes per type, findings badge, hover neighbourhood preview, inspector panel (PageRank position and percentile, metrics, purpose, filterable symbols with signatures and docs, neighbours grouped by relation, clickable, Back history, 1-3 hop reach, isolate), search over labels, paths and symbol names, layouts force / cluster (community anchors) / radial (layer rings) / dag, deep links #node=&layout=; unresolved calls and imports that resolve to project files never become externals; payload file nodes carry rank, rank_pos, doc (empty in privacy mode), symbol_list
 - ForceGraphRenderer.thumbnail_svg(payload): escaped ForceAtlas2 preview used as the featured gallery card in both `diagrams` and `pages`
+- Explorer page (readmenator/_forcegraph_page.py): template placeholders are filled in one regex pass (payload text naming a token is never rescanned); page_settings(payload) serializes every tuneable from Config plus group_colors (layer palette, language hash colors); member_of/layered_as edges use their own palette entries
+- Explorer selection: engine pointer picking is disabled (force-graph repaints its shadow canvas at most every 800 ms, so picks drifted while nodes moved); hover, click, drag-to-pin, double-click isolate and right-click menus are hit-tested in the page against the positions drawn in the same frame; priority node glyph, then label, then enlarged grab area (FORCEGRAPH_MIN_HIT_PX + padding), then dependency edges (curved edges via __controlPoints); while a focus is active only highlighted edges are pickable
+- Explorer 3D: 3d-force-graph (pinned CDN, orbit controls) keeps links, arrows and particles; node spheres hidden (nodeVisibility false) and flat glyphs (document tiles, hexagon communities, diamond layers, triangle externals), group halos and collision-aware labels painted on an overlay canvas from the same camera inside renderer.render, with depth fade; camera fly-to, orbit toggle, cluster anchors on a Fibonacci sphere, layer shells; falls back to 2D when the CDN is unreachable
+- Explorer actions: reach direction (both, upstream used by, downstream uses) x depth (1, 2, 3, all); path finder (directed first, then reverse, undirected, then via shared group) with hop-by-hop passport; edge passport (sentence, endpoints, mutual dependency, cycle closure, upward layer crossing, community bridge, parallel relations); group passport (cohesion, depends-on and used-by groups); color by community/layer/language; node and edge type filters; hide/unhide; lenses: import cycles (Tarjan SCC), no importers, disconnected, hubs; deep links node, edge, path, lens, group, view, layout, color, dir, depth; window.ReadmenatorExplorer API
 - AnalyzerFactory exposes forcegraph, analytics, scantext, provenance, exclusions, embedder (lazy init); app.export_forcegraph/explorer_state/serve_explorer/analytics/scan_texts/near/audit_provenance/validate_yaralite; run()/rebuild() write readmenator-maps/graph-force.html via _maybe_export_forcegraph (skipped when FORCEGRAPH_ENABLED=False); export_diagrams() writes it first and links it from the gallery index; export() also writes it
 
 ### GraphRAG Contract
@@ -607,7 +614,7 @@ tests/
 - Canvas uses the darkest token with lifted node panels; edge labels carry halo strokes for readability
 - Four visual presets with identity (classic, signal-flow glow, blueprint grid with square nodes, warm editorial) and dark/light themes from Config
 - VisNetworkRenderer class with render(map) returning a physics-driven vis.js document
-- Live map selection: hover preview card; click dims everything outside the 1-hop neighbourhood (reach modes still filter), fits the camera, and opens a passport with metric tiles, an ego mini-map SVG (used by left, imports right, clickable), clamped doc, neighbour chips, filterable symbol table, Back history (Backspace); guide rows hide while focused
+- Live map selection: hover preview card (the #peek element ships in the template); click dims everything outside the 1-hop neighbourhood (reach modes still filter), fits the camera, and opens a passport with metric tiles, an ego mini-map SVG (used by left, imports right, clickable), clamped doc, neighbour chips, filterable symbol table, Back history (Backspace); guide rows hide while focused
 - Live maps color nodes by code community (legend with counts, click isolates, #community=id deep link, C toggles to role colors), size dots by link count, always label the DIAGRAM_VIS_LABEL_TOP_N most connected files and reveal the rest on zoom, dim edges that light up on hover/selection, forceAtlas2Based physics from DIAGRAM_VIS_* settings
 - Layer roles are honest: utility -> core, testing -> test (never "external" for project files)
 - Default export format for `diagrams`, `diagram`, and `pages` (CDN bundle URLs from Config, pages need network access)
@@ -615,6 +622,8 @@ tests/
 - Tooltips show docs plus top symbols; focus passport renders the symbol table with docs, neighbor lists, and counts
 - Draggable nodes with barnesHut physics, stabilization, freeze toggle, PNG snapshot and typed JSON export
 - Reuses reader contracts: search, focus, reach, route, lens, chapters, deep links, titled controls
+- Live map links: hover card, click opens a link passport (sentence, endpoints, mutual dependency, community bridge, role crossing, other links between the pair, Fit, Both neighbourhoods), #edge=from~to deep link, Esc clears
+- Both map renderers fill placeholders with _fill_template in one pass, so payload text naming a placeholder stays literal
 - Every toolbar and dialog action carries a human-readable title plus a visible reading guide and a gallery how-to section
 - Deep links restore #focus=id, #focus=id&reach=upstream|downstream, #route=a~b, #lens=role, #view=id
 - Motion is finite, honors prefers-reduced-motion, and never enters canonical exports

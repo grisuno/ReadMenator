@@ -18,14 +18,15 @@
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
-| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 90 | 6 |
+| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 91 | 6 |
 | `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 31 | 2 |
 | `readmenator/_embed.py` | Optional semantic embeddings for the readmenator knowledge graph. | readmenator | 11 | 2 |
 | `readmenator/_exclusions.py` | False-positive exclusion list for readmenator findings. | readmenator | 11 | 2 |
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_explorer.py` | Stdlib explorer HTTP server for the readmenator knowledge graph. | readmenator | 13 | 2 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 16 | 3 |
-| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 18 | 5 |
+| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 21 | 5 |
+| `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 1 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 3 |
 | `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 5 |
 | `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 11 | 3 |
@@ -94,7 +95,7 @@
 | `tests/test_cursorrules.py` | Contract tests for the CursorRulesGenerator. | tests | 12 | 0 |
 | `tests/test_dataflow.py` | - | tests | 47 | 0 |
 | `tests/test_dead_code.py` | Contract tests for the DeadCodeStripper. | tests | 15 | 0 |
-| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 70 | 0 |
+| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 72 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
@@ -102,7 +103,7 @@
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
-| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 47 | 0 |
+| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 60 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |
 | `tests/test_linter.py` | Contract tests for the ArchitectureLinter. | tests | 14 | 0 |
 | `tests/test_mcp_server.py` | Contract tests for the MCP server protocol and tool dispatch. | tests | 25 | 0 |

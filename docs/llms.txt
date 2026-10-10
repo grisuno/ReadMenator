@@ -1,17 +1,17 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 6 communities, 124 files, 974 imports, 2 languages, 2305 symbols.
+> Static analysis knowledge base for ReadMenator: 6 communities, 125 files, 980 imports, 2 languages, 2324 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
-- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 5 layers, dominant utility (71 files) across 7 import-based communities....
-- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-08 | offline, deterministic
+- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 6 layers, dominant utility (71 files) across 7 import-based communities....
+- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-09 | offline, deterministic
 - [readmenator-wiki/community_0_readmenator_agent_output.md](md/readmenator-wiki/community_0_readmenator_agent_output.md): Community 0 | 38 files | cohesion 0.41
 - [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 28 files | cohesion 0.54
 - [readmenator-wiki/community_2_readmenator_diagrams.md](md/readmenator-wiki/community_2_readmenator_diagrams.md): Community 2 | 20 files | cohesion 0.33
-- [readmenator-wiki/community_3_readmenator_pipeline.md](md/readmenator-wiki/community_3_readmenator_pipeline.md): Community 3 | 17 files | cohesion 0.31
+- [readmenator-wiki/community_3_readmenator_pipeline.md](md/readmenator-wiki/community_3_readmenator_pipeline.md): Community 3 | 18 files | cohesion 0.32
 - [readmenator-wiki/community_4_readmenator_video.md](md/readmenator-wiki/community_4_readmenator_video.md): Community 4 | 13 files | cohesion 0.36
 - [readmenator-wiki/community_5_readmenator_agent_injector.md](md/readmenator-wiki/community_5_readmenator_agent_injector.md): Community 5 | 5 files | cohesion 0.40
 - [readmenator-wiki/community_6_orphans.md](md/readmenator-wiki/community_6_orphans.md): Community 6 | 3 files | cohesion 0.00
@@ -20,7 +20,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 
 ## GraphRAG
 
-- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 2517 | Relationships: 8527 | Communities: 7 | Themes: 2 | Text units: 2409
+- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 2537 | Relationships: 8574 | Communities: 7 | Themes: 2 | Text units: 2429
 
 ## Agent Docs
 
@@ -41,7 +41,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/KB_tests.md](md/readmenator-agent/KB_tests.md): Doc: Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 - [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
 - [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): makenode (function, line 7) def makenode(nodeid, symbols)
-- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 124 files at commit b3f9b9da0bd3. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
+- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 125 files at commit 15acb8294e7e. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)

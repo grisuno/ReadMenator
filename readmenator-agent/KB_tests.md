@@ -365,7 +365,7 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `TestInteractiveMapRendererContract` (class, line 237) `class TestInteractiveMapRendererContract(TestCase)`
   - `TestDocsSitePublisherContract` (class, line 367) `class TestDocsSitePublisherContract(TestCase)`
   - `TestVisNetworkRendererContract` (class, line 510) `class TestVisNetworkRendererContract(TestCase)`
-  - `TestDiagramVariantsContract` (class, line 627) `class TestDiagramVariantsContract(TestCase)`
+  - `TestDiagramVariantsContract` (class, line 650) `class TestDiagramVariantsContract(TestCase)`
   - `setUp` (method, line 33) `def setUp(self)`
   - `_make_graph` (method, line 38) `def _make_graph(self)`
   - `test_builder_supports_five_kinds` (method, line 52) `def test_builder_supports_five_kinds(self)`
@@ -417,19 +417,21 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_publish_card_reports_primary_scope` (method, line 501) `def test_publish_card_reports_primary_scope(self)`
   - `setUp` (method, line 513) `def setUp(self)`
   - `_map` (method, line 519) `def _map(self, kind)`
-  - `test_renderer_uses_configured_cdn_urls` (method, line 529) `def test_renderer_uses_configured_cdn_urls(self)`
-  - `test_renderer_builds_vis_network_with_physics` (method, line 542) `def test_renderer_builds_vis_network_with_physics(self)`
-  - `test_renderer_links_gallery_home_when_configured` (method, line 550) `def test_renderer_links_gallery_home_when_configured(self)`
-  - `test_renderer_disables_physics_from_config` (method, line 558) `def test_renderer_disables_physics_from_config(self)`
-  - `test_renderer_escapes_malicious_titles` (method, line 565) `def test_renderer_escapes_malicious_titles(self)`
-  - `test_renderer_exposes_reader_controls` (method, line 578) `def test_renderer_exposes_reader_controls(self)`
-  - `test_renderer_is_deterministic` (method, line 584) `def test_renderer_is_deterministic(self)`
-  - `test_renderer_embeds_valid_payloads` (method, line 589) `def test_renderer_embeds_valid_payloads(self)`
-  - `test_renderer_documents_symbols_per_file` (method, line 597) `def test_renderer_documents_symbols_per_file(self)`
-  - `test_renderer_escapes_malicious_symbol_docs` (method, line 613) `def test_renderer_escapes_malicious_symbol_docs(self)`
-  - `_project` (method, line 630) `def _project(self, tmp)`
-  - `test_export_diagrams_writes_vis_maps_by_default` (method, line 635) `def test_export_diagrams_writes_vis_maps_by_default(self)`
-  - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 649) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
+  - `test_renderers_ignore_placeholders_inside_payload_text` (method, line 529) `def test_renderers_ignore_placeholders_inside_payload_text(self)`
+  - `test_renderer_ships_edge_actions` (method, line 546) `def test_renderer_ships_edge_actions(self)`
+  - `test_renderer_uses_configured_cdn_urls` (method, line 552) `def test_renderer_uses_configured_cdn_urls(self)`
+  - `test_renderer_builds_vis_network_with_physics` (method, line 565) `def test_renderer_builds_vis_network_with_physics(self)`
+  - `test_renderer_links_gallery_home_when_configured` (method, line 573) `def test_renderer_links_gallery_home_when_configured(self)`
+  - `test_renderer_disables_physics_from_config` (method, line 581) `def test_renderer_disables_physics_from_config(self)`
+  - `test_renderer_escapes_malicious_titles` (method, line 588) `def test_renderer_escapes_malicious_titles(self)`
+  - `test_renderer_exposes_reader_controls` (method, line 601) `def test_renderer_exposes_reader_controls(self)`
+  - `test_renderer_is_deterministic` (method, line 607) `def test_renderer_is_deterministic(self)`
+  - `test_renderer_embeds_valid_payloads` (method, line 612) `def test_renderer_embeds_valid_payloads(self)`
+  - `test_renderer_documents_symbols_per_file` (method, line 620) `def test_renderer_documents_symbols_per_file(self)`
+  - `test_renderer_escapes_malicious_symbol_docs` (method, line 636) `def test_renderer_escapes_malicious_symbol_docs(self)`
+  - `_project` (method, line 653) `def _project(self, tmp)`
+  - `test_export_diagrams_writes_vis_maps_by_default` (method, line 658) `def test_export_diagrams_writes_vis_maps_by_default(self)`
+  - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 672) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
 
 ## tests/test_documentation.py

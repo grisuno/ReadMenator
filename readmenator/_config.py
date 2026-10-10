@@ -556,7 +556,7 @@ class Config:
 
     FORCEGRAPH_CDN_JS_2D: str = "https://cdn.jsdelivr.net/npm/force-graph@1/dist/force-graph.min.js"
 
-    FORCEGRAPH_CDN_JS_3D: str = "https://cdn.jsdelivr.net/npm/3d-force-graph@1/dist/3d-force-graph.min.js"
+    FORCEGRAPH_CDN_JS_3D: str = "https://cdn.jsdelivr.net/npm/3d-force-graph@1.77.0/dist/3d-force-graph.min.js"
 
     FORCEGRAPH_VENDOR_SUBDIR: str = "vendor"
 
@@ -601,6 +601,8 @@ class Config:
         ("calls", "rgba(239,184,79,.4)"),
         ("inherits", "rgba(124,90,239,.45)"),
         ("external", "rgba(255,255,255,.15)"),
+        ("member_of", "rgba(167,139,250,.22)"),
+        ("layered_as", "rgba(52,211,153,.16)"),
     )
 
     FORCEGRAPH_FAMILY_SAT_BASE: int = 55
@@ -773,6 +775,70 @@ class Config:
     FORCEGRAPH_THUMB_HEIGHT: int = 150
 
     FORCEGRAPH_THUMB_ITERATIONS: int = 150
+
+    FORCEGRAPH_LAYER_COLORS: Tuple[Tuple[str, str], ...] = (
+        ("presentation", "#22d3ee"),
+        ("business_logic", "#34d399"),
+        ("data_access", "#a78bfa"),
+        ("infrastructure", "#fbbf24"),
+        ("utility", "#94a3b8"),
+        ("testing", "#fb923c"),
+        ("unknown", "#64748b"),
+    )
+
+    FORCEGRAPH_HIT_PADDING_PX: float = 3.0
+
+    FORCEGRAPH_MIN_HIT_PX: float = 7.0
+
+    FORCEGRAPH_EDGE_HIT_PX: float = 5.0
+
+    FORCEGRAPH_DRAG_THRESHOLD_PX: float = 4.0
+
+    FORCEGRAPH_CURVE_STEP: float = 0.18
+
+    FORCEGRAPH_CURVE_SAMPLES: int = 16
+
+    FORCEGRAPH_ARROW_LENGTH: float = 4.0
+
+    FORCEGRAPH_ARROW_ZOOM: float = 2.2
+
+    FORCEGRAPH_COOLDOWN_TICKS: int = 400
+
+    FORCEGRAPH_COOLDOWN_TICKS_REDUCED: int = 60
+
+    FORCEGRAPH_COLLIDE_MAX_NODES: int = 1500
+
+    FORCEGRAPH_LABEL_HIGHLIGHT_MAX: int = 60
+
+    FORCEGRAPH_DOC_LINES_PX: float = 9.0
+
+    FORCEGRAPH_TIP_DOC_CHARS: int = 200
+
+    FORCEGRAPH_HUB_TOP_N: int = 10
+
+    FORCEGRAPH_FIT_PADDING_PX: int = 48
+
+    FORCEGRAPH_FIT_MAX_ZOOM: float = 2.5
+
+    FORCEGRAPH_FIT_LEGEND_MIN_WIDTH: int = 700
+
+    FORCEGRAPH_3D_LINK_OPACITY: float = 0.5
+
+    FORCEGRAPH_3D_LINK_WIDTH_HIGHLIGHT: float = 0.7
+
+    FORCEGRAPH_3D_LINK_WIDTH_ACTIVE: float = 1.4
+
+    FORCEGRAPH_3D_PARTICLE_WIDTH: float = 1.3
+
+    FORCEGRAPH_3D_DEPTH_FADE: float = 0.3
+
+    FORCEGRAPH_3D_MIN_GLYPH_PX: float = 2.5
+
+    FORCEGRAPH_3D_LABEL_PX: float = 9.0
+
+    FORCEGRAPH_3D_ORBIT_SPEED: float = 0.6
+
+    FORCEGRAPH_3D_FLY_DISTANCE: int = 320
 
     MEMORY_ENABLED: bool = True
 

@@ -3,6 +3,10 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_kind_counts` | method | `readmenator/_graphrag.py:578` | `def _kind_counts(entities)` |
+| `_location` | method | `readmenator/_graphrag.py:1151` | `def _location(entity)` |
+| `_pack` | method | `readmenator/_graphrag.py:1175` | `def _pack(self, header, sections, budget_tokens, shares)` |
+| `_rating` | method | `readmenator/_graphrag.py:851` | `def _rating(self, mass, top_mass, risk)` |
 | `_relation_weight` | method | `readmenator/_graphrag.py:335` | `def _relation_weight(relation)` |
 | `_report_block` | method | `readmenator/_graphrag.py:1163` | `def _report_block(report)` |
 | `_reports` | method | `readmenator/_graphrag.py:659` | `def _reports(self, nodes, resolved_edges, analysis, layers, findings, analysis_v2, file_rank, entities)` |
@@ -492,9 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_verdict_badge` | function | `readmenator/_video.py:181` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
 | `alpha` | function | `readmenator/_video.py:104` | `def alpha(c, a)` |
 | `build_scenes` | method | `readmenator/_video.py:682` | `def build_scenes(self, data)` |
-| `bundle_layout` | method | `readmenator/_video.py:810` | `def bundle_layout(self, data, box)` |
-| `chroma_text` | method | `readmenator/_video.py:410` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
-| `collect` | method | `readmenator/_video.py:469` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
-| `community_color` | function | `readmenator/_video.py:163` | `def community_color(index)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

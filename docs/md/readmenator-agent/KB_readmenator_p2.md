@@ -100,26 +100,35 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `family_color_from_name` (function, line 28) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
-  - `node_value` (function, line 56) `def node_value(symbols, degree)`
-  - `ForceGraphRenderer` (class, line 69) `class ForceGraphRenderer`
-  - `__init__` (method, line 72) `def __init__(self, config)`
-  - `node_palette` (method, line 80) `def node_palette(self)`
-  - `edge_palette` (method, line 84) `def edge_palette(self)`
-  - `vendor_source` (method, line 88) `def vendor_source(self)`
-  - `vendor_href` (method, line 96) `def vendor_href(self)`
-  - `build_payload` (method, line 101) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings)`
-  - `render` (method, line 277) `def render(self, payload, analytics, title, home_href)`
-  - `thumbnail_svg` (method, line 347) `def thumbnail_svg(self, payload)`
-  - `write` (method, line 387) `def write(self, output_path, payload, analytics, title, home_href)`
-  - `copy_vendor` (method, line 414) `def copy_vendor(self, dest_dir)`
-  - `_node_doc` (method, line 433) `def _node_doc(self, node)`
-  - `_symbol_list` (method, line 439) `def _symbol_list(self, node)`
-  - `_file_color` (method, line 452) `def _file_color(self, node_id, family, layer, palette)`
-  - `file_of` (method, line 135) `def file_of(edge_id)`
-  - `add_node` (method, line 189) `def add_node(node_id, label, node_type)`
-- Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`
+  - `family_color_from_name` (function, line 34) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
+  - `node_value` (function, line 62) `def node_value(symbols, degree)`
+  - `ForceGraphRenderer` (class, line 75) `class ForceGraphRenderer`
+  - `__init__` (method, line 78) `def __init__(self, config)`
+  - `node_palette` (method, line 86) `def node_palette(self)`
+  - `edge_palette` (method, line 90) `def edge_palette(self)`
+  - `vendor_source` (method, line 94) `def vendor_source(self)`
+  - `vendor_href` (method, line 102) `def vendor_href(self)`
+  - `build_payload` (method, line 107) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings)`
+  - `render` (method, line 283) `def render(self, payload, analytics, title, home_href)`
+  - `group_colors` (method, line 326) `def group_colors(self, payload)`
+  - `page_settings` (method, line 349) `def page_settings(self, payload)`
+  - `_family_color` (method, line 418) `def _family_color(self, name)`
+  - `thumbnail_svg` (method, line 435) `def thumbnail_svg(self, payload)`
+  - `write` (method, line 475) `def write(self, output_path, payload, analytics, title, home_href)`
+  - `copy_vendor` (method, line 502) `def copy_vendor(self, dest_dir)`
+  - `_node_doc` (method, line 521) `def _node_doc(self, node)`
+  - `_symbol_list` (method, line 527) `def _symbol_list(self, node)`
+  - `_file_color` (method, line 540) `def _file_color(self, node_id, family, layer, palette)`
+  - `file_of` (method, line 141) `def file_of(edge_id)`
+  - `add_node` (method, line 195) `def add_node(node_id, label, node_type)`
+- Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`
 - Imported by: `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+
+## readmenator/_forcegraph_page.py
+- Doc: HTML page template for the force-graph explorer.
+- Layer: presentation
+- Language: py
+- Imported by: `readmenator/_forcegraph.py`
 
 ## readmenator/_gh_wiki.py
 - Doc: GitHub wiki publisher: mirrors generated knowledge into the repository wiki.

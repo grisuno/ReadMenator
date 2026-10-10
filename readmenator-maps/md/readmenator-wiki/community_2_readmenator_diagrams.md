@@ -4,7 +4,7 @@
 
 ## Definition
 
-This community groups 20 file(s) rooted at `readmenator` with dominant language py (cohesion 0.33). Central symbols: `ArchitectureLinter`, `ConceptExtractor`, `CursorRulesGenerator`, `DirectoryWatcher`, `DocsSitePublisher`, `GitHubWikiPublisher`, `InteractiveMapRenderer`, `LayerDetector`. Core file: `readmenator/_diagrams.py` (90 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 20 file(s) rooted at `readmenator` with dominant language py (cohesion 0.33). Central symbols: `ArchitectureLinter`, `ConceptExtractor`, `CursorRulesGenerator`, `DirectoryWatcher`, `DocsSitePublisher`, `GitHubWikiPublisher`, `InteractiveMapRenderer`, `LayerDetector`. Core file: `readmenator/_diagrams.py` (91 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
@@ -16,7 +16,7 @@ This community groups 20 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_app.py` | py | utility | 71 | yes |
 | `readmenator/_concepts.py` | py | utility | 8 | yes |
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
-| `readmenator/_diagrams.py` | py | utility | 90 | yes |
+| `readmenator/_diagrams.py` | py | utility | 91 | yes |
 | `readmenator/_gh_wiki.py` | py | utility | 18 | yes |
 | `readmenator/_layers.py` | py | utility | 7 | yes |
 | `readmenator/_linter.py` | py | utility | 7 | yes |
@@ -25,7 +25,7 @@ This community groups 20 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_yaralite.py` | py | utility | 20 | yes |
 | `tests/test_concepts.py` | py | testing | 8 | no |
 | `tests/test_cursorrules.py` | py | testing | 12 | yes |
-| `tests/test_diagrams.py` | py | testing | 70 | yes |
+| `tests/test_diagrams.py` | py | testing | 72 | yes |
 | `tests/test_gh_wiki.py` | py | testing | 17 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
 | `tests/test_linter.py` | py | testing | 14 | yes |
@@ -87,7 +87,6 @@ This community groups 20 file(s) rooted at `readmenator` with dominant language 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_gh_wiki.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_gh_wiki.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 
 ## Open Questions
 

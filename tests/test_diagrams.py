@@ -526,6 +526,29 @@ class TestVisNetworkRendererContract(unittest.TestCase):
         layers = {"web/app.py": "presentation", "core/logic.py": "business_logic"}
         return self.builder.build(nodes, edges, edges, layers, [], None, kind)
 
+    def test_renderers_ignore_placeholders_inside_payload_text(self) -> None:
+        """A doc naming a template token stays literal and every payload stays valid JSON."""
+        nodes = [
+            Node(node_id="web/app.py", label="app.py", kind="module", language="py",
+                 doc="Writes __EDGES_JSON__ and __META_JSON__ into the page."),
+            Node(node_id="core/logic.py", label="logic.py", kind="module", language="py"),
+        ]
+        edges = [Edge(source="web/app.py", target="core/logic.py", relation="imports")]
+        layers = {"web/app.py": "presentation", "core/logic.py": "business_logic"}
+        system_map = self.builder.build(nodes, edges, edges, layers, [], None, "architecture")
+        for renderer, prefix in ((self.renderer, "vis-"), (InteractiveMapRenderer(self.config), "map-")):
+            output = renderer.render(system_map)
+            blocks = dict(re.findall(r'<script type="application/json" id="([a-z-]+)">(.*?)</script>', output, re.DOTALL))
+            for name in ("nodes", "edges", "meta"):
+                json.loads(blocks[prefix + name])
+            self.assertIn("__EDGES_JSON__ and __META_JSON__", blocks[prefix + "nodes"])
+
+    def test_renderer_ships_edge_actions(self) -> None:
+        """Links get a hover card, a click-to-open passport, and a deep link."""
+        output = self.renderer.render(self._map())
+        for token in ('network.on("hoverEdge"', "function focusEdge", "function renderEdgeDetail", "#edge=", "Both neighbourhoods", "isMutual"):
+            self.assertIn(token, output)
+
     def test_renderer_uses_configured_cdn_urls(self) -> None:
         """Script and style tags come from Config, never hardcoded."""
         from dataclasses import replace

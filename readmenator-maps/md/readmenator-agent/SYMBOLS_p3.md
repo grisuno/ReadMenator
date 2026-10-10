@@ -3,6 +3,10 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `bundle_layout` | method | `readmenator/_video.py:810` | `def bundle_layout(self, data, box)` |
+| `chroma_text` | method | `readmenator/_video.py:410` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
+| `collect` | method | `readmenator/_video.py:469` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
+| `community_color` | function | `readmenator/_video.py:163` | `def community_color(index)` |
 | `dependencies_available` | function | `readmenator/_video.py:221` | `def dependencies_available()` |
 | `draw_caption` | method | `readmenator/_video.py:448` | `def draw_caption(d, text, lt, dur, fonts, width, y)` |
 | `draw_grid` | method | `readmenator/_video.py:332` | `def draw_grid(img, t, strength, bd)` |
@@ -439,7 +443,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
 | `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
 | `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
-| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:627` | `class TestDiagramVariantsContract(TestCase)` |
+| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:650` | `class TestDiagramVariantsContract(TestCase)` |
 | `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
 | `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
 | `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
@@ -449,7 +453,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
 | `_map` | method | `tests/test_diagrams.py:519` | `def _map(self, kind)` |
 | `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
-| `_project` | method | `tests/test_diagrams.py:630` | `def _project(self, tmp)` |
+| `_project` | method | `tests/test_diagrams.py:653` | `def _project(self, tmp)` |
 | `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
 | `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
 | `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
@@ -466,8 +470,8 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
 | `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
 | `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
-| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:649` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
-| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:635` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
+| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:672` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
+| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:658` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
 | `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:501` | `def test_publish_card_reports_primary_scope(self)` |
 | `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:462` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
 | `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:430` | `def test_publish_escapes_malicious_project_name(self)` |
@@ -480,21 +484,17 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_publish_output_has_no_external_requests` | method | `tests/test_diagrams.py:406` | `def test_publish_output_has_no_external_requests(self)` |
 | `test_publish_skips_invalid_maps` | method | `tests/test_diagrams.py:450` | `def test_publish_skips_invalid_maps(self)` |
 | `test_publish_writes_index_plus_five_maps` | method | `tests/test_diagrams.py:386` | `def test_publish_writes_index_plus_five_maps(self)` |
-| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:542` | `def test_renderer_builds_vis_network_with_physics(self)` |
+| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:565` | `def test_renderer_builds_vis_network_with_physics(self)` |
 | `test_renderer_buttons_explain_their_purpose` | method | `tests/test_diagrams.py:355` | `def test_renderer_buttons_explain_their_purpose(self)` |
 | `test_renderer_covers_all_five_kinds` | method | `tests/test_diagrams.py:314` | `def test_renderer_covers_all_five_kinds(self)` |
-| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:558` | `def test_renderer_disables_physics_from_config(self)` |
-| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:597` | `def test_renderer_documents_symbols_per_file(self)` |
+| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:581` | `def test_renderer_disables_physics_from_config(self)` |
+| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:620` | `def test_renderer_documents_symbols_per_file(self)` |
 | `test_renderer_embeds_valid_json_payloads` | method | `tests/test_diagrams.py:305` | `def test_renderer_embeds_valid_json_payloads(self)` |
-| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:589` | `def test_renderer_embeds_valid_payloads(self)` |
+| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:612` | `def test_renderer_embeds_valid_payloads(self)` |
 | `test_renderer_escapes_malicious_labels` | method | `tests/test_diagrams.py:292` | `def test_renderer_escapes_malicious_labels(self)` |
-| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:613` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
-| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:565` | `def test_renderer_escapes_malicious_titles(self)` |
-| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:578` | `def test_renderer_exposes_reader_controls(self)` |
+| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:636` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
+| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:588` | `def test_renderer_escapes_malicious_titles(self)` |
+| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:601` | `def test_renderer_exposes_reader_controls(self)` |
 | `test_renderer_has_no_external_requests` | method | `tests/test_diagrams.py:270` | `def test_renderer_has_no_external_requests(self)` |
-| `test_renderer_includes_interaction_controls` | method | `tests/test_diagrams.py:277` | `def test_renderer_includes_interaction_controls(self)` |
-| `test_renderer_includes_keyboard_and_deep_links` | method | `tests/test_diagrams.py:283` | `def test_renderer_includes_keyboard_and_deep_links(self)` |
-| `test_renderer_is_deterministic` | method | `tests/test_diagrams.py:584` | `def test_renderer_is_deterministic(self)` |
-| `test_renderer_keeps_canvas_distinct_from_nodes` | method | `tests/test_diagrams.py:333` | `def test_renderer_keeps_canvas_distinct_from_nodes(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

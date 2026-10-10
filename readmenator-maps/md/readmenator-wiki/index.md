@@ -1,13 +1,13 @@
 # Second Brain
 
-*Last synthesized: 2026-10-08 | 124 files | 7 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-09 | 125 files | 7 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
 
 ## Vault Overview
 
-The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 5 layers, dominant utility (71 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
+The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (71 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
 
 Surprising tissue lives between readmenator: _agent_output, readmenator/parsers, readmenator: _diagrams: 14 extracted cross-community imports and 6 inferred bridges. Follow `connections.json` sorted by strength before refactoring.
 
@@ -17,14 +17,14 @@ Open work clusters around documentation (84% file coverage), 0 security findings
 
 | Metric | Value |
 |--------|-------|
-| Files | 124 |
-| Symbols | 2305 |
-| Resolved imports | 436 |
+| Files | 125 |
+| Symbols | 2324 |
+| Resolved imports | 437 |
 | Languages | js, py |
 | Communities | 7 |
-| Doc coverage | 84% (104/124 files) |
+| Doc coverage | 84% (105/125 files) |
 | Security findings | 0 |
-| Estimated read cost | ~56023 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~56843 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 
@@ -42,7 +42,7 @@ readmenator query "<question>" --target ReadMenator
 - [readmenator: _agent_output (38 files, cohesion 0.41)](./community_0_readmenator_agent_output.md)
 - [readmenator/parsers (28 files, cohesion 0.54)](./community_1_readmenator_parsers.md)
 - [readmenator: _diagrams (20 files, cohesion 0.33)](./community_2_readmenator_diagrams.md)
-- [readmenator: _pipeline (17 files, cohesion 0.31)](./community_3_readmenator_pipeline.md)
+- [readmenator: _pipeline (18 files, cohesion 0.32)](./community_3_readmenator_pipeline.md)
 - [readmenator: _video (13 files, cohesion 0.36)](./community_4_readmenator_video.md)
 - [readmenator: _agent_injector (5 files, cohesion 0.40)](./community_5_readmenator_agent_injector.md)
 - [orphans (3 files, cohesion 0.00)](./community_6_orphans.md)

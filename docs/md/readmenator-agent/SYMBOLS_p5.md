@@ -3,6 +3,25 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_build_seeds_for_context` | method | `tests/test_ranking.py:383` | `def test_build_seeds_for_context(self)` |
+| `test_build_seeds_for_context_no_match` | method | `tests/test_ranking.py:392` | `def test_build_seeds_for_context_no_match(self)` |
+| `test_build_seeds_from_query_matches_node_id` | method | `tests/test_ranking.py:351` | `def test_build_seeds_from_query_matches_node_id(self)` |
+| `test_build_seeds_from_query_matches_symbol` | method | `tests/test_ranking.py:363` | `def test_build_seeds_from_query_matches_symbol(self)` |
+| `test_build_seeds_from_query_no_match_returns_empty` | method | `tests/test_ranking.py:374` | `def test_build_seeds_from_query_no_match_returns_empty(self)` |
+| `test_category_from_real_edges` | method | `tests/test_ranking.py:588` | `def test_category_from_real_edges(self)` |
+| `test_compose_imports_then_defines` | method | `tests/test_ranking.py:140` | `def test_compose_imports_then_defines(self)` |
+| `test_compose_incompatible_returns_none` | method | `tests/test_ranking.py:148` | `def test_compose_incompatible_returns_none(self)` |
+| `test_compose_mismatched_target_source` | method | `tests/test_ranking.py:155` | `def test_compose_mismatched_target_source(self)` |
+| `test_compose_same_kind` | method | `tests/test_ranking.py:130` | `def test_compose_same_kind(self)` |
+| `test_converges_within_max_iter` | method | `tests/test_ranking.py:260` | `def test_converges_within_max_iter(self)` |
+| `test_dangling_node_handled` | method | `tests/test_ranking.py:273` | `def test_dangling_node_handled(self)` |
+| `test_different_seeds_produce_different_rankings` | method | `tests/test_ranking.py:303` | `def test_different_seeds_produce_different_rankings(self)` |
+| `test_doc_projection_filters_morphism_kind` | method | `tests/test_ranking.py:506` | `def test_doc_projection_filters_morphism_kind(self)` |
+| `test_doc_projection_filters_undocumented` | method | `tests/test_ranking.py:498` | `def test_doc_projection_filters_undocumented(self)` |
+| `test_edge_kind_is_str_enum` | method | `tests/test_ranking.py:75` | `def test_edge_kind_is_str_enum(self)` |
+| `test_empty_category` | method | `tests/test_ranking.py:105` | `def test_empty_category(self)` |
+| `test_empty_graph` | method | `tests/test_ranking.py:184` | `def test_empty_graph(self)` |
+| `test_empty_graph` | method | `tests/test_ranking.py:284` | `def test_empty_graph(self)` |
 | `test_empty_seeds_uses_uniform` | method | `tests/test_ranking.py:310` | `def test_empty_seeds_uses_uniform(self)` |
 | `test_explain_rank_found` | method | `tests/test_ranking.py:540` | `def test_explain_rank_found(self)` |
 | `test_explain_rank_not_found` | method | `tests/test_ranking.py:559` | `def test_explain_rank_not_found(self)` |

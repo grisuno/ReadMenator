@@ -749,8 +749,9 @@ class readmenatorApplication:
             "kind": "forcegraph",
             "title": "Force Graph Explorer",
             "href": href,
-            "description": "Every file, community, layer and external with names, PageRank sizing, cluster, "
-                           "layer-ring and tree layouts, and a node inspector with symbols and neighbours.",
+            "description": "Every file, community, layer and external in 2D or 3D: clickable nodes and edges, "
+                           "upstream and downstream reach, path finder, color by community, layer or language, "
+                           "and lenses for import cycles, files nothing imports, and hubs.",
             "meta": f"{counts['nodes']} nodes | {counts['edges']} edges",
             "thumb": str(counts.get("thumb", "")),
         }
