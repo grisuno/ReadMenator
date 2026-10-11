@@ -29,6 +29,9 @@ from readmenator._diagrams import (  # noqa: F401
     VisNetworkRenderer,
 )
 from readmenator._mcp_server import MCPServer  # noqa: F401
+from readmenator._components import ComponentDiagramBuilder, sanitize  # noqa: F401
+from readmenator._ollama import OllamaClient  # noqa: F401
+from readmenator._symindex import SymbolIndex  # noqa: F401
 from readmenator._concepts import ConceptExtractor, verb_for_relation  # noqa: F401
 from readmenator._models import (  # noqa: F401
     AnalysisResult,

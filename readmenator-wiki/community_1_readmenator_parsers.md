@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 1 | 28 files | cohesion 0.53*
+*Community 1 | 32 files | cohesion 0.53*
 
 ## Definition
 
-This community groups 28 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
+This community groups 32 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Hotspot, dependency cycle, and change impact analysis.  Scores files by complexity plus centrality, finds import cycles with DFS, and measures transitive depend.
 
 ## Files
 
@@ -21,33 +21,40 @@ This community groups 28 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/parsers/_elixir.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_gdscript.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_go.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_java.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_javascript.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_kotlin.py` | py | utility | 2 | yes |
-| `readmenator/parsers/_lua.py` | py | utility | 2 | yes |
 
-### `tests` (4 files)
+### `tests` (6 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `tests/test_hotspots.py` | py | testing | 11 | no |
 | `tests/test_mermaid.py` | py | testing | 11 | no |
 | `tests/test_models.py` | py | testing | 11 | no |
 | `tests/test_parsers_property.py` | py | testing | 27 | yes |
+| `tests/test_refactorizer.py` | py | testing | 17 | yes |
 | `tests/test_sarif.py` | py | testing | 10 | no |
 
-### `readmenator` (3 files)
+### `readmenator` (5 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `readmenator/_hotspots.py` | py | utility | 7 | yes |
 | `readmenator/_mermaid.py` | py | utility | 4 | yes |
 | `readmenator/_models.py` | py | business_logic | 23 | yes |
+| `readmenator/_refactorizer.py` | py | utility | 9 | yes |
 | `readmenator/_sarif.py` | py | utility | 5 | yes |
 
-*... and 8 more files in this community.*
+*... and 12 more files in this community.*
 
 
 ## Key Symbols
 
+- `HotspotAnalyzer` (class, `readmenator/_hotspots.py:22`) `class HotspotAnalyzer` - Hotspot detection, cycle analysis, and change impact analysis.
+- `__init__` (method, `readmenator/_hotspots.py:31`) `def __init__(self, config)`
+- `analyze_hotspots` (method, `readmenator/_hotspots.py:34`) `def analyze_hotspots(self, nodes, edges, resolved_edges)` - Rank files by combined complexity and centrality scores.
+- `detect_cycles` (method, `readmenator/_hotspots.py:90`) `def detect_cycles(self, nodes, resolved_edges)` - Detect cycles in the resolved import graph using DFS.
+- `_dfs_visit` (method, `readmenator/_hotspots.py:114`) `def _dfs_visit(current)`
+- `_record_cycle` (method, `readmenator/_hotspots.py:125`) `def _record_cycle(start, end)`
+- `analyze_change_impact` (method, `readmenator/_hotspots.py:155`) `def analyze_change_impact(self, nodes, resolved_edges)` - Compute change impact for every file in the project.
 - `MermaidRenderer` (class, `readmenator/_mermaid.py:17`) `class MermaidRenderer` - Renders a knowledge graph to Mermaid JS flowchart syntax.
 - `__init__` (method, `readmenator/_mermaid.py:26`) `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, f`
 - `_sanitize_id` (method, `readmenator/_mermaid.py:45`) `def _sanitize_id(node_id)` - Convert *node_id* to a Mermaid-safe identifier.
@@ -71,43 +78,38 @@ This community groups 28 file(s) rooted at `readmenator/parsers` with dominant l
 - `LinterViolation` (class, `readmenator/_models.py:332`) `class LinterViolation` - A violation detected by the architecture linter.
 - `DeadCodeReport` (class, `readmenator/_models.py:349`) `class DeadCodeReport` - A dead code symbol identified by the stripper.
 - `RefactoringAction` (class, `readmenator/_models.py:366`) `class RefactoringAction` - A single refactoring action within a plan.
-- `RefactoringPlan` (class, `readmenator/_models.py:387`) `class RefactoringPlan` - A complete refactoring plan for a monolithic file.
-- `ConceptNode` (class, `readmenator/_models.py:404`) `class ConceptNode` - A semantic noun node in the concept graph.
-- `ConceptRelation` (class, `readmenator/_models.py:421`) `class ConceptRelation` - A verb edge between two concept noun nodes.
-- `ConceptGraph` (class, `readmenator/_models.py:442`) `class ConceptGraph` - Deterministic semantic layer over the structural graph.
-- `SarifExporter` (class, `readmenator/_sarif.py:11`) `class SarifExporter` - Exports security findings to the SARIF standard format.
-- `__init__` (method, `readmenator/_sarif.py:30`) `def __init__(self, privacy_mode)`
-- `export` (method, `readmenator/_sarif.py:33`) `def export(self, findings, project_name)` - Generate a SARIF v2.1.0 JSON string from security findings.
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 85
-- Cross-boundary resolved imports (EXTRACTED): 87
+- Internal resolved imports (EXTRACTED): 94
+- Cross-boundary resolved imports (EXTRACTED): 92
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_graphrag.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
+- [INFERRED] shares_context community 1 <-> 5 (strength 0.5): Inferred shared context (language py and layer utility) with no import path between community 1 (readmenator/parsers) and community 5 (orphans).
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
 
 ## Open Questions
 
-- Why do 3 file(s) lack file-level docs (e.g. `tests/test_mermaid.py`)? What purpose do they serve?
+- Why do 4 file(s) lack file-level docs (e.g. `tests/test_hotspots.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
 - Should readmenator/parsers be split, given cohesion 0.53?
 
 ## Sources
 
+- `readmenator/_hotspots.py`
 - `readmenator/_mermaid.py`
 - `readmenator/_models.py`
+- `readmenator/_refactorizer.py`
 - `readmenator/_sarif.py`
 - `readmenator/parsers/__init__.py`
 - `readmenator/parsers/_assembly.py`
@@ -124,6 +126,4 @@ This community groups 28 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/parsers/_lua.py`
 - `readmenator/parsers/_nim.py`
 - `readmenator/parsers/_php.py`
-- `readmenator/parsers/_python.py`
-- `readmenator/parsers/_ruby.py`
-- *... and 8 more*
+- *... and 12 more*

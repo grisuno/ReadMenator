@@ -1,6 +1,85 @@
 # Subsystem: tests (page 2 of 4)
 Previous: [KB_tests.md](KB_tests.md)
 
+## tests/test_diagrams.py
+- Doc: Contract tests for interactive system maps.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSystemMapBuilderContract` (class, line 30) `class TestSystemMapBuilderContract(TestCase)`
+  - `TestSystemMapValidatorContract` (class, line 176) `class TestSystemMapValidatorContract(TestCase)`
+  - `TestInteractiveMapRendererContract` (class, line 237) `class TestInteractiveMapRendererContract(TestCase)`
+  - `TestDocsSitePublisherContract` (class, line 367) `class TestDocsSitePublisherContract(TestCase)`
+  - `TestVisNetworkRendererContract` (class, line 510) `class TestVisNetworkRendererContract(TestCase)`
+  - `TestDiagramVariantsContract` (class, line 650) `class TestDiagramVariantsContract(TestCase)`
+  - `setUp` (method, line 33) `def setUp(self)`
+  - `_make_graph` (method, line 38) `def _make_graph(self)`
+  - `test_builder_supports_five_kinds` (method, line 52) `def test_builder_supports_five_kinds(self)`
+  - `test_builder_produces_all_kinds` (method, line 59) `def test_builder_produces_all_kinds(self)`
+  - `test_builder_is_deterministic` (method, line 68) `def test_builder_is_deterministic(self)`
+  - `test_builder_orders_links_deterministically` (method, line 80) `def test_builder_orders_links_deterministically(self)`
+  - `test_builder_validates_large_graph_for_all_kinds` (method, line 101) `def test_builder_validates_large_graph_for_all_kinds(self)`
+  - `test_builder_reports_total_scope` (method, line 119) `def test_builder_reports_total_scope(self)`
+  - `test_builder_attaches_symbols_and_docs` (method, line 126) `def test_builder_attaches_symbols_and_docs(self)`
+  - `test_builder_truncates_symbols_per_node` (method, line 143) `def test_builder_truncates_symbols_per_node(self)`
+  - `test_builder_truncates_to_configured_limit` (method, line 152) `def test_builder_truncates_to_configured_limit(self)`
+  - `test_compare_reports_added_removed_rerouted` (method, line 162) `def test_compare_reports_added_removed_rerouted(self)`
+  - `setUp` (method, line 179) `def setUp(self)`
+  - `_valid_map` (method, line 184) `def _valid_map(self)`
+  - `test_validator_passes_valid_map` (method, line 197) `def test_validator_passes_valid_map(self)`
+  - `test_validator_rejects_duplicate_node_ids` (method, line 204) `def test_validator_rejects_duplicate_node_ids(self)`
+  - `test_validator_rejects_dangling_edge` (method, line 214) `def test_validator_rejects_dangling_edge(self)`
+  - `test_validator_rejects_empty_map` (method, line 222) `def test_validator_rejects_empty_map(self)`
+  - `test_validator_rejects_unknown_kind` (method, line 228) `def test_validator_rejects_unknown_kind(self)`
+  - `setUp` (method, line 240) `def setUp(self)`
+  - `_map` (method, line 246) `def _map(self, kind)`
+  - `test_renderer_produces_standalone_document` (method, line 256) `def test_renderer_produces_standalone_document(self)`
+  - `test_renderer_never_uses_inner_html` (method, line 263) `def test_renderer_never_uses_inner_html(self)`
+  - `test_renderer_has_no_external_requests` (method, line 270) `def test_renderer_has_no_external_requests(self)`
+  - `test_renderer_includes_interaction_controls` (method, line 277) `def test_renderer_includes_interaction_controls(self)`
+  - `test_renderer_includes_keyboard_and_deep_links` (method, line 283) `def test_renderer_includes_keyboard_and_deep_links(self)`
+  - `test_renderer_escapes_malicious_labels` (method, line 292) `def test_renderer_escapes_malicious_labels(self)`
+  - `test_renderer_embeds_valid_json_payloads` (method, line 305) `def test_renderer_embeds_valid_json_payloads(self)`
+  - `test_renderer_covers_all_five_kinds` (method, line 314) `def test_renderer_covers_all_five_kinds(self)`
+  - `test_renderer_links_gallery_home_when_configured` (method, line 321) `def test_renderer_links_gallery_home_when_configured(self)`
+  - `test_renderer_omits_gallery_home_by_default` (method, line 328) `def test_renderer_omits_gallery_home_by_default(self)`
+  - `test_renderer_keeps_canvas_distinct_from_nodes` (method, line 333) `def test_renderer_keeps_canvas_distinct_from_nodes(self)`
+  - `test_renderer_supports_drag_and_settle` (method, line 341) `def test_renderer_supports_drag_and_settle(self)`
+  - `test_renderer_sanitizes_viewer_state_on_export` (method, line 349) `def test_renderer_sanitizes_viewer_state_on_export(self)`
+  - `test_renderer_buttons_explain_their_purpose` (method, line 355) `def test_renderer_buttons_explain_their_purpose(self)`
+  - `setUp` (method, line 370) `def setUp(self)`
+  - `_maps` (method, line 376) `def _maps(self)`
+  - `test_publish_writes_index_plus_five_maps` (method, line 386) `def test_publish_writes_index_plus_five_maps(self)`
+  - `test_publish_index_links_every_map` (method, line 397) `def test_publish_index_links_every_map(self)`
+  - `test_publish_output_has_no_external_requests` (method, line 406) `def test_publish_output_has_no_external_requests(self)`
+  - `test_publish_is_deterministic` (method, line 419) `def test_publish_is_deterministic(self)`
+  - `test_publish_escapes_malicious_project_name` (method, line 430) `def test_publish_escapes_malicious_project_name(self)`
+  - `test_publish_escapes_malicious_stat_keys` (method, line 439) `def test_publish_escapes_malicious_stat_keys(self)`
+  - `test_publish_skips_invalid_maps` (method, line 450) `def test_publish_skips_invalid_maps(self)`
+  - `test_publish_empty_maps_writes_empty_gallery` (method, line 462) `def test_publish_empty_maps_writes_empty_gallery(self)`
+  - `test_publish_leaves_input_maps_unmodified` (method, line 471) `def test_publish_leaves_input_maps_unmodified(self)`
+  - `test_publish_flat_subdir_keeps_links_relative` (method, line 480) `def test_publish_flat_subdir_keeps_links_relative(self)`
+  - `test_publish_index_explains_how_to_read` (method, line 493) `def test_publish_index_explains_how_to_read(self)`
+  - `test_publish_card_reports_primary_scope` (method, line 501) `def test_publish_card_reports_primary_scope(self)`
+  - `setUp` (method, line 513) `def setUp(self)`
+  - `_map` (method, line 519) `def _map(self, kind)`
+  - `test_renderers_ignore_placeholders_inside_payload_text` (method, line 529) `def test_renderers_ignore_placeholders_inside_payload_text(self)`
+  - `test_renderer_ships_edge_actions` (method, line 546) `def test_renderer_ships_edge_actions(self)`
+  - `test_renderer_uses_configured_cdn_urls` (method, line 552) `def test_renderer_uses_configured_cdn_urls(self)`
+  - `test_renderer_builds_vis_network_with_physics` (method, line 565) `def test_renderer_builds_vis_network_with_physics(self)`
+  - `test_renderer_links_gallery_home_when_configured` (method, line 573) `def test_renderer_links_gallery_home_when_configured(self)`
+  - `test_renderer_disables_physics_from_config` (method, line 581) `def test_renderer_disables_physics_from_config(self)`
+  - `test_renderer_escapes_malicious_titles` (method, line 588) `def test_renderer_escapes_malicious_titles(self)`
+  - `test_renderer_exposes_reader_controls` (method, line 601) `def test_renderer_exposes_reader_controls(self)`
+  - `test_renderer_is_deterministic` (method, line 607) `def test_renderer_is_deterministic(self)`
+  - `test_renderer_embeds_valid_payloads` (method, line 612) `def test_renderer_embeds_valid_payloads(self)`
+  - `test_renderer_documents_symbols_per_file` (method, line 620) `def test_renderer_documents_symbols_per_file(self)`
+  - `test_renderer_escapes_malicious_symbol_docs` (method, line 636) `def test_renderer_escapes_malicious_symbol_docs(self)`
+  - `_project` (method, line 653) `def _project(self, tmp)`
+  - `test_export_diagrams_writes_vis_maps_by_default` (method, line 658) `def test_export_diagrams_writes_vis_maps_by_default(self)`
+  - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 672) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
 ## tests/test_documentation.py
 - Layer: testing
 - Language: py
@@ -395,98 +474,16 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_pluralize_unknown_appends_s` (method, line 62) `def test_pluralize_unknown_appends_s(self)`
 - Depends on: `readmenator/_models.py`
 
-## tests/test_parsers.py
+## tests/test_ollama.py
+- Doc: Contract tests for the local Ollama client.
 - Layer: testing
 - Language: py
 - Symbols:
-  - `TestCParserContract` (class, line 22) `class TestCParserContract(TestCase)`
-  - `TestPythonParserContract` (class, line 88) `class TestPythonParserContract(TestCase)`
-  - `TestGoParserContract` (class, line 157) `class TestGoParserContract(TestCase)`
-  - `TestRustParserContract` (class, line 200) `class TestRustParserContract(TestCase)`
-  - `TestJavaScriptParserContract` (class, line 238) `class TestJavaScriptParserContract(TestCase)`
-  - `TestJavaParserContract` (class, line 277) `class TestJavaParserContract(TestCase)`
-  - `TestCSharpParserContract` (class, line 309) `class TestCSharpParserContract(TestCase)`
-  - `TestShellParserContract` (class, line 342) `class TestShellParserContract(TestCase)`
-  - `TestPHPParserContract` (class, line 361) `class TestPHPParserContract(TestCase)`
-  - `TestDartParserContract` (class, line 387) `class TestDartParserContract(TestCase)`
-  - `TestGDScriptParserContract` (class, line 412) `class TestGDScriptParserContract(TestCase)`
-  - `TestNimParserContract` (class, line 430) `class TestNimParserContract(TestCase)`
-  - `TestAssemblyParserContract` (class, line 456) `class TestAssemblyParserContract(TestCase)`
-  - `TestParserFactoryContract` (class, line 483) `class TestParserFactoryContract(TestCase)`
-  - `setUp` (method, line 23) `def setUp(self)`
-  - `test_extracts_function` (method, line 26) `def test_extracts_function(self)`
-  - `test_extracts_struct` (method, line 33) `def test_extracts_struct(self)`
-  - `test_extracts_include` (method, line 40) `def test_extracts_include(self)`
-  - `test_extracts_define` (method, line 47) `def test_extracts_define(self)`
-  - `test_skips_reserved_words` (method, line 54) `def test_skips_reserved_words(self)`
-  - `test_function_line_points_at_definition` (method, line 64) `def test_function_line_points_at_definition(self)`
-  - `test_calls_are_not_prototypes` (method, line 71) `def test_calls_are_not_prototypes(self)`
-  - `test_class_with_inheritance` (method, line 80) `def test_class_with_inheritance(self)`
-  - `setUp` (method, line 89) `def setUp(self)`
-  - `test_extracts_function` (method, line 92) `def test_extracts_function(self)`
-  - `test_extracts_class` (method, line 99) `def test_extracts_class(self)`
-  - `test_extracts_imports` (method, line 106) `def test_extracts_imports(self)`
-  - `test_extracts_async_function` (method, line 114) `def test_extracts_async_function(self)`
-  - `test_handles_syntax_error_gracefully` (method, line 121) `def test_handles_syntax_error_gracefully(self)`
-  - `test_suppresses_syntax_warnings` (method, line 127) `def test_suppresses_syntax_warnings(self)`
-  - `test_extracts_signature_with_params` (method, line 139) `def test_extracts_signature_with_params(self)`
-  - `test_extracts_class_with_bases` (method, line 147) `def test_extracts_class_with_bases(self)`
-  - `setUp` (method, line 158) `def setUp(self)`
-  - `test_extracts_function` (method, line 161) `def test_extracts_function(self)`
-  - `test_extracts_method_receiver` (method, line 168) `def test_extracts_method_receiver(self)`
-  - `test_extracts_import_block` (method, line 175) `def test_extracts_import_block(self)`
-  - `test_extracts_single_import` (method, line 182) `def test_extracts_single_import(self)`
-  - `test_extracts_struct_and_interface` (method, line 188) `def test_extracts_struct_and_interface(self)`
-  - `setUp` (method, line 201) `def setUp(self)`
-  - `test_extracts_function` (method, line 204) `def test_extracts_function(self)`
-  - `test_extracts_pub_function` (method, line 211) `def test_extracts_pub_function(self)`
-  - `test_extracts_struct_and_trait_and_enum` (method, line 218) `def test_extracts_struct_and_trait_and_enum(self)`
-  - `test_extracts_use` (method, line 231) `def test_extracts_use(self)`
-  - `setUp` (method, line 239) `def setUp(self)`
-  - `test_extracts_function` (method, line 242) `def test_extracts_function(self)`
-  - `test_extracts_arrow_function` (method, line 249) `def test_extracts_arrow_function(self)`
-  - `test_extracts_class` (method, line 256) `def test_extracts_class(self)`
-  - `test_extracts_import_and_require` (method, line 263) `def test_extracts_import_and_require(self)`
-  - `test_skips_reserved_words` (method, line 270) `def test_skips_reserved_words(self)`
-  - `setUp` (method, line 278) `def setUp(self)`
-  - `test_extracts_class` (method, line 281) `def test_extracts_class(self)`
-  - `test_extracts_method` (method, line 288) `def test_extracts_method(self)`
-  - `test_extracts_import` (method, line 295) `def test_extracts_import(self)`
-  - `test_abstract_class` (method, line 301) `def test_abstract_class(self)`
-  - `setUp` (method, line 310) `def setUp(self)`
-  - `test_extracts_class` (method, line 313) `def test_extracts_class(self)`
-  - `test_extracts_method` (method, line 320) `def test_extracts_method(self)`
-  - `test_extracts_using` (method, line 327) `def test_extracts_using(self)`
-  - `test_record_and_interface` (method, line 333) `def test_record_and_interface(self)`
-  - `setUp` (method, line 343) `def setUp(self)`
-  - `test_extracts_function_with_parentheses` (method, line 346) `def test_extracts_function_with_parentheses(self)`
-  - `test_extracts_function_keyword` (method, line 353) `def test_extracts_function_keyword(self)`
-  - `setUp` (method, line 362) `def setUp(self)`
-  - `test_extracts_function` (method, line 365) `def test_extracts_function(self)`
-  - `test_extracts_class` (method, line 372) `def test_extracts_class(self)`
-  - `test_extracts_use_and_require` (method, line 379) `def test_extracts_use_and_require(self)`
-  - `setUp` (method, line 388) `def setUp(self)`
-  - `test_extracts_class` (method, line 391) `def test_extracts_class(self)`
-  - `test_extracts_function` (method, line 398) `def test_extracts_function(self)`
-  - `test_extracts_import` (method, line 405) `def test_extracts_import(self)`
-  - `setUp` (method, line 413) `def setUp(self)`
-  - `test_extracts_function` (method, line 416) `def test_extracts_function(self)`
-  - `test_extracts_extends` (method, line 423) `def test_extracts_extends(self)`
-  - `setUp` (method, line 431) `def setUp(self)`
-  - `test_extracts_proc` (method, line 434) `def test_extracts_proc(self)`
-  - `test_extracts_type` (method, line 441) `def test_extracts_type(self)`
-  - `test_extracts_import` (method, line 448) `def test_extracts_import(self)`
-  - `setUp` (method, line 457) `def setUp(self)`
-  - `test_extracts_label` (method, line 460) `def test_extracts_label(self)`
-  - `test_extracts_multiple_labels` (method, line 467) `def test_extracts_multiple_labels(self)`
-  - `test_extracts_includes` (method, line 475) `def test_extracts_includes(self)`
-  - `setUp` (method, line 484) `def setUp(self)`
-  - `test_returns_c_parser_for_c_extensions` (method, line 487) `def test_returns_c_parser_for_c_extensions(self)`
-  - `test_returns_python_parser_for_py` (method, line 493) `def test_returns_python_parser_for_py(self)`
-  - `test_returns_none_for_unknown_extension` (method, line 498) `def test_returns_none_for_unknown_extension(self)`
-  - `test_returns_rust_parser_for_rs` (method, line 502) `def test_returns_rust_parser_for_rs(self)`
-  - `test_case_insensitive_extension` (method, line 507) `def test_case_insensitive_extension(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
+  - `TestOllamaContract` (class, line 11) `class TestOllamaContract(TestCase)`
+  - `test_disabled_client_returns_empty` (method, line 14) `def test_disabled_client_returns_empty(self)`
+  - `test_unreachable_daemon_returns_empty` (method, line 20) `def test_unreachable_daemon_returns_empty(self)`
+  - `test_strip_thinking_removes_reasoning_blocks` (method, line 30) `def test_strip_thinking_removes_reasoning_blocks(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_ollama.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

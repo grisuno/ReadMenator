@@ -1,8 +1,74 @@
-# Symbols (page 3 of 5)
+# Symbols (page 3 of 6)
 Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_generate_csharp` | method | `readmenator/_uml.py:316` | `def _generate_csharp(class_symbols, nodes, edges)` |
+| `_generate_dart` | method | `readmenator/_uml.py:547` | `def _generate_dart(class_symbols, nodes, edges)` |
+| `_generate_go` | method | `readmenator/_uml.py:395` | `def _generate_go(class_symbols, nodes, edges)` |
+| `_generate_java` | method | `readmenator/_uml.py:274` | `def _generate_java(class_symbols, nodes, edges)` |
+| `_generate_kotlin` | method | `readmenator/_uml.py:476` | `def _generate_kotlin(class_symbols, nodes, edges)` |
+| `_generate_php` | method | `readmenator/_uml.py:448` | `def _generate_php(class_symbols, nodes, edges)` |
+| `_generate_python` | method | `readmenator/_uml.py:360` | `def _generate_python(class_symbols, nodes, edges)` |
+| `_generate_ruby` | method | `readmenator/_uml.py:567` | `def _generate_ruby(class_symbols, nodes, edges)` |
+| `_generate_rust` | method | `readmenator/_uml.py:422` | `def _generate_rust(class_symbols, nodes, edges)` |
+| `_generate_scala` | method | `readmenator/_uml.py:496` | `def _generate_scala(class_symbols, nodes, edges)` |
+| `_generate_swift` | method | `readmenator/_uml.py:518` | `def _generate_swift(class_symbols, nodes, edges)` |
+| `_get_code_generator` | method | `readmenator/_uml.py:172` | `def _get_code_generator(language)` |
+| `_java_params` | method | `readmenator/_uml.py:301` | `def _java_params(params)` |
+| `_safe_name` | method | `readmenator/_uml.py:588` | `def _safe_name(name)` |
+| `_sanitize_id` | method | `readmenator/_uml.py:153` | `def _sanitize_id(raw)` |
+| `_type_map_py_to_target` | method | `readmenator/_uml.py:190` | `def _type_map_py_to_target(target, py_type_hint)` |
+| `generate_code` | method | `readmenator/_uml.py:129` | `def generate_code(self, nodes, edges, target_language)` |
+| `render_mermaid_class_diagram` | method | `readmenator/_uml.py:39` | `def render_mermaid_class_diagram(self, nodes, edges)` |
+| `Fe` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `Ha` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Ia` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `La` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Lo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Na` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `Sr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `_` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `_n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `as` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `as` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `b` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `cr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `f` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `l` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `o` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `r` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `t` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `u` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `wa` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `xo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
+| `y` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
+| `Backdrop` | class | `readmenator/_video.py:608` | `class Backdrop` |
+| `CinematicVideoRenderer` | class | `readmenator/_video.py:803` | `class CinematicVideoRenderer` |
+| `__init__` | method | `readmenator/_video.py:611` | `def __init__(self, width, height)` |
+| `_build_dep_tree` | method | `readmenator/_video.py:972` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
+| `_camera_track` | function | `readmenator/_video.py:241` | `def _camera_track(keys, f)` |
+| `_caption_y` | function | `readmenator/_video.py:138` | `def _caption_y(cfg)` |
+| `_clipped` | function | `readmenator/_video.py:264` | `def _clipped(img, box, paint)` |
+| `_cloud_core` | function | `readmenator/_video.py:320` | `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
+| `_code_tint` | function | `readmenator/_video.py:544` | `def _code_tint(line)` |
+| `_depth_alpha` | function | `readmenator/_video.py:217` | `def _depth_alpha(z, fade)` |
+| `_dna_boxes` | function | `readmenator/_video.py:152` | `def _dna_boxes(cfg)` |
+| `_draw_frame` | method | `readmenator/_video.py:1279` | `def _draw_frame(fi)` |
+| `_find` | method | `readmenator/_video.py:573` | `def _find(style)` |
 | `_graph_boxes` | function | `readmenator/_video.py:143` | `def _graph_boxes(cfg)` |
 | `_img` | method | `readmenator/_video.py:664` | `def _img()` |
 | `_language_color` | function | `readmenator/_video.py:222` | `def _language_color(language)` |
@@ -411,90 +477,24 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_same_content_produces_same_hash` | method | `tests/test_cache.py:49` | `def test_same_content_produces_same_hash(self)` |
 | `test_save_and_load_analysis_roundtrip` | method | `tests/test_cache.py:109` | `def test_save_and_load_analysis_roundtrip(self)` |
 | `test_save_and_load_roundtrip` | method | `tests/test_cache.py:60` | `def test_save_and_load_roundtrip(self)` |
-| `TestConceptGraphContract` | class | `tests/test_concepts.py:20` | `class TestConceptGraphContract(TestCase)` |
-| `_node` | function | `tests/test_concepts.py:8` | `def _node(fid, symbols, doc)` |
-| `test_concept_atomic_breakdown_splits_camelcase` | method | `tests/test_concepts.py:53` | `def test_concept_atomic_breakdown_splits_camelcase(self)` |
-| `test_concept_deterministic_ordering` | method | `tests/test_concepts.py:62` | `def test_concept_deterministic_ordering(self)` |
-| `test_concept_dialectic_questions_for_overlap` | method | `tests/test_concepts.py:85` | `def test_concept_dialectic_questions_for_overlap(self)` |
-| `test_concept_disabled_returns_empty_graph` | method | `tests/test_concepts.py:76` | `def test_concept_disabled_returns_empty_graph(self)` |
-| `test_concept_nouns_map_to_file_sets` | method | `tests/test_concepts.py:21` | `def test_concept_nouns_map_to_file_sets(self)` |
-| `test_concept_verbs_come_from_structural_edges` | method | `tests/test_concepts.py:36` | `def test_concept_verbs_come_from_structural_edges(self)` |
-| `TestConfigContract` | class | `tests/test_config.py:7` | `class TestConfigContract(TestCase)` |
-| `test_config_defaults_are_sane` | method | `tests/test_config.py:13` | `def test_config_defaults_are_sane(self)` |
-| `test_config_is_immutable` | method | `tests/test_config.py:8` | `def test_config_is_immutable(self)` |
-| `test_ignore_dirs_are_comprehensive` | method | `tests/test_config.py:24` | `def test_ignore_dirs_are_comprehensive(self)` |
-| `test_plural_map_covers_all_symbol_types` | method | `tests/test_config.py:30` | `def test_plural_map_covers_all_symbol_types(self)` |
-| `test_supported_extensions_no_duplicates` | method | `tests/test_config.py:41` | `def test_supported_extensions_no_duplicates(self)` |
-| `TestCodePropertyGraphContract` | class | `tests/test_cpg.py:11` | `class TestCodePropertyGraphContract(TestCase)` |
-| `_make_node` | method | `tests/test_cpg.py:18` | `def _make_node(self, nid, label, lang)` |
-| `_make_sym` | method | `tests/test_cpg.py:21` | `def _make_sym(self, name, kind, line)` |
-| `setUp` | method | `tests/test_cpg.py:14` | `def setUp(self)` |
-| `test_empty_graph_returns_valid_json` | method | `tests/test_cpg.py:96` | `def test_empty_graph_returns_valid_json(self)` |
-| `test_generate_includes_edges` | method | `tests/test_cpg.py:49` | `def test_generate_includes_edges(self)` |
-| `test_generate_includes_metadata` | method | `tests/test_cpg.py:61` | `def test_generate_includes_metadata(self)` |
-| `test_generate_includes_node_data` | method | `tests/test_cpg.py:33` | `def test_generate_includes_node_data(self)` |
-| `test_generate_returns_valid_json` | method | `tests/test_cpg.py:24` | `def test_generate_returns_valid_json(self)` |
-| `test_privacy_mode_strips_docs` | method | `tests/test_cpg.py:71` | `def test_privacy_mode_strips_docs(self)` |
-| `test_sha256_hash_included` | method | `tests/test_cpg.py:89` | `def test_sha256_hash_included(self)` |
-| `TestCursorRulesGeneratorContract` | class | `tests/test_cursorrules.py:18` | `class TestCursorRulesGeneratorContract(TestCase)` |
-| `setUp` | method | `tests/test_cursorrules.py:21` | `def setUp(self)` |
-| `test_generate_contains_base_rules` | method | `tests/test_cursorrules.py:33` | `def test_generate_contains_base_rules(self)` |
-| `test_generate_contains_header` | method | `tests/test_cursorrules.py:29` | `def test_generate_contains_header(self)` |
-| `test_generate_idempotent` | method | `tests/test_cursorrules.py:111` | `def test_generate_idempotent(self)` |
-| `test_generate_includes_communities` | method | `tests/test_cursorrules.py:62` | `def test_generate_includes_communities(self)` |
-| `test_generate_includes_god_nodes` | method | `tests/test_cursorrules.py:49` | `def test_generate_includes_god_nodes(self)` |
-| `test_generate_includes_layer_constraints` | method | `tests/test_cursorrules.py:38` | `def test_generate_includes_layer_constraints(self)` |
-| `test_generate_includes_violations` | method | `tests/test_cursorrules.py:82` | `def test_generate_includes_violations(self)` |
-| `test_generate_limits_violations_to_ten` | method | `tests/test_cursorrules.py:95` | `def test_generate_limits_violations_to_ten(self)` |
-| `test_generate_returns_string` | method | `tests/test_cursorrules.py:25` | `def test_generate_returns_string(self)` |
-| `test_generate_writes_file_when_project_root` | method | `tests/test_cursorrules.py:103` | `def test_generate_writes_file_when_project_root(self)` |
-| `TestDataflowContract` | class | `tests/test_dataflow.py:25` | `class TestDataflowContract(TestCase)` |
-| `_analyze` | function | `tests/test_dataflow.py:17` | `def _analyze(body)` |
-| `_node` | function | `tests/test_dataflow.py:8` | `def _node(node_id, funcs)` |
-| `test_address_alias_pointer_not_dead` | method | `tests/test_dataflow.py:234` | `def test_address_alias_pointer_not_dead(self)` |
-| `test_address_taken_suppresses_dead_store` | method | `tests/test_dataflow.py:369` | `def test_address_taken_suppresses_dead_store(self)` |
-| `test_alias_pointer_store_initializes_array` | method | `tests/test_dataflow.py:272` | `def test_alias_pointer_store_initializes_array(self)` |
-| `test_array_arg_to_filler_counts_as_init` | method | `tests/test_dataflow.py:173` | `def test_array_arg_to_filler_counts_as_init(self)` |
-| `test_array_arg_to_readonly_still_uninit` | method | `tests/test_dataflow.py:181` | `def test_array_arg_to_readonly_still_uninit(self)` |
-| `test_array_filled_in_decl_init_call` | method | `tests/test_dataflow.py:188` | `def test_array_filled_in_decl_init_call(self)` |
-| `test_array_store_before_read_suppresses_uninit` | method | `tests/test_dataflow.py:248` | `def test_array_store_before_read_suppresses_uninit(self)` |
-| `test_asm_output_counts_as_init` | method | `tests/test_dataflow.py:116` | `def test_asm_output_counts_as_init(self)` |
-| `test_assert_macro_counts_as_null_check` | method | `tests/test_dataflow.py:352` | `def test_assert_macro_counts_as_null_check(self)` |
-| `test_block_comment_malloc_ignored` | method | `tests/test_dataflow.py:225` | `def test_block_comment_malloc_ignored(self)` |
-| `test_checked_alloc_clean` | method | `tests/test_dataflow.py:78` | `def test_checked_alloc_clean(self)` |
-| `test_config_defaults` | method | `tests/test_dataflow.py:26` | `def test_config_defaults(self)` |
-| `test_config_immutable` | method | `tests/test_dataflow.py:31` | `def test_config_immutable(self)` |
-| `test_dead_store_detected` | method | `tests/test_dataflow.py:62` | `def test_dead_store_detected(self)` |
-| `test_derived_pointer_not_dead` | method | `tests/test_dataflow.py:203` | `def test_derived_pointer_not_dead(self)` |
-| `test_disabled_returns_empty` | method | `tests/test_dataflow.py:84` | `def test_disabled_returns_empty(self)` |
-| `test_fd_lt_zero_counts_as_checked` | method | `tests/test_dataflow.py:123` | `def test_fd_lt_zero_counts_as_checked(self)` |
-| `test_file_scope_symbol_still_bounds_span` | method | `tests/test_dataflow.py:329` | `def test_file_scope_symbol_still_bounds_span(self)` |
-| `test_function_pointer_call_counts_as_use` | method | `tests/test_dataflow.py:290` | `def test_function_pointer_call_counts_as_use(self)` |
-| `test_initialized_use_clean` | method | `tests/test_dataflow.py:46` | `def test_initialized_use_clean(self)` |
-| `test_inline_alias_fill_suppresses_uninit` | method | `tests/test_dataflow.py:281` | `def test_inline_alias_fill_suppresses_uninit(self)` |
-| `test_issue_cap_respected` | method | `tests/test_dataflow.py:96` | `def test_issue_cap_respected(self)` |
-| `test_line_numbers_survive_subscript_stores` | method | `tests/test_dataflow.py:156` | `def test_line_numbers_survive_subscript_stores(self)` |
-| `test_local_struct_does_not_truncate_span` | method | `tests/test_dataflow.py:305` | `def test_local_struct_does_not_truncate_span(self)` |
-| `test_loop_carried_var_not_dead` | method | `tests/test_dataflow.py:144` | `def test_loop_carried_var_not_dead(self)` |
-| `test_map_failed_counts_as_checked` | method | `tests/test_dataflow.py:129` | `def test_map_failed_counts_as_checked(self)` |
-| `test_member_null_check_counts` | method | `tests/test_dataflow.py:136` | `def test_member_null_check_counts(self)` |
-| `test_member_store_initializes_base` | method | `tests/test_dataflow.py:377` | `def test_member_store_initializes_base(self)` |
-| `test_member_store_not_local_assign` | method | `tests/test_dataflow.py:167` | `def test_member_store_not_local_assign(self)` |
-| `test_missing_content_skipped` | method | `tests/test_dataflow.py:91` | `def test_missing_content_skipped(self)` |
-| `test_multiline_call_assigns_array_arg` | method | `tests/test_dataflow.py:360` | `def test_multiline_call_assigns_array_arg(self)` |
-| `test_params_count_as_initialized` | method | `tests/test_dataflow.py:50` | `def test_params_count_as_initialized(self)` |
-| `test_plain_assignment_is_not_a_declaration` | method | `tests/test_dataflow.py:105` | `def test_plain_assignment_is_not_a_declaration(self)` |
-| `test_plain_call_is_not_a_local_use` | method | `tests/test_dataflow.py:298` | `def test_plain_call_is_not_a_local_use(self)` |
-| `test_read_store_clean` | method | `tests/test_dataflow.py:67` | `def test_read_store_clean(self)` |
-| `test_same_line_only_assign_is_dead` | method | `tests/test_dataflow.py:264` | `def test_same_line_only_assign_is_dead(self)` |
-| `test_same_line_use_not_dead` | method | `tests/test_dataflow.py:256` | `def test_same_line_use_not_dead(self)` |
-| `test_scanf_addr_counts_as_init` | method | `tests/test_dataflow.py:58` | `def test_scanf_addr_counts_as_init(self)` |
-| `test_sizeof_is_not_a_read` | method | `tests/test_dataflow.py:216` | `def test_sizeof_is_not_a_read(self)` |
-| `test_static_never_uninit` | method | `tests/test_dataflow.py:196` | `def test_static_never_uninit(self)` |
-| `test_subscript_store_counts_as_init` | method | `tests/test_dataflow.py:110` | `def test_subscript_store_counts_as_init(self)` |
-| `test_unchecked_alloc_detected` | method | `tests/test_dataflow.py:71` | `def test_unchecked_alloc_detected(self)` |
-| `test_uninit_use_detected` | method | `tests/test_dataflow.py:37` | `def test_uninit_use_detected(self)` |
-| `test_url_string_does_not_truncate_line` | method | `tests/test_dataflow.py:344` | `def test_url_string_does_not_truncate_line(self)` |
-| `TestDeadCodeStripperContract` | class | `tests/test_dead_code.py:16` | `class TestDeadCodeStripperContract(TestCase)` |
+| `TestComponentGalleryContract` | class | `tests/test_components.py:238` | `class TestComponentGalleryContract(TestCase)` |
+| `TestComponentPageContract` | class | `tests/test_components.py:140` | `class TestComponentPageContract(TestCase)` |
+| `TestComponentRenderContract` | class | `tests/test_components.py:94` | `class TestComponentRenderContract(TestCase)` |
+| `TestComponentSchemaContract` | class | `tests/test_components.py:46` | `class TestComponentSchemaContract(TestCase)` |
+| `_config` | method | `tests/test_components.py:246` | `def _config(self)` |
+| `_fixture` | function | `tests/test_components.py:25` | `def _fixture()` |
+| `_node` | function | `tests/test_components.py:17` | `def _node(nid)` |
+| `_project` | method | `tests/test_components.py:241` | `def _project(self, tmp)` |
+| `setUp` | method | `tests/test_components.py:49` | `def setUp(self)` |
+| `setUp` | method | `tests/test_components.py:97` | `def setUp(self)` |
+| `setUp` | method | `tests/test_components.py:143` | `def setUp(self)` |
+| `test_build_records_layers_hub_and_counts` | method | `tests/test_components.py:177` | `def test_build_records_layers_hub_and_counts(self)` |
+| `test_card_skipped_when_disabled` | method | `tests/test_components.py:279` | `def test_card_skipped_when_disabled(self)` |
+| `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
+| `test_docs_collect_components_overview` | method | `tests/test_components.py:290` | `def test_docs_collect_components_overview(self)` |
+| `test_empty_project_yields_empty_diagram` | method | `tests/test_components.py:133` | `def test_empty_project_yields_empty_diagram(self)` |
+| `test_export_diagrams_links_components_card` | method | `tests/test_components.py:251` | `def test_export_diagrams_links_components_card(self)` |
+| `test_export_pages_links_components_relatively` | method | `tests/test_components.py:264` | `def test_export_pages_links_components_relatively(self)` |
+| `test_mermaid_matches_layered_style` | method | `tests/test_components.py:105` | `def test_mermaid_matches_layered_style(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

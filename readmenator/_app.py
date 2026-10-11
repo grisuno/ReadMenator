@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from dataclasses import replace
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -224,8 +225,14 @@ class readmenatorApplication:
                 logger.debug("Interactive maps skipped", exc_info=True)
 
         self._maybe_export_forcegraph(
-            root, nodes, edges, resolved_edges, analysis, layers, findings
+            root, nodes, edges, resolved_edges, analysis, layers, findings, content_map
         )
+
+        if self._config.COMPONENTS_ENABLED:
+            try:
+                self.export_components(str(root))
+            except Exception:
+                logger.debug("Component diagrams skipped", exc_info=True)
 
         self._inject_readme_link(root)
         self._inject_agent_files(root)
@@ -687,6 +694,7 @@ class readmenatorApplication:
         layers: Dict[str, str],
         findings: List[SecurityFinding],
         home_href: Optional[str] = "index.html",
+        content_map: Optional[Dict[str, str]] = None,
     ) -> Optional[Dict[str, object]]:
         """Render the explorer payload and write HTML plus vendor engine.
 
@@ -702,6 +710,7 @@ class readmenatorApplication:
             layers: File-to-layer mapping.
             findings: Security findings.
             home_href: Gallery link relative to the page.
+            content_map: Optional file contents for the source viewer.
 
         Returns:
             Node and edge counts plus thumbnails (and a "bundle" entry when
@@ -709,7 +718,7 @@ class readmenatorApplication:
         """
         try:
             renderer = self._factory.forcegraph
-            payload = renderer.build_payload(nodes, edges, resolved, analysis, layers, findings)
+            payload = renderer.build_payload(nodes, edges, resolved, analysis, layers, findings, content_map)
             analytics = self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers)
             renderer.write(str(dest), payload, analytics, home_href=home_href)
             logger.info("Force-graph explorer: %s", dest)
@@ -768,6 +777,8 @@ class readmenatorApplication:
         analysis: Optional[AnalysisResult],
         layers: Dict[str, str],
         findings: List[SecurityFinding],
+        content_map: Optional[Dict[str, str]] = None,
+        project_root: Optional[str] = None,
     ) -> List[Dict[str, str]]:
         """Write the explorer pages and return their gallery cards.
 
@@ -781,12 +792,14 @@ class readmenatorApplication:
             analysis: Community analysis.
             layers: File-to-layer mapping.
             findings: Security findings.
+            content_map: Optional file contents for the source viewer.
+            project_root: Optional project root for the Component output.
 
         Returns:
-            Force-graph card plus the edge bundle card when it was written;
-            empty when the explorer write fails.
+            Force-graph card plus the edge bundle and Component cards
+            when written; empty when the explorer write fails.
         """
-        counts = self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings, home_href)
+        counts = self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings, home_href, content_map)
         if not counts:
             return []
         cards = [{
@@ -812,7 +825,66 @@ class readmenatorApplication:
                 "meta": f"{bundle['files']} files | {bundle['edges']} wires | {bundle['groups']} communities",
                 "thumb": str(bundle.get("thumb", "")),
             })
+        boarding = self._write_components_card(
+            dest.parent, nodes, edges, resolved, analysis, content_map, project_root
+        )
+        if boarding is not None:
+            cards.append(boarding)
         return cards
+
+    def _write_components_card(
+        self,
+        maps_dir: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        content_map: Optional[Dict[str, str]],
+        project_root: Optional[str],
+    ) -> Optional[Dict[str, str]]:
+        """Write the Component diagram page and return its gallery card.
+
+        Args:
+            maps_dir: Directory holding the gallery index.
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved: Resolved-import edges.
+            analysis: Community analysis.
+            content_map: Optional file contents for call-site lines.
+            project_root: Optional project root for the Component output.
+
+        Returns:
+            Gallery card fields, or None when disabled or the write fails.
+        """
+        if not self._config.COMPONENTS_ENABLED:
+            return None
+        try:
+            root = Path(project_root) if project_root else maps_dir.parent
+            out_dir = root / self._config.COMPONENTS_OUTPUT_DIR
+            builder = self._factory.components
+            document = builder.build(
+                nodes, edges, resolved, analysis, str(root), content_map
+            )
+            written = builder.write(document, out_dir)
+            index = Path(written["index"])
+            href = os.path.relpath(index, maps_dir).replace(os.sep, "/")
+            return {
+                "kind": "components",
+                "title": "Component Diagrams",
+                "href": href,
+                "description": "Component architecture map: layered "
+                               "left-to-right diagram with labeled relations, hover descriptions, "
+                               "click-to-component, sub-component expansion, and the analysis.json "
+                               "with method-level call evidence. No LLM needed.",
+                "meta": f"{len(document['components'])} components | "
+                        f"{len(document['components_relations'])} relations",
+                "thumb": builder.thumbnail_svg(
+                    document["components"], document["components_relations"]
+                ),
+            }
+        except Exception:
+            logger.debug("Component card skipped", exc_info=True)
+            return None
 
     def export_forcegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
         """Export the force-graph explorer HTML document.
@@ -830,7 +902,7 @@ class readmenatorApplication:
         layers = LayerDetector().detect(nodes, edges)
         findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
         dest = self._forcegraph_dest(target_dir, output_path)
-        self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings)
+        self._write_forcegraph(dest, nodes, edges, resolved, analysis, layers, findings, "index.html", content_map)
         return str(dest)
 
     def export_bundlegraph(self, target_dir: str, output_path: Optional[str] = None) -> str:
@@ -843,7 +915,7 @@ class readmenatorApplication:
         Returns:
             Output path of the written HTML file.
         """
-        nodes, edges, _content_map = self._scan_with_content(target_dir)
+        nodes, edges, content_map = self._scan_with_content(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
@@ -853,11 +925,38 @@ class readmenatorApplication:
             dest = root / self._config.DIAGRAM_OUTPUT_DIR / self._config.BUNDLEGRAPH_OUTPUT
         else:
             dest = Path(output_path) if Path(output_path).is_absolute() else root / output_path
-        payload = self._factory.forcegraph.build_payload(nodes, edges, resolved, analysis, layers, findings)
+        payload = self._factory.forcegraph.build_payload(nodes, edges, resolved, analysis, layers, findings, content_map)
         explorer = self._config.FORCEGRAPH_OUTPUT if self._config.FORCEGRAPH_ENABLED else None
         self._factory.bundlegraph.write(str(dest), payload, home_href="index.html", explorer_href=explorer)
         logger.info("Edge bundle explorer: %s", dest)
         return str(dest)
+
+    def export_components(self, target_dir: str, output_dir: Optional[str] = None) -> Dict[str, str]:
+        """Export component diagrams (analysis.json + graph LR markdown + index.html).
+
+        Args:
+            target_dir: Project root directory.
+            output_dir: Destination directory override.
+
+        Returns:
+            Mapping of page identifier to written file path.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        root = Path(target_dir).resolve()
+        dest = Path(output_dir) if output_dir else root / self._config.COMPONENTS_OUTPUT_DIR
+        if not dest.is_absolute():
+            dest = root / dest
+        document = self._factory.components.build(
+            nodes, edges, resolved, analysis, str(root), content_map
+        )
+        written = self._factory.components.write(document, dest)
+        logger.info(
+            "Component diagrams: %d components, %d relations in %s",
+            len(document["components"]), len(document["components_relations"]), dest,
+        )
+        return written
 
     def explorer_state(self, target_dir: str):
         """Build explorer state for the local HTTP server.
@@ -873,7 +972,7 @@ class readmenatorApplication:
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
         findings = self._factory.security.scan(Path(target_dir).resolve()) if self._config.SECURITY_ENABLED else []
-        return build_state(self._config, nodes, edges, resolved, analysis, findings, layers)
+        return build_state(self._config, nodes, edges, resolved, analysis, findings, layers, content_map)
 
     def serve_explorer(self, target_dir: str, open_browser: bool = False) -> str:
         """Serve the local explorer UI until interrupted.
@@ -1065,7 +1164,7 @@ class readmenatorApplication:
             Mapping of diagram kind to written file path.
         """
         use_full = bool(full or self._config.DIAGRAM_FULL_MODE)
-        nodes, edges = self._scan(target_dir)
+        nodes, edges, content_map = self._scan_with_content(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
@@ -1083,7 +1182,8 @@ class readmenatorApplication:
         if self._config.FORCEGRAPH_ENABLED:
             force_dest = dest / self._config.FORCEGRAPH_OUTPUT
             extra_cards.extend(self._explorer_cards(force_dest, self._config.FORCEGRAPH_OUTPUT, "index.html",
-                                                    nodes, edges, resolved, analysis, layers, findings))
+                                                    nodes, edges, resolved, analysis, layers, findings, content_map,
+                                                    str(root)))
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root), extra_cards=extra_cards,
@@ -1170,7 +1270,7 @@ class readmenatorApplication:
             Mapping of published page identifier to written file path.
         """
         use_full = bool(full or self._config.DIAGRAM_FULL_MODE)
-        nodes, edges = self._scan(target_dir)
+        nodes, edges, content_map = self._scan_with_content(target_dir)
         resolved = self._last_resolved_edges
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         layers = LayerDetector().detect(nodes, edges)
@@ -1190,7 +1290,8 @@ class readmenatorApplication:
                 dest / subdir / self._config.FORCEGRAPH_OUTPUT,
                 f"{subdir}/{self._config.FORCEGRAPH_OUTPUT}" if subdir != "." else self._config.FORCEGRAPH_OUTPUT,
                 "../index.html" if subdir != "." else "index.html",
-                nodes, edges, resolved, analysis, layers, findings,
+                nodes, edges, resolved, analysis, layers, findings, content_map,
+                str(root),
             ))
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
@@ -1272,6 +1373,7 @@ class readmenatorApplication:
         analysis: Optional[AnalysisResult],
         layers: Optional[Dict[str, str]],
         findings: Optional[List[SecurityFinding]],
+        content_map: Optional[Dict[str, str]] = None,
     ) -> Optional[str]:
         """Write the force-graph explorer HTML when enabled.
 
@@ -1283,6 +1385,7 @@ class readmenatorApplication:
             analysis: Optional community analysis.
             layers: Optional file-to-layer mapping.
             findings: Optional security findings.
+            content_map: Optional file contents for the source viewer.
 
         Returns:
             Output path string, or None when disabled or skipped.
@@ -1290,7 +1393,7 @@ class readmenatorApplication:
         if not self._config.FORCEGRAPH_ENABLED:
             return None
         dest = self._forcegraph_dest(str(root))
-        counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [])
+        counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [], "index.html", content_map)
         return str(dest) if counts else None
 
 

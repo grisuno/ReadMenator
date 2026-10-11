@@ -1,8 +1,35 @@
-# Symbols (page 2 of 5)
+# Symbols (page 2 of 6)
 Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `rewrite` | method | `readmenator/_gh_wiki.py:129` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
+| `wiki_remote` | method | `readmenator/_gh_wiki.py:249` | `def wiki_remote(self, project_root)` |
+| `_git_dir` | function | `readmenator/_gitmeta.py:38` | `def _git_dir(root)` |
+| `_packed_ref` | function | `readmenator/_gitmeta.py:59` | `def _packed_ref(git_dir, ref)` |
+| `_read_small` | function | `readmenator/_gitmeta.py:19` | `def _read_small(path)` |
+| `read_git_head` | function | `readmenator/_gitmeta.py:84` | `def read_git_head(project_root)` |
+| `BundleLayout` | class | `readmenator/_graphlayout.py:278` | `class BundleLayout` |
+| `ForceAtlas2Settings` | class | `readmenator/_graphlayout.py:37` | `class ForceAtlas2Settings` |
+| `SphereBundleLayout` | class | `readmenator/_graphlayout.py:458` | `class SphereBundleLayout` |
+| `_bspline` | method | `readmenator/_graphlayout.py:298` | `def _bspline(control, samples)` |
+| `_bundle_curves` | method | `readmenator/_graphlayout.py:321` | `def _bundle_curves(leaves, member_group, hub, root, edges, beta, samples)` |
+| `_fa2_numpy` | method | `readmenator/_graphlayout.py:116` | `def _fa2_numpy(n, pairs, start, cfg)` |
+| `_fa2_python` | method | `readmenator/_graphlayout.py:163` | `def _fa2_python(n, pairs, start, cfg)` |
+| `_initial_positions` | method | `readmenator/_graphlayout.py:63` | `def _initial_positions(n, seed, dims)` |
+| `_snapshot_steps` | method | `readmenator/_graphlayout.py:110` | `def _snapshot_steps(iterations, snapshots)` |
+| `_split_caps` | method | `readmenator/_graphlayout.py:476` | `def _split_caps(labels, sizes, points, lattice, out)` |
+| `_unit` | method | `readmenator/_graphlayout.py:449` | `def _unit(v)` |
+| `fibonacci_sphere` | method | `readmenator/_graphlayout.py:426` | `def fibonacci_sphere(count)` |
+| `fit_frames` | method | `readmenator/_graphlayout.py:218` | `def fit_frames(frames, box, margin, trim)` |
+| `forceatlas2_frames` | method | `readmenator/_graphlayout.py:70` | `def forceatlas2_frames(ids, edges, settings)` |
+| `hierarchical_edge_bundling` | method | `readmenator/_graphlayout.py:371` | `def hierarchical_edge_bundling(groups, edges, center, radius, beta, samples, group_gap, inner_ratio)` |
+| `interpolate_frames` | method | `readmenator/_graphlayout.py:263` | `def interpolate_frames(frames, t)` |
+| `normalize_cloud` | method | `readmenator/_graphlayout.py:571` | `def normalize_cloud(points, quantile, max_radius)` |
+| `spherical_edge_bundling` | method | `readmenator/_graphlayout.py:513` | `def spherical_edge_bundling(groups, edges, radius, beta, samples, inner_ratio)` |
+| `Bm25Index` | class | `readmenator/_graphrag.py:267` | `class Bm25Index` |
+| `GraphRagBuilder` | class | `readmenator/_graphrag.py:345` | `class GraphRagBuilder` |
+| `GraphRagIndex` | class | `readmenator/_graphrag.py:169` | `class GraphRagIndex` |
 | `GraphRagSearcher` | class | `readmenator/_graphrag.py:942` | `class GraphRagSearcher` |
 | `GraphRagStore` | class | `readmenator/_graphrag.py:1212` | `class GraphRagStore` |
 | `RagCommunity` | class | `readmenator/_graphrag.py:136` | `class RagCommunity` |
@@ -71,13 +98,14 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_pattern_hits` | method | `readmenator/_layers.py:114` | `def _pattern_hits(cls, pattern, tokens, joined)` |
 | `detect` | method | `readmenator/_layers.py:83` | `def detect(self, nodes, edges)` |
 | `layer_summary` | method | `readmenator/_layers.py:189` | `def layer_summary(layers)` |
-| `ArchitectureLinter` | class | `readmenator/_linter.py:18` | `class ArchitectureLinter` |
-| `__init__` | method | `readmenator/_linter.py:31` | `def __init__(self, config)` |
-| `_check_circular_dependencies` | method | `readmenator/_linter.py:127` | `def _check_circular_dependencies(self, nodes, resolved_edges)` |
-| `_check_cross_layer_violations` | method | `readmenator/_linter.py:96` | `def _check_cross_layer_violations(self, nodes, edges, resolved_edges, layers)` |
-| `_check_file_length` | method | `readmenator/_linter.py:65` | `def _check_file_length(self, nodes, content_map)` |
-| `_dfs` | method | `readmenator/_linter.py:146` | `def _dfs(current)` |
-| `lint` | method | `readmenator/_linter.py:34` | `def lint(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `ArchitectureLinter` | class | `readmenator/_linter.py:21` | `class ArchitectureLinter` |
+| `__init__` | method | `readmenator/_linter.py:34` | `def __init__(self, config)` |
+| `_check_circular_dependencies` | method | `readmenator/_linter.py:134` | `def _check_circular_dependencies(self, nodes, resolved_edges)` |
+| `_check_cross_layer_violations` | method | `readmenator/_linter.py:103` | `def _check_cross_layer_violations(self, nodes, edges, resolved_edges, layers)` |
+| `_check_file_length` | method | `readmenator/_linter.py:72` | `def _check_file_length(self, nodes, content_map)` |
+| `_check_unresolved_calls` | method | `readmenator/_linter.py:195` | `def _check_unresolved_calls(self, nodes, edges, resolved_edges, content_map)` |
+| `_dfs` | method | `readmenator/_linter.py:153` | `def _dfs(current)` |
+| `lint` | method | `readmenator/_linter.py:37` | `def lint(self, nodes, edges, resolved_edges, layers, content_map)` |
 | `MCPError` | class | `readmenator/_mcp_server.py:58` | `class MCPError(Exception)` |
 | `MCPRequest` | class | `readmenator/_mcp_server.py:71` | `class MCPRequest` |
 | `MCPResource` | class | `readmenator/_mcp_server.py:119` | `class MCPResource` |
@@ -199,52 +227,63 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `TaintAnalysisResult` | class | `readmenator/_models.py:172` | `class TaintAnalysisResult` |
 | `TaintPath` | class | `readmenator/_models.py:151` | `class TaintPath` |
 | `pluralize_symbol_kind` | method | `readmenator/_models.py:101` | `def pluralize_symbol_kind(kind, plural_map)` |
-| `AnalyzerFactory` | class | `readmenator/_pipeline.py:60` | `class AnalyzerFactory` |
-| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:399` | `class DeepAnalysisRunner` |
-| `__init__` | method | `readmenator/_pipeline.py:68` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_pipeline.py:408` | `def __init__(self, factory)` |
-| `agent_injector` | method | `readmenator/_pipeline.py:216` | `def agent_injector(self)` |
-| `agent_output` | method | `readmenator/_pipeline.py:233` | `def agent_output(self)` |
-| `analytics` | method | `readmenator/_pipeline.py:302` | `def analytics(self)` |
-| `analyzer` | method | `readmenator/_pipeline.py:123` | `def analyzer(self)` |
-| `build_typed_graph` | method | `readmenator/_pipeline.py:364` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
-| `bundlegraph` | method | `readmenator/_pipeline.py:295` | `def bundlegraph(self)` |
-| `concepts` | method | `readmenator/_pipeline.py:281` | `def concepts(self)` |
-| `cpg` | method | `readmenator/_pipeline.py:178` | `def cpg(self)` |
-| `dataflow` | method | `readmenator/_pipeline.py:147` | `def dataflow(self)` |
-| `diagram_builder` | method | `readmenator/_pipeline.py:239` | `def diagram_builder(self)` |
-| `diagram_publisher` | method | `readmenator/_pipeline.py:260` | `def diagram_publisher(self)` |
-| `diagram_renderer` | method | `readmenator/_pipeline.py:246` | `def diagram_renderer(self)` |
-| `diagram_validator` | method | `readmenator/_pipeline.py:253` | `def diagram_validator(self)` |
-| `embedder` | method | `readmenator/_pipeline.py:330` | `def embedder(self)` |
-| `exclusions` | method | `readmenator/_pipeline.py:323` | `def exclusions(self)` |
-| `exporter` | method | `readmenator/_pipeline.py:135` | `def exporter(self)` |
-| `forcegraph` | method | `readmenator/_pipeline.py:288` | `def forcegraph(self)` |
-| `generator` | method | `readmenator/_pipeline.py:117` | `def generator(self)` |
-| `gh_wiki` | method | `readmenator/_pipeline.py:226` | `def gh_wiki(self)` |
-| `graphrag` | method | `readmenator/_pipeline.py:337` | `def graphrag(self)` |
-| `graphrag_store` | method | `readmenator/_pipeline.py:344` | `def graphrag_store(self)` |
-| `hotspots` | method | `readmenator/_pipeline.py:154` | `def hotspots(self)` |
-| `last_category` | method | `readmenator/_pipeline.py:391` | `def last_category(self)` |
-| `last_typed_graph` | method | `readmenator/_pipeline.py:395` | `def last_typed_graph(self)` |
-| `layer_detector` | method | `readmenator/_pipeline.py:187` | `def layer_detector(self)` |
-| `layer_rules` | method | `readmenator/_pipeline.py:160` | `def layer_rules(self)` |
-| `make_ranker` | method | `readmenator/_pipeline.py:374` | `def make_ranker(self, typed_graph)` |
-| `memory` | method | `readmenator/_pipeline.py:351` | `def memory(self)` |
-| `provenance` | method | `readmenator/_pipeline.py:316` | `def provenance(self)` |
-| `readme_injector` | method | `readmenator/_pipeline.py:206` | `def readme_injector(self)` |
-| `rule_gen` | method | `readmenator/_pipeline.py:166` | `def rule_gen(self)` |
-| `run` | method | `readmenator/_pipeline.py:411` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
-| `sarif` | method | `readmenator/_pipeline.py:172` | `def sarif(self)` |
-| `scanner` | method | `readmenator/_pipeline.py:111` | `def scanner(self)` |
-| `scantext` | method | `readmenator/_pipeline.py:309` | `def scantext(self)` |
-| `security` | method | `readmenator/_pipeline.py:129` | `def security(self)` |
-| `skills` | method | `readmenator/_pipeline.py:358` | `def skills(self)` |
-| `taint` | method | `readmenator/_pipeline.py:141` | `def taint(self)` |
-| `uml` | method | `readmenator/_pipeline.py:193` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:274` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:267` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:199` | `def wiki(self)` |
+| `OllamaClient` | class | `readmenator/_ollama.py:33` | `class OllamaClient` |
+| `__init__` | method | `readmenator/_ollama.py:36` | `def __init__(self, config)` |
+| `available` | method | `readmenator/_ollama.py:48` | `def available(self, timeout)` |
+| `describe_component` | method | `readmenator/_ollama.py:104` | `def describe_component(self, name, files, symbols, imports)` |
+| `enabled` | method | `readmenator/_ollama.py:44` | `def enabled(self)` |
+| `generate` | method | `readmenator/_ollama.py:69` | `def generate(self, prompt, system)` |
+| `strip_thinking` | function | `readmenator/_ollama.py:21` | `def strip_thinking(text)` |
+| `AnalyzerFactory` | class | `readmenator/_pipeline.py:64` | `class AnalyzerFactory` |
+| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:435` | `class DeepAnalysisRunner` |
+| `__init__` | method | `readmenator/_pipeline.py:72` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_pipeline.py:444` | `def __init__(self, factory)` |
+| `agent_injector` | method | `readmenator/_pipeline.py:224` | `def agent_injector(self)` |
+| `agent_output` | method | `readmenator/_pipeline.py:241` | `def agent_output(self)` |
+| `analytics` | method | `readmenator/_pipeline.py:310` | `def analytics(self)` |
+| `analyzer` | method | `readmenator/_pipeline.py:131` | `def analyzer(self)` |
+| `build_typed_graph` | method | `readmenator/_pipeline.py:400` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
+| `bundlegraph` | method | `readmenator/_pipeline.py:303` | `def bundlegraph(self)` |
+| `components` | method | `readmenator/_pipeline.py:387` | `def components(self)` |
+| `concepts` | method | `readmenator/_pipeline.py:289` | `def concepts(self)` |
+| `cpg` | method | `readmenator/_pipeline.py:186` | `def cpg(self)` |
+| `dataflow` | method | `readmenator/_pipeline.py:155` | `def dataflow(self)` |
+| `diagram_builder` | method | `readmenator/_pipeline.py:247` | `def diagram_builder(self)` |
+| `diagram_publisher` | method | `readmenator/_pipeline.py:268` | `def diagram_publisher(self)` |
+| `diagram_renderer` | method | `readmenator/_pipeline.py:254` | `def diagram_renderer(self)` |
+| `diagram_validator` | method | `readmenator/_pipeline.py:261` | `def diagram_validator(self)` |
+| `embedder` | method | `readmenator/_pipeline.py:338` | `def embedder(self)` |
+| `exclusions` | method | `readmenator/_pipeline.py:331` | `def exclusions(self)` |
+| `exporter` | method | `readmenator/_pipeline.py:143` | `def exporter(self)` |
+| `forcegraph` | method | `readmenator/_pipeline.py:296` | `def forcegraph(self)` |
+| `generator` | method | `readmenator/_pipeline.py:125` | `def generator(self)` |
+| `gh_wiki` | method | `readmenator/_pipeline.py:234` | `def gh_wiki(self)` |
+| `graphrag` | method | `readmenator/_pipeline.py:345` | `def graphrag(self)` |
+| `graphrag_store` | method | `readmenator/_pipeline.py:352` | `def graphrag_store(self)` |
+| `hotspots` | method | `readmenator/_pipeline.py:162` | `def hotspots(self)` |
+| `last_category` | method | `readmenator/_pipeline.py:427` | `def last_category(self)` |
+| `last_typed_graph` | method | `readmenator/_pipeline.py:431` | `def last_typed_graph(self)` |
+| `layer_detector` | method | `readmenator/_pipeline.py:195` | `def layer_detector(self)` |
+| `layer_rules` | method | `readmenator/_pipeline.py:168` | `def layer_rules(self)` |
+| `make_ranker` | method | `readmenator/_pipeline.py:410` | `def make_ranker(self, typed_graph)` |
+| `memory` | method | `readmenator/_pipeline.py:359` | `def memory(self)` |
+| `ollama` | method | `readmenator/_pipeline.py:394` | `def ollama(self)` |
+| `provenance` | method | `readmenator/_pipeline.py:324` | `def provenance(self)` |
+| `readme_injector` | method | `readmenator/_pipeline.py:214` | `def readme_injector(self)` |
+| `rule_gen` | method | `readmenator/_pipeline.py:174` | `def rule_gen(self)` |
+| `run` | method | `readmenator/_pipeline.py:447` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `sarif` | method | `readmenator/_pipeline.py:180` | `def sarif(self)` |
+| `scanner` | method | `readmenator/_pipeline.py:119` | `def scanner(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:317` | `def scantext(self)` |
+| `security` | method | `readmenator/_pipeline.py:137` | `def security(self)` |
+| `skills` | method | `readmenator/_pipeline.py:366` | `def skills(self)` |
+| `sourceview` | method | `readmenator/_pipeline.py:373` | `def sourceview(self)` |
+| `symindex` | method | `readmenator/_pipeline.py:380` | `def symindex(self)` |
+| `taint` | method | `readmenator/_pipeline.py:149` | `def taint(self)` |
+| `uml` | method | `readmenator/_pipeline.py:201` | `def uml(self)` |
+| `video` | method | `readmenator/_pipeline.py:282` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:275` | `def vis_renderer(self)` |
+| `wiki` | method | `readmenator/_pipeline.py:207` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -362,18 +401,18 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `export` | method | `readmenator/_sarif.py:33` | `def export(self, findings, project_name)` |
 | `PolyglotScanner` | class | `readmenator/_scanner.py:28` | `class PolyglotScanner` |
 | `__init__` | method | `readmenator/_scanner.py:39` | `def __init__(self, config)` |
-| `_check_directory_depth` | method | `readmenator/_scanner.py:167` | `def _check_directory_depth(self, path, root)` |
-| `_emit_progress` | method | `readmenator/_scanner.py:251` | `def _emit_progress(self, count)` |
-| `_extract_file_doc` | method | `readmenator/_scanner.py:175` | `def _extract_file_doc(self, content)` |
-| `_gitignore_glob_to_regex` | method | `readmenator/_scanner.py:105` | `def _gitignore_glob_to_regex(pattern)` |
+| `_check_directory_depth` | method | `readmenator/_scanner.py:168` | `def _check_directory_depth(self, path, root)` |
+| `_emit_progress` | method | `readmenator/_scanner.py:252` | `def _emit_progress(self, count)` |
+| `_extract_file_doc` | method | `readmenator/_scanner.py:176` | `def _extract_file_doc(self, content)` |
+| `_gitignore_glob_to_regex` | method | `readmenator/_scanner.py:106` | `def _gitignore_glob_to_regex(pattern)` |
 | `_is_generated` | method | `readmenator/_scanner.py:57` | `def _is_generated(self, rel_path)` |
-| `_is_gitignored` | method | `readmenator/_scanner.py:145` | `def _is_gitignored(self, rel_path)` |
+| `_is_gitignored` | method | `readmenator/_scanner.py:146` | `def _is_gitignored(self, rel_path)` |
 | `_is_ignored` | method | `readmenator/_scanner.py:50` | `def _is_ignored(self, path)` |
-| `_load_gitignore` | method | `readmenator/_scanner.py:83` | `def _load_gitignore(self, root)` |
-| `_scan_impl` | method | `readmenator/_scanner.py:286` | `def _scan_impl(self, root)` |
-| `_validate_path_security` | method | `readmenator/_scanner.py:154` | `def _validate_path_security(self, path)` |
-| `scan` | method | `readmenator/_scanner.py:261` | `def scan(self, root)` |
-| `scan_with_content` | method | `readmenator/_scanner.py:275` | `def scan_with_content(self, root)` |
+| `_load_gitignore` | method | `readmenator/_scanner.py:84` | `def _load_gitignore(self, root)` |
+| `_scan_impl` | method | `readmenator/_scanner.py:287` | `def _scan_impl(self, root)` |
+| `_validate_path_security` | method | `readmenator/_scanner.py:155` | `def _validate_path_security(self, path)` |
+| `scan` | method | `readmenator/_scanner.py:262` | `def scan(self, root)` |
+| `scan_with_content` | method | `readmenator/_scanner.py:276` | `def scan_with_content(self, root)` |
 | `ScanTextBuilder` | class | `readmenator/_scantext.py:16` | `class ScanTextBuilder` |
 | `__init__` | method | `readmenator/_scantext.py:19` | `def __init__(self, config)` |
 | `build_corpus` | method | `readmenator/_scantext.py:67` | `def build_corpus(self, nodes, content_map, edges)` |
@@ -417,6 +456,33 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `maybe_install_on_run` | method | `readmenator/_skill_installer.py:87` | `def maybe_install_on_run(self, project_root)` |
 | `source_dir` | method | `readmenator/_skill_installer.py:34` | `def source_dir()` |
 | `target_dir` | method | `readmenator/_skill_installer.py:48` | `def target_dir(self, project_root, target)` |
+| `SourceEntry` | class | `readmenator/_sourceview.py:20` | `class SourceEntry` |
+| `SourceViewBuilder` | class | `readmenator/_sourceview.py:36` | `class SourceViewBuilder` |
+| `__init__` | method | `readmenator/_sourceview.py:39` | `def __init__(self, config)` |
+| `build_sources` | method | `readmenator/_sourceview.py:55` | `def build_sources(self, nodes, content_map)` |
+| `enabled` | method | `readmenator/_sourceview.py:47` | `def enabled(self)` |
+| `to_payload` | method | `readmenator/_sourceview.py:105` | `def to_payload(self, sources)` |
+| `CallSite` | class | `readmenator/_symindex.py:65` | `class CallSite` |
+| `ResolvedCall` | class | `readmenator/_symindex.py:84` | `class ResolvedCall` |
+| `SymbolDef` | class | `readmenator/_symindex.py:40` | `class SymbolDef` |
+| `SymbolIndex` | class | `readmenator/_symindex.py:114` | `class SymbolIndex` |
+| `_Visitor` | class | `readmenator/_symindex.py:347` | `class _Visitor(NodeVisitor)` |
+| `__init__` | method | `readmenator/_symindex.py:117` | `def __init__(self, config)` |
+| `_edge_call_sites` | method | `readmenator/_symindex.py:313` | `def _edge_call_sites(self, edges)` |
+| `_kind_to_node_type` | method | `readmenator/_symindex.py:104` | `def _kind_to_node_type(kind)` |
+| `_pop` | method | `readmenator/_symindex.py:356` | `def _pop(self, node)` |
+| `_push` | method | `readmenator/_symindex.py:350` | `def _push(self, node)` |
+| `_python_call_sites` | method | `readmenator/_symindex.py:330` | `def _python_call_sites(self, file_id, content)` |
+| `_regex_call_sites` | method | `readmenator/_symindex.py:401` | `def _regex_call_sites(self, file_id, content, symbols)` |
+| `_resolve_one` | method | `readmenator/_symindex.py:268` | `def _resolve_one(self, site, by_name, imports_of)` |
+| `build` | method | `readmenator/_symindex.py:126` | `def build(self, nodes, content_map)` |
+| `extract_call_sites` | method | `readmenator/_symindex.py:194` | `def extract_call_sites(self, file_id, content, language, symbols)` |
+| `methods_index` | method | `readmenator/_symindex.py:166` | `def methods_index(self, index)` |
+| `resolve` | method | `readmenator/_symindex.py:219` | `def resolve(self, nodes, edges, resolved_edges, content_map)` |
+| `visit_AsyncFunctionDef` | method | `readmenator/_symindex.py:373` | `def visit_AsyncFunctionDef(self, node)` |
+| `visit_Call` | method | `readmenator/_symindex.py:379` | `def visit_Call(self, node)` |
+| `visit_ClassDef` | method | `readmenator/_symindex.py:361` | `def visit_ClassDef(self, node)` |
+| `visit_FunctionDef` | method | `readmenator/_symindex.py:367` | `def visit_FunctionDef(self, node)` |
 | `TaintAnalyzer` | class | `readmenator/_taint.py:12` | `class TaintAnalyzer` |
 | `__init__` | method | `readmenator/_taint.py:73` | `def __init__(self, config)` |
 | `_build_forward_graph` | method | `readmenator/_taint.py:213` | `def _build_forward_graph(nodes, resolved_edges)` |
@@ -430,71 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_extract_params` | method | `readmenator/_uml.py:592` | `def _extract_params(signature)` |
 | `_find_node` | method | `readmenator/_uml.py:165` | `def _find_node(nodes, node_id)` |
 | `_generate_cpp` | method | `readmenator/_uml.py:233` | `def _generate_cpp(class_symbols, nodes, edges)` |
-| `_generate_csharp` | method | `readmenator/_uml.py:316` | `def _generate_csharp(class_symbols, nodes, edges)` |
-| `_generate_dart` | method | `readmenator/_uml.py:547` | `def _generate_dart(class_symbols, nodes, edges)` |
-| `_generate_go` | method | `readmenator/_uml.py:395` | `def _generate_go(class_symbols, nodes, edges)` |
-| `_generate_java` | method | `readmenator/_uml.py:274` | `def _generate_java(class_symbols, nodes, edges)` |
-| `_generate_kotlin` | method | `readmenator/_uml.py:476` | `def _generate_kotlin(class_symbols, nodes, edges)` |
-| `_generate_php` | method | `readmenator/_uml.py:448` | `def _generate_php(class_symbols, nodes, edges)` |
-| `_generate_python` | method | `readmenator/_uml.py:360` | `def _generate_python(class_symbols, nodes, edges)` |
-| `_generate_ruby` | method | `readmenator/_uml.py:567` | `def _generate_ruby(class_symbols, nodes, edges)` |
-| `_generate_rust` | method | `readmenator/_uml.py:422` | `def _generate_rust(class_symbols, nodes, edges)` |
-| `_generate_scala` | method | `readmenator/_uml.py:496` | `def _generate_scala(class_symbols, nodes, edges)` |
-| `_generate_swift` | method | `readmenator/_uml.py:518` | `def _generate_swift(class_symbols, nodes, edges)` |
-| `_get_code_generator` | method | `readmenator/_uml.py:172` | `def _get_code_generator(language)` |
-| `_java_params` | method | `readmenator/_uml.py:301` | `def _java_params(params)` |
-| `_safe_name` | method | `readmenator/_uml.py:588` | `def _safe_name(name)` |
-| `_sanitize_id` | method | `readmenator/_uml.py:153` | `def _sanitize_id(raw)` |
-| `_type_map_py_to_target` | method | `readmenator/_uml.py:190` | `def _type_map_py_to_target(target, py_type_hint)` |
-| `generate_code` | method | `readmenator/_uml.py:129` | `def generate_code(self, nodes, edges, target_language)` |
-| `render_mermaid_class_diagram` | method | `readmenator/_uml.py:39` | `def render_mermaid_class_diagram(self, nodes, edges)` |
-| `Fe` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `Ha` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `Ia` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `La` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `Lo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `Na` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `Sr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `_` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `_n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `as` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `as` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `b` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `cr` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `e` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `e` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `f` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `h` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `i` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `l` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `n` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `n` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `o` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `r` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `s` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `t` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `u` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `wa` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `xo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
-| `y` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `Backdrop` | class | `readmenator/_video.py:608` | `class Backdrop` |
-| `CinematicVideoRenderer` | class | `readmenator/_video.py:803` | `class CinematicVideoRenderer` |
-| `__init__` | method | `readmenator/_video.py:611` | `def __init__(self, width, height)` |
-| `_build_dep_tree` | method | `readmenator/_video.py:972` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
-| `_camera_track` | function | `readmenator/_video.py:241` | `def _camera_track(keys, f)` |
-| `_caption_y` | function | `readmenator/_video.py:138` | `def _caption_y(cfg)` |
-| `_clipped` | function | `readmenator/_video.py:264` | `def _clipped(img, box, paint)` |
-| `_cloud_core` | function | `readmenator/_video.py:320` | `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
-| `_code_tint` | function | `readmenator/_video.py:544` | `def _code_tint(line)` |
-| `_depth_alpha` | function | `readmenator/_video.py:217` | `def _depth_alpha(z, fade)` |
-| `_dna_boxes` | function | `readmenator/_video.py:152` | `def _dna_boxes(cfg)` |
-| `_draw_frame` | method | `readmenator/_video.py:1279` | `def _draw_frame(fi)` |
-| `_find` | method | `readmenator/_video.py:573` | `def _find(style)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

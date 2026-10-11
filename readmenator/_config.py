@@ -977,3 +977,62 @@ class Config:
     GRAPHRAG_LOCAL_SECTION_SHARES: Tuple[float, ...] = (0.35, 0.15, 0.2, 0.3)
 
     GRAPHRAG_GLOBAL_SECTION_SHARES: Tuple[float, ...] = (0.3, 0.7)
+
+    SYMINDEX_MAX_CALL_SITES: int = 2000
+
+    SYMINDEX_BUILTINS: Tuple[str, ...] = (
+        "print", "len", "range", "str", "int", "float", "bool", "list",
+        "dict", "set", "tuple", "open", "super", "self", "cls", "isinstance",
+        "issubclass", "hasattr", "getattr", "setattr", "enumerate", "zip",
+        "map", "filter", "sorted", "reversed", "min", "max", "sum", "abs",
+        "round", "repr", "type", "id", "hash", "iter", "next", "all", "any",
+        "exit", "quit", "input", "format", "vars", "dir", "globals", "locals",
+        "callable", "ord", "chr", "hex", "oct", "bin", "pow", "divmod",
+        "console", "require", "module", "exports", "window", "document",
+        "parseInt", "parseFloat", "isNaN", "setTimeout", "setInterval",
+        "fetch", "assert", "expect", "describe", "it", "test",
+    )
+
+    LINTER_UNRESOLVED_CALLS: bool = True
+
+    COMPONENTS_ENABLED: bool = True
+
+    COMPONENTS_OUTPUT_DIR: str = "readmenator-diagrams"
+
+    COMPONENTS_MAX_KEY_ENTITIES: int = 8
+
+    COMPONENTS_MAX_KEY_EDGES: int = 8
+
+    COMPONENTS_MAX_ALL_EDGES: int = 50
+
+    COMPONENTS_EXPAND_MIN_FILES: int = 6
+
+    COMPONENTS_DEPTH_CAP: int = 3
+
+    COMPONENTS_NODE_SYMBOLS: int = 3
+
+    OLLAMA_ENABLED: bool = False
+
+    OLLAMA_HOST: str = "http://localhost:11434"
+
+    OLLAMA_MODEL: str = "deepseek-r1:1.5b"
+
+    OLLAMA_TIMEOUT_S: int = 120
+
+    OLLAMA_MAX_PROMPT_CHARS: int = 2000
+
+    OLLAMA_MAX_CHARS: int = 600
+
+    SOURCEVIEW_ENABLED: bool = True
+
+    SOURCEVIEW_MAX_FILES: int = 400
+
+    SOURCEVIEW_MAX_CHARS_PER_FILE: int = 60000
+
+    SOURCEVIEW_MAX_LINES_PER_FILE: int = 2000
+
+    SOURCEVIEW_MAX_TOTAL_CHARS: int = 1500000
+
+    SOURCEVIEW_CHUNK_LINES: int = 300
+
+    SOURCEVIEW_CONTEXT_LINES: int = 3

@@ -3347,7 +3347,7 @@ class DocsSitePublisher:
             candidate = base / name
             if candidate.is_file():
                 candidates.append(candidate)
-        for dirname in (self._config.AGENT_OUTPUT_DIR, self._config.WIKI_OUTPUT_DIR, self._config.GRAPHRAG_OUTPUT_DIR):
+        for dirname in (self._config.AGENT_OUTPUT_DIR, self._config.WIKI_OUTPUT_DIR, self._config.GRAPHRAG_OUTPUT_DIR, self._config.COMPONENTS_OUTPUT_DIR):
             docs_dir = base / dirname
             if not docs_dir.is_dir():
                 continue

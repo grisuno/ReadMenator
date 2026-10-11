@@ -55,6 +55,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  explorer                Serve force-graph explorer locally\n"
             "  forcegraph              Export force-graph explorer HTML (readmenator-maps/graph-force.html)\n"
             "  bundles                 Export edge bundle explorer HTML, circle + sphere (readmenator-maps/graph-bundle.html)\n"
+            "  components              Export component diagrams (analysis.json + graph LR markdown + index.html)\n"
             "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
             "  near <file|text>        Nearest files by scan-text similarity (offline Jaccard)\n"
             "  scan-text               Print synthesized scan-text blobs per file\n"
@@ -331,6 +332,11 @@ def main() -> None:
         elif command == "bundles":
             out = app.export_bundlegraph(target)
             print(out)
+            return
+        elif command == "components":
+            written = app.export_components(target)
+            for kind, path in sorted(written.items()):
+                print(f"{kind}: {path}")
             return
         elif command == "analytics":
             import json as _json

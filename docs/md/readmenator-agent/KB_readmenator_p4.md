@@ -1,6 +1,111 @@
 # Subsystem: readmenator (page 4 of 4)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_skill_installer.py
+- Doc: Installs the packaged ReadMenator agent skills into a project.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SkillInstaller` (class, line 22) `class SkillInstaller`
+  - `__init__` (method, line 25) `def __init__(self, config)`
+  - `source_dir` (method, line 34) `def source_dir()`
+  - `available` (method, line 38) `def available(self)`
+  - `target_dir` (method, line 48) `def target_dir(self, project_root, target)`
+  - `install` (method, line 61) `def install(self, project_root, target)`
+  - `maybe_install_on_run` (method, line 87) `def maybe_install_on_run(self, project_root)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_memory.py`
+
+## readmenator/_sourceview.py
+- Doc: Source viewer payload builder for the graph explorers.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SourceEntry` (class, line 20) `class SourceEntry`
+  - `SourceViewBuilder` (class, line 36) `class SourceViewBuilder`
+  - `__init__` (method, line 39) `def __init__(self, config)`
+  - `enabled` (method, line 47) `def enabled(self)`
+  - `build_sources` (method, line 55) `def build_sources(self, nodes, content_map)`
+  - `to_payload` (method, line 105) `def to_payload(self, sources)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_pipeline.py`, `tests/test_sourceview.py`
+
+## readmenator/_symindex.py
+- Doc: Deterministic symbol index with call-site resolution.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SymbolDef` (class, line 40) `class SymbolDef`
+  - `CallSite` (class, line 65) `class CallSite`
+  - `ResolvedCall` (class, line 84) `class ResolvedCall`
+  - `_kind_to_node_type` (method, line 104) `def _kind_to_node_type(kind)`
+  - `SymbolIndex` (class, line 114) `class SymbolIndex`
+  - `__init__` (method, line 117) `def __init__(self, config)`
+  - `build` (method, line 126) `def build(self, nodes, content_map)`
+  - `methods_index` (method, line 166) `def methods_index(self, index)`
+  - `extract_call_sites` (method, line 194) `def extract_call_sites(self, file_id, content, language, symbols)`
+  - `resolve` (method, line 219) `def resolve(self, nodes, edges, resolved_edges, content_map)`
+  - `_resolve_one` (method, line 268) `def _resolve_one(self, site, by_name, imports_of)`
+  - `_edge_call_sites` (method, line 313) `def _edge_call_sites(self, edges)`
+  - `_python_call_sites` (method, line 330) `def _python_call_sites(self, file_id, content)`
+  - `_regex_call_sites` (method, line 401) `def _regex_call_sites(self, file_id, content, symbols)`
+  - `_Visitor` (class, line 347) `class _Visitor(NodeVisitor)`
+  - `_push` (method, line 350) `def _push(self, node)`
+  - `_pop` (method, line 356) `def _pop(self, node)`
+  - `visit_ClassDef` (method, line 361) `def visit_ClassDef(self, node)`
+  - `visit_FunctionDef` (method, line 367) `def visit_FunctionDef(self, node)`
+  - `visit_AsyncFunctionDef` (method, line 373) `def visit_AsyncFunctionDef(self, node)`
+  - `visit_Call` (method, line 379) `def visit_Call(self, node)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_components.py`, `readmenator/_linter.py`, `readmenator/_pipeline.py`, `tests/test_symindex.py`
+
+## readmenator/_taint.py
+- Doc: Taint propagation analysis of dangerous imports through the resolved import graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `TaintAnalyzer` (class, line 12) `class TaintAnalyzer`
+  - `__init__` (method, line 73) `def __init__(self, config)`
+  - `analyze` (method, line 77) `def analyze(self, nodes, edges, resolved_edges)`
+  - `_find_direct_sources` (method, line 136) `def _find_direct_sources(self, nodes, edges)`
+  - `_propagate` (method, line 162) `def _propagate(self, source_node_id, danger_import, adj, nodes, max_depth)`
+  - `_build_forward_graph` (method, line 213) `def _build_forward_graph(nodes, resolved_edges)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_uml.py
+- Doc: UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `UmlGenerator` (class, line 34) `class UmlGenerator`
+  - `_get_code_generator` (method, line 172) `def _get_code_generator(language)`
+  - `_type_map_py_to_target` (method, line 190) `def _type_map_py_to_target(target, py_type_hint)`
+  - `_generate_cpp` (method, line 233) `def _generate_cpp(class_symbols, nodes, edges)`
+  - `_cpp_params` (method, line 259) `def _cpp_params(params)`
+  - `_generate_java` (method, line 274) `def _generate_java(class_symbols, nodes, edges)`
+  - `_java_params` (method, line 301) `def _java_params(params)`
+  - `_generate_csharp` (method, line 316) `def _generate_csharp(class_symbols, nodes, edges)`
+  - `_cs_params` (method, line 345) `def _cs_params(params)`
+  - `_generate_python` (method, line 360) `def _generate_python(class_symbols, nodes, edges)`
+  - `_generate_go` (method, line 395) `def _generate_go(class_symbols, nodes, edges)`
+  - `_generate_rust` (method, line 422) `def _generate_rust(class_symbols, nodes, edges)`
+  - `_generate_php` (method, line 448) `def _generate_php(class_symbols, nodes, edges)`
+  - `_generate_kotlin` (method, line 476) `def _generate_kotlin(class_symbols, nodes, edges)`
+  - `_generate_scala` (method, line 496) `def _generate_scala(class_symbols, nodes, edges)`
+  - `_generate_swift` (method, line 518) `def _generate_swift(class_symbols, nodes, edges)`
+  - `_generate_dart` (method, line 547) `def _generate_dart(class_symbols, nodes, edges)`
+  - `_generate_ruby` (method, line 567) `def _generate_ruby(class_symbols, nodes, edges)`
+  - `_safe_name` (method, line 588) `def _safe_name(name)`
+  - `_extract_params` (method, line 592) `def _extract_params(signature)`
+  - `__init__` (method, line 36) `def __init__(self, config)`
+  - `render_mermaid_class_diagram` (method, line 39) `def render_mermaid_class_diagram(self, nodes, edges)`
+  - `generate_code` (method, line 129) `def generate_code(self, nodes, edges, target_language)`
+  - `_sanitize_id` (method, line 153) `def _sanitize_id(raw)`
+  - `_find_node` (method, line 165) `def _find_node(nodes, node_id)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
+
 ## readmenator/_video.py
 - Doc: Cinematic codebase overview video, general purpose.
 - Layer: utility

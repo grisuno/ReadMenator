@@ -58,12 +58,16 @@ readmenator/
   _yaralite.py      - Zero-dep tiered T1/T2/T3 YARA-lite parser + runner (no native dependency)
   _provenance.py    - Evidence-provenance audit (static vs inferred-only findings)
   _exclusions.py    - FP exclusion blocklist loader (glob + rule_id scoping)
-  _explorer.py      - Stdlib HTTP explorer server (/api/graph, /api/analytics, /api/samples)
+  _explorer.py      - Stdlib HTTP explorer server (/api/graph, /api/analytics, /api/samples, /api/source)
   _embed.py         - Optional semantic embeddings with offline Jaccard fallback
   _graphrag.py      - Zero-token GraphRAG: entities, relationships, text units, report hierarchy, local/global search
   _graphlayout.py   - ForceAtlas2 snapshots in 2D/3D (numpy optional), circular and spherical hierarchical edge bundling
   _memory.py        - MEMORY.md: declared rules (file:line), measured baselines, preserved session log
   _skill_installer.py - Installs packaged agent skills (readmenator/_skills/*/SKILL.md)
+  _sourceview.py      - Bounded per-file source texts for the explorer View drawer (caps, privacy)
+  _symindex.py        - Deterministic symbol index: spans, call sites with lines, definition resolver
+  _ollama.py          - Optional local Ollama client (stdlib, bounded, never fatal)
+  _components.py      - Component diagrams: analysis.json, graph LR, per-component markdown, offline index.html
   _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
   _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
 tests/
@@ -107,6 +111,10 @@ tests/
   test_graphlayout.py - ForceAtlas2 (2D/3D) and circular/spherical edge bundling contract tests (determinism, separation, bounds, caps, curves)
   test_bundlegraph.py - Edge bundle explorer contract tests (payload, escaping, no network, gallery card, disable flag)
   test_memory.py - Project memory and skill installer contract tests (rules, citations, preserved log, marker safety)
+  test_sourceview.py - Source viewer contract tests (caps, privacy, View drawer, highlight, ctrl+click, themes)
+  test_symindex.py - Symbol index contract tests (spans, call-site lines, confidence tiers, methods_index)
+  test_components.py - Component diagram contract tests (schema, graph LR, markdown, page, gallery card)
+  test_ollama.py - Local Ollama client contract tests (disabled, unreachable, thinking strip)
 ```
 
 ## Contracts
@@ -172,6 +180,10 @@ tests/
 - Edge bundle explorer (BUNDLEGRAPH_ENABLED, BUNDLEGRAPH_OUTPUT, BUNDLEGRAPH_MODE, BUNDLEGRAPH_BETA, BUNDLEGRAPH_SAMPLES, BUNDLEGRAPH_INNER_RATIO, BUNDLEGRAPH_GROUP_GAP, BUNDLEGRAPH_EDGE_ALPHA, BUNDLEGRAPH_DIM_ALPHA, BUNDLEGRAPH_LABEL_ALL_MAX, BUNDLEGRAPH_LABEL_TOP_N, BUNDLEGRAPH_LABEL_MAX_CHARS, BUNDLEGRAPH_NODE_MIN_PX/MAX_PX, BUNDLEGRAPH_HIT_PX, BUNDLEGRAPH_ROTATE_SPEED, BUNDLEGRAPH_PERSPECTIVE, BUNDLEGRAPH_DEPTH_FADE, BUNDLEGRAPH_PARTICLES, BUNDLEGRAPH_REVEAL_MS, BUNDLEGRAPH_FLOW_TOP_N, BUNDLEGRAPH_LIST_MAX, BUNDLEGRAPH_THUMB_EDGES, BUNDLEGRAPH_THUMB_SAMPLES)
 - Memory settings (MEMORY_ENABLED, MEMORY_FILENAME, MEMORY_VOCABULARY_STOPWORDS, MEMORY_NOTE_MAX_CHARS, MEMORY_NOTE_KINDS, MEMORY_RULE_SOURCES, MEMORY_CONSTRAINT/STYLE/DELIVERABLE_KEYWORDS, MEMORY_HEADING_EXCLUDE, MEMORY_MAX_RULES_PER_FILE/CATEGORY, MEMORY_MIN_RULE_CHARS, MEMORY_MAX_COMMANDS, MEMORY_VOCABULARY_TOP_N, MEMORY_SUBSYSTEMS_TOP_N, MEMORY_STYLE_LANGUAGES, MEMORY_RISKS_TOP_N)
 - Skills settings (SKILLS_ENABLED, SKILLS_TARGET_DIR, SKILLS_INSTALL_ON_RUN)
+- Symbol index settings (SYMINDEX_MAX_CALL_SITES, SYMINDEX_BUILTINS)
+- Component diagram settings (COMPONENTS_ENABLED, COMPONENTS_OUTPUT_DIR, COMPONENTS_MAX_KEY_ENTITIES/KEY_EDGES/ALL_EDGES, COMPONENTS_EXPAND_MIN_FILES, COMPONENTS_DEPTH_CAP)
+- Ollama settings (OLLAMA_ENABLED default False, OLLAMA_HOST, OLLAMA_MODEL, OLLAMA_TIMEOUT_S, OLLAMA_MAX_PROMPT_CHARS, OLLAMA_MAX_CHARS)
+- Source viewer settings (SOURCEVIEW_ENABLED, SOURCEVIEW_MAX_FILES/CHARS_PER_FILE/LINES_PER_FILE/TOTAL_CHARS, SOURCEVIEW_CHUNK_LINES, SOURCEVIEW_CONTEXT_LINES)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -218,7 +230,7 @@ tests/
 - Emits progress messages every PROGRESS_REPORT_BATCH files
 - Supports `.gitignore`-aware scanning (GITIGNORE_AWARE)
 - Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
-- Skips its own generated outputs (agent, wiki, rules, maps, site, cache, gh-wiki dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
+- Skips its own generated outputs (agent, wiki, rules, maps, site, cache, graphrag, component diagrams, gh-wiki dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
 - scan_with_content() returns content map for rule gen, taint analysis
 
 ### Import Resolver Contract
@@ -406,17 +418,17 @@ tests/
 - YaraLiteEngine (readmenator/_yaralite.py): zero-dep T1/T2/T3 parser + runner (rule headers, meta, strings with nocase, conditions with N-of groups, any-of-them, $identifiers via restricted eval); validate_yaralite_rules reports tier counts; default rules in readmenator-rules/yara_rules.yar; CLI `validate-rules`
 - ProvenanceAuditor (readmenator/_provenance.py): classifies findings as static (snippet present in content) vs inferred_only with corpus frequency and reading guidance; CLI `provenance`
 - ExclusionList (readmenator/_exclusions.py): glob blocklist from readmenator-rules/exclusions.yaml with rule_id scoping; applied in audit_provenance before auditing
-- ForceGraphRenderer (readmenator/_forcegraph.py): heterogeneous payload (file/community/layer/external nodes; member_of/layered_as/imports/resolved_imports/calls/inherits edges) with djb2 stable family colors, log2 node sizing, per-relation edge colors, symbol-scope normalization (calls edges collapsed to files, intra-file calls dropped); render()/write() emit the gallery-styled 2D/3D explorer HTML with vendored engine (readmenator/_vendor, copied to maps/vendor/), hull overlays, dimming, particles, pills, search, theme toggle, PNG/JSON export; CLI `forcegraph`; GraphExporter.to_forcegraph delegates to it; output lives in DIAGRAM_OUTPUT_DIR and is card-linked from the maps gallery index
+- ForceGraphRenderer (readmenator/_forcegraph.py): heterogeneous payload (file/community/layer/external nodes; member_of/layered_as/imports/resolved_imports/calls/inherits edges) with djb2 stable family colors, log2 node sizing, per-relation edge colors, symbol-scope normalization (calls edges collapsed to files, intra-file calls dropped); file nodes carry bounded `src`/`src_lines`/`src_cut` for the source viewer when content_map is passed ("" in privacy mode or when disabled); render()/write() emit the gallery-styled 2D/3D explorer HTML with vendored engine (readmenator/_vendor, copied to maps/vendor/), hull overlays, dimming, particles, pills, search, theme toggle, PNG/JSON export; CLI `forcegraph`; GraphExporter.to_forcegraph delegates to it; output lives in DIAGRAM_OUTPUT_DIR and is card-linked from the maps gallery index
 - AnalyticsBuilder (readmenator/_analytics.py): attribution funnel, layer/language distributions, community cohesion, hotspot ranking, rule yield, size bands, file scatter; KB Corpus Analytics section; CLI `analytics`
-- ExplorerServer (readmenator/_explorer.py): stdlib HTTPServer with /api/graph, /api/analytics, /api/samples, /vendor/force-graph.min.js plus static write_static(); CLI `explorer` (add --no-browser to skip auto-open)
+- ExplorerServer (readmenator/_explorer.py): stdlib HTTPServer with /api/graph, /api/analytics, /api/samples, /api/source?file= (bounded source text), /vendor/force-graph.min.js plus static write_static(); CLI `explorer` (add --no-browser to skip auto-open)
 - Embedder (readmenator/_embed.py): optional sentence-transformers encode with offline Jaccard near_jaccard/cluster_jaccard/project_jaccard fallback; CLI `near <file|text>`
-- Explorer UX: canvas names with collision-aware labels (top FORCEGRAPH_LABEL_TOP_N by PageRank, all past FORCEGRAPH_LABEL_ZOOM), shapes per type, findings badge, hover neighbourhood preview, inspector panel (PageRank position and percentile, metrics, purpose, filterable symbols with signatures and docs, neighbours grouped by relation, clickable, Back history, 1-3 hop reach, isolate), search over labels, paths and symbol names, layouts force / cluster (community anchors) / radial (layer rings) / dag, deep links #node=&layout=; unresolved calls and imports that resolve to project files never become externals; payload file nodes carry rank, rank_pos, doc (empty in privacy mode), symbol_list
+- Explorer UX: canvas names with collision-aware labels (top FORCEGRAPH_LABEL_TOP_N by PageRank, all past FORCEGRAPH_LABEL_ZOOM), shapes per type, findings badge, hover neighbourhood preview, inspector panel (PageRank position and percentile, metrics, purpose, filterable symbols with signatures and docs, neighbours grouped by relation, clickable, Back history, 1-3 hop reach, isolate), View button opening the source drawer (S key, right-click menu), search over labels, paths and symbol names, layouts force / cluster (community anchors) / radial (layer rings) / dag, deep links #node=&layout=; unresolved calls and imports that resolve to project files never become externals; payload file nodes carry rank, rank_pos, doc (empty in privacy mode), symbol_list
 - ForceGraphRenderer.thumbnail_svg(payload): escaped ForceAtlas2 preview used as the featured gallery card in both `diagrams` and `pages`
-- Explorer page (readmenator/_forcegraph_page.py): template placeholders are filled in one regex pass (payload text naming a token is never rescanned); page_settings(payload) serializes every tuneable from Config plus group_colors (layer palette, language hash colors); member_of/layered_as edges use their own palette entries
+- Explorer page (readmenator/_forcegraph_page.py): template placeholders are filled in one regex pass (payload text naming a token is never rescanned); page_settings(payload) serializes every tuneable from Config plus group_colors (layer palette, language hash colors) plus srcEnabled/srcChunk/srcContext; member_of/layered_as edges use their own palette entries; source drawer (src-viewer + src-scrim + src-tip) renders embedded sources lazily in chunks with offline keyword/string/comment/number/call highlighting themed via CSS vars, hover definition cards from the symbol index, and Ctrl/Cmd+Click follow-to-definition (same file scrolls, other files open and refocus the graph); S key, View button, context menu, Esc/scrim close; window.ReadmenatorExplorer exposes openSource/closeSource
 - Explorer selection: engine pointer picking is disabled (force-graph repaints its shadow canvas at most every 800 ms, so picks drifted while nodes moved); hover, click, drag-to-pin, double-click isolate and right-click menus are hit-tested in the page against the positions drawn in the same frame; priority node glyph, then label, then enlarged grab area (FORCEGRAPH_MIN_HIT_PX + padding), then dependency edges (curved edges via __controlPoints); while a focus is active only highlighted edges are pickable
 - Explorer 3D: 3d-force-graph (pinned CDN, orbit controls) keeps links, arrows and particles; node spheres hidden (nodeVisibility false) and flat glyphs (document tiles, hexagon communities, diamond layers, triangle externals), group halos and collision-aware labels painted on an overlay canvas from the same camera inside renderer.render, with depth fade; camera fly-to, orbit toggle, cluster anchors on a Fibonacci sphere, layer shells; falls back to 2D when the CDN is unreachable
 - Explorer actions: reach direction (both, upstream used by, downstream uses) x depth (1, 2, 3, all); path finder (directed first, then reverse, undirected, then via shared group) with hop-by-hop passport; edge passport (sentence, endpoints, mutual dependency, cycle closure, upward layer crossing, community bridge, parallel relations); group passport (cohesion, depends-on and used-by groups); color by community/layer/language; node and edge type filters; hide/unhide; lenses: import cycles (Tarjan SCC), no importers, disconnected, hubs; deep links node, edge, path, lens, group, view, layout, color, dir, depth; window.ReadmenatorExplorer API
-- AnalyzerFactory exposes forcegraph, analytics, scantext, provenance, exclusions, embedder (lazy init); app.export_forcegraph/explorer_state/serve_explorer/analytics/scan_texts/near/audit_provenance/validate_yaralite; run()/rebuild() write readmenator-maps/graph-force.html via _maybe_export_forcegraph (skipped when FORCEGRAPH_ENABLED=False); export_diagrams() writes it first and links it from the gallery index; export() also writes it
+- AnalyzerFactory exposes forcegraph, analytics, scantext, provenance, exclusions, embedder, symindex, components, ollama (lazy init); app.export_forcegraph/explorer_state/serve_explorer/analytics/scan_texts/near/audit_provenance/validate_yaralite/export_components; run()/rebuild() write readmenator-maps/graph-force.html via _maybe_export_forcegraph (skipped when FORCEGRAPH_ENABLED=False) plus readmenator-diagrams/ via export_components (skipped when COMPONENTS_ENABLED=False); export_diagrams() writes it first and links it from the gallery index; export() also writes it
 
 ### GraphRAG Contract
 - GraphRagBuilder.build(nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, concept_graph, content_map, memory_notes) returns a deterministic GraphRagIndex (readmenator/_graphrag.py); zero LLM tokens
@@ -574,9 +586,34 @@ tests/
 - ARC001: File exceeds configurable line threshold (LINTER_MAX_LINES, default 300)
 - ARC002: Cross-layer import violations (presentation -> data_access forbidden)
 - ARC003: Circular dependency detection in resolved import graph
+- ARC004: Unresolved/ambiguous call targets via the symbol index (info, file:line + caller -> callee + definition evidence)
 - Respects LAYER_VIOLATION_STRICT_MODE for warning edges
 - Returns List[LinterViolation] sorted by severity (error > warning > info)
-- Configurable via LINTER_ENABLED and LINTER_CROSS_LAYER_VIOLATIONS flags
+- Configurable via LINTER_ENABLED, LINTER_CROSS_LAYER_VIOLATIONS, LINTER_UNRESOLVED_CALLS flags
+
+### Symbol Index Contract
+- SymbolIndex class with build/resolve/extract_call_sites/methods_index entry points (readmenator/_symindex.py)
+- Definitions carry file spans (end_line from the next symbol); deterministic sorted traversal
+- Python call sites exact via ast (caller scope, line, column); other languages regex-approximated with caller attribution
+- Resolution tiers: BUILTIN (stoplist) > SAME_FILE > IMPORTED (via resolved imports) > UNIQUE > AMBIGUOUS > UNRESOLVED
+- methods_index keys use the `file|file::symbol` shape with CLASS/FUNCTION types and short content hashes
+- Configurable via SYMINDEX_MAX_CALL_SITES, SYMINDEX_BUILTINS; never needs the network or an LSP
+
+### Local Ollama Contract
+- OllamaClient class with generate/describe_component/available entry points (readmenator/_ollama.py)
+- Stdlib urllib against the local daemon only; bounded timeout; every failure returns "" (never fatal)
+- Thinking-model `<think>` blocks stripped; prompt and output capped by config
+- Used only for prose (component descriptions), never for structure; default off (zero-token)
+- Configurable via OLLAMA_ENABLED (default False), OLLAMA_HOST, OLLAMA_MODEL, OLLAMA_TIMEOUT_S, OLLAMA_MAX_PROMPT_CHARS, OLLAMA_MAX_CHARS
+
+### Component Diagram Contract
+- ComponentDiagramBuilder class with build/mermaid_lr/overview_markdown/component_markdown/render_page/thumbnail_svg/write entry points (readmenator/_components.py)
+- analysis.json carries the component model: metadata (source_tree_hash, depth, file coverage), description, files, methods_index, components, components_relations
+- Components come from analyzer communities (component_id 1..N, nested i.j by top directory when expandable); relations aggregate cross-component imports/calls with method-level key_edges + call-site lines; nested levels roll parent edges up like project_relations_to_level (outside files drop, self-pairs drop)
+- Overview renders their `graph LR` style (quoted labels, `"phrase"` edges, click links) plus Related Classes/Methods with file#L anchors
+- index.html renders the layered diagram offline as inline SVG in the readmenator dark theme (cyan accents, shared readmenator-theme key): longest-path LR ranks; boxes with name, file/symbol counts, dominant-layer border + label, top symbols, file counts, hub glow for the top PageRank component; arrows weighted by call/import evidence with phrase + counts labels; hover description cards; click-to-component anchors; layer legend; a Relations section with evidence and file:line call samples; nested SVGs per expandable component; drag-pan/wheel-zoom, Reset/Fit/PNG; zero external requests
+- Written to COMPONENTS_OUTPUT_DIR (scanner-skipped) on every run when COMPONENTS_ENABLED, plus CLI `components`; maps and docs galleries get a featured "Component Diagrams" card with a dagre-dot thumbnail (href is relpath-computed, so it works from readmenator-maps/ and docs/maps/); collect_doc_sources ships the markdown into the site drawer and llms.txt
+- Configurable via COMPONENTS_ENABLED/OUTPUT_DIR/MAX_KEY_ENTITIES/MAX_KEY_EDGES/MAX_ALL_EDGES/EXPAND_MIN_FILES/DEPTH_CAP
 
 ### Dead Code Stripper Contract
 - DeadCodeStripper class with identify(nodes, edges, resolved_edges) method

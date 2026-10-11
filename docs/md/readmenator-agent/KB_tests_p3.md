@@ -1,6 +1,99 @@
 # Subsystem: tests (page 3 of 4)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_parsers.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestCParserContract` (class, line 22) `class TestCParserContract(TestCase)`
+  - `TestPythonParserContract` (class, line 88) `class TestPythonParserContract(TestCase)`
+  - `TestGoParserContract` (class, line 157) `class TestGoParserContract(TestCase)`
+  - `TestRustParserContract` (class, line 200) `class TestRustParserContract(TestCase)`
+  - `TestJavaScriptParserContract` (class, line 238) `class TestJavaScriptParserContract(TestCase)`
+  - `TestJavaParserContract` (class, line 277) `class TestJavaParserContract(TestCase)`
+  - `TestCSharpParserContract` (class, line 309) `class TestCSharpParserContract(TestCase)`
+  - `TestShellParserContract` (class, line 342) `class TestShellParserContract(TestCase)`
+  - `TestPHPParserContract` (class, line 361) `class TestPHPParserContract(TestCase)`
+  - `TestDartParserContract` (class, line 387) `class TestDartParserContract(TestCase)`
+  - `TestGDScriptParserContract` (class, line 412) `class TestGDScriptParserContract(TestCase)`
+  - `TestNimParserContract` (class, line 430) `class TestNimParserContract(TestCase)`
+  - `TestAssemblyParserContract` (class, line 456) `class TestAssemblyParserContract(TestCase)`
+  - `TestParserFactoryContract` (class, line 483) `class TestParserFactoryContract(TestCase)`
+  - `setUp` (method, line 23) `def setUp(self)`
+  - `test_extracts_function` (method, line 26) `def test_extracts_function(self)`
+  - `test_extracts_struct` (method, line 33) `def test_extracts_struct(self)`
+  - `test_extracts_include` (method, line 40) `def test_extracts_include(self)`
+  - `test_extracts_define` (method, line 47) `def test_extracts_define(self)`
+  - `test_skips_reserved_words` (method, line 54) `def test_skips_reserved_words(self)`
+  - `test_function_line_points_at_definition` (method, line 64) `def test_function_line_points_at_definition(self)`
+  - `test_calls_are_not_prototypes` (method, line 71) `def test_calls_are_not_prototypes(self)`
+  - `test_class_with_inheritance` (method, line 80) `def test_class_with_inheritance(self)`
+  - `setUp` (method, line 89) `def setUp(self)`
+  - `test_extracts_function` (method, line 92) `def test_extracts_function(self)`
+  - `test_extracts_class` (method, line 99) `def test_extracts_class(self)`
+  - `test_extracts_imports` (method, line 106) `def test_extracts_imports(self)`
+  - `test_extracts_async_function` (method, line 114) `def test_extracts_async_function(self)`
+  - `test_handles_syntax_error_gracefully` (method, line 121) `def test_handles_syntax_error_gracefully(self)`
+  - `test_suppresses_syntax_warnings` (method, line 127) `def test_suppresses_syntax_warnings(self)`
+  - `test_extracts_signature_with_params` (method, line 139) `def test_extracts_signature_with_params(self)`
+  - `test_extracts_class_with_bases` (method, line 147) `def test_extracts_class_with_bases(self)`
+  - `setUp` (method, line 158) `def setUp(self)`
+  - `test_extracts_function` (method, line 161) `def test_extracts_function(self)`
+  - `test_extracts_method_receiver` (method, line 168) `def test_extracts_method_receiver(self)`
+  - `test_extracts_import_block` (method, line 175) `def test_extracts_import_block(self)`
+  - `test_extracts_single_import` (method, line 182) `def test_extracts_single_import(self)`
+  - `test_extracts_struct_and_interface` (method, line 188) `def test_extracts_struct_and_interface(self)`
+  - `setUp` (method, line 201) `def setUp(self)`
+  - `test_extracts_function` (method, line 204) `def test_extracts_function(self)`
+  - `test_extracts_pub_function` (method, line 211) `def test_extracts_pub_function(self)`
+  - `test_extracts_struct_and_trait_and_enum` (method, line 218) `def test_extracts_struct_and_trait_and_enum(self)`
+  - `test_extracts_use` (method, line 231) `def test_extracts_use(self)`
+  - `setUp` (method, line 239) `def setUp(self)`
+  - `test_extracts_function` (method, line 242) `def test_extracts_function(self)`
+  - `test_extracts_arrow_function` (method, line 249) `def test_extracts_arrow_function(self)`
+  - `test_extracts_class` (method, line 256) `def test_extracts_class(self)`
+  - `test_extracts_import_and_require` (method, line 263) `def test_extracts_import_and_require(self)`
+  - `test_skips_reserved_words` (method, line 270) `def test_skips_reserved_words(self)`
+  - `setUp` (method, line 278) `def setUp(self)`
+  - `test_extracts_class` (method, line 281) `def test_extracts_class(self)`
+  - `test_extracts_method` (method, line 288) `def test_extracts_method(self)`
+  - `test_extracts_import` (method, line 295) `def test_extracts_import(self)`
+  - `test_abstract_class` (method, line 301) `def test_abstract_class(self)`
+  - `setUp` (method, line 310) `def setUp(self)`
+  - `test_extracts_class` (method, line 313) `def test_extracts_class(self)`
+  - `test_extracts_method` (method, line 320) `def test_extracts_method(self)`
+  - `test_extracts_using` (method, line 327) `def test_extracts_using(self)`
+  - `test_record_and_interface` (method, line 333) `def test_record_and_interface(self)`
+  - `setUp` (method, line 343) `def setUp(self)`
+  - `test_extracts_function_with_parentheses` (method, line 346) `def test_extracts_function_with_parentheses(self)`
+  - `test_extracts_function_keyword` (method, line 353) `def test_extracts_function_keyword(self)`
+  - `setUp` (method, line 362) `def setUp(self)`
+  - `test_extracts_function` (method, line 365) `def test_extracts_function(self)`
+  - `test_extracts_class` (method, line 372) `def test_extracts_class(self)`
+  - `test_extracts_use_and_require` (method, line 379) `def test_extracts_use_and_require(self)`
+  - `setUp` (method, line 388) `def setUp(self)`
+  - `test_extracts_class` (method, line 391) `def test_extracts_class(self)`
+  - `test_extracts_function` (method, line 398) `def test_extracts_function(self)`
+  - `test_extracts_import` (method, line 405) `def test_extracts_import(self)`
+  - `setUp` (method, line 413) `def setUp(self)`
+  - `test_extracts_function` (method, line 416) `def test_extracts_function(self)`
+  - `test_extracts_extends` (method, line 423) `def test_extracts_extends(self)`
+  - `setUp` (method, line 431) `def setUp(self)`
+  - `test_extracts_proc` (method, line 434) `def test_extracts_proc(self)`
+  - `test_extracts_type` (method, line 441) `def test_extracts_type(self)`
+  - `test_extracts_import` (method, line 448) `def test_extracts_import(self)`
+  - `setUp` (method, line 457) `def setUp(self)`
+  - `test_extracts_label` (method, line 460) `def test_extracts_label(self)`
+  - `test_extracts_multiple_labels` (method, line 467) `def test_extracts_multiple_labels(self)`
+  - `test_extracts_includes` (method, line 475) `def test_extracts_includes(self)`
+  - `setUp` (method, line 484) `def setUp(self)`
+  - `test_returns_c_parser_for_c_extensions` (method, line 487) `def test_returns_c_parser_for_c_extensions(self)`
+  - `test_returns_python_parser_for_py` (method, line 493) `def test_returns_python_parser_for_py(self)`
+  - `test_returns_none_for_unknown_extension` (method, line 498) `def test_returns_none_for_unknown_extension(self)`
+  - `test_returns_rust_parser_for_rs` (method, line 502) `def test_returns_rust_parser_for_rs(self)`
+  - `test_case_insensitive_extension` (method, line 507) `def test_case_insensitive_extension(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/parsers/__init__.py`
+
 ## tests/test_parsers_new.py
 - Doc: Contract tests for the 6 new language parsers.
 - Layer: testing
@@ -402,56 +495,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_unknown_cwe_falls_back` (method, line 408) `def test_unknown_cwe_falls_back(self)`
   - `test_empty_cwe_falls_back` (method, line 413) `def test_empty_cwe_falls_back(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_security.py`
-
-## tests/test_taint.py
-- Doc: TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestTaintAnalyzerContract` (class, line 10) `class TestTaintAnalyzerContract(TestCase)`
-  - `setUp` (method, line 13) `def setUp(self)`
-  - `_make_node` (method, line 17) `def _make_node(self, nid, label)`
-  - `test_empty_graph_returns_empty_result` (method, line 20) `def test_empty_graph_returns_empty_result(self)`
-  - `test_no_dangerous_imports_returns_empty` (method, line 25) `def test_no_dangerous_imports_returns_empty(self)`
-  - `test_direct_dangerous_import_found` (method, line 31) `def test_direct_dangerous_import_found(self)`
-  - `test_taint_propagates_through_resolved_edges` (method, line 38) `def test_taint_propagates_through_resolved_edges(self)`
-  - `test_dangerous_import_by_language` (method, line 62) `def test_dangerous_import_by_language(self)`
-  - `test_taint_path_has_severity` (method, line 70) `def test_taint_path_has_severity(self)`
-  - `test_max_depth_limits_propagation` (method, line 77) `def test_max_depth_limits_propagation(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_taint.py`
-
-## tests/test_taint_bdd.py
-- Doc: BDD-style contract tests for taint propagation analysis.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_build_project_files` (function, line 29) `def _build_project_files(project, root)`
-  - `_scan_project` (function, line 36) `def _scan_project(root, cfg)`
-  - `_run_taint` (function, line 54) `def _run_taint(files, cfg)`
-  - `test_direct_dangerous_import` (function, line 71) `def test_direct_dangerous_import()`
-  - `test_taint_propagates_chain` (function, line 75) `def test_taint_propagates_chain()`
-  - `test_taint_max_depth` (function, line 79) `def test_taint_max_depth()`
-  - `test_cross_language_taint` (function, line 83) `def test_cross_language_taint()`
-  - `test_bdd_skipped` (function, line 87) `def test_bdd_skipped()`
-  - `_bkg` (function, line 112) `def _bkg()`
-  - `_direct_given` (function, line 117) `def _direct_given()`
-  - `_direct_when` (function, line 121) `def _direct_when(_taint_result)`
-  - `_check_has_path` (function, line 125) `def _check_has_path(_taint_result)`
-  - `_check_direct_path` (function, line 130) `def _check_direct_path(_taint_result)`
-  - `_check_src` (function, line 135) `def _check_src(_taint_result)`
-  - `_check_sink` (function, line 139) `def _check_sink(_taint_result)`
-  - `_chain_given` (function, line 144) `def _chain_given()`
-  - `_chain_when` (function, line 148) `def _chain_when(_taint_result)`
-  - `_check_long_path` (function, line 152) `def _check_long_path(_taint_result)`
-  - `_shallow_cfg` (function, line 159) `def _shallow_cfg()`
-  - `_chain_given2` (function, line 163) `def _chain_given2()`
-  - `_run_shallow` (function, line 167) `def _run_shallow(_shallow_cfg)`
-  - `_check_shallow` (function, line 171) `def _check_shallow(_taint_result)`
-  - `_js_given` (function, line 178) `def _js_given()`
-  - `_js_when` (function, line 182) `def _js_when(_taint_result)`
-  - `_check_js_dangerous` (function, line 186) `def _check_js_dangerous(_taint_result)`
-  - `_check_js_source` (function, line 192) `def _check_js_source(_taint_result)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`, `readmenator/_taint.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

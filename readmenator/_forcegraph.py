@@ -27,6 +27,7 @@ from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
 from readmenator._purpose import file_purpose, first_sentence, truncate_words
 from readmenator._rank import file_pagerank
 from readmenator._resolver import ImportResolver
+from readmenator._sourceview import SourceViewBuilder
 
 _PLACEHOLDER = re.compile(r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS)__")
 
@@ -112,6 +113,7 @@ class ForceGraphRenderer:
         analysis: Optional[AnalysisResult] = None,
         layers: Optional[Dict[str, str]] = None,
         findings: Optional[List[SecurityFinding]] = None,
+        content_map: Optional[Dict[str, str]] = None,
     ) -> Dict[str, List[Dict[str, Any]]]:
         """Build a heterogeneous graph payload for the explorer.
 
@@ -122,6 +124,7 @@ class ForceGraphRenderer:
             analysis: Optional community and god-node analysis.
             layers: Optional file-to-layer mapping.
             findings: Optional security findings for node weights.
+            content_map: Optional file contents for the source viewer.
 
         Returns:
             Dictionary with nodes and edges lists for the frontend.
@@ -196,11 +199,15 @@ class ForceGraphRenderer:
             """Insert a node unless already present."""
             out_nodes.setdefault(node_id, {"id": node_id, "label": label, "type": node_type, **attrs})
 
+        sources = SourceViewBuilder(self._config).to_payload(
+            SourceViewBuilder(self._config).build_sources(nodes, content_map)
+        )
         for node in nodes:
             community = community_of.get(node.node_id)
             layer = (layers or {}).get(node.node_id, "unknown")
             family = community[1] if community else layer
             color = self._file_color(node.node_id, family, layer, palette)
+            record = sources.get(node.node_id, {})
             add_node(
                 f"file:{node.node_id}",
                 node.label,
@@ -222,6 +229,9 @@ class ForceGraphRenderer:
                 rank_pos=(ordered_rank.index(rank[node.node_id]) + 1) if node.node_id in rank else 0,
                 doc=self._node_doc(node),
                 symbol_list=self._symbol_list(node),
+                src=str(record.get("t", "")),
+                src_lines=int(record.get("n", 0)),
+                src_cut=int(record.get("c", 0)),
             )
             if community:
                 cid, label = community
@@ -406,6 +416,9 @@ class ForceGraphRenderer:
             "label3dPx": cfg.FORCEGRAPH_3D_LABEL_PX,
             "orbitSpeed": cfg.FORCEGRAPH_3D_ORBIT_SPEED,
             "flyDistance3d": cfg.FORCEGRAPH_3D_FLY_DISTANCE,
+            "srcEnabled": bool(cfg.SOURCEVIEW_ENABLED and not cfg.PRIVACY_MODE),
+            "srcChunk": cfg.SOURCEVIEW_CHUNK_LINES,
+            "srcContext": cfg.SOURCEVIEW_CONTEXT_LINES,
             "typeColors": {
                 "file": self.node_palette().get("file", "#4f8ef7"),
                 "community": self.node_palette().get("community", "#7c5aef"),

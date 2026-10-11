@@ -71,6 +71,7 @@ python -m readmenator /path/to/project --svg                       # graph.svg (
 python -m readmenator /path/to/project --graphml                   # graph.graphml (Gephi/yEd)
 python -m readmenator /path/to/project obsidian                    # Obsidian vault (wikilinks)
 python -m readmenator /path/to/project wiki                       # Agent wiki (index + community pages)
+python -m readmenator /path/to/project components                # Component diagrams (analysis.json + graph LR markdown + index.html)
 python -m readmenator /path/to/project lint-wiki                  # Wiki health check
 python -m readmenator /path/to/project lint                        # Architecture violations (exit 1 on errors)
 python -m readmenator /path/to/project strip-dead-code             # Orphaned symbol report
@@ -200,6 +201,25 @@ canvas, no CDN.
   layer or language, search, PNG export, light/dark theme. Deep links:
   `#view=3d&node=<id>&group=<key>&beta=0.7&color=layer&dir=out&cross=1`; console API
   `window.ReadmenatorBundles`.
+
+### Component Diagrams
+
+`readmenator-diagrams/` holds a component architecture map built with zero
+tokens: `analysis.json` (components with key entities and file/line spans,
+relations with method-level call evidence), `overview.md` with the `graph LR`
+diagram, one page per expandable component, and `index.html` — the diagram
+drawn as an offline interactive page in the readmenator dark theme (layered
+left-to-right boxes enriched with key symbols, layer colors and PageRank hubs,
+labeled arrows weighted by call/import evidence, hover descriptions,
+click-to-component, pan/zoom, PNG export). The maps gallery links it with a
+**Component Diagrams** card, and the docs site ships the markdown in its
+reader. No external service needed: structure and call evidence are pure static
+analysis; a local Ollama daemon only ever enriches prose descriptions, and only
+when `OLLAMA_ENABLED` is set.
+
+```bash
+python -m readmenator /path/to/project components  # rebuild only the diagrams
+```
 
 Serve the `docs/` directory directly with GitHub Pages (Settings -> Pages ->
 Deploy from branch -> folder `docs/`). The gallery `index.html` links every map
@@ -341,6 +361,10 @@ Supported target languages (12): C++, Java, C#, Python, Go, Rust, PHP, Kotlin, S
 | Bundle page | `_bundlegraph_page.py` | Self-contained canvas page: 2D circle, 3D sphere, live beta, focus panels |
 | Force graph | `_forcegraph.py` | Heterogeneous explorer payload, settings, thumbnail |
 | Explorer page | `_forcegraph_page.py` | 2D/3D explorer HTML: hit-testing, overlay glyphs, node and edge actions |
+| Source viewer | `_sourceview.py` | Bounded per-file source texts for the explorer View drawer |
+| Symbol index | `_symindex.py` | Definition spans, call sites with lines, BUILTIN/SAME_FILE/IMPORTED/UNIQUE/AMBIGUOUS/UNRESOLVED resolver |
+| Component diagrams | `_components.py` | analysis.json, graph LR markdown, offline interactive index.html, gallery card |
+| Local Ollama | `_ollama.py` | Optional localhost LLM client for prose only (bounded, never fatal) |
 | Memory | `_memory.py` | MEMORY.md: declared rules, measured baselines, preserved session log |
 | Skills | `_skill_installer.py` | Installs packaged agent skills from `_skills/` |
 | Application | `_app.py` | Application orchestrator |

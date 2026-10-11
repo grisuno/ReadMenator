@@ -109,6 +109,30 @@ button.badge{cursor:pointer}
 .intro b{color:var(--ink)}
 .bar{height:5px;border-radius:999px;background:var(--border);margin:3px 6px 6px;overflow:hidden}
 .bar i{display:block;height:100%}
+:root{--code:#0b1224;--kw:#7dd3fc;--str:#86efac;--cm:#64748b;--fn:#fbbf24;--num:#f472b6;--dec:#c4b5fd}
+html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;--fn:#b45309;--num:#be185d;--dec:#6d28d9}
+#src-scrim{position:fixed;inset:0;z-index:39;background:rgba(2,6,23,.55);opacity:0;pointer-events:none;transition:opacity .25s}
+#src-scrim.open{opacity:1;pointer-events:auto}
+#src-viewer{position:fixed;top:0;right:0;bottom:0;width:min(880px,100%);z-index:40;background:var(--mask);border-left:1px solid var(--border);box-shadow:-20px 0 60px rgba(0,0,0,.45);transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column}
+#src-viewer.open{transform:none}
+.src-bar{display:flex;gap:8px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--border)}
+.src-bar h2{font-size:13px;margin:0;flex:1;word-break:break-all}
+.src-bar button{background:transparent;color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:12px;cursor:pointer}
+.src-meta{padding:8px 16px;border-bottom:1px solid var(--border);color:var(--muted);font-size:11px}
+.src-body{flex:1;overflow:auto;background:var(--code);padding:0 0 24px;font-size:12px;line-height:1.65}
+.src-line{display:flex;min-width:max-content}
+.src-line:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.src-line.hl{background:color-mix(in srgb,var(--caution) 22%,transparent)}
+.src-no{flex:none;width:52px;text-align:right;padding-right:12px;color:var(--faint);user-select:none}
+.src-code{white-space:pre;padding-right:24px;flex:1}
+.tok-kw{color:var(--kw)}.tok-str{color:var(--str)}.tok-cm{color:var(--cm);font-style:italic}.tok-fn{color:var(--fn)}.tok-num{color:var(--num)}.tok-dec{color:var(--dec);font-weight:600}
+.tok-sym{color:var(--dec);text-decoration:underline dotted;cursor:pointer;border-radius:4px}
+.tok-sym:hover{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.src-hint{padding:8px 16px;border-top:1px solid var(--border);color:var(--muted);font-size:11px}
+#src-tip{position:fixed;z-index:50;pointer-events:none;display:none;max-width:360px;background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:8px 10px;font-size:11.5px;line-height:1.55;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+#src-tip b{font-size:12px;color:var(--dec)}
+#src-tip .m{color:var(--muted)}#src-tip code{color:var(--muted);font-size:10.5px;display:block;margin-top:4px;white-space:pre-wrap;word-break:break-word}
+.btn-view{border-color:var(--accent)!important;background:color-mix(in srgb,var(--accent) 14%,var(--mask))!important}
 @media (max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:minmax(420px,62vh) auto}#panel{border-left:none;border-top:1px solid var(--border)}.beta input{width:80px}}
 </style>
 </head>
@@ -148,6 +172,9 @@ button.badge{cursor:pointer}
   <aside id="panel" aria-live="polite"></aside>
 </main>
 <div id="tip" role="tooltip"></div>
+<div id="src-scrim"></div>
+<aside id="src-viewer" role="dialog" aria-modal="true" aria-labelledby="src-title" aria-hidden="true"><div class="src-bar"><h2 id="src-title">Source</h2><span id="src-lang" class="badge"></span><button type="button" id="src-close" title="Close source viewer ( Esc )">Close</button></div><div id="src-meta" class="src-meta">Pick View on any file to read it here with syntax colors.</div><div id="src-body" class="src-body" tabindex="0"></div><div class="src-hint">Hover a symbol for docs &middot; Ctrl+Click jumps to its definition &middot; Esc closes</div></aside>
+<div id="src-tip" role="tooltip"></div>
 <script>
 (function(){
 "use strict";
@@ -444,6 +471,91 @@ function explorerLink(id,view3d){
   a.title="Jump to this file in the force-graph explorer";
   return a;
 }
+const DEFINDEX={};NODES.forEach((n,i)=>{(n.syms||[]).forEach(s=>{if(!s.n)return;(DEFINDEX[s.n]=DEFINDEX[s.n]||[]).push({i,file:n.f,line:s.l,kind:s.k,sig:s.s||"",doc:s.d||""});});});
+const SRC_KW="break|case|catch|class|const|continue|def|delete|do|elif|else|enum|except|export|extends|finally|fn|for|from|function|if|impl|import|in|interface|let|match|mut|new|pass|pub|raise|record|return|self|static|struct|trait|try|type|typeof|var|void|while|with|yield|None|True|False|null|true|false|this|super|async|await|switch|default|namespace|using|public|private|protected|package";
+const SRC_RE=new RegExp("(/\\*[\\s\\S]*?\\*/|//[^\\n]*|#[^\\n]*)|(\"(?:[^\"\\\\\\n]|\\\\.)*\"|'(?:[^'\\\\\\n]|\\\\.)*'|`(?:[^`\\\\]|\\\\.)*`)|\\b(\\d+(?:\\.\\d+)?)\\b|\\b("+SRC_KW+")\\b|\\b([A-Za-z_][A-Za-z0-9_]*)(?=\\s*\\()|\\b([A-Za-z_][A-Za-z0-9_]*)","g");
+const SRC={open:false,file:-1,lines:[],job:0};
+function closeSource(){SRC.open=false;SRC.job++;$("src-viewer").classList.remove("open");$("src-scrim").classList.remove("open");$("src-viewer").setAttribute("aria-hidden","true");$("src-tip").style.display="none";}
+function openSource(i,opts){
+  opts=opts||{};
+  if(i<0||!NODES[i])return;
+  if(!CFG.srcEnabled)return;
+  const n=NODES[i],text=n.src||"";
+  SRC.open=true;SRC.file=i;SRC.job++;
+  const my=SRC.job;
+  $("src-viewer").classList.add("open");$("src-scrim").classList.add("open");$("src-viewer").setAttribute("aria-hidden","false");
+  $("src-title").textContent=n.f;$("src-lang").textContent=n.lg||"?";
+  const body=$("src-body");body.textContent="";
+  if(!text){$("src-meta").textContent=n.f+" · no embedded source (rebuild with SOURCEVIEW_ENABLED to read it here)";return;}
+  SRC.lines=text.split("\n");
+  const total=SRC.lines.length,shown=n.src_lines||total;
+  $("src-meta").textContent=n.f+" · "+shown+" lines"+(n.src_cut?" · truncated":"")+" · loading…";
+  const chunk=Math.max(50,CFG.srcChunk||300);
+  let at=0;
+  const step=()=>{
+    if(my!==SRC.job||!SRC.open)return;
+    const frag=document.createDocumentFragment();
+    const end=Math.min(total,at+chunk);
+    for(let k=at;k<end;k++)frag.appendChild(srcLine(SRC.lines[k],k+1));
+    body.appendChild(frag);
+    at=end;
+    $("src-meta").textContent=n.f+" · "+shown+" lines"+(n.src_cut?" · truncated":"")+" · "+Math.min(at,total)+"/"+total;
+    if(at<total){requestAnimationFrame(step);return;}
+    $("src-meta").textContent=n.f+" · "+shown+" lines"+(n.src_cut?" · truncated":"")+" · "+Object.keys(DEFINDEX).length+" known symbols";
+    if(opts.line)revealLine(opts.line);
+  };
+  requestAnimationFrame(step);
+  if(!reduce)$("src-close").focus({preventScroll:true});
+}
+function srcLine(text,lineno){
+  const row=document.createElement("div");row.className="src-line";row.id="srcl-"+lineno;
+  const no=document.createElement("span");no.className="src-no";no.textContent=String(lineno);row.appendChild(no);
+  const code=document.createElement("span");code.className="src-code";
+  SRC_RE.lastIndex=0;let last=0,m;
+  const push=t=>{if(t)code.appendChild(document.createTextNode(t));};
+  while((m=SRC_RE.exec(text))){
+    if(m.index>last)push(text.slice(last,m.index));
+    const tok=m[0];
+    if(m[1]){const s=document.createElement("span");s.className="tok-cm";s.textContent=tok;code.appendChild(s);}
+    else if(m[2]){const s=document.createElement("span");s.className="tok-str";s.textContent=tok;code.appendChild(s);}
+    else if(m[3]){const s=document.createElement("span");s.className="tok-num";s.textContent=tok;code.appendChild(s);}
+    else if(m[4]){const s=document.createElement("span");s.className="tok-kw";s.textContent=tok;code.appendChild(s);}
+    else if(m[5]){const s=document.createElement("span");s.className="tok-fn";s.textContent=tok;code.appendChild(s);}
+    else{const name=m[6]||tok;if(DEFINDEX[name]){const s=document.createElement("span");s.className="tok-sym";s.textContent=name;s.dataset.sym=name;s.title=name+" · Ctrl+Click to jump";code.appendChild(s);}else push(tok);}
+    last=m.index+tok.length;
+    if(!tok.length)SRC_RE.lastIndex++;
+  }
+  if(last<text.length)push(text.slice(last));
+  if(!code.childNodes.length)code.appendChild(document.createTextNode(text||" "));
+  row.appendChild(code);return row;
+}
+function revealLine(lineno){const el=document.getElementById("srcl-"+lineno);if(!el)return;document.querySelectorAll(".src-line.hl").forEach(e=>e.classList.remove("hl"));el.classList.add("hl");el.scrollIntoView({block:"center"});}
+function srcHover(name,cx,cy){
+  const tip=$("src-tip"),defs=DEFINDEX[name]||[];
+  if(!defs.length){tip.style.display="none";return;}
+  tip.textContent="";
+  const first=defs[0];
+  const head=document.createElement("div");head.appendChild(mk("b",null,name));head.appendChild(mk("span","m","  "+first.kind+" · L"+first.line));tip.appendChild(head);
+  tip.appendChild(mk("div","m",first.file));
+  if(first.sig)tip.appendChild(mk("code",null,clip(first.sig,220)));
+  if(first.doc)tip.appendChild(mk("div",null,clip(first.doc,220)));
+  if(defs.length>1)tip.appendChild(mk("div","m","+"+(defs.length-1)+" more · Ctrl+Click follows the first"));
+  else tip.appendChild(mk("div","m","Ctrl+Click to jump to L"+first.line));
+  tip.style.display="block";
+  const w=tip.offsetWidth,h=tip.offsetHeight;
+  tip.style.left=Math.max(8,Math.min(window.innerWidth-w-8,cx+14))+"px";
+  tip.style.top=Math.max(8,Math.min(window.innerHeight-h-8,cy+14))+"px";
+}
+function srcFollow(name,fromI){
+  const defs=DEFINDEX[name]||[];
+  if(!defs.length)return;
+  const same=defs.find(d=>d.i===fromI);
+  if(same&&SRC.file===fromI){revealLine(same.line);return;}
+  const target=same||defs[0];
+  if(target.i!==SRC.file)openSource(target.i,{line:target.line});
+  else revealLine(target.line);
+  focusNode(target.i);
+}
 function nodeButton(i,extra){
   const b=mk("button","nb");const dot=mk("i");dot.style.background=colorOf(i);
   b.append(dot,mk("span",null,NODES[i].l),mk("em",null,extra!=null?extra:GROUPS[NODES[i].g].l));
@@ -473,6 +585,8 @@ function renderPanel(){
     head.append(badges);panel.append(head);
     const m=mk("div","metrics");[["#"+n.rp,"pagerank"],[OUT[i].length,"imports"],[INN[i].length,"used by"]].forEach(([v,l])=>{const c=mk("div","metric");c.append(mk("b",null,v),mk("span",null,l));m.append(c);});panel.append(m);
     if(n.d)panel.append(mk("div","doc",n.d));
+    if(CFG.srcEnabled){const va=mk("div","actions");const vb=mk("button",null,"View");vb.className="btn-view";vb.title="Read this file with syntax colors ( S )";vb.addEventListener("click",()=>openSource(i,{}));va.append(vb);va.append(mk("span","badge",n.src_lines?n.src_lines+" lines":"no embedded text"));panel.append(va);}
+    if((n.syms||[]).length){const sec=mk("div","sec");sec.append(mk("span",null,"Symbols"),mk("span",null,String(n.syms.length)));panel.append(sec);const list=mk("div","list");n.syms.slice(0,CFG.listMax).forEach(s=>{const b=mk("button","nb");b.append(mk("span",null,s.k+" "+s.n),mk("em",null,"L"+s.l));b.title=(s.s||"")+(s.d?" · "+s.d:"");b.addEventListener("click",()=>openSource(i,{line:s.l}));list.append(b);});panel.append(list);}
     const act=mk("div","actions");const l1=explorerLink(n.id,false),l2=explorerLink(n.id,true);if(l1)act.append(l1);if(l2)act.append(l2);if(act.childNodes.length)panel.append(act);
     const outs=OUT[i].map(k=>EDGES[k][1]).sort((a,b)=>NODES[b].r-NODES[a].r);
     const ins=INN[i].map(k=>EDGES[k][0]).sort((a,b)=>NODES[b].r-NODES[a].r);
@@ -595,10 +709,12 @@ function search(text){
 q.addEventListener("input",()=>search(q.value));
 q.addEventListener("keydown",ev=>{if(ev.key==="Enter"){const h=search(q.value);if(h.length){focusNode(h[0]);results.classList.remove("open");q.blur();}}else if(ev.key==="Escape"){q.value="";search("");q.blur();}});
 document.addEventListener("keydown",ev=>{
-  if(ev.target===q||ev.ctrlKey||ev.metaKey||ev.altKey)return;
+  if(ev.target===q){if(ev.key!=="Escape")return;}
+  if(ev.ctrlKey||ev.metaKey||ev.altKey)return;
   const k=ev.key;
   if(k==="/"){ev.preventDefault();q.focus();}
-  else if(k==="Escape"){S.focus=-1;S.group=-1;S.key=null;sync();}
+  else if(k==="Escape"){if(SRC.open)closeSource();else{S.focus=-1;S.group=-1;S.key=null;sync();}}
+  else if(k==="s"||k==="S"){if(S.focus>=0&&!SRC.open)openSource(S.focus,{});}
   else if(k==="2")setView("2d");else if(k==="3")setView("3d");
   else if(k==="r"&&S.view==="3d"){S.rotate=!S.rotate;aim=null;sync();}
   else if(k==="c"){const modes=["community","layer","language"];setColor(modes[(modes.indexOf(S.color)+1)%modes.length]);}
@@ -623,7 +739,12 @@ if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>resize()).observe(
 window.addEventListener("resize",resize);
 resize();sync();
 setTimeout(()=>{if(S.reveal<1){S.reveal=1;draw(performance.now());}},CFG.revealMs+250);
-window.ReadmenatorBundles=Object.freeze({state:S,focusNode,focusGroup,setView,setBeta,setColor,setDir});
+$("src-close").addEventListener("click",closeSource);
+$("src-scrim").addEventListener("click",closeSource);
+$("src-body").addEventListener("mousemove",ev=>{const t=ev.target.closest?ev.target.closest(".tok-sym"):null;if(t&&t.dataset.sym)srcHover(t.dataset.sym,ev.clientX,ev.clientY);else $("src-tip").style.display="none";});
+$("src-body").addEventListener("mouseleave",()=>{$("src-tip").style.display="none";});
+$("src-body").addEventListener("click",ev=>{const t=ev.target.closest?ev.target.closest(".tok-sym"):null;if(!t)return;if(ev.ctrlKey||ev.metaKey){ev.preventDefault();srcFollow(t.dataset.sym,SRC.file);}else srcHover(t.dataset.sym,ev.clientX,ev.clientY);});
+window.ReadmenatorBundles=Object.freeze({state:S,focusNode,focusGroup,setView,setBeta,setColor,setDir,openSource,closeSource});
 requestAnimationFrame(frame);
 })();
 </script>

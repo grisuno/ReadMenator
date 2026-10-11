@@ -120,6 +120,14 @@ class BundleGraphRenderer:
         nodes: List[Dict[str, Any]] = []
         for node in files:
             nid = node["id"]
+            syms = node.get("symbol_list") or []
+            kept = [
+                {"n": str(s.get("n", "")), "k": str(s.get("k", "")),
+                 "l": int(s.get("l", 0)), "s": str(s.get("s", "")),
+                 "d": str(s.get("d", ""))}
+                for s in syms[: self._config.FORCEGRAPH_SYMBOLS_PER_NODE]
+                if str(s.get("n", ""))
+            ]
             nodes.append({
                 "id": nid,
                 "f": str(node.get("file") or node.get("label") or nid),
@@ -134,6 +142,10 @@ class BundleGraphRenderer:
                 "d": str(node.get("doc") or ""),
                 "a": round(circle.angles[nid], COORD_DIGITS),
                 "p": [round(v, COORD_DIGITS) for v in sphere.leaves[nid]],
+                "src": str(node.get("src") or ""),
+                "src_lines": int(node.get("src_lines", 0)),
+                "src_cut": int(node.get("src_cut", 0)),
+                "syms": kept,
             })
         pairs = sorted({
             (index[e["source"]], index[e["target"]])
@@ -178,6 +190,9 @@ class BundleGraphRenderer:
             "tipDocChars": cfg.FORCEGRAPH_TIP_DOC_CHARS,
             "dragPx": cfg.FORCEGRAPH_DRAG_THRESHOLD_PX,
             "flyMs": cfg.FORCEGRAPH_FLY_MS,
+            "srcEnabled": bool(cfg.SOURCEVIEW_ENABLED and not cfg.PRIVACY_MODE),
+            "srcChunk": cfg.SOURCEVIEW_CHUNK_LINES,
+            "srcContext": cfg.SOURCEVIEW_CONTEXT_LINES,
             "explorerHref": explorer_href or "",
             "unassignedKey": UNASSIGNED_KEY,
             "groupColors": self._force.group_colors(force_payload),

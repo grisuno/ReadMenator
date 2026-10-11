@@ -250,6 +250,47 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_has_changed_since_last_analysis_returns_true_when_file_changed` (method, line 147) `def test_has_changed_since_last_analysis_returns_true_when_file_changed(self)`
 - Depends on: `readmenator/_cache.py`, `readmenator/_config.py`
 
+## tests/test_components.py
+- Doc: Contract tests for the component diagram exporter.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 17) `def _node(nid)`
+  - `_fixture` (function, line 25) `def _fixture()`
+  - `TestComponentSchemaContract` (class, line 46) `class TestComponentSchemaContract(TestCase)`
+  - `TestComponentRenderContract` (class, line 94) `class TestComponentRenderContract(TestCase)`
+  - `TestComponentPageContract` (class, line 140) `class TestComponentPageContract(TestCase)`
+  - `TestComponentGalleryContract` (class, line 238) `class TestComponentGalleryContract(TestCase)`
+  - `setUp` (method, line 49) `def setUp(self)`
+  - `test_top_level_keys_match_schema` (method, line 57) `def test_top_level_keys_match_schema(self)`
+  - `test_components_carry_entities_and_file_methods` (method, line 67) `def test_components_carry_entities_and_file_methods(self)`
+  - `test_relations_link_components_with_call_sites` (method, line 78) `def test_relations_link_components_with_call_sites(self)`
+  - `test_methods_index_keys_use_pipe_separator` (method, line 89) `def test_methods_index_keys_use_pipe_separator(self)`
+  - `setUp` (method, line 97) `def setUp(self)`
+  - `test_mermaid_matches_layered_style` (method, line 105) `def test_mermaid_matches_layered_style(self)`
+  - `test_sanitize_for_mermaid_ids` (method, line 114) `def test_sanitize_for_mermaid_ids(self)`
+  - `test_overview_lists_related_entities` (method, line 118) `def test_overview_lists_related_entities(self)`
+  - `test_write_emits_analysis_and_pages` (method, line 124) `def test_write_emits_analysis_and_pages(self)`
+  - `test_empty_project_yields_empty_diagram` (method, line 133) `def test_empty_project_yields_empty_diagram(self)`
+  - `setUp` (method, line 143) `def setUp(self)`
+  - `test_page_draws_nodes_edges_and_links` (method, line 152) `def test_page_draws_nodes_edges_and_links(self)`
+  - `test_page_nodes_explain_themselves` (method, line 162) `def test_page_nodes_explain_themselves(self)`
+  - `test_relations_section_lists_call_evidence` (method, line 171) `def test_relations_section_lists_call_evidence(self)`
+  - `test_build_records_layers_hub_and_counts` (method, line 177) `def test_build_records_layers_hub_and_counts(self)`
+  - `test_page_has_no_network_requests` (method, line 186) `def test_page_has_no_network_requests(self)`
+  - `test_page_escapes_untrusted_text` (method, line 194) `def test_page_escapes_untrusted_text(self)`
+  - `test_thumbnail_is_safe_svg` (method, line 204) `def test_thumbnail_is_safe_svg(self)`
+  - `test_write_emits_index_page` (method, line 213) `def test_write_emits_index_page(self)`
+  - `test_page_script_is_valid_javascript` (method, line 223) `def test_page_script_is_valid_javascript(self)`
+  - `_project` (method, line 241) `def _project(self, tmp)`
+  - `_config` (method, line 246) `def _config(self)`
+  - `test_export_diagrams_links_components_card` (method, line 251) `def test_export_diagrams_links_components_card(self)`
+  - `test_export_pages_links_components_relatively` (method, line 264) `def test_export_pages_links_components_relatively(self)`
+  - `test_card_skipped_when_disabled` (method, line 279) `def test_card_skipped_when_disabled(self)`
+  - `test_docs_collect_components_overview` (method, line 290) `def test_docs_collect_components_overview(self)`
+  - `test_nested_relations_roll_up` (method, line 302) `def test_nested_relations_roll_up(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
+
 ## tests/test_concepts.py
 - Doc: test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets.
 - Layer: testing
@@ -388,85 +429,6 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_all_symbols_imported_returns_empty` (method, line 101) `def test_all_symbols_imported_returns_empty(self)`
   - `test_reports_sorted_by_file_path` (method, line 113) `def test_reports_sorted_by_file_path(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_dead_code.py`, `readmenator/_models.py`
-
-## tests/test_diagrams.py
-- Doc: Contract tests for interactive system maps.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestSystemMapBuilderContract` (class, line 30) `class TestSystemMapBuilderContract(TestCase)`
-  - `TestSystemMapValidatorContract` (class, line 176) `class TestSystemMapValidatorContract(TestCase)`
-  - `TestInteractiveMapRendererContract` (class, line 237) `class TestInteractiveMapRendererContract(TestCase)`
-  - `TestDocsSitePublisherContract` (class, line 367) `class TestDocsSitePublisherContract(TestCase)`
-  - `TestVisNetworkRendererContract` (class, line 510) `class TestVisNetworkRendererContract(TestCase)`
-  - `TestDiagramVariantsContract` (class, line 650) `class TestDiagramVariantsContract(TestCase)`
-  - `setUp` (method, line 33) `def setUp(self)`
-  - `_make_graph` (method, line 38) `def _make_graph(self)`
-  - `test_builder_supports_five_kinds` (method, line 52) `def test_builder_supports_five_kinds(self)`
-  - `test_builder_produces_all_kinds` (method, line 59) `def test_builder_produces_all_kinds(self)`
-  - `test_builder_is_deterministic` (method, line 68) `def test_builder_is_deterministic(self)`
-  - `test_builder_orders_links_deterministically` (method, line 80) `def test_builder_orders_links_deterministically(self)`
-  - `test_builder_validates_large_graph_for_all_kinds` (method, line 101) `def test_builder_validates_large_graph_for_all_kinds(self)`
-  - `test_builder_reports_total_scope` (method, line 119) `def test_builder_reports_total_scope(self)`
-  - `test_builder_attaches_symbols_and_docs` (method, line 126) `def test_builder_attaches_symbols_and_docs(self)`
-  - `test_builder_truncates_symbols_per_node` (method, line 143) `def test_builder_truncates_symbols_per_node(self)`
-  - `test_builder_truncates_to_configured_limit` (method, line 152) `def test_builder_truncates_to_configured_limit(self)`
-  - `test_compare_reports_added_removed_rerouted` (method, line 162) `def test_compare_reports_added_removed_rerouted(self)`
-  - `setUp` (method, line 179) `def setUp(self)`
-  - `_valid_map` (method, line 184) `def _valid_map(self)`
-  - `test_validator_passes_valid_map` (method, line 197) `def test_validator_passes_valid_map(self)`
-  - `test_validator_rejects_duplicate_node_ids` (method, line 204) `def test_validator_rejects_duplicate_node_ids(self)`
-  - `test_validator_rejects_dangling_edge` (method, line 214) `def test_validator_rejects_dangling_edge(self)`
-  - `test_validator_rejects_empty_map` (method, line 222) `def test_validator_rejects_empty_map(self)`
-  - `test_validator_rejects_unknown_kind` (method, line 228) `def test_validator_rejects_unknown_kind(self)`
-  - `setUp` (method, line 240) `def setUp(self)`
-  - `_map` (method, line 246) `def _map(self, kind)`
-  - `test_renderer_produces_standalone_document` (method, line 256) `def test_renderer_produces_standalone_document(self)`
-  - `test_renderer_never_uses_inner_html` (method, line 263) `def test_renderer_never_uses_inner_html(self)`
-  - `test_renderer_has_no_external_requests` (method, line 270) `def test_renderer_has_no_external_requests(self)`
-  - `test_renderer_includes_interaction_controls` (method, line 277) `def test_renderer_includes_interaction_controls(self)`
-  - `test_renderer_includes_keyboard_and_deep_links` (method, line 283) `def test_renderer_includes_keyboard_and_deep_links(self)`
-  - `test_renderer_escapes_malicious_labels` (method, line 292) `def test_renderer_escapes_malicious_labels(self)`
-  - `test_renderer_embeds_valid_json_payloads` (method, line 305) `def test_renderer_embeds_valid_json_payloads(self)`
-  - `test_renderer_covers_all_five_kinds` (method, line 314) `def test_renderer_covers_all_five_kinds(self)`
-  - `test_renderer_links_gallery_home_when_configured` (method, line 321) `def test_renderer_links_gallery_home_when_configured(self)`
-  - `test_renderer_omits_gallery_home_by_default` (method, line 328) `def test_renderer_omits_gallery_home_by_default(self)`
-  - `test_renderer_keeps_canvas_distinct_from_nodes` (method, line 333) `def test_renderer_keeps_canvas_distinct_from_nodes(self)`
-  - `test_renderer_supports_drag_and_settle` (method, line 341) `def test_renderer_supports_drag_and_settle(self)`
-  - `test_renderer_sanitizes_viewer_state_on_export` (method, line 349) `def test_renderer_sanitizes_viewer_state_on_export(self)`
-  - `test_renderer_buttons_explain_their_purpose` (method, line 355) `def test_renderer_buttons_explain_their_purpose(self)`
-  - `setUp` (method, line 370) `def setUp(self)`
-  - `_maps` (method, line 376) `def _maps(self)`
-  - `test_publish_writes_index_plus_five_maps` (method, line 386) `def test_publish_writes_index_plus_five_maps(self)`
-  - `test_publish_index_links_every_map` (method, line 397) `def test_publish_index_links_every_map(self)`
-  - `test_publish_output_has_no_external_requests` (method, line 406) `def test_publish_output_has_no_external_requests(self)`
-  - `test_publish_is_deterministic` (method, line 419) `def test_publish_is_deterministic(self)`
-  - `test_publish_escapes_malicious_project_name` (method, line 430) `def test_publish_escapes_malicious_project_name(self)`
-  - `test_publish_escapes_malicious_stat_keys` (method, line 439) `def test_publish_escapes_malicious_stat_keys(self)`
-  - `test_publish_skips_invalid_maps` (method, line 450) `def test_publish_skips_invalid_maps(self)`
-  - `test_publish_empty_maps_writes_empty_gallery` (method, line 462) `def test_publish_empty_maps_writes_empty_gallery(self)`
-  - `test_publish_leaves_input_maps_unmodified` (method, line 471) `def test_publish_leaves_input_maps_unmodified(self)`
-  - `test_publish_flat_subdir_keeps_links_relative` (method, line 480) `def test_publish_flat_subdir_keeps_links_relative(self)`
-  - `test_publish_index_explains_how_to_read` (method, line 493) `def test_publish_index_explains_how_to_read(self)`
-  - `test_publish_card_reports_primary_scope` (method, line 501) `def test_publish_card_reports_primary_scope(self)`
-  - `setUp` (method, line 513) `def setUp(self)`
-  - `_map` (method, line 519) `def _map(self, kind)`
-  - `test_renderers_ignore_placeholders_inside_payload_text` (method, line 529) `def test_renderers_ignore_placeholders_inside_payload_text(self)`
-  - `test_renderer_ships_edge_actions` (method, line 546) `def test_renderer_ships_edge_actions(self)`
-  - `test_renderer_uses_configured_cdn_urls` (method, line 552) `def test_renderer_uses_configured_cdn_urls(self)`
-  - `test_renderer_builds_vis_network_with_physics` (method, line 565) `def test_renderer_builds_vis_network_with_physics(self)`
-  - `test_renderer_links_gallery_home_when_configured` (method, line 573) `def test_renderer_links_gallery_home_when_configured(self)`
-  - `test_renderer_disables_physics_from_config` (method, line 581) `def test_renderer_disables_physics_from_config(self)`
-  - `test_renderer_escapes_malicious_titles` (method, line 588) `def test_renderer_escapes_malicious_titles(self)`
-  - `test_renderer_exposes_reader_controls` (method, line 601) `def test_renderer_exposes_reader_controls(self)`
-  - `test_renderer_is_deterministic` (method, line 607) `def test_renderer_is_deterministic(self)`
-  - `test_renderer_embeds_valid_payloads` (method, line 612) `def test_renderer_embeds_valid_payloads(self)`
-  - `test_renderer_documents_symbols_per_file` (method, line 620) `def test_renderer_documents_symbols_per_file(self)`
-  - `test_renderer_escapes_malicious_symbol_docs` (method, line 636) `def test_renderer_escapes_malicious_symbol_docs(self)`
-  - `_project` (method, line 653) `def _project(self, tmp)`
-  - `test_export_diagrams_writes_vis_maps_by_default` (method, line 658) `def test_export_diagrams_writes_vis_maps_by_default(self)`
-  - `test_export_diagrams_falls_back_offline_when_disabled` (method, line 672) `def test_export_diagrams_falls_back_offline_when_disabled(self)`
-- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
 
 
 Next: [KB_tests_p2.md](KB_tests_p2.md)

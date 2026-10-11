@@ -1,9 +1,39 @@
 # API (page 2 of 2)
 Previous: [API.md](API.md)
 
+## readmenator/_provenance.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+- `ProvenanceFinding.is_inferred_only` (method) `readmenator/_provenance.py:32` `def is_inferred_only(self)` -- Return True when no static evidence supports the finding.
+- `ProvenanceFinding.reading` (method) `readmenator/_provenance.py:37` `def reading(self)` -- Explain which way an inferred-only hit points.
+- `ProvenanceAuditor.__init__` (method) `readmenator/_provenance.py:49` `def __init__(self, config)` -- Initialise with application configuration.
+- `ProvenanceAuditor.audit` (method) `readmenator/_provenance.py:57` `def audit(self, findings, content_map)` -- Audit findings for evidence provenance.
+- `ProvenanceAuditor.summary` (method) `readmenator/_provenance.py:98` `def summary(self, findings)` -- Summarize provenance findings by provenance class.
+
+## readmenator/_purpose.py
+Depends on: `readmenator/_models.py`
+Imported by: `readmenator/_agent_output.py`, `readmenator/_components.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_wiki.py`, `tests/test_agent_friendliness.py`
+- `is_garbage_doc` (function) `readmenator/_purpose.py:26` `def is_garbage_doc(text)` -- Return True for doc lines that carry no purpose signal.
+- `clean_purpose` (function) `readmenator/_purpose.py:43` `def clean_purpose(text)` -- Return the purpose signal of a doc first line, or an empty string.
+- `escape_cell` (function) `readmenator/_purpose.py:66` `def escape_cell(text)` -- Escape markdown table breaking characters in one line of text.
+- `truncate_words` (function) `readmenator/_purpose.py:78` `def truncate_words(text, max_chars)` -- Truncate text at a word boundary and mark the cut with an ellipsis.
+- `first_sentence` (function) `readmenator/_purpose.py:98` `def first_sentence(doc)` -- Return the first clean sentence of the first meaningful paragraph.
+- `file_purpose` (function) `readmenator/_purpose.py:140` `def file_purpose(node, max_chars)` -- Return a bounded one-sentence purpose for a file node.
+
+## readmenator/_query.py
+Depends on: `readmenator/_category.py`, `readmenator/_models.py`, `readmenator/_rank.py`
+Imported by: `readmenator/_app.py`, `readmenator/_mcp_server.py`, `tests/test_query.py`
+- `QueryEngine.__init__` (method) `readmenator/_query.py:34` `def __init__(self, nodes, edges, resolved_edges, ranker, config)` -- Initialise internal indexes from scanned data.
+- `QueryEngine.ranked_query` (method) `readmenator/_query.py:73` `def ranked_query(self, query, top_n)` -- Answer *query* with a ranked list of relevant nodes.
+- `QueryEngine.find_symbol` (method) `readmenator/_query.py:220` `def find_symbol(self, name)` -- Look up *name* by exact match, then by substring fuzzy match.
+- `QueryEngine.explain` (method) `readmenator/_query.py:238` `def explain(self, name)` -- Return a detailed multi-line explanation of *name*.
+- `QueryEngine.find_path` (method) `readmenator/_query.py:285` `def find_path(self, symbol_a, symbol_b)` -- Find the shortest import path from *symbol_a* to *symbol_b*.
+- `QueryEngine.query` (method) `readmenator/_query.py:355` `def query(self, question)` -- Free-text search over symbols and file paths.
+- `QueryEngine.summary` (method) `readmenator/_query.py:411` `def summary(self)` -- Return a concise overview of the loaded knowledge base.
+
 ## readmenator/_rank.py
 Depends on: `readmenator/_category.py`
-Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_documentation.py`, `readmenator/_explain.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_video.py`, `tests/test_ranking.py`
+Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_documentation.py`, `readmenator/_explain.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_video.py`, `tests/test_ranking.py`
 - `RankConfig.global_pagerank` (method) `readmenator/_rank.py:61` `def global_pagerank(graph, alpha, max_iter, tolerance)` -- Compute global PageRank on the typed weighted graph.
 - `RankConfig.file_pagerank` (method) `readmenator/_rank.py:119` `def file_pagerank(file_ids, edges, alpha, max_iter, tolerance)` -- Directed PageRank over file-to-file dependency pairs.
 - `RankConfig.personalized_pagerank` (method) `readmenator/_rank.py:153` `def personalized_pagerank(graph, seeds, alpha, max_iter, tolerance)` -- Compute Personalized PageRank with a seed-node preference vector.
@@ -53,8 +83,8 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_sarif.py`
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/__init__.py`
 Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
 - `PolyglotScanner.__init__` (method) `readmenator/_scanner.py:39` `def __init__(self, config)` -- Initialise the scanner with application configuration.
-- `PolyglotScanner.scan` (method) `readmenator/_scanner.py:261` `def scan(self, root)` -- Walk *root* recursively and produce (nodes, edges) for the graph.
-- `PolyglotScanner.scan_with_content` (method) `readmenator/_scanner.py:275` `def scan_with_content(self, root)` -- Scan and also return raw file contents for deeper analysis.
+- `PolyglotScanner.scan` (method) `readmenator/_scanner.py:262` `def scan(self, root)` -- Walk *root* recursively and produce (nodes, edges) for the graph.
+- `PolyglotScanner.scan_with_content` (method) `readmenator/_scanner.py:276` `def scan_with_content(self, root)` -- Scan and also return raw file contents for deeper analysis.
 
 ## readmenator/_scantext.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
@@ -80,6 +110,27 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_memory.py`
 - `SkillInstaller.target_dir` (method) `readmenator/_skill_installer.py:48` `def target_dir(self, project_root, target)` -- Resolve the destination skills directory.
 - `SkillInstaller.install` (method) `readmenator/_skill_installer.py:61` `def install(self, project_root, target)` -- Write every packaged skill whose content changed.
 - `SkillInstaller.maybe_install_on_run` (method) `readmenator/_skill_installer.py:87` `def maybe_install_on_run(self, project_root)` -- Install during run() only when the project already uses agent skills.
+
+## readmenator/_sourceview.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_pipeline.py`, `tests/test_sourceview.py`
+- `SourceViewBuilder.__init__` (method) `readmenator/_sourceview.py:39` `def __init__(self, config)` -- Initialise with application configuration.
+- `SourceViewBuilder.enabled` (method) `readmenator/_sourceview.py:47` `def enabled(self)` -- Return True when sources may be embedded in the payload.
+- `SourceViewBuilder.build_sources` (method) `readmenator/_sourceview.py:55` `def build_sources(self, nodes, content_map)` -- Build bounded source entries for every node in sorted order.
+- `SourceViewBuilder.to_payload` (method) `readmenator/_sourceview.py:105` `def to_payload(self, sources)` -- Serialise source entries to JSON-safe payload records.
+
+## readmenator/_symindex.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/__init__.py`, `readmenator/_components.py`, `readmenator/_linter.py`, `readmenator/_pipeline.py`, `tests/test_symindex.py`
+- `SymbolIndex.__init__` (method) `readmenator/_symindex.py:117` `def __init__(self, config)` -- Initialise with application configuration.
+- `SymbolIndex.build` (method) `readmenator/_symindex.py:126` `def build(self, nodes, content_map)` -- Index every symbol with its file span.
+- `SymbolIndex.methods_index` (method) `readmenator/_symindex.py:166` `def methods_index(self, index)` -- Serialise definitions to component-diagram methods_index entries.
+- `SymbolIndex.extract_call_sites` (method) `readmenator/_symindex.py:194` `def extract_call_sites(self, file_id, content, language, symbols)` -- Find call sites with line numbers in one file.
+- `SymbolIndex.resolve` (method) `readmenator/_symindex.py:219` `def resolve(self, nodes, edges, resolved_edges, content_map)` -- Resolve every call to its best definition candidate.
+- `_Visitor.visit_ClassDef` (method) `readmenator/_symindex.py:361` `def visit_ClassDef(self, node)` -- Visit a class body within its scope.
+- `_Visitor.visit_FunctionDef` (method) `readmenator/_symindex.py:367` `def visit_FunctionDef(self, node)` -- Visit a function body within its scope.
+- `_Visitor.visit_AsyncFunctionDef` (method) `readmenator/_symindex.py:373` `def visit_AsyncFunctionDef(self, node)` -- Visit an async function body within its scope.
+- `_Visitor.visit_Call` (method) `readmenator/_symindex.py:379` `def visit_Call(self, node)` -- Record a call with its source location.
 
 ## readmenator/_taint.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`

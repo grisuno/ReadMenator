@@ -32,6 +32,7 @@ class ExplorerState:
         analysis: Optional[AnalysisResult] = None,
         findings: Optional[List[SecurityFinding]] = None,
         layers: Optional[Dict[str, str]] = None,
+        content_map: Optional[Dict[str, str]] = None,
     ) -> None:
         """Initialise explorer state and precompute payloads.
 
@@ -43,6 +44,7 @@ class ExplorerState:
             analysis: Optional community analysis.
             findings: Optional security findings.
             layers: Optional file-to-layer mapping.
+            content_map: Optional file contents for the source viewer.
         """
         self._config = config
         self._nodes = nodes
@@ -51,8 +53,9 @@ class ExplorerState:
         self._analysis = analysis
         self._findings = findings or []
         self._layers = layers or {}
+        self._content_map = content_map or {}
         renderer = ForceGraphRenderer(config)
-        self.graph = renderer.build_payload(nodes, edges, resolved_edges, analysis, layers, findings)
+        self.graph = renderer.build_payload(nodes, edges, resolved_edges, analysis, layers, findings, content_map)
         self.analytics = AnalyticsBuilder(config).build(
             nodes, edges, resolved_edges, analysis, findings, layers
         )
@@ -74,6 +77,27 @@ class ExplorerState:
         rows.sort(key=lambda item: (-item["symbols"], item["file"]))
         return rows
 
+    def source(self, file_id: str) -> Dict[str, Any]:
+        """Return the bounded source text for one file.
+
+        Args:
+            file_id: Relative file identifier.
+
+        Returns:
+            Mapping with text, line count, and truncation flag.
+        """
+        from readmenator._sourceview import SourceViewBuilder
+
+        node = next((item for item in self._nodes if item.node_id == file_id), None)
+        if node is None:
+            return {"file": file_id, "text": "", "lines": 0, "truncated": True}
+        built = SourceViewBuilder(self._config).build_sources([node], self._content_map)
+        entry = built.get(file_id)
+        if entry is None:
+            return {"file": file_id, "text": "", "lines": 0, "truncated": True}
+        return {"file": file_id, "text": entry.text, "lines": entry.lines,
+                "truncated": entry.truncated, "language": entry.language}
+
 
 _STATE: ExplorerState | None = None
 
@@ -87,6 +111,8 @@ class _Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:
         """Dispatch GET routes for HTML and JSON APIs."""
+        from urllib.parse import parse_qs
+
         parsed = urlparse(self.path)
         path = parsed.path.rstrip("/") or "/"
         if path == "/":
@@ -99,6 +125,10 @@ class _Handler(BaseHTTPRequestHandler):
             self._serve_json(_STATE.analytics if _STATE else {})
         elif path == "/api/samples":
             self._serve_json(_STATE.samples() if _STATE else [])
+        elif path == "/api/source":
+            query = parse_qs(parsed.query or "")
+            file_id = (query.get("file") or [""])[0]
+            self._serve_json(_STATE.source(file_id) if _STATE else {})
         else:
             self.send_error(404)
 
@@ -196,6 +226,7 @@ def build_state(
     analysis: Optional[AnalysisResult] = None,
     findings: Optional[List[SecurityFinding]] = None,
     layers: Optional[Dict[str, str]] = None,
+    content_map: Optional[Dict[str, str]] = None,
 ) -> ExplorerState:
     """Build explorer state without starting the server.
 
@@ -207,11 +238,12 @@ def build_state(
         analysis: Optional community analysis.
         findings: Optional security findings.
         layers: Optional file-to-layer mapping.
+        content_map: Optional file contents for the source viewer.
 
     Returns:
         Precomputed explorer state.
     """
-    return ExplorerState(config, nodes, edges, resolved_edges, analysis, findings, layers)
+    return ExplorerState(config, nodes, edges, resolved_edges, analysis, findings, layers, content_map)
 
 
 def write_static(

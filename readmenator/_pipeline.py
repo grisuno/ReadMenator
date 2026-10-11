@@ -12,6 +12,7 @@ from readmenator._agent_injector import AgentInjector
 from readmenator._agent_output import AgentOutputGenerator
 from readmenator._analytics import AnalyticsBuilder
 from readmenator._analyzer import GraphAnalyzer
+from readmenator._components import ComponentDiagramBuilder
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._concepts import ConceptExtractor
 from readmenator._config import Config
@@ -29,6 +30,7 @@ from readmenator._scantext import ScanTextBuilder
 from readmenator._gh_wiki import GitHubWikiPublisher
 from readmenator._graphrag import GraphRagBuilder, GraphRagStore
 from readmenator._memory import ProjectMemory
+from readmenator._ollama import OllamaClient
 from readmenator._skill_installer import SkillInstaller
 from readmenator._hotspots import HotspotAnalyzer
 from readmenator._layer_rules import LayerRuleEngine
@@ -51,6 +53,8 @@ from readmenator._rule_gen import RuleGenerator
 from readmenator._sarif import SarifExporter
 from readmenator._scanner import PolyglotScanner
 from readmenator._security import SecurityAnalyzer
+from readmenator._sourceview import SourceViewBuilder
+from readmenator._symindex import SymbolIndex
 from readmenator._taint import TaintAnalyzer
 from readmenator._uml import UmlGenerator
 from readmenator._video import CinematicVideoRenderer
@@ -104,6 +108,10 @@ class AnalyzerFactory:
         self._graphrag_store: GraphRagStore | None = None
         self._memory: ProjectMemory | None = None
         self._skills: SkillInstaller | None = None
+        self._sourceview: SourceViewBuilder | None = None
+        self._symindex: SymbolIndex | None = None
+        self._components: ComponentDiagramBuilder | None = None
+        self._ollama: OllamaClient | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -360,6 +368,34 @@ class AnalyzerFactory:
         if self._skills is None:
             self._skills = SkillInstaller(self._config)
         return self._skills
+
+    @property
+    def sourceview(self) -> SourceViewBuilder:
+        """Return the lazily initialised source viewer builder."""
+        if self._sourceview is None:
+            self._sourceview = SourceViewBuilder(self._config)
+        return self._sourceview
+
+    @property
+    def symindex(self) -> SymbolIndex:
+        """Return the lazily initialised symbol index."""
+        if self._symindex is None:
+            self._symindex = SymbolIndex(self._config)
+        return self._symindex
+
+    @property
+    def components(self) -> ComponentDiagramBuilder:
+        """Return the lazily initialised component diagram builder."""
+        if self._components is None:
+            self._components = ComponentDiagramBuilder(self._config)
+        return self._components
+
+    @property
+    def ollama(self) -> OllamaClient:
+        """Return the lazily initialised local Ollama client."""
+        if self._ollama is None:
+            self._ollama = OllamaClient(self._config)
+        return self._ollama
 
     def build_typed_graph(
         self, nodes: List[Node], edges: List[Edge],

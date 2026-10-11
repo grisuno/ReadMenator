@@ -1,8 +1,10 @@
 """Architecture linter for the readmenator knowledge graph.
 
 Evaluates files against predefined architectural rules: file length
-limits, cross-layer import violations, and circular dependency
-detection. All rules are deterministic and token-free.
+limits, cross-layer import violations, circular dependency detection,
+and unresolved call targets. All rules are deterministic and
+token-free; call targets resolve through the symbol index with file
+and line evidence.
 """
 
 from __future__ import annotations
@@ -13,14 +15,15 @@ from typing import Dict, List, Optional, Set, Tuple
 from readmenator._config import Config
 from readmenator._layers import LayerDetector
 from readmenator._models import Edge, LinterViolation, Node
+from readmenator._symindex import SymbolIndex
 
 
 class ArchitectureLinter:
     """Enforces architectural rules over scanned nodes and edges.
 
-    Checks file length, cross-layer import violations, and circular
-    dependencies. Returns structured LinterViolation instances for
-    each detected issue.
+    Checks file length, cross-layer import violations, circular
+    dependencies, and calls that resolve to no project definition.
+    Returns structured LinterViolation instances for each issue.
     """
 
     FORBIDDEN_IMPORTS: Dict[str, Set[str]] = {
@@ -59,6 +62,10 @@ class ArchitectureLinter:
                 layers = detector.detect(nodes, edges)
             violations.extend(self._check_cross_layer_violations(nodes, edges, resolved_edges, layers))
             violations.extend(self._check_circular_dependencies(nodes, resolved_edges))
+        if self._config.LINTER_UNRESOLVED_CALLS:
+            violations.extend(
+                self._check_unresolved_calls(nodes, edges, resolved_edges, content_map)
+            )
         violations.sort(key=lambda v: ("error", "warning", "info").index(v.severity) if v.severity in ("error", "warning", "info") else 3)
         return violations
 
@@ -181,6 +188,60 @@ class ArchitectureLinter:
                         rule_id="ARC003",
                         severity="warning",
                         message=f"Circular dependency detected: {cycle_str}",
+                    )
+                )
+        return violations
+
+    def _check_unresolved_calls(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        content_map: Optional[Dict[str, str]],
+    ) -> List[LinterViolation]:
+        """Flag calls that resolve to no project definition.
+
+        Every other call carries its definition location in the
+        message so reviewers can follow symbols to their sources.
+        """
+        violations: List[LinterViolation] = []
+        resolved = SymbolIndex(self._config).resolve(
+            nodes, edges, resolved_edges, content_map
+        )
+        seen: Set[Tuple[str, str, int]] = set()
+        for call in resolved:
+            site = call.site
+            key = (site.file, site.callee, site.line)
+            if key in seen:
+                continue
+            seen.add(key)
+            caller = f"{site.caller}()" if site.caller else "<module>"
+            where = f"{site.file}:{site.line}" if site.line else site.file
+            if call.confidence == "UNRESOLVED":
+                violations.append(
+                    LinterViolation(
+                        file_path=site.file,
+                        rule_id="ARC004",
+                        severity="info",
+                        message=(
+                            f"{where} {caller} -> {site.callee}(): "
+                            "no definition found in the project."
+                        ),
+                    )
+                )
+            elif call.confidence == "AMBIGUOUS":
+                targets = ", ".join(
+                    f"{candidate}" for candidate in call.candidates[:5]
+                )
+                violations.append(
+                    LinterViolation(
+                        file_path=site.file,
+                        rule_id="ARC004",
+                        severity="info",
+                        message=(
+                            f"{where} {caller} -> {site.callee}(): "
+                            f"ambiguous, defined in {targets}."
+                        ),
                     )
                 )
         return violations

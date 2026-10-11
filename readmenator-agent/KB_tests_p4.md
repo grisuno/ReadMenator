@@ -1,6 +1,96 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_sourceview.py
+- Doc: Contract tests for the source viewer (View drawer in explorers).
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 15) `def _node(nid)`
+  - `TestSourceViewBuilderContract` (class, line 21) `class TestSourceViewBuilderContract(TestCase)`
+  - `TestSourceViewerRenderContract` (class, line 51) `class TestSourceViewerRenderContract(TestCase)`
+  - `test_build_sources_embeds_truncated_text` (method, line 24) `def test_build_sources_embeds_truncated_text(self)`
+  - `test_build_sources_respects_caps` (method, line 33) `def test_build_sources_respects_caps(self)`
+  - `test_build_sources_empty_in_privacy_mode` (method, line 40) `def test_build_sources_empty_in_privacy_mode(self)`
+  - `test_build_sources_disabled_flag` (method, line 45) `def test_build_sources_disabled_flag(self)`
+  - `setUp` (method, line 54) `def setUp(self)`
+  - `test_forcegraph_embeds_src_fields` (method, line 64) `def test_forcegraph_embeds_src_fields(self)`
+  - `test_bundlegraph_propagates_src_and_syms` (method, line 71) `def test_bundlegraph_propagates_src_and_syms(self)`
+  - `test_both_pages_ship_view_drawer` (method, line 78) `def test_both_pages_ship_view_drawer(self)`
+  - `test_settings_carry_src_budgets` (method, line 89) `def test_settings_carry_src_budgets(self)`
+  - `test_no_network_requests` (method, line 94) `def test_no_network_requests(self)`
+  - `test_theme_tokens_for_both_modes` (method, line 102) `def test_theme_tokens_for_both_modes(self)`
+  - `test_privacy_mode_strips_viewer` (method, line 108) `def test_privacy_mode_strips_viewer(self)`
+  - `test_untrusted_source_cannot_break_script` (method, line 120) `def test_untrusted_source_cannot_break_script(self)`
+- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_sourceview.py`
+
+## tests/test_symindex.py
+- Doc: Contract tests for the deterministic symbol index.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 12) `def _node(nid)`
+  - `TestSymbolIndexContract` (class, line 20) `class TestSymbolIndexContract(TestCase)`
+  - `setUp` (method, line 23) `def setUp(self)`
+  - `test_build_assigns_spans` (method, line 33) `def test_build_assigns_spans(self)`
+  - `test_python_call_sites_carry_lines` (method, line 40) `def test_python_call_sites_carry_lines(self)`
+  - `test_resolve_prefers_same_file` (method, line 46) `def test_resolve_prefers_same_file(self)`
+  - `test_resolve_follows_imports` (method, line 54) `def test_resolve_follows_imports(self)`
+  - `test_unresolved_and_builtin_tiers` (method, line 62) `def test_unresolved_and_builtin_tiers(self)`
+  - `test_methods_index_matches_pipe_keys` (method, line 71) `def test_methods_index_matches_pipe_keys(self)`
+  - `test_edge_fallback_without_content` (method, line 81) `def test_edge_fallback_without_content(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_symindex.py`
+
+## tests/test_taint.py
+- Doc: TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestTaintAnalyzerContract` (class, line 10) `class TestTaintAnalyzerContract(TestCase)`
+  - `setUp` (method, line 13) `def setUp(self)`
+  - `_make_node` (method, line 17) `def _make_node(self, nid, label)`
+  - `test_empty_graph_returns_empty_result` (method, line 20) `def test_empty_graph_returns_empty_result(self)`
+  - `test_no_dangerous_imports_returns_empty` (method, line 25) `def test_no_dangerous_imports_returns_empty(self)`
+  - `test_direct_dangerous_import_found` (method, line 31) `def test_direct_dangerous_import_found(self)`
+  - `test_taint_propagates_through_resolved_edges` (method, line 38) `def test_taint_propagates_through_resolved_edges(self)`
+  - `test_dangerous_import_by_language` (method, line 62) `def test_dangerous_import_by_language(self)`
+  - `test_taint_path_has_severity` (method, line 70) `def test_taint_path_has_severity(self)`
+  - `test_max_depth_limits_propagation` (method, line 77) `def test_max_depth_limits_propagation(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_taint.py`
+
+## tests/test_taint_bdd.py
+- Doc: BDD-style contract tests for taint propagation analysis.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_build_project_files` (function, line 29) `def _build_project_files(project, root)`
+  - `_scan_project` (function, line 36) `def _scan_project(root, cfg)`
+  - `_run_taint` (function, line 54) `def _run_taint(files, cfg)`
+  - `test_direct_dangerous_import` (function, line 71) `def test_direct_dangerous_import()`
+  - `test_taint_propagates_chain` (function, line 75) `def test_taint_propagates_chain()`
+  - `test_taint_max_depth` (function, line 79) `def test_taint_max_depth()`
+  - `test_cross_language_taint` (function, line 83) `def test_cross_language_taint()`
+  - `test_bdd_skipped` (function, line 87) `def test_bdd_skipped()`
+  - `_bkg` (function, line 112) `def _bkg()`
+  - `_direct_given` (function, line 117) `def _direct_given()`
+  - `_direct_when` (function, line 121) `def _direct_when(_taint_result)`
+  - `_check_has_path` (function, line 125) `def _check_has_path(_taint_result)`
+  - `_check_direct_path` (function, line 130) `def _check_direct_path(_taint_result)`
+  - `_check_src` (function, line 135) `def _check_src(_taint_result)`
+  - `_check_sink` (function, line 139) `def _check_sink(_taint_result)`
+  - `_chain_given` (function, line 144) `def _chain_given()`
+  - `_chain_when` (function, line 148) `def _chain_when(_taint_result)`
+  - `_check_long_path` (function, line 152) `def _check_long_path(_taint_result)`
+  - `_shallow_cfg` (function, line 159) `def _shallow_cfg()`
+  - `_chain_given2` (function, line 163) `def _chain_given2()`
+  - `_run_shallow` (function, line 167) `def _run_shallow(_shallow_cfg)`
+  - `_check_shallow` (function, line 171) `def _check_shallow(_taint_result)`
+  - `_js_given` (function, line 178) `def _js_given()`
+  - `_js_when` (function, line 182) `def _js_when(_taint_result)`
+  - `_check_js_dangerous` (function, line 186) `def _check_js_dangerous(_taint_result)`
+  - `_check_js_source` (function, line 192) `def _check_js_source(_taint_result)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`, `readmenator/_taint.py`
+
 ## tests/test_uml.py
 - Doc: Contract tests for UML class diagram generation and language code generation.
 - Layer: testing

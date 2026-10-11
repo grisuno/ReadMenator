@@ -9,11 +9,12 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_agent_output.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
 - `readmenator/_analytics.py` -> __future__, collections, typing
 - `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
-- `readmenator/_app.py` -> __future__, dataclasses, json, logging, pathlib, typing
+- `readmenator/_app.py` -> __future__, dataclasses, json, logging, os, pathlib, typing
 - `readmenator/_bundlegraph.py` -> __future__, html, json, math, pathlib, re, typing
 - `readmenator/_bundlegraph_page.py` -> __future__
 - `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
 - `readmenator/_category.py` -> __future__, dataclasses, enum, typing
+- `readmenator/_components.py` -> __future__, datetime, html, json, math, pathlib, re, typing
 - `readmenator/_concepts.py` -> __future__, collections, logging, re, typing
 - `readmenator/_config.py` -> __future__, dataclasses, typing
 - `readmenator/_cpg.py` -> __future__, hashlib, json, typing
@@ -41,6 +42,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_memory.py` -> __future__, dataclasses, datetime, json, pathlib, re, typing
 - `readmenator/_mermaid.py` -> __future__, re, typing
 - `readmenator/_models.py` -> __future__, dataclasses, typing
+- `readmenator/_ollama.py` -> __future__, json, re, typing, urllib.request
 - `readmenator/_pipeline.py` -> __future__, typing
 - `readmenator/_projections.py` -> __future__, typing
 - `readmenator/_provenance.py` -> __future__, dataclasses, typing
@@ -56,6 +58,8 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_scantext.py` -> __future__, typing
 - `readmenator/_security.py` -> __future__, dataclasses, pathlib, re, typing
 - `readmenator/_skill_installer.py` -> __future__, logging, pathlib, typing
+- `readmenator/_sourceview.py` -> __future__, dataclasses, typing
+- `readmenator/_symindex.py` -> __future__, ast, dataclasses, hashlib, re, typing
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
 - `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, typing
@@ -90,6 +94,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_analyzer.py` -> __future__, unittest
 - `tests/test_bundlegraph.py` -> __future__, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
+- `tests/test_components.py` -> __future__, json, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_concepts.py` -> unittest
 - `tests/test_config.py` -> dataclasses, unittest
 - `tests/test_cpg.py` -> __future__, json, unittest
@@ -111,6 +116,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_memory.py` -> __future__, dataclasses, pathlib, tempfile, unittest
 - `tests/test_mermaid.py` -> unittest
 - `tests/test_models.py` -> unittest
+- `tests/test_ollama.py` -> __future__, unittest
 - `tests/test_parsers.py` -> unittest, warnings
 - `tests/test_parsers_new.py` -> __future__, unittest
 - `tests/test_parsers_property.py` -> __future__, hypothesis, pathlib, sys, typing, unittest
@@ -123,6 +129,8 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_sarif.py` -> __future__, json, unittest
 - `tests/test_scanner.py` -> os, pathlib, re, shutil, tempfile, unittest
 - `tests/test_security.py` -> __future__, os, pathlib, tempfile, unittest
+- `tests/test_sourceview.py` -> __future__, re, unittest
+- `tests/test_symindex.py` -> __future__, unittest
 - `tests/test_taint.py` -> __future__, unittest
 - `tests/test_taint_bdd.py` -> __future__, pathlib, pytest_bdd, tempfile, typing, unittest
 - `tests/test_uml.py` -> __future__, unittest

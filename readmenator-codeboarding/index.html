@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CodeBoarding Analysis | CodeBoarding diagrams</title>
+<style>
+:root{--cb-bg:#f8f9fa;--cb-panel:#ffffff;--cb-ink:#212529;--cb-muted:#6c757d;--cb-border:#dee2e6;--cb-node:#f8f9fa;--cb-node-border:#dee2e6;--cb-node-linked:#e9ecef;--cb-node-hover:#dee2e6;--cb-edge:#adb5bd;--cb-chip:#e9ecef}
+html[data-theme="dark"]{--cb-bg:#0f172a;--cb-panel:#1e293b;--cb-ink:#f1f5f9;--cb-muted:#94a3b8;--cb-border:#334155;--cb-node:#1e293b;--cb-node-border:#475569;--cb-node-linked:#0f172a;--cb-node-hover:#334155;--cb-edge:#64748b;--cb-chip:#334155}
+*{box-sizing:border-box}
+body{margin:0 auto;max-width:1200px;padding:20px;background:var(--cb-bg);color:var(--cb-ink);font-family:Arial,Helvetica,sans-serif;line-height:1.6}
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.brand{font-weight:700}
+.spacer{flex:1}
+.home,.topbar button{font-size:12px;text-decoration:none;border:1px solid var(--cb-border);border-radius:8px;padding:6px 10px;color:var(--cb-ink);background:var(--cb-panel);cursor:pointer}
+h1{margin:.4em 0 .2em}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 4px}
+.chips span{background:var(--cb-chip);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--cb-muted)}
+.diagram-controls{margin:10px 0;text-align:center}
+.diagram-controls button{margin:0 5px;padding:8px 16px;background:#6c757d;color:#fff;border:none;border-radius:4px;cursor:pointer}
+.diagram-controls button:hover{background:#495057}
+.cb-wrap{border:1px solid var(--cb-border);border-radius:8px;background:#fff;overflow:hidden}
+svg.cb-diagram{display:block;width:100%;height:auto;background:#fff;touch-action:none;cursor:grab}
+.cb-node rect{fill:#f8f9fa;stroke:#dee2e6;stroke-width:2}
+.cb-node.linked rect{fill:#e9ecef;stroke:#6c757d;stroke-width:3}
+.cb-node:hover rect{fill:#dee2e6;stroke:#495057;stroke-width:3}
+.cb-node a{text-decoration:none}
+.cb-node-label{fill:#495057;font-size:12px;font-weight:600;text-anchor:middle}
+.cb-node-sub{fill:#6c757d;font-size:10px;text-anchor:middle}
+.cb-edge{fill:none;stroke:#adb5bd;stroke-width:2}
+.cb-arrow{fill:#adb5bd}
+.cb-edge-label{fill:#6c757d;font-size:10px;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px}
+.component{border-left:3px solid #6c757d;background:var(--cb-panel);padding:15px;border-radius:8px;box-shadow:0 2px 4px rgba(0,0,0,.1);margin-bottom:20px}
+.component h3{color:var(--cb-muted);margin-top:0}
+.references{list-style:none;padding-left:0;margin:10px 0}
+.references li{margin:4px 0}
+code{background:var(--cb-chip);padding:2px 4px;border-radius:3px;font-size:12px}
+.muted{color:var(--cb-muted)}
+footer{color:var(--cb-muted);font-size:12px;margin:24px 0}
+#cb-tip{position:fixed;z-index:50;pointer-events:none;display:none;max-width:320px;background:#333;color:#fff;padding:8px;border-radius:4px;font-size:12px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="topbar"><span class="brand">CodeBoarding diagrams</span>
+
+<span class="spacer"></span>
+<button type="button" id="cb-theme" title="Toggle light and dark theme">Theme</button></div>
+<main>
+<h1>CodeBoarding Analysis</h1>
+<div class="chips"><span>5 components</span><span>20 relations</span><span>136 files</span></div>
+<div class="diagram-controls"><button type="button" id="cb-reset" title="Reset pan and zoom">Reset Layout</button><button type="button" id="cb-fit" title="Fit the diagram to the view">Fit to View</button><button type="button" id="cb-png" title="Export the diagram as PNG">Export PNG</button></div>
+<div class="cb-wrap"><svg id="cb-diagram" class="cb-diagram" viewBox="0 0 13220 560" role="img" aria-label="Component diagram"><defs><marker id="cb-diagram-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M13180.0 70.0 C13220.0 70.0 12900.0 210.0 12940.0 210.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="134.0" class="cb-edge-label">calls into</text><path d="M13180.0 70.0 C13220.0 70.0 12900.0 350.0 12940.0 350.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="204.0" class="cb-edge-label">calls into</text><path d="M13180.0 70.0 C13220.0 70.0 12900.0 490.0 12940.0 490.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="274.0" class="cb-edge-label">calls into</text><path d="M13180.0 70.0 C13220.0 70.0 12470.0 280.0 12510.0 280.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="169.0" class="cb-edge-label">calls into</text><path d="M13180.0 210.0 C13220.0 210.0 12900.0 70.0 12940.0 70.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="134.0" class="cb-edge-label">calls into</text><path d="M13180.0 210.0 C13220.0 210.0 12900.0 350.0 12940.0 350.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="274.0" class="cb-edge-label">calls into</text><path d="M13180.0 210.0 C13220.0 210.0 12900.0 490.0 12940.0 490.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="344.0" class="cb-edge-label">calls into</text><path d="M13180.0 210.0 C13220.0 210.0 12470.0 280.0 12510.0 280.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="239.0" class="cb-edge-label">calls into</text><path d="M13180.0 350.0 C13220.0 350.0 12900.0 70.0 12940.0 70.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="204.0" class="cb-edge-label">calls into</text><path d="M13180.0 350.0 C13220.0 350.0 12900.0 210.0 12940.0 210.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="274.0" class="cb-edge-label">calls into</text><path d="M13180.0 350.0 C13220.0 350.0 12900.0 490.0 12940.0 490.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="414.0" class="cb-edge-label">calls into</text><path d="M13180.0 350.0 C13220.0 350.0 12470.0 280.0 12510.0 280.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="309.0" class="cb-edge-label">calls into</text><path d="M13180.0 490.0 C13220.0 490.0 12900.0 70.0 12940.0 70.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="274.0" class="cb-edge-label">calls into</text><path d="M13180.0 490.0 C13220.0 490.0 12900.0 210.0 12940.0 210.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="344.0" class="cb-edge-label">calls into</text><path d="M13180.0 490.0 C13220.0 490.0 12900.0 350.0 12940.0 350.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="13060.0" y="414.0" class="cb-edge-label">calls into</text><path d="M13180.0 490.0 C13220.0 490.0 12470.0 280.0 12510.0 280.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="379.0" class="cb-edge-label">calls into</text><path d="M12750.0 280.0 C12845.0 280.0 12845.0 70.0 12940.0 70.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="169.0" class="cb-edge-label">calls into</text><path d="M12750.0 280.0 C12845.0 280.0 12845.0 210.0 12940.0 210.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="239.0" class="cb-edge-label">calls into</text><path d="M12750.0 280.0 C12845.0 280.0 12845.0 350.0 12940.0 350.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="309.0" class="cb-edge-label">calls into</text><path d="M12750.0 280.0 C12845.0 280.0 12845.0 490.0 12940.0 490.0" class="cb-edge" marker-end="url(#cb-diagram-arrow)"/><text x="12845.0" y="379.0" class="cb-edge-label">depends on</text><g class="cb-node linked" data-desc="readmenator: _agent_output groups 36 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator."><a href="#comp-1"><rect x="12940.0" y="40.0" width="240" height="60" rx="10"/><text x="13060.0" y="65.0" class="cb-node-label">readmenator: _agent_output</text><text x="13060.0" y="83.0" class="cb-node-sub">36 files</text></a></g><g class="cb-node linked" data-desc="readmenator/parsers groups 28 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning."><a href="#comp-2"><rect x="12940.0" y="180.0" width="240" height="60" rx="10"/><text x="13060.0" y="205.0" class="cb-node-label">readmenator/parsers</text><text x="13060.0" y="223.0" class="cb-node-sub">28 files</text></a></g><g class="cb-node linked" data-desc="readmenator: _pipeline groups 25 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph."><a href="#comp-3"><rect x="12940.0" y="320.0" width="240" height="60" rx="10"/><text x="13060.0" y="345.0" class="cb-node-label">readmenator: _pipeline</text><text x="13060.0" y="363.0" class="cb-node-sub">25 files</text></a></g><g class="cb-node linked" data-desc="readmenator: _diagrams groups 22 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Launcher shim that runs the readmenator CLI from a source checkout."><a href="#comp-4"><rect x="12940.0" y="460.0" width="240" height="60" rx="10"/><text x="13060.0" y="485.0" class="cb-node-label">readmenator: _diagrams</text><text x="13060.0" y="503.0" class="cb-node-sub">22 files</text></a></g><g class="cb-node linked" data-desc="readmenator: _graphrag groups 22 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator."><a href="#comp-5"><rect x="12510.0" y="250.0" width="240" height="60" rx="10"/><text x="12630.0" y="275.0" class="cb-node-label">readmenator: _graphrag</text><text x="12630.0" y="293.0" class="cb-node-sub">22 files</text></a></g></svg></div>
+<h2>Details</h2>
+<p>Static architecture map of 136 files (js, py) in 5 components: readmenator: _agent_output, readmenator/parsers, readmenator: _pipeline, readmenator: _diagrams, readmenator: _graphrag. Structure is extracted statically without LLM calls; component prose may be enriched locally.</p>
+<section class="component" id="comp-1">
+<h3>readmenator: _agent_output (1)
+ <a href="#comp-1-children">[Expand]</a>
+</h3>
+<p>readmenator: _agent_output groups 36 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.</p>
+<h4>Related Classes/Methods:</h4>
+<ul class="references">
+<li><a href="readmenator/_config.py#L15-L1036"><code>readmenator/_config.py::Config</code></a></li>
+<li><a href="readmenator/_resolver.py#L18-L60"><code>readmenator/_resolver.py::ImportResolver</code></a></li>
+<li><a href="readmenator/_resolver.py#L61-L82"><code>readmenator/_resolver.py::__init__</code></a></li>
+<li><a href="readmenator/_resolver.py#L83-L92"><code>readmenator/_resolver.py::_build_stem_index</code></a></li>
+<li><a href="readmenator/_resolver.py#L93-L109"><code>readmenator/_resolver.py::_build_dir_index</code></a></li>
+<li><a href="readmenator/_resolver.py#L110-L162"><code>readmenator/_resolver.py::resolve</code></a></li>
+<li><a href="readmenator/_resolver.py#L163-L178"><code>readmenator/_resolver.py::resolve_all</code></a></li>
+<li><a href="readmenator/_resolver.py#L179-L198"><code>readmenator/_resolver.py::_resolve_include_dirs</code></a></li>
+</ul>
+<h4 id="comp-1-children">Sub-components</h4>
+<div class="cb-wrap"><svg id="cb-sub-comp-1" class="cb-diagram" viewBox="0 0 750 140" role="img" aria-label="Component diagram"><defs><marker id="cb-sub-comp-1-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M280.0 70.0 C375.0 70.0 375.0 70.0 470.0 70.0" class="cb-edge" marker-end="url(#cb-sub-comp-1-arrow)"/><text x="375.0" y="64.0" class="cb-edge-label">calls into</text><g class="cb-node" data-desc="readmenator groups 18 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator."><a href="#comp-1-1"><rect x="470.0" y="40.0" width="240" height="60" rx="10"/><text x="590.0" y="65.0" class="cb-node-label">readmenator</text><text x="590.0" y="83.0" class="cb-node-sub">18 files</text></a></g><g class="cb-node" data-desc="tests groups 18 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise."><a href="#comp-1-2"><rect x="40.0" y="40.0" width="240" height="60" rx="10"/><text x="160.0" y="65.0" class="cb-node-label">tests</text><text x="160.0" y="83.0" class="cb-node-sub">18 files</text></a></g></svg></div>
+<h5 id="comp-1-1">readmenator (1.1)</h5>
+<p>readmenator groups 18 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.</p>
+<h5 id="comp-1-2">tests (1.2)</h5>
+<p>tests groups 18 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.</p>
+<h4>Files</h4>
+<ul class="references">
+<li><code>readmenator/_agent_output.py</code></li>
+<li><code>readmenator/_analyzer.py</code></li>
+<li><code>readmenator/_cache.py</code></li>
+<li><code>readmenator/_config.py</code></li>
+<li><code>readmenator/_dataflow.py</code></li>
+<li><code>readmenator/_gitmeta.py</code></li>
+<li><code>readmenator/_hotspots.py</code></li>
+<li><code>readmenator/_layer_rules.py</code></li>
+<li><code>readmenator/_memory.py</code></li>
+<li><code>readmenator/_purpose.py</code></li>
+<li><code>readmenator/_refactorizer.py</code></li>
+<li><code>readmenator/_resolver.py</code></li>
+<li><code>readmenator/_rule_gen.py</code></li>
+<li><code>readmenator/_scanner.py</code></li>
+<li><code>readmenator/_security.py</code></li>
+<li><code>readmenator/_skill_installer.py</code></li>
+<li><code>readmenator/_taint.py</code></li>
+<li><code>readmenator/_wiki.py</code></li>
+<li><code>tests/test_agent_friendliness.py</code></li>
+<li><code>tests/test_analyzer.py</code></li>
+<li><code>tests/test_cache.py</code></li>
+<li><code>tests/test_config.py</code></li>
+<li><code>tests/test_dataflow.py</code></li>
+<li><code>tests/test_hotspots.py</code></li>
+<li><code>tests/test_layer_rules.py</code></li>
+<li><code>tests/test_memory.py</code></li>
+<li><code>tests/test_parsers.py</code></li>
+<li><code>tests/test_parsers_new.py</code></li>
+<li><code>tests/test_refactorizer.py</code></li>
+<li><code>tests/test_resolver.py</code></li>
+<li><code>tests/test_rule_gen.py</code></li>
+<li><code>tests/test_scanner.py</code></li>
+<li><code>tests/test_security.py</code></li>
+<li><code>tests/test_taint.py</code></li>
+<li><code>tests/test_taint_bdd.py</code></li>
+<li><code>tests/test_wiki.py</code></li>
+</ul>
+</section>
+<section class="component" id="comp-2">
+<h3>readmenator/parsers (2)
+ <a href="#comp-2-children">[Expand]</a>
+</h3>
+<p>readmenator/parsers groups 28 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.</p>
+<h4>Related Classes/Methods:</h4>
+<ul class="references">
+<li><a href="readmenator/_models.py#L18-L36"><code>readmenator/_models.py::Symbol</code></a></li>
+<li><a href="readmenator/_models.py#L37-L57"><code>readmenator/_models.py::Node</code></a></li>
+<li><a href="readmenator/_models.py#L58-L76"><code>readmenator/_models.py::Edge</code></a></li>
+<li><a href="readmenator/_models.py#L77-L100"><code>readmenator/_models.py::SecurityFinding</code></a></li>
+<li><a href="readmenator/_models.py#L101-L110"><code>readmenator/_models.py::pluralize_symbol_kind</code></a></li>
+<li><a href="readmenator/_models.py#L111-L129"><code>readmenator/_models.py::CommunityResult</code></a></li>
+<li><a href="readmenator/_models.py#L130-L150"><code>readmenator/_models.py::AnalysisResult</code></a></li>
+<li><a href="readmenator/_models.py#L151-L171"><code>readmenator/_models.py::TaintPath</code></a></li>
+</ul>
+<h4 id="comp-2-children">Sub-components</h4>
+<div class="cb-wrap"><svg id="cb-sub-comp-2" class="cb-diagram" viewBox="0 0 750 140" role="img" aria-label="Component diagram"><defs><marker id="cb-sub-comp-2-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M280.0 70.0 C375.0 70.0 375.0 70.0 470.0 70.0" class="cb-edge" marker-end="url(#cb-sub-comp-2-arrow)"/><text x="375.0" y="64.0" class="cb-edge-label">calls into</text><g class="cb-node" data-desc="readmenator groups 24 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning."><a href="#comp-2-1"><rect x="470.0" y="40.0" width="240" height="60" rx="10"/><text x="590.0" y="65.0" class="cb-node-label">readmenator</text><text x="590.0" y="83.0" class="cb-node-sub">24 files</text></a></g><g class="cb-node" data-desc="tests groups 4 files (py) around TestMermaidRendererContract, setUp, test_renders_graph_header, test_renders_module_node, test_renders_symbol_subnodes. Property-based contract tests for all 19 language parsers."><a href="#comp-2-2"><rect x="40.0" y="40.0" width="240" height="60" rx="10"/><text x="160.0" y="65.0" class="cb-node-label">tests</text><text x="160.0" y="83.0" class="cb-node-sub">4 files</text></a></g></svg></div>
+<h5 id="comp-2-1">readmenator (2.1)</h5>
+<p>readmenator groups 24 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.</p>
+<h5 id="comp-2-2">tests (2.2)</h5>
+<p>tests groups 4 files (py) around TestMermaidRendererContract, setUp, test_renders_graph_header, test_renders_module_node, test_renders_symbol_subnodes. Property-based contract tests for all 19 language parsers.</p>
+<h4>Files</h4>
+<ul class="references">
+<li><code>readmenator/_mermaid.py</code></li>
+<li><code>readmenator/_models.py</code></li>
+<li><code>readmenator/_sarif.py</code></li>
+<li><code>readmenator/parsers/__init__.py</code></li>
+<li><code>readmenator/parsers/_assembly.py</code></li>
+<li><code>readmenator/parsers/_base.py</code></li>
+<li><code>readmenator/parsers/_c.py</code></li>
+<li><code>readmenator/parsers/_csharp.py</code></li>
+<li><code>readmenator/parsers/_dart.py</code></li>
+<li><code>readmenator/parsers/_elixir.py</code></li>
+<li><code>readmenator/parsers/_gdscript.py</code></li>
+<li><code>readmenator/parsers/_go.py</code></li>
+<li><code>readmenator/parsers/_java.py</code></li>
+<li><code>readmenator/parsers/_javascript.py</code></li>
+<li><code>readmenator/parsers/_kotlin.py</code></li>
+<li><code>readmenator/parsers/_lua.py</code></li>
+<li><code>readmenator/parsers/_nim.py</code></li>
+<li><code>readmenator/parsers/_php.py</code></li>
+<li><code>readmenator/parsers/_python.py</code></li>
+<li><code>readmenator/parsers/_ruby.py</code></li>
+<li><code>readmenator/parsers/_rust.py</code></li>
+<li><code>readmenator/parsers/_scala.py</code></li>
+<li><code>readmenator/parsers/_shell.py</code></li>
+<li><code>readmenator/parsers/_swift.py</code></li>
+<li><code>tests/test_mermaid.py</code></li>
+<li><code>tests/test_models.py</code></li>
+<li><code>tests/test_parsers_property.py</code></li>
+<li><code>tests/test_sarif.py</code></li>
+</ul>
+</section>
+<section class="component" id="comp-3">
+<h3>readmenator: _pipeline (3)
+ <a href="#comp-3-children">[Expand]</a>
+</h3>
+<p>readmenator: _pipeline groups 25 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.</p>
+<h4>Related Classes/Methods:</h4>
+<ul class="references">
+<li><a href="readmenator/_graphlayout.py#L37-L62"><code>readmenator/_graphlayout.py::ForceAtlas2Settings</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L63-L69"><code>readmenator/_graphlayout.py::_initial_positions</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L70-L109"><code>readmenator/_graphlayout.py::forceatlas2_frames</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L110-L115"><code>readmenator/_graphlayout.py::_snapshot_steps</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L116-L162"><code>readmenator/_graphlayout.py::_fa2_numpy</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L163-L217"><code>readmenator/_graphlayout.py::_fa2_python</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L218-L262"><code>readmenator/_graphlayout.py::fit_frames</code></a></li>
+<li><a href="readmenator/_graphlayout.py#L263-L277"><code>readmenator/_graphlayout.py::interpolate_frames</code></a></li>
+</ul>
+<h4 id="comp-3-children">Sub-components</h4>
+<div class="cb-wrap"><svg id="cb-sub-comp-3" class="cb-diagram" viewBox="0 0 750 140" role="img" aria-label="Component diagram"><defs><marker id="cb-sub-comp-3-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M280.0 70.0 C375.0 70.0 375.0 70.0 470.0 70.0" class="cb-edge" marker-end="url(#cb-sub-comp-3-arrow)"/><text x="375.0" y="64.0" class="cb-edge-label">calls into</text><g class="cb-node" data-desc="readmenator groups 17 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph."><a href="#comp-3-1"><rect x="470.0" y="40.0" width="240" height="60" rx="10"/><text x="590.0" y="65.0" class="cb-node-label">readmenator</text><text x="590.0" y="83.0" class="cb-node-sub">17 files</text></a></g><g class="cb-node" data-desc="tests groups 8 files (py) around _node, _fixture, _script_json, TestBundleGraphPayloadContract, setUp. Contract tests for the edge bundle explorer (circle and sphere views)."><a href="#comp-3-2"><rect x="40.0" y="40.0" width="240" height="60" rx="10"/><text x="160.0" y="65.0" class="cb-node-label">tests</text><text x="160.0" y="83.0" class="cb-node-sub">8 files</text></a></g></svg></div>
+<h5 id="comp-3-1">readmenator (3.1)</h5>
+<p>readmenator groups 17 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.</p>
+<h5 id="comp-3-2">tests (3.2)</h5>
+<p>tests groups 8 files (py) around _node, _fixture, _script_json, TestBundleGraphPayloadContract, setUp. Contract tests for the edge bundle explorer (circle and sphere views).</p>
+<h4>Files</h4>
+<ul class="references">
+<li><code>readmenator/_analytics.py</code></li>
+<li><code>readmenator/_bundlegraph.py</code></li>
+<li><code>readmenator/_bundlegraph_page.py</code></li>
+<li><code>readmenator/_cpg.py</code></li>
+<li><code>readmenator/_documentation.py</code></li>
+<li><code>readmenator/_embed.py</code></li>
+<li><code>readmenator/_exclusions.py</code></li>
+<li><code>readmenator/_explorer.py</code></li>
+<li><code>readmenator/_exporter.py</code></li>
+<li><code>readmenator/_forcegraph.py</code></li>
+<li><code>readmenator/_forcegraph_page.py</code></li>
+<li><code>readmenator/_graphlayout.py</code></li>
+<li><code>readmenator/_pipeline.py</code></li>
+<li><code>readmenator/_provenance.py</code></li>
+<li><code>readmenator/_scantext.py</code></li>
+<li><code>readmenator/_sourceview.py</code></li>
+<li><code>readmenator/_uml.py</code></li>
+<li><code>tests/test_bundlegraph.py</code></li>
+<li><code>tests/test_cpg.py</code></li>
+<li><code>tests/test_documentation.py</code></li>
+<li><code>tests/test_exporter.py</code></li>
+<li><code>tests/test_graphlayout.py</code></li>
+<li><code>tests/test_interactive_graph.py</code></li>
+<li><code>tests/test_sourceview.py</code></li>
+<li><code>tests/test_uml.py</code></li>
+</ul>
+</section>
+<section class="component" id="comp-4">
+<h3>readmenator: _diagrams (4)
+ <a href="#comp-4-children">[Expand]</a>
+</h3>
+<p>readmenator: _diagrams groups 22 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Launcher shim that runs the readmenator CLI from a source checkout.</p>
+<h4>Related Classes/Methods:</h4>
+<ul class="references">
+<li><a href="readmenator/_app.py"><code>readmenator/_app.py::readmenatorApplication</code></a></li>
+<li><a href="readmenator/_app.py#L51-L59"><code>readmenator/_app.py::__init__</code></a></li>
+<li><a href="readmenator/_app.py#L60-L67"><code>readmenator/_app.py::_scan</code></a></li>
+<li><a href="readmenator/_app.py#L68-L77"><code>readmenator/_app.py::_scan_with_content</code></a></li>
+<li><a href="readmenator/_app.py#L78-L96"><code>readmenator/_app.py::_resolve_imports</code></a></li>
+<li><a href="readmenator/_app.py#L97-L244"><code>readmenator/_app.py::run</code></a></li>
+<li><a href="readmenator/_app.py#L245-L271"><code>readmenator/_app.py::check_freshness</code></a></li>
+<li><a href="readmenator/_app.py#L272-L289"><code>readmenator/_app.py::_maybe_refresh_pages</code></a></li>
+</ul>
+<h4 id="comp-4-children">Sub-components</h4>
+<div class="cb-wrap"><svg id="cb-sub-comp-4" class="cb-diagram" viewBox="0 0 750 280" role="img" aria-label="Component diagram"><defs><marker id="cb-sub-comp-4-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M280.0 70.0 C375.0 70.0 375.0 140.0 470.0 140.0" class="cb-edge" marker-end="url(#cb-sub-comp-4-arrow)"/><text x="375.0" y="99.0" class="cb-edge-label">calls into</text><path d="M280.0 210.0 C375.0 210.0 375.0 140.0 470.0 140.0" class="cb-edge" marker-end="url(#cb-sub-comp-4-arrow)"/><text x="375.0" y="169.0" class="cb-edge-label">calls into</text><g class="cb-node" data-desc="readmenator groups 12 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Command line entry point: argument parsing and subcommand dispatch."><a href="#comp-4-1"><rect x="470.0" y="110.0" width="240" height="60" rx="10"/><text x="590.0" y="135.0" class="cb-node-label">readmenator</text><text x="590.0" y="153.0" class="cb-node-sub">12 files</text></a></g><g class="cb-node" data-desc="root groups 1 files (py). Launcher shim that runs the readmenator CLI from a source checkout."><a href="#comp-4-2"><rect x="40.0" y="40.0" width="240" height="60" rx="10"/><text x="160.0" y="65.0" class="cb-node-label">root</text><text x="160.0" y="83.0" class="cb-node-sub">1 files</text></a></g><g class="cb-node" data-desc="tests groups 9 files (py) around _node, _fixture, TestCodeboardingSchemaContract, setUp, test_top_level_keys_match_codeboarding. Contract tests for the CodeBoarding-faithful diagram exporter."><a href="#comp-4-3"><rect x="40.0" y="180.0" width="240" height="60" rx="10"/><text x="160.0" y="205.0" class="cb-node-label">tests</text><text x="160.0" y="223.0" class="cb-node-sub">9 files</text></a></g></svg></div>
+<h5 id="comp-4-1">readmenator (4.1)</h5>
+<p>readmenator groups 12 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Command line entry point: argument parsing and subcommand dispatch.</p>
+<h5 id="comp-4-2">root (4.2)</h5>
+<p>root groups 1 files (py). Launcher shim that runs the readmenator CLI from a source checkout.</p>
+<h5 id="comp-4-3">tests (4.3)</h5>
+<p>tests groups 9 files (py) around _node, _fixture, TestCodeboardingSchemaContract, setUp, test_top_level_keys_match_codeboarding. Contract tests for the CodeBoarding-faithful diagram exporter.</p>
+<h4>Files</h4>
+<ul class="references">
+<li><code>readmenator.py</code></li>
+<li><code>readmenator/__main__.py</code></li>
+<li><code>readmenator/_app.py</code></li>
+<li><code>readmenator/_cursorrules_generator.py</code></li>
+<li><code>readmenator/_dead_code.py</code></li>
+<li><code>readmenator/_diagrams.py</code></li>
+<li><code>readmenator/_gh_wiki.py</code></li>
+<li><code>readmenator/_layers.py</code></li>
+<li><code>readmenator/_linter.py</code></li>
+<li><code>readmenator/_mcp_server.py</code></li>
+<li><code>readmenator/_video.py</code></li>
+<li><code>readmenator/_watcher.py</code></li>
+<li><code>readmenator/_yaralite.py</code></li>
+<li><code>tests/test_codeboarding.py</code></li>
+<li><code>tests/test_cursorrules.py</code></li>
+<li><code>tests/test_dead_code.py</code></li>
+<li><code>tests/test_diagrams.py</code></li>
+<li><code>tests/test_gh_wiki.py</code></li>
+<li><code>tests/test_integration.py</code></li>
+<li><code>tests/test_linter.py</code></li>
+<li><code>tests/test_mcp_server.py</code></li>
+<li><code>tests/test_video.py</code></li>
+</ul>
+</section>
+<section class="component" id="comp-5">
+<h3>readmenator: _graphrag (5)
+ <a href="#comp-5-children">[Expand]</a>
+</h3>
+<p>readmenator: _graphrag groups 22 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator.</p>
+<h4>Related Classes/Methods:</h4>
+<ul class="references">
+<li><a href="readmenator/_category.py#L24-L37"><code>readmenator/_category.py::EdgeKind</code></a></li>
+<li><a href="readmenator/_category.py#L38-L56"><code>readmenator/_category.py::__str__</code></a></li>
+<li><a href="readmenator/_category.py#L57-L72"><code>readmenator/_category.py::Morphism</code></a></li>
+<li><a href="readmenator/_category.py#L73-L77"><code>readmenator/_category.py::weight</code></a></li>
+<li><a href="readmenator/_category.py#L78-L85"><code>readmenator/_category.py::Category</code></a></li>
+<li><a href="readmenator/_category.py#L86-L91"><code>readmenator/_category.py::__init__</code></a></li>
+<li><a href="readmenator/_category.py#L92-L94"><code>readmenator/_category.py::add_object</code></a></li>
+<li><a href="readmenator/_category.py#L95-L102"><code>readmenator/_category.py::add_morphism</code></a></li>
+</ul>
+<h4 id="comp-5-children">Sub-components</h4>
+<div class="cb-wrap"><svg id="cb-sub-comp-5" class="cb-diagram" viewBox="0 0 750 140" role="img" aria-label="Component diagram"><defs><marker id="cb-sub-comp-5-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" class="cb-arrow"/></marker></defs><path d="M280.0 70.0 C375.0 70.0 375.0 70.0 470.0 70.0" class="cb-edge" marker-end="url(#cb-sub-comp-5-arrow)"/><text x="375.0" y="64.0" class="cb-edge-label">calls into</text><g class="cb-node" data-desc="readmenator groups 13 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator."><a href="#comp-5-1"><rect x="470.0" y="40.0" width="240" height="60" rx="10"/><text x="590.0" y="65.0" class="cb-node-label">readmenator</text><text x="590.0" y="83.0" class="cb-node-sub">13 files</text></a></g><g class="cb-node" data-desc="tests groups 9 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection."><a href="#comp-5-2"><rect x="40.0" y="40.0" width="240" height="60" rx="10"/><text x="160.0" y="65.0" class="cb-node-label">tests</text><text x="160.0" y="83.0" class="cb-node-sub">9 files</text></a></g></svg></div>
+<h5 id="comp-5-1">readmenator (5.1)</h5>
+<p>readmenator groups 13 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator.</p>
+<h5 id="comp-5-2">tests (5.2)</h5>
+<p>tests groups 9 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection.</p>
+<h4>Files</h4>
+<ul class="references">
+<li><code>readmenator/__init__.py</code></li>
+<li><code>readmenator/_agent_injector.py</code></li>
+<li><code>readmenator/_category.py</code></li>
+<li><code>readmenator/_codeboarding.py</code></li>
+<li><code>readmenator/_concepts.py</code></li>
+<li><code>readmenator/_explain.py</code></li>
+<li><code>readmenator/_graphrag.py</code></li>
+<li><code>readmenator/_ollama.py</code></li>
+<li><code>readmenator/_projections.py</code></li>
+<li><code>readmenator/_query.py</code></li>
+<li><code>readmenator/_rank.py</code></li>
+<li><code>readmenator/_readme_injector.py</code></li>
+<li><code>readmenator/_symindex.py</code></li>
+<li><code>tests/test_agent_injector.py</code></li>
+<li><code>tests/test_agent_output.py</code></li>
+<li><code>tests/test_concepts.py</code></li>
+<li><code>tests/test_graphrag.py</code></li>
+<li><code>tests/test_ollama.py</code></li>
+<li><code>tests/test_query.py</code></li>
+<li><code>tests/test_ranking.py</code></li>
+<li><code>tests/test_readme_injector.py</code></li>
+<li><code>tests/test_symindex.py</code></li>
+</ul>
+</section>
+<footer>Generated offline from static analysis &middot; ec27737bde53</footer>
+</main>
+<div id="cb-tip" role="tooltip"></div>
+<script>
+(function(){
+"use strict";
+try{var s=localStorage.getItem("readmenator-theme");if(s==="light"||s==="dark")document.documentElement.setAttribute("data-theme",s);}catch(e){}
+document.getElementById("cb-theme").addEventListener("click",function(){
+  var r=document.documentElement,n=r.getAttribute("data-theme")==="light"?"dark":"light";
+  r.setAttribute("data-theme",n);try{localStorage.setItem("readmenator-theme",n);}catch(e){}
+});
+var tip=document.getElementById("cb-tip");
+document.querySelectorAll(".cb-node").forEach(function(g){
+  g.addEventListener("mousemove",function(ev){
+    var d=g.getAttribute("data-desc");
+    if(!d){tip.style.display="none";return;}
+    tip.textContent=d;tip.style.display="block";
+    tip.style.left=Math.min(window.innerWidth-330,ev.clientX+12)+"px";
+    tip.style.top=(ev.clientY+14)+"px";
+  });
+  g.addEventListener("mouseleave",function(){tip.style.display="none";});
+});
+document.querySelectorAll("svg.cb-diagram").forEach(function(svg){
+  var vb=svg.viewBox.baseVal,home={x:vb.x,y:vb.y,w:vb.width,h:vb.height},drag=null;
+  function set(x,y,w,h){svg.setAttribute("viewBox",x+" "+y+" "+w+" "+h);}
+  function cur(){var v=svg.viewBox.baseVal;return {x:v.x,y:v.y,w:v.width,h:v.height};}
+  svg.addEventListener("pointerdown",function(ev){drag={x:ev.clientX,y:ev.clientY,v:cur()};svg.setPointerCapture(ev.pointerId);});
+  svg.addEventListener("pointermove",function(ev){
+    if(!drag)return;
+    var r=svg.getBoundingClientRect(),k=drag.v.w/r.width;
+    set(drag.v.x-(ev.clientX-drag.x)*k,drag.v.y-(ev.clientY-drag.y)*k,drag.v.w,drag.v.h);
+  });
+  svg.addEventListener("pointerup",function(){drag=null;});
+  svg.addEventListener("wheel",function(ev){
+    ev.preventDefault();
+    var v=cur(),r=svg.getBoundingClientRect(),f=Math.exp(ev.deltaY*0.0012);
+    var mx=v.x+(ev.clientX-r.left)/r.width*v.w,my=v.y+(ev.clientY-r.top)/r.height*v.h;
+    var w=Math.min(home.w*4,Math.max(home.w/8,v.w*f)),h=w*v.h/v.w;
+    set(mx-(mx-v.x)*w/v.w,my-(my-v.y)*h/v.h,w,h);
+  },{passive:false});
+  svg._home=home;svg._set=set;
+});
+document.getElementById("cb-reset").addEventListener("click",function(){
+  var svg=document.getElementById("cb-diagram");if(!svg)return;var h=svg._home;svg._set(h.x,h.y,h.w,h.h);
+});
+document.getElementById("cb-fit").addEventListener("click",function(){
+  var svg=document.getElementById("cb-diagram");if(!svg)return;var h=svg._home;svg._set(h.x,h.y,h.w,h.h);
+});
+document.getElementById("cb-png").addEventListener("click",function(){
+  var svg=document.getElementById("cb-diagram");if(!svg)return;
+  try{
+    var data=new XMLSerializer().serializeToString(svg);
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement("canvas"),k=2;
+      c.width=svg.viewBox.baseVal.width*k;c.height=svg.viewBox.baseVal.height*k;
+      var x=c.getContext("2d");x.fillStyle="#ffffff";x.fillRect(0,0,c.width,c.height);
+      x.drawImage(img,0,0,c.width,c.height);
+      var a=document.createElement("a");a.download="codeboarding.png";a.href=c.toDataURL("image/png");a.click();
+    };
+    img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(data);
+  }catch(e){}
+});
+})();
+</script>
+
+</body>
+</html>
