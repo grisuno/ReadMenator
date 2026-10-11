@@ -97,7 +97,14 @@ Previous: [KB_tests_p3.md](KB_tests_p3.md)
   - `test_theme_tokens_for_both_modes` (method, line 102) `def test_theme_tokens_for_both_modes(self)`
   - `test_privacy_mode_strips_viewer` (method, line 108) `def test_privacy_mode_strips_viewer(self)`
   - `test_untrusted_source_cannot_break_script` (method, line 120) `def test_untrusted_source_cannot_break_script(self)`
-- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_sourceview.py`
+  - `test_missing_source_falls_back_to_live_api` (method, line 127) `def test_missing_source_falls_back_to_live_api(self)`
+  - `test_static_pages_never_probe_the_api` (method, line 136) `def test_static_pages_never_probe_the_api(self)`
+  - `test_budget_cut_files_say_so` (method, line 143) `def test_budget_cut_files_say_so(self)`
+  - `test_empty_files_say_so` (method, line 158) `def test_empty_files_say_so(self)`
+  - `test_default_budgets_cover_mid_size_projects` (method, line 165) `def test_default_budgets_cover_mid_size_projects(self)`
+  - `test_budget_cut_warns_on_console` (method, line 170) `def test_budget_cut_warns_on_console(self)`
+  - `test_update_refreshes_explorer_sources` (method, line 179) `def test_update_refreshes_explorer_sources(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_sourceview.py`
 
 ## tests/test_symindex.py
 - Doc: Contract tests for the deterministic symbol index.

@@ -28,7 +28,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_explain.py` -> __future__, typing
 - `readmenator/_explorer.py` -> __future__, http.server, json, pathlib, socket, typing, urllib.parse, webbrowser
 - `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing
-- `readmenator/_forcegraph.py` -> __future__, html, json, math, pathlib, re, shutil, typing
+- `readmenator/_forcegraph.py` -> __future__, html, json, logging, math, pathlib, re, shutil, typing
 - `readmenator/_forcegraph_page.py` -> __future__
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
 - `readmenator/_gitmeta.py` -> __future__, pathlib, typing
@@ -129,7 +129,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_sarif.py` -> __future__, json, unittest
 - `tests/test_scanner.py` -> os, pathlib, re, shutil, tempfile, unittest
 - `tests/test_security.py` -> __future__, os, pathlib, tempfile, unittest
-- `tests/test_sourceview.py` -> __future__, re, unittest
+- `tests/test_sourceview.py` -> __future__, pathlib, re, tempfile, unittest
 - `tests/test_symindex.py` -> __future__, unittest
 - `tests/test_taint.py` -> __future__, unittest
 - `tests/test_taint_bdd.py` -> __future__, pathlib, pytest_bdd, tempfile, typing, unittest

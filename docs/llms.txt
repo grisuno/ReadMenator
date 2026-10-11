@@ -1,17 +1,17 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 5 communities, 136 files, 1096 imports, 2 languages, 2551 symbols.
+> Static analysis knowledge base for ReadMenator: 5 communities, 136 files, 1100 imports, 2 languages, 2561 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
 - [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 6 layers, dominant utility (75 files) across 6 import-based communities....
-- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-10 | offline, deterministic
+- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-11 | offline, deterministic
 - [readmenator-wiki/community_0_readmenator_graphrag.md](md/readmenator-wiki/community_0_readmenator_graphrag.md): Community 0 | 40 files | cohesion 0.41
 - [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 32 files | cohesion 0.53
 - [readmenator-wiki/community_2_readmenator_diagrams.md](md/readmenator-wiki/community_2_readmenator_diagrams.md): Community 2 | 31 files | cohesion 0.42
-- [readmenator-wiki/community_3_readmenator_pipeline.md](md/readmenator-wiki/community_3_readmenator_pipeline.md): Community 3 | 25 files | cohesion 0.37
+- [readmenator-wiki/community_3_readmenator_pipeline.md](md/readmenator-wiki/community_3_readmenator_pipeline.md): Community 3 | 25 files | cohesion 0.36
 - [readmenator-wiki/community_4_readmenator_agent_injector.md](md/readmenator-wiki/community_4_readmenator_agent_injector.md): Community 4 | 5 files | cohesion 0.40
 - [readmenator-wiki/community_5_orphans.md](md/readmenator-wiki/community_5_orphans.md): Community 5 | 3 files | cohesion 0.00
 - [readmenator-wiki/concepts.md](md/readmenator-wiki/concepts.md): Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
@@ -19,7 +19,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 
 ## GraphRAG
 
-- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 2776 | Relationships: 9388 | Communities: 6 | Themes: 2 | Text units: 2667
+- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 2786 | Relationships: 9423 | Communities: 6 | Themes: 2 | Text units: 2677
 
 ## Agent Docs
 
@@ -41,7 +41,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for interactive system maps.
 - [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): TestCParserContract (class, line 22) class TestCParserContract(TestCase)
 - [readmenator-agent/KB_tests_p4.md](md/readmenator-agent/KB_tests_p4.md): Doc: Contract tests for the static security analysis module.
-- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 136 files at commit ea8c0cbfd79a. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
+- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 136 files at commit 91d6003d9723. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)

@@ -14,7 +14,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 |------|----------|-------|---------|-----|
 | `readmenator/__init__.py` | py | utility | 0 | yes |
 | `readmenator/__main__.py` | py | utility | 3 | yes |
-| `readmenator/_app.py` | py | utility | 75 | yes |
+| `readmenator/_app.py` | py | utility | 76 | yes |
 | `readmenator/_category.py` | py | utility | 26 | yes |
 | `readmenator/_components.py` | py | presentation | 25 | yes |
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
@@ -67,22 +67,22 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 - `generate_uml_code` (method, `readmenator/_app.py:364`) `def generate_uml_code(self, target_dir, language, output_path)`
 - `_log_summary` (method, `readmenator/_app.py:376`) `def _log_summary(self, nodes, edges, root, resolved_edges, analysis, layer_summa`
 - `update` (method, `readmenator/_app.py:431`) `def update(self, target_dir, run_security)`
-- `_scan_for_cache` (method, `readmenator/_app.py:536`) `def _scan_for_cache(self, root, cache)`
-- `query` (method, `readmenator/_app.py:554`) `def query(self, target_dir, question)`
-- `explain` (method, `readmenator/_app.py:559`) `def explain(self, target_dir, symbol_name)`
-- `find_path` (method, `readmenator/_app.py:571`) `def find_path(self, target_dir, symbol_a, symbol_b)`
-- `summary` (method, `readmenator/_app.py:584`) `def summary(self, target_dir)`
-- `rank_query` (method, `readmenator/_app.py:589`) `def rank_query(self, target_dir, query, top_n)` - Run a ranked query against the knowledge graph.
-- `rebuild` (method, `readmenator/_app.py:619`) `def rebuild(self, target_dir, run_security)`
-- `analyze` (method, `readmenator/_app.py:622`) `def analyze(self, target_dir)`
-- `export_json` (method, `readmenator/_app.py:626`) `def export_json(self, target_dir, output_path)`
-- `export_html` (method, `readmenator/_app.py:643`) `def export_html(self, target_dir, output_path)`
-- `export_svg` (method, `readmenator/_app.py:654`) `def export_svg(self, target_dir, output_path)`
+- `_scan_for_cache` (method, `readmenator/_app.py:541`) `def _scan_for_cache(self, root, cache)`
+- `query` (method, `readmenator/_app.py:559`) `def query(self, target_dir, question)`
+- `explain` (method, `readmenator/_app.py:564`) `def explain(self, target_dir, symbol_name)`
+- `find_path` (method, `readmenator/_app.py:576`) `def find_path(self, target_dir, symbol_a, symbol_b)`
+- `summary` (method, `readmenator/_app.py:589`) `def summary(self, target_dir)`
+- `rank_query` (method, `readmenator/_app.py:594`) `def rank_query(self, target_dir, query, top_n)` - Run a ranked query against the knowledge graph.
+- `rebuild` (method, `readmenator/_app.py:624`) `def rebuild(self, target_dir, run_security)`
+- `analyze` (method, `readmenator/_app.py:627`) `def analyze(self, target_dir)`
+- `export_json` (method, `readmenator/_app.py:631`) `def export_json(self, target_dir, output_path)`
+- `export_html` (method, `readmenator/_app.py:648`) `def export_html(self, target_dir, output_path)`
+- `export_svg` (method, `readmenator/_app.py:659`) `def export_svg(self, target_dir, output_path)`
 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 61
-- Cross-boundary resolved imports (EXTRACTED): 88
+- Cross-boundary resolved imports (EXTRACTED): 89
 
 ## Connections
 

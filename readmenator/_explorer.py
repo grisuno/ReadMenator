@@ -59,7 +59,7 @@ class ExplorerState:
         self.analytics = AnalyticsBuilder(config).build(
             nodes, edges, resolved_edges, analysis, findings, layers
         )
-        self.html = renderer.render(self.graph, self.analytics, home_href=None)
+        self.html = renderer.render(self.graph, self.analytics, home_href=None, live_api=True)
 
     def samples(self) -> List[Dict[str, Any]]:
         """Return a compact per-file sample listing."""

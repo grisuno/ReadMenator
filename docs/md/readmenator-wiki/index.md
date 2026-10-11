@@ -1,6 +1,6 @@
 # Second Brain
 
-*Last synthesized: 2026-10-10 | 136 files | 6 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-11 | 136 files | 6 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
@@ -18,13 +18,13 @@ Open work clusters around documentation (85% file coverage), 0 security findings
 | Metric | Value |
 |--------|-------|
 | Files | 136 |
-| Symbols | 2551 |
-| Resolved imports | 494 |
+| Symbols | 2561 |
+| Resolved imports | 495 |
 | Languages | js, py |
 | Communities | 6 |
 | Doc coverage | 85% (116/136 files) |
 | Security findings | 0 |
-| Estimated read cost | ~66576 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~67204 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 
@@ -42,7 +42,7 @@ readmenator query "<question>" --target ReadMenator
 - [readmenator: _graphrag (40 files, cohesion 0.41)](./community_0_readmenator_graphrag.md)
 - [readmenator/parsers (32 files, cohesion 0.53)](./community_1_readmenator_parsers.md)
 - [readmenator: _diagrams (31 files, cohesion 0.42)](./community_2_readmenator_diagrams.md)
-- [readmenator: _pipeline (25 files, cohesion 0.37)](./community_3_readmenator_pipeline.md)
+- [readmenator: _pipeline (25 files, cohesion 0.36)](./community_3_readmenator_pipeline.md)
 - [readmenator: _agent_injector (5 files, cohesion 0.40)](./community_4_readmenator_agent_injector.md)
 - [orphans (3 files, cohesion 0.00)](./community_5_orphans.md)
 
@@ -53,7 +53,7 @@ readmenator query "<question>" --target ReadMenator
 | `readmenator/_models.py` | 196.3 |
 | `readmenator/_config.py` | 172.1 |
 | `readmenator/_pipeline.py` | 87.0 |
-| `readmenator/_app.py` | 73.5 |
+| `readmenator/_app.py` | 75.6 |
 | `readmenator/parsers/__init__.py` | 48.2 |
 
 ## Strongest Connections

@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "generated_at": "2026-10-11T01:52:39.090197+00:00",
-  "source_tree_hash": "70970f52629c6d03109bb5528027701035927620ccb201ad7181110a363af304",
+  "generated_at": "2026-10-11T05:03:50.485801+00:00",
+  "source_tree_hash": "51dd64d0f090ccc8db79a1967b096a9a93663c58c7ab5a9a0c5dc163268b2b3b",
   "repo_name": "ReadMenator",
   "depth_level": 2,
   "depth_cap": 3,
@@ -45,7 +45,7 @@
   },
   "readmenator/_app.py": {
    "language": "py",
-   "symbols": 75
+   "symbols": 76
   },
   "readmenator/_bundlegraph.py": {
    "language": "py",
@@ -241,7 +241,7 @@
   },
   "readmenator/_sourceview.py": {
    "language": "py",
-   "symbols": 6
+   "symbols": 8
   },
   "readmenator/_symindex.py": {
    "language": "py",
@@ -533,7 +533,7 @@
   },
   "tests/test_sourceview.py": {
    "language": "py",
-   "symbols": 16
+   "symbols": 23
   },
   "tests/test_symindex.py": {
    "language": "py",
@@ -1341,481 +1341,489 @@
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::update",
    "start_line": 431,
-   "end_line": 535,
+   "end_line": 540,
    "type": "FUNCTION",
    "content_hash": "73ef443b9442499c"
   },
   "readmenator/_app.py|readmenator/_app.py::_scan_for_cache": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_scan_for_cache",
-   "start_line": 536,
-   "end_line": 553,
+   "start_line": 541,
+   "end_line": 558,
    "type": "FUNCTION",
-   "content_hash": "db85fec252eff054"
+   "content_hash": "587d1c41658f7e68"
   },
   "readmenator/_app.py|readmenator/_app.py::query": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::query",
-   "start_line": 554,
-   "end_line": 558,
+   "start_line": 559,
+   "end_line": 563,
    "type": "FUNCTION",
-   "content_hash": "26720bf179f21bea"
+   "content_hash": "6524560c25516b83"
   },
   "readmenator/_app.py|readmenator/_app.py::explain": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::explain",
-   "start_line": 559,
-   "end_line": 570,
+   "start_line": 564,
+   "end_line": 575,
    "type": "FUNCTION",
-   "content_hash": "63d13e32061343f8"
+   "content_hash": "2195385ecc462cd1"
   },
   "readmenator/_app.py|readmenator/_app.py::find_path": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::find_path",
-   "start_line": 571,
-   "end_line": 583,
+   "start_line": 576,
+   "end_line": 588,
    "type": "FUNCTION",
-   "content_hash": "50321e0474461328"
+   "content_hash": "ecb1d15de1a57e12"
   },
   "readmenator/_app.py|readmenator/_app.py::summary": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::summary",
-   "start_line": 584,
-   "end_line": 588,
+   "start_line": 589,
+   "end_line": 593,
    "type": "FUNCTION",
-   "content_hash": "5aa3fb4b6744486a"
+   "content_hash": "adce075857744180"
   },
   "readmenator/_app.py|readmenator/_app.py::rank_query": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::rank_query",
-   "start_line": 589,
-   "end_line": 618,
+   "start_line": 594,
+   "end_line": 623,
    "type": "FUNCTION",
-   "content_hash": "0cfeac2fb1168d90"
+   "content_hash": "0f5506a7f730f3c3"
   },
   "readmenator/_app.py|readmenator/_app.py::rebuild": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::rebuild",
-   "start_line": 619,
-   "end_line": 621,
+   "start_line": 624,
+   "end_line": 626,
    "type": "FUNCTION",
-   "content_hash": "7879e878555e4f2a"
+   "content_hash": "de52d00fb1c885fe"
   },
   "readmenator/_app.py|readmenator/_app.py::analyze": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::analyze",
-   "start_line": 622,
-   "end_line": 625,
+   "start_line": 627,
+   "end_line": 630,
    "type": "FUNCTION",
-   "content_hash": "fb30aa958a24de20"
+   "content_hash": "c0e825f6cb94ebe0"
   },
   "readmenator/_app.py|readmenator/_app.py::export_json": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_json",
-   "start_line": 626,
-   "end_line": 642,
+   "start_line": 631,
+   "end_line": 647,
    "type": "FUNCTION",
-   "content_hash": "040a9aa014b45f90"
+   "content_hash": "b8b16f132cdb0bc1"
   },
   "readmenator/_app.py|readmenator/_app.py::export_html": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_html",
-   "start_line": 643,
-   "end_line": 653,
+   "start_line": 648,
+   "end_line": 658,
    "type": "FUNCTION",
-   "content_hash": "fb3a29424439ec15"
+   "content_hash": "5f3c95f4de0d778a"
   },
   "readmenator/_app.py|readmenator/_app.py::export_svg": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_svg",
-   "start_line": 654,
-   "end_line": 664,
+   "start_line": 659,
+   "end_line": 669,
    "type": "FUNCTION",
-   "content_hash": "e9fefc2e64e809d3"
+   "content_hash": "8d7b18b2b7c4e55d"
   },
   "readmenator/_app.py|readmenator/_app.py::export": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export",
-   "start_line": 665,
-   "end_line": 671,
+   "start_line": 670,
+   "end_line": 676,
    "type": "FUNCTION",
-   "content_hash": "dfebcbb069e571db"
+   "content_hash": "1c965f135d49a609"
   },
   "readmenator/_app.py|readmenator/_app.py::_forcegraph_dest": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_forcegraph_dest",
-   "start_line": 672,
-   "end_line": 686,
+   "start_line": 677,
+   "end_line": 691,
    "type": "FUNCTION",
-   "content_hash": "aeb8c82c92fc36bc"
+   "content_hash": "64ecaebdd56e1806"
   },
   "readmenator/_app.py|readmenator/_app.py::_write_forcegraph": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_write_forcegraph",
-   "start_line": 687,
-   "end_line": 735,
+   "start_line": 692,
+   "end_line": 740,
    "type": "FUNCTION",
-   "content_hash": "848676070f25c1d5"
+   "content_hash": "fd1e569a760174cb"
   },
   "readmenator/_app.py|readmenator/_app.py::_write_bundlegraph": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_write_bundlegraph",
-   "start_line": 736,
-   "end_line": 768,
+   "start_line": 741,
+   "end_line": 773,
    "type": "FUNCTION",
-   "content_hash": "041323ac5f9c78e3"
+   "content_hash": "49d7d692ced3b4f2"
   },
   "readmenator/_app.py|readmenator/_app.py::_explorer_cards": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_explorer_cards",
-   "start_line": 769,
-   "end_line": 837,
+   "start_line": 774,
+   "end_line": 842,
    "type": "FUNCTION",
-   "content_hash": "9295484a5d604e0e"
+   "content_hash": "89dedfe5bf67ec17"
   },
   "readmenator/_app.py|readmenator/_app.py::_write_components_card": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_write_components_card",
-   "start_line": 838,
-   "end_line": 914,
+   "start_line": 843,
+   "end_line": 919,
    "type": "FUNCTION",
-   "content_hash": "0726757387444ea4"
+   "content_hash": "ca902b742b03d845"
   },
   "readmenator/_app.py|readmenator/_app.py::export_forcegraph": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_forcegraph",
-   "start_line": 915,
-   "end_line": 933,
+   "start_line": 920,
+   "end_line": 938,
    "type": "FUNCTION",
-   "content_hash": "a3f3143e9f2567da"
+   "content_hash": "24c776a2a3be0dfe"
   },
   "readmenator/_app.py|readmenator/_app.py::export_bundlegraph": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_bundlegraph",
-   "start_line": 934,
-   "end_line": 959,
+   "start_line": 939,
+   "end_line": 964,
    "type": "FUNCTION",
-   "content_hash": "d2a81bbae49006df"
+   "content_hash": "0113a290dc386c0b"
   },
   "readmenator/_app.py|readmenator/_app.py::export_components": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_components",
-   "start_line": 960,
-   "end_line": 986,
+   "start_line": 965,
+   "end_line": 991,
    "type": "FUNCTION",
-   "content_hash": "b784df1ad74ac1a5"
+   "content_hash": "00b47d433a7545e8"
   },
   "readmenator/_app.py|readmenator/_app.py::explorer_state": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::explorer_state",
-   "start_line": 987,
-   "end_line": 1002,
+   "start_line": 992,
+   "end_line": 1007,
    "type": "FUNCTION",
-   "content_hash": "9e14d0364d0ff823"
+   "content_hash": "a39195143049b3e9"
   },
   "readmenator/_app.py|readmenator/_app.py::serve_explorer": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::serve_explorer",
-   "start_line": 1003,
-   "end_line": 1015,
+   "start_line": 1008,
+   "end_line": 1020,
    "type": "FUNCTION",
-   "content_hash": "810ab975f3fe743d"
+   "content_hash": "c438fc08ac011d4e"
   },
   "readmenator/_app.py|readmenator/_app.py::analytics": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::analytics",
-   "start_line": 1016,
-   "end_line": 1032,
+   "start_line": 1021,
+   "end_line": 1037,
    "type": "FUNCTION",
-   "content_hash": "4baf627c1e855487"
+   "content_hash": "f4996dc86258718f"
   },
   "readmenator/_app.py|readmenator/_app.py::scan_texts": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::scan_texts",
-   "start_line": 1033,
-   "end_line": 1044,
+   "start_line": 1038,
+   "end_line": 1049,
    "type": "FUNCTION",
-   "content_hash": "35760e021dcadcf2"
+   "content_hash": "24a2401a0ddc2402"
   },
   "readmenator/_app.py|readmenator/_app.py::near": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::near",
-   "start_line": 1045,
-   "end_line": 1058,
+   "start_line": 1050,
+   "end_line": 1063,
    "type": "FUNCTION",
-   "content_hash": "ff4a8819411cf4b7"
+   "content_hash": "74579abfaa7c9221"
   },
   "readmenator/_app.py|readmenator/_app.py::audit_provenance": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::audit_provenance",
-   "start_line": 1059,
-   "end_line": 1081,
+   "start_line": 1064,
+   "end_line": 1086,
    "type": "FUNCTION",
-   "content_hash": "33abe7cdb1a53894"
+   "content_hash": "ba0c7a67aa66d9f3"
   },
   "readmenator/_app.py|readmenator/_app.py::validate_yaralite": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::validate_yaralite",
-   "start_line": 1082,
-   "end_line": 1095,
+   "start_line": 1087,
+   "end_line": 1100,
    "type": "FUNCTION",
-   "content_hash": "d889f787bf249c8d"
+   "content_hash": "6c85323448d5446c"
   },
   "readmenator/_app.py|readmenator/_app.py::export_graphml": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_graphml",
-   "start_line": 1096,
-   "end_line": 1106,
+   "start_line": 1101,
+   "end_line": 1111,
    "type": "FUNCTION",
-   "content_hash": "646416e12b761d0e"
+   "content_hash": "b6d77b54255c3d09"
   },
   "readmenator/_app.py|readmenator/_app.py::export_cypher": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_cypher",
-   "start_line": 1107,
-   "end_line": 1122,
+   "start_line": 1112,
+   "end_line": 1127,
    "type": "FUNCTION",
-   "content_hash": "d81ce014beaa1f2f"
+   "content_hash": "a2e4b277e63e5fd3"
   },
   "readmenator/_app.py|readmenator/_app.py::export_obsidian": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_obsidian",
-   "start_line": 1123,
-   "end_line": 1137,
+   "start_line": 1128,
+   "end_line": 1142,
    "type": "FUNCTION",
-   "content_hash": "466c107a223a8a58"
+   "content_hash": "49aa46020cd0a1cd"
   },
   "readmenator/_app.py|readmenator/_app.py::export_wiki": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_wiki",
-   "start_line": 1138,
-   "end_line": 1160,
+   "start_line": 1143,
+   "end_line": 1165,
    "type": "FUNCTION",
-   "content_hash": "598b2b9ff67e742b"
+   "content_hash": "e43110020e3b1cd8"
   },
   "readmenator/_app.py|readmenator/_app.py::lint_wiki": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::lint_wiki",
-   "start_line": 1161,
-   "end_line": 1178,
+   "start_line": 1166,
+   "end_line": 1183,
    "type": "FUNCTION",
-   "content_hash": "7c9e9d6bbd0b8fb7"
+   "content_hash": "f044c14b6dc7795d"
   },
   "readmenator/_app.py|readmenator/_app.py::export_diagrams": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_diagrams",
-   "start_line": 1179,
-   "end_line": 1223,
+   "start_line": 1184,
+   "end_line": 1228,
    "type": "FUNCTION",
-   "content_hash": "15982053e051ffb0"
+   "content_hash": "1527c3c3e066d8d0"
   },
   "readmenator/_app.py|readmenator/_app.py::_site_stats": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_site_stats",
-   "start_line": 1224,
-   "end_line": 1235,
+   "start_line": 1229,
+   "end_line": 1240,
    "type": "FUNCTION",
-   "content_hash": "165f21737585bd5e"
+   "content_hash": "c7e0eea557721090"
   },
   "readmenator/_app.py|readmenator/_app.py::_live_renderer": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_live_renderer",
-   "start_line": 1236,
-   "end_line": 1245,
+   "start_line": 1241,
+   "end_line": 1250,
    "type": "FUNCTION",
-   "content_hash": "1ad792e6c89bd9d1"
+   "content_hash": "792c68167d907a50"
   },
   "readmenator/_app.py|readmenator/_app.py::export_diagram": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_diagram",
-   "start_line": 1246,
-   "end_line": 1284,
+   "start_line": 1251,
+   "end_line": 1289,
    "type": "FUNCTION",
-   "content_hash": "7e21f85553d78273"
+   "content_hash": "a2f04d8d74aead08"
   },
   "readmenator/_app.py|readmenator/_app.py::export_pages": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_pages",
-   "start_line": 1285,
-   "end_line": 1329,
+   "start_line": 1290,
+   "end_line": 1334,
    "type": "FUNCTION",
-   "content_hash": "7a9e9c1d68810328"
+   "content_hash": "0f52f54ef4b051a8"
   },
   "readmenator/_app.py|readmenator/_app.py::export_video": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_video",
-   "start_line": 1330,
-   "end_line": 1353,
+   "start_line": 1335,
+   "end_line": 1358,
    "type": "FUNCTION",
-   "content_hash": "bf9a02308f1b9be0"
+   "content_hash": "b80940a0ca28fb90"
   },
   "readmenator/_app.py|readmenator/_app.py::_maybe_export_video": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_maybe_export_video",
-   "start_line": 1354,
-   "end_line": 1392,
+   "start_line": 1359,
+   "end_line": 1397,
    "type": "FUNCTION",
-   "content_hash": "4a195a0ae5e70d4e"
+   "content_hash": "a60687bf884d8188"
+  },
+  "readmenator/_app.py|readmenator/_app.py::_refresh_explorers": {
+   "file_path": "readmenator/_app.py",
+   "qualified_name": "readmenator/_app.py::_refresh_explorers",
+   "start_line": 1398,
+   "end_line": 1447,
+   "type": "FUNCTION",
+   "content_hash": "13d5c0cb9386ed2c"
   },
   "readmenator/_app.py|readmenator/_app.py::_maybe_export_forcegraph": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_maybe_export_forcegraph",
-   "start_line": 1393,
-   "end_line": 1425,
+   "start_line": 1448,
+   "end_line": 1480,
    "type": "FUNCTION",
-   "content_hash": "a5b66aa4d315392f"
+   "content_hash": "48045d0b5e5bee39"
   },
   "readmenator/_app.py|readmenator/_app.py::_maybe_write_graphrag": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_maybe_write_graphrag",
-   "start_line": 1426,
-   "end_line": 1461,
+   "start_line": 1481,
+   "end_line": 1516,
    "type": "FUNCTION",
-   "content_hash": "0cf577e250b3e896"
+   "content_hash": "3ffc402ccf423643"
   },
   "readmenator/_app.py|readmenator/_app.py::_memory_notes": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_memory_notes",
-   "start_line": 1462,
-   "end_line": 1467,
+   "start_line": 1517,
+   "end_line": 1522,
    "type": "FUNCTION",
-   "content_hash": "fd959b181896531b"
+   "content_hash": "f08283e37ec1c87c"
   },
   "readmenator/_app.py|readmenator/_app.py::_maybe_write_memory": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::_maybe_write_memory",
-   "start_line": 1468,
-   "end_line": 1493,
+   "start_line": 1523,
+   "end_line": 1548,
    "type": "FUNCTION",
-   "content_hash": "62800d87834b8f83"
+   "content_hash": "994e54c577060671"
   },
   "readmenator/_app.py|readmenator/_app.py::memory": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::memory",
-   "start_line": 1494,
-   "end_line": 1516,
+   "start_line": 1549,
+   "end_line": 1571,
    "type": "FUNCTION",
-   "content_hash": "240b2943abee3efa"
+   "content_hash": "52b9c581ef24a7af"
   },
   "readmenator/_app.py|readmenator/_app.py::remember": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::remember",
-   "start_line": 1517,
-   "end_line": 1530,
+   "start_line": 1572,
+   "end_line": 1585,
    "type": "FUNCTION",
-   "content_hash": "a0541565e11acc72"
+   "content_hash": "07d78704be087710"
   },
   "readmenator/_app.py|readmenator/_app.py::install_skills": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::install_skills",
-   "start_line": 1531,
-   "end_line": 1542,
+   "start_line": 1586,
+   "end_line": 1597,
    "type": "FUNCTION",
-   "content_hash": "0760430cba4dba6f"
+   "content_hash": "f77a2cce6362d076"
   },
   "readmenator/_app.py|readmenator/_app.py::build_graphrag": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::build_graphrag",
-   "start_line": 1543,
-   "end_line": 1565,
+   "start_line": 1598,
+   "end_line": 1620,
    "type": "FUNCTION",
-   "content_hash": "f31004624d7fc8c9"
+   "content_hash": "e889883b69cadf18"
   },
   "readmenator/_app.py|readmenator/_app.py::graphrag_search": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::graphrag_search",
-   "start_line": 1566,
-   "end_line": 1586,
+   "start_line": 1621,
+   "end_line": 1641,
    "type": "FUNCTION",
-   "content_hash": "66c2e1b0ea1f06c0"
+   "content_hash": "99c8b4e1ec110c34"
   },
   "readmenator/_app.py|readmenator/_app.py::watch": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::watch",
-   "start_line": 1587,
-   "end_line": 1590,
+   "start_line": 1642,
+   "end_line": 1645,
    "type": "FUNCTION",
-   "content_hash": "c7327e4d93267a13"
+   "content_hash": "49502158d90ee8d9"
   },
   "readmenator/_app.py|readmenator/_app.py::on_change": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::on_change",
-   "start_line": 1591,
-   "end_line": 1596,
+   "start_line": 1646,
+   "end_line": 1651,
    "type": "FUNCTION",
-   "content_hash": "48fa8e2f53390289"
+   "content_hash": "b48d4c7f56642cf5"
   },
   "readmenator/_app.py|readmenator/_app.py::audit": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::audit",
-   "start_line": 1597,
-   "end_line": 1603,
+   "start_line": 1652,
+   "end_line": 1658,
    "type": "FUNCTION",
-   "content_hash": "02f6dd8ee18e6af7"
+   "content_hash": "6b2f247601607519"
   },
   "readmenator/_app.py|readmenator/_app.py::audit_deep": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::audit_deep",
-   "start_line": 1604,
-   "end_line": 1623,
+   "start_line": 1659,
+   "end_line": 1678,
    "type": "FUNCTION",
-   "content_hash": "ebaf6b22025455ef"
+   "content_hash": "fb14b74d0743176e"
   },
   "readmenator/_app.py|readmenator/_app.py::export_sarif": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_sarif",
-   "start_line": 1624,
-   "end_line": 1633,
+   "start_line": 1679,
+   "end_line": 1688,
    "type": "FUNCTION",
-   "content_hash": "ae687664cfb3b5f5"
+   "content_hash": "6852f9b0174f7d9f"
   },
   "readmenator/_app.py|readmenator/_app.py::export_rules": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::export_rules",
-   "start_line": 1634,
-   "end_line": 1643,
+   "start_line": 1689,
+   "end_line": 1698,
    "type": "FUNCTION",
-   "content_hash": "ab914b2eba4c5998"
+   "content_hash": "c8154e42e57c9d53"
   },
   "readmenator/_app.py|readmenator/_app.py::detect_layers": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::detect_layers",
-   "start_line": 1644,
-   "end_line": 1653,
+   "start_line": 1699,
+   "end_line": 1708,
    "type": "FUNCTION",
-   "content_hash": "f1c5310ec279e63a"
+   "content_hash": "182ef68cda70c565"
   },
   "readmenator/_app.py|readmenator/_app.py::lint": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::lint",
-   "start_line": 1654,
-   "end_line": 1666,
+   "start_line": 1709,
+   "end_line": 1721,
    "type": "FUNCTION",
-   "content_hash": "256d8fe90254a81d"
+   "content_hash": "454d46350fff122c"
   },
   "readmenator/_app.py|readmenator/_app.py::strip_dead_code": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::strip_dead_code",
-   "start_line": 1667,
-   "end_line": 1676,
+   "start_line": 1722,
+   "end_line": 1731,
    "type": "FUNCTION",
-   "content_hash": "29466461fe3793cd"
+   "content_hash": "0966ab5976c3eadd"
   },
   "readmenator/_app.py|readmenator/_app.py::generate_cursorrules": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::generate_cursorrules",
-   "start_line": 1677,
-   "end_line": 1691,
+   "start_line": 1732,
+   "end_line": 1746,
    "type": "FUNCTION",
-   "content_hash": "153ee694d78040db"
+   "content_hash": "387bf982bf18e7b6"
   },
   "readmenator/_app.py|readmenator/_app.py::refactor_monolith": {
    "file_path": "readmenator/_app.py",
    "qualified_name": "readmenator/_app.py::refactor_monolith",
-   "start_line": 1692,
-   "end_line": 1706,
+   "start_line": 1747,
+   "end_line": 1761,
    "type": "FUNCTION",
-   "content_hash": "624f40471926695b"
+   "content_hash": "4f66c31b4c1db8af"
   },
   "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::_json_script": {
    "file_path": "readmenator/_bundlegraph.py",
@@ -1845,41 +1853,41 @@
    "file_path": "readmenator/_bundlegraph.py",
    "qualified_name": "readmenator/_bundlegraph.py::build_payload",
    "start_line": 60,
-   "end_line": 158,
+   "end_line": 159,
    "type": "FUNCTION",
    "content_hash": "c34046993f164ba7"
   },
   "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::page_settings": {
    "file_path": "readmenator/_bundlegraph.py",
    "qualified_name": "readmenator/_bundlegraph.py::page_settings",
-   "start_line": 159,
-   "end_line": 200,
+   "start_line": 160,
+   "end_line": 203,
    "type": "FUNCTION",
-   "content_hash": "84c54c540fe6724d"
+   "content_hash": "5860ed3c6f05d2f5"
   },
   "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::render": {
    "file_path": "readmenator/_bundlegraph.py",
    "qualified_name": "readmenator/_bundlegraph.py::render",
-   "start_line": 201,
-   "end_line": 236,
+   "start_line": 204,
+   "end_line": 241,
    "type": "FUNCTION",
-   "content_hash": "8bb2578c30e952a1"
+   "content_hash": "a275205632fb2d38"
   },
   "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write": {
    "file_path": "readmenator/_bundlegraph.py",
    "qualified_name": "readmenator/_bundlegraph.py::write",
-   "start_line": 237,
-   "end_line": 262,
+   "start_line": 242,
+   "end_line": 267,
    "type": "FUNCTION",
-   "content_hash": "761592a0f8f34990"
+   "content_hash": "6f2d732dea595f28"
   },
   "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::thumbnail_svg": {
    "file_path": "readmenator/_bundlegraph.py",
    "qualified_name": "readmenator/_bundlegraph.py::thumbnail_svg",
-   "start_line": 263,
-   "end_line": 316,
+   "start_line": 268,
+   "end_line": 321,
    "type": "FUNCTION",
-   "content_hash": "816d097303ea0069"
+   "content_hash": "79093f4e0841c625"
   },
   "readmenator/_cache.py|readmenator/_cache.py::FileCache": {
    "file_path": "readmenator/_cache.py",
@@ -4140,178 +4148,178 @@
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::family_color_from_name": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::family_color_from_name",
-   "start_line": 35,
-   "end_line": 62,
+   "start_line": 38,
+   "end_line": 65,
    "type": "FUNCTION",
-   "content_hash": "951ba0129665d0bd"
+   "content_hash": "4eaabf886f8958eb"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::node_value": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::node_value",
-   "start_line": 63,
-   "end_line": 75,
+   "start_line": 66,
+   "end_line": 78,
    "type": "FUNCTION",
-   "content_hash": "1fb592959cca2a3e"
+   "content_hash": "1f671f3cd82eb612"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::ForceGraphRenderer": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::ForceGraphRenderer",
-   "start_line": 76,
-   "end_line": 78,
+   "start_line": 79,
+   "end_line": 81,
    "type": "CLASS",
-   "content_hash": "6f26617caf89060c"
+   "content_hash": "e7425d9192efcc8a"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::__init__": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::__init__",
-   "start_line": 79,
-   "end_line": 86,
+   "start_line": 82,
+   "end_line": 89,
    "type": "FUNCTION",
-   "content_hash": "10cab5b1cacf9592"
+   "content_hash": "4e24ce422e645b30"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::node_palette": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::node_palette",
-   "start_line": 87,
-   "end_line": 90,
+   "start_line": 90,
+   "end_line": 93,
    "type": "FUNCTION",
-   "content_hash": "5e59eaa5618ccd08"
+   "content_hash": "dcee9c133002ad67"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::edge_palette": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::edge_palette",
-   "start_line": 91,
-   "end_line": 94,
+   "start_line": 94,
+   "end_line": 97,
    "type": "FUNCTION",
-   "content_hash": "612e02655d0ff9b7"
+   "content_hash": "5945d6983812f395"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::vendor_source": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::vendor_source",
-   "start_line": 95,
-   "end_line": 102,
+   "start_line": 98,
+   "end_line": 105,
    "type": "FUNCTION",
-   "content_hash": "9a1a5ea369b22244"
+   "content_hash": "e53b4485c68918c7"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::vendor_href": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::vendor_href",
-   "start_line": 103,
-   "end_line": 107,
+   "start_line": 106,
+   "end_line": 110,
    "type": "FUNCTION",
-   "content_hash": "109e8ac8d1a558cc"
+   "content_hash": "f1a12c6bacf79ab3"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::build_payload": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::build_payload",
-   "start_line": 108,
-   "end_line": 143,
+   "start_line": 111,
+   "end_line": 146,
    "type": "FUNCTION",
-   "content_hash": "fe89d6215c6ed29a"
+   "content_hash": "cff29e2754013282"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::file_of": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::file_of",
-   "start_line": 144,
-   "end_line": 197,
+   "start_line": 147,
+   "end_line": 200,
    "type": "FUNCTION",
-   "content_hash": "7cd3daaeb3b7fbc1"
+   "content_hash": "8c02667fdadbd530"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::add_node": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::add_node",
-   "start_line": 198,
-   "end_line": 292,
+   "start_line": 201,
+   "end_line": 309,
    "type": "FUNCTION",
-   "content_hash": "349cd9d69791be15"
+   "content_hash": "798f61ed27f3620a"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::render": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::render",
-   "start_line": 293,
-   "end_line": 335,
+   "start_line": 310,
+   "end_line": 357,
    "type": "FUNCTION",
-   "content_hash": "0dc4513149becc49"
+   "content_hash": "c4fc304e0d919e6e"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::group_colors": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::group_colors",
-   "start_line": 336,
-   "end_line": 358,
+   "start_line": 358,
+   "end_line": 380,
    "type": "FUNCTION",
-   "content_hash": "69df9ca32b77a392"
+   "content_hash": "569a024953397cb2"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::page_settings": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::page_settings",
-   "start_line": 359,
-   "end_line": 430,
+   "start_line": 381,
+   "end_line": 454,
    "type": "FUNCTION",
-   "content_hash": "b20069042ffe2eac"
+   "content_hash": "415cef2836cd6137"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::family_color": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::family_color",
-   "start_line": 431,
-   "end_line": 441,
+   "start_line": 455,
+   "end_line": 465,
    "type": "FUNCTION",
-   "content_hash": "11a625b9836e7a92"
+   "content_hash": "b94ab61fcc95ada8"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::_family_color": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::_family_color",
-   "start_line": 442,
-   "end_line": 458,
+   "start_line": 466,
+   "end_line": 482,
    "type": "FUNCTION",
-   "content_hash": "140e3ab05c0a5f7d"
+   "content_hash": "a304cdf08ae770e5"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::thumbnail_svg": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::thumbnail_svg",
-   "start_line": 459,
-   "end_line": 498,
+   "start_line": 483,
+   "end_line": 522,
    "type": "FUNCTION",
-   "content_hash": "260321d54a70f9ba"
+   "content_hash": "e0ab524e84109e2e"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::write": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::write",
-   "start_line": 499,
-   "end_line": 525,
+   "start_line": 523,
+   "end_line": 549,
    "type": "FUNCTION",
-   "content_hash": "a1f4e1b54b140247"
+   "content_hash": "e3c57ce196529829"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::copy_vendor": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::copy_vendor",
-   "start_line": 526,
-   "end_line": 544,
+   "start_line": 550,
+   "end_line": 568,
    "type": "FUNCTION",
-   "content_hash": "28358455a4fa12cd"
+   "content_hash": "fa2804ff83ebcf8e"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::_node_doc": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::_node_doc",
-   "start_line": 545,
-   "end_line": 550,
+   "start_line": 569,
+   "end_line": 574,
    "type": "FUNCTION",
-   "content_hash": "e2b3bb4a1cb96e1d"
+   "content_hash": "c697dc71eb09c520"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::_symbol_list": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::_symbol_list",
-   "start_line": 551,
-   "end_line": 563,
+   "start_line": 575,
+   "end_line": 587,
    "type": "FUNCTION",
-   "content_hash": "4f332167af49853c"
+   "content_hash": "bb0524c9e9f5a52b"
   },
   "readmenator/_forcegraph.py|readmenator/_forcegraph.py::_file_color": {
    "file_path": "readmenator/_forcegraph.py",
    "qualified_name": "readmenator/_forcegraph.py::_file_color",
-   "start_line": 564,
-   "end_line": 570,
+   "start_line": 588,
+   "end_line": 594,
    "type": "FUNCTION",
-   "content_hash": "4fded1c7fabc5921"
+   "content_hash": "8789101e6ed33307"
   },
   "readmenator/_gh_wiki.py|readmenator/_gh_wiki.py::WikiPublishResult": {
    "file_path": "readmenator/_gh_wiki.py",
@@ -7981,17 +7989,33 @@
    "file_path": "readmenator/_sourceview.py",
    "qualified_name": "readmenator/_sourceview.py::build_sources",
    "start_line": 55,
-   "end_line": 104,
+   "end_line": 69,
    "type": "FUNCTION",
    "content_hash": "383bc86854d0cf27"
+  },
+  "readmenator/_sourceview.py|readmenator/_sourceview.py::build_reasons": {
+   "file_path": "readmenator/_sourceview.py",
+   "qualified_name": "readmenator/_sourceview.py::build_reasons",
+   "start_line": 70,
+   "end_line": 88,
+   "type": "FUNCTION",
+   "content_hash": "6b7318dcfaad4f03"
+  },
+  "readmenator/_sourceview.py|readmenator/_sourceview.py::_build": {
+   "file_path": "readmenator/_sourceview.py",
+   "qualified_name": "readmenator/_sourceview.py::_build",
+   "start_line": 89,
+   "end_line": 148,
+   "type": "FUNCTION",
+   "content_hash": "92a14e0421538fa0"
   },
   "readmenator/_sourceview.py|readmenator/_sourceview.py::to_payload": {
    "file_path": "readmenator/_sourceview.py",
    "qualified_name": "readmenator/_sourceview.py::to_payload",
-   "start_line": 105,
-   "end_line": 122,
+   "start_line": 149,
+   "end_line": 166,
    "type": "FUNCTION",
-   "content_hash": "2d0c841bad1162e2"
+   "content_hash": "0b715a3f5c10f4f2"
   },
   "readmenator/_symindex.py|readmenator/_symindex.py::SymbolDef": {
    "file_path": "readmenator/_symindex.py",
@@ -18981,9 +19005,65 @@
    "file_path": "tests/test_sourceview.py",
    "qualified_name": "tests/test_sourceview.py::test_untrusted_source_cannot_break_script",
    "start_line": 120,
-   "end_line": 129,
+   "end_line": 126,
    "type": "FUNCTION",
    "content_hash": "70b5567fd568af75"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_missing_source_falls_back_to_live_api": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_missing_source_falls_back_to_live_api",
+   "start_line": 127,
+   "end_line": 135,
+   "type": "FUNCTION",
+   "content_hash": "9e1e3b2326543d3b"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_static_pages_never_probe_the_api": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_static_pages_never_probe_the_api",
+   "start_line": 136,
+   "end_line": 142,
+   "type": "FUNCTION",
+   "content_hash": "4383ff29cd1577f3"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_budget_cut_files_say_so": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_budget_cut_files_say_so",
+   "start_line": 143,
+   "end_line": 157,
+   "type": "FUNCTION",
+   "content_hash": "4d8a2734edcd97ad"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_empty_files_say_so": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_empty_files_say_so",
+   "start_line": 158,
+   "end_line": 164,
+   "type": "FUNCTION",
+   "content_hash": "33c985348dce3c5c"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_default_budgets_cover_mid_size_projects": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_default_budgets_cover_mid_size_projects",
+   "start_line": 165,
+   "end_line": 169,
+   "type": "FUNCTION",
+   "content_hash": "e5bfe42b9d6f331c"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_budget_cut_warns_on_console": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_budget_cut_warns_on_console",
+   "start_line": 170,
+   "end_line": 178,
+   "type": "FUNCTION",
+   "content_hash": "0ecdb94a762a46b4"
+  },
+  "tests/test_sourceview.py|tests/test_sourceview.py::test_update_refreshes_explorer_sources": {
+   "file_path": "tests/test_sourceview.py",
+   "qualified_name": "tests/test_sourceview.py::test_update_refreshes_explorer_sources",
+   "start_line": 179,
+   "end_line": 202,
+   "type": "FUNCTION",
+   "content_hash": "1a47820b34413218"
   },
   "tests/test_symindex.py|tests/test_symindex.py::_node": {
    "file_path": "tests/test_symindex.py",
@@ -24848,6 +24928,7 @@
       "readmenator/_app.py::export_pages",
       "readmenator/_app.py::export_video",
       "readmenator/_app.py::_maybe_export_video",
+      "readmenator/_app.py::_refresh_explorers",
       "readmenator/_app.py::_maybe_export_forcegraph",
       "readmenator/_app.py::_maybe_write_graphrag",
       "readmenator/_app.py::_memory_notes",
@@ -25844,6 +25925,7 @@
         "readmenator/_app.py::export_pages",
         "readmenator/_app.py::export_video",
         "readmenator/_app.py::_maybe_export_video",
+        "readmenator/_app.py::_refresh_explorers",
         "readmenator/_app.py::_maybe_export_forcegraph",
         "readmenator/_app.py::_maybe_write_graphrag",
         "readmenator/_app.py::_memory_notes",
@@ -26364,7 +26446,7 @@
      "components": [],
      "components_relations": [],
      "layer": "utility",
-     "symbol_count": 490,
+     "symbol_count": 491,
      "top_symbols": [
       {
        "n": "EdgeKind",
@@ -26379,7 +26461,7 @@
        "k": "class"
       }
      ],
-     "top_symbols_more": 438
+     "top_symbols_more": 439
     },
     {
      "name": "root",
@@ -27526,7 +27608,7 @@
     }
    ],
    "layer": "utility",
-   "symbol_count": 788,
+   "symbol_count": 789,
    "top_symbols": [
     {
      "n": "EdgeKind",
@@ -27541,7 +27623,7 @@
      "k": "class"
     }
    ],
-   "top_symbols_more": 715,
+   "top_symbols_more": 716,
    "hub": false
   },
   {
@@ -27890,6 +27972,8 @@
       "readmenator/_sourceview.py::__init__",
       "readmenator/_sourceview.py::enabled",
       "readmenator/_sourceview.py::build_sources",
+      "readmenator/_sourceview.py::build_reasons",
+      "readmenator/_sourceview.py::_build",
       "readmenator/_sourceview.py::to_payload"
      ]
     },
@@ -28146,7 +28230,14 @@
       "tests/test_sourceview.py::test_no_network_requests",
       "tests/test_sourceview.py::test_theme_tokens_for_both_modes",
       "tests/test_sourceview.py::test_privacy_mode_strips_viewer",
-      "tests/test_sourceview.py::test_untrusted_source_cannot_break_script"
+      "tests/test_sourceview.py::test_untrusted_source_cannot_break_script",
+      "tests/test_sourceview.py::test_missing_source_falls_back_to_live_api",
+      "tests/test_sourceview.py::test_static_pages_never_probe_the_api",
+      "tests/test_sourceview.py::test_budget_cut_files_say_so",
+      "tests/test_sourceview.py::test_empty_files_say_so",
+      "tests/test_sourceview.py::test_default_budgets_cover_mid_size_projects",
+      "tests/test_sourceview.py::test_budget_cut_warns_on_console",
+      "tests/test_sourceview.py::test_update_refreshes_explorer_sources"
      ]
     },
     {
@@ -28553,6 +28644,8 @@
         "readmenator/_sourceview.py::__init__",
         "readmenator/_sourceview.py::enabled",
         "readmenator/_sourceview.py::build_sources",
+        "readmenator/_sourceview.py::build_reasons",
+        "readmenator/_sourceview.py::_build",
         "readmenator/_sourceview.py::to_payload"
        ]
       },
@@ -28592,7 +28685,7 @@
      "components": [],
      "components_relations": [],
      "layer": "utility",
-     "symbol_count": 241,
+     "symbol_count": 243,
      "top_symbols": [
       {
        "n": "ForceAtlas2Settings",
@@ -28607,7 +28700,7 @@
        "k": "method"
       }
      ],
-     "top_symbols_more": 218
+     "top_symbols_more": 220
     },
     {
      "name": "tests",
@@ -28887,7 +28980,14 @@
         "tests/test_sourceview.py::test_no_network_requests",
         "tests/test_sourceview.py::test_theme_tokens_for_both_modes",
         "tests/test_sourceview.py::test_privacy_mode_strips_viewer",
-        "tests/test_sourceview.py::test_untrusted_source_cannot_break_script"
+        "tests/test_sourceview.py::test_untrusted_source_cannot_break_script",
+        "tests/test_sourceview.py::test_missing_source_falls_back_to_live_api",
+        "tests/test_sourceview.py::test_static_pages_never_probe_the_api",
+        "tests/test_sourceview.py::test_budget_cut_files_say_so",
+        "tests/test_sourceview.py::test_empty_files_say_so",
+        "tests/test_sourceview.py::test_default_budgets_cover_mid_size_projects",
+        "tests/test_sourceview.py::test_budget_cut_warns_on_console",
+        "tests/test_sourceview.py::test_update_refreshes_explorer_sources"
        ]
       },
       {
@@ -28950,7 +29050,7 @@
      "components": [],
      "components_relations": [],
      "layer": "testing",
-     "symbol_count": 240,
+     "symbol_count": 247,
      "top_symbols": [
       {
        "n": "_node",
@@ -28965,7 +29065,7 @@
        "k": "function"
       }
      ],
-     "top_symbols_more": 214
+     "top_symbols_more": 221
     }
    ],
    "components_relations": [
@@ -28973,9 +29073,9 @@
      "relation": "calls into",
      "src_name": "tests",
      "dst_name": "readmenator",
-     "evidence": "18 imports, 215 calls across the boundary",
+     "evidence": "18 imports, 229 calls across the boundary",
      "import_count": 18,
-     "call_count": 215,
+     "call_count": 229,
      "key_edges": [
       {
        "source": "tests/test_bundlegraph.py|tests/test_bundlegraph.py::_fixture",
@@ -29624,7 +29724,7 @@
     }
    ],
    "layer": "utility",
-   "symbol_count": 481,
+   "symbol_count": 490,
    "top_symbols": [
     {
      "n": "ForceAtlas2Settings",
@@ -29639,7 +29739,7 @@
      "k": "method"
     }
    ],
-   "top_symbols_more": 434,
+   "top_symbols_more": 443,
    "hub": false
   },
   {
@@ -32806,7 +32906,7 @@
      "target": "readmenator/_cache.py|readmenator/_cache.py::load",
      "call_sites": [
       {
-       "line": 539,
+       "line": 544,
        "column": 24
       }
      ],
@@ -32817,7 +32917,7 @@
      "target": "readmenator/_cache.py|readmenator/_cache.py::prune_deleted",
      "call_sites": [
       {
-       "line": 545,
+       "line": 550,
        "column": 8
       }
      ],
@@ -32828,7 +32928,7 @@
      "target": "readmenator/_cache.py|readmenator/_cache.py::compute_hashes",
      "call_sites": [
       {
-       "line": 548,
+       "line": 553,
        "column": 21
       }
      ],
@@ -32839,7 +32939,7 @@
      "target": "readmenator/_cache.py|readmenator/_cache.py::save",
      "call_sites": [
       {
-       "line": 550,
+       "line": 555,
        "column": 12
       }
      ],
@@ -32850,7 +32950,7 @@
      "target": "readmenator/_concepts.py|readmenator/_concepts.py::extract",
      "call_sites": [
       {
-       "line": 629,
+       "line": 634,
        "column": 19
       }
      ],
@@ -32861,7 +32961,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 637,
+       "line": 642,
        "column": 19
       }
      ],
@@ -32872,7 +32972,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 648,
+       "line": 653,
        "column": 19
       }
      ],
@@ -32883,7 +32983,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 659,
+       "line": 664,
        "column": 19
       }
      ],
@@ -32894,7 +32994,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 684,
+       "line": 689,
        "column": 49
       }
      ],
@@ -32905,7 +33005,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 685,
+       "line": 690,
        "column": 15
       }
      ],
@@ -32916,7 +33016,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 929,
+       "line": 934,
        "column": 47
       }
      ],
@@ -32927,7 +33027,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 948,
+       "line": 953,
        "column": 47
       }
      ],
@@ -32938,7 +33038,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 949,
+       "line": 954,
        "column": 15
       }
      ],
@@ -32949,7 +33049,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 973,
+       "line": 978,
        "column": 15
       }
      ],
@@ -32960,7 +33060,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 1000,
+       "line": 1005,
        "column": 47
       }
      ],
@@ -32971,7 +33071,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 1029,
+       "line": 1034,
        "column": 47
       }
      ],
@@ -32982,7 +33082,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 1069,
+       "line": 1074,
        "column": 47
       }
      ],
@@ -33047,7 +33147,7 @@
      "target": "readmenator/_hotspots.py|readmenator/_hotspots.py::analyze_hotspots",
      "call_sites": [
       {
-       "line": 1030,
+       "line": 1035,
        "column": 19
       }
      ],
@@ -33058,7 +33158,7 @@
      "target": "readmenator/_refactorizer.py|readmenator/_refactorizer.py::MonolithRefactorizer",
      "call_sites": [
       {
-       "line": 1695,
+       "line": 1750,
        "column": 23
       }
      ],
@@ -33069,7 +33169,7 @@
      "target": "readmenator/_refactorizer.py|readmenator/_refactorizer.py::generate_script",
      "call_sites": [
       {
-       "line": 1702,
+       "line": 1757,
        "column": 29
       }
      ],
@@ -33140,7 +33240,7 @@
      "target": "readmenator/_hotspots.py|readmenator/_hotspots.py::analyze_hotspots",
      "call_sites": [
       {
-       "line": 1030,
+       "line": 1035,
        "column": 19
       }
      ],
@@ -33151,7 +33251,7 @@
      "target": "readmenator/_refactorizer.py|readmenator/_refactorizer.py::MonolithRefactorizer",
      "call_sites": [
       {
-       "line": 1695,
+       "line": 1750,
        "column": 23
       }
      ],
@@ -33162,7 +33262,7 @@
      "target": "readmenator/_refactorizer.py|readmenator/_refactorizer.py::generate_script",
      "call_sites": [
       {
-       "line": 1702,
+       "line": 1757,
        "column": 29
       }
      ],
@@ -33722,7 +33822,7 @@
      "target": "readmenator/_pipeline.py|readmenator/_pipeline.py::build_typed_graph",
      "call_sites": [
       {
-       "line": 608,
+       "line": 613,
        "column": 8
       }
      ],
@@ -33733,7 +33833,7 @@
      "target": "readmenator/_pipeline.py|readmenator/_pipeline.py::build_typed_graph",
      "call_sites": [
       {
-       "line": 611,
+       "line": 616,
        "column": 26
       }
      ],
@@ -33815,7 +33915,7 @@
      "target": "readmenator/_pipeline.py|readmenator/_pipeline.py::build_typed_graph",
      "call_sites": [
       {
-       "line": 608,
+       "line": 613,
        "column": 8
       }
      ],
@@ -33826,7 +33926,7 @@
      "target": "readmenator/_pipeline.py|readmenator/_pipeline.py::build_typed_graph",
      "call_sites": [
       {
-       "line": 611,
+       "line": 616,
        "column": 26
       }
      ],
@@ -33837,7 +33937,7 @@
      "target": "readmenator/_pipeline.py|readmenator/_pipeline.py::make_ranker",
      "call_sites": [
       {
-       "line": 613,
+       "line": 618,
        "column": 17
       }
      ],
@@ -33848,7 +33948,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_json",
      "call_sites": [
       {
-       "line": 632,
+       "line": 637,
        "column": 15
       }
      ],
@@ -33859,7 +33959,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_html",
      "call_sites": [
       {
-       "line": 646,
+       "line": 651,
        "column": 15
       }
      ],
@@ -33870,7 +33970,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_svg",
      "call_sites": [
       {
-       "line": 657,
+       "line": 662,
        "column": 15
       }
      ],
@@ -33881,7 +33981,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::build_payload",
      "call_sites": [
       {
-       "line": 721,
+       "line": 726,
        "column": 22
       }
      ],
@@ -33892,7 +33992,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 723,
+       "line": 728,
        "column": 12
       }
      ],
@@ -33903,7 +34003,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::thumbnail_svg",
      "call_sites": [
       {
-       "line": 726,
+       "line": 731,
        "column": 50
       }
      ],
@@ -33914,7 +34014,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 759,
+       "line": 764,
        "column": 12
       }
      ],
@@ -33925,7 +34025,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::build_payload",
      "call_sites": [
       {
-       "line": 760,
+       "line": 765,
        "column": 21
       }
      ],
@@ -33936,7 +34036,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::thumbnail_svg",
      "call_sites": [
       {
-       "line": 764,
+       "line": 769,
        "column": 52
       }
      ],
@@ -33947,7 +34047,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 880,
+       "line": 885,
        "column": 12
       }
      ],
@@ -33958,7 +34058,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::thumbnail_svg",
      "call_sites": [
       {
-       "line": 907,
+       "line": 912,
        "column": 25
       }
      ],
@@ -33969,7 +34069,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::build_payload",
      "call_sites": [
       {
-       "line": 954,
+       "line": 959,
        "column": 18
       }
      ],
@@ -33980,7 +34080,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 956,
+       "line": 961,
        "column": 8
       }
      ],
@@ -33991,7 +34091,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 980,
+       "line": 985,
        "column": 18
       }
      ],
@@ -34002,7 +34102,7 @@
      "target": "readmenator/_explorer.py|readmenator/_explorer.py::build_state",
      "call_sites": [
       {
-       "line": 1001,
+       "line": 1006,
        "column": 15
       }
      ],
@@ -34013,7 +34113,7 @@
      "target": "readmenator/_scantext.py|readmenator/_scantext.py::build_corpus",
      "call_sites": [
       {
-       "line": 1043,
+       "line": 1048,
        "column": 15
       }
      ],
@@ -34024,7 +34124,7 @@
      "target": "readmenator/_embed.py|readmenator/_embed.py::near_jaccard",
      "call_sites": [
       {
-       "line": 1057,
+       "line": 1062,
        "column": 15
       }
      ],
@@ -34035,7 +34135,7 @@
      "target": "readmenator/_exclusions.py|readmenator/_exclusions.py::filter_findings",
      "call_sites": [
       {
-       "line": 1072,
+       "line": 1077,
        "column": 19
       }
      ],
@@ -34046,7 +34146,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_graphml",
      "call_sites": [
       {
-       "line": 1099,
+       "line": 1104,
        "column": 15
       }
      ],
@@ -34057,7 +34157,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_cypher",
      "call_sites": [
       {
-       "line": 1113,
+       "line": 1118,
        "column": 15
       }
      ],
@@ -34068,7 +34168,7 @@
      "target": "readmenator/_exporter.py|readmenator/_exporter.py::to_obsidian",
      "call_sites": [
       {
-       "line": 1132,
+       "line": 1137,
        "column": 18
       }
      ],
@@ -34079,7 +34179,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 1281,
+       "line": 1286,
        "column": 18
       }
      ],
@@ -34090,7 +34190,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::render",
      "call_sites": [
       {
-       "line": 1386,
+       "line": 1391,
        "column": 22
       }
      ],
@@ -34101,7 +34201,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 1452,
+       "line": 1507,
        "column": 12
       }
      ],
@@ -34112,7 +34212,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 1487,
+       "line": 1542,
        "column": 19
       }
      ],
@@ -34123,7 +34223,7 @@
      "target": "readmenator/_bundlegraph.py|readmenator/_bundlegraph.py::write",
      "call_sites": [
       {
-       "line": 1563,
+       "line": 1618,
        "column": 8
       }
      ],
@@ -34313,16 +34413,16 @@
    "relation": "calls into",
    "src_name": "readmenator: _pipeline",
    "dst_name": "readmenator: _graphrag",
-   "evidence": "36 imports, 80 calls across the boundary",
+   "evidence": "36 imports, 86 calls across the boundary",
    "import_count": 36,
-   "call_count": 80,
+   "call_count": 86,
    "key_edges": [
     {
      "source": "readmenator/_forcegraph.py|readmenator/_forcegraph.py::vendor_source",
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 98,
+       "line": 101,
        "column": 12
       }
      ],
@@ -34333,7 +34433,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::ImportResolver",
      "call_sites": [
       {
-       "line": 153,
+       "line": 156,
        "column": 19
       }
      ],
@@ -34344,7 +34444,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 162,
+       "line": 165,
        "column": 49
       }
      ],
@@ -34355,7 +34455,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::file_purpose",
      "call_sites": [
       {
-       "line": 549,
+       "line": 573,
        "column": 15
       }
      ],
@@ -34366,7 +34466,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::truncate_words",
      "call_sites": [
       {
-       "line": 558,
+       "line": 582,
        "column": 30
       }
      ],
@@ -34377,7 +34477,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::first_sentence",
      "call_sites": [
       {
-       "line": 560,
+       "line": 584,
        "column": 45
       }
      ],
@@ -34388,7 +34488,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::truncate_words",
      "call_sites": [
       {
-       "line": 560,
+       "line": 584,
        "column": 30
       }
      ],
@@ -34415,7 +34515,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 98,
+       "line": 101,
        "column": 12
       }
      ],
@@ -34426,7 +34526,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::ImportResolver",
      "call_sites": [
       {
-       "line": 153,
+       "line": 156,
        "column": 19
       }
      ],
@@ -34437,7 +34537,7 @@
      "target": "readmenator/_resolver.py|readmenator/_resolver.py::resolve",
      "call_sites": [
       {
-       "line": 162,
+       "line": 165,
        "column": 49
       }
      ],
@@ -34448,7 +34548,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::file_purpose",
      "call_sites": [
       {
-       "line": 549,
+       "line": 573,
        "column": 15
       }
      ],
@@ -34459,7 +34559,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::truncate_words",
      "call_sites": [
       {
-       "line": 558,
+       "line": 582,
        "column": 30
       }
      ],
@@ -34470,7 +34570,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::first_sentence",
      "call_sites": [
       {
-       "line": 560,
+       "line": 584,
        "column": 45
       }
      ],
@@ -34481,7 +34581,7 @@
      "target": "readmenator/_purpose.py|readmenator/_purpose.py::truncate_words",
      "call_sites": [
       {
-       "line": 560,
+       "line": 584,
        "column": 30
       }
      ],
@@ -34997,7 +35097,7 @@
      "target": "readmenator/_models.py|readmenator/_models.py::Edge",
      "call_sites": [
       {
-       "line": 165,
+       "line": 168,
        "column": 20
       }
      ],
@@ -35008,7 +35108,7 @@
      "target": "readmenator/_models.py|readmenator/_models.py::Edge",
      "call_sites": [
       {
-       "line": 177,
+       "line": 180,
        "column": 16
       }
      ],
@@ -35090,7 +35190,7 @@
      "target": "readmenator/_models.py|readmenator/_models.py::Edge",
      "call_sites": [
       {
-       "line": 165,
+       "line": 168,
        "column": 20
       }
      ],
@@ -35101,7 +35201,7 @@
      "target": "readmenator/_models.py|readmenator/_models.py::Edge",
      "call_sites": [
       {
-       "line": 177,
+       "line": 180,
        "column": 16
       }
      ],
@@ -35619,9 +35719,9 @@
    "relation": "calls into",
    "src_name": "readmenator: _pipeline",
    "dst_name": "readmenator: _diagrams",
-   "evidence": "19 imports, 51 calls across the boundary",
-   "import_count": 19,
-   "call_count": 51,
+   "evidence": "20 imports, 54 calls across the boundary",
+   "import_count": 20,
+   "call_count": 54,
    "key_edges": [
     {
      "source": "readmenator/_documentation.py|readmenator/_documentation.py::_build_ranked_context",
@@ -35650,7 +35750,7 @@
      "target": "readmenator/_rank.py|readmenator/_rank.py::file_pagerank",
      "call_sites": [
       {
-       "line": 188,
+       "line": 191,
        "column": 15
       }
      ],
@@ -35743,7 +35843,7 @@
      "target": "readmenator/_rank.py|readmenator/_rank.py::file_pagerank",
      "call_sites": [
       {
-       "line": 188,
+       "line": 191,
        "column": 15
       }
      ],

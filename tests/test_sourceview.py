@@ -124,6 +124,79 @@ class TestSourceViewerRenderContract(unittest.TestCase):
         html = ForceGraphRenderer(self.config).render(payload)
         self.assertNotIn("</script><script>alert(1)", html)
 
+    def test_missing_source_falls_back_to_live_api(self) -> None:
+        """Empty embedded source tries /api/source before blaming the build."""
+        for html in (self.force_html, self.bundle_html):
+            self.assertIn("api/source?file=", html)
+            self.assertIn("loading live source", html)
+            self.assertIn("source viewer disabled (privacy mode or SOURCEVIEW_ENABLED off)", html)
+            self.assertIn("readmenator . --rebuild", html)
+            self.assertNotIn("rebuild with SOURCEVIEW_ENABLED to read it here", html)
+
+    def test_static_pages_never_probe_the_api(self) -> None:
+        """Static exports keep srcLive false so Pages hosting fires no fetch (no 404)."""
+        for html in (self.force_html, self.bundle_html):
+            self.assertIn('"srcLive": false', html)
+        live = ForceGraphRenderer(self.config).render(self.force, live_api=True)
+        self.assertIn('"srcLive": true', live)
+
+    def test_budget_cut_files_say_so(self) -> None:
+        """Files cut by SOURCEVIEW budgets carry src_why so the drawer is honest."""
+        tiny = Config(SOURCEVIEW_MAX_FILES=1)
+        payload = ForceGraphRenderer(tiny).build_payload(self.nodes, [], content_map=self.content)
+        by_id = {n["id"]: n for n in payload["nodes"]}
+        self.assertEqual(by_id["file:a.py"]["src_why"], "")
+        self.assertIn("def foo", by_id["file:a.py"]["src"])
+        self.assertEqual(by_id["file:b.py"]["src"], "")
+        self.assertEqual(by_id["file:b.py"]["src_why"], "budget")
+        bundle = BundleGraphRenderer(tiny).build_payload(payload)
+        bnode = next(n for n in bundle["nodes"] if n["f"] == "b.py")
+        self.assertEqual(bnode["src_why"], "budget")
+        html = ForceGraphRenderer(tiny).render(payload)
+        self.assertIn("cut by SOURCEVIEW budgets", html)
+
+    def test_empty_files_say_so(self) -> None:
+        """Files with no content report empty instead of stale."""
+        builder = SourceViewBuilder(Config())
+        reasons = builder.build_reasons(self.nodes, {"a.py": "x = 1\n"})
+        self.assertNotIn("a.py", reasons)
+        self.assertEqual(reasons.get("b.py"), "empty")
+
+    def test_default_budgets_cover_mid_size_projects(self) -> None:
+        """Raised defaults embed far more than the old 400-file cap."""
+        self.assertGreaterEqual(Config().SOURCEVIEW_MAX_FILES, 1000)
+        self.assertGreaterEqual(Config().SOURCEVIEW_MAX_TOTAL_CHARS, 4000000)
+
+    def test_budget_cut_warns_on_console(self) -> None:
+        """Hitting a budget logs which knobs to raise."""
+        tiny = Config(SOURCEVIEW_MAX_FILES=1)
+        with self.assertLogs("readmenator._forcegraph", level="WARNING") as captured:
+            ForceGraphRenderer(tiny).build_payload(self.nodes, [], content_map=self.content)
+        self.assertTrue(any("SOURCEVIEW budgets hit" in line for line in captured.output))
+        full = ForceGraphRenderer(self.config).build_payload(self.nodes, [], content_map=self.content)
+        self.assertTrue(all(n.get("src") for n in full["nodes"] if n["type"] == "file"))
+
+    def test_update_refreshes_explorer_sources(self) -> None:
+        """update() rewrites explorers so new files carry embedded source."""
+        import tempfile
+        from pathlib import Path
+        from readmenator._app import readmenatorApplication
+        with tempfile.TemporaryDirectory() as tmp:
+            Path(tmp, "a.py").write_text("import os\n", encoding="utf-8")
+            app = readmenatorApplication(Config(
+                WIKI_ENABLED=False, AGENT_OUTPUT_ENABLED=False,
+                VIDEO_ENABLED=False, GH_WIKI_ENABLED=False,
+                COMPONENTS_ENABLED=False, DIAGRAM_ENABLED=False,
+            ))
+            app.update(tmp)
+            force = Path(tmp) / "readmenator-maps" / "graph-force.html"
+            self.assertTrue(force.is_file())
+            Path(tmp, "logging_config.py").write_text("LEVEL = 1\n", encoding="utf-8")
+            app.update(tmp)
+            html = force.read_text(encoding="utf-8")
+            self.assertIn("logging_config.py", html)
+            self.assertIn("LEVEL = 1", html)
+
 
 if __name__ == "__main__":
     unittest.main()

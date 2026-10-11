@@ -3,6 +3,9 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_pluralize_unknown_appends_s` | method | `tests/test_models.py:62` | `def test_pluralize_unknown_appends_s(self)` |
+| `test_symbol_creation` | method | `tests/test_models.py:7` | `def test_symbol_creation(self)` |
+| `test_symbol_with_signature` | method | `tests/test_models.py:15` | `def test_symbol_with_signature(self)` |
 | `TestOllamaContract` | class | `tests/test_ollama.py:11` | `class TestOllamaContract(TestCase)` |
 | `test_disabled_client_returns_empty` | method | `tests/test_ollama.py:14` | `def test_disabled_client_returns_empty(self)` |
 | `test_strip_thinking_removes_reasoning_blocks` | method | `tests/test_ollama.py:30` | `def test_strip_thinking_removes_reasoning_blocks(self)` |
@@ -428,17 +431,24 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `_node` | function | `tests/test_sourceview.py:15` | `def _node(nid)` |
 | `setUp` | method | `tests/test_sourceview.py:54` | `def setUp(self)` |
 | `test_both_pages_ship_view_drawer` | method | `tests/test_sourceview.py:78` | `def test_both_pages_ship_view_drawer(self)` |
+| `test_budget_cut_files_say_so` | method | `tests/test_sourceview.py:143` | `def test_budget_cut_files_say_so(self)` |
+| `test_budget_cut_warns_on_console` | method | `tests/test_sourceview.py:170` | `def test_budget_cut_warns_on_console(self)` |
 | `test_build_sources_disabled_flag` | method | `tests/test_sourceview.py:45` | `def test_build_sources_disabled_flag(self)` |
 | `test_build_sources_embeds_truncated_text` | method | `tests/test_sourceview.py:24` | `def test_build_sources_embeds_truncated_text(self)` |
 | `test_build_sources_empty_in_privacy_mode` | method | `tests/test_sourceview.py:40` | `def test_build_sources_empty_in_privacy_mode(self)` |
 | `test_build_sources_respects_caps` | method | `tests/test_sourceview.py:33` | `def test_build_sources_respects_caps(self)` |
 | `test_bundlegraph_propagates_src_and_syms` | method | `tests/test_sourceview.py:71` | `def test_bundlegraph_propagates_src_and_syms(self)` |
+| `test_default_budgets_cover_mid_size_projects` | method | `tests/test_sourceview.py:165` | `def test_default_budgets_cover_mid_size_projects(self)` |
+| `test_empty_files_say_so` | method | `tests/test_sourceview.py:158` | `def test_empty_files_say_so(self)` |
 | `test_forcegraph_embeds_src_fields` | method | `tests/test_sourceview.py:64` | `def test_forcegraph_embeds_src_fields(self)` |
+| `test_missing_source_falls_back_to_live_api` | method | `tests/test_sourceview.py:127` | `def test_missing_source_falls_back_to_live_api(self)` |
 | `test_no_network_requests` | method | `tests/test_sourceview.py:94` | `def test_no_network_requests(self)` |
 | `test_privacy_mode_strips_viewer` | method | `tests/test_sourceview.py:108` | `def test_privacy_mode_strips_viewer(self)` |
 | `test_settings_carry_src_budgets` | method | `tests/test_sourceview.py:89` | `def test_settings_carry_src_budgets(self)` |
+| `test_static_pages_never_probe_the_api` | method | `tests/test_sourceview.py:136` | `def test_static_pages_never_probe_the_api(self)` |
 | `test_theme_tokens_for_both_modes` | method | `tests/test_sourceview.py:102` | `def test_theme_tokens_for_both_modes(self)` |
 | `test_untrusted_source_cannot_break_script` | method | `tests/test_sourceview.py:120` | `def test_untrusted_source_cannot_break_script(self)` |
+| `test_update_refreshes_explorer_sources` | method | `tests/test_sourceview.py:179` | `def test_update_refreshes_explorer_sources(self)` |
 | `TestSymbolIndexContract` | class | `tests/test_symindex.py:20` | `class TestSymbolIndexContract(TestCase)` |
 | `_node` | function | `tests/test_symindex.py:12` | `def _node(nid)` |
 | `setUp` | method | `tests/test_symindex.py:23` | `def setUp(self)` |
@@ -486,15 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_taint_max_depth` | function | `tests/test_taint_bdd.py:79` | `def test_taint_max_depth()` |
 | `test_taint_propagates_chain` | function | `tests/test_taint_bdd.py:75` | `def test_taint_propagates_chain()` |
 | `TestUmlCodeGenerationCSharp` | class | `tests/test_uml.py:281` | `class TestUmlCodeGenerationCSharp(TestCase)` |
-| `TestUmlCodeGenerationCpp` | class | `tests/test_uml.py:181` | `class TestUmlCodeGenerationCpp(TestCase)` |
-| `TestUmlCodeGenerationGo` | class | `tests/test_uml.py:306` | `class TestUmlCodeGenerationGo(TestCase)` |
-| `TestUmlCodeGenerationJava` | class | `tests/test_uml.py:239` | `class TestUmlCodeGenerationJava(TestCase)` |
-| `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` | class | `tests/test_uml.py:427` | `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)` |
-| `TestUmlCodeGenerationPhp` | class | `tests/test_uml.py:387` | `class TestUmlCodeGenerationPhp(TestCase)` |
-| `TestUmlCodeGenerationRust` | class | `tests/test_uml.py:347` | `class TestUmlCodeGenerationRust(TestCase)` |
-| `TestUmlMermaidDiagram` | class | `tests/test_uml.py:16` | `class TestUmlMermaidDiagram(TestCase)` |
-| `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
-| `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
-| `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

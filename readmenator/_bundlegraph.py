@@ -145,6 +145,7 @@ class BundleGraphRenderer:
                 "src": str(node.get("src") or ""),
                 "src_lines": int(node.get("src_lines", 0)),
                 "src_cut": int(node.get("src_cut", 0)),
+                "src_why": str(node.get("src_why") or ""),
                 "syms": kept,
             })
         pairs = sorted({
@@ -156,12 +157,13 @@ class BundleGraphRenderer:
         })
         return {"nodes": nodes, "groups": groups, "edges": [list(p) for p in pairs]}
 
-    def page_settings(self, force_payload: Dict[str, List[Dict[str, Any]]], explorer_href: Optional[str]) -> Dict[str, Any]:
+    def page_settings(self, force_payload: Dict[str, List[Dict[str, Any]]], explorer_href: Optional[str], live_api: bool = False) -> Dict[str, Any]:
         """Collect the page settings serialized into the HTML.
 
         Args:
             force_payload: Force-graph payload (for layer and language colors).
             explorer_href: Relative link to the force-graph explorer, or None.
+            live_api: True when served by a live server with api/source.
 
         Returns:
             JSON-serializable settings for bundling, camera, labels, and palettes.
@@ -191,6 +193,7 @@ class BundleGraphRenderer:
             "dragPx": cfg.FORCEGRAPH_DRAG_THRESHOLD_PX,
             "flyMs": cfg.FORCEGRAPH_FLY_MS,
             "srcEnabled": bool(cfg.SOURCEVIEW_ENABLED and not cfg.PRIVACY_MODE),
+            "srcLive": bool(live_api),
             "srcChunk": cfg.SOURCEVIEW_CHUNK_LINES,
             "srcContext": cfg.SOURCEVIEW_CONTEXT_LINES,
             "explorerHref": explorer_href or "",
@@ -204,6 +207,7 @@ class BundleGraphRenderer:
         title: str = "Edge Bundles",
         home_href: Optional[str] = "index.html",
         explorer_href: Optional[str] = None,
+        live_api: bool = False,
     ) -> str:
         """Render the standalone edge bundle explorer HTML document.
 
@@ -212,6 +216,7 @@ class BundleGraphRenderer:
             title: Document title shown in the header.
             home_href: Optional gallery home link; omitted when None.
             explorer_href: Optional link to the force-graph explorer page.
+            live_api: True when served by a live server with api/source.
 
         Returns:
             Complete HTML document as a string.
@@ -230,7 +235,7 @@ class BundleGraphRenderer:
             "HOME": home,
             "EXPLORER": explorer,
             "DATA": _json_script(self.build_payload(force_payload)),
-            "SETTINGS": _json_script(self.page_settings(force_payload, explorer_href)),
+            "SETTINGS": _json_script(self.page_settings(force_payload, explorer_href, live_api=live_api)),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], BUNDLEGRAPH_PAGE_TEMPLATE)
 

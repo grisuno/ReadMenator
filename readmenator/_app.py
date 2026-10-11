@@ -522,6 +522,11 @@ class readmenatorApplication:
             except Exception:
                 logger.debug("Agent wiki skipped", exc_info=True)
 
+        try:
+            self._refresh_explorers(root, nodes, edges, resolved_edges, analysis, layers, findings)
+        except Exception:
+            logger.debug("Explorer refresh skipped", exc_info=True)
+
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         total_symbols = sum(len(n.symbols) for n in nodes)
@@ -1389,6 +1394,56 @@ class readmenatorApplication:
         except Exception:
             logger.debug("Overview video skipped", exc_info=True)
             return None
+
+    def _refresh_explorers(
+        self,
+        root: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Dict[str, str],
+        findings: List[SecurityFinding],
+    ) -> Optional[str]:
+        """Refresh the force-graph and bundle explorers after an update.
+
+        The incremental update path previously left the explorer pages
+        stale, so files added after the last full run had no embedded
+        source. Contents are re-read here (skipping symlinks and files
+        over MAX_FILE_SIZE_MB) so the View drawer works after update.
+
+        Args:
+            root: Project root directory (HTML lands in the maps directory).
+            nodes: Scanned file nodes.
+            edges: Import edges.
+            resolved_edges: Optional resolved-import edges.
+            analysis: Optional community analysis.
+            layers: File-to-layer mapping.
+            findings: Security findings.
+
+        Returns:
+            Output path string, or None when disabled or skipped.
+        """
+        if not self._config.FORCEGRAPH_ENABLED:
+            return None
+        if self._config.PRIVACY_MODE or not self._config.SOURCEVIEW_ENABLED:
+            content_map: Optional[Dict[str, str]] = None
+        else:
+            content_map = {}
+            max_bytes = int(self._config.MAX_FILE_SIZE_MB * 1024 * 1024)
+            for node in nodes:
+                path = root / node.node_id
+                try:
+                    if not path.is_file() or path.is_symlink():
+                        continue
+                    if max_bytes and path.stat().st_size > max_bytes:
+                        continue
+                    content_map[node.node_id] = path.read_text(encoding="utf-8", errors="ignore")
+                except OSError:
+                    continue
+        dest = self._forcegraph_dest(str(root))
+        counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [], "index.html", content_map)
+        return str(dest) if counts else None
 
     def _maybe_export_forcegraph(
         self,

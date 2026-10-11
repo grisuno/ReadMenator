@@ -240,28 +240,28 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `family_color_from_name` (function, line 35) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
-  - `node_value` (function, line 63) `def node_value(symbols, degree)`
-  - `ForceGraphRenderer` (class, line 76) `class ForceGraphRenderer`
-  - `__init__` (method, line 79) `def __init__(self, config)`
-  - `node_palette` (method, line 87) `def node_palette(self)`
-  - `edge_palette` (method, line 91) `def edge_palette(self)`
-  - `vendor_source` (method, line 95) `def vendor_source(self)`
-  - `vendor_href` (method, line 103) `def vendor_href(self)`
-  - `build_payload` (method, line 108) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)`
-  - `render` (method, line 293) `def render(self, payload, analytics, title, home_href)`
-  - `group_colors` (method, line 336) `def group_colors(self, payload)`
-  - `page_settings` (method, line 359) `def page_settings(self, payload)`
-  - `family_color` (method, line 431) `def family_color(self, name)`
-  - `_family_color` (method, line 442) `def _family_color(self, name)`
-  - `thumbnail_svg` (method, line 459) `def thumbnail_svg(self, payload)`
-  - `write` (method, line 499) `def write(self, output_path, payload, analytics, title, home_href)`
-  - `copy_vendor` (method, line 526) `def copy_vendor(self, dest_dir)`
-  - `_node_doc` (method, line 545) `def _node_doc(self, node)`
-  - `_symbol_list` (method, line 551) `def _symbol_list(self, node)`
-  - `_file_color` (method, line 564) `def _file_color(self, node_id, family, layer, palette)`
-  - `file_of` (method, line 144) `def file_of(edge_id)`
-  - `add_node` (method, line 198) `def add_node(node_id, label, node_type)`
+  - `family_color_from_name` (function, line 38) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
+  - `node_value` (function, line 66) `def node_value(symbols, degree)`
+  - `ForceGraphRenderer` (class, line 79) `class ForceGraphRenderer`
+  - `__init__` (method, line 82) `def __init__(self, config)`
+  - `node_palette` (method, line 90) `def node_palette(self)`
+  - `edge_palette` (method, line 94) `def edge_palette(self)`
+  - `vendor_source` (method, line 98) `def vendor_source(self)`
+  - `vendor_href` (method, line 106) `def vendor_href(self)`
+  - `build_payload` (method, line 111) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)`
+  - `render` (method, line 310) `def render(self, payload, analytics, title, home_href, live_api)`
+  - `group_colors` (method, line 358) `def group_colors(self, payload)`
+  - `page_settings` (method, line 381) `def page_settings(self, payload, live_api)`
+  - `family_color` (method, line 455) `def family_color(self, name)`
+  - `_family_color` (method, line 466) `def _family_color(self, name)`
+  - `thumbnail_svg` (method, line 483) `def thumbnail_svg(self, payload)`
+  - `write` (method, line 523) `def write(self, output_path, payload, analytics, title, home_href)`
+  - `copy_vendor` (method, line 550) `def copy_vendor(self, dest_dir)`
+  - `_node_doc` (method, line 569) `def _node_doc(self, node)`
+  - `_symbol_list` (method, line 575) `def _symbol_list(self, node)`
+  - `_file_color` (method, line 588) `def _file_color(self, node_id, family, layer, palette)`
+  - `file_of` (method, line 147) `def file_of(edge_id)`
+  - `add_node` (method, line 201) `def add_node(node_id, label, node_type)`
 - Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_sourceview.py`
 - Imported by: `readmenator/_bundlegraph.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`, `tests/test_interactive_graph.py`, `tests/test_sourceview.py`
 

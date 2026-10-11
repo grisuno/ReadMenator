@@ -1,10 +1,10 @@
 # readmenator: _pipeline
 
-*Community 3 | 25 files | cohesion 0.37*
+*Community 3 | 25 files | cohesion 0.36*
 
 ## Definition
 
-This community groups 25 file(s) rooted at `readmenator` with dominant language py (cohesion 0.37). Central symbols: `AnalyticsBuilder`, `AnalyzerFactory`, `BundleGraphRenderer`, `BundleLayout`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`. Core file: `tests/test_interactive_graph.py` (60 symbols). Documented purpose: Corpus analytics aggregations for the readmenator knowledge graph.  Computes the explorer dashboard payloads (attribution funnel, distributions, scatter, rule y.
+This community groups 25 file(s) rooted at `readmenator` with dominant language py (cohesion 0.36). Central symbols: `AnalyticsBuilder`, `AnalyzerFactory`, `BundleGraphRenderer`, `BundleLayout`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`. Core file: `tests/test_interactive_graph.py` (60 symbols). Documented purpose: Corpus analytics aggregations for the readmenator knowledge graph.  Computes the explorer dashboard payloads (attribution funnel, distributions, scatter, rule y.
 
 ## Files
 
@@ -35,7 +35,7 @@ This community groups 25 file(s) rooted at `readmenator` with dominant language 
 | `tests/test_exporter.py` | py | testing | 15 | yes |
 | `tests/test_graphlayout.py` | py | testing | 33 | yes |
 | `tests/test_interactive_graph.py` | py | testing | 60 | yes |
-| `tests/test_sourceview.py` | py | testing | 16 | yes |
+| `tests/test_sourceview.py` | py | testing | 23 | yes |
 | `tests/test_uml.py` | py | testing | 49 | yes |
 
 *... and 5 more files in this community.*
@@ -56,10 +56,10 @@ This community groups 25 file(s) rooted at `readmenator` with dominant language 
 - `BundleGraphRenderer` (class, `readmenator/_bundlegraph.py:48`) `class BundleGraphRenderer` - Builds the bundle payload and renders the edge bundle explorer page.
 - `__init__` (method, `readmenator/_bundlegraph.py:51`) `def __init__(self, config)` - Initialise with application configuration.
 - `build_payload` (method, `readmenator/_bundlegraph.py:60`) `def build_payload(self, force_payload)` - Derive the bundle payload from a force-graph payload.
-- `page_settings` (method, `readmenator/_bundlegraph.py:159`) `def page_settings(self, force_payload, explorer_href)` - Collect the page settings serialized into the HTML.
-- `render` (method, `readmenator/_bundlegraph.py:201`) `def render(self, force_payload, title, home_href, explorer_href)` - Render the standalone edge bundle explorer HTML document.
-- `write` (method, `readmenator/_bundlegraph.py:237`) `def write(self, output_path, force_payload, title, home_href, explorer_href)` - Write the edge bundle explorer HTML document.
-- `thumbnail_svg` (method, `readmenator/_bundlegraph.py:263`) `def thumbnail_svg(self, force_payload)` - Render a small circular bundle preview as inline SVG.
+- `page_settings` (method, `readmenator/_bundlegraph.py:160`) `def page_settings(self, force_payload, explorer_href, live_api)` - Collect the page settings serialized into the HTML.
+- `render` (method, `readmenator/_bundlegraph.py:204`) `def render(self, force_payload, title, home_href, explorer_href, live_api)` - Render the standalone edge bundle explorer HTML document.
+- `write` (method, `readmenator/_bundlegraph.py:242`) `def write(self, output_path, force_payload, title, home_href, explorer_href)` - Write the edge bundle explorer HTML document.
+- `thumbnail_svg` (method, `readmenator/_bundlegraph.py:268`) `def thumbnail_svg(self, force_payload)` - Render a small circular bundle preview as inline SVG.
 - `CodePropertyGraph` (class, `readmenator/_cpg.py:16`) `class CodePropertyGraph` - Generates a Code Property Graph (CPG) as JSON-LD for AI agent consumption.
 - `__init__` (method, `readmenator/_cpg.py:26`) `def __init__(self, privacy_mode, cpg_context)`
 - `generate` (method, `readmenator/_cpg.py:30`) `def generate(self, nodes, edges, resolved_edges, analysis, findings)` - Generate the CPG JSON-LD string embeddable in markdown.
@@ -77,7 +77,7 @@ This community groups 25 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 45
-- Cross-boundary resolved imports (EXTRACTED): 88
+- Cross-boundary resolved imports (EXTRACTED): 89
 
 ## Connections
 
@@ -92,27 +92,27 @@ This community groups 25 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_resolver.py` via `subprocess` (2 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_purpose.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph_page.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_sourceview.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_purpose.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_graphlayout.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_resolver.py` via `subprocess` (2 hops)
 
 ## Open Questions
 
 - Why do 2 file(s) lack file-level docs (e.g. `tests/test_cpg.py`)? What purpose do they serve?
 - Is the dangerous import `subprocess` in `readmenator/_documentation.py` still required, or can it be isolated?
 - What would break if the most connected file in readmenator: _pipeline changed?
-- Should readmenator: _pipeline be split, given cohesion 0.37?
+- Should readmenator: _pipeline be split, given cohesion 0.36?
 
 ## Sources
 

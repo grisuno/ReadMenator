@@ -9,7 +9,7 @@
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 33 | 3 |
 | `readmenator/_analytics.py` | Corpus analytics aggregations for the readmenator knowledge graph. | readmenator | 9 | 5 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 23 | 5 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 75 | 12 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 76 | 13 |
 | `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 4 |
 | `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 1 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
@@ -58,7 +58,7 @@
 | `readmenator/_scantext.py` | Synthesized scan-text builder for the readmenator knowledge graph. | readmenator | 4 | 2 |
 | `readmenator/_security.py` | Pattern-based static security analysis for the readmenator knowledge graph. | readmenator | 32 | 4 |
 | `readmenator/_skill_installer.py` | Installs the packaged ReadMenator agent skills into a project. | readmenator | 7 | 2 |
-| `readmenator/_sourceview.py` | Source viewer payload builder for the graph explorers. | readmenator | 6 | 4 |
+| `readmenator/_sourceview.py` | Source viewer payload builder for the graph explorers. | readmenator | 8 | 4 |
 | `readmenator/_symindex.py` | Deterministic symbol index with call-site resolution. | readmenator | 21 | 5 |
 | `readmenator/_taint.py` | Taint propagation analysis of dangerous imports through the resolved import graph. | readmenator | 6 | 3 |
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
@@ -131,7 +131,7 @@
 | `tests/test_sarif.py` | TestSarifExporterContract: Contract: SarifExporter produces valid SARIF v2.1.0 JSON. | tests | 10 | 0 |
 | `tests/test_scanner.py` | - | tests | 21 | 0 |
 | `tests/test_security.py` | Contract tests for the static security analysis module. | tests | 68 | 0 |
-| `tests/test_sourceview.py` | Contract tests for the source viewer (View drawer in explorers). | tests | 16 | 0 |
+| `tests/test_sourceview.py` | Contract tests for the source viewer (View drawer in explorers). | tests | 23 | 0 |
 | `tests/test_symindex.py` | Contract tests for the deterministic symbol index. | tests | 10 | 0 |
 | `tests/test_taint.py` | TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths. | tests | 10 | 0 |
 | `tests/test_taint_bdd.py` | BDD-style contract tests for taint propagation analysis. | tests | 26 | 0 |

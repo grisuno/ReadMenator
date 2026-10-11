@@ -1,6 +1,6 @@
 # GraphRAG Community Reports
 
-Entities: 2776 | Relationships: 9388 | Communities: 6 | Themes: 2 | Text units: 2667
+Entities: 2786 | Relationships: 9423 | Communities: 6 | Themes: 2 | Text units: 2677
 
 Query with `readmenator . ask "<question>"` (local: BM25 + Personalized PageRank; global: map-reduce over these reports) or the MCP tool `readmenator.graphrag`.
 
@@ -27,7 +27,7 @@ Theme of 5 communities and 133 files: readmenator/parsers (32 files, rating 7.0)
 - [readmenator: _graphrag] `readmenator/_config.py` ranks 1 by PageRank, 88 importers, 1 symbols: Immutable configuration dataclass for readmenator.
 - [readmenator: _graphrag] `readmenator/_resolver.py` ranks 2 by PageRank, 7 importers, 17 symbols: Import path resolver for the readmenator knowledge graph.
 - [readmenator: _diagrams] `readmenator/_category.py` ranks 1 by PageRank, 9 importers, 26 symbols: Category theory model for the readmenator code graph.
-- [readmenator: _diagrams] `readmenator/_app.py` ranks 2 by PageRank, 22 importers, 75 symbols: Application orchestrator: scan, resolve, analyze, and write every output.
+- [readmenator: _diagrams] `readmenator/_app.py` ranks 2 by PageRank, 23 importers, 76 symbols: Application orchestrator: scan, resolve, analyze, and write every output.
 - [readmenator: _pipeline] `readmenator/_graphlayout.py` ranks 1 by PageRank, 4 importers, 18 symbols: Deterministic graph layout algorithms for animated renders.
 - [readmenator: _pipeline] `readmenator/_forcegraph.py` ranks 2 by PageRank, 8 importers, 22 symbols: Force-graph explorer for the readmenator knowledge graph.
 - Key entities: file:readmenator/_models.py, sym:readmenator/_models.py::Symbol@18, file:tests/test_parsers.py, file:tests/test_security.py, file:readmenator/_diagrams.py, file:readmenator/_app.py, file:tests/test_interactive_graph.py, file:readmenator/_pipeline.py
@@ -46,7 +46,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator/parsers (`c1`, community, rating 7.0)
 
-32 files under readmenator/parsers (py 32), mostly utility. Core file readmenator/_models.py (PageRank 0.1495, imported by 109 files): Data model types for the readmenator knowledge graph. Key abstractions: Symbol, Node, Edge, SecurityFinding, CommunityResult, AnalysisResult. Depends on readmenator: _graphrag (8), readmenator: _diagrams (1). Used by readmenator: _graphrag (34), readmenator: _pipeline (25), readmenator: _diagrams (20).
+32 files under readmenator/parsers (py 32), mostly utility. Core file readmenator/_models.py (PageRank 0.1494, imported by 109 files): Data model types for the readmenator knowledge graph. Key abstractions: Symbol, Node, Edge, SecurityFinding, CommunityResult, AnalysisResult. Depends on readmenator: _graphrag (8), readmenator: _diagrams (1). Used by readmenator: _graphrag (34), readmenator: _pipeline (25), readmenator: _diagrams (20).
 
 - `readmenator/_models.py` ranks 1 by PageRank, 109 importers, 23 symbols: Data model types for the readmenator knowledge graph.
 - `readmenator/parsers/_base.py` ranks 2 by PageRank, 20 importers, 6 symbols: LanguageParser base class with shared docstring and signature extraction.
@@ -59,7 +59,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _graphrag (`c0`, community, rating 6.9)
 
-40 files under readmenator (py 40), mostly testing. Core file readmenator/_config.py (PageRank 0.1284, imported by 88 files): Immutable configuration dataclass for readmenator. Key abstractions: Config, ImportResolver, resolve, resolve_all, is_garbage_doc, clean_purpose. Depends on readmenator/parsers (34), readmenator: _diagrams (9). Used by readmenator: _pipeline (36), readmenator: _diagrams (32), readmenator/parsers (8).
+40 files under readmenator (py 40), mostly testing. Core file readmenator/_config.py (PageRank 0.1283, imported by 88 files): Immutable configuration dataclass for readmenator. Key abstractions: Config, ImportResolver, resolve, resolve_all, is_garbage_doc, clean_purpose. Depends on readmenator/parsers (34), readmenator: _diagrams (9). Used by readmenator: _pipeline (36), readmenator: _diagrams (32), readmenator/parsers (8).
 
 - `readmenator/_config.py` ranks 1 by PageRank, 88 importers, 1 symbols: Immutable configuration dataclass for readmenator.
 - `readmenator/_resolver.py` ranks 2 by PageRank, 7 importers, 17 symbols: Import path resolver for the readmenator knowledge graph.
@@ -73,13 +73,13 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _diagrams (`c2`, community, rating 6.9)
 
-31 files under readmenator (py 31), mostly utility. Core file readmenator/_category.py (PageRank 0.1458, imported by 9 files): Category theory model for the readmenator code graph. Key abstractions: EdgeKind, Morphism, Category, TypedGraph, weight, add_object. Depends on readmenator: _graphrag (32), readmenator/parsers (20), readmenator: _pipeline (6). Used by readmenator: _pipeline (19), readmenator: _graphrag (9), readmenator/parsers (1).
+31 files under readmenator (py 31), mostly utility. Core file readmenator/_category.py (PageRank 0.1457, imported by 9 files): Category theory model for the readmenator code graph. Key abstractions: EdgeKind, Morphism, Category, TypedGraph, weight, add_object. Depends on readmenator: _graphrag (32), readmenator/parsers (20), readmenator: _pipeline (6). Used by readmenator: _pipeline (20), readmenator: _graphrag (9), readmenator/parsers (1).
 
 - `readmenator/_category.py` ranks 1 by PageRank, 9 importers, 26 symbols: Category theory model for the readmenator code graph.
-- `readmenator/_app.py` ranks 2 by PageRank, 22 importers, 75 symbols: Application orchestrator: scan, resolve, analyze, and write every output.
+- `readmenator/_app.py` ranks 2 by PageRank, 23 importers, 76 symbols: Application orchestrator: scan, resolve, analyze, and write every output.
 - `readmenator/_rank.py` ranks 3 by PageRank, 11 importers, 18 symbols: PageRank, Personalized PageRank, HITS, and composite scoring.
 - Hotspot `readmenator/_diagrams.py`: 92 symbols, 23 connections (score 0.41).
-- Hotspot `readmenator/_app.py`: 75 symbols, 73 connections (score 0.34).
+- Hotspot `readmenator/_app.py`: 76 symbols, 74 connections (score 0.35).
 - 1 layer violations, e.g. test_components.py (testing) -> _components.py (presentation).
 - Taint: 4 paths reach this group via subprocess.
 - Surprising bridge: readmenator.py <-> test_agent_injector.py (5 hops across communities).
@@ -88,7 +88,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _pipeline (`c3`, community, rating 2.5)
 
-25 files under readmenator (py 25), mostly utility. Core file readmenator/_graphlayout.py (PageRank 0.0085, imported by 4 files): Deterministic graph layout algorithms for animated renders. Key abstractions: ForceAtlas2Settings, BundleLayout, SphereBundleLayout, forceatlas2_frames, fit_frames, interpolate_frames. Depends on readmenator: _graphrag (36), readmenator/parsers (25), readmenator: _diagrams (19). Used by readmenator: _diagrams (6).
+25 files under readmenator (py 25), mostly utility. Core file readmenator/_graphlayout.py (PageRank 0.0085, imported by 4 files): Deterministic graph layout algorithms for animated renders. Key abstractions: ForceAtlas2Settings, BundleLayout, SphereBundleLayout, forceatlas2_frames, fit_frames, interpolate_frames. Depends on readmenator: _graphrag (36), readmenator/parsers (25), readmenator: _diagrams (20). Used by readmenator: _diagrams (6).
 
 - `readmenator/_graphlayout.py` ranks 1 by PageRank, 4 importers, 18 symbols: Deterministic graph layout algorithms for animated renders.
 - `readmenator/_forcegraph.py` ranks 2 by PageRank, 8 importers, 22 symbols: Force-graph explorer for the readmenator knowledge graph.

@@ -117,7 +117,8 @@ Imported by: `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmena
 - `SourceViewBuilder.__init__` (method) `readmenator/_sourceview.py:39` `def __init__(self, config)` -- Initialise with application configuration.
 - `SourceViewBuilder.enabled` (method) `readmenator/_sourceview.py:47` `def enabled(self)` -- Return True when sources may be embedded in the payload.
 - `SourceViewBuilder.build_sources` (method) `readmenator/_sourceview.py:55` `def build_sources(self, nodes, content_map)` -- Build bounded source entries for every node in sorted order.
-- `SourceViewBuilder.to_payload` (method) `readmenator/_sourceview.py:105` `def to_payload(self, sources)` -- Serialise source entries to JSON-safe payload records.
+- `SourceViewBuilder.build_reasons` (method) `readmenator/_sourceview.py:70` `def build_reasons(self, nodes, content_map)` -- Explain every file left without embedded source.
+- `SourceViewBuilder.to_payload` (method) `readmenator/_sourceview.py:149` `def to_payload(self, sources)` -- Serialise source entries to JSON-safe payload records.
 
 ## readmenator/_symindex.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`

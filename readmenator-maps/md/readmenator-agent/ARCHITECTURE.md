@@ -428,6 +428,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_security.py` -> `readmenator/_config.py`
 - `tests/test_security.py` -> `readmenator/_models.py`
 - `tests/test_security.py` -> `readmenator/_security.py`
+- `tests/test_sourceview.py` -> `readmenator/_app.py`
 - `tests/test_sourceview.py` -> `readmenator/_bundlegraph.py`
 - `tests/test_sourceview.py` -> `readmenator/_config.py`
 - `tests/test_sourceview.py` -> `readmenator/_forcegraph.py`

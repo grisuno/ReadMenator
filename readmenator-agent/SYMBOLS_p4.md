@@ -3,6 +3,9 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_card_skipped_when_disabled` | method | `tests/test_components.py:305` | `def test_card_skipped_when_disabled(self)` |
+| `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
+| `test_docs_collect_components_overview` | method | `tests/test_components.py:319` | `def test_docs_collect_components_overview(self)` |
 | `test_empty_project_yields_empty_diagram` | method | `tests/test_components.py:133` | `def test_empty_project_yields_empty_diagram(self)` |
 | `test_export_diagrams_links_components_card` | method | `tests/test_components.py:251` | `def test_export_diagrams_links_components_card(self)` |
 | `test_export_pages_links_components_relatively` | method | `tests/test_components.py:266` | `def test_export_pages_links_components_relatively(self)` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_node_creation` | method | `tests/test_models.py:21` | `def test_node_creation(self)` |
 | `test_node_with_symbols` | method | `tests/test_models.py:35` | `def test_node_with_symbols(self)` |
 | `test_pluralize_class` | method | `tests/test_models.py:57` | `def test_pluralize_class(self)` |
-| `test_pluralize_unknown_appends_s` | method | `tests/test_models.py:62` | `def test_pluralize_unknown_appends_s(self)` |
-| `test_symbol_creation` | method | `tests/test_models.py:7` | `def test_symbol_creation(self)` |
-| `test_symbol_with_signature` | method | `tests/test_models.py:15` | `def test_symbol_with_signature(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

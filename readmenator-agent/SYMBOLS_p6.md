@@ -3,6 +3,16 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestUmlCodeGenerationCpp` | class | `tests/test_uml.py:181` | `class TestUmlCodeGenerationCpp(TestCase)` |
+| `TestUmlCodeGenerationGo` | class | `tests/test_uml.py:306` | `class TestUmlCodeGenerationGo(TestCase)` |
+| `TestUmlCodeGenerationJava` | class | `tests/test_uml.py:239` | `class TestUmlCodeGenerationJava(TestCase)` |
+| `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` | class | `tests/test_uml.py:427` | `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)` |
+| `TestUmlCodeGenerationPhp` | class | `tests/test_uml.py:387` | `class TestUmlCodeGenerationPhp(TestCase)` |
+| `TestUmlCodeGenerationRust` | class | `tests/test_uml.py:347` | `class TestUmlCodeGenerationRust(TestCase)` |
+| `TestUmlMermaidDiagram` | class | `tests/test_uml.py:16` | `class TestUmlMermaidDiagram(TestCase)` |
+| `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
+| `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
+| `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |

@@ -7,7 +7,7 @@ These files have the most connections. Changes here have high blast radius.
 - `readmenator/_models.py` (score: 196.30, imported by 96 files)
 - `readmenator/_config.py` (score: 172.10, imported by 86 files)
 - `readmenator/_pipeline.py` (score: 87.00, imported by 1 files)
-- `readmenator/_app.py` (score: 73.50, imported by 12 files)
+- `readmenator/_app.py` (score: 75.60, imported by 13 files)
 - `readmenator/parsers/__init__.py` (score: 48.20, imported by 3 files)
 - `readmenator/parsers/_base.py` (score: 44.60, imported by 20 files)
 - `readmenator/_forcegraph.py` (score: 34.20, imported by 8 files)
@@ -19,7 +19,7 @@ Editing these files can break the listed number of dependents. Run their tests a
 - `readmenator/_category.py` -- 9 direct, 99 total dependents
 - `readmenator/_models.py` -- 50 direct, 96 total dependents
 - `readmenator/_config.py` -- 50 direct, 86 total dependents
-- `readmenator/parsers/_base.py` -- 20 direct, 41 total dependents
+- `readmenator/parsers/_base.py` -- 20 direct, 42 total dependents
 - `readmenator/_purpose.py` -- 7 direct, 32 total dependents
 - `readmenator/_rank.py` -- 11 direct, 32 total dependents
 - `readmenator/_resolver.py` -- 7 direct, 30 total dependents

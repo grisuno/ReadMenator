@@ -3,6 +3,9 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `__init__` | method | `readmenator/_uml.py:36` | `def __init__(self, config)` |
+| `_cpp_params` | method | `readmenator/_uml.py:259` | `def _cpp_params(params)` |
+| `_cs_params` | method | `readmenator/_uml.py:345` | `def _cs_params(params)` |
 | `_extract_params` | method | `readmenator/_uml.py:592` | `def _extract_params(signature)` |
 | `_find_node` | method | `readmenator/_uml.py:165` | `def _find_node(nodes, node_id)` |
 | `_generate_cpp` | method | `readmenator/_uml.py:233` | `def _generate_cpp(class_symbols, nodes, edges)` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `setUp` | method | `tests/test_components.py:97` | `def setUp(self)` |
 | `setUp` | method | `tests/test_components.py:143` | `def setUp(self)` |
 | `test_build_records_layers_hub_and_counts` | method | `tests/test_components.py:177` | `def test_build_records_layers_hub_and_counts(self)` |
-| `test_card_skipped_when_disabled` | method | `tests/test_components.py:305` | `def test_card_skipped_when_disabled(self)` |
-| `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
-| `test_docs_collect_components_overview` | method | `tests/test_components.py:319` | `def test_docs_collect_components_overview(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

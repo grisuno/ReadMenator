@@ -3,6 +3,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `permalink` | method | `readmenator/_gh_wiki.py:164` | `def permalink(match)` |
 | `publish` | method | `readmenator/_gh_wiki.py:313` | `def publish(self, project_root, dry_run)` |
 | `render` | method | `readmenator/_gh_wiki.py:179` | `def render(self, project_root, remote)` |
 | `rewrite` | method | `readmenator/_gh_wiki.py:129` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
@@ -462,9 +463,11 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `SourceEntry` | class | `readmenator/_sourceview.py:20` | `class SourceEntry` |
 | `SourceViewBuilder` | class | `readmenator/_sourceview.py:36` | `class SourceViewBuilder` |
 | `__init__` | method | `readmenator/_sourceview.py:39` | `def __init__(self, config)` |
+| `_build` | method | `readmenator/_sourceview.py:89` | `def _build(self, nodes, content_map)` |
+| `build_reasons` | method | `readmenator/_sourceview.py:70` | `def build_reasons(self, nodes, content_map)` |
 | `build_sources` | method | `readmenator/_sourceview.py:55` | `def build_sources(self, nodes, content_map)` |
 | `enabled` | method | `readmenator/_sourceview.py:47` | `def enabled(self)` |
-| `to_payload` | method | `readmenator/_sourceview.py:105` | `def to_payload(self, sources)` |
+| `to_payload` | method | `readmenator/_sourceview.py:149` | `def to_payload(self, sources)` |
 | `CallSite` | class | `readmenator/_symindex.py:65` | `class CallSite` |
 | `ResolvedCall` | class | `readmenator/_symindex.py:84` | `class ResolvedCall` |
 | `SymbolDef` | class | `readmenator/_symindex.py:40` | `class SymbolDef` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_propagate` | method | `readmenator/_taint.py:162` | `def _propagate(self, source_node_id, danger_import, adj, nodes, max_depth)` |
 | `analyze` | method | `readmenator/_taint.py:77` | `def analyze(self, nodes, edges, resolved_edges)` |
 | `UmlGenerator` | class | `readmenator/_uml.py:34` | `class UmlGenerator` |
-| `__init__` | method | `readmenator/_uml.py:36` | `def __init__(self, config)` |
-| `_cpp_params` | method | `readmenator/_uml.py:259` | `def _cpp_params(params)` |
-| `_cs_params` | method | `readmenator/_uml.py:345` | `def _cs_params(params)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

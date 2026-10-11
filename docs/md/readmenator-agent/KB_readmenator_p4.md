@@ -26,7 +26,9 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `__init__` (method, line 39) `def __init__(self, config)`
   - `enabled` (method, line 47) `def enabled(self)`
   - `build_sources` (method, line 55) `def build_sources(self, nodes, content_map)`
-  - `to_payload` (method, line 105) `def to_payload(self, sources)`
+  - `build_reasons` (method, line 70) `def build_reasons(self, nodes, content_map)`
+  - `_build` (method, line 89) `def _build(self, nodes, content_map)`
+  - `to_payload` (method, line 149) `def to_payload(self, sources)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_explorer.py`, `readmenator/_forcegraph.py`, `readmenator/_pipeline.py`, `tests/test_sourceview.py`
 

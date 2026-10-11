@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import html
 import json
+import logging
 import math
 import re
 import shutil
@@ -28,6 +29,8 @@ from readmenator._purpose import file_purpose, first_sentence, truncate_words
 from readmenator._rank import file_pagerank
 from readmenator._resolver import ImportResolver
 from readmenator._sourceview import SourceViewBuilder
+
+logger = logging.getLogger(__name__)
 
 _PLACEHOLDER = re.compile(r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS)__")
 
@@ -199,9 +202,22 @@ class ForceGraphRenderer:
             """Insert a node unless already present."""
             out_nodes.setdefault(node_id, {"id": node_id, "label": label, "type": node_type, **attrs})
 
-        sources = SourceViewBuilder(self._config).to_payload(
-            SourceViewBuilder(self._config).build_sources(nodes, content_map)
+        source_builder = SourceViewBuilder(self._config)
+        sources = source_builder.to_payload(
+            source_builder.build_sources(nodes, content_map)
         )
+        source_why = source_builder.build_reasons(nodes, content_map)
+        if content_map and source_builder.enabled() and source_why:
+            cut = sum(1 for reason in source_why.values() if reason == "budget")
+            if cut:
+                logger.warning(
+                    "Source viewer: %d of %d files without embedded source "
+                    "(SOURCEVIEW budgets hit: MAX_FILES=%d, MAX_TOTAL_CHARS=%d); "
+                    "raise them and rebuild to read every file in the explorer",
+                    cut, len(nodes),
+                    self._config.SOURCEVIEW_MAX_FILES,
+                    self._config.SOURCEVIEW_MAX_TOTAL_CHARS,
+                )
         for node in nodes:
             community = community_of.get(node.node_id)
             layer = (layers or {}).get(node.node_id, "unknown")
@@ -232,6 +248,7 @@ class ForceGraphRenderer:
                 src=str(record.get("t", "")),
                 src_lines=int(record.get("n", 0)),
                 src_cut=int(record.get("c", 0)),
+                src_why=str(source_why.get(node.node_id, "")),
             )
             if community:
                 cid, label = community
@@ -296,6 +313,7 @@ class ForceGraphRenderer:
         analytics: Optional[Dict[str, Any]] = None,
         title: str = "Force Graph",
         home_href: Optional[str] = "index.html",
+        live_api: bool = False,
     ) -> str:
         """Render the standalone force-graph explorer HTML document.
 
@@ -304,6 +322,10 @@ class ForceGraphRenderer:
             analytics: Optional analytics payload for the side panel.
             title: Document title shown in the header.
             home_href: Optional gallery home link; omitted when None.
+            live_api: True when the page is served by the explorer HTTP
+                server, so the source drawer may probe api/source for
+                files without embedded text. Static exports keep False
+                so Pages-style hosting never fires a doomed fetch (404).
 
         Returns:
             Complete HTML document as a string.
@@ -329,7 +351,7 @@ class ForceGraphRenderer:
             "CDN_3D": safe_cdn_3d,
             "DATA": data_json,
             "ANALYTICS": analytics_json,
-            "SETTINGS": json.dumps(self.page_settings(payload)).replace("<", "\\u003c"),
+            "SETTINGS": json.dumps(self.page_settings(payload, live_api=live_api)).replace("<", "\\u003c"),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], FORCEGRAPH_PAGE_TEMPLATE)
 
@@ -356,11 +378,12 @@ class ForceGraphRenderer:
                 languages[language] = self._family_color(language)
         return {"layer": layers, "language": languages}
 
-    def page_settings(self, payload: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Any]:
+    def page_settings(self, payload: Dict[str, List[Dict[str, Any]]], live_api: bool = False) -> Dict[str, Any]:
         """Collect the explorer page settings serialized into the HTML.
 
         Args:
             payload: Heterogeneous graph payload from build_payload.
+            live_api: True when served by the explorer HTTP server.
 
         Returns:
             JSON-serializable settings for physics, hit-testing, 3D view, and palettes.
@@ -417,6 +440,7 @@ class ForceGraphRenderer:
             "orbitSpeed": cfg.FORCEGRAPH_3D_ORBIT_SPEED,
             "flyDistance3d": cfg.FORCEGRAPH_3D_FLY_DISTANCE,
             "srcEnabled": bool(cfg.SOURCEVIEW_ENABLED and not cfg.PRIVACY_MODE),
+            "srcLive": bool(live_api),
             "srcChunk": cfg.SOURCEVIEW_CHUNK_LINES,
             "srcContext": cfg.SOURCEVIEW_CONTEXT_LINES,
             "typeColors": {

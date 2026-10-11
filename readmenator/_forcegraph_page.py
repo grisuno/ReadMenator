@@ -966,7 +966,24 @@ function openSource(id,opts){
   $("src-viewer").classList.add("open");$("src-scrim").classList.add("open");$("src-viewer").setAttribute("aria-hidden","false");
   $("src-title").textContent=n.file||n.label;$("src-lang").textContent=n.language||"?";
   const body=$("src-body");clearEl(body);
-  if(!text){$("src-meta").textContent=(n.file||n.label)+" · no embedded source (rebuild with SOURCEVIEW_ENABLED to read it here)";return;}
+  if(!text){
+    if(!SETTINGS.srcEnabled){$("src-meta").textContent=(n.file||n.label)+" · source viewer disabled (privacy mode or SOURCEVIEW_ENABLED off)";return;}
+    const why=n.src_why||"";
+    if(why==="budget"){$("src-meta").textContent=(n.file||n.label)+" · cut by SOURCEVIEW budgets (raise SOURCEVIEW_MAX_FILES or SOURCEVIEW_MAX_TOTAL_CHARS and rebuild: readmenator . --rebuild)";return;}
+    if(why==="empty"){$("src-meta").textContent=(n.file||n.label)+" · file is empty";return;}
+    const file=n.file||n.label;
+    const stale=()=>{if(my===SRC.job&&SRC.open)$("src-meta").textContent=file+" · no embedded source (file added or changed after the last build; rebuild: readmenator . --rebuild, republish Pages with readmenator . pages)";};
+    if(SETTINGS.srcLive&&location.protocol.indexOf("http")===0&&typeof fetch==="function"){
+      $("src-meta").textContent=file+" · loading live source…";
+      fetch("api/source?file="+encodeURIComponent(file)).then(r=>{if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(d=>{
+        if(my!==SRC.job||!SRC.open)return;
+        if(d&&d.text){n.src=d.text;n.src_lines=d.lines||d.text.split("\n").length;n.src_cut=d.truncated?1:0;n.src_why="";openSource(id,opts);return;}
+        stale();
+      }).catch(stale);
+      return;
+    }
+    stale();return;
+  }
   SRC.lines=text.split("\n");
   const total=SRC.lines.length,shown=n.src_lines||total;
   $("src-meta").textContent=(n.file||n.label)+" · "+shown+" lines"+(n.src_cut?" · truncated":"")+" · loading…";
