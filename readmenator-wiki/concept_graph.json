@@ -133,6 +133,7 @@
         "readmenator/_purpose.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_refactorizer.py",
         "readmenator/_resolver.py",
         "readmenator/_rule_gen.py",
@@ -183,7 +184,7 @@
         "tests/test_uml.py",
         "tests/test_video.py"
       ],
-      "mentions": 397,
+      "mentions": 405,
       "confidence": "EXTRACTED"
     },
     {
@@ -268,7 +269,7 @@
         "tests/test_video.py",
         "tests/test_wiki.py"
       ],
-      "mentions": 542,
+      "mentions": 543,
       "confidence": "EXTRACTED"
     },
     {
@@ -306,6 +307,7 @@
         "readmenator/_pipeline.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_refactorizer.py",
         "readmenator/_resolver.py",
         "readmenator/_scanner.py",
@@ -339,7 +341,7 @@
         "tests/test_taint_bdd.py",
         "tests/test_video.py"
       ],
-      "mentions": 311,
+      "mentions": 313,
       "confidence": "EXTRACTED"
     },
     {
@@ -600,6 +602,124 @@
       "confidence": "EXTRACTED"
     },
     {
+      "name": "when",
+      "files": [
+        "readmenator/_agent_injector.py",
+        "readmenator/_analyzer.py",
+        "readmenator/_app.py",
+        "readmenator/_bundlegraph.py",
+        "readmenator/_components.py",
+        "readmenator/_dataflow.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_embed.py",
+        "readmenator/_exclusions.py",
+        "readmenator/_explorer.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphlayout.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_layers.py",
+        "readmenator/_memory.py",
+        "readmenator/_mermaid.py",
+        "readmenator/_models.py",
+        "readmenator/_ollama.py",
+        "readmenator/_provenance.py",
+        "readmenator/_purpose.py",
+        "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_security.py",
+        "readmenator/_skill_installer.py",
+        "readmenator/_sourceview.py",
+        "readmenator/_symindex.py",
+        "readmenator/_video.py",
+        "readmenator/_watcher.py",
+        "readmenator/parsers/_c.py",
+        "tests/test_agent_injector.py",
+        "tests/test_bundlegraph.py",
+        "tests/test_cache.py",
+        "tests/test_components.py",
+        "tests/test_cursorrules.py",
+        "tests/test_diagrams.py",
+        "tests/test_documentation.py",
+        "tests/test_exporter.py",
+        "tests/test_gh_wiki.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_linter.py",
+        "tests/test_memory.py",
+        "tests/test_mermaid.py",
+        "tests/test_parsers_property.py",
+        "tests/test_ranking.py",
+        "tests/test_readme_injector.py",
+        "tests/test_resolver.py",
+        "tests/test_scanner.py",
+        "tests/test_symindex.py",
+        "tests/test_taint_bdd.py"
+      ],
+      "mentions": 156,
+      "confidence": "EXTRACTED"
+    },
+    {
+      "name": "empty",
+      "files": [
+        "readmenator/_app.py",
+        "readmenator/_bundlegraph.py",
+        "readmenator/_cache.py",
+        "readmenator/_category.py",
+        "readmenator/_components.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_embed.py",
+        "readmenator/_exclusions.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphlayout.py",
+        "readmenator/_memory.py",
+        "readmenator/_purpose.py",
+        "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_scanner.py",
+        "readmenator/_skill_installer.py",
+        "readmenator/_wiki.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_agent_injector.py",
+        "tests/test_agent_output.py",
+        "tests/test_analyzer.py",
+        "tests/test_bundlegraph.py",
+        "tests/test_cache.py",
+        "tests/test_components.py",
+        "tests/test_concepts.py",
+        "tests/test_cpg.py",
+        "tests/test_dataflow.py",
+        "tests/test_dead_code.py",
+        "tests/test_diagrams.py",
+        "tests/test_documentation.py",
+        "tests/test_graphlayout.py",
+        "tests/test_graphrag.py",
+        "tests/test_hotspots.py",
+        "tests/test_layer_rules.py",
+        "tests/test_linter.py",
+        "tests/test_memory.py",
+        "tests/test_ollama.py",
+        "tests/test_parsers_property.py",
+        "tests/test_ranking.py",
+        "tests/test_readme_injector.py",
+        "tests/test_refactorizer.py",
+        "tests/test_resolver.py",
+        "tests/test_rule_gen.py",
+        "tests/test_sarif.py",
+        "tests/test_security.py",
+        "tests/test_sourceview.py",
+        "tests/test_taint.py",
+        "tests/test_uml.py",
+        "tests/test_video.py"
+      ],
+      "mentions": 118,
+      "confidence": "EXTRACTED"
+    },
+    {
       "name": "edges",
       "files": [
         "readmenator/_agent_output.py",
@@ -716,64 +836,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "when",
-      "files": [
-        "readmenator/_agent_injector.py",
-        "readmenator/_analyzer.py",
-        "readmenator/_app.py",
-        "readmenator/_bundlegraph.py",
-        "readmenator/_components.py",
-        "readmenator/_dataflow.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_embed.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_explorer.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_graphlayout.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_layers.py",
-        "readmenator/_memory.py",
-        "readmenator/_mermaid.py",
-        "readmenator/_models.py",
-        "readmenator/_ollama.py",
-        "readmenator/_provenance.py",
-        "readmenator/_purpose.py",
-        "readmenator/_rank.py",
-        "readmenator/_resolver.py",
-        "readmenator/_security.py",
-        "readmenator/_skill_installer.py",
-        "readmenator/_sourceview.py",
-        "readmenator/_symindex.py",
-        "readmenator/_video.py",
-        "readmenator/_watcher.py",
-        "readmenator/parsers/_c.py",
-        "tests/test_agent_injector.py",
-        "tests/test_bundlegraph.py",
-        "tests/test_cache.py",
-        "tests/test_components.py",
-        "tests/test_cursorrules.py",
-        "tests/test_diagrams.py",
-        "tests/test_documentation.py",
-        "tests/test_exporter.py",
-        "tests/test_gh_wiki.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_linter.py",
-        "tests/test_memory.py",
-        "tests/test_mermaid.py",
-        "tests/test_parsers_property.py",
-        "tests/test_ranking.py",
-        "tests/test_readme_injector.py",
-        "tests/test_resolver.py",
-        "tests/test_scanner.py",
-        "tests/test_symindex.py",
-        "tests/test_taint_bdd.py"
-      ],
-      "mentions": 151,
-      "confidence": "EXTRACTED"
-    },
-    {
       "name": "symbol",
       "files": [
         "readmenator/__init__.py",
@@ -832,64 +894,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "empty",
-      "files": [
-        "readmenator/_app.py",
-        "readmenator/_bundlegraph.py",
-        "readmenator/_cache.py",
-        "readmenator/_category.py",
-        "readmenator/_components.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_embed.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_graphlayout.py",
-        "readmenator/_memory.py",
-        "readmenator/_purpose.py",
-        "readmenator/_rank.py",
-        "readmenator/_resolver.py",
-        "readmenator/_scanner.py",
-        "readmenator/_skill_installer.py",
-        "readmenator/_wiki.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_agent_injector.py",
-        "tests/test_agent_output.py",
-        "tests/test_analyzer.py",
-        "tests/test_bundlegraph.py",
-        "tests/test_cache.py",
-        "tests/test_components.py",
-        "tests/test_concepts.py",
-        "tests/test_cpg.py",
-        "tests/test_dataflow.py",
-        "tests/test_dead_code.py",
-        "tests/test_diagrams.py",
-        "tests/test_documentation.py",
-        "tests/test_graphlayout.py",
-        "tests/test_graphrag.py",
-        "tests/test_hotspots.py",
-        "tests/test_layer_rules.py",
-        "tests/test_linter.py",
-        "tests/test_memory.py",
-        "tests/test_ollama.py",
-        "tests/test_parsers_property.py",
-        "tests/test_ranking.py",
-        "tests/test_readme_injector.py",
-        "tests/test_refactorizer.py",
-        "tests/test_resolver.py",
-        "tests/test_rule_gen.py",
-        "tests/test_sarif.py",
-        "tests/test_security.py",
-        "tests/test_sourceview.py",
-        "tests/test_taint.py",
-        "tests/test_uml.py",
-        "tests/test_video.py"
-      ],
-      "mentions": 117,
-      "confidence": "EXTRACTED"
-    },
-    {
       "name": "build",
       "files": [
         "readmenator/__main__.py",
@@ -941,7 +945,7 @@
         "tests/test_taint_bdd.py",
         "tests/test_video.py"
       ],
-      "mentions": 230,
+      "mentions": 231,
       "confidence": "EXTRACTED"
     },
     {
@@ -1089,6 +1093,7 @@
         "readmenator/_purpose.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_refactorizer.py",
         "readmenator/_resolver.py",
         "readmenator/_rule_gen.py",
@@ -1104,7 +1109,7 @@
         "readmenator/_yaralite.py",
         "readmenator/parsers/_base.py"
       ],
-      "mentions": 280,
+      "mentions": 288,
       "confidence": "EXTRACTED"
     },
     {
@@ -1141,6 +1146,7 @@
         "readmenator/_purpose.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_scanner.py",
         "readmenator/_security.py",
         "readmenator/_skill_installer.py",
@@ -1157,7 +1163,61 @@
         "tests/test_memory.py",
         "tests/test_parsers_property.py"
       ],
-      "mentions": 182,
+      "mentions": 184,
+      "confidence": "EXTRACTED"
+    },
+    {
+      "name": "all",
+      "files": [
+        "readmenator/_agent_injector.py",
+        "readmenator/_agent_output.py",
+        "readmenator/_analyzer.py",
+        "readmenator/_app.py",
+        "readmenator/_cache.py",
+        "readmenator/_category.py",
+        "readmenator/_components.py",
+        "readmenator/_config.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_exporter.py",
+        "readmenator/_forcegraph_page.py",
+        "readmenator/_hotspots.py",
+        "readmenator/_layer_rules.py",
+        "readmenator/_linter.py",
+        "readmenator/_mcp_server.py",
+        "readmenator/_models.py",
+        "readmenator/_pipeline.py",
+        "readmenator/_query.py",
+        "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_rule_gen.py",
+        "readmenator/_security.py",
+        "readmenator/_symindex.py",
+        "readmenator/_taint.py",
+        "readmenator/_video.py",
+        "readmenator/_watcher.py",
+        "readmenator/_wiki.py",
+        "readmenator/_yaralite.py",
+        "readmenator/parsers/_base.py",
+        "readmenator_orchestrator.py",
+        "tests/test_agent_injector.py",
+        "tests/test_agent_output.py",
+        "tests/test_cache.py",
+        "tests/test_config.py",
+        "tests/test_dead_code.py",
+        "tests/test_diagrams.py",
+        "tests/test_graphrag.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_mcp_server.py",
+        "tests/test_memory.py",
+        "tests/test_parsers_property.py",
+        "tests/test_ranking.py",
+        "tests/test_readme_injector.py",
+        "tests/test_security.py",
+        "tests/test_video.py",
+        "tests/test_wiki.py"
+      ],
+      "mentions": 81,
       "confidence": "EXTRACTED"
     },
     {
@@ -1214,58 +1274,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "all",
-      "files": [
-        "readmenator/_agent_injector.py",
-        "readmenator/_agent_output.py",
-        "readmenator/_analyzer.py",
-        "readmenator/_app.py",
-        "readmenator/_cache.py",
-        "readmenator/_category.py",
-        "readmenator/_components.py",
-        "readmenator/_config.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_exporter.py",
-        "readmenator/_forcegraph_page.py",
-        "readmenator/_hotspots.py",
-        "readmenator/_layer_rules.py",
-        "readmenator/_linter.py",
-        "readmenator/_mcp_server.py",
-        "readmenator/_models.py",
-        "readmenator/_pipeline.py",
-        "readmenator/_query.py",
-        "readmenator/_rank.py",
-        "readmenator/_resolver.py",
-        "readmenator/_rule_gen.py",
-        "readmenator/_security.py",
-        "readmenator/_symindex.py",
-        "readmenator/_taint.py",
-        "readmenator/_video.py",
-        "readmenator/_watcher.py",
-        "readmenator/_wiki.py",
-        "readmenator/_yaralite.py",
-        "readmenator/parsers/_base.py",
-        "readmenator_orchestrator.py",
-        "tests/test_agent_injector.py",
-        "tests/test_agent_output.py",
-        "tests/test_cache.py",
-        "tests/test_config.py",
-        "tests/test_dead_code.py",
-        "tests/test_diagrams.py",
-        "tests/test_graphrag.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_mcp_server.py",
-        "tests/test_memory.py",
-        "tests/test_parsers_property.py",
-        "tests/test_ranking.py",
-        "tests/test_security.py",
-        "tests/test_video.py",
-        "tests/test_wiki.py"
-      ],
-      "mentions": 79,
-      "confidence": "EXTRACTED"
-    },
-    {
       "name": "project",
       "files": [
         "readmenator/_agent_injector.py",
@@ -1313,7 +1321,7 @@
         "tests/test_taint_bdd.py",
         "tests/test_video.py"
       ],
-      "mentions": 210,
+      "mentions": 216,
       "confidence": "EXTRACTED"
     },
     {
@@ -1337,6 +1345,7 @@
         "readmenator/_linter.py",
         "readmenator/_memory.py",
         "readmenator/_provenance.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_refactorizer.py",
         "readmenator/_rule_gen.py",
         "readmenator/_scanner.py",
@@ -1363,7 +1372,7 @@
         "tests/test_security.py",
         "tests/test_symindex.py"
       ],
-      "mentions": 90,
+      "mentions": 93,
       "confidence": "EXTRACTED"
     },
     {
@@ -1417,6 +1426,55 @@
       "confidence": "EXTRACTED"
     },
     {
+      "name": "path",
+      "files": [
+        "readmenator/_agent_output.py",
+        "readmenator/_analyzer.py",
+        "readmenator/_app.py",
+        "readmenator/_bundlegraph.py",
+        "readmenator/_category.py",
+        "readmenator/_components.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_exclusions.py",
+        "readmenator/_explain.py",
+        "readmenator/_explorer.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphlayout.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_layers.py",
+        "readmenator/_mcp_server.py",
+        "readmenator/_memory.py",
+        "readmenator/_models.py",
+        "readmenator/_provenance.py",
+        "readmenator/_query.py",
+        "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_scanner.py",
+        "readmenator/_security.py",
+        "readmenator/_skill_installer.py",
+        "readmenator/_wiki.py",
+        "readmenator/parsers/_base.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_bundlegraph.py",
+        "tests/test_dead_code.py",
+        "tests/test_documentation.py",
+        "tests/test_graphlayout.py",
+        "tests/test_integration.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_mcp_server.py",
+        "tests/test_query.py",
+        "tests/test_ranking.py",
+        "tests/test_security.py",
+        "tests/test_taint.py",
+        "tests/test_taint_bdd.py"
+      ],
+      "mentions": 166,
+      "confidence": "EXTRACTED"
+    },
+    {
       "name": "source",
       "files": [
         "readmenator.py",
@@ -1466,51 +1524,52 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "path",
+      "name": "edge",
       "files": [
-        "readmenator/_agent_output.py",
-        "readmenator/_analyzer.py",
+        "readmenator/__init__.py",
         "readmenator/_app.py",
         "readmenator/_bundlegraph.py",
+        "readmenator/_bundlegraph_page.py",
         "readmenator/_category.py",
-        "readmenator/_components.py",
+        "readmenator/_concepts.py",
         "readmenator/_diagrams.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_explain.py",
-        "readmenator/_explorer.py",
         "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
         "readmenator/_graphlayout.py",
         "readmenator/_graphrag.py",
-        "readmenator/_layers.py",
-        "readmenator/_mcp_server.py",
-        "readmenator/_memory.py",
+        "readmenator/_mermaid.py",
         "readmenator/_models.py",
-        "readmenator/_provenance.py",
+        "readmenator/_pipeline.py",
+        "readmenator/_projections.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
-        "readmenator/_resolver.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_scanner.py",
-        "readmenator/_security.py",
-        "readmenator/_skill_installer.py",
-        "readmenator/_wiki.py",
-        "readmenator/parsers/_base.py",
+        "readmenator/_sourceview.py",
+        "readmenator/_symindex.py",
+        "readmenator/_video.py",
         "tests/test_agent_friendliness.py",
+        "tests/test_agent_injector.py",
+        "tests/test_agent_output.py",
+        "tests/test_analyzer.py",
         "tests/test_bundlegraph.py",
+        "tests/test_components.py",
         "tests/test_dead_code.py",
-        "tests/test_documentation.py",
+        "tests/test_diagrams.py",
+        "tests/test_exporter.py",
         "tests/test_graphlayout.py",
-        "tests/test_integration.py",
         "tests/test_interactive_graph.py",
-        "tests/test_mcp_server.py",
-        "tests/test_query.py",
+        "tests/test_layer_rules.py",
+        "tests/test_linter.py",
+        "tests/test_mermaid.py",
+        "tests/test_models.py",
+        "tests/test_parsers_property.py",
         "tests/test_ranking.py",
-        "tests/test_security.py",
-        "tests/test_taint.py",
-        "tests/test_taint_bdd.py"
+        "tests/test_readme_injector.py",
+        "tests/test_refactorizer.py",
+        "tests/test_resolver.py",
+        "tests/test_symindex.py"
       ],
-      "mentions": 165,
+      "mentions": 118,
       "confidence": "EXTRACTED"
     },
     {
@@ -1559,54 +1618,6 @@
         "tests/test_wiki.py"
       ],
       "mentions": 164,
-      "confidence": "EXTRACTED"
-    },
-    {
-      "name": "edge",
-      "files": [
-        "readmenator/__init__.py",
-        "readmenator/_app.py",
-        "readmenator/_bundlegraph.py",
-        "readmenator/_bundlegraph_page.py",
-        "readmenator/_category.py",
-        "readmenator/_concepts.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_graphlayout.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_mermaid.py",
-        "readmenator/_models.py",
-        "readmenator/_pipeline.py",
-        "readmenator/_projections.py",
-        "readmenator/_query.py",
-        "readmenator/_rank.py",
-        "readmenator/_scanner.py",
-        "readmenator/_sourceview.py",
-        "readmenator/_symindex.py",
-        "readmenator/_video.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_agent_injector.py",
-        "tests/test_agent_output.py",
-        "tests/test_analyzer.py",
-        "tests/test_bundlegraph.py",
-        "tests/test_components.py",
-        "tests/test_dead_code.py",
-        "tests/test_diagrams.py",
-        "tests/test_exporter.py",
-        "tests/test_graphlayout.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_layer_rules.py",
-        "tests/test_linter.py",
-        "tests/test_mermaid.py",
-        "tests/test_models.py",
-        "tests/test_parsers_property.py",
-        "tests/test_ranking.py",
-        "tests/test_readme_injector.py",
-        "tests/test_refactorizer.py",
-        "tests/test_resolver.py",
-        "tests/test_symindex.py"
-      ],
-      "mentions": 117,
       "confidence": "EXTRACTED"
     },
     {
@@ -1746,7 +1757,7 @@
         "tests/test_integration.py",
         "tests/test_readme_injector.py"
       ],
-      "mentions": 66,
+      "mentions": 68,
       "confidence": "EXTRACTED"
     },
     {
@@ -1773,6 +1784,7 @@
         "readmenator/_ollama.py",
         "readmenator/_purpose.py",
         "readmenator/_query.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_security.py",
         "readmenator/_sourceview.py",
         "readmenator/_symindex.py",
@@ -1789,7 +1801,7 @@
         "tests/test_sourceview.py",
         "tests/test_video.py"
       ],
-      "mentions": 111,
+      "mentions": 112,
       "confidence": "EXTRACTED"
     },
     {
@@ -1815,6 +1827,7 @@
         "readmenator/_purpose.py",
         "readmenator/_query.py",
         "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_scanner.py",
         "readmenator/_scantext.py",
         "readmenator/_sourceview.py",
@@ -1831,7 +1844,7 @@
         "tests/test_parsers_property.py",
         "tests/test_sourceview.py"
       ],
-      "mentions": 158,
+      "mentions": 165,
       "confidence": "EXTRACTED"
     },
     {
@@ -1855,6 +1868,7 @@
         "readmenator/_memory.py",
         "readmenator/_ollama.py",
         "readmenator/_purpose.py",
+        "readmenator/_readme_injector.py",
         "readmenator/_refactorizer.py",
         "readmenator/_resolver.py",
         "readmenator/_security.py",
@@ -1873,7 +1887,7 @@
         "tests/test_video.py",
         "tests/test_wiki.py"
       ],
-      "mentions": 59,
+      "mentions": 60,
       "confidence": "EXTRACTED"
     },
     {
@@ -1916,6 +1930,47 @@
         "tests/test_refactorizer.py"
       ],
       "mentions": 54,
+      "confidence": "EXTRACTED"
+    },
+    {
+      "name": "directory",
+      "files": [
+        "readmenator/_agent_output.py",
+        "readmenator/_analyzer.py",
+        "readmenator/_app.py",
+        "readmenator/_cache.py",
+        "readmenator/_components.py",
+        "readmenator/_config.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_exclusions.py",
+        "readmenator/_explorer.py",
+        "readmenator/_exporter.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_memory.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_rule_gen.py",
+        "readmenator/_scanner.py",
+        "readmenator/_security.py",
+        "readmenator/_skill_installer.py",
+        "readmenator/_watcher.py",
+        "readmenator/_wiki.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_agent_output.py",
+        "tests/test_analyzer.py",
+        "tests/test_bundlegraph.py",
+        "tests/test_diagrams.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_memory.py",
+        "tests/test_resolver.py",
+        "tests/test_scanner.py",
+        "tests/test_security.py",
+        "tests/test_wiki.py"
+      ],
+      "mentions": 145,
       "confidence": "EXTRACTED"
     },
     {
@@ -2001,46 +2056,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "directory",
-      "files": [
-        "readmenator/_agent_output.py",
-        "readmenator/_analyzer.py",
-        "readmenator/_app.py",
-        "readmenator/_cache.py",
-        "readmenator/_components.py",
-        "readmenator/_config.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_explorer.py",
-        "readmenator/_exporter.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_memory.py",
-        "readmenator/_resolver.py",
-        "readmenator/_rule_gen.py",
-        "readmenator/_scanner.py",
-        "readmenator/_security.py",
-        "readmenator/_skill_installer.py",
-        "readmenator/_watcher.py",
-        "readmenator/_wiki.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_agent_output.py",
-        "tests/test_analyzer.py",
-        "tests/test_bundlegraph.py",
-        "tests/test_diagrams.py",
-        "tests/test_interactive_graph.py",
-        "tests/test_memory.py",
-        "tests/test_resolver.py",
-        "tests/test_scanner.py",
-        "tests/test_security.py",
-        "tests/test_wiki.py"
-      ],
-      "mentions": 132,
-      "confidence": "EXTRACTED"
-    },
-    {
       "name": "resolved",
       "files": [
         "readmenator/_agent_output.py",
@@ -2118,6 +2133,45 @@
         "tests/test_wiki.py"
       ],
       "mentions": 54,
+      "confidence": "EXTRACTED"
+    },
+    {
+      "name": "line",
+      "files": [
+        "readmenator/__main__.py",
+        "readmenator/_agent_output.py",
+        "readmenator/_app.py",
+        "readmenator/_dataflow.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_explorer.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_linter.py",
+        "readmenator/_memory.py",
+        "readmenator/_models.py",
+        "readmenator/_purpose.py",
+        "readmenator/_query.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_refactorizer.py",
+        "readmenator/_security.py",
+        "readmenator/_sourceview.py",
+        "readmenator/_symindex.py",
+        "readmenator/_video.py",
+        "readmenator/_yaralite.py",
+        "readmenator/parsers/_assembly.py",
+        "readmenator/parsers/_base.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_components.py",
+        "tests/test_dataflow.py",
+        "tests/test_documentation.py",
+        "tests/test_memory.py",
+        "tests/test_parsers.py",
+        "tests/test_refactorizer.py",
+        "tests/test_sourceview.py",
+        "tests/test_symindex.py"
+      ],
+      "mentions": 111,
       "confidence": "EXTRACTED"
     },
     {
@@ -2237,44 +2291,6 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "line",
-      "files": [
-        "readmenator/__main__.py",
-        "readmenator/_agent_output.py",
-        "readmenator/_app.py",
-        "readmenator/_dataflow.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_explorer.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_linter.py",
-        "readmenator/_memory.py",
-        "readmenator/_models.py",
-        "readmenator/_purpose.py",
-        "readmenator/_query.py",
-        "readmenator/_refactorizer.py",
-        "readmenator/_security.py",
-        "readmenator/_sourceview.py",
-        "readmenator/_symindex.py",
-        "readmenator/_video.py",
-        "readmenator/_yaralite.py",
-        "readmenator/parsers/_assembly.py",
-        "readmenator/parsers/_base.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_components.py",
-        "tests/test_dataflow.py",
-        "tests/test_documentation.py",
-        "tests/test_memory.py",
-        "tests/test_parsers.py",
-        "tests/test_refactorizer.py",
-        "tests/test_sourceview.py",
-        "tests/test_symindex.py"
-      ],
-      "mentions": 110,
-      "confidence": "EXTRACTED"
-    },
-    {
       "name": "name",
       "files": [
         "readmenator/_agent_output.py",
@@ -2310,6 +2326,44 @@
         "tests/test_symindex.py"
       ],
       "mentions": 106,
+      "confidence": "EXTRACTED"
+    },
+    {
+      "name": "string",
+      "files": [
+        "readmenator/_app.py",
+        "readmenator/_bundlegraph.py",
+        "readmenator/_category.py",
+        "readmenator/_components.py",
+        "readmenator/_cpg.py",
+        "readmenator/_cursorrules_generator.py",
+        "readmenator/_dataflow.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_explain.py",
+        "readmenator/_exporter.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_mermaid.py",
+        "readmenator/_models.py",
+        "readmenator/_provenance.py",
+        "readmenator/_purpose.py",
+        "readmenator/_query.py",
+        "readmenator/_rank.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_resolver.py",
+        "readmenator/_sarif.py",
+        "readmenator/_scanner.py",
+        "readmenator/_security.py",
+        "readmenator/_wiki.py",
+        "readmenator/_yaralite.py",
+        "tests/test_cache.py",
+        "tests/test_cursorrules.py",
+        "tests/test_dataflow.py",
+        "tests/test_exporter.py",
+        "tests/test_uml.py"
+      ],
+      "mentions": 83,
       "confidence": "EXTRACTED"
     },
     {
@@ -2351,40 +2405,40 @@
       "confidence": "EXTRACTED"
     },
     {
-      "name": "string",
+      "name": "output",
       "files": [
+        "readmenator/_agent_output.py",
         "readmenator/_app.py",
         "readmenator/_bundlegraph.py",
-        "readmenator/_category.py",
         "readmenator/_components.py",
-        "readmenator/_cpg.py",
         "readmenator/_cursorrules_generator.py",
-        "readmenator/_dataflow.py",
         "readmenator/_diagrams.py",
-        "readmenator/_explain.py",
+        "readmenator/_explorer.py",
         "readmenator/_exporter.py",
         "readmenator/_forcegraph.py",
         "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_mermaid.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_memory.py",
         "readmenator/_models.py",
-        "readmenator/_provenance.py",
-        "readmenator/_purpose.py",
+        "readmenator/_ollama.py",
+        "readmenator/_pipeline.py",
         "readmenator/_query.py",
-        "readmenator/_rank.py",
-        "readmenator/_resolver.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_rule_gen.py",
         "readmenator/_sarif.py",
         "readmenator/_scanner.py",
-        "readmenator/_security.py",
         "readmenator/_wiki.py",
-        "readmenator/_yaralite.py",
-        "tests/test_cache.py",
-        "tests/test_cursorrules.py",
+        "tests/test_agent_friendliness.py",
+        "tests/test_agent_output.py",
+        "tests/test_components.py",
+        "tests/test_cpg.py",
         "tests/test_dataflow.py",
-        "tests/test_exporter.py",
-        "tests/test_uml.py"
+        "tests/test_diagrams.py",
+        "tests/test_documentation.py",
+        "tests/test_security.py",
+        "tests/test_video.py"
       ],
-      "mentions": 82,
+      "mentions": 118,
       "confidence": "EXTRACTED"
     },
     {
@@ -2425,6 +2479,43 @@
       "confidence": "EXTRACTED"
     },
     {
+      "name": "only",
+      "files": [
+        "readmenator/_app.py",
+        "readmenator/_bundlegraph.py",
+        "readmenator/_cache.py",
+        "readmenator/_components.py",
+        "readmenator/_dataflow.py",
+        "readmenator/_diagrams.py",
+        "readmenator/_forcegraph.py",
+        "readmenator/_gh_wiki.py",
+        "readmenator/_gitmeta.py",
+        "readmenator/_graphrag.py",
+        "readmenator/_layers.py",
+        "readmenator/_memory.py",
+        "readmenator/_ollama.py",
+        "readmenator/_projections.py",
+        "readmenator/_provenance.py",
+        "readmenator/_query.py",
+        "readmenator/_readme_injector.py",
+        "readmenator/_refactorizer.py",
+        "readmenator/_resolver.py",
+        "readmenator/_security.py",
+        "readmenator/_skill_installer.py",
+        "tests/test_bundlegraph.py",
+        "tests/test_components.py",
+        "tests/test_dataflow.py",
+        "tests/test_gh_wiki.py",
+        "tests/test_interactive_graph.py",
+        "tests/test_memory.py",
+        "tests/test_ollama.py",
+        "tests/test_parsers_property.py",
+        "tests/test_sourceview.py"
+      ],
+      "mentions": 56,
+      "confidence": "EXTRACTED"
+    },
+    {
       "name": "community",
       "files": [
         "readmenator/_analytics.py",
@@ -2458,78 +2549,6 @@
         "tests/test_wiki.py"
       ],
       "mentions": 145,
-      "confidence": "EXTRACTED"
-    },
-    {
-      "name": "output",
-      "files": [
-        "readmenator/_agent_output.py",
-        "readmenator/_app.py",
-        "readmenator/_bundlegraph.py",
-        "readmenator/_components.py",
-        "readmenator/_cursorrules_generator.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_explorer.py",
-        "readmenator/_exporter.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_memory.py",
-        "readmenator/_models.py",
-        "readmenator/_ollama.py",
-        "readmenator/_pipeline.py",
-        "readmenator/_query.py",
-        "readmenator/_rule_gen.py",
-        "readmenator/_sarif.py",
-        "readmenator/_scanner.py",
-        "readmenator/_wiki.py",
-        "tests/test_agent_friendliness.py",
-        "tests/test_agent_output.py",
-        "tests/test_components.py",
-        "tests/test_cpg.py",
-        "tests/test_dataflow.py",
-        "tests/test_diagrams.py",
-        "tests/test_documentation.py",
-        "tests/test_security.py",
-        "tests/test_video.py"
-      ],
-      "mentions": 98,
-      "confidence": "EXTRACTED"
-    },
-    {
-      "name": "mapping",
-      "files": [
-        "readmenator/_analytics.py",
-        "readmenator/_analyzer.py",
-        "readmenator/_app.py",
-        "readmenator/_cache.py",
-        "readmenator/_components.py",
-        "readmenator/_cursorrules_generator.py",
-        "readmenator/_diagrams.py",
-        "readmenator/_embed.py",
-        "readmenator/_exclusions.py",
-        "readmenator/_explorer.py",
-        "readmenator/_exporter.py",
-        "readmenator/_forcegraph.py",
-        "readmenator/_gh_wiki.py",
-        "readmenator/_gitmeta.py",
-        "readmenator/_graphlayout.py",
-        "readmenator/_graphrag.py",
-        "readmenator/_layer_rules.py",
-        "readmenator/_layers.py",
-        "readmenator/_linter.py",
-        "readmenator/_provenance.py",
-        "readmenator/_query.py",
-        "readmenator/_rank.py",
-        "readmenator/_refactorizer.py",
-        "readmenator/_resolver.py",
-        "readmenator/_rule_gen.py",
-        "readmenator/_scantext.py",
-        "readmenator/_sourceview.py",
-        "readmenator/_symindex.py",
-        "tests/test_concepts.py"
-      ],
-      "mentions": 79,
       "confidence": "EXTRACTED"
     }
   ],
@@ -2687,6 +2706,25 @@
       ]
     },
     {
+      "source": "file",
+      "target": "graph",
+      "verb": "depends_on",
+      "strength": 0.79,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/_agent_output.py->readmenator/_config.py",
+        "readmenator/_agent_output.py->readmenator/_models.py",
+        "readmenator/_agent_output.py->readmenator/_resolver.py",
+        "readmenator/_agent_output.py->readmenator/_security.py",
+        "readmenator/_analytics.py->readmenator/_config.py",
+        "readmenator/_analytics.py->readmenator/_models.py",
+        "readmenator/_analyzer.py->readmenator/_config.py",
+        "readmenator/_analyzer.py->readmenator/_models.py",
+        "readmenator/_app.py->readmenator/_bundlegraph.py",
+        "readmenator/_app.py->readmenator/_config.py"
+      ]
+    },
+    {
       "source": "return",
       "target": "readmenator",
       "verb": "depends_on",
@@ -2703,25 +2741,6 @@
         "readmenator/_analyzer.py->readmenator/_config.py",
         "readmenator/_analyzer.py->readmenator/_models.py",
         "readmenator/_app.py->readmenator/_bundlegraph.py"
-      ]
-    },
-    {
-      "source": "file",
-      "target": "graph",
-      "verb": "depends_on",
-      "strength": 0.78,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/_agent_output.py->readmenator/_config.py",
-        "readmenator/_agent_output.py->readmenator/_models.py",
-        "readmenator/_agent_output.py->readmenator/_resolver.py",
-        "readmenator/_agent_output.py->readmenator/_security.py",
-        "readmenator/_analytics.py->readmenator/_config.py",
-        "readmenator/_analytics.py->readmenator/_models.py",
-        "readmenator/_analyzer.py->readmenator/_config.py",
-        "readmenator/_analyzer.py->readmenator/_models.py",
-        "readmenator/_app.py->readmenator/_bundlegraph.py",
-        "readmenator/_app.py->readmenator/_config.py"
       ]
     },
     {
@@ -2878,6 +2897,25 @@
     },
     {
       "source": "readmenator",
+      "target": "graph",
+      "verb": "depends_on",
+      "strength": 0.74,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_concepts.py",
+        "readmenator/__init__.py->readmenator/_config.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py"
+      ]
+    },
+    {
+      "source": "readmenator",
       "target": "import",
       "verb": "depends_on",
       "strength": 0.74,
@@ -2988,25 +3026,6 @@
         "readmenator/_analytics.py->readmenator/_config.py",
         "readmenator/_analytics.py->readmenator/_models.py",
         "readmenator/_analyzer.py->readmenator/_config.py"
-      ]
-    },
-    {
-      "source": "readmenator",
-      "target": "graph",
-      "verb": "depends_on",
-      "strength": 0.73,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_concepts.py",
-        "readmenator/__init__.py->readmenator/_config.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/__main__.py->readmenator/_app.py"
       ]
     },
     {
@@ -3181,6 +3200,25 @@
       ]
     },
     {
+      "source": "readmenator",
+      "target": "all",
+      "verb": "depends_on",
+      "strength": 0.71,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_config.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py",
+        "readmenator/__init__.py->readmenator/_symindex.py"
+      ]
+    },
+    {
       "source": "returns",
       "target": "graph",
       "verb": "depends_on",
@@ -3238,22 +3276,22 @@
       ]
     },
     {
-      "source": "readmenator",
-      "target": "all",
+      "source": "build",
+      "target": "graph",
       "verb": "depends_on",
-      "strength": 0.7,
+      "strength": 0.69,
       "confidence": "INFERRED",
       "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_config.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/__init__.py->readmenator/_symindex.py",
-        "readmenator/__main__.py->readmenator/_app.py"
+        "readmenator/__main__.py->readmenator/_app.py",
+        "readmenator/__main__.py->readmenator/_config.py",
+        "readmenator/__main__.py->readmenator/_mcp_server.py",
+        "readmenator/_agent_output.py->readmenator/_config.py",
+        "readmenator/_agent_output.py->readmenator/_models.py",
+        "readmenator/_agent_output.py->readmenator/_resolver.py",
+        "readmenator/_agent_output.py->readmenator/_security.py",
+        "readmenator/_analytics.py->readmenator/_config.py",
+        "readmenator/_analytics.py->readmenator/_models.py",
+        "readmenator/_analyzer.py->readmenator/_config.py"
       ]
     },
     {
@@ -3333,25 +3371,6 @@
       ]
     },
     {
-      "source": "build",
-      "target": "graph",
-      "verb": "depends_on",
-      "strength": 0.68,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__main__.py->readmenator/_app.py",
-        "readmenator/__main__.py->readmenator/_config.py",
-        "readmenator/__main__.py->readmenator/_mcp_server.py",
-        "readmenator/_agent_output.py->readmenator/_config.py",
-        "readmenator/_agent_output.py->readmenator/_models.py",
-        "readmenator/_agent_output.py->readmenator/_resolver.py",
-        "readmenator/_agent_output.py->readmenator/_security.py",
-        "readmenator/_analytics.py->readmenator/_config.py",
-        "readmenator/_analytics.py->readmenator/_models.py",
-        "readmenator/_analyzer.py->readmenator/_config.py"
-      ]
-    },
-    {
       "source": "file",
       "target": "analysis",
       "verb": "depends_on",
@@ -3387,6 +3406,25 @@
         "readmenator/_app.py->readmenator/_config.py",
         "readmenator/_app.py->readmenator/_dead_code.py",
         "readmenator/_app.py->readmenator/_diagrams.py"
+      ]
+    },
+    {
+      "source": "graph",
+      "target": "all",
+      "verb": "depends_on",
+      "strength": 0.68,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_config.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py",
+        "readmenator/__init__.py->readmenator/_symindex.py"
       ]
     },
     {
@@ -3466,25 +3504,6 @@
       ]
     },
     {
-      "source": "graph",
-      "target": "all",
-      "verb": "depends_on",
-      "strength": 0.67,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_config.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/__init__.py->readmenator/_symindex.py",
-        "readmenator/_analytics.py->readmenator/_config.py"
-      ]
-    },
-    {
       "source": "node",
       "target": "graph",
       "verb": "depends_on",
@@ -3500,7 +3519,7 @@
         "readmenator/__init__.py->readmenator/_mcp_server.py",
         "readmenator/__init__.py->readmenator/_models.py",
         "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/_analytics.py->readmenator/_config.py"
+        "readmenator/__init__.py->readmenator/_readme_injector.py"
       ]
     },
     {
@@ -3561,6 +3580,25 @@
       ]
     },
     {
+      "source": "symbol",
+      "target": "graph",
+      "verb": "depends_on",
+      "strength": 0.66,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_concepts.py",
+        "readmenator/__init__.py->readmenator/_config.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py"
+      ]
+    },
+    {
       "source": "edges",
       "target": "file",
       "verb": "depends_on",
@@ -3596,25 +3634,6 @@
         "readmenator/_analyzer.py->readmenator/_models.py",
         "readmenator/_app.py->readmenator/_config.py",
         "readmenator/_app.py->readmenator/_diagrams.py"
-      ]
-    },
-    {
-      "source": "symbol",
-      "target": "graph",
-      "verb": "depends_on",
-      "strength": 0.65,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_concepts.py",
-        "readmenator/__init__.py->readmenator/_config.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/_agent_output.py->readmenator/_config.py"
       ]
     },
     {
@@ -3672,6 +3691,25 @@
         "readmenator/__init__.py->readmenator/_models.py",
         "readmenator/__init__.py->readmenator/_ollama.py",
         "readmenator/__init__.py->readmenator/_rank.py"
+      ]
+    },
+    {
+      "source": "graph",
+      "target": "return",
+      "verb": "depends_on",
+      "strength": 0.64,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_concepts.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_ollama.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py"
       ]
     },
     {
@@ -3865,25 +3903,6 @@
       ]
     },
     {
-      "source": "graph",
-      "target": "return",
-      "verb": "depends_on",
-      "strength": 0.63,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_concepts.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_ollama.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/_analytics.py->readmenator/_models.py"
-      ]
-    },
-    {
       "source": "output",
       "target": "readmenator",
       "verb": "depends_on",
@@ -3900,6 +3919,25 @@
         "readmenator/_app.py->readmenator/_bundlegraph.py",
         "readmenator/_app.py->readmenator/_cache.py",
         "readmenator/_app.py->readmenator/_config.py"
+      ]
+    },
+    {
+      "source": "returns",
+      "target": "all",
+      "verb": "depends_on",
+      "strength": 0.63,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/_analytics.py->readmenator/_config.py",
+        "readmenator/_analytics.py->readmenator/_models.py",
+        "readmenator/_analyzer.py->readmenator/_config.py",
+        "readmenator/_analyzer.py->readmenator/_models.py",
+        "readmenator/_app.py->readmenator/_cache.py",
+        "readmenator/_app.py->readmenator/_config.py",
+        "readmenator/_app.py->readmenator/_diagrams.py",
+        "readmenator/_app.py->readmenator/_linter.py",
+        "readmenator/_app.py->readmenator/_models.py",
+        "readmenator/_app.py->readmenator/_pipeline.py"
       ]
     },
     {
@@ -3995,25 +4033,6 @@
         "readmenator/_analyzer.py->readmenator/_config.py",
         "readmenator/_analyzer.py->readmenator/_models.py",
         "readmenator/_app.py->readmenator/_bundlegraph.py"
-      ]
-    },
-    {
-      "source": "returns",
-      "target": "all",
-      "verb": "depends_on",
-      "strength": 0.62,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/_analytics.py->readmenator/_config.py",
-        "readmenator/_analytics.py->readmenator/_models.py",
-        "readmenator/_analyzer.py->readmenator/_config.py",
-        "readmenator/_analyzer.py->readmenator/_models.py",
-        "readmenator/_app.py->readmenator/_cache.py",
-        "readmenator/_app.py->readmenator/_config.py",
-        "readmenator/_app.py->readmenator/_diagrams.py",
-        "readmenator/_app.py->readmenator/_linter.py",
-        "readmenator/_app.py->readmenator/_models.py",
-        "readmenator/_app.py->readmenator/_pipeline.py"
       ]
     },
     {
@@ -4128,6 +4147,25 @@
         "readmenator/_analyzer.py->readmenator/_config.py",
         "readmenator/_analyzer.py->readmenator/_models.py",
         "readmenator/_app.py->readmenator/_bundlegraph.py"
+      ]
+    },
+    {
+      "source": "node",
+      "target": "all",
+      "verb": "depends_on",
+      "strength": 0.61,
+      "confidence": "INFERRED",
+      "evidence": [
+        "readmenator/__init__.py->readmenator/_app.py",
+        "readmenator/__init__.py->readmenator/_category.py",
+        "readmenator/__init__.py->readmenator/_components.py",
+        "readmenator/__init__.py->readmenator/_config.py",
+        "readmenator/__init__.py->readmenator/_diagrams.py",
+        "readmenator/__init__.py->readmenator/_mcp_server.py",
+        "readmenator/__init__.py->readmenator/_models.py",
+        "readmenator/__init__.py->readmenator/_rank.py",
+        "readmenator/__init__.py->readmenator/_readme_injector.py",
+        "readmenator/__init__.py->readmenator/_symindex.py"
       ]
     },
     {
@@ -4303,25 +4341,6 @@
     },
     {
       "source": "node",
-      "target": "all",
-      "verb": "depends_on",
-      "strength": 0.6,
-      "confidence": "INFERRED",
-      "evidence": [
-        "readmenator/__init__.py->readmenator/_app.py",
-        "readmenator/__init__.py->readmenator/_category.py",
-        "readmenator/__init__.py->readmenator/_components.py",
-        "readmenator/__init__.py->readmenator/_config.py",
-        "readmenator/__init__.py->readmenator/_diagrams.py",
-        "readmenator/__init__.py->readmenator/_mcp_server.py",
-        "readmenator/__init__.py->readmenator/_models.py",
-        "readmenator/__init__.py->readmenator/_rank.py",
-        "readmenator/__init__.py->readmenator/_symindex.py",
-        "readmenator/_analytics.py->readmenator/_config.py"
-      ]
-    },
-    {
-      "source": "node",
       "target": "import",
       "verb": "depends_on",
       "strength": 0.6,
@@ -4436,15 +4455,15 @@
     }
   ],
   "dialectic": [
-    "Thesis: `all` centralizes 45 files; Antithesis: `analysis` pulls 41 files with 20 shared (Jaccard 0.30); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `build` pulls 48 files with 24 shared (Jaccard 0.35); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `directory` pulls 33 files with 19 shared (Jaccard 0.32); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `every` pulls 40 files with 21 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `file` pulls 78 files with 36 shared (Jaccard 0.41); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `files` pulls 57 files with 29 shared (Jaccard 0.40); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `graph` pulls 64 files with 27 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `list` pulls 34 files with 23 shared (Jaccard 0.41); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `map` pulls 40 files with 21 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
-    "Thesis: `all` centralizes 45 files; Antithesis: `nodes` pulls 51 files with 24 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?"
+    "Thesis: `all` centralizes 47 files; Antithesis: `build` pulls 48 files with 25 shared (Jaccard 0.36); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `content` pulls 44 files with 21 shared (Jaccard 0.30); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `directory` pulls 34 files with 20 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `every` pulls 40 files with 21 shared (Jaccard 0.32); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `file` pulls 78 files with 38 shared (Jaccard 0.44); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `files` pulls 57 files with 29 shared (Jaccard 0.39); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `graph` pulls 65 files with 28 shared (Jaccard 0.33); Synthesis: should they merge, split by layer, or keep `depends_on` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `list` pulls 34 files with 23 shared (Jaccard 0.40); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `map` pulls 40 files with 21 shared (Jaccard 0.32); Synthesis: should they merge, split by layer, or keep `bridges` explicit?",
+    "Thesis: `all` centralizes 47 files; Antithesis: `nodes` pulls 51 files with 24 shared (Jaccard 0.32); Synthesis: should they merge, split by layer, or keep `bridges` explicit?"
   ]
 }

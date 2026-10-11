@@ -88,7 +88,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/parsers/_shell.py` -> __future__, re
 - `readmenator/parsers/_swift.py` -> __future__, re
 - `readmenator_orchestrator.py` -> argparse, dataclasses, datetime, logging, os, pathlib, re, shlex, shutil, subprocess, sys, tempfile, typing, unittest, unittest.mock
-- `tests/test_agent_friendliness.py` -> dataclasses, json, os, pathlib, tempfile, unittest
+- `tests/test_agent_friendliness.py` -> dataclasses, json, os, pathlib, re, tempfile, unittest
 - `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest

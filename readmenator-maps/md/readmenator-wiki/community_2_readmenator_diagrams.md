@@ -4,7 +4,7 @@
 
 ## Definition
 
-This community groups 31 file(s) rooted at `readmenator` with dominant language py (cohesion 0.42). Central symbols: `ArchitectureLinter`, `Backdrop`, `CallSite`, `Category`, `CinematicVideoRenderer`, `ComponentDiagramBuilder`, `CompositeRanker`, `CursorRulesGenerator`. Core file: `readmenator/_diagrams.py` (91 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 31 file(s) rooted at `readmenator` with dominant language py (cohesion 0.42). Central symbols: `ArchitectureLinter`, `Backdrop`, `CallSite`, `Category`, `CinematicVideoRenderer`, `ComponentDiagramBuilder`, `CompositeRanker`, `CursorRulesGenerator`. Core file: `readmenator/_diagrams.py` (92 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
@@ -18,7 +18,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_category.py` | py | utility | 26 | yes |
 | `readmenator/_components.py` | py | presentation | 25 | yes |
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
-| `readmenator/_diagrams.py` | py | utility | 91 | yes |
+| `readmenator/_diagrams.py` | py | utility | 92 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
 | `readmenator/_layers.py` | py | utility | 7 | yes |
 | `readmenator/_linter.py` | py | utility | 8 | yes |
@@ -29,7 +29,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 |------|----------|-------|---------|-----|
 | `tests/test_components.py` | py | testing | 36 | yes |
 | `tests/test_cursorrules.py` | py | testing | 12 | yes |
-| `tests/test_diagrams.py` | py | testing | 72 | yes |
+| `tests/test_diagrams.py` | py | testing | 73 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
 | `tests/test_linter.py` | py | testing | 14 | yes |
 | `tests/test_mcp_server.py` | py | testing | 25 | yes |
@@ -82,7 +82,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 61
-- Cross-boundary resolved imports (EXTRACTED): 86
+- Cross-boundary resolved imports (EXTRACTED): 88
 
 ## Connections
 
@@ -98,8 +98,8 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)

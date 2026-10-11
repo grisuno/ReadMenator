@@ -16,7 +16,7 @@ These files have the most connections. Changes here have high blast radius.
 
 Editing these files can break the listed number of dependents. Run their tests after any change.
 
-- `readmenator/_category.py` -- 9 direct, 100 total dependents
+- `readmenator/_category.py` -- 9 direct, 99 total dependents
 - `readmenator/_models.py` -- 50 direct, 96 total dependents
 - `readmenator/_config.py` -- 50 direct, 86 total dependents
 - `readmenator/parsers/_base.py` -- 20 direct, 41 total dependents
@@ -38,7 +38,7 @@ Editing these files can break the listed number of dependents. Run their tests a
 - `readmenator/_graphrag.py` -- complexity: 0.6, centrality: 0.0, combined: 0.2
 - `readmenator_orchestrator.py` -- complexity: 0.4, centrality: 0.0, combined: 0.2
 - `readmenator/_agent_output.py` -- complexity: 0.4, centrality: 0.0, combined: 0.2
-- `readmenator/_wiki.py` -- complexity: 0.4, centrality: 0.0, combined: 0.1
+- `readmenator/_wiki.py` -- complexity: 0.3, centrality: 0.0, combined: 0.1
 
 ## Layer Violations
 

@@ -38,7 +38,7 @@ readmenator: _graphrag groups 40 files (py) around Config, ImportResolver, __ini
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_config.py#L15-L1038">readmenator/_config.py::Config</a>
+- <a href="../readmenator/_config.py#L15-L1042">readmenator/_config.py::Config</a>
 - <a href="../readmenator/_resolver.py#L18-L60">readmenator/_resolver.py::ImportResolver</a>
 - <a href="../readmenator/_resolver.py#L61-L82">readmenator/_resolver.py::__init__</a>
 - <a href="../readmenator/_resolver.py#L83-L92">readmenator/_resolver.py::_build_stem_index</a>
@@ -98,11 +98,11 @@ readmenator: _agent_injector groups 5 files (py) around ReadmeInjector, __init__
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_readme_injector.py#L70-L77">readmenator/_readme_injector.py::ReadmeInjector</a>
-- <a href="../readmenator/_readme_injector.py#L78-L87">readmenator/_readme_injector.py::__init__</a>
-- <a href="../readmenator/_readme_injector.py#L88-L116">readmenator/_readme_injector.py::inject</a>
-- <a href="../readmenator/_readme_injector.py#L117-L125">readmenator/_readme_injector.py::_extract_current_injection</a>
-- <a href="../readmenator/_readme_injector.py#L126-L135">readmenator/_readme_injector.py::_remove_old_injection</a>
-- <a href="../readmenator/_readme_injector.py#L136-L164">readmenator/_readme_injector.py::remove</a>
-- <a href="../readmenator/_readme_injector.py#L165-L171">readmenator/_readme_injector.py::_find_readme</a>
-- <a href="../readmenator/_readme_injector.py#L172-L182">readmenator/_readme_injector.py::_build_injection</a>
+- <a href="../readmenator/_readme_injector.py#L115-L125">readmenator/_readme_injector.py::ReadmeInjector</a>
+- <a href="../readmenator/_readme_injector.py#L126-L181">readmenator/_readme_injector.py::__init__</a>
+- <a href="../readmenator/_readme_injector.py#L182-L222">readmenator/_readme_injector.py::inject</a>
+- <a href="../readmenator/_readme_injector.py#L223-L239">readmenator/_readme_injector.py::_extract_current_injection</a>
+- <a href="../readmenator/_readme_injector.py#L240-L258">readmenator/_readme_injector.py::_remove_old_injection</a>
+- <a href="../readmenator/_readme_injector.py#L259-L273">readmenator/_readme_injector.py::_strip_partial_anchor</a>
+- <a href="../readmenator/_readme_injector.py#L274-L310">readmenator/_readme_injector.py::remove</a>
+- <a href="../readmenator/_readme_injector.py#L311-L325">readmenator/_readme_injector.py::_find_readme</a>

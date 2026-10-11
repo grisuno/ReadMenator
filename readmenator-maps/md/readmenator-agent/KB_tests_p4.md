@@ -1,6 +1,81 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_security.py
+- Doc: Contract tests for the static security analysis module.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSecurityFinding` (class, line 21) `class TestSecurityFinding(TestCase)`
+  - `TestSecurityAnalyzerConfig` (class, line 43) `class TestSecurityAnalyzerConfig(TestCase)`
+  - `TestSecurityAnalyzerRules` (class, line 64) `class TestSecurityAnalyzerRules(TestCase)`
+  - `TestSecurityAnalyzerThreshold` (class, line 295) `class TestSecurityAnalyzerThreshold(TestCase)`
+  - `TestSecurityAnalyzerPathValidation` (class, line 327) `class TestSecurityAnalyzerPathValidation(TestCase)`
+  - `TestSecurityAnalyzerSummary` (class, line 374) `class TestSecurityAnalyzerSummary(TestCase)`
+  - `TestFixGuidance` (class, line 396) `class TestFixGuidance(TestCase)`
+  - `test_security_finding_fields` (method, line 24) `def test_security_finding_fields(self)`
+  - `test_default_config_disables_security` (method, line 46) `def test_default_config_disables_security(self)`
+  - `test_default_severity_threshold` (method, line 50) `def test_default_severity_threshold(self)`
+  - `test_default_security_output` (method, line 54) `def test_default_security_output(self)`
+  - `test_init_with_config` (method, line 58) `def test_init_with_config(self)`
+  - `setUp` (method, line 67) `def setUp(self)`
+  - `_scan_content` (method, line 71) `def _scan_content(self, content, extension)`
+  - `test_python_os_system` (method, line 78) `def test_python_os_system(self)`
+  - `test_python_eval` (method, line 83) `def test_python_eval(self)`
+  - `test_python_pickle` (method, line 88) `def test_python_pickle(self)`
+  - `test_python_sql_injection` (method, line 93) `def test_python_sql_injection(self)`
+  - `test_python_hardcoded_secret` (method, line 98) `def test_python_hardcoded_secret(self)`
+  - `test_python_weak_crypto` (method, line 103) `def test_python_weak_crypto(self)`
+  - `test_python_request_verify_false` (method, line 108) `def test_python_request_verify_false(self)`
+  - `test_python_flask_debug` (method, line 113) `def test_python_flask_debug(self)`
+  - `test_python_yaml_load` (method, line 118) `def test_python_yaml_load(self)`
+  - `test_javascript_inner_html` (method, line 123) `def test_javascript_inner_html(self)`
+  - `test_javascript_eval` (method, line 128) `def test_javascript_eval(self)`
+  - `test_javascript_child_process` (method, line 133) `def test_javascript_child_process(self)`
+  - `test_javascript_dangerously_set_inner_html` (method, line 138) `def test_javascript_dangerously_set_inner_html(self)`
+  - `test_c_strcpy` (method, line 143) `def test_c_strcpy(self)`
+  - `test_c_gets` (method, line 148) `def test_c_gets(self)`
+  - `test_c_system` (method, line 153) `def test_c_system(self)`
+  - `test_java_runtime_exec` (method, line 158) `def test_java_runtime_exec(self)`
+  - `test_java_sql_injection` (method, line 163) `def test_java_sql_injection(self)`
+  - `test_go_exec_command` (method, line 168) `def test_go_exec_command(self)`
+  - `test_ruby_eval` (method, line 173) `def test_ruby_eval(self)`
+  - `test_ruby_marshal_load` (method, line 178) `def test_ruby_marshal_load(self)`
+  - `test_php_eval` (method, line 183) `def test_php_eval(self)`
+  - `test_php_sql_injection` (method, line 188) `def test_php_sql_injection(self)`
+  - `test_php_unseralize` (method, line 193) `def test_php_unseralize(self)`
+  - `test_shell_eval` (method, line 198) `def test_shell_eval(self)`
+  - `test_csharp_process_start` (method, line 203) `def test_csharp_process_start(self)`
+  - `test_kotlin_runtime_exec` (method, line 208) `def test_kotlin_runtime_exec(self)`
+  - `test_swift_process` (method, line 213) `def test_swift_process(self)`
+  - `test_lua_load` (method, line 218) `def test_lua_load(self)`
+  - `test_lua_os_execute` (method, line 223) `def test_lua_os_execute(self)`
+  - `test_dart_process_run` (method, line 228) `def test_dart_process_run(self)`
+  - `test_rust_unsafe` (method, line 233) `def test_rust_unsafe(self)`
+  - `test_elixir_code_eval` (method, line 238) `def test_elixir_code_eval(self)`
+  - `test_elixir_system_cmd` (method, line 243) `def test_elixir_system_cmd(self)`
+  - `test_gdscript_os_execute` (method, line 248) `def test_gdscript_os_execute(self)`
+  - `test_scala_runtime_exec` (method, line 253) `def test_scala_runtime_exec(self)`
+  - `test_nim_exec_process` (method, line 258) `def test_nim_exec_process(self)`
+  - `test_safe_code_produces_no_findings` (method, line 263) `def test_safe_code_produces_no_findings(self)`
+  - `test_csharp_binary_formatter` (method, line 274) `def test_csharp_binary_formatter(self)`
+  - `test_ruby_backtick` (method, line 279) `def test_ruby_backtick(self)`
+  - `test_php_xss` (method, line 284) `def test_php_xss(self)`
+  - `test_go_unsafe_package` (method, line 289) `def test_go_unsafe_package(self)`
+  - `test_threshold_filters_low` (method, line 298) `def test_threshold_filters_low(self)`
+  - `test_threshold_info_shows_all` (method, line 312) `def test_threshold_info_shows_all(self)`
+  - `test_ignores_symlinks` (method, line 330) `def test_ignores_symlinks(self)`
+  - `test_ignores_ignored_dirs` (method, line 345) `def test_ignores_ignored_dirs(self)`
+  - `test_empty_directory` (method, line 357) `def test_empty_directory(self)`
+  - `test_unsupported_extension` (method, line 364) `def test_unsupported_extension(self)`
+  - `test_summary_empty` (method, line 377) `def test_summary_empty(self)`
+  - `test_summary_with_findings` (method, line 383) `def test_summary_with_findings(self)`
+  - `_finding` (method, line 399) `def _finding(self, cwe)`
+  - `test_known_cwe_returns_actionable_hint` (method, line 402) `def test_known_cwe_returns_actionable_hint(self)`
+  - `test_unknown_cwe_falls_back` (method, line 408) `def test_unknown_cwe_falls_back(self)`
+  - `test_empty_cwe_falls_back` (method, line 413) `def test_empty_cwe_falls_back(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_security.py`
+
 ## tests/test_sourceview.py
 - Doc: Contract tests for the source viewer (View drawer in explorers).
 - Layer: testing

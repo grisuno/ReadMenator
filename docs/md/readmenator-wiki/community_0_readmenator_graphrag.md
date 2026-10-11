@@ -27,7 +27,7 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
-| `tests/test_agent_friendliness.py` | py | testing | 58 | yes |
+| `tests/test_agent_friendliness.py` | py | testing | 59 | yes |
 | `tests/test_analyzer.py` | py | testing | 14 | yes |
 | `tests/test_cache.py` | py | testing | 22 | yes |
 | `tests/test_concepts.py` | py | testing | 8 | no |
@@ -77,7 +77,7 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 88
-- Cross-boundary resolved imports (EXTRACTED): 119
+- Cross-boundary resolved imports (EXTRACTED): 121
 
 ## Connections
 

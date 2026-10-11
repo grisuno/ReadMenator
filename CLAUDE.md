@@ -162,6 +162,7 @@ tests/
 - Agent budget settings (AGENT_OUTPUT_MAX_LINES, AGENT_PURPOSE_MAX_CHARS, AGENT_DOC_MAX_CHARS, AGENT_SIGNATURE_MAX_CHARS, AGENT_GOTCHAS_TOP_N, AGENT_GOTCHAS_EXCLUDE_LAYERS, AGENT_API_PUBLIC_ONLY, AGENT_API_EXCLUDE_LAYERS, AGENT_CHARS_PER_TOKEN, AGENT_ENTRYPOINT_FILENAMES)
 - Generated artifact settings (GENERATED_FILE_PREFIXES, SKIP_GENERATED_OUTPUTS, REFACTORIZER_SCRIPT_PREFIX)
 - Site agent settings (SITE_LLMS_TXT_ENABLED, SITE_LLMS_TXT_FILENAME, SITE_REFRESH_ON_REBUILD)
+- Site project links (SITE_GITHUB_URL, SITE_PYPI_URL)
 - GitHub wiki settings (GH_WIKI_ENABLED default True, GH_WIKI_REMOTE, GH_WIKI_GIT_REMOTE_NAME, GH_WIKI_HOME_PAGE, GH_WIKI_KB_PAGE, GH_WIKI_AGENT_PREFIX, GH_WIKI_RECIPE_PREFIX, GH_WIKI_INCLUDE_KB, GH_WIKI_PERMALINKS, GH_WIKI_STATE_FILE, GH_WIKI_DRY_RUN_DIR, GH_WIKI_TIMEOUT_S, GH_WIKI_COMMIT_MESSAGE)
 - Force-graph settings (FORCEGRAPH_ENABLED, FORCEGRAPH_MODE, FORCEGRAPH_OUTPUT, FORCEGRAPH_CDN_JS_2D/3D, FORCEGRAPH_BG, FORCEGRAPH_CHARGE, FORCEGRAPH_LINK_DISTANCE/STRENGTH, FORCEGRAPH_NODE_REL_SIZE, FORCEGRAPH_HULLS_ENABLED/FILL/STROKE/PAD, FORCEGRAPH_PARTICLES_ON_HIGHLIGHT, FORCEGRAPH_DIM_NODE/LINK, FORCEGRAPH_NODE_COLORS, FORCEGRAPH_EDGE_COLORS, FORCEGRAPH_FAMILY_SAT/LIGHT_BASE/SPAN)
 - Analytics settings (ANALYTICS_ENABLED)
@@ -503,14 +504,15 @@ tests/
 ### README Injection Contract
 - ReadmeInjector class with inject(project_root) and remove(project_root) methods
 - Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
-- Injects a section linking to KNOWLEDGE_BASE.md and agent output directory with HTML anchor comments
-- Injected section also links readmenator-wiki/ (index.md entry point, community pages, REPORT.md)
+- Injects a section linking to KNOWLEDGE_BASE.md and every run artifact with HTML anchor comments
+- Injected section covers: KNOWLEDGE_BASE.md, readmenator-agent/ (INDEX, SYMBOLS, ARCHITECTURE, API, GOTCHAS, SECURITY, MEMORY, MANIFEST, KB_*, recipes), readmenator-wiki/ (index, community_*, connections.json, queries, REPORT), readmenator-graphrag/ (ask), readmenator-maps/ (index gallery + 5 maps + graph-force.html + graph-bundle.html + components.html), docs/ site (llms.txt + video), readmenator-diagrams/ (analysis.json), readmenator-rules/ (Semgrep + yara + exclusions), readmenator.mp4, .cursorrules, SARIF audit, cache, skills
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
+- **Tag creation**: when the anchor tag is missing (or only half present), the section is created fresh; partial markers are stripped before appending
 - Preserves existing README content
 - Markdown injection: link, description, AI/human context
 - reStructuredText injection: adapted RST syntax
-- Uses configurable kb_filename and agent_output_dir parameters
+- Uses configurable kb_filename, agent_output_dir, wiki_output_dir, graphrag/maps/pages/components/rules dirs, video/cursorrules/sarif/cache/skills/llms/forcegraph/bundle names (AnalyzerFactory wires every Config value)
 - Remove method strips injected section cleanly
 - Returns False when no README found or no injection present
 - Guided by README_INJECTION_ENABLED config flag
@@ -681,7 +683,8 @@ tests/
 - All labels HTML-escaped in Python and script payloads unicode-escaped for angle brackets
 - DocsSitePublisher class with publish(maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries) entry point
 - Publishes maps/<kind>.html plus a gallery index.html and a .nojekyll marker into DIAGRAM_PAGES_DIR
-- Gallery index: project header with stats, one card per validated map with counts and descriptions, filter input, theme toggle, how-to-read section, relative links only, zero external requests
+- Gallery index: project header with stats, one card per validated map with counts and descriptions, filter input, theme toggle, how-to-read section, relative links only, zero external fetches (the only `https://` hrefs allowed are the footer SITE_GITHUB_URL + SITE_PYPI_URL project links)
+- Gallery footer: offline notice + llms.txt agent pointer + footer-links nav with GitHub (inline SVG mark, blue-to-cyan gradient `#38bdf8`->`#22d3ee` matching `--accent`) and PyPI pills (target _blank, rel noopener, escaped Config URLs)
 - Gallery redesign: hero with counter tiles (files, symbols, imports by relation only, languages, communities; count-up always lands on the real value), Start here path (wiki index, video, KB, agent INDEX), sticky filter toolbar (`/` focuses, live match count), map cards with per-kind inline SVG glyphs and hover flow animation, whole-card links
 - Video player gets a poster frame (SITE_VIDEO_POSTER_FILENAME extracted by ffmpeg at SITE_VIDEO_POSTER_AT_S, refreshed only when the video is newer; skipped without ffmpeg)
 - Docs grouped Wiki / Project / Agent / Recipes, entry points first; paged NAME_pN.md collapse into one card with page chips; cards show the document H1 title, a prose preview (markdown syntax stripped), line count, and approximate tokens

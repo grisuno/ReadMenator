@@ -3,6 +3,10 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestOllamaContract` | class | `tests/test_ollama.py:11` | `class TestOllamaContract(TestCase)` |
+| `test_disabled_client_returns_empty` | method | `tests/test_ollama.py:14` | `def test_disabled_client_returns_empty(self)` |
+| `test_strip_thinking_removes_reasoning_blocks` | method | `tests/test_ollama.py:30` | `def test_strip_thinking_removes_reasoning_blocks(self)` |
+| `test_unreachable_daemon_returns_empty` | method | `tests/test_ollama.py:20` | `def test_unreachable_daemon_returns_empty(self)` |
 | `TestAssemblyParserContract` | class | `tests/test_parsers.py:456` | `class TestAssemblyParserContract(TestCase)` |
 | `TestCParserContract` | class | `tests/test_parsers.py:22` | `class TestCParserContract(TestCase)` |
 | `TestCSharpParserContract` | class | `tests/test_parsers.py:309` | `class TestCSharpParserContract(TestCase)` |
@@ -262,8 +266,10 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_inject_into_markdown_readme_adds_kb_link` | method | `tests/test_readme_injector.py:28` | `def test_inject_into_markdown_readme_adds_kb_link(self)` |
 | `test_inject_into_rst_readme_adds_kb_link` | method | `tests/test_readme_injector.py:39` | `def test_inject_into_rst_readme_adds_kb_link(self)` |
 | `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_readme_injector.py:48` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
+| `test_inject_lists_all_artifacts` | method | `tests/test_readme_injector.py:168` | `def test_inject_lists_all_artifacts(self)` |
 | `test_inject_no_readme_file_returns_false` | method | `tests/test_readme_injector.py:59` | `def test_inject_no_readme_file_returns_false(self)` |
 | `test_inject_preserves_existing_content` | method | `tests/test_readme_injector.py:63` | `def test_inject_preserves_existing_content(self)` |
+| `test_inject_repairs_partial_anchor` | method | `tests/test_readme_injector.py:181` | `def test_inject_repairs_partial_anchor(self)` |
 | `test_prefers_readme_md_over_rst` | method | `tests/test_readme_injector.py:128` | `def test_prefers_readme_md_over_rst(self)` |
 | `test_remove_no_readme_returns_false` | method | `tests/test_readme_injector.py:100` | `def test_remove_no_readme_returns_false(self)` |
 | `test_remove_strips_injected_section` | method | `tests/test_readme_injector.py:84` | `def test_remove_strips_injected_section(self)` |
@@ -490,11 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
 | `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
 | `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

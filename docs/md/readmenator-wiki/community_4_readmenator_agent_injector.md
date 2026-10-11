@@ -11,10 +11,10 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
 | `readmenator/_agent_injector.py` | py | infrastructure | 14 | yes |
-| `readmenator/_readme_injector.py` | py | infrastructure | 8 | yes |
+| `readmenator/_readme_injector.py` | py | infrastructure | 9 | yes |
 | `tests/test_agent_injector.py` | py | testing | 38 | yes |
 | `tests/test_agent_output.py` | py | testing | 45 | no |
-| `tests/test_readme_injector.py` | py | testing | 26 | yes |
+| `tests/test_readme_injector.py` | py | testing | 28 | yes |
 
 ## Key Symbols
 
@@ -32,14 +32,15 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 - `_build_injection` (method, `readmenator/_agent_injector.py:276`) `def _build_injection(self, fmt)`
 - `_build_mdc_injection` (method, `readmenator/_agent_injector.py:288`) `def _build_mdc_injection(self)` - Build Cursor .mdc injection body (frontmatter added separately).
 - `_prepend_mdc_frontmatter` (method, `readmenator/_agent_injector.py:293`) `def _prepend_mdc_frontmatter(content, injection)` - Prepend Cursor frontmatter so the rule is auto-attached.
-- `ReadmeInjector` (class, `readmenator/_readme_injector.py:70`) `class ReadmeInjector` - Injects a link to KNOWLEDGE_BASE.md into the project README.
-- `__init__` (method, `readmenator/_readme_injector.py:78`) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir)`
-- `inject` (method, `readmenator/_readme_injector.py:88`) `def inject(self, project_root)`
-- `_extract_current_injection` (method, `readmenator/_readme_injector.py:117`) `def _extract_current_injection(content)`
-- `_remove_old_injection` (method, `readmenator/_readme_injector.py:126`) `def _remove_old_injection(content)`
-- `remove` (method, `readmenator/_readme_injector.py:136`) `def remove(self, project_root)`
-- `_find_readme` (method, `readmenator/_readme_injector.py:165`) `def _find_readme(root)`
-- `_build_injection` (method, `readmenator/_readme_injector.py:172`) `def _build_injection(self, suffix)`
+- `ReadmeInjector` (class, `readmenator/_readme_injector.py:115`) `class ReadmeInjector` - Injects a link to KNOWLEDGE_BASE.md into the project README.
+- `__init__` (method, `readmenator/_readme_injector.py:126`) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_outp` - Initialise the injector with output locations.
+- `inject` (method, `readmenator/_readme_injector.py:182`) `def inject(self, project_root)` - Inject or refresh the knowledge base section in the README.
+- `_extract_current_injection` (method, `readmenator/_readme_injector.py:223`) `def _extract_current_injection(content)` - Return the current anchored injection block.
+- `_remove_old_injection` (method, `readmenator/_readme_injector.py:240`) `def _remove_old_injection(content)` - Remove a complete anchored injection block.
+- `_strip_partial_anchor` (method, `readmenator/_readme_injector.py:259`) `def _strip_partial_anchor(content)` - Remove a broken half-anchor so a fresh tag can be created.
+- `remove` (method, `readmenator/_readme_injector.py:274`) `def remove(self, project_root)` - Remove the injected section from the README.
+- `_find_readme` (method, `readmenator/_readme_injector.py:311`) `def _find_readme(root)` - Return the first README candidate present in the directory.
+- `_build_injection` (method, `readmenator/_readme_injector.py:326`) `def _build_injection(self, suffix)` - Build the injection text for a README suffix.
 - `TestAgentInjectorInjectBehavior` (class, `tests/test_agent_injector.py:19`) `class TestAgentInjectorInjectBehavior(TestCase)` - BDD: AgentInjector injection contract.
 - `setUp` (method, `tests/test_agent_injector.py:22`) `def setUp(self)`
 - `tearDown` (method, `tests/test_agent_injector.py:27`) `def tearDown(self)`
@@ -47,7 +48,6 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 - `test_inject_into_claude_md_adds_kb_link` (method, `tests/test_agent_injector.py:39`) `def test_inject_into_claude_md_adds_kb_link(self)`
 - `test_inject_into_cursorrules_adds_kb_link` (method, `tests/test_agent_injector.py:49`) `def test_inject_into_cursorrules_adds_kb_link(self)`
 - `test_inject_into_github_copilot_instructions` (method, `tests/test_agent_injector.py:57`) `def test_inject_into_github_copilot_instructions(self)`
-- `test_inject_replaces_old_injection_without_regen_command` (method, `tests/test_agent_injector.py:67`) `def test_inject_replaces_old_injection_without_regen_command(self)`
 
 ## Internal vs External Edges
 

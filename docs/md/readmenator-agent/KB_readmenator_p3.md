@@ -175,7 +175,7 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Language: py
 - Symbols:
   - `AnalyzerFactory` (class, line 64) `class AnalyzerFactory`
-  - `DeepAnalysisRunner` (class, line 435) `class DeepAnalysisRunner`
+  - `DeepAnalysisRunner` (class, line 448) `class DeepAnalysisRunner`
   - `__init__` (method, line 72) `def __init__(self, config)`
   - `scanner` (method, line 119) `def scanner(self)`
   - `generator` (method, line 125) `def generator(self)`
@@ -193,37 +193,37 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `uml` (method, line 201) `def uml(self)`
   - `wiki` (method, line 207) `def wiki(self)`
   - `readme_injector` (method, line 214) `def readme_injector(self)`
-  - `agent_injector` (method, line 224) `def agent_injector(self)`
-  - `gh_wiki` (method, line 234) `def gh_wiki(self)`
-  - `agent_output` (method, line 241) `def agent_output(self)`
-  - `diagram_builder` (method, line 247) `def diagram_builder(self)`
-  - `diagram_renderer` (method, line 254) `def diagram_renderer(self)`
-  - `diagram_validator` (method, line 261) `def diagram_validator(self)`
-  - `diagram_publisher` (method, line 268) `def diagram_publisher(self)`
-  - `vis_renderer` (method, line 275) `def vis_renderer(self)`
-  - `video` (method, line 282) `def video(self)`
-  - `concepts` (method, line 289) `def concepts(self)`
-  - `forcegraph` (method, line 296) `def forcegraph(self)`
-  - `bundlegraph` (method, line 303) `def bundlegraph(self)`
-  - `analytics` (method, line 310) `def analytics(self)`
-  - `scantext` (method, line 317) `def scantext(self)`
-  - `provenance` (method, line 324) `def provenance(self)`
-  - `exclusions` (method, line 331) `def exclusions(self)`
-  - `embedder` (method, line 338) `def embedder(self)`
-  - `graphrag` (method, line 345) `def graphrag(self)`
-  - `graphrag_store` (method, line 352) `def graphrag_store(self)`
-  - `memory` (method, line 359) `def memory(self)`
-  - `skills` (method, line 366) `def skills(self)`
-  - `sourceview` (method, line 373) `def sourceview(self)`
-  - `symindex` (method, line 380) `def symindex(self)`
-  - `components` (method, line 387) `def components(self)`
-  - `ollama` (method, line 394) `def ollama(self)`
-  - `build_typed_graph` (method, line 400) `def build_typed_graph(self, nodes, edges, resolved_edges)`
-  - `make_ranker` (method, line 410) `def make_ranker(self, typed_graph)`
-  - `last_category` (method, line 427) `def last_category(self)`
-  - `last_typed_graph` (method, line 431) `def last_typed_graph(self)`
-  - `__init__` (method, line 444) `def __init__(self, factory)`
-  - `run` (method, line 447) `def run(self, nodes, edges, resolved_edges, layers, content_map)`
+  - `agent_injector` (method, line 237) `def agent_injector(self)`
+  - `gh_wiki` (method, line 247) `def gh_wiki(self)`
+  - `agent_output` (method, line 254) `def agent_output(self)`
+  - `diagram_builder` (method, line 260) `def diagram_builder(self)`
+  - `diagram_renderer` (method, line 267) `def diagram_renderer(self)`
+  - `diagram_validator` (method, line 274) `def diagram_validator(self)`
+  - `diagram_publisher` (method, line 281) `def diagram_publisher(self)`
+  - `vis_renderer` (method, line 288) `def vis_renderer(self)`
+  - `video` (method, line 295) `def video(self)`
+  - `concepts` (method, line 302) `def concepts(self)`
+  - `forcegraph` (method, line 309) `def forcegraph(self)`
+  - `bundlegraph` (method, line 316) `def bundlegraph(self)`
+  - `analytics` (method, line 323) `def analytics(self)`
+  - `scantext` (method, line 330) `def scantext(self)`
+  - `provenance` (method, line 337) `def provenance(self)`
+  - `exclusions` (method, line 344) `def exclusions(self)`
+  - `embedder` (method, line 351) `def embedder(self)`
+  - `graphrag` (method, line 358) `def graphrag(self)`
+  - `graphrag_store` (method, line 365) `def graphrag_store(self)`
+  - `memory` (method, line 372) `def memory(self)`
+  - `skills` (method, line 379) `def skills(self)`
+  - `sourceview` (method, line 386) `def sourceview(self)`
+  - `symindex` (method, line 393) `def symindex(self)`
+  - `components` (method, line 400) `def components(self)`
+  - `ollama` (method, line 407) `def ollama(self)`
+  - `build_typed_graph` (method, line 413) `def build_typed_graph(self, nodes, edges, resolved_edges)`
+  - `make_ranker` (method, line 423) `def make_ranker(self, typed_graph)`
+  - `last_category` (method, line 440) `def last_category(self)`
+  - `last_typed_graph` (method, line 444) `def last_typed_graph(self)`
+  - `__init__` (method, line 457) `def __init__(self, factory)`
+  - `run` (method, line 460) `def run(self, nodes, edges, resolved_edges, layers, content_map)`
 - Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_bundlegraph.py`, `readmenator/_category.py`, `readmenator/_components.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_ollama.py`, `readmenator/_provenance.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_sourceview.py`, `readmenator/_symindex.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`
 - Imported by: `readmenator/_app.py`
 
@@ -339,14 +339,15 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Layer: infrastructure
 - Language: py
 - Symbols:
-  - `ReadmeInjector` (class, line 70) `class ReadmeInjector`
-  - `__init__` (method, line 78) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir)`
-  - `inject` (method, line 88) `def inject(self, project_root)`
-  - `_extract_current_injection` (method, line 117) `def _extract_current_injection(content)`
-  - `_remove_old_injection` (method, line 126) `def _remove_old_injection(content)`
-  - `remove` (method, line 136) `def remove(self, project_root)`
-  - `_find_readme` (method, line 165) `def _find_readme(root)`
-  - `_build_injection` (method, line 172) `def _build_injection(self, suffix)`
+  - `ReadmeInjector` (class, line 115) `class ReadmeInjector`
+  - `__init__` (method, line 126) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_output_dir, maps_output_dir, pages_dir...`
+  - `inject` (method, line 182) `def inject(self, project_root)`
+  - `_extract_current_injection` (method, line 223) `def _extract_current_injection(content)`
+  - `_remove_old_injection` (method, line 240) `def _remove_old_injection(content)`
+  - `_strip_partial_anchor` (method, line 259) `def _strip_partial_anchor(content)`
+  - `remove` (method, line 274) `def remove(self, project_root)`
+  - `_find_readme` (method, line 311) `def _find_readme(root)`
+  - `_build_injection` (method, line 326) `def _build_injection(self, suffix)`
 - Imported by: `readmenator/__init__.py`, `readmenator/_pipeline.py`, `tests/test_agent_output.py`, `tests/test_readme_injector.py`
 
 ## readmenator/_refactorizer.py

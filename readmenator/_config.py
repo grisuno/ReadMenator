@@ -112,6 +112,10 @@ class Config:
 
     SITE_LLMS_TXT_FILENAME: str = "llms.txt"
 
+    SITE_GITHUB_URL: str = "https://github.com/grisuno/ReadMenator"
+
+    SITE_PYPI_URL: str = "https://pypi.org/project/readmenator/"
+
     GENERATED_FILE_PREFIXES: Tuple[str, ...] = (".refactor_",)
 
     SKIP_GENERATED_OUTPUTS: bool = True

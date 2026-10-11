@@ -48,9 +48,9 @@ Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_com
 
 ## readmenator/_readme_injector.py
 Imported by: `readmenator/__init__.py`, `readmenator/_pipeline.py`, `tests/test_agent_output.py`, `tests/test_readme_injector.py`
-- `ReadmeInjector.__init__` (method) `readmenator/_readme_injector.py:78` `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir)`
-- `ReadmeInjector.inject` (method) `readmenator/_readme_injector.py:88` `def inject(self, project_root)`
-- `ReadmeInjector.remove` (method) `readmenator/_readme_injector.py:136` `def remove(self, project_root)`
+- `ReadmeInjector.__init__` (method) `readmenator/_readme_injector.py:126` `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_output_dir, maps_output_dir, pages_dir...` -- Initialise the injector with output locations.
+- `ReadmeInjector.inject` (method) `readmenator/_readme_injector.py:182` `def inject(self, project_root)` -- Inject or refresh the knowledge base section in the README.
+- `ReadmeInjector.remove` (method) `readmenator/_readme_injector.py:274` `def remove(self, project_root)` -- Remove the injected section from the README.
 
 ## readmenator/_refactorizer.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`

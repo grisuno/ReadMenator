@@ -217,6 +217,19 @@ class AnalyzerFactory:
                 kb_filename=self._config.OUTPUT_FILENAME,
                 agent_output_dir=self._config.AGENT_OUTPUT_DIR,
                 wiki_output_dir=self._config.WIKI_OUTPUT_DIR,
+                graphrag_output_dir=self._config.GRAPHRAG_OUTPUT_DIR,
+                maps_output_dir=self._config.DIAGRAM_OUTPUT_DIR,
+                pages_dir=self._config.DIAGRAM_PAGES_DIR,
+                components_output_dir=self._config.COMPONENTS_OUTPUT_DIR,
+                rules_output_dir=self._config.RULE_GEN_OUTPUT_DIR,
+                video_output=self._config.VIDEO_OUTPUT,
+                cursorrules_output=self._config.CURSORRULES_OUTPUT,
+                sarif_output=self._config.SARIF_OUTPUT,
+                cache_dir=self._config.CACHE_DIR,
+                skills_dir=self._config.SKILLS_TARGET_DIR,
+                llms_txt=self._config.SITE_LLMS_TXT_FILENAME,
+                forcegraph_output=self._config.FORCEGRAPH_OUTPUT,
+                bundlegraph_output=self._config.BUNDLEGRAPH_OUTPUT,
             )
         return self._readme_injector
 

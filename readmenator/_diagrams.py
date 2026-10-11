@@ -3063,6 +3063,13 @@ figcaption{margin-top:8px}
 .howto p{font-size:12px;color:var(--muted);line-height:1.7;margin:0}
 .empty{color:var(--muted);font-size:13px}
 footer{padding-top:24px;padding-bottom:40px;color:var(--muted);font-size:11px}
+footer a{color:var(--accent);text-decoration:none}
+footer a:hover,footer a:focus-visible{text-decoration:underline;outline:none}
+.footer-links{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.footer-link{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--border);border-radius:999px;padding:5px 12px 5px 8px;background:var(--mask);transition:border-color .2s,box-shadow .2s,transform .2s}
+.footer-link:hover,.footer-link:focus-visible{border-color:var(--accent);box-shadow:0 4px 18px var(--glow);transform:translateY(-1px);text-decoration:none}
+.gh-icon{width:16px;height:16px;flex:none}
+.pypi-icon{width:16px;height:16px;flex:none;font-size:13px;line-height:1}
 #doc-viewer{position:fixed;top:0;right:0;bottom:0;width:min(860px,100%);z-index:20;background:var(--mask);border-left:1px solid var(--border);box-shadow:-20px 0 60px rgba(0,0,0,.45);transform:translateX(100%);transition:transform .28s ease;display:flex;flex-direction:column}
 #doc-viewer.open{transform:none}
 #doc-viewer .bar{display:flex;gap:8px;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border)}
@@ -3667,14 +3674,53 @@ class DocsSitePublisher:
             + "reach, Path to probe the exact route between two ids, Lens to compare semantic roles, Play to walk "
             + "the guided chapters, Stabilize to re-run physics, Theme for dark and light, Export for PNG or typed "
             + "JSON. Deep links such as #route=a~b restore any reading.</p></section>"
-            + "<footer>Generated offline from scanned source topology. Counts reflect authored relationships only. "
-            + "Agents: read <a href=\"" + self._escape(self._config.SITE_LLMS_TXT_FILENAME) + "\">"
-            + self._escape(self._config.SITE_LLMS_TXT_FILENAME) + "</a>.</footer>"
+            + self._footer()
             + _GALLERY_DRAWER
             + "<script>\n(function(){\n\"use strict\";\n"
             + _GALLERY_MD_JS
             + _GALLERY_APP_JS
             + "})();\n</script>\n</body>\n</html>"
+        )
+
+    def _footer(self) -> str:
+        """Render the gallery footer with project links.
+
+        Returns:
+            Footer HTML with the offline notice, the llms.txt agent
+            pointer, and GitHub/PyPI links styled in the site palette.
+        """
+        llms = self._escape(self._config.SITE_LLMS_TXT_FILENAME)
+        github = self._escape(self._config.SITE_GITHUB_URL)
+        pypi = self._escape(self._config.SITE_PYPI_URL)
+        return (
+            "<footer>Generated offline from scanned source topology. "
+            "Counts reflect authored relationships only. "
+            'Agents: read <a href="' + llms + '">' + llms + "</a>."
+            '<nav class="footer-links" aria-label="Project links">'
+            '<a class="footer-link" href="' + github + '" target="_blank" rel="noopener">'
+            '<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
+            "<defs><linearGradient id=\"rm-gh-grad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">"
+            '<stop offset="0" stop-color="#38bdf8"/>'
+            '<stop offset="1" stop-color="#22d3ee"/>'
+            "</linearGradient></defs>"
+            '<path fill="url(#rm-gh-grad)" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 '
+            "5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94"
+            "-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07"
+            "-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 "
+            "1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 "
+            "2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 "
+            '8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
+            "<span>GitHub</span></a>"
+            '<a class="footer-link" href="' + pypi + '" target="_blank" rel="noopener">'
+            '<svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
+            "<defs><linearGradient id=\"rm-pypi-grad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">"
+            '<stop offset="0" stop-color="#7dd3fc"/>'
+            '<stop offset="1" stop-color="#0891b2"/>'
+            "</linearGradient></defs>"
+            '<path fill="url(#rm-pypi-grad)" d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2zm0 2.3L5.7 7.7 12 11l6.3-3.3L12 4.3zM5 '
+            '9.7v5.1l6 3.4v-5.1l-6-3.4zm14 0l-6 3.4v5.1l6-3.4V9.7z"/></svg>'
+            "<span>PyPI</span></a>"
+            "</nav></footer>"
         )
 
     def _stat_tiles(self, stats: Dict[str, int]) -> str:

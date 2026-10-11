@@ -3,6 +3,12 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
 | `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |

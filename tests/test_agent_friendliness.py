@@ -484,12 +484,23 @@ class TestGalleryIndex(unittest.TestCase):
         self.assertIn('data-count="3"', html)
 
     def test_gallery_has_no_external_resources_and_escapes_titles(self) -> None:
+        import re
         entries = self._entries()
         entries[0]["title"] = "<img src=x onerror=alert(1)>"
         html = DocsSitePublisher(Config()).render_index("Demo", {}, {}, "", None, entries)
         self.assertNotIn('src="http', html)
-        self.assertNotIn('href="http', html)
         self.assertNotIn("<img src=x", html)
+        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL}
+        for match in re.findall(r'href="(https?://[^"]+)"', html):
+            self.assertIn(match, allowed)
+
+    def test_gallery_footer_links_github_and_pypi(self) -> None:
+        html = DocsSitePublisher(Config()).render_index("Demo", {}, {"files": 3}, "", None, [])
+        self.assertIn(Config().SITE_GITHUB_URL, html)
+        self.assertIn(Config().SITE_PYPI_URL, html)
+        self.assertIn("gh-icon", html)
+        self.assertIn("footer-links", html)
+        self.assertIn("Generated offline", html)
 
     def test_doc_preview_skips_markdown_syntax(self) -> None:
         publisher = DocsSitePublisher(Config())

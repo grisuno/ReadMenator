@@ -3,6 +3,8 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_extract_params` | method | `readmenator/_uml.py:592` | `def _extract_params(signature)` |
+| `_find_node` | method | `readmenator/_uml.py:165` | `def _find_node(nodes, node_id)` |
 | `_generate_cpp` | method | `readmenator/_uml.py:233` | `def _generate_cpp(class_symbols, nodes, edges)` |
 | `_generate_csharp` | method | `readmenator/_uml.py:316` | `def _generate_csharp(class_symbols, nodes, edges)` |
 | `_generate_dart` | method | `readmenator/_uml.py:547` | `def _generate_dart(class_symbols, nodes, edges)` |
@@ -279,7 +281,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
 | `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
 | `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
-| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:501` | `class TestLiveMapCommunities(TestCase)` |
+| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:512` | `class TestLiveMapCommunities(TestCase)` |
 | `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
 | `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
 | `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
@@ -291,7 +293,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_edge` | function | `tests/test_agent_friendliness.py:29` | `def _edge(source, target, relation)` |
 | `_entries` | method | `tests/test_agent_friendliness.py:459` | `def _entries(self)` |
 | `_git_repo` | method | `tests/test_agent_friendliness.py:202` | `def _git_repo(self, root, packed)` |
-| `_inputs` | method | `tests/test_agent_friendliness.py:504` | `def _inputs(self)` |
+| `_inputs` | method | `tests/test_agent_friendliness.py:515` | `def _inputs(self)` |
 | `_node` | function | `tests/test_agent_friendliness.py:21` | `def _node(node_id, doc, symbols)` |
 | `_two_cliques` | method | `tests/test_agent_friendliness.py:414` | `def _two_cliques(self)` |
 | `test_agent_output_pages_repeat_table_header_and_link_next` | method | `tests/test_agent_friendliness.py:84` | `def test_agent_output_pages_repeat_table_header_and_link_next(self)` |
@@ -302,12 +304,13 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_api_skips_private_helpers_and_test_layer` | method | `tests/test_agent_friendliness.py:122` | `def test_api_skips_private_helpers_and_test_layer(self)` |
 | `test_api_states_dependencies_once_per_file` | method | `tests/test_agent_friendliness.py:113` | `def test_api_states_dependencies_once_per_file(self)` |
 | `test_architecture_external_excludes_internally_resolved_imports` | method | `tests/test_agent_friendliness.py:144` | `def test_architecture_external_excludes_internally_resolved_imports(self)` |
-| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:520` | `def test_built_maps_carry_community_and_core_role(self)` |
+| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:531` | `def test_built_maps_carry_community_and_core_role(self)` |
 | `test_check_freshness_detects_source_edits` | method | `tests/test_agent_friendliness.py:343` | `def test_check_freshness_detects_source_edits(self)` |
 | `test_communities_survive_a_shared_hub` | method | `tests/test_agent_friendliness.py:311` | `def test_communities_survive_a_shared_hub(self)` |
 | `test_community_label_ignores_test_directory` | method | `tests/test_agent_friendliness.py:446` | `def test_community_label_ignores_test_directory(self)` |
-| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:494` | `def test_doc_preview_skips_markdown_syntax(self)` |
+| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:505` | `def test_doc_preview_skips_markdown_syntax(self)` |
 | `test_fingerprint_changes_with_content_not_with_order` | method | `tests/test_agent_friendliness.py:332` | `def test_fingerprint_changes_with_content_not_with_order(self)` |
+| `test_gallery_footer_links_github_and_pypi` | method | `tests/test_agent_friendliness.py:497` | `def test_gallery_footer_links_github_and_pypi(self)` |
 | `test_gallery_groups_docs_and_collapses_pages` | method | `tests/test_agent_friendliness.py:470` | `def test_gallery_groups_docs_and_collapses_pages(self)` |
 | `test_gallery_has_no_external_resources_and_escapes_titles` | method | `tests/test_agent_friendliness.py:486` | `def test_gallery_has_no_external_resources_and_escapes_titles(self)` |
 | `test_gallery_video_has_poster_and_start_here` | method | `tests/test_agent_friendliness.py:480` | `def test_gallery_video_has_poster_and_start_here(self)` |
@@ -331,7 +334,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_scanner_skips_own_generated_outputs` | method | `tests/test_agent_friendliness.py:247` | `def test_scanner_skips_own_generated_outputs(self)` |
 | `test_shared_directory_labels_use_core_file` | method | `tests/test_agent_friendliness.py:380` | `def test_shared_directory_labels_use_core_file(self)` |
 | `test_small_community_merges_into_best_connected_neighbor` | method | `tests/test_agent_friendliness.py:366` | `def test_small_community_merges_into_best_connected_neighbor(self)` |
-| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:529` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
+| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:540` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
 | `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:248` | `class TestAgentInjectorEdgeCases(TestCase)` |
 | `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:211` | `class TestAgentInjectorFindFiles(TestCase)` |
 | `TestAgentInjectorInjectBehavior` | class | `tests/test_agent_injector.py:19` | `class TestAgentInjectorInjectBehavior(TestCase)` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `test_card_skipped_when_disabled` | method | `tests/test_components.py:305` | `def test_card_skipped_when_disabled(self)` |
 | `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
 | `test_docs_collect_components_overview` | method | `tests/test_components.py:319` | `def test_docs_collect_components_overview(self)` |
-| `test_empty_project_yields_empty_diagram` | method | `tests/test_components.py:133` | `def test_empty_project_yields_empty_diagram(self)` |
-| `test_export_diagrams_links_components_card` | method | `tests/test_components.py:251` | `def test_export_diagrams_links_components_card(self)` |
-| `test_export_pages_links_components_relatively` | method | `tests/test_components.py:266` | `def test_export_pages_links_components_relatively(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

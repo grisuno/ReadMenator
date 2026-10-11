@@ -405,7 +405,10 @@ class TestDocsSitePublisherContract(unittest.TestCase):
 
     def test_publish_output_has_no_external_requests(self) -> None:
         """Index and maps perform no external fetches or CDN references."""
+        import re
         import tempfile
+        from readmenator._config import Config
+        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL}
         with tempfile.TemporaryDirectory() as tmp:
             written = self.publisher.publish(self._maps(), "Demo", tmp, {})
             for key, path in written.items():
@@ -413,8 +416,21 @@ class TestDocsSitePublisherContract(unittest.TestCase):
                     continue
                 content = Path(path).read_text(encoding="utf-8")
                 self.assertNotIn("src=\"http", content)
-                self.assertNotIn("href=\"http", content)
+                for match in re.findall(r'href="(https?://[^"]+)"', content):
+                    self.assertIn(match, allowed)
                 self.assertNotIn("unpkg", content)
+
+    def test_publish_footer_links_github_and_pypi(self) -> None:
+        """Gallery index footer links GitHub and PyPI with the site palette."""
+        import tempfile
+        from readmenator._config import Config
+        with tempfile.TemporaryDirectory() as tmp:
+            written = self.publisher.publish(self._maps(), "Demo", tmp, {})
+            index = Path(written["index"]).read_text(encoding="utf-8")
+            self.assertIn(Config().SITE_GITHUB_URL, index)
+            self.assertIn(Config().SITE_PYPI_URL, index)
+            self.assertIn("gh-icon", index)
+            self.assertIn("footer-links", index)
 
     def test_publish_is_deterministic(self) -> None:
         """Two publishes over identical input share index bytes."""

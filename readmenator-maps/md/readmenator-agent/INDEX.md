@@ -21,7 +21,7 @@
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
-| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 91 | 7 |
+| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 92 | 7 |
 | `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 31 | 2 |
 | `readmenator/_embed.py` | Optional semantic embeddings for the readmenator knowledge graph. | readmenator | 11 | 2 |
 | `readmenator/_exclusions.py` | False-positive exclusion list for readmenator findings. | readmenator | 11 | 2 |
@@ -49,7 +49,7 @@
 | `readmenator/_purpose.py` | Purpose extraction shared by every agent-facing document generator. | readmenator | 7 | 7 |
 | `readmenator/_query.py` | Query engine for the readmenator knowledge base. | readmenator | 17 | 3 |
 | `readmenator/_rank.py` | PageRank, Personalized PageRank, HITS, and composite scoring. | readmenator | 18 | 11 |
-| `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 8 | 4 |
+| `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 9 | 4 |
 | `readmenator/_refactorizer.py` | Monolithic file refactoring planner for the readmenator knowledge graph. | readmenator | 9 | 2 |
 | `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 7 |
 | `readmenator/_rule_gen.py` | Suggested linting rule generator producing Semgrep YAML from detected antipatterns. | readmenator | 9 | 2 |
@@ -90,7 +90,7 @@
 | `readmenator/parsers/_swift.py` | Swift parser: regex extraction of symbols, signatures, docstrings, and imports. | parsers | 2 | 2 |
 | `readmenator_orchestrator.py` | test_rebuild_command_includes_full_concept_layer: The orchestrator must force a full rebuild... | root | 37 | 0 |
 | `tests/__init__.py` | - | tests | 0 | 0 |
-| `tests/test_agent_friendliness.py` | Contract tests for agent-facing output quality: budgets, purposes, freshness, noise. | tests | 58 | 0 |
+| `tests/test_agent_friendliness.py` | Contract tests for agent-facing output quality: budgets, purposes, freshness, noise. | tests | 59 | 0 |
 | `tests/test_agent_injector.py` | Contract tests for AI agent file injection. | tests | 38 | 0 |
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
@@ -103,7 +103,7 @@
 | `tests/test_cursorrules.py` | Contract tests for the CursorRulesGenerator. | tests | 12 | 0 |
 | `tests/test_dataflow.py` | - | tests | 47 | 0 |
 | `tests/test_dead_code.py` | Contract tests for the DeadCodeStripper. | tests | 15 | 0 |
-| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 72 | 0 |
+| `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 73 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
@@ -124,7 +124,7 @@
 | `tests/test_parsers_property.py` | Property-based contract tests for all 19 language parsers. | tests | 27 | 0 |
 | `tests/test_query.py` | - | tests | 18 | 0 |
 | `tests/test_ranking.py` | Contract tests for the category theory and ranking system. | tests | 72 | 0 |
-| `tests/test_readme_injector.py` | Contract tests for README injection into documented projects. | tests | 26 | 0 |
+| `tests/test_readme_injector.py` | Contract tests for README injection into documented projects. | tests | 28 | 0 |
 | `tests/test_refactorizer.py` | Contract tests for the MonolithRefactorizer. | tests | 17 | 0 |
 | `tests/test_resolver.py` | Contract tests for the ImportResolver. | tests | 22 | 0 |
 | `tests/test_rule_gen.py` | TestRuleGeneratorContract: Contract: RuleGenerator detects patterns and suggests rules. | tests | 10 | 0 |

@@ -165,6 +165,29 @@ class TestReadmeInjectorEdgeCases(unittest.TestCase):
         content = readme.read_text()
         self.assertIn("docs/KB.md", content)
 
+    def test_inject_lists_all_artifacts(self):
+        readme = self.root / "README.md"
+        readme.write_text("# Test\n")
+        self.injector.inject(str(self.root))
+        content = readme.read_text()
+        for artifact in (
+            "readmenator-agent/", "readmenator-wiki/", "readmenator-graphrag/",
+            "readmenator-maps/", "readmenator-diagrams/", "readmenator-rules/",
+            "readmenator.mp4", ".cursorrules", "MEMORY.md", "MANIFEST.json",
+            "graph-force.html", "graph-bundle.html", "REPORT.md",
+        ):
+            self.assertIn(artifact, content)
+
+    def test_inject_repairs_partial_anchor(self):
+        readme = self.root / "README.md"
+        readme.write_text("# Test\n\n<!-- readmenator-kb-link -->\n")
+        result = self.injector.inject(str(self.root))
+        self.assertTrue(result)
+        content = readme.read_text()
+        self.assertIn("<!-- readmenator-kb-link -->", content)
+        self.assertIn("<!-- /readmenator-kb-link -->", content)
+        self.assertIn("readmenator-maps/", content)
+
 
 if __name__ == "__main__":
     unittest.main()
