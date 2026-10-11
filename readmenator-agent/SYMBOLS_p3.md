@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_generate_cpp` | method | `readmenator/_uml.py:233` | `def _generate_cpp(class_symbols, nodes, edges)` |
 | `_generate_csharp` | method | `readmenator/_uml.py:316` | `def _generate_csharp(class_symbols, nodes, edges)` |
 | `_generate_dart` | method | `readmenator/_uml.py:547` | `def _generate_dart(class_symbols, nodes, edges)` |
 | `_generate_go` | method | `readmenator/_uml.py:395` | `def _generate_go(class_symbols, nodes, edges)` |
@@ -489,12 +490,11 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `setUp` | method | `tests/test_components.py:97` | `def setUp(self)` |
 | `setUp` | method | `tests/test_components.py:143` | `def setUp(self)` |
 | `test_build_records_layers_hub_and_counts` | method | `tests/test_components.py:177` | `def test_build_records_layers_hub_and_counts(self)` |
-| `test_card_skipped_when_disabled` | method | `tests/test_components.py:279` | `def test_card_skipped_when_disabled(self)` |
+| `test_card_skipped_when_disabled` | method | `tests/test_components.py:305` | `def test_card_skipped_when_disabled(self)` |
 | `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
-| `test_docs_collect_components_overview` | method | `tests/test_components.py:290` | `def test_docs_collect_components_overview(self)` |
+| `test_docs_collect_components_overview` | method | `tests/test_components.py:319` | `def test_docs_collect_components_overview(self)` |
 | `test_empty_project_yields_empty_diagram` | method | `tests/test_components.py:133` | `def test_empty_project_yields_empty_diagram(self)` |
 | `test_export_diagrams_links_components_card` | method | `tests/test_components.py:251` | `def test_export_diagrams_links_components_card(self)` |
-| `test_export_pages_links_components_relatively` | method | `tests/test_components.py:264` | `def test_export_pages_links_components_relatively(self)` |
-| `test_mermaid_matches_layered_style` | method | `tests/test_components.py:105` | `def test_mermaid_matches_layered_style(self)` |
+| `test_export_pages_links_components_relatively` | method | `tests/test_components.py:266` | `def test_export_pages_links_components_relatively(self)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

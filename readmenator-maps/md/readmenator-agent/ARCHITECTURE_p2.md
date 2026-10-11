@@ -14,7 +14,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_bundlegraph_page.py` -> __future__
 - `readmenator/_cache.py` -> __future__, hashlib, json, os, pathlib, typing
 - `readmenator/_category.py` -> __future__, dataclasses, enum, typing
-- `readmenator/_components.py` -> __future__, datetime, html, json, math, pathlib, re, typing
+- `readmenator/_components.py` -> __future__, datetime, html, json, math, os, pathlib, re, typing
 - `readmenator/_concepts.py` -> __future__, collections, logging, re, typing
 - `readmenator/_config.py` -> __future__, dataclasses, typing
 - `readmenator/_cpg.py` -> __future__, hashlib, json, typing

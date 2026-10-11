@@ -16,7 +16,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/__main__.py` | py | utility | 3 | yes |
 | `readmenator/_app.py` | py | utility | 75 | yes |
 | `readmenator/_category.py` | py | utility | 26 | yes |
-| `readmenator/_components.py` | py | presentation | 24 | yes |
+| `readmenator/_components.py` | py | presentation | 25 | yes |
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
 | `readmenator/_diagrams.py` | py | utility | 91 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
@@ -27,7 +27,7 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
-| `tests/test_components.py` | py | testing | 34 | yes |
+| `tests/test_components.py` | py | testing | 36 | yes |
 | `tests/test_cursorrules.py` | py | testing | 12 | yes |
 | `tests/test_diagrams.py` | py | testing | 72 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
@@ -98,8 +98,8 @@ This community groups 31 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)

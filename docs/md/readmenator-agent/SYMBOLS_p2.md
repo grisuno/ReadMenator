@@ -3,6 +3,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `render` | method | `readmenator/_gh_wiki.py:179` | `def render(self, project_root, remote)` |
 | `rewrite` | method | `readmenator/_gh_wiki.py:129` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
 | `wiki_remote` | method | `readmenator/_gh_wiki.py:249` | `def wiki_remote(self, project_root)` |
 | `_git_dir` | function | `readmenator/_gitmeta.py:38` | `def _git_dir(root)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `_cs_params` | method | `readmenator/_uml.py:345` | `def _cs_params(params)` |
 | `_extract_params` | method | `readmenator/_uml.py:592` | `def _extract_params(signature)` |
 | `_find_node` | method | `readmenator/_uml.py:165` | `def _find_node(nodes, node_id)` |
-| `_generate_cpp` | method | `readmenator/_uml.py:233` | `def _generate_cpp(class_symbols, nodes, edges)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

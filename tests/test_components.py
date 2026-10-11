@@ -249,17 +249,19 @@ class TestComponentGalleryContract(unittest.TestCase):
                       GH_WIKI_ENABLED=False, DIAGRAM_VIS_ENABLED=False, **extra)
 
     def test_export_diagrams_links_components_card(self) -> None:
-        """export_diagrams writes index.html and links it from the gallery."""
+        """export_diagrams writes the site-local page and links it in-site."""
         from readmenator._app import readmenatorApplication
 
         with tempfile.TemporaryDirectory() as tmp:
             self._project(tmp)
             readmenatorApplication(self._config()).export_diagrams(tmp)
-            maps_dir = Path(tmp) / "readmenator-diagrams"
-            self.assertTrue((maps_dir / "index.html").is_file())
-            index = (Path(tmp) / "readmenator-maps" / "index.html").read_text(encoding="utf-8")
+            maps_dir = Path(tmp) / "readmenator-maps"
+            self.assertTrue((maps_dir / "components.html").is_file())
+            self.assertTrue((Path(tmp) / "readmenator-diagrams" / "index.html").is_file())
+            index = (maps_dir / "index.html").read_text(encoding="utf-8")
             self.assertIn("Component Diagrams", index)
-            self.assertIn("../readmenator-diagrams/index.html", index)
+            self.assertIn('href="components.html"', index)
+            self.assertNotIn("readmenator-diagrams/index.html", index)
 
     def test_export_pages_links_components_relatively(self) -> None:
         """export_pages links the page from inside the maps subdirectory."""
@@ -272,19 +274,46 @@ class TestComponentGalleryContract(unittest.TestCase):
             subdir = Config().DIAGRAM_MAPS_SUBDIR.strip("/")
             page = Path(tmp) / "readmenator-diagrams" / "index.html"
             self.assertTrue(page.is_file())
+            site_page = out / subdir / "components.html"
+            self.assertTrue(site_page.is_file())
             index = (out / "index.html").read_text(encoding="utf-8")
-            self.assertIn("../../readmenator-diagrams/index.html", index)
+            self.assertIn(f'href="{subdir}/components.html"', index)
+            self.assertNotIn("../readmenator-diagrams", index)
             self.assertIn(subdir + "/graph-force.html", index)
 
+    def test_site_copy_has_no_source_links(self) -> None:
+        """The site copy shows source refs as text (sources are not published)."""
+        nodes, content, analysis, resolved = _fixture()
+        builder = ComponentDiagramBuilder(Config())
+        document = builder.build(nodes, [], resolved, analysis, "/tmp", content)
+        page = builder.render_page(document, link_files=False)
+        self.assertIn("pkg/a.py", page)
+        self.assertNotIn("../pkg/a.py", page)
+
+    def test_overview_prefixes_source_links(self) -> None:
+        """Source links resolve from the output dir to the project root."""
+        nodes, content, analysis, resolved = _fixture()
+        builder = ComponentDiagramBuilder(Config())
+        document = builder.build(nodes, [], resolved, analysis, "/tmp", content)
+        self.assertIn("../pkg/a.py#L", builder.overview_markdown(document))
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "a" / "b"
+            builder.write(document, out, tmp)
+            overview = (out / "overview.md").read_text(encoding="utf-8")
+            self.assertIn("../../pkg/a.py#L", overview)
+
     def test_card_skipped_when_disabled(self) -> None:
-        """COMPONENTS_ENABLED=False writes no page and no card."""
+        """COMPONENTS_ENABLED=False writes no page, no copy, and no card."""
         from readmenator._app import readmenatorApplication
 
         with tempfile.TemporaryDirectory() as tmp:
             self._project(tmp)
+            (Path(tmp) / "readmenator-maps").mkdir()
+            (Path(tmp) / "readmenator-maps" / "components.html").write_text("stale", encoding="utf-8")
             readmenatorApplication(self._config(COMPONENTS_ENABLED=False)).export_diagrams(tmp)
             maps_dir = Path(tmp) / "readmenator-maps"
             self.assertFalse((Path(tmp) / "readmenator-diagrams" / "index.html").exists())
+            self.assertFalse((maps_dir / "components.html").exists())
             self.assertNotIn("Component Diagrams", (maps_dir / "index.html").read_text(encoding="utf-8"))
 
     def test_docs_collect_components_overview(self) -> None:

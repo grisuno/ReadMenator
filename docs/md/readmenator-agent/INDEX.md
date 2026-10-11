@@ -14,7 +14,7 @@
 | `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 1 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
-| `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 24 | 3 |
+| `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 3 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
 | `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 86 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
@@ -96,7 +96,7 @@
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
 | `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 27 | 0 |
 | `tests/test_cache.py` | Contract tests for the FileCache. | tests | 22 | 0 |
-| `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 34 | 0 |
+| `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 36 | 0 |
 | `tests/test_concepts.py` | test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets. | tests | 8 | 0 |
 | `tests/test_config.py` | - | tests | 6 | 0 |
 | `tests/test_cpg.py` | TestCodePropertyGraphContract: Contract: CodePropertyGraph generates valid JSON-LD CPG output. | tests | 11 | 0 |

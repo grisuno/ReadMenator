@@ -3,9 +3,11 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_mermaid_matches_layered_style` | method | `tests/test_components.py:105` | `def test_mermaid_matches_layered_style(self)` |
 | `test_methods_index_keys_use_pipe_separator` | method | `tests/test_components.py:89` | `def test_methods_index_keys_use_pipe_separator(self)` |
-| `test_nested_relations_roll_up` | method | `tests/test_components.py:302` | `def test_nested_relations_roll_up(self)` |
+| `test_nested_relations_roll_up` | method | `tests/test_components.py:331` | `def test_nested_relations_roll_up(self)` |
 | `test_overview_lists_related_entities` | method | `tests/test_components.py:118` | `def test_overview_lists_related_entities(self)` |
+| `test_overview_prefixes_source_links` | method | `tests/test_components.py:293` | `def test_overview_prefixes_source_links(self)` |
 | `test_page_draws_nodes_edges_and_links` | method | `tests/test_components.py:152` | `def test_page_draws_nodes_edges_and_links(self)` |
 | `test_page_escapes_untrusted_text` | method | `tests/test_components.py:194` | `def test_page_escapes_untrusted_text(self)` |
 | `test_page_has_no_network_requests` | method | `tests/test_components.py:186` | `def test_page_has_no_network_requests(self)` |
@@ -14,6 +16,7 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_relations_link_components_with_call_sites` | method | `tests/test_components.py:78` | `def test_relations_link_components_with_call_sites(self)` |
 | `test_relations_section_lists_call_evidence` | method | `tests/test_components.py:171` | `def test_relations_section_lists_call_evidence(self)` |
 | `test_sanitize_for_mermaid_ids` | method | `tests/test_components.py:114` | `def test_sanitize_for_mermaid_ids(self)` |
+| `test_site_copy_has_no_source_links` | method | `tests/test_components.py:284` | `def test_site_copy_has_no_source_links(self)` |
 | `test_thumbnail_is_safe_svg` | method | `tests/test_components.py:204` | `def test_thumbnail_is_safe_svg(self)` |
 | `test_top_level_keys_match_schema` | method | `tests/test_components.py:57` | `def test_top_level_keys_match_schema(self)` |
 | `test_write_emits_analysis_and_pages` | method | `tests/test_components.py:124` | `def test_write_emits_analysis_and_pages(self)` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_disabled_client_returns_empty` | method | `tests/test_ollama.py:14` | `def test_disabled_client_returns_empty(self)` |
 | `test_strip_thinking_removes_reasoning_blocks` | method | `tests/test_ollama.py:30` | `def test_strip_thinking_removes_reasoning_blocks(self)` |
 | `test_unreachable_daemon_returns_empty` | method | `tests/test_ollama.py:20` | `def test_unreachable_daemon_returns_empty(self)` |
-| `TestAssemblyParserContract` | class | `tests/test_parsers.py:456` | `class TestAssemblyParserContract(TestCase)` |
-| `TestCParserContract` | class | `tests/test_parsers.py:22` | `class TestCParserContract(TestCase)` |
-| `TestCSharpParserContract` | class | `tests/test_parsers.py:309` | `class TestCSharpParserContract(TestCase)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

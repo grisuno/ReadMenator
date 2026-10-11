@@ -779,6 +779,7 @@ class readmenatorApplication:
         findings: List[SecurityFinding],
         content_map: Optional[Dict[str, str]] = None,
         project_root: Optional[str] = None,
+        gallery_dir: Optional[Path] = None,
     ) -> List[Dict[str, str]]:
         """Write the explorer pages and return their gallery cards.
 
@@ -794,6 +795,7 @@ class readmenatorApplication:
             findings: Security findings.
             content_map: Optional file contents for the source viewer.
             project_root: Optional project root for the Component output.
+            gallery_dir: Directory holding the gallery index.
 
         Returns:
             Force-graph card plus the edge bundle and Component cards
@@ -826,7 +828,8 @@ class readmenatorApplication:
                 "thumb": str(bundle.get("thumb", "")),
             })
         boarding = self._write_components_card(
-            dest.parent, nodes, edges, resolved, analysis, content_map, project_root
+            dest.parent, nodes, edges, resolved, analysis, content_map, project_root,
+            gallery_dir,
         )
         if boarding is not None:
             cards.append(boarding)
@@ -841,22 +844,31 @@ class readmenatorApplication:
         analysis: Optional[AnalysisResult],
         content_map: Optional[Dict[str, str]],
         project_root: Optional[str],
+        gallery_dir: Optional[Path] = None,
     ) -> Optional[Dict[str, str]]:
         """Write the Component diagram page and return its gallery card.
 
         Args:
-            maps_dir: Directory holding the gallery index.
+            maps_dir: Directory receiving the site-local page copy.
             nodes: Scanned file nodes.
             edges: Import edges.
             resolved: Resolved-import edges.
             analysis: Community analysis.
             content_map: Optional file contents for call-site lines.
             project_root: Optional project root for the Component output.
+            gallery_dir: Directory holding the gallery index (card hrefs
+                are relative to it); defaults to maps_dir.
 
         Returns:
             Gallery card fields, or None when disabled or the write fails.
         """
         if not self._config.COMPONENTS_ENABLED:
+            try:
+                stale = maps_dir / "components.html"
+                if stale.is_file():
+                    stale.unlink()
+            except OSError:
+                pass
             return None
         try:
             root = Path(project_root) if project_root else maps_dir.parent
@@ -865,9 +877,23 @@ class readmenatorApplication:
             document = builder.build(
                 nodes, edges, resolved, analysis, str(root), content_map
             )
-            written = builder.write(document, out_dir)
-            index = Path(written["index"])
-            href = os.path.relpath(index, maps_dir).replace(os.sep, "/")
+            builder.write(document, out_dir, str(root))
+            # Site-local copy beside the gallery maps: the canonical page
+            # lives outside the site, and a ../.. href would escape a
+            # subpath deployment (GitHub project Pages), so the gallery
+            # links to this copy instead. Fully self-contained.
+            site_page = maps_dir / "components.html"
+            site_page.write_text(
+                builder.render_page(
+                    document, home_href="index.html", link_files=False
+                ),
+                encoding="utf-8",
+            )
+            gallery = Path(gallery_dir) if gallery_dir else maps_dir
+            try:
+                href = os.path.relpath(site_page, gallery).replace(os.sep, "/")
+            except (OSError, ValueError):
+                href = site_page.name
             return {
                 "kind": "components",
                 "title": "Component Diagrams",
@@ -951,7 +977,7 @@ class readmenatorApplication:
         document = self._factory.components.build(
             nodes, edges, resolved, analysis, str(root), content_map
         )
-        written = self._factory.components.write(document, dest)
+        written = self._factory.components.write(document, dest, str(root))
         logger.info(
             "Component diagrams: %d components, %d relations in %s",
             len(document["components"]), len(document["components_relations"]), dest,
@@ -1183,7 +1209,7 @@ class readmenatorApplication:
             force_dest = dest / self._config.FORCEGRAPH_OUTPUT
             extra_cards.extend(self._explorer_cards(force_dest, self._config.FORCEGRAPH_OUTPUT, "index.html",
                                                     nodes, edges, resolved, analysis, layers, findings, content_map,
-                                                    str(root)))
+                                                    str(root), dest))
         written = flat_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),
             project_root=str(root), extra_cards=extra_cards,
@@ -1291,7 +1317,7 @@ class readmenatorApplication:
                 f"{subdir}/{self._config.FORCEGRAPH_OUTPUT}" if subdir != "." else self._config.FORCEGRAPH_OUTPUT,
                 "../index.html" if subdir != "." else "index.html",
                 nodes, edges, resolved, analysis, layers, findings, content_map,
-                str(root),
+                str(root), dest,
             ))
         written = self._factory.diagram_publisher.publish(
             maps, root.name, str(dest), stats, self._live_renderer(),

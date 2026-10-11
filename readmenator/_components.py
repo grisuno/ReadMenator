@@ -15,6 +15,7 @@ from __future__ import annotations
 import html
 import json
 import math
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -195,12 +196,16 @@ class ComponentDiagramBuilder:
         lines.append("```")
         return "\n".join(lines)
 
-    def overview_markdown(self, analysis: Dict[str, Any], docs_ref: str = ".") -> str:
+    def overview_markdown(
+        self, analysis: Dict[str, Any], docs_ref: str = ".", rel_prefix: str = ".."
+    ) -> str:
         """Render the overview page (diagram plus component details).
 
         Args:
             analysis: Document from build().
             docs_ref: Base href for per-component detail pages.
+            rel_prefix: Relative path from the output directory to the
+                project root, so source file links resolve locally.
 
         Returns:
             Markdown text with the diagram, details, and related entities.
@@ -229,10 +234,11 @@ class ComponentDiagramBuilder:
                     start = entity.get("reference_start_line")
                     end = entity.get("reference_end_line")
                     name = str(entity.get("qualified_name", ref))
+                    target = f"{rel_prefix}/{ref}" if ref else ""
                     if ref and start and end and start != end:
-                        lines.append(f"- <a href=\"{ref}#L{start}-L{end}\">{name}</a>")
+                        lines.append(f"- <a href=\"{target}#L{start}-L{end}\">{name}</a>")
                     elif ref:
-                        lines.append(f"- <a href=\"{ref}\">{name}</a>")
+                        lines.append(f"- <a href=\"{target}\">{name}</a>")
                     else:
                         lines.append(f"- {name}")
             lines.append("")
@@ -267,19 +273,27 @@ class ComponentDiagramBuilder:
         return "\n".join(lines).rstrip() + "\n"
 
     def write(
-        self, analysis: Dict[str, Any], output_dir: str | Path
+        self,
+        analysis: Dict[str, Any],
+        output_dir: str | Path,
+        project_root: Optional[str] = None,
     ) -> Dict[str, str]:
         """Write analysis.json, the overview, component pages, and index.html.
 
         Args:
             analysis: Document from build().
             output_dir: Destination directory.
+            project_root: Optional project root used to prefix source
+                file links so they resolve when browsing locally.
 
         Returns:
             Mapping of page identifier to written file path.
         """
         root = Path(output_dir)
         root.mkdir(parents=True, exist_ok=True)
+        rel_prefix = self._rel_prefix(
+            Path(project_root) if project_root else None, root
+        )
         written: Dict[str, str] = {}
         target = root / "analysis.json"
         target.write_text(
@@ -288,11 +302,14 @@ class ComponentDiagramBuilder:
         written["analysis"] = str(target)
         page = root / "index.html"
         page.write_text(
-            self.render_page(analysis, home_href=None), encoding="utf-8"
+            self.render_page(analysis, home_href=None, rel_prefix=rel_prefix),
+            encoding="utf-8",
         )
         written["index"] = str(page)
         overview = root / "overview.md"
-        overview.write_text(self.overview_markdown(analysis), encoding="utf-8")
+        overview.write_text(
+            self.overview_markdown(analysis, rel_prefix=rel_prefix), encoding="utf-8"
+        )
         written["overview"] = str(overview)
         for component in analysis.get("components", []):
             if not component.get("can_expand"):
@@ -309,6 +326,25 @@ class ComponentDiagramBuilder:
             except OSError:
                 continue
         return written
+
+    @staticmethod
+    def _rel_prefix(project_root: Optional[Path], output_dir: Path) -> str:
+        """Return the relative path from the output dir to the project root.
+
+        Args:
+            project_root: Optional resolved project root.
+            output_dir: Output directory receiving the pages.
+
+        Returns:
+            Posix relative prefix (".." for the default layout).
+        """
+        if project_root is None:
+            return ".."
+        try:
+            rel = os.path.relpath(project_root.resolve(), output_dir.resolve())
+        except (OSError, ValueError):
+            return ".."
+        return Path(rel).as_posix() or "."
 
     def _components_of(
         self, nodes: List[Node], analysis: Optional[AnalysisResult]
@@ -577,18 +613,23 @@ class ComponentDiagramBuilder:
         analysis: Dict[str, Any],
         title: str = "Component Diagrams",
         home_href: Optional[str] = None,
+        rel_prefix: str = "..",
+        link_files: bool = True,
     ) -> str:
         """Render the standalone interactive diagram page.
 
-        Offline Cytoscape/dagre look-alike: layered left-to-right SVG
-        with rounded boxes, labeled bezier arrows, hover descriptions,
-        click-to-component, pan/zoom, PNG export, and a light/dark
-        theme toggle. Zero external requests.
+        Offline layered left-to-right SVG with enriched boxes, labeled
+        arrows, hover descriptions, click-to-component, pan/zoom, PNG
+        export, and a light/dark theme toggle. Zero external requests.
 
         Args:
             analysis: Document from build().
             title: Document title shown in the header.
             home_href: Optional gallery home link; omitted when None.
+            rel_prefix: Relative path from the page directory to the
+                project root for source file links.
+            link_files: False renders source references as plain text
+                (for site copies where sources are not published).
 
         Returns:
             Complete HTML document as a string.
@@ -605,7 +646,11 @@ class ComponentDiagramBuilder:
         diagram = self._svg_level(components, relations, "cb-diagram", "comp-")
         cards: List[str] = []
         for component in components:
-            cards.append(self._component_card(component))
+            cards.append(
+                self._component_card(
+                    component, rel_prefix=rel_prefix, link_files=link_files
+                )
+            )
         body = "\n".join([
             _CB_PAGE_HEAD.replace("__TITLE__", safe_title),
             '<div class="topbar"><span class="brand">Component diagrams</span>',
@@ -750,7 +795,12 @@ class ComponentDiagramBuilder:
             f"<span>{html.escape(chip)}</span>" for chip in chips
         ) + "</div>"
 
-    def _component_card(self, component: Dict[str, Any]) -> str:
+    def _component_card(
+        self,
+        component: Dict[str, Any],
+        rel_prefix: str = "..",
+        link_files: bool = True,
+    ) -> str:
         """Render one component detail card with entities and files."""
         cid = str(component.get("component_id", ""))
         anchor = "comp-" + cid.replace(".", "-")
@@ -772,16 +822,20 @@ class ComponentDiagramBuilder:
                 start = entity.get("reference_start_line")
                 end = entity.get("reference_end_line")
                 label = html.escape(str(entity.get("qualified_name", ref)), quote=True)
-                if ref and start and end and start != end:
+                target = f"{rel_prefix}/{ref}" if ref else ""
+                if ref and start and end and start != end and link_files:
                     parts.append(
-                        f'<li><a href="{html.escape(ref, quote=True)}'
+                        f'<li><a href="{html.escape(target, quote=True)}'
                         f'#L{int(start)}-L{int(end)}"><code>{label}</code></a></li>'
                     )
-                elif ref:
+                elif ref and link_files:
                     parts.append(
-                        f'<li><a href="{html.escape(ref, quote=True)}">'
+                        f'<li><a href="{html.escape(target, quote=True)}">'
                         f"<code>{label}</code></a></li>"
                     )
+                elif ref:
+                    anchor_ref = f"{label}#L{int(start)}-L{int(end)}" if start and end and start != end else label
+                    parts.append(f"<li><code>{anchor_ref}</code></li>")
                 else:
                     parts.append(f"<li><code>{label}</code></li>")
             parts.append("</ul>")

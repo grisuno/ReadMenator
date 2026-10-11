@@ -285,10 +285,12 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `_project` (method, line 241) `def _project(self, tmp)`
   - `_config` (method, line 246) `def _config(self)`
   - `test_export_diagrams_links_components_card` (method, line 251) `def test_export_diagrams_links_components_card(self)`
-  - `test_export_pages_links_components_relatively` (method, line 264) `def test_export_pages_links_components_relatively(self)`
-  - `test_card_skipped_when_disabled` (method, line 279) `def test_card_skipped_when_disabled(self)`
-  - `test_docs_collect_components_overview` (method, line 290) `def test_docs_collect_components_overview(self)`
-  - `test_nested_relations_roll_up` (method, line 302) `def test_nested_relations_roll_up(self)`
+  - `test_export_pages_links_components_relatively` (method, line 266) `def test_export_pages_links_components_relatively(self)`
+  - `test_site_copy_has_no_source_links` (method, line 284) `def test_site_copy_has_no_source_links(self)`
+  - `test_overview_prefixes_source_links` (method, line 293) `def test_overview_prefixes_source_links(self)`
+  - `test_card_skipped_when_disabled` (method, line 305) `def test_card_skipped_when_disabled(self)`
+  - `test_docs_collect_components_overview` (method, line 319) `def test_docs_collect_components_overview(self)`
+  - `test_nested_relations_roll_up` (method, line 331) `def test_nested_relations_roll_up(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
 
 ## tests/test_concepts.py

@@ -3,6 +3,9 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
+| `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |
 | `test_generate_cpp_unknown_language_returns_error_message` | method | `tests/test_uml.py:223` | `def test_generate_cpp_unknown_language_returns_error_message(self)` |
 | `test_generate_cpp_with_empty_classes` | method | `tests/test_uml.py:208` | `def test_generate_cpp_with_empty_classes(self)` |
 | `test_generate_csharp_produces_valid_code` | method | `tests/test_uml.py:288` | `def test_generate_csharp_produces_valid_code(self)` |

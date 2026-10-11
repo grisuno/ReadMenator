@@ -3,6 +3,9 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestAssemblyParserContract` | class | `tests/test_parsers.py:456` | `class TestAssemblyParserContract(TestCase)` |
+| `TestCParserContract` | class | `tests/test_parsers.py:22` | `class TestCParserContract(TestCase)` |
+| `TestCSharpParserContract` | class | `tests/test_parsers.py:309` | `class TestCSharpParserContract(TestCase)` |
 | `TestDartParserContract` | class | `tests/test_parsers.py:387` | `class TestDartParserContract(TestCase)` |
 | `TestGDScriptParserContract` | class | `tests/test_parsers.py:412` | `class TestGDScriptParserContract(TestCase)` |
 | `TestGoParserContract` | class | `tests/test_parsers.py:157` | `class TestGoParserContract(TestCase)` |
@@ -493,8 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
 | `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
-| `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

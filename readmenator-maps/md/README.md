@@ -212,10 +212,12 @@ drawn as an offline interactive page in the readmenator dark theme (layered
 left-to-right boxes enriched with key symbols, layer colors and PageRank hubs,
 labeled arrows weighted by call/import evidence, hover descriptions,
 click-to-component, pan/zoom, PNG export). The maps gallery links it with a
-**Component Diagrams** card, and the docs site ships the markdown in its
-reader. No external service needed: structure and call evidence are pure static
-analysis; a local Ollama daemon only ever enriches prose descriptions, and only
-when `OLLAMA_ENABLED` is set.
+**Component Diagrams** card that opens a self-contained copy living inside the
+maps directory itself, so the link never leaves the site (safe on GitHub Pages
+project subpaths, where `../..` hrefs would escape the project). The docs site
+ships the markdown in its reader. No external service needed: structure and
+call evidence are pure static analysis; a local Ollama daemon only ever
+enriches prose descriptions, and only when `OLLAMA_ENABLED` is set.
 
 ```bash
 python -m readmenator /path/to/project components  # rebuild only the diagrams
