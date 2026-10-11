@@ -2,6 +2,7 @@
 
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-45c9-a119-fa154d03446b" />
 
+<img width="1913" height="963" alt="image" src="https://github.com/user-attachments/assets/f32e63ea-d2a2-41c1-a00f-6b660efbd643" />
 
 A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer.
 
