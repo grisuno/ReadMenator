@@ -188,6 +188,57 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_dominant_directory_prefers_specific_on_tie` (method, line 141) `def test_dominant_directory_prefers_specific_on_tie(self)`
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`
 
+## tests/test_apidocs.py
+- Doc: Contract tests for the docstring parser and the deterministic API reference.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_project` (function, line 142) `def _project()`
+  - `TestDocstringParser` (class, line 161) `class TestDocstringParser(TestCase)`
+  - `TestApiReferenceBuilder` (class, line 255) `class TestApiReferenceBuilder(TestCase)`
+  - `TestSignatureParsing` (class, line 378) `class TestSignatureParsing(TestCase)`
+  - `TestApiRendering` (class, line 401) `class TestApiRendering(TestCase)`
+  - `TestApiDocsIntegration` (class, line 479) `class TestApiDocsIntegration(TestCase)`
+  - `test_docstrings_google_sections` (method, line 164) `def test_docstrings_google_sections(self)`
+  - `test_docstrings_numpy_sections` (method, line 179) `def test_docstrings_numpy_sections(self)`
+  - `test_docstrings_rest_fields_and_directives` (method, line 189) `def test_docstrings_rest_fields_and_directives(self)`
+  - `test_docstrings_jsdoc_and_doxygen_tags` (method, line 201) `def test_docstrings_jsdoc_and_doxygen_tags(self)`
+  - `test_docstrings_phpdoc_type_before_variable` (method, line 216) `def test_docstrings_phpdoc_type_before_variable(self)`
+  - `test_docstrings_csharp_xml` (method, line 220) `def test_docstrings_csharp_xml(self)`
+  - `test_docstrings_rustdoc_sections` (method, line 229) `def test_docstrings_rustdoc_sections(self)`
+  - `test_docstrings_plain_and_empty` (method, line 235) `def test_docstrings_plain_and_empty(self)`
+  - `test_docstrings_recover_block_and_line_comments` (method, line 242) `def test_docstrings_recover_block_and_line_comments(self)`
+  - `test_docstrings_recover_elixir_doc_heredoc` (method, line 250) `def test_docstrings_recover_elixir_doc_heredoc(self)`
+  - `setUpClass` (method, line 259) `def setUpClass(cls)`
+  - `test_apidocs_python_signatures_exact` (method, line 263) `def test_apidocs_python_signatures_exact(self)`
+  - `test_apidocs_python_nesting_and_kinds` (method, line 275) `def test_apidocs_python_nesting_and_kinds(self)`
+  - `test_apidocs_python_all_and_private_filter` (method, line 283) `def test_apidocs_python_all_and_private_filter(self)`
+  - `test_apidocs_tests_excluded_by_default` (method, line 292) `def test_apidocs_tests_excluded_by_default(self)`
+  - `test_apidocs_constructor_inherits_class_args` (method, line 299) `def test_apidocs_constructor_inherits_class_args(self)`
+  - `test_apidocs_inheritance_links_and_doc_inheritance` (method, line 303) `def test_apidocs_inheritance_links_and_doc_inheritance(self)`
+  - `test_apidocs_c_prototype_doc_merges_into_definition` (method, line 312) `def test_apidocs_c_prototype_doc_merges_into_definition(self)`
+  - `test_apidocs_call_graph_resolved` (method, line 320) `def test_apidocs_call_graph_resolved(self)`
+  - `test_apidocs_receiver_filter_drops_unproven_method_calls` (method, line 326) `def test_apidocs_receiver_filter_drops_unproven_method_calls(self)`
+  - `test_apidocs_annotated_receiver_resolves_method` (method, line 330) `def test_apidocs_annotated_receiver_resolves_method(self)`
+  - `test_apidocs_warnings_cover_every_rule` (method, line 334) `def test_apidocs_warnings_cover_every_rule(self)`
+  - `test_apidocs_coverage_counts` (method, line 344) `def test_apidocs_coverage_counts(self)`
+  - `test_apidocs_deterministic` (method, line 350) `def test_apidocs_deterministic(self)`
+  - `test_apidocs_privacy_mode_strips_text` (method, line 358) `def test_apidocs_privacy_mode_strips_text(self)`
+  - `test_apidocs_entity_budget_truncates` (method, line 366) `def test_apidocs_entity_budget_truncates(self)`
+  - `test_apidocs_without_content_uses_parser_symbols` (method, line 372) `def test_apidocs_without_content_uses_parser_symbols(self)`
+  - `test_apidocs_signature_languages` (method, line 381) `def test_apidocs_signature_languages(self)`
+  - `setUpClass` (method, line 405) `def setUpClass(cls)`
+  - `test_apidocs_pages_layout` (method, line 411) `def test_apidocs_pages_layout(self)`
+  - `test_apidocs_module_page_sections` (method, line 416) `def test_apidocs_module_page_sections(self)`
+  - `test_apidocs_hierarchy_nests_subclasses` (method, line 427) `def test_apidocs_hierarchy_nests_subclasses(self)`
+  - `test_apidocs_linker_resolves_references` (method, line 431) `def test_apidocs_linker_resolves_references(self)`
+  - `test_apidocs_html_is_self_contained_and_escaped` (method, line 440) `def test_apidocs_html_is_self_contained_and_escaped(self)`
+  - `test_apidocs_html_placeholder_in_payload_stays_literal` (method, line 448) `def test_apidocs_html_placeholder_in_payload_stays_literal(self)`
+  - `test_apidocs_writer_writes_and_prunes` (method, line 452) `def test_apidocs_writer_writes_and_prunes(self)`
+  - `test_apidocs_writer_refuses_symlinked_output` (method, line 467) `def test_apidocs_writer_refuses_symlinked_output(self)`
+  - `test_apidocs_app_export_and_scanner_skip` (method, line 482) `def test_apidocs_app_export_and_scanner_skip(self)`
+- Depends on: `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_docstrings.py`, `readmenator/_models.py`
+
 ## tests/test_bundlegraph.py
 - Doc: Contract tests for the edge bundle explorer (circle and sphere views).
 - Layer: testing

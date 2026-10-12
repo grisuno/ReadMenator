@@ -305,7 +305,52 @@ class ForceGraphRenderer:
                     "color": edge_palette.get(edge.relation, edge_palette.get("external", "rgba(255,255,255,.15)")),
                 }
             )
-        return {"nodes": list(out_nodes.values()), "edges": out_edges}
+        payload = {"nodes": list(out_nodes.values()), "edges": out_edges}
+        self._seed_positions(payload)
+        return payload
+
+    def _seed_positions(self, payload: Dict[str, List[Dict[str, Any]]]) -> None:
+        """Attach deterministic ForceAtlas2 start positions to every payload node.
+
+        Runs LinLog ForceAtlas2 in 2D (``s2``) and 3D (``s3``) over the
+        whole heterogeneous graph (files, communities, layers, externals)
+        and rescales each layout so the median edge length equals
+        FORCEGRAPH_LINK_DISTANCE. The explorer starts the physics from
+        these positions, so the first frame is already clustered and the
+        layout is identical on every load. Skipped when disabled or above
+        FORCEGRAPH_SEED_MAX_NODES.
+
+        Args:
+            payload: Payload whose nodes receive ``s2`` and ``s3`` lists.
+        """
+        cfg = self._config
+        nodes = payload.get("nodes", [])
+        if not cfg.FORCEGRAPH_SEED_LAYOUT or not nodes or len(nodes) > cfg.FORCEGRAPH_SEED_MAX_NODES:
+            return
+        ids = sorted(str(n["id"]) for n in nodes)
+        known = set(ids)
+        links = sorted({
+            (str(e["source"]), str(e["target"])) for e in payload.get("edges", [])
+            if e["source"] in known and e["target"] in known and e["source"] != e["target"]
+        })
+        for key, dims in (("s2", 2), ("s3", 3)):
+            frames = forceatlas2_frames(ids, links, ForceAtlas2Settings(
+                iterations=cfg.FORCEGRAPH_SEED_ITERATIONS, snapshots=2, linlog=True,
+                gravity=cfg.FORCEGRAPH_SEED_GRAVITY, dims=dims,
+            ))
+            if not frames:
+                return
+            final = frames[-1]
+            center = [sum(p[k] for p in final.values()) / len(final) for k in range(dims)]
+            lengths = sorted(
+                math.sqrt(sum((final[a][k] - final[b][k]) ** 2 for k in range(dims))) for a, b in links
+            )
+            median = lengths[len(lengths) // 2] if lengths else 1.0
+            scale = float(cfg.FORCEGRAPH_LINK_DISTANCE) / max(median, 1e-9)
+            for node in nodes:
+                point = final.get(str(node["id"]))
+                if point is not None:
+                    node[key] = [round((point[k] - center[k]) * scale, 1) for k in range(dims)]
 
     def render(
         self,
@@ -422,6 +467,8 @@ class ForceGraphRenderer:
             "curveSamples": cfg.FORCEGRAPH_CURVE_SAMPLES,
             "arrowLen": cfg.FORCEGRAPH_ARROW_LENGTH,
             "arrowZoom": cfg.FORCEGRAPH_ARROW_ZOOM,
+            "seedLayout": bool(cfg.FORCEGRAPH_SEED_LAYOUT),
+            "seedVelocityDecay": cfg.FORCEGRAPH_SEED_VELOCITY_DECAY,
             "cooldownTicks": cfg.FORCEGRAPH_COOLDOWN_TICKS,
             "cooldownTicksReduced": cfg.FORCEGRAPH_COOLDOWN_TICKS_REDUCED,
             "docLinesPx": cfg.FORCEGRAPH_DOC_LINES_PX,

@@ -4,6 +4,7 @@ graph LR
     readmenator_parsers["readmenator/parsers"]
     readmenator__diagrams["readmenator: _diagrams"]
     readmenator__pipeline["readmenator: _pipeline"]
+    readmenator__apidocs["readmenator: _apidocs"]
     readmenator__agent_injector["readmenator: _agent_injector"]
     readmenator__graphrag -- "calls into" --> readmenator_parsers
     readmenator__graphrag -- "calls into" --> readmenator__diagrams
@@ -14,11 +15,17 @@ graph LR
     readmenator__diagrams -- "calls into" --> readmenator__graphrag
     readmenator__diagrams -- "calls into" --> readmenator_parsers
     readmenator__diagrams -- "calls into" --> readmenator__pipeline
+    readmenator__diagrams -- "calls into" --> readmenator__apidocs
     readmenator__diagrams -- "depends on" --> readmenator__agent_injector
     readmenator__pipeline -- "calls into" --> readmenator__graphrag
     readmenator__pipeline -- "calls into" --> readmenator_parsers
     readmenator__pipeline -- "calls into" --> readmenator__diagrams
+    readmenator__pipeline -- "calls into" --> readmenator__apidocs
     readmenator__pipeline -- "calls into" --> readmenator__agent_injector
+    readmenator__apidocs -- "calls into" --> readmenator__graphrag
+    readmenator__apidocs -- "calls into" --> readmenator_parsers
+    readmenator__apidocs -- "calls into" --> readmenator__diagrams
+    readmenator__apidocs -- "calls into" --> readmenator__pipeline
     readmenator__agent_injector -- "calls into" --> readmenator__graphrag
     readmenator__agent_injector -- "calls into" --> readmenator_parsers
     readmenator__agent_injector -- "calls into" --> readmenator__pipeline
@@ -26,11 +33,12 @@ graph LR
     click readmenator_parsers href "./readmenator_parsers.md" "Details"
     click readmenator__diagrams href "./readmenator__diagrams.md" "Details"
     click readmenator__pipeline href "./readmenator__pipeline.md" "Details"
+    click readmenator__apidocs href "./readmenator__apidocs.md" "Details"
 ```
 
 ## Details
 
-Static architecture map of 136 files (js, py) in 5 components: readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams, readmenator: _pipeline, readmenator: _agent_injector. Structure is extracted statically without LLM calls; component prose may be enriched locally.
+Static architecture map of 145 files (js, py) in 6 components: readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams, readmenator: _pipeline, readmenator: _apidocs, readmenator: _agent_injector. Structure is extracted statically without LLM calls; component prose may be enriched locally.
 
 ### readmenator: _graphrag (1)
 
@@ -38,7 +46,7 @@ readmenator: _graphrag groups 40 files (py) around Config, ImportResolver, __ini
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_config.py#L15-L1042">readmenator/_config.py::Config</a>
+- <a href="../readmenator/_config.py#L15-L1152">readmenator/_config.py::Config</a>
 - <a href="../readmenator/_resolver.py#L18-L60">readmenator/_resolver.py::ImportResolver</a>
 - <a href="../readmenator/_resolver.py#L61-L82">readmenator/_resolver.py::__init__</a>
 - <a href="../readmenator/_resolver.py#L83-L92">readmenator/_resolver.py::_build_stem_index</a>
@@ -79,30 +87,45 @@ readmenator: _diagrams groups 31 files (py) around EdgeKind, __str__, Morphism, 
 
 ### readmenator: _pipeline (4)
 
-readmenator: _pipeline groups 25 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
+readmenator: _pipeline groups 20 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_graphlayout.py#L37-L62">readmenator/_graphlayout.py::ForceAtlas2Settings</a>
-- <a href="../readmenator/_graphlayout.py#L63-L69">readmenator/_graphlayout.py::_initial_positions</a>
-- <a href="../readmenator/_graphlayout.py#L70-L109">readmenator/_graphlayout.py::forceatlas2_frames</a>
-- <a href="../readmenator/_graphlayout.py#L110-L115">readmenator/_graphlayout.py::_snapshot_steps</a>
-- <a href="../readmenator/_graphlayout.py#L116-L162">readmenator/_graphlayout.py::_fa2_numpy</a>
-- <a href="../readmenator/_graphlayout.py#L163-L217">readmenator/_graphlayout.py::_fa2_python</a>
-- <a href="../readmenator/_graphlayout.py#L218-L262">readmenator/_graphlayout.py::fit_frames</a>
-- <a href="../readmenator/_graphlayout.py#L263-L277">readmenator/_graphlayout.py::interpolate_frames</a>
+- <a href="../readmenator/_graphlayout.py#L40-L65">readmenator/_graphlayout.py::ForceAtlas2Settings</a>
+- <a href="../readmenator/_graphlayout.py#L66-L72">readmenator/_graphlayout.py::_initial_positions</a>
+- <a href="../readmenator/_graphlayout.py#L73-L112">readmenator/_graphlayout.py::forceatlas2_frames</a>
+- <a href="../readmenator/_graphlayout.py#L113-L118">readmenator/_graphlayout.py::_snapshot_steps</a>
+- <a href="../readmenator/_graphlayout.py#L119-L165">readmenator/_graphlayout.py::_fa2_numpy</a>
+- <a href="../readmenator/_graphlayout.py#L166-L220">readmenator/_graphlayout.py::_fa2_python</a>
+- <a href="../readmenator/_graphlayout.py#L221-L265">readmenator/_graphlayout.py::fit_frames</a>
+- <a href="../readmenator/_graphlayout.py#L266-L280">readmenator/_graphlayout.py::interpolate_frames</a>
 
-### readmenator: _agent_injector (5)
+### readmenator: _apidocs (5)
+
+readmenator: _apidocs groups 14 files (py) around ApiParam, to_dict, ApiEntity, is_documented, to_dict. Deterministic API reference model: extraction, cross-references, coverage.
+
+**Related Classes/Methods**:
+
+- <a href="../readmenator/_apidocs.py#L76-L90">readmenator/_apidocs.py::ApiParam</a>
+- <a href="../readmenator/_apidocs.py#L91-L97">readmenator/_apidocs.py::to_dict</a>
+- <a href="../readmenator/_apidocs.py#L98-L155">readmenator/_apidocs.py::ApiEntity</a>
+- <a href="../readmenator/_apidocs.py#L156-L159">readmenator/_apidocs.py::is_documented</a>
+- <a href="../readmenator/_apidocs.py#L160-L179">readmenator/_apidocs.py::to_dict</a>
+- <a href="../readmenator/_apidocs.py#L180-L196">readmenator/_apidocs.py::DocWarning</a>
+- <a href="../readmenator/_apidocs.py#L197-L203">readmenator/_apidocs.py::to_dict</a>
+- <a href="../readmenator/_apidocs.py#L204-L220">readmenator/_apidocs.py::ApiReference</a>
+
+### readmenator: _agent_injector (6)
 
 readmenator: _agent_injector groups 5 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_readme_injector.py#L115-L125">readmenator/_readme_injector.py::ReadmeInjector</a>
-- <a href="../readmenator/_readme_injector.py#L126-L181">readmenator/_readme_injector.py::__init__</a>
-- <a href="../readmenator/_readme_injector.py#L182-L222">readmenator/_readme_injector.py::inject</a>
-- <a href="../readmenator/_readme_injector.py#L223-L239">readmenator/_readme_injector.py::_extract_current_injection</a>
-- <a href="../readmenator/_readme_injector.py#L240-L258">readmenator/_readme_injector.py::_remove_old_injection</a>
-- <a href="../readmenator/_readme_injector.py#L259-L273">readmenator/_readme_injector.py::_strip_partial_anchor</a>
-- <a href="../readmenator/_readme_injector.py#L274-L310">readmenator/_readme_injector.py::remove</a>
-- <a href="../readmenator/_readme_injector.py#L311-L325">readmenator/_readme_injector.py::_find_readme</a>
+- <a href="../readmenator/_readme_injector.py#L122-L132">readmenator/_readme_injector.py::ReadmeInjector</a>
+- <a href="../readmenator/_readme_injector.py#L133-L191">readmenator/_readme_injector.py::__init__</a>
+- <a href="../readmenator/_readme_injector.py#L192-L232">readmenator/_readme_injector.py::inject</a>
+- <a href="../readmenator/_readme_injector.py#L233-L249">readmenator/_readme_injector.py::_extract_current_injection</a>
+- <a href="../readmenator/_readme_injector.py#L250-L268">readmenator/_readme_injector.py::_remove_old_injection</a>
+- <a href="../readmenator/_readme_injector.py#L269-L283">readmenator/_readme_injector.py::_strip_partial_anchor</a>
+- <a href="../readmenator/_readme_injector.py#L284-L320">readmenator/_readme_injector.py::remove</a>
+- <a href="../readmenator/_readme_injector.py#L321-L335">readmenator/_readme_injector.py::_find_readme</a>

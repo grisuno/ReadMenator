@@ -13,6 +13,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from readmenator._apidocs import ApiReference
 from readmenator._bundlegraph import UNASSIGNED_KEY
 from readmenator._cache import FileCache, source_fingerprint
 from readmenator._config import Config
@@ -20,6 +21,7 @@ from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher
 from readmenator._explorer import build_state
+from readmenator._flowcharts import render_architecture_section, render_flows_section
 from readmenator._explorer import serve as _serve_explorer
 from readmenator._gh_wiki import WikiPublishResult
 from readmenator._gitmeta import read_git_head
@@ -153,6 +155,7 @@ class readmenatorApplication:
 
         content = self._factory.generator.generate(
             nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked,
+            content_map=content_map,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
@@ -205,6 +208,8 @@ class readmenatorApplication:
             root, nodes, edges, resolved_edges, analysis,
             layers, findings, analysis_v2, content_map,
         )
+
+        self._maybe_write_apidocs(root, nodes, edges, resolved_edges, content_map, analysis, layers)
 
         try:
             installed = self._factory.skills.maybe_install_on_run(str(root))
@@ -500,12 +505,15 @@ class readmenatorApplication:
                 })
             self._last_findings = findings
 
+        update_contents = self._read_contents(root, nodes)
         content = self._factory.generator.generate(
             nodes, edges, resolved_edges, analysis,
             layers=layers, findings=findings, analysis_v2=analysis_v2,
+            content_map=update_contents,
         )
         output_path = root / self._config.OUTPUT_FILENAME
         output_path.write_text(content, encoding="utf-8")
+        self._maybe_write_apidocs(root, nodes, edges, resolved_edges, update_contents, analysis, layers)
 
         if self._config.AGENT_OUTPUT_ENABLED:
             self._factory.agent_output.generate(
@@ -989,6 +997,82 @@ class readmenatorApplication:
         )
         return written
 
+    def _maybe_write_apidocs(
+        self,
+        root: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        content_map: Optional[Dict[str, str]],
+        analysis: Optional[AnalysisResult] = None,
+        layers: Optional[Dict[str, str]] = None,
+    ) -> Optional[ApiReference]:
+        """Build and write the API reference when APIDOCS_ENABLED is set.
+
+        Failures are logged and never fail the knowledge base run.
+
+        Returns:
+            The written reference, or None when disabled or skipped.
+        """
+        if not self._config.APIDOCS_ENABLED:
+            return None
+        try:
+            reference = self._factory.apidocs.build(nodes, edges, resolved_edges, content_map)
+            architecture = self._architecture_markdown(nodes, edges, resolved_edges, content_map, analysis, layers)
+            self._factory.apidocs_writer.write(reference, str(root), architecture_markdown=architecture)
+        except Exception:
+            logger.warning("API reference skipped", exc_info=True)
+            return None
+        return reference
+
+    def _architecture_markdown(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        content_map: Optional[Dict[str, str]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+    ) -> str:
+        """Render the architecture overview and execution flows as Markdown."""
+        lines: List[str] = []
+        if self._config.ARCH_DIAGRAM_ENABLED:
+            lines.extend(render_architecture_section(
+                self._config, nodes, resolved_edges, analysis, layers if layers is not None else LayerDetector().detect(nodes, edges),
+            ))
+        if self._config.FLOW_ENABLED:
+            lines.extend(render_flows_section(self._config, nodes, edges, resolved_edges, content_map))
+        return "\n".join(lines)
+
+    def build_api_reference(self, target_dir: str) -> ApiReference:
+        """Scan *target_dir* and build its API reference without writing it.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            The deterministic API reference.
+        """
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        return self._factory.apidocs.build(nodes, edges, self._last_resolved_edges, content_map)
+
+    def export_apidocs(self, target_dir: str) -> Dict[str, str]:
+        """Generate the API reference tree (Markdown, api.json, index.html).
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Mapping of relative output path to written file path.
+        """
+        root = Path(target_dir).resolve()
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        reference = self._factory.apidocs.build(nodes, edges, resolved, content_map)
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        architecture = self._architecture_markdown(nodes, edges, resolved, content_map, analysis, None)
+        return self._factory.apidocs_writer.write(reference, str(root), architecture_markdown=architecture)
+
     def explorer_state(self, target_dir: str):
         """Build explorer state for the local HTTP server.
 
@@ -1395,6 +1479,30 @@ class readmenatorApplication:
             logger.debug("Overview video skipped", exc_info=True)
             return None
 
+    def _read_contents(self, root: Path, nodes: List[Node]) -> Dict[str, str]:
+        """Re-read scanned file contents, skipping symlinks and oversized files.
+
+        Args:
+            root: Project root directory.
+            nodes: Scanned file nodes.
+
+        Returns:
+            Mapping of file id to text content.
+        """
+        content_map: Dict[str, str] = {}
+        max_bytes = int(self._config.MAX_FILE_SIZE_MB * 1024 * 1024)
+        for node in nodes:
+            path = root / node.node_id
+            try:
+                if not path.is_file() or path.is_symlink():
+                    continue
+                if max_bytes and path.stat().st_size > max_bytes:
+                    continue
+                content_map[node.node_id] = path.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
+        return content_map
+
     def _refresh_explorers(
         self,
         root: Path,
@@ -1429,18 +1537,7 @@ class readmenatorApplication:
         if self._config.PRIVACY_MODE or not self._config.SOURCEVIEW_ENABLED:
             content_map: Optional[Dict[str, str]] = None
         else:
-            content_map = {}
-            max_bytes = int(self._config.MAX_FILE_SIZE_MB * 1024 * 1024)
-            for node in nodes:
-                path = root / node.node_id
-                try:
-                    if not path.is_file() or path.is_symlink():
-                        continue
-                    if max_bytes and path.stat().st_size > max_bytes:
-                        continue
-                    content_map[node.node_id] = path.read_text(encoding="utf-8", errors="ignore")
-                except OSError:
-                    continue
+            content_map = self._read_contents(root, nodes)
         dest = self._forcegraph_dest(str(root))
         counts = self._write_forcegraph(dest, nodes, edges, resolved_edges, analysis, layers or {}, findings or [], "index.html", content_map)
         return str(dest) if counts else None

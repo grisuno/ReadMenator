@@ -12,15 +12,15 @@
 - Language: py
 - Symbols:
   - `Config` (class, line 21) `class Config`
-  - `_validate_repo_name` (method, line 56) `def _validate_repo_name(name)`
-  - `_validate_branch_name` (method, line 62) `def _validate_branch_name(name)`
-  - `_safe_env` (method, line 68) `def _safe_env()`
+  - `_validate_repo_name` (function, line 56) `def _validate_repo_name(name)`
+  - `_validate_branch_name` (function, line 62) `def _validate_branch_name(name)`
+  - `_safe_env` (function, line 68) `def _safe_env()`
   - `GitHubClient` (class, line 83) `class GitHubClient`
   - `RepositoryProcessor` (class, line 197) `class RepositoryProcessor`
   - `Orchestrator` (class, line 366) `class Orchestrator`
   - `TestOrchestrator` (class, line 421) `class TestOrchestrator(TestCase)`
-  - `parse_arguments` (method, line 481) `def parse_arguments()`
-  - `main` (method, line 498) `def main()`
+  - `parse_arguments` (function, line 481) `def parse_arguments()`
+  - `main` (function, line 498) `def main()`
   - `__init__` (method, line 84) `def __init__(self, config)`
   - `_resolve_user` (method, line 89) `def _resolve_user(self)`
   - `_setup_git_auth` (method, line 110) `def _setup_git_auth(self)`

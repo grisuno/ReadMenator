@@ -36,6 +36,7 @@ from readmenator._graphlayout import (
     hierarchical_edge_bundling,
     interpolate_frames,
     normalize_cloud,
+    optimize_bundle_order,
     spherical_edge_bundling,
 )
 from readmenator._models import AnalysisResult, AnalysisResultV2, Edge, Node, SecurityFinding
@@ -93,9 +94,14 @@ _RENDER_CFG: Optional[Config] = None
 
 
 def ease(x: float) -> float:
-    """Smoothstep clamped to [0, 1]."""
+    """Quintic smootherstep clamped to [0, 1].
+
+    Perlin's 6x^5 - 15x^4 + 10x^3 has zero first and second derivatives
+    at both ends, so reveals, counters, and camera moves start and stop
+    without the visible acceleration jump of cubic smoothstep.
+    """
     x = max(0.0, min(1.0, x))
-    return x * x * (3 - 2 * x)
+    return x * x * x * (x * (x * 6 - 15) + 10)
 
 
 def fmt_int(n: int) -> str:
@@ -1164,12 +1170,22 @@ class CinematicVideoRenderer:
             groups["-1:unassigned"] = loose
         return groups
 
+    def ordered_groups(self, data: Dict[str, Any]) -> Dict[str, List[str]]:
+        """Bundle groups reordered to shorten bundled edges (same optimizer as the explorer)."""
+        groups = self.bundle_groups(data)
+        c = self.config
+        if not c.BUNDLEGRAPH_ORDER_OPTIMIZE:
+            return groups
+        return optimize_bundle_order(
+            groups, data["graph_links"], c.BUNDLEGRAPH_ORDER_SWEEPS, c.BUNDLEGRAPH_ORDER_PASSES,
+        )
+
     def bundle_layout(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> BundleLayout:
         """Hierarchical edge bundling of resolved imports grouped by community."""
         x0, y0, x1, y1 = box
         radius = max(10.0, min(x1 - x0, y1 - y0) / 2 - 70)
         return hierarchical_edge_bundling(
-            self.bundle_groups(data), data["graph_links"], ((x0 + x1) / 2, (y0 + y1) / 2 + 10), radius,
+            self.ordered_groups(data), data["graph_links"], ((x0 + x1) / 2, (y0 + y1) / 2 + 10), radius,
             beta=self.config.VIDEO_BUNDLE_BETA, samples=self.config.VIDEO_BUNDLE_SAMPLES,
         )
 
@@ -1187,8 +1203,9 @@ class CinematicVideoRenderer:
         """Spherical edge bundling of resolved imports on community caps."""
         c = self.config
         return spherical_edge_bundling(
-            self.bundle_groups(data), data["graph_links"], 1.0, beta=c.VIDEO_BUNDLE_BETA,
+            self.ordered_groups(data), data["graph_links"], 1.0, beta=c.VIDEO_BUNDLE_BETA,
             samples=c.VIDEO_SPHERE_SAMPLES, inner_ratio=c.BUNDLEGRAPH_INNER_RATIO,
+            refine_sweeps=c.BUNDLEGRAPH_SPHERE_REFINE_SWEEPS if c.BUNDLEGRAPH_ORDER_OPTIMIZE else 0,
         )
 
     def orbit_stops(self, data: Dict[str, Any], positions: Dict[str, Tuple[float, float, float]]) -> List[Dict[str, Any]]:
@@ -1276,30 +1293,77 @@ def _render_frame_bytes(fi: int) -> bytes:
     return _draw_frame(fi).tobytes()
 
 
-def _draw_frame(fi: int) -> Any:
-    """Draw one frame for the global render state."""
+_TRANSITION_CACHE: Dict[int, Any] = {}
+
+
+def _scene_index(gt: float) -> int:
+    """Return the index of the scene active at global time *gt*."""
+    for index, scene in enumerate(_RENDER_SCENES):
+        if scene["start"] <= gt < scene["start"] + scene["dur"]:
+            return index
+    return len(_RENDER_SCENES) - 1
+
+
+def _paint_scene(index: int, lt: float) -> Any:
+    """Draw scene *index* at local time *lt* (before post effects)."""
     from PIL import ImageDraw
 
-    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
-    cfg = _RENDER_CFG
-    fps = cfg.VIDEO_FPS
-    gt = fi / max(1, fps)
-    sc = _RENDER_SCENES[-1]
-    for s in _RENDER_SCENES:
-        if s["start"] <= gt < s["start"] + s["dur"]:
-            sc = s
-            break
-    lt = gt - sc["start"]
+    sc = _RENDER_SCENES[index]
+    lt = max(0.0, min(sc["dur"], lt))
+    gt = sc["start"] + lt
     img = _RENDER_BD.base.copy()
     if sc["kind"] not in ("title", "card", "outro", "invite"):
         draw_grid(img, gt, 0.35, _RENDER_BD)
     d = ImageDraw.Draw(img, "RGBA")
     _SCENE_FN[sc["kind"]](img, d, lt, gt, sc)
+    return img
+
+
+def _motion_blurred(index: int, lt: float) -> Any:
+    """Average shutter sub-frames for fast camera acts (temporal supersampling)."""
+    cfg = _RENDER_CFG
+    sc = _RENDER_SCENES[index]
+    samples = max(1, int(cfg.VIDEO_MOTION_BLUR_SAMPLES)) if sc["kind"] in cfg.VIDEO_MOTION_BLUR_ACTS else 1
+    if samples == 1:
+        return _paint_scene(index, lt)
+    span = float(cfg.VIDEO_MOTION_BLUR_SHUTTER) / max(1, cfg.VIDEO_FPS)
+    acc = _paint_scene(index, lt)
+    for k in range(1, samples):
+        sub = _paint_scene(index, lt - span * k / samples)
+        acc = _img().blend(acc, sub, 1.0 / (k + 1))
+    return acc
+
+
+def _outgoing_frame(index: int) -> Any:
+    """Final frame of scene *index*, cached per worker process."""
+    if index not in _TRANSITION_CACHE:
+        sc = _RENDER_SCENES[index]
+        _TRANSITION_CACHE.clear()
+        _TRANSITION_CACHE[index] = _paint_scene(index, sc["dur"] - 1.0 / max(1, _RENDER_CFG.VIDEO_FPS))
+    return _TRANSITION_CACHE[index]
+
+
+def _draw_frame(fi: int) -> Any:
+    """Draw one frame: scene, motion blur, crossfade from the previous scene, post."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    cfg = _RENDER_CFG
+    fps = cfg.VIDEO_FPS
+    gt = fi / max(1, fps)
+    index = _scene_index(gt)
+    sc = _RENDER_SCENES[index]
+    lt = gt - sc["start"]
+    img = _motion_blurred(index, lt)
+    fade = float(cfg.VIDEO_TRANSITION_S)
+    crossfading = fade > 0 and index > 0 and lt < fade
+    if crossfading:
+        img = _img().blend(_outgoing_frame(index - 1), img, ease(lt / fade))
     edge = min(lt, sc["dur"] - lt) * fps
     glitch = max(0.0, 1 - edge / 12) if gt > 12 / max(1, fps) else 0.0
+    if fade > 0:
+        glitch *= float(cfg.VIDEO_TRANSITION_GLITCH)
     img = post(img, glitch * 0.8, fi)
     if gt < 0.8:
-        img = _img().blend(_img().new("RGB", img.size, (0, 0, 0)), img, gt / 0.8)
+        img = _img().blend(_img().new("RGB", img.size, (0, 0, 0)), img, ease(gt / 0.8))
     return img
 
 

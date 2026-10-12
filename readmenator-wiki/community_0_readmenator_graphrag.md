@@ -1,10 +1,10 @@
 # readmenator: _graphrag
 
-*Community 0 | 40 files | cohesion 0.41*
+*Community 0 | 40 files | cohesion 0.39*
 
 ## Definition
 
-This community groups 40 file(s) rooted at `readmenator` with dominant language py (cohesion 0.41). Central symbols: `AgentOutputGenerator`, `Bm25Index`, `ConceptExtractor`, `Config`, `DataflowAnalyzer`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
+This community groups 40 file(s) rooted at `readmenator` with dominant language py (cohesion 0.39). Central symbols: `AgentOutputGenerator`, `Bm25Index`, `ConceptExtractor`, `Config`, `DataflowAnalyzer`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
 
 ## Files
 
@@ -60,7 +60,7 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 - `_build_symbols` (method, `readmenator/_agent_output.py:484`) `def _build_symbols(self, nodes)` - Build grep-friendly symbol index (one line per symbol).
 - `_closed_loop` (method, `readmenator/_agent_output.py:499`) `def _closed_loop(cycle)` - Render a cycle as a closed loop without duplicating a closed tail.
 - `_build_gotchas` (method, `readmenator/_agent_output.py:506`) `def _build_gotchas(self, analysis, analysis_v2, nodes, layers, imported_by)` - Build actionable warnings: blast radius, hotspots, cycles, violations.
-- `keep` (method, `readmenator/_agent_output.py:525`) `def keep(file_id)` - Return whether a file belongs in the gotcha lists.
+- `keep` (function, `readmenator/_agent_output.py:525`) `def keep(file_id)` - Return whether a file belongs in the gotcha lists.
 - `_build_concepts` (method, `readmenator/_agent_output.py:628`) `def _build_concepts(self, analysis_v2)` - Build the grep-friendly semantic concept layer.
 - `_safe_name` (method, `readmenator/_agent_output.py:668`) `def _safe_name(name)` - Return a filesystem-safe subsystem name.
 - `_write_subsystem_files` (method, `readmenator/_agent_output.py:675`) `def _write_subsystem_files(self, out_dir, subsystems, resolved_map, imported_by,` - Write one paged KB_<subsystem>.md per inferred subsystem.
@@ -77,16 +77,16 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 88
-- Cross-boundary resolved imports (EXTRACTED): 121
+- Cross-boundary resolved imports (EXTRACTED): 131
 
 ## Connections
 
 - [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
 - [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
-- [INFERRED] bridges community 4 <-> 0 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 0 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _graphrag) and community 5 (orphans).
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
+- [INFERRED] shares_context community 0 <-> 6 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _graphrag) and community 6 (orphans).
 
 ## Risks
 
@@ -97,9 +97,9 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 
 ## Open Questions
 
-- Why do 9 file(s) lack file-level docs (e.g. `tests/test_concepts.py`)? What purpose do they serve?
+- Why do 8 file(s) lack file-level docs (e.g. `tests/test_concepts.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _graphrag changed?
-- Should readmenator: _graphrag be split, given cohesion 0.41?
+- Should readmenator: _graphrag be split, given cohesion 0.39?
 
 ## Sources
 
@@ -116,8 +116,8 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_layer_rules.py`
 - `readmenator/_memory.py`
 - `readmenator/_purpose.py`
+- `readmenator/_refactorizer.py`
 - `readmenator/_resolver.py`
-- `readmenator/_rule_gen.py`
 - `readmenator/_scanner.py`
 - `readmenator/_security.py`
 - `readmenator/_skill_installer.py`

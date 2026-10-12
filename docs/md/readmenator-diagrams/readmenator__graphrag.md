@@ -32,8 +32,8 @@ tests groups 20 files (py) around _node, _edge, _big_project, TestAgentOutputBud
 - readmenator/_layer_rules.py
 - readmenator/_memory.py
 - readmenator/_purpose.py
+- readmenator/_refactorizer.py
 - readmenator/_resolver.py
-- readmenator/_rule_gen.py
 - readmenator/_scanner.py
 - readmenator/_security.py
 - readmenator/_skill_installer.py
@@ -52,8 +52,8 @@ tests groups 20 files (py) around _node, _edge, _big_project, TestAgentOutputBud
 - tests/test_memory.py
 - tests/test_parsers.py
 - tests/test_parsers_new.py
+- tests/test_refactorizer.py
 - tests/test_resolver.py
-- tests/test_rule_gen.py
 - tests/test_scanner.py
 - tests/test_security.py
 - tests/test_taint.py

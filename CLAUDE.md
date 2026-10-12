@@ -68,6 +68,12 @@ readmenator/
   _symindex.py        - Deterministic symbol index: spans, call sites with lines, definition resolver
   _ollama.py          - Optional local Ollama client (stdlib, bounded, never fatal)
   _components.py      - Component diagrams: analysis.json, graph LR, per-component markdown, offline index.html
+  _docstrings.py      - Multi-style docstring parser (Google, NumPy, reST, Javadoc/JSDoc/PHPDoc/Doxygen, C# XML, Rustdoc) + raw comment recovery
+  _apidocs.py         - API reference model: Python ast extraction, generic symbol nesting, signatures, cross-refs, coverage, DOC00x warnings
+  _apidocs_render.py  - API reference Markdown (index, modules, hierarchy, genindex, coverage), api.json, writer, linker
+  _apidocs_page.py    - Self-contained offline HTML API browser (search, tree, hierarchy, coverage, architecture page)
+  _flowcharts.py      - Tiered architecture (Tarjan SCC, Eades-Lin-Smyth FAS, transitive reduction) + execution flows (entry points, call tree, control flow, sequence)
+  _pytypes.py         - Deterministic Python receiver typing (constructors, annotations, self attributes) for precise call graphs
   _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
   _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
 tests/
@@ -115,6 +121,9 @@ tests/
   test_symindex.py - Symbol index contract tests (spans, call-site lines, confidence tiers, methods_index)
   test_components.py - Component diagram contract tests (schema, graph LR, markdown, page, gallery card)
   test_ollama.py - Local Ollama client contract tests (disabled, unreachable, thinking strip)
+  test_apidocs.py - Docstring parser (all styles, comment recovery) + API reference contract tests (signatures, nesting, inheritance, calls, warnings, coverage, privacy, rendering, HTML escaping, writer)
+  test_flowcharts.py - Architecture tiers, SCC/transitive reduction/ELS, entry points, call walks, control flow, sequence, KB integration, receiver typing
+  test_layout_quality.py - Bundle crossing reduction (cost, determinism, monotone sweeps, sphere refinement) and seeded explorer layouts
 ```
 
 ## Contracts
@@ -185,6 +194,12 @@ tests/
 - Component diagram settings (COMPONENTS_ENABLED, COMPONENTS_OUTPUT_DIR, COMPONENTS_MAX_KEY_ENTITIES/KEY_EDGES/ALL_EDGES, COMPONENTS_EXPAND_MIN_FILES, COMPONENTS_DEPTH_CAP)
 - Ollama settings (OLLAMA_ENABLED default False, OLLAMA_HOST, OLLAMA_MODEL, OLLAMA_TIMEOUT_S, OLLAMA_MAX_PROMPT_CHARS, OLLAMA_MAX_CHARS)
 - Source viewer settings (SOURCEVIEW_ENABLED, SOURCEVIEW_MAX_FILES/CHARS_PER_FILE/LINES_PER_FILE/TOTAL_CHARS, SOURCEVIEW_CHUNK_LINES, SOURCEVIEW_CONTEXT_LINES)
+- API reference settings (APIDOCS_ENABLED, APIDOCS_OUTPUT_DIR, APIDOCS_MODULES_SUBDIR, APIDOCS_INCLUDE_PRIVATE, APIDOCS_INCLUDE_TESTS, APIDOCS_TEST_PATH_TOKENS, APIDOCS_SKIP_SUFFIXES, APIDOCS_EXCLUDE_DIRS, APIDOCS_MAX_ENTITIES, APIDOCS_DOC_LOOKBACK_LINES, APIDOCS_BRACE_SCAN_LINES, APIDOCS_MAX_CALL_REFS, APIDOCS_CALLGRAPH_MAX_EDGES, APIDOCS_SUMMARY_MAX_CHARS, APIDOCS_HTML_ENABLED, APIDOCS_HTML_FILENAME, APIDOCS_JSON_FILENAME, APIDOCS_ARCHITECTURE_FILENAME, APIDOCS_SCHEMA_VERSION, APIDOCS_MERMAID_CDN_JS, APIDOCS_COVERAGE_FAIL_UNDER, APIDOCS_MAX_WARNINGS_LISTED)
+- Architecture and flow diagram settings (ARCH_DIAGRAM_ENABLED, ARCH_DIAGRAM_INCLUDE_TESTS, ARCH_DIAGRAM_MAX_COMPONENTS, ARCH_DIAGRAM_LABEL_CHARS, FLOW_ENABLED, FLOW_MAX_ENTRYPOINTS, FLOW_MIN_ENTRY_SCORE, FLOW_SOURCE_MIN_CALLS, FLOW_MAX_DEPTH, FLOW_MAX_STEPS, FLOW_LABEL_CHARS, FLOW_SEQUENCE_MAX_MESSAGES, FLOW_CFG_MAX_NODES, FLOW_SWITCH_MIN_CASES)
+- Symbol index receiver window (SYMINDEX_RECEIVER_WINDOW: bounded look-behind for attribute-call receivers, keeps minified lines linear)
+- Bundle ordering (BUNDLEGRAPH_ORDER_OPTIMIZE, BUNDLEGRAPH_ORDER_SWEEPS, BUNDLEGRAPH_ORDER_PASSES, BUNDLEGRAPH_SPHERE_REFINE_SWEEPS)
+- Explorer seeded layout (FORCEGRAPH_SEED_LAYOUT, FORCEGRAPH_SEED_ITERATIONS, FORCEGRAPH_SEED_GRAVITY, FORCEGRAPH_SEED_MAX_NODES, FORCEGRAPH_SEED_VELOCITY_DECAY)
+- Video transitions (VIDEO_TRANSITION_S crossfade, VIDEO_TRANSITION_GLITCH, VIDEO_MOTION_BLUR_SAMPLES, VIDEO_MOTION_BLUR_SHUTTER, VIDEO_MOTION_BLUR_ACTS)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -216,6 +231,7 @@ tests/
 - C-family and assembly parsers extract #include directives (quoted and angled) as imports
 - Reserved keywords filtered out (if, for, while, switch, catch)
 - C parser: function/prototype line numbers anchored at the symbol name (multiline signatures safe); call statements rejected as prototypes via return-type prefix check; extern/define patterns never span newlines
+- Java, C#, and JS/TS symbol lines are anchored at the name group (leading whitespace never shifts them); Java abstract methods ending in ; are extracted; JS/TS class methods are extracted as methods; Python methods are functions defined directly in a class body
 
 ### Scanner Contract
 - Rejects symlinks for security
@@ -506,14 +522,14 @@ tests/
 - ReadmeInjector class with inject(project_root) and remove(project_root) methods
 - Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
 - Injects a section linking to KNOWLEDGE_BASE.md and every run artifact with HTML anchor comments
-- Injected section covers: KNOWLEDGE_BASE.md, readmenator-agent/ (INDEX, SYMBOLS, ARCHITECTURE, API, GOTCHAS, SECURITY, MEMORY, MANIFEST, KB_*, recipes), readmenator-wiki/ (index, community_*, connections.json, queries, REPORT), readmenator-graphrag/ (ask), readmenator-maps/ (index gallery + 5 maps + graph-force.html + graph-bundle.html + components.html), docs/ site (llms.txt + video), readmenator-diagrams/ (analysis.json), readmenator-rules/ (Semgrep + yara + exclusions), readmenator.mp4, .cursorrules, SARIF audit, cache, skills
+- Injected section covers: KNOWLEDGE_BASE.md, readmenator-agent/ (INDEX, SYMBOLS, ARCHITECTURE, API, GOTCHAS, SECURITY, MEMORY, MANIFEST, KB_*, recipes), readmenator-wiki/ (index, community_*, connections.json, queries, REPORT), readmenator-graphrag/ (ask), readmenator-apidocs/ (index, modules, architecture, classes, genindex, COVERAGE, index.html, api.json), readmenator-maps/ (index gallery + 5 maps + graph-force.html + graph-bundle.html + components.html), docs/ site (llms.txt + video), readmenator-diagrams/ (analysis.json), readmenator-rules/ (Semgrep + yara + exclusions), readmenator.mp4, .cursorrules, SARIF audit, cache, skills
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - **Tag creation**: when the anchor tag is missing (or only half present), the section is created fresh; partial markers are stripped before appending
 - Preserves existing README content
 - Markdown injection: link, description, AI/human context
 - reStructuredText injection: adapted RST syntax
-- Uses configurable kb_filename, agent_output_dir, wiki_output_dir, graphrag/maps/pages/components/rules dirs, video/cursorrules/sarif/cache/skills/llms/forcegraph/bundle names (AnalyzerFactory wires every Config value)
+- Uses configurable kb_filename, agent_output_dir, wiki_output_dir, graphrag/apidocs/maps/pages/components/rules dirs, video/cursorrules/sarif/cache/skills/llms/forcegraph/bundle names (AnalyzerFactory wires every Config value)
 - Remove method strips injected section cleanly
 - Returns False when no README found or no injection present
 - Guided by README_INJECTION_ENABLED config flag
@@ -600,7 +616,8 @@ tests/
 - Python call sites exact via ast (caller scope, line, column); other languages regex-approximated with caller attribution
 - Resolution tiers: BUILTIN (stoplist) > SAME_FILE > IMPORTED (via resolved imports) > UNIQUE > AMBIGUOUS > UNRESOLVED
 - methods_index keys use the `file|file::symbol` shape with CLASS/FUNCTION types and short content hashes
-- Configurable via SYMINDEX_MAX_CALL_SITES, SYMINDEX_BUILTINS; never needs the network or an LSP
+- CallSite.receiver records the attribute-call receiver (ast text for Python, bounded regex look-behind elsewhere)
+- Configurable via SYMINDEX_MAX_CALL_SITES, SYMINDEX_BUILTINS, SYMINDEX_RECEIVER_WINDOW; never needs the network or an LSP
 
 ### Local Ollama Contract
 - OllamaClient class with generate/describe_component/available entry points (readmenator/_ollama.py)
@@ -617,6 +634,42 @@ tests/
 - index.html renders the layered diagram offline as inline SVG in the readmenator dark theme (cyan accents, shared readmenator-theme key): longest-path LR ranks; boxes with name, file/symbol counts, dominant-layer border + label, top symbols, file counts, hub glow for the top PageRank component; arrows weighted by call/import evidence with phrase + counts labels; hover description cards; click-to-component anchors; layer legend; a Relations section with evidence and file:line call samples; nested SVGs per expandable component; drag-pan/wheel-zoom, Reset/Fit/PNG; zero external requests
 - Written to COMPONENTS_OUTPUT_DIR (scanner-skipped) on every run when COMPONENTS_ENABLED, plus CLI `components`; maps and docs galleries get a featured "Component Diagrams" card opening a self-contained components.html copy inside the maps dir (never a ../.. href, so subpath Pages deployments keep working; source refs render as text there, links home); collect_doc_sources ships the markdown into the site drawer and llms.txt
 - Configurable via COMPONENTS_ENABLED/OUTPUT_DIR/MAX_KEY_ENTITIES/MAX_KEY_EDGES/MAX_ALL_EDGES/EXPAND_MIN_FILES/DEPTH_CAP
+
+### Docstring Parser Contract
+- parse_docstring(text) (readmenator/_docstrings.py) returns a DocComment (summary, description, params, returns, yields, raises, attributes, examples, notes, see_also, deprecated, since, style); empty text yields an empty comment
+- detect_style order: C# XML > reST field lists > NumPy underlined sections > Javadoc/JSDoc/PHPDoc/KDoc/Doxygen tags (@ and backslash forms, [in]/[out], {type}, [name=default], PHP Type $name) > Google sections > Rustdoc headings > plain
+- Google "Defaults to X." and NumPy "type, optional"/"default" populate DocField.default; doctest (>>>) blocks become examples
+- recover_comment(lines, line, language, lookback) recovers the adjacent comment block above a declaration with line structure intact: ///, //!, //, /** */, /* */, #, ##, --, ;, Elixir @doc heredocs; decorators/attributes/annotations ([[x]], #[x], @X, [X]) skipped; shebangs, ///< trailing docs, rulers, and blank-line-separated blocks ignored
+
+### API Reference Contract
+- ApiReferenceBuilder.build(nodes, edges, resolved_edges, content_map) (readmenator/_apidocs.py) returns a deterministic ApiReference (entities keyed by uid `file` / `file::Qual.name`, modules, warnings, coverage, meta)
+- Python: own ast pass with exact signatures (annotations, defaults, / and * markers, *args/**kwargs), decorators, nested classes, constructor/property/classmethod/staticmethod kinds, enum/protocol/exception class kinds, dataclass fields as attributes, module constants with following docstrings, `__all__` visibility, inferred raises, return/generator behaviour; class Args docs flow into an undocumented `__init__`
+- Other languages: parser symbols plus recover_comment docs, members nested by brace span (string/comment aware, prototypes ending in ; never span) or indentation, signatures split into typed params and return types per language family, visibility from modifiers / Go case / Rust pub / C static / _ and # prefixes / Elixir defp; include guards dropped; module doc dropped when it is really the first declaration's doc
+- Tests (APIDOCS_TEST_PATH_TOKENS), minified bundles (APIDOCS_SKIP_SUFFIXES), and vendored trees (APIDOCS_EXCLUDE_DIRS) are skipped; APIDOCS_MAX_ENTITIES truncates with meta.truncated
+- Cross-references: bases resolved to project types (subclasses filled), C-family definitions inherit header prototype docs, undocumented overrides inherit base docs (marked with an Inherited note), callers/callees from the symbol index filtered by receiver typing (typed self/var/attr receivers re-resolved to the owning class; untyped attribute calls dropped unless the receiver names the module or class)
+- Warnings: DOC001 undocumented public item, DOC002 parameter not documented, DOC003 documented parameter missing from the signature, DOC004 return not documented, DOC005 raised exception not documented; coverage overall/by kind/by module over public modules, types, and callables
+- PRIVACY_MODE keeps signatures and parameter names only
+- ApiMarkdownRenderer/ApiDocsWriter (readmenator/_apidocs_render.py) write APIDOCS_OUTPUT_DIR: index.md (modules by package with coverage), modules/<slug>.md (contents, Mermaid classDiagram, Mermaid call graph, per-entity anchors, badges, signature, merged parameter table, returns, raises incl. undocumented inferred ones, examples, admonitions, see also, calls/called by, source file#Lline links), classes.md, genindex.md, COVERAGE.md, architecture.md, api.json (APIDOCS_SCHEMA_VERSION), index.html; stale module pages pruned; symlinked output refused
+- ApiLinker resolves backticks, Sphinx roles (:class:, :func:, ~), and {@link} to anchors, never inside fenced code
+- render_api_site (readmenator/_apidocs_page.py): one self-contained page, JSON payload with < > & escaped, placeholders filled in one regex pass, zero requests by default; the Architecture page renders Mermaid only when the reader clicks the button (APIDOCS_MERMAID_CDN_JS)
+- Wired into run() and update() (_maybe_write_apidocs, never fatal), CLI `apidocs`, `doc-coverage [--fail-under N]` (exit 1 below threshold); scanner skips APIDOCS_OUTPUT_DIR; README injection lists it
+
+### Architecture and Execution Flow Contract
+- ArchitectureDiagramBuilder (readmenator/_flowcharts.py): components from analyzer communities (directory fallback), tests and vendored files excluded; weighted component graph ordered by weighted Eades-Lin-Smyth so most imports point downward; edges against the order are upward dependencies (dashed red, declared reversed so Mermaid keeps tiers in order); tiers = longest path over forward edges; forward edges transitively reduced; Tarjan SCC reports cycles; thick arrows for the top quartile; invisible ~~~ anchors keep tier order
+- ExecutionFlowBuilder: call graph from SymbolIndex plus PythonReceiverTypes (same-name methods disambiguated by line); entry points scored from __main__ guards, compiled-language main, entry-style names and files, and call-graph sources; a guard that only calls picked entries is skipped
+- walk(): depth-first in call-site order, FLOW_MAX_DEPTH / FLOW_MAX_STEPS, repeats not re-expanded, recursion flagged
+- Mermaid outputs: call tree (flowchart LR, numbered call order, Owner.method labels), Python control flow (decisions, loops with back edges, try/except, with, match, return/raise ends, collapsed straight-line runs, if/elif dispatch on one subject compacted into one switch node), cross-file sequenceDiagram; labels escaped with Mermaid entity codes
+- KNOWLEDGE_BASE.md gains Architecture Overview and Execution Flows (TOC entries only when present); run() and update() pass content_map; architecture.md in the API reference uses the same renderers
+
+### Python Receiver Typing Contract
+- PythonReceiverTypes(contents, language) (readmenator/_pytypes.py) indexes scopes, method owners, class bases, locals typed by constructor calls / annotations / annotated parameters, self attributes assigned or annotated, class-level annotated fields
+- receiver_class, resolve_method (lineage in base order), accepts (True/False for Python callers, None otherwise); unknown stays unknown
+
+### Layout Quality Contract
+- optimize_bundle_order(groups, edges, sweeps, passes, gap) (readmenator/_graphlayout.py): first group fixed, greedy weighted chaining + 2-opt on arc-center distance, center-out hub seeding, barycentric sweeps; each stage accepted only when bundle_angular_cost drops, so more sweeps never cost more; deterministic, membership preserved
+- refine_sphere_leaves / spherical_edge_bundling(refine_sweeps, affinity_edges): members take cap points facing their neighbours, caps keep exactly their lattice points, kept only when total chord length drops
+- Edge bundle explorer and video bundle/sphere acts use the optimized order (BUNDLEGRAPH_ORDER_OPTIMIZE); thumbnails follow payload angles
+- ForceGraphRenderer payload nodes carry deterministic ForceAtlas2 seeds s2 (2D) and s3 (3D) scaled so the median edge equals FORCEGRAPH_LINK_DISTANCE; the explorer starts the force layout from them with FORCEGRAPH_SEED_VELOCITY_DECAY (pins respected, seeded once per view mode)
 
 ### Dead Code Stripper Contract
 - DeadCodeStripper class with identify(nodes, edges, resolved_edges) method
@@ -725,6 +778,7 @@ tests/
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
 - Nine acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
 - An act with duration <= 0 is skipped together with its card; VIDEO_INVITE_S <= 0 drops the invite
+- Motion: ease() is quintic smootherstep (C2); scenes crossfade from the previous scene's last frame over VIDEO_TRANSITION_S (glitch scaled by VIDEO_TRANSITION_GLITCH); VIDEO_MOTION_BLUR_ACTS average VIDEO_MOTION_BLUR_SAMPLES shutter sub-frames
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
 - No truncation of reality: act III is the full blast-radius tree (every file that transitively imports the hub, BFS over dependents, VIDEO_TREE_MAX_NODES 0 = all) in a radial layout (one ring per depth, sectors by leaf count); act V graph shows every file and every resolved import (VIDEO_MAX_GRAPH_NODES 0 = all), spring layout on connected files with isolated files in a bottom strip; act VI DNA grid sizes cells so every file fits (VIDEO_DNA_MAX_CELL)
 - Labels never overlap: tree labels placed greedily by depth and skipped only when they would collide (nodes are always drawn); labels truncated to VIDEO_MAX_LABEL_CHARS

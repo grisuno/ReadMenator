@@ -1,6 +1,78 @@
 # Subsystem: tests (page 3 of 4)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_memory.py
+- Doc: Contract tests for project memory, the session log, and agent skills.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_project` (function, line 17) `def _project(root)`
+  - `TestProjectMemoryContract` (class, line 40) `class TestProjectMemoryContract(TestCase)`
+  - `TestSkillInstallerContract` (class, line 115) `class TestSkillInstallerContract(TestCase)`
+  - `setUp` (method, line 43) `def setUp(self)`
+  - `tearDown` (method, line 50) `def tearDown(self)`
+  - `test_memory_extracts_declared_rules_with_citations` (method, line 54) `def test_memory_extracts_declared_rules_with_citations(self)`
+  - `test_memory_skips_contract_headings_and_injected_blocks` (method, line 61) `def test_memory_skips_contract_headings_and_injected_blocks(self)`
+  - `test_memory_build_has_all_sections` (method, line 67) `def test_memory_build_has_all_sections(self)`
+  - `test_memory_remember_then_rebuild_preserves_log` (method, line 76) `def test_memory_remember_then_rebuild_preserves_log(self)`
+  - `test_memory_remember_rejects_unknown_kind_and_empty` (method, line 86) `def test_memory_remember_rejects_unknown_kind_and_empty(self)`
+  - `test_memory_note_cannot_break_markers` (method, line 93) `def test_memory_note_cannot_break_markers(self)`
+  - `test_memory_sanitize_truncates` (method, line 101) `def test_memory_sanitize_truncates(self)`
+  - `test_memory_notes_feed_graphrag` (method, line 105) `def test_memory_notes_feed_graphrag(self)`
+  - `test_skills_are_packaged_with_frontmatter` (method, line 118) `def test_skills_are_packaged_with_frontmatter(self)`
+  - `test_skills_install_is_idempotent` (method, line 129) `def test_skills_install_is_idempotent(self)`
+  - `test_skills_install_on_run_requires_existing_parent` (method, line 137) `def test_skills_install_on_run_requires_existing_parent(self)`
+  - `test_skills_install_on_run_respects_flag` (method, line 145) `def test_skills_install_on_run_respects_flag(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_skill_installer.py`
+
+## tests/test_mermaid.py
+- Doc: TestMermaidEdgeBudget: Contract: the structural map never exceeds Mermaid's 500-edge render limit.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMermaidRendererContract` (class, line 7) `class TestMermaidRendererContract(TestCase)`
+  - `TestMermaidEdgeBudget` (class, line 92) `class TestMermaidEdgeBudget(TestCase)`
+  - `setUp` (method, line 8) `def setUp(self)`
+  - `test_renders_graph_header` (method, line 11) `def test_renders_graph_header(self)`
+  - `test_renders_module_node` (method, line 19) `def test_renders_module_node(self)`
+  - `test_renders_symbol_subnodes` (method, line 27) `def test_renders_symbol_subnodes(self)`
+  - `test_class_symbol_gets_cls_style` (method, line 36) `def test_class_symbol_gets_cls_style(self)`
+  - `test_function_symbol_gets_fn_style` (method, line 45) `def test_function_symbol_gets_fn_style(self)`
+  - `test_external_import_edge_is_dashed` (method, line 54) `def test_external_import_edge_is_dashed(self)`
+  - `test_truncation_when_over_limit` (method, line 62) `def test_truncation_when_over_limit(self)`
+  - `test_limits_symbols_to_five_per_node` (method, line 72) `def test_limits_symbols_to_five_per_node(self)`
+  - `test_handles_special_characters_in_ids` (method, line 82) `def test_handles_special_characters_in_ids(self)`
+  - `test_mermaid_edge_budget_truncates` (method, line 95) `def test_mermaid_edge_budget_truncates(self)`
+- Depends on: `readmenator/_mermaid.py`, `readmenator/_models.py`
+
+## tests/test_models.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSymbolContract` (class, line 6) `class TestSymbolContract(TestCase)`
+  - `TestNodeContract` (class, line 20) `class TestNodeContract(TestCase)`
+  - `TestEdgeContract` (class, line 48) `class TestEdgeContract(TestCase)`
+  - `TestPluralizeContract` (class, line 56) `class TestPluralizeContract(TestCase)`
+  - `test_symbol_creation` (method, line 7) `def test_symbol_creation(self)`
+  - `test_symbol_with_signature` (method, line 15) `def test_symbol_with_signature(self)`
+  - `test_node_creation` (method, line 21) `def test_node_creation(self)`
+  - `test_node_with_symbols` (method, line 35) `def test_node_with_symbols(self)`
+  - `test_edge_creation` (method, line 49) `def test_edge_creation(self)`
+  - `test_pluralize_class` (method, line 57) `def test_pluralize_class(self)`
+  - `test_pluralize_unknown_appends_s` (method, line 62) `def test_pluralize_unknown_appends_s(self)`
+- Depends on: `readmenator/_models.py`
+
+## tests/test_ollama.py
+- Doc: Contract tests for the local Ollama client.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestOllamaContract` (class, line 11) `class TestOllamaContract(TestCase)`
+  - `test_disabled_client_returns_empty` (method, line 14) `def test_disabled_client_returns_empty(self)`
+  - `test_unreachable_daemon_returns_empty` (method, line 20) `def test_unreachable_daemon_returns_empty(self)`
+  - `test_strip_thinking_removes_reasoning_blocks` (method, line 30) `def test_strip_thinking_removes_reasoning_blocks(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_ollama.py`
+
 ## tests/test_parsers.py
 - Layer: testing
 - Language: py
@@ -160,15 +232,15 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_python_never_crashes_on_any_text` (method, line 310) `def test_python_never_crashes_on_any_text(self, code)`
   - `_StrategyPlaceholder` (class, line 45) `class _StrategyPlaceholder`
   - `_UnavailableStrategies` (class, line 60) `class _UnavailableStrategies`
-  - `given` (method, line 69) `def given()`
-  - `settings` (method, line 75) `def settings()`
+  - `given` (function, line 69) `def given()`
+  - `settings` (function, line 75) `def settings()`
   - `__or__` (method, line 48) `def __or__(self, other)`
   - `__ror__` (method, line 52) `def __ror__(self, other)`
   - `map` (method, line 56) `def map(self)`
   - `__getattr__` (method, line 63) `def __getattr__(self, name)`
-  - `wrapper` (method, line 71) `def wrapper(fn)`
-  - `wrapper` (method, line 77) `def wrapper(fn)`
-  - `builder` (method, line 65) `def builder()`
+  - `wrapper` (function, line 71) `def wrapper(fn)`
+  - `wrapper` (function, line 77) `def wrapper(fn)`
+  - `builder` (function, line 65) `def builder()`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
 ## tests/test_query.py
@@ -204,7 +276,7 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `TestMorphism` (class, line 84) `class TestMorphism`
   - `TestCategory` (class, line 104) `class TestCategory`
   - `TestTypedGraph` (class, line 183) `class TestTypedGraph`
-  - `_make_test_graph` (method, line 238) `def _make_test_graph()`
+  - `_make_test_graph` (function, line 238) `def _make_test_graph()`
   - `TestGlobalPageRank` (class, line 247) `class TestGlobalPageRank`
   - `TestPersonalizedPageRank` (class, line 288) `class TestPersonalizedPageRank`
   - `TestHITS` (class, line 325) `class TestHITS`

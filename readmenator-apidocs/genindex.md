@@ -1,0 +1,1823 @@
+# General Index
+
+[Back to index](index.md)
+
+[A](#a) | [B](#b) | [C](#c) | [D](#d) | [E](#e) | [F](#f) | [G](#g) | [H](#h) | [I](#i) | [J](#j) | [K](#k) | [L](#l) | [M](#m) | [N](#n) | [O](#o) | [P](#p) | [Q](#q) | [R](#r) | [S](#s) | [T](#t) | [U](#u) | [V](#v) | [W](#w) | [X](#x) | [Y](#y)
+
+<a id="a"></a>
+
+## A
+
+- [`accepts`](modules/readmenator._pytypes.py.md#pythonreceivertypes-accepts) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`ACT_CARDS`](modules/readmenator._video.py.md#act_cards) constant in `readmenator._video`
+- [`action_type`](modules/readmenator._models.py.md#refactoringaction-action_type) attribute of `RefactoringAction` in `readmenator._models`
+- [`actions`](modules/readmenator._models.py.md#refactoringplan-actions) attribute of `RefactoringPlan` in `readmenator._models`
+- [`add_morphism`](modules/readmenator._category.py.md#category-add_morphism) method of `Category` in `readmenator._category`
+- [`add_object`](modules/readmenator._category.py.md#category-add_object) method of `Category` in `readmenator._category`
+- [`added`](modules/readmenator._diagrams.py.md#mapdelta-added) attribute of `MapDelta` in `readmenator._diagrams`
+- [`AGENT_API_EXCLUDE_LAYERS`](modules/readmenator._config.py.md#config-agent_api_exclude_layers) attribute of `Config` in `readmenator._config`
+- [`AGENT_API_PUBLIC_ONLY`](modules/readmenator._config.py.md#config-agent_api_public_only) attribute of `Config` in `readmenator._config`
+- [`AGENT_CHARS_PER_TOKEN`](modules/readmenator._config.py.md#config-agent_chars_per_token) attribute of `Config` in `readmenator._config`
+- [`AGENT_DOC_MAX_CHARS`](modules/readmenator._config.py.md#config-agent_doc_max_chars) attribute of `Config` in `readmenator._config`
+- [`AGENT_ENTRYPOINT_FILENAMES`](modules/readmenator._config.py.md#config-agent_entrypoint_filenames) attribute of `Config` in `readmenator._config`
+- [`AGENT_GOTCHAS_EXCLUDE_LAYERS`](modules/readmenator._config.py.md#config-agent_gotchas_exclude_layers) attribute of `Config` in `readmenator._config`
+- [`AGENT_GOTCHAS_TOP_N`](modules/readmenator._config.py.md#config-agent_gotchas_top_n) attribute of `Config` in `readmenator._config`
+- [`AGENT_INJECTION_ENABLED`](modules/readmenator._config.py.md#config-agent_injection_enabled) attribute of `Config` in `readmenator._config`
+- [`AGENT_INJECTION_KB_FILENAME`](modules/readmenator._config.py.md#config-agent_injection_kb_filename) attribute of `Config` in `readmenator._config`
+- [`agent_injector`](modules/readmenator._pipeline.py.md#analyzerfactory-agent_injector) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`agent_output`](modules/readmenator._pipeline.py.md#analyzerfactory-agent_output) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`AGENT_OUTPUT_DIR`](modules/readmenator._config.py.md#config-agent_output_dir) attribute of `Config` in `readmenator._config`
+- [`agent_output_dir`](modules/readmenator_orchestrator.py.md#config-agent_output_dir) attribute of `Config` in `readmenator_orchestrator`
+- [`AGENT_OUTPUT_ENABLED`](modules/readmenator._config.py.md#config-agent_output_enabled) attribute of `Config` in `readmenator._config`
+- [`AGENT_OUTPUT_MAX_LINES`](modules/readmenator._config.py.md#config-agent_output_max_lines) attribute of `Config` in `readmenator._config`
+- [`AGENT_OUTPUT_MIN_SUBSYSTEM_FILES`](modules/readmenator._config.py.md#config-agent_output_min_subsystem_files) attribute of `Config` in `readmenator._config`
+- [`AGENT_PURPOSE_MAX_CHARS`](modules/readmenator._config.py.md#config-agent_purpose_max_chars) attribute of `Config` in `readmenator._config`
+- [`AGENT_SIGNATURE_MAX_CHARS`](modules/readmenator._config.py.md#config-agent_signature_max_chars) attribute of `Config` in `readmenator._config`
+- [`AgentInjector`](modules/readmenator._agent_injector.py.md#agentinjector) class in `readmenator._agent_injector`
+- [`AgentOutputGenerator`](modules/readmenator._agent_output.py.md#agentoutputgenerator) class in `readmenator._agent_output`
+- [`ALLOWED_EDGES`](modules/readmenator._layer_rules.py.md#layerruleengine-allowed_edges) attribute of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`alpha`](modules/readmenator._rank.py.md#rankconfig-alpha) attribute of `RankConfig` in `readmenator._rank`
+- [`alpha`](modules/readmenator._video.py.md#alpha) function in `readmenator._video`
+- [`AnalysisResult`](modules/readmenator._models.py.md#analysisresult) class in `readmenator._models`
+- [`AnalysisResultV2`](modules/readmenator._models.py.md#analysisresultv2) class in `readmenator._models`
+- [`analytics`](modules/readmenator._pipeline.py.md#analyzerfactory-analytics) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`analytics`](modules/readmenator._app.py.md#readmenatorapplication-analytics) method of `readmenatorApplication` in `readmenator._app`
+- [`ANALYTICS_ENABLED`](modules/readmenator._config.py.md#config-analytics_enabled) attribute of `Config` in `readmenator._config`
+- [`AnalyticsBuilder`](modules/readmenator._analytics.py.md#analyticsbuilder) class in `readmenator._analytics`
+- [`analyze`](modules/readmenator._dataflow.py.md#dataflowanalyzer-analyze) method of `DataflowAnalyzer` in `readmenator._dataflow`
+- [`analyze`](modules/readmenator._analyzer.py.md#graphanalyzer-analyze) method of `GraphAnalyzer` in `readmenator._analyzer`
+- [`analyze`](modules/readmenator._refactorizer.py.md#monolithrefactorizer-analyze) method of `MonolithRefactorizer` in `readmenator._refactorizer`
+- [`analyze`](modules/readmenator._taint.py.md#taintanalyzer-analyze) method of `TaintAnalyzer` in `readmenator._taint`
+- [`analyze`](modules/readmenator._app.py.md#readmenatorapplication-analyze) method of `readmenatorApplication` in `readmenator._app`
+- [`analyze_change_impact`](modules/readmenator._hotspots.py.md#hotspotanalyzer-analyze_change_impact) method of `HotspotAnalyzer` in `readmenator._hotspots`
+- [`analyze_hotspots`](modules/readmenator._hotspots.py.md#hotspotanalyzer-analyze_hotspots) method of `HotspotAnalyzer` in `readmenator._hotspots`
+- [`analyzer`](modules/readmenator._pipeline.py.md#analyzerfactory-analyzer) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`AnalyzerFactory`](modules/readmenator._pipeline.py.md#analyzerfactory) class in `readmenator._pipeline`
+- [`anchor_slug`](modules/readmenator._apidocs_render.py.md#anchor_slug) function in `readmenator._apidocs_render`
+- [`angles`](modules/readmenator._graphlayout.py.md#bundlelayout-angles) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`annotation`](modules/readmenator._apidocs.py.md#apiparam-annotation) attribute of `ApiParam` in `readmenator._apidocs`
+- [`ANTIPATTERN_RULES`](modules/readmenator._rule_gen.py.md#rulegenerator-antipattern_rules) attribute of `RuleGenerator` in `readmenator._rule_gen`
+- [`apidocs`](modules/readmenator._pipeline.py.md#analyzerfactory-apidocs) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`APIDOCS_ARCHITECTURE_FILENAME`](modules/readmenator._config.py.md#config-apidocs_architecture_filename) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_BRACE_SCAN_LINES`](modules/readmenator._config.py.md#config-apidocs_brace_scan_lines) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_CALLGRAPH_MAX_EDGES`](modules/readmenator._config.py.md#config-apidocs_callgraph_max_edges) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_COVERAGE_FAIL_UNDER`](modules/readmenator._config.py.md#config-apidocs_coverage_fail_under) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_DOC_LOOKBACK_LINES`](modules/readmenator._config.py.md#config-apidocs_doc_lookback_lines) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_ENABLED`](modules/readmenator._config.py.md#config-apidocs_enabled) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_EXCLUDE_DIRS`](modules/readmenator._config.py.md#config-apidocs_exclude_dirs) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_HTML_ENABLED`](modules/readmenator._config.py.md#config-apidocs_html_enabled) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_HTML_FILENAME`](modules/readmenator._config.py.md#config-apidocs_html_filename) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_INCLUDE_PRIVATE`](modules/readmenator._config.py.md#config-apidocs_include_private) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_INCLUDE_TESTS`](modules/readmenator._config.py.md#config-apidocs_include_tests) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSON_FILENAME`](modules/readmenator._config.py.md#config-apidocs_json_filename) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_MAX_CALL_REFS`](modules/readmenator._config.py.md#config-apidocs_max_call_refs) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_MAX_ENTITIES`](modules/readmenator._config.py.md#config-apidocs_max_entities) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_MAX_WARNINGS_LISTED`](modules/readmenator._config.py.md#config-apidocs_max_warnings_listed) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_MERMAID_CDN_JS`](modules/readmenator._config.py.md#config-apidocs_mermaid_cdn_js) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_MODULES_SUBDIR`](modules/readmenator._config.py.md#config-apidocs_modules_subdir) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_OUTPUT_DIR`](modules/readmenator._config.py.md#config-apidocs_output_dir) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_SCHEMA_VERSION`](modules/readmenator._config.py.md#config-apidocs_schema_version) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_SKIP_SUFFIXES`](modules/readmenator._config.py.md#config-apidocs_skip_suffixes) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_SUMMARY_MAX_CHARS`](modules/readmenator._config.py.md#config-apidocs_summary_max_chars) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_TEST_PATH_TOKENS`](modules/readmenator._config.py.md#config-apidocs_test_path_tokens) attribute of `Config` in `readmenator._config`
+- [`apidocs_writer`](modules/readmenator._pipeline.py.md#analyzerfactory-apidocs_writer) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`ApiDocsWriter`](modules/readmenator._apidocs_render.py.md#apidocswriter) class in `readmenator._apidocs_render`
+- [`ApiEntity`](modules/readmenator._apidocs.py.md#apientity) class in `readmenator._apidocs`
+- [`ApiLinker`](modules/readmenator._apidocs_render.py.md#apilinker) class in `readmenator._apidocs_render`
+- [`ApiMarkdownRenderer`](modules/readmenator._apidocs_render.py.md#apimarkdownrenderer) class in `readmenator._apidocs_render`
+- [`ApiParam`](modules/readmenator._apidocs.py.md#apiparam) class in `readmenator._apidocs`
+- [`ApiReference`](modules/readmenator._apidocs.py.md#apireference) class in `readmenator._apidocs`
+- [`ApiReferenceBuilder`](modules/readmenator._apidocs.py.md#apireferencebuilder) class in `readmenator._apidocs`
+- [`apply_view`](modules/readmenator._projections.py.md#apply_view) function in `readmenator._projections`
+- [`approx_tokens`](modules/readmenator._graphrag.py.md#ragcontext-approx_tokens) attribute of `RagContext` in `readmenator._graphrag`
+- [`ARCH_DIAGRAM_ENABLED`](modules/readmenator._config.py.md#config-arch_diagram_enabled) attribute of `Config` in `readmenator._config`
+- [`ARCH_DIAGRAM_INCLUDE_TESTS`](modules/readmenator._config.py.md#config-arch_diagram_include_tests) attribute of `Config` in `readmenator._config`
+- [`ARCH_DIAGRAM_LABEL_CHARS`](modules/readmenator._config.py.md#config-arch_diagram_label_chars) attribute of `Config` in `readmenator._config`
+- [`ARCH_DIAGRAM_MAX_COMPONENTS`](modules/readmenator._config.py.md#config-arch_diagram_max_components) attribute of `Config` in `readmenator._config`
+- [`ArchitectureDiagramBuilder`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder) class in `readmenator._flowcharts`
+- [`ArchitectureLinter`](modules/readmenator._linter.py.md#architecturelinter) class in `readmenator._linter`
+- [`AssemblyParser`](modules/readmenator.parsers._assembly.py.md#assemblyparser) class in `readmenator.parsers._assembly`
+- [`attributes`](modules/readmenator._docstrings.py.md#doccomment-attributes) attribute of `DocComment` in `readmenator._docstrings`
+- [`audit`](modules/readmenator._provenance.py.md#provenanceauditor-audit) method of `ProvenanceAuditor` in `readmenator._provenance`
+- [`audit`](modules/readmenator._app.py.md#readmenatorapplication-audit) method of `readmenatorApplication` in `readmenator._app`
+- [`audit_deep`](modules/readmenator._app.py.md#readmenatorapplication-audit_deep) method of `readmenatorApplication` in `readmenator._app`
+- [`audit_provenance`](modules/readmenator._app.py.md#readmenatorapplication-audit_provenance) method of `readmenatorApplication` in `readmenator._app`
+- [`authority_score`](modules/readmenator._rank.py.md#rankeditem-authority_score) attribute of `RankedItem` in `readmenator._rank`
+- [`autolink`](modules/readmenator._apidocs_render.py.md#apilinker-autolink) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`available`](modules/readmenator._ollama.py.md#ollamaclient-available) method of `OllamaClient` in `readmenator._ollama`
+- [`available`](modules/readmenator._skill_installer.py.md#skillinstaller-available) method of `SkillInstaller` in `readmenator._skill_installer`
+
+<a id="b"></a>
+
+## B
+
+- [`Backdrop`](modules/readmenator._video.py.md#backdrop) class in `readmenator._video`
+- [`base_uids`](modules/readmenator._apidocs.py.md#apientity-base_uids) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`bases`](modules/readmenator._apidocs.py.md#apientity-bases) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`BG_HORIZON`](modules/readmenator._video.py.md#bg_horizon) constant in `readmenator._video`
+- [`BG_TOP`](modules/readmenator._video.py.md#bg_top) constant in `readmenator._video`
+- [`Bm25Index`](modules/readmenator._graphrag.py.md#bm25index) class in `readmenator._graphrag`
+- [`build`](modules/readmenator._analytics.py.md#analyticsbuilder-build) method of `AnalyticsBuilder` in `readmenator._analytics`
+- [`build`](modules/readmenator._apidocs.py.md#apireferencebuilder-build) method of `ApiReferenceBuilder` in `readmenator._apidocs`
+- [`build`](modules/readmenator._components.py.md#componentdiagrambuilder-build) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`build`](modules/readmenator._graphrag.py.md#graphragbuilder-build) method of `GraphRagBuilder` in `readmenator._graphrag`
+- [`build`](modules/readmenator._memory.py.md#projectmemory-build) method of `ProjectMemory` in `readmenator._memory`
+- [`build`](modules/readmenator._symindex.py.md#symbolindex-build) method of `SymbolIndex` in `readmenator._symindex`
+- [`build`](modules/readmenator._diagrams.py.md#systemmapbuilder-build) method of `SystemMapBuilder` in `readmenator._diagrams`
+- [`build_all`](modules/readmenator._diagrams.py.md#systemmapbuilder-build_all) method of `SystemMapBuilder` in `readmenator._diagrams`
+- [`build_api_reference`](modules/readmenator._app.py.md#readmenatorapplication-build_api_reference) method of `readmenatorApplication` in `readmenator._app`
+- [`build_category_from_edges`](modules/readmenator._category.py.md#build_category_from_edges) function in `readmenator._category`
+- [`build_corpus`](modules/readmenator._scantext.py.md#scantextbuilder-build_corpus) method of `ScanTextBuilder` in `readmenator._scantext`
+- [`build_for_node`](modules/readmenator._scantext.py.md#scantextbuilder-build_for_node) method of `ScanTextBuilder` in `readmenator._scantext`
+- [`build_graphrag`](modules/readmenator._app.py.md#readmenatorapplication-build_graphrag) method of `readmenatorApplication` in `readmenator._app`
+- [`build_parser`](modules/readmenator.__main__.py.md#build_parser) function in `readmenator.__main__`
+- [`build_payload`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-build_payload) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`build_payload`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-build_payload) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`build_reasons`](modules/readmenator._sourceview.py.md#sourceviewbuilder-build_reasons) method of `SourceViewBuilder` in `readmenator._sourceview`
+- [`build_scenes`](modules/readmenator._video.py.md#cinematicvideorenderer-build_scenes) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`build_seeds_for_context`](modules/readmenator._rank.py.md#build_seeds_for_context) function in `readmenator._rank`
+- [`build_seeds_from_query`](modules/readmenator._rank.py.md#build_seeds_from_query) function in `readmenator._rank`
+- [`build_sources`](modules/readmenator._sourceview.py.md#sourceviewbuilder-build_sources) method of `SourceViewBuilder` in `readmenator._sourceview`
+- [`build_state`](modules/readmenator._explorer.py.md#build_state) function in `readmenator._explorer`
+- [`build_typed_graph`](modules/readmenator._pipeline.py.md#analyzerfactory-build_typed_graph) method of `AnalyzerFactory` in `readmenator._pipeline`
+- [`bundle_angular_cost`](modules/readmenator._graphlayout.py.md#bundle_angular_cost) function in `readmenator._graphlayout`
+- [`bundle_groups`](modules/readmenator._video.py.md#cinematicvideorenderer-bundle_groups) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`bundle_layout`](modules/readmenator._video.py.md#cinematicvideorenderer-bundle_layout) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`BUNDLE_RELATIONS`](modules/readmenator._bundlegraph.py.md#bundle_relations) constant in `readmenator._bundlegraph`
+- [`bundlegraph`](modules/readmenator._pipeline.py.md#analyzerfactory-bundlegraph) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`BUNDLEGRAPH_BETA`](modules/readmenator._config.py.md#config-bundlegraph_beta) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_DEPTH_FADE`](modules/readmenator._config.py.md#config-bundlegraph_depth_fade) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_DIM_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_dim_alpha) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_EDGE_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_edge_alpha) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_ENABLED`](modules/readmenator._config.py.md#config-bundlegraph_enabled) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_FLOW_TOP_N`](modules/readmenator._config.py.md#config-bundlegraph_flow_top_n) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_GROUP_GAP`](modules/readmenator._config.py.md#config-bundlegraph_group_gap) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_HIT_PX`](modules/readmenator._config.py.md#config-bundlegraph_hit_px) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_INNER_RATIO`](modules/readmenator._config.py.md#config-bundlegraph_inner_ratio) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_LABEL_ALL_MAX`](modules/readmenator._config.py.md#config-bundlegraph_label_all_max) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_LABEL_MAX_CHARS`](modules/readmenator._config.py.md#config-bundlegraph_label_max_chars) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_LABEL_TOP_N`](modules/readmenator._config.py.md#config-bundlegraph_label_top_n) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_LIST_MAX`](modules/readmenator._config.py.md#config-bundlegraph_list_max) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_MODE`](modules/readmenator._config.py.md#config-bundlegraph_mode) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_NODE_MAX_PX`](modules/readmenator._config.py.md#config-bundlegraph_node_max_px) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_NODE_MIN_PX`](modules/readmenator._config.py.md#config-bundlegraph_node_min_px) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_ORDER_OPTIMIZE`](modules/readmenator._config.py.md#config-bundlegraph_order_optimize) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_ORDER_PASSES`](modules/readmenator._config.py.md#config-bundlegraph_order_passes) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_ORDER_SWEEPS`](modules/readmenator._config.py.md#config-bundlegraph_order_sweeps) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_OUTPUT`](modules/readmenator._config.py.md#config-bundlegraph_output) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_PAGE_TEMPLATE`](modules/readmenator._bundlegraph_page.py.md#bundlegraph_page_template) constant in `readmenator._bundlegraph_page`
+- [`BUNDLEGRAPH_PARTICLES`](modules/readmenator._config.py.md#config-bundlegraph_particles) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_PERSPECTIVE`](modules/readmenator._config.py.md#config-bundlegraph_perspective) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_REVEAL_MS`](modules/readmenator._config.py.md#config-bundlegraph_reveal_ms) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_ROTATE_SPEED`](modules/readmenator._config.py.md#config-bundlegraph_rotate_speed) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_SAMPLES`](modules/readmenator._config.py.md#config-bundlegraph_samples) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_SPHERE_REFINE_SWEEPS`](modules/readmenator._config.py.md#config-bundlegraph_sphere_refine_sweeps) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_THUMB_EDGES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_edges) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_THUMB_SAMPLES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_samples) attribute of `Config` in `readmenator._config`
+- [`BundleGraphRenderer`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer) class in `readmenator._bundlegraph`
+- [`BundleLayout`](modules/readmenator._graphlayout.py.md#bundlelayout) class in `readmenator._graphlayout`
+
+<a id="c"></a>
+
+## C
+
+- [`CACHE_DIR`](modules/readmenator._config.py.md#config-cache_dir) attribute of `Config` in `readmenator._config`
+- [`call`](modules/readmenator._mcp_server.py.md#mcptool-call) method of `MCPTool` in `readmenator._mcp_server`
+- [`CALL_CONFIDENCE_ORDER`](modules/readmenator._symindex.py.md#call_confidence_order) constant in `readmenator._symindex`
+- [`call_graph`](modules/readmenator._flowcharts.py.md#executionflowbuilder-call_graph) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`call_tree_mermaid`](modules/readmenator._flowcharts.py.md#executionflowbuilder-call_tree_mermaid) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`CALLABLE_KINDS`](modules/readmenator._apidocs.py.md#callable_kinds) constant in `readmenator._apidocs`
+- [`called_by`](modules/readmenator._apidocs.py.md#apientity-called_by) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`callee`](modules/readmenator._symindex.py.md#callsite-callee) attribute of `CallSite` in `readmenator._symindex`
+- [`callee`](modules/readmenator._flowcharts.py.md#flowstep-callee) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`caller`](modules/readmenator._symindex.py.md#callsite-caller) attribute of `CallSite` in `readmenator._symindex`
+- [`caller`](modules/readmenator._flowcharts.py.md#flowstep-caller) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`calls`](modules/readmenator._apidocs.py.md#apientity-calls) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`CALLS`](modules/readmenator._category.py.md#edgekind-calls) attribute of `EdgeKind` in `readmenator._category`
+- [`CallSite`](modules/readmenator._symindex.py.md#callsite) class in `readmenator._symindex`
+- [`candidates`](modules/readmenator._symindex.py.md#resolvedcall-candidates) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`Category`](modules/readmenator._category.py.md#category) class in `readmenator._category`
+- [`category`](modules/readmenator._memory.py.md#declaredrule-category) attribute of `DeclaredRule` in `readmenator._memory`
+- [`center`](modules/readmenator._graphlayout.py.md#bundlelayout-center) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`centrality_score`](modules/readmenator._models.py.md#hotspotresult-centrality_score) attribute of `HotspotResult` in `readmenator._models`
+- [`CHANGE_IMPACT_MAX_DEPTH`](modules/readmenator._config.py.md#config-change_impact_max_depth) attribute of `Config` in `readmenator._config`
+- [`CHANGE_IMPACT_MAX_FILES`](modules/readmenator._config.py.md#config-change_impact_max_files) attribute of `Config` in `readmenator._config`
+- [`change_impacts`](modules/readmenator._models.py.md#analysisresultv2-change_impacts) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`changed`](modules/readmenator._diagrams.py.md#mapdelta-changed) attribute of `MapDelta` in `readmenator._diagrams`
+- [`ChangeImpact`](modules/readmenator._models.py.md#changeimpact) class in `readmenator._models`
+- [`check_freshness`](modules/readmenator._app.py.md#readmenatorapplication-check_freshness) method of `readmenatorApplication` in `readmenator._app`
+- [`checks`](modules/readmenator._diagrams.py.md#mapreceipt-checks) attribute of `MapReceipt` in `readmenator._diagrams`
+- [`children`](modules/readmenator._apidocs.py.md#apireference-children) method of `ApiReference` in `readmenator._apidocs`
+- [`children`](modules/readmenator._graphrag.py.md#ragcommunity-children) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`choose_mode`](modules/readmenator._graphrag.py.md#graphragsearcher-choose_mode) method of `GraphRagSearcher` in `readmenator._graphrag`
+- [`chroma_text`](modules/readmenator._video.py.md#chroma_text) function in `readmenator._video`
+- [`CinematicVideoRenderer`](modules/readmenator._video.py.md#cinematicvideorenderer) class in `readmenator._video`
+- [`CLASS_KINDS`](modules/readmenator._apidocs.py.md#class_kinds) constant in `readmenator._apidocs`
+- [`classes`](modules/readmenator._pytypes.py.md#pythonreceivertypes-classes) property of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`clean_purpose`](modules/readmenator._purpose.py.md#clean_purpose) function in `readmenator._purpose`
+- [`clean_text`](modules/readmenator._docstrings.py.md#clean_text) function in `readmenator._docstrings`
+- [`clear_analysis`](modules/readmenator._cache.py.md#filecache-clear_analysis) method of `FileCache` in `readmenator._cache`
+- [`close_existing_prs`](modules/readmenator_orchestrator.py.md#githubclient-close_existing_prs) method of `GitHubClient` in `readmenator_orchestrator`
+- [`cluster_jaccard`](modules/readmenator._embed.py.md#embedder-cluster_jaccard) method of `Embedder` in `readmenator._embed`
+- [`code`](modules/readmenator._apidocs.py.md#docwarning-code) attribute of `DocWarning` in `readmenator._apidocs`
+- [`CodePropertyGraph`](modules/readmenator._cpg.py.md#codepropertygraph) class in `readmenator._cpg`
+- [`cohesion`](modules/readmenator._models.py.md#communityresult-cohesion) attribute of `CommunityResult` in `readmenator._models`
+- [`collect`](modules/readmenator._video.py.md#cinematicvideorenderer-collect) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`collect_doc_sources`](modules/readmenator._diagrams.py.md#docssitepublisher-collect_doc_sources) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`collect_sources`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-collect_sources) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`COLOR_MODES`](modules/readmenator._video.py.md#color_modes) constant in `readmenator._video`
+- [`column`](modules/readmenator._symindex.py.md#callsite-column) attribute of `CallSite` in `readmenator._symindex`
+- [`combined_score`](modules/readmenator._models.py.md#hotspotresult-combined_score) attribute of `HotspotResult` in `readmenator._models`
+- [`COMMENT_RE`](modules/readmenator._yaralite.py.md#comment_re) constant in `readmenator._yaralite`
+- [`commit_message`](modules/readmenator_orchestrator.py.md#config-commit_message) attribute of `Config` in `readmenator_orchestrator`
+- [`communities`](modules/readmenator._models.py.md#analysisresult-communities) attribute of `AnalysisResult` in `readmenator._models`
+- [`communities`](modules/readmenator._graphrag.py.md#graphragindex-communities) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`community`](modules/readmenator._diagrams.py.md#mapnode-community) attribute of `MapNode` in `readmenator._diagrams`
+- [`community`](modules/readmenator._graphrag.py.md#ragentity-community) attribute of `RagEntity` in `readmenator._graphrag`
+- [`COMMUNITY_ALGORITHM`](modules/readmenator._config.py.md#config-community_algorithm) attribute of `Config` in `readmenator._config`
+- [`community_color`](modules/readmenator._video.py.md#community_color) function in `readmenator._video`
+- [`COMMUNITY_HUB_DAMPING`](modules/readmenator._config.py.md#config-community_hub_damping) attribute of `Config` in `readmenator._config`
+- [`community_id`](modules/readmenator._models.py.md#communityresult-community_id) attribute of `CommunityResult` in `readmenator._models`
+- [`community_id`](modules/readmenator._graphrag.py.md#ragcommunity-community_id) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`community_label`](modules/readmenator._diagrams.py.md#mapnode-community_label) attribute of `MapNode` in `readmenator._diagrams`
+- [`COMMUNITY_MAX_LEVELS`](modules/readmenator._config.py.md#config-community_max_levels) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_MAX_SIZE_RATIO`](modules/readmenator._config.py.md#config-community_max_size_ratio) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_MAX_SWEEPS`](modules/readmenator._config.py.md#config-community_max_sweeps) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_MERGE_BELOW`](modules/readmenator._config.py.md#config-community_merge_below) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_MIN_SIZE`](modules/readmenator._config.py.md#config-community_min_size) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_PALETTE`](modules/readmenator._video.py.md#community_palette) constant in `readmenator._video`
+- [`COMMUNITY_RESOLUTION`](modules/readmenator._config.py.md#config-community_resolution) attribute of `Config` in `readmenator._config`
+- [`COMMUNITY_VOTE_EPSILON`](modules/readmenator._config.py.md#config-community_vote_epsilon) attribute of `Config` in `readmenator._config`
+- [`CommunityResult`](modules/readmenator._models.py.md#communityresult) class in `readmenator._models`
+- [`compare`](modules/readmenator._diagrams.py.md#systemmapbuilder-compare) method of `SystemMapBuilder` in `readmenator._diagrams`
+- [`complexity_score`](modules/readmenator._models.py.md#hotspotresult-complexity_score) attribute of `HotspotResult` in `readmenator._models`
+- [`Component`](modules/readmenator._flowcharts.py.md#component) class in `readmenator._flowcharts`
+- [`component_markdown`](modules/readmenator._components.py.md#componentdiagrambuilder-component_markdown) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`ComponentDiagramBuilder`](modules/readmenator._components.py.md#componentdiagrambuilder) class in `readmenator._components`
+- [`components`](modules/readmenator._pipeline.py.md#analyzerfactory-components) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`components`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder-components) method of `ArchitectureDiagramBuilder` in `readmenator._flowcharts`
+- [`COMPONENTS_DEPTH_CAP`](modules/readmenator._config.py.md#config-components_depth_cap) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_ENABLED`](modules/readmenator._config.py.md#config-components_enabled) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_EXPAND_MIN_FILES`](modules/readmenator._config.py.md#config-components_expand_min_files) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_MAX_ALL_EDGES`](modules/readmenator._config.py.md#config-components_max_all_edges) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_MAX_KEY_EDGES`](modules/readmenator._config.py.md#config-components_max_key_edges) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_MAX_KEY_ENTITIES`](modules/readmenator._config.py.md#config-components_max_key_entities) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_NODE_SYMBOLS`](modules/readmenator._config.py.md#config-components_node_symbols) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_OUTPUT_DIR`](modules/readmenator._config.py.md#config-components_output_dir) attribute of `Config` in `readmenator._config`
+- [`compose`](modules/readmenator._category.py.md#category-compose) method of `Category` in `readmenator._category`
+- [`composite_authority_weight`](modules/readmenator._rank.py.md#rankconfig-composite_authority_weight) attribute of `RankConfig` in `readmenator._rank`
+- [`composite_doc_weight`](modules/readmenator._rank.py.md#rankconfig-composite_doc_weight) attribute of `RankConfig` in `readmenator._rank`
+- [`composite_freshness_weight`](modules/readmenator._rank.py.md#rankconfig-composite_freshness_weight) attribute of `RankConfig` in `readmenator._rank`
+- [`composite_ppr_weight`](modules/readmenator._rank.py.md#rankconfig-composite_ppr_weight) attribute of `RankConfig` in `readmenator._rank`
+- [`composite_score`](modules/readmenator._rank.py.md#rankeditem-composite_score) attribute of `RankedItem` in `readmenator._rank`
+- [`composite_test_weight`](modules/readmenator._rank.py.md#rankconfig-composite_test_weight) attribute of `RankConfig` in `readmenator._rank`
+- [`CompositeRanker`](modules/readmenator._rank.py.md#compositeranker) class in `readmenator._rank`
+- [`compute_hash`](modules/readmenator._cache.py.md#filecache-compute_hash) method of `FileCache` in `readmenator._cache`
+- [`compute_hashes`](modules/readmenator._cache.py.md#filecache-compute_hashes) method of `FileCache` in `readmenator._cache`
+- [`CONCEPT_DIALECTIC_MAX`](modules/readmenator._config.py.md#config-concept_dialectic_max) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_ENABLED`](modules/readmenator._config.py.md#config-concept_enabled) attribute of `Config` in `readmenator._config`
+- [`concept_graph`](modules/readmenator._models.py.md#analysisresultv2-concept_graph) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`CONCEPT_MAX_CONCEPTS`](modules/readmenator._config.py.md#config-concept_max_concepts) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_MAX_FILES_PER_CONCEPT`](modules/readmenator._config.py.md#config-concept_max_files_per_concept) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_MAX_RELATIONS`](modules/readmenator._config.py.md#config-concept_max_relations) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_MIN_FILES`](modules/readmenator._config.py.md#config-concept_min_files) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_MIN_TOKEN_LEN`](modules/readmenator._config.py.md#config-concept_min_token_len) attribute of `Config` in `readmenator._config`
+- [`CONCEPT_STOPWORDS`](modules/readmenator._config.py.md#config-concept_stopwords) attribute of `Config` in `readmenator._config`
+- [`ConceptExtractor`](modules/readmenator._concepts.py.md#conceptextractor) class in `readmenator._concepts`
+- [`ConceptGraph`](modules/readmenator._models.py.md#conceptgraph) class in `readmenator._models`
+- [`ConceptNode`](modules/readmenator._models.py.md#conceptnode) class in `readmenator._models`
+- [`ConceptRelation`](modules/readmenator._models.py.md#conceptrelation) class in `readmenator._models`
+- [`concepts`](modules/readmenator._pipeline.py.md#analyzerfactory-concepts) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`concepts`](modules/readmenator._models.py.md#conceptgraph-concepts) attribute of `ConceptGraph` in `readmenator._models`
+- [`condition`](modules/readmenator._yaralite.py.md#yaraliterule-condition) attribute of `YaraLiteRule` in `readmenator._yaralite`
+- [`confidence`](modules/readmenator._models.py.md#conceptnode-confidence) attribute of `ConceptNode` in `readmenator._models`
+- [`confidence`](modules/readmenator._models.py.md#conceptrelation-confidence) attribute of `ConceptRelation` in `readmenator._models`
+- [`confidence`](modules/readmenator._models.py.md#dataflowissue-confidence) attribute of `DataflowIssue` in `readmenator._models`
+- [`confidence`](modules/readmenator._models.py.md#edge-confidence) attribute of `Edge` in `readmenator._models`
+- [`confidence`](modules/readmenator._category.py.md#morphism-confidence) attribute of `Morphism` in `readmenator._category`
+- [`confidence`](modules/readmenator._graphrag.py.md#ragrelation-confidence) attribute of `RagRelation` in `readmenator._graphrag`
+- [`confidence`](modules/readmenator._symindex.py.md#resolvedcall-confidence) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`confidence`](modules/readmenator._yaralite.py.md#yaralitematch-confidence) attribute of `YaraLiteMatch` in `readmenator._yaralite`
+- [`config`](modules/readmenator._video.py.md#cinematicvideorenderer-config) attribute of `CinematicVideoRenderer` in `readmenator._video`
+- [`Config`](modules/readmenator._config.py.md#config) class in `readmenator._config`
+- [`Config`](modules/readmenator_orchestrator.py.md#config) class in `readmenator_orchestrator`
+- [`config`](modules/readmenator._rank.py.md#rankedresult-config) attribute of `RankedResult` in `readmenator._rank`
+- [`connection_count`](modules/readmenator._models.py.md#hotspotresult-connection_count) attribute of `HotspotResult` in `readmenator._models`
+- [`CONTAINER_KINDS`](modules/readmenator._apidocs.py.md#container_kinds) constant in `readmenator._apidocs`
+- [`CONTEXT_BUDGET`](modules/readmenator._config.py.md#config-context_budget) attribute of `Config` in `readmenator._config`
+- [`control_flow_mermaid`](modules/readmenator._flowcharts.py.md#executionflowbuilder-control_flow_mermaid) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`COORD_DIGITS`](modules/readmenator._bundlegraph.py.md#coord_digits) constant in `readmenator._bundlegraph`
+- [`copy_vendor`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-copy_vendor) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`core`](modules/readmenator._flowcharts.py.md#component-core) attribute of `Component` in `readmenator._flowcharts`
+- [`corpus_frequency`](modules/readmenator._provenance.py.md#provenancefinding-corpus_frequency) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`coverage`](modules/readmenator._apidocs.py.md#apireference-coverage) attribute of `ApiReference` in `readmenator._apidocs`
+- [`CParser`](modules/readmenator.parsers._c.py.md#cparser) class in `readmenator.parsers._c`
+- [`cpg`](modules/readmenator._pipeline.py.md#analyzerfactory-cpg) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`CPG_CONTEXT`](modules/readmenator._config.py.md#config-cpg_context) attribute of `Config` in `readmenator._config`
+- [`CPG_EMBED_IN_KNOWLEDGE_BASE`](modules/readmenator._config.py.md#config-cpg_embed_in_knowledge_base) attribute of `Config` in `readmenator._config`
+- [`CPG_ENABLED`](modules/readmenator._config.py.md#config-cpg_enabled) attribute of `Config` in `readmenator._config`
+- [`create_parser`](modules/readmenator.parsers.__init__.py.md#create_parser) function in `readmenator.parsers`
+- [`create_pr`](modules/readmenator_orchestrator.py.md#githubclient-create_pr) method of `GitHubClient` in `readmenator_orchestrator`
+- [`CSharpParser`](modules/readmenator.parsers._csharp.py.md#csharpparser) class in `readmenator.parsers._csharp`
+- [`current_lines`](modules/readmenator._models.py.md#refactoringplan-current_lines) attribute of `RefactoringPlan` in `readmenator._models`
+- [`CURSORRULES_ENABLED`](modules/readmenator._config.py.md#config-cursorrules_enabled) attribute of `Config` in `readmenator._config`
+- [`CURSORRULES_OUTPUT`](modules/readmenator._config.py.md#config-cursorrules_output) attribute of `Config` in `readmenator._config`
+- [`CursorRulesGenerator`](modules/readmenator._cursorrules_generator.py.md#cursorrulesgenerator) class in `readmenator._cursorrules_generator`
+- [`curves`](modules/readmenator._graphlayout.py.md#bundlelayout-curves) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`curves`](modules/readmenator._graphlayout.py.md#spherebundlelayout-curves) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+- [`cwe`](modules/readmenator._models.py.md#securityfinding-cwe) attribute of `SecurityFinding` in `readmenator._models`
+- [`cwe`](modules/readmenator._security.py.md#securityrule-cwe) attribute of `SecurityRule` in `readmenator._security`
+- [`CYAN`](modules/readmenator._video.py.md#cyan) constant in `readmenator._video`
+- [`cycle`](modules/readmenator._models.py.md#dependencycycle-cycle) attribute of `DependencyCycle` in `readmenator._models`
+- [`CYCLE_DETECTION_ENABLED`](modules/readmenator._config.py.md#config-cycle_detection_enabled) attribute of `Config` in `readmenator._config`
+- [`cycles`](modules/readmenator._models.py.md#analysisresultv2-cycles) attribute of `AnalysisResultV2` in `readmenator._models`
+
+<a id="d"></a>
+
+## D
+
+- [`dangerous_import`](modules/readmenator._models.py.md#taintpath-dangerous_import) attribute of `TaintPath` in `readmenator._models`
+- [`DANGEROUS_IMPORTS`](modules/readmenator._taint.py.md#taintanalyzer-dangerous_imports) attribute of `TaintAnalyzer` in `readmenator._taint`
+- [`DANGEROUS_IMPORTS_BY_LANGUAGE`](modules/readmenator._taint.py.md#taintanalyzer-dangerous_imports_by_language) attribute of `TaintAnalyzer` in `readmenator._taint`
+- [`DartParser`](modules/readmenator.parsers._dart.py.md#dartparser) class in `readmenator.parsers._dart`
+- [`DATA_KINDS`](modules/readmenator._apidocs.py.md#data_kinds) constant in `readmenator._apidocs`
+- [`dataflow`](modules/readmenator._pipeline.py.md#analyzerfactory-dataflow) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`DATAFLOW_ENABLED`](modules/readmenator._config.py.md#config-dataflow_enabled) attribute of `Config` in `readmenator._config`
+- [`dataflow_issues`](modules/readmenator._models.py.md#analysisresultv2-dataflow_issues) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`DATAFLOW_MAX_ISSUES`](modules/readmenator._config.py.md#config-dataflow_max_issues) attribute of `Config` in `readmenator._config`
+- [`DataflowAnalyzer`](modules/readmenator._dataflow.py.md#dataflowanalyzer) class in `readmenator._dataflow`
+- [`DataflowIssue`](modules/readmenator._models.py.md#dataflowissue) class in `readmenator._models`
+- [`date`](modules/readmenator._memory.py.md#memorynote-date) attribute of `MemoryNote` in `readmenator._memory`
+- [`DEAD_CODE_ENABLED`](modules/readmenator._config.py.md#config-dead_code_enabled) attribute of `Config` in `readmenator._config`
+- [`DEAD_CODE_ENTRY_POINTS`](modules/readmenator._config.py.md#config-dead_code_entry_points) attribute of `Config` in `readmenator._config`
+- [`DEAD_CODE_QUARANTINE_DIR`](modules/readmenator._config.py.md#config-dead_code_quarantine_dir) attribute of `Config` in `readmenator._config`
+- [`DeadCodeReport`](modules/readmenator._models.py.md#deadcodereport) class in `readmenator._models`
+- [`DeadCodeStripper`](modules/readmenator._dead_code.py.md#deadcodestripper) class in `readmenator._dead_code`
+- [`DeclaredRule`](modules/readmenator._memory.py.md#declaredrule) class in `readmenator._memory`
+- [`decorators`](modules/readmenator._apidocs.py.md#apientity-decorators) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`DeepAnalysisRunner`](modules/readmenator._pipeline.py.md#deepanalysisrunner) class in `readmenator._pipeline`
+- [`default`](modules/readmenator._apidocs.py.md#apiparam-default) attribute of `ApiParam` in `readmenator._apidocs`
+- [`default`](modules/readmenator._docstrings.py.md#docfield-default) attribute of `DocField` in `readmenator._docstrings`
+- [`DEFINES`](modules/readmenator._category.py.md#edgekind-defines) attribute of `EdgeKind` in `readmenator._category`
+- [`definition`](modules/readmenator._mcp_server.py.md#mcpresource-definition) method of `MCPResource` in `readmenator._mcp_server`
+- [`definition`](modules/readmenator._mcp_server.py.md#mcptool-definition) method of `MCPTool` in `readmenator._mcp_server`
+- [`degree`](modules/readmenator._graphrag.py.md#ragentity-degree) attribute of `RagEntity` in `readmenator._graphrag`
+- [`delete_remote_branch`](modules/readmenator_orchestrator.py.md#githubclient-delete_remote_branch) method of `GitHubClient` in `readmenator_orchestrator`
+- [`dependencies_available`](modules/readmenator._embed.py.md#embedder-dependencies_available) method of `Embedder` in `readmenator._embed`
+- [`dependencies_available`](modules/readmenator._video.py.md#dependencies_available) function in `readmenator._video`
+- [`DependencyCycle`](modules/readmenator._models.py.md#dependencycycle) class in `readmenator._models`
+- [`DEPENDS_ON`](modules/readmenator._category.py.md#edgekind-depends_on) attribute of `EdgeKind` in `readmenator._category`
+- [`deprecated`](modules/readmenator._docstrings.py.md#doccomment-deprecated) attribute of `DocComment` in `readmenator._docstrings`
+- [`depth`](modules/readmenator._flowcharts.py.md#flowstep-depth) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`describe_component`](modules/readmenator._ollama.py.md#ollamaclient-describe_component) method of `OllamaClient` in `readmenator._ollama`
+- [`description`](modules/readmenator._models.py.md#dataflowissue-description) attribute of `DataflowIssue` in `readmenator._models`
+- [`description`](modules/readmenator._docstrings.py.md#doccomment-description) attribute of `DocComment` in `readmenator._docstrings`
+- [`description`](modules/readmenator._docstrings.py.md#docfield-description) attribute of `DocField` in `readmenator._docstrings`
+- [`description`](modules/readmenator._models.py.md#layerviolation-description) attribute of `LayerViolation` in `readmenator._models`
+- [`description`](modules/readmenator._diagrams.py.md#mapview-description) attribute of `MapView` in `readmenator._diagrams`
+- [`description`](modules/readmenator._graphrag.py.md#ragentity-description) attribute of `RagEntity` in `readmenator._graphrag`
+- [`description`](modules/readmenator._graphrag.py.md#ragrelation-description) attribute of `RagRelation` in `readmenator._graphrag`
+- [`description`](modules/readmenator._models.py.md#refactoringaction-description) attribute of `RefactoringAction` in `readmenator._models`
+- [`description`](modules/readmenator._models.py.md#securityfinding-description) attribute of `SecurityFinding` in `readmenator._models`
+- [`description`](modules/readmenator._security.py.md#securityrule-description) attribute of `SecurityRule` in `readmenator._security`
+- [`description`](modules/readmenator._models.py.md#suggestedrule-description) attribute of `SuggestedRule` in `readmenator._models`
+- [`description`](modules/readmenator._yaralite.py.md#yaralitematch-description) attribute of `YaraLiteMatch` in `readmenator._yaralite`
+- [`description_for`](modules/readmenator._diagrams.py.md#docssitepublisher-description_for) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`detail`](modules/readmenator._diagrams.py.md#mapnode-detail) attribute of `MapNode` in `readmenator._diagrams`
+- [`detect`](modules/readmenator._layers.py.md#layerdetector-detect) method of `LayerDetector` in `readmenator._layers`
+- [`detect_commands`](modules/readmenator._memory.py.md#projectmemory-detect_commands) method of `ProjectMemory` in `readmenator._memory`
+- [`detect_cycles`](modules/readmenator._hotspots.py.md#hotspotanalyzer-detect_cycles) method of `HotspotAnalyzer` in `readmenator._hotspots`
+- [`detect_layers`](modules/readmenator._app.py.md#readmenatorapplication-detect_layers) method of `readmenatorApplication` in `readmenator._app`
+- [`detect_style`](modules/readmenator._docstrings.py.md#detect_style) function in `readmenator._docstrings`
+- [`detect_violations`](modules/readmenator._layer_rules.py.md#layerruleengine-detect_violations) method of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`diagram_builder`](modules/readmenator._pipeline.py.md#analyzerfactory-diagram_builder) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`DIAGRAM_CANVAS_HEIGHT`](modules/readmenator._config.py.md#config-diagram_canvas_height) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_CANVAS_WIDTH`](modules/readmenator._config.py.md#config-diagram_canvas_width) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_CHAPTER_FOCUS`](modules/readmenator._config.py.md#config-diagram_chapter_focus) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_COLUMN_GAP`](modules/readmenator._config.py.md#config-diagram_column_gap) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_COMMUNITY_COLORS`](modules/readmenator._config.py.md#config-diagram_community_colors) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_ENABLED`](modules/readmenator._config.py.md#config-diagram_enabled) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_FULL_MODE`](modules/readmenator._config.py.md#config-diagram_full_mode) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_KINDS`](modules/readmenator._config.py.md#config-diagram_kinds) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_LANE_TOP`](modules/readmenator._config.py.md#config-diagram_lane_top) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAP_SYMBOLS_PER_NODE`](modules/readmenator._config.py.md#config-diagram_map_symbols_per_node) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAPS_SUBDIR`](modules/readmenator._config.py.md#config-diagram_maps_subdir) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MARGIN_X`](modules/readmenator._config.py.md#config-diagram_margin_x) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MARGIN_Y`](modules/readmenator._config.py.md#config-diagram_margin_y) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAX_EDGES`](modules/readmenator._config.py.md#config-diagram_max_edges) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAX_LABEL_CHARS`](modules/readmenator._config.py.md#config-diagram_max_label_chars) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAX_NODES`](modules/readmenator._config.py.md#config-diagram_max_nodes) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MAX_VIEWS`](modules/readmenator._config.py.md#config-diagram_max_views) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MIN_GAP`](modules/readmenator._config.py.md#config-diagram_min_gap) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_MOTION_ENABLED`](modules/readmenator._config.py.md#config-diagram_motion_enabled) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_NEIGHBOR_NAMES`](modules/readmenator._config.py.md#config-diagram_neighbor_names) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_NODE_HEIGHT`](modules/readmenator._config.py.md#config-diagram_node_height) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_NODE_WIDTH`](modules/readmenator._config.py.md#config-diagram_node_width) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_OUTPUT_DIR`](modules/readmenator._config.py.md#config-diagram_output_dir) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_PAGES_DIR`](modules/readmenator._config.py.md#config-diagram_pages_dir) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_PRESET`](modules/readmenator._config.py.md#config-diagram_preset) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_PRESETS`](modules/readmenator._config.py.md#config-diagram_presets) attribute of `Config` in `readmenator._config`
+- [`diagram_publisher`](modules/readmenator._pipeline.py.md#analyzerfactory-diagram_publisher) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`diagram_renderer`](modules/readmenator._pipeline.py.md#analyzerfactory-diagram_renderer) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`DIAGRAM_ROLE_COLORS`](modules/readmenator._config.py.md#config-diagram_role_colors) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_ROLES`](modules/readmenator._config.py.md#config-diagram_roles) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_ROW_GAP`](modules/readmenator._config.py.md#config-diagram_row_gap) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_SEQUENCE_MAX_PARTICIPANTS`](modules/readmenator._config.py.md#config-diagram_sequence_max_participants) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_SEQUENCE_TOP`](modules/readmenator._config.py.md#config-diagram_sequence_top) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_SHARE_HEIGHT`](modules/readmenator._config.py.md#config-diagram_share_height) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_SHARE_WIDTH`](modules/readmenator._config.py.md#config-diagram_share_width) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_THEME`](modules/readmenator._config.py.md#config-diagram_theme) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_TOOLTIP_DOC_CHARS`](modules/readmenator._config.py.md#config-diagram_tooltip_doc_chars) attribute of `Config` in `readmenator._config`
+- [`diagram_validator`](modules/readmenator._pipeline.py.md#analyzerfactory-diagram_validator) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`DIAGRAM_VIS_AVOID_OVERLAP`](modules/readmenator._config.py.md#config-diagram_vis_avoid_overlap) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_CDN_CSS`](modules/readmenator._config.py.md#config-diagram_vis_cdn_css) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_CDN_JS`](modules/readmenator._config.py.md#config-diagram_vis_cdn_js) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_CENTRAL_GRAVITY`](modules/readmenator._config.py.md#config-diagram_vis_central_gravity) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_DAMPING`](modules/readmenator._config.py.md#config-diagram_vis_damping) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_ENABLED`](modules/readmenator._config.py.md#config-diagram_vis_enabled) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_GRAVITY`](modules/readmenator._config.py.md#config-diagram_vis_gravity) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_LABEL_TOP_N`](modules/readmenator._config.py.md#config-diagram_vis_label_top_n) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_PHYSICS_ENABLED`](modules/readmenator._config.py.md#config-diagram_vis_physics_enabled) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_SPRING_CONSTANT`](modules/readmenator._config.py.md#config-diagram_vis_spring_constant) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_SPRING_LENGTH`](modules/readmenator._config.py.md#config-diagram_vis_spring_length) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_VIS_STABILIZE_ITERATIONS`](modules/readmenator._config.py.md#config-diagram_vis_stabilize_iterations) attribute of `Config` in `readmenator._config`
+- [`DIAGRAM_WORKFLOW_FALLBACK_NODES`](modules/readmenator._config.py.md#config-diagram_workflow_fallback_nodes) attribute of `Config` in `readmenator._config`
+- [`dialectic_questions`](modules/readmenator._models.py.md#conceptgraph-dialectic_questions) attribute of `ConceptGraph` in `readmenator._models`
+- [`DIM`](modules/readmenator._video.py.md#dim) constant in `readmenator._video`
+- [`dims`](modules/readmenator._graphlayout.py.md#forceatlas2settings-dims) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`direct_dependents`](modules/readmenator._models.py.md#changeimpact-direct_dependents) attribute of `ChangeImpact` in `readmenator._models`
+- [`directory`](modules/readmenator._graphrag.py.md#graphragstore-directory) method of `GraphRagStore` in `readmenator._graphrag`
+- [`DirectoryWatcher`](modules/readmenator._watcher.py.md#directorywatcher) class in `readmenator._watcher`
+- [`dispatch`](modules/readmenator._mcp_server.py.md#mcpserver-dispatch) method of `MCPServer` in `readmenator._mcp_server`
+- [`doc`](modules/readmenator._apidocs.py.md#apientity-doc) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`doc`](modules/readmenator._diagrams.py.md#mapnode-doc) attribute of `MapNode` in `readmenator._diagrams`
+- [`doc`](modules/readmenator._models.py.md#node-doc) attribute of `Node` in `readmenator._models`
+- [`doc`](modules/readmenator._models.py.md#symbol-doc) attribute of `Symbol` in `readmenator._models`
+- [`doc`](modules/readmenator._symindex.py.md#symboldef-doc) attribute of `SymbolDef` in `readmenator._symindex`
+- [`doc_coverage`](modules/readmenator._rank.py.md#rankeditem-doc_coverage) attribute of `RankedItem` in `readmenator._rank`
+- [`DocComment`](modules/readmenator._docstrings.py.md#doccomment) class in `readmenator._docstrings`
+- [`DocField`](modules/readmenator._docstrings.py.md#docfield) class in `readmenator._docstrings`
+- [`DocProjection`](modules/readmenator._projections.py.md#docprojection) class in `readmenator._projections`
+- [`docs_subdir`](modules/readmenator_orchestrator.py.md#config-docs_subdir) attribute of `Config` in `readmenator_orchestrator`
+- [`DocsSitePublisher`](modules/readmenator._diagrams.py.md#docssitepublisher) class in `readmenator._diagrams`
+- [`DOCSTRING_LOOKBACK_LINES`](modules/readmenator._config.py.md#config-docstring_lookback_lines) attribute of `Config` in `readmenator._config`
+- [`DocumentationGenerator`](modules/readmenator._documentation.py.md#documentationgenerator) class in `readmenator._documentation`
+- [`DOCUMENTS`](modules/readmenator._category.py.md#edgekind-documents) attribute of `EdgeKind` in `readmenator._category`
+- [`DocWarning`](modules/readmenator._apidocs.py.md#docwarning) class in `readmenator._apidocs`
+- [`dominant_directory`](modules/readmenator._analyzer.py.md#dominant_directory) function in `readmenator._analyzer`
+- [`draw_caption`](modules/readmenator._video.py.md#draw_caption) function in `readmenator._video`
+- [`draw_cloud3d`](modules/readmenator._video.py.md#draw_cloud3d) function in `readmenator._video`
+- [`draw_grid`](modules/readmenator._video.py.md#draw_grid) function in `readmenator._video`
+- [`draw_header`](modules/readmenator._video.py.md#draw_header) function in `readmenator._video`
+- [`draw_sphere3d`](modules/readmenator._video.py.md#draw_sphere3d) function in `readmenator._video`
+- [`draw_sun`](modules/readmenator._video.py.md#draw_sun) function in `readmenator._video`
+
+<a id="e"></a>
+
+## E
+
+- [`eades_lin_smyth`](modules/readmenator._flowcharts.py.md#eades_lin_smyth) function in `readmenator._flowcharts`
+- [`ease`](modules/readmenator._video.py.md#ease) function in `readmenator._video`
+- [`Edge`](modules/readmenator._models.py.md#edge) class in `readmenator._models`
+- [`edge_count`](modules/readmenator._models.py.md#analysisresult-edge_count) attribute of `AnalysisResult` in `readmenator._models`
+- [`edge_palette`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-edge_palette) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`EDGE_WEIGHTS`](modules/readmenator._category.py.md#edge_weights) constant in `readmenator._category`
+- [`EdgeKind`](modules/readmenator._category.py.md#edgekind) enum in `readmenator._category`
+- [`edges`](modules/readmenator._diagrams.py.md#systemmap-edges) attribute of `SystemMap` in `readmenator._diagrams`
+- [`ElixirParser`](modules/readmenator.parsers._elixir.py.md#elixirparser) class in `readmenator.parsers._elixir`
+- [`EMBED_ENABLED`](modules/readmenator._config.py.md#config-embed_enabled) attribute of `Config` in `readmenator._config`
+- [`EMBED_MAX_NEIGHBORS`](modules/readmenator._config.py.md#config-embed_max_neighbors) attribute of `Config` in `readmenator._config`
+- [`EMBED_MIN_CLUSTER_SIZE`](modules/readmenator._config.py.md#config-embed_min_cluster_size) attribute of `Config` in `readmenator._config`
+- [`EMBED_MODEL`](modules/readmenator._config.py.md#config-embed_model) attribute of `Config` in `readmenator._config`
+- [`embedder`](modules/readmenator._pipeline.py.md#analyzerfactory-embedder) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`Embedder`](modules/readmenator._embed.py.md#embedder) class in `readmenator._embed`
+- [`emergence_frames`](modules/readmenator._video.py.md#cinematicvideorenderer-emergence_frames) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`enabled`](modules/readmenator._ollama.py.md#ollamaclient-enabled) method of `OllamaClient` in `readmenator._ollama`
+- [`enabled`](modules/readmenator._sourceview.py.md#sourceviewbuilder-enabled) method of `SourceViewBuilder` in `readmenator._sourceview`
+- [`encode`](modules/readmenator._embed.py.md#embedder-encode) method of `Embedder` in `readmenator._embed`
+- [`end_line`](modules/readmenator._apidocs.py.md#apientity-end_line) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`end_line`](modules/readmenator._graphrag.py.md#ragtextunit-end_line) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`end_line`](modules/readmenator._models.py.md#refactoringaction-end_line) attribute of `RefactoringAction` in `readmenator._models`
+- [`end_line`](modules/readmenator._symindex.py.md#symboldef-end_line) attribute of `SymbolDef` in `readmenator._symindex`
+- [`ensure_readmenator_installed`](modules/readmenator._agent_injector.py.md#ensure_readmenator_installed) function in `readmenator._agent_injector`
+- [`entities`](modules/readmenator._apidocs.py.md#apireference-entities) attribute of `ApiReference` in `readmenator._apidocs`
+- [`entities`](modules/readmenator._graphrag.py.md#graphragindex-entities) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`entities`](modules/readmenator._graphrag.py.md#ragcontext-entities) attribute of `RagContext` in `readmenator._graphrag`
+- [`entity_id`](modules/readmenator._graphrag.py.md#ragentity-entity_id) attribute of `RagEntity` in `readmenator._graphrag`
+- [`entity_id`](modules/readmenator._graphrag.py.md#ragtextunit-entity_id) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`entries`](modules/readmenator._exclusions.py.md#exclusionlist-entries) property of `ExclusionList` in `readmenator._exclusions`
+- [`entry_points`](modules/readmenator._flowcharts.py.md#executionflowbuilder-entry_points) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`EntryPoint`](modules/readmenator._flowcharts.py.md#entrypoint) class in `readmenator._flowcharts`
+- [`error`](modules/readmenator._mcp_server.py.md#mcprequest-error) method of `MCPRequest` in `readmenator._mcp_server`
+- [`errors`](modules/readmenator._diagrams.py.md#mapreceipt-errors) attribute of `MapReceipt` in `readmenator._diagrams`
+- [`escape_cell`](modules/readmenator._purpose.py.md#escape_cell) function in `readmenator._purpose`
+- [`estimated_impact`](modules/readmenator._models.py.md#refactoringplan-estimated_impact) attribute of `RefactoringPlan` in `readmenator._models`
+- [`evidence`](modules/readmenator._diagrams.py.md#mapdiagnostic-evidence) attribute of `MapDiagnostic` in `readmenator._diagrams`
+- [`examples`](modules/readmenator._docstrings.py.md#doccomment-examples) attribute of `DocComment` in `readmenator._docstrings`
+- [`excerpt`](modules/readmenator._yaralite.py.md#yaralitehit-excerpt) attribute of `YaraLiteHit` in `readmenator._yaralite`
+- [`ExclusionEntry`](modules/readmenator._exclusions.py.md#exclusionentry) class in `readmenator._exclusions`
+- [`ExclusionList`](modules/readmenator._exclusions.py.md#exclusionlist) class in `readmenator._exclusions`
+- [`exclusions`](modules/readmenator._pipeline.py.md#analyzerfactory-exclusions) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`EXCLUSIONS_ENABLED`](modules/readmenator._config.py.md#config-exclusions_enabled) attribute of `Config` in `readmenator._config`
+- [`EXCLUSIONS_FILE`](modules/readmenator._config.py.md#config-exclusions_file) attribute of `Config` in `readmenator._config`
+- [`ExecutionFlowBuilder`](modules/readmenator._flowcharts.py.md#executionflowbuilder) class in `readmenator._flowcharts`
+- [`existing_ids`](modules/readmenator._wiki.py.md#existing_ids) function in `readmenator._wiki`
+- [`explain`](modules/readmenator._query.py.md#queryengine-explain) method of `QueryEngine` in `readmenator._query`
+- [`explain`](modules/readmenator._rank.py.md#rankedresult-explain) method of `RankedResult` in `readmenator._rank`
+- [`explain`](modules/readmenator._app.py.md#readmenatorapplication-explain) method of `readmenatorApplication` in `readmenator._app`
+- [`explain_rank`](modules/readmenator._explain.py.md#explain_rank) function in `readmenator._explain`
+- [`EXPLORER_ENABLED`](modules/readmenator._config.py.md#config-explorer_enabled) attribute of `Config` in `readmenator._config`
+- [`EXPLORER_HOST`](modules/readmenator._config.py.md#config-explorer_host) attribute of `Config` in `readmenator._config`
+- [`EXPLORER_PORT`](modules/readmenator._config.py.md#config-explorer_port) attribute of `Config` in `readmenator._config`
+- [`explorer_state`](modules/readmenator._app.py.md#readmenatorapplication-explorer_state) method of `readmenatorApplication` in `readmenator._app`
+- [`ExplorerState`](modules/readmenator._explorer.py.md#explorerstate) class in `readmenator._explorer`
+- [`export`](modules/readmenator._sarif.py.md#sarifexporter-export) method of `SarifExporter` in `readmenator._sarif`
+- [`export`](modules/readmenator._app.py.md#readmenatorapplication-export) method of `readmenatorApplication` in `readmenator._app`
+- [`export_apidocs`](modules/readmenator._app.py.md#readmenatorapplication-export_apidocs) method of `readmenatorApplication` in `readmenator._app`
+- [`export_bundlegraph`](modules/readmenator._app.py.md#readmenatorapplication-export_bundlegraph) method of `readmenatorApplication` in `readmenator._app`
+- [`export_components`](modules/readmenator._app.py.md#readmenatorapplication-export_components) method of `readmenatorApplication` in `readmenator._app`
+- [`export_cypher`](modules/readmenator._app.py.md#readmenatorapplication-export_cypher) method of `readmenatorApplication` in `readmenator._app`
+- [`export_diagram`](modules/readmenator._app.py.md#readmenatorapplication-export_diagram) method of `readmenatorApplication` in `readmenator._app`
+- [`export_diagrams`](modules/readmenator._app.py.md#readmenatorapplication-export_diagrams) method of `readmenatorApplication` in `readmenator._app`
+- [`export_forcegraph`](modules/readmenator._app.py.md#readmenatorapplication-export_forcegraph) method of `readmenatorApplication` in `readmenator._app`
+- [`export_graphml`](modules/readmenator._app.py.md#readmenatorapplication-export_graphml) method of `readmenatorApplication` in `readmenator._app`
+- [`export_html`](modules/readmenator._app.py.md#readmenatorapplication-export_html) method of `readmenatorApplication` in `readmenator._app`
+- [`export_json`](modules/readmenator._app.py.md#readmenatorapplication-export_json) method of `readmenatorApplication` in `readmenator._app`
+- [`export_obsidian`](modules/readmenator._app.py.md#readmenatorapplication-export_obsidian) method of `readmenatorApplication` in `readmenator._app`
+- [`export_pages`](modules/readmenator._app.py.md#readmenatorapplication-export_pages) method of `readmenatorApplication` in `readmenator._app`
+- [`export_rules`](modules/readmenator._app.py.md#readmenatorapplication-export_rules) method of `readmenatorApplication` in `readmenator._app`
+- [`export_sarif`](modules/readmenator._app.py.md#readmenatorapplication-export_sarif) method of `readmenatorApplication` in `readmenator._app`
+- [`export_svg`](modules/readmenator._app.py.md#readmenatorapplication-export_svg) method of `readmenatorApplication` in `readmenator._app`
+- [`export_video`](modules/readmenator._app.py.md#readmenatorapplication-export_video) method of `readmenatorApplication` in `readmenator._app`
+- [`export_wiki`](modules/readmenator._app.py.md#readmenatorapplication-export_wiki) method of `readmenatorApplication` in `readmenator._app`
+- [`exporter`](modules/readmenator._pipeline.py.md#analyzerfactory-exporter) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`extract`](modules/readmenator._concepts.py.md#conceptextractor-extract) method of `ConceptExtractor` in `readmenator._concepts`
+- [`extract_call_sites`](modules/readmenator._symindex.py.md#symbolindex-extract_call_sites) method of `SymbolIndex` in `readmenator._symindex`
+- [`extract_rules`](modules/readmenator._memory.py.md#projectmemory-extract_rules) method of `ProjectMemory` in `readmenator._memory`
+
+<a id="f"></a>
+
+## F
+
+- [`FAINT`](modules/readmenator._video.py.md#faint) constant in `readmenator._video`
+- [`fallback_budget`](modules/readmenator._graphlayout.py.md#forceatlas2settings-fallback_budget) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`family_color`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-family_color) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`family_color_from_name`](modules/readmenator._forcegraph.py.md#family_color_from_name) function in `readmenator._forcegraph`
+- [`FENCE_LANGUAGES`](modules/readmenator._apidocs_render.py.md#fence_languages) constant in `readmenator._apidocs_render`
+- [`fibonacci_sphere`](modules/readmenator._graphlayout.py.md#fibonacci_sphere) function in `readmenator._graphlayout`
+- [`file`](modules/readmenator._apidocs.py.md#apientity-file) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`file`](modules/readmenator._symindex.py.md#callsite-file) attribute of `CallSite` in `readmenator._symindex`
+- [`file`](modules/readmenator._apidocs.py.md#docwarning-file) attribute of `DocWarning` in `readmenator._apidocs`
+- [`file`](modules/readmenator._flowcharts.py.md#entrypoint-file) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`file`](modules/readmenator._graphrag.py.md#ragentity-file) attribute of `RagEntity` in `readmenator._graphrag`
+- [`file`](modules/readmenator._graphrag.py.md#ragtextunit-file) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`file`](modules/readmenator._symindex.py.md#symboldef-file) attribute of `SymbolDef` in `readmenator._symindex`
+- [`file_evidence`](modules/readmenator._models.py.md#conceptrelation-file_evidence) attribute of `ConceptRelation` in `readmenator._models`
+- [`file_examples`](modules/readmenator._models.py.md#suggestedrule-file_examples) attribute of `SuggestedRule` in `readmenator._models`
+- [`FILE_HEADER_MAX_LINES`](modules/readmenator._config.py.md#config-file_header_max_lines) attribute of `Config` in `readmenator._config`
+- [`file_id`](modules/readmenator._models.py.md#changeimpact-file_id) attribute of `ChangeImpact` in `readmenator._models`
+- [`file_id`](modules/readmenator._models.py.md#hotspotresult-file_id) attribute of `HotspotResult` in `readmenator._models`
+- [`file_ids`](modules/readmenator._models.py.md#communityresult-file_ids) attribute of `CommunityResult` in `readmenator._models`
+- [`file_ids`](modules/readmenator._models.py.md#conceptnode-file_ids) attribute of `ConceptNode` in `readmenator._models`
+- [`file_ids`](modules/readmenator._graphrag.py.md#ragcommunity-file_ids) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`file_pagerank`](modules/readmenator._rank.py.md#file_pagerank) function in `readmenator._rank`
+- [`file_path`](modules/readmenator._models.py.md#dataflowissue-file_path) attribute of `DataflowIssue` in `readmenator._models`
+- [`file_path`](modules/readmenator._models.py.md#deadcodereport-file_path) attribute of `DeadCodeReport` in `readmenator._models`
+- [`file_path`](modules/readmenator._models.py.md#linterviolation-file_path) attribute of `LinterViolation` in `readmenator._models`
+- [`file_path`](modules/readmenator._provenance.py.md#provenancefinding-file_path) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`file_path`](modules/readmenator._models.py.md#refactoringplan-file_path) attribute of `RefactoringPlan` in `readmenator._models`
+- [`file_path`](modules/readmenator._models.py.md#securityfinding-file_path) attribute of `SecurityFinding` in `readmenator._models`
+- [`file_purpose`](modules/readmenator._purpose.py.md#file_purpose) function in `readmenator._purpose`
+- [`FileCache`](modules/readmenator._cache.py.md#filecache) class in `readmenator._cache`
+- [`files`](modules/readmenator._flowcharts.py.md#component-files) attribute of `Component` in `readmenator._flowcharts`
+- [`filter_findings`](modules/readmenator._exclusions.py.md#exclusionlist-filter_findings) method of `ExclusionList` in `readmenator._exclusions`
+- [`find_agent_files`](modules/readmenator._agent_injector.py.md#agentinjector-find_agent_files) method of `AgentInjector` in `readmenator._agent_injector`
+- [`find_changed`](modules/readmenator._cache.py.md#filecache-find_changed) method of `FileCache` in `readmenator._cache`
+- [`find_free_port`](modules/readmenator._explorer.py.md#find_free_port) function in `readmenator._explorer`
+- [`find_path`](modules/readmenator._query.py.md#queryengine-find_path) method of `QueryEngine` in `readmenator._query`
+- [`find_path`](modules/readmenator._app.py.md#readmenatorapplication-find_path) method of `readmenatorApplication` in `readmenator._app`
+- [`find_symbol`](modules/readmenator._query.py.md#queryengine-find_symbol) method of `QueryEngine` in `readmenator._query`
+- [`findings`](modules/readmenator._graphrag.py.md#ragcommunity-findings) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`first_sentence`](modules/readmenator._purpose.py.md#first_sentence) function in `readmenator._purpose`
+- [`fit_frames`](modules/readmenator._graphlayout.py.md#fit_frames) function in `readmenator._graphlayout`
+- [`fix_hint_for`](modules/readmenator._security.py.md#fix_hint_for) function in `readmenator._security`
+- [`FLOW_CFG_MAX_NODES`](modules/readmenator._config.py.md#config-flow_cfg_max_nodes) attribute of `Config` in `readmenator._config`
+- [`FLOW_ENABLED`](modules/readmenator._config.py.md#config-flow_enabled) attribute of `Config` in `readmenator._config`
+- [`FLOW_LABEL_CHARS`](modules/readmenator._config.py.md#config-flow_label_chars) attribute of `Config` in `readmenator._config`
+- [`FLOW_MAX_DEPTH`](modules/readmenator._config.py.md#config-flow_max_depth) attribute of `Config` in `readmenator._config`
+- [`FLOW_MAX_ENTRYPOINTS`](modules/readmenator._config.py.md#config-flow_max_entrypoints) attribute of `Config` in `readmenator._config`
+- [`FLOW_MAX_STEPS`](modules/readmenator._config.py.md#config-flow_max_steps) attribute of `Config` in `readmenator._config`
+- [`FLOW_MIN_ENTRY_SCORE`](modules/readmenator._config.py.md#config-flow_min_entry_score) attribute of `Config` in `readmenator._config`
+- [`FLOW_SEQUENCE_MAX_MESSAGES`](modules/readmenator._config.py.md#config-flow_sequence_max_messages) attribute of `Config` in `readmenator._config`
+- [`FLOW_SOURCE_MIN_CALLS`](modules/readmenator._config.py.md#config-flow_source_min_calls) attribute of `Config` in `readmenator._config`
+- [`FLOW_SWITCH_MIN_CASES`](modules/readmenator._config.py.md#config-flow_switch_min_cases) attribute of `Config` in `readmenator._config`
+- [`FlowStep`](modules/readmenator._flowcharts.py.md#flowstep) class in `readmenator._flowcharts`
+- [`fmt_int`](modules/readmenator._video.py.md#fmt_int) function in `readmenator._video`
+- [`focus`](modules/readmenator._diagrams.py.md#mapview-focus) attribute of `MapView` in `readmenator._diagrams`
+- [`FORBIDDEN_EDGES`](modules/readmenator._layer_rules.py.md#layerruleengine-forbidden_edges) attribute of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`FORBIDDEN_IMPORTS`](modules/readmenator._linter.py.md#architecturelinter-forbidden_imports) attribute of `ArchitectureLinter` in `readmenator._linter`
+- [`forceatlas2_frames`](modules/readmenator._graphlayout.py.md#forceatlas2_frames) function in `readmenator._graphlayout`
+- [`ForceAtlas2Settings`](modules/readmenator._graphlayout.py.md#forceatlas2settings) class in `readmenator._graphlayout`
+- [`forcegraph`](modules/readmenator._pipeline.py.md#analyzerfactory-forcegraph) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`FORCEGRAPH_3D_DEPTH_FADE`](modules/readmenator._config.py.md#config-forcegraph_3d_depth_fade) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_FLY_DISTANCE`](modules/readmenator._config.py.md#config-forcegraph_3d_fly_distance) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_LABEL_PX`](modules/readmenator._config.py.md#config-forcegraph_3d_label_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_LINK_OPACITY`](modules/readmenator._config.py.md#config-forcegraph_3d_link_opacity) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_LINK_WIDTH_ACTIVE`](modules/readmenator._config.py.md#config-forcegraph_3d_link_width_active) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_LINK_WIDTH_HIGHLIGHT`](modules/readmenator._config.py.md#config-forcegraph_3d_link_width_highlight) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_MIN_GLYPH_PX`](modules/readmenator._config.py.md#config-forcegraph_3d_min_glyph_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_ORBIT_SPEED`](modules/readmenator._config.py.md#config-forcegraph_3d_orbit_speed) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_3D_PARTICLE_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_3d_particle_width) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_ARROW_LENGTH`](modules/readmenator._config.py.md#config-forcegraph_arrow_length) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_ARROW_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_arrow_zoom) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_BG`](modules/readmenator._config.py.md#config-forcegraph_bg) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CDN_JS_2D`](modules/readmenator._config.py.md#config-forcegraph_cdn_js_2d) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CDN_JS_3D`](modules/readmenator._config.py.md#config-forcegraph_cdn_js_3d) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CHARGE`](modules/readmenator._config.py.md#config-forcegraph_charge) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CLUSTER_STRENGTH`](modules/readmenator._config.py.md#config-forcegraph_cluster_strength) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_COLLIDE_MAX_NODES`](modules/readmenator._config.py.md#config-forcegraph_collide_max_nodes) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_COLLIDE_PADDING`](modules/readmenator._config.py.md#config-forcegraph_collide_padding) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_COOLDOWN_TICKS`](modules/readmenator._config.py.md#config-forcegraph_cooldown_ticks) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_COOLDOWN_TICKS_REDUCED`](modules/readmenator._config.py.md#config-forcegraph_cooldown_ticks_reduced) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CURVE_SAMPLES`](modules/readmenator._config.py.md#config-forcegraph_curve_samples) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CURVE_STEP`](modules/readmenator._config.py.md#config-forcegraph_curve_step) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DAG_LEVEL_DISTANCE`](modules/readmenator._config.py.md#config-forcegraph_dag_level_distance) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DIM_LINK`](modules/readmenator._config.py.md#config-forcegraph_dim_link) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DIM_NODE`](modules/readmenator._config.py.md#config-forcegraph_dim_node) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DOC_LINES_PX`](modules/readmenator._config.py.md#config-forcegraph_doc_lines_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DOC_MAX_CHARS`](modules/readmenator._config.py.md#config-forcegraph_doc_max_chars) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_DRAG_THRESHOLD_PX`](modules/readmenator._config.py.md#config-forcegraph_drag_threshold_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_EDGE_COLORS`](modules/readmenator._config.py.md#config-forcegraph_edge_colors) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_EDGE_HIT_PX`](modules/readmenator._config.py.md#config-forcegraph_edge_hit_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FAMILY_LIGHT_BASE`](modules/readmenator._config.py.md#config-forcegraph_family_light_base) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FAMILY_LIGHT_SPAN`](modules/readmenator._config.py.md#config-forcegraph_family_light_span) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FAMILY_SAT_BASE`](modules/readmenator._config.py.md#config-forcegraph_family_sat_base) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FAMILY_SAT_SPAN`](modules/readmenator._config.py.md#config-forcegraph_family_sat_span) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FIT_LEGEND_MIN_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_fit_legend_min_width) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FIT_MAX_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_fit_max_zoom) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FIT_PADDING_PX`](modules/readmenator._config.py.md#config-forcegraph_fit_padding_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FLY_MS`](modules/readmenator._config.py.md#config-forcegraph_fly_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_FLY_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_fly_zoom) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HIT_PADDING_PX`](modules/readmenator._config.py.md#config-forcegraph_hit_padding_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HUB_TOP_N`](modules/readmenator._config.py.md#config-forcegraph_hub_top_n) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HULL_FILL_ALPHA`](modules/readmenator._config.py.md#config-forcegraph_hull_fill_alpha) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HULL_PAD`](modules/readmenator._config.py.md#config-forcegraph_hull_pad) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HULL_STROKE_ALPHA`](modules/readmenator._config.py.md#config-forcegraph_hull_stroke_alpha) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_HULLS_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_hulls_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LABEL_HIGHLIGHT_MAX`](modules/readmenator._config.py.md#config-forcegraph_label_highlight_max) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LABEL_MAX_CHARS`](modules/readmenator._config.py.md#config-forcegraph_label_max_chars) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LABEL_TOP_N`](modules/readmenator._config.py.md#config-forcegraph_label_top_n) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LABEL_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_label_zoom) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LAYER_COLORS`](modules/readmenator._config.py.md#config-forcegraph_layer_colors) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LINK_DISTANCE`](modules/readmenator._config.py.md#config-forcegraph_link_distance) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_LINK_STRENGTH`](modules/readmenator._config.py.md#config-forcegraph_link_strength) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_MIN_HIT_PX`](modules/readmenator._config.py.md#config-forcegraph_min_hit_px) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_MODE`](modules/readmenator._config.py.md#config-forcegraph_mode) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_NODE_COLORS`](modules/readmenator._config.py.md#config-forcegraph_node_colors) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_NODE_REL_SIZE`](modules/readmenator._config.py.md#config-forcegraph_node_rel_size) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_OUTPUT`](modules/readmenator._config.py.md#config-forcegraph_output) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_PAGE_TEMPLATE`](modules/readmenator._forcegraph_page.py.md#forcegraph_page_template) constant in `readmenator._forcegraph_page`
+- [`FORCEGRAPH_PARTICLES_ON_HIGHLIGHT`](modules/readmenator._config.py.md#config-forcegraph_particles_on_highlight) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEARCH_RESULTS`](modules/readmenator._config.py.md#config-forcegraph_search_results) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEED_GRAVITY`](modules/readmenator._config.py.md#config-forcegraph_seed_gravity) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEED_ITERATIONS`](modules/readmenator._config.py.md#config-forcegraph_seed_iterations) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEED_LAYOUT`](modules/readmenator._config.py.md#config-forcegraph_seed_layout) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEED_MAX_NODES`](modules/readmenator._config.py.md#config-forcegraph_seed_max_nodes) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SEED_VELOCITY_DECAY`](modules/readmenator._config.py.md#config-forcegraph_seed_velocity_decay) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SIGNATURE_MAX_CHARS`](modules/readmenator._config.py.md#config-forcegraph_signature_max_chars) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_SYMBOLS_PER_NODE`](modules/readmenator._config.py.md#config-forcegraph_symbols_per_node) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_THUMB_HEIGHT`](modules/readmenator._config.py.md#config-forcegraph_thumb_height) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_THUMB_ITERATIONS`](modules/readmenator._config.py.md#config-forcegraph_thumb_iterations) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_THUMB_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_thumb_width) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TIP_DOC_CHARS`](modules/readmenator._config.py.md#config-forcegraph_tip_doc_chars) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_VENDOR_JS_2D`](modules/readmenator._config.py.md#config-forcegraph_vendor_js_2d) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_VENDOR_SUBDIR`](modules/readmenator._config.py.md#config-forcegraph_vendor_subdir) attribute of `Config` in `readmenator._config`
+- [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
+- [`freshness`](modules/readmenator._rank.py.md#rankeditem-freshness) attribute of `RankedItem` in `readmenator._rank`
+- [`from_dict`](modules/readmenator._graphrag.py.md#graphragindex-from_dict) classmethod of `GraphRagIndex` in `readmenator._graphrag`
+- [`function`](modules/readmenator._models.py.md#dataflowissue-function) attribute of `DataflowIssue` in `readmenator._models`
+
+<a id="g"></a>
+
+## G
+
+- [`GDScriptParser`](modules/readmenator.parsers._gdscript.py.md#gdscriptparser) class in `readmenator.parsers._gdscript`
+- [`generate`](modules/readmenator._agent_output.py.md#agentoutputgenerator-generate) method of `AgentOutputGenerator` in `readmenator._agent_output`
+- [`generate`](modules/readmenator._cpg.py.md#codepropertygraph-generate) method of `CodePropertyGraph` in `readmenator._cpg`
+- [`generate`](modules/readmenator._cursorrules_generator.py.md#cursorrulesgenerator-generate) method of `CursorRulesGenerator` in `readmenator._cursorrules_generator`
+- [`generate`](modules/readmenator._documentation.py.md#documentationgenerator-generate) method of `DocumentationGenerator` in `readmenator._documentation`
+- [`generate`](modules/readmenator._ollama.py.md#ollamaclient-generate) method of `OllamaClient` in `readmenator._ollama`
+- [`generate`](modules/readmenator._rule_gen.py.md#rulegenerator-generate) method of `RuleGenerator` in `readmenator._rule_gen`
+- [`generate`](modules/readmenator._wiki.py.md#wikigenerator-generate) method of `WikiGenerator` in `readmenator._wiki`
+- [`generate_code`](modules/readmenator._uml.py.md#umlgenerator-generate_code) method of `UmlGenerator` in `readmenator._uml`
+- [`generate_cursorrules`](modules/readmenator._app.py.md#readmenatorapplication-generate_cursorrules) method of `readmenatorApplication` in `readmenator._app`
+- [`generate_script`](modules/readmenator._refactorizer.py.md#monolithrefactorizer-generate_script) method of `MonolithRefactorizer` in `readmenator._refactorizer`
+- [`generate_uml_code`](modules/readmenator._app.py.md#readmenatorapplication-generate_uml_code) method of `readmenatorApplication` in `readmenator._app`
+- [`GENERATED_FILE_PREFIXES`](modules/readmenator._config.py.md#config-generated_file_prefixes) attribute of `Config` in `readmenator._config`
+- [`GENERATES`](modules/readmenator._category.py.md#edgekind-generates) attribute of `EdgeKind` in `readmenator._category`
+- [`generator`](modules/readmenator._pipeline.py.md#analyzerfactory-generator) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`gh_wiki`](modules/readmenator._pipeline.py.md#analyzerfactory-gh_wiki) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`GH_WIKI_AGENT_PREFIX`](modules/readmenator._config.py.md#config-gh_wiki_agent_prefix) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_COMMIT_MESSAGE`](modules/readmenator._config.py.md#config-gh_wiki_commit_message) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_DRY_RUN_DIR`](modules/readmenator._config.py.md#config-gh_wiki_dry_run_dir) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_ENABLED`](modules/readmenator._config.py.md#config-gh_wiki_enabled) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_GIT_REMOTE_NAME`](modules/readmenator._config.py.md#config-gh_wiki_git_remote_name) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_HOME_PAGE`](modules/readmenator._config.py.md#config-gh_wiki_home_page) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_INCLUDE_KB`](modules/readmenator._config.py.md#config-gh_wiki_include_kb) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_KB_PAGE`](modules/readmenator._config.py.md#config-gh_wiki_kb_page) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_PERMALINKS`](modules/readmenator._config.py.md#config-gh_wiki_permalinks) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_RECIPE_PREFIX`](modules/readmenator._config.py.md#config-gh_wiki_recipe_prefix) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_REMOTE`](modules/readmenator._config.py.md#config-gh_wiki_remote) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_STATE_FILE`](modules/readmenator._config.py.md#config-gh_wiki_state_file) attribute of `Config` in `readmenator._config`
+- [`GH_WIKI_TIMEOUT_S`](modules/readmenator._config.py.md#config-gh_wiki_timeout_s) attribute of `Config` in `readmenator._config`
+- [`git_user_email`](modules/readmenator_orchestrator.py.md#config-git_user_email) attribute of `Config` in `readmenator_orchestrator`
+- [`git_user_name`](modules/readmenator_orchestrator.py.md#config-git_user_name) attribute of `Config` in `readmenator_orchestrator`
+- [`github_user`](modules/readmenator_orchestrator.py.md#config-github_user) attribute of `Config` in `readmenator_orchestrator`
+- [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`
+- [`GitHubWikiPublisher`](modules/readmenator._gh_wiki.py.md#githubwikipublisher) class in `readmenator._gh_wiki`
+- [`GITIGNORE_AWARE`](modules/readmenator._config.py.md#config-gitignore_aware) attribute of `Config` in `readmenator._config`
+- [`glitch_fx`](modules/readmenator._video.py.md#glitch_fx) function in `readmenator._video`
+- [`global_pagerank`](modules/readmenator._rank.py.md#global_pagerank) function in `readmenator._rank`
+- [`global_search`](modules/readmenator._graphrag.py.md#graphragsearcher-global_search) method of `GraphRagSearcher` in `readmenator._graphrag`
+- [`GOD_NODE_TOP_N`](modules/readmenator._config.py.md#config-god_node_top_n) attribute of `Config` in `readmenator._config`
+- [`god_nodes`](modules/readmenator._models.py.md#analysisresult-god_nodes) attribute of `AnalysisResult` in `readmenator._models`
+- [`GoParser`](modules/readmenator.parsers._go.py.md#goparser) class in `readmenator.parsers._go`
+- [`graph_positions`](modules/readmenator._video.py.md#cinematicvideorenderer-graph_positions) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`GraphAnalyzer`](modules/readmenator._analyzer.py.md#graphanalyzer) class in `readmenator._analyzer`
+- [`GraphExporter`](modules/readmenator._exporter.py.md#graphexporter) class in `readmenator._exporter`
+- [`graphrag`](modules/readmenator._pipeline.py.md#analyzerfactory-graphrag) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`GRAPHRAG_BM25_B`](modules/readmenator._config.py.md#config-graphrag_bm25_b) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_BM25_K1`](modules/readmenator._config.py.md#config-graphrag_bm25_k1) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_CONTEXT_BUDGET_TOKENS`](modules/readmenator._config.py.md#config-graphrag_context_budget_tokens) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_DESCRIPTION_MAX_CHARS`](modules/readmenator._config.py.md#config-graphrag_description_max_chars) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_ENABLED`](modules/readmenator._config.py.md#config-graphrag_enabled) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_GLOBAL_HINTS`](modules/readmenator._config.py.md#config-graphrag_global_hints) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_GLOBAL_SECTION_SHARES`](modules/readmenator._config.py.md#config-graphrag_global_section_shares) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_GLOBAL_TOP_REPORTS`](modules/readmenator._config.py.md#config-graphrag_global_top_reports) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_INCLUDE_CONCEPTS`](modules/readmenator._config.py.md#config-graphrag_include_concepts) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_INCLUDE_EXTERNALS`](modules/readmenator._config.py.md#config-graphrag_include_externals) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_INCLUDE_SYMBOLS`](modules/readmenator._config.py.md#config-graphrag_include_symbols) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_LOCAL_SECTION_SHARES`](modules/readmenator._config.py.md#config-graphrag_local_section_shares) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_LOCAL_TOP_ENTITIES`](modules/readmenator._config.py.md#config-graphrag_local_top_entities) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_LOCAL_TOP_RELATIONS`](modules/readmenator._config.py.md#config-graphrag_local_top_relations) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_LOCAL_TOP_REPORTS`](modules/readmenator._config.py.md#config-graphrag_local_top_reports) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_LOCAL_TOP_TEXT_UNITS`](modules/readmenator._config.py.md#config-graphrag_local_top_text_units) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_MIN_TOKEN_LEN`](modules/readmenator._config.py.md#config-graphrag_min_token_len) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_OUTPUT_DIR`](modules/readmenator._config.py.md#config-graphrag_output_dir) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_PPR_ALPHA`](modules/readmenator._config.py.md#config-graphrag_ppr_alpha) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_PPR_MAX_ITER`](modules/readmenator._config.py.md#config-graphrag_ppr_max_iter) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_PPR_TOLERANCE`](modules/readmenator._config.py.md#config-graphrag_ppr_tolerance) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_RATING_CENTRALITY_WEIGHT`](modules/readmenator._config.py.md#config-graphrag_rating_centrality_weight) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_RATING_RISK_CAP`](modules/readmenator._config.py.md#config-graphrag_rating_risk_cap) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_RATING_RISK_WEIGHT`](modules/readmenator._config.py.md#config-graphrag_rating_risk_weight) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_REPORT_KEY_ENTITIES`](modules/readmenator._config.py.md#config-graphrag_report_key_entities) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_REPORT_KEY_RELATIONS`](modules/readmenator._config.py.md#config-graphrag_report_key_relations) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_REPORT_MAX_FINDINGS`](modules/readmenator._config.py.md#config-graphrag_report_max_findings) attribute of `Config` in `readmenator._config`
+- [`graphrag_search`](modules/readmenator._app.py.md#readmenatorapplication-graphrag_search) method of `readmenatorApplication` in `readmenator._app`
+- [`GRAPHRAG_SEED_TOP_K`](modules/readmenator._config.py.md#config-graphrag_seed_top_k) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_SEVERITY_WEIGHTS`](modules/readmenator._config.py.md#config-graphrag_severity_weights) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_STOPWORDS`](modules/readmenator._config.py.md#config-graphrag_stopwords) attribute of `Config` in `readmenator._config`
+- [`graphrag_store`](modules/readmenator._pipeline.py.md#analyzerfactory-graphrag_store) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`GRAPHRAG_TEXT_UNIT_MAX_CHARS`](modules/readmenator._config.py.md#config-graphrag_text_unit_max_chars) attribute of `Config` in `readmenator._config`
+- [`GRAPHRAG_TEXT_UNIT_MAX_LINES`](modules/readmenator._config.py.md#config-graphrag_text_unit_max_lines) attribute of `Config` in `readmenator._config`
+- [`GraphRagBuilder`](modules/readmenator._graphrag.py.md#graphragbuilder) class in `readmenator._graphrag`
+- [`GraphRagIndex`](modules/readmenator._graphrag.py.md#graphragindex) class in `readmenator._graphrag`
+- [`GraphRagSearcher`](modules/readmenator._graphrag.py.md#graphragsearcher) class in `readmenator._graphrag`
+- [`GraphRagStore`](modules/readmenator._graphrag.py.md#graphragstore) class in `readmenator._graphrag`
+- [`gravity`](modules/readmenator._graphlayout.py.md#forceatlas2settings-gravity) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`GREEN`](modules/readmenator._video.py.md#green) constant in `readmenator._video`
+- [`group`](modules/readmenator._diagrams.py.md#mapnode-group) attribute of `MapNode` in `readmenator._diagrams`
+- [`group_colors`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-group_colors) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`groups`](modules/readmenator._graphlayout.py.md#bundlelayout-groups) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`groups`](modules/readmenator._graphlayout.py.md#spherebundlelayout-groups) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+
+<a id="h"></a>
+
+## H
+
+- [`has_changed_since_last_analysis`](modules/readmenator._cache.py.md#filecache-has_changed_since_last_analysis) method of `FileCache` in `readmenator._cache`
+- [`has_entry`](modules/readmenator._flowcharts.py.md#component-has_entry) attribute of `Component` in `readmenator._flowcharts`
+- [`hash_color`](modules/readmenator._video.py.md#hash_color) function in `readmenator._video`
+- [`heading`](modules/readmenator._memory.py.md#declaredrule-heading) attribute of `DeclaredRule` in `readmenator._memory`
+- [`hierarchical_edge_bundling`](modules/readmenator._graphlayout.py.md#hierarchical_edge_bundling) function in `readmenator._graphlayout`
+- [`hits`](modules/readmenator._rank.py.md#hits) function in `readmenator._rank`
+- [`hops`](modules/readmenator._models.py.md#taintpath-hops) attribute of `TaintPath` in `readmenator._models`
+- [`HOTSPOT_CENTRALITY_WEIGHT`](modules/readmenator._config.py.md#config-hotspot_centrality_weight) attribute of `Config` in `readmenator._config`
+- [`HOTSPOT_COMPLEXITY_WEIGHT`](modules/readmenator._config.py.md#config-hotspot_complexity_weight) attribute of `Config` in `readmenator._config`
+- [`HotspotAnalyzer`](modules/readmenator._hotspots.py.md#hotspotanalyzer) class in `readmenator._hotspots`
+- [`HotspotResult`](modules/readmenator._models.py.md#hotspotresult) class in `readmenator._models`
+- [`hotspots`](modules/readmenator._models.py.md#analysisresultv2-hotspots) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`hotspots`](modules/readmenator._pipeline.py.md#analyzerfactory-hotspots) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`HOTSPOTS_ENABLED`](modules/readmenator._config.py.md#config-hotspots_enabled) attribute of `Config` in `readmenator._config`
+- [`href`](modules/readmenator._apidocs_render.py.md#apilinker-href) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`HTML_TEMPLATE_STYLE`](modules/readmenator._config.py.md#config-html_template_style) attribute of `Config` in `readmenator._config`
+- [`HUB_PENALTY_NAMES`](modules/readmenator._rank.py.md#hub_penalty_names) constant in `readmenator._rank`
+- [`hubs`](modules/readmenator._graphlayout.py.md#spherebundlelayout-hubs) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+- [`hud_panel`](modules/readmenator._video.py.md#hud_panel) function in `readmenator._video`
+
+<a id="i"></a>
+
+## I
+
+- [`identifier`](modules/readmenator._yaralite.py.md#yaralitehit-identifier) attribute of `YaraLiteHit` in `readmenator._yaralite`
+- [`identifier`](modules/readmenator._yaralite.py.md#yaralitestring-identifier) attribute of `YaraLiteString` in `readmenator._yaralite`
+- [`identify`](modules/readmenator._dead_code.py.md#deadcodestripper-identify) method of `DeadCodeStripper` in `readmenator._dead_code`
+- [`IdentityProjection`](modules/readmenator._projections.py.md#identityprojection) class in `readmenator._projections`
+- [`IGNORE_DIRS`](modules/readmenator._config.py.md#config-ignore_dirs) attribute of `Config` in `readmenator._config`
+- [`IMPLEMENTS`](modules/readmenator._category.py.md#edgekind-implements) attribute of `EdgeKind` in `readmenator._category`
+- [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
+- [`IMPORTS`](modules/readmenator._category.py.md#edgekind-imports) attribute of `EdgeKind` in `readmenator._category`
+- [`incoming`](modules/readmenator._category.py.md#category-incoming) method of `Category` in `readmenator._category`
+- [`inferred_raises`](modules/readmenator._apidocs.py.md#apientity-inferred_raises) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`INHERITS`](modules/readmenator._category.py.md#edgekind-inherits) attribute of `EdgeKind` in `readmenator._category`
+- [`__init__`](modules/readmenator._agent_injector.py.md#agentinjector-__init__) constructor of `AgentInjector` in `readmenator._agent_injector`
+- [`__init__`](modules/readmenator._agent_output.py.md#agentoutputgenerator-__init__) constructor of `AgentOutputGenerator` in `readmenator._agent_output`
+- [`__init__`](modules/readmenator._analytics.py.md#analyticsbuilder-__init__) constructor of `AnalyticsBuilder` in `readmenator._analytics`
+- [`__init__`](modules/readmenator._pipeline.py.md#analyzerfactory-__init__) constructor of `AnalyzerFactory` in `readmenator._pipeline`
+- [`__init__`](modules/readmenator._apidocs_render.py.md#apidocswriter-__init__) constructor of `ApiDocsWriter` in `readmenator._apidocs_render`
+- [`__init__`](modules/readmenator._apidocs_render.py.md#apilinker-__init__) constructor of `ApiLinker` in `readmenator._apidocs_render`
+- [`__init__`](modules/readmenator._apidocs_render.py.md#apimarkdownrenderer-__init__) constructor of `ApiMarkdownRenderer` in `readmenator._apidocs_render`
+- [`__init__`](modules/readmenator._apidocs.py.md#apireferencebuilder-__init__) constructor of `ApiReferenceBuilder` in `readmenator._apidocs`
+- [`__init__`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder-__init__) constructor of `ArchitectureDiagramBuilder` in `readmenator._flowcharts`
+- [`__init__`](modules/readmenator._linter.py.md#architecturelinter-__init__) constructor of `ArchitectureLinter` in `readmenator._linter`
+- [`__init__`](modules/readmenator._video.py.md#backdrop-__init__) constructor of `Backdrop` in `readmenator._video`
+- [`__init__`](modules/readmenator._graphrag.py.md#bm25index-__init__) constructor of `Bm25Index` in `readmenator._graphrag`
+- [`__init__`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-__init__) constructor of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`__init__`](modules/readmenator._category.py.md#category-__init__) constructor of `Category` in `readmenator._category`
+- [`__init__`](modules/readmenator._cpg.py.md#codepropertygraph-__init__) constructor of `CodePropertyGraph` in `readmenator._cpg`
+- [`__init__`](modules/readmenator._components.py.md#componentdiagrambuilder-__init__) constructor of `ComponentDiagramBuilder` in `readmenator._components`
+- [`__init__`](modules/readmenator._rank.py.md#compositeranker-__init__) constructor of `CompositeRanker` in `readmenator._rank`
+- [`__init__`](modules/readmenator._concepts.py.md#conceptextractor-__init__) constructor of `ConceptExtractor` in `readmenator._concepts`
+- [`__init__`](modules/readmenator._cursorrules_generator.py.md#cursorrulesgenerator-__init__) constructor of `CursorRulesGenerator` in `readmenator._cursorrules_generator`
+- [`__init__`](modules/readmenator._dataflow.py.md#dataflowanalyzer-__init__) constructor of `DataflowAnalyzer` in `readmenator._dataflow`
+- [`__init__`](modules/readmenator._dead_code.py.md#deadcodestripper-__init__) constructor of `DeadCodeStripper` in `readmenator._dead_code`
+- [`__init__`](modules/readmenator._pipeline.py.md#deepanalysisrunner-__init__) constructor of `DeepAnalysisRunner` in `readmenator._pipeline`
+- [`__init__`](modules/readmenator._watcher.py.md#directorywatcher-__init__) constructor of `DirectoryWatcher` in `readmenator._watcher`
+- [`__init__`](modules/readmenator._projections.py.md#docprojection-__init__) constructor of `DocProjection` in `readmenator._projections`
+- [`__init__`](modules/readmenator._diagrams.py.md#docssitepublisher-__init__) constructor of `DocsSitePublisher` in `readmenator._diagrams`
+- [`__init__`](modules/readmenator._documentation.py.md#documentationgenerator-__init__) constructor of `DocumentationGenerator` in `readmenator._documentation`
+- [`__init__`](modules/readmenator._embed.py.md#embedder-__init__) constructor of `Embedder` in `readmenator._embed`
+- [`__init__`](modules/readmenator._exclusions.py.md#exclusionlist-__init__) constructor of `ExclusionList` in `readmenator._exclusions`
+- [`__init__`](modules/readmenator._flowcharts.py.md#executionflowbuilder-__init__) constructor of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`__init__`](modules/readmenator._explorer.py.md#explorerstate-__init__) constructor of `ExplorerState` in `readmenator._explorer`
+- [`__init__`](modules/readmenator._cache.py.md#filecache-__init__) constructor of `FileCache` in `readmenator._cache`
+- [`__init__`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-__init__) constructor of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`__init__`](modules/readmenator_orchestrator.py.md#githubclient-__init__) constructor of `GitHubClient` in `readmenator_orchestrator`
+- [`__init__`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-__init__) constructor of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`__init__`](modules/readmenator._analyzer.py.md#graphanalyzer-__init__) constructor of `GraphAnalyzer` in `readmenator._analyzer`
+- [`__init__`](modules/readmenator._exporter.py.md#graphexporter-__init__) constructor of `GraphExporter` in `readmenator._exporter`
+- [`__init__`](modules/readmenator._graphrag.py.md#graphragbuilder-__init__) constructor of `GraphRagBuilder` in `readmenator._graphrag`
+- [`__init__`](modules/readmenator._graphrag.py.md#graphragsearcher-__init__) constructor of `GraphRagSearcher` in `readmenator._graphrag`
+- [`__init__`](modules/readmenator._graphrag.py.md#graphragstore-__init__) constructor of `GraphRagStore` in `readmenator._graphrag`
+- [`__init__`](modules/readmenator._hotspots.py.md#hotspotanalyzer-__init__) constructor of `HotspotAnalyzer` in `readmenator._hotspots`
+- [`__init__`](modules/readmenator._resolver.py.md#importresolver-__init__) constructor of `ImportResolver` in `readmenator._resolver`
+- [`__init__`](modules/readmenator._diagrams.py.md#interactivemaprenderer-__init__) constructor of `InteractiveMapRenderer` in `readmenator._diagrams`
+- [`__init__`](modules/readmenator.parsers._base.py.md#languageparser-__init__) constructor of `LanguageParser` in `readmenator.parsers._base`
+- [`__init__`](modules/readmenator._layer_rules.py.md#layerruleengine-__init__) constructor of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`__init__`](modules/readmenator._mcp_server.py.md#mcperror-__init__) constructor of `MCPError` in `readmenator._mcp_server`
+- [`__init__`](modules/readmenator._mcp_server.py.md#mcprequest-__init__) constructor of `MCPRequest` in `readmenator._mcp_server`
+- [`__init__`](modules/readmenator._mcp_server.py.md#mcpresource-__init__) constructor of `MCPResource` in `readmenator._mcp_server`
+- [`__init__`](modules/readmenator._mcp_server.py.md#mcpserver-__init__) constructor of `MCPServer` in `readmenator._mcp_server`
+- [`__init__`](modules/readmenator._mcp_server.py.md#mcptool-__init__) constructor of `MCPTool` in `readmenator._mcp_server`
+- [`__init__`](modules/readmenator._mermaid.py.md#mermaidrenderer-__init__) constructor of `MermaidRenderer` in `readmenator._mermaid`
+- [`__init__`](modules/readmenator._refactorizer.py.md#monolithrefactorizer-__init__) constructor of `MonolithRefactorizer` in `readmenator._refactorizer`
+- [`__init__`](modules/readmenator._ollama.py.md#ollamaclient-__init__) constructor of `OllamaClient` in `readmenator._ollama`
+- [`__init__`](modules/readmenator_orchestrator.py.md#orchestrator-__init__) constructor of `Orchestrator` in `readmenator_orchestrator`
+- [`__init__`](modules/readmenator._scanner.py.md#polyglotscanner-__init__) constructor of `PolyglotScanner` in `readmenator._scanner`
+- [`__init__`](modules/readmenator._memory.py.md#projectmemory-__init__) constructor of `ProjectMemory` in `readmenator._memory`
+- [`__init__`](modules/readmenator._provenance.py.md#provenanceauditor-__init__) constructor of `ProvenanceAuditor` in `readmenator._provenance`
+- [`__init__`](modules/readmenator._pytypes.py.md#pythonreceivertypes-__init__) constructor of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`__init__`](modules/readmenator._query.py.md#queryengine-__init__) constructor of `QueryEngine` in `readmenator._query`
+- [`__init__`](modules/readmenator._readme_injector.py.md#readmeinjector-__init__) constructor of `ReadmeInjector` in `readmenator._readme_injector`
+- [`__init__`](modules/readmenator_orchestrator.py.md#repositoryprocessor-__init__) constructor of `RepositoryProcessor` in `readmenator_orchestrator`
+- [`__init__`](modules/readmenator._projections.py.md#riskprojection-__init__) constructor of `RiskProjection` in `readmenator._projections`
+- [`__init__`](modules/readmenator._rule_gen.py.md#rulegenerator-__init__) constructor of `RuleGenerator` in `readmenator._rule_gen`
+- [`__init__`](modules/readmenator._sarif.py.md#sarifexporter-__init__) constructor of `SarifExporter` in `readmenator._sarif`
+- [`__init__`](modules/readmenator._scantext.py.md#scantextbuilder-__init__) constructor of `ScanTextBuilder` in `readmenator._scantext`
+- [`__init__`](modules/readmenator._security.py.md#securityanalyzer-__init__) constructor of `SecurityAnalyzer` in `readmenator._security`
+- [`__init__`](modules/readmenator._skill_installer.py.md#skillinstaller-__init__) constructor of `SkillInstaller` in `readmenator._skill_installer`
+- [`__init__`](modules/readmenator._sourceview.py.md#sourceviewbuilder-__init__) constructor of `SourceViewBuilder` in `readmenator._sourceview`
+- [`__init__`](modules/readmenator._symindex.py.md#symbolindex-__init__) constructor of `SymbolIndex` in `readmenator._symindex`
+- [`__init__`](modules/readmenator._diagrams.py.md#systemmapbuilder-__init__) constructor of `SystemMapBuilder` in `readmenator._diagrams`
+- [`__init__`](modules/readmenator._diagrams.py.md#systemmapvalidator-__init__) constructor of `SystemMapValidator` in `readmenator._diagrams`
+- [`__init__`](modules/readmenator._taint.py.md#taintanalyzer-__init__) constructor of `TaintAnalyzer` in `readmenator._taint`
+- [`__init__`](modules/readmenator._category.py.md#typedgraph-__init__) constructor of `TypedGraph` in `readmenator._category`
+- [`__init__`](modules/readmenator._uml.py.md#umlgenerator-__init__) constructor of `UmlGenerator` in `readmenator._uml`
+- [`__init__`](modules/readmenator._diagrams.py.md#visnetworkrenderer-__init__) constructor of `VisNetworkRenderer` in `readmenator._diagrams`
+- [`__init__`](modules/readmenator._wiki.py.md#wikigenerator-__init__) constructor of `WikiGenerator` in `readmenator._wiki`
+- [`__init__`](modules/readmenator._app.py.md#readmenatorapplication-__init__) constructor of `readmenatorApplication` in `readmenator._app`
+- [`inject`](modules/readmenator._agent_injector.py.md#agentinjector-inject) method of `AgentInjector` in `readmenator._agent_injector`
+- [`inject`](modules/readmenator._readme_injector.py.md#readmeinjector-inject) method of `ReadmeInjector` in `readmenator._readme_injector`
+- [`install`](modules/readmenator._skill_installer.py.md#skillinstaller-install) method of `SkillInstaller` in `readmenator._skill_installer`
+- [`install_skills`](modules/readmenator._app.py.md#readmenatorapplication-install_skills) method of `readmenatorApplication` in `readmenator._app`
+- [`InteractiveMapRenderer`](modules/readmenator._diagrams.py.md#interactivemaprenderer) class in `readmenator._diagrams`
+- [`INTERNAL_ERROR`](modules/readmenator._mcp_server.py.md#internal_error) constant in `readmenator._mcp_server`
+- [`interpolate_frames`](modules/readmenator._graphlayout.py.md#interpolate_frames) function in `readmenator._graphlayout`
+- [`INVALID_PARAMS`](modules/readmenator._mcp_server.py.md#invalid_params) constant in `readmenator._mcp_server`
+- [`is_documented`](modules/readmenator._apidocs.py.md#apientity-is_documented) property of `ApiEntity` in `readmenator._apidocs`
+- [`is_empty`](modules/readmenator._docstrings.py.md#doccomment-is_empty) property of `DocComment` in `readmenator._docstrings`
+- [`is_excluded`](modules/readmenator._exclusions.py.md#exclusionlist-is_excluded) method of `ExclusionList` in `readmenator._exclusions`
+- [`is_garbage_doc`](modules/readmenator._purpose.py.md#is_garbage_doc) function in `readmenator._purpose`
+- [`is_inferred_only`](modules/readmenator._provenance.py.md#provenancefinding-is_inferred_only) property of `ProvenanceFinding` in `readmenator._provenance`
+- [`is_notification`](modules/readmenator._mcp_server.py.md#mcprequest-is_notification) property of `MCPRequest` in `readmenator._mcp_server`
+- [`is_self_receiver`](modules/readmenator._pytypes.py.md#pythonreceivertypes-is_self_receiver) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`is_vendored_path`](modules/readmenator._apidocs.py.md#is_vendored_path) function in `readmenator._apidocs`
+- [`items`](modules/readmenator._rank.py.md#rankedresult-items) attribute of `RankedResult` in `readmenator._rank`
+- [`iterations`](modules/readmenator._graphlayout.py.md#forceatlas2settings-iterations) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+
+<a id="j"></a>
+
+## J
+
+- [`JavaParser`](modules/readmenator.parsers._java.py.md#javaparser) class in `readmenator.parsers._java`
+- [`JavaScriptParser`](modules/readmenator.parsers._javascript.py.md#javascriptparser) class in `readmenator.parsers._javascript`
+- [`justification_paths`](modules/readmenator._rank.py.md#rankeditem-justification_paths) attribute of `RankedItem` in `readmenator._rank`
+
+<a id="k"></a>
+
+## K
+
+- [`KB_HERO_ENABLED`](modules/readmenator._config.py.md#config-kb_hero_enabled) attribute of `Config` in `readmenator._config`
+- [`KB_MERMAID_THEME`](modules/readmenator._config.py.md#config-kb_mermaid_theme) attribute of `Config` in `readmenator._config`
+- [`KB_TITLE`](modules/readmenator._config.py.md#config-kb_title) attribute of `Config` in `readmenator._config`
+- [`key`](modules/readmenator._flowcharts.py.md#component-key) attribute of `Component` in `readmenator._flowcharts`
+- [`key`](modules/readmenator._flowcharts.py.md#entrypoint-key) property of `EntryPoint` in `readmenator._flowcharts`
+- [`key_entities`](modules/readmenator._graphrag.py.md#ragcommunity-key_entities) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`key_relations`](modules/readmenator._graphrag.py.md#ragcommunity-key_relations) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`kind`](modules/readmenator._apidocs.py.md#apientity-kind) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`kind`](modules/readmenator._apidocs.py.md#apiparam-kind) attribute of `ApiParam` in `readmenator._apidocs`
+- [`kind`](modules/readmenator._models.py.md#dataflowissue-kind) attribute of `DataflowIssue` in `readmenator._models`
+- [`kind`](modules/readmenator._models.py.md#edge-kind) attribute of `Edge` in `readmenator._models`
+- [`kind`](modules/readmenator._diagrams.py.md#mapdelta-kind) attribute of `MapDelta` in `readmenator._diagrams`
+- [`kind`](modules/readmenator._diagrams.py.md#mapedge-kind) attribute of `MapEdge` in `readmenator._diagrams`
+- [`kind`](modules/readmenator._memory.py.md#memorynote-kind) attribute of `MemoryNote` in `readmenator._memory`
+- [`kind`](modules/readmenator._category.py.md#morphism-kind) attribute of `Morphism` in `readmenator._category`
+- [`kind`](modules/readmenator._models.py.md#node-kind) attribute of `Node` in `readmenator._models`
+- [`kind`](modules/readmenator._graphrag.py.md#ragentity-kind) attribute of `RagEntity` in `readmenator._graphrag`
+- [`kind`](modules/readmenator._models.py.md#symbol-kind) attribute of `Symbol` in `readmenator._models`
+- [`kind`](modules/readmenator._symindex.py.md#symboldef-kind) attribute of `SymbolDef` in `readmenator._symindex`
+- [`kind`](modules/readmenator._diagrams.py.md#systemmap-kind) attribute of `SystemMap` in `readmenator._diagrams`
+- [`KIND_MODULE`](modules/readmenator._apidocs.py.md#kind_module) constant in `readmenator._apidocs`
+- [`KIND_TITLES`](modules/readmenator._apidocs_render.py.md#kind_titles) constant in `readmenator._apidocs_render`
+- [`KotlinParser`](modules/readmenator.parsers._kotlin.py.md#kotlinparser) class in `readmenator.parsers._kotlin`
+
+<a id="l"></a>
+
+## L
+
+- [`label`](modules/readmenator._models.py.md#communityresult-label) attribute of `CommunityResult` in `readmenator._models`
+- [`label`](modules/readmenator._flowcharts.py.md#component-label) attribute of `Component` in `readmenator._flowcharts`
+- [`label`](modules/readmenator._diagrams.py.md#mapedge-label) attribute of `MapEdge` in `readmenator._diagrams`
+- [`label`](modules/readmenator._diagrams.py.md#mapnode-label) attribute of `MapNode` in `readmenator._diagrams`
+- [`label`](modules/readmenator._models.py.md#node-label) attribute of `Node` in `readmenator._models`
+- [`label`](modules/readmenator._rank.py.md#rankeditem-label) property of `RankedItem` in `readmenator._rank`
+- [`language`](modules/readmenator._apidocs.py.md#apientity-language) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`language`](modules/readmenator._diagrams.py.md#mapnode-language) attribute of `MapNode` in `readmenator._diagrams`
+- [`language`](modules/readmenator._models.py.md#node-language) attribute of `Node` in `readmenator._models`
+- [`language`](modules/readmenator._sourceview.py.md#sourceentry-language) attribute of `SourceEntry` in `readmenator._sourceview`
+- [`language`](modules/readmenator._models.py.md#suggestedrule-language) attribute of `SuggestedRule` in `readmenator._models`
+- [`LanguageParser`](modules/readmenator.parsers._base.py.md#languageparser) class in `readmenator.parsers._base`
+- [`last_category`](modules/readmenator._pipeline.py.md#analyzerfactory-last_category) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`last_typed_graph`](modules/readmenator._pipeline.py.md#analyzerfactory-last_typed_graph) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`layer`](modules/readmenator._flowcharts.py.md#component-layer) attribute of `Component` in `readmenator._flowcharts`
+- [`LAYER_COLORS`](modules/readmenator._video.py.md#layer_colors) constant in `readmenator._video`
+- [`layer_detector`](modules/readmenator._pipeline.py.md#analyzerfactory-layer_detector) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`LAYER_ORDER`](modules/readmenator._flowcharts.py.md#layer_order) constant in `readmenator._flowcharts`
+- [`layer_rules`](modules/readmenator._pipeline.py.md#analyzerfactory-layer_rules) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`layer_summary`](modules/readmenator._layers.py.md#layerdetector-layer_summary) staticmethod of `LayerDetector` in `readmenator._layers`
+- [`LAYER_TITLES`](modules/readmenator._flowcharts.py.md#layer_titles) constant in `readmenator._flowcharts`
+- [`LAYER_VIOLATION_ENABLED`](modules/readmenator._config.py.md#config-layer_violation_enabled) attribute of `Config` in `readmenator._config`
+- [`LAYER_VIOLATION_STRICT_MODE`](modules/readmenator._config.py.md#config-layer_violation_strict_mode) attribute of `Config` in `readmenator._config`
+- [`layer_violations`](modules/readmenator._models.py.md#analysisresultv2-layer_violations) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`LayerDetector`](modules/readmenator._layers.py.md#layerdetector) class in `readmenator._layers`
+- [`LayerRuleEngine`](modules/readmenator._layer_rules.py.md#layerruleengine) class in `readmenator._layer_rules`
+- [`LayerViolation`](modules/readmenator._models.py.md#layerviolation) class in `readmenator._models`
+- [`leaves`](modules/readmenator._graphlayout.py.md#bundlelayout-leaves) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`leaves`](modules/readmenator._graphlayout.py.md#spherebundlelayout-leaves) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+- [`length`](modules/readmenator._models.py.md#dependencycycle-length) attribute of `DependencyCycle` in `readmenator._models`
+- [`level`](modules/readmenator._graphrag.py.md#ragcommunity-level) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`line`](modules/readmenator._apidocs.py.md#apientity-line) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`line`](modules/readmenator._symindex.py.md#callsite-line) attribute of `CallSite` in `readmenator._symindex`
+- [`line`](modules/readmenator._models.py.md#dataflowissue-line) attribute of `DataflowIssue` in `readmenator._models`
+- [`line`](modules/readmenator._apidocs.py.md#docwarning-line) attribute of `DocWarning` in `readmenator._apidocs`
+- [`line`](modules/readmenator._flowcharts.py.md#entrypoint-line) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`line`](modules/readmenator._flowcharts.py.md#flowstep-line) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`line`](modules/readmenator._graphrag.py.md#ragentity-line) attribute of `RagEntity` in `readmenator._graphrag`
+- [`line`](modules/readmenator._models.py.md#securityfinding-line) attribute of `SecurityFinding` in `readmenator._models`
+- [`line`](modules/readmenator._models.py.md#symbol-line) attribute of `Symbol` in `readmenator._models`
+- [`line`](modules/readmenator._symindex.py.md#symboldef-line) attribute of `SymbolDef` in `readmenator._symindex`
+- [`lineage`](modules/readmenator._pytypes.py.md#pythonreceivertypes-lineage) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`lines`](modules/readmenator._sourceview.py.md#sourceentry-lines) attribute of `SourceEntry` in `readmenator._sourceview`
+- [`link`](modules/readmenator._apidocs_render.py.md#apilinker-link) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`link_uid`](modules/readmenator._apidocs_render.py.md#apilinker-link_uid) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`linlog`](modules/readmenator._graphlayout.py.md#forceatlas2settings-linlog) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`lint`](modules/readmenator._linter.py.md#architecturelinter-lint) method of `ArchitectureLinter` in `readmenator._linter`
+- [`lint`](modules/readmenator._wiki.py.md#wikigenerator-lint) method of `WikiGenerator` in `readmenator._wiki`
+- [`lint`](modules/readmenator._app.py.md#readmenatorapplication-lint) method of `readmenatorApplication` in `readmenator._app`
+- [`lint_wiki`](modules/readmenator._app.py.md#readmenatorapplication-lint_wiki) method of `readmenatorApplication` in `readmenator._app`
+- [`LINTER_CROSS_LAYER_VIOLATIONS`](modules/readmenator._config.py.md#config-linter_cross_layer_violations) attribute of `Config` in `readmenator._config`
+- [`LINTER_ENABLED`](modules/readmenator._config.py.md#config-linter_enabled) attribute of `Config` in `readmenator._config`
+- [`LINTER_MAX_LINES`](modules/readmenator._config.py.md#config-linter_max_lines) attribute of `Config` in `readmenator._config`
+- [`LINTER_UNRESOLVED_CALLS`](modules/readmenator._config.py.md#config-linter_unresolved_calls) attribute of `Config` in `readmenator._config`
+- [`LinterViolation`](modules/readmenator._models.py.md#linterviolation) class in `readmenator._models`
+- [`list_repos`](modules/readmenator_orchestrator.py.md#githubclient-list_repos) method of `GitHubClient` in `readmenator_orchestrator`
+- [`load`](modules/readmenator._exclusions.py.md#exclusionlist-load) method of `ExclusionList` in `readmenator._exclusions`
+- [`load`](modules/readmenator._cache.py.md#filecache-load) method of `FileCache` in `readmenator._cache`
+- [`load`](modules/readmenator._graphrag.py.md#graphragstore-load) method of `GraphRagStore` in `readmenator._graphrag`
+- [`load_analysis`](modules/readmenator._cache.py.md#filecache-load_analysis) method of `FileCache` in `readmenator._cache`
+- [`local_search`](modules/readmenator._graphrag.py.md#graphragsearcher-local_search) method of `GraphRagSearcher` in `readmenator._graphrag`
+- [`LuaParser`](modules/readmenator.parsers._lua.py.md#luaparser) class in `readmenator.parsers._lua`
+
+<a id="m"></a>
+
+## M
+
+- [`MAGENTA`](modules/readmenator._video.py.md#magenta) constant in `readmenator._video`
+- [`main`](modules/readmenator.__main__.py.md#main) function in `readmenator.__main__`
+- [`main`](modules/readmenator._mcp_server.py.md#main) function in `readmenator._mcp_server`
+- [`main`](modules/readmenator_orchestrator.py.md#main) function in `readmenator_orchestrator`
+- [`make_ranker`](modules/readmenator._pipeline.py.md#analyzerfactory-make_ranker) method of `AnalyzerFactory` in `readmenator._pipeline`
+- [`map_morphism`](modules/readmenator._projections.py.md#docprojection-map_morphism) method of `DocProjection` in `readmenator._projections`
+- [`map_morphism`](modules/readmenator._projections.py.md#identityprojection-map_morphism) method of `IdentityProjection` in `readmenator._projections`
+- [`map_morphism`](modules/readmenator._projections.py.md#projection-map_morphism) method of `Projection` in `readmenator._projections`
+- [`map_morphism`](modules/readmenator._projections.py.md#riskprojection-map_morphism) method of `RiskProjection` in `readmenator._projections`
+- [`map_node`](modules/readmenator._projections.py.md#docprojection-map_node) method of `DocProjection` in `readmenator._projections`
+- [`map_node`](modules/readmenator._projections.py.md#identityprojection-map_node) method of `IdentityProjection` in `readmenator._projections`
+- [`map_node`](modules/readmenator._projections.py.md#projection-map_node) method of `Projection` in `readmenator._projections`
+- [`map_node`](modules/readmenator._projections.py.md#riskprojection-map_node) method of `RiskProjection` in `readmenator._projections`
+- [`MapDelta`](modules/readmenator._diagrams.py.md#mapdelta) class in `readmenator._diagrams`
+- [`MapDiagnostic`](modules/readmenator._diagrams.py.md#mapdiagnostic) class in `readmenator._diagrams`
+- [`MapEdge`](modules/readmenator._diagrams.py.md#mapedge) class in `readmenator._diagrams`
+- [`MapNode`](modules/readmenator._diagrams.py.md#mapnode) class in `readmenator._diagrams`
+- [`MapReceipt`](modules/readmenator._diagrams.py.md#mapreceipt) class in `readmenator._diagrams`
+- [`MapView`](modules/readmenator._diagrams.py.md#mapview) class in `readmenator._diagrams`
+- [`markdown`](modules/readmenator._graphrag.py.md#ragcontext-markdown) attribute of `RagContext` in `readmenator._graphrag`
+- [`match_count`](modules/readmenator._models.py.md#suggestedrule-match_count) attribute of `SuggestedRule` in `readmenator._models`
+- [`matched_strings`](modules/readmenator._yaralite.py.md#yaralitematch-matched_strings) attribute of `YaraLiteMatch` in `readmenator._yaralite`
+- [`matches`](modules/readmenator._exclusions.py.md#exclusionentry-matches) method of `ExclusionEntry` in `readmenator._exclusions`
+- [`MAX_DIRECTORY_DEPTH`](modules/readmenator._config.py.md#config-max_directory_depth) attribute of `Config` in `readmenator._config`
+- [`MAX_FILE_SIZE_MB`](modules/readmenator._config.py.md#config-max_file_size_mb) attribute of `Config` in `readmenator._config`
+- [`max_iter`](modules/readmenator._rank.py.md#rankconfig-max_iter) attribute of `RankConfig` in `readmenator._rank`
+- [`max_repos`](modules/readmenator_orchestrator.py.md#config-max_repos) attribute of `Config` in `readmenator_orchestrator`
+- [`maybe_install_on_run`](modules/readmenator._skill_installer.py.md#skillinstaller-maybe_install_on_run) method of `SkillInstaller` in `readmenator._skill_installer`
+- [`MCPError`](modules/readmenator._mcp_server.py.md#mcperror) exception in `readmenator._mcp_server`
+- [`MCPRequest`](modules/readmenator._mcp_server.py.md#mcprequest) class in `readmenator._mcp_server`
+- [`MCPResource`](modules/readmenator._mcp_server.py.md#mcpresource) class in `readmenator._mcp_server`
+- [`MCPServer`](modules/readmenator._mcp_server.py.md#mcpserver) class in `readmenator._mcp_server`
+- [`MCPTool`](modules/readmenator._mcp_server.py.md#mcptool) class in `readmenator._mcp_server`
+- [`members`](modules/readmenator._apidocs.py.md#apientity-members) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`memory`](modules/readmenator._pipeline.py.md#analyzerfactory-memory) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`memory`](modules/readmenator._app.py.md#readmenatorapplication-memory) method of `readmenatorApplication` in `readmenator._app`
+- [`MEMORY_CONSTRAINT_KEYWORDS`](modules/readmenator._config.py.md#config-memory_constraint_keywords) attribute of `Config` in `readmenator._config`
+- [`MEMORY_DELIVERABLE_KEYWORDS`](modules/readmenator._config.py.md#config-memory_deliverable_keywords) attribute of `Config` in `readmenator._config`
+- [`MEMORY_ENABLED`](modules/readmenator._config.py.md#config-memory_enabled) attribute of `Config` in `readmenator._config`
+- [`MEMORY_FILENAME`](modules/readmenator._config.py.md#config-memory_filename) attribute of `Config` in `readmenator._config`
+- [`MEMORY_HEADING_EXCLUDE`](modules/readmenator._config.py.md#config-memory_heading_exclude) attribute of `Config` in `readmenator._config`
+- [`MEMORY_MAX_COMMANDS`](modules/readmenator._config.py.md#config-memory_max_commands) attribute of `Config` in `readmenator._config`
+- [`MEMORY_MAX_RULES_PER_CATEGORY`](modules/readmenator._config.py.md#config-memory_max_rules_per_category) attribute of `Config` in `readmenator._config`
+- [`MEMORY_MAX_RULES_PER_FILE`](modules/readmenator._config.py.md#config-memory_max_rules_per_file) attribute of `Config` in `readmenator._config`
+- [`MEMORY_MIN_RULE_CHARS`](modules/readmenator._config.py.md#config-memory_min_rule_chars) attribute of `Config` in `readmenator._config`
+- [`MEMORY_NOTE_KINDS`](modules/readmenator._config.py.md#config-memory_note_kinds) attribute of `Config` in `readmenator._config`
+- [`MEMORY_NOTE_MAX_CHARS`](modules/readmenator._config.py.md#config-memory_note_max_chars) attribute of `Config` in `readmenator._config`
+- [`memory_only_patterns`](modules/readmenator._provenance.py.md#provenancefinding-memory_only_patterns) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`MEMORY_RISKS_TOP_N`](modules/readmenator._config.py.md#config-memory_risks_top_n) attribute of `Config` in `readmenator._config`
+- [`MEMORY_RULE_SOURCES`](modules/readmenator._config.py.md#config-memory_rule_sources) attribute of `Config` in `readmenator._config`
+- [`MEMORY_STYLE_KEYWORDS`](modules/readmenator._config.py.md#config-memory_style_keywords) attribute of `Config` in `readmenator._config`
+- [`MEMORY_STYLE_LANGUAGES`](modules/readmenator._config.py.md#config-memory_style_languages) attribute of `Config` in `readmenator._config`
+- [`MEMORY_SUBSYSTEMS_TOP_N`](modules/readmenator._config.py.md#config-memory_subsystems_top_n) attribute of `Config` in `readmenator._config`
+- [`MEMORY_VOCABULARY_STOPWORDS`](modules/readmenator._config.py.md#config-memory_vocabulary_stopwords) attribute of `Config` in `readmenator._config`
+- [`MEMORY_VOCABULARY_TOP_N`](modules/readmenator._config.py.md#config-memory_vocabulary_top_n) attribute of `Config` in `readmenator._config`
+- [`MemoryNote`](modules/readmenator._memory.py.md#memorynote) class in `readmenator._memory`
+- [`mention_count`](modules/readmenator._models.py.md#conceptnode-mention_count) attribute of `ConceptNode` in `readmenator._models`
+- [`MERMAID_CLASS_STYLE`](modules/readmenator._config.py.md#config-mermaid_class_style) attribute of `Config` in `readmenator._config`
+- [`MERMAID_EXTERNAL_STYLE`](modules/readmenator._config.py.md#config-mermaid_external_style) attribute of `Config` in `readmenator._config`
+- [`MERMAID_FUNCTION_STYLE`](modules/readmenator._config.py.md#config-mermaid_function_style) attribute of `Config` in `readmenator._config`
+- [`mermaid_id`](modules/readmenator._flowcharts.py.md#mermaid_id) function in `readmenator._flowcharts`
+- [`MERMAID_INTERNAL_EDGE_STYLE`](modules/readmenator._config.py.md#config-mermaid_internal_edge_style) attribute of `Config` in `readmenator._config`
+- [`mermaid_lr`](modules/readmenator._components.py.md#componentdiagrambuilder-mermaid_lr) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`MERMAID_MAX_EDGES`](modules/readmenator._config.py.md#config-mermaid_max_edges) attribute of `Config` in `readmenator._config`
+- [`MERMAID_MAX_INTERNAL_EDGES`](modules/readmenator._config.py.md#config-mermaid_max_internal_edges) attribute of `Config` in `readmenator._config`
+- [`MERMAID_MAX_NODES`](modules/readmenator._config.py.md#config-mermaid_max_nodes) attribute of `Config` in `readmenator._config`
+- [`MERMAID_MAX_SYMBOLS_PER_FILE`](modules/readmenator._config.py.md#config-mermaid_max_symbols_per_file) attribute of `Config` in `readmenator._config`
+- [`MERMAID_MODULE_STYLE`](modules/readmenator._config.py.md#config-mermaid_module_style) attribute of `Config` in `readmenator._config`
+- [`mermaid_text`](modules/readmenator._flowcharts.py.md#mermaid_text) function in `readmenator._flowcharts`
+- [`MermaidRenderer`](modules/readmenator._mermaid.py.md#mermaidrenderer) class in `readmenator._mermaid`
+- [`message`](modules/readmenator._apidocs.py.md#docwarning-message) attribute of `DocWarning` in `readmenator._apidocs`
+- [`message`](modules/readmenator._models.py.md#linterviolation-message) attribute of `LinterViolation` in `readmenator._models`
+- [`message`](modules/readmenator._gh_wiki.py.md#wikipublishresult-message) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`meta`](modules/readmenator._apidocs.py.md#apireference-meta) attribute of `ApiReference` in `readmenator._apidocs`
+- [`meta`](modules/readmenator._graphrag.py.md#graphragindex-meta) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`meta`](modules/readmenator._diagrams.py.md#systemmap-meta) attribute of `SystemMap` in `readmenator._diagrams`
+- [`meta`](modules/readmenator._yaralite.py.md#yaraliterule-meta) attribute of `YaraLiteRule` in `readmenator._yaralite`
+- [`META_RE`](modules/readmenator._yaralite.py.md#meta_re) constant in `readmenator._yaralite`
+- [`METHOD_NOT_FOUND`](modules/readmenator._mcp_server.py.md#method_not_found) constant in `readmenator._mcp_server`
+- [`methods_index`](modules/readmenator._symindex.py.md#symbolindex-methods_index) method of `SymbolIndex` in `readmenator._symindex`
+- [`mitre_attack`](modules/readmenator._models.py.md#securityfinding-mitre_attack) attribute of `SecurityFinding` in `readmenator._models`
+- [`mitre_attack`](modules/readmenator._security.py.md#securityrule-mitre_attack) attribute of `SecurityRule` in `readmenator._security`
+- [`mix`](modules/readmenator._video.py.md#mix) function in `readmenator._video`
+- [`mode`](modules/readmenator._graphrag.py.md#ragcontext-mode) attribute of `RagContext` in `readmenator._graphrag`
+- [`mode_color`](modules/readmenator._video.py.md#mode_color) function in `readmenator._video`
+- [`model_version`](modules/readmenator._rank.py.md#rankedresult-model_version) attribute of `RankedResult` in `readmenator._rank`
+- [`modifiers`](modules/readmenator._apidocs.py.md#apientity-modifiers) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`module_display_name`](modules/readmenator._apidocs_render.py.md#module_display_name) function in `readmenator._apidocs_render`
+- [`module_of`](modules/readmenator._apidocs_render.py.md#apilinker-module_of) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`modules`](modules/readmenator._apidocs.py.md#apireference-modules) attribute of `ApiReference` in `readmenator._apidocs`
+- [`MonolithRefactorizer`](modules/readmenator._refactorizer.py.md#monolithrefactorizer) class in `readmenator._refactorizer`
+- [`Morphism`](modules/readmenator._category.py.md#morphism) class in `readmenator._category`
+- [`morphisms`](modules/readmenator._category.py.md#category-morphisms) property of `Category` in `readmenator._category`
+- [`moved`](modules/readmenator._diagrams.py.md#mapdelta-moved) attribute of `MapDelta` in `readmenator._diagrams`
+
+<a id="n"></a>
+
+## N
+
+- [`name`](modules/readmenator._apidocs.py.md#apientity-name) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`name`](modules/readmenator._apidocs.py.md#apiparam-name) attribute of `ApiParam` in `readmenator._apidocs`
+- [`name`](modules/readmenator._models.py.md#conceptnode-name) attribute of `ConceptNode` in `readmenator._models`
+- [`name`](modules/readmenator._docstrings.py.md#docfield-name) attribute of `DocField` in `readmenator._docstrings`
+- [`name`](modules/readmenator._flowcharts.py.md#entrypoint-name) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`name`](modules/readmenator._graphrag.py.md#ragentity-name) attribute of `RagEntity` in `readmenator._graphrag`
+- [`name`](modules/readmenator._models.py.md#symbol-name) attribute of `Symbol` in `readmenator._models`
+- [`name`](modules/readmenator._symindex.py.md#symboldef-name) attribute of `SymbolDef` in `readmenator._symindex`
+- [`name`](modules/readmenator._yaralite.py.md#yaraliterule-name) attribute of `YaraLiteRule` in `readmenator._yaralite`
+- [`NAMING_PATTERNS`](modules/readmenator._rule_gen.py.md#rulegenerator-naming_patterns) attribute of `RuleGenerator` in `readmenator._rule_gen`
+- [`near`](modules/readmenator._app.py.md#readmenatorapplication-near) method of `readmenatorApplication` in `readmenator._app`
+- [`near_jaccard`](modules/readmenator._embed.py.md#embedder-near_jaccard) method of `Embedder` in `readmenator._embed`
+- [`NimParser`](modules/readmenator.parsers._nim.py.md#nimparser) class in `readmenator.parsers._nim`
+- [`nocase`](modules/readmenator._yaralite.py.md#yaralitestring-nocase) attribute of `YaraLiteString` in `readmenator._yaralite`
+- [`Node`](modules/readmenator._models.py.md#node) class in `readmenator._models`
+- [`node_count`](modules/readmenator._models.py.md#analysisresult-node_count) attribute of `AnalysisResult` in `readmenator._models`
+- [`node_id`](modules/readmenator._diagrams.py.md#mapnode-node_id) attribute of `MapNode` in `readmenator._diagrams`
+- [`node_id`](modules/readmenator._models.py.md#node-node_id) attribute of `Node` in `readmenator._models`
+- [`node_id`](modules/readmenator._rank.py.md#rankeditem-node_id) attribute of `RankedItem` in `readmenator._rank`
+- [`node_index`](modules/readmenator._category.py.md#typedgraph-node_index) method of `TypedGraph` in `readmenator._category`
+- [`node_palette`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-node_palette) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`node_value`](modules/readmenator._forcegraph.py.md#node_value) function in `readmenator._forcegraph`
+- [`nodes`](modules/readmenator._diagrams.py.md#systemmap-nodes) attribute of `SystemMap` in `readmenator._diagrams`
+- [`nodes`](modules/readmenator._category.py.md#typedgraph-nodes) property of `TypedGraph` in `readmenator._category`
+- [`noise_penalty`](modules/readmenator._rank.py.md#rankconfig-noise_penalty) attribute of `RankConfig` in `readmenator._rank`
+- [`normalize_cloud`](modules/readmenator._graphlayout.py.md#normalize_cloud) function in `readmenator._graphlayout`
+- [`notes`](modules/readmenator._docstrings.py.md#doccomment-notes) attribute of `DocComment` in `readmenator._docstrings`
+- [`notes`](modules/readmenator._memory.py.md#projectmemory-notes) method of `ProjectMemory` in `readmenator._memory`
+- [`NOTES_BEGIN`](modules/readmenator._memory.py.md#notes_begin) constant in `readmenator._memory`
+- [`NOTES_END`](modules/readmenator._memory.py.md#notes_end) constant in `readmenator._memory`
+
+<a id="o"></a>
+
+## O
+
+- [`objects`](modules/readmenator._category.py.md#category-objects) property of `Category` in `readmenator._category`
+- [`offset`](modules/readmenator._yaralite.py.md#yaralitehit-offset) attribute of `YaraLiteHit` in `readmenator._yaralite`
+- [`ollama`](modules/readmenator._pipeline.py.md#analyzerfactory-ollama) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`OLLAMA_ENABLED`](modules/readmenator._config.py.md#config-ollama_enabled) attribute of `Config` in `readmenator._config`
+- [`OLLAMA_HOST`](modules/readmenator._config.py.md#config-ollama_host) attribute of `Config` in `readmenator._config`
+- [`OLLAMA_MAX_CHARS`](modules/readmenator._config.py.md#config-ollama_max_chars) attribute of `Config` in `readmenator._config`
+- [`OLLAMA_MAX_PROMPT_CHARS`](modules/readmenator._config.py.md#config-ollama_max_prompt_chars) attribute of `Config` in `readmenator._config`
+- [`OLLAMA_MODEL`](modules/readmenator._config.py.md#config-ollama_model) attribute of `Config` in `readmenator._config`
+- [`OLLAMA_TIMEOUT_S`](modules/readmenator._config.py.md#config-ollama_timeout_s) attribute of `Config` in `readmenator._config`
+- [`OllamaClient`](modules/readmenator._ollama.py.md#ollamaclient) class in `readmenator._ollama`
+- [`optimize_bundle_order`](modules/readmenator._graphlayout.py.md#optimize_bundle_order) function in `readmenator._graphlayout`
+- [`ORANGE`](modules/readmenator._video.py.md#orange) constant in `readmenator._video`
+- [`orbit_positions`](modules/readmenator._video.py.md#cinematicvideorenderer-orbit_positions) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`orbit_stops`](modules/readmenator._video.py.md#cinematicvideorenderer-orbit_stops) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`Orchestrator`](modules/readmenator_orchestrator.py.md#orchestrator) class in `readmenator_orchestrator`
+- [`ordered_groups`](modules/readmenator._video.py.md#cinematicvideorenderer-ordered_groups) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`outgoing`](modules/readmenator._category.py.md#category-outgoing) method of `Category` in `readmenator._category`
+- [`output_dir`](modules/readmenator._gh_wiki.py.md#wikipublishresult-output_dir) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`OUTPUT_FILENAME`](modules/readmenator._config.py.md#config-output_filename) attribute of `Config` in `readmenator._config`
+- [`output_filename`](modules/readmenator_orchestrator.py.md#config-output_filename) attribute of `Config` in `readmenator_orchestrator`
+- [`overview_markdown`](modules/readmenator._components.py.md#componentdiagrambuilder-overview_markdown) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`owner_of`](modules/readmenator._pytypes.py.md#pythonreceivertypes-owner_of) method of `PythonReceiverTypes` in `readmenator._pytypes`
+
+<a id="p"></a>
+
+## P
+
+- [`page_name`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-page_name) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`page_settings`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-page_settings) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`page_settings`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-page_settings) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`page_slug`](modules/readmenator._apidocs_render.py.md#page_slug) function in `readmenator._apidocs_render`
+- [`pages`](modules/readmenator._gh_wiki.py.md#wikipublishresult-pages) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`PANEL_FILL`](modules/readmenator._video.py.md#panel_fill) constant in `readmenator._video`
+- [`PANEL_HEAD`](modules/readmenator._video.py.md#panel_head) constant in `readmenator._video`
+- [`param`](modules/readmenator._docstrings.py.md#doccomment-param) method of `DocComment` in `readmenator._docstrings`
+- [`params`](modules/readmenator._apidocs.py.md#apientity-params) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`params`](modules/readmenator._docstrings.py.md#doccomment-params) attribute of `DocComment` in `readmenator._docstrings`
+- [`parent`](modules/readmenator._apidocs.py.md#apientity-parent) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`parent`](modules/readmenator._graphrag.py.md#ragcommunity-parent) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`parse`](modules/readmenator.parsers._base.py.md#languageparser-parse) method of `LanguageParser` in `readmenator.parsers._base`
+- [`parse_arguments`](modules/readmenator_orchestrator.py.md#parse_arguments) function in `readmenator_orchestrator`
+- [`parse_docstring`](modules/readmenator._docstrings.py.md#parse_docstring) function in `readmenator._docstrings`
+- [`parse_exclusions`](modules/readmenator._exclusions.py.md#parse_exclusions) function in `readmenator._exclusions`
+- [`parse_signature_params`](modules/readmenator._apidocs.py.md#parse_signature_params) function in `readmenator._apidocs`
+- [`parse_yaralite_rules`](modules/readmenator._yaralite.py.md#parse_yaralite_rules) function in `readmenator._yaralite`
+- [`partition`](modules/readmenator._analyzer.py.md#graphanalyzer-partition) method of `GraphAnalyzer` in `readmenator._analyzer`
+- [`passed`](modules/readmenator._diagrams.py.md#mapreceipt-passed) attribute of `MapReceipt` in `readmenator._diagrams`
+- [`path`](modules/readmenator._memory.py.md#projectmemory-path) method of `ProjectMemory` in `readmenator._memory`
+- [`path`](modules/readmenator._models.py.md#taintpath-path) attribute of `TaintPath` in `readmenator._models`
+- [`paths`](modules/readmenator._category.py.md#category-paths) method of `Category` in `readmenator._category`
+- [`paths`](modules/readmenator._models.py.md#taintanalysisresult-paths) attribute of `TaintAnalysisResult` in `readmenator._models`
+- [`pattern`](modules/readmenator._exclusions.py.md#exclusionentry-pattern) attribute of `ExclusionEntry` in `readmenator._exclusions`
+- [`pattern`](modules/readmenator._security.py.md#securityrule-pattern) attribute of `SecurityRule` in `readmenator._security`
+- [`pattern`](modules/readmenator._models.py.md#suggestedrule-pattern) attribute of `SuggestedRule` in `readmenator._models`
+- [`pattern`](modules/readmenator._yaralite.py.md#yaralitehit-pattern) attribute of `YaraLiteHit` in `readmenator._yaralite`
+- [`pattern`](modules/readmenator._yaralite.py.md#yaralitestring-pattern) attribute of `YaraLiteString` in `readmenator._yaralite`
+- [`personalized_pagerank`](modules/readmenator._rank.py.md#personalized_pagerank) function in `readmenator._rank`
+- [`PHPParser`](modules/readmenator.parsers._php.py.md#phpparser) class in `readmenator.parsers._php`
+- [`pluralize_symbol_kind`](modules/readmenator._models.py.md#pluralize_symbol_kind) function in `readmenator._models`
+- [`PolyglotScanner`](modules/readmenator._scanner.py.md#polyglotscanner) class in `readmenator._scanner`
+- [`post`](modules/readmenator._video.py.md#post) function in `readmenator._video`
+- [`ppr_score`](modules/readmenator._rank.py.md#rankeditem-ppr_score) attribute of `RankedItem` in `readmenator._rank`
+- [`pr_body_template`](modules/readmenator_orchestrator.py.md#config-pr_body_template) attribute of `Config` in `readmenator_orchestrator`
+- [`pr_title`](modules/readmenator_orchestrator.py.md#config-pr_title) attribute of `Config` in `readmenator_orchestrator`
+- [`PRIVACY_MODE`](modules/readmenator._config.py.md#config-privacy_mode) attribute of `Config` in `readmenator._config`
+- [`process`](modules/readmenator_orchestrator.py.md#repositoryprocessor-process) method of `RepositoryProcessor` in `readmenator_orchestrator`
+- [`PROGRESS_REPORT_BATCH`](modules/readmenator._config.py.md#config-progress_report_batch) attribute of `Config` in `readmenator._config`
+- [`project3d`](modules/readmenator._video.py.md#project3d) function in `readmenator._video`
+- [`project_jaccard`](modules/readmenator._embed.py.md#embedder-project_jaccard) method of `Embedder` in `readmenator._embed`
+- [`Projection`](modules/readmenator._projections.py.md#projection) protocol in `readmenator._projections`
+- [`ProjectMemory`](modules/readmenator._memory.py.md#projectmemory) class in `readmenator._memory`
+- [`provenance`](modules/readmenator._pipeline.py.md#analyzerfactory-provenance) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`provenance`](modules/readmenator._provenance.py.md#provenancefinding-provenance) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`PROVENANCE_ENABLED`](modules/readmenator._config.py.md#config-provenance_enabled) attribute of `Config` in `readmenator._config`
+- [`ProvenanceAuditor`](modules/readmenator._provenance.py.md#provenanceauditor) class in `readmenator._provenance`
+- [`ProvenanceFinding`](modules/readmenator._provenance.py.md#provenancefinding) class in `readmenator._provenance`
+- [`prune_deleted`](modules/readmenator._cache.py.md#filecache-prune_deleted) method of `FileCache` in `readmenator._cache`
+- [`publish`](modules/readmenator._diagrams.py.md#docssitepublisher-publish) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`publish`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-publish) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`publish_assets`](modules/readmenator._diagrams.py.md#docssitepublisher-publish_assets) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`publish_github_wiki`](modules/readmenator._app.py.md#readmenatorapplication-publish_github_wiki) method of `readmenatorApplication` in `readmenator._app`
+- [`pushed`](modules/readmenator._gh_wiki.py.md#wikipublishresult-pushed) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`PythonParser`](modules/readmenator.parsers._python.py.md#pythonparser) class in `readmenator.parsers._python`
+- [`PythonReceiverTypes`](modules/readmenator._pytypes.py.md#pythonreceivertypes) class in `readmenator._pytypes`
+
+<a id="q"></a>
+
+## Q
+
+- [`qualified`](modules/readmenator._symindex.py.md#symboldef-qualified) attribute of `SymbolDef` in `readmenator._symindex`
+- [`qualname`](modules/readmenator._apidocs.py.md#apientity-qualname) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`query`](modules/readmenator._query.py.md#queryengine-query) method of `QueryEngine` in `readmenator._query`
+- [`query`](modules/readmenator._graphrag.py.md#ragcontext-query) attribute of `RagContext` in `readmenator._graphrag`
+- [`query`](modules/readmenator._rank.py.md#rankedresult-query) attribute of `RankedResult` in `readmenator._rank`
+- [`query`](modules/readmenator._app.py.md#readmenatorapplication-query) method of `readmenatorApplication` in `readmenator._app`
+- [`QueryEngine`](modules/readmenator._query.py.md#queryengine) class in `readmenator._query`
+
+<a id="r"></a>
+
+## R
+
+- [`radius`](modules/readmenator._graphlayout.py.md#bundlelayout-radius) attribute of `BundleLayout` in `readmenator._graphlayout`
+- [`radius`](modules/readmenator._graphlayout.py.md#spherebundlelayout-radius) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+- [`RagCommunity`](modules/readmenator._graphrag.py.md#ragcommunity) class in `readmenator._graphrag`
+- [`RagContext`](modules/readmenator._graphrag.py.md#ragcontext) class in `readmenator._graphrag`
+- [`RagEntity`](modules/readmenator._graphrag.py.md#ragentity) class in `readmenator._graphrag`
+- [`RagRelation`](modules/readmenator._graphrag.py.md#ragrelation) class in `readmenator._graphrag`
+- [`RagTextUnit`](modules/readmenator._graphrag.py.md#ragtextunit) class in `readmenator._graphrag`
+- [`raises`](modules/readmenator._docstrings.py.md#doccomment-raises) attribute of `DocComment` in `readmenator._docstrings`
+- [`rank`](modules/readmenator._rank.py.md#compositeranker-rank) method of `CompositeRanker` in `readmenator._rank`
+- [`rank`](modules/readmenator._graphrag.py.md#ragentity-rank) attribute of `RagEntity` in `readmenator._graphrag`
+- [`rank_query`](modules/readmenator._app.py.md#readmenatorapplication-rank_query) method of `readmenatorApplication` in `readmenator._app`
+- [`rank_summary`](modules/readmenator._explain.py.md#rank_summary) function in `readmenator._explain`
+- [`RankConfig`](modules/readmenator._rank.py.md#rankconfig) class in `readmenator._rank`
+- [`ranked_query`](modules/readmenator._query.py.md#queryengine-ranked_query) method of `QueryEngine` in `readmenator._query`
+- [`RankedItem`](modules/readmenator._rank.py.md#rankeditem) class in `readmenator._rank`
+- [`RankedResult`](modules/readmenator._rank.py.md#rankedresult) class in `readmenator._rank`
+- [`RANKING_ALPHA`](modules/readmenator._config.py.md#config-ranking_alpha) attribute of `Config` in `readmenator._config`
+- [`RANKING_AUTHORITY_WEIGHT`](modules/readmenator._config.py.md#config-ranking_authority_weight) attribute of `Config` in `readmenator._config`
+- [`RANKING_DOC_WEIGHT`](modules/readmenator._config.py.md#config-ranking_doc_weight) attribute of `Config` in `readmenator._config`
+- [`RANKING_ENABLED`](modules/readmenator._config.py.md#config-ranking_enabled) attribute of `Config` in `readmenator._config`
+- [`RANKING_FRESHNESS_WEIGHT`](modules/readmenator._config.py.md#config-ranking_freshness_weight) attribute of `Config` in `readmenator._config`
+- [`RANKING_MAX_ITER`](modules/readmenator._config.py.md#config-ranking_max_iter) attribute of `Config` in `readmenator._config`
+- [`RANKING_NOISE_PENALTY`](modules/readmenator._config.py.md#config-ranking_noise_penalty) attribute of `Config` in `readmenator._config`
+- [`RANKING_PPR_WEIGHT`](modules/readmenator._config.py.md#config-ranking_ppr_weight) attribute of `Config` in `readmenator._config`
+- [`RANKING_TEST_WEIGHT`](modules/readmenator._config.py.md#config-ranking_test_weight) attribute of `Config` in `readmenator._config`
+- [`RANKING_TOLERANCE`](modules/readmenator._config.py.md#config-ranking_tolerance) attribute of `Config` in `readmenator._config`
+- [`RANKING_TOP_N`](modules/readmenator._config.py.md#config-ranking_top_n) attribute of `Config` in `readmenator._config`
+- [`rating`](modules/readmenator._graphrag.py.md#ragcommunity-rating) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`rating_explanation`](modules/readmenator._graphrag.py.md#ragcommunity-rating_explanation) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`read`](modules/readmenator._mcp_server.py.md#mcpresource-read) method of `MCPResource` in `readmenator._mcp_server`
+- [`read`](modules/readmenator._memory.py.md#projectmemory-read) method of `ProjectMemory` in `readmenator._memory`
+- [`read_git_head`](modules/readmenator._gitmeta.py.md#read_git_head) function in `readmenator._gitmeta`
+- [`reading`](modules/readmenator._provenance.py.md#provenancefinding-reading) property of `ProvenanceFinding` in `readmenator._provenance`
+- [`README_INJECTION_ENABLED`](modules/readmenator._config.py.md#config-readme_injection_enabled) attribute of `Config` in `readmenator._config`
+- [`readme_injector`](modules/readmenator._pipeline.py.md#analyzerfactory-readme_injector) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`ReadmeInjector`](modules/readmenator._readme_injector.py.md#readmeinjector) class in `readmenator._readme_injector`
+- [`readmenator_script_name`](modules/readmenator_orchestrator.py.md#config-readmenator_script_name) attribute of `Config` in `readmenator_orchestrator`
+- [`readmenatorApplication`](modules/readmenator._app.py.md#readmenatorapplication) class in `readmenator._app`
+- [`reason`](modules/readmenator._exclusions.py.md#exclusionentry-reason) attribute of `ExclusionEntry` in `readmenator._exclusions`
+- [`reasons`](modules/readmenator._flowcharts.py.md#entrypoint-reasons) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`rebuild`](modules/readmenator._app.py.md#readmenatorapplication-rebuild) method of `readmenatorApplication` in `readmenator._app`
+- [`receiver`](modules/readmenator._symindex.py.md#callsite-receiver) attribute of `CallSite` in `readmenator._symindex`
+- [`receiver_class`](modules/readmenator._pytypes.py.md#pythonreceivertypes-receiver_class) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`reclassified_as`](modules/readmenator._exclusions.py.md#exclusionentry-reclassified_as) attribute of `ExclusionEntry` in `readmenator._exclusions`
+- [`recommendation`](modules/readmenator._models.py.md#deadcodereport-recommendation) attribute of `DeadCodeReport` in `readmenator._models`
+- [`recover_comment`](modules/readmenator._docstrings.py.md#recover_comment) function in `readmenator._docstrings`
+- [`recursive`](modules/readmenator._flowcharts.py.md#flowstep-recursive) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`RED`](modules/readmenator._video.py.md#red) constant in `readmenator._video`
+- [`refactor_monolith`](modules/readmenator._app.py.md#readmenatorapplication-refactor_monolith) method of `readmenatorApplication` in `readmenator._app`
+- [`RefactoringAction`](modules/readmenator._models.py.md#refactoringaction) class in `readmenator._models`
+- [`RefactoringPlan`](modules/readmenator._models.py.md#refactoringplan) class in `readmenator._models`
+- [`REFACTORIZER_ENABLED`](modules/readmenator._config.py.md#config-refactorizer_enabled) attribute of `Config` in `readmenator._config`
+- [`REFACTORIZER_MAX_FILES`](modules/readmenator._config.py.md#config-refactorizer_max_files) attribute of `Config` in `readmenator._config`
+- [`REFACTORIZER_MIN_LINES`](modules/readmenator._config.py.md#config-refactorizer_min_lines) attribute of `Config` in `readmenator._config`
+- [`REFACTORIZER_SCRIPT_PREFIX`](modules/readmenator._config.py.md#config-refactorizer_script_prefix) attribute of `Config` in `readmenator._config`
+- [`refine_sphere_leaves`](modules/readmenator._graphlayout.py.md#refine_sphere_leaves) function in `readmenator._graphlayout`
+- [`register_resource`](modules/readmenator._mcp_server.py.md#mcpserver-register_resource) method of `MCPServer` in `readmenator._mcp_server`
+- [`register_tool`](modules/readmenator._mcp_server.py.md#mcpserver-register_tool) method of `MCPServer` in `readmenator._mcp_server`
+- [`relation`](modules/readmenator._models.py.md#edge-relation) attribute of `Edge` in `readmenator._models`
+- [`relation`](modules/readmenator._graphrag.py.md#ragrelation-relation) attribute of `RagRelation` in `readmenator._graphrag`
+- [`relations`](modules/readmenator._models.py.md#conceptgraph-relations) attribute of `ConceptGraph` in `readmenator._models`
+- [`relations`](modules/readmenator._graphrag.py.md#ragcontext-relations) attribute of `RagContext` in `readmenator._graphrag`
+- [`relationships`](modules/readmenator._graphrag.py.md#graphragindex-relationships) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`remember`](modules/readmenator._memory.py.md#projectmemory-remember) method of `ProjectMemory` in `readmenator._memory`
+- [`remember`](modules/readmenator._app.py.md#readmenatorapplication-remember) method of `readmenatorApplication` in `readmenator._app`
+- [`remote`](modules/readmenator._gh_wiki.py.md#wikipublishresult-remote) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`remove`](modules/readmenator._agent_injector.py.md#agentinjector-remove) method of `AgentInjector` in `readmenator._agent_injector`
+- [`remove`](modules/readmenator._readme_injector.py.md#readmeinjector-remove) method of `ReadmeInjector` in `readmenator._readme_injector`
+- [`removed`](modules/readmenator._diagrams.py.md#mapdelta-removed) attribute of `MapDelta` in `readmenator._diagrams`
+- [`removed`](modules/readmenator._gh_wiki.py.md#wikipublishresult-removed) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`render`](modules/readmenator._apidocs_render.py.md#apimarkdownrenderer-render) method of `ApiMarkdownRenderer` in `readmenator._apidocs_render`
+- [`render`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder-render) method of `ArchitectureDiagramBuilder` in `readmenator._flowcharts`
+- [`render`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-render) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`render`](modules/readmenator._video.py.md#cinematicvideorenderer-render) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`render`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-render) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`render`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-render) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`render`](modules/readmenator._diagrams.py.md#interactivemaprenderer-render) method of `InteractiveMapRenderer` in `readmenator._diagrams`
+- [`render`](modules/readmenator._mermaid.py.md#mermaidrenderer-render) method of `MermaidRenderer` in `readmenator._mermaid`
+- [`render`](modules/readmenator._diagrams.py.md#visnetworkrenderer-render) method of `VisNetworkRenderer` in `readmenator._diagrams`
+- [`render_api_site`](modules/readmenator._apidocs_page.py.md#render_api_site) function in `readmenator._apidocs_page`
+- [`render_architecture_section`](modules/readmenator._flowcharts.py.md#render_architecture_section) function in `readmenator._flowcharts`
+- [`render_flows_section`](modules/readmenator._flowcharts.py.md#render_flows_section) function in `readmenator._flowcharts`
+- [`render_index`](modules/readmenator._diagrams.py.md#docssitepublisher-render_index) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`render_llms_txt`](modules/readmenator._diagrams.py.md#docssitepublisher-render_llms_txt) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`render_mermaid_class_diagram`](modules/readmenator._uml.py.md#umlgenerator-render_mermaid_class_diagram) method of `UmlGenerator` in `readmenator._uml`
+- [`render_page`](modules/readmenator._components.py.md#componentdiagrambuilder-render_page) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`render_reports`](modules/readmenator._graphrag.py.md#graphragstore-render_reports) staticmethod of `GraphRagStore` in `readmenator._graphrag`
+- [`render_single_frame`](modules/readmenator._video.py.md#cinematicvideorenderer-render_single_frame) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`repair`](modules/readmenator._diagrams.py.md#mapdiagnostic-repair) attribute of `MapDiagnostic` in `readmenator._diagrams`
+- [`repeat`](modules/readmenator._flowcharts.py.md#flowstep-repeat) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`reports`](modules/readmenator._graphrag.py.md#ragcontext-reports) attribute of `RagContext` in `readmenator._graphrag`
+- [`RepositoryProcessor`](modules/readmenator_orchestrator.py.md#repositoryprocessor) class in `readmenator_orchestrator`
+- [`rerouted`](modules/readmenator._diagrams.py.md#mapdelta-rerouted) attribute of `MapDelta` in `readmenator._diagrams`
+- [`resolve`](modules/readmenator._apidocs_render.py.md#apilinker-resolve) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`resolve`](modules/readmenator._resolver.py.md#importresolver-resolve) method of `ImportResolver` in `readmenator._resolver`
+- [`resolve`](modules/readmenator._symindex.py.md#symbolindex-resolve) method of `SymbolIndex` in `readmenator._symindex`
+- [`resolve_all`](modules/readmenator._resolver.py.md#importresolver-resolve_all) method of `ImportResolver` in `readmenator._resolver`
+- [`resolve_fonts`](modules/readmenator._video.py.md#resolve_fonts) function in `readmenator._video`
+- [`resolve_method`](modules/readmenator._pytypes.py.md#pythonreceivertypes-resolve_method) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`RESOLVED_IMPORTS`](modules/readmenator._category.py.md#edgekind-resolved_imports) attribute of `EdgeKind` in `readmenator._category`
+- [`ResolvedCall`](modules/readmenator._symindex.py.md#resolvedcall) class in `readmenator._symindex`
+- [`response`](modules/readmenator._mcp_server.py.md#mcprequest-response) method of `MCPRequest` in `readmenator._mcp_server`
+- [`returns`](modules/readmenator._apidocs.py.md#apientity-returns) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`returns`](modules/readmenator._docstrings.py.md#doccomment-returns) attribute of `DocComment` in `readmenator._docstrings`
+- [`returns_value`](modules/readmenator._apidocs.py.md#apientity-returns_value) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`rewrite`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-rewrite) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`RiskProjection`](modules/readmenator._projections.py.md#riskprojection) class in `readmenator._projections`
+- [`role`](modules/readmenator._diagrams.py.md#mapnode-role) attribute of `MapNode` in `readmenator._diagrams`
+- [`RubyParser`](modules/readmenator.parsers._ruby.py.md#rubyparser) class in `readmenator.parsers._ruby`
+- [`rule`](modules/readmenator._diagrams.py.md#mapdiagnostic-rule) attribute of `MapDiagnostic` in `readmenator._diagrams`
+- [`rule`](modules/readmenator._provenance.py.md#provenancefinding-rule) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`rule`](modules/readmenator._yaralite.py.md#yaralitematch-rule) attribute of `YaraLiteMatch` in `readmenator._yaralite`
+- [`rule_gen`](modules/readmenator._pipeline.py.md#analyzerfactory-rule_gen) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`RULE_GEN_ENABLED`](modules/readmenator._config.py.md#config-rule_gen_enabled) attribute of `Config` in `readmenator._config`
+- [`RULE_GEN_MIN_PATTERN_COUNT`](modules/readmenator._config.py.md#config-rule_gen_min_pattern_count) attribute of `Config` in `readmenator._config`
+- [`RULE_GEN_OUTPUT_DIR`](modules/readmenator._config.py.md#config-rule_gen_output_dir) attribute of `Config` in `readmenator._config`
+- [`RULE_HEADER_RE`](modules/readmenator._yaralite.py.md#rule_header_re) constant in `readmenator._yaralite`
+- [`rule_id`](modules/readmenator._exclusions.py.md#exclusionentry-rule_id) attribute of `ExclusionEntry` in `readmenator._exclusions`
+- [`rule_id`](modules/readmenator._models.py.md#linterviolation-rule_id) attribute of `LinterViolation` in `readmenator._models`
+- [`rule_id`](modules/readmenator._models.py.md#securityfinding-rule_id) attribute of `SecurityFinding` in `readmenator._models`
+- [`rule_id`](modules/readmenator._security.py.md#securityrule-rule_id) attribute of `SecurityRule` in `readmenator._security`
+- [`rule_id`](modules/readmenator._models.py.md#suggestedrule-rule_id) attribute of `SuggestedRule` in `readmenator._models`
+- [`RuleGenerator`](modules/readmenator._rule_gen.py.md#rulegenerator) class in `readmenator._rule_gen`
+- [`run`](modules/readmenator._pipeline.py.md#deepanalysisrunner-run) method of `DeepAnalysisRunner` in `readmenator._pipeline`
+- [`run`](modules/readmenator._mcp_server.py.md#mcpserver-run) method of `MCPServer` in `readmenator._mcp_server`
+- [`run`](modules/readmenator_orchestrator.py.md#orchestrator-run) method of `Orchestrator` in `readmenator_orchestrator`
+- [`run`](modules/readmenator._app.py.md#readmenatorapplication-run) method of `readmenatorApplication` in `readmenator._app`
+- [`run_yaralite_rules`](modules/readmenator._yaralite.py.md#run_yaralite_rules) function in `readmenator._yaralite`
+- [`RustParser`](modules/readmenator.parsers._rust.py.md#rustparser) class in `readmenator.parsers._rust`
+
+<a id="s"></a>
+
+## S
+
+- [`samples`](modules/readmenator._explorer.py.md#explorerstate-samples) method of `ExplorerState` in `readmenator._explorer`
+- [`sanitize`](modules/readmenator._components.py.md#sanitize) function in `readmenator._components`
+- [`sanitize_note`](modules/readmenator._memory.py.md#sanitize_note) function in `readmenator._memory`
+- [`sarif`](modules/readmenator._pipeline.py.md#analyzerfactory-sarif) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SARIF_ENABLED`](modules/readmenator._config.py.md#config-sarif_enabled) attribute of `Config` in `readmenator._config`
+- [`SARIF_OUTPUT`](modules/readmenator._config.py.md#config-sarif_output) attribute of `Config` in `readmenator._config`
+- [`SARIF_SCHEMA`](modules/readmenator._sarif.py.md#sarifexporter-sarif_schema) attribute of `SarifExporter` in `readmenator._sarif`
+- [`SARIF_VERSION`](modules/readmenator._sarif.py.md#sarifexporter-sarif_version) attribute of `SarifExporter` in `readmenator._sarif`
+- [`SarifExporter`](modules/readmenator._sarif.py.md#sarifexporter) class in `readmenator._sarif`
+- [`save`](modules/readmenator._cache.py.md#filecache-save) method of `FileCache` in `readmenator._cache`
+- [`save_analysis`](modules/readmenator._cache.py.md#filecache-save_analysis) method of `FileCache` in `readmenator._cache`
+- [`ScalaParser`](modules/readmenator.parsers._scala.py.md#scalaparser) class in `readmenator.parsers._scala`
+- [`scaling`](modules/readmenator._graphlayout.py.md#forceatlas2settings-scaling) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`scan`](modules/readmenator._scanner.py.md#polyglotscanner-scan) method of `PolyglotScanner` in `readmenator._scanner`
+- [`scan`](modules/readmenator._security.py.md#securityanalyzer-scan) method of `SecurityAnalyzer` in `readmenator._security`
+- [`SCAN_EXCLUDE_PATTERNS`](modules/readmenator._config.py.md#config-scan_exclude_patterns) attribute of `Config` in `readmenator._config`
+- [`SCAN_INCLUDE_DIRS`](modules/readmenator._config.py.md#config-scan_include_dirs) attribute of `Config` in `readmenator._config`
+- [`SCAN_MODE`](modules/readmenator._config.py.md#config-scan_mode) attribute of `Config` in `readmenator._config`
+- [`scan_texts`](modules/readmenator._app.py.md#readmenatorapplication-scan_texts) method of `readmenatorApplication` in `readmenator._app`
+- [`scan_with_content`](modules/readmenator._scanner.py.md#polyglotscanner-scan_with_content) method of `PolyglotScanner` in `readmenator._scanner`
+- [`scanner`](modules/readmenator._pipeline.py.md#analyzerfactory-scanner) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`scantext`](modules/readmenator._pipeline.py.md#analyzerfactory-scantext) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SCANTEXT_ENABLED`](modules/readmenator._config.py.md#config-scantext_enabled) attribute of `Config` in `readmenator._config`
+- [`SCANTEXT_MAX_IMPORTS`](modules/readmenator._config.py.md#config-scantext_max_imports) attribute of `Config` in `readmenator._config`
+- [`SCANTEXT_MAX_SYMBOLS`](modules/readmenator._config.py.md#config-scantext_max_symbols) attribute of `Config` in `readmenator._config`
+- [`SCANTEXT_SNIPPET_CHARS`](modules/readmenator._config.py.md#config-scantext_snippet_chars) attribute of `Config` in `readmenator._config`
+- [`ScanTextBuilder`](modules/readmenator._scantext.py.md#scantextbuilder) class in `readmenator._scantext`
+- [`SCHEMA_VERSION`](modules/readmenator._graphrag.py.md#schema_version) constant in `readmenator._graphrag`
+- [`scope_at`](modules/readmenator._pytypes.py.md#pythonreceivertypes-scope_at) method of `PythonReceiverTypes` in `readmenator._pytypes`
+- [`score`](modules/readmenator._flowcharts.py.md#entrypoint-score) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`scores`](modules/readmenator._graphrag.py.md#bm25index-scores) method of `Bm25Index` in `readmenator._graphrag`
+- [`search`](modules/readmenator._graphrag.py.md#graphragsearcher-search) method of `GraphRagSearcher` in `readmenator._graphrag`
+- [`security`](modules/readmenator._pipeline.py.md#analyzerfactory-security) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SECURITY_ENABLED`](modules/readmenator._config.py.md#config-security_enabled) attribute of `Config` in `readmenator._config`
+- [`SECURITY_OUTPUT`](modules/readmenator._config.py.md#config-security_output) attribute of `Config` in `readmenator._config`
+- [`SECURITY_SEVERITY_THRESHOLD`](modules/readmenator._config.py.md#config-security_severity_threshold) attribute of `Config` in `readmenator._config`
+- [`SecurityAnalyzer`](modules/readmenator._security.py.md#securityanalyzer) class in `readmenator._security`
+- [`SecurityFinding`](modules/readmenator._models.py.md#securityfinding) class in `readmenator._models`
+- [`SecurityRule`](modules/readmenator._security.py.md#securityrule) class in `readmenator._security`
+- [`see_also`](modules/readmenator._docstrings.py.md#doccomment-see_also) attribute of `DocComment` in `readmenator._docstrings`
+- [`seed`](modules/readmenator._graphlayout.py.md#forceatlas2settings-seed) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`seed_nodes`](modules/readmenator._rank.py.md#rankedresult-seed_nodes) attribute of `RankedResult` in `readmenator._rank`
+- [`semgrep_yaml`](modules/readmenator._models.py.md#suggestedrule-semgrep_yaml) attribute of `SuggestedRule` in `readmenator._models`
+- [`sequence_mermaid`](modules/readmenator._flowcharts.py.md#executionflowbuilder-sequence_mermaid) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`serve`](modules/readmenator._explorer.py.md#serve) function in `readmenator._explorer`
+- [`serve_explorer`](modules/readmenator._app.py.md#readmenatorapplication-serve_explorer) method of `readmenatorApplication` in `readmenator._app`
+- [`setUp`](modules/readmenator_orchestrator.py.md#testorchestrator-setup) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`SEVERITIES`](modules/readmenator._taint.py.md#taintanalyzer-severities) attribute of `TaintAnalyzer` in `readmenator._taint`
+- [`severity`](modules/readmenator._models.py.md#layerviolation-severity) attribute of `LayerViolation` in `readmenator._models`
+- [`severity`](modules/readmenator._models.py.md#linterviolation-severity) attribute of `LinterViolation` in `readmenator._models`
+- [`severity`](modules/readmenator._provenance.py.md#provenancefinding-severity) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`severity`](modules/readmenator._models.py.md#securityfinding-severity) attribute of `SecurityFinding` in `readmenator._models`
+- [`severity`](modules/readmenator._security.py.md#securityrule-severity) attribute of `SecurityRule` in `readmenator._security`
+- [`severity`](modules/readmenator._models.py.md#suggestedrule-severity) attribute of `SuggestedRule` in `readmenator._models`
+- [`severity`](modules/readmenator._models.py.md#taintpath-severity) attribute of `TaintPath` in `readmenator._models`
+- [`SEVERITY_LEVEL_MAP`](modules/readmenator._sarif.py.md#sarifexporter-severity_level_map) attribute of `SarifExporter` in `readmenator._sarif`
+- [`SEVERITY_ORDER`](modules/readmenator._security.py.md#securityanalyzer-severity_order) attribute of `SecurityAnalyzer` in `readmenator._security`
+- [`ShellParser`](modules/readmenator.parsers._shell.py.md#shellparser) class in `readmenator.parsers._shell`
+- [`short_label`](modules/readmenator._video.py.md#short_label) function in `readmenator._video`
+- [`signature`](modules/readmenator._apidocs.py.md#apientity-signature) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`signature`](modules/readmenator._models.py.md#symbol-signature) attribute of `Symbol` in `readmenator._models`
+- [`signature`](modules/readmenator._symindex.py.md#symboldef-signature) attribute of `SymbolDef` in `readmenator._symindex`
+- [`since`](modules/readmenator._docstrings.py.md#doccomment-since) attribute of `DocComment` in `readmenator._docstrings`
+- [`sink_count`](modules/readmenator._models.py.md#taintanalysisresult-sink_count) attribute of `TaintAnalysisResult` in `readmenator._models`
+- [`sink_file`](modules/readmenator._models.py.md#taintpath-sink_file) attribute of `TaintPath` in `readmenator._models`
+- [`site`](modules/readmenator._symindex.py.md#resolvedcall-site) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`SITE_DIR`](modules/readmenator._config.py.md#config-site_dir) attribute of `Config` in `readmenator._config`
+- [`SITE_DOCS_ENABLED`](modules/readmenator._config.py.md#config-site_docs_enabled) attribute of `Config` in `readmenator._config`
+- [`SITE_DOCS_SUBDIR`](modules/readmenator._config.py.md#config-site_docs_subdir) attribute of `Config` in `readmenator._config`
+- [`SITE_ENABLED`](modules/readmenator._config.py.md#config-site_enabled) attribute of `Config` in `readmenator._config`
+- [`SITE_GITHUB_URL`](modules/readmenator._config.py.md#config-site_github_url) attribute of `Config` in `readmenator._config`
+- [`SITE_LLMS_TXT_ENABLED`](modules/readmenator._config.py.md#config-site_llms_txt_enabled) attribute of `Config` in `readmenator._config`
+- [`SITE_LLMS_TXT_FILENAME`](modules/readmenator._config.py.md#config-site_llms_txt_filename) attribute of `Config` in `readmenator._config`
+- [`SITE_MAX_DOCS`](modules/readmenator._config.py.md#config-site_max_docs) attribute of `Config` in `readmenator._config`
+- [`SITE_MD_PREVIEW_CHARS`](modules/readmenator._config.py.md#config-site_md_preview_chars) attribute of `Config` in `readmenator._config`
+- [`SITE_MD_PREVIEW_MIN_CHARS`](modules/readmenator._config.py.md#config-site_md_preview_min_chars) attribute of `Config` in `readmenator._config`
+- [`SITE_PYPI_URL`](modules/readmenator._config.py.md#config-site_pypi_url) attribute of `Config` in `readmenator._config`
+- [`SITE_REFRESH_ON_REBUILD`](modules/readmenator._config.py.md#config-site_refresh_on_rebuild) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_ENABLED`](modules/readmenator._config.py.md#config-site_video_enabled) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_FILENAME`](modules/readmenator._config.py.md#config-site_video_filename) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_POSTER_AT_S`](modules/readmenator._config.py.md#config-site_video_poster_at_s) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_POSTER_FILENAME`](modules/readmenator._config.py.md#config-site_video_poster_filename) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_POSTER_QUALITY`](modules/readmenator._config.py.md#config-site_video_poster_quality) attribute of `Config` in `readmenator._config`
+- [`SITE_VIDEO_POSTER_TIMEOUT_S`](modules/readmenator._config.py.md#config-site_video_poster_timeout_s) attribute of `Config` in `readmenator._config`
+- [`size`](modules/readmenator._models.py.md#communityresult-size) attribute of `CommunityResult` in `readmenator._models`
+- [`size`](modules/readmenator._category.py.md#typedgraph-size) property of `TypedGraph` in `readmenator._category`
+- [`SKILL_PREFIX`](modules/readmenator._skill_installer.py.md#skill_prefix) constant in `readmenator._skill_installer`
+- [`SkillInstaller`](modules/readmenator._skill_installer.py.md#skillinstaller) class in `readmenator._skill_installer`
+- [`skills`](modules/readmenator._pipeline.py.md#analyzerfactory-skills) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SKILLS_ENABLED`](modules/readmenator._config.py.md#config-skills_enabled) attribute of `Config` in `readmenator._config`
+- [`SKILLS_INSTALL_ON_RUN`](modules/readmenator._config.py.md#config-skills_install_on_run) attribute of `Config` in `readmenator._config`
+- [`SKILLS_TARGET_DIR`](modules/readmenator._config.py.md#config-skills_target_dir) attribute of `Config` in `readmenator._config`
+- [`SKIP_GENERATED_OUTPUTS`](modules/readmenator._config.py.md#config-skip_generated_outputs) attribute of `Config` in `readmenator._config`
+- [`skip_repos`](modules/readmenator_orchestrator.py.md#config-skip_repos) attribute of `Config` in `readmenator_orchestrator`
+- [`snapshots`](modules/readmenator._graphlayout.py.md#forceatlas2settings-snapshots) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`snippet`](modules/readmenator._models.py.md#securityfinding-snippet) attribute of `SecurityFinding` in `readmenator._models`
+- [`source`](modules/readmenator._models.py.md#conceptrelation-source) attribute of `ConceptRelation` in `readmenator._models`
+- [`source`](modules/readmenator._memory.py.md#declaredrule-source) attribute of `DeclaredRule` in `readmenator._memory`
+- [`source`](modules/readmenator._models.py.md#edge-source) attribute of `Edge` in `readmenator._models`
+- [`source`](modules/readmenator._explorer.py.md#explorerstate-source) method of `ExplorerState` in `readmenator._explorer`
+- [`source`](modules/readmenator._diagrams.py.md#mapedge-source) attribute of `MapEdge` in `readmenator._diagrams`
+- [`source`](modules/readmenator._category.py.md#morphism-source) attribute of `Morphism` in `readmenator._category`
+- [`source`](modules/readmenator._graphrag.py.md#ragrelation-source) attribute of `RagRelation` in `readmenator._graphrag`
+- [`source_count`](modules/readmenator._models.py.md#taintanalysisresult-source_count) attribute of `TaintAnalysisResult` in `readmenator._models`
+- [`source_dir`](modules/readmenator._skill_installer.py.md#skillinstaller-source_dir) staticmethod of `SkillInstaller` in `readmenator._skill_installer`
+- [`source_file`](modules/readmenator._models.py.md#layerviolation-source_file) attribute of `LayerViolation` in `readmenator._models`
+- [`source_file`](modules/readmenator._models.py.md#refactoringaction-source_file) attribute of `RefactoringAction` in `readmenator._models`
+- [`source_file`](modules/readmenator._models.py.md#taintpath-source_file) attribute of `TaintPath` in `readmenator._models`
+- [`source_fingerprint`](modules/readmenator._cache.py.md#source_fingerprint) function in `readmenator._cache`
+- [`source_layer`](modules/readmenator._models.py.md#layerviolation-source_layer) attribute of `LayerViolation` in `readmenator._models`
+- [`SourceEntry`](modules/readmenator._sourceview.py.md#sourceentry) class in `readmenator._sourceview`
+- [`sourceview`](modules/readmenator._pipeline.py.md#analyzerfactory-sourceview) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SOURCEVIEW_CHUNK_LINES`](modules/readmenator._config.py.md#config-sourceview_chunk_lines) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_CONTEXT_LINES`](modules/readmenator._config.py.md#config-sourceview_context_lines) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_ENABLED`](modules/readmenator._config.py.md#config-sourceview_enabled) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_MAX_CHARS_PER_FILE`](modules/readmenator._config.py.md#config-sourceview_max_chars_per_file) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_MAX_FILES`](modules/readmenator._config.py.md#config-sourceview_max_files) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_MAX_LINES_PER_FILE`](modules/readmenator._config.py.md#config-sourceview_max_lines_per_file) attribute of `Config` in `readmenator._config`
+- [`SOURCEVIEW_MAX_TOTAL_CHARS`](modules/readmenator._config.py.md#config-sourceview_max_total_chars) attribute of `Config` in `readmenator._config`
+- [`SourceViewBuilder`](modules/readmenator._sourceview.py.md#sourceviewbuilder) class in `readmenator._sourceview`
+- [`sphere_layout`](modules/readmenator._video.py.md#cinematicvideorenderer-sphere_layout) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`SphereBundleLayout`](modules/readmenator._graphlayout.py.md#spherebundlelayout) class in `readmenator._graphlayout`
+- [`spherical_edge_bundling`](modules/readmenator._graphlayout.py.md#spherical_edge_bundling) function in `readmenator._graphlayout`
+- [`split_summary`](modules/readmenator._docstrings.py.md#split_summary) function in `readmenator._docstrings`
+- [`start`](modules/readmenator._watcher.py.md#directorywatcher-start) method of `DirectoryWatcher` in `readmenator._watcher`
+- [`start_line`](modules/readmenator._graphrag.py.md#ragtextunit-start_line) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`start_line`](modules/readmenator._models.py.md#refactoringaction-start_line) attribute of `RefactoringAction` in `readmenator._models`
+- [`static_patterns`](modules/readmenator._provenance.py.md#provenancefinding-static_patterns) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`stochastic_row`](modules/readmenator._category.py.md#typedgraph-stochastic_row) method of `TypedGraph` in `readmenator._category`
+- [`stop`](modules/readmenator._watcher.py.md#directorywatcher-stop) method of `DirectoryWatcher` in `readmenator._watcher`
+- [`strength`](modules/readmenator._models.py.md#conceptrelation-strength) attribute of `ConceptRelation` in `readmenator._models`
+- [`STRING_RE`](modules/readmenator._yaralite.py.md#string_re) constant in `readmenator._yaralite`
+- [`strings`](modules/readmenator._yaralite.py.md#yaraliterule-strings) attribute of `YaraLiteRule` in `readmenator._yaralite`
+- [`strip_dead_code`](modules/readmenator._app.py.md#readmenatorapplication-strip_dead_code) method of `readmenatorApplication` in `readmenator._app`
+- [`strip_thinking`](modules/readmenator._ollama.py.md#strip_thinking) function in `readmenator._ollama`
+- [`style`](modules/readmenator._docstrings.py.md#doccomment-style) attribute of `DocComment` in `readmenator._docstrings`
+- [`STYLE_GOOGLE`](modules/readmenator._docstrings.py.md#style_google) constant in `readmenator._docstrings`
+- [`STYLE_NUMPY`](modules/readmenator._docstrings.py.md#style_numpy) constant in `readmenator._docstrings`
+- [`STYLE_PLAIN`](modules/readmenator._docstrings.py.md#style_plain) constant in `readmenator._docstrings`
+- [`STYLE_REST`](modules/readmenator._docstrings.py.md#style_rest) constant in `readmenator._docstrings`
+- [`STYLE_RUSTDOC`](modules/readmenator._docstrings.py.md#style_rustdoc) constant in `readmenator._docstrings`
+- [`STYLE_TAGS`](modules/readmenator._docstrings.py.md#style_tags) constant in `readmenator._docstrings`
+- [`STYLE_XML`](modules/readmenator._docstrings.py.md#style_xml) constant in `readmenator._docstrings`
+- [`subclasses`](modules/readmenator._apidocs.py.md#apientity-subclasses) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`subject`](modules/readmenator._diagrams.py.md#mapdiagnostic-subject) attribute of `MapDiagnostic` in `readmenator._diagrams`
+- [`subprocess_timeout`](modules/readmenator_orchestrator.py.md#config-subprocess_timeout) attribute of `Config` in `readmenator_orchestrator`
+- [`suggested_questions`](modules/readmenator._models.py.md#analysisresult-suggested_questions) attribute of `AnalysisResult` in `readmenator._models`
+- [`SUGGESTED_QUESTIONS_COUNT`](modules/readmenator._config.py.md#config-suggested_questions_count) attribute of `Config` in `readmenator._config`
+- [`suggested_rules`](modules/readmenator._models.py.md#analysisresultv2-suggested_rules) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`SuggestedRule`](modules/readmenator._models.py.md#suggestedrule) class in `readmenator._models`
+- [`summary`](modules/readmenator._docstrings.py.md#doccomment-summary) attribute of `DocComment` in `readmenator._docstrings`
+- [`summary`](modules/readmenator._provenance.py.md#provenanceauditor-summary) method of `ProvenanceAuditor` in `readmenator._provenance`
+- [`summary`](modules/readmenator._query.py.md#queryengine-summary) method of `QueryEngine` in `readmenator._query`
+- [`summary`](modules/readmenator._graphrag.py.md#ragcommunity-summary) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`summary`](modules/readmenator._security.py.md#securityanalyzer-summary) method of `SecurityAnalyzer` in `readmenator._security`
+- [`summary`](modules/readmenator._app.py.md#readmenatorapplication-summary) method of `readmenatorApplication` in `readmenator._app`
+- [`SUPPORTED_EXTENSIONS`](modules/readmenator._config.py.md#config-supported_extensions) attribute of `Config` in `readmenator._config`
+- [`SUPPORTED_EXTENSIONS`](modules/readmenator.parsers.__init__.py.md#supported_extensions) constant in `readmenator.parsers`
+- [`supported_kinds`](modules/readmenator._diagrams.py.md#systemmapbuilder-supported_kinds) method of `SystemMapBuilder` in `readmenator._diagrams`
+- [`SURPRISING_CONNECTION_HOP_THRESHOLD`](modules/readmenator._config.py.md#config-surprising_connection_hop_threshold) attribute of `Config` in `readmenator._config`
+- [`SURPRISING_CONNECTION_TOP_N`](modules/readmenator._config.py.md#config-surprising_connection_top_n) attribute of `Config` in `readmenator._config`
+- [`surprising_connections`](modules/readmenator._models.py.md#analysisresult-surprising_connections) attribute of `AnalysisResult` in `readmenator._models`
+- [`SVG_DPI`](modules/readmenator._config.py.md#config-svg_dpi) attribute of `Config` in `readmenator._config`
+- [`SVG_MAX_NODES`](modules/readmenator._config.py.md#config-svg_max_nodes) attribute of `Config` in `readmenator._config`
+- [`SwiftParser`](modules/readmenator.parsers._swift.py.md#swiftparser) class in `readmenator.parsers._swift`
+- [`Symbol`](modules/readmenator._models.py.md#symbol) class in `readmenator._models`
+- [`symbol_count`](modules/readmenator._models.py.md#hotspotresult-symbol_count) attribute of `HotspotResult` in `readmenator._models`
+- [`symbol_name`](modules/readmenator._models.py.md#deadcodereport-symbol_name) attribute of `DeadCodeReport` in `readmenator._models`
+- [`symbol_total`](modules/readmenator._diagrams.py.md#mapnode-symbol_total) attribute of `MapNode` in `readmenator._diagrams`
+- [`symbol_type`](modules/readmenator._models.py.md#deadcodereport-symbol_type) attribute of `DeadCodeReport` in `readmenator._models`
+- [`SYMBOL_TYPE_PLURALS`](modules/readmenator._config.py.md#config-symbol_type_plurals) attribute of `Config` in `readmenator._config`
+- [`SymbolDef`](modules/readmenator._symindex.py.md#symboldef) class in `readmenator._symindex`
+- [`SymbolIndex`](modules/readmenator._symindex.py.md#symbolindex) class in `readmenator._symindex`
+- [`symbols`](modules/readmenator._flowcharts.py.md#component-symbols) attribute of `Component` in `readmenator._flowcharts`
+- [`symbols`](modules/readmenator._diagrams.py.md#mapnode-symbols) attribute of `MapNode` in `readmenator._diagrams`
+- [`symbols`](modules/readmenator._models.py.md#node-symbols) attribute of `Node` in `readmenator._models`
+- [`symindex`](modules/readmenator._pipeline.py.md#analyzerfactory-symindex) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`SYMINDEX_BUILTINS`](modules/readmenator._config.py.md#config-symindex_builtins) attribute of `Config` in `readmenator._config`
+- [`SYMINDEX_MAX_CALL_SITES`](modules/readmenator._config.py.md#config-symindex_max_call_sites) attribute of `Config` in `readmenator._config`
+- [`SYMINDEX_RECEIVER_WINDOW`](modules/readmenator._config.py.md#config-symindex_receiver_window) attribute of `Config` in `readmenator._config`
+- [`SystemMap`](modules/readmenator._diagrams.py.md#systemmap) class in `readmenator._diagrams`
+- [`SystemMapBuilder`](modules/readmenator._diagrams.py.md#systemmapbuilder) class in `readmenator._diagrams`
+- [`SystemMapValidator`](modules/readmenator._diagrams.py.md#systemmapvalidator) class in `readmenator._diagrams`
+
+<a id="t"></a>
+
+## T
+
+- [`taint`](modules/readmenator._models.py.md#analysisresultv2-taint) attribute of `AnalysisResultV2` in `readmenator._models`
+- [`taint`](modules/readmenator._pipeline.py.md#analyzerfactory-taint) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`TAINT_ENABLED`](modules/readmenator._config.py.md#config-taint_enabled) attribute of `Config` in `readmenator._config`
+- [`TAINT_MAX_DEPTH`](modules/readmenator._config.py.md#config-taint_max_depth) attribute of `Config` in `readmenator._config`
+- [`TAINT_MAX_PATHS`](modules/readmenator._config.py.md#config-taint_max_paths) attribute of `Config` in `readmenator._config`
+- [`TaintAnalysisResult`](modules/readmenator._models.py.md#taintanalysisresult) class in `readmenator._models`
+- [`TaintAnalyzer`](modules/readmenator._taint.py.md#taintanalyzer) class in `readmenator._taint`
+- [`TaintPath`](modules/readmenator._models.py.md#taintpath) class in `readmenator._models`
+- [`target`](modules/readmenator._models.py.md#conceptrelation-target) attribute of `ConceptRelation` in `readmenator._models`
+- [`target`](modules/readmenator._models.py.md#edge-target) attribute of `Edge` in `readmenator._models`
+- [`target`](modules/readmenator._diagrams.py.md#mapedge-target) attribute of `MapEdge` in `readmenator._diagrams`
+- [`target`](modules/readmenator._category.py.md#morphism-target) attribute of `Morphism` in `readmenator._category`
+- [`target`](modules/readmenator._graphrag.py.md#ragrelation-target) attribute of `RagRelation` in `readmenator._graphrag`
+- [`target_branch`](modules/readmenator_orchestrator.py.md#config-target_branch) attribute of `Config` in `readmenator_orchestrator`
+- [`target_dir`](modules/readmenator._skill_installer.py.md#skillinstaller-target_dir) method of `SkillInstaller` in `readmenator._skill_installer`
+- [`target_file`](modules/readmenator._models.py.md#layerviolation-target_file) attribute of `LayerViolation` in `readmenator._models`
+- [`target_file`](modules/readmenator._models.py.md#refactoringaction-target_file) attribute of `RefactoringAction` in `readmenator._models`
+- [`target_file`](modules/readmenator._symindex.py.md#resolvedcall-target_file) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`target_layer`](modules/readmenator._models.py.md#layerviolation-target_layer) attribute of `LayerViolation` in `readmenator._models`
+- [`target_line`](modules/readmenator._symindex.py.md#resolvedcall-target_line) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`target_qualified`](modules/readmenator._symindex.py.md#resolvedcall-target_qualified) attribute of `ResolvedCall` in `readmenator._symindex`
+- [`tarjan_scc`](modules/readmenator._flowcharts.py.md#tarjan_scc) function in `readmenator._flowcharts`
+- [`tearDown`](modules/readmenator_orchestrator.py.md#testorchestrator-teardown) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_branch_name_validation`](modules/readmenator_orchestrator.py.md#testorchestrator-test_branch_name_validation) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_config_defaults`](modules/readmenator_orchestrator.py.md#testorchestrator-test_config_defaults) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_config_immutability`](modules/readmenator_orchestrator.py.md#testorchestrator-test_config_immutability) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_coverage`](modules/readmenator._rank.py.md#rankeditem-test_coverage) attribute of `RankedItem` in `readmenator._rank`
+- [`test_pr_body_mentions_concept_layer`](modules/readmenator_orchestrator.py.md#testorchestrator-test_pr_body_mentions_concept_layer) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_rebuild_command_includes_full_concept_layer`](modules/readmenator_orchestrator.py.md#testorchestrator-test_rebuild_command_includes_full_concept_layer) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_repo_name_validation`](modules/readmenator_orchestrator.py.md#testorchestrator-test_repo_name_validation) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`test_skip_repos_logic`](modules/readmenator_orchestrator.py.md#testorchestrator-test_skip_repos_logic) method of `TestOrchestrator` in `readmenator_orchestrator`
+- [`TestOrchestrator`](modules/readmenator_orchestrator.py.md#testorchestrator) class in `readmenator_orchestrator`
+- [`TESTS`](modules/readmenator._category.py.md#edgekind-tests) attribute of `EdgeKind` in `readmenator._category`
+- [`text`](modules/readmenator._memory.py.md#declaredrule-text) attribute of `DeclaredRule` in `readmenator._memory`
+- [`text`](modules/readmenator._memory.py.md#memorynote-text) attribute of `MemoryNote` in `readmenator._memory`
+- [`text`](modules/readmenator._graphrag.py.md#ragtextunit-text) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`text`](modules/readmenator._sourceview.py.md#sourceentry-text) attribute of `SourceEntry` in `readmenator._sourceview`
+- [`text_units`](modules/readmenator._graphrag.py.md#graphragindex-text_units) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`text_units`](modules/readmenator._graphrag.py.md#ragcontext-text_units) attribute of `RagContext` in `readmenator._graphrag`
+- [`thumbnail_svg`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-thumbnail_svg) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`thumbnail_svg`](modules/readmenator._components.py.md#componentdiagrambuilder-thumbnail_svg) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`thumbnail_svg`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-thumbnail_svg) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`tier`](modules/readmenator._yaralite.py.md#yaralitematch-tier) attribute of `YaraLiteMatch` in `readmenator._yaralite`
+- [`tier`](modules/readmenator._yaralite.py.md#yaraliterule-tier) property of `YaraLiteRule` in `readmenator._yaralite`
+- [`title`](modules/readmenator._diagrams.py.md#mapview-title) attribute of `MapView` in `readmenator._diagrams`
+- [`title`](modules/readmenator._graphrag.py.md#ragcommunity-title) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`title`](modules/readmenator._diagrams.py.md#systemmap-title) attribute of `SystemMap` in `readmenator._diagrams`
+- [`to_cypher`](modules/readmenator._exporter.py.md#graphexporter-to_cypher) method of `GraphExporter` in `readmenator._exporter`
+- [`to_dict`](modules/readmenator._apidocs.py.md#apientity-to_dict) method of `ApiEntity` in `readmenator._apidocs`
+- [`to_dict`](modules/readmenator._apidocs.py.md#apiparam-to_dict) method of `ApiParam` in `readmenator._apidocs`
+- [`to_dict`](modules/readmenator._apidocs.py.md#apireference-to_dict) method of `ApiReference` in `readmenator._apidocs`
+- [`to_dict`](modules/readmenator._docstrings.py.md#doccomment-to_dict) method of `DocComment` in `readmenator._docstrings`
+- [`to_dict`](modules/readmenator._docstrings.py.md#docfield-to_dict) method of `DocField` in `readmenator._docstrings`
+- [`to_dict`](modules/readmenator._apidocs.py.md#docwarning-to_dict) method of `DocWarning` in `readmenator._apidocs`
+- [`to_dict`](modules/readmenator._graphrag.py.md#graphragindex-to_dict) method of `GraphRagIndex` in `readmenator._graphrag`
+- [`to_forcegraph`](modules/readmenator._exporter.py.md#graphexporter-to_forcegraph) method of `GraphExporter` in `readmenator._exporter`
+- [`to_graphml`](modules/readmenator._exporter.py.md#graphexporter-to_graphml) method of `GraphExporter` in `readmenator._exporter`
+- [`to_html`](modules/readmenator._exporter.py.md#graphexporter-to_html) method of `GraphExporter` in `readmenator._exporter`
+- [`to_json`](modules/readmenator._exporter.py.md#graphexporter-to_json) method of `GraphExporter` in `readmenator._exporter`
+- [`to_obsidian`](modules/readmenator._exporter.py.md#graphexporter-to_obsidian) method of `GraphExporter` in `readmenator._exporter`
+- [`to_payload`](modules/readmenator._sourceview.py.md#sourceviewbuilder-to_payload) method of `SourceViewBuilder` in `readmenator._sourceview`
+- [`to_svg`](modules/readmenator._exporter.py.md#graphexporter-to_svg) method of `GraphExporter` in `readmenator._exporter`
+- [`tokenize`](modules/readmenator._graphrag.py.md#tokenize) function in `readmenator._graphrag`
+- [`tolerance`](modules/readmenator._graphlayout.py.md#forceatlas2settings-tolerance) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
+- [`tolerance`](modules/readmenator._rank.py.md#rankconfig-tolerance) attribute of `RankConfig` in `readmenator._rank`
+- [`TOOL_CALL_ERROR`](modules/readmenator._mcp_server.py.md#tool_call_error) constant in `readmenator._mcp_server`
+- [`top`](modules/readmenator._rank.py.md#rankedresult-top) method of `RankedResult` in `readmenator._rank`
+- [`top_n`](modules/readmenator._rank.py.md#rankconfig-top_n) attribute of `RankConfig` in `readmenator._rank`
+- [`total_impact`](modules/readmenator._models.py.md#changeimpact-total_impact) attribute of `ChangeImpact` in `readmenator._models`
+- [`transition_weight`](modules/readmenator._category.py.md#typedgraph-transition_weight) method of `TypedGraph` in `readmenator._category`
+- [`transitive_dependents`](modules/readmenator._models.py.md#changeimpact-transitive_dependents) attribute of `ChangeImpact` in `readmenator._models`
+- [`transitive_reduction`](modules/readmenator._flowcharts.py.md#transitive_reduction) function in `readmenator._flowcharts`
+- [`tree_positions`](modules/readmenator._video.py.md#cinematicvideorenderer-tree_positions) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`truncate_words`](modules/readmenator._purpose.py.md#truncate_words) function in `readmenator._purpose`
+- [`truncated`](modules/readmenator._sourceview.py.md#sourceentry-truncated) attribute of `SourceEntry` in `readmenator._sourceview`
+- [`TXT`](modules/readmenator._video.py.md#txt) constant in `readmenator._video`
+- [`type`](modules/readmenator._docstrings.py.md#docfield-type) attribute of `DocField` in `readmenator._docstrings`
+- [`TypedGraph`](modules/readmenator._category.py.md#typedgraph) class in `readmenator._category`
+
+<a id="u"></a>
+
+## U
+
+- [`uid`](modules/readmenator._apidocs.py.md#apientity-uid) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`uid`](modules/readmenator._apidocs.py.md#docwarning-uid) attribute of `DocWarning` in `readmenator._apidocs`
+- [`uml`](modules/readmenator._pipeline.py.md#analyzerfactory-uml) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`UML_ENABLED`](modules/readmenator._config.py.md#config-uml_enabled) attribute of `Config` in `readmenator._config`
+- [`UML_GENERATED_LANGUAGES`](modules/readmenator._config.py.md#config-uml_generated_languages) attribute of `Config` in `readmenator._config`
+- [`UML_MAX_CLASSES`](modules/readmenator._config.py.md#config-uml_max_classes) attribute of `Config` in `readmenator._config`
+- [`UmlGenerator`](modules/readmenator._uml.py.md#umlgenerator) class in `readmenator._uml`
+- [`UNASSIGNED_KEY`](modules/readmenator._bundlegraph.py.md#unassigned_key) constant in `readmenator._bundlegraph`
+- [`unit_id`](modules/readmenator._graphrag.py.md#ragtextunit-unit_id) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`update`](modules/readmenator._app.py.md#readmenatorapplication-update) method of `readmenatorApplication` in `readmenator._app`
+
+<a id="v"></a>
+
+## V
+
+- [`validate`](modules/readmenator._diagrams.py.md#systemmapvalidator-validate) method of `SystemMapValidator` in `readmenator._diagrams`
+- [`validate_yaralite`](modules/readmenator._app.py.md#readmenatorapplication-validate_yaralite) method of `readmenatorApplication` in `readmenator._app`
+- [`validate_yaralite_rules`](modules/readmenator._yaralite.py.md#validate_yaralite_rules) function in `readmenator._yaralite`
+- [`value`](modules/readmenator._apidocs.py.md#apientity-value) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`variable`](modules/readmenator._models.py.md#dataflowissue-variable) attribute of `DataflowIssue` in `readmenator._models`
+- [`vendor_href`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-vendor_href) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`vendor_source`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-vendor_source) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`verb`](modules/readmenator._models.py.md#conceptrelation-verb) attribute of `ConceptRelation` in `readmenator._models`
+- [`verb_for_relation`](modules/readmenator._concepts.py.md#verb_for_relation) function in `readmenator._concepts`
+- [`video`](modules/readmenator._pipeline.py.md#analyzerfactory-video) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`VIDEO_BUNDLE_BETA`](modules/readmenator._config.py.md#config-video_bundle_beta) attribute of `Config` in `readmenator._config`
+- [`VIDEO_BUNDLE_S`](modules/readmenator._config.py.md#config-video_bundle_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_BUNDLE_SAMPLES`](modules/readmenator._config.py.md#config-video_bundle_samples) attribute of `Config` in `readmenator._config`
+- [`VIDEO_CARD_S`](modules/readmenator._config.py.md#config-video_card_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_COMM_S`](modules/readmenator._config.py.md#config-video_comm_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_CRF`](modules/readmenator._config.py.md#config-video_crf) attribute of `Config` in `readmenator._config`
+- [`VIDEO_DNA_MAX_CELL`](modules/readmenator._config.py.md#config-video_dna_max_cell) attribute of `Config` in `readmenator._config`
+- [`VIDEO_DNA_S`](modules/readmenator._config.py.md#config-video_dna_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ENABLED`](modules/readmenator._config.py.md#config-video_enabled) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FA2_GRAVITY`](modules/readmenator._config.py.md#config-video_fa2_gravity) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FA2_ITERATIONS`](modules/readmenator._config.py.md#config-video_fa2_iterations) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FA2_LINLOG`](modules/readmenator._config.py.md#config-video_fa2_linlog) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FA2_SCALING`](modules/readmenator._config.py.md#config-video_fa2_scaling) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FA2_SNAPSHOTS`](modules/readmenator._config.py.md#config-video_fa2_snapshots) attribute of `Config` in `readmenator._config`
+- [`VIDEO_FPS`](modules/readmenator._config.py.md#config-video_fps) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GOD_S`](modules/readmenator._config.py.md#config-video_god_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GRAPH_LOOSE_STRIP`](modules/readmenator._config.py.md#config-video_graph_loose_strip) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GRAPH_S`](modules/readmenator._config.py.md#config-video_graph_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GRAPH_SPREAD`](modules/readmenator._config.py.md#config-video_graph_spread) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GRAPH_TRIM_FRACTION`](modules/readmenator._config.py.md#config-video_graph_trim_fraction) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HEIGHT`](modules/readmenator._config.py.md#config-video_height) attribute of `Config` in `readmenator._config`
+- [`VIDEO_INVITE_S`](modules/readmenator._config.py.md#config-video_invite_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_JOBS`](modules/readmenator._config.py.md#config-video_jobs) attribute of `Config` in `readmenator._config`
+- [`VIDEO_LAYER_S`](modules/readmenator._config.py.md#config-video_layer_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MAX_GRAPH_NODES`](modules/readmenator._config.py.md#config-video_max_graph_nodes) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MAX_LABEL_CHARS`](modules/readmenator._config.py.md#config-video_max_label_chars) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MOTION_BLUR_ACTS`](modules/readmenator._config.py.md#config-video_motion_blur_acts) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MOTION_BLUR_SAMPLES`](modules/readmenator._config.py.md#config-video_motion_blur_samples) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MOTION_BLUR_SHUTTER`](modules/readmenator._config.py.md#config-video_motion_blur_shutter) attribute of `Config` in `readmenator._config`
+- [`VIDEO_MUSIC_PATH`](modules/readmenator._config.py.md#config-video_music_path) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_DEPTH_FADE`](modules/readmenator._config.py.md#config-video_orbit_depth_fade) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_FA2_ITERATIONS`](modules/readmenator._config.py.md#config-video_orbit_fa2_iterations) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_LABELS`](modules/readmenator._config.py.md#config-video_orbit_labels) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_PERSPECTIVE`](modules/readmenator._config.py.md#config-video_orbit_perspective) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_PITCH_DEG`](modules/readmenator._config.py.md#config-video_orbit_pitch_deg) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_S`](modules/readmenator._config.py.md#config-video_orbit_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_TOUR_STOPS`](modules/readmenator._config.py.md#config-video_orbit_tour_stops) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_TURNS`](modules/readmenator._config.py.md#config-video_orbit_turns) attribute of `Config` in `readmenator._config`
+- [`VIDEO_ORBIT_ZOOM`](modules/readmenator._config.py.md#config-video_orbit_zoom) attribute of `Config` in `readmenator._config`
+- [`VIDEO_OUTPUT`](modules/readmenator._config.py.md#config-video_output) attribute of `Config` in `readmenator._config`
+- [`VIDEO_OUTRO_S`](modules/readmenator._config.py.md#config-video_outro_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_PREVIEW_LINES`](modules/readmenator._config.py.md#config-video_preview_lines) attribute of `Config` in `readmenator._config`
+- [`VIDEO_RANK_LABELS`](modules/readmenator._config.py.md#config-video_rank_labels) attribute of `Config` in `readmenator._config`
+- [`VIDEO_SPHERE_S`](modules/readmenator._config.py.md#config-video_sphere_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_SPHERE_SAMPLES`](modules/readmenator._config.py.md#config-video_sphere_samples) attribute of `Config` in `readmenator._config`
+- [`VIDEO_SPHERE_TURNS`](modules/readmenator._config.py.md#config-video_sphere_turns) attribute of `Config` in `readmenator._config`
+- [`VIDEO_SURFERS`](modules/readmenator._config.py.md#config-video_surfers) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TITLE_S`](modules/readmenator._config.py.md#config-video_title_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TRANSITION_GLITCH`](modules/readmenator._config.py.md#config-video_transition_glitch) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TRANSITION_S`](modules/readmenator._config.py.md#config-video_transition_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TREE_CHAR_PX`](modules/readmenator._config.py.md#config-video_tree_char_px) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TREE_LABEL_GAP`](modules/readmenator._config.py.md#config-video_tree_label_gap) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TREE_MAX_NODES`](modules/readmenator._config.py.md#config-video_tree_max_nodes) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TREE_RING_MARGIN`](modules/readmenator._config.py.md#config-video_tree_ring_margin) attribute of `Config` in `readmenator._config`
+- [`VIDEO_TREE_S`](modules/readmenator._config.py.md#config-video_tree_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_WIDTH`](modules/readmenator._config.py.md#config-video_width) attribute of `Config` in `readmenator._config`
+- [`view_id`](modules/readmenator._diagrams.py.md#mapview-view_id) attribute of `MapView` in `readmenator._diagrams`
+- [`views`](modules/readmenator._diagrams.py.md#systemmap-views) attribute of `SystemMap` in `readmenator._diagrams`
+- [`VIEWS`](modules/readmenator._projections.py.md#views) constant in `readmenator._projections`
+- [`violation_summary`](modules/readmenator._layer_rules.py.md#layerruleengine-violation_summary) staticmethod of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`VIOLET`](modules/readmenator._video.py.md#violet) constant in `readmenator._video`
+- [`vis_renderer`](modules/readmenator._pipeline.py.md#analyzerfactory-vis_renderer) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`visibility`](modules/readmenator._apidocs.py.md#apientity-visibility) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`VisNetworkRenderer`](modules/readmenator._diagrams.py.md#visnetworkrenderer) class in `readmenator._diagrams`
+
+<a id="w"></a>
+
+## W
+
+- [`walk`](modules/readmenator._flowcharts.py.md#executionflowbuilder-walk) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
+- [`WARN_EDGES`](modules/readmenator._layer_rules.py.md#layerruleengine-warn_edges) attribute of `LayerRuleEngine` in `readmenator._layer_rules`
+- [`WARN_PARAM_MISSING`](modules/readmenator._apidocs.py.md#warn_param_missing) constant in `readmenator._apidocs`
+- [`WARN_PARAM_UNKNOWN`](modules/readmenator._apidocs.py.md#warn_param_unknown) constant in `readmenator._apidocs`
+- [`WARN_RAISE_MISSING`](modules/readmenator._apidocs.py.md#warn_raise_missing) constant in `readmenator._apidocs`
+- [`WARN_RETURN_MISSING`](modules/readmenator._apidocs.py.md#warn_return_missing) constant in `readmenator._apidocs`
+- [`WARN_UNDOCUMENTED`](modules/readmenator._apidocs.py.md#warn_undocumented) constant in `readmenator._apidocs`
+- [`warnings`](modules/readmenator._apidocs.py.md#apireference-warnings) attribute of `ApiReference` in `readmenator._apidocs`
+- [`warnings`](modules/readmenator._diagrams.py.md#mapreceipt-warnings) attribute of `MapReceipt` in `readmenator._diagrams`
+- [`watch`](modules/readmenator._app.py.md#readmenatorapplication-watch) method of `readmenatorApplication` in `readmenator._app`
+- [`weight`](modules/readmenator._category.py.md#morphism-weight) property of `Morphism` in `readmenator._category`
+- [`weight`](modules/readmenator._graphrag.py.md#ragrelation-weight) attribute of `RagRelation` in `readmenator._graphrag`
+- [`wiki`](modules/readmenator._pipeline.py.md#analyzerfactory-wiki) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`WIKI_ENABLED`](modules/readmenator._config.py.md#config-wiki_enabled) attribute of `Config` in `readmenator._config`
+- [`WIKI_LARGE_FILE_KB`](modules/readmenator._config.py.md#config-wiki_large_file_kb) attribute of `Config` in `readmenator._config`
+- [`WIKI_MAX_CONNECTIONS`](modules/readmenator._config.py.md#config-wiki_max_connections) attribute of `Config` in `readmenator._config`
+- [`WIKI_MAX_FILES_PER_PAGE`](modules/readmenator._config.py.md#config-wiki_max_files_per_page) attribute of `Config` in `readmenator._config`
+- [`WIKI_MAX_SYMBOLS_PER_PAGE`](modules/readmenator._config.py.md#config-wiki_max_symbols_per_page) attribute of `Config` in `readmenator._config`
+- [`WIKI_OUTPUT_DIR`](modules/readmenator._config.py.md#config-wiki_output_dir) attribute of `Config` in `readmenator._config`
+- [`wiki_output_dir`](modules/readmenator_orchestrator.py.md#config-wiki_output_dir) attribute of `Config` in `readmenator_orchestrator`
+- [`wiki_remote`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-wiki_remote) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
+- [`WikiGenerator`](modules/readmenator._wiki.py.md#wikigenerator) class in `readmenator._wiki`
+- [`WikiPublishResult`](modules/readmenator._gh_wiki.py.md#wikipublishresult) class in `readmenator._gh_wiki`
+- [`write`](modules/readmenator._apidocs_render.py.md#apidocswriter-write) method of `ApiDocsWriter` in `readmenator._apidocs_render`
+- [`write`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-write) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
+- [`write`](modules/readmenator._components.py.md#componentdiagrambuilder-write) method of `ComponentDiagramBuilder` in `readmenator._components`
+- [`write`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-write) method of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`write`](modules/readmenator._graphrag.py.md#graphragstore-write) method of `GraphRagStore` in `readmenator._graphrag`
+- [`write`](modules/readmenator._diagrams.py.md#interactivemaprenderer-write) method of `InteractiveMapRenderer` in `readmenator._diagrams`
+- [`write`](modules/readmenator._memory.py.md#projectmemory-write) method of `ProjectMemory` in `readmenator._memory`
+- [`write`](modules/readmenator._diagrams.py.md#visnetworkrenderer-write) method of `VisNetworkRenderer` in `readmenator._diagrams`
+- [`write_rules`](modules/readmenator._rule_gen.py.md#rulegenerator-write_rules) method of `RuleGenerator` in `readmenator._rule_gen`
+- [`write_static`](modules/readmenator._explorer.py.md#write_static) function in `readmenator._explorer`
+
+<a id="x"></a>
+
+## X
+
+- [`x`](modules/readmenator._diagrams.py.md#mapnode-x) attribute of `MapNode` in `readmenator._diagrams`
+
+<a id="y"></a>
+
+## Y
+
+- [`y`](modules/readmenator._diagrams.py.md#mapnode-y) attribute of `MapNode` in `readmenator._diagrams`
+- [`YARALITE_ENABLED`](modules/readmenator._config.py.md#config-yaralite_enabled) attribute of `Config` in `readmenator._config`
+- [`YARALITE_MAX_HITS_PER_ID`](modules/readmenator._config.py.md#config-yaralite_max_hits_per_id) attribute of `Config` in `readmenator._config`
+- [`YARALITE_RULES_FILE`](modules/readmenator._config.py.md#config-yaralite_rules_file) attribute of `Config` in `readmenator._config`
+- [`YaraLiteHit`](modules/readmenator._yaralite.py.md#yaralitehit) class in `readmenator._yaralite`
+- [`YaraLiteMatch`](modules/readmenator._yaralite.py.md#yaralitematch) class in `readmenator._yaralite`
+- [`YaraLiteRule`](modules/readmenator._yaralite.py.md#yaraliterule) class in `readmenator._yaralite`
+- [`YaraLiteString`](modules/readmenator._yaralite.py.md#yaralitestring) class in `readmenator._yaralite`
+- [`YELLOW`](modules/readmenator._video.py.md#yellow) constant in `readmenator._video`
+- [`yields`](modules/readmenator._docstrings.py.md#doccomment-yields) attribute of `DocComment` in `readmenator._docstrings`

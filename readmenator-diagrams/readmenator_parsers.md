@@ -22,7 +22,7 @@ tests groups 6 files (py) around TestHotspotAnalyzerContract, setUp, _make_node,
 - readmenator/_hotspots.py
 - readmenator/_mermaid.py
 - readmenator/_models.py
-- readmenator/_refactorizer.py
+- readmenator/_rule_gen.py
 - readmenator/_sarif.py
 - readmenator/parsers/__init__.py
 - readmenator/parsers/_assembly.py
@@ -49,5 +49,5 @@ tests groups 6 files (py) around TestHotspotAnalyzerContract, setUp, _make_node,
 - tests/test_mermaid.py
 - tests/test_models.py
 - tests/test_parsers_property.py
-- tests/test_refactorizer.py
+- tests/test_rule_gen.py
 - tests/test_sarif.py

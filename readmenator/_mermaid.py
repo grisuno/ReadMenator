@@ -32,7 +32,23 @@ class MermaidRenderer:
         function_style: str = "fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa",
         external_style: str = "fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa",
         internal_edge_style: str = "stroke:#88aaff,stroke-width:1px",
+        max_edges: int = 480,
+        max_internal_edges: int = 100,
     ) -> None:
+        """Initialise rendering budgets and styles.
+
+        Args:
+            max_nodes: Maximum file nodes drawn.
+            max_symbols_per_file: Symbol budget per file.
+            module_style: classDef style for files.
+            class_style: classDef style for class-like symbols.
+            function_style: classDef style for callables.
+            external_style: classDef style for external imports.
+            internal_edge_style: Style for internal import edges.
+            max_edges: Total edge budget; Mermaid refuses to render more than
+                500 edges, so the default stays below that hard limit.
+            max_internal_edges: Budget for project-internal import edges.
+        """
         self._max_nodes = max_nodes
         self._max_symbols = max_symbols_per_file
         self._module_style = module_style
@@ -40,6 +56,8 @@ class MermaidRenderer:
         self._function_style = function_style
         self._external_style = external_style
         self._internal_edge_style = internal_edge_style
+        self._max_edges = max_edges
+        self._max_internal_edges = max_internal_edges
 
     @staticmethod
     def _sanitize_id(node_id: str) -> str:
@@ -104,6 +122,7 @@ class MermaidRenderer:
                 for fid in c.file_ids:
                     community_map[fid] = c.community_id
 
+        edge_count = 0
         rendered_communities: Set[int] = set()
         pending_subgraph_close = False
 
@@ -148,6 +167,9 @@ class MermaidRenderer:
             else:
                 sym_limit = 0
             for symbol in node.symbols[:sym_limit]:
+                if edge_count >= self._max_edges:
+                    is_truncated = True
+                    break
                 symbol_id = f"{safe_id}_{self._sanitize_id(symbol.name)}"
                 symbol_label = symbol.name.replace('"', '\\"')
                 lines.append(f'    {symbol_id}["{symbol_label}"]')
@@ -157,6 +179,7 @@ class MermaidRenderer:
                 else:
                     lines.append(f"    class {symbol_id} fn;")
                 lines.append(f"    {safe_id} --> {symbol_id}")
+                edge_count += 1
                 symbol_count += 1
 
         if pending_subgraph_close:
@@ -166,7 +189,7 @@ class MermaidRenderer:
         if resolved_edges and not is_truncated:
             file_ids = {n.node_id for n in nodes}
             for edge in resolved_edges:
-                if internal_edge_count >= 100:
+                if internal_edge_count >= self._max_internal_edges or edge_count >= self._max_edges:
                     break
                 src_safe = self._sanitize_id(edge.source)
                 tgt_safe = self._sanitize_id(edge.target)
@@ -177,6 +200,7 @@ class MermaidRenderer:
                         f"    {src_safe} -- {edge.relation} --> {tgt_safe}"
                     )
                     internal_edge_count += 1
+                    edge_count += 1
 
         ext_node_count = 0
         for edge in edges:
@@ -185,6 +209,9 @@ class MermaidRenderer:
             src = self._sanitize_id(edge.source)
             if src not in seen_ids:
                 continue
+            if edge_count >= self._max_edges:
+                is_truncated = True
+                break
             target_id = self._sanitize_id(f"ext_{edge.target}")
             target_label = edge.target.split("/")[-1].replace('"', '\\"')
             if target_id not in seen_ids:
@@ -196,5 +223,6 @@ class MermaidRenderer:
                 seen_ids.add(target_id)
                 ext_node_count += 1
             lines.append(f"    {src} -.->|imports| {target_id}")
+            edge_count += 1
 
         return "\n".join(lines), is_truncated

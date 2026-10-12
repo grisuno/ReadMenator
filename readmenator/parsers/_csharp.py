@@ -22,7 +22,7 @@ class CSharpParser(LanguageParser):
             r"(?:public|private|protected|internal)?\s*(?:static\s+)?(?:class|struct|interface|record)\s+(\w+)",
             content,
         ):
-            line_num = content[: m.start()].count("\n")
+            line_num = content[: m.start(1)].count("\n")
             self.symbols.append(
                 Symbol(
                     name=m.group(1),
@@ -32,11 +32,11 @@ class CSharpParser(LanguageParser):
                 )
             )
         method_pattern = r"(?:public|private|protected|internal)?\s*(?:static\s+)?(?:virtual\s+)?(?:override\s+)?(?:async\s+)?(?:[\w<>\[\]]+\s+)+(\w+)\s*\([^)]*\)\s*\{"
-        reserved = {"if", "for", "while", "switch", "catch"}
+        reserved = {"if", "for", "while", "switch", "catch", "return", "new", "throw", "else", "await", "typeof", "function", "do"}
         for m in re.finditer(method_pattern, content):
             name = m.group(1)
             if name not in reserved:
-                line_num = content[: m.start()].count("\n")
+                line_num = content[: m.start(1)].count("\n")
                 self.symbols.append(
                     Symbol(
                         name=name,

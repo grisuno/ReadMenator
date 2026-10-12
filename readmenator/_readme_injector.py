@@ -40,6 +40,11 @@ a zero-token polyglot static analysis tool. Regenerate with
   - `REPORT.md` -- Honest audit: coverage, confidence, limits
 - **[{graphrag_output_dir}/](./{graphrag_output_dir}/)** -- Zero-token GraphRAG index.
   - `index.json` + `REPORTS.md` -- Query with `readmenator . ask "<question>"`
+- **[{apidocs_output_dir}/](./{apidocs_output_dir}/)** -- API reference (Sphinx/Doxygen style).
+  - `index.md` + `modules/*.md` -- Signatures, parameters, returns, raises, examples, call graphs
+  - `architecture.md` -- Tiered architecture + execution flows (control flow, call tree, sequence)
+  - `classes.md`, `genindex.md`, `COVERAGE.md` -- Hierarchy, A-Z index, doc coverage + warnings
+  - `index.html` + `api.json` -- Offline searchable browser and machine-readable model
 - **[{maps_output_dir}/](./{maps_output_dir}/)** -- Interactive gallery (`index.html`).
   - 5 system maps: architecture, workflow, sequence, dataflow, lifecycle
   - `{forcegraph_output}` -- Force-graph explorer (2D/3D, reach, paths, lenses)
@@ -92,6 +97,8 @@ a zero-token polyglot static analysis tool. Regenerate with
   - ``community_*.md`` -- One synthesis page per code community
   - ``REPORT.md`` -- Honest audit: coverage, confidence, limits
 - **{graphrag_output_dir}/** -- Zero-token GraphRAG index (``readmenator . ask``).
+- **{apidocs_output_dir}/** -- API reference (``index.md``, ``modules/``, ``architecture.md``,
+  ``COVERAGE.md``, offline ``index.html``, ``api.json``).
 - **{maps_output_dir}/** -- Interactive gallery (``index.html``): 5 system maps,
   ``{forcegraph_output}``, ``{bundlegraph_output}``, ``components.html``.
 - **{pages_dir}/** -- Static site (gallery copy + ``{llms_txt}`` + video).
@@ -141,6 +148,7 @@ class ReadmeInjector:
         llms_txt: str = "llms.txt",
         forcegraph_output: str = "graph-force.html",
         bundlegraph_output: str = "graph-bundle.html",
+        apidocs_output_dir: str = "readmenator-apidocs",
     ) -> None:
         """Initialise the injector with output locations.
 
@@ -161,6 +169,7 @@ class ReadmeInjector:
             llms_txt: Site llms.txt filename.
             forcegraph_output: Force-graph explorer filename.
             bundlegraph_output: Edge bundle explorer filename.
+            apidocs_output_dir: API reference output directory.
         """
         self._kb_filename = kb_filename
         self._agent_output_dir = agent_output_dir
@@ -178,6 +187,7 @@ class ReadmeInjector:
         self._llms_txt = llms_txt
         self._forcegraph_output = forcegraph_output
         self._bundlegraph_output = bundlegraph_output
+        self._apidocs_output_dir = apidocs_output_dir
 
     def inject(self, project_root: str) -> bool:
         """Inject or refresh the knowledge base section in the README.
@@ -351,6 +361,7 @@ class ReadmeInjector:
             llms_txt=self._llms_txt,
             forcegraph_output=self._forcegraph_output,
             bundlegraph_output=self._bundlegraph_output,
+            apidocs_output_dir=self._apidocs_output_dir,
         )
         if suffix == ".rst":
             return _INJECTION_TEXT_RST.format(**kwargs)

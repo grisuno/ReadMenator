@@ -87,3 +87,16 @@ class TestMermaidRendererContract(unittest.TestCase):
         output, _ = self.renderer.render([node], [])
         self.assertNotIn("my-project/src/foo-bar.ts", output)
         self.assertIn("my_project", output)
+
+
+class TestMermaidEdgeBudget(unittest.TestCase):
+    """Contract: the structural map never exceeds Mermaid's 500-edge render limit."""
+
+    def test_mermaid_edge_budget_truncates(self) -> None:
+        nodes = [Node(f"f{i}.py", f"f{i}.py", "module", "py", "", []) for i in range(40)]
+        edges = [Edge(f"f{i}.py", f"ext{j}", "imports") for i in range(40) for j in range(20)]
+        source, truncated = MermaidRenderer(max_edges=120).render(nodes, edges)
+        arrows = sum(1 for line in source.splitlines() if "-->" in line or "-.->" in line)
+        self.assertLessEqual(arrows, 120)
+        self.assertTrue(truncated)
+

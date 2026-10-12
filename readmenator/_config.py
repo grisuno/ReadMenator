@@ -45,6 +45,10 @@ class Config:
 
     MERMAID_MAX_SYMBOLS_PER_FILE: int = 5
 
+    MERMAID_MAX_EDGES: int = 480
+
+    MERMAID_MAX_INTERNAL_EDGES: int = 100
+
     MERMAID_MODULE_STYLE: str = "fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff"
 
     MERMAID_CLASS_STYLE: str = "fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff"
@@ -800,6 +804,16 @@ class Config:
 
     VIDEO_SPHERE_SAMPLES: int = 18
 
+    VIDEO_TRANSITION_S: float = 0.45
+
+    VIDEO_TRANSITION_GLITCH: float = 0.35
+
+    VIDEO_MOTION_BLUR_SAMPLES: int = 3
+
+    VIDEO_MOTION_BLUR_SHUTTER: float = 0.5
+
+    VIDEO_MOTION_BLUR_ACTS: Tuple[str, ...] = ("orbit", "sphere", "invite")
+
     BUNDLEGRAPH_ENABLED: bool = True
 
     BUNDLEGRAPH_OUTPUT: str = "graph-bundle.html"
@@ -848,11 +862,29 @@ class Config:
 
     BUNDLEGRAPH_THUMB_SAMPLES: int = 12
 
+    BUNDLEGRAPH_ORDER_OPTIMIZE: bool = True
+
+    BUNDLEGRAPH_ORDER_SWEEPS: int = 6
+
+    BUNDLEGRAPH_ORDER_PASSES: int = 8
+
+    BUNDLEGRAPH_SPHERE_REFINE_SWEEPS: int = 4
+
     FORCEGRAPH_THUMB_WIDTH: int = 320
 
     FORCEGRAPH_THUMB_HEIGHT: int = 150
 
     FORCEGRAPH_THUMB_ITERATIONS: int = 150
+
+    FORCEGRAPH_SEED_LAYOUT: bool = True
+
+    FORCEGRAPH_SEED_ITERATIONS: int = 220
+
+    FORCEGRAPH_SEED_GRAVITY: float = 1.0
+
+    FORCEGRAPH_SEED_MAX_NODES: int = 3000
+
+    FORCEGRAPH_SEED_VELOCITY_DECAY: float = 0.55
 
     FORCEGRAPH_LAYER_COLORS: Tuple[Tuple[str, str], ...] = (
         ("presentation", "#22d3ee"),
@@ -999,6 +1031,8 @@ class Config:
 
     LINTER_UNRESOLVED_CALLS: bool = True
 
+    SYMINDEX_RECEIVER_WINDOW: int = 160
+
     COMPONENTS_ENABLED: bool = True
 
     COMPONENTS_OUTPUT_DIR: str = "readmenator-diagrams"
@@ -1040,3 +1074,79 @@ class Config:
     SOURCEVIEW_CHUNK_LINES: int = 300
 
     SOURCEVIEW_CONTEXT_LINES: int = 3
+
+    APIDOCS_ENABLED: bool = True
+
+    APIDOCS_OUTPUT_DIR: str = "readmenator-apidocs"
+
+    APIDOCS_MODULES_SUBDIR: str = "modules"
+
+    APIDOCS_INCLUDE_PRIVATE: bool = False
+
+    APIDOCS_INCLUDE_TESTS: bool = False
+
+    APIDOCS_TEST_PATH_TOKENS: Tuple[str, ...] = (
+        "test", "tests", "spec", "specs", "__tests__", "testing", "conftest",
+    )
+
+    APIDOCS_SKIP_SUFFIXES: Tuple[str, ...] = (".min.js", ".min.mjs", ".bundle.js", ".min.css")
+
+    APIDOCS_EXCLUDE_DIRS: Tuple[str, ...] = (
+        "vendor", "_vendor", "third_party", "thirdparty", "external", "node_modules",
+    )
+
+    APIDOCS_MAX_ENTITIES: int = 20000
+
+    APIDOCS_DOC_LOOKBACK_LINES: int = 80
+
+    APIDOCS_BRACE_SCAN_LINES: int = 12
+
+    APIDOCS_MAX_CALL_REFS: int = 12
+
+    APIDOCS_CALLGRAPH_MAX_EDGES: int = 24
+
+    APIDOCS_SUMMARY_MAX_CHARS: int = 160
+
+    APIDOCS_HTML_ENABLED: bool = True
+
+    APIDOCS_HTML_FILENAME: str = "index.html"
+
+    APIDOCS_JSON_FILENAME: str = "api.json"
+
+    APIDOCS_ARCHITECTURE_FILENAME: str = "architecture.md"
+
+    APIDOCS_SCHEMA_VERSION: int = 1
+
+    APIDOCS_MERMAID_CDN_JS: str = "https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"
+
+    APIDOCS_COVERAGE_FAIL_UNDER: float = 0.0
+
+    APIDOCS_MAX_WARNINGS_LISTED: int = 500
+
+    ARCH_DIAGRAM_ENABLED: bool = True
+
+    ARCH_DIAGRAM_INCLUDE_TESTS: bool = False
+
+    ARCH_DIAGRAM_MAX_COMPONENTS: int = 40
+
+    ARCH_DIAGRAM_LABEL_CHARS: int = 36
+
+    FLOW_ENABLED: bool = True
+
+    FLOW_MAX_ENTRYPOINTS: int = 3
+
+    FLOW_MIN_ENTRY_SCORE: int = 3
+
+    FLOW_SOURCE_MIN_CALLS: int = 3
+
+    FLOW_MAX_DEPTH: int = 4
+
+    FLOW_MAX_STEPS: int = 40
+
+    FLOW_LABEL_CHARS: int = 48
+
+    FLOW_SEQUENCE_MAX_MESSAGES: int = 30
+
+    FLOW_CFG_MAX_NODES: int = 60
+
+    FLOW_SWITCH_MIN_CASES: int = 3

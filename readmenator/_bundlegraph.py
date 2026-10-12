@@ -22,7 +22,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from readmenator._bundlegraph_page import BUNDLEGRAPH_PAGE_TEMPLATE
 from readmenator._config import Config
 from readmenator._forcegraph import ForceGraphRenderer
-from readmenator._graphlayout import hierarchical_edge_bundling, spherical_edge_bundling
+from readmenator._graphlayout import hierarchical_edge_bundling, optimize_bundle_order, spherical_edge_bundling
 
 _PLACEHOLDER = re.compile(r"__(TITLE|HOME|EXPLORER|DATA|SETTINGS)__")
 
@@ -60,10 +60,13 @@ class BundleGraphRenderer:
     def build_payload(self, force_payload: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Any]:
         """Derive the bundle payload from a force-graph payload.
 
-        Communities keep the analyzer order (largest first) and files
-        without a community form a trailing unassigned group. Inside a
-        group files are ordered by PageRank, so hubs sit at the center
-        of their arc and cap. Edges are distinct directed file pairs.
+        Communities start in analyzer order (largest first) and files
+        without a community form a trailing unassigned group. With
+        BUNDLEGRAPH_ORDER_OPTIMIZE the group order and member order are
+        then optimized to shorten bundles (optimize_bundle_order: 2-opt
+        group order, center-out hubs, barycentric sweeps) and members
+        inside each sphere cap face their neighbours. Edges are distinct
+        directed file pairs.
 
         Args:
             force_payload: Payload from ForceGraphRenderer.build_payload.
@@ -92,11 +95,29 @@ class BundleGraphRenderer:
         members: Dict[str, List[str]] = {key: [] for key in keys}
         for node in sorted(files, key=lambda n: (-float(n.get("rank", 0.0)), str(n["id"]))):
             members[member_key[node["id"]]].append(node["id"])
+        file_ids = set(member_key)
+        id_edges = sorted({
+            (str(e["source"]), str(e["target"]))
+            for e in force_payload.get("edges", [])
+            if e.get("type") in BUNDLE_RELATIONS
+            and e.get("source") in file_ids and e.get("target") in file_ids
+            and e["source"] != e["target"]
+        })
+        if cfg.BUNDLEGRAPH_ORDER_OPTIMIZE:
+            members = optimize_bundle_order(
+                members, id_edges, cfg.BUNDLEGRAPH_ORDER_SWEEPS, cfg.BUNDLEGRAPH_ORDER_PASSES,
+                cfg.BUNDLEGRAPH_GROUP_GAP,
+            )
+            keys = list(members)
         circle = hierarchical_edge_bundling(
             members, [], (0.0, 0.0), 1.0, group_gap=cfg.BUNDLEGRAPH_GROUP_GAP,
             inner_ratio=cfg.BUNDLEGRAPH_INNER_RATIO,
         )
-        sphere = spherical_edge_bundling(members, [], 1.0, inner_ratio=cfg.BUNDLEGRAPH_INNER_RATIO)
+        sphere = spherical_edge_bundling(
+            members, [], 1.0, inner_ratio=cfg.BUNDLEGRAPH_INNER_RATIO,
+            refine_sweeps=cfg.BUNDLEGRAPH_SPHERE_REFINE_SWEEPS if cfg.BUNDLEGRAPH_ORDER_OPTIMIZE else 0,
+            affinity_edges=id_edges,
+        )
         group_index = {key: i for i, key in enumerate(keys)}
         caps = {label: center for label, center, _count in sphere.groups}
         fallback = self._force.node_palette().get("file", "#4f8ef7")
@@ -285,7 +306,7 @@ class BundleGraphRenderer:
             return ""
         w, h = cfg.FORCEGRAPH_THUMB_WIDTH, cfg.FORCEGRAPH_THUMB_HEIGHT
         members: Dict[str, List[str]] = {str(g): [] for g in range(len(payload["groups"]))}
-        for node in sorted(nodes, key=lambda n: (-n["r"], n["id"])):
+        for node in sorted(nodes, key=lambda n: ((n["a"] - float(payload["groups"][n["g"]]["a0"])), n["id"])):
             members[str(node["g"])].append(node["id"])
         ranked = sorted(
             payload["edges"],

@@ -1,6 +1,152 @@
 # Subsystem: readmenator (page 4 of 4)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_refactorizer.py
+- Doc: Monolithic file refactoring planner for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `MonolithRefactorizer` (class, line 24) `class MonolithRefactorizer`
+  - `__init__` (method, line 32) `def __init__(self, config)`
+  - `analyze` (method, line 35) `def analyze(self, nodes, edges, resolved_edges, content_map)`
+  - `_get_line_count` (method, line 70) `def _get_line_count(self, file_id, content_map)`
+  - `_plan_refactoring` (method, line 82) `def _plan_refactoring(self, node, edges, resolved_edges, content_map)`
+  - `_group_symbols_by_kind` (method, line 126) `def _group_symbols_by_kind(self, symbols)`
+  - `_suggest_target_file` (method, line 132) `def _suggest_target_file(self, source_file, kind)`
+  - `_estimate_impact` (method, line 147) `def _estimate_impact(self, file_id, resolved_edges)`
+  - `generate_script` (method, line 156) `def generate_script(self, plan, project_root)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_app.py`, `tests/test_refactorizer.py`
+
+## readmenator/_resolver.py
+- Doc: Import path resolver for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ImportResolver` (class, line 18) `class ImportResolver`
+  - `__init__` (method, line 61) `def __init__(self, file_ids, root, extensions, include_dirs)`
+  - `_build_stem_index` (method, line 83) `def _build_stem_index(self, file_ids)`
+  - `_build_dir_index` (method, line 93) `def _build_dir_index(self, file_ids)`
+  - `resolve` (method, line 110) `def resolve(self, import_str, source_file)`
+  - `resolve_all` (method, line 163) `def resolve_all(self, import_str, source_file)`
+  - `_resolve_include_dirs` (method, line 179) `def _resolve_include_dirs(self, import_str)`
+  - `_resolve_relative` (method, line 199) `def _resolve_relative(self, import_str, source_file)`
+  - `_resolve_verbatim` (method, line 217) `def _resolve_verbatim(self, import_str, source_file)`
+  - `_resolve_extensionless` (method, line 235) `def _resolve_extensionless(self, import_str, source_file)`
+  - `_resolve_directory_init` (method, line 244) `def _resolve_directory_init(self, import_str, source_file)`
+  - `_resolve_root_package` (method, line 254) `def _resolve_root_package(self, import_str)`
+  - `_resolve_module_dotpath` (method, line 269) `def _resolve_module_dotpath(self, import_str)`
+  - `_resolve_suffix_match` (method, line 291) `def _resolve_suffix_match(self, import_str)`
+  - `_resolve_basename_match` (method, line 306) `def _resolve_basename_match(self, import_str)`
+  - `_resolve_stem_match` (method, line 324) `def _resolve_stem_match(self, import_str)`
+  - `_strip_extension` (method, line 333) `def _strip_extension(self, name)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `tests/test_agent_friendliness.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_rule_gen.py
+- Doc: Suggested linting rule generator producing Semgrep YAML from detected antipatterns.
+- Layer: business_logic
+- Language: py
+- Symbols:
+  - `RuleGenerator` (class, line 14) `class RuleGenerator`
+  - `__init__` (method, line 90) `def __init__(self, config)`
+  - `generate` (method, line 94) `def generate(self, nodes, content_map)`
+  - `write_rules` (method, line 122) `def write_rules(self, rules, output_dir)`
+  - `_group_by_language` (method, line 161) `def _group_by_language(self, nodes)`
+  - `_analyze_language` (method, line 171) `def _analyze_language(self, lang, nodes, content_map)`
+  - `_detect_antipatterns` (method, line 204) `def _detect_antipatterns(self, nodes, content_map)`
+  - `_infer_language_for_rule` (method, line 250) `def _infer_language_for_rule(rule_id)`
+  - `_next_rule_id` (method, line 260) `def _next_rule_id(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_rule_gen.py`
+
+## readmenator/_sarif.py
+- Doc: SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible).
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SarifExporter` (class, line 11) `class SarifExporter`
+  - `__init__` (method, line 30) `def __init__(self, privacy_mode)`
+  - `export` (method, line 33) `def export(self, findings, project_name)`
+  - `_build_rule` (method, line 82) `def _build_rule(self, finding)`
+  - `_build_result` (method, line 106) `def _build_result(self, finding, rule_index)`
+- Depends on: `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_sarif.py`
+
+## readmenator/_scanner.py
+- Doc: Secure polyglot directory traversal and file analysis.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `PolyglotScanner` (class, line 28) `class PolyglotScanner`
+  - `__init__` (method, line 39) `def __init__(self, config)`
+  - `_is_ignored` (method, line 50) `def _is_ignored(self, path)`
+  - `_is_generated` (method, line 57) `def _is_generated(self, rel_path)`
+  - `_load_gitignore` (method, line 84) `def _load_gitignore(self, root)`
+  - `_gitignore_glob_to_regex` (method, line 106) `def _gitignore_glob_to_regex(pattern)`
+  - `_is_gitignored` (method, line 146) `def _is_gitignored(self, rel_path)`
+  - `_validate_path_security` (method, line 155) `def _validate_path_security(self, path)`
+  - `_check_directory_depth` (method, line 168) `def _check_directory_depth(self, path, root)`
+  - `_extract_file_doc` (method, line 176) `def _extract_file_doc(self, content)`
+  - `_emit_progress` (method, line 252) `def _emit_progress(self, count)`
+  - `scan` (method, line 262) `def scan(self, root)`
+  - `scan_with_content` (method, line 276) `def scan_with_content(self, root)`
+  - `_scan_impl` (method, line 287) `def _scan_impl(self, root)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/__init__.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_scantext.py
+- Doc: Synthesized scan-text builder for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ScanTextBuilder` (class, line 16) `class ScanTextBuilder`
+  - `__init__` (method, line 19) `def __init__(self, config)`
+  - `build_for_node` (method, line 27) `def build_for_node(self, node, content, imports)`
+  - `build_corpus` (method, line 67) `def build_corpus(self, nodes, content_map, edges)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
+
+## readmenator/_security.py
+- Doc: Pattern-based static security analysis for the readmenator knowledge graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `SecurityRule` (class, line 24) `class SecurityRule`
+  - `_parse_minimal_yaml` (function, line 46) `def _parse_minimal_yaml(text)`
+  - `_unquote` (function, line 121) `def _unquote(s)`
+  - `_load_rules_from_yaml` (function, line 128) `def _load_rules_from_yaml(yaml_path)`
+  - `_compile` (function, line 148) `def _compile()`
+  - `_python_rules` (function, line 153) `def _python_rules()`
+  - `_javascript_rules` (function, line 182) `def _javascript_rules()`
+  - `_c_rules` (function, line 201) `def _c_rules()`
+  - `_java_rules` (function, line 222) `def _java_rules()`
+  - `_go_rules` (function, line 237) `def _go_rules()`
+  - `_ruby_rules` (function, line 250) `def _ruby_rules()`
+  - `_php_rules` (function, line 267) `def _php_rules()`
+  - `_shell_rules` (function, line 284) `def _shell_rules()`
+  - `_csharp_rules` (function, line 297) `def _csharp_rules()`
+  - `_kotlin_rules` (function, line 310) `def _kotlin_rules()`
+  - `_swift_rules` (function, line 321) `def _swift_rules()`
+  - `_scala_rules` (function, line 332) `def _scala_rules()`
+  - `_lua_rules` (function, line 343) `def _lua_rules()`
+  - `_dart_rules` (function, line 354) `def _dart_rules()`
+  - `_rust_rules` (function, line 365) `def _rust_rules()`
+  - `_nim_rules` (function, line 376) `def _nim_rules()`
+  - `_gdscript_rules` (function, line 387) `def _gdscript_rules()`
+  - `_elixir_rules` (function, line 398) `def _elixir_rules()`
+  - `_build_rules_from_yaml` (function, line 447) `def _build_rules_from_yaml(yaml_path)`
+  - `SecurityAnalyzer` (class, line 486) `class SecurityAnalyzer`
+  - `fix_hint_for` (function, line 620) `def fix_hint_for(finding)`
+  - `__init__` (method, line 496) `def __init__(self, config)`
+  - `_resolve_rules` (method, line 500) `def _resolve_rules(self)`
+  - `_meets_threshold` (method, line 509) `def _meets_threshold(self, severity)`
+  - `scan` (method, line 513) `def scan(self, root)`
+  - `_validate_path` (method, line 555) `def _validate_path(self, path, root)`
+  - `summary` (method, line 572) `def summary(self, findings)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_pipeline.py`, `readmenator/_wiki.py`, `tests/test_security.py`
+
 ## readmenator/_skill_installer.py
 - Doc: Installs the packaged ReadMenator agent skills into a project.
 - Layer: utility
@@ -37,29 +183,30 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `SymbolDef` (class, line 40) `class SymbolDef`
-  - `CallSite` (class, line 65) `class CallSite`
-  - `ResolvedCall` (class, line 84) `class ResolvedCall`
-  - `_kind_to_node_type` (method, line 104) `def _kind_to_node_type(kind)`
-  - `SymbolIndex` (class, line 114) `class SymbolIndex`
-  - `__init__` (method, line 117) `def __init__(self, config)`
-  - `build` (method, line 126) `def build(self, nodes, content_map)`
-  - `methods_index` (method, line 166) `def methods_index(self, index)`
-  - `extract_call_sites` (method, line 194) `def extract_call_sites(self, file_id, content, language, symbols)`
-  - `resolve` (method, line 219) `def resolve(self, nodes, edges, resolved_edges, content_map)`
-  - `_resolve_one` (method, line 268) `def _resolve_one(self, site, by_name, imports_of)`
-  - `_edge_call_sites` (method, line 313) `def _edge_call_sites(self, edges)`
-  - `_python_call_sites` (method, line 330) `def _python_call_sites(self, file_id, content)`
-  - `_regex_call_sites` (method, line 401) `def _regex_call_sites(self, file_id, content, symbols)`
-  - `_Visitor` (class, line 347) `class _Visitor(NodeVisitor)`
-  - `_push` (method, line 350) `def _push(self, node)`
-  - `_pop` (method, line 356) `def _pop(self, node)`
-  - `visit_ClassDef` (method, line 361) `def visit_ClassDef(self, node)`
-  - `visit_FunctionDef` (method, line 367) `def visit_FunctionDef(self, node)`
-  - `visit_AsyncFunctionDef` (method, line 373) `def visit_AsyncFunctionDef(self, node)`
-  - `visit_Call` (method, line 379) `def visit_Call(self, node)`
+  - `_receiver_text` (function, line 42) `def _receiver_text(node)`
+  - `SymbolDef` (class, line 56) `class SymbolDef`
+  - `CallSite` (class, line 81) `class CallSite`
+  - `ResolvedCall` (class, line 102) `class ResolvedCall`
+  - `_kind_to_node_type` (function, line 122) `def _kind_to_node_type(kind)`
+  - `SymbolIndex` (class, line 132) `class SymbolIndex`
+  - `__init__` (method, line 135) `def __init__(self, config)`
+  - `build` (method, line 144) `def build(self, nodes, content_map)`
+  - `methods_index` (method, line 184) `def methods_index(self, index)`
+  - `extract_call_sites` (method, line 212) `def extract_call_sites(self, file_id, content, language, symbols)`
+  - `resolve` (method, line 237) `def resolve(self, nodes, edges, resolved_edges, content_map)`
+  - `_resolve_one` (method, line 286) `def _resolve_one(self, site, by_name, imports_of)`
+  - `_edge_call_sites` (method, line 331) `def _edge_call_sites(self, edges)`
+  - `_python_call_sites` (method, line 348) `def _python_call_sites(self, file_id, content)`
+  - `_regex_call_sites` (method, line 422) `def _regex_call_sites(self, file_id, content, symbols)`
+  - `_Visitor` (class, line 365) `class _Visitor(NodeVisitor)`
+  - `_push` (method, line 368) `def _push(self, node)`
+  - `_pop` (method, line 374) `def _pop(self, node)`
+  - `visit_ClassDef` (method, line 379) `def visit_ClassDef(self, node)`
+  - `visit_FunctionDef` (method, line 385) `def visit_FunctionDef(self, node)`
+  - `visit_AsyncFunctionDef` (method, line 391) `def visit_AsyncFunctionDef(self, node)`
+  - `visit_Call` (method, line 397) `def visit_Call(self, node)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/_components.py`, `readmenator/_linter.py`, `readmenator/_pipeline.py`, `tests/test_symindex.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_apidocs.py`, `readmenator/_components.py`, `readmenator/_flowcharts.py`, `readmenator/_linter.py`, `readmenator/_pipeline.py`, `tests/test_symindex.py`
 
 ## readmenator/_taint.py
 - Doc: Taint propagation analysis of dangerous imports through the resolved import graph.
@@ -81,25 +228,25 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Language: py
 - Symbols:
   - `UmlGenerator` (class, line 34) `class UmlGenerator`
-  - `_get_code_generator` (method, line 172) `def _get_code_generator(language)`
-  - `_type_map_py_to_target` (method, line 190) `def _type_map_py_to_target(target, py_type_hint)`
-  - `_generate_cpp` (method, line 233) `def _generate_cpp(class_symbols, nodes, edges)`
-  - `_cpp_params` (method, line 259) `def _cpp_params(params)`
-  - `_generate_java` (method, line 274) `def _generate_java(class_symbols, nodes, edges)`
-  - `_java_params` (method, line 301) `def _java_params(params)`
-  - `_generate_csharp` (method, line 316) `def _generate_csharp(class_symbols, nodes, edges)`
-  - `_cs_params` (method, line 345) `def _cs_params(params)`
-  - `_generate_python` (method, line 360) `def _generate_python(class_symbols, nodes, edges)`
-  - `_generate_go` (method, line 395) `def _generate_go(class_symbols, nodes, edges)`
-  - `_generate_rust` (method, line 422) `def _generate_rust(class_symbols, nodes, edges)`
-  - `_generate_php` (method, line 448) `def _generate_php(class_symbols, nodes, edges)`
-  - `_generate_kotlin` (method, line 476) `def _generate_kotlin(class_symbols, nodes, edges)`
-  - `_generate_scala` (method, line 496) `def _generate_scala(class_symbols, nodes, edges)`
-  - `_generate_swift` (method, line 518) `def _generate_swift(class_symbols, nodes, edges)`
-  - `_generate_dart` (method, line 547) `def _generate_dart(class_symbols, nodes, edges)`
-  - `_generate_ruby` (method, line 567) `def _generate_ruby(class_symbols, nodes, edges)`
-  - `_safe_name` (method, line 588) `def _safe_name(name)`
-  - `_extract_params` (method, line 592) `def _extract_params(signature)`
+  - `_get_code_generator` (function, line 172) `def _get_code_generator(language)`
+  - `_type_map_py_to_target` (function, line 190) `def _type_map_py_to_target(target, py_type_hint)`
+  - `_generate_cpp` (function, line 233) `def _generate_cpp(class_symbols, nodes, edges)`
+  - `_cpp_params` (function, line 259) `def _cpp_params(params)`
+  - `_generate_java` (function, line 274) `def _generate_java(class_symbols, nodes, edges)`
+  - `_java_params` (function, line 301) `def _java_params(params)`
+  - `_generate_csharp` (function, line 316) `def _generate_csharp(class_symbols, nodes, edges)`
+  - `_cs_params` (function, line 345) `def _cs_params(params)`
+  - `_generate_python` (function, line 360) `def _generate_python(class_symbols, nodes, edges)`
+  - `_generate_go` (function, line 395) `def _generate_go(class_symbols, nodes, edges)`
+  - `_generate_rust` (function, line 422) `def _generate_rust(class_symbols, nodes, edges)`
+  - `_generate_php` (function, line 448) `def _generate_php(class_symbols, nodes, edges)`
+  - `_generate_kotlin` (function, line 476) `def _generate_kotlin(class_symbols, nodes, edges)`
+  - `_generate_scala` (function, line 496) `def _generate_scala(class_symbols, nodes, edges)`
+  - `_generate_swift` (function, line 518) `def _generate_swift(class_symbols, nodes, edges)`
+  - `_generate_dart` (function, line 547) `def _generate_dart(class_symbols, nodes, edges)`
+  - `_generate_ruby` (function, line 567) `def _generate_ruby(class_symbols, nodes, edges)`
+  - `_safe_name` (function, line 588) `def _safe_name(name)`
+  - `_extract_params` (function, line 592) `def _extract_params(signature)`
   - `__init__` (method, line 36) `def __init__(self, config)`
   - `render_mermaid_class_diagram` (method, line 39) `def render_mermaid_class_diagram(self, nodes, edges)`
   - `generate_code` (method, line 129) `def generate_code(self, nodes, edges, target_language)`
@@ -113,82 +260,87 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `ease` (function, line 95) `def ease(x)`
-  - `fmt_int` (function, line 101) `def fmt_int(n)`
-  - `mix` (function, line 106) `def mix(a, b, t)`
-  - `alpha` (function, line 111) `def alpha(c, a)`
-  - `hash_color` (function, line 116) `def hash_color(digest)`
-  - `short_label` (function, line 125) `def short_label(text, limit)`
-  - `_panel` (function, line 133) `def _panel(cfg)`
-  - `_caption_y` (function, line 138) `def _caption_y(cfg)`
-  - `_graph_boxes` (function, line 143) `def _graph_boxes(cfg)`
-  - `_dna_boxes` (function, line 152) `def _dna_boxes(cfg)`
-  - `_split_boxes` (function, line 161) `def _split_boxes(cfg)`
-  - `community_color` (function, line 170) `def community_color(index)`
-  - `_polyline_point` (function, line 177) `def _polyline_point(points, f)`
-  - `project3d` (function, line 188) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
-  - `_depth_alpha` (function, line 217) `def _depth_alpha(z, fade)`
-  - `_language_color` (function, line 222) `def _language_color(language)`
-  - `mode_color` (function, line 227) `def mode_color(data, nid, mode)`
-  - `_lerp3` (function, line 236) `def _lerp3(a, b, t)`
-  - `_camera_track` (function, line 241) `def _camera_track(keys, f)`
-  - `_place_label` (function, line 252) `def _place_label(d, placed, x, y, text, font, col, a)`
-  - `_clipped` (function, line 264) `def _clipped(img, box, paint)`
-  - `draw_cloud3d` (function, line 276) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `_cloud_core` (function, line 320) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `draw_sphere3d` (function, line 396) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_sphere_core` (function, line 435) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_verdict_badge` (function, line 520) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
-  - `_scan_cursor` (function, line 535) `def _scan_cursor(d, box, progress, col)`
-  - `_code_tint` (function, line 544) `def _code_tint(line)`
-  - `_packet_offset` (function, line 554) `def _packet_offset(a, b, k)`
-  - `dependencies_available` (function, line 560) `def dependencies_available()`
-  - `resolve_fonts` (function, line 569) `def resolve_fonts()`
-  - `Backdrop` (class, line 608) `class Backdrop`
-  - `_img` (method, line 664) `def _img()`
-  - `draw_grid` (method, line 671) `def draw_grid(img, t, strength, bd)`
-  - `draw_sun` (method, line 691) `def draw_sun(img, a, bd, cy)`
-  - `post` (method, line 708) `def post(img, glitch, seed)`
-  - `glitch_fx` (method, line 726) `def glitch_fx(img, amount, seed)`
-  - `chroma_text` (method, line 749) `def chroma_text(img, xy, text, font, col, spread, anchor)`
-  - `hud_panel` (method, line 760) `def hud_panel(d, box, title, fonts, col)`
-  - `draw_header` (method, line 773) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
-  - `draw_caption` (method, line 787) `def draw_caption(d, text, lt, dur, fonts, width, y)`
-  - `CinematicVideoRenderer` (class, line 803) `class CinematicVideoRenderer`
-  - `_render_frame_bytes` (method, line 1274) `def _render_frame_bytes(fi)`
-  - `_draw_frame` (method, line 1279) `def _draw_frame(fi)`
-  - `_scene_title` (method, line 1306) `def _scene_title(img, d, lt, gt, sc)`
-  - `_scene_card` (method, line 1341) `def _scene_card(img, d, lt, gt, sc)`
-  - `_scene_layers` (method, line 1355) `def _scene_layers(img, d, lt, gt, sc)`
-  - `_scene_gods` (method, line 1380) `def _scene_gods(img, d, lt, gt, sc)`
-  - `_scene_tree` (method, line 1423) `def _scene_tree(img, d, lt, gt, sc)`
-  - `_scene_communities` (method, line 1497) `def _scene_communities(img, d, lt, gt, sc)`
-  - `_scene_graph` (method, line 1541) `def _scene_graph(img, d, lt, gt, sc)`
-  - `_scene_bundle` (method, line 1627) `def _scene_bundle(img, d, lt, gt, sc)`
-  - `_orbit_plan` (method, line 1713) `def _orbit_plan(dur)`
-  - `_scene_orbit` (method, line 1718) `def _scene_orbit(img, d, lt, gt, sc)`
-  - `_scene_sphere` (method, line 1834) `def _scene_sphere(img, d, lt, gt, sc)`
-  - `_scene_invite` (method, line 1895) `def _scene_invite(img, d, lt, gt, sc)`
-  - `_scene_dna` (method, line 1942) `def _scene_dna(img, d, lt, gt, sc)`
-  - `_scene_outro` (method, line 2001) `def _scene_outro(img, d, lt, gt, sc)`
-  - `pr` (method, line 463) `def pr(p)`
-  - `_find` (method, line 573) `def _find(style)`
-  - `__init__` (method, line 611) `def __init__(self, width, height)`
-  - `_sun` (method, line 649) `def _sun(self, r)`
-  - `collect` (method, line 808) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
-  - `_build_dep_tree` (method, line 972) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
-  - `build_scenes` (method, line 1023) `def build_scenes(self, data)`
-  - `graph_positions` (method, line 1052) `def graph_positions(self, data, box)`
-  - `tree_positions` (method, line 1099) `def tree_positions(self, data, box)`
-  - `emergence_frames` (method, line 1142) `def emergence_frames(self, data, box)`
-  - `bundle_groups` (method, line 1152) `def bundle_groups(self, data)`
-  - `bundle_layout` (method, line 1167) `def bundle_layout(self, data, box)`
-  - `orbit_positions` (method, line 1176) `def orbit_positions(self, data)`
-  - `sphere_layout` (method, line 1186) `def sphere_layout(self, data)`
-  - `orbit_stops` (method, line 1194) `def orbit_stops(self, data, positions)`
-  - `_prepare_layouts` (method, line 1209) `def _prepare_layouts(self, data)`
-  - `render_single_frame` (method, line 1223) `def render_single_frame(self, data, frame_index)`
-  - `render` (method, line 1237) `def render(self, data, output_path)`
+  - `ease` (function, line 96) `def ease(x)`
+  - `fmt_int` (function, line 107) `def fmt_int(n)`
+  - `mix` (function, line 112) `def mix(a, b, t)`
+  - `alpha` (function, line 117) `def alpha(c, a)`
+  - `hash_color` (function, line 122) `def hash_color(digest)`
+  - `short_label` (function, line 131) `def short_label(text, limit)`
+  - `_panel` (function, line 139) `def _panel(cfg)`
+  - `_caption_y` (function, line 144) `def _caption_y(cfg)`
+  - `_graph_boxes` (function, line 149) `def _graph_boxes(cfg)`
+  - `_dna_boxes` (function, line 158) `def _dna_boxes(cfg)`
+  - `_split_boxes` (function, line 167) `def _split_boxes(cfg)`
+  - `community_color` (function, line 176) `def community_color(index)`
+  - `_polyline_point` (function, line 183) `def _polyline_point(points, f)`
+  - `project3d` (function, line 194) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
+  - `_depth_alpha` (function, line 223) `def _depth_alpha(z, fade)`
+  - `_language_color` (function, line 228) `def _language_color(language)`
+  - `mode_color` (function, line 233) `def mode_color(data, nid, mode)`
+  - `_lerp3` (function, line 242) `def _lerp3(a, b, t)`
+  - `_camera_track` (function, line 247) `def _camera_track(keys, f)`
+  - `_place_label` (function, line 258) `def _place_label(d, placed, x, y, text, font, col, a)`
+  - `_clipped` (function, line 270) `def _clipped(img, box, paint)`
+  - `draw_cloud3d` (function, line 282) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `_cloud_core` (function, line 326) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `draw_sphere3d` (function, line 402) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
+  - `_sphere_core` (function, line 441) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
+  - `_verdict_badge` (function, line 526) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
+  - `_scan_cursor` (function, line 541) `def _scan_cursor(d, box, progress, col)`
+  - `_code_tint` (function, line 550) `def _code_tint(line)`
+  - `_packet_offset` (function, line 560) `def _packet_offset(a, b, k)`
+  - `dependencies_available` (function, line 566) `def dependencies_available()`
+  - `resolve_fonts` (function, line 575) `def resolve_fonts()`
+  - `Backdrop` (class, line 614) `class Backdrop`
+  - `_img` (function, line 670) `def _img()`
+  - `draw_grid` (function, line 677) `def draw_grid(img, t, strength, bd)`
+  - `draw_sun` (function, line 697) `def draw_sun(img, a, bd, cy)`
+  - `post` (function, line 714) `def post(img, glitch, seed)`
+  - `glitch_fx` (function, line 732) `def glitch_fx(img, amount, seed)`
+  - `chroma_text` (function, line 755) `def chroma_text(img, xy, text, font, col, spread, anchor)`
+  - `hud_panel` (function, line 766) `def hud_panel(d, box, title, fonts, col)`
+  - `draw_header` (function, line 779) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
+  - `draw_caption` (function, line 793) `def draw_caption(d, text, lt, dur, fonts, width, y)`
+  - `CinematicVideoRenderer` (class, line 809) `class CinematicVideoRenderer`
+  - `_render_frame_bytes` (function, line 1291) `def _render_frame_bytes(fi)`
+  - `_scene_index` (function, line 1299) `def _scene_index(gt)`
+  - `_paint_scene` (function, line 1307) `def _paint_scene(index, lt)`
+  - `_motion_blurred` (function, line 1322) `def _motion_blurred(index, lt)`
+  - `_outgoing_frame` (function, line 1337) `def _outgoing_frame(index)`
+  - `_draw_frame` (function, line 1346) `def _draw_frame(fi)`
+  - `_scene_title` (function, line 1370) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (function, line 1405) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (function, line 1419) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (function, line 1444) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (function, line 1487) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (function, line 1561) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (function, line 1605) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_bundle` (function, line 1691) `def _scene_bundle(img, d, lt, gt, sc)`
+  - `_orbit_plan` (function, line 1777) `def _orbit_plan(dur)`
+  - `_scene_orbit` (function, line 1782) `def _scene_orbit(img, d, lt, gt, sc)`
+  - `_scene_sphere` (function, line 1898) `def _scene_sphere(img, d, lt, gt, sc)`
+  - `_scene_invite` (function, line 1959) `def _scene_invite(img, d, lt, gt, sc)`
+  - `_scene_dna` (function, line 2006) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (function, line 2065) `def _scene_outro(img, d, lt, gt, sc)`
+  - `pr` (function, line 469) `def pr(p)`
+  - `_find` (function, line 579) `def _find(style)`
+  - `__init__` (method, line 617) `def __init__(self, width, height)`
+  - `_sun` (method, line 655) `def _sun(self, r)`
+  - `collect` (method, line 814) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
+  - `_build_dep_tree` (method, line 978) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
+  - `build_scenes` (method, line 1029) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 1058) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 1105) `def tree_positions(self, data, box)`
+  - `emergence_frames` (method, line 1148) `def emergence_frames(self, data, box)`
+  - `bundle_groups` (method, line 1158) `def bundle_groups(self, data)`
+  - `ordered_groups` (method, line 1173) `def ordered_groups(self, data)`
+  - `bundle_layout` (method, line 1183) `def bundle_layout(self, data, box)`
+  - `orbit_positions` (method, line 1192) `def orbit_positions(self, data)`
+  - `sphere_layout` (method, line 1202) `def sphere_layout(self, data)`
+  - `orbit_stops` (method, line 1211) `def orbit_stops(self, data, positions)`
+  - `_prepare_layouts` (method, line 1226) `def _prepare_layouts(self, data)`
+  - `render_single_frame` (method, line 1240) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 1254) `def render(self, data, output_path)`
 - Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
 
@@ -241,7 +393,7 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `_build_report` (method, line 961) `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...`
   - `_estimate_tokens` (method, line 1033) `def _estimate_tokens(self, nodes, connections)`
   - `_write` (method, line 1044) `def _write(path, content)`
-  - `dominant` (method, line 428) `def dominant(ids, key)`
+  - `dominant` (function, line 428) `def dominant(ids, key)`
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
 
@@ -254,21 +406,21 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `YaraLiteRule` (class, line 33) `class YaraLiteRule`
   - `YaraLiteHit` (class, line 56) `class YaraLiteHit`
   - `YaraLiteMatch` (class, line 66) `class YaraLiteMatch`
-  - `parse_yaralite_rules` (method, line 76) `def parse_yaralite_rules(rules_text)`
-  - `run_yaralite_rules` (method, line 112) `def run_yaralite_rules(text, rules)`
-  - `validate_yaralite_rules` (method, line 139) `def validate_yaralite_rules(rules_text)`
-  - `_rule_blocks` (method, line 161) `def _rule_blocks(rules_text)`
-  - `_section` (method, line 182) `def _section(body, start_marker, end_marker)`
-  - `_parse_meta` (method, line 196) `def _parse_meta(meta_body)`
-  - `_parse_strings` (method, line 215) `def _parse_strings(strings_body)`
-  - `_strip_comments` (method, line 233) `def _strip_comments(text)`
-  - `_decode_yara_string` (method, line 238) `def _decode_yara_string(value)`
-  - `_string_hits` (method, line 243) `def _string_hits(text, rule)`
-  - `_condition_matches` (method, line 265) `def _condition_matches(condition, hits)`
-  - `_confidence` (method, line 305) `def _confidence(value)`
-  - `_excerpt` (method, line 322) `def _excerpt(text, offset, length)`
+  - `parse_yaralite_rules` (function, line 76) `def parse_yaralite_rules(rules_text)`
+  - `run_yaralite_rules` (function, line 112) `def run_yaralite_rules(text, rules)`
+  - `validate_yaralite_rules` (function, line 139) `def validate_yaralite_rules(rules_text)`
+  - `_rule_blocks` (function, line 161) `def _rule_blocks(rules_text)`
+  - `_section` (function, line 182) `def _section(body, start_marker, end_marker)`
+  - `_parse_meta` (function, line 196) `def _parse_meta(meta_body)`
+  - `_parse_strings` (function, line 215) `def _parse_strings(strings_body)`
+  - `_strip_comments` (function, line 233) `def _strip_comments(text)`
+  - `_decode_yara_string` (function, line 238) `def _decode_yara_string(value)`
+  - `_string_hits` (function, line 243) `def _string_hits(text, rule)`
+  - `_condition_matches` (function, line 265) `def _condition_matches(condition, hits)`
+  - `_confidence` (function, line 305) `def _confidence(value)`
+  - `_excerpt` (function, line 322) `def _excerpt(text, offset, length)`
   - `tier` (method, line 42) `def tier(self)`
-  - `replace_group` (method, line 270) `def replace_group(match)`
-  - `replace_identifier` (method, line 292) `def replace_identifier(match)`
+  - `replace_group` (function, line 270) `def replace_group(match)`
+  - `replace_identifier` (function, line 292) `def replace_identifier(match)`
 - Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
 

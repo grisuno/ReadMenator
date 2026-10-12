@@ -30,12 +30,12 @@ class JavaScriptParser(LanguageParser):
             r"(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?\(",
             r"(?:const|let|var)\s+(\w+)\s*=\s*(?:async\s+)?function",
         ]
-        reserved = {"if", "for", "while", "switch", "catch"}
+        reserved = {"if", "for", "while", "switch", "catch", "return", "new", "throw", "else", "await", "typeof", "function", "do"}
         for pattern in patterns:
             for m in re.finditer(pattern, content):
                 name = m.group(1)
                 if name not in reserved:
-                    line_num = content[: m.start()].count("\n")
+                    line_num = content[: m.start(1)].count("\n")
                     self.symbols.append(
                         Symbol(
                             name=name,
@@ -49,7 +49,7 @@ class JavaScriptParser(LanguageParser):
         ):
             name = m.group(1)
             parent = m.group(2)
-            line_num = content[: m.start()].count("\n")
+            line_num = content[: m.start(1)].count("\n")
             self.symbols.append(
                 Symbol(
                     name=name,
@@ -60,6 +60,23 @@ class JavaScriptParser(LanguageParser):
             )
             if parent:
                 self.inherits.append((name, parent))
+        method_pattern = (
+            r"^[ \t]+(?:(?:public|private|protected|static|async|readonly|override|abstract|get|set)\s+)*"
+            r"(#?[A-Za-z_$][\w$]*)\s*(?:<[^>()]*>)?\s*\([^)]*\)\s*(?::\s*[^{;=]+)?\s*\{"
+        )
+        for m in re.finditer(method_pattern, content, re.MULTILINE):
+            name = m.group(1)
+            if name in reserved:
+                continue
+            line_num = content[: m.start(1)].count("\n")
+            self.symbols.append(
+                Symbol(
+                    name=name,
+                    kind="method",
+                    line=line_num + 1,
+                    doc=self._extract_docstring(line_num),
+                )
+            )
         for m in re.finditer(r"(\w+)\s*\([^)]*\)\s*(?:;|{)?", content):
             callee = m.group(1)
             if callee and callee[0].isupper() is False and callee not in reserved:

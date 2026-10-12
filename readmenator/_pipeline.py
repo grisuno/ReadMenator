@@ -11,6 +11,8 @@ from typing import Dict, List, Optional
 from readmenator._agent_injector import AgentInjector
 from readmenator._agent_output import AgentOutputGenerator
 from readmenator._analytics import AnalyticsBuilder
+from readmenator._apidocs import ApiReferenceBuilder
+from readmenator._apidocs_render import ApiDocsWriter
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._components import ComponentDiagramBuilder
 from readmenator._category import Category, TypedGraph, build_category_from_edges
@@ -112,6 +114,8 @@ class AnalyzerFactory:
         self._symindex: SymbolIndex | None = None
         self._components: ComponentDiagramBuilder | None = None
         self._ollama: OllamaClient | None = None
+        self._apidocs: ApiReferenceBuilder | None = None
+        self._apidocs_writer: ApiDocsWriter | None = None
         self._last_category: Category | None = None
         self._last_typed_graph: TypedGraph | None = None
 
@@ -230,6 +234,7 @@ class AnalyzerFactory:
                 llms_txt=self._config.SITE_LLMS_TXT_FILENAME,
                 forcegraph_output=self._config.FORCEGRAPH_OUTPUT,
                 bundlegraph_output=self._config.BUNDLEGRAPH_OUTPUT,
+                apidocs_output_dir=self._config.APIDOCS_OUTPUT_DIR,
             )
         return self._readme_injector
 
@@ -402,6 +407,20 @@ class AnalyzerFactory:
         if self._components is None:
             self._components = ComponentDiagramBuilder(self._config)
         return self._components
+
+    @property
+    def apidocs(self) -> ApiReferenceBuilder:
+        """Return the lazily initialised API reference builder."""
+        if self._apidocs is None:
+            self._apidocs = ApiReferenceBuilder(self._config)
+        return self._apidocs
+
+    @property
+    def apidocs_writer(self) -> ApiDocsWriter:
+        """Return the lazily initialised API reference writer."""
+        if self._apidocs_writer is None:
+            self._apidocs_writer = ApiDocsWriter(self._config)
+        return self._apidocs_writer
 
     @property
     def ollama(self) -> OllamaClient:

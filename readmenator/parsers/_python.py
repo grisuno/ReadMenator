@@ -24,7 +24,13 @@ class PythonParser(LanguageParser):
                 tree = ast.parse(content, filename=self.filename)
             except SyntaxError:
                 return
-        current_class: Optional[str] = None
+        class_members = {
+            id(child)
+            for parent in ast.walk(tree)
+            if isinstance(parent, ast.ClassDef)
+            for child in parent.body
+            if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
         for node in ast.walk(tree):
             if isinstance(node, (ast.Import, ast.ImportFrom)):
                 if isinstance(node, ast.Import):
@@ -34,7 +40,6 @@ class PythonParser(LanguageParser):
                     if node.module:
                         self.imports.append(node.module)
             elif isinstance(node, ast.ClassDef):
-                current_class = node.name
                 bases = []
                 for base in node.bases:
                     if isinstance(base, ast.Name):
@@ -60,7 +65,7 @@ class PythonParser(LanguageParser):
                     arg.arg for arg in node.args.args
                 )
                 sig = f"def {node.name}({params})"
-                kind = "method" if current_class else "function"
+                kind = "method" if id(node) in class_members else "function"
                 self.symbols.append(
                     Symbol(
                         name=node.name,
@@ -79,7 +84,5 @@ class PythonParser(LanguageParser):
                         elif isinstance(child.func, ast.Attribute):
                             callee = child.func.attr if hasattr(child.func, 'attr') else str(child.func)
                             self.calls.append((caller, callee))
-            elif isinstance(node, ast.Call) and isinstance(node, ast.AST):
-                pass
 
 

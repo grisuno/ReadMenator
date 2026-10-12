@@ -1,0 +1,174 @@
+# Class Hierarchy
+
+Project types nested under the project types they derive from. External bases are listed in parentheses.
+
+[Back to index](index.md)
+
+- [`AgentInjector`](modules/readmenator._agent_injector.py.md#agentinjector) class in `readmenator._agent_injector`
+- [`AgentOutputGenerator`](modules/readmenator._agent_output.py.md#agentoutputgenerator) class in `readmenator._agent_output`
+- [`AnalysisResult`](modules/readmenator._models.py.md#analysisresult) class in `readmenator._models`
+- [`AnalysisResultV2`](modules/readmenator._models.py.md#analysisresultv2) class in `readmenator._models`
+- [`AnalyticsBuilder`](modules/readmenator._analytics.py.md#analyticsbuilder) class in `readmenator._analytics`
+- [`AnalyzerFactory`](modules/readmenator._pipeline.py.md#analyzerfactory) class in `readmenator._pipeline`
+- [`ApiDocsWriter`](modules/readmenator._apidocs_render.py.md#apidocswriter) class in `readmenator._apidocs_render`
+- [`ApiEntity`](modules/readmenator._apidocs.py.md#apientity) class in `readmenator._apidocs`
+- [`ApiLinker`](modules/readmenator._apidocs_render.py.md#apilinker) class in `readmenator._apidocs_render`
+- [`ApiMarkdownRenderer`](modules/readmenator._apidocs_render.py.md#apimarkdownrenderer) class in `readmenator._apidocs_render`
+- [`ApiParam`](modules/readmenator._apidocs.py.md#apiparam) class in `readmenator._apidocs`
+- [`ApiReference`](modules/readmenator._apidocs.py.md#apireference) class in `readmenator._apidocs`
+- [`ApiReferenceBuilder`](modules/readmenator._apidocs.py.md#apireferencebuilder) class in `readmenator._apidocs`
+- [`ArchitectureDiagramBuilder`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder) class in `readmenator._flowcharts`
+- [`ArchitectureLinter`](modules/readmenator._linter.py.md#architecturelinter) class in `readmenator._linter`
+- [`Backdrop`](modules/readmenator._video.py.md#backdrop) class in `readmenator._video`
+- [`Bm25Index`](modules/readmenator._graphrag.py.md#bm25index) class in `readmenator._graphrag`
+- [`BundleGraphRenderer`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer) class in `readmenator._bundlegraph`
+- [`BundleLayout`](modules/readmenator._graphlayout.py.md#bundlelayout) class in `readmenator._graphlayout`
+- [`CallSite`](modules/readmenator._symindex.py.md#callsite) class in `readmenator._symindex`
+- [`Category`](modules/readmenator._category.py.md#category) class in `readmenator._category`
+- [`ChangeImpact`](modules/readmenator._models.py.md#changeimpact) class in `readmenator._models`
+- [`CinematicVideoRenderer`](modules/readmenator._video.py.md#cinematicvideorenderer) class in `readmenator._video`
+- [`CodePropertyGraph`](modules/readmenator._cpg.py.md#codepropertygraph) class in `readmenator._cpg`
+- [`CommunityResult`](modules/readmenator._models.py.md#communityresult) class in `readmenator._models`
+- [`Component`](modules/readmenator._flowcharts.py.md#component) class in `readmenator._flowcharts`
+- [`ComponentDiagramBuilder`](modules/readmenator._components.py.md#componentdiagrambuilder) class in `readmenator._components`
+- [`CompositeRanker`](modules/readmenator._rank.py.md#compositeranker) class in `readmenator._rank`
+- [`ConceptExtractor`](modules/readmenator._concepts.py.md#conceptextractor) class in `readmenator._concepts`
+- [`ConceptGraph`](modules/readmenator._models.py.md#conceptgraph) class in `readmenator._models`
+- [`ConceptNode`](modules/readmenator._models.py.md#conceptnode) class in `readmenator._models`
+- [`ConceptRelation`](modules/readmenator._models.py.md#conceptrelation) class in `readmenator._models`
+- [`Config`](modules/readmenator._config.py.md#config) class in `readmenator._config`
+- [`Config`](modules/readmenator_orchestrator.py.md#config) class in `readmenator_orchestrator`
+- [`CursorRulesGenerator`](modules/readmenator._cursorrules_generator.py.md#cursorrulesgenerator) class in `readmenator._cursorrules_generator`
+- [`DataflowAnalyzer`](modules/readmenator._dataflow.py.md#dataflowanalyzer) class in `readmenator._dataflow`
+- [`DataflowIssue`](modules/readmenator._models.py.md#dataflowissue) class in `readmenator._models`
+- [`DeadCodeReport`](modules/readmenator._models.py.md#deadcodereport) class in `readmenator._models`
+- [`DeadCodeStripper`](modules/readmenator._dead_code.py.md#deadcodestripper) class in `readmenator._dead_code`
+- [`DeclaredRule`](modules/readmenator._memory.py.md#declaredrule) class in `readmenator._memory`
+- [`DeepAnalysisRunner`](modules/readmenator._pipeline.py.md#deepanalysisrunner) class in `readmenator._pipeline`
+- [`DependencyCycle`](modules/readmenator._models.py.md#dependencycycle) class in `readmenator._models`
+- [`DirectoryWatcher`](modules/readmenator._watcher.py.md#directorywatcher) class in `readmenator._watcher`
+- [`DocComment`](modules/readmenator._docstrings.py.md#doccomment) class in `readmenator._docstrings`
+- [`DocField`](modules/readmenator._docstrings.py.md#docfield) class in `readmenator._docstrings`
+- [`DocProjection`](modules/readmenator._projections.py.md#docprojection) class in `readmenator._projections`
+- [`DocsSitePublisher`](modules/readmenator._diagrams.py.md#docssitepublisher) class in `readmenator._diagrams`
+- [`DocumentationGenerator`](modules/readmenator._documentation.py.md#documentationgenerator) class in `readmenator._documentation`
+- [`DocWarning`](modules/readmenator._apidocs.py.md#docwarning) class in `readmenator._apidocs`
+- [`Edge`](modules/readmenator._models.py.md#edge) class in `readmenator._models`
+- [`EdgeKind`](modules/readmenator._category.py.md#edgekind) enum in `readmenator._category`(str, Enum)
+- [`Embedder`](modules/readmenator._embed.py.md#embedder) class in `readmenator._embed`
+- [`EntryPoint`](modules/readmenator._flowcharts.py.md#entrypoint) class in `readmenator._flowcharts`
+- [`ExclusionEntry`](modules/readmenator._exclusions.py.md#exclusionentry) class in `readmenator._exclusions`
+- [`ExclusionList`](modules/readmenator._exclusions.py.md#exclusionlist) class in `readmenator._exclusions`
+- [`ExecutionFlowBuilder`](modules/readmenator._flowcharts.py.md#executionflowbuilder) class in `readmenator._flowcharts`
+- [`ExplorerState`](modules/readmenator._explorer.py.md#explorerstate) class in `readmenator._explorer`
+- [`FileCache`](modules/readmenator._cache.py.md#filecache) class in `readmenator._cache`
+- [`FlowStep`](modules/readmenator._flowcharts.py.md#flowstep) class in `readmenator._flowcharts`
+- [`ForceAtlas2Settings`](modules/readmenator._graphlayout.py.md#forceatlas2settings) class in `readmenator._graphlayout`
+- [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
+- [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`
+- [`GitHubWikiPublisher`](modules/readmenator._gh_wiki.py.md#githubwikipublisher) class in `readmenator._gh_wiki`
+- [`GraphAnalyzer`](modules/readmenator._analyzer.py.md#graphanalyzer) class in `readmenator._analyzer`
+- [`GraphExporter`](modules/readmenator._exporter.py.md#graphexporter) class in `readmenator._exporter`
+- [`GraphRagBuilder`](modules/readmenator._graphrag.py.md#graphragbuilder) class in `readmenator._graphrag`
+- [`GraphRagIndex`](modules/readmenator._graphrag.py.md#graphragindex) class in `readmenator._graphrag`
+- [`GraphRagSearcher`](modules/readmenator._graphrag.py.md#graphragsearcher) class in `readmenator._graphrag`
+- [`GraphRagStore`](modules/readmenator._graphrag.py.md#graphragstore) class in `readmenator._graphrag`
+- [`HotspotAnalyzer`](modules/readmenator._hotspots.py.md#hotspotanalyzer) class in `readmenator._hotspots`
+- [`HotspotResult`](modules/readmenator._models.py.md#hotspotresult) class in `readmenator._models`
+- [`IdentityProjection`](modules/readmenator._projections.py.md#identityprojection) class in `readmenator._projections`
+- [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
+- [`InteractiveMapRenderer`](modules/readmenator._diagrams.py.md#interactivemaprenderer) class in `readmenator._diagrams`
+- [`LanguageParser`](modules/readmenator.parsers._base.py.md#languageparser) class in `readmenator.parsers._base`
+  - [`AssemblyParser`](modules/readmenator.parsers._assembly.py.md#assemblyparser) class in `readmenator.parsers._assembly`
+  - [`CParser`](modules/readmenator.parsers._c.py.md#cparser) class in `readmenator.parsers._c`
+  - [`CSharpParser`](modules/readmenator.parsers._csharp.py.md#csharpparser) class in `readmenator.parsers._csharp`
+  - [`DartParser`](modules/readmenator.parsers._dart.py.md#dartparser) class in `readmenator.parsers._dart`
+  - [`ElixirParser`](modules/readmenator.parsers._elixir.py.md#elixirparser) class in `readmenator.parsers._elixir`
+  - [`GDScriptParser`](modules/readmenator.parsers._gdscript.py.md#gdscriptparser) class in `readmenator.parsers._gdscript`
+  - [`GoParser`](modules/readmenator.parsers._go.py.md#goparser) class in `readmenator.parsers._go`
+  - [`JavaParser`](modules/readmenator.parsers._java.py.md#javaparser) class in `readmenator.parsers._java`
+  - [`JavaScriptParser`](modules/readmenator.parsers._javascript.py.md#javascriptparser) class in `readmenator.parsers._javascript`
+  - [`KotlinParser`](modules/readmenator.parsers._kotlin.py.md#kotlinparser) class in `readmenator.parsers._kotlin`
+  - [`LuaParser`](modules/readmenator.parsers._lua.py.md#luaparser) class in `readmenator.parsers._lua`
+  - [`NimParser`](modules/readmenator.parsers._nim.py.md#nimparser) class in `readmenator.parsers._nim`
+  - [`PHPParser`](modules/readmenator.parsers._php.py.md#phpparser) class in `readmenator.parsers._php`
+  - [`PythonParser`](modules/readmenator.parsers._python.py.md#pythonparser) class in `readmenator.parsers._python`
+  - [`RubyParser`](modules/readmenator.parsers._ruby.py.md#rubyparser) class in `readmenator.parsers._ruby`
+  - [`RustParser`](modules/readmenator.parsers._rust.py.md#rustparser) class in `readmenator.parsers._rust`
+  - [`ScalaParser`](modules/readmenator.parsers._scala.py.md#scalaparser) class in `readmenator.parsers._scala`
+  - [`ShellParser`](modules/readmenator.parsers._shell.py.md#shellparser) class in `readmenator.parsers._shell`
+  - [`SwiftParser`](modules/readmenator.parsers._swift.py.md#swiftparser) class in `readmenator.parsers._swift`
+- [`LayerDetector`](modules/readmenator._layers.py.md#layerdetector) class in `readmenator._layers`
+- [`LayerRuleEngine`](modules/readmenator._layer_rules.py.md#layerruleengine) class in `readmenator._layer_rules`
+- [`LayerViolation`](modules/readmenator._models.py.md#layerviolation) class in `readmenator._models`
+- [`LinterViolation`](modules/readmenator._models.py.md#linterviolation) class in `readmenator._models`
+- [`MapDelta`](modules/readmenator._diagrams.py.md#mapdelta) class in `readmenator._diagrams`
+- [`MapDiagnostic`](modules/readmenator._diagrams.py.md#mapdiagnostic) class in `readmenator._diagrams`
+- [`MapEdge`](modules/readmenator._diagrams.py.md#mapedge) class in `readmenator._diagrams`
+- [`MapNode`](modules/readmenator._diagrams.py.md#mapnode) class in `readmenator._diagrams`
+- [`MapReceipt`](modules/readmenator._diagrams.py.md#mapreceipt) class in `readmenator._diagrams`
+- [`MapView`](modules/readmenator._diagrams.py.md#mapview) class in `readmenator._diagrams`
+- [`MCPError`](modules/readmenator._mcp_server.py.md#mcperror) exception in `readmenator._mcp_server`(Exception)
+- [`MCPRequest`](modules/readmenator._mcp_server.py.md#mcprequest) class in `readmenator._mcp_server`
+- [`MCPResource`](modules/readmenator._mcp_server.py.md#mcpresource) class in `readmenator._mcp_server`
+- [`MCPServer`](modules/readmenator._mcp_server.py.md#mcpserver) class in `readmenator._mcp_server`
+- [`MCPTool`](modules/readmenator._mcp_server.py.md#mcptool) class in `readmenator._mcp_server`
+- [`MemoryNote`](modules/readmenator._memory.py.md#memorynote) class in `readmenator._memory`
+- [`MermaidRenderer`](modules/readmenator._mermaid.py.md#mermaidrenderer) class in `readmenator._mermaid`
+- [`MonolithRefactorizer`](modules/readmenator._refactorizer.py.md#monolithrefactorizer) class in `readmenator._refactorizer`
+- [`Morphism`](modules/readmenator._category.py.md#morphism) class in `readmenator._category`
+- [`Node`](modules/readmenator._models.py.md#node) class in `readmenator._models`
+- [`OllamaClient`](modules/readmenator._ollama.py.md#ollamaclient) class in `readmenator._ollama`
+- [`Orchestrator`](modules/readmenator_orchestrator.py.md#orchestrator) class in `readmenator_orchestrator`
+- [`PolyglotScanner`](modules/readmenator._scanner.py.md#polyglotscanner) class in `readmenator._scanner`
+- [`Projection`](modules/readmenator._projections.py.md#projection) protocol in `readmenator._projections`(Protocol)
+- [`ProjectMemory`](modules/readmenator._memory.py.md#projectmemory) class in `readmenator._memory`
+- [`ProvenanceAuditor`](modules/readmenator._provenance.py.md#provenanceauditor) class in `readmenator._provenance`
+- [`ProvenanceFinding`](modules/readmenator._provenance.py.md#provenancefinding) class in `readmenator._provenance`
+- [`PythonReceiverTypes`](modules/readmenator._pytypes.py.md#pythonreceivertypes) class in `readmenator._pytypes`
+- [`QueryEngine`](modules/readmenator._query.py.md#queryengine) class in `readmenator._query`
+- [`RagCommunity`](modules/readmenator._graphrag.py.md#ragcommunity) class in `readmenator._graphrag`
+- [`RagContext`](modules/readmenator._graphrag.py.md#ragcontext) class in `readmenator._graphrag`
+- [`RagEntity`](modules/readmenator._graphrag.py.md#ragentity) class in `readmenator._graphrag`
+- [`RagRelation`](modules/readmenator._graphrag.py.md#ragrelation) class in `readmenator._graphrag`
+- [`RagTextUnit`](modules/readmenator._graphrag.py.md#ragtextunit) class in `readmenator._graphrag`
+- [`RankConfig`](modules/readmenator._rank.py.md#rankconfig) class in `readmenator._rank`
+- [`RankedItem`](modules/readmenator._rank.py.md#rankeditem) class in `readmenator._rank`
+- [`RankedResult`](modules/readmenator._rank.py.md#rankedresult) class in `readmenator._rank`
+- [`ReadmeInjector`](modules/readmenator._readme_injector.py.md#readmeinjector) class in `readmenator._readme_injector`
+- [`readmenatorApplication`](modules/readmenator._app.py.md#readmenatorapplication) class in `readmenator._app`
+- [`RefactoringAction`](modules/readmenator._models.py.md#refactoringaction) class in `readmenator._models`
+- [`RefactoringPlan`](modules/readmenator._models.py.md#refactoringplan) class in `readmenator._models`
+- [`RepositoryProcessor`](modules/readmenator_orchestrator.py.md#repositoryprocessor) class in `readmenator_orchestrator`
+- [`ResolvedCall`](modules/readmenator._symindex.py.md#resolvedcall) class in `readmenator._symindex`
+- [`RiskProjection`](modules/readmenator._projections.py.md#riskprojection) class in `readmenator._projections`
+- [`RuleGenerator`](modules/readmenator._rule_gen.py.md#rulegenerator) class in `readmenator._rule_gen`
+- [`SarifExporter`](modules/readmenator._sarif.py.md#sarifexporter) class in `readmenator._sarif`
+- [`ScanTextBuilder`](modules/readmenator._scantext.py.md#scantextbuilder) class in `readmenator._scantext`
+- [`SecurityAnalyzer`](modules/readmenator._security.py.md#securityanalyzer) class in `readmenator._security`
+- [`SecurityFinding`](modules/readmenator._models.py.md#securityfinding) class in `readmenator._models`
+- [`SecurityRule`](modules/readmenator._security.py.md#securityrule) class in `readmenator._security`
+- [`SkillInstaller`](modules/readmenator._skill_installer.py.md#skillinstaller) class in `readmenator._skill_installer`
+- [`SourceEntry`](modules/readmenator._sourceview.py.md#sourceentry) class in `readmenator._sourceview`
+- [`SourceViewBuilder`](modules/readmenator._sourceview.py.md#sourceviewbuilder) class in `readmenator._sourceview`
+- [`SphereBundleLayout`](modules/readmenator._graphlayout.py.md#spherebundlelayout) class in `readmenator._graphlayout`
+- [`SuggestedRule`](modules/readmenator._models.py.md#suggestedrule) class in `readmenator._models`
+- [`Symbol`](modules/readmenator._models.py.md#symbol) class in `readmenator._models`
+- [`SymbolDef`](modules/readmenator._symindex.py.md#symboldef) class in `readmenator._symindex`
+- [`SymbolIndex`](modules/readmenator._symindex.py.md#symbolindex) class in `readmenator._symindex`
+- [`SystemMap`](modules/readmenator._diagrams.py.md#systemmap) class in `readmenator._diagrams`
+- [`SystemMapBuilder`](modules/readmenator._diagrams.py.md#systemmapbuilder) class in `readmenator._diagrams`
+- [`SystemMapValidator`](modules/readmenator._diagrams.py.md#systemmapvalidator) class in `readmenator._diagrams`
+- [`TaintAnalysisResult`](modules/readmenator._models.py.md#taintanalysisresult) class in `readmenator._models`
+- [`TaintAnalyzer`](modules/readmenator._taint.py.md#taintanalyzer) class in `readmenator._taint`
+- [`TaintPath`](modules/readmenator._models.py.md#taintpath) class in `readmenator._models`
+- [`TestOrchestrator`](modules/readmenator_orchestrator.py.md#testorchestrator) class in `readmenator_orchestrator`(unittest.TestCase)
+- [`TypedGraph`](modules/readmenator._category.py.md#typedgraph) class in `readmenator._category`
+- [`UmlGenerator`](modules/readmenator._uml.py.md#umlgenerator) class in `readmenator._uml`
+- [`VisNetworkRenderer`](modules/readmenator._diagrams.py.md#visnetworkrenderer) class in `readmenator._diagrams`
+- [`WikiGenerator`](modules/readmenator._wiki.py.md#wikigenerator) class in `readmenator._wiki`
+- [`WikiPublishResult`](modules/readmenator._gh_wiki.py.md#wikipublishresult) class in `readmenator._gh_wiki`
+- [`YaraLiteHit`](modules/readmenator._yaralite.py.md#yaralitehit) class in `readmenator._yaralite`
+- [`YaraLiteMatch`](modules/readmenator._yaralite.py.md#yaralitematch) class in `readmenator._yaralite`
+- [`YaraLiteRule`](modules/readmenator._yaralite.py.md#yaraliterule) class in `readmenator._yaralite`
+- [`YaraLiteString`](modules/readmenator._yaralite.py.md#yaralitestring) class in `readmenator._yaralite`

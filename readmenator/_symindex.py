@@ -36,6 +36,22 @@ _DEF_RE = re.compile(
 )
 
 
+_RECEIVER_RE = re.compile(r"([A-Za-z_$][\w$]*(?:\(\))?|\)|\])\s*(?:\.|->|::|\?\.)\s*$")
+
+
+def _receiver_text(node: ast.AST) -> str:
+    """Return a short source rendering of an attribute-call receiver."""
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        inner = _receiver_text(node.value)
+        return f"{inner}.{node.attr}" if inner else node.attr
+    if isinstance(node, ast.Call):
+        inner = _receiver_text(node.func)
+        return f"{inner}()" if inner else "()"
+    return type(node).__name__.lower()
+
+
 @dataclass
 class SymbolDef:
     """One symbol definition with its file span.
@@ -71,6 +87,7 @@ class CallSite:
         callee: Called simple name.
         line: One-based call line (0 when unknown).
         column: Zero-based call column (0 when unknown).
+        receiver: Expression before the dot for attribute calls ("" for plain calls).
     """
 
     file: str
@@ -78,6 +95,7 @@ class CallSite:
     callee: str
     line: int = 0
     column: int = 0
+    receiver: str = ""
 
 
 @dataclass
@@ -379,10 +397,12 @@ class SymbolIndex:
             def visit_Call(self, node: ast.Call) -> None:
                 """Record a call with its source location."""
                 callee = ""
+                receiver = ""
                 if isinstance(node.func, ast.Name):
                     callee = node.func.id
                 elif isinstance(node.func, ast.Attribute):
                     callee = str(node.func.attr)
+                    receiver = _receiver_text(node.func.value)
                 if callee:
                     sites.append(
                         CallSite(
@@ -391,6 +411,7 @@ class SymbolIndex:
                             callee=callee,
                             line=getattr(node, "lineno", 0),
                             column=getattr(node, "col_offset", 0),
+                            receiver=receiver,
                         )
                     )
                 self.generic_visit(node)
@@ -429,10 +450,12 @@ class SymbolIndex:
                 name = match.group(1)
                 if _DEF_RE.match(line) and name in {s.name for s in ordered}:
                     continue
+                before = _RECEIVER_RE.search(line[max(0, match.start(1) - int(self._config.SYMINDEX_RECEIVER_WINDOW)):match.start(1)])
                 sites.append(
                     CallSite(
                         file=file_id, caller=caller, callee=name,
                         line=lineno, column=match.start(1),
+                        receiver=before.group(1) if before else "",
                     )
                 )
         return sites

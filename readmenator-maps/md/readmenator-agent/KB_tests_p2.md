@@ -138,13 +138,46 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_to_json_handles_resolved_edges` (method, line 160) `def test_to_json_handles_resolved_edges(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_exporter.py`, `readmenator/_models.py`
 
+## tests/test_flowcharts.py
+- Doc: Contract tests for architecture tiers, execution flows, and receiver typing.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_project` (function, line 87) `def _project()`
+  - `TestGraphAlgorithms` (class, line 106) `class TestGraphAlgorithms(TestCase)`
+  - `TestArchitectureDiagram` (class, line 131) `class TestArchitectureDiagram(TestCase)`
+  - `TestExecutionFlows` (class, line 183) `class TestExecutionFlows(TestCase)`
+  - `TestPythonReceiverTypes` (class, line 255) `class TestPythonReceiverTypes(TestCase)`
+  - `test_flowcharts_tarjan_finds_cycles` (method, line 109) `def test_flowcharts_tarjan_finds_cycles(self)`
+  - `test_flowcharts_transitive_reduction_drops_implied` (method, line 113) `def test_flowcharts_transitive_reduction_drops_implied(self)`
+  - `test_flowcharts_eades_lin_smyth_orders_by_weight` (method, line 117) `def test_flowcharts_eades_lin_smyth_orders_by_weight(self)`
+  - `test_flowcharts_eades_lin_smyth_deterministic` (method, line 122) `def test_flowcharts_eades_lin_smyth_deterministic(self)`
+  - `test_flowcharts_mermaid_text_escapes` (method, line 126) `def test_flowcharts_mermaid_text_escapes(self)`
+  - `_fixture` (method, line 134) `def _fixture(self)`
+  - `test_flowcharts_architecture_tiers_and_upward` (method, line 152) `def test_flowcharts_architecture_tiers_and_upward(self)`
+  - `test_flowcharts_architecture_skips_tests_and_vendor` (method, line 164) `def test_flowcharts_architecture_skips_tests_and_vendor(self)`
+  - `test_flowcharts_architecture_section_markdown` (method, line 174) `def test_flowcharts_architecture_section_markdown(self)`
+  - `setUpClass` (method, line 187) `def setUpClass(cls)`
+  - `test_flowcharts_typed_receivers_route_calls` (method, line 192) `def test_flowcharts_typed_receivers_route_calls(self)`
+  - `test_flowcharts_entry_points_scored` (method, line 197) `def test_flowcharts_entry_points_scored(self)`
+  - `test_flowcharts_walk_order_and_recursion` (method, line 203) `def test_flowcharts_walk_order_and_recursion(self)`
+  - `test_flowcharts_call_tree_mermaid` (method, line 211) `def test_flowcharts_call_tree_mermaid(self)`
+  - `test_flowcharts_control_flow_switch_loop_try` (method, line 220) `def test_flowcharts_control_flow_switch_loop_try(self)`
+  - `test_flowcharts_sequence_crosses_files` (method, line 232) `def test_flowcharts_sequence_crosses_files(self)`
+  - `test_flowcharts_section_and_kb_integration` (method, line 240) `def test_flowcharts_section_and_kb_integration(self)`
+  - `setUp` (method, line 258) `def setUp(self)`
+  - `test_pytypes_receiver_classes` (method, line 262) `def test_pytypes_receiver_classes(self)`
+  - `test_pytypes_resolve_method_picks_typed_owner` (method, line 268) `def test_pytypes_resolve_method_picks_typed_owner(self)`
+  - `test_pytypes_accepts_rejects_unproven` (method, line 272) `def test_pytypes_accepts_rejects_unproven(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_flowcharts.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`
+
 ## tests/test_gh_wiki.py
 - Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
 - Layer: testing
 - Language: py
 - Symbols:
   - `_FakeRunner` (class, line 14) `class _FakeRunner`
-  - `_project` (method, line 41) `def _project(root, config)`
+  - `_project` (function, line 41) `def _project(root, config)`
   - `TestGitHubWikiPages` (class, line 61) `class TestGitHubWikiPages(TestCase)`
   - `TestGitHubWikiPublish` (class, line 115) `class TestGitHubWikiPublish(TestCase)`
   - `__init__` (method, line 17) `def __init__(self, origin, clone_ok, dirty)`
@@ -199,7 +232,7 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_graphlayout_sphere_curves_skip_unknown_and_self` (method, line 215) `def test_graphlayout_sphere_curves_skip_unknown_and_self(self)`
   - `test_graphlayout_sphere_cross_curve_dives_inside` (method, line 223) `def test_graphlayout_sphere_cross_curve_dives_inside(self)`
   - `test_graphlayout_sphere_is_deterministic_and_empty_safe` (method, line 228) `def test_graphlayout_sphere_is_deterministic_and_empty_safe(self)`
-  - `mean` (method, line 52) `def mean(pairs)`
+  - `mean` (function, line 52) `def mean(pairs)`
 - Depends on: `readmenator/_graphlayout.py`
 
 ## tests/test_graphrag.py
@@ -285,7 +318,7 @@ Previous: [KB_tests.md](KB_tests.md)
   - `_node` (function, line 39) `def _node(nid, symbols)`
   - `TestForceGraphContract` (class, line 51) `class TestForceGraphContract(TestCase)`
   - `TestScanTextContract` (class, line 132) `class TestScanTextContract(TestCase)`
-  - `self_nodes` (method, line 152) `def self_nodes()`
+  - `self_nodes` (function, line 152) `def self_nodes()`
   - `TestYaraLiteContract` (class, line 157) `class TestYaraLiteContract(TestCase)`
   - `TestProvenanceContract` (class, line 210) `class TestProvenanceContract(TestCase)`
   - `TestExclusionsContract` (class, line 233) `class TestExclusionsContract(TestCase)`
@@ -295,8 +328,8 @@ Previous: [KB_tests.md](KB_tests.md)
   - `TestRebuildContract` (class, line 316) `class TestRebuildContract(TestCase)`
   - `TestGalleryCardContract` (class, line 368) `class TestGalleryCardContract(TestCase)`
   - `TestForceGraphInspectorPayload` (class, line 425) `class TestForceGraphInspectorPayload(TestCase)`
-  - `_inline_script` (method, line 476) `def _inline_script(html)`
-  - `_const_json` (method, line 481) `def _const_json(html, name)`
+  - `_inline_script` (function, line 476) `def _inline_script(html)`
+  - `_const_json` (function, line 481) `def _const_json(html, name)`
   - `TestForceGraphExplorerInteraction` (class, line 489) `class TestForceGraphExplorerInteraction(TestCase)`
   - `setUp` (method, line 54) `def setUp(self)`
   - `test_family_color_is_deterministic` (method, line 60) `def test_family_color_is_deterministic(self)`
@@ -364,6 +397,29 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_presentation_to_data_access_forbidden` (method, line 115) `def test_presentation_to_data_access_forbidden(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`
 
+## tests/test_layout_quality.py
+- Doc: Contract tests for bundle crossing reduction and seeded explorer layouts.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_clustered` (function, line 23) `def _clustered()`
+  - `_chords` (function, line 37) `def _chords(layout, edges)`
+  - `TestBundleOrdering` (class, line 42) `class TestBundleOrdering(TestCase)`
+  - `_force_payload_inputs` (function, line 100) `def _force_payload_inputs()`
+  - `TestSeededExplorer` (class, line 116) `class TestSeededExplorer(TestCase)`
+  - `test_layout_order_reduces_angular_cost` (method, line 45) `def test_layout_order_reduces_angular_cost(self)`
+  - `test_layout_order_keeps_members_and_first_group` (method, line 50) `def test_layout_order_keeps_members_and_first_group(self)`
+  - `test_layout_order_deterministic_and_never_worse` (method, line 56) `def test_layout_order_deterministic_and_never_worse(self)`
+  - `test_layout_more_sweeps_never_increase_cost` (method, line 63) `def test_layout_more_sweeps_never_increase_cost(self)`
+  - `test_layout_center_out_puts_hub_mid_arc` (method, line 77) `def test_layout_center_out_puts_hub_mid_arc(self)`
+  - `test_layout_sphere_refinement_shortens_chords` (method, line 82) `def test_layout_sphere_refinement_shortens_chords(self)`
+  - `test_layout_sphere_refine_in_bundling_call` (method, line 92) `def test_layout_sphere_refine_in_bundling_call(self)`
+  - `test_layout_seed_positions_present_and_scaled` (method, line 119) `def test_layout_seed_positions_present_and_scaled(self)`
+  - `test_layout_seed_deterministic_and_disableable` (method, line 132) `def test_layout_seed_deterministic_and_disableable(self)`
+  - `test_layout_seed_page_wiring` (method, line 142) `def test_layout_seed_page_wiring(self)`
+  - `test_layout_bundle_payload_uses_optimized_order` (method, line 150) `def test_layout_bundle_payload_uses_optimized_order(self)`
+- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`
+
 ## tests/test_linter.py
 - Doc: Contract tests for the ArchitectureLinter.
 - Layer: testing
@@ -416,75 +472,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
   - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
-
-## tests/test_memory.py
-- Doc: Contract tests for project memory, the session log, and agent skills.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_project` (function, line 17) `def _project(root)`
-  - `TestProjectMemoryContract` (class, line 40) `class TestProjectMemoryContract(TestCase)`
-  - `TestSkillInstallerContract` (class, line 115) `class TestSkillInstallerContract(TestCase)`
-  - `setUp` (method, line 43) `def setUp(self)`
-  - `tearDown` (method, line 50) `def tearDown(self)`
-  - `test_memory_extracts_declared_rules_with_citations` (method, line 54) `def test_memory_extracts_declared_rules_with_citations(self)`
-  - `test_memory_skips_contract_headings_and_injected_blocks` (method, line 61) `def test_memory_skips_contract_headings_and_injected_blocks(self)`
-  - `test_memory_build_has_all_sections` (method, line 67) `def test_memory_build_has_all_sections(self)`
-  - `test_memory_remember_then_rebuild_preserves_log` (method, line 76) `def test_memory_remember_then_rebuild_preserves_log(self)`
-  - `test_memory_remember_rejects_unknown_kind_and_empty` (method, line 86) `def test_memory_remember_rejects_unknown_kind_and_empty(self)`
-  - `test_memory_note_cannot_break_markers` (method, line 93) `def test_memory_note_cannot_break_markers(self)`
-  - `test_memory_sanitize_truncates` (method, line 101) `def test_memory_sanitize_truncates(self)`
-  - `test_memory_notes_feed_graphrag` (method, line 105) `def test_memory_notes_feed_graphrag(self)`
-  - `test_skills_are_packaged_with_frontmatter` (method, line 118) `def test_skills_are_packaged_with_frontmatter(self)`
-  - `test_skills_install_is_idempotent` (method, line 129) `def test_skills_install_is_idempotent(self)`
-  - `test_skills_install_on_run_requires_existing_parent` (method, line 137) `def test_skills_install_on_run_requires_existing_parent(self)`
-  - `test_skills_install_on_run_respects_flag` (method, line 145) `def test_skills_install_on_run_respects_flag(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_skill_installer.py`
-
-## tests/test_mermaid.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestMermaidRendererContract` (class, line 7) `class TestMermaidRendererContract(TestCase)`
-  - `setUp` (method, line 8) `def setUp(self)`
-  - `test_renders_graph_header` (method, line 11) `def test_renders_graph_header(self)`
-  - `test_renders_module_node` (method, line 19) `def test_renders_module_node(self)`
-  - `test_renders_symbol_subnodes` (method, line 27) `def test_renders_symbol_subnodes(self)`
-  - `test_class_symbol_gets_cls_style` (method, line 36) `def test_class_symbol_gets_cls_style(self)`
-  - `test_function_symbol_gets_fn_style` (method, line 45) `def test_function_symbol_gets_fn_style(self)`
-  - `test_external_import_edge_is_dashed` (method, line 54) `def test_external_import_edge_is_dashed(self)`
-  - `test_truncation_when_over_limit` (method, line 62) `def test_truncation_when_over_limit(self)`
-  - `test_limits_symbols_to_five_per_node` (method, line 72) `def test_limits_symbols_to_five_per_node(self)`
-  - `test_handles_special_characters_in_ids` (method, line 82) `def test_handles_special_characters_in_ids(self)`
-- Depends on: `readmenator/_mermaid.py`, `readmenator/_models.py`
-
-## tests/test_models.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestSymbolContract` (class, line 6) `class TestSymbolContract(TestCase)`
-  - `TestNodeContract` (class, line 20) `class TestNodeContract(TestCase)`
-  - `TestEdgeContract` (class, line 48) `class TestEdgeContract(TestCase)`
-  - `TestPluralizeContract` (class, line 56) `class TestPluralizeContract(TestCase)`
-  - `test_symbol_creation` (method, line 7) `def test_symbol_creation(self)`
-  - `test_symbol_with_signature` (method, line 15) `def test_symbol_with_signature(self)`
-  - `test_node_creation` (method, line 21) `def test_node_creation(self)`
-  - `test_node_with_symbols` (method, line 35) `def test_node_with_symbols(self)`
-  - `test_edge_creation` (method, line 49) `def test_edge_creation(self)`
-  - `test_pluralize_class` (method, line 57) `def test_pluralize_class(self)`
-  - `test_pluralize_unknown_appends_s` (method, line 62) `def test_pluralize_unknown_appends_s(self)`
-- Depends on: `readmenator/_models.py`
-
-## tests/test_ollama.py
-- Doc: Contract tests for the local Ollama client.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestOllamaContract` (class, line 11) `class TestOllamaContract(TestCase)`
-  - `test_disabled_client_returns_empty` (method, line 14) `def test_disabled_client_returns_empty(self)`
-  - `test_unreachable_daemon_returns_empty` (method, line 20) `def test_unreachable_daemon_returns_empty(self)`
-  - `test_strip_thinking_removes_reasoning_blocks` (method, line 30) `def test_strip_thinking_removes_reasoning_blocks(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_ollama.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

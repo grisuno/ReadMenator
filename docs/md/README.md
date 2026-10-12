@@ -2,6 +2,7 @@
 
 <img width="1024" height="559" alt="image" src="https://github.com/user-attachments/assets/8d146d5d-8e35-45c9-a119-fa154d03446b" />
 
+<img width="1913" height="963" alt="image" src="https://github.com/user-attachments/assets/f32e63ea-d2a2-41c1-a00f-6b660efbd643" />
 
 A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer.
 
@@ -156,6 +157,9 @@ The **Force Graph Explorer** (`readmenator-maps/graph-force.html`, featured in t
 gallery with a real ForceAtlas2 thumbnail) draws every file, community, layer and
 external in a 2D map or a 3D space:
 
+- **Deterministic start.** Every node ships ForceAtlas2 (LinLog) start positions for
+  2D and 3D, scaled to the link distance, so the map opens already clustered and
+  identical on every load instead of exploding from random positions.
 - **Exact selection.** Hover, click, drag and right-click are hit-tested in the page
   against the positions drawn in the same frame, so the pointer always picks what is
   under it, including labels and curved edges, in both 2D and 3D.
@@ -192,6 +196,10 @@ canvas, no CDN.
   cap sized by its file count, wires dive through the core between caps. Drag to
   rotate, wheel to zoom, optional auto-rotate; selecting a file or community flies
   the camera to face it.
+- **Crossing reduction.** Communities that talk the most sit next to each other
+  (weighted chaining plus 2-opt), hubs sit mid-arc, and barycentric sweeps move
+  each file toward its neighbours; on the sphere every file takes the cap point
+  facing its neighbours. Each step is kept only when total bundle length drops.
 - **Reading it.** Hover a file: cyan wires are what it imports, pink what imports it.
   Click to pin it (imports and importers listed, one click to open it in the force
   graph in 2D or 3D). Click an arc, cap label or legend row to focus a community
@@ -201,6 +209,56 @@ canvas, no CDN.
   layer or language, search, PNG export, light/dark theme. Deep links:
   `#view=3d&node=<id>&group=<key>&beta=0.7&color=layer&dir=out&cross=1`; console API
   `window.ReadmenatorBundles`.
+
+### API Reference (Sphinx / Doxygen style, zero tokens)
+
+Every run writes `readmenator-apidocs/`, a deterministic API reference built
+from source, not from an LLM:
+
+- **Signatures from the code.** Python gets a full `ast` pass (annotations,
+  defaults, `/` and `*` markers, decorators, properties, class and static
+  methods, dataclass fields, `__all__`, inferred raises and return behaviour).
+  The other 18 languages reuse the parsers, recover the comment block above
+  each declaration, nest members into their type by brace or indentation span,
+  and split signatures into typed parameters and return types.
+- **Docstrings in any convention.** Google, NumPy, reStructuredText/Sphinx,
+  Javadoc/JSDoc/PHPDoc/KDoc/Doxygen (`@param`, `\brief`, `{type}`,
+  `[name=default]`), C# XML doc comments, and Rustdoc sections all parse into
+  the same parameters / returns / raises / examples / notes / see-also model.
+- **Cross-references.** Base classes link to project types (with subclasses),
+  header prototypes lend their docs to C definitions, overrides inherit base
+  docs, and every callable lists precise callers and callees (Python receivers
+  are typed from constructors, annotations, and `self.attr` assignments, so
+  `app.run()` resolves to `App.run` and unproven `obj.x()` calls are dropped).
+  Backticks, Sphinx roles and `{@link}` in prose become links.
+- **Pages.** `index.md` (modules by package with coverage), one page per module
+  with a Mermaid class diagram and call graph, `classes.md` (hierarchy),
+  `genindex.md` (A-Z), `COVERAGE.md`, `architecture.md`, `api.json`, and an
+  offline searchable `index.html` browser.
+- **Doc linting like Doxygen.** DOC001 undocumented, DOC002 parameter not
+  documented, DOC003 documented parameter not in the signature (stale docs),
+  DOC004 return not documented, DOC005 raised exception not documented.
+
+```bash
+readmenator . apidocs                       # write readmenator-apidocs/
+readmenator . doc-coverage --fail-under 80  # CI gate: exit 1 below 80%
+```
+
+### Architecture Overview and Execution Flows
+
+`KNOWLEDGE_BASE.md` (and `readmenator-apidocs/architecture.md`) open with two
+diagrams computed by graph algorithms instead of a raw file dump:
+
+- **Tiered architecture.** Communities become components; a weighted
+  Eades-Lin-Smyth feedback-arc-set ordering makes most imports point downward,
+  tiers are longest-path levels, implied edges are removed by transitive
+  reduction, and the few imports that go *upward* (the minimal set that closes
+  every cycle) are drawn as dashed red arrows and listed as "fix first".
+- **Execution flows.** Entry points are scored (`__main__` guards, `main`,
+  CLI/server files, call-graph sources) and each one gets a control-flow
+  flowchart (decisions, loops, try/except, returns; `if/elif` dispatch chains
+  collapse into one switch), a call tree in real call order, and a cross-file
+  sequence diagram.
 
 ### Component Diagrams
 
@@ -246,7 +304,10 @@ community and a live flow ranking), **The Sphere** (the 3D layout folds onto a g
 of community caps and every import bundles through its core), and code DNA. A
 closing invitation shows both explorers spinning with their paths, so viewers know
 where to go next. Set an act's duration (`VIDEO_ORBIT_S`, `VIDEO_SPHERE_S`,
-`VIDEO_INVITE_S`, ...) to 0 to drop it with its card.
+`VIDEO_INVITE_S`, ...) to 0 to drop it with its card. Motion uses quintic
+smootherstep easing, scenes crossfade into each other (`VIDEO_TRANSITION_S`),
+and the 3D camera acts get shutter motion blur (`VIDEO_MOTION_BLUR_SAMPLES`).
+The circle and sphere acts share the explorer's crossing-reduction ordering.
 
 ### GraphRAG for agents (zero tokens to build, cheap to query)
 
@@ -416,6 +477,11 @@ a zero-token polyglot static analysis tool. Regenerate with
   - `REPORT.md` -- Honest audit: coverage, confidence, limits
 - **[readmenator-graphrag/](./readmenator-graphrag/)** -- Zero-token GraphRAG index.
   - `index.json` + `REPORTS.md` -- Query with `readmenator . ask "<question>"`
+- **[readmenator-apidocs/](./readmenator-apidocs/)** -- API reference (Sphinx/Doxygen style).
+  - `index.md` + `modules/*.md` -- Signatures, parameters, returns, raises, examples, call graphs
+  - `architecture.md` -- Tiered architecture + execution flows (control flow, call tree, sequence)
+  - `classes.md`, `genindex.md`, `COVERAGE.md` -- Hierarchy, A-Z index, doc coverage + warnings
+  - `index.html` + `api.json` -- Offline searchable browser and machine-readable model
 - **[readmenator-maps/](./readmenator-maps/)** -- Interactive gallery (`index.html`).
   - 5 system maps: architecture, workflow, sequence, dataflow, lifecycle
   - `graph-force.html` -- Force-graph explorer (2D/3D, reach, paths, lenses)

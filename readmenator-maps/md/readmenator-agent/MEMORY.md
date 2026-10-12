@@ -2,16 +2,17 @@
 
 > Cross-session context for agents. Sections 1-6 are regenerated from the source tree with zero LLM tokens: declared rules are quoted verbatim with `file:line`, measured baselines come from the scan. Section 7 is written by agents and humans and is preserved across rebuilds.
 
-Generated from 136 files at commit `91d6003d9723`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
+Generated from 145 files at commit `ea480890c542`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
 
 ## 1. Purpose and domain
 
-- What it is: A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer. (`README.md:6`)
-- Domain vocabulary (term, files): `readmenator` (89), `file` (78), `graph` (65), `node` (61), `files` (59), `symbols` (57), `imports` (54), `edges` (51), `nodes` (51), `symbol` (51), `build` (48), `import` (48), `all` (47), `set` (46), `content` (45)
+- What it is: A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer. (`README.md:7`)
+- Domain vocabulary (term, files): `readmenator` (95), `file` (86), `graph` (70), `node` (65), `files` (62), `symbols` (61), `edges` (57), `imports` (56), `nodes` (54), `symbol` (53), `project` (52), `build` (52), `all` (52), `import` (51), `content` (50)
 - Subsystem `readmenator: _graphrag`: 40 files, core `readmenator/_graphrag.py`: Zero-token GraphRAG index and retrieval for AI agents.
 - Subsystem `readmenator/parsers`: 32 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
 - Subsystem `readmenator: _diagrams`: 31 files, core `readmenator/_diagrams.py`: Self-contained interactive system maps for the knowledge graph.
-- Subsystem `readmenator: _pipeline`: 25 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
+- Subsystem `readmenator: _pipeline`: 20 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
+- Subsystem `readmenator: _apidocs`: 14 files, core `readmenator/_apidocs.py`: Deterministic API reference model: extraction, cross-references, coverage.
 - Subsystem `readmenator: _agent_injector`: 5 files, core `readmenator/_agent_injector.py`: Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 - Business rules that the code cannot show live in section 7: record them there.
 
@@ -36,35 +37,35 @@ Session protocol:
 ## 3. Rules and constraints
 
 Declared:
-- Config is the single source of truth for all constants (`CLAUDE.md:740`)
-- Symbol creation logic is not duplicated across parsers (`CLAUDE.md:741`)
-- Docstring extraction lives once in LanguageParser base class (`CLAUDE.md:742`)
-- File-level doc extraction lives once in PolyglotScanner (`CLAUDE.md:743`)
-- All analysis thresholds in Config, never hardcoded (`CLAUDE.md:744`)
-- Single Responsibility: each module has one job (`CLAUDE.md:747`)
-- Open/Closed: add parsers/analyzers without modifying existing code (`CLAUDE.md:748`)
-- Liskov Substitution: all parsers inherit from LanguageParser (`CLAUDE.md:749`)
-- Interface Segregation: each contract exposes minimal surface (`CLAUDE.md:750`)
-- Dependency Inversion: app depends on abstractions (Config, Scanner) (`CLAUDE.md:751`)
-- No absolute paths in source code (`CLAUDE.md:754`)
-- No network calls from the core scanner (`CLAUDE.md:755`)
-- Symlinks rejected (`CLAUDE.md:756`)
-- File size limits enforced (`CLAUDE.md:757`)
-- Directory depth limits enforced (`CLAUDE.md:758`)
-- All parsing exceptions caught (`CLAUDE.md:759`)
-- No external API calls in any analysis or export module (`CLAUDE.md:760`)
-- Pattern-based security analyzer with 18 language rule sets (`CLAUDE.md:761`)
-- Privacy mode strips source snippets from output (`CLAUDE.md:762`)
-- Fix any security issues found (symlinks, path traversal, size limits) (`CLAUDE.md:791`)
-- Remove hardcoded values and move to Config if they are tuneable (`CLAUDE.md:792`)
-- Update tests to cover new behaviors (`CLAUDE.md:793`)
-- Keep the "Classs" pluralization fix intact (`CLAUDE.md:794`)
-- Do not add absolute paths (`CLAUDE.md:795`)
-- Do not add external dependencies to the core scanner (`CLAUDE.md:796`)
-- Maintain backward compatibility of the CLI interface (`CLAUDE.md:797`)
-- Update this CLAUDE.md and README.md for any contract changes (`CLAUDE.md:798`)
-- Fix inline imports (move to top of file) (`CLAUDE.md:799`)
-- Add type annotations to all function signatures (`CLAUDE.md:800`)
+- Config is the single source of truth for all constants (`CLAUDE.md:794`)
+- Symbol creation logic is not duplicated across parsers (`CLAUDE.md:795`)
+- Docstring extraction lives once in LanguageParser base class (`CLAUDE.md:796`)
+- File-level doc extraction lives once in PolyglotScanner (`CLAUDE.md:797`)
+- All analysis thresholds in Config, never hardcoded (`CLAUDE.md:798`)
+- Single Responsibility: each module has one job (`CLAUDE.md:801`)
+- Open/Closed: add parsers/analyzers without modifying existing code (`CLAUDE.md:802`)
+- Liskov Substitution: all parsers inherit from LanguageParser (`CLAUDE.md:803`)
+- Interface Segregation: each contract exposes minimal surface (`CLAUDE.md:804`)
+- Dependency Inversion: app depends on abstractions (Config, Scanner) (`CLAUDE.md:805`)
+- No absolute paths in source code (`CLAUDE.md:808`)
+- No network calls from the core scanner (`CLAUDE.md:809`)
+- Symlinks rejected (`CLAUDE.md:810`)
+- File size limits enforced (`CLAUDE.md:811`)
+- Directory depth limits enforced (`CLAUDE.md:812`)
+- All parsing exceptions caught (`CLAUDE.md:813`)
+- No external API calls in any analysis or export module (`CLAUDE.md:814`)
+- Pattern-based security analyzer with 18 language rule sets (`CLAUDE.md:815`)
+- Privacy mode strips source snippets from output (`CLAUDE.md:816`)
+- Fix any security issues found (symlinks, path traversal, size limits) (`CLAUDE.md:845`)
+- Remove hardcoded values and move to Config if they are tuneable (`CLAUDE.md:846`)
+- Update tests to cover new behaviors (`CLAUDE.md:847`)
+- Keep the "Classs" pluralization fix intact (`CLAUDE.md:848`)
+- Do not add absolute paths (`CLAUDE.md:849`)
+- Do not add external dependencies to the core scanner (`CLAUDE.md:850`)
+- Maintain backward compatibility of the CLI interface (`CLAUDE.md:851`)
+- Update this CLAUDE.md and README.md for any contract changes (`CLAUDE.md:852`)
+- Fix inline imports (move to top of file) (`CLAUDE.md:853`)
+- Add type annotations to all function signatures (`CLAUDE.md:854`)
 - Maintain strict separation of concerns. (`.cursorrules:5`)
 - UI/presentation components must not contain business logic or database queries. (`.cursorrules:6`)
 - Business logic must not depend on presentation or infrastructure details. (`.cursorrules:7`)
@@ -78,42 +79,42 @@ Declared:
 
 Measured baseline:
 - Security findings at medium or above: 0 (see `readmenator-agent/SECURITY.md`); do not add new ones.
-- Dependency cycles: 0; layer violations: 1 (see `readmenator-agent/GOTCHAS.md`).
+- Dependency cycles: 0; layer violations: 4 (see `readmenator-agent/GOTCHAS.md`).
 
 ## 4. Style norms
 
 Declared:
-- All progress/report messages use `logging.getLogger(__name__)` (never `print()`) (`CLAUDE.md:765`)
-- User-facing output (query results, summaries) uses `print()` to stdout (`CLAUDE.md:766`)
-- Logging format configured in `__main__.py` via `logging.basicConfig` (`CLAUDE.md:767`)
-- Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:768`)
+- All progress/report messages use `logging.getLogger(__name__)` (never `print()`) (`CLAUDE.md:819`)
+- User-facing output (query results, summaries) uses `print()` to stdout (`CLAUDE.md:820`)
+- Logging format configured in `__main__.py` via `logging.basicConfig` (`CLAUDE.md:821`)
+- Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:822`)
 
 Measured baseline:
-- py: 135 files, 2526 symbols; docstrings on 52% of symbols; functions snake_case (95%); types PascalCase (100%); median file 193 lines, max 4050.
+- py: 144 files, 2821 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 202 lines, max 4050.
 - js: 1 files, 35 symbols; docstrings on 100% of symbols; functions snake_case (80%); types PascalCase (40%); median file 5 lines, max 5.
-- Tests: 49 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
+- Tests: 52 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
 
 ## 5. Minimum deliverables
 
 Declared:
-- Tests named as `test_<contract>_<behavior>` (BDD style) (`CLAUDE.md:771`)
-- Each module has its own test class (`CLAUDE.md:772`)
-- Security behaviors tested explicitly (`CLAUDE.md:773`)
-- Edge cases tested (empty files, syntax errors, symlinks) (`CLAUDE.md:774`)
-- Integration tests validate end-to-end pipeline (`CLAUDE.md:775`)
-- "Classs" regression test prevents re-introduction (`CLAUDE.md:776`)
-- All new modules have complete contract test suites (`CLAUDE.md:777`)
-- Mutation check after SDD+TDD+BDD: introduce one-line mutants (validation bypass, escaping bypass, ordering change); a killed mutant fails at least one test, a surviving mutant requires a stronger test before refactor (`CLAUDE.md:778`)
-- Property-based parser tests skip cleanly when hypothesis is not installed (inert strategy placeholders, identity decorators) (`CLAUDE.md:779`)
-- English only, no emojis, no prose comments, docstrings on every public and private function (`CLAUDE.md:782`)
-- DRY and SOLID, one self-contained file per contract, production code with no placeholders or simplifications (`CLAUDE.md:783`)
-- No hardcoded tuneables or magic numbers: every setting lives in Config (`CLAUDE.md:784`)
-- No absolute paths, no network calls from analysis or export modules, all untrusted text escaped at the boundary (`CLAUDE.md:785`)
-- Boy scout: any technical debt or security flaw found during the change is fixed without losing functionality (`CLAUDE.md:786`)
+- Tests named as `test_<contract>_<behavior>` (BDD style) (`CLAUDE.md:825`)
+- Each module has its own test class (`CLAUDE.md:826`)
+- Security behaviors tested explicitly (`CLAUDE.md:827`)
+- Edge cases tested (empty files, syntax errors, symlinks) (`CLAUDE.md:828`)
+- Integration tests validate end-to-end pipeline (`CLAUDE.md:829`)
+- "Classs" regression test prevents re-introduction (`CLAUDE.md:830`)
+- All new modules have complete contract test suites (`CLAUDE.md:831`)
+- Mutation check after SDD+TDD+BDD: introduce one-line mutants (validation bypass, escaping bypass, ordering change); a killed mutant fails at least one test, a surviving mutant requires a stronger test before refactor (`CLAUDE.md:832`)
+- Property-based parser tests skip cleanly when hypothesis is not installed (inert strategy placeholders, identity decorators) (`CLAUDE.md:833`)
+- English only, no emojis, no prose comments, docstrings on every public and private function (`CLAUDE.md:836`)
+- DRY and SOLID, one self-contained file per contract, production code with no placeholders or simplifications (`CLAUDE.md:837`)
+- No hardcoded tuneables or magic numbers: every setting lives in Config (`CLAUDE.md:838`)
+- No absolute paths, no network calls from analysis or export modules, all untrusted text escaped at the boundary (`CLAUDE.md:839`)
+- Boy scout: any technical debt or security flaw found during the change is fixed without losing functionality (`CLAUDE.md:840`)
 
 Measured baseline:
 - Tests pass: `python -m pytest -q`.
-- Docstring coverage stays at or above 53%.
+- Docstring coverage stays at or above 55%.
 - No new security findings at medium or above (current: 0).
 - No new dependency cycles (current: 0).
 - Files stay under 300 lines where possible (`readmenator . lint`).

@@ -4,15 +4,15 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 ## Suggested
 
-### Q: What does _models.py depend on, and what depends on it? (97 connections)
+### Q: What does _models.py depend on, and what depends on it? (102 connections)
 
 - Status: unanswered
 
-### Q: What does _config.py depend on, and what depends on it? (86 connections)
+### Q: What does _config.py depend on, and what depends on it? (93 connections)
 
 - Status: unanswered
 
-### Q: What does _pipeline.py depend on, and what depends on it? (41 connections)
+### Q: What does _pipeline.py depend on, and what depends on it? (43 connections)
 
 - Status: unanswered
 
@@ -20,7 +20,7 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: Why are readmenator.py and test_agent_injector.py connected through 5 hops across 3 communities?
+### Q: Why are _docstrings.py and test_graphlayout.py connected through 5 hops across 3 communities?
 
 - Status: unanswered
 

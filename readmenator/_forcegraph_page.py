@@ -582,6 +582,7 @@ function build2D(el,data){
     .onRenderFramePost((ctx,scale)=>drawLabels2D(ctx,scale))
     .cooldownTicks(reduced?SETTINGS.cooldownTicksReduced:SETTINGS.cooldownTicks).onEngineStop(onFirstStop);
   commonForces(g2);g2.d3Force("collide",collideForce());
+  if(SETTINGS.seedLayout&&S.layout==="force")g2.d3VelocityDecay(SETTINGS.seedVelocityDecay);
   applyLayout(false);
 }
 let PROJ=[],PROJ_BY={},labelBoxes3=[];
@@ -628,6 +629,7 @@ function build3D(el,data){
     .backgroundColor("rgba(0,0,0,0)").onDagError(()=>{})
     .cooldownTicks(reduced?SETTINGS.cooldownTicksReduced:SETTINGS.cooldownTicks).onEngineStop(onFirstStop);
   commonForces(g3);
+  if(SETTINGS.seedLayout&&S.layout==="force")g3.d3VelocityDecay(SETTINGS.seedVelocityDecay);
   const ctl=g3.controls();if(ctl){ctl.autoRotate=S.orbit;ctl.autoRotateSpeed=SETTINGS.orbitSpeed;}
   hookRenderer();applyLayout(false);
 }
@@ -641,10 +643,17 @@ function visible(){
   return {nodes:RAW.nodes.filter(n=>keep.has(n.id)),links:EDGES.filter(e=>!S.hiddenRel.has(e.type)&&keep.has(e.source)&&keep.has(e.target)).map(e=>Object.assign({},e))};
 }
 let started=false,bootDone=false;
+function seedPositions(){
+  if(!SETTINGS.seedLayout||S.layout!=="force")return;
+  const mode=is3d?3:2;
+  RAW.nodes.forEach(n=>{const s=is3d?n.s3:n.s2;if(!s||n.__seed===mode||n.fx!=null)return;
+    n.x=s[0];n.y=s[1];if(is3d)n.z=s[2];else delete n.z;n.vx=0;n.vy=0;if(is3d)n.vz=0;n.__seed=mode;});
+}
 function mount(){
   const el=$("graph");clearEl(el);g2=null;g3=null;started=false;
   const ov=$("overlay");ov.getContext("2d").clearRect(0,0,ov.width,ov.height);
   if(is3d)stashPins();else restorePins();
+  seedPositions();
   const data=visible();
   try{if(is3d)build3D(el,data);else build2D(el,data);}catch(err){fail("Graph engine failed to start: "+(err&&err.message||err));return;}
   $("stage").classList.toggle("is3d",is3d);$("btn-orbit").hidden=!is3d;

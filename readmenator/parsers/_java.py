@@ -22,7 +22,7 @@ class JavaParser(LanguageParser):
             r"(?:public|private|protected)?\s*(?:abstract\s+)?(?:class|interface)\s+(\w+)",
             content,
         ):
-            line_num = content[: m.start()].count("\n")
+            line_num = content[: m.start(1)].count("\n")
             self.symbols.append(
                 Symbol(
                     name=m.group(1),
@@ -31,12 +31,17 @@ class JavaParser(LanguageParser):
                     doc=self._extract_docstring(line_num),
                 )
             )
-        method_pattern = r"(?:public|private|protected)?\s*(?:static\s+)?(?:[\w<>\[\]]+\s+)+(\w+)\s*\([^)]*\)\s*(?:throws\s+[\w,\s]+)?\s*\{"
-        reserved = {"if", "for", "while", "switch", "catch"}
-        for m in re.finditer(method_pattern, content):
-            name = m.group(1)
+        method_pattern = (
+            r"(?:public|private|protected)?\s*(?:static\s+)?(?:[\w<>\[\]]+\s+)+(\w+)\s*\([^)]*\)\s*(?:throws\s+[\w,\s.]+)?\s*\{"
+            r"|^[ \t]*(?:(?:public|protected|private|static|default|synchronized)\s+)*abstract\s+"
+            r"(?:(?:public|protected|static)\s+)*[\w<>\[\],.?\s]+?\s+(\w+)\s*\([^)]*\)\s*(?:throws\s+[\w,\s.]+)?;"
+        )
+        reserved = {"if", "for", "while", "switch", "catch", "return", "new", "throw", "else", "await", "typeof", "function", "do"}
+        for m in re.finditer(method_pattern, content, re.MULTILINE):
+            group = 1 if m.group(1) else 2
+            name = m.group(group)
             if name not in reserved:
-                line_num = content[: m.start()].count("\n")
+                line_num = content[: m.start(group)].count("\n")
                 self.symbols.append(
                     Symbol(
                         name=name,

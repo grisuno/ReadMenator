@@ -1,6 +1,6 @@
 # readmenator: _agent_injector
 
-*Community 4 | 5 files | cohesion 0.40*
+*Community 5 | 5 files | cohesion 0.40*
 
 ## Definition
 
@@ -32,15 +32,15 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 - `_build_injection` (method, `readmenator/_agent_injector.py:276`) `def _build_injection(self, fmt)`
 - `_build_mdc_injection` (method, `readmenator/_agent_injector.py:288`) `def _build_mdc_injection(self)` - Build Cursor .mdc injection body (frontmatter added separately).
 - `_prepend_mdc_frontmatter` (method, `readmenator/_agent_injector.py:293`) `def _prepend_mdc_frontmatter(content, injection)` - Prepend Cursor frontmatter so the rule is auto-attached.
-- `ReadmeInjector` (class, `readmenator/_readme_injector.py:115`) `class ReadmeInjector` - Injects a link to KNOWLEDGE_BASE.md into the project README.
-- `__init__` (method, `readmenator/_readme_injector.py:126`) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_outp` - Initialise the injector with output locations.
-- `inject` (method, `readmenator/_readme_injector.py:182`) `def inject(self, project_root)` - Inject or refresh the knowledge base section in the README.
-- `_extract_current_injection` (method, `readmenator/_readme_injector.py:223`) `def _extract_current_injection(content)` - Return the current anchored injection block.
-- `_remove_old_injection` (method, `readmenator/_readme_injector.py:240`) `def _remove_old_injection(content)` - Remove a complete anchored injection block.
-- `_strip_partial_anchor` (method, `readmenator/_readme_injector.py:259`) `def _strip_partial_anchor(content)` - Remove a broken half-anchor so a fresh tag can be created.
-- `remove` (method, `readmenator/_readme_injector.py:274`) `def remove(self, project_root)` - Remove the injected section from the README.
-- `_find_readme` (method, `readmenator/_readme_injector.py:311`) `def _find_readme(root)` - Return the first README candidate present in the directory.
-- `_build_injection` (method, `readmenator/_readme_injector.py:326`) `def _build_injection(self, suffix)` - Build the injection text for a README suffix.
+- `ReadmeInjector` (class, `readmenator/_readme_injector.py:122`) `class ReadmeInjector` - Injects a link to KNOWLEDGE_BASE.md into the project README.
+- `__init__` (method, `readmenator/_readme_injector.py:133`) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_outp` - Initialise the injector with output locations.
+- `inject` (method, `readmenator/_readme_injector.py:192`) `def inject(self, project_root)` - Inject or refresh the knowledge base section in the README.
+- `_extract_current_injection` (method, `readmenator/_readme_injector.py:233`) `def _extract_current_injection(content)` - Return the current anchored injection block.
+- `_remove_old_injection` (method, `readmenator/_readme_injector.py:250`) `def _remove_old_injection(content)` - Remove a complete anchored injection block.
+- `_strip_partial_anchor` (method, `readmenator/_readme_injector.py:269`) `def _strip_partial_anchor(content)` - Remove a broken half-anchor so a fresh tag can be created.
+- `remove` (method, `readmenator/_readme_injector.py:284`) `def remove(self, project_root)` - Remove the injected section from the README.
+- `_find_readme` (method, `readmenator/_readme_injector.py:321`) `def _find_readme(root)` - Return the first README candidate present in the directory.
+- `_build_injection` (method, `readmenator/_readme_injector.py:336`) `def _build_injection(self, suffix)` - Build the injection text for a README suffix.
 - `TestAgentInjectorInjectBehavior` (class, `tests/test_agent_injector.py:19`) `class TestAgentInjectorInjectBehavior(TestCase)` - BDD: AgentInjector injection contract.
 - `setUp` (method, `tests/test_agent_injector.py:22`) `def setUp(self)`
 - `tearDown` (method, `tests/test_agent_injector.py:27`) `def tearDown(self)`
@@ -56,15 +56,12 @@ This community groups 5 file(s) rooted at `tests` with dominant language py (coh
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
-- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
-- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_graphlayout.py in 5 hops.
-- [INFERRED] bridges community 4 <-> 0 (strength 0.5): Inferred cross-community bridge: tests/test_agent_injector.py reaches tests/test_resolver.py in 5 hops.
-- [INFERRED] shares_context community 4 <-> 5 (strength 0.5): Inferred shared context (language py) with no import path between community 4 (readmenator: _agent_injector) and community 5 (orphans).
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
+- [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
+- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.
+- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
+- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
 
 ## Risks
 

@@ -9,6 +9,9 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_agent_output.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
 - `readmenator/_analytics.py` -> __future__, collections, typing
 - `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
+- `readmenator/_apidocs.py` -> __future__, ast, dataclasses, pathlib, re, typing, warnings
+- `readmenator/_apidocs_page.py` -> __future__, html, json, pathlib, re, typing
+- `readmenator/_apidocs_render.py` -> __future__, json, logging, os, pathlib, re, typing
 - `readmenator/_app.py` -> __future__, dataclasses, json, logging, os, pathlib, typing
 - `readmenator/_bundlegraph.py` -> __future__, html, json, math, pathlib, re, typing
 - `readmenator/_bundlegraph_page.py` -> __future__
@@ -22,12 +25,14 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_dataflow.py` -> __future__, logging, re, typing
 - `readmenator/_dead_code.py` -> __future__, collections, typing
 - `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, re, shutil, subprocess, typing
+- `readmenator/_docstrings.py` -> __future__, dataclasses, re, typing
 - `readmenator/_documentation.py` -> __future__, collections, subprocess, typing
 - `readmenator/_embed.py` -> __future__, collections, math, re, sentence_transformers, typing
 - `readmenator/_exclusions.py` -> __future__, dataclasses, fnmatch, pathlib, typing
 - `readmenator/_explain.py` -> __future__, typing
 - `readmenator/_explorer.py` -> __future__, http.server, json, pathlib, socket, typing, urllib.parse, webbrowser
 - `readmenator/_exporter.py` -> __future__, json, math, os, pathlib, textwrap, typing
+- `readmenator/_flowcharts.py` -> __future__, ast, dataclasses, pathlib, re, typing, warnings
 - `readmenator/_forcegraph.py` -> __future__, html, json, logging, math, pathlib, re, shutil, typing
 - `readmenator/_forcegraph_page.py` -> __future__
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
@@ -47,6 +52,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_projections.py` -> __future__, typing
 - `readmenator/_provenance.py` -> __future__, dataclasses, typing
 - `readmenator/_purpose.py` -> __future__, re, typing
+- `readmenator/_pytypes.py` -> __future__, ast, dataclasses, typing, warnings
 - `readmenator/_query.py` -> __future__, collections, typing
 - `readmenator/_rank.py` -> __future__, dataclasses, math, typing
 - `readmenator/_readme_injector.py` -> __future__, logging, pathlib, typing
@@ -92,6 +98,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest
+- `tests/test_apidocs.py` -> __future__, dataclasses, json, pathlib, re, shutil, tempfile, unittest
 - `tests/test_bundlegraph.py` -> __future__, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
 - `tests/test_components.py` -> __future__, json, pathlib, shutil, subprocess, tempfile, unittest
@@ -104,6 +111,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_diagrams.py` -> __future__, dataclasses, json, pathlib, re, tempfile, unittest
 - `tests/test_documentation.py` -> __future__, unittest
 - `tests/test_exporter.py` -> __future__, json, unittest
+- `tests/test_flowcharts.py` -> __future__, dataclasses, unittest
 - `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
 - `tests/test_graphlayout.py` -> __future__, math, unittest
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
@@ -111,6 +119,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
 - `tests/test_interactive_graph.py` -> __future__, json, pathlib, re, shutil, subprocess, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest
+- `tests/test_layout_quality.py` -> __future__, dataclasses, math, random, unittest
 - `tests/test_linter.py` -> __future__, unittest
 - `tests/test_mcp_server.py` -> __future__, json, pathlib, tempfile, typing, unittest
 - `tests/test_memory.py` -> __future__, dataclasses, pathlib, tempfile, unittest

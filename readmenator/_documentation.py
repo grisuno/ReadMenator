@@ -14,6 +14,7 @@ from readmenator._analytics import AnalyticsBuilder
 from readmenator._config import Config
 from readmenator._cpg import CodePropertyGraph
 from readmenator._forcegraph import ForceGraphRenderer
+from readmenator._flowcharts import render_architecture_section, render_flows_section
 from readmenator._mermaid import MermaidRenderer
 from readmenator._uml import UmlGenerator
 from readmenator._models import (
@@ -54,6 +55,8 @@ class DocumentationGenerator:
             function_style=config.MERMAID_FUNCTION_STYLE,
             external_style=config.MERMAID_EXTERNAL_STYLE,
             internal_edge_style=config.MERMAID_INTERNAL_EDGE_STYLE,
+            max_edges=config.MERMAID_MAX_EDGES,
+            max_internal_edges=config.MERMAID_MAX_INTERNAL_EDGES,
         )
         self._cpg = CodePropertyGraph(
             privacy_mode=config.PRIVACY_MODE,
@@ -100,8 +103,34 @@ class DocumentationGenerator:
         findings: Optional[List[SecurityFinding]] = None,
         analysis_v2: Optional[AnalysisResultV2] = None,
         ranked: Optional[RankedResult] = None,
+        content_map: Optional[Dict[str, str]] = None,
     ) -> str:
+        """Render KNOWLEDGE_BASE.md.
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Raw edges.
+            resolved_edges: Resolved import edges.
+            analysis: Community and centrality analysis.
+            layers: File-to-layer mapping.
+            findings: Security findings.
+            analysis_v2: Deep analysis results.
+            ranked: Ranked context result.
+            content_map: File contents (enables execution-flow control-flow charts).
+
+        Returns:
+            The Markdown document.
+        """
         total_symbols = sum(len(n.symbols) for n in nodes)
+        architecture_lines: List[str] = []
+        if self._config.ARCH_DIAGRAM_ENABLED:
+            architecture_lines = render_architecture_section(self._config, nodes, resolved_edges, analysis, layers)
+        flow_lines: List[str] = []
+        if self._config.FLOW_ENABLED:
+            flow_lines = render_flows_section(self._config, nodes, edges, resolved_edges, content_map)
+        extra_toc = [title for title, block in (
+            ("Architecture Overview", architecture_lines), ("Execution Flows", flow_lines),
+        ) if block]
         import_edges = sum(1 for e in edges if e.relation == "imports")
         graph_output, is_truncated = self._mermaid.render(
             nodes, edges, resolved_edges, analysis
@@ -144,9 +173,11 @@ class DocumentationGenerator:
             lines.extend(["", ranking_meta])
         lines.extend(["", ""])
 
-        lines.extend(self._build_toc(nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked))
+        lines.extend(self._build_toc(nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked, extra_toc))
         lines.extend(self._build_dashboard(nodes, edges, resolved_edges))
         lines.extend(self._build_layers(layers, nodes))
+        lines.extend(architecture_lines)
+        lines.extend(flow_lines)
         if ranked:
             lines.extend(self._build_ranked_context(ranked))
         lines.extend(self._build_god_nodes(analysis, ranked))
@@ -327,6 +358,7 @@ class DocumentationGenerator:
         analysis_v2: Optional[AnalysisResultV2],
         is_truncated: bool,
         ranked: Optional[RankedResult] = None,
+        extra_sections: Optional[List[str]] = None,
     ) -> List[str]:
         toc: List[str] = ["## Table of Contents", ""]
         toc.append("1. [Statistics Dashboard](#statistics-dashboard)")
@@ -334,6 +366,10 @@ class DocumentationGenerator:
 
         toc.append(f"{entry}. [Architectural Layers](#architectural-layers)")
         entry += 1
+
+        for title in extra_sections or []:
+            toc.append(f"{entry}. [{title}](#{title.lower().replace(' ', '-')})")
+            entry += 1
 
         if ranked:
             toc.append(f"{entry}. [Ranked Context](#ranked-context)")

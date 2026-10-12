@@ -13,6 +13,9 @@ Implements two layout families used by the cinematic video:
 - Spherical edge bundling: the same hierarchy on a unit sphere, each
   community owning a cap of Fibonacci lattice points sized by its
   member count, hubs inside the sphere and the root at its center.
+- Crossing reduction for both: group order by weighted adjacency with
+  2-opt, center-out hub seeding, barycentric member sweeps on the
+  circle, and neighbour-facing point assignment inside sphere caps.
 
 ForceAtlas2 runs in two or three dimensions (settings.dims).
 
@@ -517,6 +520,8 @@ def spherical_edge_bundling(
     beta: float = 0.85,
     samples: int = 24,
     inner_ratio: float = 0.55,
+    refine_sweeps: int = 0,
+    affinity_edges: Optional[Sequence[Tuple[str, str]]] = None,
 ) -> SphereBundleLayout:
     """Lay leaves on a sphere in community caps and bundle edges through the hierarchy.
 
@@ -537,6 +542,10 @@ def spherical_edge_bundling(
         beta: Bundling strength in [0, 1].
         samples: Points per sampled curve.
         inner_ratio: Radius ratio of the group hubs.
+        refine_sweeps: When > 0, members are reassigned inside their cap
+            to face their neighbours (refine_sphere_leaves) before curves
+            are sampled.
+        affinity_edges: Edges used for refinement (defaults to *edges*).
 
     Returns:
         SphereBundleLayout with leaf positions, caps, hubs, and curves.
@@ -564,6 +573,12 @@ def spherical_edge_bundling(
         hubs[label] = (center[0] * radius * inner_ratio, center[1] * radius * inner_ratio,
                        center[2] * radius * inner_ratio)
         caps.append((label, center, len(groups[label])))
+    if refine_sweeps > 0:
+        draft = SphereBundleLayout(leaves, caps, hubs, [], radius)
+        leaves = dict(refine_sphere_leaves(
+            draft, {label: groups[label] for label in labels},
+            list(affinity_edges if affinity_edges is not None else edges), refine_sweeps,
+        ).leaves)
     curves = _bundle_curves(leaves, member_group, hubs, (0.0, 0.0, 0.0), edges, beta, samples)
     return SphereBundleLayout(leaves, caps, hubs, curves, radius)
 
@@ -603,3 +618,243 @@ def normalize_cloud(
             v = [c * factor for c in v]
         out[nid] = (v[0], v[1], v[2])
     return out
+
+
+def _undirected_weights(groups: Dict[str, List[str]], edges: Sequence[Tuple[str, str]]) -> Tuple[Dict[Tuple[str, str], int], Dict[str, List[str]]]:
+    """Return group-pair edge counts and per-member neighbour lists.
+
+    Args:
+        groups: Group label to member ids.
+        edges: Directed (source, target) pairs; unknown ids and self loops skipped.
+
+    Returns:
+        Tuple of (sorted group pair to count, member to sorted neighbour ids).
+    """
+    member_group = {m: g for g, ms in groups.items() for m in ms}
+    pair_weight: Dict[Tuple[str, str], int] = {}
+    neighbours: Dict[str, set] = {m: set() for m in member_group}
+    for a, b in edges:
+        if a == b or a not in member_group or b not in member_group:
+            continue
+        neighbours[a].add(b)
+        neighbours[b].add(a)
+        ga, gb = member_group[a], member_group[b]
+        if ga != gb:
+            key = (ga, gb) if ga < gb else (gb, ga)
+            pair_weight[key] = pair_weight.get(key, 0) + 1
+    return pair_weight, {m: sorted(ns) for m, ns in neighbours.items()}
+
+
+def _angular_distance(a: float, b: float) -> float:
+    """Return the shortest angular distance between two angles in radians."""
+    d = abs(a - b) % (2 * math.pi)
+    return min(d, 2 * math.pi - d)
+
+
+def bundle_angular_cost(groups: Dict[str, List[str]], edges: Sequence[Tuple[str, str]], group_gap: float = 0.04) -> float:
+    """Total angular length of all edges for a circular group layout.
+
+    Shorter total angular length means shorter bundles and fewer
+    crossings in hierarchical edge bundling.
+
+    Args:
+        groups: Ordered group label to ordered member ids.
+        edges: (source, target) pairs.
+        group_gap: Angular gap between groups in radians.
+
+    Returns:
+        Sum over edges of the angular distance between their endpoints.
+    """
+    layout = hierarchical_edge_bundling(groups, [], (0.0, 0.0), 1.0, group_gap=group_gap)
+    total = 0.0
+    for a, b in edges:
+        if a in layout.angles and b in layout.angles and a != b:
+            total += _angular_distance(layout.angles[a], layout.angles[b])
+    return total
+
+
+def _center_out(members: List[str]) -> List[str]:
+    """Reorder a ranked list so the first item sits in the middle, then alternate outwards."""
+    left: List[str] = []
+    right: List[str] = []
+    for pos, member in enumerate(members):
+        if pos % 2 == 0:
+            right.append(member)
+        else:
+            left.append(member)
+    return list(reversed(left)) + right
+
+
+def _group_order_cost(order: List[str], sizes: Dict[str, int], weights: Dict[Tuple[str, str], int], gap: float) -> float:
+    """Weighted angular distance between group arc centers for one cyclic order."""
+    total_members = sum(sizes[g] for g in order) or 1
+    usable = 2 * math.pi - gap * len(order)
+    step = usable / total_members
+    mids: Dict[str, float] = {}
+    angle = 0.0
+    for label in order:
+        span = sizes[label] * step
+        mids[label] = angle + span / 2
+        angle += span + gap
+    return sum(w * _angular_distance(mids[a], mids[b]) for (a, b), w in weights.items())
+
+
+def optimize_bundle_order(
+    groups: Dict[str, List[str]],
+    edges: Sequence[Tuple[str, str]],
+    sweeps: int = 6,
+    passes: int = 8,
+    group_gap: float = 0.04,
+) -> Dict[str, List[str]]:
+    """Reorder groups and members to shorten bundled edges (fewer crossings).
+
+    Three deterministic stages, each accepted only when it lowers the
+    total angular edge length (bundle_angular_cost):
+
+    1. Group order: the first group stays first; the rest are chained
+       greedily by inter-group edge weight, then refined with 2-opt
+       reversals on the weighted arc-center distance.
+    2. Center-out seeding: inside each group the first-listed members
+       (hubs, by caller rank) move to the middle of their arc.
+    3. Barycentric sweeps: each member is placed at the circular mean
+       of its neighbours' angles projected onto its own arc, the
+       classic crossing-reduction heuristic (Sugiyama-style) applied
+       to the radial layout; members without neighbours keep their slot.
+
+    Args:
+        groups: Ordered group label to ranked member ids.
+        edges: (source, target) pairs between members.
+        sweeps: Barycentric refinement sweeps.
+        passes: 2-opt passes over the group order.
+        group_gap: Angular gap between groups in radians.
+
+    Returns:
+        A new ordered mapping with the same groups and members.
+    """
+    labels = [g for g in groups if groups[g]]
+    if not labels:
+        return {g: list(ms) for g, ms in groups.items()}
+    weights, neighbours = _undirected_weights(groups, edges)
+    sizes = {g: len(groups[g]) for g in labels}
+    order = [labels[0]]
+    remaining = labels[1:]
+    while remaining:
+        last = order[-1]
+        best = max(
+            remaining,
+            key=lambda g: (weights.get((last, g) if last < g else (g, last), 0), -labels.index(g)),
+        )
+        order.append(best)
+        remaining.remove(best)
+    cost = _group_order_cost(order, sizes, weights, group_gap)
+    for _ in range(max(0, passes)):
+        improved = False
+        for i in range(1, len(order) - 1):
+            for j in range(i + 1, len(order)):
+                candidate = order[:i] + list(reversed(order[i:j + 1])) + order[j + 1:]
+                value = _group_order_cost(candidate, sizes, weights, group_gap)
+                if value < cost - 1e-12:
+                    order, cost, improved = candidate, value, True
+        if not improved:
+            break
+    baseline = {g: list(groups[g]) for g in labels}
+    current = {g: list(groups[g]) for g in order}
+    if bundle_angular_cost(current, edges, group_gap) > bundle_angular_cost(baseline, edges, group_gap):
+        current = baseline
+    seeded = {g: _center_out(ms) for g, ms in current.items()}
+    best_cost = bundle_angular_cost(current, edges, group_gap)
+    seeded_cost = bundle_angular_cost(seeded, edges, group_gap)
+    if seeded_cost <= best_cost:
+        current, best_cost = seeded, seeded_cost
+    for _ in range(max(0, sweeps)):
+        layout = hierarchical_edge_bundling(current, [], (0.0, 0.0), 1.0, group_gap=group_gap)
+        arcs = {label: (start, end) for label, start, end, _count in layout.groups}
+        proposal: Dict[str, List[str]] = {}
+        for label, members in current.items():
+            start, end = arcs[label]
+            mid = (start + end) / 2
+            half = max(1e-9, (end - start) / 2)
+            keyed = []
+            for slot, member in enumerate(members):
+                own = layout.angles[member]
+                ns = neighbours.get(member, [])
+                if ns:
+                    sx = sum(math.cos(layout.angles[n]) for n in ns)
+                    sy = sum(math.sin(layout.angles[n]) for n in ns)
+                    target = math.atan2(sy, sx) if abs(sx) + abs(sy) > 1e-12 else own
+                    delta = (target - mid + math.pi) % (2 * math.pi) - math.pi
+                    position = max(-half, min(half, delta))
+                else:
+                    position = own - mid
+                keyed.append((position, slot, member))
+            keyed.sort()
+            proposal[label] = [member for _p, _s, member in keyed]
+        value = bundle_angular_cost(proposal, edges, group_gap)
+        if value < best_cost - 1e-12:
+            current, best_cost = proposal, value
+        else:
+            break
+    result = {g: current[g] for g in current}
+    for g, ms in groups.items():
+        if g not in result:
+            result[g] = list(ms)
+    return result
+
+
+def refine_sphere_leaves(
+    layout: SphereBundleLayout,
+    groups: Dict[str, List[str]],
+    edges: Sequence[Tuple[str, str]],
+    sweeps: int = 4,
+) -> SphereBundleLayout:
+    """Reassign leaves inside each cap so members face their neighbours.
+
+    Every cap keeps exactly its lattice points; members are visited by
+    descending degree and take the free point closest to the mean
+    direction of their neighbours (cap center for isolated members).
+    A sweep is kept only when the total chord length of all edges drops.
+
+    Args:
+        layout: Result of spherical_edge_bundling.
+        groups: Group label to member ids (same as the layout input).
+        edges: (source, target) pairs.
+        sweeps: Maximum refinement sweeps.
+
+    Returns:
+        A new SphereBundleLayout with reassigned leaves (curves unchanged).
+    """
+    _weights, neighbours = _undirected_weights(groups, edges)
+    centers = {label: center for label, center, _count in layout.groups}
+
+    def chord_total(leaves: Dict[str, Point3]) -> float:
+        """Sum of straight-line edge lengths."""
+        total = 0.0
+        for a, b in edges:
+            if a in leaves and b in leaves and a != b:
+                pa, pb = leaves[a], leaves[b]
+                total += math.sqrt(sum((pa[k] - pb[k]) ** 2 for k in range(3)))
+        return total
+
+    current = dict(layout.leaves)
+    best = chord_total(current)
+    for _ in range(max(0, sweeps)):
+        proposal = dict(current)
+        for label, members in groups.items():
+            if not members or label not in centers:
+                continue
+            free = [current[m] for m in members if m in current]
+            order = sorted(members, key=lambda m: (-len(neighbours.get(m, [])), members.index(m)))
+            for member in order:
+                ns = [current[n] for n in neighbours.get(member, []) if n in current]
+                if ns:
+                    target = _unit([sum(p[k] for p in ns) for k in range(3)])
+                else:
+                    target = centers[label]
+                pick = max(range(len(free)), key=lambda i: (sum(free[i][k] * target[k] for k in range(3)), -i))
+                proposal[member] = free.pop(pick)
+        value = chord_total(proposal)
+        if value < best - 1e-12:
+            current, best = proposal, value
+        else:
+            break
+    return SphereBundleLayout(current, layout.groups, layout.hubs, layout.curves, layout.radius)

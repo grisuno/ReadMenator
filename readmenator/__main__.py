@@ -56,6 +56,8 @@ def build_parser() -> argparse.ArgumentParser:
             "  forcegraph              Export force-graph explorer HTML (readmenator-maps/graph-force.html)\n"
             "  bundles                 Export edge bundle explorer HTML, circle + sphere (readmenator-maps/graph-bundle.html)\n"
             "  components              Export component diagrams (analysis.json + graph LR markdown + index.html)\n"
+            "  apidocs                 Generate the API reference (Sphinx/Doxygen style: readmenator-apidocs/)\n"
+            "  doc-coverage [--fail-under N]  Print documentation coverage and warnings (exit 1 below N%)\n"
             "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
             "  near <file|text>        Nearest files by scan-text similarity (offline Jaccard)\n"
             "  scan-text               Print synthesized scan-text blobs per file\n"
@@ -333,6 +335,30 @@ def main() -> None:
             out = app.export_bundlegraph(target)
             print(out)
             return
+        elif command == "apidocs":
+            written = app.export_apidocs(target)
+            for rel in sorted(written):
+                print(f"{rel}: {written[rel]}")
+            return
+        elif command == "doc-coverage":
+            reference = app.build_api_reference(target)
+            overall = reference.coverage.get("overall", {})
+            threshold = app._config.APIDOCS_COVERAGE_FAIL_UNDER
+            if "--fail-under" in sys.argv:
+                pos = sys.argv.index("--fail-under")
+                try:
+                    threshold = float(sys.argv[pos + 1])
+                except (IndexError, ValueError):
+                    print("--fail-under needs a number", file=sys.stderr)
+                    sys.exit(2)
+            for warning in reference.warnings:
+                print(f"{warning.file}:{warning.line}: {warning.code} {warning.message}")
+            print(
+                f"Documentation coverage: {overall.get('percent', 100.0)}% "
+                f"({overall.get('documented', 0)}/{overall.get('total', 0)}), "
+                f"{len(reference.warnings)} warnings"
+            )
+            sys.exit(1 if float(overall.get("percent", 100.0)) < threshold else 0)
         elif command == "components":
             written = app.export_components(target)
             for kind, path in sorted(written.items()):
