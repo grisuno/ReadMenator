@@ -15,6 +15,7 @@ from readmenator._apidocs import ApiReferenceBuilder
 from readmenator._apidocs_render import ApiDocsWriter
 from readmenator._analyzer import GraphAnalyzer
 from readmenator._components import ComponentDiagramBuilder
+from readmenator._folder_readme import FolderReadmeWriter
 from readmenator._category import Category, TypedGraph, build_category_from_edges
 from readmenator._concepts import ConceptExtractor
 from readmenator._config import Config
@@ -113,6 +114,7 @@ class AnalyzerFactory:
         self._sourceview: SourceViewBuilder | None = None
         self._symindex: SymbolIndex | None = None
         self._components: ComponentDiagramBuilder | None = None
+        self._folder_readme: FolderReadmeWriter | None = None
         self._ollama: OllamaClient | None = None
         self._apidocs: ApiReferenceBuilder | None = None
         self._apidocs_writer: ApiDocsWriter | None = None
@@ -407,6 +409,13 @@ class AnalyzerFactory:
         if self._components is None:
             self._components = ComponentDiagramBuilder(self._config)
         return self._components
+
+    @property
+    def folder_readme(self) -> FolderReadmeWriter:
+        """Return the lazily initialised per-folder README writer."""
+        if self._folder_readme is None:
+            self._folder_readme = FolderReadmeWriter(self._config)
+        return self._folder_readme
 
     @property
     def apidocs(self) -> ApiReferenceBuilder:

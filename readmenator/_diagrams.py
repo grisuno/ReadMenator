@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 
 from readmenator._config import Config
+from readmenator._folder_readme import is_generated_folder_readme
 from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
 _MD_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
@@ -3370,7 +3371,7 @@ class DocsSitePublisher:
             if not docs_dir.is_dir():
                 continue
             for path in sorted(docs_dir.rglob("*.md")):
-                if path.is_file() and path not in candidates:
+                if path.is_file() and path not in candidates and not is_generated_folder_readme(path, self._config):
                     candidates.append(path)
         limit = max(1, self._config.SITE_MAX_DOCS)
         ordered = sorted(candidates, key=lambda p: p.relative_to(base).as_posix())

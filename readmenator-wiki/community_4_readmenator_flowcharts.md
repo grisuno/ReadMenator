@@ -1,6 +1,6 @@
 # readmenator: _flowcharts
 
-*Community 5 | 12 files | cohesion 0.47*
+*Community 4 | 12 files | cohesion 0.47*
 
 ## Definition
 
@@ -63,16 +63,17 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
-- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 5 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.
-- [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
-- [INFERRED] bridges community 5 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator/_docstrings.py reaches tests/test_graphlayout.py in 5 hops.
+- [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_apidocs.py.
+- [INFERRED] bridges community 4 <-> 0 (strength 0.5): Inferred cross-community bridge: readmenator/_docstrings.py reaches tests/test_graphlayout.py in 5 hops.
 
 ## Risks
 
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_pytypes.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_flowlayout.py` via `subprocess` (2 hops)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_render.py` (presentation)
 - [layer strict] `tests/test_flowcharts.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)

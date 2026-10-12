@@ -40,7 +40,7 @@ Output layout::
 
 ### `AgentOutputGenerator`
 
-`class` | [readmenator/_agent_output.py:70](../../readmenator/_agent_output.py#L70)
+`class` | [readmenator/_agent_output.py:71](../../readmenator/_agent_output.py#L71)
 
 ```python
 class AgentOutputGenerator
@@ -62,7 +62,7 @@ blocks around data structures.  Every line is greppable.
 
 #### `AgentOutputGenerator.__init__`
 
-`constructor` | [readmenator/_agent_output.py:77](../../readmenator/_agent_output.py#L77)
+`constructor` | [readmenator/_agent_output.py:78](../../readmenator/_agent_output.py#L78)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -82,7 +82,7 @@ Store configuration for output paths and size budgets.
 
 #### `AgentOutputGenerator.generate`
 
-`method` | [readmenator/_agent_output.py:81](../../readmenator/_agent_output.py#L81)
+`method` | [readmenator/_agent_output.py:82](../../readmenator/_agent_output.py#L82)
 
 ```python
 def generate(self, nodes: List[Node], edges: List[Edge], resolved_edges: List[Edge], analysis: Optional[AnalysisResult], analysis_v2: Optional[AnalysisResultV2], findings: List[SecurityFinding], layers: Dict[str, str], project_root: str) -> str

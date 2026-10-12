@@ -406,6 +406,16 @@ UI, and git can push (for example after `gh auth setup-git`). Pages written by
 hand are never deleted. Only pages that readmenator generated earlier are
 replaced.
 
+### Self-describing output folders
+
+Every generated `readmenator-*` folder (agent, wiki, graphrag, apidocs, maps,
+diagrams, rules, ghwiki) gets its own `README.md` explaining what the folder
+is for, what each file in it is (only files that actually exist are listed),
+how humans and agents use it, and how to regenerate it. A README without the
+`<!-- readmenator:folder-readme -->` first line is yours and is never
+overwritten; generated READMEs are kept out of the docs site, `llms.txt`, the
+GitHub wiki and the agent MANIFEST. Disable with `FOLDER_README_ENABLED=False`.
+
 ### Generate Class Stubs in Other Languages
 
 Translate extracted class structures into target language declarations:

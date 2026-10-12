@@ -1,6 +1,23 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_rule_gen.py
+- Doc: TestRuleGeneratorContract: Contract: RuleGenerator detects patterns and suggests rules.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestRuleGeneratorContract` (class, line 12) `class TestRuleGeneratorContract(TestCase)`
+  - `setUp` (method, line 15) `def setUp(self)`
+  - `_make_node` (method, line 19) `def _make_node(self, nid, label, lang)`
+  - `_make_node_with_symbols` (method, line 29) `def _make_node_with_symbols(self, nid, sym_count)`
+  - `test_empty_nodes_returns_empty_rules` (method, line 44) `def test_empty_nodes_returns_empty_rules(self)`
+  - `test_generates_rules_for_function_heavy_language` (method, line 48) `def test_generates_rules_for_function_heavy_language(self)`
+  - `test_detects_antipatterns_with_content` (method, line 56) `def test_detects_antipatterns_with_content(self)`
+  - `test_antipattern_threshold_from_config` (method, line 67) `def test_antipattern_threshold_from_config(self)`
+  - `test_write_rules_creates_files` (method, line 77) `def test_write_rules_creates_files(self)`
+  - `test_rule_id_increments` (method, line 90) `def test_rule_id_increments(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_rule_gen.py`
+
 ## tests/test_sarif.py
 - Doc: TestSarifExporterContract: Contract: SarifExporter produces valid SARIF v2.1.0 JSON.
 - Layer: testing

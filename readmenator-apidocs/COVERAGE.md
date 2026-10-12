@@ -1,6 +1,6 @@
 # Documentation Coverage
 
-Overall: **82.2%** (681 of 828 public modules, types, and callables). Data members are excluded from the ratio.
+Overall: **82.4%** (690 of 837 public modules, types, and callables). Data members are excluded from the ratio.
 
 [Back to index](index.md)
 
@@ -8,15 +8,15 @@ Overall: **82.2%** (681 of 828 public modules, types, and callables). Data membe
 
 | Kind | Documented | Total | Coverage |
 |---|---|---|---|
-| class | 158 | 169 | 93.5% |
+| class | 160 | 171 | 93.6% |
 | classmethod | 1 | 1 | 100.0% |
-| constructor | 45 | 76 | 59.2% |
+| constructor | 46 | 77 | 59.7% |
 | enum | 1 | 1 | 100.0% |
 | exception | 0 | 1 | 0.0% |
-| function | 106 | 110 | 96.4% |
-| method | 235 | 310 | 75.8% |
-| module | 94 | 95 | 98.9% |
-| property | 36 | 60 | 60.0% |
+| function | 107 | 111 | 96.4% |
+| method | 238 | 313 | 76.0% |
+| module | 95 | 96 | 99.0% |
+| property | 37 | 61 | 60.7% |
 | protocol | 1 | 1 | 100.0% |
 | staticmethod | 4 | 4 | 100.0% |
 
@@ -33,7 +33,7 @@ Overall: **82.2%** (681 of 828 public modules, types, and callables). Data membe
 | [`readmenator._category`](modules/readmenator._category.py.md) | 11 | 22 | 50.0% |
 | [`readmenator._projections`](modules/readmenator._projections.py.md) | 8 | 16 | 50.0% |
 | [`readmenator._security`](modules/readmenator._security.py.md) | 4 | 7 | 57.1% |
-| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | 31 | 53 | 58.5% |
+| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | 32 | 54 | 59.3% |
 | [`readmenator._refactorizer`](modules/readmenator._refactorizer.py.md) | 3 | 5 | 60.0% |
 | [`readmenator._cpg`](modules/readmenator._cpg.py.md) | 3 | 4 | 75.0% |
 | [`readmenator._cursorrules_generator`](modules/readmenator._cursorrules_generator.py.md) | 3 | 4 | 75.0% |
@@ -71,6 +71,7 @@ Overall: **82.2%** (681 of 828 public modules, types, and callables). Data membe
 | [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | 30 | 30 | 100.0% |
 | [`readmenator._flowlayout`](modules/readmenator._flowlayout.py.md) | 10 | 10 | 100.0% |
 | [`readmenator._flowpage`](modules/readmenator._flowpage.py.md) | 4 | 4 | 100.0% |
+| [`readmenator._folder_readme`](modules/readmenator._folder_readme.py.md) | 8 | 8 | 100.0% |
 | [`readmenator._forcegraph`](modules/readmenator._forcegraph.py.md) | 17 | 17 | 100.0% |
 | [`readmenator._forcegraph_page`](modules/readmenator._forcegraph_page.py.md) | 1 | 1 | 100.0% |
 | [`readmenator._gh_wiki`](modules/readmenator._gh_wiki.py.md) | 10 | 10 | 100.0% |
@@ -133,31 +134,31 @@ DOC001: 126, DOC002: 3, DOC004: 1, DOC005: 1
 - DOC001 `readmenator/_app.py:54` class readmenatorApplication is not documented
 - DOC001 `readmenator/_app.py:55` constructor readmenatorApplication.__init__ is not documented
 - DOC001 `readmenator/_app.py:101` method readmenatorApplication.run is not documented
-- DOC001 `readmenator/_app.py:371` method readmenatorApplication.generate_uml_code is not documented
-- DOC001 `readmenator/_app.py:438` method readmenatorApplication.update is not documented
-- DOC001 `readmenator/_app.py:569` method readmenatorApplication.query is not documented
-- DOC001 `readmenator/_app.py:574` method readmenatorApplication.explain is not documented
-- DOC001 `readmenator/_app.py:586` method readmenatorApplication.find_path is not documented
-- DOC001 `readmenator/_app.py:599` method readmenatorApplication.summary is not documented
-- DOC001 `readmenator/_app.py:634` method readmenatorApplication.rebuild is not documented
-- DOC001 `readmenator/_app.py:637` method readmenatorApplication.analyze is not documented
-- DOC001 `readmenator/_app.py:641` method readmenatorApplication.export_json is not documented
-- DOC001 `readmenator/_app.py:658` method readmenatorApplication.export_html is not documented
-- DOC001 `readmenator/_app.py:669` method readmenatorApplication.export_svg is not documented
-- DOC001 `readmenator/_app.py:680` method readmenatorApplication.export is not documented
-- DOC001 `readmenator/_app.py:1271` method readmenatorApplication.export_graphml is not documented
-- DOC001 `readmenator/_app.py:1282` method readmenatorApplication.export_cypher is not documented
-- DOC001 `readmenator/_app.py:1298` method readmenatorApplication.export_obsidian is not documented
-- DOC001 `readmenator/_app.py:1825` method readmenatorApplication.watch is not documented
-- DOC001 `readmenator/_app.py:1835` method readmenatorApplication.audit is not documented
-- DOC001 `readmenator/_app.py:1842` method readmenatorApplication.audit_deep is not documented
-- DOC001 `readmenator/_app.py:1862` method readmenatorApplication.export_sarif is not documented
-- DOC001 `readmenator/_app.py:1872` method readmenatorApplication.export_rules is not documented
-- DOC001 `readmenator/_app.py:1882` method readmenatorApplication.detect_layers is not documented
-- DOC001 `readmenator/_app.py:1892` method readmenatorApplication.lint is not documented
-- DOC001 `readmenator/_app.py:1905` method readmenatorApplication.strip_dead_code is not documented
-- DOC001 `readmenator/_app.py:1915` method readmenatorApplication.generate_cursorrules is not documented
-- DOC001 `readmenator/_app.py:1930` method readmenatorApplication.refactor_monolith is not documented
+- DOC001 `readmenator/_app.py:389` method readmenatorApplication.generate_uml_code is not documented
+- DOC001 `readmenator/_app.py:456` method readmenatorApplication.update is not documented
+- DOC001 `readmenator/_app.py:588` method readmenatorApplication.query is not documented
+- DOC001 `readmenator/_app.py:593` method readmenatorApplication.explain is not documented
+- DOC001 `readmenator/_app.py:605` method readmenatorApplication.find_path is not documented
+- DOC001 `readmenator/_app.py:618` method readmenatorApplication.summary is not documented
+- DOC001 `readmenator/_app.py:653` method readmenatorApplication.rebuild is not documented
+- DOC001 `readmenator/_app.py:656` method readmenatorApplication.analyze is not documented
+- DOC001 `readmenator/_app.py:660` method readmenatorApplication.export_json is not documented
+- DOC001 `readmenator/_app.py:677` method readmenatorApplication.export_html is not documented
+- DOC001 `readmenator/_app.py:688` method readmenatorApplication.export_svg is not documented
+- DOC001 `readmenator/_app.py:699` method readmenatorApplication.export is not documented
+- DOC001 `readmenator/_app.py:1293` method readmenatorApplication.export_graphml is not documented
+- DOC001 `readmenator/_app.py:1304` method readmenatorApplication.export_cypher is not documented
+- DOC001 `readmenator/_app.py:1320` method readmenatorApplication.export_obsidian is not documented
+- DOC001 `readmenator/_app.py:1850` method readmenatorApplication.watch is not documented
+- DOC001 `readmenator/_app.py:1860` method readmenatorApplication.audit is not documented
+- DOC001 `readmenator/_app.py:1867` method readmenatorApplication.audit_deep is not documented
+- DOC001 `readmenator/_app.py:1887` method readmenatorApplication.export_sarif is not documented
+- DOC001 `readmenator/_app.py:1897` method readmenatorApplication.export_rules is not documented
+- DOC001 `readmenator/_app.py:1908` method readmenatorApplication.detect_layers is not documented
+- DOC001 `readmenator/_app.py:1918` method readmenatorApplication.lint is not documented
+- DOC001 `readmenator/_app.py:1931` method readmenatorApplication.strip_dead_code is not documented
+- DOC001 `readmenator/_app.py:1941` method readmenatorApplication.generate_cursorrules is not documented
+- DOC001 `readmenator/_app.py:1956` method readmenatorApplication.refactor_monolith is not documented
 - DOC001 `readmenator/_cache.py:38` method FileCache.load is not documented
 - DOC001 `readmenator/_cache.py:49` method FileCache.save is not documented
 - DOC001 `readmenator/_cache.py:55` method FileCache.compute_hash is not documented
@@ -197,26 +198,26 @@ DOC001: 126, DOC002: 3, DOC004: 1, DOC005: 1
 - DOC001 `readmenator/_mcp_server.py:158` method MCPServer.register_resource is not documented
 - DOC001 `readmenator/_mcp_server.py:241` method MCPServer.dispatch is not documented
 - DOC001 `readmenator/_mcp_server.py:261` method MCPServer.run is not documented
-- DOC001 `readmenator/_pipeline.py:123` property AnalyzerFactory.scanner is not documented
-- DOC001 `readmenator/_pipeline.py:129` property AnalyzerFactory.generator is not documented
-- DOC001 `readmenator/_pipeline.py:135` property AnalyzerFactory.analyzer is not documented
-- DOC001 `readmenator/_pipeline.py:141` property AnalyzerFactory.security is not documented
-- DOC001 `readmenator/_pipeline.py:147` property AnalyzerFactory.exporter is not documented
-- DOC001 `readmenator/_pipeline.py:153` property AnalyzerFactory.taint is not documented
-- DOC001 `readmenator/_pipeline.py:166` property AnalyzerFactory.hotspots is not documented
-- DOC001 `readmenator/_pipeline.py:172` property AnalyzerFactory.layer_rules is not documented
-- DOC001 `readmenator/_pipeline.py:178` property AnalyzerFactory.rule_gen is not documented
-- DOC001 `readmenator/_pipeline.py:184` property AnalyzerFactory.sarif is not documented
-- DOC001 `readmenator/_pipeline.py:190` property AnalyzerFactory.cpg is not documented
-- DOC001 `readmenator/_pipeline.py:199` property AnalyzerFactory.layer_detector is not documented
-- DOC001 `readmenator/_pipeline.py:205` property AnalyzerFactory.uml is not documented
-- DOC001 `readmenator/_pipeline.py:218` property AnalyzerFactory.readme_injector is not documented
-- DOC001 `readmenator/_pipeline.py:242` property AnalyzerFactory.agent_injector is not documented
-- DOC001 `readmenator/_pipeline.py:259` property AnalyzerFactory.agent_output is not documented
-- DOC001 `readmenator/_pipeline.py:432` method AnalyzerFactory.build_typed_graph is not documented
-- DOC001 `readmenator/_pipeline.py:459` property AnalyzerFactory.last_category is not documented
-- DOC001 `readmenator/_pipeline.py:463` property AnalyzerFactory.last_typed_graph is not documented
-- DOC001 `readmenator/_pipeline.py:479` method DeepAnalysisRunner.run is not documented
+- DOC001 `readmenator/_pipeline.py:125` property AnalyzerFactory.scanner is not documented
+- DOC001 `readmenator/_pipeline.py:131` property AnalyzerFactory.generator is not documented
+- DOC001 `readmenator/_pipeline.py:137` property AnalyzerFactory.analyzer is not documented
+- DOC001 `readmenator/_pipeline.py:143` property AnalyzerFactory.security is not documented
+- DOC001 `readmenator/_pipeline.py:149` property AnalyzerFactory.exporter is not documented
+- DOC001 `readmenator/_pipeline.py:155` property AnalyzerFactory.taint is not documented
+- DOC001 `readmenator/_pipeline.py:168` property AnalyzerFactory.hotspots is not documented
+- DOC001 `readmenator/_pipeline.py:174` property AnalyzerFactory.layer_rules is not documented
+- DOC001 `readmenator/_pipeline.py:180` property AnalyzerFactory.rule_gen is not documented
+- DOC001 `readmenator/_pipeline.py:186` property AnalyzerFactory.sarif is not documented
+- DOC001 `readmenator/_pipeline.py:192` property AnalyzerFactory.cpg is not documented
+- DOC001 `readmenator/_pipeline.py:201` property AnalyzerFactory.layer_detector is not documented
+- DOC001 `readmenator/_pipeline.py:207` property AnalyzerFactory.uml is not documented
+- DOC001 `readmenator/_pipeline.py:220` property AnalyzerFactory.readme_injector is not documented
+- DOC001 `readmenator/_pipeline.py:244` property AnalyzerFactory.agent_injector is not documented
+- DOC001 `readmenator/_pipeline.py:261` property AnalyzerFactory.agent_output is not documented
+- DOC001 `readmenator/_pipeline.py:441` method AnalyzerFactory.build_typed_graph is not documented
+- DOC001 `readmenator/_pipeline.py:468` property AnalyzerFactory.last_category is not documented
+- DOC001 `readmenator/_pipeline.py:472` property AnalyzerFactory.last_typed_graph is not documented
+- DOC001 `readmenator/_pipeline.py:488` method DeepAnalysisRunner.run is not documented
 - DOC001 `readmenator/_projections.py:35` method IdentityProjection.map_node is not documented
 - DOC001 `readmenator/_projections.py:38` method IdentityProjection.map_morphism is not documented
 - DOC001 `readmenator/_projections.py:52` method DocProjection.map_node is not documented

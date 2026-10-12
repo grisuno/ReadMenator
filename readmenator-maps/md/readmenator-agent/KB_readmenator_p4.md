@@ -1,6 +1,29 @@
 # Subsystem: readmenator (page 4 of 5)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_pytypes.py
+- Doc: Lightweight, deterministic receiver typing for Python attribute calls.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `_Scope` (class, line 31) `class _Scope`
+  - `_annotation_name` (function, line 41) `def _annotation_name(node)`
+  - `_constructed` (function, line 68) `def _constructed(node)`
+  - `PythonReceiverTypes` (class, line 78) `class PythonReceiverTypes`
+  - `__init__` (method, line 81) `def __init__(self, contents, language)`
+  - `classes` (method, line 118) `def classes(self)`
+  - `_index_file` (method, line 122) `def _index_file(self, file_id, tree)`
+  - `_record_assignment` (method, line 156) `def _record_assignment(self, node, scope)`
+  - `scope_at` (method, line 179) `def scope_at(self, file_id, line)`
+  - `owner_of` (method, line 187) `def owner_of(self, file_id, line)`
+  - `receiver_class` (method, line 191) `def receiver_class(self, file_id, line, receiver)`
+  - `lineage` (method, line 233) `def lineage(self, class_name)`
+  - `resolve_method` (method, line 245) `def resolve_method(self, file_id, line, receiver, name)`
+  - `accepts` (method, line 269) `def accepts(self, file_id, line, receiver, target_file, target_line, target_name)`
+  - `is_self_receiver` (method, line 304) `def is_self_receiver(self, receiver)`
+  - `visit` (function, line 126) `def visit(body, owner)`
+- Imported by: `readmenator/_apidocs.py`, `readmenator/_flowcharts.py`, `tests/test_flowcharts.py`
+
 ## readmenator/_query.py
 - Doc: Query engine for the readmenator knowledge base.
 - Layer: data_access

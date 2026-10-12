@@ -180,6 +180,33 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_flowpage_api_site_embeds_flows` (method, line 350) `def test_flowpage_api_site_embeds_flows(self)`
 - Depends on: `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_flowcharts.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`
 
+## tests/test_folder_readme.py
+- Doc: Contract tests for per-folder README.md files (readmenator/_folder_readme.py).
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestFolderReadmeWriterContract` (class, line 20) `class TestFolderReadmeWriterContract(TestCase)`
+  - `TestFolderReadmeConsumersContract` (class, line 103) `class TestFolderReadmeConsumersContract(TestCase)`
+  - `TestFolderReadmeAppWiring` (class, line 144) `class TestFolderReadmeAppWiring(TestCase)`
+  - `setUp` (method, line 23) `def setUp(self)`
+  - `tearDown` (method, line 36) `def tearDown(self)`
+  - `readme` (method, line 40) `def readme(self, dirname)`
+  - `test_folder_readme_written_only_for_existing_folders` (method, line 44) `def test_folder_readme_written_only_for_existing_folders(self)`
+  - `test_folder_readme_explains_purpose_and_lists_only_present_entries` (method, line 50) `def test_folder_readme_explains_purpose_and_lists_only_present_entries(self)`
+  - `test_folder_readme_is_idempotent_and_deterministic` (method, line 64) `def test_folder_readme_is_idempotent_and_deterministic(self)`
+  - `test_folder_readme_keeps_hand_written_readme` (method, line 70) `def test_folder_readme_keeps_hand_written_readme(self)`
+  - `test_folder_readme_refuses_symlinks` (method, line 77) `def test_folder_readme_refuses_symlinks(self)`
+  - `test_folder_readme_disabled_writes_nothing` (method, line 90) `def test_folder_readme_disabled_writes_nothing(self)`
+  - `test_folder_readme_specs_cover_every_generated_folder` (method, line 95) `def test_folder_readme_specs_cover_every_generated_folder(self)`
+  - `setUp` (method, line 106) `def setUp(self)`
+  - `tearDown` (method, line 116) `def tearDown(self)`
+  - `test_folder_readme_not_published_to_site_or_github_wiki` (method, line 120) `def test_folder_readme_not_published_to_site_or_github_wiki(self)`
+  - `test_folder_readme_hand_written_still_published` (method, line 127) `def test_folder_readme_hand_written_still_published(self)`
+  - `test_folder_readme_excluded_from_agent_inventory` (method, line 133) `def test_folder_readme_excluded_from_agent_inventory(self)`
+  - `test_folder_readme_survives_component_pruning` (method, line 137) `def test_folder_readme_survives_component_pruning(self)`
+  - `test_folder_readme_written_by_export_apidocs` (method, line 147) `def test_folder_readme_written_by_export_apidocs(self)`
+- Depends on: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_folder_readme.py`, `readmenator/_gh_wiki.py`
+
 ## tests/test_gh_wiki.py
 - Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).
 - Layer: testing
@@ -453,27 +480,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_layout_seed_page_wiring` (method, line 142) `def test_layout_seed_page_wiring(self)`
   - `test_layout_bundle_payload_uses_optimized_order` (method, line 150) `def test_layout_bundle_payload_uses_optimized_order(self)`
 - Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`
-
-## tests/test_linter.py
-- Doc: Contract tests for the ArchitectureLinter.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestArchitectureLinterContract` (class, line 16) `class TestArchitectureLinterContract(TestCase)`
-  - `setUp` (method, line 19) `def setUp(self)`
-  - `_make_node` (method, line 23) `def _make_node(self, nid, label, lang)`
-  - `_make_edge` (method, line 26) `def _make_edge(self, src, tgt, rel)`
-  - `test_lint_empty_graph_returns_no_violations` (method, line 29) `def test_lint_empty_graph_returns_no_violations(self)`
-  - `test_lint_returns_empty_for_files_under_threshold` (method, line 33) `def test_lint_returns_empty_for_files_under_threshold(self)`
-  - `test_lint_detects_file_exceeding_max_lines` (method, line 40) `def test_lint_detects_file_exceeding_max_lines(self)`
-  - `test_lint_detects_cross_layer_violation` (method, line 49) `def test_lint_detects_cross_layer_violation(self)`
-  - `test_lint_allows_same_layer_imports` (method, line 61) `def test_lint_allows_same_layer_imports(self)`
-  - `test_lint_allows_testing_to_business_logic` (method, line 72) `def test_lint_allows_testing_to_business_logic(self)`
-  - `test_lint_ignores_utility_layer` (method, line 83) `def test_lint_ignores_utility_layer(self)`
-  - `test_lint_detects_circular_dependencies` (method, line 94) `def test_lint_detects_circular_dependencies(self)`
-  - `test_violations_sorted_by_severity` (method, line 108) `def test_violations_sorted_by_severity(self)`
-  - `test_lint_returns_empty_when_disabled` (method, line 121) `def test_lint_returns_empty_when_disabled(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_linter.py`, `readmenator/_models.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

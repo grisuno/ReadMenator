@@ -22,6 +22,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/__main__.py` -> `readmenator/_mcp_server.py`
 - `readmenator/_agent_output.py` -> `readmenator/_cache.py`
 - `readmenator/_agent_output.py` -> `readmenator/_config.py`
+- `readmenator/_agent_output.py` -> `readmenator/_folder_readme.py`
 - `readmenator/_agent_output.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_agent_output.py` -> `readmenator/_models.py`
 - `readmenator/_agent_output.py` -> `readmenator/_purpose.py`
@@ -97,6 +98,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_dead_code.py` -> `readmenator/_config.py`
 - `readmenator/_dead_code.py` -> `readmenator/_models.py`
 - `readmenator/_diagrams.py` -> `readmenator/_config.py`
+- `readmenator/_diagrams.py` -> `readmenator/_folder_readme.py`
 - `readmenator/_diagrams.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_diagrams.py` -> `readmenator/_models.py`
 - `readmenator/_documentation.py` -> `readmenator/_analytics.py`
@@ -130,6 +132,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_flowpage.py` -> `readmenator/_config.py`
 - `readmenator/_flowpage.py` -> `readmenator/_flowlayout.py`
 - `readmenator/_flowpage.py` -> `readmenator/_htmlpack.py`
+- `readmenator/_folder_readme.py` -> `readmenator/_config.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_config.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_forcegraph_page.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_graphlayout.py`
@@ -140,6 +143,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_forcegraph.py` -> `readmenator/_resolver.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_sourceview.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_config.py`
+- `readmenator/_gh_wiki.py` -> `readmenator/_folder_readme.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_graphrag.py` -> `readmenator/_analyzer.py`
 - `readmenator/_graphrag.py` -> `readmenator/_category.py`
@@ -187,6 +191,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_pipeline.py` -> `readmenator/_embed.py`
 - `readmenator/_pipeline.py` -> `readmenator/_exclusions.py`
 - `readmenator/_pipeline.py` -> `readmenator/_exporter.py`
+- `readmenator/_pipeline.py` -> `readmenator/_folder_readme.py`
 - `readmenator/_pipeline.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_pipeline.py` -> `readmenator/_gh_wiki.py`
 - `readmenator/_pipeline.py` -> `readmenator/_graphrag.py`
@@ -390,6 +395,13 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_flowcharts.py` -> `readmenator/_flowpage.py`
 - `tests/test_flowcharts.py` -> `readmenator/_models.py`
 - `tests/test_flowcharts.py` -> `readmenator/_pytypes.py`
+- `tests/test_folder_readme.py` -> `readmenator/_agent_output.py`
+- `tests/test_folder_readme.py` -> `readmenator/_app.py`
+- `tests/test_folder_readme.py` -> `readmenator/_components.py`
+- `tests/test_folder_readme.py` -> `readmenator/_config.py`
+- `tests/test_folder_readme.py` -> `readmenator/_diagrams.py`
+- `tests/test_folder_readme.py` -> `readmenator/_folder_readme.py`
+- `tests/test_folder_readme.py` -> `readmenator/_gh_wiki.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_app.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_config.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_gh_wiki.py`
@@ -484,17 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_rule_gen.py` -> `readmenator/_models.py`
 - `tests/test_rule_gen.py` -> `readmenator/_rule_gen.py`
 - `tests/test_sarif.py` -> `readmenator/_config.py`
-- `tests/test_sarif.py` -> `readmenator/_models.py`
-- `tests/test_sarif.py` -> `readmenator/_sarif.py`
-- `tests/test_scanner.py` -> `readmenator/_config.py`
-- `tests/test_scanner.py` -> `readmenator/_models.py`
-- `tests/test_scanner.py` -> `readmenator/_scanner.py`
-- `tests/test_security.py` -> `readmenator/_config.py`
-- `tests/test_security.py` -> `readmenator/_models.py`
-- `tests/test_security.py` -> `readmenator/_security.py`
-- `tests/test_sourceview.py` -> `readmenator/_app.py`
-- `tests/test_sourceview.py` -> `readmenator/_bundlegraph.py`
-- `tests/test_sourceview.py` -> `readmenator/_config.py`
-- `tests/test_sourceview.py` -> `readmenator/_forcegraph.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)

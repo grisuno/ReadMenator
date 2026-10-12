@@ -72,6 +72,7 @@ readmenator/
   _apidocs.py         - API reference model: Python ast extraction, generic symbol nesting, signatures, cross-refs, coverage, DOC00x warnings
   _apidocs_render.py  - API reference Markdown (index, modules, hierarchy, genindex, coverage), split api/ JSON Lines model, writer, linker
   _apidocs_page.py    - Self-contained offline HTML API browser (search, tree, hierarchy, coverage, architecture page)
+  _folder_readme.py   - Per-folder README.md for every generated readmenator-* directory (purpose, present contents, usage, regenerate)
   _htmlpack.py        - Embedded page payloads: plain JSON when small (legacy per-page format), deterministic gzip+base64 decoded by native DecompressionStream when large; shared async loader
   _flowcharts.py      - Tiered architecture (Tarjan SCC, Eades-Lin-Smyth FAS, transitive reduction) + execution flows (entry points, call tree, control flow, sequence)
   _flowlayout.py      - FlowGraph model + deterministic layered layout (ranks, barycenter ordering, row wrapping, curve routing, lanes)
@@ -126,6 +127,7 @@ tests/
   test_ollama.py - Local Ollama client contract tests (disabled, unreachable, thinking strip)
   test_apidocs.py - Docstring parser (all styles, comment recovery) + API reference contract tests (signatures, nesting, inheritance, calls, warnings, coverage, privacy, rendering, HTML escaping, writer)
   test_flowcharts.py - Architecture tiers, SCC/transitive reduction/ELS, entry points, call walks, control flow, sequence, KB integration, receiver typing
+  test_folder_readme.py - Folder README contract (existing folders only, present entries only, idempotent, hand-written kept, symlinks refused, consumers skip, app wiring)
   test_htmlpack.py - Payload compression contract (threshold, determinism, legacy plain format, browser loader in node, every page decodes identical payloads plain vs compressed, inline scripts valid JS)
   test_layout_quality.py - Bundle crossing reduction (cost, determinism, monotone sweeps, sphere refinement) and seeded explorer layouts
 ```
@@ -207,6 +209,7 @@ tests/
 - Legacy Mermaid shape (MERMAID_GRID_COLUMNS, MERMAID_MAX_EXTERNALS, MERMAID_DIRECTION, UML_CLASSES_PER_DIAGRAM)
 - Video flow acts (VIDEO_TIERS_S, VIDEO_FLOW_S, VIDEO_FLOW_VIEW_WIDTH)
 - Video transitions (VIDEO_TRANSITION_S crossfade, VIDEO_TRANSITION_GLITCH, VIDEO_MOTION_BLUR_SAMPLES, VIDEO_MOTION_BLUR_SHUTTER, VIDEO_MOTION_BLUR_ACTS)
+- Folder READMEs (FOLDER_README_ENABLED, FOLDER_README_FILENAME, FOLDER_README_MARKER)
 - Embedded payload compression (PAYLOAD_COMPRESSION_ENABLED, PAYLOAD_COMPRESSION_MIN_BYTES default 256 KiB, PAYLOAD_COMPRESSION_LEVEL)
 
 ### Models Contract
@@ -383,7 +386,7 @@ tests/
 ### AnalyzerFactory Contract (pipeline)
 - Lazy property-based initialization of all analyzer components
 - Each component is created on first access and cached
-- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector, video, gh_wiki
+- Provides: scanner, generator, analyzer, security, exporter, taint, hotspots, layer_rules, rule_gen, sarif, cpg, layer_detector, uml, wiki, readme_injector, video, gh_wiki, folder_readme
 - Decouples the application orchestrator from concrete instantiation
 
 ### DeepAnalysisRunner Contract (pipeline)
@@ -437,6 +440,13 @@ tests/
 - Resources: readmenator://summary, readmenator://graph, readmenator://findings, readmenator://analysis, readmenator://kb, readmenator://concepts, readmenator://forcegraph, readmenator://analytics, readmenator://graphrag, readmenator://memory
 - Integrated with readmenatorApplication for all query/analysis operations
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
+
+### Folder README Contract
+- FolderReadmeWriter.write_all(project_root) (readmenator/_folder_readme.py) writes FOLDER_README_FILENAME into each existing generated folder: AGENT_OUTPUT_DIR, WIKI_OUTPUT_DIR, GRAPHRAG_OUTPUT_DIR, APIDOCS_OUTPUT_DIR, DIAGRAM_OUTPUT_DIR, COMPONENTS_OUTPUT_DIR, RULE_GEN_OUTPUT_DIR, GH_WIKI_DRY_RUN_DIR (folder names from Config)
+- Content: FOLDER_README_MARKER first line, title, purpose, regenerated-on-every-run notice, Contents table listing only entries whose glob matches on disk (directories with a trailing slash), How to use (human and agent commands), Regenerate commands; deterministic and idempotent
+- A README without the marker is hand-written and never overwritten; symlinked folders and targets are refused
+- is_generated_folder_readme(path, config) lets consumers skip generated READMEs: site docs (collect_doc_sources, so llms.txt), GitHub wiki collect_sources, agent MANIFEST inventory; component stale-page pruning never deletes any README
+- Wired (never fatal) into run()/rebuild()/update() before README/agent injection, and into export_apidocs, export_diagrams, export_components, export_wiki, export_rules, build_graphrag, publish_github_wiki(dry_run=True)
 
 ### Payload Compression Contract
 - payload_script(element_id, payload, config, compact, escape) (readmenator/_htmlpack.py): payloads under PAYLOAD_COMPRESSION_MIN_BYTES (or with PAYLOAD_COMPRESSION_ENABLED=False) stay plain application/json in the page's legacy serialization (compact/escape per page, "<" always escaped); larger ones become application/octet-stream data-encoding="gzip+base64" with mtime 0 (byte-deterministic)

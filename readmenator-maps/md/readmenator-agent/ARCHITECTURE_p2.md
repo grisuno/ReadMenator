@@ -2,6 +2,18 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_sarif.py` -> `readmenator/_models.py`
+- `tests/test_sarif.py` -> `readmenator/_sarif.py`
+- `tests/test_scanner.py` -> `readmenator/_config.py`
+- `tests/test_scanner.py` -> `readmenator/_models.py`
+- `tests/test_scanner.py` -> `readmenator/_scanner.py`
+- `tests/test_security.py` -> `readmenator/_config.py`
+- `tests/test_security.py` -> `readmenator/_models.py`
+- `tests/test_security.py` -> `readmenator/_security.py`
+- `tests/test_sourceview.py` -> `readmenator/_app.py`
+- `tests/test_sourceview.py` -> `readmenator/_bundlegraph.py`
+- `tests/test_sourceview.py` -> `readmenator/_config.py`
+- `tests/test_sourceview.py` -> `readmenator/_forcegraph.py`
 - `tests/test_sourceview.py` -> `readmenator/_models.py`
 - `tests/test_sourceview.py` -> `readmenator/_sourceview.py`
 - `tests/test_symindex.py` -> `readmenator/_config.py`
@@ -60,6 +72,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_flowcharts.py` -> __future__, ast, dataclasses, pathlib, re, typing, warnings
 - `readmenator/_flowlayout.py` -> __future__, dataclasses, textwrap, typing
 - `readmenator/_flowpage.py` -> __future__, html, json, re, typing
+- `readmenator/_folder_readme.py` -> __future__, dataclasses, logging, pathlib, typing
 - `readmenator/_forcegraph.py` -> __future__, html, json, logging, math, pathlib, re, shutil, typing
 - `readmenator/_forcegraph_page.py` -> __future__
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
@@ -140,6 +153,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_documentation.py` -> __future__, unittest
 - `tests/test_exporter.py` -> __future__, json, unittest
 - `tests/test_flowcharts.py` -> __future__, dataclasses, json, re, unittest
+- `tests/test_folder_readme.py` -> __future__, dataclasses, pathlib, shutil, tempfile, unittest
 - `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
 - `tests/test_graphlayout.py` -> __future__, math, unittest
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest

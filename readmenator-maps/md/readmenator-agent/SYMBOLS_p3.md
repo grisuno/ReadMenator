@@ -1,20 +1,29 @@
-# Symbols (page 3 of 6)
+# Symbols (page 3 of 7)
 Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
-| `sarif` | method | `readmenator/_pipeline.py:184` | `def sarif(self)` |
-| `scanner` | method | `readmenator/_pipeline.py:123` | `def scanner(self)` |
-| `scantext` | method | `readmenator/_pipeline.py:335` | `def scantext(self)` |
-| `security` | method | `readmenator/_pipeline.py:141` | `def security(self)` |
-| `skills` | method | `readmenator/_pipeline.py:384` | `def skills(self)` |
-| `sourceview` | method | `readmenator/_pipeline.py:391` | `def sourceview(self)` |
-| `symindex` | method | `readmenator/_pipeline.py:398` | `def symindex(self)` |
-| `taint` | method | `readmenator/_pipeline.py:153` | `def taint(self)` |
-| `uml` | method | `readmenator/_pipeline.py:205` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:300` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:293` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:211` | `def wiki(self)` |
+| `layer_detector` | method | `readmenator/_pipeline.py:201` | `def layer_detector(self)` |
+| `layer_rules` | method | `readmenator/_pipeline.py:174` | `def layer_rules(self)` |
+| `make_ranker` | method | `readmenator/_pipeline.py:451` | `def make_ranker(self, typed_graph)` |
+| `memory` | method | `readmenator/_pipeline.py:379` | `def memory(self)` |
+| `ollama` | method | `readmenator/_pipeline.py:435` | `def ollama(self)` |
+| `provenance` | method | `readmenator/_pipeline.py:344` | `def provenance(self)` |
+| `readme_injector` | method | `readmenator/_pipeline.py:220` | `def readme_injector(self)` |
+| `rule_gen` | method | `readmenator/_pipeline.py:180` | `def rule_gen(self)` |
+| `run` | method | `readmenator/_pipeline.py:488` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `sarif` | method | `readmenator/_pipeline.py:186` | `def sarif(self)` |
+| `scanner` | method | `readmenator/_pipeline.py:125` | `def scanner(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:337` | `def scantext(self)` |
+| `security` | method | `readmenator/_pipeline.py:143` | `def security(self)` |
+| `skills` | method | `readmenator/_pipeline.py:386` | `def skills(self)` |
+| `sourceview` | method | `readmenator/_pipeline.py:393` | `def sourceview(self)` |
+| `symindex` | method | `readmenator/_pipeline.py:400` | `def symindex(self)` |
+| `taint` | method | `readmenator/_pipeline.py:155` | `def taint(self)` |
+| `uml` | method | `readmenator/_pipeline.py:207` | `def uml(self)` |
+| `video` | method | `readmenator/_pipeline.py:302` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:295` | `def vis_renderer(self)` |
+| `wiki` | method | `readmenator/_pipeline.py:213` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -487,14 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `RubyParser` | class | `readmenator/parsers/_ruby.py:11` | `class RubyParser(LanguageParser)` |
 | `_extract_specifics` | method | `readmenator/parsers/_ruby.py:18` | `def _extract_specifics(self, content)` |
 | `RustParser` | class | `readmenator/parsers/_rust.py:11` | `class RustParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_rust.py:18` | `def _extract_specifics(self, content)` |
-| `ScalaParser` | class | `readmenator/parsers/_scala.py:11` | `class ScalaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_scala.py:18` | `def _extract_specifics(self, content)` |
-| `ShellParser` | class | `readmenator/parsers/_shell.py:11` | `class ShellParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_shell.py:18` | `def _extract_specifics(self, content)` |
-| `SwiftParser` | class | `readmenator/parsers/_swift.py:11` | `class SwiftParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_swift.py:18` | `def _extract_specifics(self, content)` |
-| `Config` | class | `readmenator_orchestrator.py:21` | `class Config` |
-| `GitHubClient` | class | `readmenator_orchestrator.py:83` | `class GitHubClient` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

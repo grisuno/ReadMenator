@@ -1,6 +1,6 @@
 # readmenator: _diagrams
 
-readmenator: _diagrams groups 29 files (py) around EdgeKind, __str__, Morphism, weight, Category. Launcher shim that runs the readmenator CLI from a source checkout.
+readmenator: _diagrams groups 30 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Launcher shim that runs the readmenator CLI from a source checkout.
 
 ```mermaid
 graph LR
@@ -13,7 +13,7 @@ graph LR
 
 ## readmenator (3.1)
 
-readmenator groups 18 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator.
+readmenator groups 18 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Command line entry point: argument parsing and subcommand dispatch.
 
 ## root (3.2)
 
@@ -21,36 +21,37 @@ root groups 1 files (py). Launcher shim that runs the readmenator CLI from a sou
 
 ## tests (3.3)
 
-tests groups 10 files (py) around _node, _fixture, TestComponentSchemaContract, setUp, test_top_level_keys_match_schema. Contract tests for the component diagram exporter.
+tests groups 11 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 
 **Files**:
 
 - readmenator.py
-- readmenator/__init__.py
 - readmenator/__main__.py
+- readmenator/_agent_output.py
 - readmenator/_app.py
-- readmenator/_category.py
+- readmenator/_cache.py
 - readmenator/_components.py
 - readmenator/_cursorrules_generator.py
 - readmenator/_diagrams.py
-- readmenator/_explain.py
+- readmenator/_folder_readme.py
+- readmenator/_gh_wiki.py
+- readmenator/_gitmeta.py
 - readmenator/_layers.py
 - readmenator/_linter.py
 - readmenator/_mcp_server.py
-- readmenator/_ollama.py
-- readmenator/_projections.py
-- readmenator/_query.py
-- readmenator/_rank.py
-- readmenator/_video.py
+- readmenator/_memory.py
+- readmenator/_purpose.py
+- readmenator/_resolver.py
 - readmenator/_watcher.py
 - readmenator/_yaralite.py
+- tests/test_agent_friendliness.py
+- tests/test_cache.py
 - tests/test_components.py
 - tests/test_cursorrules.py
 - tests/test_diagrams.py
+- tests/test_folder_readme.py
+- tests/test_gh_wiki.py
 - tests/test_integration.py
 - tests/test_linter.py
 - tests/test_mcp_server.py
-- tests/test_ollama.py
-- tests/test_query.py
-- tests/test_ranking.py
-- tests/test_video.py
+- tests/test_resolver.py

@@ -8,15 +8,15 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: What does _config.py depend on, and what depends on it? (96 connections)
+### Q: What does _config.py depend on, and what depends on it? (98 connections)
 
 - Status: unanswered
 
-### Q: What does _pipeline.py depend on, and what depends on it? (43 connections)
+### Q: What does _pipeline.py depend on, and what depends on it? (44 connections)
 
 - Status: unanswered
 
-### Q: How are the 38 files in 'readmenator: _graphrag' related to each other?
+### Q: How are the 44 files in 'readmenator: _pipeline' related to each other?
 
 - Status: unanswered
 

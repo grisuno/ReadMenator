@@ -532,6 +532,9 @@ defined here and consumed by reference elsewhere.
 | [`PAYLOAD_COMPRESSION_ENABLED`](#config-payload_compression_enabled) | `bool` | `True` |  |
 | [`PAYLOAD_COMPRESSION_MIN_BYTES`](#config-payload_compression_min_bytes) | `int` | `262144` |  |
 | [`PAYLOAD_COMPRESSION_LEVEL`](#config-payload_compression_level) | `int` | `9` |  |
+| [`FOLDER_README_ENABLED`](#config-folder_readme_enabled) | `bool` | `True` |  |
+| [`FOLDER_README_FILENAME`](#config-folder_readme_filename) | `str` | `'README.md'` |  |
+| [`FOLDER_README_MARKER`](#config-folder_readme_marker) | `str` | `'<!-- readmenator:folder-readme -->'` |  |
 | [`ARCH_DIAGRAM_ENABLED`](#config-arch_diagram_enabled) | `bool` | `True` |  |
 | [`ARCH_DIAGRAM_INCLUDE_TESTS`](#config-arch_diagram_include_tests) | `bool` | `False` |  |
 | [`ARCH_DIAGRAM_MAX_COMPONENTS`](#config-arch_diagram_max_components) | `int` | `40` |  |

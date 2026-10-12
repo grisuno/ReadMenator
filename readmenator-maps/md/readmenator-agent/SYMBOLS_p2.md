@@ -1,8 +1,9 @@
-# Symbols (page 2 of 6)
+# Symbols (page 2 of 7)
 Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_parse_xml` | function | `readmenator/_docstrings.py:778` | `def _parse_xml(text)` |
 | `_section_key` | function | `readmenator/_docstrings.py:331` | `def _section_key(header)` |
 | `_split_refs` | function | `readmenator/_docstrings.py:382` | `def _split_refs(text)` |
 | `_strip_fence` | function | `readmenator/_docstrings.py:372` | `def _strip_fence(text)` |
@@ -173,6 +174,13 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `flow_thumbnail_svg` | function | `readmenator/_flowpage.py:251` | `def flow_thumbnail_svg(graph, width, height)` |
 | `flows_payload_json` | function | `readmenator/_flowpage.py:221` | `def flows_payload_json(graphs, api_href)` |
 | `render_flows_page` | function | `readmenator/_flowpage.py:227` | `def render_flows_page(graphs, project_name, api_href, config)` |
+| `FolderReadmeWriter` | class | `readmenator/_folder_readme.py:65` | `class FolderReadmeWriter` |
+| `FolderSpec` | class | `readmenator/_folder_readme.py:27` | `class FolderSpec` |
+| `__init__` | method | `readmenator/_folder_readme.py:68` | `def __init__(self, config)` |
+| `is_generated_folder_readme` | function | `readmenator/_folder_readme.py:45` | `def is_generated_folder_readme(path, config)` |
+| `render` | method | `readmenator/_folder_readme.py:272` | `def render(self, spec, folder)` |
+| `specs` | method | `readmenator/_folder_readme.py:76` | `def specs(self)` |
+| `write_all` | method | `readmenator/_folder_readme.py:307` | `def write_all(self, project_root)` |
 | `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:80` | `class ForceGraphRenderer` |
 | `__init__` | method | `readmenator/_forcegraph.py:83` | `def __init__(self, config)` |
 | `_family_color` | method | `readmenator/_forcegraph.py:513` | `def _family_color(self, name)` |
@@ -196,24 +204,24 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `vendor_href` | method | `readmenator/_forcegraph.py:107` | `def vendor_href(self)` |
 | `vendor_source` | method | `readmenator/_forcegraph.py:99` | `def vendor_source(self)` |
 | `write` | method | `readmenator/_forcegraph.py:570` | `def write(self, output_path, payload, analytics, title, home_href)` |
-| `GitHubWikiPublisher` | class | `readmenator/_gh_wiki.py:59` | `class GitHubWikiPublisher` |
-| `WikiPublishResult` | class | `readmenator/_gh_wiki.py:39` | `class WikiPublishResult` |
-| `__init__` | method | `readmenator/_gh_wiki.py:62` | `def __init__(self, config, runner)` |
-| `_blob_base` | method | `readmenator/_gh_wiki.py:121` | `def _blob_base(self, remote, commit)` |
-| `_call` | method | `readmenator/_gh_wiki.py:279` | `def _call(self, command, cwd)` |
-| `_fallback_home` | method | `readmenator/_gh_wiki.py:205` | `def _fallback_home(self, project_name)` |
-| `_footer` | method | `readmenator/_gh_wiki.py:241` | `def _footer(git)` |
-| `_origin` | method | `readmenator/_gh_wiki.py:267` | `def _origin(self, project_root)` |
-| `_sidebar` | method | `readmenator/_gh_wiki.py:213` | `def _sidebar(self, names)` |
-| `_write_pages` | method | `readmenator/_gh_wiki.py:293` | `def _write_pages(self, target, pages)` |
-| `collect_sources` | method | `readmenator/_gh_wiki.py:96` | `def collect_sources(self, project_root)` |
-| `link` | function | `readmenator/_gh_wiki.py:151` | `def link(match)` |
-| `page_name` | method | `readmenator/_gh_wiki.py:72` | `def page_name(self, rel_path)` |
-| `permalink` | function | `readmenator/_gh_wiki.py:164` | `def permalink(match)` |
-| `publish` | method | `readmenator/_gh_wiki.py:313` | `def publish(self, project_root, dry_run)` |
-| `render` | method | `readmenator/_gh_wiki.py:179` | `def render(self, project_root, remote)` |
-| `rewrite` | method | `readmenator/_gh_wiki.py:129` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
-| `wiki_remote` | method | `readmenator/_gh_wiki.py:249` | `def wiki_remote(self, project_root)` |
+| `GitHubWikiPublisher` | class | `readmenator/_gh_wiki.py:60` | `class GitHubWikiPublisher` |
+| `WikiPublishResult` | class | `readmenator/_gh_wiki.py:40` | `class WikiPublishResult` |
+| `__init__` | method | `readmenator/_gh_wiki.py:63` | `def __init__(self, config, runner)` |
+| `_blob_base` | method | `readmenator/_gh_wiki.py:122` | `def _blob_base(self, remote, commit)` |
+| `_call` | method | `readmenator/_gh_wiki.py:280` | `def _call(self, command, cwd)` |
+| `_fallback_home` | method | `readmenator/_gh_wiki.py:206` | `def _fallback_home(self, project_name)` |
+| `_footer` | method | `readmenator/_gh_wiki.py:242` | `def _footer(git)` |
+| `_origin` | method | `readmenator/_gh_wiki.py:268` | `def _origin(self, project_root)` |
+| `_sidebar` | method | `readmenator/_gh_wiki.py:214` | `def _sidebar(self, names)` |
+| `_write_pages` | method | `readmenator/_gh_wiki.py:294` | `def _write_pages(self, target, pages)` |
+| `collect_sources` | method | `readmenator/_gh_wiki.py:97` | `def collect_sources(self, project_root)` |
+| `link` | function | `readmenator/_gh_wiki.py:152` | `def link(match)` |
+| `page_name` | method | `readmenator/_gh_wiki.py:73` | `def page_name(self, rel_path)` |
+| `permalink` | function | `readmenator/_gh_wiki.py:165` | `def permalink(match)` |
+| `publish` | method | `readmenator/_gh_wiki.py:314` | `def publish(self, project_root, dry_run)` |
+| `render` | method | `readmenator/_gh_wiki.py:180` | `def render(self, project_root, remote)` |
+| `rewrite` | method | `readmenator/_gh_wiki.py:130` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
+| `wiki_remote` | method | `readmenator/_gh_wiki.py:250` | `def wiki_remote(self, project_root)` |
 | `_git_dir` | function | `readmenator/_gitmeta.py:38` | `def _git_dir(root)` |
 | `_packed_ref` | function | `readmenator/_gitmeta.py:59` | `def _packed_ref(git_dir, ref)` |
 | `_read_small` | function | `readmenator/_gitmeta.py:19` | `def _read_small(path)` |
@@ -456,45 +464,37 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `enabled` | method | `readmenator/_ollama.py:44` | `def enabled(self)` |
 | `generate` | method | `readmenator/_ollama.py:69` | `def generate(self, prompt, system)` |
 | `strip_thinking` | function | `readmenator/_ollama.py:21` | `def strip_thinking(text)` |
-| `AnalyzerFactory` | class | `readmenator/_pipeline.py:66` | `class AnalyzerFactory` |
-| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:467` | `class DeepAnalysisRunner` |
-| `__init__` | method | `readmenator/_pipeline.py:74` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_pipeline.py:476` | `def __init__(self, factory)` |
-| `agent_injector` | method | `readmenator/_pipeline.py:242` | `def agent_injector(self)` |
-| `agent_output` | method | `readmenator/_pipeline.py:259` | `def agent_output(self)` |
-| `analytics` | method | `readmenator/_pipeline.py:328` | `def analytics(self)` |
-| `analyzer` | method | `readmenator/_pipeline.py:135` | `def analyzer(self)` |
-| `apidocs` | method | `readmenator/_pipeline.py:412` | `def apidocs(self)` |
-| `apidocs_writer` | method | `readmenator/_pipeline.py:419` | `def apidocs_writer(self)` |
-| `build_typed_graph` | method | `readmenator/_pipeline.py:432` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
-| `bundlegraph` | method | `readmenator/_pipeline.py:321` | `def bundlegraph(self)` |
-| `components` | method | `readmenator/_pipeline.py:405` | `def components(self)` |
-| `concepts` | method | `readmenator/_pipeline.py:307` | `def concepts(self)` |
-| `cpg` | method | `readmenator/_pipeline.py:190` | `def cpg(self)` |
-| `dataflow` | method | `readmenator/_pipeline.py:159` | `def dataflow(self)` |
-| `diagram_builder` | method | `readmenator/_pipeline.py:265` | `def diagram_builder(self)` |
-| `diagram_publisher` | method | `readmenator/_pipeline.py:286` | `def diagram_publisher(self)` |
-| `diagram_renderer` | method | `readmenator/_pipeline.py:272` | `def diagram_renderer(self)` |
-| `diagram_validator` | method | `readmenator/_pipeline.py:279` | `def diagram_validator(self)` |
-| `embedder` | method | `readmenator/_pipeline.py:356` | `def embedder(self)` |
-| `exclusions` | method | `readmenator/_pipeline.py:349` | `def exclusions(self)` |
-| `exporter` | method | `readmenator/_pipeline.py:147` | `def exporter(self)` |
-| `forcegraph` | method | `readmenator/_pipeline.py:314` | `def forcegraph(self)` |
-| `generator` | method | `readmenator/_pipeline.py:129` | `def generator(self)` |
-| `gh_wiki` | method | `readmenator/_pipeline.py:252` | `def gh_wiki(self)` |
-| `graphrag` | method | `readmenator/_pipeline.py:363` | `def graphrag(self)` |
-| `graphrag_store` | method | `readmenator/_pipeline.py:370` | `def graphrag_store(self)` |
-| `hotspots` | method | `readmenator/_pipeline.py:166` | `def hotspots(self)` |
-| `last_category` | method | `readmenator/_pipeline.py:459` | `def last_category(self)` |
-| `last_typed_graph` | method | `readmenator/_pipeline.py:463` | `def last_typed_graph(self)` |
-| `layer_detector` | method | `readmenator/_pipeline.py:199` | `def layer_detector(self)` |
-| `layer_rules` | method | `readmenator/_pipeline.py:172` | `def layer_rules(self)` |
-| `make_ranker` | method | `readmenator/_pipeline.py:442` | `def make_ranker(self, typed_graph)` |
-| `memory` | method | `readmenator/_pipeline.py:377` | `def memory(self)` |
-| `ollama` | method | `readmenator/_pipeline.py:426` | `def ollama(self)` |
-| `provenance` | method | `readmenator/_pipeline.py:342` | `def provenance(self)` |
-| `readme_injector` | method | `readmenator/_pipeline.py:218` | `def readme_injector(self)` |
-| `rule_gen` | method | `readmenator/_pipeline.py:178` | `def rule_gen(self)` |
-| `run` | method | `readmenator/_pipeline.py:479` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `AnalyzerFactory` | class | `readmenator/_pipeline.py:67` | `class AnalyzerFactory` |
+| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:476` | `class DeepAnalysisRunner` |
+| `__init__` | method | `readmenator/_pipeline.py:75` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_pipeline.py:485` | `def __init__(self, factory)` |
+| `agent_injector` | method | `readmenator/_pipeline.py:244` | `def agent_injector(self)` |
+| `agent_output` | method | `readmenator/_pipeline.py:261` | `def agent_output(self)` |
+| `analytics` | method | `readmenator/_pipeline.py:330` | `def analytics(self)` |
+| `analyzer` | method | `readmenator/_pipeline.py:137` | `def analyzer(self)` |
+| `apidocs` | method | `readmenator/_pipeline.py:421` | `def apidocs(self)` |
+| `apidocs_writer` | method | `readmenator/_pipeline.py:428` | `def apidocs_writer(self)` |
+| `build_typed_graph` | method | `readmenator/_pipeline.py:441` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
+| `bundlegraph` | method | `readmenator/_pipeline.py:323` | `def bundlegraph(self)` |
+| `components` | method | `readmenator/_pipeline.py:407` | `def components(self)` |
+| `concepts` | method | `readmenator/_pipeline.py:309` | `def concepts(self)` |
+| `cpg` | method | `readmenator/_pipeline.py:192` | `def cpg(self)` |
+| `dataflow` | method | `readmenator/_pipeline.py:161` | `def dataflow(self)` |
+| `diagram_builder` | method | `readmenator/_pipeline.py:267` | `def diagram_builder(self)` |
+| `diagram_publisher` | method | `readmenator/_pipeline.py:288` | `def diagram_publisher(self)` |
+| `diagram_renderer` | method | `readmenator/_pipeline.py:274` | `def diagram_renderer(self)` |
+| `diagram_validator` | method | `readmenator/_pipeline.py:281` | `def diagram_validator(self)` |
+| `embedder` | method | `readmenator/_pipeline.py:358` | `def embedder(self)` |
+| `exclusions` | method | `readmenator/_pipeline.py:351` | `def exclusions(self)` |
+| `exporter` | method | `readmenator/_pipeline.py:149` | `def exporter(self)` |
+| `folder_readme` | method | `readmenator/_pipeline.py:414` | `def folder_readme(self)` |
+| `forcegraph` | method | `readmenator/_pipeline.py:316` | `def forcegraph(self)` |
+| `generator` | method | `readmenator/_pipeline.py:131` | `def generator(self)` |
+| `gh_wiki` | method | `readmenator/_pipeline.py:254` | `def gh_wiki(self)` |
+| `graphrag` | method | `readmenator/_pipeline.py:365` | `def graphrag(self)` |
+| `graphrag_store` | method | `readmenator/_pipeline.py:372` | `def graphrag_store(self)` |
+| `hotspots` | method | `readmenator/_pipeline.py:168` | `def hotspots(self)` |
+| `last_category` | method | `readmenator/_pipeline.py:468` | `def last_category(self)` |
+| `last_typed_graph` | method | `readmenator/_pipeline.py:472` | `def last_typed_graph(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

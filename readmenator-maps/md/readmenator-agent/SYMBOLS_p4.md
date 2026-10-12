@@ -1,8 +1,17 @@
-# Symbols (page 4 of 6)
+# Symbols (page 4 of 7)
 Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_extract_specifics` | method | `readmenator/parsers/_rust.py:18` | `def _extract_specifics(self, content)` |
+| `ScalaParser` | class | `readmenator/parsers/_scala.py:11` | `class ScalaParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_scala.py:18` | `def _extract_specifics(self, content)` |
+| `ShellParser` | class | `readmenator/parsers/_shell.py:11` | `class ShellParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_shell.py:18` | `def _extract_specifics(self, content)` |
+| `SwiftParser` | class | `readmenator/parsers/_swift.py:11` | `class SwiftParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_swift.py:18` | `def _extract_specifics(self, content)` |
+| `Config` | class | `readmenator_orchestrator.py:21` | `class Config` |
+| `GitHubClient` | class | `readmenator_orchestrator.py:83` | `class GitHubClient` |
 | `Orchestrator` | class | `readmenator_orchestrator.py:366` | `class Orchestrator` |
 | `RepositoryProcessor` | class | `readmenator_orchestrator.py:197` | `class RepositoryProcessor` |
 | `TestOrchestrator` | class | `readmenator_orchestrator.py:421` | `class TestOrchestrator(TestCase)` |
@@ -487,14 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:321` | `def test_renderer_links_gallery_home_when_configured(self)` |
 | `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:589` | `def test_renderer_links_gallery_home_when_configured(self)` |
 | `test_renderer_never_uses_inner_html` | method | `tests/test_diagrams.py:263` | `def test_renderer_never_uses_inner_html(self)` |
-| `test_renderer_omits_gallery_home_by_default` | method | `tests/test_diagrams.py:328` | `def test_renderer_omits_gallery_home_by_default(self)` |
-| `test_renderer_produces_standalone_document` | method | `tests/test_diagrams.py:256` | `def test_renderer_produces_standalone_document(self)` |
-| `test_renderer_sanitizes_viewer_state_on_export` | method | `tests/test_diagrams.py:349` | `def test_renderer_sanitizes_viewer_state_on_export(self)` |
-| `test_renderer_ships_edge_actions` | method | `tests/test_diagrams.py:562` | `def test_renderer_ships_edge_actions(self)` |
-| `test_renderer_supports_drag_and_settle` | method | `tests/test_diagrams.py:341` | `def test_renderer_supports_drag_and_settle(self)` |
-| `test_renderer_uses_configured_cdn_urls` | method | `tests/test_diagrams.py:568` | `def test_renderer_uses_configured_cdn_urls(self)` |
-| `test_renderers_ignore_placeholders_inside_payload_text` | method | `tests/test_diagrams.py:545` | `def test_renderers_ignore_placeholders_inside_payload_text(self)` |
-| `test_validator_passes_valid_map` | method | `tests/test_diagrams.py:197` | `def test_validator_passes_valid_map(self)` |
-| `test_validator_rejects_dangling_edge` | method | `tests/test_diagrams.py:214` | `def test_validator_rejects_dangling_edge(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

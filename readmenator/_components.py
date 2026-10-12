@@ -319,7 +319,7 @@ class ComponentDiagramBuilder:
             written[component["component_id"]] = str(page)
         stale = {p.name for p in root.glob("*.md")} - {
             Path(p).name for key, p in written.items() if key != "analysis"
-        }
+        } - {self._config.FOLDER_README_FILENAME}
         for name in sorted(stale):
             try:
                 (root / name).unlink()

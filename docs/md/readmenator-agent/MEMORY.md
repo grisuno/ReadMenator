@@ -2,18 +2,19 @@
 
 > Cross-session context for agents. Sections 1-6 are regenerated from the source tree with zero LLM tokens: declared rules are quoted verbatim with `file:line`, measured baselines come from the scan. Section 7 is written by agents and humans and is preserved across rebuilds.
 
-Generated from 149 files at commit `44291e9c5934`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
+Generated from 151 files at commit `ba552ee3474a`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
 
 ## 1. Purpose and domain
 
 - What it is: A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer. (`README.md:7`)
-- Domain vocabulary (term, files): `readmenator` (99), `file` (89), `graph` (72), `node` (67), `files` (64), `symbols` (61), `edges` (59), `imports` (56), `nodes` (55), `build` (54), `project` (54), `symbol` (53), `all` (52), `import` (51), `set` (51)
-- Subsystem `readmenator: _graphrag`: 38 files, core `readmenator/_graphrag.py`: Zero-token GraphRAG index and retrieval for AI agents.
-- Subsystem `readmenator/parsers`: 34 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
-- Subsystem `readmenator: _diagrams`: 29 files, core `readmenator/_diagrams.py`: Self-contained interactive system maps for the knowledge graph.
-- Subsystem `readmenator: _pipeline`: 20 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
-- Subsystem `readmenator: _graphlayout`: 13 files, core `readmenator/_graphlayout.py`: Deterministic graph layout algorithms for animated renders.
+- Domain vocabulary (term, files): `readmenator` (101), `file` (90), `graph` (72), `node` (67), `files` (66), `symbols` (61), `edges` (59), `project` (56), `imports` (56), `nodes` (55), `build` (54), `symbol` (53), `all` (53), `set` (52), `import` (51)
+- Subsystem `readmenator: _pipeline`: 44 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
+- Subsystem `readmenator/parsers`: 37 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
+- Subsystem `readmenator: _diagrams`: 30 files, core `readmenator/_diagrams.py`: Self-contained interactive system maps for the knowledge graph.
+- Subsystem `readmenator: _video`: 14 files, core `readmenator/_video.py`: Cinematic codebase overview video, general purpose.
 - Subsystem `readmenator: _flowcharts`: 12 files, core `readmenator/_flowcharts.py`: Architecture and execution-flow Mermaid diagrams from static structure.
+- Subsystem `readmenator: _security`: 6 files, core `readmenator/_security.py`: Pattern-based static security analysis for the readmenator knowledge graph.
+- Subsystem `readmenator: _agent_injector`: 5 files, core `readmenator/_agent_injector.py`: Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 - Business rules that the code cannot show live in section 7: record them there.
 
 ## 2. Workflow
@@ -37,35 +38,35 @@ Session protocol:
 ## 3. Rules and constraints
 
 Declared:
-- Config is the single source of truth for all constants (`CLAUDE.md:817`)
-- Symbol creation logic is not duplicated across parsers (`CLAUDE.md:818`)
-- Docstring extraction lives once in LanguageParser base class (`CLAUDE.md:819`)
-- File-level doc extraction lives once in PolyglotScanner (`CLAUDE.md:820`)
-- All analysis thresholds in Config, never hardcoded (`CLAUDE.md:821`)
-- Single Responsibility: each module has one job (`CLAUDE.md:824`)
-- Open/Closed: add parsers/analyzers without modifying existing code (`CLAUDE.md:825`)
-- Liskov Substitution: all parsers inherit from LanguageParser (`CLAUDE.md:826`)
-- Interface Segregation: each contract exposes minimal surface (`CLAUDE.md:827`)
-- Dependency Inversion: app depends on abstractions (Config, Scanner) (`CLAUDE.md:828`)
-- No absolute paths in source code (`CLAUDE.md:831`)
-- No network calls from the core scanner (`CLAUDE.md:832`)
-- Symlinks rejected (`CLAUDE.md:833`)
-- File size limits enforced (`CLAUDE.md:834`)
-- Directory depth limits enforced (`CLAUDE.md:835`)
-- All parsing exceptions caught (`CLAUDE.md:836`)
-- No external API calls in any analysis or export module (`CLAUDE.md:837`)
-- Pattern-based security analyzer with 18 language rule sets (`CLAUDE.md:838`)
-- Privacy mode strips source snippets from output (`CLAUDE.md:839`)
-- Fix any security issues found (symlinks, path traversal, size limits) (`CLAUDE.md:868`)
-- Remove hardcoded values and move to Config if they are tuneable (`CLAUDE.md:869`)
-- Update tests to cover new behaviors (`CLAUDE.md:870`)
-- Keep the "Classs" pluralization fix intact (`CLAUDE.md:871`)
-- Do not add absolute paths (`CLAUDE.md:872`)
-- Do not add external dependencies to the core scanner (`CLAUDE.md:873`)
-- Maintain backward compatibility of the CLI interface (`CLAUDE.md:874`)
-- Update this CLAUDE.md and README.md for any contract changes (`CLAUDE.md:875`)
-- Fix inline imports (move to top of file) (`CLAUDE.md:876`)
-- Add type annotations to all function signatures (`CLAUDE.md:877`)
+- Config is the single source of truth for all constants (`CLAUDE.md:827`)
+- Symbol creation logic is not duplicated across parsers (`CLAUDE.md:828`)
+- Docstring extraction lives once in LanguageParser base class (`CLAUDE.md:829`)
+- File-level doc extraction lives once in PolyglotScanner (`CLAUDE.md:830`)
+- All analysis thresholds in Config, never hardcoded (`CLAUDE.md:831`)
+- Single Responsibility: each module has one job (`CLAUDE.md:834`)
+- Open/Closed: add parsers/analyzers without modifying existing code (`CLAUDE.md:835`)
+- Liskov Substitution: all parsers inherit from LanguageParser (`CLAUDE.md:836`)
+- Interface Segregation: each contract exposes minimal surface (`CLAUDE.md:837`)
+- Dependency Inversion: app depends on abstractions (Config, Scanner) (`CLAUDE.md:838`)
+- No absolute paths in source code (`CLAUDE.md:841`)
+- No network calls from the core scanner (`CLAUDE.md:842`)
+- Symlinks rejected (`CLAUDE.md:843`)
+- File size limits enforced (`CLAUDE.md:844`)
+- Directory depth limits enforced (`CLAUDE.md:845`)
+- All parsing exceptions caught (`CLAUDE.md:846`)
+- No external API calls in any analysis or export module (`CLAUDE.md:847`)
+- Pattern-based security analyzer with 18 language rule sets (`CLAUDE.md:848`)
+- Privacy mode strips source snippets from output (`CLAUDE.md:849`)
+- Fix any security issues found (symlinks, path traversal, size limits) (`CLAUDE.md:878`)
+- Remove hardcoded values and move to Config if they are tuneable (`CLAUDE.md:879`)
+- Update tests to cover new behaviors (`CLAUDE.md:880`)
+- Keep the "Classs" pluralization fix intact (`CLAUDE.md:881`)
+- Do not add absolute paths (`CLAUDE.md:882`)
+- Do not add external dependencies to the core scanner (`CLAUDE.md:883`)
+- Maintain backward compatibility of the CLI interface (`CLAUDE.md:884`)
+- Update this CLAUDE.md and README.md for any contract changes (`CLAUDE.md:885`)
+- Fix inline imports (move to top of file) (`CLAUDE.md:886`)
+- Add type annotations to all function signatures (`CLAUDE.md:887`)
 - Maintain strict separation of concerns. (`.cursorrules:5`)
 - UI/presentation components must not contain business logic or database queries. (`.cursorrules:6`)
 - Business logic must not depend on presentation or infrastructure details. (`.cursorrules:7`)
@@ -79,38 +80,38 @@ Declared:
 
 Measured baseline:
 - Security findings at medium or above: 0 (see `readmenator-agent/SECURITY.md`); do not add new ones.
-- Dependency cycles: 0; layer violations: 5 (see `readmenator-agent/GOTCHAS.md`).
+- Dependency cycles: 0; layer violations: 6 (see `readmenator-agent/GOTCHAS.md`).
 
 ## 4. Style norms
 
 Declared:
-- All progress/report messages use `logging.getLogger(__name__)` (never `print()`) (`CLAUDE.md:842`)
-- User-facing output (query results, summaries) uses `print()` to stdout (`CLAUDE.md:843`)
-- Logging format configured in `__main__.py` via `logging.basicConfig` (`CLAUDE.md:844`)
-- Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:845`)
+- All progress/report messages use `logging.getLogger(__name__)` (never `print()`) (`CLAUDE.md:852`)
+- User-facing output (query results, summaries) uses `print()` to stdout (`CLAUDE.md:853`)
+- Logging format configured in `__main__.py` via `logging.basicConfig` (`CLAUDE.md:854`)
+- Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:855`)
 
 Measured baseline:
-- py: 148 files, 2899 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 202 lines, max 4061.
+- py: 150 files, 2928 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 202 lines, max 4062.
 - js: 1 files, 35 symbols; docstrings on 100% of symbols; functions snake_case (80%); types PascalCase (40%); median file 5 lines, max 5.
-- Tests: 53 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
+- Tests: 54 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
 
 ## 5. Minimum deliverables
 
 Declared:
-- Tests named as `test_<contract>_<behavior>` (BDD style) (`CLAUDE.md:848`)
-- Each module has its own test class (`CLAUDE.md:849`)
-- Security behaviors tested explicitly (`CLAUDE.md:850`)
-- Edge cases tested (empty files, syntax errors, symlinks) (`CLAUDE.md:851`)
-- Integration tests validate end-to-end pipeline (`CLAUDE.md:852`)
-- "Classs" regression test prevents re-introduction (`CLAUDE.md:853`)
-- All new modules have complete contract test suites (`CLAUDE.md:854`)
-- Mutation check after SDD+TDD+BDD: introduce one-line mutants (validation bypass, escaping bypass, ordering change); a killed mutant fails at least one test, a surviving mutant requires a stronger test before refactor (`CLAUDE.md:855`)
-- Property-based parser tests skip cleanly when hypothesis is not installed (inert strategy placeholders, identity decorators) (`CLAUDE.md:856`)
-- English only, no emojis, no prose comments, docstrings on every public and private function (`CLAUDE.md:859`)
-- DRY and SOLID, one self-contained file per contract, production code with no placeholders or simplifications (`CLAUDE.md:860`)
-- No hardcoded tuneables or magic numbers: every setting lives in Config (`CLAUDE.md:861`)
-- No absolute paths, no network calls from analysis or export modules, all untrusted text escaped at the boundary (`CLAUDE.md:862`)
-- Boy scout: any technical debt or security flaw found during the change is fixed without losing functionality (`CLAUDE.md:863`)
+- Tests named as `test_<contract>_<behavior>` (BDD style) (`CLAUDE.md:858`)
+- Each module has its own test class (`CLAUDE.md:859`)
+- Security behaviors tested explicitly (`CLAUDE.md:860`)
+- Edge cases tested (empty files, syntax errors, symlinks) (`CLAUDE.md:861`)
+- Integration tests validate end-to-end pipeline (`CLAUDE.md:862`)
+- "Classs" regression test prevents re-introduction (`CLAUDE.md:863`)
+- All new modules have complete contract test suites (`CLAUDE.md:864`)
+- Mutation check after SDD+TDD+BDD: introduce one-line mutants (validation bypass, escaping bypass, ordering change); a killed mutant fails at least one test, a surviving mutant requires a stronger test before refactor (`CLAUDE.md:865`)
+- Property-based parser tests skip cleanly when hypothesis is not installed (inert strategy placeholders, identity decorators) (`CLAUDE.md:866`)
+- English only, no emojis, no prose comments, docstrings on every public and private function (`CLAUDE.md:869`)
+- DRY and SOLID, one self-contained file per contract, production code with no placeholders or simplifications (`CLAUDE.md:870`)
+- No hardcoded tuneables or magic numbers: every setting lives in Config (`CLAUDE.md:871`)
+- No absolute paths, no network calls from analysis or export modules, all untrusted text escaped at the boundary (`CLAUDE.md:872`)
+- Boy scout: any technical debt or security flaw found during the change is fixed without losing functionality (`CLAUDE.md:873`)
 
 Measured baseline:
 - Tests pass: `python -m pytest -q`.

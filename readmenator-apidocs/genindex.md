@@ -463,6 +463,7 @@
 - [`direct_dependents`](modules/readmenator._models.py.md#changeimpact-direct_dependents) attribute of `ChangeImpact` in `readmenator._models`
 - [`directory`](modules/readmenator._graphrag.py.md#graphragstore-directory) method of `GraphRagStore` in `readmenator._graphrag`
 - [`DirectoryWatcher`](modules/readmenator._watcher.py.md#directorywatcher) class in `readmenator._watcher`
+- [`dirname`](modules/readmenator._folder_readme.py.md#folderspec-dirname) attribute of `FolderSpec` in `readmenator._folder_readme`
 - [`dispatch`](modules/readmenator._mcp_server.py.md#mcpserver-dispatch) method of `MCPServer` in `readmenator._mcp_server`
 - [`doc`](modules/readmenator._apidocs.py.md#apientity-doc) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`doc`](modules/readmenator._diagrams.py.md#mapnode-doc) attribute of `MapNode` in `readmenator._diagrams`
@@ -523,6 +524,7 @@
 - [`entity_id`](modules/readmenator._graphrag.py.md#ragentity-entity_id) attribute of `RagEntity` in `readmenator._graphrag`
 - [`entity_id`](modules/readmenator._graphrag.py.md#ragtextunit-entity_id) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`entries`](modules/readmenator._exclusions.py.md#exclusionlist-entries) property of `ExclusionList` in `readmenator._exclusions`
+- [`entries`](modules/readmenator._folder_readme.py.md#folderspec-entries) attribute of `FolderSpec` in `readmenator._folder_readme`
 - [`entry_points`](modules/readmenator._flowcharts.py.md#executionflowbuilder-entry_points) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
 - [`EntryPoint`](modules/readmenator._flowcharts.py.md#entrypoint) class in `readmenator._flowcharts`
 - [`error`](modules/readmenator._mcp_server.py.md#mcprequest-error) method of `MCPRequest` in `readmenator._mcp_server`
@@ -644,6 +646,12 @@
 - [`FlowStep`](modules/readmenator._flowcharts.py.md#flowstep) class in `readmenator._flowcharts`
 - [`fmt_int`](modules/readmenator._video.py.md#fmt_int) function in `readmenator._video`
 - [`focus`](modules/readmenator._diagrams.py.md#mapview-focus) attribute of `MapView` in `readmenator._diagrams`
+- [`folder_readme`](modules/readmenator._pipeline.py.md#analyzerfactory-folder_readme) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`FOLDER_README_ENABLED`](modules/readmenator._config.py.md#config-folder_readme_enabled) attribute of `Config` in `readmenator._config`
+- [`FOLDER_README_FILENAME`](modules/readmenator._config.py.md#config-folder_readme_filename) attribute of `Config` in `readmenator._config`
+- [`FOLDER_README_MARKER`](modules/readmenator._config.py.md#config-folder_readme_marker) attribute of `Config` in `readmenator._config`
+- [`FolderReadmeWriter`](modules/readmenator._folder_readme.py.md#folderreadmewriter) class in `readmenator._folder_readme`
+- [`FolderSpec`](modules/readmenator._folder_readme.py.md#folderspec) class in `readmenator._folder_readme`
 - [`FORBIDDEN_EDGES`](modules/readmenator._layer_rules.py.md#layerruleengine-forbidden_edges) attribute of `LayerRuleEngine` in `readmenator._layer_rules`
 - [`FORBIDDEN_IMPORTS`](modules/readmenator._linter.py.md#architecturelinter-forbidden_imports) attribute of `ArchitectureLinter` in `readmenator._linter`
 - [`forceatlas2_frames`](modules/readmenator._graphlayout.py.md#forceatlas2_frames) function in `readmenator._graphlayout`
@@ -898,6 +906,7 @@
 - [`__init__`](modules/readmenator._flowcharts.py.md#executionflowbuilder-__init__) constructor of `ExecutionFlowBuilder` in `readmenator._flowcharts`
 - [`__init__`](modules/readmenator._explorer.py.md#explorerstate-__init__) constructor of `ExplorerState` in `readmenator._explorer`
 - [`__init__`](modules/readmenator._cache.py.md#filecache-__init__) constructor of `FileCache` in `readmenator._cache`
+- [`__init__`](modules/readmenator._folder_readme.py.md#folderreadmewriter-__init__) constructor of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`__init__`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-__init__) constructor of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`__init__`](modules/readmenator_orchestrator.py.md#githubclient-__init__) constructor of `GitHubClient` in `readmenator_orchestrator`
 - [`__init__`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-__init__) constructor of `GitHubWikiPublisher` in `readmenator._gh_wiki`
@@ -955,6 +964,7 @@
 - [`is_empty`](modules/readmenator._docstrings.py.md#doccomment-is_empty) property of `DocComment` in `readmenator._docstrings`
 - [`is_excluded`](modules/readmenator._exclusions.py.md#exclusionlist-is_excluded) method of `ExclusionList` in `readmenator._exclusions`
 - [`is_garbage_doc`](modules/readmenator._purpose.py.md#is_garbage_doc) function in `readmenator._purpose`
+- [`is_generated_folder_readme`](modules/readmenator._folder_readme.py.md#is_generated_folder_readme) function in `readmenator._folder_readme`
 - [`is_inferred_only`](modules/readmenator._provenance.py.md#provenancefinding-is_inferred_only) property of `ProvenanceFinding` in `readmenator._provenance`
 - [`is_notification`](modules/readmenator._mcp_server.py.md#mcprequest-is_notification) property of `MCPRequest` in `readmenator._mcp_server`
 - [`is_self_receiver`](modules/readmenator._pytypes.py.md#pythonreceivertypes-is_self_receiver) method of `PythonReceiverTypes` in `readmenator._pytypes`
@@ -1101,6 +1111,7 @@
 - [`MapView`](modules/readmenator._diagrams.py.md#mapview) class in `readmenator._diagrams`
 - [`margin`](modules/readmenator._flowlayout.py.md#layoutmetrics-margin) attribute of `LayoutMetrics` in `readmenator._flowlayout`
 - [`markdown`](modules/readmenator._graphrag.py.md#ragcontext-markdown) attribute of `RagContext` in `readmenator._graphrag`
+- [`MARKER_SCAN_BYTES`](modules/readmenator._folder_readme.py.md#marker_scan_bytes) constant in `readmenator._folder_readme`
 - [`match_count`](modules/readmenator._models.py.md#suggestedrule-match_count) attribute of `SuggestedRule` in `readmenator._models`
 - [`matched_strings`](modules/readmenator._yaralite.py.md#yaralitematch-matched_strings) attribute of `YaraLiteMatch` in `readmenator._yaralite`
 - [`matches`](modules/readmenator._exclusions.py.md#exclusionentry-matches) method of `ExclusionEntry` in `readmenator._exclusions`
@@ -1319,6 +1330,7 @@
 - [`publish`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-publish) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
 - [`publish_assets`](modules/readmenator._diagrams.py.md#docssitepublisher-publish_assets) method of `DocsSitePublisher` in `readmenator._diagrams`
 - [`publish_github_wiki`](modules/readmenator._app.py.md#readmenatorapplication-publish_github_wiki) method of `readmenatorApplication` in `readmenator._app`
+- [`purpose`](modules/readmenator._folder_readme.py.md#folderspec-purpose) attribute of `FolderSpec` in `readmenator._folder_readme`
 - [`pushed`](modules/readmenator._gh_wiki.py.md#wikipublishresult-pushed) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
 - [`PythonParser`](modules/readmenator.parsers._python.py.md#pythonparser) class in `readmenator.parsers._python`
 - [`PythonReceiverTypes`](modules/readmenator._pytypes.py.md#pythonreceivertypes) class in `readmenator._pytypes`
@@ -1398,6 +1410,7 @@
 - [`REFACTORIZER_MIN_LINES`](modules/readmenator._config.py.md#config-refactorizer_min_lines) attribute of `Config` in `readmenator._config`
 - [`REFACTORIZER_SCRIPT_PREFIX`](modules/readmenator._config.py.md#config-refactorizer_script_prefix) attribute of `Config` in `readmenator._config`
 - [`refine_sphere_leaves`](modules/readmenator._graphlayout.py.md#refine_sphere_leaves) function in `readmenator._graphlayout`
+- [`regenerate`](modules/readmenator._folder_readme.py.md#folderspec-regenerate) attribute of `FolderSpec` in `readmenator._folder_readme`
 - [`register_resource`](modules/readmenator._mcp_server.py.md#mcpserver-register_resource) method of `MCPServer` in `readmenator._mcp_server`
 - [`register_tool`](modules/readmenator._mcp_server.py.md#mcpserver-register_tool) method of `MCPServer` in `readmenator._mcp_server`
 - [`relation`](modules/readmenator._models.py.md#edge-relation) attribute of `Edge` in `readmenator._models`
@@ -1416,6 +1429,7 @@
 - [`render`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder-render) method of `ArchitectureDiagramBuilder` in `readmenator._flowcharts`
 - [`render`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-render) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
 - [`render`](modules/readmenator._video.py.md#cinematicvideorenderer-render) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`render`](modules/readmenator._folder_readme.py.md#folderreadmewriter-render) method of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`render`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-render) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`render`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-render) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
 - [`render`](modules/readmenator._diagrams.py.md#interactivemaprenderer-render) method of `InteractiveMapRenderer` in `readmenator._diagrams`
@@ -1602,6 +1616,7 @@
 - [`SOURCEVIEW_MAX_LINES_PER_FILE`](modules/readmenator._config.py.md#config-sourceview_max_lines_per_file) attribute of `Config` in `readmenator._config`
 - [`SOURCEVIEW_MAX_TOTAL_CHARS`](modules/readmenator._config.py.md#config-sourceview_max_total_chars) attribute of `Config` in `readmenator._config`
 - [`SourceViewBuilder`](modules/readmenator._sourceview.py.md#sourceviewbuilder) class in `readmenator._sourceview`
+- [`specs`](modules/readmenator._folder_readme.py.md#folderreadmewriter-specs) method of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`sphere_layout`](modules/readmenator._video.py.md#cinematicvideorenderer-sphere_layout) method of `CinematicVideoRenderer` in `readmenator._video`
 - [`SphereBundleLayout`](modules/readmenator._graphlayout.py.md#spherebundlelayout) class in `readmenator._graphlayout`
 - [`spherical_edge_bundling`](modules/readmenator._graphlayout.py.md#spherical_edge_bundling) function in `readmenator._graphlayout`
@@ -1775,6 +1790,7 @@
 - [`UNASSIGNED_KEY`](modules/readmenator._bundlegraph.py.md#unassigned_key) constant in `readmenator._bundlegraph`
 - [`unit_id`](modules/readmenator._graphrag.py.md#ragtextunit-unit_id) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`update`](modules/readmenator._app.py.md#readmenatorapplication-update) method of `readmenatorApplication` in `readmenator._app`
+- [`usage`](modules/readmenator._folder_readme.py.md#folderspec-usage) attribute of `FolderSpec` in `readmenator._folder_readme`
 
 <a id="v"></a>
 
@@ -1895,6 +1911,7 @@
 - [`write`](modules/readmenator._diagrams.py.md#interactivemaprenderer-write) method of `InteractiveMapRenderer` in `readmenator._diagrams`
 - [`write`](modules/readmenator._memory.py.md#projectmemory-write) method of `ProjectMemory` in `readmenator._memory`
 - [`write`](modules/readmenator._diagrams.py.md#visnetworkrenderer-write) method of `VisNetworkRenderer` in `readmenator._diagrams`
+- [`write_all`](modules/readmenator._folder_readme.py.md#folderreadmewriter-write_all) method of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`write_rules`](modules/readmenator._rule_gen.py.md#rulegenerator-write_rules) method of `RuleGenerator` in `readmenator._rule_gen`
 - [`write_static`](modules/readmenator._explorer.py.md#write_static) function in `readmenator._explorer`
 

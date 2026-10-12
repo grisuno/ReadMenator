@@ -241,6 +241,7 @@ class readmenatorApplication:
             except Exception:
                 logger.debug("Component diagrams skipped", exc_info=True)
 
+        self._write_folder_readmes(root)
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         self._maybe_refresh_pages(root)
@@ -324,6 +325,8 @@ class readmenatorApplication:
         """
         result = self._factory.gh_wiki.publish(target_dir, dry_run=dry_run)
         logger.info(result.message)
+        if dry_run:
+            self._write_folder_readmes(Path(target_dir).resolve())
         return result
 
     def _write_sidecar_outputs(
@@ -351,6 +354,21 @@ class readmenatorApplication:
                 logger.info(
                     "Suggested rules: %d files in %s", written, rules_dir
                 )
+
+    def _write_folder_readmes(self, root: Path) -> None:
+        """Write README.md into every generated readmenator-* folder (never fatal).
+
+        Args:
+            root: Project root directory.
+        """
+        if not self._config.FOLDER_README_ENABLED:
+            return
+        try:
+            written = self._factory.folder_readme.write_all(str(root))
+            if written:
+                logger.debug("Folder READMEs current: %d", len(written))
+        except OSError:
+            logger.warning("Folder README writing skipped", exc_info=True)
 
     def _inject_readme_link(self, root: Path) -> None:
         if not self._config.README_INJECTION_ENABLED:
@@ -537,6 +555,7 @@ class readmenatorApplication:
         except Exception:
             logger.debug("Explorer refresh skipped", exc_info=True)
 
+        self._write_folder_readmes(root)
         self._inject_readme_link(root)
         self._inject_agent_files(root)
         total_symbols = sum(len(n.symbols) for n in nodes)
@@ -1000,6 +1019,7 @@ class readmenatorApplication:
             "Component diagrams: %d components, %d relations in %s",
             len(document["components"]), len(document["components_relations"]), dest,
         )
+        self._write_folder_readmes(root)
         return written
 
     def _maybe_write_apidocs(
@@ -1138,9 +1158,11 @@ class readmenatorApplication:
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         architecture = self._architecture_markdown(nodes, edges, resolved, content_map, analysis, None)
         graphs = self._flow_graphs(nodes, edges, resolved, content_map, analysis, None)
-        return self._factory.apidocs_writer.write(
+        written = self._factory.apidocs_writer.write(
             reference, str(root), architecture_markdown=architecture, flow_graphs=graphs,
         )
+        self._write_folder_readmes(root)
+        return written
 
     def export_flows(self, target_dir: str) -> str:
         """Write the standalone interactive architecture and flow page into the maps directory.
@@ -1331,6 +1353,7 @@ class readmenatorApplication:
         )
         if output_dir is not None:
             logger.info("Agent wiki exported: %s", out)
+        self._write_folder_readmes(Path(target_dir).resolve())
         return out
 
     def lint_wiki(self, target_dir: str) -> List[str]:
@@ -1393,6 +1416,7 @@ class readmenatorApplication:
             if kind not in written:
                 logger.warning("Diagram %s failed validation and was skipped", kind)
         logger.info("Interactive system maps: %d files in %s", len(written), dest)
+        self._write_folder_readmes(Path(target_dir).resolve())
         return written
 
     @staticmethod
@@ -1799,6 +1823,7 @@ class readmenatorApplication:
             self._memory_notes(root),
         )
         self._factory.graphrag_store.write(index, str(root))
+        self._write_folder_readmes(root)
         return index
 
     def graphrag_search(
@@ -1877,6 +1902,7 @@ class readmenatorApplication:
         rules = self._factory.rule_gen.generate(nodes, content_map)
         written = self._factory.rule_gen.write_rules(rules, output_dir)
         logger.info("Rules exported: %d files to %s", written, output_dir)
+        self._write_folder_readmes(root)
         return written
 
     def detect_layers(self, target_dir: str) -> dict:

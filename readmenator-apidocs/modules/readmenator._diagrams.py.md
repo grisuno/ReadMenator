@@ -126,6 +126,7 @@ flowchart LR
     n_readmenator__diagrams_py__DocsSitePublisher_collect_doc_sources(["DocsSitePublisher.collect_doc_sources"])
     n_readmenator__diagrams_py__DocsSitePublisher_description_for(["DocsSitePublisher.description_for"])
     n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
+    n_readmenator__folder_readme_py__is_generated_folder_readme["_folder_readme.is_generated_folder_readme"]
     n_readmenator__diagrams_py__SystemMapValidator_validate --> n_readmenator__diagrams_py__MapDiagnostic
     n_readmenator__diagrams_py__SystemMapValidator_validate --> n_readmenator__diagrams_py__MapReceipt
     n_readmenator__diagrams_py__SystemMapBuilder___init__ --> n_readmenator__diagrams_py__SystemMapValidator___init__
@@ -146,6 +147,7 @@ flowchart LR
     n_readmenator__diagrams_py__DocsSitePublisher_render_llms_txt --> n_readmenator__diagrams_py__DocsSitePublisher_description_for
     n_readmenator__diagrams_py__InteractiveMapRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
     n_readmenator__diagrams_py__VisNetworkRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
+    n_readmenator__diagrams_py__DocsSitePublisher_collect_doc_sources -.-> n_readmenator__folder_readme_py__is_generated_folder_readme
 ```
 
 ## Classes
@@ -154,7 +156,7 @@ flowchart LR
 
 ### `MapNode`
 
-`class` `dataclass` | [readmenator/_diagrams.py:89](../../readmenator/_diagrams.py#L89)
+`class` `dataclass` | [readmenator/_diagrams.py:90](../../readmenator/_diagrams.py#L90)
 
 Decorators: `@dataclass`
 
@@ -188,7 +190,7 @@ Single authored node in a system map.
 
 ### `MapEdge`
 
-`class` `dataclass` | [readmenator/_diagrams.py:122](../../readmenator/_diagrams.py#L122)
+`class` `dataclass` | [readmenator/_diagrams.py:123](../../readmenator/_diagrams.py#L123)
 
 Decorators: `@dataclass`
 
@@ -213,7 +215,7 @@ Single authored directed relationship in a system map.
 
 ### `MapView`
 
-`class` `dataclass` | [readmenator/_diagrams.py:139](../../readmenator/_diagrams.py#L139)
+`class` `dataclass` | [readmenator/_diagrams.py:140](../../readmenator/_diagrams.py#L140)
 
 Decorators: `@dataclass`
 
@@ -238,7 +240,7 @@ Single guided chapter over authored topology.
 
 ### `SystemMap`
 
-`class` `dataclass` | [readmenator/_diagrams.py:156](../../readmenator/_diagrams.py#L156)
+`class` `dataclass` | [readmenator/_diagrams.py:157](../../readmenator/_diagrams.py#L157)
 
 Decorators: `@dataclass`
 
@@ -265,7 +267,7 @@ Typed intermediate representation of one diagram.
 
 ### `MapDiagnostic`
 
-`class` `dataclass` | [readmenator/_diagrams.py:177](../../readmenator/_diagrams.py#L177)
+`class` `dataclass` | [readmenator/_diagrams.py:178](../../readmenator/_diagrams.py#L178)
 
 Decorators: `@dataclass`
 
@@ -290,7 +292,7 @@ Single machine-readable validation diagnostic.
 
 ### `MapReceipt`
 
-`class` `dataclass` | [readmenator/_diagrams.py:194](../../readmenator/_diagrams.py#L194)
+`class` `dataclass` | [readmenator/_diagrams.py:195](../../readmenator/_diagrams.py#L195)
 
 Decorators: `@dataclass`
 
@@ -315,7 +317,7 @@ Deterministic validation receipt for a system map.
 
 ### `MapDelta`
 
-`class` `dataclass` | [readmenator/_diagrams.py:211](../../readmenator/_diagrams.py#L211)
+`class` `dataclass` | [readmenator/_diagrams.py:212](../../readmenator/_diagrams.py#L212)
 
 Decorators: `@dataclass`
 
@@ -342,7 +344,7 @@ Before and after comparison between two maps of the same kind.
 
 ### `SystemMapValidator`
 
-`class` | [readmenator/_diagrams.py:231](../../readmenator/_diagrams.py#L231)
+`class` | [readmenator/_diagrams.py:232](../../readmenator/_diagrams.py#L232)
 
 ```python
 class SystemMapValidator
@@ -361,7 +363,7 @@ Deterministic validator for system map intermediate representations.
 
 #### `SystemMapValidator.__init__`
 
-`constructor` | [readmenator/_diagrams.py:234](../../readmenator/_diagrams.py#L234)
+`constructor` | [readmenator/_diagrams.py:235](../../readmenator/_diagrams.py#L235)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -381,7 +383,7 @@ Initialise the validator with application configuration.
 
 #### `SystemMapValidator.validate`
 
-`method` | [readmenator/_diagrams.py:263](../../readmenator/_diagrams.py#L263)
+`method` | [readmenator/_diagrams.py:264](../../readmenator/_diagrams.py#L264)
 
 ```python
 def validate(self, system_map: SystemMap) -> MapReceipt
@@ -407,7 +409,7 @@ Validate a system map and return a deterministic receipt.
 
 ### `SystemMapBuilder`
 
-`class` | [readmenator/_diagrams.py:455](../../readmenator/_diagrams.py#L455)
+`class` | [readmenator/_diagrams.py:456](../../readmenator/_diagrams.py#L456)
 
 ```python
 class SystemMapBuilder
@@ -429,7 +431,7 @@ Builds deterministic system maps from the scanned knowledge graph.
 
 #### `SystemMapBuilder.__init__`
 
-`constructor` | [readmenator/_diagrams.py:484](../../readmenator/_diagrams.py#L484)
+`constructor` | [readmenator/_diagrams.py:485](../../readmenator/_diagrams.py#L485)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -451,7 +453,7 @@ Initialise the builder with application configuration.
 
 #### `SystemMapBuilder.supported_kinds`
 
-`method` | [readmenator/_diagrams.py:493](../../readmenator/_diagrams.py#L493)
+`method` | [readmenator/_diagrams.py:494](../../readmenator/_diagrams.py#L494)
 
 ```python
 def supported_kinds(self) -> List[str]
@@ -467,7 +469,7 @@ Return the supported diagram kind identifiers.
 
 #### `SystemMapBuilder.build`
 
-`method` | [readmenator/_diagrams.py:514](../../readmenator/_diagrams.py#L514)
+`method` | [readmenator/_diagrams.py:515](../../readmenator/_diagrams.py#L515)
 
 ```python
 def build(self, nodes: Sequence[Node], edges: Sequence[Edge], resolved_edges: Optional[Sequence[Edge]] = None, layers: Optional[Dict[str, str]] = None, findings: Optional[Sequence[SecurityFinding]] = None, analysis: Optional[AnalysisResult] = None, kind: str = 'architecture', full: Optional[bool] = None) -> SystemMap
@@ -498,7 +500,7 @@ Build one deterministic system map of the requested kind.
 
 #### `SystemMapBuilder.build_all`
 
-`method` | [readmenator/_diagrams.py:573](../../readmenator/_diagrams.py#L573)
+`method` | [readmenator/_diagrams.py:574](../../readmenator/_diagrams.py#L574)
 
 ```python
 def build_all(self, nodes: Sequence[Node], edges: Sequence[Edge], resolved_edges: Optional[Sequence[Edge]] = None, layers: Optional[Dict[str, str]] = None, findings: Optional[Sequence[SecurityFinding]] = None, analysis: Optional[AnalysisResult] = None, full: Optional[bool] = None) -> Dict[str, SystemMap]
@@ -526,7 +528,7 @@ Build all five diagram kinds deterministically.
 
 #### `SystemMapBuilder.compare`
 
-`method` | [readmenator/_diagrams.py:604](../../readmenator/_diagrams.py#L604)
+`method` | [readmenator/_diagrams.py:605](../../readmenator/_diagrams.py#L605)
 
 ```python
 def compare(self, base: SystemMap, head: SystemMap) -> MapDelta
@@ -551,7 +553,7 @@ Compare two maps of the same kind as before, delta, and after.
 
 ### `InteractiveMapRenderer`
 
-`class` | [readmenator/_diagrams.py:1521](../../readmenator/_diagrams.py#L1521)
+`class` | [readmenator/_diagrams.py:1522](../../readmenator/_diagrams.py#L1522)
 
 ```python
 class InteractiveMapRenderer
@@ -571,7 +573,7 @@ Renders a system map as one self-contained interactive HTML document.
 
 #### `InteractiveMapRenderer.__init__`
 
-`constructor` | [readmenator/_diagrams.py:1524](../../readmenator/_diagrams.py#L1524)
+`constructor` | [readmenator/_diagrams.py:1525](../../readmenator/_diagrams.py#L1525)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -591,7 +593,7 @@ Initialise the renderer with application configuration.
 
 #### `InteractiveMapRenderer.render`
 
-`method` | [readmenator/_diagrams.py:1553](../../readmenator/_diagrams.py#L1553)
+`method` | [readmenator/_diagrams.py:1554](../../readmenator/_diagrams.py#L1554)
 
 ```python
 def render(self, system_map: SystemMap) -> str
@@ -615,7 +617,7 @@ Render a system map as a self-contained HTML document.
 
 #### `InteractiveMapRenderer.write`
 
-`method` | [readmenator/_diagrams.py:1648](../../readmenator/_diagrams.py#L1648)
+`method` | [readmenator/_diagrams.py:1649](../../readmenator/_diagrams.py#L1649)
 
 ```python
 def write(self, system_map: SystemMap, output_path: str) -> str
@@ -640,7 +642,7 @@ Render a system map and write it to a relative output path.
 
 ### `VisNetworkRenderer`
 
-`class` | [readmenator/_diagrams.py:2232](../../readmenator/_diagrams.py#L2232)
+`class` | [readmenator/_diagrams.py:2233](../../readmenator/_diagrams.py#L2233)
 
 ```python
 class VisNetworkRenderer
@@ -664,7 +666,7 @@ physics; use the inline renderer when fully offline output matters.
 
 #### `VisNetworkRenderer.__init__`
 
-`constructor` | [readmenator/_diagrams.py:2240](../../readmenator/_diagrams.py#L2240)
+`constructor` | [readmenator/_diagrams.py:2241](../../readmenator/_diagrams.py#L2241)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -684,7 +686,7 @@ Initialise the renderer with application configuration.
 
 #### `VisNetworkRenderer.render`
 
-`method` | [readmenator/_diagrams.py:2248](../../readmenator/_diagrams.py#L2248)
+`method` | [readmenator/_diagrams.py:2249](../../readmenator/_diagrams.py#L2249)
 
 ```python
 def render(self, system_map: SystemMap) -> str
@@ -708,7 +710,7 @@ Render a system map as a vis.js network HTML document.
 
 #### `VisNetworkRenderer.write`
 
-`method` | [readmenator/_diagrams.py:2374](../../readmenator/_diagrams.py#L2374)
+`method` | [readmenator/_diagrams.py:2375](../../readmenator/_diagrams.py#L2375)
 
 ```python
 def write(self, system_map: SystemMap, output_path: str) -> str
@@ -733,7 +735,7 @@ Render a vis.js map and write it to a relative output path.
 
 ### `DocsSitePublisher`
 
-`class` | [readmenator/_diagrams.py:3218](../../readmenator/_diagrams.py#L3218)
+`class` | [readmenator/_diagrams.py:3219](../../readmenator/_diagrams.py#L3219)
 
 ```python
 class DocsSitePublisher
@@ -762,7 +764,7 @@ requests and relative links only.
 
 #### `DocsSitePublisher.__init__`
 
-`constructor` | [readmenator/_diagrams.py:3235](../../readmenator/_diagrams.py#L3235)
+`constructor` | [readmenator/_diagrams.py:3236](../../readmenator/_diagrams.py#L3236)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -784,7 +786,7 @@ Initialise the publisher with application configuration.
 
 #### `DocsSitePublisher.description_for`
 
-`method` | [readmenator/_diagrams.py:3245](../../readmenator/_diagrams.py#L3245)
+`method` | [readmenator/_diagrams.py:3246](../../readmenator/_diagrams.py#L3246)
 
 ```python
 def description_for(self, kind: str) -> str
@@ -806,7 +808,7 @@ Return the gallery description for a diagram kind.
 
 #### `DocsSitePublisher.publish`
 
-`method` | [readmenator/_diagrams.py:3259](../../readmenator/_diagrams.py#L3259)
+`method` | [readmenator/_diagrams.py:3260](../../readmenator/_diagrams.py#L3260)
 
 ```python
 def publish(self, maps: Dict[str, SystemMap], project_name: str, output_dir: str, stats: Optional[Dict[str, int]] = None, renderer: Optional[object] = None, project_root: Optional[str] = None, video_rel: Optional[str] = None, doc_entries: Optional[List[Dict[str, str]]] = None, extra_cards: Optional[List[Dict[str, str]]] = None) -> Dict[str, str]
@@ -838,7 +840,7 @@ Publish maps and a gallery index into a documentation directory.
 
 #### `DocsSitePublisher.collect_doc_sources`
 
-`method` | [readmenator/_diagrams.py:3353](../../readmenator/_diagrams.py#L3353)
+`method` | [readmenator/_diagrams.py:3354](../../readmenator/_diagrams.py#L3354)
 
 ```python
 def collect_doc_sources(self, project_root: str) -> List[Path]
@@ -854,13 +856,15 @@ Collect generated markdown sources for the static site.
 
 **Returns:** `List[Path]` - Sorted list of markdown file paths capped by configuration.
 
+*Calls:* [`is_generated_folder_readme`](readmenator._folder_readme.py.md#is_generated_folder_readme)
+
 *Called by:* [`DocsSitePublisher.publish_assets`](#docssitepublisher-publish_assets)
 
 <a id="docssitepublisher-publish_assets"></a>
 
 #### `DocsSitePublisher.publish_assets`
 
-`method` | [readmenator/_diagrams.py:3379](../../readmenator/_diagrams.py#L3379)
+`method` | [readmenator/_diagrams.py:3380](../../readmenator/_diagrams.py#L3380)
 
 ```python
 def publish_assets(self, project_root: str, output_dir: str) -> Dict[str, object]
@@ -885,7 +889,7 @@ Copy overview video and markdown docs into the static site.
 
 #### `DocsSitePublisher.render_llms_txt`
 
-`method` | [readmenator/_diagrams.py:3548](../../readmenator/_diagrams.py#L3548)
+`method` | [readmenator/_diagrams.py:3549](../../readmenator/_diagrams.py#L3549)
 
 ```python
 def render_llms_txt(self, project_name: str, maps: Dict[str, SystemMap], stats: Dict[str, int], href_prefix: str, doc_entries: Optional[List[Dict[str, str]]] = None) -> str
@@ -917,7 +921,7 @@ first because it is cheaper to read than the HTML maps.
 
 #### `DocsSitePublisher.render_index`
 
-`method` | [readmenator/_diagrams.py:3627](../../readmenator/_diagrams.py#L3627)
+`method` | [readmenator/_diagrams.py:3628](../../readmenator/_diagrams.py#L3628)
 
 ```python
 def render_index(self, project_name: str, maps: Dict[str, SystemMap], stats: Dict[str, int], href_prefix: Optional[str] = None, video_rel: Optional[str] = None, doc_entries: Optional[List[Dict[str, str]]] = None, poster_rel: Optional[str] = None, extra_cards: Optional[List[Dict[str, str]]] = None) -> str

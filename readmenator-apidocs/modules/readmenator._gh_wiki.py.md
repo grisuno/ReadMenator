@@ -51,6 +51,7 @@ flowchart LR
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_publish(["GitHubWikiPublisher.publish"])
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_wiki_remote(["GitHubWikiPublisher.wiki_remote"])
     n_readmenator__gh_wiki_py__WikiPublishResult(["WikiPublishResult"])
+    n_readmenator__folder_readme_py__is_generated_folder_readme["_folder_readme.is_generated_folder_readme"]
     n_readmenator__gitmeta_py__read_git_head["_gitmeta.read_git_head"]
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_render --> n_readmenator__gh_wiki_py__GitHubWikiPublisher_collect_sources
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_render --> n_readmenator__gh_wiki_py__GitHubWikiPublisher_page_name
@@ -58,6 +59,7 @@ flowchart LR
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_publish --> n_readmenator__gh_wiki_py__GitHubWikiPublisher_render
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_publish --> n_readmenator__gh_wiki_py__GitHubWikiPublisher_wiki_remote
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_publish --> n_readmenator__gh_wiki_py__WikiPublishResult
+    n_readmenator__gh_wiki_py__GitHubWikiPublisher_collect_sources -.-> n_readmenator__folder_readme_py__is_generated_folder_readme
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_render -.-> n_readmenator__gitmeta_py__read_git_head
     n_readmenator__gh_wiki_py__GitHubWikiPublisher_publish -.-> n_readmenator__gitmeta_py__read_git_head
 ```
@@ -68,7 +70,7 @@ flowchart LR
 
 ### `WikiPublishResult`
 
-`class` `dataclass` | [readmenator/_gh_wiki.py:39](../../readmenator/_gh_wiki.py#L39)
+`class` `dataclass` | [readmenator/_gh_wiki.py:40](../../readmenator/_gh_wiki.py#L40)
 
 Decorators: `@dataclass`
 
@@ -95,7 +97,7 @@ Outcome of a GitHub wiki publish.
 
 ### `GitHubWikiPublisher`
 
-`class` | [readmenator/_gh_wiki.py:59](../../readmenator/_gh_wiki.py#L59)
+`class` | [readmenator/_gh_wiki.py:60](../../readmenator/_gh_wiki.py#L60)
 
 ```python
 class GitHubWikiPublisher
@@ -119,7 +121,7 @@ Renders and publishes generated documentation to a GitHub wiki.
 
 #### `GitHubWikiPublisher.__init__`
 
-`constructor` | [readmenator/_gh_wiki.py:62](../../readmenator/_gh_wiki.py#L62)
+`constructor` | [readmenator/_gh_wiki.py:63](../../readmenator/_gh_wiki.py#L63)
 
 ```python
 def __init__(self, config: Config, runner: Optional[Runner] = None) -> None
@@ -140,7 +142,7 @@ Store configuration and the subprocess runner (injectable for tests).
 
 #### `GitHubWikiPublisher.page_name`
 
-`method` | [readmenator/_gh_wiki.py:72](../../readmenator/_gh_wiki.py#L72)
+`method` | [readmenator/_gh_wiki.py:73](../../readmenator/_gh_wiki.py#L73)
 
 ```python
 def page_name(self, rel_path: str) -> str
@@ -162,7 +164,7 @@ Map a generated markdown path to its flat GitHub wiki page name.
 
 #### `GitHubWikiPublisher.collect_sources`
 
-`method` | [readmenator/_gh_wiki.py:96](../../readmenator/_gh_wiki.py#L96)
+`method` | [readmenator/_gh_wiki.py:97](../../readmenator/_gh_wiki.py#L97)
 
 ```python
 def collect_sources(self, project_root: str) -> List[str]
@@ -178,13 +180,15 @@ List project-relative markdown sources to publish, sorted.
 
 **Returns:** `List[str]` - Relative POSIX paths of regular, non-symlink markdown files.
 
+*Calls:* [`is_generated_folder_readme`](readmenator._folder_readme.py.md#is_generated_folder_readme)
+
 *Called by:* [`GitHubWikiPublisher.render`](#githubwikipublisher-render)
 
 <a id="githubwikipublisher-rewrite"></a>
 
 #### `GitHubWikiPublisher.rewrite`
 
-`method` | [readmenator/_gh_wiki.py:129](../../readmenator/_gh_wiki.py#L129)
+`method` | [readmenator/_gh_wiki.py:130](../../readmenator/_gh_wiki.py#L130)
 
 ```python
 def rewrite(self, text: str, rel_path: str, names: Dict[str, str], project_root: str, blob_base: str) -> str
@@ -210,7 +214,7 @@ Rewrite relative doc links to wiki pages and paths to source permalinks.
 
 #### `GitHubWikiPublisher.render`
 
-`method` | [readmenator/_gh_wiki.py:179](../../readmenator/_gh_wiki.py#L179)
+`method` | [readmenator/_gh_wiki.py:180](../../readmenator/_gh_wiki.py#L180)
 
 ```python
 def render(self, project_root: str, remote: str = '') -> Dict[str, str]
@@ -235,7 +239,7 @@ Render every wiki page, including sidebar and footer.
 
 #### `GitHubWikiPublisher.wiki_remote`
 
-`method` | [readmenator/_gh_wiki.py:249](../../readmenator/_gh_wiki.py#L249)
+`method` | [readmenator/_gh_wiki.py:250](../../readmenator/_gh_wiki.py#L250)
 
 ```python
 def wiki_remote(self, project_root: str) -> str
@@ -257,7 +261,7 @@ Resolve the wiki remote from config, ``gh``, or the git origin.
 
 #### `GitHubWikiPublisher.publish`
 
-`method` | [readmenator/_gh_wiki.py:313](../../readmenator/_gh_wiki.py#L313)
+`method` | [readmenator/_gh_wiki.py:314](../../readmenator/_gh_wiki.py#L314)
 
 ```python
 def publish(self, project_root: str, dry_run: bool = False) -> WikiPublishResult

@@ -2,41 +2,41 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 95,
-  "entities": 1887,
+  "modules": 96,
+  "entities": 1905,
   "languages": {
-   "py": 95
+   "py": 96
   },
   "kinds": {
-   "attribute": 989,
-   "class": 169,
+   "attribute": 997,
+   "class": 171,
    "classmethod": 1,
-   "constant": 70,
-   "constructor": 76,
+   "constant": 71,
+   "constructor": 77,
    "enum": 1,
    "exception": 1,
-   "function": 110,
-   "method": 310,
-   "module": 95,
-   "property": 60,
+   "function": 111,
+   "method": 313,
+   "module": 96,
+   "property": 61,
    "protocol": 1,
    "staticmethod": 4
   },
   "truncated": false,
-  "skipped_files": 54,
+  "skipped_files": 55,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 681,
-   "total": 828,
-   "percent": 82.2
+   "documented": 690,
+   "total": 837,
+   "percent": 82.4
   },
   "by_kind": {
    "class": {
-    "documented": 158,
-    "total": 169,
-    "percent": 93.5
+    "documented": 160,
+    "total": 171,
+    "percent": 93.6
    },
    "classmethod": {
     "documented": 1,
@@ -44,9 +44,9 @@
     "percent": 100.0
    },
    "constructor": {
-    "documented": 45,
-    "total": 76,
-    "percent": 59.2
+    "documented": 46,
+    "total": 77,
+    "percent": 59.7
    },
    "enum": {
     "documented": 1,
@@ -59,24 +59,24 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 106,
-    "total": 110,
+    "documented": 107,
+    "total": 111,
     "percent": 96.4
    },
    "method": {
-    "documented": 235,
-    "total": 310,
-    "percent": 75.8
+    "documented": 238,
+    "total": 313,
+    "percent": 76.0
    },
    "module": {
-    "documented": 94,
-    "total": 95,
-    "percent": 98.9
+    "documented": 95,
+    "total": 96,
+    "percent": 99.0
    },
    "property": {
-    "documented": 36,
-    "total": 60,
-    "percent": 60.0
+    "documented": 37,
+    "total": 61,
+    "percent": 60.7
    },
    "protocol": {
     "documented": 1,
@@ -255,6 +255,11 @@
     "total": 4,
     "percent": 100.0
    },
+   "readmenator/_folder_readme.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
    "readmenator/_forcegraph.py": {
     "documented": 17,
     "total": 17,
@@ -336,9 +341,9 @@
     "percent": 100.0
    },
    "readmenator/_pipeline.py": {
-    "documented": 31,
-    "total": 53,
-    "percent": 58.5
+    "documented": 32,
+    "total": 54,
+    "percent": 59.3
    },
    "readmenator/_projections.py": {
     "documented": 8,
@@ -656,7 +661,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 517
+   "entities": 520
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -732,6 +737,11 @@
    "uid": "readmenator/_flowpage.py",
    "path": "modules/readmenator._flowpage.py.jsonl",
    "entities": 6
+  },
+  {
+   "uid": "readmenator/_folder_readme.py",
+   "path": "modules/readmenator._folder_readme.py.jsonl",
+   "entities": 14
   },
   {
    "uid": "readmenator/_forcegraph.py",
@@ -816,7 +826,7 @@
   {
    "uid": "readmenator/_pipeline.py",
    "path": "modules/readmenator._pipeline.py.jsonl",
-   "entities": 53
+   "entities": 54
   },
   {
    "uid": "readmenator/_projections.py",

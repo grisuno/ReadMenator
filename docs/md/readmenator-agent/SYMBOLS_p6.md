@@ -1,8 +1,37 @@
-# Symbols (page 6 of 6)
+# Symbols (page 6 of 7)
 Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_suppresses_syntax_warnings` | method | `tests/test_parsers.py:127` | `def test_suppresses_syntax_warnings(self)` |
+| `TestElixirParserContract` | class | `tests/test_parsers_new.py:117` | `class TestElixirParserContract(TestCase)` |
+| `TestKotlinParserContract` | class | `tests/test_parsers_new.py:68` | `class TestKotlinParserContract(TestCase)` |
+| `TestLuaParserContract` | class | `tests/test_parsers_new.py:102` | `class TestLuaParserContract(TestCase)` |
+| `TestNewParserFactoryContract` | class | `tests/test_parsers_new.py:134` | `class TestNewParserFactoryContract(TestCase)` |
+| `TestPythonCallExtractionContract` | class | `tests/test_parsers_new.py:151` | `class TestPythonCallExtractionContract(TestCase)` |
+| `TestRubyParserContract` | class | `tests/test_parsers_new.py:15` | `class TestRubyParserContract(TestCase)` |
+| `TestScalaParserContract` | class | `tests/test_parsers_new.py:85` | `class TestScalaParserContract(TestCase)` |
+| `TestSwiftParserContract` | class | `tests/test_parsers_new.py:45` | `class TestSwiftParserContract(TestCase)` |
+| `setUp` | method | `tests/test_parsers_new.py:16` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:46` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:69` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:86` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:103` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:118` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:135` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers_new.py:152` | `def setUp(self)` |
+| `test_extracts_class` | method | `tests/test_parsers_new.py:49` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers_new.py:72` | `def test_extracts_class(self)` |
+| `test_extracts_class_inheritance` | method | `tests/test_parsers_new.py:155` | `def test_extracts_class_inheritance(self)` |
+| `test_extracts_class_with_inheritance` | method | `tests/test_parsers_new.py:19` | `def test_extracts_class_with_inheritance(self)` |
+| `test_extracts_def` | method | `tests/test_parsers_new.py:95` | `def test_extracts_def(self)` |
+| `test_extracts_defmodule` | method | `tests/test_parsers_new.py:121` | `def test_extracts_defmodule(self)` |
+| `test_extracts_fun` | method | `tests/test_parsers_new.py:78` | `def test_extracts_fun(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:55` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:106` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers_new.py:127` | `def test_extracts_function(self)` |
+| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
+| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
 | `test_extracts_module` | method | `tests/test_parsers_new.py:27` | `def test_extracts_module(self)` |
 | `test_extracts_object` | method | `tests/test_parsers_new.py:89` | `def test_extracts_object(self)` |
 | `test_extracts_protocol` | method | `tests/test_parsers_new.py:61` | `def test_extracts_protocol(self)` |
@@ -467,9 +496,5 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_lint_healthy_after_generate` | method | `tests/test_wiki.py:152` | `def test_lint_healthy_after_generate(self)` |
 | `test_no_duplicate_link_for_disjoint_scopes` | method | `tests/test_wiki.py:388` | `def test_no_duplicate_link_for_disjoint_scopes(self)` |
 | `test_oversized_community_grouped_by_directory` | method | `tests/test_wiki.py:278` | `def test_oversized_community_grouped_by_directory(self)` |
-| `test_privacy_mode_strips_docs` | method | `tests/test_wiki.py:174` | `def test_privacy_mode_strips_docs(self)` |
-| `test_report_honest_audit_sections` | method | `tests/test_wiki.py:125` | `def test_report_honest_audit_sections(self)` |
-| `test_risks_carry_fix_hint_scope_and_closed_cycle` | method | `tests/test_wiki.py:335` | `def test_risks_carry_fix_hint_scope_and_closed_cycle(self)` |
-| `test_shared_context_link_for_disconnected_communities` | method | `tests/test_wiki.py:194` | `def test_shared_context_link_for_disconnected_communities(self)` |
-| `test_stale_pages_pruned_on_regenerate` | method | `tests/test_wiki.py:323` | `def test_stale_pages_pruned_on_regenerate(self)` |
 
+Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

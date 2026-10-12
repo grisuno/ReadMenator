@@ -66,6 +66,8 @@ Project types nested under the project types they derive from. External bases ar
 - [`FlowGraph`](modules/readmenator._flowlayout.py.md#flowgraph) class in `readmenator._flowlayout`
 - [`FlowNode`](modules/readmenator._flowlayout.py.md#flownode) class in `readmenator._flowlayout`
 - [`FlowStep`](modules/readmenator._flowcharts.py.md#flowstep) class in `readmenator._flowcharts`
+- [`FolderReadmeWriter`](modules/readmenator._folder_readme.py.md#folderreadmewriter) class in `readmenator._folder_readme`
+- [`FolderSpec`](modules/readmenator._folder_readme.py.md#folderspec) class in `readmenator._folder_readme`
 - [`ForceAtlas2Settings`](modules/readmenator._graphlayout.py.md#forceatlas2settings) class in `readmenator._graphlayout`
 - [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
 - [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`

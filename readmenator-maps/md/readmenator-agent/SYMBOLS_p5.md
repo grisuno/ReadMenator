@@ -1,8 +1,17 @@
-# Symbols (page 5 of 6)
+# Symbols (page 5 of 7)
 Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_renderer_omits_gallery_home_by_default` | method | `tests/test_diagrams.py:328` | `def test_renderer_omits_gallery_home_by_default(self)` |
+| `test_renderer_produces_standalone_document` | method | `tests/test_diagrams.py:256` | `def test_renderer_produces_standalone_document(self)` |
+| `test_renderer_sanitizes_viewer_state_on_export` | method | `tests/test_diagrams.py:349` | `def test_renderer_sanitizes_viewer_state_on_export(self)` |
+| `test_renderer_ships_edge_actions` | method | `tests/test_diagrams.py:562` | `def test_renderer_ships_edge_actions(self)` |
+| `test_renderer_supports_drag_and_settle` | method | `tests/test_diagrams.py:341` | `def test_renderer_supports_drag_and_settle(self)` |
+| `test_renderer_uses_configured_cdn_urls` | method | `tests/test_diagrams.py:568` | `def test_renderer_uses_configured_cdn_urls(self)` |
+| `test_renderers_ignore_placeholders_inside_payload_text` | method | `tests/test_diagrams.py:545` | `def test_renderers_ignore_placeholders_inside_payload_text(self)` |
+| `test_validator_passes_valid_map` | method | `tests/test_diagrams.py:197` | `def test_validator_passes_valid_map(self)` |
+| `test_validator_rejects_dangling_edge` | method | `tests/test_diagrams.py:214` | `def test_validator_rejects_dangling_edge(self)` |
 | `test_validator_rejects_duplicate_node_ids` | method | `tests/test_diagrams.py:204` | `def test_validator_rejects_duplicate_node_ids(self)` |
 | `test_validator_rejects_empty_map` | method | `tests/test_diagrams.py:222` | `def test_validator_rejects_empty_map(self)` |
 | `test_validator_rejects_unknown_kind` | method | `tests/test_diagrams.py:228` | `def test_validator_rejects_unknown_kind(self)` |
@@ -85,6 +94,26 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_pytypes_accepts_rejects_unproven` | method | `tests/test_flowcharts.py:279` | `def test_pytypes_accepts_rejects_unproven(self)` |
 | `test_pytypes_receiver_classes` | method | `tests/test_flowcharts.py:269` | `def test_pytypes_receiver_classes(self)` |
 | `test_pytypes_resolve_method_picks_typed_owner` | method | `tests/test_flowcharts.py:275` | `def test_pytypes_resolve_method_picks_typed_owner(self)` |
+| `TestFolderReadmeAppWiring` | class | `tests/test_folder_readme.py:144` | `class TestFolderReadmeAppWiring(TestCase)` |
+| `TestFolderReadmeConsumersContract` | class | `tests/test_folder_readme.py:103` | `class TestFolderReadmeConsumersContract(TestCase)` |
+| `TestFolderReadmeWriterContract` | class | `tests/test_folder_readme.py:20` | `class TestFolderReadmeWriterContract(TestCase)` |
+| `readme` | method | `tests/test_folder_readme.py:40` | `def readme(self, dirname)` |
+| `setUp` | method | `tests/test_folder_readme.py:23` | `def setUp(self)` |
+| `setUp` | method | `tests/test_folder_readme.py:106` | `def setUp(self)` |
+| `tearDown` | method | `tests/test_folder_readme.py:36` | `def tearDown(self)` |
+| `tearDown` | method | `tests/test_folder_readme.py:116` | `def tearDown(self)` |
+| `test_folder_readme_disabled_writes_nothing` | method | `tests/test_folder_readme.py:90` | `def test_folder_readme_disabled_writes_nothing(self)` |
+| `test_folder_readme_excluded_from_agent_inventory` | method | `tests/test_folder_readme.py:133` | `def test_folder_readme_excluded_from_agent_inventory(self)` |
+| `test_folder_readme_explains_purpose_and_lists_only_present_entries` | method | `tests/test_folder_readme.py:50` | `def test_folder_readme_explains_purpose_and_lists_only_present_entries(self)` |
+| `test_folder_readme_hand_written_still_published` | method | `tests/test_folder_readme.py:127` | `def test_folder_readme_hand_written_still_published(self)` |
+| `test_folder_readme_is_idempotent_and_deterministic` | method | `tests/test_folder_readme.py:64` | `def test_folder_readme_is_idempotent_and_deterministic(self)` |
+| `test_folder_readme_keeps_hand_written_readme` | method | `tests/test_folder_readme.py:70` | `def test_folder_readme_keeps_hand_written_readme(self)` |
+| `test_folder_readme_not_published_to_site_or_github_wiki` | method | `tests/test_folder_readme.py:120` | `def test_folder_readme_not_published_to_site_or_github_wiki(self)` |
+| `test_folder_readme_refuses_symlinks` | method | `tests/test_folder_readme.py:77` | `def test_folder_readme_refuses_symlinks(self)` |
+| `test_folder_readme_specs_cover_every_generated_folder` | method | `tests/test_folder_readme.py:95` | `def test_folder_readme_specs_cover_every_generated_folder(self)` |
+| `test_folder_readme_survives_component_pruning` | method | `tests/test_folder_readme.py:137` | `def test_folder_readme_survives_component_pruning(self)` |
+| `test_folder_readme_written_by_export_apidocs` | method | `tests/test_folder_readme.py:147` | `def test_folder_readme_written_by_export_apidocs(self)` |
+| `test_folder_readme_written_only_for_existing_folders` | method | `tests/test_folder_readme.py:44` | `def test_folder_readme_written_only_for_existing_folders(self)` |
 | `TestGitHubWikiPages` | class | `tests/test_gh_wiki.py:61` | `class TestGitHubWikiPages(TestCase)` |
 | `TestGitHubWikiPublish` | class | `tests/test_gh_wiki.py:115` | `class TestGitHubWikiPublish(TestCase)` |
 | `_FakeRunner` | class | `tests/test_gh_wiki.py:14` | `class _FakeRunner` |
@@ -467,34 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_returns_rust_parser_for_rs` | method | `tests/test_parsers.py:502` | `def test_returns_rust_parser_for_rs(self)` |
 | `test_skips_reserved_words` | method | `tests/test_parsers.py:54` | `def test_skips_reserved_words(self)` |
 | `test_skips_reserved_words` | method | `tests/test_parsers.py:270` | `def test_skips_reserved_words(self)` |
-| `test_suppresses_syntax_warnings` | method | `tests/test_parsers.py:127` | `def test_suppresses_syntax_warnings(self)` |
-| `TestElixirParserContract` | class | `tests/test_parsers_new.py:117` | `class TestElixirParserContract(TestCase)` |
-| `TestKotlinParserContract` | class | `tests/test_parsers_new.py:68` | `class TestKotlinParserContract(TestCase)` |
-| `TestLuaParserContract` | class | `tests/test_parsers_new.py:102` | `class TestLuaParserContract(TestCase)` |
-| `TestNewParserFactoryContract` | class | `tests/test_parsers_new.py:134` | `class TestNewParserFactoryContract(TestCase)` |
-| `TestPythonCallExtractionContract` | class | `tests/test_parsers_new.py:151` | `class TestPythonCallExtractionContract(TestCase)` |
-| `TestRubyParserContract` | class | `tests/test_parsers_new.py:15` | `class TestRubyParserContract(TestCase)` |
-| `TestScalaParserContract` | class | `tests/test_parsers_new.py:85` | `class TestScalaParserContract(TestCase)` |
-| `TestSwiftParserContract` | class | `tests/test_parsers_new.py:45` | `class TestSwiftParserContract(TestCase)` |
-| `setUp` | method | `tests/test_parsers_new.py:16` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:46` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:69` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:86` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:103` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:118` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:135` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers_new.py:152` | `def setUp(self)` |
-| `test_extracts_class` | method | `tests/test_parsers_new.py:49` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers_new.py:72` | `def test_extracts_class(self)` |
-| `test_extracts_class_inheritance` | method | `tests/test_parsers_new.py:155` | `def test_extracts_class_inheritance(self)` |
-| `test_extracts_class_with_inheritance` | method | `tests/test_parsers_new.py:19` | `def test_extracts_class_with_inheritance(self)` |
-| `test_extracts_def` | method | `tests/test_parsers_new.py:95` | `def test_extracts_def(self)` |
-| `test_extracts_defmodule` | method | `tests/test_parsers_new.py:121` | `def test_extracts_defmodule(self)` |
-| `test_extracts_fun` | method | `tests/test_parsers_new.py:78` | `def test_extracts_fun(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:55` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:106` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers_new.py:127` | `def test_extracts_function(self)` |
-| `test_extracts_function_calls` | method | `tests/test_parsers_new.py:160` | `def test_extracts_function_calls(self)` |
-| `test_extracts_method` | method | `tests/test_parsers_new.py:33` | `def test_extracts_method(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

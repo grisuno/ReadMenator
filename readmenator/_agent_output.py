@@ -40,6 +40,7 @@ from typing import Dict, List, Optional, Set, Tuple
 
 from readmenator._cache import source_fingerprint
 from readmenator._config import Config
+from readmenator._folder_readme import is_generated_folder_readme
 from readmenator._gitmeta import read_git_head
 from readmenator._models import (
     AnalysisResult,
@@ -473,6 +474,8 @@ class AgentOutputGenerator:
         chars_per_token = max(1, self._config.AGENT_CHARS_PER_TOKEN)
         inventory: List[Dict[str, object]] = []
         for path in sorted(out_dir.rglob("*.md")):
+            if is_generated_folder_readme(path, self._config):
+                continue
             text = path.read_text(encoding="utf-8")
             inventory.append({
                 "path": path.relative_to(out_dir).as_posix(),

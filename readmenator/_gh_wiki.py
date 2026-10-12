@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional, Sequence, Tuple
 
 from readmenator._config import Config
+from readmenator._folder_readme import is_generated_folder_readme
 from readmenator._gitmeta import read_git_head
 
 logger = logging.getLogger(__name__)
@@ -114,7 +115,7 @@ class GitHubWikiPublisher:
             if not folder.is_dir() or folder.is_symlink():
                 continue
             for path in sorted(folder.rglob("*.md")):
-                if path.is_file() and not path.is_symlink():
+                if path.is_file() and not path.is_symlink() and not is_generated_folder_readme(path, cfg):
                     sources.append(path.relative_to(base).as_posix())
         return sorted(set(sources))
 

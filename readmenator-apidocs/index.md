@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 95 modules, 1887 documented entities, documentation coverage 82.2% (681/828 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 96 modules, 1905 documented entities, documentation coverage 82.4% (690/837 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (95)
+Languages: py (96)
 
 ## Modules
 
@@ -51,6 +51,7 @@ Languages: py (95)
 | [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | Architecture and execution-flow Mermaid diagrams from static structure. | 5 | 24 | 100.0% |
 | [`readmenator._flowlayout`](modules/readmenator._flowlayout.py.md) | Flow graph model and deterministic layered layout (Sugiyama style). | 4 | 5 | 100.0% |
 | [`readmenator._flowpage`](modules/readmenator._flowpage.py.md) | Interactive SVG viewer for laid-out architecture and execution-flow diagrams. | 0 | 3 | 100.0% |
+| [`readmenator._folder_readme`](modules/readmenator._folder_readme.py.md) | Per-folder README.md files for every generated readmenator-* directory. | 2 | 5 | 100.0% |
 | [`readmenator._forcegraph`](modules/readmenator._forcegraph.py.md) | Force-graph explorer for the readmenator knowledge graph. | 1 | 15 | 100.0% |
 | [`readmenator._forcegraph_page`](modules/readmenator._forcegraph_page.py.md) | HTML page template for the force-graph explorer. | 0 | 0 | 100.0% |
 | [`readmenator._gh_wiki`](modules/readmenator._gh_wiki.py.md) | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | 2 | 7 | 100.0% |
@@ -67,7 +68,7 @@ Languages: py (95)
 | [`readmenator._mermaid`](modules/readmenator._mermaid.py.md) | Mermaid graph renderer with intelligent pruning. | 1 | 2 | 100.0% |
 | [`readmenator._models`](modules/readmenator._models.py.md) | Data model types for the readmenator knowledge graph. | 22 | 1 | 100.0% |
 | [`readmenator._ollama`](modules/readmenator._ollama.py.md) | Local Ollama client for optional LLM enrichment. | 1 | 6 | 100.0% |
-| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | 2 | 50 | 58.5% |
+| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | 2 | 51 | 59.3% |
 | [`readmenator._projections`](modules/readmenator._projections.py.md) | Functors and projections for the readmenator code category. | 4 | 11 | 50.0% |
 | [`readmenator._provenance`](modules/readmenator._provenance.py.md) | Evidence-provenance audit for readmenator security findings. | 2 | 5 | 100.0% |
 | [`readmenator._purpose`](modules/readmenator._purpose.py.md) | Purpose extraction shared by every agent-facing document generator. | 0 | 6 | 100.0% |

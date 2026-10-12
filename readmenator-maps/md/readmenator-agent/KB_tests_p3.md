@@ -1,6 +1,27 @@
 # Subsystem: tests (page 3 of 4)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_linter.py
+- Doc: Contract tests for the ArchitectureLinter.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestArchitectureLinterContract` (class, line 16) `class TestArchitectureLinterContract(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `_make_node` (method, line 23) `def _make_node(self, nid, label, lang)`
+  - `_make_edge` (method, line 26) `def _make_edge(self, src, tgt, rel)`
+  - `test_lint_empty_graph_returns_no_violations` (method, line 29) `def test_lint_empty_graph_returns_no_violations(self)`
+  - `test_lint_returns_empty_for_files_under_threshold` (method, line 33) `def test_lint_returns_empty_for_files_under_threshold(self)`
+  - `test_lint_detects_file_exceeding_max_lines` (method, line 40) `def test_lint_detects_file_exceeding_max_lines(self)`
+  - `test_lint_detects_cross_layer_violation` (method, line 49) `def test_lint_detects_cross_layer_violation(self)`
+  - `test_lint_allows_same_layer_imports` (method, line 61) `def test_lint_allows_same_layer_imports(self)`
+  - `test_lint_allows_testing_to_business_logic` (method, line 72) `def test_lint_allows_testing_to_business_logic(self)`
+  - `test_lint_ignores_utility_layer` (method, line 83) `def test_lint_ignores_utility_layer(self)`
+  - `test_lint_detects_circular_dependencies` (method, line 94) `def test_lint_detects_circular_dependencies(self)`
+  - `test_violations_sorted_by_severity` (method, line 108) `def test_violations_sorted_by_severity(self)`
+  - `test_lint_returns_empty_when_disabled` (method, line 121) `def test_lint_returns_empty_when_disabled(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_linter.py`, `readmenator/_models.py`
+
 ## tests/test_mcp_server.py
 - Doc: Contract tests for the MCP server protocol and tool dispatch.
 - Layer: testing
@@ -465,23 +486,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_resolves_include_dir_suffix_match` (method, line 149) `def test_resolves_include_dir_suffix_match(self)`
   - `test_returns_none_for_ambiguous_suffix_match` (method, line 156) `def test_returns_none_for_ambiguous_suffix_match(self)`
 - Depends on: `readmenator/_resolver.py`
-
-## tests/test_rule_gen.py
-- Doc: TestRuleGeneratorContract: Contract: RuleGenerator detects patterns and suggests rules.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestRuleGeneratorContract` (class, line 12) `class TestRuleGeneratorContract(TestCase)`
-  - `setUp` (method, line 15) `def setUp(self)`
-  - `_make_node` (method, line 19) `def _make_node(self, nid, label, lang)`
-  - `_make_node_with_symbols` (method, line 29) `def _make_node_with_symbols(self, nid, sym_count)`
-  - `test_empty_nodes_returns_empty_rules` (method, line 44) `def test_empty_nodes_returns_empty_rules(self)`
-  - `test_generates_rules_for_function_heavy_language` (method, line 48) `def test_generates_rules_for_function_heavy_language(self)`
-  - `test_detects_antipatterns_with_content` (method, line 56) `def test_detects_antipatterns_with_content(self)`
-  - `test_antipattern_threshold_from_config` (method, line 67) `def test_antipattern_threshold_from_config(self)`
-  - `test_write_rules_creates_files` (method, line 77) `def test_write_rules_creates_files(self)`
-  - `test_rule_id_increments` (method, line 90) `def test_rule_id_increments(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_rule_gen.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

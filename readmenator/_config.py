@@ -1153,6 +1153,12 @@ class Config:
 
     PAYLOAD_COMPRESSION_LEVEL: int = 9
 
+    FOLDER_README_ENABLED: bool = True
+
+    FOLDER_README_FILENAME: str = "README.md"
+
+    FOLDER_README_MARKER: str = "<!-- readmenator:folder-readme -->"
+
     ARCH_DIAGRAM_ENABLED: bool = True
 
     ARCH_DIAGRAM_INCLUDE_TESTS: bool = False

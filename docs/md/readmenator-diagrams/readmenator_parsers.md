@@ -1,6 +1,6 @@
 # readmenator/parsers
 
-readmenator/parsers groups 34 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Procedural intra-function dataflow analysis for readmenator.
+readmenator/parsers groups 37 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Dead code detection for the readmenator knowledge graph.
 
 ```mermaid
 graph LR
@@ -11,20 +11,21 @@ graph LR
 
 ## readmenator (2.1)
 
-readmenator groups 27 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Procedural intra-function dataflow analysis for readmenator.
+readmenator groups 28 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Dead code detection for the readmenator knowledge graph.
 
 ## tests (2.2)
 
-tests groups 7 files (py) around _node, _analyze, TestDataflowContract, test_config_defaults, test_config_immutable. TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and...
+tests groups 9 files (py) around TestDeadCodeStripperContract, setUp, _make_symbol, _make_node, _make_edge. Contract tests for the DeadCodeStripper.
 
 **Files**:
 
-- readmenator/_dataflow.py
-- readmenator/_hotspots.py
+- readmenator/_dead_code.py
 - readmenator/_mermaid.py
 - readmenator/_models.py
-- readmenator/_rule_gen.py
+- readmenator/_refactorizer.py
 - readmenator/_sarif.py
+- readmenator/_scanner.py
+- readmenator/_taint.py
 - readmenator/parsers/__init__.py
 - readmenator/parsers/_assembly.py
 - readmenator/parsers/_base.py
@@ -46,10 +47,12 @@ tests groups 7 files (py) around _node, _analyze, TestDataflowContract, test_con
 - readmenator/parsers/_scala.py
 - readmenator/parsers/_shell.py
 - readmenator/parsers/_swift.py
-- tests/test_dataflow.py
-- tests/test_hotspots.py
+- tests/test_dead_code.py
 - tests/test_mermaid.py
 - tests/test_models.py
 - tests/test_parsers_property.py
-- tests/test_rule_gen.py
+- tests/test_refactorizer.py
 - tests/test_sarif.py
+- tests/test_scanner.py
+- tests/test_taint.py
+- tests/test_taint_bdd.py
