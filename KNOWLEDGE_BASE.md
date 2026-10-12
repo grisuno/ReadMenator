@@ -12,7 +12,7 @@
 **Total Files Parsed:** 147 | **Total Symbols Extracted:** 2901 | **Total Imports:** 1217
  | **Resolved Imports:** 547
 
-<!-- ranking_model: v1.0 | weights: {ppr:0.45,auth:0.2,test:0.15,doc:0.1,fresh:0.1} | alpha:0.85 | commit:0d25200 | date:2026-07-18 -->
+<!-- ranking_model: v1.0 | weights: {ppr:0.45,auth:0.2,test:0.15,doc:0.1,fresh:0.1} | alpha:0.85 | commit:fcc85bf | date:2026-07-18 -->
 
 
 ## Table of Contents
@@ -908,12 +908,12 @@ Files ranked by composite score for the current query context. The ranking combi
 | 9 | `_scantext.py` | 0.1256 | 0.0000 | 0.0032 | 0.00 | 1.25 |
 | 10 | `test_ollama.py` | 0.1256 | 0.0000 | 0.0030 | 0.00 | 1.25 |
 
-**Query anchors:** readmenator/_flowcharts.py, tests/test_ranking.py, readmenator/_diagrams.py, readmenator/_rule_gen.py, tests/test_linter.py, tests/test_agent_friendliness.py, tests/test_rule_gen.py, tests/test_flowcharts.py (+6 more)
+**Query anchors:** tests/test_agent_output.py, tests/test_ranking.py, readmenator/_flowcharts.py, readmenator/_linter.py, tests/test_documentation.py, readmenator/_diagrams.py, readmenator/_rule_gen.py, readmenator/_app.py (+6 more)
 
 **Top result justification paths:**
 
-  `_flowcharts.py -> _apidocs.py -> _config.py`
-  `_flowcharts.py -> _apidocs.py -> _symindex.py -> _config.py`
+  `test_agent_output.py -> _agent_output.py -> _cache.py -> _config.py`
+  `test_agent_output.py -> _agent_output.py -> _config.py`
 
 ---
 
@@ -1134,42 +1134,42 @@ Taint analysis traces how dangerous imports propagate through the codebase via t
   Path: _agent_injector.py
 - `_diagrams.py` imports `subprocess` (0 hop to `_diagrams.py`) [high]
   Path: _diagrams.py
-- `_diagrams.py` imports `subprocess` (1 hop to `_models.py`) [high]
-  Path: _diagrams.py -> _models.py
 - `_diagrams.py` imports `subprocess` (1 hop to `_config.py`) [high]
   Path: _diagrams.py -> _config.py
+- `_diagrams.py` imports `subprocess` (1 hop to `_models.py`) [high]
+  Path: _diagrams.py -> _models.py
 - `_diagrams.py` imports `subprocess` (2 hops to `_category.py`) [high]
   Path: _diagrams.py -> _models.py -> _category.py
 - `_documentation.py` imports `subprocess` (0 hop to `_documentation.py`) [high]
   Path: _documentation.py
+- `_documentation.py` imports `subprocess` (1 hop to `_forcegraph.py`) [high]
+  Path: _documentation.py -> _forcegraph.py
 - `_documentation.py` imports `subprocess` (1 hop to `_flowcharts.py`) [high]
   Path: _documentation.py -> _flowcharts.py
-- `_documentation.py` imports `subprocess` (1 hop to `_mermaid.py`) [high]
-  Path: _documentation.py -> _mermaid.py
+- `_documentation.py` imports `subprocess` (1 hop to `_cpg.py`) [high]
+  Path: _documentation.py -> _cpg.py
+- `_documentation.py` imports `subprocess` (1 hop to `_uml.py`) [high]
+  Path: _documentation.py -> _uml.py
 - `_documentation.py` imports `subprocess` (1 hop to `_analytics.py`) [high]
   Path: _documentation.py -> _analytics.py
 - `_documentation.py` imports `subprocess` (1 hop to `_rank.py`) [high]
   Path: _documentation.py -> _rank.py
-- `_documentation.py` imports `subprocess` (1 hop to `_forcegraph.py`) [high]
-  Path: _documentation.py -> _forcegraph.py
-- `_documentation.py` imports `subprocess` (1 hop to `_models.py`) [high]
-  Path: _documentation.py -> _models.py
 - `_documentation.py` imports `subprocess` (1 hop to `_config.py`) [high]
   Path: _documentation.py -> _config.py
-- `_documentation.py` imports `subprocess` (1 hop to `_uml.py`) [high]
-  Path: _documentation.py -> _uml.py
-- `_documentation.py` imports `subprocess` (1 hop to `_cpg.py`) [high]
-  Path: _documentation.py -> _cpg.py
-- `_documentation.py` imports `subprocess` (2 hops to `_symindex.py`) [high]
-  Path: _documentation.py -> _flowcharts.py -> _symindex.py
-- `_documentation.py` imports `subprocess` (2 hops to `_flowlayout.py`) [high]
-  Path: _documentation.py -> _flowcharts.py -> _flowlayout.py
-- `_documentation.py` imports `subprocess` (2 hops to `_pytypes.py`) [high]
-  Path: _documentation.py -> _flowcharts.py -> _pytypes.py
-- `_documentation.py` imports `subprocess` (2 hops to `_apidocs.py`) [high]
-  Path: _documentation.py -> _flowcharts.py -> _apidocs.py
-- `_documentation.py` imports `subprocess` (2 hops to `_category.py`) [high]
-  Path: _documentation.py -> _rank.py -> _category.py
+- `_documentation.py` imports `subprocess` (1 hop to `_models.py`) [high]
+  Path: _documentation.py -> _models.py
+- `_documentation.py` imports `subprocess` (1 hop to `_mermaid.py`) [high]
+  Path: _documentation.py -> _mermaid.py
+- `_documentation.py` imports `subprocess` (2 hops to `_graphlayout.py`) [high]
+  Path: _documentation.py -> _forcegraph.py -> _graphlayout.py
+- `_documentation.py` imports `subprocess` (2 hops to `_resolver.py`) [high]
+  Path: _documentation.py -> _forcegraph.py -> _resolver.py
+- `_documentation.py` imports `subprocess` (2 hops to `_sourceview.py`) [high]
+  Path: _documentation.py -> _forcegraph.py -> _sourceview.py
+- `_documentation.py` imports `subprocess` (2 hops to `_purpose.py`) [high]
+  Path: _documentation.py -> _forcegraph.py -> _purpose.py
+- `_documentation.py` imports `subprocess` (2 hops to `_forcegraph_page.py`) [high]
+  Path: _documentation.py -> _forcegraph.py -> _forcegraph_page.py
 
 ---
 
