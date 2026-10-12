@@ -193,50 +193,54 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_project` (function, line 142) `def _project()`
-  - `TestDocstringParser` (class, line 161) `class TestDocstringParser(TestCase)`
-  - `TestApiReferenceBuilder` (class, line 255) `class TestApiReferenceBuilder(TestCase)`
-  - `TestSignatureParsing` (class, line 378) `class TestSignatureParsing(TestCase)`
-  - `TestApiRendering` (class, line 401) `class TestApiRendering(TestCase)`
-  - `TestApiDocsIntegration` (class, line 479) `class TestApiDocsIntegration(TestCase)`
-  - `test_docstrings_google_sections` (method, line 164) `def test_docstrings_google_sections(self)`
-  - `test_docstrings_numpy_sections` (method, line 179) `def test_docstrings_numpy_sections(self)`
-  - `test_docstrings_rest_fields_and_directives` (method, line 189) `def test_docstrings_rest_fields_and_directives(self)`
-  - `test_docstrings_jsdoc_and_doxygen_tags` (method, line 201) `def test_docstrings_jsdoc_and_doxygen_tags(self)`
-  - `test_docstrings_phpdoc_type_before_variable` (method, line 216) `def test_docstrings_phpdoc_type_before_variable(self)`
-  - `test_docstrings_csharp_xml` (method, line 220) `def test_docstrings_csharp_xml(self)`
-  - `test_docstrings_rustdoc_sections` (method, line 229) `def test_docstrings_rustdoc_sections(self)`
-  - `test_docstrings_plain_and_empty` (method, line 235) `def test_docstrings_plain_and_empty(self)`
-  - `test_docstrings_recover_block_and_line_comments` (method, line 242) `def test_docstrings_recover_block_and_line_comments(self)`
-  - `test_docstrings_recover_elixir_doc_heredoc` (method, line 250) `def test_docstrings_recover_elixir_doc_heredoc(self)`
-  - `setUpClass` (method, line 259) `def setUpClass(cls)`
-  - `test_apidocs_python_signatures_exact` (method, line 263) `def test_apidocs_python_signatures_exact(self)`
-  - `test_apidocs_python_nesting_and_kinds` (method, line 275) `def test_apidocs_python_nesting_and_kinds(self)`
-  - `test_apidocs_python_all_and_private_filter` (method, line 283) `def test_apidocs_python_all_and_private_filter(self)`
-  - `test_apidocs_tests_excluded_by_default` (method, line 292) `def test_apidocs_tests_excluded_by_default(self)`
-  - `test_apidocs_constructor_inherits_class_args` (method, line 299) `def test_apidocs_constructor_inherits_class_args(self)`
-  - `test_apidocs_inheritance_links_and_doc_inheritance` (method, line 303) `def test_apidocs_inheritance_links_and_doc_inheritance(self)`
-  - `test_apidocs_c_prototype_doc_merges_into_definition` (method, line 312) `def test_apidocs_c_prototype_doc_merges_into_definition(self)`
-  - `test_apidocs_call_graph_resolved` (method, line 320) `def test_apidocs_call_graph_resolved(self)`
-  - `test_apidocs_receiver_filter_drops_unproven_method_calls` (method, line 326) `def test_apidocs_receiver_filter_drops_unproven_method_calls(self)`
-  - `test_apidocs_annotated_receiver_resolves_method` (method, line 330) `def test_apidocs_annotated_receiver_resolves_method(self)`
-  - `test_apidocs_warnings_cover_every_rule` (method, line 334) `def test_apidocs_warnings_cover_every_rule(self)`
-  - `test_apidocs_coverage_counts` (method, line 344) `def test_apidocs_coverage_counts(self)`
-  - `test_apidocs_deterministic` (method, line 350) `def test_apidocs_deterministic(self)`
-  - `test_apidocs_privacy_mode_strips_text` (method, line 358) `def test_apidocs_privacy_mode_strips_text(self)`
-  - `test_apidocs_entity_budget_truncates` (method, line 366) `def test_apidocs_entity_budget_truncates(self)`
-  - `test_apidocs_without_content_uses_parser_symbols` (method, line 372) `def test_apidocs_without_content_uses_parser_symbols(self)`
-  - `test_apidocs_signature_languages` (method, line 381) `def test_apidocs_signature_languages(self)`
-  - `setUpClass` (method, line 405) `def setUpClass(cls)`
-  - `test_apidocs_pages_layout` (method, line 411) `def test_apidocs_pages_layout(self)`
-  - `test_apidocs_module_page_sections` (method, line 416) `def test_apidocs_module_page_sections(self)`
-  - `test_apidocs_hierarchy_nests_subclasses` (method, line 427) `def test_apidocs_hierarchy_nests_subclasses(self)`
-  - `test_apidocs_linker_resolves_references` (method, line 431) `def test_apidocs_linker_resolves_references(self)`
-  - `test_apidocs_html_is_self_contained_and_escaped` (method, line 440) `def test_apidocs_html_is_self_contained_and_escaped(self)`
-  - `test_apidocs_html_placeholder_in_payload_stays_literal` (method, line 448) `def test_apidocs_html_placeholder_in_payload_stays_literal(self)`
-  - `test_apidocs_writer_writes_and_prunes` (method, line 452) `def test_apidocs_writer_writes_and_prunes(self)`
-  - `test_apidocs_writer_refuses_symlinked_output` (method, line 467) `def test_apidocs_writer_refuses_symlinked_output(self)`
-  - `test_apidocs_app_export_and_scanner_skip` (method, line 482) `def test_apidocs_app_export_and_scanner_skip(self)`
+  - `_project` (function, line 144) `def _project()`
+  - `TestDocstringParser` (class, line 163) `class TestDocstringParser(TestCase)`
+  - `TestApiReferenceBuilder` (class, line 257) `class TestApiReferenceBuilder(TestCase)`
+  - `TestSignatureParsing` (class, line 380) `class TestSignatureParsing(TestCase)`
+  - `TestApiRendering` (class, line 403) `class TestApiRendering(TestCase)`
+  - `TestApiDocsIntegration` (class, line 541) `class TestApiDocsIntegration(TestCase)`
+  - `test_docstrings_google_sections` (method, line 166) `def test_docstrings_google_sections(self)`
+  - `test_docstrings_numpy_sections` (method, line 181) `def test_docstrings_numpy_sections(self)`
+  - `test_docstrings_rest_fields_and_directives` (method, line 191) `def test_docstrings_rest_fields_and_directives(self)`
+  - `test_docstrings_jsdoc_and_doxygen_tags` (method, line 203) `def test_docstrings_jsdoc_and_doxygen_tags(self)`
+  - `test_docstrings_phpdoc_type_before_variable` (method, line 218) `def test_docstrings_phpdoc_type_before_variable(self)`
+  - `test_docstrings_csharp_xml` (method, line 222) `def test_docstrings_csharp_xml(self)`
+  - `test_docstrings_rustdoc_sections` (method, line 231) `def test_docstrings_rustdoc_sections(self)`
+  - `test_docstrings_plain_and_empty` (method, line 237) `def test_docstrings_plain_and_empty(self)`
+  - `test_docstrings_recover_block_and_line_comments` (method, line 244) `def test_docstrings_recover_block_and_line_comments(self)`
+  - `test_docstrings_recover_elixir_doc_heredoc` (method, line 252) `def test_docstrings_recover_elixir_doc_heredoc(self)`
+  - `setUpClass` (method, line 261) `def setUpClass(cls)`
+  - `test_apidocs_python_signatures_exact` (method, line 265) `def test_apidocs_python_signatures_exact(self)`
+  - `test_apidocs_python_nesting_and_kinds` (method, line 277) `def test_apidocs_python_nesting_and_kinds(self)`
+  - `test_apidocs_python_all_and_private_filter` (method, line 285) `def test_apidocs_python_all_and_private_filter(self)`
+  - `test_apidocs_tests_excluded_by_default` (method, line 294) `def test_apidocs_tests_excluded_by_default(self)`
+  - `test_apidocs_constructor_inherits_class_args` (method, line 301) `def test_apidocs_constructor_inherits_class_args(self)`
+  - `test_apidocs_inheritance_links_and_doc_inheritance` (method, line 305) `def test_apidocs_inheritance_links_and_doc_inheritance(self)`
+  - `test_apidocs_c_prototype_doc_merges_into_definition` (method, line 314) `def test_apidocs_c_prototype_doc_merges_into_definition(self)`
+  - `test_apidocs_call_graph_resolved` (method, line 322) `def test_apidocs_call_graph_resolved(self)`
+  - `test_apidocs_receiver_filter_drops_unproven_method_calls` (method, line 328) `def test_apidocs_receiver_filter_drops_unproven_method_calls(self)`
+  - `test_apidocs_annotated_receiver_resolves_method` (method, line 332) `def test_apidocs_annotated_receiver_resolves_method(self)`
+  - `test_apidocs_warnings_cover_every_rule` (method, line 336) `def test_apidocs_warnings_cover_every_rule(self)`
+  - `test_apidocs_coverage_counts` (method, line 346) `def test_apidocs_coverage_counts(self)`
+  - `test_apidocs_deterministic` (method, line 352) `def test_apidocs_deterministic(self)`
+  - `test_apidocs_privacy_mode_strips_text` (method, line 360) `def test_apidocs_privacy_mode_strips_text(self)`
+  - `test_apidocs_entity_budget_truncates` (method, line 368) `def test_apidocs_entity_budget_truncates(self)`
+  - `test_apidocs_without_content_uses_parser_symbols` (method, line 374) `def test_apidocs_without_content_uses_parser_symbols(self)`
+  - `test_apidocs_signature_languages` (method, line 383) `def test_apidocs_signature_languages(self)`
+  - `setUpClass` (method, line 407) `def setUpClass(cls)`
+  - `test_apidocs_pages_layout` (method, line 413) `def test_apidocs_pages_layout(self)`
+  - `test_apidocs_module_page_sections` (method, line 418) `def test_apidocs_module_page_sections(self)`
+  - `test_apidocs_hierarchy_nests_subclasses` (method, line 429) `def test_apidocs_hierarchy_nests_subclasses(self)`
+  - `test_apidocs_linker_resolves_references` (method, line 433) `def test_apidocs_linker_resolves_references(self)`
+  - `test_apidocs_html_is_self_contained_and_escaped` (method, line 442) `def test_apidocs_html_is_self_contained_and_escaped(self)`
+  - `test_apidocs_html_placeholder_in_payload_stays_literal` (method, line 450) `def test_apidocs_html_placeholder_in_payload_stays_literal(self)`
+  - `test_apidocs_html_large_payload_is_gzip_base64` (method, line 454) `def test_apidocs_html_large_payload_is_gzip_base64(self)`
+  - `test_apidocs_html_compression_disabled_keeps_plain_json` (method, line 464) `def test_apidocs_html_compression_disabled_keeps_plain_json(self)`
+  - `test_apidocs_writer_writes_and_prunes` (method, line 470) `def test_apidocs_writer_writes_and_prunes(self)`
+  - `test_apidocs_writer_jsonl_one_file_per_module_one_line_per_entity` (method, line 485) `def test_apidocs_writer_jsonl_one_file_per_module_one_line_per_entity(self)`
+  - `test_apidocs_writer_prunes_stale_jsonl_and_monolith` (method, line 512) `def test_apidocs_writer_prunes_stale_jsonl_and_monolith(self)`
+  - `test_apidocs_writer_refuses_symlinked_output` (method, line 529) `def test_apidocs_writer_refuses_symlinked_output(self)`
+  - `test_apidocs_app_export_and_scanner_skip` (method, line 544) `def test_apidocs_app_export_and_scanner_skip(self)`
 - Depends on: `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_docstrings.py`, `readmenator/_models.py`
 
 ## tests/test_bundlegraph.py
@@ -244,34 +248,34 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_node` (function, line 18) `def _node(nid, doc)`
-  - `_fixture` (function, line 23) `def _fixture(config)`
-  - `_script_json` (function, line 48) `def _script_json(html, name)`
-  - `TestBundleGraphPayloadContract` (class, line 55) `class TestBundleGraphPayloadContract(TestCase)`
-  - `TestBundleGraphRenderContract` (class, line 105) `class TestBundleGraphRenderContract(TestCase)`
-  - `TestBundleGraphAppContract` (class, line 169) `class TestBundleGraphAppContract(TestCase)`
-  - `setUp` (method, line 58) `def setUp(self)`
-  - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 64) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
-  - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 70) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
-  - `test_bundlegraph_nodes_on_circle_and_sphere` (method, line 78) `def test_bundlegraph_nodes_on_circle_and_sphere(self)`
-  - `test_bundlegraph_hub_leads_its_arc` (method, line 84) `def test_bundlegraph_hub_leads_its_arc(self)`
-  - `test_bundlegraph_empty_payload` (method, line 92) `def test_bundlegraph_empty_payload(self)`
-  - `test_bundlegraph_privacy_mode_strips_docs` (method, line 98) `def test_bundlegraph_privacy_mode_strips_docs(self)`
-  - `setUp` (method, line 108) `def setUp(self)`
-  - `test_bundlegraph_render_fills_placeholders` (method, line 115) `def test_bundlegraph_render_fills_placeholders(self)`
-  - `test_bundlegraph_render_has_no_network_requests` (method, line 124) `def test_bundlegraph_render_has_no_network_requests(self)`
-  - `test_bundlegraph_render_has_both_views_and_controls` (method, line 131) `def test_bundlegraph_render_has_both_views_and_controls(self)`
-  - `test_bundlegraph_render_escapes_untrusted_text` (method, line 137) `def test_bundlegraph_render_escapes_untrusted_text(self)`
-  - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 148) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
-  - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 154) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
-  - `test_bundlegraph_write_creates_parent` (method, line 161) `def test_bundlegraph_write_creates_parent(self)`
-  - `_project` (method, line 172) `def _project(self, tmp)`
-  - `_config` (method, line 177) `def _config(self)`
-  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 182) `def test_export_diagrams_writes_bundle_page_and_card(self)`
-  - `test_bundle_page_skipped_when_disabled` (method, line 198) `def test_bundle_page_skipped_when_disabled(self)`
-  - `test_export_bundlegraph_cli_entry` (method, line 209) `def test_export_bundlegraph_cli_entry(self)`
-  - `test_pages_subdir_card_points_into_maps_dir` (method, line 219) `def test_pages_subdir_card_points_into_maps_dir(self)`
-- Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`
+  - `_node` (function, line 19) `def _node(nid, doc)`
+  - `_fixture` (function, line 24) `def _fixture(config)`
+  - `_script_json` (function, line 49) `def _script_json(html, name)`
+  - `TestBundleGraphPayloadContract` (class, line 58) `class TestBundleGraphPayloadContract(TestCase)`
+  - `TestBundleGraphRenderContract` (class, line 108) `class TestBundleGraphRenderContract(TestCase)`
+  - `TestBundleGraphAppContract` (class, line 172) `class TestBundleGraphAppContract(TestCase)`
+  - `setUp` (method, line 61) `def setUp(self)`
+  - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 67) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
+  - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 73) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
+  - `test_bundlegraph_nodes_on_circle_and_sphere` (method, line 81) `def test_bundlegraph_nodes_on_circle_and_sphere(self)`
+  - `test_bundlegraph_hub_leads_its_arc` (method, line 87) `def test_bundlegraph_hub_leads_its_arc(self)`
+  - `test_bundlegraph_empty_payload` (method, line 95) `def test_bundlegraph_empty_payload(self)`
+  - `test_bundlegraph_privacy_mode_strips_docs` (method, line 101) `def test_bundlegraph_privacy_mode_strips_docs(self)`
+  - `setUp` (method, line 111) `def setUp(self)`
+  - `test_bundlegraph_render_fills_placeholders` (method, line 118) `def test_bundlegraph_render_fills_placeholders(self)`
+  - `test_bundlegraph_render_has_no_network_requests` (method, line 127) `def test_bundlegraph_render_has_no_network_requests(self)`
+  - `test_bundlegraph_render_has_both_views_and_controls` (method, line 134) `def test_bundlegraph_render_has_both_views_and_controls(self)`
+  - `test_bundlegraph_render_escapes_untrusted_text` (method, line 140) `def test_bundlegraph_render_escapes_untrusted_text(self)`
+  - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 151) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
+  - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 157) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
+  - `test_bundlegraph_write_creates_parent` (method, line 164) `def test_bundlegraph_write_creates_parent(self)`
+  - `_project` (method, line 175) `def _project(self, tmp)`
+  - `_config` (method, line 180) `def _config(self)`
+  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 185) `def test_export_diagrams_writes_bundle_page_and_card(self)`
+  - `test_bundle_page_skipped_when_disabled` (method, line 201) `def test_bundle_page_skipped_when_disabled(self)`
+  - `test_export_bundlegraph_cli_entry` (method, line 212) `def test_export_bundlegraph_cli_entry(self)`
+  - `test_pages_subdir_card_points_into_maps_dir` (method, line 222) `def test_pages_subdir_card_points_into_maps_dir(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`
 
 ## tests/test_cache.py
 - Doc: Contract tests for the FileCache.

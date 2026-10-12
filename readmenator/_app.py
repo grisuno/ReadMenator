@@ -1092,7 +1092,7 @@ class readmenatorApplication:
             target = maps_dir / self._config.FLOWS_OUTPUT
             if target.is_symlink():
                 return None
-            target.write_text(render_flows_page(graphs, Path(maps_dir).resolve().parent.name), encoding="utf-8")
+            target.write_text(render_flows_page(graphs, Path(maps_dir).resolve().parent.name, config=self._config), encoding="utf-8")
         except Exception:
             logger.warning("Architecture and flow page skipped", exc_info=True)
             return None

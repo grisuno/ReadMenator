@@ -11,15 +11,15 @@
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 23 | 5 |
 | `readmenator/_apidocs.py` | Deterministic API reference model: extraction, cross-references, coverage. | readmenator | 52 | 7 |
 | `readmenator/_apidocs_page.py` | Self-contained HTML browser for the deterministic API reference. | readmenator | 2 | 3 |
-| `readmenator/_apidocs_render.py` | Markdown, JSON, and writer layer for the deterministic API reference. | readmenator | 39 | 2 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 84 | 14 |
+| `readmenator/_apidocs_render.py` | Markdown, JSON, and writer layer for the deterministic API reference. | readmenator | 45 | 2 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 84 | 15 |
 | `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 5 |
 | `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 1 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 3 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 93 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 96 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
@@ -42,6 +42,7 @@
 | `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 26 | 5 |
 | `readmenator/_graphrag.py` | Zero-token GraphRAG index and retrieval for AI agents. | readmenator | 53 | 4 |
 | `readmenator/_hotspots.py` | Hotspot, dependency cycle, and change impact analysis. | readmenator | 7 | 2 |
+| `readmenator/_htmlpack.py` | Compact JSON payload embedding for self-contained HTML pages. | readmenator | 5 | 8 |
 | `readmenator/_layer_rules.py` | Architecture layer rule engine: forbidden and warning edges between layers. | readmenator | 4 | 2 |
 | `readmenator/_layers.py` | Architectural layer detection for the readmenator knowledge graph. | readmenator | 7 | 7 |
 | `readmenator/_linter.py` | Architecture linter for the readmenator knowledge graph. | readmenator | 8 | 2 |
@@ -102,7 +103,7 @@
 | `tests/test_agent_injector.py` | Contract tests for AI agent file injection. | tests | 38 | 0 |
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
-| `tests/test_apidocs.py` | Contract tests for the docstring parser and the deterministic API reference. | tests | 44 | 0 |
+| `tests/test_apidocs.py` | Contract tests for the docstring parser and the deterministic API reference. | tests | 48 | 0 |
 | `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 27 | 0 |
 | `tests/test_cache.py` | Contract tests for the FileCache. | tests | 22 | 0 |
 | `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 36 | 0 |
@@ -120,6 +121,7 @@
 | `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 33 | 0 |
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
+| `tests/test_htmlpack.py` | Contract tests for embedded page payload compression (readmenator/_htmlpack.py). | tests | 18 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
 | `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 60 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |

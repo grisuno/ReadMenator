@@ -8,7 +8,7 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: What does _config.py depend on, and what depends on it? (93 connections)
+### Q: What does _config.py depend on, and what depends on it? (96 connections)
 
 - Status: unanswered
 
@@ -16,7 +16,7 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: How are the 40 files in 'readmenator: _graphrag' related to each other?
+### Q: How are the 38 files in 'readmenator: _graphrag' related to each other?
 
 - Status: unanswered
 

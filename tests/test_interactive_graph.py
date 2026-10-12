@@ -18,6 +18,7 @@ from pathlib import Path
 
 from readmenator._analytics import AnalyticsBuilder
 from readmenator._config import Config
+from readmenator._htmlpack import read_payload_script
 from readmenator._embed import Embedder
 from readmenator._exclusions import ExclusionList, parse_exclusions
 from readmenator._explorer import build_state
@@ -479,7 +480,10 @@ def _inline_script(html: str) -> str:
 
 
 def _const_json(html: str, name: str) -> object:
-    """Parse the JSON literal assigned to a top-level const in the explorer script."""
+    """Parse a payload script element (RAW, ANALYTICS) or an inline const literal of the explorer."""
+    element = {"RAW": "fg-data", "ANALYTICS": "fg-analytics"}.get(name)
+    if element is not None:
+        return read_payload_script(html, element)
     match = re.search(r"^const " + name + r"=(.*);$", _inline_script(html), re.MULTILINE)
     if match is None:
         raise AssertionError(f"const {name} not found")

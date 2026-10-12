@@ -2,6 +2,18 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_sourceview.py` -> `readmenator/_models.py`
+- `tests/test_sourceview.py` -> `readmenator/_sourceview.py`
+- `tests/test_symindex.py` -> `readmenator/_config.py`
+- `tests/test_symindex.py` -> `readmenator/_models.py`
+- `tests/test_symindex.py` -> `readmenator/_symindex.py`
+- `tests/test_taint.py` -> `readmenator/_config.py`
+- `tests/test_taint.py` -> `readmenator/_models.py`
+- `tests/test_taint.py` -> `readmenator/_taint.py`
+- `tests/test_taint_bdd.py` -> `readmenator/_config.py`
+- `tests/test_taint_bdd.py` -> `readmenator/_models.py`
+- `tests/test_taint_bdd.py` -> `readmenator/_resolver.py`
+- `tests/test_taint_bdd.py` -> `readmenator/_scanner.py`
 - `tests/test_taint_bdd.py` -> `readmenator/_taint.py`
 - `tests/test_uml.py` -> `readmenator/_config.py`
 - `tests/test_uml.py` -> `readmenator/_models.py`
@@ -23,7 +35,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_analytics.py` -> __future__, collections, typing
 - `readmenator/_analyzer.py` -> __future__, collections, hashlib, math, random, typing
 - `readmenator/_apidocs.py` -> __future__, ast, dataclasses, pathlib, re, typing, warnings
-- `readmenator/_apidocs_page.py` -> __future__, html, json, pathlib, re, typing
+- `readmenator/_apidocs_page.py` -> __future__, html, pathlib, re, typing
 - `readmenator/_apidocs_render.py` -> __future__, json, logging, os, pathlib, re, typing
 - `readmenator/_app.py` -> __future__, dataclasses, json, logging, os, pathlib, typing
 - `readmenator/_bundlegraph.py` -> __future__, html, json, math, pathlib, re, typing
@@ -55,6 +67,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_graphlayout.py` -> __future__, dataclasses, math, numpy, random, typing
 - `readmenator/_graphrag.py` -> __future__, dataclasses, json, logging, math, pathlib, re, typing
 - `readmenator/_hotspots.py` -> __future__, collections, typing
+- `readmenator/_htmlpack.py` -> __future__, base64, gzip, html, json, re, typing
 - `readmenator/_layer_rules.py` -> __future__, typing
 - `readmenator/_layers.py` -> __future__, collections, re, typing
 - `readmenator/_linter.py` -> __future__, pathlib, typing
@@ -113,7 +126,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_agent_injector.py` -> __future__, pathlib, shutil, tempfile, unittest, unittest.mock
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest
-- `tests/test_apidocs.py` -> __future__, dataclasses, json, pathlib, re, shutil, tempfile, unittest
+- `tests/test_apidocs.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, tempfile, unittest
 - `tests/test_bundlegraph.py` -> __future__, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
 - `tests/test_components.py` -> __future__, json, pathlib, shutil, subprocess, tempfile, unittest
@@ -131,6 +144,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_graphlayout.py` -> __future__, math, unittest
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
 - `tests/test_hotspots.py` -> __future__, unittest
+- `tests/test_htmlpack.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, subprocess, tempfile, typing, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
 - `tests/test_interactive_graph.py` -> __future__, json, pathlib, re, shutil, subprocess, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest

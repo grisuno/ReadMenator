@@ -1,10 +1,10 @@
 # readmenator: _flowcharts
 
-*Community 4 | 12 files | cohesion 0.49*
+*Community 5 | 12 files | cohesion 0.47*
 
 ## Definition
 
-This community groups 12 file(s) rooted at `readmenator` with dominant language py (cohesion 0.49). Central symbols: `ApiDocsWriter`, `ApiEntity`, `ApiLinker`, `ApiMarkdownRenderer`, `ApiParam`, `ApiReference`, `ApiReferenceBuilder`, `ArchitectureDiagramBuilder`. Core file: `readmenator/_flowcharts.py` (54 symbols). Documented purpose: Deterministic API reference model: extraction, cross-references, coverage.  Builds a Sphinx / Doxygen style API reference from the scanned graph with zero token.
+This community groups 12 file(s) rooted at `readmenator` with dominant language py (cohesion 0.47). Central symbols: `ApiDocsWriter`, `ApiEntity`, `ApiLinker`, `ApiMarkdownRenderer`, `ApiParam`, `ApiReference`, `ApiReferenceBuilder`, `ArchitectureDiagramBuilder`. Core file: `readmenator/_flowcharts.py` (54 symbols). Documented purpose: Deterministic API reference model: extraction, cross-references, coverage.  Builds a Sphinx / Doxygen style API reference from the scanned graph with zero token.
 
 ## Files
 
@@ -12,14 +12,14 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 |------|----------|-------|---------|-----|
 | `readmenator/_apidocs.py` | py | utility | 52 | yes |
 | `readmenator/_apidocs_page.py` | py | presentation | 2 | yes |
-| `readmenator/_apidocs_render.py` | py | presentation | 39 | yes |
+| `readmenator/_apidocs_render.py` | py | presentation | 45 | yes |
 | `readmenator/_docstrings.py` | py | utility | 30 | yes |
 | `readmenator/_flowcharts.py` | py | utility | 54 | yes |
 | `readmenator/_flowlayout.py` | py | utility | 11 | yes |
 | `readmenator/_flowpage.py` | py | utility | 3 | yes |
 | `readmenator/_pytypes.py` | py | utility | 16 | yes |
 | `readmenator/_symindex.py` | py | utility | 22 | yes |
-| `tests/test_apidocs.py` | py | testing | 44 | yes |
+| `tests/test_apidocs.py` | py | testing | 48 | yes |
 | `tests/test_flowcharts.py` | py | testing | 35 | yes |
 | `tests/test_symindex.py` | py | testing | 10 | yes |
 
@@ -59,15 +59,16 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 27
-- Cross-boundary resolved imports (EXTRACTED): 28
+- Cross-boundary resolved imports (EXTRACTED): 31
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
-- [INFERRED] bridges community 4 <-> 3 (strength 0.5): Inferred cross-community bridge: readmenator/_docstrings.py reaches tests/test_graphlayout.py in 5 hops.
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.
+- [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
+- [INFERRED] bridges community 5 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator/_docstrings.py reaches tests/test_graphlayout.py in 5 hops.
 
 ## Risks
 
@@ -79,7 +80,7 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 ## Open Questions
 
 - What would break if the most connected file in readmenator: _flowcharts changed?
-- Should readmenator: _flowcharts be split, given cohesion 0.49?
+- Should readmenator: _flowcharts be split, given cohesion 0.47?
 
 ## Sources
 

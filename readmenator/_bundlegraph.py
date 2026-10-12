@@ -23,8 +23,9 @@ from readmenator._bundlegraph_page import BUNDLEGRAPH_PAGE_TEMPLATE
 from readmenator._config import Config
 from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._graphlayout import hierarchical_edge_bundling, optimize_bundle_order, spherical_edge_bundling
+from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
-_PLACEHOLDER = re.compile(r"__(TITLE|HOME|EXPLORER|DATA|SETTINGS)__")
+_PLACEHOLDER = re.compile(r"__(TITLE|HOME|EXPLORER|DATA|SETTINGS|LOADER)__")
 
 BUNDLE_RELATIONS = ("resolved_imports", "imports", "calls", "inherits")
 
@@ -255,7 +256,8 @@ class BundleGraphRenderer:
             "TITLE": html.escape(title, quote=True),
             "HOME": home,
             "EXPLORER": explorer,
-            "DATA": _json_script(self.build_payload(force_payload)),
+            "DATA": payload_script("bundle-data", self.build_payload(force_payload), self._config, compact=False, escape="<>"),
+            "LOADER": PAYLOAD_LOADER_JS,
             "SETTINGS": _json_script(self.page_settings(force_payload, explorer_href, live_api=live_api)),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], BUNDLEGRAPH_PAGE_TEMPLATE)

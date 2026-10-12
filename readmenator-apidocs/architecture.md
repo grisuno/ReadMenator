@@ -4,9 +4,9 @@
 
 ## Architecture Overview
 
-7 components stacked in 5 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 7 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
+7 components stacked in 6 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 10 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
 
-Upward dependencies to fix first: `readmenator: _diagrams` -> `readmenator: _pipeline` (6 imports); `readmenator/parsers` -> `readmenator: _graphrag` (4 imports); `readmenator: _graphrag` -> `readmenator: _diagrams` (2 imports); `readmenator/parsers` -> `readmenator: _diagrams` (1 imports)
+Upward dependencies to fix first: `readmenator/parsers` -> `readmenator: _graphrag` (5 imports); `readmenator: _diagrams` -> `readmenator: _pipeline` (3 imports); `readmenator: _graphrag` -> `readmenator: _diagrams` (2 imports); `readmenator/parsers` -> `readmenator: _diagrams` (1 imports); `readmenator: _graphlayout` -> `readmenator: _diagrams` (1 imports); `readmenator: _graphlayout` -> `readmenator: _pipeline` (1 imports)
 
 ```mermaid
 flowchart TB
@@ -15,7 +15,7 @@ flowchart TB
     classDef entry fill:#0e7490,stroke:#22d3ee,color:#ecfeff,stroke-width:2px;
     subgraph lane_0["Tier 1 - entry / orchestration"]
         direction LR
-        n_c3["readmenator: _pipeline<br/>17 files, 254 symbols<br/>Core / utility"]:::cycle
+        n_c3["readmenator: _pipeline<br/>12 files, 198 symbols<br/>Core / utility"]:::cycle
         n_d__root_["(root)<br/>1 files, 37 symbols<br/>Core / utility"]:::default
     end
     subgraph lane_1["Tier 2"]
@@ -24,29 +24,35 @@ flowchart TB
     end
     subgraph lane_2["Tier 3"]
         direction LR
-        n_c4["readmenator: _flowcharts<br/>9 files, 229 symbols<br/>Core / utility"]:::cycle
-        n_c5["readmenator: _agent_injector<br/>2 files, 23 symbols<br/>Infrastructure"]:::default
+        n_c5["readmenator: _flowcharts<br/>9 files, 235 symbols<br/>Core / utility"]:::cycle
     end
     subgraph lane_3["Tier 4"]
         direction LR
-        n_c0["readmenator: _graphrag<br/>20 files, 338 symbols<br/>Core / utility"]:::cycle
+        n_c4["readmenator: _graphlayout<br/>8 files, 84 symbols<br/>Core / utility"]:::cycle
     end
-    subgraph lane_4["Tier 5 - foundation"]
+    subgraph lane_4["Tier 5"]
         direction LR
-        n_c1["readmenator/parsers<br/>26 files, 95 symbols<br/>Core / utility"]:::cycle
+        n_c0["readmenator: _graphrag<br/>19 files, 317 symbols<br/>Core / utility"]:::cycle
     end
-    n_c0 ==>|"15"| n_c1
-    n_c2 -->|"8"| n_c4
-    n_c2 -->|"1"| n_c5
-    n_c3 ==>|"9"| n_c2
-    n_c4 -->|"5"| n_c0
+    subgraph lane_5["Tier 6 - foundation"]
+        direction LR
+        n_c1["readmenator/parsers<br/>27 files, 116 symbols<br/>Core / utility"]:::cycle
+    end
+    n_c0 ==>|"14"| n_c1
+    n_c2 ==>|"8"| n_c5
+    n_c3 ==>|"8"| n_c2
+    n_c4 -->|"7"| n_c0
+    n_c5 -->|"2"| n_c4
     n_c2 <-.-|"2 upward"| n_c0
-    n_c0 <-.-|"4 upward"| n_c1
+    n_c0 <-.-|"5 upward"| n_c1
     n_c2 <-.-|"1 upward"| n_c1
-    n_c3 <-.-|"6 upward"| n_c2
-    linkStyle 5,6,7,8 stroke:#f87171,stroke-width:2px;
+    n_c3 <-.-|"3 upward"| n_c2
+    n_c2 <-.-|"1 upward"| n_c4
+    n_c3 <-.-|"1 upward"| n_c4
+    linkStyle 5,6,7,8,9,10 stroke:#f87171,stroke-width:2px;
     n_c3 ~~~ n_c2
-    n_c2 ~~~ n_c4
+    n_c2 ~~~ n_c5
+    n_c5 ~~~ n_c4
     n_c4 ~~~ n_c0
     n_c0 ~~~ n_c1
 ```

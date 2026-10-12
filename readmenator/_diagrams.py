@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Set, Tuple
 
 from readmenator._config import Config
+from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
 _MD_LINK_RE = re.compile(r"\[([^\]]*)\]\([^)]*\)")
 _MD_MARK_RE = re.compile(r"[`*_]")
@@ -1616,10 +1617,11 @@ class InteractiveMapRenderer:
         values["__MAP_THEME__"] = html.escape(theme)
         values["__NODES_SVG__"] = self._nodes_svg(system_map)
         values["__EDGES_SVG__"] = self._edges_svg(system_map)
-        values["__NODES_JSON__"] = self._safe_json(nodes_payload)
-        values["__EDGES_JSON__"] = self._safe_json(edges_payload)
-        values["__VIEWS_JSON__"] = self._safe_json(views_payload)
-        values["__META_JSON__"] = self._safe_json(
+        values["__LOADER__"] = PAYLOAD_LOADER_JS
+        values["__NODES_JSON__"] = payload_script("map-nodes", nodes_payload, self._config, compact=False, escape="<")
+        values["__EDGES_JSON__"] = payload_script("map-edges", edges_payload, self._config, compact=False, escape="<")
+        values["__VIEWS_JSON__"] = payload_script("map-views", views_payload, self._config, compact=False, escape="<")
+        values["__META_JSON__"] = payload_script("map-meta",
             {
                 "kind": system_map.kind,
                 "title": system_map.title,
@@ -1633,7 +1635,10 @@ class InteractiveMapRenderer:
                 "nodeHeight": self._config.DIAGRAM_NODE_HEIGHT,
                 "canvasWidth": canvas_w,
                 "canvasHeight": canvas_h,
-            }
+            },
+            self._config,
+            compact=False,
+            escape="<",
         )
         values["__PRESETS_JSON__"] = self._safe_json(list(self._config.DIAGRAM_PRESETS))
         values["__CANVAS_W__"] = str(canvas_w)
@@ -1951,17 +1956,18 @@ __HOME_LINK__
 <button type="button" data-action="export-json" title="Download the typed JSON behind this diagram">Download typed JSON</button>
 <button type="button" data-action="close-exports" title="Close the export menu">Close</button>
 </dialog>
-<script type="application/json" id="map-nodes">__NODES_JSON__</script>
-<script type="application/json" id="map-edges">__EDGES_JSON__</script>
-<script type="application/json" id="map-views">__VIEWS_JSON__</script>
-<script type="application/json" id="map-meta">__META_JSON__</script>
+__NODES_JSON__
+__EDGES_JSON__
+__VIEWS_JSON__
+__META_JSON__
+<script>__LOADER__</script>
 <script>
-(function(){
+readmenatorPayloads([["map-nodes",[]],["map-edges",[]],["map-views",[]],["map-meta",{}]]).then(function(__rmPayload){
 "use strict";
-var nodes=JSON.parse(document.getElementById("map-nodes").textContent||"[]");
-var edges=JSON.parse(document.getElementById("map-edges").textContent||"[]");
-var views=JSON.parse(document.getElementById("map-views").textContent||"[]");
-var meta=JSON.parse(document.getElementById("map-meta").textContent||"{}");
+var nodes=__rmPayload[0];
+var edges=__rmPayload[1];
+var views=__rmPayload[2];
+var meta=__rmPayload[3];
 var root=document.documentElement;
 var svg=document.getElementById("canvas");
 var search=document.getElementById("search");
@@ -2217,7 +2223,7 @@ else if(ev.key==="0"){resetZoom();}});
 passportMeta.textContent=nodes.length+" of "+(meta.totalFiles||nodes.length)+" files | "+edges.length+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
 receipt.textContent="Ready. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
 renderChapters();renderRoleCounts();updateOverview();readHash();
-})();
+},readmenatorPayloadError);
 </script>
 </body>
 </html>"""
@@ -2322,10 +2328,11 @@ class VisNetworkRenderer:
         values["__MAP_TITLE__"] = _escape_markup(system_map.title)
         values["__MAP_PRESET__"] = _escape_markup(preset)
         values["__MAP_THEME__"] = _escape_markup(theme)
-        values["__NODES_JSON__"] = _json_payload(nodes_payload)
-        values["__EDGES_JSON__"] = _json_payload(edges_payload)
-        values["__VIEWS_JSON__"] = _json_payload(views_payload)
-        values["__META_JSON__"] = _json_payload(
+        values["__LOADER__"] = PAYLOAD_LOADER_JS
+        values["__NODES_JSON__"] = payload_script("vis-nodes", nodes_payload, self._config, compact=False, escape="<")
+        values["__EDGES_JSON__"] = payload_script("vis-edges", edges_payload, self._config, compact=False, escape="<")
+        values["__VIEWS_JSON__"] = payload_script("vis-views", views_payload, self._config, compact=False, escape="<")
+        values["__META_JSON__"] = payload_script("vis-meta",
             {
                 "kind": system_map.kind,
                 "title": system_map.title,
@@ -2335,10 +2342,13 @@ class VisNetworkRenderer:
                 "neighbors": self._config.DIAGRAM_NEIGHBOR_NAMES,
                 "communities": self._community_legend(system_map),
                 "labelTopN": self._config.DIAGRAM_VIS_LABEL_TOP_N,
-            }
+            },
+            self._config,
+            compact=False,
+            escape="<",
         )
-        values["__PHYSICS_JSON__"] = _json_payload(physics)
-        values["__ROLES_JSON__"] = _json_payload(dict(self._config.DIAGRAM_ROLE_COLORS))
+        values["__PHYSICS_JSON__"] = payload_script("vis-physics", physics, self._config, compact=False, escape="<")
+        values["__ROLES_JSON__"] = payload_script("vis-roles", dict(self._config.DIAGRAM_ROLE_COLORS), self._config, compact=False, escape="<")
         return _fill_template(self._template(), values)
 
     def _community_legend(self, system_map: SystemMap) -> List[Dict[str, object]]:
@@ -2552,22 +2562,23 @@ __HOME_LINK__
 <button type="button" data-action="export-json" title="Download the typed JSON behind this diagram">Download typed JSON</button>
 <button type="button" data-action="close-exports" title="Close the export menu">Close</button>
 </dialog>
-<script type="application/json" id="vis-nodes">__NODES_JSON__</script>
-<script type="application/json" id="vis-edges">__EDGES_JSON__</script>
-<script type="application/json" id="vis-views">__VIEWS_JSON__</script>
-<script type="application/json" id="vis-meta">__META_JSON__</script>
-<script type="application/json" id="vis-physics">__PHYSICS_JSON__</script>
-<script type="application/json" id="vis-roles">__ROLES_JSON__</script>
+__NODES_JSON__
+__EDGES_JSON__
+__VIEWS_JSON__
+__META_JSON__
+__PHYSICS_JSON__
+__ROLES_JSON__
+<script>__LOADER__</script>
 <div class="peek" id="peek" role="tooltip"></div>
 <script>
-(function(){
+readmenatorPayloads([["vis-nodes",[]],["vis-edges",[]],["vis-views",[]],["vis-meta",{}],["vis-physics",{}],["vis-roles",{}]]).then(function(__rmPayload){
 "use strict";
-var rawNodes=JSON.parse(document.getElementById("vis-nodes").textContent||"[]");
-var rawEdges=JSON.parse(document.getElementById("vis-edges").textContent||"[]");
-var views=JSON.parse(document.getElementById("vis-views").textContent||"[]");
-var meta=JSON.parse(document.getElementById("vis-meta").textContent||"{}");
-var physics=JSON.parse(document.getElementById("vis-physics").textContent||"{}");
-var roleColors=JSON.parse(document.getElementById("vis-roles").textContent||"{}");
+var rawNodes=__rmPayload[0];
+var rawEdges=__rmPayload[1];
+var views=__rmPayload[2];
+var meta=__rmPayload[3];
+var physics=__rmPayload[4];
+var roleColors=__rmPayload[5];
 var root=document.documentElement;
 var container=document.getElementById("network");
 var search=document.getElementById("search");
@@ -2984,7 +2995,7 @@ else if(ev.key==="Escape"){showAll();state.focus=null;state.edge=null;detailHist
 passportMeta.textContent=(meta.nodeCount||rawNodes.length)+" of "+(meta.totalFiles||rawNodes.length)+" files | "+(meta.edgeCount||rawEdges.length)+" links | "+views.length+" chapters. Primary scope only; full listing lives in the knowledge base.";
 receipt.textContent="Live physics network. Drag nodes, search, focus, trace reach, probe routes, compare roles, or play chapters.";
 renderChapters();renderRoleCounts();readHash();
-})();
+},readmenatorPayloadError);
 </script>
 </body>
 </html>"""

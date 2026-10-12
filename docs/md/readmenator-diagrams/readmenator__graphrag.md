@@ -1,6 +1,6 @@
 # readmenator: _graphrag
 
-readmenator: _graphrag groups 40 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.
+readmenator: _graphrag groups 38 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.
 
 ```mermaid
 graph LR
@@ -11,11 +11,11 @@ graph LR
 
 ## readmenator (1.1)
 
-readmenator groups 20 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.
+readmenator groups 19 files (py) around Config, ImportResolver, __init__, _build_stem_index, _build_dir_index. Agent-friendly output generator for ReadMenator.
 
 ## tests (1.2)
 
-tests groups 20 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
+tests groups 19 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 
 **Files**:
 
@@ -24,7 +24,6 @@ tests groups 20 files (py) around _node, _edge, _big_project, TestAgentOutputBud
 - readmenator/_cache.py
 - readmenator/_concepts.py
 - readmenator/_config.py
-- readmenator/_dataflow.py
 - readmenator/_dead_code.py
 - readmenator/_gh_wiki.py
 - readmenator/_gitmeta.py
@@ -44,7 +43,6 @@ tests groups 20 files (py) around _node, _edge, _big_project, TestAgentOutputBud
 - tests/test_cache.py
 - tests/test_concepts.py
 - tests/test_config.py
-- tests/test_dataflow.py
 - tests/test_dead_code.py
 - tests/test_gh_wiki.py
 - tests/test_graphrag.py

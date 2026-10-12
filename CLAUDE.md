@@ -70,8 +70,9 @@ readmenator/
   _components.py      - Component diagrams: analysis.json, graph LR, per-component markdown, offline index.html
   _docstrings.py      - Multi-style docstring parser (Google, NumPy, reST, Javadoc/JSDoc/PHPDoc/Doxygen, C# XML, Rustdoc) + raw comment recovery
   _apidocs.py         - API reference model: Python ast extraction, generic symbol nesting, signatures, cross-refs, coverage, DOC00x warnings
-  _apidocs_render.py  - API reference Markdown (index, modules, hierarchy, genindex, coverage), api.json, writer, linker
+  _apidocs_render.py  - API reference Markdown (index, modules, hierarchy, genindex, coverage), split api/ JSON Lines model, writer, linker
   _apidocs_page.py    - Self-contained offline HTML API browser (search, tree, hierarchy, coverage, architecture page)
+  _htmlpack.py        - Embedded page payloads: plain JSON when small (legacy per-page format), deterministic gzip+base64 decoded by native DecompressionStream when large; shared async loader
   _flowcharts.py      - Tiered architecture (Tarjan SCC, Eades-Lin-Smyth FAS, transitive reduction) + execution flows (entry points, call tree, control flow, sequence)
   _flowlayout.py      - FlowGraph model + deterministic layered layout (ranks, barycenter ordering, row wrapping, curve routing, lanes)
   _flowpage.py        - Offline interactive SVG viewer for flow graphs (flows.html, API Flows tab, gallery thumbnail)
@@ -125,6 +126,7 @@ tests/
   test_ollama.py - Local Ollama client contract tests (disabled, unreachable, thinking strip)
   test_apidocs.py - Docstring parser (all styles, comment recovery) + API reference contract tests (signatures, nesting, inheritance, calls, warnings, coverage, privacy, rendering, HTML escaping, writer)
   test_flowcharts.py - Architecture tiers, SCC/transitive reduction/ELS, entry points, call walks, control flow, sequence, KB integration, receiver typing
+  test_htmlpack.py - Payload compression contract (threshold, determinism, legacy plain format, browser loader in node, every page decodes identical payloads plain vs compressed, inline scripts valid JS)
   test_layout_quality.py - Bundle crossing reduction (cost, determinism, monotone sweeps, sphere refinement) and seeded explorer layouts
 ```
 
@@ -196,7 +198,7 @@ tests/
 - Component diagram settings (COMPONENTS_ENABLED, COMPONENTS_OUTPUT_DIR, COMPONENTS_MAX_KEY_ENTITIES/KEY_EDGES/ALL_EDGES, COMPONENTS_EXPAND_MIN_FILES, COMPONENTS_DEPTH_CAP)
 - Ollama settings (OLLAMA_ENABLED default False, OLLAMA_HOST, OLLAMA_MODEL, OLLAMA_TIMEOUT_S, OLLAMA_MAX_PROMPT_CHARS, OLLAMA_MAX_CHARS)
 - Source viewer settings (SOURCEVIEW_ENABLED, SOURCEVIEW_MAX_FILES/CHARS_PER_FILE/LINES_PER_FILE/TOTAL_CHARS, SOURCEVIEW_CHUNK_LINES, SOURCEVIEW_CONTEXT_LINES)
-- API reference settings (APIDOCS_ENABLED, APIDOCS_OUTPUT_DIR, APIDOCS_MODULES_SUBDIR, APIDOCS_INCLUDE_PRIVATE, APIDOCS_INCLUDE_TESTS, APIDOCS_TEST_PATH_TOKENS, APIDOCS_SKIP_SUFFIXES, APIDOCS_EXCLUDE_DIRS, APIDOCS_MAX_ENTITIES, APIDOCS_DOC_LOOKBACK_LINES, APIDOCS_BRACE_SCAN_LINES, APIDOCS_MAX_CALL_REFS, APIDOCS_CALLGRAPH_MAX_EDGES, APIDOCS_SUMMARY_MAX_CHARS, APIDOCS_HTML_ENABLED, APIDOCS_HTML_FILENAME, APIDOCS_JSON_FILENAME, APIDOCS_ARCHITECTURE_FILENAME, APIDOCS_SCHEMA_VERSION, APIDOCS_MERMAID_CDN_JS, APIDOCS_COVERAGE_FAIL_UNDER, APIDOCS_MAX_WARNINGS_LISTED)
+- API reference settings (APIDOCS_ENABLED, APIDOCS_OUTPUT_DIR, APIDOCS_MODULES_SUBDIR, APIDOCS_INCLUDE_PRIVATE, APIDOCS_INCLUDE_TESTS, APIDOCS_TEST_PATH_TOKENS, APIDOCS_SKIP_SUFFIXES, APIDOCS_EXCLUDE_DIRS, APIDOCS_MAX_ENTITIES, APIDOCS_DOC_LOOKBACK_LINES, APIDOCS_BRACE_SCAN_LINES, APIDOCS_MAX_CALL_REFS, APIDOCS_CALLGRAPH_MAX_EDGES, APIDOCS_SUMMARY_MAX_CHARS, APIDOCS_HTML_ENABLED, APIDOCS_HTML_FILENAME, APIDOCS_JSON_FILENAME, APIDOCS_JSON_MONOLITH (default False), APIDOCS_JSONL_DIR, APIDOCS_JSONL_MODULES_SUBDIR, APIDOCS_JSONL_INDEX, APIDOCS_JSONL_WARNINGS, APIDOCS_ARCHITECTURE_FILENAME, APIDOCS_SCHEMA_VERSION, APIDOCS_MERMAID_CDN_JS, APIDOCS_COVERAGE_FAIL_UNDER, APIDOCS_MAX_WARNINGS_LISTED)
 - Architecture and flow diagram settings (ARCH_DIAGRAM_ENABLED, ARCH_DIAGRAM_INCLUDE_TESTS, ARCH_DIAGRAM_MAX_COMPONENTS, ARCH_DIAGRAM_LABEL_CHARS, FLOW_ENABLED, FLOW_MAX_ENTRYPOINTS, FLOW_MIN_ENTRY_SCORE, FLOW_SOURCE_MIN_CALLS, FLOW_MAX_DEPTH, FLOW_MAX_STEPS, FLOW_LABEL_CHARS, FLOW_SEQUENCE_MAX_MESSAGES, FLOW_CFG_MAX_NODES, FLOW_SWITCH_MIN_CASES)
 - Symbol index receiver window (SYMINDEX_RECEIVER_WINDOW: bounded look-behind for attribute-call receivers, keeps minified lines linear)
 - Bundle ordering (BUNDLEGRAPH_ORDER_OPTIMIZE, BUNDLEGRAPH_ORDER_SWEEPS, BUNDLEGRAPH_ORDER_PASSES, BUNDLEGRAPH_SPHERE_REFINE_SWEEPS)
@@ -205,6 +207,7 @@ tests/
 - Legacy Mermaid shape (MERMAID_GRID_COLUMNS, MERMAID_MAX_EXTERNALS, MERMAID_DIRECTION, UML_CLASSES_PER_DIAGRAM)
 - Video flow acts (VIDEO_TIERS_S, VIDEO_FLOW_S, VIDEO_FLOW_VIEW_WIDTH)
 - Video transitions (VIDEO_TRANSITION_S crossfade, VIDEO_TRANSITION_GLITCH, VIDEO_MOTION_BLUR_SAMPLES, VIDEO_MOTION_BLUR_SHUTTER, VIDEO_MOTION_BLUR_ACTS)
+- Embedded payload compression (PAYLOAD_COMPRESSION_ENABLED, PAYLOAD_COMPRESSION_MIN_BYTES default 256 KiB, PAYLOAD_COMPRESSION_LEVEL)
 
 ### Models Contract
 - Symbol: name, kind (not `type`), line, doc, signature
@@ -435,6 +438,13 @@ tests/
 - Integrated with readmenatorApplication for all query/analysis operations
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
 
+### Payload Compression Contract
+- payload_script(element_id, payload, config, compact, escape) (readmenator/_htmlpack.py): payloads under PAYLOAD_COMPRESSION_MIN_BYTES (or with PAYLOAD_COMPRESSION_ENABLED=False) stay plain application/json in the page's legacy serialization (compact/escape per page, "<" always escaped); larger ones become application/octet-stream data-encoding="gzip+base64" with mtime 0 (byte-deterministic)
+- PAYLOAD_LOADER_JS: readmenatorPayload(id, fallback) / readmenatorPayloads(specs) resolve plain JSON or decode via native DecompressionStream (works from file://, zero requests); readmenatorPayloadError shows a role=alert box on load failure only (boot errors stay console errors via then(boot, onError))
+- Pages boot as readmenatorPayloads([...]).then(function(__rmPayload){ unchanged body }): API browser (api-data), flows pages (fv-data), force-graph explorer (fg-data, fg-analytics; SETTINGS stays inline), edge bundle explorer (bundle-data; CFG stays inline), live vis maps (vis-*), offline SVG maps (map-*); the flows page restores the theme synchronously before data loads
+- read_payload_script(document, element_id) decodes either encoding for tests and tools
+- Rendered DOM is identical to the pre-compression pages in plain and compressed modes (verified in headless Chromium)
+
 ### Interactive Explorer Modules Contract
 - ScanTextBuilder (readmenator/_scantext.py): build_for_node/build_corpus flatten names, symbols, signatures, imports, content snippets into labelled blobs; respects PRIVACY_MODE and SCANTEXT_* budgets; CLI `scan-text`
 - YaraLiteEngine (readmenator/_yaralite.py): zero-dep T1/T2/T3 parser + runner (rule headers, meta, strings with nocase, conditions with N-of groups, any-of-them, $identifiers via restricted eval); validate_yaralite_rules reports tier counts; default rules in readmenator-rules/yara_rules.yar; CLI `validate-rules`
@@ -527,7 +537,7 @@ tests/
 - ReadmeInjector class with inject(project_root) and remove(project_root) methods
 - Detects README.md, README.rst, Readme.md, readme.md, and 4 other variants
 - Injects a section linking to KNOWLEDGE_BASE.md and every run artifact with HTML anchor comments
-- Injected section covers: KNOWLEDGE_BASE.md, readmenator-agent/ (INDEX, SYMBOLS, ARCHITECTURE, API, GOTCHAS, SECURITY, MEMORY, MANIFEST, KB_*, recipes), readmenator-wiki/ (index, community_*, connections.json, queries, REPORT), readmenator-graphrag/ (ask), readmenator-apidocs/ (index, modules, architecture, classes, genindex, COVERAGE, index.html, api.json), readmenator-maps/ (index gallery + 5 maps + graph-force.html + graph-bundle.html + components.html), docs/ site (llms.txt + video), readmenator-diagrams/ (analysis.json), readmenator-rules/ (Semgrep + yara + exclusions), readmenator.mp4, .cursorrules, SARIF audit, cache, skills
+- Injected section covers: KNOWLEDGE_BASE.md, readmenator-agent/ (INDEX, SYMBOLS, ARCHITECTURE, API, GOTCHAS, SECURITY, MEMORY, MANIFEST, KB_*, recipes), readmenator-wiki/ (index, community_*, connections.json, queries, REPORT), readmenator-graphrag/ (ask), readmenator-apidocs/ (index, modules, architecture, classes, genindex, COVERAGE, index.html, api/ JSONL), readmenator-maps/ (index gallery + 5 maps + graph-force.html + graph-bundle.html + components.html), docs/ site (llms.txt + video), readmenator-diagrams/ (analysis.json), readmenator-rules/ (Semgrep + yara + exclusions), readmenator.mp4, .cursorrules, SARIF audit, cache, skills
 - Idempotent: second injection returns False when injection text is identical
 - **Outdated detection**: when anchor exists but text differs from current template, removes old and injects new
 - **Tag creation**: when the anchor tag is missing (or only half present), the section is created fresh; partial markers are stripped before appending
@@ -654,9 +664,9 @@ tests/
 - Cross-references: bases resolved to project types (subclasses filled), C-family definitions inherit header prototype docs, undocumented overrides inherit base docs (marked with an Inherited note), callers/callees from the symbol index filtered by receiver typing (typed self/var/attr receivers re-resolved to the owning class; untyped attribute calls dropped unless the receiver names the module or class)
 - Warnings: DOC001 undocumented public item, DOC002 parameter not documented, DOC003 documented parameter missing from the signature, DOC004 return not documented, DOC005 raised exception not documented; coverage overall/by kind/by module over public modules, types, and callables
 - PRIVACY_MODE keeps signatures and parameter names only
-- ApiMarkdownRenderer/ApiDocsWriter (readmenator/_apidocs_render.py) write APIDOCS_OUTPUT_DIR: index.md (modules by package with coverage), modules/<slug>.md (contents, Mermaid classDiagram, Mermaid call graph, per-entity anchors, badges, signature, merged parameter table, returns, raises incl. undocumented inferred ones, examples, admonitions, see also, calls/called by, source file#Lline links), classes.md, genindex.md, COVERAGE.md, architecture.md, api.json (APIDOCS_SCHEMA_VERSION), index.html; stale module pages pruned; symlinked output refused
+- ApiMarkdownRenderer/ApiDocsWriter (readmenator/_apidocs_render.py) write APIDOCS_OUTPUT_DIR: index.md (modules by package with coverage), modules/<slug>.md (contents, Mermaid classDiagram, Mermaid call graph, per-entity anchors, badges, signature, merged parameter table, returns, raises incl. undocumented inferred ones, examples, admonitions, see also, calls/called by, source file#Lline links), classes.md, genindex.md, COVERAGE.md, architecture.md, api/ (index.json with schema_version, meta, coverage, module listing, warning total and grep usage; modules/<slug>.jsonl one compact entity per line; warnings.jsonl one warning per line; read_api_jsonl reassembles the monolithic shape), index.html; api.json only when APIDOCS_JSON_MONOLITH (stale api.json removed otherwise); stale module pages and module JSONL files pruned; symlinked output refused
 - ApiLinker resolves backticks, Sphinx roles (:class:, :func:, ~), and {@link} to anchors, never inside fenced code
-- render_api_site (readmenator/_apidocs_page.py): one self-contained page, JSON payload with < > & escaped, placeholders filled in one regex pass, zero requests by default; the Architecture page renders Mermaid only when the reader clicks the button (APIDOCS_MERMAID_CDN_JS)
+- render_api_site (readmenator/_apidocs_page.py): one self-contained page, JSON payload with < > & escaped (payloads of PAYLOAD_COMPRESSION_MIN_BYTES or more embedded as gzip+base64 with mtime 0, decoded offline by DecompressionStream, load errors shown in the page; api/ JSONL and modules/*.md stay plain and greppable), placeholders filled in one regex pass, zero requests by default; the Architecture page renders Mermaid only when the reader clicks the button (APIDOCS_MERMAID_CDN_JS)
 - Wired into run() and update() (_maybe_write_apidocs, never fatal), CLI `apidocs`, `doc-coverage [--fail-under N]` (exit 1 below threshold); scanner skips APIDOCS_OUTPUT_DIR; README injection lists it
 
 ### Architecture and Execution Flow Contract

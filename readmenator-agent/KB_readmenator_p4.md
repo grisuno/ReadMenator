@@ -1,5 +1,30 @@
-# Subsystem: readmenator (page 4 of 4)
+# Subsystem: readmenator (page 4 of 5)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
+
+## readmenator/_query.py
+- Doc: Query engine for the readmenator knowledge base.
+- Layer: data_access
+- Language: py
+- Symbols:
+  - `QueryEngine` (class, line 25) `class QueryEngine`
+  - `__init__` (method, line 34) `def __init__(self, nodes, edges, resolved_edges, ranker, config)`
+  - `_init_default_ranker` (method, line 64) `def _init_default_ranker(self)`
+  - `ranked_query` (method, line 73) `def ranked_query(self, query, top_n)`
+  - `_estimate_test_coverage` (method, line 124) `def _estimate_test_coverage(self)`
+  - `_estimate_doc_coverage` (method, line 150) `def _estimate_doc_coverage(self)`
+  - `_build_symbol_index` (method, line 170) `def _build_symbol_index(self)`
+  - `_build_import_graph` (method, line 184) `def _build_import_graph(self)`
+  - `_build_resolved_graph` (method, line 200) `def _build_resolved_graph(self)`
+  - `find_symbol` (method, line 220) `def find_symbol(self, name)`
+  - `explain` (method, line 238) `def explain(self, name)`
+  - `_find_incoming_imports` (method, line 277) `def _find_incoming_imports(self, target)`
+  - `find_path` (method, line 285) `def find_path(self, symbol_a, symbol_b)`
+  - `_make_bidirectional` (method, line 315) `def _make_bidirectional(graph)`
+  - `_bfs_shortest_path` (method, line 331) `def _bfs_shortest_path(self, graph, start, goal)`
+  - `query` (method, line 355) `def query(self, question)`
+  - `summary` (method, line 411) `def summary(self)`
+- Depends on: `readmenator/_category.py`, `readmenator/_models.py`, `readmenator/_rank.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_mcp_server.py`, `tests/test_query.py`
 
 ## readmenator/_rank.py
 - Doc: PageRank, Personalized PageRank, HITS, and composite scoring.
@@ -448,30 +473,5 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
 
-## readmenator/_yaralite.py
-- Doc: Zero-dependency YARA-lite rule parser and runner.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `YaraLiteString` (class, line 24) `class YaraLiteString`
-  - `YaraLiteRule` (class, line 33) `class YaraLiteRule`
-  - `YaraLiteHit` (class, line 56) `class YaraLiteHit`
-  - `YaraLiteMatch` (class, line 66) `class YaraLiteMatch`
-  - `parse_yaralite_rules` (function, line 76) `def parse_yaralite_rules(rules_text)`
-  - `run_yaralite_rules` (function, line 112) `def run_yaralite_rules(text, rules)`
-  - `validate_yaralite_rules` (function, line 139) `def validate_yaralite_rules(rules_text)`
-  - `_rule_blocks` (function, line 161) `def _rule_blocks(rules_text)`
-  - `_section` (function, line 182) `def _section(body, start_marker, end_marker)`
-  - `_parse_meta` (function, line 196) `def _parse_meta(meta_body)`
-  - `_parse_strings` (function, line 215) `def _parse_strings(strings_body)`
-  - `_strip_comments` (function, line 233) `def _strip_comments(text)`
-  - `_decode_yara_string` (function, line 238) `def _decode_yara_string(value)`
-  - `_string_hits` (function, line 243) `def _string_hits(text, rule)`
-  - `_condition_matches` (function, line 265) `def _condition_matches(condition, hits)`
-  - `_confidence` (function, line 305) `def _confidence(value)`
-  - `_excerpt` (function, line 322) `def _excerpt(text, offset, length)`
-  - `tier` (method, line 42) `def tier(self)`
-  - `replace_group` (function, line 270) `def replace_group(match)`
-  - `replace_identifier` (function, line 292) `def replace_identifier(match)`
-- Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
 
+Next: [KB_readmenator_p5.md](KB_readmenator_p5.md)

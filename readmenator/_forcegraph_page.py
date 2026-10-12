@@ -2,7 +2,9 @@
 
 The template is a single self-contained document with placeholders
 (__TITLE__, __HOME__, __VENDOR_SRC__, __CDN_2D__, __CDN_3D__, __DATA__,
-__ANALYTICS__, __SETTINGS__) filled by ForceGraphRenderer.render. All
+__ANALYTICS__, __SETTINGS__, __LOADER__) filled by ForceGraphRenderer.render.
+The graph and analytics payloads are payload script elements (plain JSON,
+or gzip+base64 when large) decoded by the shared loader before boot. All
 pointer interaction (hover, click, drag, context menu) is hit-tested in
 the page against live node positions, so selection never drifts from
 what is drawn. The 3D view keeps the WebGL engine for links and physics
@@ -240,11 +242,14 @@ __HOME__
 <div id="src-scrim"></div>
 <aside id="src-viewer" role="dialog" aria-modal="true" aria-labelledby="src-title" aria-hidden="true"><div class="src-bar"><h2 id="src-title">Source</h2><span id="src-lang" class="badge"></span><button type="button" id="src-close" title="Close source viewer ( Esc )">Close</button></div><div id="src-meta" class="src-meta">Pick View on any file to read it here with syntax colors.</div><div id="src-body" class="src-body" tabindex="0"></div><div class="src-hint">Hover a symbol for docs &middot; Ctrl+Click jumps to its definition &middot; Esc closes</div></aside>
 <div id="src-tip" role="tooltip"></div>
+<script>__LOADER__</script>
+__DATA__
+__ANALYTICS__
 <script>
-(function(){
+readmenatorPayloads([["fg-data",{nodes:[],edges:[]}],["fg-analytics",{}]]).then(function(__rmPayload){
 "use strict";
-const RAW=__DATA__;
-const ANALYTICS=__ANALYTICS__;
+const RAW=__rmPayload[0];
+const ANALYTICS=__rmPayload[1];
 const SETTINGS=__SETTINGS__;
 const CDN_2D="__CDN_2D__";
 const CDN_3D="__CDN_3D__";
@@ -1409,7 +1414,7 @@ if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>resize()).observe(
 window.addEventListener("resize",resize);
 renderEmpty();
 if(applyHashSettings())ensure3D(()=>{is3d=true;mount();},()=>ensure2D(mount));else ensure2D(mount);
-})();
+},readmenatorPayloadError);
 </script>
 </body>
 </html>

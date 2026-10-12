@@ -3,6 +3,17 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `Orchestrator` | class | `readmenator_orchestrator.py:366` | `class Orchestrator` |
+| `RepositoryProcessor` | class | `readmenator_orchestrator.py:197` | `class RepositoryProcessor` |
+| `TestOrchestrator` | class | `readmenator_orchestrator.py:421` | `class TestOrchestrator(TestCase)` |
+| `__init__` | method | `readmenator_orchestrator.py:84` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator_orchestrator.py:198` | `def __init__(self, config, github_client)` |
+| `__init__` | method | `readmenator_orchestrator.py:367` | `def __init__(self, config)` |
+| `_build_readmenator_command` | method | `readmenator_orchestrator.py:283` | `def _build_readmenator_command(self, repo_dir)` |
+| `_cleanup_temp_dir` | method | `readmenator_orchestrator.py:361` | `def _cleanup_temp_dir(temp_dir)` |
+| `_clone_repository` | method | `readmenator_orchestrator.py:247` | `def _clone_repository(self, repo)` |
+| `_commit_and_push` | method | `readmenator_orchestrator.py:313` | `def _commit_and_push(self, repo_dir, repo)` |
+| `_copy_to_docs_dir` | method | `readmenator_orchestrator.py:293` | `def _copy_to_docs_dir(self, repo_dir, generated_file)` |
 | `_get_default_branch` | method | `readmenator_orchestrator.py:231` | `def _get_default_branch(self, repo)` |
 | `_resolve_user` | method | `readmenator_orchestrator.py:89` | `def _resolve_user(self)` |
 | `_run_readmenator` | method | `readmenator_orchestrator.py:263` | `def _run_readmenator(self, repo_dir)` |
@@ -183,77 +194,81 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_community_cohesion_is_between_zero_and_one` | method | `tests/test_analyzer.py:92` | `def test_community_cohesion_is_between_zero_and_one(self)` |
 | `test_dominant_directory_prefers_specific_on_tie` | method | `tests/test_analyzer.py:141` | `def test_dominant_directory_prefers_specific_on_tie(self)` |
 | `test_isolated_nodes_do_not_form_communities` | method | `tests/test_analyzer.py:107` | `def test_isolated_nodes_do_not_form_communities(self)` |
-| `TestApiDocsIntegration` | class | `tests/test_apidocs.py:479` | `class TestApiDocsIntegration(TestCase)` |
-| `TestApiReferenceBuilder` | class | `tests/test_apidocs.py:255` | `class TestApiReferenceBuilder(TestCase)` |
-| `TestApiRendering` | class | `tests/test_apidocs.py:401` | `class TestApiRendering(TestCase)` |
-| `TestDocstringParser` | class | `tests/test_apidocs.py:161` | `class TestDocstringParser(TestCase)` |
-| `TestSignatureParsing` | class | `tests/test_apidocs.py:378` | `class TestSignatureParsing(TestCase)` |
-| `_project` | function | `tests/test_apidocs.py:142` | `def _project()` |
-| `setUpClass` | method | `tests/test_apidocs.py:259` | `def setUpClass(cls)` |
-| `setUpClass` | method | `tests/test_apidocs.py:405` | `def setUpClass(cls)` |
-| `test_apidocs_annotated_receiver_resolves_method` | method | `tests/test_apidocs.py:330` | `def test_apidocs_annotated_receiver_resolves_method(self)` |
-| `test_apidocs_app_export_and_scanner_skip` | method | `tests/test_apidocs.py:482` | `def test_apidocs_app_export_and_scanner_skip(self)` |
-| `test_apidocs_c_prototype_doc_merges_into_definition` | method | `tests/test_apidocs.py:312` | `def test_apidocs_c_prototype_doc_merges_into_definition(self)` |
-| `test_apidocs_call_graph_resolved` | method | `tests/test_apidocs.py:320` | `def test_apidocs_call_graph_resolved(self)` |
-| `test_apidocs_constructor_inherits_class_args` | method | `tests/test_apidocs.py:299` | `def test_apidocs_constructor_inherits_class_args(self)` |
-| `test_apidocs_coverage_counts` | method | `tests/test_apidocs.py:344` | `def test_apidocs_coverage_counts(self)` |
-| `test_apidocs_deterministic` | method | `tests/test_apidocs.py:350` | `def test_apidocs_deterministic(self)` |
-| `test_apidocs_entity_budget_truncates` | method | `tests/test_apidocs.py:366` | `def test_apidocs_entity_budget_truncates(self)` |
-| `test_apidocs_hierarchy_nests_subclasses` | method | `tests/test_apidocs.py:427` | `def test_apidocs_hierarchy_nests_subclasses(self)` |
-| `test_apidocs_html_is_self_contained_and_escaped` | method | `tests/test_apidocs.py:440` | `def test_apidocs_html_is_self_contained_and_escaped(self)` |
-| `test_apidocs_html_placeholder_in_payload_stays_literal` | method | `tests/test_apidocs.py:448` | `def test_apidocs_html_placeholder_in_payload_stays_literal(self)` |
-| `test_apidocs_inheritance_links_and_doc_inheritance` | method | `tests/test_apidocs.py:303` | `def test_apidocs_inheritance_links_and_doc_inheritance(self)` |
-| `test_apidocs_linker_resolves_references` | method | `tests/test_apidocs.py:431` | `def test_apidocs_linker_resolves_references(self)` |
-| `test_apidocs_module_page_sections` | method | `tests/test_apidocs.py:416` | `def test_apidocs_module_page_sections(self)` |
-| `test_apidocs_pages_layout` | method | `tests/test_apidocs.py:411` | `def test_apidocs_pages_layout(self)` |
-| `test_apidocs_privacy_mode_strips_text` | method | `tests/test_apidocs.py:358` | `def test_apidocs_privacy_mode_strips_text(self)` |
-| `test_apidocs_python_all_and_private_filter` | method | `tests/test_apidocs.py:283` | `def test_apidocs_python_all_and_private_filter(self)` |
-| `test_apidocs_python_nesting_and_kinds` | method | `tests/test_apidocs.py:275` | `def test_apidocs_python_nesting_and_kinds(self)` |
-| `test_apidocs_python_signatures_exact` | method | `tests/test_apidocs.py:263` | `def test_apidocs_python_signatures_exact(self)` |
-| `test_apidocs_receiver_filter_drops_unproven_method_calls` | method | `tests/test_apidocs.py:326` | `def test_apidocs_receiver_filter_drops_unproven_method_calls(self)` |
-| `test_apidocs_signature_languages` | method | `tests/test_apidocs.py:381` | `def test_apidocs_signature_languages(self)` |
-| `test_apidocs_tests_excluded_by_default` | method | `tests/test_apidocs.py:292` | `def test_apidocs_tests_excluded_by_default(self)` |
-| `test_apidocs_warnings_cover_every_rule` | method | `tests/test_apidocs.py:334` | `def test_apidocs_warnings_cover_every_rule(self)` |
-| `test_apidocs_without_content_uses_parser_symbols` | method | `tests/test_apidocs.py:372` | `def test_apidocs_without_content_uses_parser_symbols(self)` |
-| `test_apidocs_writer_refuses_symlinked_output` | method | `tests/test_apidocs.py:467` | `def test_apidocs_writer_refuses_symlinked_output(self)` |
-| `test_apidocs_writer_writes_and_prunes` | method | `tests/test_apidocs.py:452` | `def test_apidocs_writer_writes_and_prunes(self)` |
-| `test_docstrings_csharp_xml` | method | `tests/test_apidocs.py:220` | `def test_docstrings_csharp_xml(self)` |
-| `test_docstrings_google_sections` | method | `tests/test_apidocs.py:164` | `def test_docstrings_google_sections(self)` |
-| `test_docstrings_jsdoc_and_doxygen_tags` | method | `tests/test_apidocs.py:201` | `def test_docstrings_jsdoc_and_doxygen_tags(self)` |
-| `test_docstrings_numpy_sections` | method | `tests/test_apidocs.py:179` | `def test_docstrings_numpy_sections(self)` |
-| `test_docstrings_phpdoc_type_before_variable` | method | `tests/test_apidocs.py:216` | `def test_docstrings_phpdoc_type_before_variable(self)` |
-| `test_docstrings_plain_and_empty` | method | `tests/test_apidocs.py:235` | `def test_docstrings_plain_and_empty(self)` |
-| `test_docstrings_recover_block_and_line_comments` | method | `tests/test_apidocs.py:242` | `def test_docstrings_recover_block_and_line_comments(self)` |
-| `test_docstrings_recover_elixir_doc_heredoc` | method | `tests/test_apidocs.py:250` | `def test_docstrings_recover_elixir_doc_heredoc(self)` |
-| `test_docstrings_rest_fields_and_directives` | method | `tests/test_apidocs.py:189` | `def test_docstrings_rest_fields_and_directives(self)` |
-| `test_docstrings_rustdoc_sections` | method | `tests/test_apidocs.py:229` | `def test_docstrings_rustdoc_sections(self)` |
-| `TestBundleGraphAppContract` | class | `tests/test_bundlegraph.py:169` | `class TestBundleGraphAppContract(TestCase)` |
-| `TestBundleGraphPayloadContract` | class | `tests/test_bundlegraph.py:55` | `class TestBundleGraphPayloadContract(TestCase)` |
-| `TestBundleGraphRenderContract` | class | `tests/test_bundlegraph.py:105` | `class TestBundleGraphRenderContract(TestCase)` |
-| `_config` | method | `tests/test_bundlegraph.py:177` | `def _config(self)` |
-| `_fixture` | function | `tests/test_bundlegraph.py:23` | `def _fixture(config)` |
-| `_node` | function | `tests/test_bundlegraph.py:18` | `def _node(nid, doc)` |
-| `_project` | method | `tests/test_bundlegraph.py:172` | `def _project(self, tmp)` |
-| `_script_json` | function | `tests/test_bundlegraph.py:48` | `def _script_json(html, name)` |
-| `setUp` | method | `tests/test_bundlegraph.py:58` | `def setUp(self)` |
-| `setUp` | method | `tests/test_bundlegraph.py:108` | `def setUp(self)` |
-| `test_bundle_page_skipped_when_disabled` | method | `tests/test_bundlegraph.py:198` | `def test_bundle_page_skipped_when_disabled(self)` |
-| `test_bundlegraph_edges_are_distinct_file_pairs` | method | `tests/test_bundlegraph.py:70` | `def test_bundlegraph_edges_are_distinct_file_pairs(self)` |
-| `test_bundlegraph_empty_payload` | method | `tests/test_bundlegraph.py:92` | `def test_bundlegraph_empty_payload(self)` |
-| `test_bundlegraph_groups_follow_community_order_with_unassigned_last` | method | `tests/test_bundlegraph.py:64` | `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)` |
-| `test_bundlegraph_hub_leads_its_arc` | method | `tests/test_bundlegraph.py:84` | `def test_bundlegraph_hub_leads_its_arc(self)` |
-| `test_bundlegraph_nodes_on_circle_and_sphere` | method | `tests/test_bundlegraph.py:78` | `def test_bundlegraph_nodes_on_circle_and_sphere(self)` |
-| `test_bundlegraph_privacy_mode_strips_docs` | method | `tests/test_bundlegraph.py:98` | `def test_bundlegraph_privacy_mode_strips_docs(self)` |
-| `test_bundlegraph_render_escapes_untrusted_text` | method | `tests/test_bundlegraph.py:137` | `def test_bundlegraph_render_escapes_untrusted_text(self)` |
-| `test_bundlegraph_render_fills_placeholders` | method | `tests/test_bundlegraph.py:115` | `def test_bundlegraph_render_fills_placeholders(self)` |
-| `test_bundlegraph_render_has_both_views_and_controls` | method | `tests/test_bundlegraph.py:131` | `def test_bundlegraph_render_has_both_views_and_controls(self)` |
-| `test_bundlegraph_render_has_no_network_requests` | method | `tests/test_bundlegraph.py:124` | `def test_bundlegraph_render_has_no_network_requests(self)` |
-| `test_bundlegraph_render_payload_naming_a_token_stays_literal` | method | `tests/test_bundlegraph.py:148` | `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)` |
-| `test_bundlegraph_thumbnail_is_safe_svg` | method | `tests/test_bundlegraph.py:154` | `def test_bundlegraph_thumbnail_is_safe_svg(self)` |
-| `test_bundlegraph_write_creates_parent` | method | `tests/test_bundlegraph.py:161` | `def test_bundlegraph_write_creates_parent(self)` |
-| `test_export_bundlegraph_cli_entry` | method | `tests/test_bundlegraph.py:209` | `def test_export_bundlegraph_cli_entry(self)` |
-| `test_export_diagrams_writes_bundle_page_and_card` | method | `tests/test_bundlegraph.py:182` | `def test_export_diagrams_writes_bundle_page_and_card(self)` |
-| `test_pages_subdir_card_points_into_maps_dir` | method | `tests/test_bundlegraph.py:219` | `def test_pages_subdir_card_points_into_maps_dir(self)` |
+| `TestApiDocsIntegration` | class | `tests/test_apidocs.py:541` | `class TestApiDocsIntegration(TestCase)` |
+| `TestApiReferenceBuilder` | class | `tests/test_apidocs.py:257` | `class TestApiReferenceBuilder(TestCase)` |
+| `TestApiRendering` | class | `tests/test_apidocs.py:403` | `class TestApiRendering(TestCase)` |
+| `TestDocstringParser` | class | `tests/test_apidocs.py:163` | `class TestDocstringParser(TestCase)` |
+| `TestSignatureParsing` | class | `tests/test_apidocs.py:380` | `class TestSignatureParsing(TestCase)` |
+| `_project` | function | `tests/test_apidocs.py:144` | `def _project()` |
+| `setUpClass` | method | `tests/test_apidocs.py:261` | `def setUpClass(cls)` |
+| `setUpClass` | method | `tests/test_apidocs.py:407` | `def setUpClass(cls)` |
+| `test_apidocs_annotated_receiver_resolves_method` | method | `tests/test_apidocs.py:332` | `def test_apidocs_annotated_receiver_resolves_method(self)` |
+| `test_apidocs_app_export_and_scanner_skip` | method | `tests/test_apidocs.py:544` | `def test_apidocs_app_export_and_scanner_skip(self)` |
+| `test_apidocs_c_prototype_doc_merges_into_definition` | method | `tests/test_apidocs.py:314` | `def test_apidocs_c_prototype_doc_merges_into_definition(self)` |
+| `test_apidocs_call_graph_resolved` | method | `tests/test_apidocs.py:322` | `def test_apidocs_call_graph_resolved(self)` |
+| `test_apidocs_constructor_inherits_class_args` | method | `tests/test_apidocs.py:301` | `def test_apidocs_constructor_inherits_class_args(self)` |
+| `test_apidocs_coverage_counts` | method | `tests/test_apidocs.py:346` | `def test_apidocs_coverage_counts(self)` |
+| `test_apidocs_deterministic` | method | `tests/test_apidocs.py:352` | `def test_apidocs_deterministic(self)` |
+| `test_apidocs_entity_budget_truncates` | method | `tests/test_apidocs.py:368` | `def test_apidocs_entity_budget_truncates(self)` |
+| `test_apidocs_hierarchy_nests_subclasses` | method | `tests/test_apidocs.py:429` | `def test_apidocs_hierarchy_nests_subclasses(self)` |
+| `test_apidocs_html_compression_disabled_keeps_plain_json` | method | `tests/test_apidocs.py:464` | `def test_apidocs_html_compression_disabled_keeps_plain_json(self)` |
+| `test_apidocs_html_is_self_contained_and_escaped` | method | `tests/test_apidocs.py:442` | `def test_apidocs_html_is_self_contained_and_escaped(self)` |
+| `test_apidocs_html_large_payload_is_gzip_base64` | method | `tests/test_apidocs.py:454` | `def test_apidocs_html_large_payload_is_gzip_base64(self)` |
+| `test_apidocs_html_placeholder_in_payload_stays_literal` | method | `tests/test_apidocs.py:450` | `def test_apidocs_html_placeholder_in_payload_stays_literal(self)` |
+| `test_apidocs_inheritance_links_and_doc_inheritance` | method | `tests/test_apidocs.py:305` | `def test_apidocs_inheritance_links_and_doc_inheritance(self)` |
+| `test_apidocs_linker_resolves_references` | method | `tests/test_apidocs.py:433` | `def test_apidocs_linker_resolves_references(self)` |
+| `test_apidocs_module_page_sections` | method | `tests/test_apidocs.py:418` | `def test_apidocs_module_page_sections(self)` |
+| `test_apidocs_pages_layout` | method | `tests/test_apidocs.py:413` | `def test_apidocs_pages_layout(self)` |
+| `test_apidocs_privacy_mode_strips_text` | method | `tests/test_apidocs.py:360` | `def test_apidocs_privacy_mode_strips_text(self)` |
+| `test_apidocs_python_all_and_private_filter` | method | `tests/test_apidocs.py:285` | `def test_apidocs_python_all_and_private_filter(self)` |
+| `test_apidocs_python_nesting_and_kinds` | method | `tests/test_apidocs.py:277` | `def test_apidocs_python_nesting_and_kinds(self)` |
+| `test_apidocs_python_signatures_exact` | method | `tests/test_apidocs.py:265` | `def test_apidocs_python_signatures_exact(self)` |
+| `test_apidocs_receiver_filter_drops_unproven_method_calls` | method | `tests/test_apidocs.py:328` | `def test_apidocs_receiver_filter_drops_unproven_method_calls(self)` |
+| `test_apidocs_signature_languages` | method | `tests/test_apidocs.py:383` | `def test_apidocs_signature_languages(self)` |
+| `test_apidocs_tests_excluded_by_default` | method | `tests/test_apidocs.py:294` | `def test_apidocs_tests_excluded_by_default(self)` |
+| `test_apidocs_warnings_cover_every_rule` | method | `tests/test_apidocs.py:336` | `def test_apidocs_warnings_cover_every_rule(self)` |
+| `test_apidocs_without_content_uses_parser_symbols` | method | `tests/test_apidocs.py:374` | `def test_apidocs_without_content_uses_parser_symbols(self)` |
+| `test_apidocs_writer_jsonl_one_file_per_module_one_line_per_entity` | method | `tests/test_apidocs.py:485` | `def test_apidocs_writer_jsonl_one_file_per_module_one_line_per_entity(self)` |
+| `test_apidocs_writer_prunes_stale_jsonl_and_monolith` | method | `tests/test_apidocs.py:512` | `def test_apidocs_writer_prunes_stale_jsonl_and_monolith(self)` |
+| `test_apidocs_writer_refuses_symlinked_output` | method | `tests/test_apidocs.py:529` | `def test_apidocs_writer_refuses_symlinked_output(self)` |
+| `test_apidocs_writer_writes_and_prunes` | method | `tests/test_apidocs.py:470` | `def test_apidocs_writer_writes_and_prunes(self)` |
+| `test_docstrings_csharp_xml` | method | `tests/test_apidocs.py:222` | `def test_docstrings_csharp_xml(self)` |
+| `test_docstrings_google_sections` | method | `tests/test_apidocs.py:166` | `def test_docstrings_google_sections(self)` |
+| `test_docstrings_jsdoc_and_doxygen_tags` | method | `tests/test_apidocs.py:203` | `def test_docstrings_jsdoc_and_doxygen_tags(self)` |
+| `test_docstrings_numpy_sections` | method | `tests/test_apidocs.py:181` | `def test_docstrings_numpy_sections(self)` |
+| `test_docstrings_phpdoc_type_before_variable` | method | `tests/test_apidocs.py:218` | `def test_docstrings_phpdoc_type_before_variable(self)` |
+| `test_docstrings_plain_and_empty` | method | `tests/test_apidocs.py:237` | `def test_docstrings_plain_and_empty(self)` |
+| `test_docstrings_recover_block_and_line_comments` | method | `tests/test_apidocs.py:244` | `def test_docstrings_recover_block_and_line_comments(self)` |
+| `test_docstrings_recover_elixir_doc_heredoc` | method | `tests/test_apidocs.py:252` | `def test_docstrings_recover_elixir_doc_heredoc(self)` |
+| `test_docstrings_rest_fields_and_directives` | method | `tests/test_apidocs.py:191` | `def test_docstrings_rest_fields_and_directives(self)` |
+| `test_docstrings_rustdoc_sections` | method | `tests/test_apidocs.py:231` | `def test_docstrings_rustdoc_sections(self)` |
+| `TestBundleGraphAppContract` | class | `tests/test_bundlegraph.py:172` | `class TestBundleGraphAppContract(TestCase)` |
+| `TestBundleGraphPayloadContract` | class | `tests/test_bundlegraph.py:58` | `class TestBundleGraphPayloadContract(TestCase)` |
+| `TestBundleGraphRenderContract` | class | `tests/test_bundlegraph.py:108` | `class TestBundleGraphRenderContract(TestCase)` |
+| `_config` | method | `tests/test_bundlegraph.py:180` | `def _config(self)` |
+| `_fixture` | function | `tests/test_bundlegraph.py:24` | `def _fixture(config)` |
+| `_node` | function | `tests/test_bundlegraph.py:19` | `def _node(nid, doc)` |
+| `_project` | method | `tests/test_bundlegraph.py:175` | `def _project(self, tmp)` |
+| `_script_json` | function | `tests/test_bundlegraph.py:49` | `def _script_json(html, name)` |
+| `setUp` | method | `tests/test_bundlegraph.py:61` | `def setUp(self)` |
+| `setUp` | method | `tests/test_bundlegraph.py:111` | `def setUp(self)` |
+| `test_bundle_page_skipped_when_disabled` | method | `tests/test_bundlegraph.py:201` | `def test_bundle_page_skipped_when_disabled(self)` |
+| `test_bundlegraph_edges_are_distinct_file_pairs` | method | `tests/test_bundlegraph.py:73` | `def test_bundlegraph_edges_are_distinct_file_pairs(self)` |
+| `test_bundlegraph_empty_payload` | method | `tests/test_bundlegraph.py:95` | `def test_bundlegraph_empty_payload(self)` |
+| `test_bundlegraph_groups_follow_community_order_with_unassigned_last` | method | `tests/test_bundlegraph.py:67` | `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)` |
+| `test_bundlegraph_hub_leads_its_arc` | method | `tests/test_bundlegraph.py:87` | `def test_bundlegraph_hub_leads_its_arc(self)` |
+| `test_bundlegraph_nodes_on_circle_and_sphere` | method | `tests/test_bundlegraph.py:81` | `def test_bundlegraph_nodes_on_circle_and_sphere(self)` |
+| `test_bundlegraph_privacy_mode_strips_docs` | method | `tests/test_bundlegraph.py:101` | `def test_bundlegraph_privacy_mode_strips_docs(self)` |
+| `test_bundlegraph_render_escapes_untrusted_text` | method | `tests/test_bundlegraph.py:140` | `def test_bundlegraph_render_escapes_untrusted_text(self)` |
+| `test_bundlegraph_render_fills_placeholders` | method | `tests/test_bundlegraph.py:118` | `def test_bundlegraph_render_fills_placeholders(self)` |
+| `test_bundlegraph_render_has_both_views_and_controls` | method | `tests/test_bundlegraph.py:134` | `def test_bundlegraph_render_has_both_views_and_controls(self)` |
+| `test_bundlegraph_render_has_no_network_requests` | method | `tests/test_bundlegraph.py:127` | `def test_bundlegraph_render_has_no_network_requests(self)` |
+| `test_bundlegraph_render_payload_naming_a_token_stays_literal` | method | `tests/test_bundlegraph.py:151` | `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)` |
+| `test_bundlegraph_thumbnail_is_safe_svg` | method | `tests/test_bundlegraph.py:157` | `def test_bundlegraph_thumbnail_is_safe_svg(self)` |
+| `test_bundlegraph_write_creates_parent` | method | `tests/test_bundlegraph.py:164` | `def test_bundlegraph_write_creates_parent(self)` |
+| `test_export_bundlegraph_cli_entry` | method | `tests/test_bundlegraph.py:212` | `def test_export_bundlegraph_cli_entry(self)` |
+| `test_export_diagrams_writes_bundle_page_and_card` | method | `tests/test_bundlegraph.py:185` | `def test_export_diagrams_writes_bundle_page_and_card(self)` |
+| `test_pages_subdir_card_points_into_maps_dir` | method | `tests/test_bundlegraph.py:222` | `def test_pages_subdir_card_points_into_maps_dir(self)` |
 | `TestFileCacheContract` | class | `tests/test_cache.py:18` | `class TestFileCacheContract(TestCase)` |
 | `_write` | method | `tests/test_cache.py:30` | `def _write(self, rel_path, content)` |
 | `setUp` | method | `tests/test_cache.py:21` | `def setUp(self)` |
@@ -481,20 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_renderers_ignore_placeholders_inside_payload_text` | method | `tests/test_diagrams.py:545` | `def test_renderers_ignore_placeholders_inside_payload_text(self)` |
 | `test_validator_passes_valid_map` | method | `tests/test_diagrams.py:197` | `def test_validator_passes_valid_map(self)` |
 | `test_validator_rejects_dangling_edge` | method | `tests/test_diagrams.py:214` | `def test_validator_rejects_dangling_edge(self)` |
-| `test_validator_rejects_duplicate_node_ids` | method | `tests/test_diagrams.py:204` | `def test_validator_rejects_duplicate_node_ids(self)` |
-| `test_validator_rejects_empty_map` | method | `tests/test_diagrams.py:222` | `def test_validator_rejects_empty_map(self)` |
-| `test_validator_rejects_unknown_kind` | method | `tests/test_diagrams.py:228` | `def test_validator_rejects_unknown_kind(self)` |
-| `TestDocumentationGeneratorContract` | class | `tests/test_documentation.py:17` | `class TestDocumentationGeneratorContract(TestCase)` |
-| `setUp` | method | `tests/test_documentation.py:18` | `def setUp(self)` |
-| `test_architectural_layers_section` | method | `tests/test_documentation.py:217` | `def test_architectural_layers_section(self)` |
-| `test_class_symbol_is_pluralized_correctly` | method | `tests/test_documentation.py:83` | `def test_class_symbol_is_pluralized_correctly(self)` |
-| `test_contains_architecture_reference` | method | `tests/test_documentation.py:37` | `def test_contains_architecture_reference(self)` |
-| `test_contains_cpg_block` | method | `tests/test_documentation.py:41` | `def test_contains_cpg_block(self)` |
-| `test_contains_header` | method | `tests/test_documentation.py:22` | `def test_contains_header(self)` |
-| `test_contains_mermaid_block` | method | `tests/test_documentation.py:32` | `def test_contains_mermaid_block(self)` |
-| `test_contains_metadata_line` | method | `tests/test_documentation.py:26` | `def test_contains_metadata_line(self)` |
-| `test_contains_statistics_dashboard` | method | `tests/test_documentation.py:46` | `def test_contains_statistics_dashboard(self)` |
-| `test_context_budget_includes_security_findings` | method | `tests/test_documentation.py:293` | `def test_context_budget_includes_security_findings(self)` |
-| `test_context_budget_prioritizes_god_nodes` | method | `tests/test_documentation.py:268` | `def test_context_budget_prioritizes_god_nodes(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

@@ -3,6 +3,17 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `sarif` | method | `readmenator/_pipeline.py:184` | `def sarif(self)` |
+| `scanner` | method | `readmenator/_pipeline.py:123` | `def scanner(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:335` | `def scantext(self)` |
+| `security` | method | `readmenator/_pipeline.py:141` | `def security(self)` |
+| `skills` | method | `readmenator/_pipeline.py:384` | `def skills(self)` |
+| `sourceview` | method | `readmenator/_pipeline.py:391` | `def sourceview(self)` |
+| `symindex` | method | `readmenator/_pipeline.py:398` | `def symindex(self)` |
+| `taint` | method | `readmenator/_pipeline.py:153` | `def taint(self)` |
+| `uml` | method | `readmenator/_pipeline.py:205` | `def uml(self)` |
+| `video` | method | `readmenator/_pipeline.py:300` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:293` | `def vis_renderer(self)` |
 | `wiki` | method | `readmenator/_pipeline.py:211` | `def wiki(self)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
@@ -485,16 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_extract_specifics` | method | `readmenator/parsers/_swift.py:18` | `def _extract_specifics(self, content)` |
 | `Config` | class | `readmenator_orchestrator.py:21` | `class Config` |
 | `GitHubClient` | class | `readmenator_orchestrator.py:83` | `class GitHubClient` |
-| `Orchestrator` | class | `readmenator_orchestrator.py:366` | `class Orchestrator` |
-| `RepositoryProcessor` | class | `readmenator_orchestrator.py:197` | `class RepositoryProcessor` |
-| `TestOrchestrator` | class | `readmenator_orchestrator.py:421` | `class TestOrchestrator(TestCase)` |
-| `__init__` | method | `readmenator_orchestrator.py:84` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator_orchestrator.py:198` | `def __init__(self, config, github_client)` |
-| `__init__` | method | `readmenator_orchestrator.py:367` | `def __init__(self, config)` |
-| `_build_readmenator_command` | method | `readmenator_orchestrator.py:283` | `def _build_readmenator_command(self, repo_dir)` |
-| `_cleanup_temp_dir` | method | `readmenator_orchestrator.py:361` | `def _cleanup_temp_dir(temp_dir)` |
-| `_clone_repository` | method | `readmenator_orchestrator.py:247` | `def _clone_repository(self, repo)` |
-| `_commit_and_push` | method | `readmenator_orchestrator.py:313` | `def _commit_and_push(self, repo_dir, repo)` |
-| `_copy_to_docs_dir` | method | `readmenator_orchestrator.py:293` | `def _copy_to_docs_dir(self, repo_dir, generated_file)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

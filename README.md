@@ -233,8 +233,11 @@ from source, not from an LLM:
   Backticks, Sphinx roles and `{@link}` in prose become links.
 - **Pages.** `index.md` (modules by package with coverage), one page per module
   with a Mermaid class diagram and call graph, `classes.md` (hierarchy),
-  `genindex.md` (A-Z), `COVERAGE.md`, `architecture.md`, `api.json`, and an
-  offline searchable `index.html` browser.
+  `genindex.md` (A-Z), `COVERAGE.md`, `architecture.md`, a split machine-readable
+  model (`api/index.json` plus one JSON Lines file per module in `api/modules/`, one
+  entity per line, so `grep '"name":"Foo"'` returns exactly that entity), and an
+  offline searchable `index.html` browser. Large page payloads are embedded
+  gzip+base64 and decoded natively in the browser (`PAYLOAD_COMPRESSION_*`).
 - **Doc linting like Doxygen.** DOC001 undocumented, DOC002 parameter not
   documented, DOC003 documented parameter not in the signature (stale docs),
   DOC004 return not documented, DOC005 raised exception not documented.
@@ -506,7 +509,7 @@ a zero-token polyglot static analysis tool. Regenerate with
   - `index.md` + `modules/*.md` -- Signatures, parameters, returns, raises, examples, call graphs
   - `architecture.md` -- Tiered architecture + execution flows (control flow, call tree, sequence)
   - `classes.md`, `genindex.md`, `COVERAGE.md` -- Hierarchy, A-Z index, doc coverage + warnings
-  - `index.html` + `api.json` -- Offline searchable browser and machine-readable model
+  - `index.html` + `api/` -- Offline searchable browser and machine-readable model (`api/index.json`, `api/modules/*.jsonl` one entity per line)
 - **[readmenator-maps/](./readmenator-maps/)** -- Interactive gallery (`index.html`).
   - 5 system maps: architecture, workflow, sequence, dataflow, lifecycle
   - `graph-force.html` -- Force-graph explorer (2D/3D, reach, paths, lenses)

@@ -11,6 +11,7 @@ from pathlib import Path
 
 from readmenator._bundlegraph import UNASSIGNED_KEY, BundleGraphRenderer
 from readmenator._config import Config
+from readmenator._htmlpack import read_payload_script
 from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._models import AnalysisResult, CommunityResult, Edge, Node, Symbol
 
@@ -46,7 +47,9 @@ def _fixture(config: Config) -> dict:
 
 
 def _script_json(html: str, name: str) -> dict:
-    """Extract one inline JSON constant from the rendered page."""
+    """Extract the bundle payload element (DATA) or one inline JSON constant from the rendered page."""
+    if name == "DATA":
+        return read_payload_script(html, "bundle-data")
     match = re.search(r"const " + name + r"=(.*?);\n", html, re.S)
     assert match is not None
     return json.loads(match.group(1))

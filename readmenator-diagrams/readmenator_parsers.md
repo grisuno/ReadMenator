@@ -1,6 +1,6 @@
 # readmenator/parsers
 
-readmenator/parsers groups 32 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
+readmenator/parsers groups 34 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Procedural intra-function dataflow analysis for readmenator.
 
 ```mermaid
 graph LR
@@ -11,14 +11,15 @@ graph LR
 
 ## readmenator (2.1)
 
-readmenator groups 26 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
+readmenator groups 27 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Procedural intra-function dataflow analysis for readmenator.
 
 ## tests (2.2)
 
-tests groups 6 files (py) around TestHotspotAnalyzerContract, setUp, _make_node, test_empty_graph_returns_empty_hotspots, test_hotspots_rank_by_combined_score. TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and...
+tests groups 7 files (py) around _node, _analyze, TestDataflowContract, test_config_defaults, test_config_immutable. TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and...
 
 **Files**:
 
+- readmenator/_dataflow.py
 - readmenator/_hotspots.py
 - readmenator/_mermaid.py
 - readmenator/_models.py
@@ -45,6 +46,7 @@ tests groups 6 files (py) around TestHotspotAnalyzerContract, setUp, _make_node,
 - readmenator/parsers/_scala.py
 - readmenator/parsers/_shell.py
 - readmenator/parsers/_swift.py
+- tests/test_dataflow.py
 - tests/test_hotspots.py
 - tests/test_mermaid.py
 - tests/test_models.py

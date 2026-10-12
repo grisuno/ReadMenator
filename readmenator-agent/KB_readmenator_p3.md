@@ -1,4 +1,4 @@
-# Subsystem: readmenator (page 3 of 4)
+# Subsystem: readmenator (page 3 of 5)
 Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 
 ## readmenator/_graphlayout.py
@@ -109,6 +109,19 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `_record_cycle` (function, line 125) `def _record_cycle(start, end)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_hotspots.py`
+
+## readmenator/_htmlpack.py
+- Doc: Compact JSON payload embedding for self-contained HTML pages.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `escape_json_for_script` (function, line 49) `def escape_json_for_script(text, chars)`
+  - `should_compress` (function, line 64) `def should_compress(raw_size, config)`
+  - `compress_text` (function, line 77) `def compress_text(text, config)`
+  - `payload_script` (function, line 92) `def payload_script(element_id, payload, config, compact, escape)`
+  - `read_payload_script` (function, line 119) `def read_payload_script(document, element_id)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_apidocs_page.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `tests/test_bundlegraph.py`, `tests/test_htmlpack.py`, `tests/test_interactive_graph.py`
 
 ## readmenator/_layer_rules.py
 - Doc: Architecture layer rule engine: forbidden and warning edges between layers.
@@ -459,31 +472,6 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `is_self_receiver` (method, line 304) `def is_self_receiver(self, receiver)`
   - `visit` (function, line 126) `def visit(body, owner)`
 - Imported by: `readmenator/_apidocs.py`, `readmenator/_flowcharts.py`, `tests/test_flowcharts.py`
-
-## readmenator/_query.py
-- Doc: Query engine for the readmenator knowledge base.
-- Layer: data_access
-- Language: py
-- Symbols:
-  - `QueryEngine` (class, line 25) `class QueryEngine`
-  - `__init__` (method, line 34) `def __init__(self, nodes, edges, resolved_edges, ranker, config)`
-  - `_init_default_ranker` (method, line 64) `def _init_default_ranker(self)`
-  - `ranked_query` (method, line 73) `def ranked_query(self, query, top_n)`
-  - `_estimate_test_coverage` (method, line 124) `def _estimate_test_coverage(self)`
-  - `_estimate_doc_coverage` (method, line 150) `def _estimate_doc_coverage(self)`
-  - `_build_symbol_index` (method, line 170) `def _build_symbol_index(self)`
-  - `_build_import_graph` (method, line 184) `def _build_import_graph(self)`
-  - `_build_resolved_graph` (method, line 200) `def _build_resolved_graph(self)`
-  - `find_symbol` (method, line 220) `def find_symbol(self, name)`
-  - `explain` (method, line 238) `def explain(self, name)`
-  - `_find_incoming_imports` (method, line 277) `def _find_incoming_imports(self, target)`
-  - `find_path` (method, line 285) `def find_path(self, symbol_a, symbol_b)`
-  - `_make_bidirectional` (method, line 315) `def _make_bidirectional(graph)`
-  - `_bfs_shortest_path` (method, line 331) `def _bfs_shortest_path(self, graph, start, goal)`
-  - `query` (method, line 355) `def query(self, question)`
-  - `summary` (method, line 411) `def summary(self)`
-- Depends on: `readmenator/_category.py`, `readmenator/_models.py`, `readmenator/_rank.py`
-- Imported by: `readmenator/_app.py`, `readmenator/_mcp_server.py`, `tests/test_query.py`
 
 
 Next: [KB_readmenator_p4.md](KB_readmenator_p4.md)

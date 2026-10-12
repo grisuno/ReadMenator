@@ -12,7 +12,6 @@ the readmenator theme key.
 from __future__ import annotations
 
 import html
-import json
 import re
 from pathlib import PurePosixPath
 from typing import Dict, List, Optional
@@ -21,9 +20,10 @@ from readmenator._apidocs import ApiReference
 from readmenator._config import Config
 from readmenator._flowlayout import FlowGraph
 from readmenator._flowpage import FLOW_VIEWER_CSS, FLOW_VIEWER_JS
+from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
 
-_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|FVCSS|FVJS)@@")
+_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|FVCSS|FVJS|LOADER)@@")
 
 
 def _payload(reference: ApiReference, project_name: str, config: Config) -> Dict[str, object]:
@@ -71,10 +71,9 @@ def render_api_site(
     """
     payload = _payload(reference, project_name, config)
     payload["flows"] = [g.to_dict() for g in (flow_graphs or [])]
-    data = json.dumps(payload, separators=(",", ":"))
-    data = data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
-    values = {"TITLE": html.escape(f"{project_name} API Reference"), "DATA": data,
-              "FVCSS": FLOW_VIEWER_CSS, "FVJS": FLOW_VIEWER_JS}
+    values = {"TITLE": html.escape(f"{project_name} API Reference"),
+              "DATA": payload_script("api-data", payload, config),
+              "FVCSS": FLOW_VIEWER_CSS, "FVJS": FLOW_VIEWER_JS, "LOADER": PAYLOAD_LOADER_JS}
     return _PLACEHOLDER_RE.sub(lambda m: values[m.group(1)], _TEMPLATE)
 
 
@@ -151,12 +150,12 @@ ul.tree{list-style:none;padding-left:18px}ul.tree>li{margin:2px 0}
   <aside class="side"><input id="filter" type="search" placeholder="Filter modules" aria-label="Filter modules"><div id="tree"></div></aside>
   <main id="main"></main>
 </div>
-<script type="application/json" id="api-data">@@DATA@@</script>
+@@DATA@@
 <script>@@FVJS@@</script>
+<script>@@LOADER@@</script>
 <script>
-(function(){
+readmenatorPayload("api-data",{}).then(function(D){
 "use strict";
-var D=JSON.parse(document.getElementById("api-data").textContent);
 var E={},byName={},byQual={};
 D.entities.forEach(function(e){E[e.uid]=e;if(e.kind!=="module"){(byName[e.name]=byName[e.name]||[]).push(e);(byQual[e.qualname]=byQual[e.qualname]||[]).push(e);}});
 var CLASS=["class","struct","interface","trait","enum","record","protocol","union","exception","extension","object","impl","type_alias"];
@@ -313,7 +312,7 @@ try{var saved=localStorage.getItem("readmenator-theme");if(saved)root.setAttribu
 document.getElementById("theme").addEventListener("click",function(){var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");var nxt=cur==="light"?"dark":"light";root.setAttribute("data-theme",nxt);try{localStorage.setItem("readmenator-theme",nxt);}catch(err){}route();});
 document.getElementById("title").textContent=D.project+" API";
 route();
-})();
+},readmenatorPayloadError);
 </script>
 </body>
 </html>

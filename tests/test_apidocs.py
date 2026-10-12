@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import base64
+import gzip
 import json
 import re
 import shutil
@@ -20,7 +22,7 @@ from readmenator._apidocs import (
     parse_signature_params,
 )
 from readmenator._apidocs_page import render_api_site
-from readmenator._apidocs_render import ApiDocsWriter, ApiLinker, ApiMarkdownRenderer, page_slug
+from readmenator._apidocs_render import ApiDocsWriter, ApiLinker, ApiMarkdownRenderer, page_slug, read_api_jsonl
 from readmenator._app import readmenatorApplication
 from readmenator._config import Config
 from readmenator._docstrings import (
@@ -449,6 +451,22 @@ class TestApiRendering(unittest.TestCase):
         site = render_api_site(self.ref, "@@DATA@@", self.config)
         self.assertEqual(site.count('id="api-data"'), 1)
 
+    def test_apidocs_html_large_payload_is_gzip_base64(self) -> None:
+        config = replace(self.config, PAYLOAD_COMPRESSION_MIN_BYTES=0)
+        site = render_api_site(self.ref, "Demo", config)
+        match = re.search(r'<script type="application/octet-stream" id="api-data" data-encoding="gzip\+base64">([A-Za-z0-9+/=]+)</script>', site)
+        self.assertIsNotNone(match)
+        data = json.loads(gzip.decompress(base64.b64decode(match.group(1))).decode("utf-8"))
+        self.assertEqual(data["project"], "Demo")
+        self.assertIn("readmenatorPayload(\"api-data\"", site)
+        self.assertEqual(site, render_api_site(self.ref, "Demo", config))
+
+    def test_apidocs_html_compression_disabled_keeps_plain_json(self) -> None:
+        config = replace(self.config, PAYLOAD_COMPRESSION_MIN_BYTES=0, PAYLOAD_COMPRESSION_ENABLED=False)
+        site = render_api_site(self.ref, "Demo", config)
+        self.assertIn('<script type="application/json" id="api-data">', site)
+        self.assertNotIn('data-encoding="gzip+base64"', site)
+
     def test_apidocs_writer_writes_and_prunes(self) -> None:
         tmp = Path(tempfile.mkdtemp())
         try:
@@ -457,10 +475,54 @@ class TestApiRendering(unittest.TestCase):
             stale.write_text("x", encoding="utf-8")
             written = ApiDocsWriter(self.config).write(self.ref, str(tmp), "Demo")
             self.assertFalse(stale.exists())
-            self.assertIn("api.json", written)
+            self.assertNotIn("api.json", written)
+            index = json.loads(Path(written["api/index.json"]).read_text(encoding="utf-8"))
+            self.assertEqual(index["schema_version"], self.config.APIDOCS_SCHEMA_VERSION)
+            self.assertTrue(Path(written["index.html"]).is_file())
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_apidocs_writer_jsonl_one_file_per_module_one_line_per_entity(self) -> None:
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            written = ApiDocsWriter(self.config).write(self.ref, str(tmp), "Demo")
+            api_dir = tmp / self.config.APIDOCS_OUTPUT_DIR / self.config.APIDOCS_JSONL_DIR
+            index = json.loads((api_dir / self.config.APIDOCS_JSONL_INDEX).read_text(encoding="utf-8"))
+            self.assertEqual(sorted(m["uid"] for m in index["modules"]), sorted(self.ref.modules))
+            total = 0
+            for module in index["modules"]:
+                lines = (api_dir / module["path"]).read_text(encoding="utf-8").splitlines()
+                self.assertEqual(len(lines), module["entities"])
+                for line in lines:
+                    record = json.loads(line)
+                    self.assertEqual(record["file"], module["uid"])
+                total += len(lines)
+            self.assertEqual(total, len(self.ref.entities))
+            self.assertTrue(any(k.startswith("api/modules/") for k in written))
+            rebuilt = read_api_jsonl(str(api_dir), self.config)
+            full = self.ref.to_dict(self.config.APIDOCS_SCHEMA_VERSION)
+            key = lambda e: e["uid"]
+            self.assertEqual(sorted(rebuilt["entities"], key=key), sorted(full["entities"], key=key))
+            self.assertEqual(rebuilt["warnings"], full["warnings"])
+            self.assertEqual(rebuilt["modules"], full["modules"])
+            self.assertEqual(rebuilt["coverage"], full["coverage"])
+        finally:
+            shutil.rmtree(tmp)
+
+    def test_apidocs_writer_prunes_stale_jsonl_and_monolith(self) -> None:
+        tmp = Path(tempfile.mkdtemp())
+        try:
+            out = tmp / self.config.APIDOCS_OUTPUT_DIR
+            stale = out / self.config.APIDOCS_JSONL_DIR / self.config.APIDOCS_JSONL_MODULES_SUBDIR / "gone.py.jsonl"
+            stale.parent.mkdir(parents=True)
+            stale.write_text("{}\n", encoding="utf-8")
+            (out / self.config.APIDOCS_JSON_FILENAME).write_text("{}", encoding="utf-8")
+            ApiDocsWriter(self.config).write(self.ref, str(tmp), "Demo")
+            self.assertFalse(stale.exists())
+            self.assertFalse((out / self.config.APIDOCS_JSON_FILENAME).exists())
+            written = ApiDocsWriter(replace(self.config, APIDOCS_JSON_MONOLITH=True)).write(self.ref, str(tmp), "Demo")
             data = json.loads(Path(written["api.json"]).read_text(encoding="utf-8"))
             self.assertEqual(data["schema_version"], self.config.APIDOCS_SCHEMA_VERSION)
-            self.assertTrue(Path(written["index.html"]).is_file())
         finally:
             shutil.rmtree(tmp)
 

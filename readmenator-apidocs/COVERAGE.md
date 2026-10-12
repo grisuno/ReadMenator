@@ -1,6 +1,6 @@
 # Documentation Coverage
 
-Overall: **82.0%** (671 of 818 public modules, types, and callables). Data members are excluded from the ratio.
+Overall: **82.2%** (681 of 828 public modules, types, and callables). Data members are excluded from the ratio.
 
 [Back to index](index.md)
 
@@ -13,9 +13,9 @@ Overall: **82.0%** (671 of 818 public modules, types, and callables). Data membe
 | constructor | 45 | 76 | 59.2% |
 | enum | 1 | 1 | 100.0% |
 | exception | 0 | 1 | 0.0% |
-| function | 97 | 101 | 96.0% |
+| function | 106 | 110 | 96.4% |
 | method | 235 | 310 | 75.8% |
-| module | 93 | 94 | 98.9% |
+| module | 94 | 95 | 98.9% |
 | property | 36 | 60 | 60.0% |
 | protocol | 1 | 1 | 100.0% |
 | staticmethod | 4 | 4 | 100.0% |
@@ -54,7 +54,7 @@ Overall: **82.0%** (671 of 818 public modules, types, and callables). Data membe
 | [`readmenator._analyzer`](modules/readmenator._analyzer.py.md) | 6 | 6 | 100.0% |
 | [`readmenator._apidocs`](modules/readmenator._apidocs.py.md) | 16 | 16 | 100.0% |
 | [`readmenator._apidocs_page`](modules/readmenator._apidocs_page.py.md) | 2 | 2 | 100.0% |
-| [`readmenator._apidocs_render`](modules/readmenator._apidocs_render.py.md) | 18 | 18 | 100.0% |
+| [`readmenator._apidocs_render`](modules/readmenator._apidocs_render.py.md) | 22 | 22 | 100.0% |
 | [`readmenator._bundlegraph`](modules/readmenator._bundlegraph.py.md) | 8 | 8 | 100.0% |
 | [`readmenator._bundlegraph_page`](modules/readmenator._bundlegraph_page.py.md) | 1 | 1 | 100.0% |
 | [`readmenator._components`](modules/readmenator._components.py.md) | 11 | 11 | 100.0% |
@@ -77,6 +77,7 @@ Overall: **82.0%** (671 of 818 public modules, types, and callables). Data membe
 | [`readmenator._gitmeta`](modules/readmenator._gitmeta.py.md) | 2 | 2 | 100.0% |
 | [`readmenator._graphlayout`](modules/readmenator._graphlayout.py.md) | 14 | 14 | 100.0% |
 | [`readmenator._graphrag`](modules/readmenator._graphrag.py.md) | 28 | 28 | 100.0% |
+| [`readmenator._htmlpack`](modules/readmenator._htmlpack.py.md) | 6 | 6 | 100.0% |
 | [`readmenator._layers`](modules/readmenator._layers.py.md) | 4 | 4 | 100.0% |
 | [`readmenator._memory`](modules/readmenator._memory.py.md) | 14 | 14 | 100.0% |
 | [`readmenator._mermaid`](modules/readmenator._mermaid.py.md) | 4 | 4 | 100.0% |
@@ -128,7 +129,7 @@ DOC001: 126, DOC002: 3, DOC004: 1, DOC005: 1
 - DOC001 `readmenator/__main__.py:18` function build_parser is not documented
 - DOC001 `readmenator/__main__.py:151` function main is not documented
 - DOC004 `readmenator/_apidocs.py:759` return value of is_vendored_path is not documented
-- DOC005 `readmenator/_apidocs_render.py:745` ApiDocsWriter.write raises OSError but does not document it
+- DOC005 `readmenator/_apidocs_render.py:835` ApiDocsWriter.write raises OSError but does not document it
 - DOC001 `readmenator/_app.py:54` class readmenatorApplication is not documented
 - DOC001 `readmenator/_app.py:55` constructor readmenatorApplication.__init__ is not documented
 - DOC001 `readmenator/_app.py:101` method readmenatorApplication.run is not documented

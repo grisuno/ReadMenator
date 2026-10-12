@@ -5,8 +5,9 @@
 HTML page template for the edge bundle explorer.
 
 The template is one self-contained document with placeholders
-(__TITLE__, __HOME__, __EXPLORER__, __DATA__, __SETTINGS__) filled by
-BundleGraphRenderer.render in a single regex pass. Everything is drawn
+(__TITLE__, __HOME__, __EXPLORER__, __DATA__, __SETTINGS__, __LOADER__) filled
+by BundleGraphRenderer.render in a single regex pass; the bundle payload is a
+payload script element (plain JSON, or gzip+base64 when large). Everything is drawn
 on one canvas with no external requests: the 2D view lays files on a
 circle grouped by community, the 3D view lays them on a sphere of
 community caps projected through a small perspective camera, and in
@@ -23,7 +24,7 @@ B-spline whose bundling strength (beta) is recomputed live in the page.
 
 ### `BUNDLEGRAPH_PAGE_TEMPLATE`
 
-`constant` | [readmenator/_bundlegraph_page.py:15](../../readmenator/_bundlegraph_page.py#L15)
+`constant` | [readmenator/_bundlegraph_page.py:16](../../readmenator/_bundlegraph_page.py#L16)
 
 ```python
 BUNDLEGRAPH_PAGE_TEMPLATE

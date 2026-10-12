@@ -17,7 +17,7 @@ resolved to anchors. Everything is deterministic and offline.
 ## Contents
 
 - **Classes:** [`ApiLinker`](#apilinker), [`ApiMarkdownRenderer`](#apimarkdownrenderer), [`ApiDocsWriter`](#apidocswriter)
-- **Functions:** [`module_display_name`](#module_display_name), [`page_slug`](#page_slug), [`anchor_slug`](#anchor_slug)
+- **Functions:** [`module_display_name`](#module_display_name), [`page_slug`](#page_slug), [`jsonl_index_path`](#jsonl_index_path), [`jsonl_warnings_path`](#jsonl_warnings_path), [`jsonl_pages`](#jsonl_pages), [`read_api_jsonl`](#read_api_jsonl), [`anchor_slug`](#anchor_slug)
 - **Constants:** [`FENCE_LANGUAGES`](#fence_languages), [`KIND_TITLES`](#kind_titles)
 
 ## Type Diagram
@@ -47,12 +47,13 @@ Solid arrows stay in this module, dashed arrows leave it.
 
 ```mermaid
 flowchart LR
+    n_readmenator__apidocs_render_py__jsonl_pages(["jsonl_pages"])
+    n_readmenator__apidocs_render_py__page_slug(["page_slug"])
     n_readmenator__apidocs_render_py__ApiLinker___init__(["ApiLinker.__init__"])
     n_readmenator__apidocs_render_py__module_display_name(["module_display_name"])
     n_readmenator__apidocs_render_py__ApiLinker_href(["ApiLinker.href"])
     n_readmenator__apidocs_render_py__ApiLinker_module_of(["ApiLinker.module_of"])
     n_readmenator__apidocs_render_py__anchor_slug(["anchor_slug"])
-    n_readmenator__apidocs_render_py__page_slug(["page_slug"])
     n_readmenator__apidocs_render_py__ApiLinker_link(["ApiLinker.link"])
     n_readmenator__apidocs_render_py__ApiLinker_link_uid(["ApiLinker.link_uid"])
     n_readmenator__apidocs_render_py__ApiMarkdownRenderer_render(["ApiMarkdownRenderer.render"])
@@ -62,6 +63,7 @@ flowchart LR
     n_readmenator__apidocs_py__ApiReference_to_dict["_apidocs.ApiReference.to_dict"]
     n_readmenator__apidocs_page_py__render_api_site["_apidocs_page.render_api_site"]
     n_readmenator__flowpage_py__render_flows_page["_flowpage.render_flows_page"]
+    n_readmenator__apidocs_render_py__jsonl_pages --> n_readmenator__apidocs_render_py__page_slug
     n_readmenator__apidocs_render_py__ApiLinker___init__ --> n_readmenator__apidocs_render_py__module_display_name
     n_readmenator__apidocs_render_py__ApiLinker_href --> n_readmenator__apidocs_render_py__ApiLinker_module_of
     n_readmenator__apidocs_render_py__ApiLinker_href --> n_readmenator__apidocs_render_py__anchor_slug
@@ -73,6 +75,7 @@ flowchart LR
     n_readmenator__apidocs_render_py__ApiMarkdownRenderer_render --> n_readmenator__apidocs_render_py__page_slug
     n_readmenator__apidocs_render_py__ApiDocsWriter___init__ --> n_readmenator__apidocs_render_py__ApiMarkdownRenderer___init__
     n_readmenator__apidocs_render_py__ApiDocsWriter_write --> n_readmenator__apidocs_render_py__ApiMarkdownRenderer_render
+    n_readmenator__apidocs_render_py__ApiDocsWriter_write --> n_readmenator__apidocs_render_py__jsonl_pages
     n_readmenator__apidocs_render_py__ApiDocsWriter_write -.-> n_readmenator__apidocs_py__ApiReference_to_dict
     n_readmenator__apidocs_render_py__ApiDocsWriter_write -.-> n_readmenator__apidocs_page_py__render_api_site
     n_readmenator__apidocs_render_py__ApiDocsWriter_write -.-> n_readmenator__flowpage_py__render_flows_page
@@ -84,7 +87,7 @@ flowchart LR
 
 ### `ApiLinker`
 
-`class` | [readmenator/_apidocs_render.py:100](../../readmenator/_apidocs_render.py#L100)
+`class` | [readmenator/_apidocs_render.py:190](../../readmenator/_apidocs_render.py#L190)
 
 ```python
 class ApiLinker
@@ -108,7 +111,7 @@ Resolves names and entity uids to relative Markdown links.
 
 #### `ApiLinker.__init__`
 
-`constructor` | [readmenator/_apidocs_render.py:103](../../readmenator/_apidocs_render.py#L103)
+`constructor` | [readmenator/_apidocs_render.py:193](../../readmenator/_apidocs_render.py#L193)
 
 ```python
 def __init__(self, reference: ApiReference) -> None
@@ -130,7 +133,7 @@ Index every entity by uid, qualname, and simple name.
 
 #### `ApiLinker.module_of`
 
-`method` | [readmenator/_apidocs_render.py:120](../../readmenator/_apidocs_render.py#L120)
+`method` | [readmenator/_apidocs_render.py:210](../../readmenator/_apidocs_render.py#L210)
 
 ```python
 def module_of(self, entity: ApiEntity) -> ApiEntity
@@ -152,7 +155,7 @@ Return the module entity that contains *entity*.
 
 #### `ApiLinker.resolve`
 
-`method` | [readmenator/_apidocs_render.py:124](../../readmenator/_apidocs_render.py#L124)
+`method` | [readmenator/_apidocs_render.py:214](../../readmenator/_apidocs_render.py#L214)
 
 ```python
 def resolve(self, name: str, context_file: str = '') -> Optional[ApiEntity]
@@ -176,7 +179,7 @@ Accepts dotted Python paths (``pkg.mod.Class.method``), qualnames,
 
 #### `ApiLinker.href`
 
-`method` | [readmenator/_apidocs_render.py:161](../../readmenator/_apidocs_render.py#L161)
+`method` | [readmenator/_apidocs_render.py:251](../../readmenator/_apidocs_render.py#L251)
 
 ```python
 def href(self, entity: ApiEntity, from_module: str) -> str
@@ -201,7 +204,7 @@ Return the relative link to *entity* from a module page (or index when "").
 
 #### `ApiLinker.link`
 
-`method` | [readmenator/_apidocs_render.py:170](../../readmenator/_apidocs_render.py#L170)
+`method` | [readmenator/_apidocs_render.py:260](../../readmenator/_apidocs_render.py#L260)
 
 ```python
 def link(self, entity: ApiEntity, from_module: str, label: str = '') -> str
@@ -227,7 +230,7 @@ Return a Markdown link to *entity*.
 
 #### `ApiLinker.link_uid`
 
-`method` | [readmenator/_apidocs_render.py:175](../../readmenator/_apidocs_render.py#L175)
+`method` | [readmenator/_apidocs_render.py:265](../../readmenator/_apidocs_render.py#L265)
 
 ```python
 def link_uid(self, uid: str, from_module: str) -> str
@@ -250,7 +253,7 @@ Return a Markdown link to the entity with *uid* (plain code when unknown).
 
 #### `ApiLinker.autolink`
 
-`method` | [readmenator/_apidocs_render.py:182](../../readmenator/_apidocs_render.py#L182)
+`method` | [readmenator/_apidocs_render.py:272](../../readmenator/_apidocs_render.py#L272)
 
 ```python
 def autolink(self, text: str, from_module: str) -> str
@@ -275,7 +278,7 @@ Fenced code blocks are left untouched.
 
 ### `ApiMarkdownRenderer`
 
-`class` | [readmenator/_apidocs_render.py:218](../../readmenator/_apidocs_render.py#L218)
+`class` | [readmenator/_apidocs_render.py:308](../../readmenator/_apidocs_render.py#L308)
 
 ```python
 class ApiMarkdownRenderer
@@ -294,7 +297,7 @@ Renders an ApiReference into Markdown pages.
 
 #### `ApiMarkdownRenderer.__init__`
 
-`constructor` | [readmenator/_apidocs_render.py:221](../../readmenator/_apidocs_render.py#L221)
+`constructor` | [readmenator/_apidocs_render.py:311](../../readmenator/_apidocs_render.py#L311)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -314,7 +317,7 @@ Initialise with application configuration.
 
 #### `ApiMarkdownRenderer.render`
 
-`method` | [readmenator/_apidocs_render.py:229](../../readmenator/_apidocs_render.py#L229)
+`method` | [readmenator/_apidocs_render.py:319](../../readmenator/_apidocs_render.py#L319)
 
 ```python
 def render(self, reference: ApiReference, project_name: str) -> Dict[str, str]
@@ -341,7 +344,7 @@ Render every page.
 
 ### `ApiDocsWriter`
 
-`class` | [readmenator/_apidocs_render.py:733](../../readmenator/_apidocs_render.py#L733)
+`class` | [readmenator/_apidocs_render.py:823](../../readmenator/_apidocs_render.py#L823)
 
 ```python
 class ApiDocsWriter
@@ -360,7 +363,7 @@ Writes the API reference tree (Markdown, JSON, HTML) to disk.
 
 #### `ApiDocsWriter.__init__`
 
-`constructor` | [readmenator/_apidocs_render.py:736](../../readmenator/_apidocs_render.py#L736)
+`constructor` | [readmenator/_apidocs_render.py:826](../../readmenator/_apidocs_render.py#L826)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -382,7 +385,7 @@ Initialise with application configuration.
 
 #### `ApiDocsWriter.write`
 
-`method` | [readmenator/_apidocs_render.py:745](../../readmenator/_apidocs_render.py#L745)
+`method` | [readmenator/_apidocs_render.py:835](../../readmenator/_apidocs_render.py#L835)
 
 ```python
 def write(self, reference: ApiReference, project_root: str, project_name: str = '', architecture_markdown: str = '', flow_graphs: Optional[List[FlowGraph]] = None) -> Dict[str, str]
@@ -408,7 +411,7 @@ Refuses to write through a symlinked output directory.
 
 - `OSError`: (raised in the body, not documented)
 
-*Calls:* [`ApiReference.to_dict`](readmenator._apidocs.py.md#apireference-to_dict), [`render_api_site`](readmenator._apidocs_page.py.md#render_api_site), [`ApiMarkdownRenderer.render`](#apimarkdownrenderer-render), [`render_flows_page`](readmenator._flowpage.py.md#render_flows_page)
+*Calls:* [`ApiReference.to_dict`](readmenator._apidocs.py.md#apireference-to_dict), [`render_api_site`](readmenator._apidocs_page.py.md#render_api_site), [`ApiMarkdownRenderer.render`](#apimarkdownrenderer-render), [`jsonl_pages`](#jsonl_pages), [`render_flows_page`](readmenator._flowpage.py.md#render_flows_page)
 
 ---
 
@@ -458,7 +461,104 @@ Return the deterministic page file stem for a module uid.
 
 **Returns:** `str`
 
-*Called by:* [`ApiLinker.href`](#apilinker-href), [`ApiMarkdownRenderer.render`](#apimarkdownrenderer-render)
+*Called by:* [`ApiLinker.href`](#apilinker-href), [`ApiMarkdownRenderer.render`](#apimarkdownrenderer-render), [`jsonl_pages`](#jsonl_pages)
+
+---
+
+<a id="jsonl_index_path"></a>
+
+### `jsonl_index_path`
+
+`function` | [readmenator/_apidocs_render.py:81](../../readmenator/_apidocs_render.py#L81)
+
+```python
+def jsonl_index_path(config: Config) -> str
+```
+
+Return the API JSONL index path relative to APIDOCS_OUTPUT_DIR.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `config` | `Config` |  |  |
+
+**Returns:** `str`
+
+---
+
+<a id="jsonl_warnings_path"></a>
+
+### `jsonl_warnings_path`
+
+`function` | [readmenator/_apidocs_render.py:86](../../readmenator/_apidocs_render.py#L86)
+
+```python
+def jsonl_warnings_path(config: Config) -> str
+```
+
+Return the API warnings JSONL path relative to APIDOCS_OUTPUT_DIR.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `config` | `Config` |  |  |
+
+**Returns:** `str`
+
+---
+
+<a id="jsonl_pages"></a>
+
+### `jsonl_pages`
+
+`function` | [readmenator/_apidocs_render.py:96](../../readmenator/_apidocs_render.py#L96)
+
+```python
+def jsonl_pages(reference: ApiReference, config: Config) -> Dict[str, str]
+```
+
+Split the API model into one JSON Lines file per module plus an index.
+
+Every entity is one line in ``api/modules/<slug>.jsonl`` so a grep returns
+exactly the matching entity; no file grows with the whole project.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `reference` | `ApiReference` |  | The API reference. |
+| `config` | `Config` |  | Application configuration. |
+
+**Returns:** `Dict[str, str]` - Mapping of path relative to APIDOCS_OUTPUT_DIR to file text.
+
+*Calls:* [`page_slug`](#page_slug)
+
+*Called by:* [`ApiDocsWriter.write`](#apidocswriter-write)
+
+---
+
+<a id="read_api_jsonl"></a>
+
+### `read_api_jsonl`
+
+`function` | [readmenator/_apidocs_render.py:143](../../readmenator/_apidocs_render.py#L143)
+
+```python
+def read_api_jsonl(api_dir: str, config: Config) -> Dict[str, object]
+```
+
+Reassemble the split JSONL API model into the monolithic api.json shape.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `api_dir` | `str` |  | The ``api/`` directory written by jsonl_pages. |
+| `config` | `Config` |  | Application configuration. |
+
+**Returns:** `Dict[str, object]` - Dictionary with schema_version, meta, coverage, modules, entities, warnings.
 
 ---
 
@@ -466,7 +566,7 @@ Return the deterministic page file stem for a module uid.
 
 ### `anchor_slug`
 
-`function` | [readmenator/_apidocs_render.py:81](../../readmenator/_apidocs_render.py#L81)
+`function` | [readmenator/_apidocs_render.py:171](../../readmenator/_apidocs_render.py#L171)
 
 ```python
 def anchor_slug(qualname: str) -> str

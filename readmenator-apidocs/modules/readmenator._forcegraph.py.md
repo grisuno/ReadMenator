@@ -43,6 +43,7 @@ flowchart LR
     n_readmenator__sourceview_py__SourceViewBuilder_build_sources["_sourceview.SourceViewBuilder.build_sources"]
     n_readmenator__sourceview_py__SourceViewBuilder_enabled["_sourceview.SourceViewBuilder.enabled"]
     n_readmenator__sourceview_py__SourceViewBuilder_to_payload["_sourceview.SourceViewBuilder.to_payload"]
+    n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg(["ForceGraphRenderer.thumbnail_svg"])
     n_readmenator__graphlayout_py__ForceAtlas2Settings["_graphlayout.ForceAtlas2Settings"]
     n_readmenator__graphlayout_py__fit_frames["_graphlayout.fit_frames"]
@@ -65,6 +66,7 @@ flowchart LR
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload -.-> n_readmenator__sourceview_py__SourceViewBuilder_build_sources
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload -.-> n_readmenator__sourceview_py__SourceViewBuilder_enabled
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload -.-> n_readmenator__sourceview_py__SourceViewBuilder_to_payload
+    n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__ForceAtlas2Settings
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__fit_frames
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__forceatlas2_frames
@@ -76,7 +78,7 @@ flowchart LR
 
 ### `ForceGraphRenderer`
 
-`class` | [readmenator/_forcegraph.py:79](../../readmenator/_forcegraph.py#L79)
+`class` | [readmenator/_forcegraph.py:80](../../readmenator/_forcegraph.py#L80)
 
 ```python
 class ForceGraphRenderer
@@ -106,7 +108,7 @@ Builds force-graph payloads and renders the explorer HTML.
 
 #### `ForceGraphRenderer.__init__`
 
-`constructor` | [readmenator/_forcegraph.py:82](../../readmenator/_forcegraph.py#L82)
+`constructor` | [readmenator/_forcegraph.py:83](../../readmenator/_forcegraph.py#L83)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -126,7 +128,7 @@ Initialise with application configuration.
 
 #### `ForceGraphRenderer.node_palette`
 
-`method` | [readmenator/_forcegraph.py:90](../../readmenator/_forcegraph.py#L90)
+`method` | [readmenator/_forcegraph.py:91](../../readmenator/_forcegraph.py#L91)
 
 ```python
 def node_palette(self) -> Dict[str, str]
@@ -142,7 +144,7 @@ Return the node-type color palette from configuration.
 
 #### `ForceGraphRenderer.edge_palette`
 
-`method` | [readmenator/_forcegraph.py:94](../../readmenator/_forcegraph.py#L94)
+`method` | [readmenator/_forcegraph.py:95](../../readmenator/_forcegraph.py#L95)
 
 ```python
 def edge_palette(self) -> Dict[str, str]
@@ -158,7 +160,7 @@ Return the edge-relation color palette from configuration.
 
 #### `ForceGraphRenderer.vendor_source`
 
-`method` | [readmenator/_forcegraph.py:98](../../readmenator/_forcegraph.py#L98)
+`method` | [readmenator/_forcegraph.py:99](../../readmenator/_forcegraph.py#L99)
 
 ```python
 def vendor_source(self) -> Path
@@ -174,7 +176,7 @@ Return the path of the vendored 2D engine shipped in the package.
 
 #### `ForceGraphRenderer.vendor_href`
 
-`method` | [readmenator/_forcegraph.py:106](../../readmenator/_forcegraph.py#L106)
+`method` | [readmenator/_forcegraph.py:107](../../readmenator/_forcegraph.py#L107)
 
 ```python
 def vendor_href(self) -> str
@@ -190,7 +192,7 @@ Return the relative vendor script href used beside the page.
 
 #### `ForceGraphRenderer.build_payload`
 
-`method` | [readmenator/_forcegraph.py:111](../../readmenator/_forcegraph.py#L111)
+`method` | [readmenator/_forcegraph.py:112](../../readmenator/_forcegraph.py#L112)
 
 ```python
 def build_payload(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None, analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None, findings: Optional[List[SecurityFinding]] = None, content_map: Optional[Dict[str, str]] = None) -> Dict[str, List[Dict[str, Any]]]
@@ -220,7 +222,7 @@ Build a heterogeneous graph payload for the explorer.
 
 #### `ForceGraphRenderer.render`
 
-`method` | [readmenator/_forcegraph.py:355](../../readmenator/_forcegraph.py#L355)
+`method` | [readmenator/_forcegraph.py:356](../../readmenator/_forcegraph.py#L356)
 
 ```python
 def render(self, payload: Dict[str, List[Dict[str, Any]]], analytics: Optional[Dict[str, Any]] = None, title: str = 'Force Graph', home_href: Optional[str] = 'index.html', live_api: bool = False) -> str
@@ -240,7 +242,7 @@ Render the standalone force-graph explorer HTML document.
 
 **Returns:** `str` - Complete HTML document as a string.
 
-*Calls:* [`ForceGraphRenderer.page_settings`](#forcegraphrenderer-page_settings), [`ForceGraphRenderer.vendor_href`](#forcegraphrenderer-vendor_href)
+*Calls:* [`ForceGraphRenderer.page_settings`](#forcegraphrenderer-page_settings), [`ForceGraphRenderer.vendor_href`](#forcegraphrenderer-vendor_href), [`payload_script`](readmenator._htmlpack.py.md#payload_script)
 
 *Called by:* [`ExplorerState.__init__`](readmenator._explorer.py.md#explorerstate-__init__), [`GraphExporter.to_forcegraph`](readmenator._exporter.py.md#graphexporter-to_forcegraph), [`ForceGraphRenderer.write`](#forcegraphrenderer-write)
 
@@ -396,7 +398,7 @@ Copy the vendored 2D engine next to an exported page.
 
 ### `family_color_from_name`
 
-`function` | [readmenator/_forcegraph.py:38](../../readmenator/_forcegraph.py#L38)
+`function` | [readmenator/_forcegraph.py:39](../../readmenator/_forcegraph.py#L39)
 
 ```python
 def family_color_from_name(name: str, sat_base: int = 55, sat_span: int = 12, light_base: int = 58, light_span: int = 10) -> str
@@ -422,7 +424,7 @@ Derive a stable, visually-distinct HSL color from a label.
 
 ### `node_value`
 
-`function` | [readmenator/_forcegraph.py:66](../../readmenator/_forcegraph.py#L66)
+`function` | [readmenator/_forcegraph.py:67](../../readmenator/_forcegraph.py#L67)
 
 ```python
 def node_value(symbols: int, degree: int) -> float

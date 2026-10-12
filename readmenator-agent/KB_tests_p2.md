@@ -297,6 +297,31 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_hotspot_weights_from_config` (method, line 100) `def test_hotspot_weights_from_config(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_hotspots.py`, `readmenator/_models.py`
 
+## tests/test_htmlpack.py
+- Doc: Contract tests for embedded page payload compression (readmenator/_htmlpack.py).
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_inline_scripts` (function, line 47) `def _inline_scripts(document)`
+  - `_build_site` (function, line 52) `def _build_site(root, config)`
+  - `TestPayloadScriptContract` (class, line 68) `class TestPayloadScriptContract(TestCase)`
+  - `TestCompressedPagesContract` (class, line 140) `class TestCompressedPagesContract(TestCase)`
+  - `setUp` (method, line 71) `def setUp(self)`
+  - `test_htmlpack_small_payload_stays_plain_and_escaped` (method, line 77) `def test_htmlpack_small_payload_stays_plain_and_escaped(self)`
+  - `test_htmlpack_large_payload_is_gzip_base64_and_round_trips` (method, line 83) `def test_htmlpack_large_payload_is_gzip_base64_and_round_trips(self)`
+  - `test_htmlpack_compression_is_deterministic` (method, line 90) `def test_htmlpack_compression_is_deterministic(self)`
+  - `test_htmlpack_threshold_and_disable_flag` (method, line 95) `def test_htmlpack_threshold_and_disable_flag(self)`
+  - `test_htmlpack_plain_format_matches_legacy_serialization` (method, line 101) `def test_htmlpack_plain_format_matches_legacy_serialization(self)`
+  - `test_htmlpack_missing_or_empty_element_reads_none` (method, line 107) `def test_htmlpack_missing_or_empty_element_reads_none(self)`
+  - `test_htmlpack_browser_loader_decodes_both_encodings` (method, line 112) `def test_htmlpack_browser_loader_decodes_both_encodings(self)`
+  - `setUpClass` (method, line 144) `def setUpClass(cls)`
+  - `tearDownClass` (method, line 152) `def tearDownClass(cls)`
+  - `test_htmlpack_pages_compress_every_payload_when_forced` (method, line 156) `def test_htmlpack_pages_compress_every_payload_when_forced(self)`
+  - `test_htmlpack_pages_decode_identical_payloads` (method, line 162) `def test_htmlpack_pages_decode_identical_payloads(self)`
+  - `test_htmlpack_pages_boot_through_the_shared_loader` (method, line 169) `def test_htmlpack_pages_boot_through_the_shared_loader(self)`
+  - `test_htmlpack_pages_inline_scripts_are_valid_javascript` (method, line 177) `def test_htmlpack_pages_inline_scripts_are_valid_javascript(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_htmlpack.py`
+
 ## tests/test_integration.py
 - Layer: testing
 - Language: py
@@ -324,67 +349,67 @@ Previous: [KB_tests.md](KB_tests.md)
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_node` (function, line 39) `def _node(nid, symbols)`
-  - `TestForceGraphContract` (class, line 51) `class TestForceGraphContract(TestCase)`
-  - `TestScanTextContract` (class, line 132) `class TestScanTextContract(TestCase)`
-  - `self_nodes` (function, line 152) `def self_nodes()`
-  - `TestYaraLiteContract` (class, line 157) `class TestYaraLiteContract(TestCase)`
-  - `TestProvenanceContract` (class, line 210) `class TestProvenanceContract(TestCase)`
-  - `TestExclusionsContract` (class, line 233) `class TestExclusionsContract(TestCase)`
-  - `TestAnalyticsContract` (class, line 253) `class TestAnalyticsContract(TestCase)`
-  - `TestExplorerContract` (class, line 274) `class TestExplorerContract(TestCase)`
-  - `TestEmbedContract` (class, line 289) `class TestEmbedContract(TestCase)`
-  - `TestRebuildContract` (class, line 316) `class TestRebuildContract(TestCase)`
-  - `TestGalleryCardContract` (class, line 368) `class TestGalleryCardContract(TestCase)`
-  - `TestForceGraphInspectorPayload` (class, line 425) `class TestForceGraphInspectorPayload(TestCase)`
-  - `_inline_script` (function, line 476) `def _inline_script(html)`
-  - `_const_json` (function, line 481) `def _const_json(html, name)`
-  - `TestForceGraphExplorerInteraction` (class, line 489) `class TestForceGraphExplorerInteraction(TestCase)`
-  - `setUp` (method, line 54) `def setUp(self)`
-  - `test_family_color_is_deterministic` (method, line 60) `def test_family_color_is_deterministic(self)`
-  - `test_node_value_dampens_large_files` (method, line 65) `def test_node_value_dampens_large_files(self)`
-  - `test_build_payload_has_heterogeneous_nodes` (method, line 73) `def test_build_payload_has_heterogeneous_nodes(self)`
-  - `test_build_payload_maps_communities` (method, line 81) `def test_build_payload_maps_communities(self)`
-  - `test_render_produces_standalone_html` (method, line 93) `def test_render_produces_standalone_html(self)`
-  - `test_render_uses_supported_cdn_fallback` (method, line 105) `def test_render_uses_supported_cdn_fallback(self)`
-  - `test_write_copies_vendor_engine` (method, line 111) `def test_write_copies_vendor_engine(self)`
-  - `test_exporter_delegates_to_forcegraph` (method, line 126) `def test_exporter_delegates_to_forcegraph(self)`
-  - `test_build_for_node_includes_sections` (method, line 135) `def test_build_for_node_includes_sections(self)`
-  - `test_build_corpus_maps_every_node` (method, line 145) `def test_build_corpus_maps_every_node(self)`
-  - `test_parse_reports_tiers` (method, line 183) `def test_parse_reports_tiers(self)`
-  - `test_run_matches_any_of_them` (method, line 189) `def test_run_matches_any_of_them(self)`
-  - `test_run_requires_cooccurrence` (method, line 195) `def test_run_requires_cooccurrence(self)`
-  - `test_validate_counts_rules` (method, line 202) `def test_validate_counts_rules(self)`
-  - `test_audit_flags_snippetless_findings` (method, line 213) `def test_audit_flags_snippetless_findings(self)`
-  - `test_summary_counts_classes` (method, line 225) `def test_summary_counts_classes(self)`
-  - `test_parse_and_match_glob` (method, line 236) `def test_parse_and_match_glob(self)`
-  - `test_filter_findings_removes_excluded` (method, line 242) `def test_filter_findings_removes_excluded(self)`
-  - `test_build_has_all_sections` (method, line 256) `def test_build_has_all_sections(self)`
-  - `test_build_state_serves_apis` (method, line 277) `def test_build_state_serves_apis(self)`
-  - `test_near_jaccard_prefers_shared_terms` (method, line 292) `def test_near_jaccard_prefers_shared_terms(self)`
-  - `test_cluster_groups_similar_files` (method, line 303) `def test_cluster_groups_similar_files(self)`
-  - `_run_app` (method, line 319) `def _run_app(self, tmp)`
-  - `test_run_writes_forcegraph_html` (method, line 334) `def test_run_writes_forcegraph_html(self)`
-  - `test_run_skips_forcegraph_when_disabled` (method, line 346) `def test_run_skips_forcegraph_when_disabled(self)`
-  - `test_publish_appends_extra_card` (method, line 371) `def test_publish_appends_extra_card(self)`
-  - `test_export_diagrams_writes_forcegraph_and_card` (method, line 398) `def test_export_diagrams_writes_forcegraph_and_card(self)`
-  - `setUp` (method, line 428) `def setUp(self)`
-  - `test_forcegraph_file_nodes_carry_inspector_fields` (method, line 440) `def test_forcegraph_file_nodes_carry_inspector_fields(self)`
-  - `test_forcegraph_externals_exclude_calls_and_internal_imports` (method, line 448) `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)`
-  - `test_forcegraph_privacy_mode_strips_docs` (method, line 453) `def test_forcegraph_privacy_mode_strips_docs(self)`
-  - `test_forcegraph_thumbnail_escapes_colors` (method, line 461) `def test_forcegraph_thumbnail_escapes_colors(self)`
-  - `test_forcegraph_render_has_inspector_and_layouts` (method, line 469) `def test_forcegraph_render_has_inspector_and_layouts(self)`
-  - `setUp` (method, line 492) `def setUp(self)`
-  - `test_explorer_hit_tests_against_live_positions` (method, line 506) `def test_explorer_hit_tests_against_live_positions(self)`
-  - `test_explorer_3d_draws_flat_glyphs_on_overlay` (method, line 511) `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)`
-  - `test_explorer_3d_engine_is_pinned` (method, line 516) `def test_explorer_3d_engine_is_pinned(self)`
-  - `test_explorer_ships_edge_path_and_lens_actions` (method, line 522) `def test_explorer_ships_edge_path_and_lens_actions(self)`
-  - `test_explorer_settings_come_from_config` (method, line 527) `def test_explorer_settings_come_from_config(self)`
-  - `test_explorer_structural_edges_use_their_own_colors` (method, line 538) `def test_explorer_structural_edges_use_their_own_colors(self)`
-  - `test_explorer_placeholders_inside_data_are_left_alone` (method, line 545) `def test_explorer_placeholders_inside_data_are_left_alone(self)`
-  - `test_explorer_data_cannot_close_the_script` (method, line 555) `def test_explorer_data_cannot_close_the_script(self)`
-  - `test_explorer_script_is_valid_javascript` (method, line 563) `def test_explorer_script_is_valid_javascript(self)`
-- Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
+  - `_node` (function, line 40) `def _node(nid, symbols)`
+  - `TestForceGraphContract` (class, line 52) `class TestForceGraphContract(TestCase)`
+  - `TestScanTextContract` (class, line 133) `class TestScanTextContract(TestCase)`
+  - `self_nodes` (function, line 153) `def self_nodes()`
+  - `TestYaraLiteContract` (class, line 158) `class TestYaraLiteContract(TestCase)`
+  - `TestProvenanceContract` (class, line 211) `class TestProvenanceContract(TestCase)`
+  - `TestExclusionsContract` (class, line 234) `class TestExclusionsContract(TestCase)`
+  - `TestAnalyticsContract` (class, line 254) `class TestAnalyticsContract(TestCase)`
+  - `TestExplorerContract` (class, line 275) `class TestExplorerContract(TestCase)`
+  - `TestEmbedContract` (class, line 290) `class TestEmbedContract(TestCase)`
+  - `TestRebuildContract` (class, line 317) `class TestRebuildContract(TestCase)`
+  - `TestGalleryCardContract` (class, line 369) `class TestGalleryCardContract(TestCase)`
+  - `TestForceGraphInspectorPayload` (class, line 426) `class TestForceGraphInspectorPayload(TestCase)`
+  - `_inline_script` (function, line 477) `def _inline_script(html)`
+  - `_const_json` (function, line 482) `def _const_json(html, name)`
+  - `TestForceGraphExplorerInteraction` (class, line 493) `class TestForceGraphExplorerInteraction(TestCase)`
+  - `setUp` (method, line 55) `def setUp(self)`
+  - `test_family_color_is_deterministic` (method, line 61) `def test_family_color_is_deterministic(self)`
+  - `test_node_value_dampens_large_files` (method, line 66) `def test_node_value_dampens_large_files(self)`
+  - `test_build_payload_has_heterogeneous_nodes` (method, line 74) `def test_build_payload_has_heterogeneous_nodes(self)`
+  - `test_build_payload_maps_communities` (method, line 82) `def test_build_payload_maps_communities(self)`
+  - `test_render_produces_standalone_html` (method, line 94) `def test_render_produces_standalone_html(self)`
+  - `test_render_uses_supported_cdn_fallback` (method, line 106) `def test_render_uses_supported_cdn_fallback(self)`
+  - `test_write_copies_vendor_engine` (method, line 112) `def test_write_copies_vendor_engine(self)`
+  - `test_exporter_delegates_to_forcegraph` (method, line 127) `def test_exporter_delegates_to_forcegraph(self)`
+  - `test_build_for_node_includes_sections` (method, line 136) `def test_build_for_node_includes_sections(self)`
+  - `test_build_corpus_maps_every_node` (method, line 146) `def test_build_corpus_maps_every_node(self)`
+  - `test_parse_reports_tiers` (method, line 184) `def test_parse_reports_tiers(self)`
+  - `test_run_matches_any_of_them` (method, line 190) `def test_run_matches_any_of_them(self)`
+  - `test_run_requires_cooccurrence` (method, line 196) `def test_run_requires_cooccurrence(self)`
+  - `test_validate_counts_rules` (method, line 203) `def test_validate_counts_rules(self)`
+  - `test_audit_flags_snippetless_findings` (method, line 214) `def test_audit_flags_snippetless_findings(self)`
+  - `test_summary_counts_classes` (method, line 226) `def test_summary_counts_classes(self)`
+  - `test_parse_and_match_glob` (method, line 237) `def test_parse_and_match_glob(self)`
+  - `test_filter_findings_removes_excluded` (method, line 243) `def test_filter_findings_removes_excluded(self)`
+  - `test_build_has_all_sections` (method, line 257) `def test_build_has_all_sections(self)`
+  - `test_build_state_serves_apis` (method, line 278) `def test_build_state_serves_apis(self)`
+  - `test_near_jaccard_prefers_shared_terms` (method, line 293) `def test_near_jaccard_prefers_shared_terms(self)`
+  - `test_cluster_groups_similar_files` (method, line 304) `def test_cluster_groups_similar_files(self)`
+  - `_run_app` (method, line 320) `def _run_app(self, tmp)`
+  - `test_run_writes_forcegraph_html` (method, line 335) `def test_run_writes_forcegraph_html(self)`
+  - `test_run_skips_forcegraph_when_disabled` (method, line 347) `def test_run_skips_forcegraph_when_disabled(self)`
+  - `test_publish_appends_extra_card` (method, line 372) `def test_publish_appends_extra_card(self)`
+  - `test_export_diagrams_writes_forcegraph_and_card` (method, line 399) `def test_export_diagrams_writes_forcegraph_and_card(self)`
+  - `setUp` (method, line 429) `def setUp(self)`
+  - `test_forcegraph_file_nodes_carry_inspector_fields` (method, line 441) `def test_forcegraph_file_nodes_carry_inspector_fields(self)`
+  - `test_forcegraph_externals_exclude_calls_and_internal_imports` (method, line 449) `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)`
+  - `test_forcegraph_privacy_mode_strips_docs` (method, line 454) `def test_forcegraph_privacy_mode_strips_docs(self)`
+  - `test_forcegraph_thumbnail_escapes_colors` (method, line 462) `def test_forcegraph_thumbnail_escapes_colors(self)`
+  - `test_forcegraph_render_has_inspector_and_layouts` (method, line 470) `def test_forcegraph_render_has_inspector_and_layouts(self)`
+  - `setUp` (method, line 496) `def setUp(self)`
+  - `test_explorer_hit_tests_against_live_positions` (method, line 510) `def test_explorer_hit_tests_against_live_positions(self)`
+  - `test_explorer_3d_draws_flat_glyphs_on_overlay` (method, line 515) `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)`
+  - `test_explorer_3d_engine_is_pinned` (method, line 520) `def test_explorer_3d_engine_is_pinned(self)`
+  - `test_explorer_ships_edge_path_and_lens_actions` (method, line 526) `def test_explorer_ships_edge_path_and_lens_actions(self)`
+  - `test_explorer_settings_come_from_config` (method, line 531) `def test_explorer_settings_come_from_config(self)`
+  - `test_explorer_structural_edges_use_their_own_colors` (method, line 542) `def test_explorer_structural_edges_use_their_own_colors(self)`
+  - `test_explorer_placeholders_inside_data_are_left_alone` (method, line 549) `def test_explorer_placeholders_inside_data_are_left_alone(self)`
+  - `test_explorer_data_cannot_close_the_script` (method, line 559) `def test_explorer_data_cannot_close_the_script(self)`
+  - `test_explorer_script_is_valid_javascript` (method, line 567) `def test_explorer_script_is_valid_javascript(self)`
+- Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
 
 ## tests/test_layer_rules.py
 - Doc: TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations.
@@ -449,38 +474,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_violations_sorted_by_severity` (method, line 108) `def test_violations_sorted_by_severity(self)`
   - `test_lint_returns_empty_when_disabled` (method, line 121) `def test_lint_returns_empty_when_disabled(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_linter.py`, `readmenator/_models.py`
-
-## tests/test_mcp_server.py
-- Doc: Contract tests for the MCP server protocol and tool dispatch.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestMCPProtocol` (class, line 21) `class TestMCPProtocol(TestCase)`
-  - `setUp` (method, line 24) `def setUp(self)`
-  - `tearDown` (method, line 33) `def tearDown(self)`
-  - `_make_request` (method, line 36) `def _make_request(self, method, params, msg_id)`
-  - `_call` (method, line 42) `def _call(self, req)`
-  - `test_initialize_exchanges_protocol_version` (method, line 49) `def test_initialize_exchanges_protocol_version(self)`
-  - `test_notifications_initialized_returns_no_response` (method, line 62) `def test_notifications_initialized_returns_no_response(self)`
-  - `test_unknown_method_returns_error` (method, line 67) `def test_unknown_method_returns_error(self)`
-  - `test_uninitialized_request_returns_error` (method, line 75) `def test_uninitialized_request_returns_error(self)`
-  - `test_list_tools_returns_all_tool_definitions` (method, line 85) `def test_list_tools_returns_all_tool_definitions(self)`
-  - `test_call_tool_without_initialize_returns_error` (method, line 115) `def test_call_tool_without_initialize_returns_error(self)`
-  - `test_call_tool_unknown_tool_returns_method_not_found` (method, line 123) `def test_call_tool_unknown_tool_returns_method_not_found(self)`
-  - `test_call_summary_tool_returns_content` (method, line 132) `def test_call_summary_tool_returns_content(self)`
-  - `test_call_query_tool_with_text_returns_results` (method, line 145) `def test_call_query_tool_with_text_returns_results(self)`
-  - `test_call_query_tool_missing_required_param_raises` (method, line 154) `def test_call_query_tool_missing_required_param_raises(self)`
-  - `test_list_resources_returns_resource_definitions` (method, line 168) `def test_list_resources_returns_resource_definitions(self)`
-  - `test_read_resource_summary_returns_json` (method, line 186) `def test_read_resource_summary_returns_json(self)`
-  - `test_read_resource_unknown_uri_returns_error` (method, line 197) `def test_read_resource_unknown_uri_returns_error(self)`
-  - `test_read_resource_kb_returns_markdown` (method, line 205) `def test_read_resource_kb_returns_markdown(self)`
-  - `_get_tool_def` (method, line 219) `def _get_tool_def(self, name)`
-  - `test_query_tool_requires_text_param` (method, line 226) `def test_query_tool_requires_text_param(self)`
-  - `test_explain_tool_requires_name_param` (method, line 230) `def test_explain_tool_requires_name_param(self)`
-  - `test_path_tool_requires_two_params` (method, line 234) `def test_path_tool_requires_two_params(self)`
-  - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
-  - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
-- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

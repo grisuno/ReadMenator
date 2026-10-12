@@ -3,6 +3,12 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_section_key` | function | `readmenator/_docstrings.py:331` | `def _section_key(header)` |
+| `_split_refs` | function | `readmenator/_docstrings.py:382` | `def _split_refs(text)` |
+| `_strip_fence` | function | `readmenator/_docstrings.py:372` | `def _strip_fence(text)` |
+| `_strip_line_prefix` | function | `readmenator/_docstrings.py:874` | `def _strip_line_prefix(line, prefixes)` |
+| `_xml_inline` | function | `readmenator/_docstrings.py:767` | `def _xml_inline(text)` |
+| `clean_text` | function | `readmenator/_docstrings.py:230` | `def clean_text(text)` |
 | `detect_style` | function | `readmenator/_docstrings.py:254` | `def detect_style(text)` |
 | `flush` | function | `readmenator/_docstrings.py:413` | `def flush()` |
 | `grab` | function | `readmenator/_docstrings.py:782` | `def grab(tag)` |
@@ -164,31 +170,31 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `measure` | function | `readmenator/_flowlayout.py:195` | `def measure(node, metrics)` |
 | `node` | method | `readmenator/_flowlayout.py:117` | `def node(self, node_id)` |
 | `to_dict` | method | `readmenator/_flowlayout.py:124` | `def to_dict(self)` |
-| `flow_thumbnail_svg` | function | `readmenator/_flowpage.py:244` | `def flow_thumbnail_svg(graph, width, height)` |
-| `flows_payload_json` | function | `readmenator/_flowpage.py:218` | `def flows_payload_json(graphs, api_href)` |
-| `render_flows_page` | function | `readmenator/_flowpage.py:224` | `def render_flows_page(graphs, project_name, api_href)` |
-| `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:79` | `class ForceGraphRenderer` |
-| `__init__` | method | `readmenator/_forcegraph.py:82` | `def __init__(self, config)` |
+| `flow_thumbnail_svg` | function | `readmenator/_flowpage.py:251` | `def flow_thumbnail_svg(graph, width, height)` |
+| `flows_payload_json` | function | `readmenator/_flowpage.py:221` | `def flows_payload_json(graphs, api_href)` |
+| `render_flows_page` | function | `readmenator/_flowpage.py:227` | `def render_flows_page(graphs, project_name, api_href, config)` |
+| `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:80` | `class ForceGraphRenderer` |
+| `__init__` | method | `readmenator/_forcegraph.py:83` | `def __init__(self, config)` |
 | `_family_color` | method | `readmenator/_forcegraph.py:513` | `def _family_color(self, name)` |
 | `_file_color` | method | `readmenator/_forcegraph.py:635` | `def _file_color(self, node_id, family, layer, palette)` |
 | `_node_doc` | method | `readmenator/_forcegraph.py:616` | `def _node_doc(self, node)` |
-| `_seed_positions` | method | `readmenator/_forcegraph.py:312` | `def _seed_positions(self, payload)` |
+| `_seed_positions` | method | `readmenator/_forcegraph.py:313` | `def _seed_positions(self, payload)` |
 | `_symbol_list` | method | `readmenator/_forcegraph.py:622` | `def _symbol_list(self, node)` |
-| `add_node` | function | `readmenator/_forcegraph.py:201` | `def add_node(node_id, label, node_type)` |
-| `build_payload` | method | `readmenator/_forcegraph.py:111` | `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)` |
+| `add_node` | function | `readmenator/_forcegraph.py:202` | `def add_node(node_id, label, node_type)` |
+| `build_payload` | method | `readmenator/_forcegraph.py:112` | `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)` |
 | `copy_vendor` | method | `readmenator/_forcegraph.py:597` | `def copy_vendor(self, dest_dir)` |
-| `edge_palette` | method | `readmenator/_forcegraph.py:94` | `def edge_palette(self)` |
+| `edge_palette` | method | `readmenator/_forcegraph.py:95` | `def edge_palette(self)` |
 | `family_color` | method | `readmenator/_forcegraph.py:502` | `def family_color(self, name)` |
-| `family_color_from_name` | function | `readmenator/_forcegraph.py:38` | `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)` |
-| `file_of` | function | `readmenator/_forcegraph.py:147` | `def file_of(edge_id)` |
+| `family_color_from_name` | function | `readmenator/_forcegraph.py:39` | `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)` |
+| `file_of` | function | `readmenator/_forcegraph.py:148` | `def file_of(edge_id)` |
 | `group_colors` | method | `readmenator/_forcegraph.py:403` | `def group_colors(self, payload)` |
-| `node_palette` | method | `readmenator/_forcegraph.py:90` | `def node_palette(self)` |
-| `node_value` | function | `readmenator/_forcegraph.py:66` | `def node_value(symbols, degree)` |
+| `node_palette` | method | `readmenator/_forcegraph.py:91` | `def node_palette(self)` |
+| `node_value` | function | `readmenator/_forcegraph.py:67` | `def node_value(symbols, degree)` |
 | `page_settings` | method | `readmenator/_forcegraph.py:426` | `def page_settings(self, payload, live_api)` |
-| `render` | method | `readmenator/_forcegraph.py:355` | `def render(self, payload, analytics, title, home_href, live_api)` |
+| `render` | method | `readmenator/_forcegraph.py:356` | `def render(self, payload, analytics, title, home_href, live_api)` |
 | `thumbnail_svg` | method | `readmenator/_forcegraph.py:530` | `def thumbnail_svg(self, payload)` |
-| `vendor_href` | method | `readmenator/_forcegraph.py:106` | `def vendor_href(self)` |
-| `vendor_source` | method | `readmenator/_forcegraph.py:98` | `def vendor_source(self)` |
+| `vendor_href` | method | `readmenator/_forcegraph.py:107` | `def vendor_href(self)` |
+| `vendor_source` | method | `readmenator/_forcegraph.py:99` | `def vendor_source(self)` |
 | `write` | method | `readmenator/_forcegraph.py:570` | `def write(self, output_path, payload, analytics, title, home_href)` |
 | `GitHubWikiPublisher` | class | `readmenator/_gh_wiki.py:59` | `class GitHubWikiPublisher` |
 | `WikiPublishResult` | class | `readmenator/_gh_wiki.py:39` | `class WikiPublishResult` |
@@ -298,6 +304,11 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `analyze_change_impact` | method | `readmenator/_hotspots.py:155` | `def analyze_change_impact(self, nodes, resolved_edges)` |
 | `analyze_hotspots` | method | `readmenator/_hotspots.py:34` | `def analyze_hotspots(self, nodes, edges, resolved_edges)` |
 | `detect_cycles` | method | `readmenator/_hotspots.py:90` | `def detect_cycles(self, nodes, resolved_edges)` |
+| `compress_text` | function | `readmenator/_htmlpack.py:77` | `def compress_text(text, config)` |
+| `escape_json_for_script` | function | `readmenator/_htmlpack.py:49` | `def escape_json_for_script(text, chars)` |
+| `payload_script` | function | `readmenator/_htmlpack.py:92` | `def payload_script(element_id, payload, config, compact, escape)` |
+| `read_payload_script` | function | `readmenator/_htmlpack.py:119` | `def read_payload_script(document, element_id)` |
+| `should_compress` | function | `readmenator/_htmlpack.py:64` | `def should_compress(raw_size, config)` |
 | `LayerRuleEngine` | class | `readmenator/_layer_rules.py:11` | `class LayerRuleEngine` |
 | `__init__` | method | `readmenator/_layer_rules.py:36` | `def __init__(self, config)` |
 | `detect_violations` | method | `readmenator/_layer_rules.py:39` | `def detect_violations(self, nodes, edges, resolved_edges, layers)` |
@@ -485,16 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `readme_injector` | method | `readmenator/_pipeline.py:218` | `def readme_injector(self)` |
 | `rule_gen` | method | `readmenator/_pipeline.py:178` | `def rule_gen(self)` |
 | `run` | method | `readmenator/_pipeline.py:479` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
-| `sarif` | method | `readmenator/_pipeline.py:184` | `def sarif(self)` |
-| `scanner` | method | `readmenator/_pipeline.py:123` | `def scanner(self)` |
-| `scantext` | method | `readmenator/_pipeline.py:335` | `def scantext(self)` |
-| `security` | method | `readmenator/_pipeline.py:141` | `def security(self)` |
-| `skills` | method | `readmenator/_pipeline.py:384` | `def skills(self)` |
-| `sourceview` | method | `readmenator/_pipeline.py:391` | `def sourceview(self)` |
-| `symindex` | method | `readmenator/_pipeline.py:398` | `def symindex(self)` |
-| `taint` | method | `readmenator/_pipeline.py:153` | `def taint(self)` |
-| `uml` | method | `readmenator/_pipeline.py:205` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:300` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:293` | `def vis_renderer(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

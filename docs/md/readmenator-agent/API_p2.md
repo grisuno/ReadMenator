@@ -1,6 +1,12 @@
 # API (page 2 of 2)
 Previous: [API.md](API.md)
 
+## readmenator/_linter.py
+Depends on: `readmenator/_config.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_symindex.py`
+Imported by: `readmenator/_app.py`, `tests/test_linter.py`
+- `ArchitectureLinter.__init__` (method) `readmenator/_linter.py:34` `def __init__(self, config)`
+- `ArchitectureLinter.lint` (method) `readmenator/_linter.py:37` `def lint(self, nodes, edges, resolved_edges, layers, content_map)` -- Run all linter rules and return violations.
+
 ## readmenator/_mcp_server.py
 Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_layers.py`, `readmenator/_query.py`
 Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `tests/test_mcp_server.py`

@@ -1127,6 +1127,16 @@ class Config:
 
     APIDOCS_JSON_FILENAME: str = "api.json"
 
+    APIDOCS_JSON_MONOLITH: bool = False
+
+    APIDOCS_JSONL_DIR: str = "api"
+
+    APIDOCS_JSONL_MODULES_SUBDIR: str = "modules"
+
+    APIDOCS_JSONL_INDEX: str = "index.json"
+
+    APIDOCS_JSONL_WARNINGS: str = "warnings.jsonl"
+
     APIDOCS_ARCHITECTURE_FILENAME: str = "architecture.md"
 
     APIDOCS_SCHEMA_VERSION: int = 1
@@ -1136,6 +1146,12 @@ class Config:
     APIDOCS_COVERAGE_FAIL_UNDER: float = 0.0
 
     APIDOCS_MAX_WARNINGS_LISTED: int = 500
+
+    PAYLOAD_COMPRESSION_ENABLED: bool = True
+
+    PAYLOAD_COMPRESSION_MIN_BYTES: int = 262144
+
+    PAYLOAD_COMPRESSION_LEVEL: int = 9
 
     ARCH_DIAGRAM_ENABLED: bool = True
 

@@ -1,10 +1,10 @@
 # readmenator: _diagrams
 
-*Community 2 | 29 files | cohesion 0.39*
+*Community 2 | 29 files | cohesion 0.38*
 
 ## Definition
 
-This community groups 29 file(s) rooted at `readmenator` with dominant language py (cohesion 0.39). Central symbols: `ArchitectureLinter`, `Backdrop`, `Category`, `CinematicVideoRenderer`, `ComponentDiagramBuilder`, `CompositeRanker`, `CursorRulesGenerator`, `DirectoryWatcher`. Core file: `readmenator/_diagrams.py` (92 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 29 file(s) rooted at `readmenator` with dominant language py (cohesion 0.38). Central symbols: `ArchitectureLinter`, `Backdrop`, `Category`, `CinematicVideoRenderer`, `ComponentDiagramBuilder`, `CompositeRanker`, `CursorRulesGenerator`, `DirectoryWatcher`. Core file: `readmenator/_diagrams.py` (92 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
@@ -82,26 +82,28 @@ This community groups 29 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 57
-- Cross-boundary resolved imports (EXTRACTED): 93
+- Cross-boundary resolved imports (EXTRACTED): 95
 
 ## Connections
 
 - [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
 - [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 2 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_uml.py.
-- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
-- [INFERRED] bridges community 2 <-> 3 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_graphlayout.py in 5 hops.
-- [INFERRED] bridges community 2 <-> 5 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
+- [EXTRACTED] depends_on community 2 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
+- [EXTRACTED] depends_on community 2 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_bundlegraph.py.
+- [INFERRED] bridges community 2 <-> 3 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.
+- [INFERRED] bridges community 2 <-> 4 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_graphlayout.py in 5 hops.
+- [INFERRED] bridges community 2 <-> 3 (strength 0.5): Inferred cross-community bridge: readmenator.py reaches tests/test_readme_injector.py in 5 hops.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_htmlpack.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [layer strict] `tests/test_components.py` (testing) -> `readmenator/_components.py` (presentation)
 
 ## Open Questions
@@ -109,7 +111,7 @@ This community groups 29 file(s) rooted at `readmenator` with dominant language 
 - Why do 2 file(s) lack file-level docs (e.g. `tests/test_integration.py`)? What purpose do they serve?
 - Is the dangerous import `subprocess` in `readmenator/_diagrams.py` still required, or can it be isolated?
 - What would break if the most connected file in readmenator: _diagrams changed?
-- Should readmenator: _diagrams be split, given cohesion 0.39?
+- Should readmenator: _diagrams be split, given cohesion 0.38?
 
 ## Sources
 

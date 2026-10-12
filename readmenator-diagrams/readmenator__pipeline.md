@@ -1,6 +1,6 @@
 # readmenator: _pipeline
 
-readmenator: _pipeline groups 26 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
+readmenator: _pipeline groups 20 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 
 ```mermaid
 graph LR
@@ -11,37 +11,31 @@ graph LR
 
 ## readmenator (4.1)
 
-readmenator groups 17 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
+readmenator groups 12 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 
 ## tests (4.2)
 
-tests groups 9 files (py) around _node, _fixture, _script_json, TestBundleGraphPayloadContract, setUp. Contract tests for the edge bundle explorer (circle and sphere views).
+tests groups 8 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection.
 
 **Files**:
 
+- readmenator/_agent_injector.py
 - readmenator/_analytics.py
-- readmenator/_bundlegraph.py
-- readmenator/_bundlegraph_page.py
 - readmenator/_cpg.py
 - readmenator/_documentation.py
 - readmenator/_embed.py
 - readmenator/_exclusions.py
-- readmenator/_explorer.py
 - readmenator/_exporter.py
-- readmenator/_forcegraph.py
-- readmenator/_forcegraph_page.py
-- readmenator/_graphlayout.py
 - readmenator/_pipeline.py
 - readmenator/_provenance.py
+- readmenator/_readme_injector.py
 - readmenator/_scantext.py
-- readmenator/_sourceview.py
 - readmenator/_uml.py
-- tests/test_bundlegraph.py
+- tests/test_agent_injector.py
+- tests/test_agent_output.py
 - tests/test_cpg.py
 - tests/test_documentation.py
 - tests/test_exporter.py
-- tests/test_graphlayout.py
 - tests/test_interactive_graph.py
-- tests/test_layout_quality.py
-- tests/test_sourceview.py
+- tests/test_readme_injector.py
 - tests/test_uml.py

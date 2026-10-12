@@ -78,6 +78,96 @@ def page_slug(module_uid: str) -> str:
     return slug.strip("._") or "module"
 
 
+def jsonl_index_path(config: Config) -> str:
+    """Return the API JSONL index path relative to APIDOCS_OUTPUT_DIR."""
+    return str(PurePosixPath(config.APIDOCS_JSONL_DIR) / config.APIDOCS_JSONL_INDEX)
+
+
+def jsonl_warnings_path(config: Config) -> str:
+    """Return the API warnings JSONL path relative to APIDOCS_OUTPUT_DIR."""
+    return str(PurePosixPath(config.APIDOCS_JSONL_DIR) / config.APIDOCS_JSONL_WARNINGS)
+
+
+def _jsonl_line(record: Dict[str, object]) -> str:
+    """Serialise one record as a single compact JSON line."""
+    return json.dumps(record, ensure_ascii=False, separators=(",", ":"), sort_keys=False)
+
+
+def jsonl_pages(reference: ApiReference, config: Config) -> Dict[str, str]:
+    """Split the API model into one JSON Lines file per module plus an index.
+
+    Every entity is one line in ``api/modules/<slug>.jsonl`` so a grep returns
+    exactly the matching entity; no file grows with the whole project.
+
+    Args:
+        reference: The API reference.
+        config: Application configuration.
+
+    Returns:
+        Mapping of path relative to APIDOCS_OUTPUT_DIR to file text.
+    """
+    base = PurePosixPath(config.APIDOCS_JSONL_DIR)
+    modules_rel = PurePosixPath(config.APIDOCS_JSONL_MODULES_SUBDIR)
+    grouped: Dict[str, List[str]] = {uid: [] for uid in reference.modules}
+    for entity in reference.entities.values():
+        grouped.setdefault(entity.file, []).append(_jsonl_line(entity.to_dict()))
+    pages: Dict[str, str] = {}
+    listing: List[Dict[str, object]] = []
+    for uid, lines in grouped.items():
+        if not lines:
+            continue
+        rel = modules_rel / f"{page_slug(uid)}.jsonl"
+        pages[str(base / rel)] = "\n".join(lines) + "\n"
+        listing.append({"uid": uid, "path": str(rel), "entities": len(lines)})
+    warnings = [_jsonl_line(w.to_dict()) for w in reference.warnings]
+    pages[str(base / config.APIDOCS_JSONL_WARNINGS)] = "\n".join(warnings) + ("\n" if warnings else "")
+    root = f"{config.APIDOCS_OUTPUT_DIR}/{base}"
+    index = {
+        "schema_version": config.APIDOCS_SCHEMA_VERSION,
+        "format": "jsonl",
+        "meta": dict(reference.meta),
+        "coverage": reference.coverage,
+        "modules": listing,
+        "warnings": {"path": config.APIDOCS_JSONL_WARNINGS, "total": len(warnings)},
+        "usage": [
+            f"grep -h '\"name\":\"<Name>\"' {root}/{modules_rel}/*.jsonl",
+            f"grep -h '\"qualname\":\"<Owner.method>\"' {root}/{modules_rel}/*.jsonl",
+            f"cat {root}/{modules_rel}/<module-slug>.jsonl",
+            f"grep -h '\"code\":\"DOC001\"' {root}/{config.APIDOCS_JSONL_WARNINGS}",
+        ],
+    }
+    pages[str(base / config.APIDOCS_JSONL_INDEX)] = json.dumps(index, indent=1, ensure_ascii=False) + "\n"
+    return pages
+
+
+def read_api_jsonl(api_dir: str, config: Config) -> Dict[str, object]:
+    """Reassemble the split JSONL API model into the monolithic api.json shape.
+
+    Args:
+        api_dir: The ``api/`` directory written by jsonl_pages.
+        config: Application configuration.
+
+    Returns:
+        Dictionary with schema_version, meta, coverage, modules, entities, warnings.
+    """
+    root = Path(api_dir)
+    index = json.loads((root / config.APIDOCS_JSONL_INDEX).read_text(encoding="utf-8"))
+    entities: List[Dict[str, object]] = []
+    for module in index.get("modules", []):
+        text = (root / module["path"]).read_text(encoding="utf-8")
+        entities.extend(json.loads(line) for line in text.splitlines() if line.strip())
+    warn_path = root / index.get("warnings", {}).get("path", config.APIDOCS_JSONL_WARNINGS)
+    warnings = [json.loads(line) for line in warn_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return {
+        "schema_version": index.get("schema_version"),
+        "meta": index.get("meta", {}),
+        "coverage": index.get("coverage", {}),
+        "modules": [m["uid"] for m in index.get("modules", [])],
+        "entities": entities,
+        "warnings": warnings,
+    }
+
+
 def anchor_slug(qualname: str) -> str:
     """Return the HTML anchor id for an entity qualname."""
     return re.sub(r"[^a-z0-9_-]+", "-", qualname.lower()).strip("-") or "entity"
@@ -284,8 +374,8 @@ class ApiMarkdownRenderer:
             "Navigate: [Interactive architecture and flows](" + self._config.FLOWS_OUTPUT + ") | "
             "[Architecture and flows (Mermaid)](" + self._config.APIDOCS_ARCHITECTURE_FILENAME + ") | "
             "[Class hierarchy](classes.md) | [General index](genindex.md) | "
-            f"[Coverage and warnings](COVERAGE.md) | [`{self._config.APIDOCS_JSON_FILENAME}`]"
-            f"({self._config.APIDOCS_JSON_FILENAME})"
+            f"[Coverage and warnings](COVERAGE.md) | [`{jsonl_index_path(self._config)}`]"
+            f"({jsonl_index_path(self._config)})"
             + (f" | [HTML browser]({self._config.APIDOCS_HTML_FILENAME})" if self._config.APIDOCS_HTML_ENABLED else ""),
             "",
         ]
@@ -443,7 +533,7 @@ class ApiMarkdownRenderer:
         for warning in reference.warnings[:cap]:
             lines.append(f"- {warning.code} `{warning.file}:{warning.line}` {warning.message}")
         if len(reference.warnings) > cap:
-            lines.append(f"- ... {len(reference.warnings) - cap} more in `{self._config.APIDOCS_JSON_FILENAME}`")
+            lines.append(f"- ... {len(reference.warnings) - cap} more in `{jsonl_warnings_path(self._config)}`")
         if not reference.warnings:
             lines.append("No warnings.")
         return "\n".join(lines).rstrip() + "\n"
@@ -769,7 +859,9 @@ class ApiDocsWriter:
         cfg = self._config
         root = Path(project_root).resolve()
         out_dir = root / cfg.APIDOCS_OUTPUT_DIR
-        if out_dir.is_symlink() or (out_dir / cfg.APIDOCS_MODULES_SUBDIR).is_symlink():
+        jsonl_dir = out_dir / cfg.APIDOCS_JSONL_DIR
+        jsonl_modules = jsonl_dir / cfg.APIDOCS_JSONL_MODULES_SUBDIR
+        if any(p.is_symlink() for p in (out_dir, out_dir / cfg.APIDOCS_MODULES_SUBDIR, jsonl_dir, jsonl_modules)):
             raise OSError(f"Refusing to write API docs through a symlink: {out_dir}")
         name = project_name or root.name
         pages = self._markdown.render(reference, name)
@@ -778,13 +870,15 @@ class ApiDocsWriter:
                 f"# {name} Architecture and Execution Flows\n\n[Back to index](index.md)\n\n"
                 + architecture_markdown.rstrip() + "\n"
             )
-        pages[cfg.APIDOCS_JSON_FILENAME] = json.dumps(
-            reference.to_dict(cfg.APIDOCS_SCHEMA_VERSION), indent=1, sort_keys=False
-        ) + "\n"
+        pages.update(jsonl_pages(reference, cfg))
+        if cfg.APIDOCS_JSON_MONOLITH:
+            pages[cfg.APIDOCS_JSON_FILENAME] = json.dumps(
+                reference.to_dict(cfg.APIDOCS_SCHEMA_VERSION), indent=1, sort_keys=False
+            ) + "\n"
         if cfg.APIDOCS_HTML_ENABLED:
             pages[cfg.APIDOCS_HTML_FILENAME] = render_api_site(reference, name, cfg, flow_graphs or [])
             if flow_graphs:
-                pages[cfg.FLOWS_OUTPUT] = render_flows_page(flow_graphs, name, cfg.APIDOCS_HTML_FILENAME)
+                pages[cfg.FLOWS_OUTPUT] = render_flows_page(flow_graphs, name, cfg.APIDOCS_HTML_FILENAME, cfg)
         modules_dir = out_dir / cfg.APIDOCS_MODULES_SUBDIR
         modules_dir.mkdir(parents=True, exist_ok=True)
         expected = {
@@ -795,6 +889,7 @@ class ApiDocsWriter:
         for stale in sorted(modules_dir.glob("*.md")):
             if stale.name not in expected and stale.is_file() and not stale.is_symlink():
                 stale.unlink()
+        self._prune_jsonl(out_dir, pages)
         written: Dict[str, str] = {}
         for rel, text in sorted(pages.items()):
             target = out_dir / rel
@@ -814,3 +909,21 @@ class ApiDocsWriter:
             os.path.relpath(out_dir, root),
         )
         return written
+
+    def _prune_jsonl(self, out_dir: Path, pages: Dict[str, str]) -> None:
+        """Remove stale per-module JSONL files and a disabled monolithic api.json.
+
+        Args:
+            out_dir: API reference output directory.
+            pages: Pages about to be written (relative path to text).
+        """
+        cfg = self._config
+        jsonl_modules = out_dir / cfg.APIDOCS_JSONL_DIR / cfg.APIDOCS_JSONL_MODULES_SUBDIR
+        if jsonl_modules.is_dir():
+            for stale in sorted(jsonl_modules.glob("*.jsonl")):
+                rel = str(PurePosixPath(stale.relative_to(out_dir).as_posix()))
+                if rel not in pages and stale.is_file() and not stale.is_symlink():
+                    stale.unlink()
+        monolith = out_dir / cfg.APIDOCS_JSON_FILENAME
+        if not cfg.APIDOCS_JSON_MONOLITH and monolith.is_file() and not monolith.is_symlink():
+            monolith.unlink()

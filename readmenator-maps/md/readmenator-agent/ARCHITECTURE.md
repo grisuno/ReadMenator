@@ -40,6 +40,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_apidocs_page.py` -> `readmenator/_config.py`
 - `readmenator/_apidocs_page.py` -> `readmenator/_flowlayout.py`
 - `readmenator/_apidocs_page.py` -> `readmenator/_flowpage.py`
+- `readmenator/_apidocs_page.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_apidocs_render.py` -> `readmenator/_apidocs.py`
 - `readmenator/_apidocs_render.py` -> `readmenator/_apidocs_page.py`
 - `readmenator/_apidocs_render.py` -> `readmenator/_config.py`
@@ -75,6 +76,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_bundlegraph.py` -> `readmenator/_config.py`
 - `readmenator/_bundlegraph.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_bundlegraph.py` -> `readmenator/_graphlayout.py`
+- `readmenator/_bundlegraph.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_cache.py` -> `readmenator/_config.py`
 - `readmenator/_components.py` -> `readmenator/_cache.py`
 - `readmenator/_components.py` -> `readmenator/_config.py`
@@ -95,6 +97,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_dead_code.py` -> `readmenator/_config.py`
 - `readmenator/_dead_code.py` -> `readmenator/_models.py`
 - `readmenator/_diagrams.py` -> `readmenator/_config.py`
+- `readmenator/_diagrams.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_diagrams.py` -> `readmenator/_models.py`
 - `readmenator/_documentation.py` -> `readmenator/_analytics.py`
 - `readmenator/_documentation.py` -> `readmenator/_config.py`
@@ -124,10 +127,13 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_flowcharts.py` -> `readmenator/_models.py`
 - `readmenator/_flowcharts.py` -> `readmenator/_pytypes.py`
 - `readmenator/_flowcharts.py` -> `readmenator/_symindex.py`
+- `readmenator/_flowpage.py` -> `readmenator/_config.py`
 - `readmenator/_flowpage.py` -> `readmenator/_flowlayout.py`
+- `readmenator/_flowpage.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_config.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_forcegraph_page.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_graphlayout.py`
+- `readmenator/_forcegraph.py` -> `readmenator/_htmlpack.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_models.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_purpose.py`
 - `readmenator/_forcegraph.py` -> `readmenator/_rank.py`
@@ -144,6 +150,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_graphrag.py` -> `readmenator/_resolver.py`
 - `readmenator/_hotspots.py` -> `readmenator/_config.py`
 - `readmenator/_hotspots.py` -> `readmenator/_models.py`
+- `readmenator/_htmlpack.py` -> `readmenator/_config.py`
 - `readmenator/_layer_rules.py` -> `readmenator/_config.py`
 - `readmenator/_layer_rules.py` -> `readmenator/_models.py`
 - `readmenator/_layers.py` -> `readmenator/_models.py`
@@ -339,6 +346,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_bundlegraph.py` -> `readmenator/_bundlegraph.py`
 - `tests/test_bundlegraph.py` -> `readmenator/_config.py`
 - `tests/test_bundlegraph.py` -> `readmenator/_forcegraph.py`
+- `tests/test_bundlegraph.py` -> `readmenator/_htmlpack.py`
 - `tests/test_bundlegraph.py` -> `readmenator/_models.py`
 - `tests/test_cache.py` -> `readmenator/_cache.py`
 - `tests/test_cache.py` -> `readmenator/_config.py`
@@ -392,6 +400,9 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_hotspots.py` -> `readmenator/_config.py`
 - `tests/test_hotspots.py` -> `readmenator/_hotspots.py`
 - `tests/test_hotspots.py` -> `readmenator/_models.py`
+- `tests/test_htmlpack.py` -> `readmenator/_app.py`
+- `tests/test_htmlpack.py` -> `readmenator/_config.py`
+- `tests/test_htmlpack.py` -> `readmenator/_htmlpack.py`
 - `tests/test_integration.py` -> `readmenator/_app.py`
 - `tests/test_integration.py` -> `readmenator/_config.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_analytics.py`
@@ -403,6 +414,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_interactive_graph.py` -> `readmenator/_explorer.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_exporter.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_forcegraph.py`
+- `tests/test_interactive_graph.py` -> `readmenator/_htmlpack.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_models.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_provenance.py`
 - `tests/test_interactive_graph.py` -> `readmenator/_scantext.py`
@@ -484,17 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_sourceview.py` -> `readmenator/_bundlegraph.py`
 - `tests/test_sourceview.py` -> `readmenator/_config.py`
 - `tests/test_sourceview.py` -> `readmenator/_forcegraph.py`
-- `tests/test_sourceview.py` -> `readmenator/_models.py`
-- `tests/test_sourceview.py` -> `readmenator/_sourceview.py`
-- `tests/test_symindex.py` -> `readmenator/_config.py`
-- `tests/test_symindex.py` -> `readmenator/_models.py`
-- `tests/test_symindex.py` -> `readmenator/_symindex.py`
-- `tests/test_taint.py` -> `readmenator/_config.py`
-- `tests/test_taint.py` -> `readmenator/_models.py`
-- `tests/test_taint.py` -> `readmenator/_taint.py`
-- `tests/test_taint_bdd.py` -> `readmenator/_config.py`
-- `tests/test_taint_bdd.py` -> `readmenator/_models.py`
-- `tests/test_taint_bdd.py` -> `readmenator/_resolver.py`
-- `tests/test_taint_bdd.py` -> `readmenator/_scanner.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)

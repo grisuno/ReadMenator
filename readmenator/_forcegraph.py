@@ -24,6 +24,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from readmenator._config import Config
 from readmenator._forcegraph_page import FORCEGRAPH_PAGE_TEMPLATE
 from readmenator._graphlayout import ForceAtlas2Settings, fit_frames, forceatlas2_frames
+from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 from readmenator._models import AnalysisResult, Edge, Node, SecurityFinding
 from readmenator._purpose import file_purpose, first_sentence, truncate_words
 from readmenator._rank import file_pagerank
@@ -32,7 +33,7 @@ from readmenator._sourceview import SourceViewBuilder
 
 logger = logging.getLogger(__name__)
 
-_PLACEHOLDER = re.compile(r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS)__")
+_PLACEHOLDER = re.compile(r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS|LOADER)__")
 
 
 def family_color_from_name(
@@ -375,8 +376,6 @@ class ForceGraphRenderer:
         Returns:
             Complete HTML document as a string.
         """
-        data_json = json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
-        analytics_json = json.dumps(analytics or {}, ensure_ascii=False).replace("<", "\\u003c")
         safe_title = html.escape(title, quote=True)
         safe_vendor = html.escape(self.vendor_href(), quote=True)
         safe_cdn_2d = html.escape(self._config.FORCEGRAPH_CDN_JS_2D, quote=True)
@@ -394,8 +393,9 @@ class ForceGraphRenderer:
             "VENDOR_SRC": safe_vendor,
             "CDN_2D": safe_cdn_2d,
             "CDN_3D": safe_cdn_3d,
-            "DATA": data_json,
-            "ANALYTICS": analytics_json,
+            "DATA": payload_script("fg-data", payload, self._config, compact=False, escape="<"),
+            "ANALYTICS": payload_script("fg-analytics", analytics or {}, self._config, compact=False, escape="<"),
+            "LOADER": PAYLOAD_LOADER_JS,
             "SETTINGS": json.dumps(self.page_settings(payload, live_api=live_api)).replace("<", "\\u003c"),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], FORCEGRAPH_PAGE_TEMPLATE)

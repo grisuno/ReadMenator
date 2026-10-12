@@ -70,6 +70,11 @@
 - [`APIDOCS_INCLUDE_PRIVATE`](modules/readmenator._config.py.md#config-apidocs_include_private) attribute of `Config` in `readmenator._config`
 - [`APIDOCS_INCLUDE_TESTS`](modules/readmenator._config.py.md#config-apidocs_include_tests) attribute of `Config` in `readmenator._config`
 - [`APIDOCS_JSON_FILENAME`](modules/readmenator._config.py.md#config-apidocs_json_filename) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSON_MONOLITH`](modules/readmenator._config.py.md#config-apidocs_json_monolith) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSONL_DIR`](modules/readmenator._config.py.md#config-apidocs_jsonl_dir) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSONL_INDEX`](modules/readmenator._config.py.md#config-apidocs_jsonl_index) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSONL_MODULES_SUBDIR`](modules/readmenator._config.py.md#config-apidocs_jsonl_modules_subdir) attribute of `Config` in `readmenator._config`
+- [`APIDOCS_JSONL_WARNINGS`](modules/readmenator._config.py.md#config-apidocs_jsonl_warnings) attribute of `Config` in `readmenator._config`
 - [`APIDOCS_MAX_CALL_REFS`](modules/readmenator._config.py.md#config-apidocs_max_call_refs) attribute of `Config` in `readmenator._config`
 - [`APIDOCS_MAX_ENTITIES`](modules/readmenator._config.py.md#config-apidocs_max_entities) attribute of `Config` in `readmenator._config`
 - [`APIDOCS_MAX_WARNINGS_LISTED`](modules/readmenator._config.py.md#config-apidocs_max_warnings_listed) attribute of `Config` in `readmenator._config`
@@ -279,6 +284,7 @@
 - [`composite_score`](modules/readmenator._rank.py.md#rankeditem-composite_score) attribute of `RankedItem` in `readmenator._rank`
 - [`composite_test_weight`](modules/readmenator._rank.py.md#rankconfig-composite_test_weight) attribute of `RankConfig` in `readmenator._rank`
 - [`CompositeRanker`](modules/readmenator._rank.py.md#compositeranker) class in `readmenator._rank`
+- [`compress_text`](modules/readmenator._htmlpack.py.md#compress_text) function in `readmenator._htmlpack`
 - [`compute_hash`](modules/readmenator._cache.py.md#filecache-compute_hash) method of `FileCache` in `readmenator._cache`
 - [`compute_hashes`](modules/readmenator._cache.py.md#filecache-compute_hashes) method of `FileCache` in `readmenator._cache`
 - [`CONCEPT_DIALECTIC_MAX`](modules/readmenator._config.py.md#config-concept_dialectic_max) attribute of `Config` in `readmenator._config`
@@ -522,6 +528,7 @@
 - [`error`](modules/readmenator._mcp_server.py.md#mcprequest-error) method of `MCPRequest` in `readmenator._mcp_server`
 - [`errors`](modules/readmenator._diagrams.py.md#mapreceipt-errors) attribute of `MapReceipt` in `readmenator._diagrams`
 - [`escape_cell`](modules/readmenator._purpose.py.md#escape_cell) function in `readmenator._purpose`
+- [`escape_json_for_script`](modules/readmenator._htmlpack.py.md#escape_json_for_script) function in `readmenator._htmlpack`
 - [`estimated_impact`](modules/readmenator._models.py.md#refactoringplan-estimated_impact) attribute of `RefactoringPlan` in `readmenator._models`
 - [`evidence`](modules/readmenator._diagrams.py.md#mapdiagnostic-evidence) attribute of `MapDiagnostic` in `readmenator._diagrams`
 - [`examples`](modules/readmenator._docstrings.py.md#doccomment-examples) attribute of `DocComment` in `readmenator._docstrings`
@@ -961,6 +968,9 @@
 
 - [`JavaParser`](modules/readmenator.parsers._java.py.md#javaparser) class in `readmenator.parsers._java`
 - [`JavaScriptParser`](modules/readmenator.parsers._javascript.py.md#javascriptparser) class in `readmenator.parsers._javascript`
+- [`jsonl_index_path`](modules/readmenator._apidocs_render.py.md#jsonl_index_path) function in `readmenator._apidocs_render`
+- [`jsonl_pages`](modules/readmenator._apidocs_render.py.md#jsonl_pages) function in `readmenator._apidocs_render`
+- [`jsonl_warnings_path`](modules/readmenator._apidocs_render.py.md#jsonl_warnings_path) function in `readmenator._apidocs_render`
 - [`justification_paths`](modules/readmenator._rank.py.md#rankeditem-justification_paths) attribute of `RankedItem` in `readmenator._rank`
 
 <a id="k"></a>
@@ -1277,6 +1287,12 @@
 - [`pattern`](modules/readmenator._models.py.md#suggestedrule-pattern) attribute of `SuggestedRule` in `readmenator._models`
 - [`pattern`](modules/readmenator._yaralite.py.md#yaralitehit-pattern) attribute of `YaraLiteHit` in `readmenator._yaralite`
 - [`pattern`](modules/readmenator._yaralite.py.md#yaralitestring-pattern) attribute of `YaraLiteString` in `readmenator._yaralite`
+- [`PAYLOAD_COMPRESSION_ENABLED`](modules/readmenator._config.py.md#config-payload_compression_enabled) attribute of `Config` in `readmenator._config`
+- [`PAYLOAD_COMPRESSION_LEVEL`](modules/readmenator._config.py.md#config-payload_compression_level) attribute of `Config` in `readmenator._config`
+- [`PAYLOAD_COMPRESSION_MIN_BYTES`](modules/readmenator._config.py.md#config-payload_compression_min_bytes) attribute of `Config` in `readmenator._config`
+- [`PAYLOAD_ENCODING_GZIP`](modules/readmenator._htmlpack.py.md#payload_encoding_gzip) constant in `readmenator._htmlpack`
+- [`PAYLOAD_LOADER_JS`](modules/readmenator._htmlpack.py.md#payload_loader_js) constant in `readmenator._htmlpack`
+- [`payload_script`](modules/readmenator._htmlpack.py.md#payload_script) function in `readmenator._htmlpack`
 - [`personalized_pagerank`](modules/readmenator._rank.py.md#personalized_pagerank) function in `readmenator._rank`
 - [`PHPParser`](modules/readmenator.parsers._php.py.md#phpparser) class in `readmenator.parsers._php`
 - [`pluralize_symbol_kind`](modules/readmenator._models.py.md#pluralize_symbol_kind) function in `readmenator._models`
@@ -1355,7 +1371,9 @@
 - [`rating_explanation`](modules/readmenator._graphrag.py.md#ragcommunity-rating_explanation) attribute of `RagCommunity` in `readmenator._graphrag`
 - [`read`](modules/readmenator._mcp_server.py.md#mcpresource-read) method of `MCPResource` in `readmenator._mcp_server`
 - [`read`](modules/readmenator._memory.py.md#projectmemory-read) method of `ProjectMemory` in `readmenator._memory`
+- [`read_api_jsonl`](modules/readmenator._apidocs_render.py.md#read_api_jsonl) function in `readmenator._apidocs_render`
 - [`read_git_head`](modules/readmenator._gitmeta.py.md#read_git_head) function in `readmenator._gitmeta`
+- [`read_payload_script`](modules/readmenator._htmlpack.py.md#read_payload_script) function in `readmenator._htmlpack`
 - [`reading`](modules/readmenator._provenance.py.md#provenancefinding-reading) property of `ProvenanceFinding` in `readmenator._provenance`
 - [`README_INJECTION_ENABLED`](modules/readmenator._config.py.md#config-readme_injection_enabled) attribute of `Config` in `readmenator._config`
 - [`readme_injector`](modules/readmenator._pipeline.py.md#analyzerfactory-readme_injector) property of `AnalyzerFactory` in `readmenator._pipeline`
@@ -1521,6 +1539,7 @@
 - [`SHAPES`](modules/readmenator._flowlayout.py.md#shapes) constant in `readmenator._flowlayout`
 - [`ShellParser`](modules/readmenator.parsers._shell.py.md#shellparser) class in `readmenator.parsers._shell`
 - [`short_label`](modules/readmenator._video.py.md#short_label) function in `readmenator._video`
+- [`should_compress`](modules/readmenator._htmlpack.py.md#should_compress) function in `readmenator._htmlpack`
 - [`signature`](modules/readmenator._apidocs.py.md#apientity-signature) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`signature`](modules/readmenator._models.py.md#symbol-signature) attribute of `Symbol` in `readmenator._models`
 - [`signature`](modules/readmenator._symindex.py.md#symboldef-signature) attribute of `SymbolDef` in `readmenator._symindex`

@@ -1,6 +1,50 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_sarif.py
+- Doc: TestSarifExporterContract: Contract: SarifExporter produces valid SARIF v2.1.0 JSON.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestSarifExporterContract` (class, line 11) `class TestSarifExporterContract(TestCase)`
+  - `setUp` (method, line 14) `def setUp(self)`
+  - `_make_finding` (method, line 18) `def _make_finding(self, file_path, line, severity, rule_id, description, snippet, cwe)`
+  - `test_export_returns_valid_json` (method, line 38) `def test_export_returns_valid_json(self)`
+  - `test_export_includes_tool_info` (method, line 46) `def test_export_includes_tool_info(self)`
+  - `test_export_includes_rule` (method, line 54) `def test_export_includes_rule(self)`
+  - `test_export_includes_result` (method, line 62) `def test_export_includes_result(self)`
+  - `test_severity_maps_correctly` (method, line 73) `def test_severity_maps_correctly(self)`
+  - `test_privacy_mode_strips_snippets` (method, line 88) `def test_privacy_mode_strips_snippets(self)`
+  - `test_empty_findings_produces_valid_sarif` (method, line 97) `def test_empty_findings_produces_valid_sarif(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_sarif.py`
+
+## tests/test_scanner.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestScannerContract` (class, line 11) `class TestScannerContract(TestCase)`
+  - `setUp` (method, line 12) `def setUp(self)`
+  - `tearDown` (method, line 16) `def tearDown(self)`
+  - `_write` (method, line 20) `def _write(self, path, content)`
+  - `test_scans_python_files` (method, line 25) `def test_scans_python_files(self)`
+  - `test_ignores_env_and_vendor_dirs` (method, line 32) `def test_ignores_env_and_vendor_dirs(self)`
+  - `test_rejects_symlinks` (method, line 45) `def test_rejects_symlinks(self)`
+  - `test_skips_non_code_files` (method, line 59) `def test_skips_non_code_files(self)`
+  - `test_scans_multiple_languages` (method, line 70) `def test_scans_multiple_languages(self)`
+  - `test_respects_max_directory_depth` (method, line 79) `def test_respects_max_directory_depth(self)`
+  - `test_raises_on_invalid_directory` (method, line 89) `def test_raises_on_invalid_directory(self)`
+  - `test_import_edges_are_created` (method, line 94) `def test_import_edges_are_created(self)`
+  - `test_privacy_mode_strips_docs` (method, line 104) `def test_privacy_mode_strips_docs(self)`
+  - `test_module_docstring_extracted_as_file_doc` (method, line 114) `def test_module_docstring_extracted_as_file_doc(self)`
+  - `test_multiline_module_docstring_extracted` (method, line 121) `def test_multiline_module_docstring_extracted(self)`
+  - `test_coding_cookie_ignored_as_file_doc` (method, line 129) `def test_coding_cookie_ignored_as_file_doc(self)`
+  - `test_preprocessor_guards_ignored_as_file_doc` (method, line 136) `def test_preprocessor_guards_ignored_as_file_doc(self)`
+  - `test_scan_with_content_returns_content_map` (method, line 143) `def test_scan_with_content_returns_content_map(self)`
+  - `test_gitignore_respected_when_enabled` (method, line 151) `def test_gitignore_respected_when_enabled(self)`
+  - `test_gitignore_disabled_by_default` (method, line 162) `def test_gitignore_disabled_by_default(self)`
+  - `test_gitignore_glob_conversion` (method, line 171) `def test_gitignore_glob_conversion(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_scanner.py`
+
 ## tests/test_security.py
 - Doc: Contract tests for the static security analysis module.
 - Layer: testing

@@ -1,5 +1,5 @@
-# Subsystem: readmenator (page 1 of 4)
-Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmenator_p2.md), [KB_readmenator_p3.md](KB_readmenator_p3.md), [KB_readmenator_p4.md](KB_readmenator_p4.md)
+# Subsystem: readmenator (page 1 of 5)
+Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmenator_p2.md), [KB_readmenator_p3.md](KB_readmenator_p3.md), [KB_readmenator_p4.md](KB_readmenator_p4.md), [KB_readmenator_p5.md](KB_readmenator_p5.md)
 
 ## readmenator/__init__.py
 - Doc: ReadMenator -- Zero-token polyglot codebase knowledge graph generator.
@@ -195,7 +195,7 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Symbols:
   - `_payload` (function, line 29) `def _payload(reference, project_name, config)`
   - `render_api_site` (function, line 57) `def render_api_site(reference, project_name, config, flow_graphs)`
-- Depends on: `readmenator/_apidocs.py`, `readmenator/_config.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`
+- Depends on: `readmenator/_apidocs.py`, `readmenator/_config.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`, `readmenator/_htmlpack.py`
 - Imported by: `readmenator/_apidocs_render.py`, `tests/test_apidocs.py`, `tests/test_flowcharts.py`
 
 ## readmenator/_apidocs_render.py
@@ -205,43 +205,49 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Symbols:
   - `module_display_name` (function, line 64) `def module_display_name(entity)`
   - `page_slug` (function, line 75) `def page_slug(module_uid)`
-  - `anchor_slug` (function, line 81) `def anchor_slug(qualname)`
-  - `_cell` (function, line 86) `def _cell(text)`
-  - `_inline_code` (function, line 91) `def _inline_code(text)`
-  - `ApiLinker` (class, line 100) `class ApiLinker`
-  - `ApiMarkdownRenderer` (class, line 218) `class ApiMarkdownRenderer`
-  - `ApiDocsWriter` (class, line 733) `class ApiDocsWriter`
-  - `__init__` (method, line 103) `def __init__(self, reference)`
-  - `module_of` (method, line 120) `def module_of(self, entity)`
-  - `resolve` (method, line 124) `def resolve(self, name, context_file)`
-  - `href` (method, line 161) `def href(self, entity, from_module)`
-  - `link` (method, line 170) `def link(self, entity, from_module, label)`
-  - `link_uid` (method, line 175) `def link_uid(self, uid, from_module)`
-  - `autolink` (method, line 182) `def autolink(self, text, from_module)`
-  - `_replace` (method, line 202) `def _replace(self, match, from_module)`
-  - `__init__` (method, line 221) `def __init__(self, config)`
-  - `render` (method, line 229) `def render(self, reference, project_name)`
-  - `_module_link` (method, line 251) `def _module_link(self, linker, entity)`
-  - `_top_link` (method, line 256) `def _top_link(self, linker, entity, label)`
-  - `_summary` (method, line 261) `def _summary(self, entity)`
-  - `_index` (method, line 270) `def _index(self, reference, linker, project_name)`
-  - `_descendants` (method, line 325) `def _descendants(reference, uid)`
-  - `_hierarchy` (method, line 337) `def _hierarchy(self, reference, linker)`
-  - `_genindex` (method, line 374) `def _genindex(self, reference, linker)`
-  - `_coverage` (method, line 401) `def _coverage(self, reference, linker)`
-  - `_source_link` (method, line 451) `def _source_link(self, entity)`
-  - `_module` (method, line 459) `def _module(self, reference, linker, uid)`
-  - `_entity` (method, line 499) `def _entity(self, reference, linker, entity, module_uid, fence, level)`
-  - `_doc_block` (method, line 569) `def _doc_block(self, doc, linker, module_uid, entity)`
-  - `_merged_params` (method, line 622) `def _merged_params(entity, doc)`
-  - `_call_refs` (method, line 646) `def _call_refs(self, linker, entity, module_uid)`
-  - `_mermaid_id` (method, line 659) `def _mermaid_id(uid)`
-  - `_mermaid_label` (method, line 664) `def _mermaid_label(text)`
-  - `_class_diagram` (method, line 668) `def _class_diagram(self, reference, uid)`
-  - `_call_graph` (method, line 701) `def _call_graph(self, reference, uid)`
-  - `__init__` (method, line 736) `def __init__(self, config)`
-  - `write` (method, line 745) `def write(self, reference, project_root, project_name, architecture_markdown, flow_graphs)`
-  - `walk` (function, line 348) `def walk(entity, depth)`
+  - `jsonl_index_path` (function, line 81) `def jsonl_index_path(config)`
+  - `jsonl_warnings_path` (function, line 86) `def jsonl_warnings_path(config)`
+  - `_jsonl_line` (function, line 91) `def _jsonl_line(record)`
+  - `jsonl_pages` (function, line 96) `def jsonl_pages(reference, config)`
+  - `read_api_jsonl` (function, line 143) `def read_api_jsonl(api_dir, config)`
+  - `anchor_slug` (function, line 171) `def anchor_slug(qualname)`
+  - `_cell` (function, line 176) `def _cell(text)`
+  - `_inline_code` (function, line 181) `def _inline_code(text)`
+  - `ApiLinker` (class, line 190) `class ApiLinker`
+  - `ApiMarkdownRenderer` (class, line 308) `class ApiMarkdownRenderer`
+  - `ApiDocsWriter` (class, line 823) `class ApiDocsWriter`
+  - `__init__` (method, line 193) `def __init__(self, reference)`
+  - `module_of` (method, line 210) `def module_of(self, entity)`
+  - `resolve` (method, line 214) `def resolve(self, name, context_file)`
+  - `href` (method, line 251) `def href(self, entity, from_module)`
+  - `link` (method, line 260) `def link(self, entity, from_module, label)`
+  - `link_uid` (method, line 265) `def link_uid(self, uid, from_module)`
+  - `autolink` (method, line 272) `def autolink(self, text, from_module)`
+  - `_replace` (method, line 292) `def _replace(self, match, from_module)`
+  - `__init__` (method, line 311) `def __init__(self, config)`
+  - `render` (method, line 319) `def render(self, reference, project_name)`
+  - `_module_link` (method, line 341) `def _module_link(self, linker, entity)`
+  - `_top_link` (method, line 346) `def _top_link(self, linker, entity, label)`
+  - `_summary` (method, line 351) `def _summary(self, entity)`
+  - `_index` (method, line 360) `def _index(self, reference, linker, project_name)`
+  - `_descendants` (method, line 415) `def _descendants(reference, uid)`
+  - `_hierarchy` (method, line 427) `def _hierarchy(self, reference, linker)`
+  - `_genindex` (method, line 464) `def _genindex(self, reference, linker)`
+  - `_coverage` (method, line 491) `def _coverage(self, reference, linker)`
+  - `_source_link` (method, line 541) `def _source_link(self, entity)`
+  - `_module` (method, line 549) `def _module(self, reference, linker, uid)`
+  - `_entity` (method, line 589) `def _entity(self, reference, linker, entity, module_uid, fence, level)`
+  - `_doc_block` (method, line 659) `def _doc_block(self, doc, linker, module_uid, entity)`
+  - `_merged_params` (method, line 712) `def _merged_params(entity, doc)`
+  - `_call_refs` (method, line 736) `def _call_refs(self, linker, entity, module_uid)`
+  - `_mermaid_id` (method, line 749) `def _mermaid_id(uid)`
+  - `_mermaid_label` (method, line 754) `def _mermaid_label(text)`
+  - `_class_diagram` (method, line 758) `def _class_diagram(self, reference, uid)`
+  - `_call_graph` (method, line 791) `def _call_graph(self, reference, uid)`
+  - `__init__` (method, line 826) `def __init__(self, config)`
+  - `write` (method, line 835) `def write(self, reference, project_root, project_name, architecture_markdown, flow_graphs)`
+  - `_prune_jsonl` (method, line 913) `def _prune_jsonl(self, out_dir, pages)`
+  - `walk` (function, line 438) `def walk(entity, depth)`
 - Depends on: `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_config.py`, `readmenator/_docstrings.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_apidocs.py`
 
@@ -335,22 +341,22 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
   - `refactor_monolith` (method, line 1930) `def refactor_monolith(self, target_dir)`
   - `on_change` (function, line 1829) `def on_change()`
 - Depends on: `readmenator/_apidocs.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_explorer.py`, `readmenator/_flowcharts.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`, `readmenator/_gh_wiki.py`, `readmenator/_gitmeta.py`, `readmenator/_graphrag.py`, `readmenator/_layers.py`, `readmenator/_linter.py`, `readmenator/_models.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_rank.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_yaralite.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_apidocs.py`, `tests/test_bundlegraph.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_mcp_server.py`, `tests/test_sourceview.py`, `tests/test_video.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_mcp_server.py`, `tests/test_agent_friendliness.py`, `tests/test_apidocs.py`, `tests/test_bundlegraph.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_gh_wiki.py`, `tests/test_htmlpack.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_mcp_server.py`, `tests/test_sourceview.py`, `tests/test_video.py`
 
 ## readmenator/_bundlegraph.py
 - Doc: Edge bundle explorer: circle and sphere hierarchical edge bundling pages.
 - Layer: utility
 - Language: py
 - Symbols:
-  - `_json_script` (function, line 36) `def _json_script(value)`
-  - `BundleGraphRenderer` (class, line 48) `class BundleGraphRenderer`
-  - `__init__` (method, line 51) `def __init__(self, config)`
-  - `build_payload` (method, line 60) `def build_payload(self, force_payload)`
-  - `page_settings` (method, line 181) `def page_settings(self, force_payload, explorer_href, live_api)`
-  - `render` (method, line 225) `def render(self, force_payload, title, home_href, explorer_href, live_api)`
-  - `write` (method, line 263) `def write(self, output_path, force_payload, title, home_href, explorer_href)`
-  - `thumbnail_svg` (method, line 289) `def thumbnail_svg(self, force_payload)`
-- Depends on: `readmenator/_bundlegraph_page.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_graphlayout.py`
+  - `_json_script` (function, line 37) `def _json_script(value)`
+  - `BundleGraphRenderer` (class, line 49) `class BundleGraphRenderer`
+  - `__init__` (method, line 52) `def __init__(self, config)`
+  - `build_payload` (method, line 61) `def build_payload(self, force_payload)`
+  - `page_settings` (method, line 182) `def page_settings(self, force_payload, explorer_href, live_api)`
+  - `render` (method, line 226) `def render(self, force_payload, title, home_href, explorer_href, live_api)`
+  - `write` (method, line 265) `def write(self, output_path, force_payload, title, home_href, explorer_href)`
+  - `thumbnail_svg` (method, line 291) `def thumbnail_svg(self, force_payload)`
+- Depends on: `readmenator/_bundlegraph_page.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`, `tests/test_layout_quality.py`, `tests/test_sourceview.py`
 
 ## readmenator/_bundlegraph_page.py
@@ -469,7 +475,7 @@ Pages: [KB_readmenator.md](KB_readmenator.md), [KB_readmenator_p2.md](KB_readmen
 - Language: py
 - Symbols:
   - `Config` (class, line 15) `class Config`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_components.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_flowcharts.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_memory.py`, `readmenator/_ollama.py`, `readmenator/_pipeline.py`, `readmenator/_provenance.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_rule_gen.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_sourceview.py`, `readmenator/_symindex.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_wiki.py`, `readmenator/parsers/__init__.py`, `readmenator/parsers/_base.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_apidocs.py`, `tests/test_bundlegraph.py`, `tests/test_cache.py`, `tests/test_components.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_flowcharts.py`, `tests/test_gh_wiki.py`, `tests/test_graphrag.py`, `tests/test_hotspots.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_layer_rules.py`, `tests/test_layout_quality.py`, `tests/test_linter.py`, `tests/test_mcp_server.py`, `tests/test_memory.py`, `tests/test_ollama.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`, `tests/test_parsers_property.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_sourceview.py`, `tests/test_symindex.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_components.py`, `readmenator/_concepts.py`, `readmenator/_cursorrules_generator.py`, `readmenator/_dataflow.py`, `readmenator/_dead_code.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_flowcharts.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_htmlpack.py`, `readmenator/_layer_rules.py`, `readmenator/_linter.py`, `readmenator/_mcp_server.py`, `readmenator/_memory.py`, `readmenator/_ollama.py`, `readmenator/_pipeline.py`, `readmenator/_provenance.py`, `readmenator/_refactorizer.py`, `readmenator/_resolver.py`, `readmenator/_rule_gen.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_sourceview.py`, `readmenator/_symindex.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_watcher.py`, `readmenator/_wiki.py`, `readmenator/parsers/__init__.py`, `readmenator/parsers/_base.py`, `tests/test_agent_friendliness.py`, `tests/test_agent_output.py`, `tests/test_analyzer.py`, `tests/test_apidocs.py`, `tests/test_bundlegraph.py`, `tests/test_cache.py`, `tests/test_components.py`, `tests/test_concepts.py`, `tests/test_config.py`, `tests/test_cpg.py`, `tests/test_cursorrules.py`, `tests/test_dataflow.py`, `tests/test_dead_code.py`, `tests/test_diagrams.py`, `tests/test_documentation.py`, `tests/test_exporter.py`, `tests/test_flowcharts.py`, `tests/test_gh_wiki.py`, `tests/test_graphrag.py`, `tests/test_hotspots.py`, `tests/test_htmlpack.py`, `tests/test_integration.py`, `tests/test_interactive_graph.py`, `tests/test_layer_rules.py`, `tests/test_layout_quality.py`, `tests/test_linter.py`, `tests/test_mcp_server.py`, `tests/test_memory.py`, `tests/test_ollama.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`, `tests/test_parsers_property.py`, `tests/test_refactorizer.py`, `tests/test_rule_gen.py`, `tests/test_sarif.py`, `tests/test_scanner.py`, `tests/test_security.py`, `tests/test_sourceview.py`, `tests/test_symindex.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`, `tests/test_uml.py`, `tests/test_video.py`, `tests/test_wiki.py`
 
 ## readmenator/_cpg.py
 - Doc: Code Property Graph (CPG) generator emitting JSON-LD for AI agents.

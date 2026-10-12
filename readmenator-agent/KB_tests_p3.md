@@ -1,6 +1,38 @@
 # Subsystem: tests (page 3 of 4)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_mcp_server.py
+- Doc: Contract tests for the MCP server protocol and tool dispatch.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMCPProtocol` (class, line 21) `class TestMCPProtocol(TestCase)`
+  - `setUp` (method, line 24) `def setUp(self)`
+  - `tearDown` (method, line 33) `def tearDown(self)`
+  - `_make_request` (method, line 36) `def _make_request(self, method, params, msg_id)`
+  - `_call` (method, line 42) `def _call(self, req)`
+  - `test_initialize_exchanges_protocol_version` (method, line 49) `def test_initialize_exchanges_protocol_version(self)`
+  - `test_notifications_initialized_returns_no_response` (method, line 62) `def test_notifications_initialized_returns_no_response(self)`
+  - `test_unknown_method_returns_error` (method, line 67) `def test_unknown_method_returns_error(self)`
+  - `test_uninitialized_request_returns_error` (method, line 75) `def test_uninitialized_request_returns_error(self)`
+  - `test_list_tools_returns_all_tool_definitions` (method, line 85) `def test_list_tools_returns_all_tool_definitions(self)`
+  - `test_call_tool_without_initialize_returns_error` (method, line 115) `def test_call_tool_without_initialize_returns_error(self)`
+  - `test_call_tool_unknown_tool_returns_method_not_found` (method, line 123) `def test_call_tool_unknown_tool_returns_method_not_found(self)`
+  - `test_call_summary_tool_returns_content` (method, line 132) `def test_call_summary_tool_returns_content(self)`
+  - `test_call_query_tool_with_text_returns_results` (method, line 145) `def test_call_query_tool_with_text_returns_results(self)`
+  - `test_call_query_tool_missing_required_param_raises` (method, line 154) `def test_call_query_tool_missing_required_param_raises(self)`
+  - `test_list_resources_returns_resource_definitions` (method, line 168) `def test_list_resources_returns_resource_definitions(self)`
+  - `test_read_resource_summary_returns_json` (method, line 186) `def test_read_resource_summary_returns_json(self)`
+  - `test_read_resource_unknown_uri_returns_error` (method, line 197) `def test_read_resource_unknown_uri_returns_error(self)`
+  - `test_read_resource_kb_returns_markdown` (method, line 205) `def test_read_resource_kb_returns_markdown(self)`
+  - `_get_tool_def` (method, line 219) `def _get_tool_def(self, name)`
+  - `test_query_tool_requires_text_param` (method, line 226) `def test_query_tool_requires_text_param(self)`
+  - `test_explain_tool_requires_name_param` (method, line 230) `def test_explain_tool_requires_name_param(self)`
+  - `test_path_tool_requires_two_params` (method, line 234) `def test_path_tool_requires_two_params(self)`
+  - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
+  - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
+
 ## tests/test_memory.py
 - Doc: Contract tests for project memory, the session log, and agent skills.
 - Layer: testing
@@ -450,50 +482,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_write_rules_creates_files` (method, line 77) `def test_write_rules_creates_files(self)`
   - `test_rule_id_increments` (method, line 90) `def test_rule_id_increments(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_rule_gen.py`
-
-## tests/test_sarif.py
-- Doc: TestSarifExporterContract: Contract: SarifExporter produces valid SARIF v2.1.0 JSON.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestSarifExporterContract` (class, line 11) `class TestSarifExporterContract(TestCase)`
-  - `setUp` (method, line 14) `def setUp(self)`
-  - `_make_finding` (method, line 18) `def _make_finding(self, file_path, line, severity, rule_id, description, snippet, cwe)`
-  - `test_export_returns_valid_json` (method, line 38) `def test_export_returns_valid_json(self)`
-  - `test_export_includes_tool_info` (method, line 46) `def test_export_includes_tool_info(self)`
-  - `test_export_includes_rule` (method, line 54) `def test_export_includes_rule(self)`
-  - `test_export_includes_result` (method, line 62) `def test_export_includes_result(self)`
-  - `test_severity_maps_correctly` (method, line 73) `def test_severity_maps_correctly(self)`
-  - `test_privacy_mode_strips_snippets` (method, line 88) `def test_privacy_mode_strips_snippets(self)`
-  - `test_empty_findings_produces_valid_sarif` (method, line 97) `def test_empty_findings_produces_valid_sarif(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_sarif.py`
-
-## tests/test_scanner.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestScannerContract` (class, line 11) `class TestScannerContract(TestCase)`
-  - `setUp` (method, line 12) `def setUp(self)`
-  - `tearDown` (method, line 16) `def tearDown(self)`
-  - `_write` (method, line 20) `def _write(self, path, content)`
-  - `test_scans_python_files` (method, line 25) `def test_scans_python_files(self)`
-  - `test_ignores_env_and_vendor_dirs` (method, line 32) `def test_ignores_env_and_vendor_dirs(self)`
-  - `test_rejects_symlinks` (method, line 45) `def test_rejects_symlinks(self)`
-  - `test_skips_non_code_files` (method, line 59) `def test_skips_non_code_files(self)`
-  - `test_scans_multiple_languages` (method, line 70) `def test_scans_multiple_languages(self)`
-  - `test_respects_max_directory_depth` (method, line 79) `def test_respects_max_directory_depth(self)`
-  - `test_raises_on_invalid_directory` (method, line 89) `def test_raises_on_invalid_directory(self)`
-  - `test_import_edges_are_created` (method, line 94) `def test_import_edges_are_created(self)`
-  - `test_privacy_mode_strips_docs` (method, line 104) `def test_privacy_mode_strips_docs(self)`
-  - `test_module_docstring_extracted_as_file_doc` (method, line 114) `def test_module_docstring_extracted_as_file_doc(self)`
-  - `test_multiline_module_docstring_extracted` (method, line 121) `def test_multiline_module_docstring_extracted(self)`
-  - `test_coding_cookie_ignored_as_file_doc` (method, line 129) `def test_coding_cookie_ignored_as_file_doc(self)`
-  - `test_preprocessor_guards_ignored_as_file_doc` (method, line 136) `def test_preprocessor_guards_ignored_as_file_doc(self)`
-  - `test_scan_with_content_returns_content_map` (method, line 143) `def test_scan_with_content_returns_content_map(self)`
-  - `test_gitignore_respected_when_enabled` (method, line 151) `def test_gitignore_respected_when_enabled(self)`
-  - `test_gitignore_disabled_by_default` (method, line 162) `def test_gitignore_disabled_by_default(self)`
-  - `test_gitignore_glob_conversion` (method, line 171) `def test_gitignore_glob_conversion(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_scanner.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

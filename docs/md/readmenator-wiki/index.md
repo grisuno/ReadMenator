@@ -1,30 +1,30 @@
 # Second Brain
 
-*Last synthesized: 2026-10-12 | 147 files | 7 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-12 | 149 files | 7 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
 
 ## Vault Overview
 
-The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (81 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
+The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (82 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
 
-Surprising tissue lives between readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams: 14 extracted cross-community imports and 6 inferred bridges. Follow `connections.json` sorted by strength before refactoring.
+Surprising tissue lives between readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams: 15 extracted cross-community imports and 5 inferred bridges. Follow `connections.json` sorted by strength before refactoring.
 
-Open work clusters around documentation (86% file coverage), 0 security findings, 20 taint paths, and 5 suggested exploration questions in `queries.md`.
+Open work clusters around documentation (87% file coverage), 0 security findings, 20 taint paths, and 5 suggested exploration questions in `queries.md`.
 
 ## Stats
 
 | Metric | Value |
 |--------|-------|
-| Files | 147 |
-| Symbols | 2901 |
-| Resolved imports | 547 |
+| Files | 149 |
+| Symbols | 2934 |
+| Resolved imports | 559 |
 | Languages | js, py |
 | Communities | 7 |
-| Doc coverage | 86% (127/147 files) |
+| Doc coverage | 87% (129/149 files) |
 | Security findings | 0 |
-| Estimated read cost | ~79365 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~80632 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 
@@ -39,12 +39,12 @@ readmenator query "<question>" --target ReadMenator
 
 ## Concept Wiki
 
-- [readmenator: _graphrag (40 files, cohesion 0.39)](./community_0_readmenator_graphrag.md)
-- [readmenator/parsers (32 files, cohesion 0.51)](./community_1_readmenator_parsers.md)
-- [readmenator: _diagrams (29 files, cohesion 0.39)](./community_2_readmenator_diagrams.md)
-- [readmenator: _pipeline (26 files, cohesion 0.37)](./community_3_readmenator_pipeline.md)
-- [readmenator: _flowcharts (12 files, cohesion 0.49)](./community_4_readmenator_flowcharts.md)
-- [readmenator: _agent_injector (5 files, cohesion 0.40)](./community_5_readmenator_agent_injector.md)
+- [readmenator: _graphrag (38 files, cohesion 0.38)](./community_0_readmenator_graphrag.md)
+- [readmenator/parsers (34 files, cohesion 0.52)](./community_1_readmenator_parsers.md)
+- [readmenator: _diagrams (29 files, cohesion 0.38)](./community_2_readmenator_diagrams.md)
+- [readmenator: _pipeline (20 files, cohesion 0.28)](./community_3_readmenator_pipeline.md)
+- [readmenator: _graphlayout (13 files, cohesion 0.38)](./community_4_readmenator_graphlayout.md)
+- [readmenator: _flowcharts (12 files, cohesion 0.47)](./community_5_readmenator_flowcharts.md)
 - [orphans (3 files, cohesion 0.00)](./community_6_orphans.md)
 
 ## God Nodes
@@ -52,23 +52,23 @@ readmenator query "<question>" --target ReadMenator
 | File | Score |
 |------|-------|
 | `readmenator/_models.py` | 206.3 |
-| `readmenator/_config.py` | 186.1 |
+| `readmenator/_config.py` | 192.1 |
 | `readmenator/_pipeline.py` | 91.2 |
-| `readmenator/_app.py` | 86.4 |
+| `readmenator/_app.py` | 88.4 |
 | `readmenator/parsers/__init__.py` | 48.2 |
 
 ## Strongest Connections
 
 - 2 -> 0: depends_on (strength 0.9, EXTRACTED)
-- 2 -> 4: depends_on (strength 0.9, EXTRACTED)
-- 2 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 2 -> 5: depends_on (strength 0.9, EXTRACTED)
+- 2 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 2 -> 3: depends_on (strength 0.9, EXTRACTED)
 - 0 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 3 -> 0: depends_on (strength 0.9, EXTRACTED)
 - 3 -> 1: depends_on (strength 0.9, EXTRACTED)
-- 4 -> 0: depends_on (strength 0.9, EXTRACTED)
-- 4 -> 1: depends_on (strength 0.9, EXTRACTED)
+- 5 -> 0: depends_on (strength 0.9, EXTRACTED)
+- 5 -> 1: depends_on (strength 0.9, EXTRACTED)
+- 5 -> 4: depends_on (strength 0.9, EXTRACTED)
 
 ## Navigation Tips
 

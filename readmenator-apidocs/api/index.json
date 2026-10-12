@@ -1,0 +1,1057 @@
+{
+ "schema_version": 1,
+ "format": "jsonl",
+ "meta": {
+  "modules": 95,
+  "entities": 1887,
+  "languages": {
+   "py": 95
+  },
+  "kinds": {
+   "attribute": 989,
+   "class": 169,
+   "classmethod": 1,
+   "constant": 70,
+   "constructor": 76,
+   "enum": 1,
+   "exception": 1,
+   "function": 110,
+   "method": 310,
+   "module": 95,
+   "property": 60,
+   "protocol": 1,
+   "staticmethod": 4
+  },
+  "truncated": false,
+  "skipped_files": 54,
+  "privacy_mode": false
+ },
+ "coverage": {
+  "overall": {
+   "documented": 681,
+   "total": 828,
+   "percent": 82.2
+  },
+  "by_kind": {
+   "class": {
+    "documented": 158,
+    "total": 169,
+    "percent": 93.5
+   },
+   "classmethod": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "constructor": {
+    "documented": 45,
+    "total": 76,
+    "percent": 59.2
+   },
+   "enum": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "exception": {
+    "documented": 0,
+    "total": 1,
+    "percent": 0.0
+   },
+   "function": {
+    "documented": 106,
+    "total": 110,
+    "percent": 96.4
+   },
+   "method": {
+    "documented": 235,
+    "total": 310,
+    "percent": 75.8
+   },
+   "module": {
+    "documented": 94,
+    "total": 95,
+    "percent": 98.9
+   },
+   "property": {
+    "documented": 36,
+    "total": 60,
+    "percent": 60.0
+   },
+   "protocol": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "staticmethod": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   }
+  },
+  "by_module": {
+   "readmenator.py": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "readmenator/__init__.py": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "readmenator/__main__.py": {
+    "documented": 1,
+    "total": 3,
+    "percent": 33.3
+   },
+   "readmenator/_agent_injector.py": {
+    "documented": 6,
+    "total": 7,
+    "percent": 85.7
+   },
+   "readmenator/_agent_output.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_analytics.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_analyzer.py": {
+    "documented": 6,
+    "total": 6,
+    "percent": 100.0
+   },
+   "readmenator/_apidocs.py": {
+    "documented": 16,
+    "total": 16,
+    "percent": 100.0
+   },
+   "readmenator/_apidocs_page.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/_apidocs_render.py": {
+    "documented": 22,
+    "total": 22,
+    "percent": 100.0
+   },
+   "readmenator/_app.py": {
+    "documented": 28,
+    "total": 56,
+    "percent": 50.0
+   },
+   "readmenator/_bundlegraph.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_bundlegraph_page.py": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "readmenator/_cache.py": {
+    "documented": 7,
+    "total": 14,
+    "percent": 50.0
+   },
+   "readmenator/_category.py": {
+    "documented": 11,
+    "total": 22,
+    "percent": 50.0
+   },
+   "readmenator/_components.py": {
+    "documented": 11,
+    "total": 11,
+    "percent": 100.0
+   },
+   "readmenator/_concepts.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_config.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/_cpg.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_cursorrules_generator.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_dataflow.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_dead_code.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_diagrams.py": {
+    "documented": 33,
+    "total": 33,
+    "percent": 100.0
+   },
+   "readmenator/_docstrings.py": {
+    "documented": 12,
+    "total": 12,
+    "percent": 100.0
+   },
+   "readmenator/_documentation.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_embed.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_exclusions.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
+   "readmenator/_explain.py": {
+    "documented": 3,
+    "total": 3,
+    "percent": 100.0
+   },
+   "readmenator/_explorer.py": {
+    "documented": 9,
+    "total": 9,
+    "percent": 100.0
+   },
+   "readmenator/_exporter.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
+   "readmenator/_flowcharts.py": {
+    "documented": 30,
+    "total": 30,
+    "percent": 100.0
+   },
+   "readmenator/_flowlayout.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
+   "readmenator/_flowpage.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_forcegraph.py": {
+    "documented": 17,
+    "total": 17,
+    "percent": 100.0
+   },
+   "readmenator/_forcegraph_page.py": {
+    "documented": 1,
+    "total": 1,
+    "percent": 100.0
+   },
+   "readmenator/_gh_wiki.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
+   "readmenator/_gitmeta.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/_graphlayout.py": {
+    "documented": 14,
+    "total": 14,
+    "percent": 100.0
+   },
+   "readmenator/_graphrag.py": {
+    "documented": 28,
+    "total": 28,
+    "percent": 100.0
+   },
+   "readmenator/_hotspots.py": {
+    "documented": 5,
+    "total": 6,
+    "percent": 83.3
+   },
+   "readmenator/_htmlpack.py": {
+    "documented": 6,
+    "total": 6,
+    "percent": 100.0
+   },
+   "readmenator/_layer_rules.py": {
+    "documented": 4,
+    "total": 5,
+    "percent": 80.0
+   },
+   "readmenator/_layers.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_linter.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_mcp_server.py": {
+    "documented": 2,
+    "total": 23,
+    "percent": 8.7
+   },
+   "readmenator/_memory.py": {
+    "documented": 14,
+    "total": 14,
+    "percent": 100.0
+   },
+   "readmenator/_mermaid.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/_models.py": {
+    "documented": 24,
+    "total": 24,
+    "percent": 100.0
+   },
+   "readmenator/_ollama.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_pipeline.py": {
+    "documented": 31,
+    "total": 53,
+    "percent": 58.5
+   },
+   "readmenator/_projections.py": {
+    "documented": 8,
+    "total": 16,
+    "percent": 50.0
+   },
+   "readmenator/_provenance.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_purpose.py": {
+    "documented": 7,
+    "total": 7,
+    "percent": 100.0
+   },
+   "readmenator/_pytypes.py": {
+    "documented": 11,
+    "total": 11,
+    "percent": 100.0
+   },
+   "readmenator/_query.py": {
+    "documented": 9,
+    "total": 9,
+    "percent": 100.0
+   },
+   "readmenator/_rank.py": {
+    "documented": 13,
+    "total": 16,
+    "percent": 81.2
+   },
+   "readmenator/_readme_injector.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_refactorizer.py": {
+    "documented": 3,
+    "total": 5,
+    "percent": 60.0
+   },
+   "readmenator/_resolver.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_rule_gen.py": {
+    "documented": 4,
+    "total": 5,
+    "percent": 80.0
+   },
+   "readmenator/_sarif.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_scanner.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_scantext.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_security.py": {
+    "documented": 4,
+    "total": 7,
+    "percent": 57.1
+   },
+   "readmenator/_skill_installer.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_sourceview.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
+   "readmenator/_symindex.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
+   "readmenator/_taint.py": {
+    "documented": 3,
+    "total": 4,
+    "percent": 75.0
+   },
+   "readmenator/_uml.py": {
+    "documented": 1,
+    "total": 5,
+    "percent": 20.0
+   },
+   "readmenator/_video.py": {
+    "documented": 38,
+    "total": 38,
+    "percent": 100.0
+   },
+   "readmenator/_watcher.py": {
+    "documented": 5,
+    "total": 5,
+    "percent": 100.0
+   },
+   "readmenator/_wiki.py": {
+    "documented": 6,
+    "total": 6,
+    "percent": 100.0
+   },
+   "readmenator/_yaralite.py": {
+    "documented": 9,
+    "total": 9,
+    "percent": 100.0
+   },
+   "readmenator/parsers/__init__.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_assembly.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_base.py": {
+    "documented": 4,
+    "total": 4,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_c.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_csharp.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_dart.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_elixir.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_gdscript.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_go.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_java.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_javascript.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_kotlin.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_lua.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_nim.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_php.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_python.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_ruby.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_rust.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_scala.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_shell.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator/parsers/_swift.py": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
+   "readmenator_orchestrator.py": {
+    "documented": 1,
+    "total": 26,
+    "percent": 3.8
+   }
+  }
+ },
+ "modules": [
+  {
+   "uid": "readmenator.py",
+   "path": "modules/readmenator.py.jsonl",
+   "entities": 1
+  },
+  {
+   "uid": "readmenator/__init__.py",
+   "path": "modules/readmenator.__init__.py.jsonl",
+   "entities": 1
+  },
+  {
+   "uid": "readmenator/__main__.py",
+   "path": "modules/readmenator.__main__.py.jsonl",
+   "entities": 3
+  },
+  {
+   "uid": "readmenator/_agent_injector.py",
+   "path": "modules/readmenator._agent_injector.py.jsonl",
+   "entities": 7
+  },
+  {
+   "uid": "readmenator/_agent_output.py",
+   "path": "modules/readmenator._agent_output.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_analytics.py",
+   "path": "modules/readmenator._analytics.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_analyzer.py",
+   "path": "modules/readmenator._analyzer.py.jsonl",
+   "entities": 6
+  },
+  {
+   "uid": "readmenator/_apidocs.py",
+   "path": "modules/readmenator._apidocs.py.jsonl",
+   "entities": 65
+  },
+  {
+   "uid": "readmenator/_apidocs_page.py",
+   "path": "modules/readmenator._apidocs_page.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/_apidocs_render.py",
+   "path": "modules/readmenator._apidocs_render.py.jsonl",
+   "entities": 24
+  },
+  {
+   "uid": "readmenator/_app.py",
+   "path": "modules/readmenator._app.py.jsonl",
+   "entities": 56
+  },
+  {
+   "uid": "readmenator/_bundlegraph.py",
+   "path": "modules/readmenator._bundlegraph.py.jsonl",
+   "entities": 11
+  },
+  {
+   "uid": "readmenator/_bundlegraph_page.py",
+   "path": "modules/readmenator._bundlegraph_page.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/_cache.py",
+   "path": "modules/readmenator._cache.py.jsonl",
+   "entities": 14
+  },
+  {
+   "uid": "readmenator/_category.py",
+   "path": "modules/readmenator._category.py.jsonl",
+   "entities": 37
+  },
+  {
+   "uid": "readmenator/_components.py",
+   "path": "modules/readmenator._components.py.jsonl",
+   "entities": 11
+  },
+  {
+   "uid": "readmenator/_concepts.py",
+   "path": "modules/readmenator._concepts.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_config.py",
+   "path": "modules/readmenator._config.py.jsonl",
+   "entities": 517
+  },
+  {
+   "uid": "readmenator/_cpg.py",
+   "path": "modules/readmenator._cpg.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_cursorrules_generator.py",
+   "path": "modules/readmenator._cursorrules_generator.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_dataflow.py",
+   "path": "modules/readmenator._dataflow.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_dead_code.py",
+   "path": "modules/readmenator._dead_code.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_diagrams.py",
+   "path": "modules/readmenator._diagrams.py.jsonl",
+   "entities": 74
+  },
+  {
+   "uid": "readmenator/_docstrings.py",
+   "path": "modules/readmenator._docstrings.py.jsonl",
+   "entities": 36
+  },
+  {
+   "uid": "readmenator/_documentation.py",
+   "path": "modules/readmenator._documentation.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_embed.py",
+   "path": "modules/readmenator._embed.py.jsonl",
+   "entities": 8
+  },
+  {
+   "uid": "readmenator/_exclusions.py",
+   "path": "modules/readmenator._exclusions.py.jsonl",
+   "entities": 14
+  },
+  {
+   "uid": "readmenator/_explain.py",
+   "path": "modules/readmenator._explain.py.jsonl",
+   "entities": 3
+  },
+  {
+   "uid": "readmenator/_explorer.py",
+   "path": "modules/readmenator._explorer.py.jsonl",
+   "entities": 9
+  },
+  {
+   "uid": "readmenator/_exporter.py",
+   "path": "modules/readmenator._exporter.py.jsonl",
+   "entities": 10
+  },
+  {
+   "uid": "readmenator/_flowcharts.py",
+   "path": "modules/readmenator._flowcharts.py.jsonl",
+   "entities": 50
+  },
+  {
+   "uid": "readmenator/_flowlayout.py",
+   "path": "modules/readmenator._flowlayout.py.jsonl",
+   "entities": 56
+  },
+  {
+   "uid": "readmenator/_flowpage.py",
+   "path": "modules/readmenator._flowpage.py.jsonl",
+   "entities": 6
+  },
+  {
+   "uid": "readmenator/_forcegraph.py",
+   "path": "modules/readmenator._forcegraph.py.jsonl",
+   "entities": 17
+  },
+  {
+   "uid": "readmenator/_forcegraph_page.py",
+   "path": "modules/readmenator._forcegraph_page.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/_gh_wiki.py",
+   "path": "modules/readmenator._gh_wiki.py.jsonl",
+   "entities": 16
+  },
+  {
+   "uid": "readmenator/_gitmeta.py",
+   "path": "modules/readmenator._gitmeta.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/_graphlayout.py",
+   "path": "modules/readmenator._graphlayout.py.jsonl",
+   "entities": 34
+  },
+  {
+   "uid": "readmenator/_graphrag.py",
+   "path": "modules/readmenator._graphrag.py.jsonl",
+   "entities": 75
+  },
+  {
+   "uid": "readmenator/_hotspots.py",
+   "path": "modules/readmenator._hotspots.py.jsonl",
+   "entities": 6
+  },
+  {
+   "uid": "readmenator/_htmlpack.py",
+   "path": "modules/readmenator._htmlpack.py.jsonl",
+   "entities": 8
+  },
+  {
+   "uid": "readmenator/_layer_rules.py",
+   "path": "modules/readmenator._layer_rules.py.jsonl",
+   "entities": 8
+  },
+  {
+   "uid": "readmenator/_layers.py",
+   "path": "modules/readmenator._layers.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_linter.py",
+   "path": "modules/readmenator._linter.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_mcp_server.py",
+   "path": "modules/readmenator._mcp_server.py.jsonl",
+   "entities": 27
+  },
+  {
+   "uid": "readmenator/_memory.py",
+   "path": "modules/readmenator._memory.py.jsonl",
+   "entities": 23
+  },
+  {
+   "uid": "readmenator/_mermaid.py",
+   "path": "modules/readmenator._mermaid.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/_models.py",
+   "path": "modules/readmenator._models.py.jsonl",
+   "entities": 140
+  },
+  {
+   "uid": "readmenator/_ollama.py",
+   "path": "modules/readmenator._ollama.py.jsonl",
+   "entities": 8
+  },
+  {
+   "uid": "readmenator/_pipeline.py",
+   "path": "modules/readmenator._pipeline.py.jsonl",
+   "entities": 53
+  },
+  {
+   "uid": "readmenator/_projections.py",
+   "path": "modules/readmenator._projections.py.jsonl",
+   "entities": 17
+  },
+  {
+   "uid": "readmenator/_provenance.py",
+   "path": "modules/readmenator._provenance.py.jsonl",
+   "entities": 15
+  },
+  {
+   "uid": "readmenator/_purpose.py",
+   "path": "modules/readmenator._purpose.py.jsonl",
+   "entities": 7
+  },
+  {
+   "uid": "readmenator/_pytypes.py",
+   "path": "modules/readmenator._pytypes.py.jsonl",
+   "entities": 11
+  },
+  {
+   "uid": "readmenator/_query.py",
+   "path": "modules/readmenator._query.py.jsonl",
+   "entities": 9
+  },
+  {
+   "uid": "readmenator/_rank.py",
+   "path": "modules/readmenator._rank.py.jsonl",
+   "entities": 40
+  },
+  {
+   "uid": "readmenator/_readme_injector.py",
+   "path": "modules/readmenator._readme_injector.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_refactorizer.py",
+   "path": "modules/readmenator._refactorizer.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_resolver.py",
+   "path": "modules/readmenator._resolver.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_rule_gen.py",
+   "path": "modules/readmenator._rule_gen.py.jsonl",
+   "entities": 7
+  },
+  {
+   "uid": "readmenator/_sarif.py",
+   "path": "modules/readmenator._sarif.py.jsonl",
+   "entities": 7
+  },
+  {
+   "uid": "readmenator/_scanner.py",
+   "path": "modules/readmenator._scanner.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_scantext.py",
+   "path": "modules/readmenator._scantext.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_security.py",
+   "path": "modules/readmenator._security.py.jsonl",
+   "entities": 14
+  },
+  {
+   "uid": "readmenator/_skill_installer.py",
+   "path": "modules/readmenator._skill_installer.py.jsonl",
+   "entities": 9
+  },
+  {
+   "uid": "readmenator/_sourceview.py",
+   "path": "modules/readmenator._sourceview.py.jsonl",
+   "entities": 12
+  },
+  {
+   "uid": "readmenator/_symindex.py",
+   "path": "modules/readmenator._symindex.py.jsonl",
+   "entities": 31
+  },
+  {
+   "uid": "readmenator/_taint.py",
+   "path": "modules/readmenator._taint.py.jsonl",
+   "entities": 7
+  },
+  {
+   "uid": "readmenator/_uml.py",
+   "path": "modules/readmenator._uml.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_video.py",
+   "path": "modules/readmenator._video.py.jsonl",
+   "entities": 57
+  },
+  {
+   "uid": "readmenator/_watcher.py",
+   "path": "modules/readmenator._watcher.py.jsonl",
+   "entities": 5
+  },
+  {
+   "uid": "readmenator/_wiki.py",
+   "path": "modules/readmenator._wiki.py.jsonl",
+   "entities": 6
+  },
+  {
+   "uid": "readmenator/_yaralite.py",
+   "path": "modules/readmenator._yaralite.py.jsonl",
+   "entities": 29
+  },
+  {
+   "uid": "readmenator/parsers/__init__.py",
+   "path": "modules/readmenator.parsers.__init__.py.jsonl",
+   "entities": 3
+  },
+  {
+   "uid": "readmenator/parsers/_assembly.py",
+   "path": "modules/readmenator.parsers._assembly.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_base.py",
+   "path": "modules/readmenator.parsers._base.py.jsonl",
+   "entities": 4
+  },
+  {
+   "uid": "readmenator/parsers/_c.py",
+   "path": "modules/readmenator.parsers._c.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_csharp.py",
+   "path": "modules/readmenator.parsers._csharp.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_dart.py",
+   "path": "modules/readmenator.parsers._dart.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_elixir.py",
+   "path": "modules/readmenator.parsers._elixir.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_gdscript.py",
+   "path": "modules/readmenator.parsers._gdscript.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_go.py",
+   "path": "modules/readmenator.parsers._go.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_java.py",
+   "path": "modules/readmenator.parsers._java.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_javascript.py",
+   "path": "modules/readmenator.parsers._javascript.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_kotlin.py",
+   "path": "modules/readmenator.parsers._kotlin.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_lua.py",
+   "path": "modules/readmenator.parsers._lua.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_nim.py",
+   "path": "modules/readmenator.parsers._nim.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_php.py",
+   "path": "modules/readmenator.parsers._php.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_python.py",
+   "path": "modules/readmenator.parsers._python.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_ruby.py",
+   "path": "modules/readmenator.parsers._ruby.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_rust.py",
+   "path": "modules/readmenator.parsers._rust.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_scala.py",
+   "path": "modules/readmenator.parsers._scala.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_shell.py",
+   "path": "modules/readmenator.parsers._shell.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator/parsers/_swift.py",
+   "path": "modules/readmenator.parsers._swift.py.jsonl",
+   "entities": 2
+  },
+  {
+   "uid": "readmenator_orchestrator.py",
+   "path": "modules/readmenator_orchestrator.py.jsonl",
+   "entities": 41
+  }
+ ],
+ "warnings": {
+  "path": "warnings.jsonl",
+  "total": 131
+ },
+ "usage": [
+  "grep -h '\"name\":\"<Name>\"' readmenator-apidocs/api/modules/*.jsonl",
+  "grep -h '\"qualname\":\"<Owner.method>\"' readmenator-apidocs/api/modules/*.jsonl",
+  "cat readmenator-apidocs/api/modules/<module-slug>.jsonl",
+  "grep -h '\"code\":\"DOC001\"' readmenator-apidocs/api/warnings.jsonl"
+ ]
+}

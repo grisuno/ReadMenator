@@ -54,7 +54,7 @@ This community groups 3 file(s) rooted at `readmenator/_vendor` with dominant la
 
 ## Connections
 
-- [INFERRED] shares_context community 0 <-> 6 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _graphrag) and community 6 (orphans).
+- No cross-community bridges recorded. This community is self-contained.
 
 ## Risks
 

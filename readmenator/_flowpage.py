@@ -16,11 +16,13 @@ from __future__ import annotations
 import html
 import json
 import re
-from typing import Dict, List
+from typing import Dict, List, Optional
 
+from readmenator._config import Config
 from readmenator._flowlayout import FlowGraph
+from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
-_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|API|CSS|JS)@@")
+_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|API|CSS|JS|LOADER)@@")
 
 FLOW_VIEWER_CSS = r"""
 .fv-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:18px 0;overflow:hidden}
@@ -201,14 +203,15 @@ _PAGE = r"""<!doctype html>
 <body>
 <header><h1>@@TITLE@@</h1>@@API@@<span class="sp"></span><button id="fv-theme" title="Toggle dark and light theme">Theme</button></header>
 <main><p class="fv-cap">Every diagram is computed from the source with zero tokens and laid out offline: tiers come from a feedback-arc-set ordering of the component graph, flows from the resolved call graph and the Python syntax tree. Click any box for its signature, docs, and files.</p><div id="fv-host"></div></main>
-<script type="application/json" id="fv-data">@@DATA@@</script>
+@@DATA@@
 <script>@@JS@@</script>
+<script>@@LOADER@@</script>
 <script>
 (function(){var root=document.documentElement;try{var t=localStorage.getItem("readmenator-theme");if(t)root.setAttribute("data-theme",t);}catch(e){}
-var data=JSON.parse(document.getElementById("fv-data").textContent);
+readmenatorPayload("fv-data",{graphs:[],api:""}).then(function(data){
 function draw(){window.ReadmenatorFlows.mount(document.getElementById("fv-host"),data.graphs,{apiHref:data.api});}
 document.getElementById("fv-theme").addEventListener("click",function(){var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");var n=cur==="light"?"dark":"light";root.setAttribute("data-theme",n);try{localStorage.setItem("readmenator-theme",n);}catch(e){}draw();});
-draw();})();
+draw();},readmenatorPayloadError);})();
 </script>
 </body>
 </html>
@@ -221,13 +224,16 @@ def flows_payload_json(graphs: List[FlowGraph], api_href: str = "") -> str:
     return data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
 
 
-def render_flows_page(graphs: List[FlowGraph], project_name: str, api_href: str = "") -> str:
+def render_flows_page(
+    graphs: List[FlowGraph], project_name: str, api_href: str = "", config: Optional[Config] = None,
+) -> str:
     """Render the standalone architecture and execution-flow page.
 
     Args:
         graphs: Laid-out graphs from build_flow_graphs().
         project_name: Display name.
         api_href: Relative link to the API reference index.html ("" hides links).
+        config: Application configuration (payload compression); defaults to Config().
 
     Returns:
         Complete self-contained HTML document (zero external requests).
@@ -235,7 +241,8 @@ def render_flows_page(graphs: List[FlowGraph], project_name: str, api_href: str 
     title = html.escape(f"{project_name}: architecture and execution flows")
     api = f'<a href="{html.escape(api_href, quote=True)}">API reference</a>' if api_href else ""
     values: Dict[str, str] = {
-        "TITLE": title, "DATA": flows_payload_json(graphs, api_href), "API": api,
+        "TITLE": title, "API": api, "LOADER": PAYLOAD_LOADER_JS,
+        "DATA": payload_script("fv-data", {"graphs": [g.to_dict() for g in graphs], "api": api_href}, config or Config()),
         "CSS": _THEME_CSS + FLOW_VIEWER_CSS, "JS": FLOW_VIEWER_JS,
     }
     return _PLACEHOLDER_RE.sub(lambda m: values[m.group(1)], _PAGE)

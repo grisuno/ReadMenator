@@ -1,8 +1,9 @@
 """HTML page template for the edge bundle explorer.
 
 The template is one self-contained document with placeholders
-(__TITLE__, __HOME__, __EXPLORER__, __DATA__, __SETTINGS__) filled by
-BundleGraphRenderer.render in a single regex pass. Everything is drawn
+(__TITLE__, __HOME__, __EXPLORER__, __DATA__, __SETTINGS__, __LOADER__) filled
+by BundleGraphRenderer.render in a single regex pass; the bundle payload is a
+payload script element (plain JSON, or gzip+base64 when large). Everything is drawn
 on one canvas with no external requests: the 2D view lays files on a
 circle grouped by community, the 3D view lays them on a sphere of
 community caps projected through a small perspective camera, and in
@@ -175,10 +176,12 @@ html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;
 <div id="src-scrim"></div>
 <aside id="src-viewer" role="dialog" aria-modal="true" aria-labelledby="src-title" aria-hidden="true"><div class="src-bar"><h2 id="src-title">Source</h2><span id="src-lang" class="badge"></span><button type="button" id="src-close" title="Close source viewer ( Esc )">Close</button></div><div id="src-meta" class="src-meta">Pick View on any file to read it here with syntax colors.</div><div id="src-body" class="src-body" tabindex="0"></div><div class="src-hint">Hover a symbol for docs &middot; Ctrl+Click jumps to its definition &middot; Esc closes</div></aside>
 <div id="src-tip" role="tooltip"></div>
+<script>__LOADER__</script>
+__DATA__
 <script>
-(function(){
+readmenatorPayload("bundle-data",{}).then(function(__rmPayload){
 "use strict";
-const DATA=__DATA__;
+const DATA=__rmPayload;
 const CFG=__SETTINGS__;
 const NODES=DATA.nodes||[],GROUPS=DATA.groups||[],EDGES=DATA.edges||[];
 const $=id=>document.getElementById(id);
@@ -762,7 +765,7 @@ $("src-body").addEventListener("mouseleave",()=>{$("src-tip").style.display="non
 $("src-body").addEventListener("click",ev=>{const t=ev.target.closest?ev.target.closest(".tok-sym"):null;if(!t)return;if(ev.ctrlKey||ev.metaKey){ev.preventDefault();srcFollow(t.dataset.sym,SRC.file);}else srcHover(t.dataset.sym,ev.clientX,ev.clientY);});
 window.ReadmenatorBundles=Object.freeze({state:S,focusNode,focusGroup,setView,setBeta,setColor,setDir,openSource,closeSource});
 requestAnimationFrame(frame);
-})();
+},readmenatorPayloadError);
 </script>
 </body>
 </html>

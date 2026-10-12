@@ -16,6 +16,17 @@ the readmenator theme key.
 
 - **Functions:** [`render_api_site`](#render_api_site)
 
+## Call Graph
+
+Solid arrows stay in this module, dashed arrows leave it.
+
+```mermaid
+flowchart LR
+    n_readmenator__apidocs_page_py__render_api_site(["render_api_site"])
+    n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
+    n_readmenator__apidocs_page_py__render_api_site -.-> n_readmenator__htmlpack_py__payload_script
+```
+
 ## Functions
 
 <a id="render_api_site"></a>
@@ -40,6 +51,8 @@ Render the standalone HTML API browser.
 | `flow_graphs` | `Optional[List[FlowGraph]]` | `None` | Laid-out architecture and execution-flow diagrams, drawn as interactive SVG in the Flows tab (no network). |
 
 **Returns:** `str` - Complete HTML document text.
+
+*Calls:* [`payload_script`](readmenator._htmlpack.py.md#payload_script)
 
 *Called by:* [`ApiDocsWriter.write`](readmenator._apidocs_render.py.md#apidocswriter-write)
 

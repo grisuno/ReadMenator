@@ -1,14 +1,14 @@
 # readmenator: _graphrag
 
-*Community 0 | 40 files | cohesion 0.39*
+*Community 0 | 38 files | cohesion 0.38*
 
 ## Definition
 
-This community groups 40 file(s) rooted at `readmenator` with dominant language py (cohesion 0.39). Central symbols: `AgentOutputGenerator`, `Bm25Index`, `ConceptExtractor`, `Config`, `DataflowAnalyzer`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
+This community groups 38 file(s) rooted at `readmenator` with dominant language py (cohesion 0.38). Central symbols: `AgentOutputGenerator`, `Bm25Index`, `ConceptExtractor`, `Config`, `DeadCodeStripper`, `DeclaredRule`, `FileCache`, `GitHubWikiPublisher`. Core file: `tests/test_parsers.py` (87 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
 
 ## Files
 
-### `readmenator` (20 files)
+### `readmenator` (19 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -17,13 +17,13 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_cache.py` | py | infrastructure | 14 | yes |
 | `readmenator/_concepts.py` | py | utility | 8 | yes |
 | `readmenator/_config.py` | py | infrastructure | 1 | yes |
-| `readmenator/_dataflow.py` | py | data_access | 21 | yes |
 | `readmenator/_dead_code.py` | py | utility | 5 | yes |
 | `readmenator/_gh_wiki.py` | py | utility | 18 | yes |
 | `readmenator/_gitmeta.py` | py | utility | 4 | yes |
 | `readmenator/_graphrag.py` | py | utility | 53 | yes |
+| `readmenator/_layer_rules.py` | py | business_logic | 4 | yes |
 
-### `tests` (20 files)
+### `tests` (19 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -32,13 +32,13 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 | `tests/test_cache.py` | py | testing | 22 | yes |
 | `tests/test_concepts.py` | py | testing | 8 | no |
 | `tests/test_config.py` | py | testing | 6 | no |
-| `tests/test_dataflow.py` | py | testing | 47 | no |
 | `tests/test_dead_code.py` | py | testing | 15 | yes |
 | `tests/test_gh_wiki.py` | py | testing | 17 | yes |
 | `tests/test_graphrag.py` | py | testing | 28 | yes |
 | `tests/test_layer_rules.py` | py | testing | 13 | no |
+| `tests/test_memory.py` | py | testing | 17 | yes |
 
-*... and 20 more files in this community.*
+*... and 18 more files in this community.*
 
 
 ## Key Symbols
@@ -76,7 +76,7 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 88
+- Internal resolved imports (EXTRACTED): 85
 - Cross-boundary resolved imports (EXTRACTED): 131
 
 ## Connections
@@ -84,22 +84,20 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 - [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.
 - [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.
-- [INFERRED] shares_context community 0 <-> 6 (strength 0.5): Inferred shared context (language py) with no import path between community 0 (readmenator: _graphrag) and community 6 (orphans).
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_bundlegraph.py imports readmenator/_config.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_resolver.py` via `subprocess` (2 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_purpose.py` via `subprocess` (2 hops)
 
 ## Open Questions
 
-- Why do 8 file(s) lack file-level docs (e.g. `tests/test_concepts.py`)? What purpose do they serve?
+- Why do 7 file(s) lack file-level docs (e.g. `tests/test_concepts.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _graphrag changed?
-- Should readmenator: _graphrag be split, given cohesion 0.39?
+- Should readmenator: _graphrag be split, given cohesion 0.38?
 
 ## Sources
 
@@ -108,7 +106,6 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_cache.py`
 - `readmenator/_concepts.py`
 - `readmenator/_config.py`
-- `readmenator/_dataflow.py`
 - `readmenator/_dead_code.py`
 - `readmenator/_gh_wiki.py`
 - `readmenator/_gitmeta.py`
@@ -123,4 +120,5 @@ This community groups 40 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_skill_installer.py`
 - `readmenator/_taint.py`
 - `readmenator/_wiki.py`
-- *... and 20 more*
+- `tests/test_agent_friendliness.py`
+- *... and 18 more*
