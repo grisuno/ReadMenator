@@ -86,7 +86,7 @@ def __init__(self, config: Config) -> None
 
 #### `DocumentationGenerator.generate`
 
-`method` | [readmenator/_documentation.py:96](../../readmenator/_documentation.py#L96)
+`method` | [readmenator/_documentation.py:99](../../readmenator/_documentation.py#L99)
 
 ```python
 def generate(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None, analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None, findings: Optional[List[SecurityFinding]] = None, analysis_v2: Optional[AnalysisResultV2] = None, ranked: Optional[RankedResult] = None, content_map: Optional[Dict[str, str]] = None) -> str

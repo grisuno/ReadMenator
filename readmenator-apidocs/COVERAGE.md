@@ -1,6 +1,6 @@
 # Documentation Coverage
 
-Overall: **81.6%** (650 of 797 public modules, types, and callables). Data members are excluded from the ratio.
+Overall: **82.0%** (671 of 818 public modules, types, and callables). Data members are excluded from the ratio.
 
 [Back to index](index.md)
 
@@ -8,14 +8,14 @@ Overall: **81.6%** (650 of 797 public modules, types, and callables). Data membe
 
 | Kind | Documented | Total | Coverage |
 |---|---|---|---|
-| class | 154 | 165 | 93.3% |
+| class | 158 | 169 | 93.5% |
 | classmethod | 1 | 1 | 100.0% |
 | constructor | 45 | 76 | 59.2% |
 | enum | 1 | 1 | 100.0% |
 | exception | 0 | 1 | 0.0% |
-| function | 89 | 93 | 95.7% |
-| method | 228 | 303 | 75.2% |
-| module | 91 | 92 | 98.9% |
+| function | 97 | 101 | 96.0% |
+| method | 235 | 310 | 75.8% |
+| module | 93 | 94 | 98.9% |
 | property | 36 | 60 | 60.0% |
 | protocol | 1 | 1 | 100.0% |
 | staticmethod | 4 | 4 | 100.0% |
@@ -28,7 +28,7 @@ Overall: **81.6%** (650 of 797 public modules, types, and callables). Data membe
 | [`readmenator._mcp_server`](modules/readmenator._mcp_server.py.md) | 2 | 23 | 8.7% |
 | [`readmenator._uml`](modules/readmenator._uml.py.md) | 1 | 5 | 20.0% |
 | [`readmenator.__main__`](modules/readmenator.__main__.py.md) | 1 | 3 | 33.3% |
-| [`readmenator._app`](modules/readmenator._app.py.md) | 27 | 55 | 49.1% |
+| [`readmenator._app`](modules/readmenator._app.py.md) | 28 | 56 | 50.0% |
 | [`readmenator._cache`](modules/readmenator._cache.py.md) | 7 | 14 | 50.0% |
 | [`readmenator._category`](modules/readmenator._category.py.md) | 11 | 22 | 50.0% |
 | [`readmenator._projections`](modules/readmenator._projections.py.md) | 8 | 16 | 50.0% |
@@ -68,7 +68,9 @@ Overall: **81.6%** (650 of 797 public modules, types, and callables). Data membe
 | [`readmenator._explain`](modules/readmenator._explain.py.md) | 3 | 3 | 100.0% |
 | [`readmenator._explorer`](modules/readmenator._explorer.py.md) | 9 | 9 | 100.0% |
 | [`readmenator._exporter`](modules/readmenator._exporter.py.md) | 10 | 10 | 100.0% |
-| [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | 24 | 24 | 100.0% |
+| [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | 30 | 30 | 100.0% |
+| [`readmenator._flowlayout`](modules/readmenator._flowlayout.py.md) | 10 | 10 | 100.0% |
+| [`readmenator._flowpage`](modules/readmenator._flowpage.py.md) | 4 | 4 | 100.0% |
 | [`readmenator._forcegraph`](modules/readmenator._forcegraph.py.md) | 17 | 17 | 100.0% |
 | [`readmenator._forcegraph_page`](modules/readmenator._forcegraph_page.py.md) | 1 | 1 | 100.0% |
 | [`readmenator._gh_wiki`](modules/readmenator._gh_wiki.py.md) | 10 | 10 | 100.0% |
@@ -124,37 +126,37 @@ DOC001 undocumented public item, DOC002 parameter not documented, DOC003 documen
 DOC001: 126, DOC002: 3, DOC004: 1, DOC005: 1
 
 - DOC001 `readmenator/__main__.py:18` function build_parser is not documented
-- DOC001 `readmenator/__main__.py:150` function main is not documented
+- DOC001 `readmenator/__main__.py:151` function main is not documented
 - DOC004 `readmenator/_apidocs.py:759` return value of is_vendored_path is not documented
-- DOC005 `readmenator/_apidocs_render.py:742` ApiDocsWriter.write raises OSError but does not document it
-- DOC001 `readmenator/_app.py:52` class readmenatorApplication is not documented
-- DOC001 `readmenator/_app.py:53` constructor readmenatorApplication.__init__ is not documented
-- DOC001 `readmenator/_app.py:99` method readmenatorApplication.run is not documented
-- DOC001 `readmenator/_app.py:369` method readmenatorApplication.generate_uml_code is not documented
-- DOC001 `readmenator/_app.py:436` method readmenatorApplication.update is not documented
-- DOC001 `readmenator/_app.py:567` method readmenatorApplication.query is not documented
-- DOC001 `readmenator/_app.py:572` method readmenatorApplication.explain is not documented
-- DOC001 `readmenator/_app.py:584` method readmenatorApplication.find_path is not documented
-- DOC001 `readmenator/_app.py:597` method readmenatorApplication.summary is not documented
-- DOC001 `readmenator/_app.py:632` method readmenatorApplication.rebuild is not documented
-- DOC001 `readmenator/_app.py:635` method readmenatorApplication.analyze is not documented
-- DOC001 `readmenator/_app.py:639` method readmenatorApplication.export_json is not documented
-- DOC001 `readmenator/_app.py:656` method readmenatorApplication.export_html is not documented
-- DOC001 `readmenator/_app.py:667` method readmenatorApplication.export_svg is not documented
-- DOC001 `readmenator/_app.py:678` method readmenatorApplication.export is not documented
-- DOC001 `readmenator/_app.py:1185` method readmenatorApplication.export_graphml is not documented
-- DOC001 `readmenator/_app.py:1196` method readmenatorApplication.export_cypher is not documented
-- DOC001 `readmenator/_app.py:1212` method readmenatorApplication.export_obsidian is not documented
-- DOC001 `readmenator/_app.py:1739` method readmenatorApplication.watch is not documented
-- DOC001 `readmenator/_app.py:1749` method readmenatorApplication.audit is not documented
-- DOC001 `readmenator/_app.py:1756` method readmenatorApplication.audit_deep is not documented
-- DOC001 `readmenator/_app.py:1776` method readmenatorApplication.export_sarif is not documented
-- DOC001 `readmenator/_app.py:1786` method readmenatorApplication.export_rules is not documented
-- DOC001 `readmenator/_app.py:1796` method readmenatorApplication.detect_layers is not documented
-- DOC001 `readmenator/_app.py:1806` method readmenatorApplication.lint is not documented
-- DOC001 `readmenator/_app.py:1819` method readmenatorApplication.strip_dead_code is not documented
-- DOC001 `readmenator/_app.py:1829` method readmenatorApplication.generate_cursorrules is not documented
-- DOC001 `readmenator/_app.py:1844` method readmenatorApplication.refactor_monolith is not documented
+- DOC005 `readmenator/_apidocs_render.py:745` ApiDocsWriter.write raises OSError but does not document it
+- DOC001 `readmenator/_app.py:54` class readmenatorApplication is not documented
+- DOC001 `readmenator/_app.py:55` constructor readmenatorApplication.__init__ is not documented
+- DOC001 `readmenator/_app.py:101` method readmenatorApplication.run is not documented
+- DOC001 `readmenator/_app.py:371` method readmenatorApplication.generate_uml_code is not documented
+- DOC001 `readmenator/_app.py:438` method readmenatorApplication.update is not documented
+- DOC001 `readmenator/_app.py:569` method readmenatorApplication.query is not documented
+- DOC001 `readmenator/_app.py:574` method readmenatorApplication.explain is not documented
+- DOC001 `readmenator/_app.py:586` method readmenatorApplication.find_path is not documented
+- DOC001 `readmenator/_app.py:599` method readmenatorApplication.summary is not documented
+- DOC001 `readmenator/_app.py:634` method readmenatorApplication.rebuild is not documented
+- DOC001 `readmenator/_app.py:637` method readmenatorApplication.analyze is not documented
+- DOC001 `readmenator/_app.py:641` method readmenatorApplication.export_json is not documented
+- DOC001 `readmenator/_app.py:658` method readmenatorApplication.export_html is not documented
+- DOC001 `readmenator/_app.py:669` method readmenatorApplication.export_svg is not documented
+- DOC001 `readmenator/_app.py:680` method readmenatorApplication.export is not documented
+- DOC001 `readmenator/_app.py:1271` method readmenatorApplication.export_graphml is not documented
+- DOC001 `readmenator/_app.py:1282` method readmenatorApplication.export_cypher is not documented
+- DOC001 `readmenator/_app.py:1298` method readmenatorApplication.export_obsidian is not documented
+- DOC001 `readmenator/_app.py:1825` method readmenatorApplication.watch is not documented
+- DOC001 `readmenator/_app.py:1835` method readmenatorApplication.audit is not documented
+- DOC001 `readmenator/_app.py:1842` method readmenatorApplication.audit_deep is not documented
+- DOC001 `readmenator/_app.py:1862` method readmenatorApplication.export_sarif is not documented
+- DOC001 `readmenator/_app.py:1872` method readmenatorApplication.export_rules is not documented
+- DOC001 `readmenator/_app.py:1882` method readmenatorApplication.detect_layers is not documented
+- DOC001 `readmenator/_app.py:1892` method readmenatorApplication.lint is not documented
+- DOC001 `readmenator/_app.py:1905` method readmenatorApplication.strip_dead_code is not documented
+- DOC001 `readmenator/_app.py:1915` method readmenatorApplication.generate_cursorrules is not documented
+- DOC001 `readmenator/_app.py:1930` method readmenatorApplication.refactor_monolith is not documented
 - DOC001 `readmenator/_cache.py:38` method FileCache.load is not documented
 - DOC001 `readmenator/_cache.py:49` method FileCache.save is not documented
 - DOC001 `readmenator/_cache.py:55` method FileCache.compute_hash is not documented

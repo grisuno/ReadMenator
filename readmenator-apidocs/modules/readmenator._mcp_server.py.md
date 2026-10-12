@@ -50,6 +50,7 @@ Resources:
 
 ```mermaid
 classDiagram
+    direction LR
     class MCPError
     <<exception>> MCPError
     MCPError : __init__()

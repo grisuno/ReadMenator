@@ -46,7 +46,7 @@ Community subgraphs group related files when analysis is available.
 `constructor` | [readmenator/_mermaid.py:26](../../readmenator/_mermaid.py#L26)
 
 ```python
-def __init__(self, max_nodes: int = 300, max_symbols_per_file: int = 5, module_style: str = 'fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff', class_style: str = 'fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff', function_style: str = 'fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa', external_style: str = 'fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa', internal_edge_style: str = 'stroke:#88aaff,stroke-width:1px', max_edges: int = 480, max_internal_edges: int = 100) -> None
+def __init__(self, max_nodes: int = 300, max_symbols_per_file: int = 5, module_style: str = 'fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff', class_style: str = 'fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff', function_style: str = 'fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa', external_style: str = 'fill:#111,stroke:#666,stroke-dasharray:5 5,color:#aaa', internal_edge_style: str = 'stroke:#88aaff,stroke-width:1px', max_edges: int = 480, max_internal_edges: int = 100, grid_columns: int = 6, max_externals: int = 24, direction: str = 'LR') -> None
 ```
 
 Initialise rendering budgets and styles.
@@ -64,6 +64,9 @@ Initialise rendering budgets and styles.
 | `internal_edge_style` | `str` | `'stroke:#88aaff,stroke-width:1px'` | Style for internal import edges. |
 | `max_edges` | `int` | `480` | Total edge budget; Mermaid refuses to render more than 500 edges, so the default stays below that hard limit. |
 | `max_internal_edges` | `int` | `100` | Budget for project-internal import edges. |
+| `grid_columns` | `int` | `6` | Files per row inside a community; invisible links stack the rest below, so the map never collapses into one extremely wide row. |
+| `max_externals` | `int` | `24` | Maximum external import boxes (each one is a node Mermaid lays out in the same rank). |
+| `direction` | `str` | `'LR'` | Mermaid direction; LR stacks unrelated nodes vertically. |
 
 *Called by:* [`DocumentationGenerator.__init__`](readmenator._documentation.py.md#documentationgenerator-__init__)
 
@@ -71,7 +74,7 @@ Initialise rendering budgets and styles.
 
 #### `MermaidRenderer.render`
 
-`method` | [readmenator/_mermaid.py:74](../../readmenator/_mermaid.py#L74)
+`method` | [readmenator/_mermaid.py:86](../../readmenator/_mermaid.py#L86)
 
 ```python
 def render(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None, analysis: Optional[AnalysisResult] = None) -> Tuple[str, bool]

@@ -3,6 +3,49 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `wrapper` | function | `tests/test_parsers_property.py:71` | `def wrapper(fn)` |
+| `wrapper` | function | `tests/test_parsers_property.py:77` | `def wrapper(fn)` |
+| `TestQueryEngineContract` | class | `tests/test_query.py:22` | `class TestQueryEngineContract(TestCase)` |
+| `_make_node` | function | `tests/test_query.py:7` | `def _make_node(node_id, symbols)` |
+| `_make_sym` | function | `tests/test_query.py:18` | `def _make_sym(name, kind, line)` |
+| `setUp` | method | `tests/test_query.py:23` | `def setUp(self)` |
+| `test_explain_returns_details` | method | `tests/test_query.py:51` | `def test_explain_returns_details(self)` |
+| `test_explain_shows_imports` | method | `tests/test_query.py:58` | `def test_explain_shows_imports(self)` |
+| `test_explain_shows_siblings` | method | `tests/test_query.py:63` | `def test_explain_shows_siblings(self)` |
+| `test_explain_unknown_returns_none` | method | `tests/test_query.py:69` | `def test_explain_unknown_returns_none(self)` |
+| `test_find_exact_symbol` | method | `tests/test_query.py:36` | `def test_find_exact_symbol(self)` |
+| `test_find_path_direct_import` | method | `tests/test_query.py:73` | `def test_find_path_direct_import(self)` |
+| `test_find_path_same_file` | method | `tests/test_query.py:79` | `def test_find_path_same_file(self)` |
+| `test_find_path_unknown_returns_none` | method | `tests/test_query.py:84` | `def test_find_path_unknown_returns_none(self)` |
+| `test_find_symbol_fuzzy` | method | `tests/test_query.py:42` | `def test_find_symbol_fuzzy(self)` |
+| `test_find_symbol_not_found` | method | `tests/test_query.py:47` | `def test_find_symbol_not_found(self)` |
+| `test_query_returns_file_matches` | method | `tests/test_query.py:102` | `def test_query_returns_file_matches(self)` |
+| `test_query_returns_matching_symbols` | method | `tests/test_query.py:98` | `def test_query_returns_matching_symbols(self)` |
+| `test_summary_shows_counts` | method | `tests/test_query.py:88` | `def test_summary_shows_counts(self)` |
+| `test_summary_shows_top_modules` | method | `tests/test_query.py:94` | `def test_summary_shows_top_modules(self)` |
+| `TestCategory` | class | `tests/test_ranking.py:104` | `class TestCategory` |
+| `TestCompositeRanker` | class | `tests/test_ranking.py:403` | `class TestCompositeRanker` |
+| `TestEdgeKind` | class | `tests/test_ranking.py:60` | `class TestEdgeKind` |
+| `TestExplain` | class | `tests/test_ranking.py:539` | `class TestExplain` |
+| `TestGlobalPageRank` | class | `tests/test_ranking.py:247` | `class TestGlobalPageRank` |
+| `TestHITS` | class | `tests/test_ranking.py:325` | `class TestHITS` |
+| `TestIntegration` | class | `tests/test_ranking.py:587` | `class TestIntegration` |
+| `TestMorphism` | class | `tests/test_ranking.py:84` | `class TestMorphism` |
+| `TestPersonalizedPageRank` | class | `tests/test_ranking.py:288` | `class TestPersonalizedPageRank` |
+| `TestProjections` | class | `tests/test_ranking.py:490` | `class TestProjections` |
+| `TestSeedGeneration` | class | `tests/test_ranking.py:350` | `class TestSeedGeneration` |
+| `TestTypedGraph` | class | `tests/test_ranking.py:183` | `class TestTypedGraph` |
+| `_make_test_graph` | function | `tests/test_ranking.py:238` | `def _make_test_graph()` |
+| `test_add_object_and_morphism` | method | `tests/test_ranking.py:110` | `def test_add_object_and_morphism(self)` |
+| `test_all_edge_kinds_have_weights` | method | `tests/test_ranking.py:61` | `def test_all_edge_kinds_have_weights(self)` |
+| `test_all_nodes_have_positive_score` | method | `tests/test_ranking.py:254` | `def test_all_nodes_have_positive_score(self)` |
+| `test_apply_view_architecture` | method | `tests/test_ranking.py:512` | `def test_apply_view_architecture(self)` |
+| `test_apply_view_empty` | method | `tests/test_ranking.py:528` | `def test_apply_view_empty(self)` |
+| `test_apply_view_reverse` | method | `tests/test_ranking.py:521` | `def test_apply_view_reverse(self)` |
+| `test_authorities_and_hubs_have_positive_scores` | method | `tests/test_ranking.py:326` | `def test_authorities_and_hubs_have_positive_scores(self)` |
+| `test_authorities_l2_normalized` | method | `tests/test_ranking.py:333` | `def test_authorities_l2_normalized(self)` |
+| `test_build_category_from_edges` | method | `tests/test_ranking.py:214` | `def test_build_category_from_edges(self)` |
+| `test_build_category_from_edges_filters_by_node_ids` | method | `tests/test_ranking.py:225` | `def test_build_category_from_edges_filters_by_node_ids(self)` |
 | `test_build_seeds_for_context` | method | `tests/test_ranking.py:383` | `def test_build_seeds_for_context(self)` |
 | `test_build_seeds_for_context_no_match` | method | `tests/test_ranking.py:392` | `def test_build_seeds_for_context_no_match(self)` |
 | `test_build_seeds_from_query_matches_node_id` | method | `tests/test_ranking.py:351` | `def test_build_seeds_from_query_matches_node_id(self)` |
@@ -347,6 +390,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_sanitize_preserves_alphanumeric` | method | `tests/test_uml.py:164` | `def test_sanitize_preserves_alphanumeric(self)` |
 | `test_sanitize_replaces_special_chars` | method | `tests/test_uml.py:168` | `def test_sanitize_replaces_special_chars(self)` |
 | `TestVideoContract` | class | `tests/test_video.py:37` | `class TestVideoContract(TestCase)` |
+| `TestVideoFlowActs` | class | `tests/test_video.py:224` | `class TestVideoFlowActs(TestCase)` |
 | `_analysis` | function | `tests/test_video.py:25` | `def _analysis()` |
 | `_nodes` | function | `tests/test_video.py:17` | `def _nodes()` |
 | `test_video_all_scenes_render_small_canvas` | method | `tests/test_video.py:92` | `def test_video_all_scenes_render_small_canvas(self)` |
@@ -356,6 +400,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_video_collect_enriched_fields` | method | `tests/test_video.py:60` | `def test_video_collect_enriched_fields(self)` |
 | `test_video_dependencies_returns_bool` | method | `tests/test_video.py:205` | `def test_video_dependencies_returns_bool(self)` |
 | `test_video_disabled_skips_without_render` | method | `tests/test_video.py:208` | `def test_video_disabled_skips_without_render(self)` |
+| `test_video_flow_acts_scheduled_and_drawn` | method | `tests/test_video.py:227` | `def test_video_flow_acts_scheduled_and_drawn(self)` |
 | `test_video_graph_positions_deterministic` | method | `tests/test_video.py:168` | `def test_video_graph_positions_deterministic(self)` |
 | `test_video_hash_color_deterministic` | method | `tests/test_video.py:194` | `def test_video_hash_color_deterministic(self)` |
 | `test_video_new_scenes_render_every_phase` | method | `tests/test_video.py:111` | `def test_video_new_scenes_render_every_phase(self)` |

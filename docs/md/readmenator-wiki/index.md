@@ -1,13 +1,13 @@
 # Second Brain
 
-*Last synthesized: 2026-10-12 | 145 files | 7 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-12 | 147 files | 7 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
 
 ## Vault Overview
 
-The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (79 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
+The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (81 files) across 7 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
 
 Surprising tissue lives between readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams: 14 extracted cross-community imports and 6 inferred bridges. Follow `connections.json` sorted by strength before refactoring.
 
@@ -17,14 +17,14 @@ Open work clusters around documentation (86% file coverage), 0 security findings
 
 | Metric | Value |
 |--------|-------|
-| Files | 145 |
-| Symbols | 2856 |
-| Resolved imports | 534 |
+| Files | 147 |
+| Symbols | 2901 |
+| Resolved imports | 547 |
 | Languages | js, py |
 | Communities | 7 |
-| Doc coverage | 86% (125/145 files) |
+| Doc coverage | 86% (127/147 files) |
 | Security findings | 0 |
-| Estimated read cost | ~77282 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~79365 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 
@@ -41,9 +41,9 @@ readmenator query "<question>" --target ReadMenator
 
 - [readmenator: _graphrag (40 files, cohesion 0.39)](./community_0_readmenator_graphrag.md)
 - [readmenator/parsers (32 files, cohesion 0.51)](./community_1_readmenator_parsers.md)
-- [readmenator: _diagrams (31 files, cohesion 0.40)](./community_2_readmenator_diagrams.md)
-- [readmenator: _pipeline (20 files, cohesion 0.35)](./community_3_readmenator_pipeline.md)
-- [readmenator: _apidocs (14 files, cohesion 0.37)](./community_4_readmenator_apidocs.md)
+- [readmenator: _diagrams (29 files, cohesion 0.39)](./community_2_readmenator_diagrams.md)
+- [readmenator: _pipeline (26 files, cohesion 0.37)](./community_3_readmenator_pipeline.md)
+- [readmenator: _flowcharts (12 files, cohesion 0.49)](./community_4_readmenator_flowcharts.md)
 - [readmenator: _agent_injector (5 files, cohesion 0.40)](./community_5_readmenator_agent_injector.md)
 - [orphans (3 files, cohesion 0.00)](./community_6_orphans.md)
 
@@ -54,21 +54,21 @@ readmenator query "<question>" --target ReadMenator
 | `readmenator/_models.py` | 206.3 |
 | `readmenator/_config.py` | 186.1 |
 | `readmenator/_pipeline.py` | 91.2 |
-| `readmenator/_app.py` | 82.1 |
+| `readmenator/_app.py` | 86.4 |
 | `readmenator/parsers/__init__.py` | 48.2 |
 
 ## Strongest Connections
 
 - 2 -> 0: depends_on (strength 0.9, EXTRACTED)
+- 2 -> 4: depends_on (strength 0.9, EXTRACTED)
 - 2 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 2 -> 5: depends_on (strength 0.9, EXTRACTED)
-- 2 -> 4: depends_on (strength 0.9, EXTRACTED)
+- 2 -> 3: depends_on (strength 0.9, EXTRACTED)
 - 0 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 3 -> 0: depends_on (strength 0.9, EXTRACTED)
 - 3 -> 1: depends_on (strength 0.9, EXTRACTED)
 - 4 -> 0: depends_on (strength 0.9, EXTRACTED)
 - 4 -> 1: depends_on (strength 0.9, EXTRACTED)
-- 2 -> 3: depends_on (strength 0.9, EXTRACTED)
 
 ## Navigation Tips
 

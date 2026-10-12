@@ -47,6 +47,10 @@ defined here and consumed by reference elsewhere.
 | [`MERMAID_MAX_SYMBOLS_PER_FILE`](#config-mermaid_max_symbols_per_file) | `int` | `5` |  |
 | [`MERMAID_MAX_EDGES`](#config-mermaid_max_edges) | `int` | `480` |  |
 | [`MERMAID_MAX_INTERNAL_EDGES`](#config-mermaid_max_internal_edges) | `int` | `100` |  |
+| [`MERMAID_GRID_COLUMNS`](#config-mermaid_grid_columns) | `int` | `6` |  |
+| [`MERMAID_MAX_EXTERNALS`](#config-mermaid_max_externals) | `int` | `24` |  |
+| [`MERMAID_DIRECTION`](#config-mermaid_direction) | `str` | `'LR'` |  |
+| [`UML_CLASSES_PER_DIAGRAM`](#config-uml_classes_per_diagram) | `int` | `6` |  |
 | [`MERMAID_MODULE_STYLE`](#config-mermaid_module_style) | `str` | `'fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff'` |  |
 | [`MERMAID_CLASS_STYLE`](#config-mermaid_class_style) | `str` | `'fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff'` |  |
 | [`MERMAID_FUNCTION_STYLE`](#config-mermaid_function_style) | `str` | `'fill:#333,stroke:#dcdcaa,stroke-width:1px,color:#dcdcaa'` |  |
@@ -378,6 +382,9 @@ defined here and consumed by reference elsewhere.
 | [`VIDEO_ORBIT_LABELS`](#config-video_orbit_labels) | `int` | `6` |  |
 | [`VIDEO_SPHERE_TURNS`](#config-video_sphere_turns) | `float` | `0.6` |  |
 | [`VIDEO_SPHERE_SAMPLES`](#config-video_sphere_samples) | `int` | `18` |  |
+| [`VIDEO_TIERS_S`](#config-video_tiers_s) | `float` | `12.0` |  |
+| [`VIDEO_FLOW_S`](#config-video_flow_s) | `float` | `16.0` |  |
+| [`VIDEO_FLOW_VIEW_WIDTH`](#config-video_flow_view_width) | `int` | `1100` |  |
 | [`VIDEO_TRANSITION_S`](#config-video_transition_s) | `float` | `0.45` |  |
 | [`VIDEO_TRANSITION_GLITCH`](#config-video_transition_glitch) | `float` | `0.35` |  |
 | [`VIDEO_MOTION_BLUR_SAMPLES`](#config-video_motion_blur_samples) | `int` | `3` |  |
@@ -529,7 +536,13 @@ defined here and consumed by reference elsewhere.
 | [`FLOW_MAX_STEPS`](#config-flow_max_steps) | `int` | `40` |  |
 | [`FLOW_LABEL_CHARS`](#config-flow_label_chars) | `int` | `48` |  |
 | [`FLOW_SEQUENCE_MAX_MESSAGES`](#config-flow_sequence_max_messages) | `int` | `30` |  |
-| [`FLOW_CFG_MAX_NODES`](#config-flow_cfg_max_nodes) | `int` | `60` |  |
+| [`FLOW_CFG_MAX_NODES`](#config-flow_cfg_max_nodes) | `int` | `160` |  |
 | [`FLOW_SWITCH_MIN_CASES`](#config-flow_switch_min_cases) | `int` | `3` |  |
+| [`FLOW_NODE_MAX_CHARS`](#config-flow_node_max_chars) | `int` | `38` |  |
+| [`FLOW_NODE_MAX_LINES`](#config-flow_node_max_lines) | `int` | `3` |  |
+| [`FLOW_MAX_PER_ROW`](#config-flow_max_per_row) | `int` | `5` |  |
+| [`ARCH_DIAGRAM_MAX_PER_ROW`](#config-arch_diagram_max_per_row) | `int` | `4` |  |
+| [`ARCH_DIAGRAM_PANEL_FILES`](#config-arch_diagram_panel_files) | `int` | `40` |  |
+| [`FLOWS_OUTPUT`](#config-flows_output) | `str` | `'flows.html'` |  |
 
 ---

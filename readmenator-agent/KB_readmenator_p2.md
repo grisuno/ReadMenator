@@ -203,35 +203,35 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
 - Symbols:
   - `DocumentationGenerator` (class, line 36) `class DocumentationGenerator`
   - `__init__` (method, line 48) `def __init__(self, config)`
-  - `_ranking_version` (method, line 68) `def _ranking_version(self)`
-  - `_get_git_commit` (method, line 86) `def _get_git_commit()`
-  - `generate` (method, line 96) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked, content_map)`
-  - `_apply_context_budget` (method, line 214) `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)`
-  - `_build_toc` (method, line 352) `def _build_toc(self, nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked, extra_sections)`
-  - `_build_layers` (method, line 455) `def _build_layers(self, layers, nodes)`
-  - `_build_dashboard` (method, line 489) `def _build_dashboard(self, nodes, edges, resolved_edges)`
-  - `_build_god_nodes` (method, line 569) `def _build_god_nodes(self, analysis, ranked)`
-  - `_build_community_analysis` (method, line 597) `def _build_community_analysis(self, analysis, nodes)`
-  - `_build_surprising_connections` (method, line 630) `def _build_surprising_connections(self, analysis, nodes)`
-  - `_build_suggested_questions` (method, line 655) `def _build_suggested_questions(self, analysis)`
-  - `_build_forcegraph_section` (method, line 671) `def _build_forcegraph_section(self, nodes, edges, resolved_edges, analysis, layers, findings)`
-  - `_build_analytics_section` (method, line 708) `def _build_analytics_section(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2)`
-  - `_build_ranked_context` (method, line 743) `def _build_ranked_context(self, ranked)`
-  - `_build_orphans` (method, line 789) `def _build_orphans(self, nodes, analysis_v2, ranked)`
-  - `_build_query_recipes` (method, line 839) `def _build_query_recipes(self)`
-  - `_build_taint_analysis` (method, line 881) `def _build_taint_analysis(self, analysis_v2)`
-  - `_build_hotspots` (method, line 916) `def _build_hotspots(self, analysis_v2, ranked)`
-  - `_build_dataflow_analysis` (method, line 954) `def _build_dataflow_analysis(self, analysis_v2)`
-  - `_build_concept_graph` (method, line 985) `def _build_concept_graph(self, analysis_v2)`
-  - `_build_dependency_cycles` (method, line 1032) `def _build_dependency_cycles(self, analysis_v2)`
-  - `_build_change_impact` (method, line 1053) `def _build_change_impact(self, analysis_v2)`
-  - `_build_layer_violations` (method, line 1078) `def _build_layer_violations(self, analysis_v2)`
-  - `_build_suggested_rules` (method, line 1106) `def _build_suggested_rules(self, analysis_v2)`
-  - `_build_security_findings` (method, line 1131) `def _build_security_findings(self, findings)`
-  - `_build_mermaid_section` (method, line 1178) `def _build_mermaid_section(self, graph_output, is_truncated)`
-  - `_build_uml_diagram` (method, line 1201) `def _build_uml_diagram(self, nodes, edges)`
-  - `_build_cpg_block` (method, line 1227) `def _build_cpg_block(self, nodes, edges, resolved_edges, analysis)`
-  - `_build_architecture_reference` (method, line 1253) `def _build_architecture_reference(self, nodes, edges)`
+  - `_ranking_version` (method, line 71) `def _ranking_version(self)`
+  - `_get_git_commit` (method, line 89) `def _get_git_commit()`
+  - `generate` (method, line 99) `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked, content_map)`
+  - `_apply_context_budget` (method, line 217) `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)`
+  - `_build_toc` (method, line 355) `def _build_toc(self, nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked, extra_sections)`
+  - `_build_layers` (method, line 458) `def _build_layers(self, layers, nodes)`
+  - `_build_dashboard` (method, line 492) `def _build_dashboard(self, nodes, edges, resolved_edges)`
+  - `_build_god_nodes` (method, line 572) `def _build_god_nodes(self, analysis, ranked)`
+  - `_build_community_analysis` (method, line 600) `def _build_community_analysis(self, analysis, nodes)`
+  - `_build_surprising_connections` (method, line 633) `def _build_surprising_connections(self, analysis, nodes)`
+  - `_build_suggested_questions` (method, line 658) `def _build_suggested_questions(self, analysis)`
+  - `_build_forcegraph_section` (method, line 674) `def _build_forcegraph_section(self, nodes, edges, resolved_edges, analysis, layers, findings)`
+  - `_build_analytics_section` (method, line 711) `def _build_analytics_section(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2)`
+  - `_build_ranked_context` (method, line 746) `def _build_ranked_context(self, ranked)`
+  - `_build_orphans` (method, line 792) `def _build_orphans(self, nodes, analysis_v2, ranked)`
+  - `_build_query_recipes` (method, line 842) `def _build_query_recipes(self)`
+  - `_build_taint_analysis` (method, line 884) `def _build_taint_analysis(self, analysis_v2)`
+  - `_build_hotspots` (method, line 919) `def _build_hotspots(self, analysis_v2, ranked)`
+  - `_build_dataflow_analysis` (method, line 957) `def _build_dataflow_analysis(self, analysis_v2)`
+  - `_build_concept_graph` (method, line 988) `def _build_concept_graph(self, analysis_v2)`
+  - `_build_dependency_cycles` (method, line 1035) `def _build_dependency_cycles(self, analysis_v2)`
+  - `_build_change_impact` (method, line 1056) `def _build_change_impact(self, analysis_v2)`
+  - `_build_layer_violations` (method, line 1081) `def _build_layer_violations(self, analysis_v2)`
+  - `_build_suggested_rules` (method, line 1109) `def _build_suggested_rules(self, analysis_v2)`
+  - `_build_security_findings` (method, line 1134) `def _build_security_findings(self, findings)`
+  - `_build_mermaid_section` (method, line 1181) `def _build_mermaid_section(self, graph_output, is_truncated)`
+  - `_build_uml_diagram` (method, line 1204) `def _build_uml_diagram(self, nodes, edges)`
+  - `_build_cpg_block` (method, line 1249) `def _build_cpg_block(self, nodes, edges, resolved_edges, analysis)`
+  - `_build_architecture_reference` (method, line 1275) `def _build_architecture_reference(self, nodes, edges)`
 - Depends on: `readmenator/_analytics.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_flowcharts.py`, `readmenator/_forcegraph.py`, `readmenator/_mermaid.py`, `readmenator/_models.py`, `readmenator/_rank.py`, `readmenator/_uml.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_documentation.py`, `tests/test_flowcharts.py`
 
@@ -335,54 +335,91 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `mermaid_id` (function, line 66) `def mermaid_id(text, prefix)`
-  - `mermaid_text` (function, line 71) `def mermaid_text(text, limit)`
-  - `tarjan_scc` (function, line 79) `def tarjan_scc(vertices, adjacency)`
-  - `transitive_reduction` (function, line 133) `def transitive_reduction(adjacency)`
-  - `eades_lin_smyth` (function, line 184) `def eades_lin_smyth(vertices, weight)`
-  - `Component` (class, line 236) `class Component`
-  - `ArchitectureDiagramBuilder` (class, line 258) `class ArchitectureDiagramBuilder`
-  - `EntryPoint` (class, line 468) `class EntryPoint`
-  - `FlowStep` (class, line 492) `class FlowStep`
-  - `ExecutionFlowBuilder` (class, line 512) `class ExecutionFlowBuilder`
-  - `_ControlFlowRenderer` (class, line 848) `class _ControlFlowRenderer`
-  - `render_architecture_section` (function, line 1090) `def render_architecture_section(config, nodes, resolved_edges, analysis, layers)`
-  - `render_flows_section` (function, line 1121) `def render_flows_section(config, nodes, edges, resolved_edges, content_map)`
-  - `reachable` (function, line 148) `def reachable(vertex)`
-  - `live` (function, line 210) `def live(table)`
-  - `__init__` (method, line 261) `def __init__(self, config)`
-  - `components` (method, line 269) `def components(self, nodes, analysis, layers)`
-  - `render` (method, line 334) `def render(self, nodes, resolved_edges, analysis, layers)`
-  - `_heavy_threshold` (method, line 459) `def _heavy_threshold(counts)`
-  - `key` (method, line 486) `def key(self)`
-  - `__init__` (method, line 515) `def __init__(self, config)`
-  - `_is_test` (method, line 524) `def _is_test(self, file_id)`
-  - `call_graph` (method, line 533) `def call_graph(self, nodes, edges, resolved_edges, content_map)`
-  - `entry_points` (method, line 614) `def entry_points(self, nodes, graph, defs, content_map)`
-  - `walk` (method, line 692) `def walk(self, graph, start)`
-  - `_short` (method, line 723) `def _short(self, key)`
-  - `call_tree_mermaid` (method, line 733) `def call_tree_mermaid(self, entry, steps)`
-  - `sequence_mermaid` (method, line 773) `def sequence_mermaid(self, entry, steps)`
-  - `control_flow_mermaid` (method, line 805) `def control_flow_mermaid(self, content, entry, project_names)`
-  - `__init__` (method, line 851) `def __init__(self, config, project_names)`
-  - `_new` (method, line 861) `def _new(self, shape, text, css)`
-  - `_link` (method, line 873) `def _link(self, src, dst, label, dotted)`
-  - `_calls` (method, line 881) `def _calls(self, node)`
-  - `render` (method, line 895) `def render(self, body, title)`
-  - `_connect` (method, line 914) `def _connect(self, tails, target)`
-  - `_block` (method, line 919) `def _block(self, body, tails)`
-  - `_case_of` (method, line 966) `def _case_of(test)`
-  - `_switch_chain` (method, line 986) `def _switch_chain(self, stmt)`
-  - `_switch` (method, line 1011) `def _switch(self, subject, cases, default, tails)`
-  - `_condition` (method, line 1030) `def _condition(self, test)`
-  - `_compound` (method, line 1034) `def _compound(self, stmt, tails)`
-  - `caller_key` (function, line 565) `def caller_key(site_file, site_line, caller)`
-  - `bump` (function, line 637) `def bump(file_id, name, line, points, reason)`
-  - `visit` (function, line 707) `def visit(caller, depth, path)`
-  - `node` (function, line 744) `def node(key, css)`
-  - `flush` (function, line 923) `def flush()`
-- Depends on: `readmenator/_apidocs.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`, `readmenator/_symindex.py`
-- Imported by: `readmenator/_app.py`, `readmenator/_documentation.py`, `tests/test_flowcharts.py`
+  - `mermaid_id` (function, line 67) `def mermaid_id(text, prefix)`
+  - `mermaid_text` (function, line 72) `def mermaid_text(text, limit)`
+  - `tarjan_scc` (function, line 80) `def tarjan_scc(vertices, adjacency)`
+  - `transitive_reduction` (function, line 134) `def transitive_reduction(adjacency)`
+  - `eades_lin_smyth` (function, line 185) `def eades_lin_smyth(vertices, weight)`
+  - `Component` (class, line 237) `class Component`
+  - `ArchitectureDiagramBuilder` (class, line 259) `class ArchitectureDiagramBuilder`
+  - `EntryPoint` (class, line 499) `class EntryPoint`
+  - `FlowStep` (class, line 523) `class FlowStep`
+  - `ExecutionFlowBuilder` (class, line 543) `class ExecutionFlowBuilder`
+  - `_first_sentence` (function, line 927) `def _first_sentence(text)`
+  - `_ControlFlowBuilder` (class, line 936) `class _ControlFlowBuilder`
+  - `to_mermaid` (function, line 1170) `def to_mermaid(graph, direction)`
+  - `build_flow_graphs` (function, line 1231) `def build_flow_graphs(config, nodes, edges, resolved_edges, content_map, analysis, layers)`
+  - `render_architecture_section` (function, line 1287) `def render_architecture_section(config, nodes, resolved_edges, analysis, layers)`
+  - `render_flows_section` (function, line 1319) `def render_flows_section(config, nodes, edges, resolved_edges, content_map)`
+  - `reachable` (function, line 149) `def reachable(vertex)`
+  - `live` (function, line 211) `def live(table)`
+  - `__init__` (method, line 262) `def __init__(self, config)`
+  - `components` (method, line 270) `def components(self, nodes, analysis, layers)`
+  - `model` (method, line 335) `def model(self, nodes, resolved_edges, analysis, layers)`
+  - `render` (method, line 476) `def render(self, nodes, resolved_edges, analysis, layers)`
+  - `_heavy_threshold` (method, line 490) `def _heavy_threshold(counts)`
+  - `key` (method, line 517) `def key(self)`
+  - `__init__` (method, line 546) `def __init__(self, config)`
+  - `_is_test` (method, line 555) `def _is_test(self, file_id)`
+  - `call_graph` (method, line 564) `def call_graph(self, nodes, edges, resolved_edges, content_map)`
+  - `entry_points` (method, line 645) `def entry_points(self, nodes, graph, defs, content_map)`
+  - `walk` (method, line 723) `def walk(self, graph, start)`
+  - `_short` (method, line 754) `def _short(self, key)`
+  - `_definition_detail` (method, line 764) `def _definition_detail(self, key, defs)`
+  - `call_tree_model` (method, line 779) `def call_tree_model(self, entry, steps, defs)`
+  - `call_tree_mermaid` (method, line 827) `def call_tree_mermaid(self, entry, steps, defs)`
+  - `sequence_model` (method, line 831) `def sequence_model(self, entry, steps, defs)`
+  - `sequence_mermaid` (method, line 862) `def sequence_mermaid(self, entry, steps, defs)`
+  - `control_flow_model` (method, line 877) `def control_flow_model(self, content, entry, project_names, defs, call_graph)`
+  - `control_flow_mermaid` (method, line 921) `def control_flow_mermaid(self, content, entry, project_names)`
+  - `__init__` (method, line 948) `def __init__(self, config, project_names, summaries, file_id)`
+  - `_new` (method, line 958) `def _new(self, shape, title, lines, tone, line, calls)`
+  - `_link` (method, line 969) `def _link(self, src, dst, label, style)`
+  - `_calls` (method, line 973) `def _calls(self, node)`
+  - `_call_lines` (method, line 987) `def _call_lines(self, calls)`
+  - `build` (method, line 994) `def build(self, body, title)`
+  - `_connect` (method, line 1012) `def _connect(self, tails, target)`
+  - `_block` (method, line 1017) `def _block(self, body, tails)`
+  - `_case_of` (method, line 1074) `def _case_of(test)`
+  - `_compound` (method, line 1094) `def _compound(self, stmt, tails)`
+  - `label` (function, line 1182) `def label(node)`
+  - `declare` (function, line 1187) `def declare(node, indent)`
+  - `caller_key` (function, line 596) `def caller_key(site_file, site_line, caller)`
+  - `bump` (function, line 668) `def bump(file_id, name, line, points, reason)`
+  - `visit` (function, line 738) `def visit(caller, depth, path)`
+  - `add` (function, line 800) `def add(key, tone)`
+  - `flush` (function, line 1022) `def flush()`
+- Depends on: `readmenator/_apidocs.py`, `readmenator/_config.py`, `readmenator/_flowlayout.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`, `readmenator/_symindex.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_documentation.py`, `readmenator/_video.py`, `tests/test_flowcharts.py`
+
+## readmenator/_flowlayout.py
+- Doc: Flow graph model and deterministic layered layout (Sugiyama style).
+- Layer: utility
+- Language: py
+- Symbols:
+  - `FlowNode` (class, line 36) `class FlowNode`
+  - `FlowEdge` (class, line 67) `class FlowEdge`
+  - `FlowGraph` (class, line 86) `class FlowGraph`
+  - `LayoutMetrics` (class, line 146) `class LayoutMetrics`
+  - `_wrap` (function, line 180) `def _wrap(lines, metrics)`
+  - `measure` (function, line 195) `def measure(node, metrics)`
+  - `_ranks` (function, line 210) `def _ranks(graph)`
+  - `layout_flow` (function, line 260) `def layout_flow(graph, metrics, direction)`
+  - `layout_sequence` (function, line 414) `def layout_sequence(graph, metrics)`
+  - `node` (method, line 117) `def node(self, node_id)`
+  - `to_dict` (method, line 124) `def to_dict(self)`
+- Imported by: `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `readmenator/_flowcharts.py`, `readmenator/_flowpage.py`, `tests/test_flowcharts.py`
+
+## readmenator/_flowpage.py
+- Doc: Interactive SVG viewer for laid-out architecture and execution-flow diagrams.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `flows_payload_json` (function, line 218) `def flows_payload_json(graphs, api_href)`
+  - `render_flows_page` (function, line 224) `def render_flows_page(graphs, project_name, api_href)`
+  - `flow_thumbnail_svg` (function, line 244) `def flow_thumbnail_svg(graph, width, height)`
+- Depends on: `readmenator/_flowlayout.py`
+- Imported by: `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `tests/test_flowcharts.py`
 
 ## readmenator/_forcegraph.py
 - Doc: Force-graph explorer for the readmenator knowledge graph.
@@ -457,39 +494,6 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `_packed_ref` (function, line 59) `def _packed_ref(git_dir, ref)`
   - `read_git_head` (function, line 84) `def read_git_head(project_root)`
 - Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_gh_wiki.py`, `readmenator/_memory.py`, `tests/test_agent_friendliness.py`
-
-## readmenator/_graphlayout.py
-- Doc: Deterministic graph layout algorithms for animated renders.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `ForceAtlas2Settings` (class, line 40) `class ForceAtlas2Settings`
-  - `_initial_positions` (function, line 66) `def _initial_positions(n, seed, dims)`
-  - `forceatlas2_frames` (function, line 73) `def forceatlas2_frames(ids, edges, settings)`
-  - `_snapshot_steps` (function, line 113) `def _snapshot_steps(iterations, snapshots)`
-  - `_fa2_numpy` (function, line 119) `def _fa2_numpy(n, pairs, start, cfg)`
-  - `_fa2_python` (function, line 166) `def _fa2_python(n, pairs, start, cfg)`
-  - `fit_frames` (function, line 221) `def fit_frames(frames, box, margin, trim)`
-  - `interpolate_frames` (function, line 266) `def interpolate_frames(frames, t)`
-  - `BundleLayout` (class, line 281) `class BundleLayout`
-  - `_bspline` (function, line 301) `def _bspline(control, samples)`
-  - `_bundle_curves` (function, line 324) `def _bundle_curves(leaves, member_group, hub, root, edges, beta, samples)`
-  - `hierarchical_edge_bundling` (function, line 374) `def hierarchical_edge_bundling(groups, edges, center, radius, beta, samples, group_gap, inner_ratio)`
-  - `fibonacci_sphere` (function, line 429) `def fibonacci_sphere(count)`
-  - `_unit` (function, line 452) `def _unit(v)`
-  - `SphereBundleLayout` (class, line 461) `class SphereBundleLayout`
-  - `_split_caps` (function, line 479) `def _split_caps(labels, sizes, points, lattice, out)`
-  - `spherical_edge_bundling` (function, line 516) `def spherical_edge_bundling(groups, edges, radius, beta, samples, inner_ratio, refine_sweeps, affinity_edges)`
-  - `normalize_cloud` (function, line 586) `def normalize_cloud(points, quantile, max_radius)`
-  - `_undirected_weights` (function, line 623) `def _undirected_weights(groups, edges)`
-  - `_angular_distance` (function, line 648) `def _angular_distance(a, b)`
-  - `bundle_angular_cost` (function, line 654) `def bundle_angular_cost(groups, edges, group_gap)`
-  - `_center_out` (function, line 676) `def _center_out(members)`
-  - `_group_order_cost` (function, line 688) `def _group_order_cost(order, sizes, weights, gap)`
-  - `optimize_bundle_order` (function, line 702) `def optimize_bundle_order(groups, edges, sweeps, passes, group_gap)`
-  - `refine_sphere_leaves` (function, line 804) `def refine_sphere_leaves(layout, groups, edges, sweeps)`
-  - `chord_total` (function, line 829) `def chord_total(leaves)`
-- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_forcegraph.py`, `readmenator/_video.py`, `tests/test_graphlayout.py`, `tests/test_layout_quality.py`
 
 
 Next: [KB_readmenator_p3.md](KB_readmenator_p3.md)

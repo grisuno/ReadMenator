@@ -18,6 +18,7 @@ apart from file-unique signals.
 
 ```mermaid
 classDiagram
+    direction LR
     class ProvenanceFinding
     ProvenanceFinding : str file_path
     ProvenanceFinding : str rule

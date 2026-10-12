@@ -11,6 +11,7 @@
 
 ```mermaid
 classDiagram
+    direction LR
     class Config
     Config : str github_user
     Config : str target_branch

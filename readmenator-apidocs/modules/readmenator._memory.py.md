@@ -32,6 +32,7 @@ model writing the rest of the file.
 
 ```mermaid
 classDiagram
+    direction LR
     class DeclaredRule
     DeclaredRule : str category
     DeclaredRule : str text

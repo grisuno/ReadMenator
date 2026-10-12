@@ -22,10 +22,10 @@ the readmenator theme key.
 
 ### `render_api_site`
 
-`function` | [readmenator/_apidocs_page.py:55](../../readmenator/_apidocs_page.py#L55)
+`function` | [readmenator/_apidocs_page.py:57](../../readmenator/_apidocs_page.py#L57)
 
 ```python
-def render_api_site(reference: ApiReference, project_name: str, config: Config, architecture_markdown: str = '') -> str
+def render_api_site(reference: ApiReference, project_name: str, config: Config, flow_graphs: Optional[List[FlowGraph]] = None) -> str
 ```
 
 Render the standalone HTML API browser.
@@ -37,7 +37,7 @@ Render the standalone HTML API browser.
 | `reference` | `ApiReference` |  | The API reference. |
 | `project_name` | `str` |  | Display name of the project. |
 | `config` | `Config` |  | Application configuration. |
-| `architecture_markdown` | `str` | `''` | Optional architecture and flow Markdown with Mermaid blocks; rendered as source until the reader asks to load the Mermaid renderer (the only optional network request). |
+| `flow_graphs` | `Optional[List[FlowGraph]]` | `None` | Laid-out architecture and execution-flow diagrams, drawn as interactive SVG in the Flows tab (no network). |
 
 **Returns:** `str` - Complete HTML document text.
 

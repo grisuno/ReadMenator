@@ -33,6 +33,7 @@ Retrieval follows two complementary strategies:
 
 ```mermaid
 classDiagram
+    direction LR
     class RagEntity
     RagEntity : str entity_id
     RagEntity : str name

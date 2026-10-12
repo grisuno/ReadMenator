@@ -12,6 +12,7 @@ Shell parser: regex extraction of symbols, signatures, docstrings, and imports.
 
 ```mermaid
 classDiagram
+    direction LR
     class ShellParser
     class LanguageParser
     LanguageParser <|-- ShellParser

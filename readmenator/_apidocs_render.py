@@ -30,6 +30,8 @@ from readmenator._apidocs import (
 )
 from readmenator._apidocs_page import render_api_site
 from readmenator._config import Config
+from readmenator._flowlayout import FlowGraph
+from readmenator._flowpage import render_flows_page
 from readmenator._docstrings import DocComment, DocField
 
 logger = logging.getLogger(__name__)
@@ -279,7 +281,8 @@ class ApiMarkdownRenderer:
             "Deterministic, zero tokens: signatures from source, docs parsed from "
             "Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.",
             "",
-            "Navigate: [Architecture and flows](" + self._config.APIDOCS_ARCHITECTURE_FILENAME + ") | "
+            "Navigate: [Interactive architecture and flows](" + self._config.FLOWS_OUTPUT + ") | "
+            "[Architecture and flows (Mermaid)](" + self._config.APIDOCS_ARCHITECTURE_FILENAME + ") | "
             "[Class hierarchy](classes.md) | [General index](genindex.md) | "
             f"[Coverage and warnings](COVERAGE.md) | [`{self._config.APIDOCS_JSON_FILENAME}`]"
             f"({self._config.APIDOCS_JSON_FILENAME})"
@@ -668,7 +671,7 @@ class ApiMarkdownRenderer:
         if not types or (len(types) < 2 and not any(t.base_uids or t.bases for t in types)):
             return ""
         cap = max(1, int(self._config.APIDOCS_CALLGRAPH_MAX_EDGES))
-        lines = ["classDiagram"]
+        lines = ["classDiagram", "    direction LR"]
         known: Dict[str, str] = {}
         for entity in types[:cap]:
             cid = re.sub(r"[^A-Za-z0-9_]", "_", entity.qualname)
@@ -745,6 +748,7 @@ class ApiDocsWriter:
         project_root: str,
         project_name: str = "",
         architecture_markdown: str = "",
+        flow_graphs: Optional[List[FlowGraph]] = None,
     ) -> Dict[str, str]:
         """Write every page and prune stale module pages.
 
@@ -755,7 +759,9 @@ class ApiDocsWriter:
             project_root: Project root directory.
             project_name: Display name (defaults to the root directory name).
             architecture_markdown: Optional architecture and execution-flow
-                Markdown (written as ``architecture.md`` and shown in the HTML).
+                Markdown (written as ``architecture.md``).
+            flow_graphs: Laid-out diagrams drawn in the HTML Flows tab and in
+                the standalone FLOWS_OUTPUT page.
 
         Returns:
             Mapping of relative output path to absolute written path.
@@ -776,7 +782,9 @@ class ApiDocsWriter:
             reference.to_dict(cfg.APIDOCS_SCHEMA_VERSION), indent=1, sort_keys=False
         ) + "\n"
         if cfg.APIDOCS_HTML_ENABLED:
-            pages[cfg.APIDOCS_HTML_FILENAME] = render_api_site(reference, name, cfg, architecture_markdown)
+            pages[cfg.APIDOCS_HTML_FILENAME] = render_api_site(reference, name, cfg, flow_graphs or [])
+            if flow_graphs:
+                pages[cfg.FLOWS_OUTPUT] = render_flows_page(flow_graphs, name, cfg.APIDOCS_HTML_FILENAME)
         modules_dir = out_dir / cfg.APIDOCS_MODULES_SUBDIR
         modules_dir.mkdir(parents=True, exist_ok=True)
         expected = {

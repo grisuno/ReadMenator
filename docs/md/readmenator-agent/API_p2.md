@@ -1,11 +1,46 @@
 # API (page 2 of 2)
 Previous: [API.md](API.md)
 
+## readmenator/_mcp_server.py
+Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_layers.py`, `readmenator/_query.py`
+Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `tests/test_mcp_server.py`
+- `MCPError.__init__` (method) `readmenator/_mcp_server.py:59` `def __init__(self, code, message, data)`
+- `MCPRequest.__init__` (method) `readmenator/_mcp_server.py:72` `def __init__(self, msg)`
+- `MCPRequest.is_notification` (method) `readmenator/_mcp_server.py:79` `def is_notification(self)`
+- `MCPRequest.response` (method) `readmenator/_mcp_server.py:82` `def response(self, result)`
+- `MCPRequest.error` (method) `readmenator/_mcp_server.py:85` `def error(self, code, message, data)`
+- `MCPTool.__init__` (method) `readmenator/_mcp_server.py:93` `def __init__(self, name, description, handler, input_schema)`
+- `MCPTool.definition` (method) `readmenator/_mcp_server.py:108` `def definition(self)`
+- `MCPTool.call` (method) `readmenator/_mcp_server.py:115` `def call(self, arguments)`
+- `MCPResource.__init__` (method) `readmenator/_mcp_server.py:120` `def __init__(self, uri, name, description, mime_type, handler)`
+- `MCPResource.definition` (method) `readmenator/_mcp_server.py:134` `def definition(self)`
+- `MCPResource.read` (method) `readmenator/_mcp_server.py:142` `def read(self)`
+- `MCPServer.__init__` (method) `readmenator/_mcp_server.py:147` `def __init__(self, app, target_dir)`
+- `MCPServer.register_tool` (method) `readmenator/_mcp_server.py:155` `def register_tool(self, tool)`
+- `MCPServer.register_resource` (method) `readmenator/_mcp_server.py:158` `def register_resource(self, resource)`
+- `MCPServer.dispatch` (method) `readmenator/_mcp_server.py:241` `def dispatch(self, req)`
+- `MCPServer.run` (method) `readmenator/_mcp_server.py:261` `def run(self)`
+- `main` (function) `readmenator/_mcp_server.py:1074` `def main()` -- CLI entry point for `readmenator serve <path>`.
+
+## readmenator/_memory.py
+Depends on: `readmenator/_config.py`, `readmenator/_gitmeta.py`, `readmenator/_models.py`, `readmenator/_purpose.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_memory.py`
+- `sanitize_note` (function) `readmenator/_memory.py:84` `def sanitize_note(text, max_chars)` -- Collapse a note to one safe line that cannot break the preserved block.
+- `ProjectMemory.__init__` (method) `readmenator/_memory.py:105` `def __init__(self, config)` -- Initialise with application configuration.
+- `ProjectMemory.path` (method) `readmenator/_memory.py:113` `def path(self, project_root)` -- Return the MEMORY.md location for a project root.
+- `ProjectMemory.read` (method) `readmenator/_memory.py:117` `def read(self, project_root)` -- Return the current memory file text ("" when missing).
+- `ProjectMemory.notes` (method) `readmenator/_memory.py:124` `def notes(self, project_root)` -- Parse the preserved session log into notes.
+- `ProjectMemory.remember` (method) `readmenator/_memory.py:149` `def remember(self, project_root, note, kind, today)` -- Append one note to the preserved session log.
+- `ProjectMemory.write` (method) `readmenator/_memory.py:218` `def write(self, project_root, generated)` -- Write generated sections while preserving the existing session log.
+- `ProjectMemory.build` (method) `readmenator/_memory.py:231` `def build(self, project_root, nodes, analysis, analysis_v2, findings, concept_graph, content_map)` -- Render the generated memory document (with an empty notes block).
+- `ProjectMemory.extract_rules` (method) `readmenator/_memory.py:291` `def extract_rules(self, project_root)` -- Extract categorised rule lines from the project's instruction files.
+- `ProjectMemory.detect_commands` (method) `readmenator/_memory.py:419` `def detect_commands(self, root, nodes)` -- Detect workflow commands from project manifests.
+
 ## readmenator/_mermaid.py
 Depends on: `readmenator/_models.py`
 Imported by: `readmenator/_documentation.py`, `tests/test_mermaid.py`
 - `MermaidRenderer.__init__` (method) `readmenator/_mermaid.py:26` `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, function_style, external_style...` -- Initialise rendering budgets and styles.
-- `MermaidRenderer.render` (method) `readmenator/_mermaid.py:74` `def render(self, nodes, edges, resolved_edges, analysis)` -- Produce a Mermaid flowchart string and a truncation flag.
+- `MermaidRenderer.render` (method) `readmenator/_mermaid.py:86` `def render(self, nodes, edges, resolved_edges, analysis)` -- Produce a Mermaid flowchart string and a truncation flag.
 
 ## readmenator/_models.py
 Depends on: `readmenator/_category.py`
@@ -280,44 +315,46 @@ Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readme
 - `s` (function) `readmenator/_vendor/force-graph.min.js:5` -- <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 colors and returns...
 
 ## readmenator/_video.py
-Depends on: `readmenator/_config.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
+Depends on: `readmenator/_config.py`, `readmenator/_flowcharts.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
 Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
-- `ease` (function) `readmenator/_video.py:96` `def ease(x)` -- Quintic smootherstep clamped to [0, 1].
-- `fmt_int` (function) `readmenator/_video.py:107` `def fmt_int(n)` -- Group thousands with commas.
-- `mix` (function) `readmenator/_video.py:112` `def mix(a, b, t)` -- Linear blend of two RGB colors.
-- `alpha` (function) `readmenator/_video.py:117` `def alpha(c, a)` -- RGB color plus an alpha in [0, 1] as an RGBA tuple.
-- `hash_color` (function) `readmenator/_video.py:122` `def hash_color(digest)` -- Neon color derived from a digest: the file fingerprint.
-- `short_label` (function) `readmenator/_video.py:131` `def short_label(text, limit)` -- Truncate a label to a character budget without newlines.
-- `community_color` (function) `readmenator/_video.py:176` `def community_color(index)` -- Neon color for a community index (grey for unassigned).
-- `project3d` (function) `readmenator/_video.py:194` `def project3d(p, yaw, pitch, target, scale, center, perspective)` -- Project a 3D point through an orbiting perspective camera.
-- `mode_color` (function) `readmenator/_video.py:233` `def mode_color(data, nid, mode)` -- Node color under an explorer color mode (community, layer, language).
-- `draw_cloud3d` (function) `readmenator/_video.py:282` `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` -- Draw the 3D force graph (graph-force 3D view) through an orbiting camera.
-- `draw_sphere3d` (function) `readmenator/_video.py:402` `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)` -- Draw the bundled sphere, optionally morphing out of the 3D force layout.
-- `pr` (function) `readmenator/_video.py:469` `def pr(p)` -- Project a layout point through the scene camera.
-- `dependencies_available` (function) `readmenator/_video.py:566` `def dependencies_available()` -- Check that PIL and ffmpeg exist for video rendering.
-- `resolve_fonts` (function) `readmenator/_video.py:575` `def resolve_fonts()` -- Resolve monospace fonts through fontconfig with PIL fallback.
-- `Backdrop.__init__` (method) `readmenator/_video.py:617` `def __init__(self, width, height)` -- Build the gradient sky, star field, sun and CRT mask.
-- `draw_grid` (function) `readmenator/_video.py:677` `def draw_grid(img, t, strength, bd)` -- Draw the scrolling perspective grid below the horizon.
-- `draw_sun` (function) `readmenator/_video.py:697` `def draw_sun(img, a, bd, cy)` -- Paste the striped synthwave sun behind the horizon.
-- `post` (function) `readmenator/_video.py:714` `def post(img, glitch, seed)` -- Apply bloom, scanlines, vignette and optional glitch.
-- `glitch_fx` (function) `readmenator/_video.py:732` `def glitch_fx(img, amount, seed)` -- RGB split plus horizontal slice displacement.
-- `chroma_text` (function) `readmenator/_video.py:755` `def chroma_text(img, xy, text, font, col, spread, anchor)` -- Draw text with red/cyan CRT chromatic aberration.
-- `hud_panel` (function) `readmenator/_video.py:766` `def hud_panel(d, box, title, fonts, col)` -- Draw a translucent HUD panel with neon edge and corner brackets.
-- `draw_header` (function) `readmenator/_video.py:779` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
-- `draw_caption` (function) `readmenator/_video.py:793` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
-- `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:814` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` -- Collect every number each scene draws, from real scan data.
-- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:1029` `def build_scenes(self, data)` -- Lay every scene on the global clock.
-- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:1058` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
-- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:1105` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
-- `CinematicVideoRenderer.emergence_frames` (method) `readmenator/_video.py:1148` `def emergence_frames(self, data, box)` -- ForceAtlas2 snapshots of the resolved import graph fitted to a pixel box.
-- `CinematicVideoRenderer.bundle_groups` (method) `readmenator/_video.py:1158` `def bundle_groups(self, data)` -- Group graph files by community (hubs first), unassigned files last.
-- `CinematicVideoRenderer.ordered_groups` (method) `readmenator/_video.py:1173` `def ordered_groups(self, data)` -- Bundle groups reordered to shorten bundled edges (same optimizer as the explorer).
-- `CinematicVideoRenderer.bundle_layout` (method) `readmenator/_video.py:1183` `def bundle_layout(self, data, box)` -- Hierarchical edge bundling of resolved imports grouped by community.
-- `CinematicVideoRenderer.orbit_positions` (method) `readmenator/_video.py:1192` `def orbit_positions(self, data)` -- 3D ForceAtlas2 layout of the graph, centered and scaled to the unit sphere.
-- `CinematicVideoRenderer.sphere_layout` (method) `readmenator/_video.py:1202` `def sphere_layout(self, data)` -- Spherical edge bundling of resolved imports on community caps.
-- `CinematicVideoRenderer.orbit_stops` (method) `readmenator/_video.py:1211` `def orbit_stops(self, data, positions)` -- Camera tour stops: the largest communities with their 3D centroid.
-- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:1240` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
-- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:1254` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
+- `ease` (function) `readmenator/_video.py:100` `def ease(x)` -- Quintic smootherstep clamped to [0, 1].
+- `fmt_int` (function) `readmenator/_video.py:111` `def fmt_int(n)` -- Group thousands with commas.
+- `mix` (function) `readmenator/_video.py:116` `def mix(a, b, t)` -- Linear blend of two RGB colors.
+- `alpha` (function) `readmenator/_video.py:121` `def alpha(c, a)` -- RGB color plus an alpha in [0, 1] as an RGBA tuple.
+- `hash_color` (function) `readmenator/_video.py:126` `def hash_color(digest)` -- Neon color derived from a digest: the file fingerprint.
+- `short_label` (function) `readmenator/_video.py:135` `def short_label(text, limit)` -- Truncate a label to a character budget without newlines.
+- `community_color` (function) `readmenator/_video.py:180` `def community_color(index)` -- Neon color for a community index (grey for unassigned).
+- `project3d` (function) `readmenator/_video.py:198` `def project3d(p, yaw, pitch, target, scale, center, perspective)` -- Project a 3D point through an orbiting perspective camera.
+- `mode_color` (function) `readmenator/_video.py:237` `def mode_color(data, nid, mode)` -- Node color under an explorer color mode (community, layer, language).
+- `draw_cloud3d` (function) `readmenator/_video.py:286` `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` -- Draw the 3D force graph (graph-force 3D view) through an orbiting camera.
+- `draw_sphere3d` (function) `readmenator/_video.py:406` `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)` -- Draw the bundled sphere, optionally morphing out of the 3D force layout.
+- `pr` (function) `readmenator/_video.py:473` `def pr(p)` -- Project a layout point through the scene camera.
+- `dependencies_available` (function) `readmenator/_video.py:570` `def dependencies_available()` -- Check that PIL and ffmpeg exist for video rendering.
+- `resolve_fonts` (function) `readmenator/_video.py:579` `def resolve_fonts()` -- Resolve monospace fonts through fontconfig with PIL fallback.
+- `Backdrop.__init__` (method) `readmenator/_video.py:621` `def __init__(self, width, height)` -- Build the gradient sky, star field, sun and CRT mask.
+- `draw_grid` (function) `readmenator/_video.py:681` `def draw_grid(img, t, strength, bd)` -- Draw the scrolling perspective grid below the horizon.
+- `draw_sun` (function) `readmenator/_video.py:701` `def draw_sun(img, a, bd, cy)` -- Paste the striped synthwave sun behind the horizon.
+- `post` (function) `readmenator/_video.py:718` `def post(img, glitch, seed)` -- Apply bloom, scanlines, vignette and optional glitch.
+- `glitch_fx` (function) `readmenator/_video.py:736` `def glitch_fx(img, amount, seed)` -- RGB split plus horizontal slice displacement.
+- `chroma_text` (function) `readmenator/_video.py:759` `def chroma_text(img, xy, text, font, col, spread, anchor)` -- Draw text with red/cyan CRT chromatic aberration.
+- `hud_panel` (function) `readmenator/_video.py:770` `def hud_panel(d, box, title, fonts, col)` -- Draw a translucent HUD panel with neon edge and corner brackets.
+- `draw_header` (function) `readmenator/_video.py:783` `def draw_header(img, d, gt, total, project, act_label, fonts, width)` -- Draw the top strip with project title, act label and progress.
+- `draw_caption` (function) `readmenator/_video.py:797` `def draw_caption(d, text, lt, dur, fonts, width, y)` -- Draw the lower-third narration line with typing effect.
+- `CinematicVideoRenderer.collect` (method) `readmenator/_video.py:818` `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` -- Collect every number each scene draws, from real scan data.
+- `CinematicVideoRenderer.build_scenes` (method) `readmenator/_video.py:1042` `def build_scenes(self, data)` -- Lay every scene on the global clock.
+- `CinematicVideoRenderer.graph_positions` (method) `readmenator/_video.py:1072` `def graph_positions(self, data, box)` -- Compute deterministic positions for graph nodes inside a box.
+- `CinematicVideoRenderer.tree_positions` (method) `readmenator/_video.py:1119` `def tree_positions(self, data, box)` -- Place the full BFS tree radially: root in the center, one ring per depth.
+- `CinematicVideoRenderer.emergence_frames` (method) `readmenator/_video.py:1162` `def emergence_frames(self, data, box)` -- ForceAtlas2 snapshots of the resolved import graph fitted to a pixel box.
+- `CinematicVideoRenderer.bundle_groups` (method) `readmenator/_video.py:1172` `def bundle_groups(self, data)` -- Group graph files by community (hubs first), unassigned files last.
+- `CinematicVideoRenderer.ordered_groups` (method) `readmenator/_video.py:1187` `def ordered_groups(self, data)` -- Bundle groups reordered to shorten bundled edges (same optimizer as the explorer).
+- `CinematicVideoRenderer.bundle_layout` (method) `readmenator/_video.py:1197` `def bundle_layout(self, data, box)` -- Hierarchical edge bundling of resolved imports grouped by community.
+- `CinematicVideoRenderer.orbit_positions` (method) `readmenator/_video.py:1206` `def orbit_positions(self, data)` -- 3D ForceAtlas2 layout of the graph, centered and scaled to the unit sphere.
+- `CinematicVideoRenderer.sphere_layout` (method) `readmenator/_video.py:1216` `def sphere_layout(self, data)` -- Spherical edge bundling of resolved imports on community caps.
+- `CinematicVideoRenderer.orbit_stops` (method) `readmenator/_video.py:1225` `def orbit_stops(self, data, positions)` -- Camera tour stops: the largest communities with their 3D centroid.
+- `CinematicVideoRenderer.render_single_frame` (method) `readmenator/_video.py:1254` `def render_single_frame(self, data, frame_index)` -- Render one frame to raw RGB bytes without touching ffmpeg.
+- `CinematicVideoRenderer.render` (method) `readmenator/_video.py:1268` `def render(self, data, output_path)` -- Render all frames and encode to mp4, muxing music if configured.
+- `tf` (function) `readmenator/_video.py:2187` `def tf(x, y)` -- Diagram to frame coordinates.
+- `tf` (function) `readmenator/_video.py:2285` `def tf(x, y)` -- Diagram to frame coordinates around the moving focus.
 
 ## readmenator/_watcher.py
 Depends on: `readmenator/_config.py`

@@ -15,6 +15,7 @@ the v2 analyses (taint, cycles, impact, hotspots, rules, layers, dataflow).
 
 ```mermaid
 classDiagram
+    direction LR
     class AnalyzerFactory
     AnalyzerFactory : __init__()
     AnalyzerFactory : scanner()

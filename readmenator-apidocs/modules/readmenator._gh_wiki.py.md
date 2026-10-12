@@ -20,6 +20,7 @@ checkout (GH_WIKI_ENABLED), never during analysis, and shells out with argument 
 
 ```mermaid
 classDiagram
+    direction LR
     class WikiPublishResult
     WikiPublishResult : List[str] pages
     WikiPublishResult : List[str] removed

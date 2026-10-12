@@ -9,10 +9,10 @@
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 33 | 3 |
 | `readmenator/_analytics.py` | Corpus analytics aggregations for the readmenator knowledge graph. | readmenator | 9 | 5 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 23 | 5 |
-| `readmenator/_apidocs.py` | Deterministic API reference model: extraction, cross-references, coverage. | readmenator | 52 | 6 |
-| `readmenator/_apidocs_page.py` | Self-contained HTML browser for the deterministic API reference. | readmenator | 2 | 2 |
+| `readmenator/_apidocs.py` | Deterministic API reference model: extraction, cross-references, coverage. | readmenator | 52 | 7 |
+| `readmenator/_apidocs_page.py` | Self-contained HTML browser for the deterministic API reference. | readmenator | 2 | 3 |
 | `readmenator/_apidocs_render.py` | Markdown, JSON, and writer layer for the deterministic API reference. | readmenator | 39 | 2 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 81 | 14 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 84 | 14 |
 | `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 5 |
 | `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 1 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
@@ -32,7 +32,9 @@
 | `readmenator/_explain.py` | Score explanation and path decomposition for the ranking system. | readmenator | 3 | 1 |
 | `readmenator/_explorer.py` | Stdlib explorer HTTP server for the readmenator knowledge graph. | readmenator | 14 | 2 |
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 16 | 3 |
-| `readmenator/_flowcharts.py` | Architecture and execution-flow Mermaid diagrams from static structure. | readmenator | 46 | 3 |
+| `readmenator/_flowcharts.py` | Architecture and execution-flow Mermaid diagrams from static structure. | readmenator | 54 | 4 |
+| `readmenator/_flowlayout.py` | Flow graph model and deterministic layered layout (Sugiyama style). | readmenator | 11 | 6 |
+| `readmenator/_flowpage.py` | Interactive SVG viewer for laid-out architecture and execution-flow diagrams. | readmenator | 3 | 4 |
 | `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 23 | 9 |
 | `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 2 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 3 |
@@ -69,7 +71,7 @@
 | `readmenator/_taint.py` | Taint propagation analysis of dangerous imports through the resolved import graph. | readmenator | 6 | 3 |
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_vendor/force-graph.min.js` | Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph | misc | 35 | 0 |
-| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 81 | 3 |
+| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 90 | 3 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
 | `readmenator/_yaralite.py` | Zero-dependency YARA-lite rule parser and runner. | readmenator | 20 | 2 |
@@ -113,7 +115,7 @@
 | `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 73 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
-| `tests/test_flowcharts.py` | Contract tests for architecture tiers, execution flows, and receiver typing. | tests | 26 | 0 |
+| `tests/test_flowcharts.py` | Contract tests for architecture tiers, execution flows, and receiver typing. | tests | 35 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
 | `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 33 | 0 |
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
@@ -145,5 +147,5 @@
 | `tests/test_taint.py` | TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths. | tests | 10 | 0 |
 | `tests/test_taint_bdd.py` | BDD-style contract tests for taint propagation analysis. | tests | 26 | 0 |
 | `tests/test_uml.py` | Contract tests for UML class diagram generation and language code generation. | tests | 49 | 0 |
-| `tests/test_video.py` | Contract tests for the cinematic overview video renderer. | tests | 18 | 0 |
+| `tests/test_video.py` | Contract tests for the cinematic overview video renderer. | tests | 20 | 0 |
 | `tests/test_wiki.py` | - | tests | 30 | 0 |

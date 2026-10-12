@@ -43,7 +43,7 @@ class TestEndToEndContract(unittest.TestCase):
         kb_path = self.temp_dir / "KNOWLEDGE_BASE.md"
         content = kb_path.read_text(encoding="utf-8")
         self.assertIn("```mermaid", content)
-        self.assertIn("graph TD", content)
+        self.assertIn("graph LR", content)
 
     def test_query_subcommand_works(self) -> None:
         self._write("main.py", "class Database:\n    pass\n")

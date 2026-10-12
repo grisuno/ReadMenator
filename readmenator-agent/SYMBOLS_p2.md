@@ -3,6 +3,9 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `detect_style` | function | `readmenator/_docstrings.py:254` | `def detect_style(text)` |
+| `flush` | function | `readmenator/_docstrings.py:413` | `def flush()` |
+| `grab` | function | `readmenator/_docstrings.py:782` | `def grab(tag)` |
 | `is_empty` | method | `readmenator/_docstrings.py:195` | `def is_empty(self)` |
 | `param` | method | `readmenator/_docstrings.py:203` | `def param(self, name)` |
 | `parse_docstring` | function | `readmenator/_docstrings.py:809` | `def parse_docstring(text)` |
@@ -12,35 +15,35 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `to_dict` | method | `readmenator/_docstrings.py:211` | `def to_dict(self)` |
 | `DocumentationGenerator` | class | `readmenator/_documentation.py:36` | `class DocumentationGenerator` |
 | `__init__` | method | `readmenator/_documentation.py:48` | `def __init__(self, config)` |
-| `_apply_context_budget` | method | `readmenator/_documentation.py:214` | `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)` |
-| `_build_analytics_section` | method | `readmenator/_documentation.py:708` | `def _build_analytics_section(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2)` |
-| `_build_architecture_reference` | method | `readmenator/_documentation.py:1253` | `def _build_architecture_reference(self, nodes, edges)` |
-| `_build_change_impact` | method | `readmenator/_documentation.py:1053` | `def _build_change_impact(self, analysis_v2)` |
-| `_build_community_analysis` | method | `readmenator/_documentation.py:597` | `def _build_community_analysis(self, analysis, nodes)` |
-| `_build_concept_graph` | method | `readmenator/_documentation.py:985` | `def _build_concept_graph(self, analysis_v2)` |
-| `_build_cpg_block` | method | `readmenator/_documentation.py:1227` | `def _build_cpg_block(self, nodes, edges, resolved_edges, analysis)` |
-| `_build_dashboard` | method | `readmenator/_documentation.py:489` | `def _build_dashboard(self, nodes, edges, resolved_edges)` |
-| `_build_dataflow_analysis` | method | `readmenator/_documentation.py:954` | `def _build_dataflow_analysis(self, analysis_v2)` |
-| `_build_dependency_cycles` | method | `readmenator/_documentation.py:1032` | `def _build_dependency_cycles(self, analysis_v2)` |
-| `_build_forcegraph_section` | method | `readmenator/_documentation.py:671` | `def _build_forcegraph_section(self, nodes, edges, resolved_edges, analysis, layers, findings)` |
-| `_build_god_nodes` | method | `readmenator/_documentation.py:569` | `def _build_god_nodes(self, analysis, ranked)` |
-| `_build_hotspots` | method | `readmenator/_documentation.py:916` | `def _build_hotspots(self, analysis_v2, ranked)` |
-| `_build_layer_violations` | method | `readmenator/_documentation.py:1078` | `def _build_layer_violations(self, analysis_v2)` |
-| `_build_layers` | method | `readmenator/_documentation.py:455` | `def _build_layers(self, layers, nodes)` |
-| `_build_mermaid_section` | method | `readmenator/_documentation.py:1178` | `def _build_mermaid_section(self, graph_output, is_truncated)` |
-| `_build_orphans` | method | `readmenator/_documentation.py:789` | `def _build_orphans(self, nodes, analysis_v2, ranked)` |
-| `_build_query_recipes` | method | `readmenator/_documentation.py:839` | `def _build_query_recipes(self)` |
-| `_build_ranked_context` | method | `readmenator/_documentation.py:743` | `def _build_ranked_context(self, ranked)` |
-| `_build_security_findings` | method | `readmenator/_documentation.py:1131` | `def _build_security_findings(self, findings)` |
-| `_build_suggested_questions` | method | `readmenator/_documentation.py:655` | `def _build_suggested_questions(self, analysis)` |
-| `_build_suggested_rules` | method | `readmenator/_documentation.py:1106` | `def _build_suggested_rules(self, analysis_v2)` |
-| `_build_surprising_connections` | method | `readmenator/_documentation.py:630` | `def _build_surprising_connections(self, analysis, nodes)` |
-| `_build_taint_analysis` | method | `readmenator/_documentation.py:881` | `def _build_taint_analysis(self, analysis_v2)` |
-| `_build_toc` | method | `readmenator/_documentation.py:352` | `def _build_toc(self, nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked, extra_sections)` |
-| `_build_uml_diagram` | method | `readmenator/_documentation.py:1201` | `def _build_uml_diagram(self, nodes, edges)` |
-| `_get_git_commit` | method | `readmenator/_documentation.py:86` | `def _get_git_commit()` |
-| `_ranking_version` | method | `readmenator/_documentation.py:68` | `def _ranking_version(self)` |
-| `generate` | method | `readmenator/_documentation.py:96` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked, content_map)` |
+| `_apply_context_budget` | method | `readmenator/_documentation.py:217` | `def _apply_context_budget(self, content, nodes, edges, resolved_edges, analysis, analysis_v2, findings)` |
+| `_build_analytics_section` | method | `readmenator/_documentation.py:711` | `def _build_analytics_section(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2)` |
+| `_build_architecture_reference` | method | `readmenator/_documentation.py:1275` | `def _build_architecture_reference(self, nodes, edges)` |
+| `_build_change_impact` | method | `readmenator/_documentation.py:1056` | `def _build_change_impact(self, analysis_v2)` |
+| `_build_community_analysis` | method | `readmenator/_documentation.py:600` | `def _build_community_analysis(self, analysis, nodes)` |
+| `_build_concept_graph` | method | `readmenator/_documentation.py:988` | `def _build_concept_graph(self, analysis_v2)` |
+| `_build_cpg_block` | method | `readmenator/_documentation.py:1249` | `def _build_cpg_block(self, nodes, edges, resolved_edges, analysis)` |
+| `_build_dashboard` | method | `readmenator/_documentation.py:492` | `def _build_dashboard(self, nodes, edges, resolved_edges)` |
+| `_build_dataflow_analysis` | method | `readmenator/_documentation.py:957` | `def _build_dataflow_analysis(self, analysis_v2)` |
+| `_build_dependency_cycles` | method | `readmenator/_documentation.py:1035` | `def _build_dependency_cycles(self, analysis_v2)` |
+| `_build_forcegraph_section` | method | `readmenator/_documentation.py:674` | `def _build_forcegraph_section(self, nodes, edges, resolved_edges, analysis, layers, findings)` |
+| `_build_god_nodes` | method | `readmenator/_documentation.py:572` | `def _build_god_nodes(self, analysis, ranked)` |
+| `_build_hotspots` | method | `readmenator/_documentation.py:919` | `def _build_hotspots(self, analysis_v2, ranked)` |
+| `_build_layer_violations` | method | `readmenator/_documentation.py:1081` | `def _build_layer_violations(self, analysis_v2)` |
+| `_build_layers` | method | `readmenator/_documentation.py:458` | `def _build_layers(self, layers, nodes)` |
+| `_build_mermaid_section` | method | `readmenator/_documentation.py:1181` | `def _build_mermaid_section(self, graph_output, is_truncated)` |
+| `_build_orphans` | method | `readmenator/_documentation.py:792` | `def _build_orphans(self, nodes, analysis_v2, ranked)` |
+| `_build_query_recipes` | method | `readmenator/_documentation.py:842` | `def _build_query_recipes(self)` |
+| `_build_ranked_context` | method | `readmenator/_documentation.py:746` | `def _build_ranked_context(self, ranked)` |
+| `_build_security_findings` | method | `readmenator/_documentation.py:1134` | `def _build_security_findings(self, findings)` |
+| `_build_suggested_questions` | method | `readmenator/_documentation.py:658` | `def _build_suggested_questions(self, analysis)` |
+| `_build_suggested_rules` | method | `readmenator/_documentation.py:1109` | `def _build_suggested_rules(self, analysis_v2)` |
+| `_build_surprising_connections` | method | `readmenator/_documentation.py:633` | `def _build_surprising_connections(self, analysis, nodes)` |
+| `_build_taint_analysis` | method | `readmenator/_documentation.py:884` | `def _build_taint_analysis(self, analysis_v2)` |
+| `_build_toc` | method | `readmenator/_documentation.py:355` | `def _build_toc(self, nodes, analysis, layers, findings, analysis_v2, is_truncated, ranked, extra_sections)` |
+| `_build_uml_diagram` | method | `readmenator/_documentation.py:1204` | `def _build_uml_diagram(self, nodes, edges)` |
+| `_get_git_commit` | method | `readmenator/_documentation.py:89` | `def _get_git_commit()` |
+| `_ranking_version` | method | `readmenator/_documentation.py:71` | `def _ranking_version(self)` |
+| `generate` | method | `readmenator/_documentation.py:99` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, ranked, content_map)` |
 | `Embedder` | class | `readmenator/_embed.py:39` | `class Embedder` |
 | `__init__` | method | `readmenator/_embed.py:42` | `def __init__(self, config)` |
 | `_jaccard` | function | `readmenator/_embed.py:27` | `def _jaccard(left, right)` |
@@ -96,52 +99,74 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `to_json` | method | `readmenator/_exporter.py:44` | `def to_json(self, nodes, edges, resolved_edges, analysis, findings, concept_graph)` |
 | `to_obsidian` | method | `readmenator/_exporter.py:895` | `def to_obsidian(self, nodes, edges, output_dir, analysis, concept_graph)` |
 | `to_svg` | method | `readmenator/_exporter.py:482` | `def to_svg(self, nodes, edges, resolved_edges, analysis)` |
-| `ArchitectureDiagramBuilder` | class | `readmenator/_flowcharts.py:258` | `class ArchitectureDiagramBuilder` |
-| `Component` | class | `readmenator/_flowcharts.py:236` | `class Component` |
-| `EntryPoint` | class | `readmenator/_flowcharts.py:468` | `class EntryPoint` |
-| `ExecutionFlowBuilder` | class | `readmenator/_flowcharts.py:512` | `class ExecutionFlowBuilder` |
-| `FlowStep` | class | `readmenator/_flowcharts.py:492` | `class FlowStep` |
-| `_ControlFlowRenderer` | class | `readmenator/_flowcharts.py:848` | `class _ControlFlowRenderer` |
-| `__init__` | method | `readmenator/_flowcharts.py:261` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_flowcharts.py:515` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_flowcharts.py:851` | `def __init__(self, config, project_names)` |
-| `_block` | method | `readmenator/_flowcharts.py:919` | `def _block(self, body, tails)` |
-| `_calls` | method | `readmenator/_flowcharts.py:881` | `def _calls(self, node)` |
-| `_case_of` | method | `readmenator/_flowcharts.py:966` | `def _case_of(test)` |
-| `_compound` | method | `readmenator/_flowcharts.py:1034` | `def _compound(self, stmt, tails)` |
-| `_condition` | method | `readmenator/_flowcharts.py:1030` | `def _condition(self, test)` |
-| `_connect` | method | `readmenator/_flowcharts.py:914` | `def _connect(self, tails, target)` |
-| `_heavy_threshold` | method | `readmenator/_flowcharts.py:459` | `def _heavy_threshold(counts)` |
-| `_is_test` | method | `readmenator/_flowcharts.py:524` | `def _is_test(self, file_id)` |
-| `_link` | method | `readmenator/_flowcharts.py:873` | `def _link(self, src, dst, label, dotted)` |
-| `_new` | method | `readmenator/_flowcharts.py:861` | `def _new(self, shape, text, css)` |
-| `_short` | method | `readmenator/_flowcharts.py:723` | `def _short(self, key)` |
-| `_switch` | method | `readmenator/_flowcharts.py:1011` | `def _switch(self, subject, cases, default, tails)` |
-| `_switch_chain` | method | `readmenator/_flowcharts.py:986` | `def _switch_chain(self, stmt)` |
-| `bump` | function | `readmenator/_flowcharts.py:637` | `def bump(file_id, name, line, points, reason)` |
-| `call_graph` | method | `readmenator/_flowcharts.py:533` | `def call_graph(self, nodes, edges, resolved_edges, content_map)` |
-| `call_tree_mermaid` | method | `readmenator/_flowcharts.py:733` | `def call_tree_mermaid(self, entry, steps)` |
-| `caller_key` | function | `readmenator/_flowcharts.py:565` | `def caller_key(site_file, site_line, caller)` |
-| `components` | method | `readmenator/_flowcharts.py:269` | `def components(self, nodes, analysis, layers)` |
-| `control_flow_mermaid` | method | `readmenator/_flowcharts.py:805` | `def control_flow_mermaid(self, content, entry, project_names)` |
-| `eades_lin_smyth` | function | `readmenator/_flowcharts.py:184` | `def eades_lin_smyth(vertices, weight)` |
-| `entry_points` | method | `readmenator/_flowcharts.py:614` | `def entry_points(self, nodes, graph, defs, content_map)` |
-| `flush` | function | `readmenator/_flowcharts.py:923` | `def flush()` |
-| `key` | method | `readmenator/_flowcharts.py:486` | `def key(self)` |
-| `live` | function | `readmenator/_flowcharts.py:210` | `def live(table)` |
-| `mermaid_id` | function | `readmenator/_flowcharts.py:66` | `def mermaid_id(text, prefix)` |
-| `mermaid_text` | function | `readmenator/_flowcharts.py:71` | `def mermaid_text(text, limit)` |
-| `node` | function | `readmenator/_flowcharts.py:744` | `def node(key, css)` |
-| `reachable` | function | `readmenator/_flowcharts.py:148` | `def reachable(vertex)` |
-| `render` | method | `readmenator/_flowcharts.py:334` | `def render(self, nodes, resolved_edges, analysis, layers)` |
-| `render` | method | `readmenator/_flowcharts.py:895` | `def render(self, body, title)` |
-| `render_architecture_section` | function | `readmenator/_flowcharts.py:1090` | `def render_architecture_section(config, nodes, resolved_edges, analysis, layers)` |
-| `render_flows_section` | function | `readmenator/_flowcharts.py:1121` | `def render_flows_section(config, nodes, edges, resolved_edges, content_map)` |
-| `sequence_mermaid` | method | `readmenator/_flowcharts.py:773` | `def sequence_mermaid(self, entry, steps)` |
-| `tarjan_scc` | function | `readmenator/_flowcharts.py:79` | `def tarjan_scc(vertices, adjacency)` |
-| `transitive_reduction` | function | `readmenator/_flowcharts.py:133` | `def transitive_reduction(adjacency)` |
-| `visit` | function | `readmenator/_flowcharts.py:707` | `def visit(caller, depth, path)` |
-| `walk` | method | `readmenator/_flowcharts.py:692` | `def walk(self, graph, start)` |
+| `ArchitectureDiagramBuilder` | class | `readmenator/_flowcharts.py:259` | `class ArchitectureDiagramBuilder` |
+| `Component` | class | `readmenator/_flowcharts.py:237` | `class Component` |
+| `EntryPoint` | class | `readmenator/_flowcharts.py:499` | `class EntryPoint` |
+| `ExecutionFlowBuilder` | class | `readmenator/_flowcharts.py:543` | `class ExecutionFlowBuilder` |
+| `FlowStep` | class | `readmenator/_flowcharts.py:523` | `class FlowStep` |
+| `_ControlFlowBuilder` | class | `readmenator/_flowcharts.py:936` | `class _ControlFlowBuilder` |
+| `__init__` | method | `readmenator/_flowcharts.py:262` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_flowcharts.py:546` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_flowcharts.py:948` | `def __init__(self, config, project_names, summaries, file_id)` |
+| `_block` | method | `readmenator/_flowcharts.py:1017` | `def _block(self, body, tails)` |
+| `_call_lines` | method | `readmenator/_flowcharts.py:987` | `def _call_lines(self, calls)` |
+| `_calls` | method | `readmenator/_flowcharts.py:973` | `def _calls(self, node)` |
+| `_case_of` | method | `readmenator/_flowcharts.py:1074` | `def _case_of(test)` |
+| `_compound` | method | `readmenator/_flowcharts.py:1094` | `def _compound(self, stmt, tails)` |
+| `_connect` | method | `readmenator/_flowcharts.py:1012` | `def _connect(self, tails, target)` |
+| `_definition_detail` | method | `readmenator/_flowcharts.py:764` | `def _definition_detail(self, key, defs)` |
+| `_first_sentence` | function | `readmenator/_flowcharts.py:927` | `def _first_sentence(text)` |
+| `_heavy_threshold` | method | `readmenator/_flowcharts.py:490` | `def _heavy_threshold(counts)` |
+| `_is_test` | method | `readmenator/_flowcharts.py:555` | `def _is_test(self, file_id)` |
+| `_link` | method | `readmenator/_flowcharts.py:969` | `def _link(self, src, dst, label, style)` |
+| `_new` | method | `readmenator/_flowcharts.py:958` | `def _new(self, shape, title, lines, tone, line, calls)` |
+| `_short` | method | `readmenator/_flowcharts.py:754` | `def _short(self, key)` |
+| `add` | function | `readmenator/_flowcharts.py:800` | `def add(key, tone)` |
+| `build` | method | `readmenator/_flowcharts.py:994` | `def build(self, body, title)` |
+| `build_flow_graphs` | function | `readmenator/_flowcharts.py:1231` | `def build_flow_graphs(config, nodes, edges, resolved_edges, content_map, analysis, layers)` |
+| `bump` | function | `readmenator/_flowcharts.py:668` | `def bump(file_id, name, line, points, reason)` |
+| `call_graph` | method | `readmenator/_flowcharts.py:564` | `def call_graph(self, nodes, edges, resolved_edges, content_map)` |
+| `call_tree_mermaid` | method | `readmenator/_flowcharts.py:827` | `def call_tree_mermaid(self, entry, steps, defs)` |
+| `call_tree_model` | method | `readmenator/_flowcharts.py:779` | `def call_tree_model(self, entry, steps, defs)` |
+| `caller_key` | function | `readmenator/_flowcharts.py:596` | `def caller_key(site_file, site_line, caller)` |
+| `components` | method | `readmenator/_flowcharts.py:270` | `def components(self, nodes, analysis, layers)` |
+| `control_flow_mermaid` | method | `readmenator/_flowcharts.py:921` | `def control_flow_mermaid(self, content, entry, project_names)` |
+| `control_flow_model` | method | `readmenator/_flowcharts.py:877` | `def control_flow_model(self, content, entry, project_names, defs, call_graph)` |
+| `declare` | function | `readmenator/_flowcharts.py:1187` | `def declare(node, indent)` |
+| `eades_lin_smyth` | function | `readmenator/_flowcharts.py:185` | `def eades_lin_smyth(vertices, weight)` |
+| `entry_points` | method | `readmenator/_flowcharts.py:645` | `def entry_points(self, nodes, graph, defs, content_map)` |
+| `flush` | function | `readmenator/_flowcharts.py:1022` | `def flush()` |
+| `key` | method | `readmenator/_flowcharts.py:517` | `def key(self)` |
+| `label` | function | `readmenator/_flowcharts.py:1182` | `def label(node)` |
+| `live` | function | `readmenator/_flowcharts.py:211` | `def live(table)` |
+| `mermaid_id` | function | `readmenator/_flowcharts.py:67` | `def mermaid_id(text, prefix)` |
+| `mermaid_text` | function | `readmenator/_flowcharts.py:72` | `def mermaid_text(text, limit)` |
+| `model` | method | `readmenator/_flowcharts.py:335` | `def model(self, nodes, resolved_edges, analysis, layers)` |
+| `reachable` | function | `readmenator/_flowcharts.py:149` | `def reachable(vertex)` |
+| `render` | method | `readmenator/_flowcharts.py:476` | `def render(self, nodes, resolved_edges, analysis, layers)` |
+| `render_architecture_section` | function | `readmenator/_flowcharts.py:1287` | `def render_architecture_section(config, nodes, resolved_edges, analysis, layers)` |
+| `render_flows_section` | function | `readmenator/_flowcharts.py:1319` | `def render_flows_section(config, nodes, edges, resolved_edges, content_map)` |
+| `sequence_mermaid` | method | `readmenator/_flowcharts.py:862` | `def sequence_mermaid(self, entry, steps, defs)` |
+| `sequence_model` | method | `readmenator/_flowcharts.py:831` | `def sequence_model(self, entry, steps, defs)` |
+| `tarjan_scc` | function | `readmenator/_flowcharts.py:80` | `def tarjan_scc(vertices, adjacency)` |
+| `to_mermaid` | function | `readmenator/_flowcharts.py:1170` | `def to_mermaid(graph, direction)` |
+| `transitive_reduction` | function | `readmenator/_flowcharts.py:134` | `def transitive_reduction(adjacency)` |
+| `visit` | function | `readmenator/_flowcharts.py:738` | `def visit(caller, depth, path)` |
+| `walk` | method | `readmenator/_flowcharts.py:723` | `def walk(self, graph, start)` |
+| `FlowEdge` | class | `readmenator/_flowlayout.py:67` | `class FlowEdge` |
+| `FlowGraph` | class | `readmenator/_flowlayout.py:86` | `class FlowGraph` |
+| `FlowNode` | class | `readmenator/_flowlayout.py:36` | `class FlowNode` |
+| `LayoutMetrics` | class | `readmenator/_flowlayout.py:146` | `class LayoutMetrics` |
+| `_ranks` | function | `readmenator/_flowlayout.py:210` | `def _ranks(graph)` |
+| `_wrap` | function | `readmenator/_flowlayout.py:180` | `def _wrap(lines, metrics)` |
+| `layout_flow` | function | `readmenator/_flowlayout.py:260` | `def layout_flow(graph, metrics, direction)` |
+| `layout_sequence` | function | `readmenator/_flowlayout.py:414` | `def layout_sequence(graph, metrics)` |
+| `measure` | function | `readmenator/_flowlayout.py:195` | `def measure(node, metrics)` |
+| `node` | method | `readmenator/_flowlayout.py:117` | `def node(self, node_id)` |
+| `to_dict` | method | `readmenator/_flowlayout.py:124` | `def to_dict(self)` |
+| `flow_thumbnail_svg` | function | `readmenator/_flowpage.py:244` | `def flow_thumbnail_svg(graph, width, height)` |
+| `flows_payload_json` | function | `readmenator/_flowpage.py:218` | `def flows_payload_json(graphs, api_href)` |
+| `render_flows_page` | function | `readmenator/_flowpage.py:224` | `def render_flows_page(graphs, project_name, api_href)` |
 | `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:79` | `class ForceGraphRenderer` |
 | `__init__` | method | `readmenator/_forcegraph.py:82` | `def __init__(self, config)` |
 | `_family_color` | method | `readmenator/_forcegraph.py:513` | `def _family_color(self, name)` |
@@ -388,8 +413,8 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `write` | method | `readmenator/_memory.py:218` | `def write(self, project_root, generated)` |
 | `MermaidRenderer` | class | `readmenator/_mermaid.py:17` | `class MermaidRenderer` |
 | `__init__` | method | `readmenator/_mermaid.py:26` | `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, function_style, external_style...` |
-| `_sanitize_id` | method | `readmenator/_mermaid.py:63` | `def _sanitize_id(node_id)` |
-| `render` | method | `readmenator/_mermaid.py:74` | `def render(self, nodes, edges, resolved_edges, analysis)` |
+| `_sanitize_id` | method | `readmenator/_mermaid.py:75` | `def _sanitize_id(node_id)` |
+| `render` | method | `readmenator/_mermaid.py:86` | `def render(self, nodes, edges, resolved_edges, analysis)` |
 | `AnalysisResult` | class | `readmenator/_models.py:130` | `class AnalysisResult` |
 | `AnalysisResultV2` | class | `readmenator/_models.py:284` | `class AnalysisResultV2` |
 | `ChangeImpact` | class | `readmenator/_models.py:200` | `class ChangeImpact` |
@@ -471,30 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `uml` | method | `readmenator/_pipeline.py:205` | `def uml(self)` |
 | `video` | method | `readmenator/_pipeline.py:300` | `def video(self)` |
 | `vis_renderer` | method | `readmenator/_pipeline.py:293` | `def vis_renderer(self)` |
-| `wiki` | method | `readmenator/_pipeline.py:211` | `def wiki(self)` |
-| `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
-| `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
-| `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
-| `RiskProjection` | class | `readmenator/_projections.py:63` | `class RiskProjection` |
-| `__init__` | method | `readmenator/_projections.py:49` | `def __init__(self, documented_ids)` |
-| `__init__` | method | `readmenator/_projections.py:70` | `def __init__(self, fan_in, fan_out, test_files)` |
-| `apply_view` | function | `readmenator/_projections.py:95` | `def apply_view(category, view_config)` |
-| `map_morphism` | method | `readmenator/_projections.py:27` | `def map_morphism(self, m)` |
-| `map_morphism` | method | `readmenator/_projections.py:38` | `def map_morphism(self, m)` |
-| `map_morphism` | method | `readmenator/_projections.py:57` | `def map_morphism(self, m)` |
-| `map_morphism` | method | `readmenator/_projections.py:91` | `def map_morphism(self, m)` |
-| `map_node` | method | `readmenator/_projections.py:23` | `def map_node(self, node)` |
-| `map_node` | method | `readmenator/_projections.py:35` | `def map_node(self, node)` |
-| `map_node` | method | `readmenator/_projections.py:52` | `def map_node(self, node)` |
-| `map_node` | method | `readmenator/_projections.py:80` | `def map_node(self, node)` |
-| `ProvenanceAuditor` | class | `readmenator/_provenance.py:46` | `class ProvenanceAuditor` |
-| `ProvenanceFinding` | class | `readmenator/_provenance.py:20` | `class ProvenanceFinding` |
-| `__init__` | method | `readmenator/_provenance.py:49` | `def __init__(self, config)` |
-| `_attach_frequency` | method | `readmenator/_provenance.py:124` | `def _attach_frequency(self, findings, content_map)` |
-| `_corpus_frequency` | function | `readmenator/_provenance.py:153` | `def _corpus_frequency(patterns, rows)` |
-| `_snippet_in_content` | method | `readmenator/_provenance.py:115` | `def _snippet_in_content(self, file_path, snippet, content_map)` |
-| `audit` | method | `readmenator/_provenance.py:57` | `def audit(self, findings, content_map)` |
-| `is_inferred_only` | method | `readmenator/_provenance.py:32` | `def is_inferred_only(self)` |
-| `reading` | method | `readmenator/_provenance.py:37` | `def reading(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

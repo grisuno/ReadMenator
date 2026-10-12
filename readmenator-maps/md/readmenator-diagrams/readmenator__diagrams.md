@@ -1,6 +1,6 @@
 # readmenator: _diagrams
 
-readmenator: _diagrams groups 31 files (py) around EdgeKind, __str__, Morphism, weight, Category. Launcher shim that runs the readmenator CLI from a source checkout.
+readmenator: _diagrams groups 29 files (py) around EdgeKind, __str__, Morphism, weight, Category. Launcher shim that runs the readmenator CLI from a source checkout.
 
 ```mermaid
 graph LR
@@ -13,7 +13,7 @@ graph LR
 
 ## readmenator (3.1)
 
-readmenator groups 19 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator.
+readmenator groups 18 files (py) around EdgeKind, __str__, Morphism, weight, Category. ReadMenator -- Zero-token polyglot codebase knowledge graph generator.
 
 ## root (3.2)
 
@@ -21,7 +21,7 @@ root groups 1 files (py). Launcher shim that runs the readmenator CLI from a sou
 
 ## tests (3.3)
 
-tests groups 11 files (py) around _node, _fixture, TestComponentSchemaContract, setUp, test_top_level_keys_match_schema. Contract tests for the component diagram exporter.
+tests groups 10 files (py) around _node, _fixture, TestComponentSchemaContract, setUp, test_top_level_keys_match_schema. Contract tests for the component diagram exporter.
 
 **Files**:
 
@@ -41,7 +41,6 @@ tests groups 11 files (py) around _node, _fixture, TestComponentSchemaContract, 
 - readmenator/_projections.py
 - readmenator/_query.py
 - readmenator/_rank.py
-- readmenator/_symindex.py
 - readmenator/_video.py
 - readmenator/_watcher.py
 - readmenator/_yaralite.py
@@ -54,5 +53,4 @@ tests groups 11 files (py) around _node, _fixture, TestComponentSchemaContract, 
 - tests/test_ollama.py
 - tests/test_query.py
 - tests/test_ranking.py
-- tests/test_symindex.py
 - tests/test_video.py

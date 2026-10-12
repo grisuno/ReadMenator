@@ -20,6 +20,7 @@ preserving line structure. Pure regex and string handling, zero tokens.
 
 ```mermaid
 classDiagram
+    direction LR
     class DocField
     DocField : str name
     DocField : str type

@@ -34,11 +34,11 @@ flowchart LR
     n_readmenator__app_py__readmenatorApplication_export_cypher["_app.readmenatorApplication.export_cypher"]
     n_readmenator__app_py__readmenatorApplication_export_diagram["_app.readmenatorApplication.export_diagram"]
     n_readmenator__app_py__readmenatorApplication_export_diagrams["_app.readmenatorApplication.export_diagrams"]
+    n_readmenator__app_py__readmenatorApplication_export_flows["_app.readmenatorApplication.export_flows"]
     n_readmenator__app_py__readmenatorApplication_export_forcegraph["_app.readmenatorApplication.export_forcegraph"]
     n_readmenator__app_py__readmenatorApplication_export_graphml["_app.readmenatorApplication.export_graphml"]
     n_readmenator__app_py__readmenatorApplication_export_html["_app.readmenatorApplication.export_html"]
     n_readmenator__app_py__readmenatorApplication_export_json["_app.readmenatorApplication.export_json"]
-    n_readmenator__app_py__readmenatorApplication_export_obsidian["_app.readmenatorApplication.export_obsidian"]
     n_readmenator___main___py__main --> n_readmenator___main___py__build_parser
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication___init__
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_analytics
@@ -58,11 +58,11 @@ flowchart LR
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_cypher
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_diagram
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_diagrams
+    n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_flows
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_forcegraph
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_graphml
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_html
     n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_json
-    n_readmenator___main___py__main -.-> n_readmenator__app_py__readmenatorApplication_export_obsidian
 ```
 
 ## Functions
@@ -87,12 +87,12 @@ def build_parser() -> argparse.ArgumentParser
 
 ### `main`
 
-`function` | [readmenator/__main__.py:150](../../readmenator/__main__.py#L150)
+`function` | [readmenator/__main__.py:151](../../readmenator/__main__.py#L151)
 
 ```python
 def main() -> None
 ```
 
-*Calls:* [`build_parser`](#build_parser), [`readmenatorApplication.__init__`](readmenator._app.py.md#readmenatorapplication-__init__), [`readmenatorApplication.analytics`](readmenator._app.py.md#readmenatorapplication-analytics), [`readmenatorApplication.analyze`](readmenator._app.py.md#readmenatorapplication-analyze), [`readmenatorApplication.audit`](readmenator._app.py.md#readmenatorapplication-audit), [`readmenatorApplication.audit_deep`](readmenator._app.py.md#readmenatorapplication-audit_deep), [`readmenatorApplication.audit_provenance`](readmenator._app.py.md#readmenatorapplication-audit_provenance), [`readmenatorApplication.build_api_reference`](readmenator._app.py.md#readmenatorapplication-build_api_reference), [`readmenatorApplication.build_graphrag`](readmenator._app.py.md#readmenatorapplication-build_graphrag), [`readmenatorApplication.check_freshness`](readmenator._app.py.md#readmenatorapplication-check_freshness), [`readmenatorApplication.detect_layers`](readmenator._app.py.md#readmenatorapplication-detect_layers), [`readmenatorApplication.explain`](readmenator._app.py.md#readmenatorapplication-explain) and 41 more
+*Calls:* [`build_parser`](#build_parser), [`readmenatorApplication.__init__`](readmenator._app.py.md#readmenatorapplication-__init__), [`readmenatorApplication.analytics`](readmenator._app.py.md#readmenatorapplication-analytics), [`readmenatorApplication.analyze`](readmenator._app.py.md#readmenatorapplication-analyze), [`readmenatorApplication.audit`](readmenator._app.py.md#readmenatorapplication-audit), [`readmenatorApplication.audit_deep`](readmenator._app.py.md#readmenatorapplication-audit_deep), [`readmenatorApplication.audit_provenance`](readmenator._app.py.md#readmenatorapplication-audit_provenance), [`readmenatorApplication.build_api_reference`](readmenator._app.py.md#readmenatorapplication-build_api_reference), [`readmenatorApplication.build_graphrag`](readmenator._app.py.md#readmenatorapplication-build_graphrag), [`readmenatorApplication.check_freshness`](readmenator._app.py.md#readmenatorapplication-check_freshness), [`readmenatorApplication.detect_layers`](readmenator._app.py.md#readmenatorapplication-detect_layers), [`readmenatorApplication.explain`](readmenator._app.py.md#readmenatorapplication-explain) and 42 more
 
 ---

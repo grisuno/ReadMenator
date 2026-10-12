@@ -34,6 +34,9 @@ class MermaidRenderer:
         internal_edge_style: str = "stroke:#88aaff,stroke-width:1px",
         max_edges: int = 480,
         max_internal_edges: int = 100,
+        grid_columns: int = 6,
+        max_externals: int = 24,
+        direction: str = "LR",
     ) -> None:
         """Initialise rendering budgets and styles.
 
@@ -48,6 +51,12 @@ class MermaidRenderer:
             max_edges: Total edge budget; Mermaid refuses to render more than
                 500 edges, so the default stays below that hard limit.
             max_internal_edges: Budget for project-internal import edges.
+            grid_columns: Files per row inside a community; invisible links
+                stack the rest below, so the map never collapses into one
+                extremely wide row.
+            max_externals: Maximum external import boxes (each one is a node
+                Mermaid lays out in the same rank).
+            direction: Mermaid direction; LR stacks unrelated nodes vertically.
         """
         self._max_nodes = max_nodes
         self._max_symbols = max_symbols_per_file
@@ -58,6 +67,9 @@ class MermaidRenderer:
         self._internal_edge_style = internal_edge_style
         self._max_edges = max_edges
         self._max_internal_edges = max_internal_edges
+        self._grid_columns = max(1, grid_columns)
+        self._max_externals = max(0, max_externals)
+        self._direction = direction if direction in ("LR", "TD", "TB", "RL", "BT") else "LR"
 
     @staticmethod
     def _sanitize_id(node_id: str) -> str:
@@ -88,7 +100,7 @@ class MermaidRenderer:
         Returns:
             Tuple of (Mermaid source string, is_truncated bool).
         """
-        lines: List[str] = ["graph TD"]
+        lines: List[str] = [f"graph {self._direction}"]
         lines.append(f"    classDef mod {self._module_style};")
         lines.append(f"    classDef cls {self._class_style};")
         lines.append(f"    classDef fn {self._function_style};")
@@ -185,6 +197,18 @@ class MermaidRenderer:
         if pending_subgraph_close:
             lines.append("    end")
 
+        grid: Dict[object, List[str]] = {}
+        for node in sorted_nodes:
+            safe = self._sanitize_id(node.node_id)
+            if safe in seen_ids:
+                grid.setdefault(community_map.get(node.node_id), []).append(safe)
+        for members in grid.values():
+            for index in range(len(members) - self._grid_columns):
+                if edge_count >= self._max_edges:
+                    break
+                lines.append(f"    {members[index]} ~~~ {members[index + self._grid_columns]}")
+                edge_count += 1
+
         internal_edge_count = 0
         if resolved_edges and not is_truncated:
             file_ids = {n.node_id for n in nodes}
@@ -215,7 +239,7 @@ class MermaidRenderer:
             target_id = self._sanitize_id(f"ext_{edge.target}")
             target_label = edge.target.split("/")[-1].replace('"', '\\"')
             if target_id not in seen_ids:
-                if ext_node_count >= max_nodes:
+                if ext_node_count >= self._max_externals:
                     is_truncated = True
                     break
                 lines.append(f'    {target_id}["{target_label}"]')

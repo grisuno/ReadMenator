@@ -20,6 +20,7 @@ finite motion, and client-side export.
 
 ```mermaid
 classDiagram
+    direction LR
     class MapNode
     MapNode : str node_id
     MapNode : str label

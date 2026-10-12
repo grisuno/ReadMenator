@@ -12,6 +12,7 @@ Python parser: native ast extraction of symbols, signatures, docstrings, and imp
 
 ```mermaid
 classDiagram
+    direction LR
     class PythonParser
     class LanguageParser
     LanguageParser <|-- PythonParser

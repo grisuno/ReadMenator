@@ -1,6 +1,39 @@
 # Subsystem: readmenator (page 3 of 4)
 Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 
+## readmenator/_graphlayout.py
+- Doc: Deterministic graph layout algorithms for animated renders.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ForceAtlas2Settings` (class, line 40) `class ForceAtlas2Settings`
+  - `_initial_positions` (function, line 66) `def _initial_positions(n, seed, dims)`
+  - `forceatlas2_frames` (function, line 73) `def forceatlas2_frames(ids, edges, settings)`
+  - `_snapshot_steps` (function, line 113) `def _snapshot_steps(iterations, snapshots)`
+  - `_fa2_numpy` (function, line 119) `def _fa2_numpy(n, pairs, start, cfg)`
+  - `_fa2_python` (function, line 166) `def _fa2_python(n, pairs, start, cfg)`
+  - `fit_frames` (function, line 221) `def fit_frames(frames, box, margin, trim)`
+  - `interpolate_frames` (function, line 266) `def interpolate_frames(frames, t)`
+  - `BundleLayout` (class, line 281) `class BundleLayout`
+  - `_bspline` (function, line 301) `def _bspline(control, samples)`
+  - `_bundle_curves` (function, line 324) `def _bundle_curves(leaves, member_group, hub, root, edges, beta, samples)`
+  - `hierarchical_edge_bundling` (function, line 374) `def hierarchical_edge_bundling(groups, edges, center, radius, beta, samples, group_gap, inner_ratio)`
+  - `fibonacci_sphere` (function, line 429) `def fibonacci_sphere(count)`
+  - `_unit` (function, line 452) `def _unit(v)`
+  - `SphereBundleLayout` (class, line 461) `class SphereBundleLayout`
+  - `_split_caps` (function, line 479) `def _split_caps(labels, sizes, points, lattice, out)`
+  - `spherical_edge_bundling` (function, line 516) `def spherical_edge_bundling(groups, edges, radius, beta, samples, inner_ratio, refine_sweeps, affinity_edges)`
+  - `normalize_cloud` (function, line 586) `def normalize_cloud(points, quantile, max_radius)`
+  - `_undirected_weights` (function, line 623) `def _undirected_weights(groups, edges)`
+  - `_angular_distance` (function, line 648) `def _angular_distance(a, b)`
+  - `bundle_angular_cost` (function, line 654) `def bundle_angular_cost(groups, edges, group_gap)`
+  - `_center_out` (function, line 676) `def _center_out(members)`
+  - `_group_order_cost` (function, line 688) `def _group_order_cost(order, sizes, weights, gap)`
+  - `optimize_bundle_order` (function, line 702) `def optimize_bundle_order(groups, edges, sweeps, passes, group_gap)`
+  - `refine_sphere_leaves` (function, line 804) `def refine_sphere_leaves(layout, groups, edges, sweeps)`
+  - `chord_total` (function, line 829) `def chord_total(leaves)`
+- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_forcegraph.py`, `readmenator/_video.py`, `tests/test_graphlayout.py`, `tests/test_layout_quality.py`
+
 ## readmenator/_graphrag.py
 - Doc: Zero-token GraphRAG index and retrieval for AI agents.
 - Layer: utility
@@ -237,8 +270,8 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Symbols:
   - `MermaidRenderer` (class, line 17) `class MermaidRenderer`
   - `__init__` (method, line 26) `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, function_style, external_style...`
-  - `_sanitize_id` (method, line 63) `def _sanitize_id(node_id)`
-  - `render` (method, line 74) `def render(self, nodes, edges, resolved_edges, analysis)`
+  - `_sanitize_id` (method, line 75) `def _sanitize_id(node_id)`
+  - `render` (method, line 86) `def render(self, nodes, edges, resolved_edges, analysis)`
 - Depends on: `readmenator/_models.py`
 - Imported by: `readmenator/_documentation.py`, `tests/test_mermaid.py`
 
@@ -451,48 +484,6 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `summary` (method, line 411) `def summary(self)`
 - Depends on: `readmenator/_category.py`, `readmenator/_models.py`, `readmenator/_rank.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_mcp_server.py`, `tests/test_query.py`
-
-## readmenator/_rank.py
-- Doc: PageRank, Personalized PageRank, HITS, and composite scoring.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `RankConfig` (class, line 32) `class RankConfig`
-  - `global_pagerank` (function, line 61) `def global_pagerank(graph, alpha, max_iter, tolerance)`
-  - `file_pagerank` (function, line 119) `def file_pagerank(file_ids, edges, alpha, max_iter, tolerance)`
-  - `personalized_pagerank` (function, line 153) `def personalized_pagerank(graph, seeds, alpha, max_iter, tolerance)`
-  - `hits` (function, line 223) `def hits(graph, max_iter, tolerance)`
-  - `build_seeds_from_query` (function, line 274) `def build_seeds_from_query(query, node_ids, node_labels, symbols)`
-  - `build_seeds_for_context` (function, line 320) `def build_seeds_for_context(node_ids, anchor_patterns)`
-  - `RankedItem` (class, line 354) `class RankedItem`
-  - `RankedResult` (class, line 383) `class RankedResult`
-  - `CompositeRanker` (class, line 411) `class CompositeRanker`
-  - `_format_explanation` (function, line 546) `def _format_explanation(item, result)`
-  - `label` (method, line 378) `def label(self)`
-  - `top` (method, line 400) `def top(self, n)`
-  - `explain` (method, line 403) `def explain(self, node_id)`
-  - `__init__` (method, line 419) `def __init__(self, graph, config)`
-  - `_get_global_pr` (method, line 428) `def _get_global_pr(self)`
-  - `rank` (method, line 438) `def rank(self, query, seeds, category, node_ids, test_coverage, doc_coverage, freshness)`
-  - `_find_justification_paths` (method, line 520) `def _find_justification_paths(self, target, seed_ids, category, max_paths)`
-- Depends on: `readmenator/_category.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_documentation.py`, `readmenator/_explain.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_pipeline.py`, `readmenator/_query.py`, `readmenator/_video.py`, `tests/test_ranking.py`
-
-## readmenator/_readme_injector.py
-- Doc: Injects a knowledge base section into the project README (Markdown or RST).
-- Layer: infrastructure
-- Language: py
-- Symbols:
-  - `ReadmeInjector` (class, line 122) `class ReadmeInjector`
-  - `__init__` (method, line 133) `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_output_dir, maps_output_dir, pages_dir...`
-  - `inject` (method, line 192) `def inject(self, project_root)`
-  - `_extract_current_injection` (method, line 233) `def _extract_current_injection(content)`
-  - `_remove_old_injection` (method, line 250) `def _remove_old_injection(content)`
-  - `_strip_partial_anchor` (method, line 269) `def _strip_partial_anchor(content)`
-  - `remove` (method, line 284) `def remove(self, project_root)`
-  - `_find_readme` (method, line 321) `def _find_readme(root)`
-  - `_build_injection` (method, line 336) `def _build_injection(self, suffix)`
-- Imported by: `readmenator/__init__.py`, `readmenator/_pipeline.py`, `tests/test_agent_output.py`, `tests/test_readme_injector.py`
 
 
 Next: [KB_readmenator_p4.md](KB_readmenator_p4.md)

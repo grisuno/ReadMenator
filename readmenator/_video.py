@@ -22,11 +22,13 @@ import multiprocessing
 import os
 import shutil
 import subprocess
+import textwrap
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from readmenator._config import Config
+from readmenator._flowcharts import build_flow_graphs
 from readmenator._graphlayout import (
     BundleLayout,
     ForceAtlas2Settings,
@@ -81,6 +83,8 @@ ACT_CARDS = {
     "VII": ("ACT VII", "THE WIRING", "hierarchical edge bundling between communities"),
     "VIII": ("ACT VIII", "THE SPHERE", "every import bundled through a globe of communities"),
     "IX": ("ACT IX", "CODE DNA", "each file becomes a color"),
+    "X": ("ACT X", "THE TIERS", "who depends on whom, and which imports break the layering"),
+    "XI": ("ACT XI", "EXECUTION", "one entry point, followed call by call"),
 }
 
 COLOR_MODES = ("community", "layer", "language")
@@ -957,7 +961,16 @@ class CinematicVideoRenderer:
         rank = file_pagerank([n.node_id for n in nodes], link_set,
                              self.config.RANKING_ALPHA, self.config.RANKING_MAX_ITER,
                              self.config.RANKING_TOLERANCE)
+        flows: List[Any] = []
+        if self.config.VIDEO_TIERS_S > 0 or self.config.VIDEO_FLOW_S > 0:
+            try:
+                flows = build_flow_graphs(
+                    self.config, nodes, edges, resolved_edges, content_map, analysis, layers,
+                )
+            except (ValueError, KeyError, RecursionError):
+                flows = []
         return {"project": short_label(project_name, 40), "files": file_count,
+                "flows": flows,
                 "membership": membership, "community_labels": community_labels,
                 "rank": rank,
                 "symbols": symbol_count, "imports": import_count,
@@ -1036,7 +1049,8 @@ class CinematicVideoRenderer:
                 ("III", "tree", c.VIDEO_TREE_S), ("IV", "communities", c.VIDEO_COMM_S),
                 ("V", "graph", c.VIDEO_GRAPH_S), ("VI", "orbit", c.VIDEO_ORBIT_S),
                 ("VII", "bundle", c.VIDEO_BUNDLE_S), ("VIII", "sphere", c.VIDEO_SPHERE_S),
-                ("IX", "dna", c.VIDEO_DNA_S)]
+                ("IX", "dna", c.VIDEO_DNA_S), ("X", "tiers", c.VIDEO_TIERS_S),
+                ("XI", "flow", c.VIDEO_FLOW_S)]
         plan: List[Tuple[str, float, Dict[str, Any]]] = [("title", c.VIDEO_TITLE_S, {})]
         for card, kind, dur in acts:
             if dur <= 0:
@@ -2092,8 +2106,246 @@ def _scene_outro(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> 
         d.text((bx, top_y + 45 + i * line_h), r, font=fonts["term"], fill=alpha(TXT, a * k))
 
 
+def _flow_graph(kind: str) -> Any:
+    """Return the first collected flow graph of *kind* (None when absent)."""
+    for graph in (_RENDER_D or {}).get("flows", []) or []:
+        if graph.kind == kind and graph.nodes:
+            return graph
+    return None
+
+
+def _bezier(points: List[Tuple[float, float]], t: float) -> Tuple[float, float]:
+    """Point on a cubic Bezier at parameter *t*."""
+    u = 1 - t
+    p0, p1, p2, p3 = points
+    return (u * u * u * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t * t * t * p3[0],
+            u * u * u * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t * t * t * p3[1])
+
+
+def _draw_flow_edge(d: Any, pts: List[Tuple[float, float]], col: Tuple[int, int, int], a: float,
+                    width: int, upto: float = 1.0, dashed: bool = False) -> None:
+    """Draw a cubic edge (optionally partially grown) with an arrow head."""
+    steps = 24
+    last = max(1, int(steps * max(0.0, min(1.0, upto))))
+    poly = [_bezier(pts, i / steps) for i in range(last + 1)]
+    for i in range(len(poly) - 1):
+        if dashed and i % 2:
+            continue
+        d.line([poly[i], poly[i + 1]], fill=alpha(col, a), width=width)
+    if upto >= 1.0 and len(poly) >= 2:
+        (x0, y0), (x1, y1) = poly[-2], poly[-1]
+        ang = math.atan2(y1 - y0, x1 - x0)
+        size = 4 + width * 2
+        left = (x1 - size * math.cos(ang - 0.45), y1 - size * math.sin(ang - 0.45))
+        right = (x1 - size * math.cos(ang + 0.45), y1 - size * math.sin(ang + 0.45))
+        d.polygon([(x1, y1), left, right], fill=alpha(col, a))
+
+
+def _draw_flow_node(d: Any, node: Any, tf: Any, fonts: Dict[str, Any], col: Tuple[int, int, int],
+                    a: float, glow: float = 0.0, lines: int = 2) -> None:
+    """Draw one flow node (rounded box with title and detail lines) through transform *tf*."""
+    x0, y0 = tf(node.x - node.w / 2, node.y - node.h / 2)
+    x1, y1 = tf(node.x + node.w / 2, node.y + node.h / 2)
+    if x1 - x0 < 4 or y1 - y0 < 4:
+        return
+    if glow > 0:
+        for k in range(3, 0, -1):
+            pad = k * 4 * glow
+            d.rounded_rectangle((x0 - pad, y0 - pad, x1 + pad, y1 + pad), radius=10, outline=alpha(col, 0.18 * glow * k), width=2)
+    d.rounded_rectangle((x0, y0, x1, y1), radius=8, fill=(12, 8, 30, int(235 * a)), outline=alpha(col, a), width=2)
+    cx = (x0 + x1) / 2
+    font = fonts["small_b"] if (x1 - x0) > 120 else fonts["tiny_b"]
+    max_chars = max(6, int((x1 - x0) / 8.4))
+    d.text((cx, y0 + 14), short_label(node.title, max_chars), font=font, fill=alpha(TXT, a), anchor="mm")
+    for i, line in enumerate(node.lines[:lines]):
+        y = y0 + 32 + i * 15
+        if y > y1 - 6:
+            break
+        d.text((cx, y), short_label(line, max_chars + 4), font=fonts["tiny"], fill=alpha(DIM, a), anchor="mm")
+
+
+def _scene_tiers(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """Tiered architecture assembled tier by tier; upward imports flash red."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT X // THE TIERS", fonts, cfg.VIDEO_WIDTH)
+    graph = _flow_graph("architecture")
+    panel = _panel(cfg)
+    side = int((panel[2] - panel[0]) * 0.30)
+    left = (panel[0], panel[1], panel[2] - side - 16, panel[3])
+    right = (panel[2] - side, panel[1], panel[2], panel[3])
+    hud_panel(d, left, "components by dependency tier // eades-lin-smyth ordering", fonts, CYAN)
+    hud_panel(d, right, "imports that break the layering", fonts, RED)
+    if graph is None:
+        d.text(((left[0] + left[2]) / 2, (left[1] + left[3]) / 2), "no component structure to rank", font=fonts["cap"], fill=DIM, anchor="mm")
+        return
+    bx0, by0, bx1, by1 = left[0] + 18, left[1] + 44, left[2] - 18, max(left[1] + 60, left[3] - 72)
+    scale = min((bx1 - bx0) / graph.width, (by1 - by0) / graph.height)
+    ox = bx0 + ((bx1 - bx0) - graph.width * scale) / 2
+    oy = by0 + ((by1 - by0) - graph.height * scale) / 2
+
+    def tf(x: float, y: float) -> Tuple[float, float]:
+        """Diagram to frame coordinates."""
+        return ox + x * scale, oy + y * scale
+
+    dur = sc["dur"]
+    build = 0.55 * dur
+    ranks = sorted({n.rank for n in graph.nodes})
+    per_rank = build / max(1, len(ranks))
+    shown = {}
+    for node in graph.nodes:
+        shown[node.id] = ease((lt - 0.4 - ranks.index(node.rank) * per_rank) / max(0.3, per_rank * 0.8))
+    for i, lane in enumerate(graph.lanes):
+        a = ease((lt - 0.2 - i * per_rank) / 0.6)
+        x0, y0 = tf(4, float(lane["y"]))
+        x1, y1 = tf(graph.width - 4, float(lane["y"]) + float(lane["h"]))
+        if x1 - x0 < 4 or y1 - y0 < 4:
+            continue
+        d.rounded_rectangle((x0, y0, x1, y1), radius=10, fill=(18, 10, 40, int(120 * a)), outline=alpha(FAINT, a), width=1)
+        d.text((x0 + 12, y0 + 6), str(lane["t"]).upper(), font=fonts["tiny_b"], fill=alpha(DIM, a))
+    flash = max(0.0, lt - build) / max(0.5, dur - build)
+    for edge in graph.edges:
+        if len(edge.points) < 4:
+            continue
+        pts = [tf(x, y) for x, y in edge.points]
+        if edge.style == "upward":
+            k = ease((lt - build) / 1.0)
+            if k <= 0:
+                continue
+            pulse = 0.55 + 0.45 * math.sin(gt * 6.0)
+            _draw_flow_edge(d, pts, RED, k * pulse, 3, upto=k, dashed=True)
+            if k >= 1:
+                mx, my = _bezier(pts, 0.5)
+                d.text((mx + 6, my), edge.label, font=fonts["tiny_b"], fill=alpha(RED, pulse), anchor="lm")
+        else:
+            grow = min(shown.get(edge.source, 0), 1.0) * ease((lt - 0.4 - ranks.index(graph.node(edge.target).rank) * per_rank) / max(0.3, per_rank))
+            if grow > 0:
+                _draw_flow_edge(d, pts, CYAN, 0.85, 4 if edge.style == "heavy" else 2, upto=grow)
+                if grow >= 1 and edge.label:
+                    mx, my = _bezier(pts, 0.5)
+                    d.text((mx + 6, my), edge.label, font=fonts["tiny"], fill=alpha(TXT, 0.9), anchor="lm")
+    for node in graph.nodes:
+        a = shown[node.id]
+        if a <= 0:
+            continue
+        col = CYAN if node.tone == "entry" else (MAGENTA if node.tone == "cycle" else VIOLET)
+        _draw_flow_node(d, node, tf, fonts, col, a, glow=a * (1 - a) * 4, lines=3)
+    upward = graph.meta.get("upward", [])
+    for i, (src, dst, count) in enumerate(sorted(upward, key=lambda u: -u[2])[:8]):
+        a = ease((lt - build - 0.3 * i) / 0.5)
+        y = right[1] + 52 + i * 46
+        d.text((right[0] + 16, y), short_label(str(src).rpartition(": ")[2] or str(src), 22), font=fonts["small_b"], fill=alpha(TXT, a))
+        d.text((right[0] + 16, y + 18), f"-> {short_label(str(dst).rpartition(': ')[2] or str(dst), 18)}  ({count} imports)", font=fonts["tiny"], fill=alpha(RED, a))
+    if not upward:
+        d.text((right[0] + 16, right[1] + 60), "none: the layering is clean", font=fonts["small_b"], fill=alpha(GREEN, ease((lt - build) / 0.6)))
+    stats = graph.meta.get("stats", {})
+    _verdict_badge(d, left, f"{stats.get('tiers', len(ranks))} tiers, {len(upward)} upward imports to fix", fonts, lt, dur, RED if upward else GREEN)
+    draw_caption(d, "arrows point from the dependent to the dependency; red ones climb back up and close cycles", lt, dur, fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
+def _scene_flow(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """A camera follows the entry point's call tree in real call order."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT XI // EXECUTION", fonts, cfg.VIDEO_WIDTH)
+    graph = _flow_graph("calltree")
+    panel = _panel(cfg)
+    side = int((panel[2] - panel[0]) * 0.30)
+    left = (panel[0], panel[1], panel[2] - side - 16, panel[3])
+    right = (panel[2] - side, panel[1], panel[2], panel[3])
+    hud_panel(d, left, "call tree // resolved calls in call-site order", fonts, CYAN)
+    hud_panel(d, right, "now executing", fonts, YELLOW)
+    if graph is None:
+        d.text(((left[0] + left[2]) / 2, (left[1] + left[3]) / 2), "no entry point detected", font=fonts["cap"], fill=DIM, anchor="mm")
+        return
+    order = [e for e in graph.edges if e.style == "solid" and len(e.points) == 4]
+    dur = sc["dur"]
+    if not order:
+        return
+    per = max(0.25, (dur - 2.0) / len(order))
+    idx = int(max(0.0, lt - 0.8) / per)
+    idx = max(0, min(len(order) - 1, idx))
+    local = max(0.0, min(1.0, (lt - 0.8 - idx * per) / per))
+    current = order[idx]
+    focus_from = graph.node(current.source)
+    focus_to = graph.node(current.target)
+    k = ease(local)
+    fx = focus_from.x + (focus_to.x - focus_from.x) * k
+    fy = focus_from.y + (focus_to.y - focus_from.y) * k
+    bx0, by0, bx1, by1 = left[0] + 14, left[1] + 40, left[2] - 14, max(left[1] + 60, left[3] - 70)
+    fit = min((bx1 - bx0) / graph.width, (by1 - by0) / graph.height)
+    zoom_in = min(1.0, max(fit, (bx1 - bx0) / max(1.0, float(cfg.VIDEO_FLOW_VIEW_WIDTH))))
+    intro = ease(lt / 1.2)
+    outro = ease((lt - (dur - 1.4)) / 1.2)
+    scale = fit + (zoom_in - fit) * intro * (1 - outro)
+    cx_frame, cy_frame = (bx0 + bx1) / 2, (by0 + by1) / 2
+    center_x = graph.width / 2 + (fx - graph.width / 2) * intro * (1 - outro)
+    center_y = graph.height / 2 + (fy - graph.height / 2) * intro * (1 - outro)
+
+    def tf(x: float, y: float) -> Tuple[float, float]:
+        """Diagram to frame coordinates around the moving focus."""
+        return cx_frame + (x - center_x) * scale, cy_frame + (y - center_y) * scale
+
+    layer = img.copy()
+    ld = _img_draw(layer)
+    reached = {graph.nodes[0].id}
+    for i, edge in enumerate(order[: idx + 1]):
+        reached.add(edge.source)
+        if i < idx or local >= 0.95:
+            reached.add(edge.target)
+    for edge in graph.edges:
+        if len(edge.points) < 4:
+            continue
+        pts = [tf(x, y) for x, y in edge.points]
+        if edge in order:
+            pos = order.index(edge)
+            if pos < idx:
+                _draw_flow_edge(ld, pts, CYAN, 0.9, 3)
+            elif pos == idx:
+                _draw_flow_edge(ld, pts, YELLOW, 1.0, 4, upto=k)
+            else:
+                _draw_flow_edge(ld, pts, FAINT, 0.35, 1)
+        else:
+            _draw_flow_edge(ld, pts, RED if edge.style == "back" else FAINT, 0.35, 1, dashed=True)
+    for node in graph.nodes:
+        on = node.id in reached
+        col = YELLOW if node.id == current.target and local > 0.6 else (CYAN if on else FAINT)
+        _draw_flow_node(ld, node, tf, fonts, col, 1.0 if on else 0.45, glow=1.0 if node.id == current.target and local > 0.6 else 0.0)
+    if k < 1:
+        px, py = _bezier([tf(x, y) for x, y in current.points], k)
+        for r, a in ((11, 0.25), (7, 0.5), (4, 1.0)):
+            ld.ellipse((px - r, py - r, px + r, py + r), fill=alpha(YELLOW, a))
+    crop = (int(left[0] + 4), int(left[1] + 34), int(left[2] - 4), int(left[3] - 4))
+    if crop[2] > crop[0] and crop[3] > crop[1]:
+        img.paste(layer.crop(crop), crop[:2])
+    target = graph.node(current.target)
+    detail = target.detail if isinstance(target.detail, dict) else {}
+    a = ease(local / 0.4)
+    y = right[1] + 50
+    d.text((right[0] + 16, y), f"call {idx + 1} of {len(order)}", font=fonts["tiny_b"], fill=alpha(DIM, 1.0))
+    d.text((right[0] + 16, y + 22), short_label(graph.node(current.source).title, 30), font=fonts["small"], fill=alpha(DIM, a))
+    d.text((right[0] + 16, y + 42), "calls", font=fonts["tiny"], fill=alpha(DIM, a))
+    d.text((right[0] + 16, y + 60), short_label(target.title, 28), font=fonts["mid"] if len(target.title) < 16 else fonts["small_b"], fill=alpha(YELLOW, a))
+    where = f"{detail.get('file', '')}:{detail.get('line', '')}".strip(":")
+    d.text((right[0] + 16, y + 102), short_label(where, 40), font=fonts["tiny"], fill=alpha(CYAN, a))
+    doc = str(detail.get("doc", "") or "")
+    for i, line in enumerate(textwrap.wrap(doc, 34)[:6]):
+        d.text((right[0] + 16, y + 130 + i * 20), line, font=fonts["small"], fill=alpha(TXT, a))
+    meta = graph.meta
+    _verdict_badge(d, left, f"entry {short_label(str(meta.get('entry', '')), 26)}: {len(order)} calls followed", fonts, lt, dur, YELLOW)
+    draw_caption(d, "arrow numbers = call order inside the caller; yellow = the call in flight", lt, dur, fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
+def _img_draw(img: Any) -> Any:
+    """ImageDraw in RGBA mode for *img*."""
+    from PIL import ImageDraw
+
+    return ImageDraw.Draw(img, "RGBA")
+
+
 _SCENE_FN = {"title": _scene_title, "card": _scene_card, "layers": _scene_layers,
              "gods": _scene_gods, "tree": _scene_tree, "communities": _scene_communities,
              "graph": _scene_graph, "orbit": _scene_orbit, "bundle": _scene_bundle,
              "sphere": _scene_sphere, "dna": _scene_dna, "invite": _scene_invite,
+             "tiers": _scene_tiers, "flow": _scene_flow,
              "outro": _scene_outro}

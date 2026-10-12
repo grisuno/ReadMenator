@@ -57,8 +57,8 @@ This community groups 32 file(s) rooted at `readmenator/parsers` with dominant l
 - `analyze_change_impact` (method, `readmenator/_hotspots.py:155`) `def analyze_change_impact(self, nodes, resolved_edges)` - Compute change impact for every file in the project.
 - `MermaidRenderer` (class, `readmenator/_mermaid.py:17`) `class MermaidRenderer` - Renders a knowledge graph to Mermaid JS flowchart syntax.
 - `__init__` (method, `readmenator/_mermaid.py:26`) `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, f` - Initialise rendering budgets and styles.
-- `_sanitize_id` (method, `readmenator/_mermaid.py:63`) `def _sanitize_id(node_id)` - Convert *node_id* to a Mermaid-safe identifier.
-- `render` (method, `readmenator/_mermaid.py:74`) `def render(self, nodes, edges, resolved_edges, analysis)` - Produce a Mermaid flowchart string and a truncation flag.
+- `_sanitize_id` (method, `readmenator/_mermaid.py:75`) `def _sanitize_id(node_id)` - Convert *node_id* to a Mermaid-safe identifier.
+- `render` (method, `readmenator/_mermaid.py:86`) `def render(self, nodes, edges, resolved_edges, analysis)` - Produce a Mermaid flowchart string and a truncation flag.
 - `Symbol` (class, `readmenator/_models.py:18`) `class Symbol` - A single code symbol extracted from a source file.
 - `Node` (class, `readmenator/_models.py:37`) `class Node` - A file node in the knowledge graph, containing its symbols.
 - `Edge` (class, `readmenator/_models.py:58`) `class Edge` - A directed relationship between two nodes in the knowledge graph.

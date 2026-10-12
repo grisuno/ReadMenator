@@ -21,6 +21,7 @@ principle). Falls back to built-in rules if the YAML file is not present.
 
 ```mermaid
 classDiagram
+    direction LR
     class SecurityRule
     SecurityRule : str rule_id
     SecurityRule : str severity

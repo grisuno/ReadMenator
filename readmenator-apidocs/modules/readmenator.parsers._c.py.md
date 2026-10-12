@@ -12,6 +12,7 @@ C and C++ parser: regex extraction of symbols, signatures, docstrings, and impor
 
 ```mermaid
 classDiagram
+    direction LR
     class CParser
     class LanguageParser
     LanguageParser <|-- CParser

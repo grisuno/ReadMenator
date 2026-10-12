@@ -18,6 +18,7 @@ in the payload. No network requests are involved.
 
 ```mermaid
 classDiagram
+    direction LR
     class SourceEntry
     SourceEntry : str text
     SourceEntry : int lines

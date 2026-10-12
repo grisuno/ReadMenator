@@ -27,6 +27,7 @@ mirror Doxygen's ``WARN_IF_UNDOCUMENTED`` and ``WARN_IF_DOC_ERROR``.
 
 ```mermaid
 classDiagram
+    direction LR
     class ApiParam
     ApiParam : str name
     ApiParam : str annotation

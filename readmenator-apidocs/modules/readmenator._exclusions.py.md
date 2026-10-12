@@ -17,6 +17,7 @@ future runs instead of being re-investigated.
 
 ```mermaid
 classDiagram
+    direction LR
     class ExclusionEntry
     ExclusionEntry : str pattern
     ExclusionEntry : str rule_id

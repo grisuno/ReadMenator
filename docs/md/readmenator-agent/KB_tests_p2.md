@@ -143,33 +143,42 @@ Previous: [KB_tests.md](KB_tests.md)
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_project` (function, line 87) `def _project()`
-  - `TestGraphAlgorithms` (class, line 106) `class TestGraphAlgorithms(TestCase)`
-  - `TestArchitectureDiagram` (class, line 131) `class TestArchitectureDiagram(TestCase)`
-  - `TestExecutionFlows` (class, line 183) `class TestExecutionFlows(TestCase)`
-  - `TestPythonReceiverTypes` (class, line 255) `class TestPythonReceiverTypes(TestCase)`
-  - `test_flowcharts_tarjan_finds_cycles` (method, line 109) `def test_flowcharts_tarjan_finds_cycles(self)`
-  - `test_flowcharts_transitive_reduction_drops_implied` (method, line 113) `def test_flowcharts_transitive_reduction_drops_implied(self)`
-  - `test_flowcharts_eades_lin_smyth_orders_by_weight` (method, line 117) `def test_flowcharts_eades_lin_smyth_orders_by_weight(self)`
-  - `test_flowcharts_eades_lin_smyth_deterministic` (method, line 122) `def test_flowcharts_eades_lin_smyth_deterministic(self)`
-  - `test_flowcharts_mermaid_text_escapes` (method, line 126) `def test_flowcharts_mermaid_text_escapes(self)`
-  - `_fixture` (method, line 134) `def _fixture(self)`
-  - `test_flowcharts_architecture_tiers_and_upward` (method, line 152) `def test_flowcharts_architecture_tiers_and_upward(self)`
-  - `test_flowcharts_architecture_skips_tests_and_vendor` (method, line 164) `def test_flowcharts_architecture_skips_tests_and_vendor(self)`
-  - `test_flowcharts_architecture_section_markdown` (method, line 174) `def test_flowcharts_architecture_section_markdown(self)`
-  - `setUpClass` (method, line 187) `def setUpClass(cls)`
-  - `test_flowcharts_typed_receivers_route_calls` (method, line 192) `def test_flowcharts_typed_receivers_route_calls(self)`
-  - `test_flowcharts_entry_points_scored` (method, line 197) `def test_flowcharts_entry_points_scored(self)`
-  - `test_flowcharts_walk_order_and_recursion` (method, line 203) `def test_flowcharts_walk_order_and_recursion(self)`
-  - `test_flowcharts_call_tree_mermaid` (method, line 211) `def test_flowcharts_call_tree_mermaid(self)`
-  - `test_flowcharts_control_flow_switch_loop_try` (method, line 220) `def test_flowcharts_control_flow_switch_loop_try(self)`
-  - `test_flowcharts_sequence_crosses_files` (method, line 232) `def test_flowcharts_sequence_crosses_files(self)`
-  - `test_flowcharts_section_and_kb_integration` (method, line 240) `def test_flowcharts_section_and_kb_integration(self)`
-  - `setUp` (method, line 258) `def setUp(self)`
-  - `test_pytypes_receiver_classes` (method, line 262) `def test_pytypes_receiver_classes(self)`
-  - `test_pytypes_resolve_method_picks_typed_owner` (method, line 268) `def test_pytypes_resolve_method_picks_typed_owner(self)`
-  - `test_pytypes_accepts_rejects_unproven` (method, line 272) `def test_pytypes_accepts_rejects_unproven(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_flowcharts.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`
+  - `_project` (function, line 94) `def _project()`
+  - `TestGraphAlgorithms` (class, line 113) `class TestGraphAlgorithms(TestCase)`
+  - `TestArchitectureDiagram` (class, line 138) `class TestArchitectureDiagram(TestCase)`
+  - `TestExecutionFlows` (class, line 190) `class TestExecutionFlows(TestCase)`
+  - `TestPythonReceiverTypes` (class, line 262) `class TestPythonReceiverTypes(TestCase)`
+  - `TestFlowLayoutAndViewer` (class, line 289) `class TestFlowLayoutAndViewer(TestCase)`
+  - `test_flowcharts_tarjan_finds_cycles` (method, line 116) `def test_flowcharts_tarjan_finds_cycles(self)`
+  - `test_flowcharts_transitive_reduction_drops_implied` (method, line 120) `def test_flowcharts_transitive_reduction_drops_implied(self)`
+  - `test_flowcharts_eades_lin_smyth_orders_by_weight` (method, line 124) `def test_flowcharts_eades_lin_smyth_orders_by_weight(self)`
+  - `test_flowcharts_eades_lin_smyth_deterministic` (method, line 129) `def test_flowcharts_eades_lin_smyth_deterministic(self)`
+  - `test_flowcharts_mermaid_text_escapes` (method, line 133) `def test_flowcharts_mermaid_text_escapes(self)`
+  - `_fixture` (method, line 141) `def _fixture(self)`
+  - `test_flowcharts_architecture_tiers_and_upward` (method, line 159) `def test_flowcharts_architecture_tiers_and_upward(self)`
+  - `test_flowcharts_architecture_skips_tests_and_vendor` (method, line 171) `def test_flowcharts_architecture_skips_tests_and_vendor(self)`
+  - `test_flowcharts_architecture_section_markdown` (method, line 181) `def test_flowcharts_architecture_section_markdown(self)`
+  - `setUpClass` (method, line 194) `def setUpClass(cls)`
+  - `test_flowcharts_typed_receivers_route_calls` (method, line 199) `def test_flowcharts_typed_receivers_route_calls(self)`
+  - `test_flowcharts_entry_points_scored` (method, line 204) `def test_flowcharts_entry_points_scored(self)`
+  - `test_flowcharts_walk_order_and_recursion` (method, line 210) `def test_flowcharts_walk_order_and_recursion(self)`
+  - `test_flowcharts_call_tree_mermaid` (method, line 218) `def test_flowcharts_call_tree_mermaid(self)`
+  - `test_flowcharts_control_flow_switch_loop_try` (method, line 227) `def test_flowcharts_control_flow_switch_loop_try(self)`
+  - `test_flowcharts_sequence_crosses_files` (method, line 239) `def test_flowcharts_sequence_crosses_files(self)`
+  - `test_flowcharts_section_and_kb_integration` (method, line 247) `def test_flowcharts_section_and_kb_integration(self)`
+  - `setUp` (method, line 265) `def setUp(self)`
+  - `test_pytypes_receiver_classes` (method, line 269) `def test_pytypes_receiver_classes(self)`
+  - `test_pytypes_resolve_method_picks_typed_owner` (method, line 275) `def test_pytypes_resolve_method_picks_typed_owner(self)`
+  - `test_pytypes_accepts_rejects_unproven` (method, line 279) `def test_pytypes_accepts_rejects_unproven(self)`
+  - `setUpClass` (method, line 293) `def setUpClass(cls)`
+  - `test_flowlayout_kinds_present` (method, line 297) `def test_flowlayout_kinds_present(self)`
+  - `test_flowlayout_never_a_strip` (method, line 303) `def test_flowlayout_never_a_strip(self)`
+  - `test_flowlayout_ladder_is_narrow` (method, line 317) `def test_flowlayout_ladder_is_narrow(self)`
+  - `test_flowlayout_edges_have_geometry` (method, line 328) `def test_flowlayout_edges_have_geometry(self)`
+  - `test_flowpage_self_contained_and_escaped` (method, line 336) `def test_flowpage_self_contained_and_escaped(self)`
+  - `test_flowpage_thumbnail` (method, line 345) `def test_flowpage_thumbnail(self)`
+  - `test_flowpage_api_site_embeds_flows` (method, line 350) `def test_flowpage_api_site_embeds_flows(self)`
+- Depends on: `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_config.py`, `readmenator/_documentation.py`, `readmenator/_flowcharts.py`, `readmenator/_flowlayout.py`, `readmenator/_flowpage.py`, `readmenator/_models.py`, `readmenator/_pytypes.py`
 
 ## tests/test_gh_wiki.py
 - Doc: Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked).

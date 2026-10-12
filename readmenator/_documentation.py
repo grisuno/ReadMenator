@@ -57,6 +57,9 @@ class DocumentationGenerator:
             internal_edge_style=config.MERMAID_INTERNAL_EDGE_STYLE,
             max_edges=config.MERMAID_MAX_EDGES,
             max_internal_edges=config.MERMAID_MAX_INTERNAL_EDGES,
+            grid_columns=config.MERMAID_GRID_COLUMNS,
+            max_externals=config.MERMAID_MAX_EXTERNALS,
+            direction=config.MERMAID_DIRECTION,
         )
         self._cpg = CodePropertyGraph(
             privacy_mode=config.PRIVACY_MODE,
@@ -1205,23 +1208,42 @@ class DocumentationGenerator:
     ) -> List[str]:
         if not self._config.UML_ENABLED:
             return []
-        uml_source = self._uml.render_mermaid_class_diagram(nodes, edges)
-        if not uml_source:
+        per_diagram = max(1, int(self._config.UML_CLASSES_PER_DIAGRAM))
+        class_kinds = ("class", "struct", "interface", "trait", "enum", "record", "protocol", "extension")
+        batches: List[List[Node]] = []
+        current: List[Node] = []
+        count = 0
+        budget = int(self._config.UML_MAX_CLASSES)
+        for node in sorted(nodes, key=lambda n: n.node_id):
+            classes = sum(1 for sym in node.symbols if sym.kind in class_kinds)
+            if not classes or budget <= 0:
+                continue
+            if current and count + classes > per_diagram:
+                batches.append(current)
+                current, count = [], 0
+            current.append(node)
+            count += classes
+            budget -= classes
+        if current:
+            batches.append(current)
+        blocks: List[str] = []
+        for batch in batches:
+            source = self._uml.render_mermaid_class_diagram(batch, edges)
+            if source:
+                title = ", ".join(f"`{n.node_id}`" for n in batch)
+                blocks.extend([f"#### {title}", "", "```mermaid", source, "```", ""])
+        if not blocks:
             return []
         lines: List[str] = [
             "## UML Class Diagram",
             "",
-            "Auto-generated Mermaid class diagram from parsed class-level symbols. "
-            "Shows classes, structs, interfaces, traits, and their methods "
-            "with inheritance and dependency relationships.",
-            "",
-            "```mermaid",
-            uml_source,
-            "```",
-            "",
-            "---",
+            "Auto-generated Mermaid class diagrams from parsed class-level symbols, split into "
+            f"groups of at most {per_diagram} classes so each diagram stays readable. "
+            "Per-module class diagrams with exact members live in `readmenator-apidocs/modules/`.",
             "",
         ]
+        lines.extend(blocks)
+        lines.extend(["---", ""])
         return lines
 
     def _build_cpg_block(

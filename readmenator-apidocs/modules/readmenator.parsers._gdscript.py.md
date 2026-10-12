@@ -12,6 +12,7 @@ GDScript parser: regex extraction of symbols, signatures, docstrings, and import
 
 ```mermaid
 classDiagram
+    direction LR
     class GDScriptParser
     class LanguageParser
     LanguageParser <|-- GDScriptParser

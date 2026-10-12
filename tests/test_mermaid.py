@@ -10,7 +10,7 @@ class TestMermaidRendererContract(unittest.TestCase):
 
     def test_renders_graph_header(self) -> None:
         output, _ = self.renderer.render([], [])
-        self.assertIn("graph TD", output)
+        self.assertIn("graph LR", output)
         self.assertIn("classDef mod", output)
         self.assertIn("classDef cls", output)
         self.assertIn("classDef fn", output)

@@ -20,6 +20,7 @@ explainable rank.
 
 ```mermaid
 classDiagram
+    direction LR
     class RankConfig
     RankConfig : float alpha
     RankConfig : int max_iter
@@ -169,6 +170,8 @@ def label(self) -> str
 ```
 
 **Returns:** `str`
+
+*Called by:* [`to_mermaid`](readmenator._flowcharts.py.md#to_mermaid)
 
 ---
 

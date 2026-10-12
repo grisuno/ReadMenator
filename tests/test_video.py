@@ -55,7 +55,7 @@ class TestVideoContract(unittest.TestCase):
         self.assertEqual(data["dep_tree"]["order"], [])
         scenes, total = renderer.build_scenes(data)
         self.assertTrue(total > 0)
-        self.assertEqual(len(scenes), 21)
+        self.assertEqual(len(scenes), 25)
 
     def test_video_collect_enriched_fields(self) -> None:
         renderer = CinematicVideoRenderer(Config())
@@ -136,7 +136,7 @@ class TestVideoContract(unittest.TestCase):
         for gone in ("orbit", "sphere", "invite"):
             self.assertNotIn(gone, kinds)
         self.assertNotIn("VI", [s.get("card") for s in scenes])
-        self.assertEqual(len(scenes), 16)
+        self.assertEqual(len(scenes), 20)
 
     def test_video_orbit_layout_is_normalized_and_stable(self) -> None:
         """The 3D orbit layout is deterministic and bounded; tour stops target real communities."""
@@ -219,3 +219,18 @@ class TestVideoContract(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestVideoFlowActs(unittest.TestCase):
+    """Contract: the tiers and execution acts exist, render, and can be dropped."""
+
+    def test_video_flow_acts_scheduled_and_drawn(self) -> None:
+        renderer = CinematicVideoRenderer(Config())
+        scenes, _ = renderer.build_scenes({"flows": []})
+        kinds = [s["kind"] for s in scenes]
+        self.assertIn("tiers", kinds)
+        self.assertIn("flow", kinds)
+        self.assertIn("X", [s.get("card") for s in scenes])
+        dropped, _ = CinematicVideoRenderer(Config(VIDEO_TIERS_S=0.0, VIDEO_FLOW_S=0.0)).build_scenes({"flows": []})
+        self.assertNotIn("tiers", [s["kind"] for s in dropped])
+        self.assertNotIn("XI", [s.get("card") for s in dropped])

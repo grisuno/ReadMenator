@@ -12,6 +12,7 @@ C# parser: regex extraction of symbols, signatures, docstrings, and imports.
 
 ```mermaid
 classDiagram
+    direction LR
     class CSharpParser
     class LanguageParser
     LanguageParser <|-- CSharpParser

@@ -7,8 +7,13 @@ from dataclasses import replace
 
 from readmenator._config import Config
 from readmenator._documentation import DocumentationGenerator
+import json
+import re
+
 from readmenator._flowcharts import (
+    build_flow_graphs,
     ArchitectureDiagramBuilder,
+    EntryPoint,
     ExecutionFlowBuilder,
     eades_lin_smyth,
     mermaid_text,
@@ -17,6 +22,8 @@ from readmenator._flowcharts import (
     tarjan_scc,
     transitive_reduction,
 )
+from readmenator._flowlayout import FlowEdge, FlowGraph, FlowNode, LayoutMetrics, layout_flow
+from readmenator._flowpage import flow_thumbnail_svg, render_flows_page
 from readmenator._models import AnalysisResult, CommunityResult, Edge, Node, Symbol
 from readmenator._pytypes import PythonReceiverTypes
 
@@ -156,10 +163,10 @@ class TestArchitectureDiagram(unittest.TestCase):
         self.assertEqual(stats["upward"], [("db", "core", 1)])
         self.assertEqual(stats["reduced"], 1)
         self.assertEqual(stats["cycles"], [["core", "db"]])
-        self.assertIn('c_c1 <-.-|"1 upward"| c_c2', source)
-        self.assertIn('subgraph tier_0["Tier 1 (entry / high level)"]', source)
+        self.assertIn('n_c1 <-.-|"1 upward"| n_c2', source)
+        self.assertIn('subgraph lane_0["Tier 1 - entry / orchestration"]', source)
         self.assertIn(":::entry", source)
-        self.assertIn("c_c0 ~~~ c_c1", source)
+        self.assertIn("n_c0 ~~~ n_c1", source)
 
     def test_flowcharts_architecture_skips_tests_and_vendor(self) -> None:
         nodes = [
@@ -213,8 +220,8 @@ class TestExecutionFlows(unittest.TestCase):
         steps = self.builder.walk(self.graph, entries[0].key)
         source = self.builder.call_tree_mermaid(entries[0], steps)
         self.assertTrue(source.startswith("flowchart LR"))
-        self.assertIn('"app.App.run"', source)
-        self.assertIn('"engine.Engine.tick"', source)
+        self.assertIn('"app.App.run<br/>', source)
+        self.assertIn('"engine.Engine.tick<br/>', source)
         self.assertIn('|"recursion"|', source)
 
     def test_flowcharts_control_flow_switch_loop_try(self) -> None:
@@ -222,9 +229,9 @@ class TestExecutionFlows(unittest.TestCase):
         names = {d.name for d in self.defs.values()}
         run_entry = type(entries[0])("pkg/app.py", "run", 11, 0)
         source = self.builder.control_flow_mermaid(APP_SOURCE, run_entry, names)
-        self.assertIn('{"switch mode"}', source)
-        self.assertIn("|\"'fast'\"|", source)
-        self.assertIn("'idle' / 'noop'", source)
+        self.assertIn('{"mode == \'fast\'?"}', source)
+        self.assertIn('n_s2 -->|"no"| n_s4', source)
+        self.assertIn("mode in 'idle' / 'noop'?", source)
         self.assertIn('{{"for item in range(3)"}}', source)
         self.assertIn("except RuntimeError", source)
         self.assertIn('(["raise ValueError"])', source)
@@ -235,7 +242,7 @@ class TestExecutionFlows(unittest.TestCase):
         source = self.builder.sequence_mermaid(entries[0], steps)
         self.assertTrue(source.startswith("sequenceDiagram"))
         self.assertIn("participant p_pkg_app_py as app.py", source)
-        self.assertIn("p_pkg_app_py->>p_pkg_engine_py: start()", source)
+        self.assertIn("p_pkg_app_py->>p_pkg_engine_py: Engine.start()", source)
 
     def test_flowcharts_section_and_kb_integration(self) -> None:
         text = "\n".join(render_flows_section(Config(), self.nodes, self.edges, self.resolved, self.contents))
@@ -277,3 +284,76 @@ class TestPythonReceiverTypes(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestFlowLayoutAndViewer(unittest.TestCase):
+    """Contract: laid-out diagrams are well proportioned and the viewer is self-contained."""
+
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.nodes, cls.edges, cls.resolved, cls.contents = _project()
+        cls.graphs = build_flow_graphs(Config(), cls.nodes, cls.edges, cls.resolved, cls.contents, None, {})
+
+    def test_flowlayout_kinds_present(self) -> None:
+        kinds = [g.kind for g in self.graphs]
+        self.assertEqual(kinds[0], "architecture")
+        for kind in ("calltree", "sequence"):
+            self.assertIn(kind, kinds)
+
+    def test_flowlayout_never_a_strip(self) -> None:
+        wide = FlowGraph(id="w", title="w", kind="calltree")
+        wide.nodes.append(FlowNode(id="root", title="root"))
+        for i in range(40):
+            wide.nodes.append(FlowNode(id=f"c{i}", title=f"child_function_{i}", lines=["does something useful"]))
+            wide.edges.append(FlowEdge("root", f"c{i}"))
+        layout_flow(wide, LayoutMetrics(max_per_row=5), "TB")
+        self.assertLess(wide.width / wide.height, 3.0)
+        boxes = [(n.x - n.w / 2, n.x + n.w / 2, n.y - n.h / 2, n.y + n.h / 2) for n in wide.nodes]
+        for i, a in enumerate(boxes):
+            for b in boxes[i + 1:]:
+                overlap = a[0] < b[1] and b[0] < a[1] and a[2] < b[3] and b[2] < a[3]
+                self.assertFalse(overlap)
+
+    def test_flowlayout_ladder_is_narrow(self) -> None:
+        source = "def run(c):\n" + "".join(
+            f"    {'if' if i == 0 else 'elif'} c == 'k{i}':\n        return f{i}()\n" for i in range(20)
+        )
+        names = {f"f{i}" for i in range(20)}
+        graph = ExecutionFlowBuilder(Config()).control_flow_model(source, EntryPoint("x.py", "run", 1, 0), names)
+        layout_flow(graph, LayoutMetrics(), "TB")
+        self.assertGreater(graph.height, 2 * graph.width)
+        decisions = [n for n in graph.nodes if n.shape == "decision"]
+        self.assertEqual(len({round(n.x) for n in decisions}), 1)
+
+    def test_flowlayout_edges_have_geometry(self) -> None:
+        for graph in self.graphs:
+            if graph.kind == "sequence":
+                self.assertTrue(all("y" in m for m in graph.messages))
+                continue
+            self.assertTrue(all(len(e.points) == 4 for e in graph.edges))
+            self.assertGreater(graph.width, 0)
+
+    def test_flowpage_self_contained_and_escaped(self) -> None:
+        page = render_flows_page(self.graphs, "<Demo & co>", "index.html")
+        self.assertIn("&lt;Demo &amp; co&gt;", page)
+        payload = re.search(r'<script type="application/json" id="fv-data">(.*?)</script>', page, re.S).group(1)
+        self.assertNotIn("<", payload)
+        self.assertTrue(json.loads(payload)["graphs"])
+        self.assertNotRegex(page, r'<script[^>]+src=|<link[^>]+href=|https://|fetch\(')
+        self.assertIn("window.ReadmenatorFlows", page)
+
+    def test_flowpage_thumbnail(self) -> None:
+        thumb = flow_thumbnail_svg(self.graphs[0], 320, 180)
+        self.assertTrue(thumb.startswith('<svg class="thumb"'))
+        self.assertEqual(flow_thumbnail_svg(FlowGraph(id="e", title="", kind="x"), 320, 180), "")
+
+    def test_flowpage_api_site_embeds_flows(self) -> None:
+        from readmenator._apidocs import ApiReferenceBuilder
+        from readmenator._apidocs_page import render_api_site
+        ref = ApiReferenceBuilder(Config()).build(self.nodes, self.edges, self.resolved, self.contents)
+        site = render_api_site(ref, "Demo", Config(), self.graphs)
+        self.assertIn('href="#/flows"', site)
+        self.assertIn("ReadmenatorFlows.mount", site)
+        self.assertNotIn("render-mermaid", site)
+        self.assertNotRegex(site, r'<script[^>]+src=')
+

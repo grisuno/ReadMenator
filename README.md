@@ -244,21 +244,42 @@ readmenator . apidocs                       # write readmenator-apidocs/
 readmenator . doc-coverage --fail-under 80  # CI gate: exit 1 below 80%
 ```
 
-### Architecture Overview and Execution Flows
+### Architecture and Execution Flows (interactive, offline)
 
-`KNOWLEDGE_BASE.md` (and `readmenator-apidocs/architecture.md`) open with two
-diagrams computed by graph algorithms instead of a raw file dump:
+Open **`readmenator-maps/flows.html`** (featured first in the maps gallery, also
+`readmenator-apidocs/flows.html` and the **Flows** tab of
+`readmenator-apidocs/index.html`). Every diagram is computed from the source and
+laid out by readmenator's own layered (Sugiyama-style) engine, then drawn as SVG
+in the page: no Mermaid, no CDN, no network.
 
 - **Tiered architecture.** Communities become components; a weighted
   Eades-Lin-Smyth feedback-arc-set ordering makes most imports point downward,
   tiers are longest-path levels, implied edges are removed by transitive
   reduction, and the few imports that go *upward* (the minimal set that closes
-  every cycle) are drawn as dashed red arrows and listed as "fix first".
-- **Execution flows.** Entry points are scored (`__main__` guards, `main`,
-  CLI/server files, call-graph sources) and each one gets a control-flow
-  flowchart (decisions, loops, try/except, returns; `if/elif` dispatch chains
-  collapse into one switch), a call tree in real call order, and a cross-file
-  sequence diagram.
+  every cycle) are drawn as red dashed arrows and listed as "fix first". Click a
+  component to see every file with its purpose and importer count.
+- **Control flow of each entry point** (Python `ast`): decisions as diamonds
+  (yes to the right, no continues down, so `if/elif` dispatchers become a tall
+  ladder instead of a wide fan), loops with back arrows, `try/except`, `with`,
+  returns and raises. Each step names the project functions it calls and shows
+  what they do (docstring summary resolved through the typed call graph).
+- **Call tree** in real call order (numbered arrows, repeats dashed, recursion
+  red), with `Owner.method`, file:line and docstring per box.
+- **Cross-file sequence** of the same walk.
+- **Viewer.** Fit width, 100 %, zoom, fullscreen, SVG download, drag to pan,
+  Ctrl+wheel to zoom, hover highlights a node's arrows, click opens a panel with
+  the signature, docs, called functions, files, and a link into the API reference.
+  Wide ranks wrap into extra rows, so a diagram never collapses into a thin strip.
+
+```bash
+readmenator . flows      # write readmenator-maps/flows.html only
+```
+
+`KNOWLEDGE_BASE.md` and `readmenator-apidocs/architecture.md` carry the same
+diagrams as Mermaid for GitHub. The legacy structural map now wraps every
+community into a grid (`MERMAID_GRID_COLUMNS`), caps external boxes
+(`MERMAID_MAX_EXTERNALS`) and runs left to right; UML is split into diagrams of
+at most `UML_CLASSES_PER_DIAGRAM` classes, so none of them renders as a strip.
 
 ### Component Diagrams
 
@@ -291,7 +312,7 @@ gallery, every `--rebuild` refreshes it (video and docs included).
 
 ### Overview Video
 
-`readmenator . video` renders a synthwave mp4 from real scan data in nine acts:
+`readmenator . video` renders a synthwave mp4 from real scan data in eleven acts:
 layers, god nodes, blast-radius tree, communities, **Emergence** (ForceAtlas2
 LinLog with adaptive speed, animated from seeded chaos to convergence, nodes
 sized by PageRank with random-surfer particles on the hottest edges), **Orbit**
@@ -304,7 +325,11 @@ community and a live flow ranking), **The Sphere** (the 3D layout folds onto a g
 of community caps and every import bundles through its core), and code DNA. A
 closing invitation shows both explorers spinning with their paths, so viewers know
 where to go next. Set an act's duration (`VIDEO_ORBIT_S`, `VIDEO_SPHERE_S`,
-`VIDEO_INVITE_S`, ...) to 0 to drop it with its card. Motion uses quintic
+`VIDEO_INVITE_S`, ...) to 0 to drop it with its card. Two acts come from the flow engine: **X The Tiers** (the architecture
+assembles tier by tier, then the upward imports that break the layering flash red
+with a "fix first" list) and **XI Execution** (a camera follows the main entry
+point's call tree in real call order, a light packet travels along each call,
+and a side panel shows the callee, its file:line and docstring). Motion uses quintic
 smootherstep easing, scenes crossfade into each other (`VIDEO_TRANSITION_S`),
 and the 3D camera acts get shutter motion blur (`VIDEO_MOTION_BLUR_SAMPLES`).
 The circle and sphere acts share the explorer's crossing-reduction ordering.

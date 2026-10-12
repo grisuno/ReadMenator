@@ -15,13 +15,15 @@ import html
 import json
 import re
 from pathlib import PurePosixPath
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from readmenator._apidocs import ApiReference
 from readmenator._config import Config
+from readmenator._flowlayout import FlowGraph
+from readmenator._flowpage import FLOW_VIEWER_CSS, FLOW_VIEWER_JS
 
 
-_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA)@@")
+_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|FVCSS|FVJS)@@")
 
 
 def _payload(reference: ApiReference, project_name: str, config: Config) -> Dict[str, object]:
@@ -53,7 +55,7 @@ def _payload(reference: ApiReference, project_name: str, config: Config) -> Dict
 
 
 def render_api_site(
-    reference: ApiReference, project_name: str, config: Config, architecture_markdown: str = "",
+    reference: ApiReference, project_name: str, config: Config, flow_graphs: Optional[List[FlowGraph]] = None,
 ) -> str:
     """Render the standalone HTML API browser.
 
@@ -61,19 +63,18 @@ def render_api_site(
         reference: The API reference.
         project_name: Display name of the project.
         config: Application configuration.
-        architecture_markdown: Optional architecture and flow Markdown with
-            Mermaid blocks; rendered as source until the reader asks to
-            load the Mermaid renderer (the only optional network request).
+        flow_graphs: Laid-out architecture and execution-flow diagrams,
+            drawn as interactive SVG in the Flows tab (no network).
 
     Returns:
         Complete HTML document text.
     """
     payload = _payload(reference, project_name, config)
-    payload["architecture"] = architecture_markdown
-    payload["mermaid_cdn"] = config.APIDOCS_MERMAID_CDN_JS
+    payload["flows"] = [g.to_dict() for g in (flow_graphs or [])]
     data = json.dumps(payload, separators=(",", ":"))
     data = data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
-    values = {"TITLE": html.escape(f"{project_name} API Reference"), "DATA": data}
+    values = {"TITLE": html.escape(f"{project_name} API Reference"), "DATA": data,
+              "FVCSS": FLOW_VIEWER_CSS, "FVJS": FLOW_VIEWER_JS}
     return _PLACEHOLDER_RE.sub(lambda m: values[m.group(1)], _TEMPLATE)
 
 
@@ -84,9 +85,9 @@ _TEMPLATE = r"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>@@TITLE@@</title>
 <style>
-:root{--bg:#0b0f17;--panel:#111827;--panel2:#0f172a;--line:#1f2937;--text:#e5e7eb;--muted:#94a3b8;--accent:#22d3ee;--accent2:#38bdf8;--warn:#fbbf24;--bad:#f87171;--good:#34d399;--code:#0a0e15;--kw:#c084fc;--str:#a3e635;--chip:#1e293b}
-:root[data-theme="light"]{--bg:#f8fafc;--panel:#ffffff;--panel2:#f1f5f9;--line:#e2e8f0;--text:#0f172a;--muted:#475569;--accent:#0891b2;--accent2:#0284c7;--warn:#b45309;--bad:#b91c1c;--good:#047857;--code:#f1f5f9;--kw:#7c3aed;--str:#4d7c0f;--chip:#e2e8f0}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f8fafc;--panel:#ffffff;--panel2:#f1f5f9;--line:#e2e8f0;--text:#0f172a;--muted:#475569;--accent:#0891b2;--accent2:#0284c7;--warn:#b45309;--bad:#b91c1c;--good:#047857;--code:#f1f5f9;--kw:#7c3aed;--str:#4d7c0f;--chip:#e2e8f0}}
+:root{--bg:#0b0f17;--panel:#111827;--panel2:#0f172a;--line:#1f2937;--text:#e5e7eb;--muted:#94a3b8;--accent:#22d3ee;--accent2:#38bdf8;--warn:#fbbf24;--bad:#f87171;--good:#34d399;--code:#0a0e15;--kw:#c084fc;--str:#a3e635;--chip:#1e293b;--fv-box:#111c2e;--fv-entry:#0b3a4a;--fv-ext:#1d1838;--fv-cycle:#2a1630;--fv-dec:#1e1b4b;--fv-stop:#3f1d1d;--fv-hub:#0b3b2e;--fv-purple:#a78bfa;--fv-pink:#f472b6}
+:root[data-theme="light"]{--bg:#f8fafc;--panel:#ffffff;--panel2:#f1f5f9;--line:#e2e8f0;--text:#0f172a;--muted:#475569;--accent:#0891b2;--accent2:#0284c7;--warn:#b45309;--bad:#b91c1c;--good:#047857;--code:#f1f5f9;--kw:#7c3aed;--str:#4d7c0f;--chip:#e2e8f0;--fv-box:#eef6ff;--fv-entry:#cffafe;--fv-ext:#f3e8ff;--fv-cycle:#fce7f3;--fv-dec:#ede9fe;--fv-stop:#fee2e2;--fv-hub:#d1fae5;--fv-purple:#7c3aed;--fv-pink:#db2777}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--bg:#f8fafc;--panel:#ffffff;--panel2:#f1f5f9;--line:#e2e8f0;--text:#0f172a;--muted:#475569;--accent:#0891b2;--accent2:#0284c7;--warn:#b45309;--bad:#b91c1c;--good:#047857;--code:#f1f5f9;--kw:#7c3aed;--str:#4d7c0f;--chip:#e2e8f0;--fv-box:#eef6ff;--fv-entry:#cffafe;--fv-ext:#f3e8ff;--fv-cycle:#fce7f3;--fv-dec:#ede9fe;--fv-stop:#fee2e2;--fv-hub:#d1fae5;--fv-purple:#7c3aed;--fv-pink:#db2777}}
 *{box-sizing:border-box}html,body{margin:0;height:100%}
 body{background:var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
@@ -136,12 +137,13 @@ ul.tree{list-style:none;padding-left:18px}ul.tree>li{margin:2px 0}
 .letters a{margin-right:8px}
 @media (max-width:860px){.layout{grid-template-columns:1fr}.side{position:static;height:auto;max-height:40vh}main{padding:16px}header nav{display:none}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+@@FVCSS@@
 </style>
 </head>
 <body>
 <header>
   <h1 id="title"></h1>
-  <nav><a href="#/">Overview</a><a href="#/architecture">Architecture</a><a href="#/hierarchy">Hierarchy</a><a href="#/index">Index</a><a href="#/coverage">Coverage</a></nav>
+  <nav><a href="#/">Overview</a><a href="#/flows">Flows</a><a href="#/hierarchy">Hierarchy</a><a href="#/index">Index</a><a href="#/coverage">Coverage</a></nav>
   <div class="search"><input id="q" type="search" placeholder="Search API ( / )" autocomplete="off" aria-label="Search the API"><div class="results" id="results" role="listbox"></div></div>
   <button id="theme" title="Toggle dark and light theme">Theme</button>
 </header>
@@ -150,6 +152,7 @@ ul.tree{list-style:none;padding-left:18px}ul.tree>li{margin:2px 0}
   <main id="main"></main>
 </div>
 <script type="application/json" id="api-data">@@DATA@@</script>
+<script>@@FVJS@@</script>
 <script>
 (function(){
 "use strict";
@@ -272,14 +275,7 @@ function genIndex(){var items=D.entities.filter(function(e){return e.kind!=="mod
   var L={};items.forEach(function(e){var c=(e.name.replace(/^[_#$]+/,"")[0]||"#").toUpperCase();if(!/[A-Z]/.test(c))c="#";(L[c]=L[c]||[]).push(e);});
   var keys=Object.keys(L).sort();return "<h2>General Index</h2><p class=\"letters\">"+keys.map(function(k){return '<a href="#/index/'+encodeURIComponent(k)+'">'+esc(k)+"</a>";}).join("")+"</p>"+keys.map(function(k){return '<h3 id="'+esc("L:"+k)+'">'+esc(k)+"</h3><ul>"+L[k].map(function(e){return "<li>"+link(e,e.name)+' <span class="muted">'+esc(e.kind)+(e.qualname.indexOf(".")>=0?" of "+esc(e.qualname.slice(0,e.qualname.lastIndexOf("."))):"")+" in "+esc(modName(e))+"</span></li>";}).join("")+"</ul>";}).join("");}
 
-function architecturePage(){if(!D.architecture)return "<h2>Architecture</h2><p class=\"muted\">No architecture or execution-flow data for this project.</p>";
-  return '<h2>Architecture and Execution Flows</h2><p><button id="render-mermaid" title="Loads the Mermaid renderer from '+esc(D.mermaid_cdn)+'">Render diagrams (loads Mermaid from CDN)</button> <span class="muted">Offline by default: diagrams are shown as Mermaid source until you choose to render them.</span></p>'+md(D.architecture,"");}
-function renderMermaid(){var blocks=main.querySelectorAll("pre.mermaid-src");if(!blocks.length)return;
-  function go(){var dark=(root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"))!=="light";
-    window.mermaid.initialize({startOnLoad:false,securityLevel:"strict",theme:dark?"dark":"default",flowchart:{htmlLabels:true}});
-    blocks.forEach(function(pre,k){var src=pre.textContent,host=document.createElement("div");host.className="card";pre.replaceWith(host);
-      window.mermaid.render("mmd"+k+"x"+Date.now(),src).then(function(r){host.innerHTML=r.svg;}).catch(function(err){host.innerHTML="<pre><code>"+esc(src)+"</code></pre><p class=\"muted\">"+esc(String(err&&err.message||err))+"</p>";});});}
-  if(window.mermaid)return go();var tag=document.createElement("script");tag.src=D.mermaid_cdn;tag.onload=go;tag.onerror=function(){alert("Mermaid could not be loaded; the diagram sources stay visible.");};document.head.appendChild(tag);}
+function flowsPage(){return '<h2>Architecture and Execution Flows</h2><p class="muted">Computed from the source and laid out offline. Click any box for its signature, docs and files; Ctrl+wheel zooms, drag pans.</p><div id="fv-host"></div>';}
 function coveragePage(){var c=D.coverage,h=["<h2>Documentation Coverage</h2>"];var o=c.overall||{};
   h.push("<p>Overall <b>"+(o.percent==null?100:o.percent)+"%</b> ("+(o.documented||0)+" of "+(o.total||0)+" public modules, types, and callables).</p>"+bar(o.percent==null?100:o.percent));
   h.push("<h3>By kind</h3><table><tr><th>Kind</th><th>Documented</th><th>Total</th><th>Coverage</th></tr>"+Object.keys(c.by_kind||{}).map(function(k){var s=c.by_kind[k];return "<tr><td>"+esc(k)+"</td><td>"+s.documented+"</td><td>"+s.total+"</td><td>"+s.percent+"%</td></tr>";}).join("")+"</table>");
@@ -292,9 +288,9 @@ var main=document.getElementById("main");
 function route(){var h=decodeURIComponent(location.hash.replace(/^#\/?/,"")),active="",html,focus="";
   if(h.indexOf("m/")===0){var rest=h.slice(2),uid=null;D.modules.forEach(function(u){if((rest===u||rest.indexOf(u+"/")===0)&&(!uid||u.length>uid.length))uid=u;});
     if(uid){active=uid;html=modulePage(uid);focus=rest.length>uid.length?"e:"+rest.slice(uid.length+1):"";}else html="<p>Unknown module.</p>";}
-  else if(h==="architecture")html=architecturePage();else if(h==="hierarchy")html=hierarchy();else if(h.indexOf("index")===0){html=genIndex();focus=h.length>6?"L:"+h.slice(6):"";}else if(h==="coverage")html=coveragePage();else html=home();
+  else if(h==="flows"||h==="architecture")html=flowsPage();else if(h==="hierarchy")html=hierarchy();else if(h.indexOf("index")===0){html=genIndex();focus=h.length>6?"L:"+h.slice(6):"";}else if(h==="coverage")html=coveragePage();else html=home();
   main.innerHTML=html;renderTree(document.getElementById("filter").value,active);
-  var rb=document.getElementById("render-mermaid");if(rb)rb.addEventListener("click",function(){rb.disabled=true;renderMermaid();});
+  var fh=document.getElementById("fv-host");if(fh&&window.ReadmenatorFlows)window.ReadmenatorFlows.mount(fh,D.flows||[],{apiHref:"index.html"});
   if(focus){var el=document.getElementById(focus);if(el){el.scrollIntoView({block:"start"});window.scrollBy(0,-64);el.style.outline="2px solid var(--accent)";}}else window.scrollTo(0,0);}
 window.addEventListener("hashchange",route);
 document.getElementById("filter").addEventListener("input",function(){var h=decodeURIComponent(location.hash);var a=D.modules.filter(function(u){return h.indexOf("#/m/"+u)===0;})[0]||"";renderTree(this.value,a);});
@@ -314,7 +310,7 @@ document.addEventListener("click",function(ev){if(!ev.target.closest(".search"))
 document.addEventListener("keydown",function(ev){if(ev.key==="/"&&document.activeElement!==q&&document.activeElement.tagName!=="INPUT"){ev.preventDefault();q.focus();}});
 var root=document.documentElement;
 try{var saved=localStorage.getItem("readmenator-theme");if(saved)root.setAttribute("data-theme",saved);}catch(err){}
-document.getElementById("theme").addEventListener("click",function(){var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");var nxt=cur==="light"?"dark":"light";root.setAttribute("data-theme",nxt);try{localStorage.setItem("readmenator-theme",nxt);}catch(err){}});
+document.getElementById("theme").addEventListener("click",function(){var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");var nxt=cur==="light"?"dark":"light";root.setAttribute("data-theme",nxt);try{localStorage.setItem("readmenator-theme",nxt);}catch(err){}route();});
 document.getElementById("title").textContent=D.project+" API";
 route();
 })();

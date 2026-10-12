@@ -20,6 +20,7 @@ unresolved-call lint rule and the component-diagram key edges.
 
 ```mermaid
 classDiagram
+    direction LR
     class SymbolDef
     SymbolDef : str file
     SymbolDef : str name

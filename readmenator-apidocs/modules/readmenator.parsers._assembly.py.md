@@ -12,6 +12,7 @@ Assembly parser: regex extraction of symbols, signatures, docstrings, and import
 
 ```mermaid
 classDiagram
+    direction LR
     class AssemblyParser
     class LanguageParser
     LanguageParser <|-- AssemblyParser

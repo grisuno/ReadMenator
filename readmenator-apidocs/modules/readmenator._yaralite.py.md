@@ -20,6 +20,7 @@ arbitrary code execution.
 
 ```mermaid
 classDiagram
+    direction LR
     class YaraLiteString
     YaraLiteString : str identifier
     YaraLiteString : str pattern

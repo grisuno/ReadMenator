@@ -49,6 +49,14 @@ class Config:
 
     MERMAID_MAX_INTERNAL_EDGES: int = 100
 
+    MERMAID_GRID_COLUMNS: int = 6
+
+    MERMAID_MAX_EXTERNALS: int = 24
+
+    MERMAID_DIRECTION: str = "LR"
+
+    UML_CLASSES_PER_DIAGRAM: int = 6
+
     MERMAID_MODULE_STYLE: str = "fill:#1e1e1e,stroke:#ff6666,stroke-width:2px,color:#fff"
 
     MERMAID_CLASS_STYLE: str = "fill:#2d2d2d,stroke:#4ec9b0,stroke-width:2px,color:#fff"
@@ -804,6 +812,12 @@ class Config:
 
     VIDEO_SPHERE_SAMPLES: int = 18
 
+    VIDEO_TIERS_S: float = 12.0
+
+    VIDEO_FLOW_S: float = 16.0
+
+    VIDEO_FLOW_VIEW_WIDTH: int = 1100
+
     VIDEO_TRANSITION_S: float = 0.45
 
     VIDEO_TRANSITION_GLITCH: float = 0.35
@@ -1147,6 +1161,18 @@ class Config:
 
     FLOW_SEQUENCE_MAX_MESSAGES: int = 30
 
-    FLOW_CFG_MAX_NODES: int = 60
+    FLOW_CFG_MAX_NODES: int = 160
 
     FLOW_SWITCH_MIN_CASES: int = 3
+
+    FLOW_NODE_MAX_CHARS: int = 38
+
+    FLOW_NODE_MAX_LINES: int = 3
+
+    FLOW_MAX_PER_ROW: int = 5
+
+    ARCH_DIAGRAM_MAX_PER_ROW: int = 4
+
+    ARCH_DIAGRAM_PANEL_FILES: int = 40
+
+    FLOWS_OUTPUT: str = "flows.html"

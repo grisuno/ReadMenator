@@ -62,6 +62,9 @@ Project types nested under the project types they derive from. External bases ar
 - [`ExecutionFlowBuilder`](modules/readmenator._flowcharts.py.md#executionflowbuilder) class in `readmenator._flowcharts`
 - [`ExplorerState`](modules/readmenator._explorer.py.md#explorerstate) class in `readmenator._explorer`
 - [`FileCache`](modules/readmenator._cache.py.md#filecache) class in `readmenator._cache`
+- [`FlowEdge`](modules/readmenator._flowlayout.py.md#flowedge) class in `readmenator._flowlayout`
+- [`FlowGraph`](modules/readmenator._flowlayout.py.md#flowgraph) class in `readmenator._flowlayout`
+- [`FlowNode`](modules/readmenator._flowlayout.py.md#flownode) class in `readmenator._flowlayout`
 - [`FlowStep`](modules/readmenator._flowcharts.py.md#flowstep) class in `readmenator._flowcharts`
 - [`ForceAtlas2Settings`](modules/readmenator._graphlayout.py.md#forceatlas2settings) class in `readmenator._graphlayout`
 - [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
@@ -101,6 +104,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`LayerDetector`](modules/readmenator._layers.py.md#layerdetector) class in `readmenator._layers`
 - [`LayerRuleEngine`](modules/readmenator._layer_rules.py.md#layerruleengine) class in `readmenator._layer_rules`
 - [`LayerViolation`](modules/readmenator._models.py.md#layerviolation) class in `readmenator._models`
+- [`LayoutMetrics`](modules/readmenator._flowlayout.py.md#layoutmetrics) class in `readmenator._flowlayout`
 - [`LinterViolation`](modules/readmenator._models.py.md#linterviolation) class in `readmenator._models`
 - [`MapDelta`](modules/readmenator._diagrams.py.md#mapdelta) class in `readmenator._diagrams`
 - [`MapDiagnostic`](modules/readmenator._diagrams.py.md#mapdiagnostic) class in `readmenator._diagrams`

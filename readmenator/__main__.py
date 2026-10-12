@@ -56,6 +56,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  forcegraph              Export force-graph explorer HTML (readmenator-maps/graph-force.html)\n"
             "  bundles                 Export edge bundle explorer HTML, circle + sphere (readmenator-maps/graph-bundle.html)\n"
             "  components              Export component diagrams (analysis.json + graph LR markdown + index.html)\n"
+            "  flows                   Export interactive architecture + execution-flow diagrams (readmenator-maps/flows.html)\n"
             "  apidocs                 Generate the API reference (Sphinx/Doxygen style: readmenator-apidocs/)\n"
             "  doc-coverage [--fail-under N]  Print documentation coverage and warnings (exit 1 below N%)\n"
             "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
@@ -334,6 +335,9 @@ def main() -> None:
         elif command == "bundles":
             out = app.export_bundlegraph(target)
             print(out)
+            return
+        elif command == "flows":
+            print(app.export_flows(target))
             return
         elif command == "apidocs":
             written = app.export_apidocs(target)

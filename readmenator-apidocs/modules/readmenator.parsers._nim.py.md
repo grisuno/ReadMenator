@@ -12,6 +12,7 @@ Nim parser: regex extraction of symbols, signatures, docstrings, and imports.
 
 ```mermaid
 classDiagram
+    direction LR
     class NimParser
     class LanguageParser
     LanguageParser <|-- NimParser

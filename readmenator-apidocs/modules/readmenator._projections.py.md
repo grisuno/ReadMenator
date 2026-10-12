@@ -20,6 +20,7 @@ change impact analysis.
 
 ```mermaid
 classDiagram
+    direction LR
     class Projection
     <<protocol>> Projection
     Projection : map_node()

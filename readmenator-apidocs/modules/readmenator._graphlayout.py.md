@@ -37,6 +37,7 @@ seed and input ordering.
 
 ```mermaid
 classDiagram
+    direction LR
     class ForceAtlas2Settings
     ForceAtlas2Settings : int iterations
     ForceAtlas2Settings : int snapshots

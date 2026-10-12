@@ -53,7 +53,7 @@ class UmlGenerator:
         if len(class_nodes) > max_classes:
             class_nodes = class_nodes[:max_classes]
 
-        lines: List[str] = ["classDiagram"]
+        lines: List[str] = ["classDiagram", "  direction LR"]
         class_ids: Set[str] = set()
 
         for node, sym in class_nodes:

@@ -28,6 +28,7 @@ by transformation, not just proximity:
 
 ```mermaid
 classDiagram
+    direction LR
     class EdgeKind
     <<enum>> EdgeKind
     EdgeKind : IMPORTS

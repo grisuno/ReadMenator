@@ -18,6 +18,7 @@ renderer, and query engine depends on these definitions.
 
 ```mermaid
 classDiagram
+    direction LR
     class Symbol
     Symbol : str name
     Symbol : str kind

@@ -3,6 +3,40 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_get_default_branch` | method | `readmenator_orchestrator.py:231` | `def _get_default_branch(self, repo)` |
+| `_resolve_user` | method | `readmenator_orchestrator.py:89` | `def _resolve_user(self)` |
+| `_run_readmenator` | method | `readmenator_orchestrator.py:263` | `def _run_readmenator(self, repo_dir)` |
+| `_safe_env` | function | `readmenator_orchestrator.py:68` | `def _safe_env()` |
+| `_setup_git_auth` | method | `readmenator_orchestrator.py:110` | `def _setup_git_auth(self)` |
+| `_validate_branch_name` | function | `readmenator_orchestrator.py:62` | `def _validate_branch_name(name)` |
+| `_validate_repo_name` | function | `readmenator_orchestrator.py:56` | `def _validate_repo_name(name)` |
+| `close_existing_prs` | method | `readmenator_orchestrator.py:136` | `def close_existing_prs(self, repo)` |
+| `create_pr` | method | `readmenator_orchestrator.py:176` | `def create_pr(self, repo, default_branch, timestamp)` |
+| `delete_remote_branch` | method | `readmenator_orchestrator.py:164` | `def delete_remote_branch(self, repo)` |
+| `list_repos` | method | `readmenator_orchestrator.py:124` | `def list_repos(self)` |
+| `main` | function | `readmenator_orchestrator.py:498` | `def main()` |
+| `parse_arguments` | function | `readmenator_orchestrator.py:481` | `def parse_arguments()` |
+| `process` | method | `readmenator_orchestrator.py:202` | `def process(self, repo)` |
+| `run` | method | `readmenator_orchestrator.py:372` | `def run(self, dry_run, only_repo)` |
+| `setUp` | method | `readmenator_orchestrator.py:422` | `def setUp(self)` |
+| `tearDown` | method | `readmenator_orchestrator.py:426` | `def tearDown(self)` |
+| `test_branch_name_validation` | method | `readmenator_orchestrator.py:472` | `def test_branch_name_validation(self)` |
+| `test_config_defaults` | method | `readmenator_orchestrator.py:433` | `def test_config_defaults(self)` |
+| `test_config_immutability` | method | `readmenator_orchestrator.py:429` | `def test_config_immutability(self)` |
+| `test_pr_body_mentions_concept_layer` | method | `readmenator_orchestrator.py:452` | `def test_pr_body_mentions_concept_layer(self)` |
+| `test_rebuild_command_includes_full_concept_layer` | method | `readmenator_orchestrator.py:441` | `def test_rebuild_command_includes_full_concept_layer(self)` |
+| `test_repo_name_validation` | method | `readmenator_orchestrator.py:462` | `def test_repo_name_validation(self)` |
+| `test_skip_repos_logic` | method | `readmenator_orchestrator.py:458` | `def test_skip_repos_logic(self)` |
+| `TestAgentOutputBudget` | class | `tests/test_agent_friendliness.py:55` | `class TestAgentOutputBudget(TestCase)` |
+| `TestAgentOutputSignal` | class | `tests/test_agent_friendliness.py:110` | `class TestAgentOutputSignal(TestCase)` |
+| `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
+| `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
+| `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
+| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:512` | `class TestLiveMapCommunities(TestCase)` |
+| `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
+| `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
+| `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
+| `TestNoiseReduction` | class | `tests/test_agent_friendliness.py:244` | `class TestNoiseReduction(TestCase)` |
 | `TestPurposeExtraction` | class | `tests/test_agent_friendliness.py:176` | `class TestPurposeExtraction(TestCase)` |
 | `TestSiteDocsPruning` | class | `tests/test_agent_friendliness.py:394` | `class TestSiteDocsPruning(TestCase)` |
 | `TestSourceFreshness` | class | `tests/test_agent_friendliness.py:329` | `class TestSourceFreshness(TestCase)` |
@@ -462,39 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_contains_statistics_dashboard` | method | `tests/test_documentation.py:46` | `def test_contains_statistics_dashboard(self)` |
 | `test_context_budget_includes_security_findings` | method | `tests/test_documentation.py:293` | `def test_context_budget_includes_security_findings(self)` |
 | `test_context_budget_prioritizes_god_nodes` | method | `tests/test_documentation.py:268` | `def test_context_budget_prioritizes_god_nodes(self)` |
-| `test_context_budget_returns_compact_summary` | method | `tests/test_documentation.py:260` | `def test_context_budget_returns_compact_summary(self)` |
-| `test_context_budget_truncates_at_limit` | method | `tests/test_documentation.py:285` | `def test_context_budget_truncates_at_limit(self)` |
-| `test_context_budget_zero_returns_full_content` | method | `tests/test_documentation.py:252` | `def test_context_budget_zero_returns_full_content(self)` |
-| `test_cpg_block_disabled_via_config` | method | `tests/test_documentation.py:211` | `def test_cpg_block_disabled_via_config(self)` |
-| `test_docstring_in_output` | method | `tests/test_documentation.py:143` | `def test_docstring_in_output(self)` |
-| `test_function_pluralization` | method | `tests/test_documentation.py:97` | `def test_function_pluralization(self)` |
-| `test_groups_files_by_language` | method | `tests/test_documentation.py:51` | `def test_groups_files_by_language(self)` |
-| `test_hotspot_section_present` | method | `tests/test_documentation.py:185` | `def test_hotspot_section_present(self)` |
-| `test_includes_file_path` | method | `tests/test_documentation.py:132` | `def test_includes_file_path(self)` |
-| `test_lists_symbols_under_file` | method | `tests/test_documentation.py:70` | `def test_lists_symbols_under_file(self)` |
-| `test_method_pluralization` | method | `tests/test_documentation.py:109` | `def test_method_pluralization(self)` |
-| `test_no_hotspot_section_when_empty` | method | `tests/test_documentation.py:207` | `def test_no_hotspot_section_when_empty(self)` |
-| `test_no_taint_section_when_empty` | method | `tests/test_documentation.py:203` | `def test_no_taint_section_when_empty(self)` |
-| `test_security_findings_section` | method | `tests/test_documentation.py:229` | `def test_security_findings_section(self)` |
-| `test_shows_no_symbols_for_empty_files` | method | `tests/test_documentation.py:121` | `def test_shows_no_symbols_for_empty_files(self)` |
-| `test_taint_propagation_section_present` | method | `tests/test_documentation.py:165` | `def test_taint_propagation_section_present(self)` |
-| `test_truncation_note_when_limited` | method | `tests/test_documentation.py:155` | `def test_truncation_note_when_limited(self)` |
-| `TestGraphExporterContract` | class | `tests/test_exporter.py:23` | `class TestGraphExporterContract(TestCase)` |
-| `_make_node` | method | `tests/test_exporter.py:30` | `def _make_node(self, nid, label, lang, symbols)` |
-| `_make_sym` | method | `tests/test_exporter.py:42` | `def _make_sym(self, name, kind, line)` |
-| `setUp` | method | `tests/test_exporter.py:26` | `def setUp(self)` |
-| `test_to_html_includes_community_legend_when_analysis` | method | `tests/test_exporter.py:116` | `def test_to_html_includes_community_legend_when_analysis(self)` |
-| `test_to_html_includes_node_data` | method | `tests/test_exporter.py:109` | `def test_to_html_includes_node_data(self)` |
-| `test_to_html_produces_standalone_page` | method | `tests/test_exporter.py:101` | `def test_to_html_produces_standalone_page(self)` |
-| `test_to_json_handles_resolved_edges` | method | `tests/test_exporter.py:160` | `def test_to_json_handles_resolved_edges(self)` |
-| `test_to_json_includes_analysis_metadata` | method | `tests/test_exporter.py:76` | `def test_to_json_includes_analysis_metadata(self)` |
-| `test_to_json_includes_metadata` | method | `tests/test_exporter.py:65` | `def test_to_json_includes_metadata(self)` |
-| `test_to_json_includes_symbol_data` | method | `tests/test_exporter.py:56` | `def test_to_json_includes_symbol_data(self)` |
-| `test_to_json_produces_valid_json` | method | `tests/test_exporter.py:47` | `def test_to_json_produces_valid_json(self)` |
-| `test_to_svg_includes_readmenator_title` | method | `tests/test_exporter.py:154` | `def test_to_svg_includes_readmenator_title(self)` |
-| `test_to_svg_produces_svg_string` | method | `tests/test_exporter.py:138` | `def test_to_svg_produces_svg_string(self)` |
-| `test_to_svg_render_truncation_for_large_graph` | method | `tests/test_exporter.py:145` | `def test_to_svg_render_truncation_for_large_graph(self)` |
-| `TestArchitectureDiagram` | class | `tests/test_flowcharts.py:131` | `class TestArchitectureDiagram(TestCase)` |
-| `TestExecutionFlows` | class | `tests/test_flowcharts.py:183` | `class TestExecutionFlows(TestCase)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

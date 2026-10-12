@@ -12,6 +12,7 @@ JavaScript and TypeScript parser: regex extraction of symbols, signatures, docst
 
 ```mermaid
 classDiagram
+    direction LR
     class JavaScriptParser
     class LanguageParser
     LanguageParser <|-- JavaScriptParser

@@ -12,6 +12,7 @@ Rust parser: regex extraction of symbols, signatures, docstrings, and imports.
 
 ```mermaid
 classDiagram
+    direction LR
     class RustParser
     class LanguageParser
     LanguageParser <|-- RustParser

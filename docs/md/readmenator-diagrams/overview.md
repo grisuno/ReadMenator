@@ -4,28 +4,30 @@ graph LR
     readmenator_parsers["readmenator/parsers"]
     readmenator__diagrams["readmenator: _diagrams"]
     readmenator__pipeline["readmenator: _pipeline"]
-    readmenator__apidocs["readmenator: _apidocs"]
+    readmenator__flowcharts["readmenator: _flowcharts"]
     readmenator__agent_injector["readmenator: _agent_injector"]
     readmenator__graphrag -- "calls into" --> readmenator_parsers
     readmenator__graphrag -- "calls into" --> readmenator__diagrams
     readmenator__graphrag -- "calls into" --> readmenator__pipeline
+    readmenator__graphrag -- "calls into" --> readmenator__flowcharts
     readmenator_parsers -- "calls into" --> readmenator__graphrag
     readmenator_parsers -- "calls into" --> readmenator__diagrams
     readmenator_parsers -- "calls into" --> readmenator__pipeline
+    readmenator_parsers -- "calls into" --> readmenator__flowcharts
     readmenator__diagrams -- "calls into" --> readmenator__graphrag
     readmenator__diagrams -- "calls into" --> readmenator_parsers
     readmenator__diagrams -- "calls into" --> readmenator__pipeline
-    readmenator__diagrams -- "calls into" --> readmenator__apidocs
+    readmenator__diagrams -- "calls into" --> readmenator__flowcharts
     readmenator__diagrams -- "depends on" --> readmenator__agent_injector
     readmenator__pipeline -- "calls into" --> readmenator__graphrag
     readmenator__pipeline -- "calls into" --> readmenator_parsers
     readmenator__pipeline -- "calls into" --> readmenator__diagrams
-    readmenator__pipeline -- "calls into" --> readmenator__apidocs
+    readmenator__pipeline -- "calls into" --> readmenator__flowcharts
     readmenator__pipeline -- "calls into" --> readmenator__agent_injector
-    readmenator__apidocs -- "calls into" --> readmenator__graphrag
-    readmenator__apidocs -- "calls into" --> readmenator_parsers
-    readmenator__apidocs -- "calls into" --> readmenator__diagrams
-    readmenator__apidocs -- "calls into" --> readmenator__pipeline
+    readmenator__flowcharts -- "calls into" --> readmenator__graphrag
+    readmenator__flowcharts -- "calls into" --> readmenator_parsers
+    readmenator__flowcharts -- "calls into" --> readmenator__diagrams
+    readmenator__flowcharts -- "calls into" --> readmenator__pipeline
     readmenator__agent_injector -- "calls into" --> readmenator__graphrag
     readmenator__agent_injector -- "calls into" --> readmenator_parsers
     readmenator__agent_injector -- "calls into" --> readmenator__pipeline
@@ -33,12 +35,12 @@ graph LR
     click readmenator_parsers href "./readmenator_parsers.md" "Details"
     click readmenator__diagrams href "./readmenator__diagrams.md" "Details"
     click readmenator__pipeline href "./readmenator__pipeline.md" "Details"
-    click readmenator__apidocs href "./readmenator__apidocs.md" "Details"
+    click readmenator__flowcharts href "./readmenator__flowcharts.md" "Details"
 ```
 
 ## Details
 
-Static architecture map of 145 files (js, py) in 6 components: readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams, readmenator: _pipeline, readmenator: _apidocs, readmenator: _agent_injector. Structure is extracted statically without LLM calls; component prose may be enriched locally.
+Static architecture map of 147 files (js, py) in 6 components: readmenator: _graphrag, readmenator/parsers, readmenator: _diagrams, readmenator: _pipeline, readmenator: _flowcharts, readmenator: _agent_injector. Structure is extracted statically without LLM calls; component prose may be enriched locally.
 
 ### readmenator: _graphrag (1)
 
@@ -46,7 +48,7 @@ readmenator: _graphrag groups 40 files (py) around Config, ImportResolver, __ini
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_config.py#L15-L1152">readmenator/_config.py::Config</a>
+- <a href="../readmenator/_config.py#L15-L1178">readmenator/_config.py::Config</a>
 - <a href="../readmenator/_resolver.py#L18-L60">readmenator/_resolver.py::ImportResolver</a>
 - <a href="../readmenator/_resolver.py#L61-L82">readmenator/_resolver.py::__init__</a>
 - <a href="../readmenator/_resolver.py#L83-L92">readmenator/_resolver.py::_build_stem_index</a>
@@ -72,7 +74,7 @@ readmenator/parsers groups 32 files (py) around Symbol, Node, Edge, SecurityFind
 
 ### readmenator: _diagrams (3)
 
-readmenator: _diagrams groups 31 files (py) around EdgeKind, __str__, Morphism, weight, Category. Launcher shim that runs the readmenator CLI from a source checkout.
+readmenator: _diagrams groups 29 files (py) around EdgeKind, __str__, Morphism, weight, Category. Launcher shim that runs the readmenator CLI from a source checkout.
 
 **Related Classes/Methods**:
 
@@ -87,7 +89,7 @@ readmenator: _diagrams groups 31 files (py) around EdgeKind, __str__, Morphism, 
 
 ### readmenator: _pipeline (4)
 
-readmenator: _pipeline groups 20 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
+readmenator: _pipeline groups 26 files (py) around ForceAtlas2Settings, _initial_positions, forceatlas2_frames, _snapshot_steps, _fa2_numpy. Corpus analytics aggregations for the readmenator knowledge graph.
 
 **Related Classes/Methods**:
 
@@ -100,20 +102,20 @@ readmenator: _pipeline groups 20 files (py) around ForceAtlas2Settings, _initial
 - <a href="../readmenator/_graphlayout.py#L221-L265">readmenator/_graphlayout.py::fit_frames</a>
 - <a href="../readmenator/_graphlayout.py#L266-L280">readmenator/_graphlayout.py::interpolate_frames</a>
 
-### readmenator: _apidocs (5)
+### readmenator: _flowcharts (5)
 
-readmenator: _apidocs groups 14 files (py) around ApiParam, to_dict, ApiEntity, is_documented, to_dict. Deterministic API reference model: extraction, cross-references, coverage.
+readmenator: _flowcharts groups 12 files (py) around FlowNode, FlowEdge, FlowGraph, node, to_dict. Deterministic API reference model: extraction, cross-references, coverage.
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_apidocs.py#L76-L90">readmenator/_apidocs.py::ApiParam</a>
-- <a href="../readmenator/_apidocs.py#L91-L97">readmenator/_apidocs.py::to_dict</a>
-- <a href="../readmenator/_apidocs.py#L98-L155">readmenator/_apidocs.py::ApiEntity</a>
-- <a href="../readmenator/_apidocs.py#L156-L159">readmenator/_apidocs.py::is_documented</a>
-- <a href="../readmenator/_apidocs.py#L160-L179">readmenator/_apidocs.py::to_dict</a>
-- <a href="../readmenator/_apidocs.py#L180-L196">readmenator/_apidocs.py::DocWarning</a>
-- <a href="../readmenator/_apidocs.py#L197-L203">readmenator/_apidocs.py::to_dict</a>
-- <a href="../readmenator/_apidocs.py#L204-L220">readmenator/_apidocs.py::ApiReference</a>
+- <a href="../readmenator/_flowlayout.py#L36-L66">readmenator/_flowlayout.py::FlowNode</a>
+- <a href="../readmenator/_flowlayout.py#L67-L85">readmenator/_flowlayout.py::FlowEdge</a>
+- <a href="../readmenator/_flowlayout.py#L86-L116">readmenator/_flowlayout.py::FlowGraph</a>
+- <a href="../readmenator/_flowlayout.py#L117-L123">readmenator/_flowlayout.py::node</a>
+- <a href="../readmenator/_flowlayout.py#L124-L145">readmenator/_flowlayout.py::to_dict</a>
+- <a href="../readmenator/_flowlayout.py#L146-L179">readmenator/_flowlayout.py::LayoutMetrics</a>
+- <a href="../readmenator/_flowlayout.py#L180-L194">readmenator/_flowlayout.py::_wrap</a>
+- <a href="../readmenator/_flowlayout.py#L195-L209">readmenator/_flowlayout.py::measure</a>
 
 ### readmenator: _agent_injector (6)
 

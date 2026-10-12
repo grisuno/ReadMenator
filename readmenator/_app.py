@@ -21,7 +21,9 @@ from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher
 from readmenator._explorer import build_state
-from readmenator._flowcharts import render_architecture_section, render_flows_section
+from readmenator._flowcharts import build_flow_graphs, render_architecture_section, render_flows_section
+from readmenator._flowlayout import FlowGraph
+from readmenator._flowpage import flow_thumbnail_svg, render_flows_page
 from readmenator._explorer import serve as _serve_explorer
 from readmenator._gh_wiki import WikiPublishResult
 from readmenator._gitmeta import read_git_head
@@ -846,6 +848,9 @@ class readmenatorApplication:
         )
         if boarding is not None:
             cards.append(boarding)
+        flows = self._write_flows_card(dest.parent, nodes, edges, resolved, analysis, layers, content_map)
+        if flows is not None:
+            cards.insert(0, flows)
         return cards
 
     def _write_components_card(
@@ -1019,7 +1024,10 @@ class readmenatorApplication:
         try:
             reference = self._factory.apidocs.build(nodes, edges, resolved_edges, content_map)
             architecture = self._architecture_markdown(nodes, edges, resolved_edges, content_map, analysis, layers)
-            self._factory.apidocs_writer.write(reference, str(root), architecture_markdown=architecture)
+            graphs = self._flow_graphs(nodes, edges, resolved_edges, content_map, analysis, layers)
+            self._factory.apidocs_writer.write(
+                reference, str(root), architecture_markdown=architecture, flow_graphs=graphs,
+            )
         except Exception:
             logger.warning("API reference skipped", exc_info=True)
             return None
@@ -1043,6 +1051,64 @@ class readmenatorApplication:
         if self._config.FLOW_ENABLED:
             lines.extend(render_flows_section(self._config, nodes, edges, resolved_edges, content_map))
         return "\n".join(lines)
+
+    def _flow_graphs(
+        self,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved_edges: Optional[List[Edge]],
+        content_map: Optional[Dict[str, str]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+    ) -> List[FlowGraph]:
+        """Build and lay out the architecture and execution-flow diagrams."""
+        return build_flow_graphs(
+            self._config, nodes, edges, resolved_edges, content_map, analysis,
+            layers if layers is not None else LayerDetector().detect(nodes, edges),
+        )
+
+    def _write_flows_card(
+        self,
+        maps_dir: Path,
+        nodes: List[Node],
+        edges: List[Edge],
+        resolved: Optional[List[Edge]],
+        analysis: Optional[AnalysisResult],
+        layers: Optional[Dict[str, str]],
+        content_map: Optional[Dict[str, str]],
+    ) -> Optional[Dict[str, str]]:
+        """Write FLOWS_OUTPUT beside the gallery and return its featured card.
+
+        Returns:
+            Gallery card, or None when disabled, empty, or the write fails.
+        """
+        if not (self._config.ARCH_DIAGRAM_ENABLED or self._config.FLOW_ENABLED):
+            return None
+        try:
+            graphs = self._flow_graphs(nodes, edges, resolved, content_map, analysis, layers)
+            if not graphs:
+                return None
+            maps_dir.mkdir(parents=True, exist_ok=True)
+            target = maps_dir / self._config.FLOWS_OUTPUT
+            if target.is_symlink():
+                return None
+            target.write_text(render_flows_page(graphs, Path(maps_dir).resolve().parent.name), encoding="utf-8")
+        except Exception:
+            logger.warning("Architecture and flow page skipped", exc_info=True)
+            return None
+        arch = next((g for g in graphs if g.kind == "architecture"), graphs[0])
+        flows = [g for g in graphs if g.kind != "architecture"]
+        logger.info("Architecture and flow diagrams: %s", target)
+        return {
+            "kind": "flows",
+            "title": "Architecture and Execution Flows",
+            "href": self._config.FLOWS_OUTPUT,
+            "description": "Tiered architecture (upward dependencies that break the layering in red) plus, "
+                           "for every entry point, a control-flow chart, the call tree in real call order and "
+                           "the cross-file sequence. Zoomable, every box opens its signature and docs.",
+            "meta": f"{len(arch.nodes)} components | {len(flows)} flow diagrams",
+            "thumb": flow_thumbnail_svg(arch, self._config.FORCEGRAPH_THUMB_WIDTH, self._config.FORCEGRAPH_THUMB_HEIGHT),
+        }
 
     def build_api_reference(self, target_dir: str) -> ApiReference:
         """Scan *target_dir* and build its API reference without writing it.
@@ -1071,7 +1137,27 @@ class readmenatorApplication:
         reference = self._factory.apidocs.build(nodes, edges, resolved, content_map)
         analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
         architecture = self._architecture_markdown(nodes, edges, resolved, content_map, analysis, None)
-        return self._factory.apidocs_writer.write(reference, str(root), architecture_markdown=architecture)
+        graphs = self._flow_graphs(nodes, edges, resolved, content_map, analysis, None)
+        return self._factory.apidocs_writer.write(
+            reference, str(root), architecture_markdown=architecture, flow_graphs=graphs,
+        )
+
+    def export_flows(self, target_dir: str) -> str:
+        """Write the standalone interactive architecture and flow page into the maps directory.
+
+        Args:
+            target_dir: Project root directory.
+
+        Returns:
+            Written file path.
+        """
+        root = Path(target_dir).resolve()
+        nodes, edges, content_map = self._scan_with_content(target_dir)
+        resolved = self._last_resolved_edges
+        analysis = self._factory.analyzer.analyze(nodes, edges, resolved)
+        dest = root / self._config.DIAGRAM_OUTPUT_DIR
+        card = self._write_flows_card(dest, nodes, edges, resolved, analysis, None, content_map)
+        return str(dest / self._config.FLOWS_OUTPUT) if card else ""
 
     def explorer_state(self, target_dir: str):
         """Build explorer state for the local HTTP server.

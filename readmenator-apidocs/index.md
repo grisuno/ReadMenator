@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 92 modules, 1785 documented entities, documentation coverage 81.6% (650/797 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 94 modules, 1867 documented entities, documentation coverage 82.0% (671/818 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
-Navigate: [Architecture and flows](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api.json`](api.json) | [HTML browser](index.html)
+Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api.json`](api.json) | [HTML browser](index.html)
 
-Languages: py (92)
+Languages: py (94)
 
 ## Modules
 
@@ -28,7 +28,7 @@ Languages: py (92)
 | [`readmenator._apidocs`](modules/readmenator._apidocs.py.md) | Deterministic API reference model: extraction, cross-references, coverage. | 5 | 10 | 100.0% |
 | [`readmenator._apidocs_page`](modules/readmenator._apidocs_page.py.md) | Self-contained HTML browser for the deterministic API reference. | 0 | 1 | 100.0% |
 | [`readmenator._apidocs_render`](modules/readmenator._apidocs_render.py.md) | Markdown, JSON, and writer layer for the deterministic API reference. | 3 | 14 | 100.0% |
-| [`readmenator._app`](modules/readmenator._app.py.md) | Application orchestrator: scan, resolve, analyze, and write every output. | 1 | 53 | 49.1% |
+| [`readmenator._app`](modules/readmenator._app.py.md) | Application orchestrator: scan, resolve, analyze, and write every output. | 1 | 54 | 50.0% |
 | [`readmenator._bundlegraph`](modules/readmenator._bundlegraph.py.md) | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | 1 | 6 | 100.0% |
 | [`readmenator._bundlegraph_page`](modules/readmenator._bundlegraph_page.py.md) | HTML page template for the edge bundle explorer. | 0 | 0 | 100.0% |
 | [`readmenator._cache`](modules/readmenator._cache.py.md) | File-content hash cache for incremental scanning and analysis caching. | 1 | 12 | 50.0% |
@@ -48,7 +48,9 @@ Languages: py (92)
 | [`readmenator._explain`](modules/readmenator._explain.py.md) | Score explanation and path decomposition for the ranking system. | 0 | 2 | 100.0% |
 | [`readmenator._explorer`](modules/readmenator._explorer.py.md) | Stdlib explorer HTTP server for the readmenator knowledge graph. | 1 | 7 | 100.0% |
 | [`readmenator._exporter`](modules/readmenator._exporter.py.md) | Multi-format exporter for the readmenator knowledge graph. | 1 | 8 | 100.0% |
-| [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | Architecture and execution-flow Mermaid diagrams from static structure. | 5 | 18 | 100.0% |
+| [`readmenator._flowcharts`](modules/readmenator._flowcharts.py.md) | Architecture and execution-flow Mermaid diagrams from static structure. | 5 | 24 | 100.0% |
+| [`readmenator._flowlayout`](modules/readmenator._flowlayout.py.md) | Flow graph model and deterministic layered layout (Sugiyama style). | 4 | 5 | 100.0% |
+| [`readmenator._flowpage`](modules/readmenator._flowpage.py.md) | Interactive SVG viewer for laid-out architecture and execution-flow diagrams. | 0 | 3 | 100.0% |
 | [`readmenator._forcegraph`](modules/readmenator._forcegraph.py.md) | Force-graph explorer for the readmenator knowledge graph. | 1 | 15 | 100.0% |
 | [`readmenator._forcegraph_page`](modules/readmenator._forcegraph_page.py.md) | HTML page template for the force-graph explorer. | 0 | 0 | 100.0% |
 | [`readmenator._gh_wiki`](modules/readmenator._gh_wiki.py.md) | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | 2 | 7 | 100.0% |

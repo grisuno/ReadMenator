@@ -73,6 +73,8 @@ readmenator/
   _apidocs_render.py  - API reference Markdown (index, modules, hierarchy, genindex, coverage), api.json, writer, linker
   _apidocs_page.py    - Self-contained offline HTML API browser (search, tree, hierarchy, coverage, architecture page)
   _flowcharts.py      - Tiered architecture (Tarjan SCC, Eades-Lin-Smyth FAS, transitive reduction) + execution flows (entry points, call tree, control flow, sequence)
+  _flowlayout.py      - FlowGraph model + deterministic layered layout (ranks, barycenter ordering, row wrapping, curve routing, lanes)
+  _flowpage.py        - Offline interactive SVG viewer for flow graphs (flows.html, API Flows tab, gallery thumbnail)
   _pytypes.py         - Deterministic Python receiver typing (constructors, annotations, self attributes) for precise call graphs
   _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
   _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
@@ -199,6 +201,9 @@ tests/
 - Symbol index receiver window (SYMINDEX_RECEIVER_WINDOW: bounded look-behind for attribute-call receivers, keeps minified lines linear)
 - Bundle ordering (BUNDLEGRAPH_ORDER_OPTIMIZE, BUNDLEGRAPH_ORDER_SWEEPS, BUNDLEGRAPH_ORDER_PASSES, BUNDLEGRAPH_SPHERE_REFINE_SWEEPS)
 - Explorer seeded layout (FORCEGRAPH_SEED_LAYOUT, FORCEGRAPH_SEED_ITERATIONS, FORCEGRAPH_SEED_GRAVITY, FORCEGRAPH_SEED_MAX_NODES, FORCEGRAPH_SEED_VELOCITY_DECAY)
+- Flow layout settings (FLOW_NODE_MAX_CHARS, FLOW_NODE_MAX_LINES, FLOW_MAX_PER_ROW, ARCH_DIAGRAM_MAX_PER_ROW, ARCH_DIAGRAM_PANEL_FILES, FLOWS_OUTPUT)
+- Legacy Mermaid shape (MERMAID_GRID_COLUMNS, MERMAID_MAX_EXTERNALS, MERMAID_DIRECTION, UML_CLASSES_PER_DIAGRAM)
+- Video flow acts (VIDEO_TIERS_S, VIDEO_FLOW_S, VIDEO_FLOW_VIEW_WIDTH)
 - Video transitions (VIDEO_TRANSITION_S crossfade, VIDEO_TRANSITION_GLITCH, VIDEO_MOTION_BLUR_SAMPLES, VIDEO_MOTION_BLUR_SHUTTER, VIDEO_MOTION_BLUR_ACTS)
 
 ### Models Contract
@@ -288,7 +293,7 @@ tests/
 - Architecture Violations section (layer rule violations)
 - Suggested Linting Rules section (auto-generated Semgrep rules)
 - Security Audit section (findings by severity, no emojis)
-- Mermaid graph in fenced code block with community subgraphs
+- Mermaid graph in fenced code block with community subgraphs (graph LR, grid-wrapped communities, capped externals)
 - Code Property Graph (CPG) block in JSON-LD format
 - Architecture Reference grouped by language
 - Each file lists its symbols by kind with correct pluralization
@@ -661,6 +666,14 @@ tests/
 - Mermaid outputs: call tree (flowchart LR, numbered call order, Owner.method labels), Python control flow (decisions, loops with back edges, try/except, with, match, return/raise ends, collapsed straight-line runs, if/elif dispatch on one subject compacted into one switch node), cross-file sequenceDiagram; labels escaped with Mermaid entity codes
 - KNOWLEDGE_BASE.md gains Architecture Overview and Execution Flows (TOC entries only when present); run() and update() pass content_map; architecture.md in the API reference uses the same renderers
 
+### Flow Layout and Viewer Contract
+- FlowGraph/FlowNode/FlowEdge (readmenator/_flowlayout.py); layout_flow(graph, metrics, TB|LR): node sizes from monospace metrics with wrapped detail lines (FLOW_NODE_MAX_CHARS, FLOW_NODE_MAX_LINES); explicit ranks (architecture tiers) or longest-path ranks without DFS back edges; barycentric sweeps; ranks wider than FLOW_MAX_PER_ROW / ARCH_DIAGRAM_MAX_PER_ROW wrap into extra rows (never a strip); trunk edges (no, done, otherwise) stay under their parent, branch edges (yes, each, except) go right; nodes never overlap; forward edges are vertical cubics, back/upward edges bend around the right side; architecture lanes carry tier titles; layout_sequence places participants and messages
+- ArchitectureDiagramBuilder.model and ExecutionFlowBuilder.call_tree_model / control_flow_model / sequence_model build FlowGraphs with viewer payloads (component files with purpose and importers; definitions with kind, file, line, signature, doc, qual; CFG steps with the docs of the functions they call, resolved through the typed call graph); if/elif chains become a ladder; to_mermaid converts any FlowGraph for Markdown
+- build_flow_graphs(config, nodes, edges, resolved, content_map, analysis, layers) returns laid-out graphs: architecture first, then per entry point control flow (when it has more than 3 nodes), call tree, sequence
+- render_flows_page (readmenator/_flowpage.py): self-contained page (payload with < > & escaped, single-pass placeholders, zero requests) with per-diagram cards, toolbar (fit width, 100%, zoom, fullscreen, SVG download), drag pan, Ctrl+wheel zoom, hover highlighting, click detail panel with API reference links; theme from shared CSS variables and the readmenator-theme key
+- Written as readmenator-maps/flows.html (featured gallery card with flow_thumbnail_svg, also in the docs site), readmenator-apidocs/flows.html, and the API browser Flows tab (#/flows); CLI `flows`
+- Video acts X The Tiers and XI Execution (VIDEO_TIERS_S, VIDEO_FLOW_S, VIDEO_FLOW_VIEW_WIDTH) draw the same laid-out graphs with PIL
+
 ### Python Receiver Typing Contract
 - PythonReceiverTypes(contents, language) (readmenator/_pytypes.py) indexes scopes, method owners, class bases, locals typed by constructor calls / annotations / annotated parameters, self attributes assigned or annotated, class-level annotated fields
 - receiver_class, resolve_method (lineage in base order), accepts (True/False for Python callers, None otherwise); unknown stays unknown
@@ -776,7 +789,7 @@ tests/
 ### Cinematic Video Contract
 - CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
-- Nine acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
+- Eleven acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, X The Tiers (tier-by-tier architecture assembly, upward imports flashing red with a fix-first list), XI Execution (camera follows the entry call tree in call order with a travelling packet and a callee doc panel), invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
 - An act with duration <= 0 is skipped together with its card; VIDEO_INVITE_S <= 0 drops the invite
 - Motion: ease() is quintic smootherstep (C2); scenes crossfade from the previous scene's last frame over VIDEO_TRANSITION_S (glitch scaled by VIDEO_TRANSITION_GLITCH); VIDEO_MOTION_BLUR_ACTS average VIDEO_MOTION_BLUR_SAMPLES shutter sub-frames
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing

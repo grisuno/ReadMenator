@@ -24,13 +24,14 @@ Two deterministic, zero-token generators:
 ## Contents
 
 - **Classes:** [`Component`](#component), [`ArchitectureDiagramBuilder`](#architecturediagrambuilder), [`EntryPoint`](#entrypoint), [`FlowStep`](#flowstep), [`ExecutionFlowBuilder`](#executionflowbuilder)
-- **Functions:** [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text), [`tarjan_scc`](#tarjan_scc), [`transitive_reduction`](#transitive_reduction), [`eades_lin_smyth`](#eades_lin_smyth), [`render_architecture_section`](#render_architecture_section), [`render_flows_section`](#render_flows_section)
+- **Functions:** [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text), [`tarjan_scc`](#tarjan_scc), [`transitive_reduction`](#transitive_reduction), [`eades_lin_smyth`](#eades_lin_smyth), [`to_mermaid`](#to_mermaid), [`build_flow_graphs`](#build_flow_graphs), [`render_architecture_section`](#render_architecture_section), [`render_flows_section`](#render_flows_section)
 - **Constants:** [`LAYER_ORDER`](#layer_order), [`LAYER_TITLES`](#layer_titles)
 
 ## Type Diagram
 
 ```mermaid
 classDiagram
+    direction LR
     class Component
     Component : str key
     Component : str label
@@ -42,6 +43,7 @@ classDiagram
     class ArchitectureDiagramBuilder
     ArchitectureDiagramBuilder : __init__()
     ArchitectureDiagramBuilder : components()
+    ArchitectureDiagramBuilder : model()
     ArchitectureDiagramBuilder : render()
     class EntryPoint
     EntryPoint : str file
@@ -62,8 +64,11 @@ classDiagram
     ExecutionFlowBuilder : call_graph()
     ExecutionFlowBuilder : entry_points()
     ExecutionFlowBuilder : walk()
+    ExecutionFlowBuilder : call_tree_model()
     ExecutionFlowBuilder : call_tree_mermaid()
+    ExecutionFlowBuilder : sequence_model()
     ExecutionFlowBuilder : sequence_mermaid()
+    ExecutionFlowBuilder : control_flow_model()
     ExecutionFlowBuilder : control_flow_mermaid()
 ```
 
@@ -75,49 +80,52 @@ Solid arrows stay in this module, dashed arrows leave it.
 flowchart LR
     n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_components(["ArchitectureDiagramBuilder.components"])
     n_readmenator__flowcharts_py__Component(["Component"])
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render(["ArchitectureDiagramBuilder.render"])
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model(["ArchitectureDiagramBuilder.model"])
     n_readmenator__flowcharts_py__eades_lin_smyth(["eades_lin_smyth"])
-    n_readmenator__flowcharts_py__mermaid_id(["mermaid_id"])
-    n_readmenator__flowcharts_py__mermaid_text(["mermaid_text"])
     n_readmenator__flowcharts_py__tarjan_scc(["tarjan_scc"])
     n_readmenator__flowcharts_py__transitive_reduction(["transitive_reduction"])
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render(["ArchitectureDiagramBuilder.render"])
+    n_readmenator__flowcharts_py__to_mermaid(["to_mermaid"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_entry_points(["ExecutionFlowBuilder.entry_points"])
     n_readmenator__flowcharts_py__EntryPoint(["EntryPoint"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_walk(["ExecutionFlowBuilder.walk"])
     n_readmenator__flowcharts_py__FlowStep(["FlowStep"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid(["ExecutionFlowBuilder.call_tree_mermaid"])
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_model(["ExecutionFlowBuilder.call_tree_model"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_mermaid(["ExecutionFlowBuilder.sequence_mermaid"])
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_model(["ExecutionFlowBuilder.sequence_model"])
+    n_readmenator__flowcharts_py__mermaid_id(["mermaid_id"])
+    n_readmenator__flowcharts_py__mermaid_text(["mermaid_text"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_mermaid(["ExecutionFlowBuilder.control_flow_mermaid"])
-    n_readmenator__flowcharts_py__render_architecture_section(["render_architecture_section"])
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_model(["ExecutionFlowBuilder.control_flow_model"])
+    n_readmenator__flowcharts_py__build_flow_graphs(["build_flow_graphs"])
     n_readmenator__flowcharts_py__ArchitectureDiagramBuilder___init__(["ArchitectureDiagramBuilder.__init__"])
-    n_readmenator__flowcharts_py__render_flows_section(["render_flows_section"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder___init__(["ExecutionFlowBuilder.__init__"])
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_graph(["ExecutionFlowBuilder.call_graph"])
-    n_readmenator__apidocs_py__is_vendored_path["_apidocs.is_vendored_path"]
     n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_components --> n_readmenator__flowcharts_py__Component
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_components
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__eades_lin_smyth
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__mermaid_id
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__mermaid_text
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__tarjan_scc
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__transitive_reduction
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_components
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model --> n_readmenator__flowcharts_py__eades_lin_smyth
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model --> n_readmenator__flowcharts_py__tarjan_scc
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model --> n_readmenator__flowcharts_py__transitive_reduction
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model
+    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render --> n_readmenator__flowcharts_py__to_mermaid
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_entry_points --> n_readmenator__flowcharts_py__EntryPoint
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_walk --> n_readmenator__flowcharts_py__FlowStep
-    n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid --> n_readmenator__flowcharts_py__mermaid_id
-    n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid --> n_readmenator__flowcharts_py__mermaid_text
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_model
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid --> n_readmenator__flowcharts_py__to_mermaid
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_mermaid --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_model
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_mermaid --> n_readmenator__flowcharts_py__mermaid_id
     n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_mermaid --> n_readmenator__flowcharts_py__mermaid_text
-    n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_mermaid --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render
-    n_readmenator__flowcharts_py__render_architecture_section --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder___init__
-    n_readmenator__flowcharts_py__render_architecture_section --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_render
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder___init__
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_graph
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_mermaid
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_mermaid
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_entry_points
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_sequence_mermaid
-    n_readmenator__flowcharts_py__render_flows_section --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_walk
-    n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_components -.-> n_readmenator__apidocs_py__is_vendored_path
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_mermaid --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_model
+    n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_mermaid --> n_readmenator__flowcharts_py__to_mermaid
+    n_readmenator__flowcharts_py__to_mermaid --> n_readmenator__flowcharts_py__mermaid_id
+    n_readmenator__flowcharts_py__to_mermaid --> n_readmenator__flowcharts_py__mermaid_text
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder___init__
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ArchitectureDiagramBuilder_model
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ExecutionFlowBuilder___init__
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_graph
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_call_tree_model
+    n_readmenator__flowcharts_py__build_flow_graphs --> n_readmenator__flowcharts_py__ExecutionFlowBuilder_control_flow_model
 ```
 
 ## Classes
@@ -126,7 +134,7 @@ flowchart LR
 
 ### `Component`
 
-`class` `dataclass` | [readmenator/_flowcharts.py:236](../../readmenator/_flowcharts.py#L236)
+`class` `dataclass` | [readmenator/_flowcharts.py:237](../../readmenator/_flowcharts.py#L237)
 
 Decorators: `@dataclass`
 
@@ -154,7 +162,7 @@ One architectural component (a group of files).
 
 ### `ArchitectureDiagramBuilder`
 
-`class` | [readmenator/_flowcharts.py:258](../../readmenator/_flowcharts.py#L258)
+`class` | [readmenator/_flowcharts.py:259](../../readmenator/_flowcharts.py#L259)
 
 ```python
 class ArchitectureDiagramBuilder
@@ -168,13 +176,14 @@ Builds a layered, cycle-aware, transitively reduced component diagram.
 |---|---|---|
 | [`__init__`](#architecturediagrambuilder-__init__) | constructor | Initialise with application configuration. |
 | [`components`](#architecturediagrambuilder-components) | method | Group files into components with dominant layers. |
-| [`render`](#architecturediagrambuilder-render) | method | Render the tiered architecture overview. |
+| [`model`](#architecturediagrambuilder-model) | method | Build the tiered architecture diagram as a FlowGraph. |
+| [`render`](#architecturediagrambuilder-render) | method | Render the tiered architecture as Mermaid (see model()). |
 
 <a id="architecturediagrambuilder-__init__"></a>
 
 #### `ArchitectureDiagramBuilder.__init__`
 
-`constructor` | [readmenator/_flowcharts.py:261](../../readmenator/_flowcharts.py#L261)
+`constructor` | [readmenator/_flowcharts.py:262](../../readmenator/_flowcharts.py#L262)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -188,13 +197,13 @@ Initialise with application configuration.
 |---|---|---|---|
 | `config` | `Config` |  | Settings for component budgets and test exclusion. |
 
-*Called by:* [`render_architecture_section`](#render_architecture_section)
+*Called by:* [`build_flow_graphs`](#build_flow_graphs), [`render_architecture_section`](#render_architecture_section)
 
 <a id="architecturediagrambuilder-components"></a>
 
 #### `ArchitectureDiagramBuilder.components`
 
-`method` | [readmenator/_flowcharts.py:269](../../readmenator/_flowcharts.py#L269)
+`method` | [readmenator/_flowcharts.py:270](../../readmenator/_flowcharts.py#L270)
 
 ```python
 def components(self, nodes: List[Node], analysis: Optional[AnalysisResult], layers: Optional[Dict[str, str]]) -> List[Component]
@@ -214,27 +223,29 @@ Group files into components with dominant layers.
 
 *Calls:* [`is_vendored_path`](readmenator._apidocs.py.md#is_vendored_path), [`Component`](#component)
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render)
+*Called by:* [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model)
 
-<a id="architecturediagrambuilder-render"></a>
+<a id="architecturediagrambuilder-model"></a>
 
-#### `ArchitectureDiagramBuilder.render`
+#### `ArchitectureDiagramBuilder.model`
 
-`method` | [readmenator/_flowcharts.py:334](../../readmenator/_flowcharts.py#L334)
+`method` | [readmenator/_flowcharts.py:335](../../readmenator/_flowcharts.py#L335)
 
 ```python
-def render(self, nodes: List[Node], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None) -> Tuple[str, Dict[str, object]]
+def model(self, nodes: List[Node], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None) -> Tuple[Optional[FlowGraph], Dict[str, object]]
 ```
 
-Render the tiered architecture overview.
+Build the tiered architecture diagram as a FlowGraph.
 
 Components are ordered with the weighted Eades-Lin-Smyth
-feedback-arc-set heuristic, so the dependency direction that
-most imports agree on points downwards. Edges against that
-order are the minimal set that creates cycles ("upward"
-dependencies, drawn dashed red). Tiers are longest-path levels
-over the remaining acyclic edges, and implied forward edges are
-removed by transitive reduction.
+feedback-arc-set heuristic, so the dependency direction most
+imports agree on points downwards. Edges against that order are
+the minimal set that creates cycles ("upward" dependencies).
+Tiers are longest-path levels over the remaining acyclic edges,
+and implied forward edges are removed by transitive reduction.
+Each component node lists its size, dominant layer, key files
+(most imported first) and carries every member file with its
+purpose for the viewer panel.
 
 **Parameters**
 
@@ -245,12 +256,39 @@ removed by transitive reduction.
 | `analysis` | `Optional[AnalysisResult]` | `None` | Optional analyzer communities. |
 | `layers` | `Optional[Dict[str, str]]` | `None` | Optional file-to-layer mapping. |
 
-**Returns:** `Tuple[str, Dict[str, object]]` - Tuple of (Mermaid source, stats with components, edges,
-reduced edge count, upward edges, cycles, tiers).
+**Returns:** `Tuple[Optional[FlowGraph], Dict[str, object]]` - Tuple of (graph or None when empty, stats with components,
+edges, reduced edge count, upward edges, cycles, tiers).
 
-*Calls:* [`ArchitectureDiagramBuilder.components`](#architecturediagrambuilder-components), [`eades_lin_smyth`](#eades_lin_smyth), [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text), [`tarjan_scc`](#tarjan_scc), [`transitive_reduction`](#transitive_reduction)
+*Calls:* [`ArchitectureDiagramBuilder.components`](#architecturediagrambuilder-components), [`eades_lin_smyth`](#eades_lin_smyth), [`tarjan_scc`](#tarjan_scc), [`transitive_reduction`](#transitive_reduction), [`FlowEdge`](readmenator._flowlayout.py.md#flowedge), [`FlowGraph`](readmenator._flowlayout.py.md#flowgraph), [`FlowNode`](readmenator._flowlayout.py.md#flownode)
 
-*Called by:* [`ExecutionFlowBuilder.control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid), [`render_architecture_section`](#render_architecture_section)
+*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render), [`build_flow_graphs`](#build_flow_graphs)
+
+<a id="architecturediagrambuilder-render"></a>
+
+#### `ArchitectureDiagramBuilder.render`
+
+`method` | [readmenator/_flowcharts.py:476](../../readmenator/_flowcharts.py#L476)
+
+```python
+def render(self, nodes: List[Node], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None) -> Tuple[str, Dict[str, object]]
+```
+
+Render the tiered architecture as Mermaid (see model()).
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `nodes` | `List[Node]` |  |  |
+| `resolved_edges` | `Optional[List[Edge]]` |  |  |
+| `analysis` | `Optional[AnalysisResult]` | `None` |  |
+| `layers` | `Optional[Dict[str, str]]` | `None` |  |
+
+**Returns:** `Tuple[str, Dict[str, object]]`
+
+*Calls:* [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model), [`to_mermaid`](#to_mermaid)
+
+*Called by:* [`render_architecture_section`](#render_architecture_section)
 
 ---
 
@@ -258,7 +296,7 @@ reduced edge count, upward edges, cycles, tiers).
 
 ### `EntryPoint`
 
-`class` `dataclass` | [readmenator/_flowcharts.py:468](../../readmenator/_flowcharts.py#L468)
+`class` `dataclass` | [readmenator/_flowcharts.py:499](../../readmenator/_flowcharts.py#L499)
 
 Decorators: `@dataclass`
 
@@ -288,7 +326,7 @@ A scored execution entry point.
 
 #### `EntryPoint.key`
 
-`property` | [readmenator/_flowcharts.py:486](../../readmenator/_flowcharts.py#L486)
+`property` | [readmenator/_flowcharts.py:517](../../readmenator/_flowcharts.py#L517)
 
 Decorators: `@property`
 
@@ -306,7 +344,7 @@ Return the call-graph key of this entry point.
 
 ### `FlowStep`
 
-`class` `dataclass` | [readmenator/_flowcharts.py:492](../../readmenator/_flowcharts.py#L492)
+`class` `dataclass` | [readmenator/_flowcharts.py:523](../../readmenator/_flowcharts.py#L523)
 
 Decorators: `@dataclass`
 
@@ -333,7 +371,7 @@ One step of an execution walk.
 
 ### `ExecutionFlowBuilder`
 
-`class` | [readmenator/_flowcharts.py:512](../../readmenator/_flowcharts.py#L512)
+`class` | [readmenator/_flowcharts.py:543](../../readmenator/_flowcharts.py#L543)
 
 ```python
 class ExecutionFlowBuilder
@@ -349,15 +387,18 @@ Detects entry points and renders their execution flows as Mermaid.
 | [`call_graph`](#executionflowbuilder-call_graph) | method | Build the ordered call graph keyed by ``file::name``. |
 | [`entry_points`](#executionflowbuilder-entry_points) | method | Score candidate entry points and return the strongest ones. |
 | [`walk`](#executionflowbuilder-walk) | method | Depth-first walk in call-site order, bounded by depth and steps. |
+| [`call_tree_model`](#executionflowbuilder-call_tree_model) | method | Build the execution call tree of one entry point. |
 | [`call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid) | method | Render an execution call tree as ``flowchart LR``. |
+| [`sequence_model`](#executionflowbuilder-sequence_model) | method | Build the cross-file sequence of one walk (None when it never leaves the entry file). |
 | [`sequence_mermaid`](#executionflowbuilder-sequence_mermaid) | method | Render the cross-file part of a walk as ``sequenceDiagram``. |
-| [`control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid) | method | Render a Python entry function (or ``__main__`` block) as a flowchart. |
+| [`control_flow_model`](#executionflowbuilder-control_flow_model) | method | Build the control-flow flowchart of a Python entry function (or ``__main__`` block). |
+| [`control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid) | method | Render a Python entry function (or ``__main__`` block) as a Mermaid flowchart. |
 
 <a id="executionflowbuilder-__init__"></a>
 
 #### `ExecutionFlowBuilder.__init__`
 
-`constructor` | [readmenator/_flowcharts.py:515](../../readmenator/_flowcharts.py#L515)
+`constructor` | [readmenator/_flowcharts.py:546](../../readmenator/_flowcharts.py#L546)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -371,13 +412,13 @@ Initialise with application configuration.
 |---|---|---|---|
 | `config` | `Config` |  | Settings for entry-point, depth, and step budgets. |
 
-*Called by:* [`render_flows_section`](#render_flows_section)
+*Called by:* [`build_flow_graphs`](#build_flow_graphs), [`render_flows_section`](#render_flows_section)
 
 <a id="executionflowbuilder-call_graph"></a>
 
 #### `ExecutionFlowBuilder.call_graph`
 
-`method` | [readmenator/_flowcharts.py:533](../../readmenator/_flowcharts.py#L533)
+`method` | [readmenator/_flowcharts.py:564](../../readmenator/_flowcharts.py#L564)
 
 ```python
 def call_graph(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]], content_map: Optional[Dict[str, str]]) -> Tuple[Dict[str, List[Tuple[int, str]]], Dict[str, SymbolDef], List[ResolvedCall]]
@@ -399,13 +440,13 @@ key, all resolved calls).
 
 *Calls:* [`PythonReceiverTypes.__init__`](readmenator._pytypes.py.md#pythonreceivertypes-__init__), [`PythonReceiverTypes.accepts`](readmenator._pytypes.py.md#pythonreceivertypes-accepts), [`PythonReceiverTypes.owner_of`](readmenator._pytypes.py.md#pythonreceivertypes-owner_of), [`PythonReceiverTypes.resolve_method`](readmenator._pytypes.py.md#pythonreceivertypes-resolve_method), [`SymbolIndex.__init__`](readmenator._symindex.py.md#symbolindex-__init__), [`SymbolIndex.build`](readmenator._symindex.py.md#symbolindex-build), [`SymbolIndex.resolve`](readmenator._symindex.py.md#symbolindex-resolve)
 
-*Called by:* [`render_flows_section`](#render_flows_section)
+*Called by:* [`build_flow_graphs`](#build_flow_graphs), [`render_flows_section`](#render_flows_section)
 
 <a id="executionflowbuilder-entry_points"></a>
 
 #### `ExecutionFlowBuilder.entry_points`
 
-`method` | [readmenator/_flowcharts.py:614](../../readmenator/_flowcharts.py#L614)
+`method` | [readmenator/_flowcharts.py:645](../../readmenator/_flowcharts.py#L645)
 
 ```python
 def entry_points(self, nodes: List[Node], graph: Dict[str, List[Tuple[int, str]]], defs: Dict[str, SymbolDef], content_map: Optional[Dict[str, str]]) -> List[EntryPoint]
@@ -426,13 +467,13 @@ Score candidate entry points and return the strongest ones.
 
 *Calls:* [`EntryPoint`](#entrypoint)
 
-*Called by:* [`render_flows_section`](#render_flows_section)
+*Called by:* [`build_flow_graphs`](#build_flow_graphs), [`render_flows_section`](#render_flows_section)
 
 <a id="executionflowbuilder-walk"></a>
 
 #### `ExecutionFlowBuilder.walk`
 
-`method` | [readmenator/_flowcharts.py:692](../../readmenator/_flowcharts.py#L692)
+`method` | [readmenator/_flowcharts.py:723](../../readmenator/_flowcharts.py#L723)
 
 ```python
 def walk(self, graph: Dict[str, List[Tuple[int, str]]], start: str) -> List[FlowStep]
@@ -451,16 +492,46 @@ Depth-first walk in call-site order, bounded by depth and steps.
 
 *Calls:* [`FlowStep`](#flowstep)
 
-*Called by:* [`render_flows_section`](#render_flows_section)
+*Called by:* [`build_flow_graphs`](#build_flow_graphs), [`render_flows_section`](#render_flows_section)
+
+<a id="executionflowbuilder-call_tree_model"></a>
+
+#### `ExecutionFlowBuilder.call_tree_model`
+
+`method` | [readmenator/_flowcharts.py:779](../../readmenator/_flowcharts.py#L779)
+
+```python
+def call_tree_model(self, entry: EntryPoint, steps: List[FlowStep], defs: Optional[Dict[str, SymbolDef]] = None) -> FlowGraph
+```
+
+Build the execution call tree of one entry point.
+
+Nodes carry ``Owner.method``, the defining file and line, and the
+first sentence of the docstring; edges are numbered in call order,
+dashed when the callee was already expanded, red for recursion.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `entry` | `EntryPoint` |  |  |
+| `steps` | `List[FlowStep]` |  |  |
+| `defs` | `Optional[Dict[str, SymbolDef]]` | `None` |  |
+
+**Returns:** `FlowGraph`
+
+*Calls:* [`FlowEdge`](readmenator._flowlayout.py.md#flowedge), [`FlowGraph`](readmenator._flowlayout.py.md#flowgraph), [`FlowNode`](readmenator._flowlayout.py.md#flownode)
+
+*Called by:* [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`build_flow_graphs`](#build_flow_graphs)
 
 <a id="executionflowbuilder-call_tree_mermaid"></a>
 
 #### `ExecutionFlowBuilder.call_tree_mermaid`
 
-`method` | [readmenator/_flowcharts.py:733](../../readmenator/_flowcharts.py#L733)
+`method` | [readmenator/_flowcharts.py:827](../../readmenator/_flowcharts.py#L827)
 
 ```python
-def call_tree_mermaid(self, entry: EntryPoint, steps: List[FlowStep]) -> str
+def call_tree_mermaid(self, entry: EntryPoint, steps: List[FlowStep], defs: Optional[Dict[str, SymbolDef]] = None) -> str
 ```
 
 Render an execution call tree as ``flowchart LR``.
@@ -471,21 +542,48 @@ Render an execution call tree as ``flowchart LR``.
 |---|---|---|---|
 | `entry` | `EntryPoint` |  |  |
 | `steps` | `List[FlowStep]` |  |  |
+| `defs` | `Optional[Dict[str, SymbolDef]]` | `None` |  |
 
 **Returns:** `str`
 
-*Calls:* [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text)
+*Calls:* [`ExecutionFlowBuilder.call_tree_model`](#executionflowbuilder-call_tree_model), [`to_mermaid`](#to_mermaid)
 
 *Called by:* [`render_flows_section`](#render_flows_section)
+
+<a id="executionflowbuilder-sequence_model"></a>
+
+#### `ExecutionFlowBuilder.sequence_model`
+
+`method` | [readmenator/_flowcharts.py:831](../../readmenator/_flowcharts.py#L831)
+
+```python
+def sequence_model(self, entry: EntryPoint, steps: List[FlowStep], defs: Optional[Dict[str, SymbolDef]] = None) -> Optional[FlowGraph]
+```
+
+Build the cross-file sequence of one walk (None when it never leaves the entry file).
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `entry` | `EntryPoint` |  |  |
+| `steps` | `List[FlowStep]` |  |  |
+| `defs` | `Optional[Dict[str, SymbolDef]]` | `None` |  |
+
+**Returns:** `Optional[FlowGraph]`
+
+*Calls:* [`FlowGraph`](readmenator._flowlayout.py.md#flowgraph)
+
+*Called by:* [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid), [`build_flow_graphs`](#build_flow_graphs)
 
 <a id="executionflowbuilder-sequence_mermaid"></a>
 
 #### `ExecutionFlowBuilder.sequence_mermaid`
 
-`method` | [readmenator/_flowcharts.py:773](../../readmenator/_flowcharts.py#L773)
+`method` | [readmenator/_flowcharts.py:862](../../readmenator/_flowcharts.py#L862)
 
 ```python
-def sequence_mermaid(self, entry: EntryPoint, steps: List[FlowStep]) -> str
+def sequence_mermaid(self, entry: EntryPoint, steps: List[FlowStep], defs: Optional[Dict[str, SymbolDef]] = None) -> str
 ```
 
 Render the cross-file part of a walk as ``sequenceDiagram``.
@@ -496,43 +594,63 @@ Render the cross-file part of a walk as ``sequenceDiagram``.
 |---|---|---|---|
 | `entry` | `EntryPoint` |  |  |
 | `steps` | `List[FlowStep]` |  |  |
+| `defs` | `Optional[Dict[str, SymbolDef]]` | `None` |  |
 
 **Returns:** `str`
 
-*Calls:* [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text)
+*Calls:* [`ExecutionFlowBuilder.sequence_model`](#executionflowbuilder-sequence_model), [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text)
 
 *Called by:* [`render_flows_section`](#render_flows_section)
 
-<a id="executionflowbuilder-control_flow_mermaid"></a>
+<a id="executionflowbuilder-control_flow_model"></a>
 
-#### `ExecutionFlowBuilder.control_flow_mermaid`
+#### `ExecutionFlowBuilder.control_flow_model`
 
-`method` | [readmenator/_flowcharts.py:805](../../readmenator/_flowcharts.py#L805)
+`method` | [readmenator/_flowcharts.py:877](../../readmenator/_flowcharts.py#L877)
 
 ```python
-def control_flow_mermaid(self, content: str, entry: EntryPoint, project_names: Set[str]) -> str
+def control_flow_model(self, content: str, entry: EntryPoint, project_names: Set[str], defs: Optional[Dict[str, SymbolDef]] = None, call_graph: Optional[Dict[str, List[Tuple[int, str]]]] = None) -> Optional[FlowGraph]
 ```
 
-Render a Python entry function (or ``__main__`` block) as a flowchart.
-
-Decisions become diamonds with Yes/No branches, loops become
-hexagons with a back edge, ``try`` blocks expose their handlers,
-and ``return`` / ``raise`` end their branch. Straight-line runs
-collapse into one step naming the project calls they make.
+Build the control-flow flowchart of a Python entry function (or ``__main__`` block).
 
 **Parameters**
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `content` | `str` |  | Python source of the entry file. |
-| `entry` | `EntryPoint` |  | The entry point. |
-| `project_names` | `Set[str]` |  | Callable names defined in the project. |
+| `content` | `str` |  |  |
+| `entry` | `EntryPoint` |  |  |
+| `project_names` | `Set[str]` |  |  |
+| `defs` | `Optional[Dict[str, SymbolDef]]` | `None` |  |
+| `call_graph` | `Optional[Dict[str, List[Tuple[int, str]]]]` | `None` |  |
 
-**Returns:** `str` - Mermaid ``flowchart TD`` source, or "" when not applicable.
+**Returns:** `Optional[FlowGraph]`
 
-*Calls:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render)
+*Called by:* [`ExecutionFlowBuilder.control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid), [`build_flow_graphs`](#build_flow_graphs), [`render_flows_section`](#render_flows_section)
 
-*Called by:* [`render_flows_section`](#render_flows_section)
+<a id="executionflowbuilder-control_flow_mermaid"></a>
+
+#### `ExecutionFlowBuilder.control_flow_mermaid`
+
+`method` | [readmenator/_flowcharts.py:921](../../readmenator/_flowcharts.py#L921)
+
+```python
+def control_flow_mermaid(self, content: str, entry: EntryPoint, project_names: Set[str]) -> str
+```
+
+Render a Python entry function (or ``__main__`` block) as a Mermaid flowchart.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `content` | `str` |  |  |
+| `entry` | `EntryPoint` |  |  |
+| `project_names` | `Set[str]` |  |  |
+
+**Returns:** `str`
+
+*Calls:* [`ExecutionFlowBuilder.control_flow_model`](#executionflowbuilder-control_flow_model), [`to_mermaid`](#to_mermaid)
 
 ---
 
@@ -542,7 +660,7 @@ collapse into one step naming the project calls they make.
 
 ### `mermaid_id`
 
-`function` | [readmenator/_flowcharts.py:66](../../readmenator/_flowcharts.py#L66)
+`function` | [readmenator/_flowcharts.py:67](../../readmenator/_flowcharts.py#L67)
 
 ```python
 def mermaid_id(text: str, prefix: str = 'n') -> str
@@ -559,7 +677,7 @@ Return a Mermaid-safe identifier for *text*.
 
 **Returns:** `str`
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render), [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid)
+*Called by:* [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid), [`to_mermaid`](#to_mermaid)
 
 ---
 
@@ -567,7 +685,7 @@ Return a Mermaid-safe identifier for *text*.
 
 ### `mermaid_text`
 
-`function` | [readmenator/_flowcharts.py:71](../../readmenator/_flowcharts.py#L71)
+`function` | [readmenator/_flowcharts.py:72](../../readmenator/_flowcharts.py#L72)
 
 ```python
 def mermaid_text(text: str, limit: int = 0) -> str
@@ -584,7 +702,7 @@ Escape *text* for a quoted Mermaid label, optionally truncating it.
 
 **Returns:** `str`
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render), [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid)
+*Called by:* [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid), [`to_mermaid`](#to_mermaid)
 
 ---
 
@@ -592,7 +710,7 @@ Escape *text* for a quoted Mermaid label, optionally truncating it.
 
 ### `tarjan_scc`
 
-`function` | [readmenator/_flowcharts.py:79](../../readmenator/_flowcharts.py#L79)
+`function` | [readmenator/_flowcharts.py:80](../../readmenator/_flowcharts.py#L80)
 
 ```python
 def tarjan_scc(vertices: List[str], adjacency: Dict[str, Set[str]]) -> List[List[str]]
@@ -609,7 +727,7 @@ Return strongly connected components (iterative Tarjan, deterministic order).
 
 **Returns:** `List[List[str]]` - Components as sorted vertex lists, ordered by their smallest vertex.
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render)
+*Called by:* [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model)
 
 ---
 
@@ -617,7 +735,7 @@ Return strongly connected components (iterative Tarjan, deterministic order).
 
 ### `transitive_reduction`
 
-`function` | [readmenator/_flowcharts.py:133](../../readmenator/_flowcharts.py#L133)
+`function` | [readmenator/_flowcharts.py:134](../../readmenator/_flowcharts.py#L134)
 
 ```python
 def transitive_reduction(adjacency: Dict[str, Set[str]]) -> Dict[str, Set[str]]
@@ -637,7 +755,7 @@ architectural dependencies.
 
 **Returns:** `Dict[str, Set[str]]` - Reduced successor sets (same vertices).
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render)
+*Called by:* [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model)
 
 ---
 
@@ -645,7 +763,7 @@ architectural dependencies.
 
 ### `eades_lin_smyth`
 
-`function` | [readmenator/_flowcharts.py:184](../../readmenator/_flowcharts.py#L184)
+`function` | [readmenator/_flowcharts.py:185](../../readmenator/_flowcharts.py#L185)
 
 ```python
 def eades_lin_smyth(vertices: List[str], weight: Dict[Tuple[str, str], int]) -> List[str]
@@ -668,7 +786,71 @@ on the vertex key, so the order is deterministic.
 
 **Returns:** `List[str]` - Vertices from highest level (dependents) to lowest (dependencies).
 
-*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render)
+*Called by:* [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model)
+
+---
+
+<a id="to_mermaid"></a>
+
+### `to_mermaid`
+
+`function` | [readmenator/_flowcharts.py:1170](../../readmenator/_flowcharts.py#L1170)
+
+```python
+def to_mermaid(graph: FlowGraph, direction: str = 'TB') -> str
+```
+
+Convert a FlowGraph into Mermaid ``flowchart`` source.
+
+Architecture lanes become subgraphs per rank; upward edges are
+declared reversed (so Mermaid keeps the tiers in order) and drawn
+red together with back edges.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `graph` | `FlowGraph` |  |  |
+| `direction` | `str` | `'TB'` |  |
+
+**Returns:** `str`
+
+*Calls:* [`mermaid_id`](#mermaid_id), [`mermaid_text`](#mermaid_text), [`RankedItem.label`](readmenator._rank.py.md#rankeditem-label)
+
+*Called by:* [`ArchitectureDiagramBuilder.render`](#architecturediagrambuilder-render), [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`ExecutionFlowBuilder.control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid), [`render_flows_section`](#render_flows_section)
+
+---
+
+<a id="build_flow_graphs"></a>
+
+### `build_flow_graphs`
+
+`function` | [readmenator/_flowcharts.py:1231](../../readmenator/_flowcharts.py#L1231)
+
+```python
+def build_flow_graphs(config: Config, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]], content_map: Optional[Dict[str, str]], analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None) -> List[FlowGraph]
+```
+
+Build and lay out every architecture and execution-flow diagram.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `config` | `Config` |  |  |
+| `nodes` | `List[Node]` |  |  |
+| `edges` | `List[Edge]` |  |  |
+| `resolved_edges` | `Optional[List[Edge]]` |  |  |
+| `content_map` | `Optional[Dict[str, str]]` |  |  |
+| `analysis` | `Optional[AnalysisResult]` | `None` |  |
+| `layers` | `Optional[Dict[str, str]]` | `None` |  |
+
+**Returns:** `List[FlowGraph]` - Laid-out graphs: the tiered architecture first, then per entry
+point its control flow, call tree, and cross-file sequence.
+
+*Calls:* [`ArchitectureDiagramBuilder.__init__`](#architecturediagrambuilder-__init__), [`ArchitectureDiagramBuilder.model`](#architecturediagrambuilder-model), [`ExecutionFlowBuilder.__init__`](#executionflowbuilder-__init__), [`ExecutionFlowBuilder.call_graph`](#executionflowbuilder-call_graph), [`ExecutionFlowBuilder.call_tree_model`](#executionflowbuilder-call_tree_model), [`ExecutionFlowBuilder.control_flow_model`](#executionflowbuilder-control_flow_model), [`ExecutionFlowBuilder.entry_points`](#executionflowbuilder-entry_points), [`ExecutionFlowBuilder.sequence_model`](#executionflowbuilder-sequence_model), [`ExecutionFlowBuilder.walk`](#executionflowbuilder-walk), [`LayoutMetrics`](readmenator._flowlayout.py.md#layoutmetrics), [`layout_flow`](readmenator._flowlayout.py.md#layout_flow), [`layout_sequence`](readmenator._flowlayout.py.md#layout_sequence)
+
+*Called by:* [`CinematicVideoRenderer.collect`](readmenator._video.py.md#cinematicvideorenderer-collect)
 
 ---
 
@@ -676,7 +858,7 @@ on the vertex key, so the order is deterministic.
 
 ### `render_architecture_section`
 
-`function` | [readmenator/_flowcharts.py:1090](../../readmenator/_flowcharts.py#L1090)
+`function` | [readmenator/_flowcharts.py:1287](../../readmenator/_flowcharts.py#L1287)
 
 ```python
 def render_architecture_section(config: Config, nodes: List[Node], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult], layers: Optional[Dict[str, str]]) -> List[str]
@@ -706,7 +888,7 @@ Return Markdown lines for the Architecture Overview section.
 
 ### `render_flows_section`
 
-`function` | [readmenator/_flowcharts.py:1121](../../readmenator/_flowcharts.py#L1121)
+`function` | [readmenator/_flowcharts.py:1319](../../readmenator/_flowcharts.py#L1319)
 
 ```python
 def render_flows_section(config: Config, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]], content_map: Optional[Dict[str, str]]) -> List[str]
@@ -726,7 +908,7 @@ Return Markdown lines for the Execution Flows section.
 
 **Returns:** `List[str]`
 
-*Calls:* [`ExecutionFlowBuilder.__init__`](#executionflowbuilder-__init__), [`ExecutionFlowBuilder.call_graph`](#executionflowbuilder-call_graph), [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`ExecutionFlowBuilder.control_flow_mermaid`](#executionflowbuilder-control_flow_mermaid), [`ExecutionFlowBuilder.entry_points`](#executionflowbuilder-entry_points), [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid), [`ExecutionFlowBuilder.walk`](#executionflowbuilder-walk)
+*Calls:* [`ExecutionFlowBuilder.__init__`](#executionflowbuilder-__init__), [`ExecutionFlowBuilder.call_graph`](#executionflowbuilder-call_graph), [`ExecutionFlowBuilder.call_tree_mermaid`](#executionflowbuilder-call_tree_mermaid), [`ExecutionFlowBuilder.control_flow_model`](#executionflowbuilder-control_flow_model), [`ExecutionFlowBuilder.entry_points`](#executionflowbuilder-entry_points), [`ExecutionFlowBuilder.sequence_mermaid`](#executionflowbuilder-sequence_mermaid), [`ExecutionFlowBuilder.walk`](#executionflowbuilder-walk), [`to_mermaid`](#to_mermaid)
 
 *Called by:* [`DocumentationGenerator.generate`](readmenator._documentation.py.md#documentationgenerator-generate)
 
@@ -738,7 +920,7 @@ Return Markdown lines for the Execution Flows section.
 
 ### `LAYER_ORDER`
 
-`constant` | [readmenator/_flowcharts.py:36](../../readmenator/_flowcharts.py#L36)
+`constant` | [readmenator/_flowcharts.py:37](../../readmenator/_flowcharts.py#L37)
 
 ```python
 LAYER_ORDER: Tuple[str, ...]
@@ -750,7 +932,7 @@ LAYER_ORDER: Tuple[str, ...]
 
 ### `LAYER_TITLES`
 
-`constant` | [readmenator/_flowcharts.py:39](../../readmenator/_flowcharts.py#L39)
+`constant` | [readmenator/_flowcharts.py:40](../../readmenator/_flowcharts.py#L40)
 
 ```python
 LAYER_TITLES: Dict[str, str]
