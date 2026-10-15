@@ -80,7 +80,6 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [layer strict] `tests/test_components.py` (testing) -> `readmenator/_components.py` (presentation)
 - [layer strict] `tests/test_folder_readme.py` (testing) -> `readmenator/_components.py` (presentation)
 
