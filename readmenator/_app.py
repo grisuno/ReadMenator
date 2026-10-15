@@ -98,6 +98,55 @@ class readmenatorApplication:
                 )
         return resolved
 
+    def _apply_project_config(self, target_dir: str) -> None:
+        """Ensure readmenator.toml exists and adopt it as project truth.
+
+        Creates the file from the embedded template when missing (never
+        overwriting), then reloads allow-listed keys over the current
+        config. Explicit non-default values (CLI flags) are preserved.
+
+        Args:
+            target_dir: Project root directory.
+        """
+        if not self._config.PROJECT_CONFIG_ENABLED:
+            return
+        try:
+            from readmenator._project_config import (
+                ensure_project_config,
+                load_project_config,
+            )
+        except ImportError:
+            return
+        root = Path(target_dir).resolve()
+        try:
+            ensure_project_config(root, self._config)
+            effective = load_project_config(root, self._config)
+        except OSError:
+            logger.debug("Project config skipped", exc_info=True)
+            return
+        if effective != self._config:
+            self._config = effective
+            self._factory = AnalyzerFactory(self._config)
+            self._deep_runner = DeepAnalysisRunner(self._factory)
+
+    def _write_viewer_config(self, root: Path) -> None:
+        """Write maps config.json from the effective config (never fatal).
+
+        Args:
+            root: Project root directory.
+        """
+        try:
+            from readmenator._project_config import write_viewer_config
+        except ImportError:
+            return
+        try:
+            maps_dir = root / self._config.DIAGRAM_OUTPUT_DIR
+            written = write_viewer_config(maps_dir, self._config, root)
+            if written is not None:
+                logger.debug("Viewer config: %s", written)
+        except OSError:
+            logger.debug("Viewer config skipped", exc_info=True)
+
     def run(
         self,
         target_dir: str,
@@ -106,6 +155,7 @@ class readmenatorApplication:
         run_security: Optional[bool] = None,
         run_v2_analysis: Optional[bool] = None,
     ) -> None:
+        self._apply_project_config(target_dir)
         root = Path(target_dir).resolve()
         nodes, edges, content_map = self._factory.scanner.scan_with_content(root)
         self._last_nodes = nodes
@@ -241,6 +291,7 @@ class readmenatorApplication:
             except Exception:
                 logger.debug("Component diagrams skipped", exc_info=True)
 
+        self._write_viewer_config(root)
         self._write_folder_readmes(root)
         self._inject_readme_link(root)
         self._inject_agent_files(root)
@@ -454,6 +505,7 @@ class readmenatorApplication:
         )
 
     def update(self, target_dir: str, run_security: Optional[bool] = None) -> None:
+        self._apply_project_config(target_dir)
         root = Path(target_dir).resolve()
         cache = FileCache(self._config, str(root))
         nodes, edges = self._scan_for_cache(root, cache)
@@ -555,6 +607,7 @@ class readmenatorApplication:
         except Exception:
             logger.debug("Explorer refresh skipped", exc_info=True)
 
+        self._write_viewer_config(root)
         self._write_folder_readmes(root)
         self._inject_readme_link(root)
         self._inject_agent_files(root)
@@ -751,10 +804,16 @@ class readmenatorApplication:
             the bundle page was written), or None when the write fails.
         """
         try:
+            from readmenator._project_config import display_name
+
             renderer = self._factory.forcegraph
             payload = renderer.build_payload(nodes, edges, resolved, analysis, layers, findings, content_map)
             analytics = self._factory.analytics.build(nodes, edges, resolved, analysis, findings, layers)
-            renderer.write(str(dest), payload, analytics, home_href=home_href)
+            brand = display_name(self._config, "")
+            renderer.write(
+                str(dest), payload, analytics, home_href=home_href,
+                title=f"{brand} Force Graph" if brand else "Force Graph",
+            )
             logger.info("Force-graph explorer: %s", dest)
             counts: Dict[str, object] = {"nodes": len(payload["nodes"]), "edges": len(payload["edges"]),
                                          "thumb": renderer.thumbnail_svg(payload)}
@@ -789,8 +848,14 @@ class readmenatorApplication:
         if not self._config.BUNDLEGRAPH_ENABLED:
             return None
         try:
+            from readmenator._project_config import display_name
+
             renderer = self._factory.bundlegraph
-            renderer.write(str(dest), force_payload, home_href=home_href, explorer_href=explorer_href)
+            brand = display_name(self._config, "")
+            renderer.write(
+                str(dest), force_payload, home_href=home_href, explorer_href=explorer_href,
+                title=f"{brand} Edge Bundles" if brand else "Edge Bundles",
+            )
             bundle = renderer.build_payload(force_payload)
             logger.info("Edge bundle explorer: %s", dest)
             communities = sum(1 for group in bundle["groups"] if group["k"] != UNASSIGNED_KEY)
@@ -1416,6 +1481,7 @@ class readmenatorApplication:
             if kind not in written:
                 logger.warning("Diagram %s failed validation and was skipped", kind)
         logger.info("Interactive system maps: %d files in %s", len(written), dest)
+        self._write_viewer_config(Path(target_dir).resolve())
         self._write_folder_readmes(Path(target_dir).resolve())
         return written
 

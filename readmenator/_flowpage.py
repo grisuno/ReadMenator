@@ -22,7 +22,7 @@ from readmenator._config import Config
 from readmenator._flowlayout import FlowGraph
 from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
-_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|API|CSS|JS|LOADER)@@")
+_PLACEHOLDER_RE = re.compile(r"@@(TITLE|DATA|API|HOME|CSS|JS|LOADER|VIEWER_MODAL|VIEWER_JS)@@")
 
 FLOW_VIEWER_CSS = r"""
 .fv-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;margin:18px 0;overflow:hidden}
@@ -201,18 +201,22 @@ _PAGE = r"""<!doctype html>
 <style>@@CSS@@</style>
 </head>
 <body>
-<header><h1>@@TITLE@@</h1>@@API@@<span class="sp"></span><button id="fv-theme" title="Toggle dark and light theme">Theme</button></header>
+<header><h1>@@TITLE@@</h1>@@API@@@@HOME@@<span class="sp"></span><button id="fv-theme" title="Toggle dark and light theme">Theme</button><button type="button" data-rm-config title="Viewer config (no reload)">Config</button></header>
 <main><p class="fv-cap">Every diagram is computed from the source with zero tokens and laid out offline: tiers come from a feedback-arc-set ordering of the component graph, flows from the resolved call graph and the Python syntax tree. Click any box for its signature, docs, and files.</p><div id="fv-host"></div></main>
 @@DATA@@
+@@VIEWER_MODAL@@
 <script>@@JS@@</script>
 <script>@@LOADER@@</script>
 <script>
 (function(){var root=document.documentElement;try{var t=localStorage.getItem("readmenator-theme");if(t)root.setAttribute("data-theme",t);}catch(e){}
+window.ReadmenatorViewerApply=function(patch){patch=patch||{};var handled=[];["theme","html_style","accent","accent2"].forEach(function(k){if(k in patch&&handled.indexOf(k)<0)handled.push(k);});if(!handled.length)return handled;try{if(typeof window.__rmFlowsDraw__==="function")window.__rmFlowsDraw__();}catch(e){}return handled;};
 readmenatorPayload("fv-data",{graphs:[],api:""}).then(function(data){
 function draw(){window.ReadmenatorFlows.mount(document.getElementById("fv-host"),data.graphs,{apiHref:data.api});}
+window.__rmFlowsDraw__=draw;
 document.getElementById("fv-theme").addEventListener("click",function(){var cur=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");var n=cur==="light"?"dark":"light";root.setAttribute("data-theme",n);try{localStorage.setItem("readmenator-theme",n);}catch(e){}draw();});
 draw();},readmenatorPayloadError);})();
 </script>
+<script>@@VIEWER_JS@@</script>
 </body>
 </html>
 """
@@ -238,12 +242,21 @@ def render_flows_page(
     Returns:
         Complete self-contained HTML document (zero external requests).
     """
-    title = html.escape(f"{project_name}: architecture and execution flows")
+    cfg = config or Config()
+    from readmenator._project_config import branding_css, display_name
+    from readmenator._viewer_ui import VIEWER_MODAL_CSS, home_anchor, modal_html, modal_script
+
+    title = html.escape(f"{display_name(cfg, project_name)}: architecture and execution flows")
     api = f'<a href="{html.escape(api_href, quote=True)}">API reference</a>' if api_href else ""
     values: Dict[str, str] = {
-        "TITLE": title, "API": api, "LOADER": PAYLOAD_LOADER_JS,
-        "DATA": payload_script("fv-data", {"graphs": [g.to_dict() for g in graphs], "api": api_href}, config or Config()),
-        "CSS": _THEME_CSS + FLOW_VIEWER_CSS, "JS": FLOW_VIEWER_JS,
+        "TITLE": title, "API": api, "HOME": home_anchor(cfg), "LOADER": PAYLOAD_LOADER_JS,
+        "DATA": payload_script("fv-data", {"graphs": [g.to_dict() for g in graphs], "api": api_href}, cfg),
+        "CSS": _THEME_CSS + FLOW_VIEWER_CSS + VIEWER_MODAL_CSS + branding_css(cfg)
+        + "header a.home{border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:13px}"
+        + "header a.home svg{width:12px;height:12px;vertical-align:-1px}",
+        "JS": FLOW_VIEWER_JS,
+        "VIEWER_MODAL": modal_html(),
+        "VIEWER_JS": modal_script(cfg),
     }
     return _PLACEHOLDER_RE.sub(lambda m: values[m.group(1)], _PAGE)
 

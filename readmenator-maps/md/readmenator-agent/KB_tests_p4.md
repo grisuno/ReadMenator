@@ -1,6 +1,59 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_refactorizer.py
+- Doc: Contract tests for the MonolithRefactorizer.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestMonolithRefactorizerContract` (class, line 18) `class TestMonolithRefactorizerContract(TestCase)`
+  - `setUp` (method, line 21) `def setUp(self)`
+  - `_make_symbol` (method, line 25) `def _make_symbol(self, name, kind, line)`
+  - `_make_node` (method, line 28) `def _make_node(self, nid, symbols)`
+  - `_make_edge` (method, line 37) `def _make_edge(self, src, tgt)`
+  - `test_analyze_empty_graph_returns_empty` (method, line 40) `def test_analyze_empty_graph_returns_empty(self)`
+  - `test_analyze_ignores_small_files` (method, line 44) `def test_analyze_ignores_small_files(self)`
+  - `test_analyze_detects_large_file` (method, line 50) `def test_analyze_detects_large_file(self)`
+  - `test_analyze_generates_extract_class_for_multiple_classes` (method, line 59) `def test_analyze_generates_extract_class_for_multiple_classes(self)`
+  - `test_analyze_generates_extract_function_for_multiple_functions` (method, line 74) `def test_analyze_generates_extract_function_for_multiple_functions(self)`
+  - `test_analyze_splits_file_with_many_symbols` (method, line 89) `def test_analyze_splits_file_with_many_symbols(self)`
+  - `test_analyze_estimates_impact_from_resolved_edges` (method, line 97) `def test_analyze_estimates_impact_from_resolved_edges(self)`
+  - `test_generate_script_contains_shebang` (method, line 109) `def test_generate_script_contains_shebang(self)`
+  - `test_generate_script_contains_set_e` (method, line 129) `def test_generate_script_contains_set_e(self)`
+  - `test_generate_script_contains_sed_commands` (method, line 140) `def test_generate_script_contains_sed_commands(self)`
+  - `test_analyze_sorted_by_line_count` (method, line 160) `def test_analyze_sorted_by_line_count(self)`
+  - `test_analyze_respects_max_files_limit` (method, line 173) `def test_analyze_respects_max_files_limit(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_refactorizer.py`
+
+## tests/test_resolver.py
+- Doc: Contract tests for the ImportResolver.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestImportResolverContract` (class, line 15) `class TestImportResolverContract(TestCase)`
+  - `test_resolves_python_module_dotpath` (method, line 18) `def test_resolves_python_module_dotpath(self)`
+  - `test_resolves_relative_import` (method, line 25) `def test_resolves_relative_import(self)`
+  - `test_resolves_extensionless_python_import` (method, line 32) `def test_resolves_extensionless_python_import(self)`
+  - `test_resolves_package_init` (method, line 39) `def test_resolves_package_init(self)`
+  - `test_returns_none_for_external_stdlib` (method, line 46) `def test_returns_none_for_external_stdlib(self)`
+  - `test_returns_none_for_unknown_import` (method, line 53) `def test_returns_none_for_unknown_import(self)`
+  - `test_resolves_stem_match_when_unique` (method, line 60) `def test_resolves_stem_match_when_unique(self)`
+  - `test_returns_none_for_empty_import` (method, line 67) `def test_returns_none_for_empty_import(self)`
+  - `test_resolves_go_import` (method, line 72) `def test_resolves_go_import(self)`
+  - `test_resolves_same_directory_import` (method, line 79) `def test_resolves_same_directory_import(self)`
+  - `test_resolves_c_quoted_header_same_dir` (method, line 86) `def test_resolves_c_quoted_header_same_dir(self)`
+  - `test_resolves_c_quoted_header_subdir` (method, line 93) `def test_resolves_c_quoted_header_subdir(self)`
+  - `test_resolves_c_extensionless_header` (method, line 100) `def test_resolves_c_extensionless_header(self)`
+  - `test_resolves_c_source_from_header_dir` (method, line 107) `def test_resolves_c_source_from_header_dir(self)`
+  - `test_resolves_cpp_header_same_dir` (method, line 114) `def test_resolves_cpp_header_same_dir(self)`
+  - `test_resolves_c_header_stem_across_dirs` (method, line 121) `def test_resolves_c_header_stem_across_dirs(self)`
+  - `test_returns_none_for_c_system_header` (method, line 128) `def test_returns_none_for_c_system_header(self)`
+  - `test_resolves_parent_dir_include` (method, line 135) `def test_resolves_parent_dir_include(self)`
+  - `test_resolves_parent_dir_include_despite_ambiguous_stem` (method, line 142) `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)`
+  - `test_resolves_include_dir_suffix_match` (method, line 149) `def test_resolves_include_dir_suffix_match(self)`
+  - `test_returns_none_for_ambiguous_suffix_match` (method, line 156) `def test_returns_none_for_ambiguous_suffix_match(self)`
+- Depends on: `readmenator/_resolver.py`
+
 ## tests/test_rule_gen.py
 - Doc: TestRuleGeneratorContract: Contract: RuleGenerator detects patterns and suggests rules.
 - Layer: testing

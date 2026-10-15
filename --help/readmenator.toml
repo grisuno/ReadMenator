@@ -1,0 +1,73 @@
+# readmenator.toml -- per-project configuration (v1).
+# Created automatically on `readmenator <dir> --rebuild` when missing.
+# This file is the source of truth for project-specific choices;
+# generic tuning still lives in readmenator/_config.py.
+# CLI flags always win over values set here.
+
+[project]
+# Human-readable project name used in page titles. Empty = directory name.
+name = ""
+
+[outputs]
+# Which deliverables are built (enabled) and under which directory/file names.
+agent_enabled = true
+agent_dir = "readmenator-agent"
+wiki_enabled = true
+wiki_dir = "readmenator-wiki"
+apidocs_enabled = true
+apidocs_dir = "readmenator-apidocs"
+graphrag_enabled = true
+graphrag_dir = "readmenator-graphrag"
+maps_dir = "readmenator-maps"
+pages_dir = "docs"
+components_enabled = true
+components_dir = "readmenator-diagrams"
+rules_enabled = true
+rules_dir = "readmenator-rules"
+forcegraph_enabled = true
+forcegraph_file = "graph-force.html"
+bundle_enabled = true
+bundle_file = "graph-bundle.html"
+flows_file = "flows.html"
+diagrams_enabled = true
+video_enabled = true
+video_file = "readmenator.mp4"
+sarif_enabled = false
+
+[features]
+# Analysis features + GitHub wiki publishing for this project.
+security_enabled = false
+privacy_mode = false
+gitignore_aware = true
+gh_wiki_enabled = true
+gh_wiki_remote = ""
+memory_enabled = true
+skills_enabled = true
+concept_enabled = true
+hotspots_enabled = true
+taint_enabled = true
+linter_enabled = true
+
+[viewer]
+# Look-and-feel of readmenator-maps/* pages. Editable live via the
+# Config button in every map; use Copy TOML there to persist back here.
+theme = "dark"
+preset = "classic"
+motion_enabled = true
+mode = "2d"
+label_top_n = 30
+label_zoom = 1.6
+charge = -300
+link_distance = 120
+link_strength = 0.3
+hulls_enabled = true
+particles = 4
+bundle_beta = 0.85
+html_style = "dark"
+
+[scan]
+# What gets scanned in this project.
+include_dirs = []
+exclude_patterns = []
+max_file_mb = 10.0
+max_depth = 20

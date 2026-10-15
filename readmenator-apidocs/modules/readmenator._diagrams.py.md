@@ -127,6 +127,7 @@ flowchart LR
     n_readmenator__diagrams_py__DocsSitePublisher_description_for(["DocsSitePublisher.description_for"])
     n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
     n_readmenator__folder_readme_py__is_generated_folder_readme["_folder_readme.is_generated_folder_readme"]
+    n_readmenator__project_config_py__display_name["_project_config.display_name"]
     n_readmenator__diagrams_py__SystemMapValidator_validate --> n_readmenator__diagrams_py__MapDiagnostic
     n_readmenator__diagrams_py__SystemMapValidator_validate --> n_readmenator__diagrams_py__MapReceipt
     n_readmenator__diagrams_py__SystemMapBuilder___init__ --> n_readmenator__diagrams_py__SystemMapValidator___init__
@@ -148,6 +149,7 @@ flowchart LR
     n_readmenator__diagrams_py__InteractiveMapRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
     n_readmenator__diagrams_py__VisNetworkRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
     n_readmenator__diagrams_py__DocsSitePublisher_collect_doc_sources -.-> n_readmenator__folder_readme_py__is_generated_folder_readme
+    n_readmenator__diagrams_py__DocsSitePublisher_render_index -.-> n_readmenator__project_config_py__display_name
 ```
 
 ## Classes
@@ -735,7 +737,7 @@ Render a vis.js map and write it to a relative output path.
 
 ### `DocsSitePublisher`
 
-`class` | [readmenator/_diagrams.py:3219](../../readmenator/_diagrams.py#L3219)
+`class` | [readmenator/_diagrams.py:3225](../../readmenator/_diagrams.py#L3225)
 
 ```python
 class DocsSitePublisher
@@ -764,7 +766,7 @@ requests and relative links only.
 
 #### `DocsSitePublisher.__init__`
 
-`constructor` | [readmenator/_diagrams.py:3236](../../readmenator/_diagrams.py#L3236)
+`constructor` | [readmenator/_diagrams.py:3242](../../readmenator/_diagrams.py#L3242)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -786,7 +788,7 @@ Initialise the publisher with application configuration.
 
 #### `DocsSitePublisher.description_for`
 
-`method` | [readmenator/_diagrams.py:3246](../../readmenator/_diagrams.py#L3246)
+`method` | [readmenator/_diagrams.py:3252](../../readmenator/_diagrams.py#L3252)
 
 ```python
 def description_for(self, kind: str) -> str
@@ -808,7 +810,7 @@ Return the gallery description for a diagram kind.
 
 #### `DocsSitePublisher.publish`
 
-`method` | [readmenator/_diagrams.py:3260](../../readmenator/_diagrams.py#L3260)
+`method` | [readmenator/_diagrams.py:3266](../../readmenator/_diagrams.py#L3266)
 
 ```python
 def publish(self, maps: Dict[str, SystemMap], project_name: str, output_dir: str, stats: Optional[Dict[str, int]] = None, renderer: Optional[object] = None, project_root: Optional[str] = None, video_rel: Optional[str] = None, doc_entries: Optional[List[Dict[str, str]]] = None, extra_cards: Optional[List[Dict[str, str]]] = None) -> Dict[str, str]
@@ -840,7 +842,7 @@ Publish maps and a gallery index into a documentation directory.
 
 #### `DocsSitePublisher.collect_doc_sources`
 
-`method` | [readmenator/_diagrams.py:3354](../../readmenator/_diagrams.py#L3354)
+`method` | [readmenator/_diagrams.py:3360](../../readmenator/_diagrams.py#L3360)
 
 ```python
 def collect_doc_sources(self, project_root: str) -> List[Path]
@@ -864,7 +866,7 @@ Collect generated markdown sources for the static site.
 
 #### `DocsSitePublisher.publish_assets`
 
-`method` | [readmenator/_diagrams.py:3380](../../readmenator/_diagrams.py#L3380)
+`method` | [readmenator/_diagrams.py:3386](../../readmenator/_diagrams.py#L3386)
 
 ```python
 def publish_assets(self, project_root: str, output_dir: str) -> Dict[str, object]
@@ -889,7 +891,7 @@ Copy overview video and markdown docs into the static site.
 
 #### `DocsSitePublisher.render_llms_txt`
 
-`method` | [readmenator/_diagrams.py:3549](../../readmenator/_diagrams.py#L3549)
+`method` | [readmenator/_diagrams.py:3555](../../readmenator/_diagrams.py#L3555)
 
 ```python
 def render_llms_txt(self, project_name: str, maps: Dict[str, SystemMap], stats: Dict[str, int], href_prefix: str, doc_entries: Optional[List[Dict[str, str]]] = None) -> str
@@ -921,7 +923,7 @@ first because it is cheaper to read than the HTML maps.
 
 #### `DocsSitePublisher.render_index`
 
-`method` | [readmenator/_diagrams.py:3628](../../readmenator/_diagrams.py#L3628)
+`method` | [readmenator/_diagrams.py:3634](../../readmenator/_diagrams.py#L3634)
 
 ```python
 def render_index(self, project_name: str, maps: Dict[str, SystemMap], stats: Dict[str, int], href_prefix: Optional[str] = None, video_rel: Optional[str] = None, doc_entries: Optional[List[Dict[str, str]]] = None, poster_rel: Optional[str] = None, extra_cards: Optional[List[Dict[str, str]]] = None) -> str
@@ -943,6 +945,8 @@ Render the gallery index page for published maps.
 | `extra_cards` | `Optional[List[Dict[str, str]]]` | `None` | Optional extra gallery cards appended after maps. |
 
 **Returns:** `str` - Complete standalone HTML gallery document.
+
+*Calls:* [`display_name`](readmenator._project_config.py.md#display_name)
 
 *Called by:* [`DocsSitePublisher.publish`](#docssitepublisher-publish)
 

@@ -3,27 +3,52 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `generator` | method | `readmenator/_pipeline.py:131` | `def generator(self)` |
+| `gh_wiki` | method | `readmenator/_pipeline.py:262` | `def gh_wiki(self)` |
+| `graphrag` | method | `readmenator/_pipeline.py:373` | `def graphrag(self)` |
+| `graphrag_store` | method | `readmenator/_pipeline.py:380` | `def graphrag_store(self)` |
+| `hotspots` | method | `readmenator/_pipeline.py:168` | `def hotspots(self)` |
+| `last_category` | method | `readmenator/_pipeline.py:476` | `def last_category(self)` |
+| `last_typed_graph` | method | `readmenator/_pipeline.py:480` | `def last_typed_graph(self)` |
 | `layer_detector` | method | `readmenator/_pipeline.py:201` | `def layer_detector(self)` |
 | `layer_rules` | method | `readmenator/_pipeline.py:174` | `def layer_rules(self)` |
-| `make_ranker` | method | `readmenator/_pipeline.py:451` | `def make_ranker(self, typed_graph)` |
-| `memory` | method | `readmenator/_pipeline.py:379` | `def memory(self)` |
-| `ollama` | method | `readmenator/_pipeline.py:435` | `def ollama(self)` |
-| `provenance` | method | `readmenator/_pipeline.py:344` | `def provenance(self)` |
+| `make_ranker` | method | `readmenator/_pipeline.py:459` | `def make_ranker(self, typed_graph)` |
+| `memory` | method | `readmenator/_pipeline.py:387` | `def memory(self)` |
+| `ollama` | method | `readmenator/_pipeline.py:443` | `def ollama(self)` |
+| `provenance` | method | `readmenator/_pipeline.py:352` | `def provenance(self)` |
 | `readme_injector` | method | `readmenator/_pipeline.py:220` | `def readme_injector(self)` |
 | `rule_gen` | method | `readmenator/_pipeline.py:180` | `def rule_gen(self)` |
-| `run` | method | `readmenator/_pipeline.py:488` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
+| `run` | method | `readmenator/_pipeline.py:496` | `def run(self, nodes, edges, resolved_edges, layers, content_map)` |
 | `sarif` | method | `readmenator/_pipeline.py:186` | `def sarif(self)` |
 | `scanner` | method | `readmenator/_pipeline.py:125` | `def scanner(self)` |
-| `scantext` | method | `readmenator/_pipeline.py:337` | `def scantext(self)` |
+| `scantext` | method | `readmenator/_pipeline.py:345` | `def scantext(self)` |
 | `security` | method | `readmenator/_pipeline.py:143` | `def security(self)` |
-| `skills` | method | `readmenator/_pipeline.py:386` | `def skills(self)` |
-| `sourceview` | method | `readmenator/_pipeline.py:393` | `def sourceview(self)` |
-| `symindex` | method | `readmenator/_pipeline.py:400` | `def symindex(self)` |
+| `skills` | method | `readmenator/_pipeline.py:394` | `def skills(self)` |
+| `sourceview` | method | `readmenator/_pipeline.py:401` | `def sourceview(self)` |
+| `symindex` | method | `readmenator/_pipeline.py:408` | `def symindex(self)` |
 | `taint` | method | `readmenator/_pipeline.py:155` | `def taint(self)` |
 | `uml` | method | `readmenator/_pipeline.py:207` | `def uml(self)` |
-| `video` | method | `readmenator/_pipeline.py:302` | `def video(self)` |
-| `vis_renderer` | method | `readmenator/_pipeline.py:295` | `def vis_renderer(self)` |
+| `video` | method | `readmenator/_pipeline.py:310` | `def video(self)` |
+| `vis_renderer` | method | `readmenator/_pipeline.py:303` | `def vis_renderer(self)` |
 | `wiki` | method | `readmenator/_pipeline.py:213` | `def wiki(self)` |
+| `_coerce` | function | `readmenator/_project_config.py:492` | `def _coerce(field_name, value, default)` |
+| `_field_types` | function | `readmenator/_project_config.py:484` | `def _field_types()` |
+| `_mini_toml_parse` | function | `readmenator/_project_config.py:333` | `def _mini_toml_parse(text)` |
+| `_mini_toml_value` | function | `readmenator/_project_config.py:395` | `def _mini_toml_value(value)` |
+| `_strip_toml_comment` | function | `readmenator/_project_config.py:367` | `def _strip_toml_comment(value)` |
+| `_toml_str` | function | `readmenator/_project_config.py:136` | `def _toml_str(value)` |
+| `_toml_value` | function | `readmenator/_project_config.py:148` | `def _toml_value(value)` |
+| `branding_css` | function | `readmenator/_project_config.py:642` | `def branding_css(config)` |
+| `config_path` | function | `readmenator/_project_config.py:286` | `def config_path(project_root, config)` |
+| `display_name` | function | `readmenator/_project_config.py:595` | `def display_name(config, fallback)` |
+| `ensure_project_config` | function | `readmenator/_project_config.py:300` | `def ensure_project_config(project_root, config)` |
+| `load_project_config` | function | `readmenator/_project_config.py:544` | `def load_project_config(project_root, base)` |
+| `parse_toml` | function | `readmenator/_project_config.py:450` | `def parse_toml(text)` |
+| `safe_color` | function | `readmenator/_project_config.py:624` | `def safe_color(value, fallback)` |
+| `safe_url` | function | `readmenator/_project_config.py:609` | `def safe_url(url)` |
+| `template_text` | function | `readmenator/_project_config.py:159` | `def template_text(config)` |
+| `viewer_config_dict` | function | `readmenator/_project_config.py:663` | `def viewer_config_dict(config, project_root)` |
+| `write_viewer_config` | function | `readmenator/_project_config.py:717` | `def write_viewer_config(maps_dir, config, project_root)` |
 | `DocProjection` | class | `readmenator/_projections.py:42` | `class DocProjection` |
 | `IdentityProjection` | class | `readmenator/_projections.py:32` | `class IdentityProjection` |
 | `Projection` | class | `readmenator/_projections.py:17` | `class Projection(Protocol)` |
@@ -107,15 +132,15 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `personalized_pagerank` | function | `readmenator/_rank.py:153` | `def personalized_pagerank(graph, seeds, alpha, max_iter, tolerance)` |
 | `rank` | method | `readmenator/_rank.py:438` | `def rank(self, query, seeds, category, node_ids, test_coverage, doc_coverage, freshness)` |
 | `top` | method | `readmenator/_rank.py:400` | `def top(self, n)` |
-| `ReadmeInjector` | class | `readmenator/_readme_injector.py:122` | `class ReadmeInjector` |
-| `__init__` | method | `readmenator/_readme_injector.py:133` | `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_output_dir, maps_output_dir, pages_dir...` |
-| `_build_injection` | method | `readmenator/_readme_injector.py:336` | `def _build_injection(self, suffix)` |
-| `_extract_current_injection` | method | `readmenator/_readme_injector.py:233` | `def _extract_current_injection(content)` |
-| `_find_readme` | method | `readmenator/_readme_injector.py:321` | `def _find_readme(root)` |
-| `_remove_old_injection` | method | `readmenator/_readme_injector.py:250` | `def _remove_old_injection(content)` |
-| `_strip_partial_anchor` | method | `readmenator/_readme_injector.py:269` | `def _strip_partial_anchor(content)` |
-| `inject` | method | `readmenator/_readme_injector.py:192` | `def inject(self, project_root)` |
-| `remove` | method | `readmenator/_readme_injector.py:284` | `def remove(self, project_root)` |
+| `ReadmeInjector` | class | `readmenator/_readme_injector.py:134` | `class ReadmeInjector` |
+| `__init__` | method | `readmenator/_readme_injector.py:145` | `def __init__(self, kb_filename, agent_output_dir, wiki_output_dir, graphrag_output_dir, maps_output_dir, pages_dir...` |
+| `_build_injection` | method | `readmenator/_readme_injector.py:363` | `def _build_injection(self, suffix)` |
+| `_extract_current_injection` | method | `readmenator/_readme_injector.py:260` | `def _extract_current_injection(content)` |
+| `_find_readme` | method | `readmenator/_readme_injector.py:348` | `def _find_readme(root)` |
+| `_remove_old_injection` | method | `readmenator/_readme_injector.py:277` | `def _remove_old_injection(content)` |
+| `_strip_partial_anchor` | method | `readmenator/_readme_injector.py:296` | `def _strip_partial_anchor(content)` |
+| `inject` | method | `readmenator/_readme_injector.py:219` | `def inject(self, project_root)` |
+| `remove` | method | `readmenator/_readme_injector.py:311` | `def remove(self, project_root)` |
 | `MonolithRefactorizer` | class | `readmenator/_refactorizer.py:24` | `class MonolithRefactorizer` |
 | `__init__` | method | `readmenator/_refactorizer.py:32` | `def __init__(self, config)` |
 | `_estimate_impact` | method | `readmenator/_refactorizer.py:147` | `def _estimate_impact(self, file_id, resolved_edges)` |
@@ -399,6 +424,13 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `tf` | function | `readmenator/_video.py:2187` | `def tf(x, y)` |
 | `tf` | function | `readmenator/_video.py:2285` | `def tf(x, y)` |
 | `tree_positions` | method | `readmenator/_video.py:1119` | `def tree_positions(self, data, box)` |
+| `branding_style` | function | `readmenator/_viewer_ui.py:318` | `def branding_style(config)` |
+| `config_button_markup` | function | `readmenator/_viewer_ui.py:419` | `def config_button_markup()` |
+| `home_anchor` | function | `readmenator/_viewer_ui.py:333` | `def home_anchor(config)` |
+| `modal_html` | function | `readmenator/_viewer_ui.py:380` | `def modal_html()` |
+| `modal_script` | function | `readmenator/_viewer_ui.py:403` | `def modal_script(config)` |
+| `project_links` | function | `readmenator/_viewer_ui.py:356` | `def project_links(config)` |
+| `viewer_json` | function | `readmenator/_viewer_ui.py:272` | `def viewer_json(config)` |
 | `DirectoryWatcher` | class | `readmenator/_watcher.py:21` | `class DirectoryWatcher` |
 | `__init__` | method | `readmenator/_watcher.py:29` | `def __init__(self, root, config, callback, interval_seconds)` |
 | `_compute_snapshot` | method | `readmenator/_watcher.py:51` | `def _compute_snapshot(self)` |
@@ -464,37 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `__init__` | method | `readmenator/parsers/_base.py:21` | `def __init__(self, filename, config)` |
 | `_extract_docstring` | method | `readmenator/parsers/_base.py:49` | `def _extract_docstring(self, line_num)` |
 | `_extract_signature` | method | `readmenator/parsers/_base.py:91` | `def _extract_signature(self, content, match_start, pattern)` |
-| `_extract_specifics` | method | `readmenator/parsers/_base.py:45` | `def _extract_specifics(self, content)` |
-| `parse` | method | `readmenator/parsers/_base.py:36` | `def parse(self, content)` |
-| `CParser` | class | `readmenator/parsers/_c.py:30` | `class CParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_c.py:37` | `def _extract_specifics(self, content)` |
-| `_has_type_prefix` | function | `readmenator/parsers/_c.py:18` | `def _has_type_prefix(prefix)` |
-| `CSharpParser` | class | `readmenator/parsers/_csharp.py:11` | `class CSharpParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_csharp.py:18` | `def _extract_specifics(self, content)` |
-| `DartParser` | class | `readmenator/parsers/_dart.py:11` | `class DartParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_dart.py:18` | `def _extract_specifics(self, content)` |
-| `ElixirParser` | class | `readmenator/parsers/_elixir.py:11` | `class ElixirParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_elixir.py:18` | `def _extract_specifics(self, content)` |
-| `GDScriptParser` | class | `readmenator/parsers/_gdscript.py:11` | `class GDScriptParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_gdscript.py:18` | `def _extract_specifics(self, content)` |
-| `GoParser` | class | `readmenator/parsers/_go.py:11` | `class GoParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_go.py:18` | `def _extract_specifics(self, content)` |
-| `JavaParser` | class | `readmenator/parsers/_java.py:11` | `class JavaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_java.py:18` | `def _extract_specifics(self, content)` |
-| `JavaScriptParser` | class | `readmenator/parsers/_javascript.py:11` | `class JavaScriptParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_javascript.py:19` | `def _extract_specifics(self, content)` |
-| `KotlinParser` | class | `readmenator/parsers/_kotlin.py:11` | `class KotlinParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_kotlin.py:18` | `def _extract_specifics(self, content)` |
-| `LuaParser` | class | `readmenator/parsers/_lua.py:11` | `class LuaParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_lua.py:18` | `def _extract_specifics(self, content)` |
-| `NimParser` | class | `readmenator/parsers/_nim.py:11` | `class NimParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_nim.py:18` | `def _extract_specifics(self, content)` |
-| `PHPParser` | class | `readmenator/parsers/_php.py:11` | `class PHPParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_php.py:18` | `def _extract_specifics(self, content)` |
-| `PythonParser` | class | `readmenator/parsers/_python.py:12` | `class PythonParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_python.py:19` | `def _extract_specifics(self, content)` |
-| `RubyParser` | class | `readmenator/parsers/_ruby.py:11` | `class RubyParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_ruby.py:18` | `def _extract_specifics(self, content)` |
-| `RustParser` | class | `readmenator/parsers/_rust.py:11` | `class RustParser(LanguageParser)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

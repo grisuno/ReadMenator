@@ -81,14 +81,7 @@ class TestAgentInjectorInjectBehavior(unittest.TestCase):
 
     def test_inject_skips_when_already_up_to_date(self):
         path = self.root / "CLAUDE.md"
-        from readmenator._agent_injector import _ANCHOR, _ANCHOR_END, _INJECTION_MD
-        current_injection = _INJECTION_MD.format(
-            anchor_start=_ANCHOR,
-            anchor_end=_ANCHOR_END,
-            kb_filename="KNOWLEDGE_BASE.md",
-            agent_output_dir="readmenator-agent",
-            wiki_output_dir="readmenator-wiki",
-        )
+        current_injection = self.injector._build_injection("markdown")
         path.write_text("# Rules\n\n" + current_injection + "\n")
         count = self.injector.inject(str(self.root))
         self.assertEqual(count, 0)

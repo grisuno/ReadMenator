@@ -22,7 +22,7 @@ KNOWLEDGE_BASE.md by running readmenator when needed.
 
 ### `AgentInjector`
 
-`class` | [readmenator/_agent_injector.py:129](../../readmenator/_agent_injector.py#L129)
+`class` | [readmenator/_agent_injector.py:142](../../readmenator/_agent_injector.py#L142)
 
 ```python
 class AgentInjector
@@ -50,10 +50,10 @@ by running readmenator when needed.
 
 #### `AgentInjector.__init__`
 
-`constructor` | [readmenator/_agent_injector.py:140](../../readmenator/_agent_injector.py#L140)
+`constructor` | [readmenator/_agent_injector.py:153](../../readmenator/_agent_injector.py#L153)
 
 ```python
-def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', agent_files: Optional[Sequence[str]] = None, agent_globs: Optional[Sequence[str]] = None, wiki_output_dir: str = 'readmenator-wiki') -> None
+def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', agent_files: Optional[Sequence[str]] = None, agent_globs: Optional[Sequence[str]] = None, wiki_output_dir: str = 'readmenator-wiki', agent_heading: str = '', agent_intro: str = '', agent_extra: str = '') -> None
 ```
 
 **Parameters**
@@ -65,6 +65,9 @@ def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str
 | `agent_files` | `Optional[Sequence[str]]` | `None` |  |
 | `agent_globs` | `Optional[Sequence[str]]` | `None` |  |
 | `wiki_output_dir` | `str` | `'readmenator-wiki'` |  |
+| `agent_heading` | `str` | `''` |  |
+| `agent_intro` | `str` | `''` |  |
+| `agent_extra` | `str` | `''` |  |
 
 *Called by:* [`AnalyzerFactory.agent_injector`](readmenator._pipeline.py.md#analyzerfactory-agent_injector)
 
@@ -72,7 +75,7 @@ def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str
 
 #### `AgentInjector.inject`
 
-`method` | [readmenator/_agent_injector.py:154](../../readmenator/_agent_injector.py#L154)
+`method` | [readmenator/_agent_injector.py:173](../../readmenator/_agent_injector.py#L173)
 
 ```python
 def inject(self, project_root: str) -> int
@@ -94,7 +97,7 @@ Returns the number of agent files actually modified.
 
 #### `AgentInjector.remove`
 
-`method` | [readmenator/_agent_injector.py:172](../../readmenator/_agent_injector.py#L172)
+`method` | [readmenator/_agent_injector.py:191](../../readmenator/_agent_injector.py#L191)
 
 ```python
 def remove(self, project_root: str) -> int
@@ -116,7 +119,7 @@ Returns the number of files actually modified.
 
 #### `AgentInjector.find_agent_files`
 
-`method` | [readmenator/_agent_injector.py:185](../../readmenator/_agent_injector.py#L185)
+`method` | [readmenator/_agent_injector.py:204](../../readmenator/_agent_injector.py#L204)
 
 ```python
 def find_agent_files(self, project_root: str) -> List[Path]
@@ -140,7 +143,7 @@ Public accessor: return all detected agent files.
 
 ### `ensure_readmenator_installed`
 
-`function` | [readmenator/_agent_injector.py:107](../../readmenator/_agent_injector.py#L107)
+`function` | [readmenator/_agent_injector.py:120](../../readmenator/_agent_injector.py#L120)
 
 ```python
 def ensure_readmenator_installed() -> bool

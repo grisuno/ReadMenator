@@ -287,15 +287,18 @@ class FolderReadmeWriter:
                 continue
             suffix = "/" if all(p.is_dir() for p in matches) else ""
             rows.append(f"| `{pattern}{suffix}` | {description} |")
+        notice = cfg.MSG_FOLDER_NOTICE.strip() or (
+            "Generated offline by ReadMenator (static analysis, zero LLM tokens). Files here are "
+            "rewritten on every run, so do not edit them by hand. To keep a hand-written README "
+            "in this folder instead, delete the first line of this file."
+        )
         lines = [
             cfg.FOLDER_README_MARKER,
             f"# {spec.dirname}",
             "",
             spec.purpose,
             "",
-            "Generated offline by ReadMenator (static analysis, zero LLM tokens). Files here are "
-            "rewritten on every run, so do not edit them by hand. To keep a hand-written README "
-            "in this folder instead, delete the first line of this file.",
+            notice,
             "",
         ]
         if rows:

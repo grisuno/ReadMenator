@@ -237,6 +237,11 @@ class AnalyzerFactory:
                 forcegraph_output=self._config.FORCEGRAPH_OUTPUT,
                 bundlegraph_output=self._config.BUNDLEGRAPH_OUTPUT,
                 apidocs_output_dir=self._config.APIDOCS_OUTPUT_DIR,
+                readme_heading=self._config.MSG_README_HEADING,
+                readme_intro=self._config.MSG_README_INTRO,
+                readme_agents_line=self._config.MSG_README_AGENTS_LINE,
+                readme_developers_line=self._config.MSG_README_DEVELOPERS_LINE,
+                readme_regen_command=self._config.MSG_README_REGEN_COMMAND,
             )
         return self._readme_injector
 
@@ -247,6 +252,9 @@ class AnalyzerFactory:
                 kb_filename=self._config.AGENT_INJECTION_KB_FILENAME,
                 agent_output_dir=self._config.AGENT_OUTPUT_DIR,
                 wiki_output_dir=self._config.WIKI_OUTPUT_DIR,
+                agent_heading=self._config.MSG_AGENT_HEADING,
+                agent_intro=self._config.MSG_AGENT_INTRO,
+                agent_extra=self._config.MSG_AGENT_EXTRA,
             )
         return self._agent_injector
 

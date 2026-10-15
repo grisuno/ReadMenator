@@ -3038,7 +3038,8 @@ a{color:var(--accent)}
 .toolbar input{flex:1;min-width:220px;background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font:inherit;font-size:13px}
 .toolbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
 button{font:inherit}
-#theme{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:12px;cursor:pointer}
+#theme,.toolbar [data-rm-config]{background:var(--mask);color:var(--ink);border:1px solid var(--border);border-radius:10px;padding:9px 12px;font-size:12px;cursor:pointer}
+.toolbar [data-rm-config]:hover{border-color:var(--accent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
 .card{position:relative;background:var(--mask);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:transform .2s,border-color .2s,box-shadow .2s}
 .card:hover,.card:focus-within{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 10px 30px var(--glow)}
@@ -3110,6 +3111,11 @@ footer a:hover,footer a:focus-visible{text-decoration:underline;outline:none}
 .hidden{display:none!important}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 @media (max-width:640px){.hero h1{font-size:22px}.tile .num{font-size:20px}}
+.brandline{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:4px 0 12px}
+.brandlogo{max-height:44px;max-width:180px;border-radius:8px}
+.projdesc{color:var(--ink);font-size:13px;margin:0;flex:1;min-width:220px}
+.byline{color:var(--muted);font-size:12px;margin:0}
+__VIEWER_CSS__
 </style>
 </head>
 <body>
@@ -3653,7 +3659,9 @@ class DocsSitePublisher:
         """
         if href_prefix is None:
             href_prefix = self._href_prefix()
-        title = self._escape(project_name.strip() or "Project")
+        from readmenator._project_config import display_name
+
+        title = self._escape(display_name(self._config, project_name.strip() or "Project"))
         entries = list(doc_entries or [])
         cards = [self._extra_card(extra) for extra in extra_cards or []]
         cards.extend(self._card(kind, maps[kind], href_prefix) for kind in sorted(maps))
@@ -3661,10 +3669,13 @@ class DocsSitePublisher:
             '<p class="empty">No validated maps were published yet.</p>'
         )
         return (
-            _GALLERY_HEAD.replace("__TITLE__", title)
+            _GALLERY_HEAD.replace("__TITLE__", title).replace(
+                "__VIEWER_CSS__", self._viewer_css()
+            )
             + '<div class="backdrop" aria-hidden="true"></div>'
             + '<header class="hero"><p class="eyebrow">Zero-token knowledge base</p>'
             + "<h1>" + title + " <span>| System Maps</span></h1>"
+            + self._brand_block()
             + "<p class=\"lede\">Architecture maps, an overview video, and the full documentation "
             + "set, generated offline from the source code. Nothing here was written by an LLM.</p>"
             + self._stat_tiles(stats)
@@ -3673,7 +3684,8 @@ class DocsSitePublisher:
             + '<div class="toolbar"><input id="filter" type="search" '
             + 'placeholder="Filter maps and docs ( / )" aria-label="Filter diagrams and docs">'
             + '<span id="filter-count" class="muted" aria-live="polite"></span>'
-            + '<button type="button" id="theme" title="Toggle dark and light theme">Theme</button></div>'
+            + '<button type="button" id="theme" title="Toggle dark and light theme">Theme</button>'
+            + '<button type="button" data-rm-config title="Viewer config (no reload)">Config</button></div>'
             + '<section class="section" id="maps"><h2>Interactive maps</h2>'
             + '<p class="muted">Physics-driven diagrams: drag nodes, click one for its documentation, '
             + "trace upstream or downstream reach. Maps load their engine from a CDN.</p>"
@@ -3688,28 +3700,94 @@ class DocsSitePublisher:
             + "JSON. Deep links such as #route=a~b restore any reading.</p></section>"
             + self._footer()
             + _GALLERY_DRAWER
+            + self._viewer_modal()
             + "<script>\n(function(){\n\"use strict\";\n"
             + _GALLERY_MD_JS
             + _GALLERY_APP_JS
-            + "})();\n</script>\n</body>\n</html>"
+            + "})();\n</script>\n"
+            + self._viewer_script()
+            + "\n</body>\n</html>"
         )
+
+    def _brand_block(self) -> str:
+        """Render the hero brand line (logo, description, author).
+
+        Returns:
+            HTML fragment, or "" when no branding identity is configured.
+        """
+        from readmenator._project_config import safe_url
+
+        cfg = self._config
+        logo = safe_url(getattr(cfg, "PROJECT_LOGO_URL", ""))
+        description = str(getattr(cfg, "PROJECT_DESCRIPTION", "") or "").strip()
+        author = str(getattr(cfg, "PROJECT_AUTHOR", "") or "").strip()
+        if not (logo or description or author):
+            return ""
+        parts = ['<div class="brandline">']
+        if logo:
+            parts.append(
+                '<img class="brandlogo" src="' + self._escape(logo)
+                + '" alt="Project logo" loading="lazy">'
+            )
+        if description:
+            parts.append('<p class="projdesc">' + self._escape(description) + "</p>")
+        if author:
+            parts.append('<p class="byline">by ' + self._escape(author) + "</p>")
+        parts.append("</div>")
+        return "".join(parts)
+
+    def _project_pills(self) -> str:
+        """Render footer pills for the analysed project's links.
+
+        Returns:
+            Anchor fragments, or "" when no project URL is configured.
+        """
+        from readmenator._viewer_ui import GLOBE_SVG, HOUSE_SVG, project_links
+
+        pills = []
+        for link in project_links(self._config):
+            icon = (
+                '<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
+                '<path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 '
+                "5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94"
+                "-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07"
+                "-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 "
+                "1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 "
+                "2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 "
+                '8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
+                if link["icon"] == "github"
+                else (GLOBE_SVG if link["icon"] == "globe" else HOUSE_SVG)
+            )
+            pills.append(
+                '<a class="footer-link" href="' + self._escape(link["url"])
+                + '" target="_blank" rel="noopener" title="Configured in readmenator.toml [branding]">'
+                + icon + "<span>" + self._escape(link["label"]) + "</span></a>"
+            )
+        return "".join(pills)
 
     def _footer(self) -> str:
         """Render the gallery footer with project links.
 
         Returns:
             Footer HTML with the offline notice, the llms.txt agent
-            pointer, and GitHub/PyPI links styled in the site palette.
+            pointer, the analysed project's pills and author credit when
+            configured, plus the ReadMenator GitHub/PyPI links.
         """
         llms = self._escape(self._config.SITE_LLMS_TXT_FILENAME)
         github = self._escape(self._config.SITE_GITHUB_URL)
         pypi = self._escape(self._config.SITE_PYPI_URL)
+        author = str(getattr(self._config, "PROJECT_AUTHOR", "") or "").strip()
+        credit = (
+            " Maintained by " + self._escape(author) + "."
+            if author else ""
+        )
         return (
             "<footer>Generated offline from scanned source topology. "
-            "Counts reflect authored relationships only. "
+            "Counts reflect authored relationships only." + credit + " "
             'Agents: read <a href="' + llms + '">' + llms + "</a>."
             '<nav class="footer-links" aria-label="Project links">'
-            '<a class="footer-link" href="' + github + '" target="_blank" rel="noopener">'
+            + self._project_pills()
+            + '<a class="footer-link" href="' + github + '" target="_blank" rel="noopener">'
             '<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
             "<defs><linearGradient id=\"rm-gh-grad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">"
             '<stop offset="0" stop-color="#38bdf8"/>'
@@ -3926,6 +4004,32 @@ class DocsSitePublisher:
         if subdir in ("", "."):
             return ""
         return subdir + "/"
+
+    def _viewer_modal(self) -> str:
+        """Return the shared viewer Config modal markup for the gallery."""
+        from readmenator._viewer_ui import modal_html
+
+        return modal_html()
+
+    def _viewer_script(self) -> str:
+        """Return the gallery viewer Config boot script."""
+        from readmenator._viewer_ui import modal_script
+
+        hook = (
+            "<script>\nwindow.ReadmenatorViewerApply=function(patch){"
+            "patch=patch||{};var handled=[];"
+            '["theme","html_style","accent","accent2"].forEach(function(k){'
+            "if(k in patch&&handled.indexOf(k)<0)handled.push(k);});"
+            "return handled;};\n</script>\n"
+        )
+        return hook + "<script>\n" + modal_script(self._config) + "\n</script>"
+
+    def _viewer_css(self) -> str:
+        """Return the shared viewer Config CSS for the gallery."""
+        from readmenator._project_config import branding_css
+        from readmenator._viewer_ui import VIEWER_MODAL_CSS
+
+        return "<style>" + VIEWER_MODAL_CSS + branding_css(self._config) + "</style>"
 
     _KIND_GLYPHS: Tuple[Tuple[str, str], ...] = (
         ("architecture",

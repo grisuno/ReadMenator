@@ -87,12 +87,12 @@ def build_parser() -> argparse.ArgumentParser
 
 ### `main`
 
-`function` | [readmenator/__main__.py:151](../../readmenator/__main__.py#L151)
+`function` | [readmenator/__main__.py:152](../../readmenator/__main__.py#L152)
 
 ```python
 def main() -> None
 ```
 
-*Calls:* [`build_parser`](#build_parser), [`readmenatorApplication.__init__`](readmenator._app.py.md#readmenatorapplication-__init__), [`readmenatorApplication.analytics`](readmenator._app.py.md#readmenatorapplication-analytics), [`readmenatorApplication.analyze`](readmenator._app.py.md#readmenatorapplication-analyze), [`readmenatorApplication.audit`](readmenator._app.py.md#readmenatorapplication-audit), [`readmenatorApplication.audit_deep`](readmenator._app.py.md#readmenatorapplication-audit_deep), [`readmenatorApplication.audit_provenance`](readmenator._app.py.md#readmenatorapplication-audit_provenance), [`readmenatorApplication.build_api_reference`](readmenator._app.py.md#readmenatorapplication-build_api_reference), [`readmenatorApplication.build_graphrag`](readmenator._app.py.md#readmenatorapplication-build_graphrag), [`readmenatorApplication.check_freshness`](readmenator._app.py.md#readmenatorapplication-check_freshness), [`readmenatorApplication.detect_layers`](readmenator._app.py.md#readmenatorapplication-detect_layers), [`readmenatorApplication.explain`](readmenator._app.py.md#readmenatorapplication-explain) and 42 more
+*Calls:* [`build_parser`](#build_parser), [`readmenatorApplication.__init__`](readmenator._app.py.md#readmenatorapplication-__init__), [`readmenatorApplication.analytics`](readmenator._app.py.md#readmenatorapplication-analytics), [`readmenatorApplication.analyze`](readmenator._app.py.md#readmenatorapplication-analyze), [`readmenatorApplication.audit`](readmenator._app.py.md#readmenatorapplication-audit), [`readmenatorApplication.audit_deep`](readmenator._app.py.md#readmenatorapplication-audit_deep), [`readmenatorApplication.audit_provenance`](readmenator._app.py.md#readmenatorapplication-audit_provenance), [`readmenatorApplication.build_api_reference`](readmenator._app.py.md#readmenatorapplication-build_api_reference), [`readmenatorApplication.build_graphrag`](readmenator._app.py.md#readmenatorapplication-build_graphrag), [`readmenatorApplication.check_freshness`](readmenator._app.py.md#readmenatorapplication-check_freshness), [`readmenatorApplication.detect_layers`](readmenator._app.py.md#readmenatorapplication-detect_layers), [`readmenatorApplication.explain`](readmenator._app.py.md#readmenatorapplication-explain) and 45 more
 
 ---

@@ -475,8 +475,12 @@ class TestForceGraphInspectorPayload(unittest.TestCase):
 
 
 def _inline_script(html: str) -> str:
-    """Return the body of the last inline script block of an explorer page."""
-    return html.rsplit("<script>", 1)[1].split("</script>", 1)[0]
+    """Return the main explorer inline script block (not the viewer modal)."""
+    blocks = re.findall(r"<script>(.*?)</script>", html, re.DOTALL)
+    for block in blocks:
+        if re.search(r"^const SETTINGS=", block, re.MULTILINE):
+            return block
+    return blocks[-1] if blocks else ""
 
 
 def _const_json(html: str, name: str) -> object:

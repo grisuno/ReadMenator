@@ -1,0 +1,33 @@
+{
+ "schema_version": 1,
+ "format": "jsonl",
+ "meta": {
+  "modules": 0,
+  "entities": 0,
+  "languages": {},
+  "kinds": {},
+  "truncated": false,
+  "skipped_files": 0,
+  "privacy_mode": false
+ },
+ "coverage": {
+  "overall": {
+   "documented": 0,
+   "total": 0,
+   "percent": 100.0
+  },
+  "by_kind": {},
+  "by_module": {}
+ },
+ "modules": [],
+ "warnings": {
+  "path": "warnings.jsonl",
+  "total": 0
+ },
+ "usage": [
+  "grep -h '\"name\":\"<Name>\"' readmenator-apidocs/api/modules/*.jsonl",
+  "grep -h '\"qualname\":\"<Owner.method>\"' readmenator-apidocs/api/modules/*.jsonl",
+  "cat readmenator-apidocs/api/modules/<module-slug>.jsonl",
+  "grep -h '\"code\":\"DOC001\"' readmenator-apidocs/api/warnings.jsonl"
+ ]
+}

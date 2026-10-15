@@ -14,6 +14,13 @@ from readmenator._category import (  # noqa: F401
     TypedGraph,
 )
 from readmenator._config import Config  # noqa: F401
+from readmenator._project_config import (  # noqa: F401
+    ensure_project_config,
+    load_project_config,
+    template_text,
+    viewer_config_dict,
+    write_viewer_config,
+)
 from readmenator._diagrams import (  # noqa: F401
     DocsSitePublisher,
     InteractiveMapRenderer,

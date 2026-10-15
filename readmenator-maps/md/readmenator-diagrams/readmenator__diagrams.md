@@ -1,57 +1,36 @@
 # readmenator: _diagrams
 
-readmenator: _diagrams groups 30 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Launcher shim that runs the readmenator CLI from a source checkout.
+readmenator: _diagrams groups 15 files (py) around _toml_str, _toml_value, template_text, config_path, ensure_project_config. Edge bundle explorer: circle and sphere hierarchical edge bundling pages.
 
 ```mermaid
 graph LR
     readmenator["readmenator"]
-    root["root"]
     tests["tests"]
-    root -- "calls into" --> readmenator
     tests -- "calls into" --> readmenator
 ```
 
-## readmenator (3.1)
+## readmenator (6.1)
 
-readmenator groups 18 files (py) around readmenatorApplication, __init__, _scan, _scan_with_content, _resolve_imports. Command line entry point: argument parsing and subcommand dispatch.
+readmenator groups 10 files (py) around _toml_str, _toml_value, template_text, config_path, ensure_project_config. Edge bundle explorer: circle and sphere hierarchical edge bundling pages.
 
-## root (3.2)
+## tests (6.2)
 
-root groups 1 files (py). Launcher shim that runs the readmenator CLI from a source checkout.
-
-## tests (3.3)
-
-tests groups 11 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
+tests groups 5 files (py) around _node, _fixture, _script_json, TestBundleGraphPayloadContract, setUp. Contract tests for the edge bundle explorer (circle and sphere views).
 
 **Files**:
 
-- readmenator.py
-- readmenator/__main__.py
-- readmenator/_agent_output.py
-- readmenator/_app.py
-- readmenator/_cache.py
-- readmenator/_components.py
-- readmenator/_cursorrules_generator.py
+- readmenator/_bundlegraph.py
+- readmenator/_bundlegraph_page.py
 - readmenator/_diagrams.py
-- readmenator/_folder_readme.py
-- readmenator/_gh_wiki.py
-- readmenator/_gitmeta.py
-- readmenator/_layers.py
-- readmenator/_linter.py
-- readmenator/_mcp_server.py
-- readmenator/_memory.py
-- readmenator/_purpose.py
-- readmenator/_resolver.py
-- readmenator/_watcher.py
-- readmenator/_yaralite.py
-- tests/test_agent_friendliness.py
-- tests/test_cache.py
-- tests/test_components.py
-- tests/test_cursorrules.py
-- tests/test_diagrams.py
-- tests/test_folder_readme.py
-- tests/test_gh_wiki.py
-- tests/test_integration.py
-- tests/test_linter.py
-- tests/test_mcp_server.py
-- tests/test_resolver.py
+- readmenator/_forcegraph.py
+- readmenator/_forcegraph_page.py
+- readmenator/_graphlayout.py
+- readmenator/_htmlpack.py
+- readmenator/_project_config.py
+- readmenator/_sourceview.py
+- readmenator/_viewer_ui.py
+- tests/test_bundlegraph.py
+- tests/test_graphlayout.py
+- tests/test_layout_quality.py
+- tests/test_project_config.py
+- tests/test_sourceview.py

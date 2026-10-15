@@ -33,7 +33,9 @@ from readmenator._sourceview import SourceViewBuilder
 
 logger = logging.getLogger(__name__)
 
-_PLACEHOLDER = re.compile(r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS|LOADER)__")
+_PLACEHOLDER = re.compile(
+    r"__(TITLE|HOME|VENDOR_SRC|CDN_2D|CDN_3D|DATA|ANALYTICS|SETTINGS|LOADER|VIEWER_CSS|VIEWER_MODAL|VIEWER_JS)__"
+)
 
 
 def family_color_from_name(
@@ -214,7 +216,8 @@ class ForceGraphRenderer:
                 logger.warning(
                     "Source viewer: %d of %d files without embedded source "
                     "(SOURCEVIEW budgets hit: MAX_FILES=%d, MAX_TOTAL_CHARS=%d); "
-                    "raise them and rebuild to read every file in the explorer",
+                    "raise [maps] sourceview_max_files/sourceview_max_total_chars "
+                    "in readmenator.toml and rebuild to read every file in the explorer",
                     cut, len(nodes),
                     self._config.SOURCEVIEW_MAX_FILES,
                     self._config.SOURCEVIEW_MAX_TOTAL_CHARS,
@@ -387,6 +390,10 @@ class ForceGraphRenderer:
                 + html.escape(home_href, quote=True)
                 + '">\u2190 Maps gallery</a>'
             )
+        from readmenator._project_config import branding_css
+        from readmenator._viewer_ui import VIEWER_MODAL_CSS, home_anchor, modal_html, modal_script
+
+        home_link += home_anchor(self._config)
         values = {
             "TITLE": safe_title,
             "HOME": home_link,
@@ -397,6 +404,9 @@ class ForceGraphRenderer:
             "ANALYTICS": payload_script("fg-analytics", analytics or {}, self._config, compact=False, escape="<"),
             "LOADER": PAYLOAD_LOADER_JS,
             "SETTINGS": json.dumps(self.page_settings(payload, live_api=live_api)).replace("<", "\\u003c"),
+            "VIEWER_CSS": "<style>" + VIEWER_MODAL_CSS + branding_css(self._config) + "</style>",
+            "VIEWER_MODAL": modal_html(),
+            "VIEWER_JS": modal_script(self._config),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], FORCEGRAPH_PAGE_TEMPLATE)
 

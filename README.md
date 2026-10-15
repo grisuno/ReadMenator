@@ -62,6 +62,8 @@ python -m readmenator /path/to/project --rebuild
 
 Creates `KNOWLEDGE_BASE.md` with Table of Contents, Statistics Dashboard, Architectural Layers, God Nodes, Community Analysis, Surprising Connections, Suggested Questions, **UML Class Diagram**, Mermaid graph (internal edges + community subgraphs), and Architecture Reference. A link to the knowledge base is automatically injected into the project's README.md.
 
+The first `--rebuild` also creates `readmenator.toml` in the project root (per-project config: deliverable dirs, feature flags, branding, maps source-viewer budgets, and `[messages]` overrides for the automated README/agent/folder texts). Edit it and rebuild; every map page also has a Config button to tweak viewer/branding/budgets/messages live and copy them back as TOML.
+
 ### Export formats
 
 ```bash

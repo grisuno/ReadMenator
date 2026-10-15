@@ -11,12 +11,20 @@ logger = logging.getLogger(__name__)
 _ANCHOR_START = "<!-- readmenator-kb-link -->"
 _ANCHOR_END = "<!-- /readmenator-kb-link -->"
 
-_INJECTION_TEXT_MD = """{anchor_start}
-## Knowledge Base
+_README_HEADING_DEFAULT = "Knowledge Base"
 
-This project has been analyzed by [ReadMenator](https://github.com/grisuno/ReadMenator),
-a zero-token polyglot static analysis tool. Regenerate with
-`pip install readmenator && readmenator . --rebuild`. Analysis outputs:
+_README_INTRO_DEFAULT = (
+    "This project has been analyzed by [ReadMenator](https://github.com/grisuno/ReadMenator),\n"
+    "a zero-token polyglot static analysis tool."
+)
+
+_README_REGEN_DEFAULT = "pip install readmenator && readmenator . --rebuild"
+
+_INJECTION_TEXT_MD = """{anchor_start}
+## {readme_heading}
+
+{readme_intro} Regenerate with
+`{readme_regen_command}`. Analysis outputs:
 
 - **[{kb_filename}](./{kb_filename})** -- Full architecture reference with all
   classes, functions, imports, dependency graphs, UML class diagrams, security
@@ -63,18 +71,22 @@ a zero-token polyglot static analysis tool. Regenerate with
 Cache (`{cache_dir}/`), packaged agent skills (`{skills_dir}/`), and the
 GitHub wiki mirror are also produced on `run`/`--rebuild`.
 
-AI agents: Read `{wiki_output_dir}/index.md` first for the big picture, then `{agent_output_dir}/INDEX.md` for grep-friendly lookup.
-Developers: Read `{kb_filename}` for full architecture reference, open `{maps_output_dir}/index.html` for the visual gallery.
+{readme_agents_line}
+{readme_developers_line}
 {anchor_end}
 """
 
-_INJECTION_TEXT_RST = """{anchor_start}
-Knowledge Base
---------------
+_README_INTRO_RST_DEFAULT = (
+    "This project has been analyzed by `ReadMenator <https://github.com/grisuno/ReadMenator>`_,\n"
+    "a zero-token polyglot static analysis tool."
+)
 
-This project has been analyzed by `ReadMenator <https://github.com/grisuno/ReadMenator>`_,
-a zero-token polyglot static analysis tool. Regenerate with
-``pip install readmenator && readmenator . --rebuild``. Analysis outputs:
+_INJECTION_TEXT_RST = """{anchor_start}
+{readme_heading}
+{readme_heading_underline}
+
+{readme_intro} Regenerate with
+``{readme_regen_command}``. Analysis outputs:
 
 - **{kb_filename}** -- Full architecture reference with all classes, functions,
   imports, dependency graphs, UML class diagrams, security audit findings,
@@ -108,8 +120,8 @@ a zero-token polyglot static analysis tool. Regenerate with
 - **{cursorrules_output}** -- Generated AI assistant rules.
 - **{sarif_output}** -- SARIF audit (when security scan is on).
 
-AI agents: Read ``{wiki_output_dir}/index.md`` first, then ``{agent_output_dir}/INDEX.md``.
-Developers: Read ``{kb_filename}`` for full architecture reference.
+{readme_agents_line}
+{readme_developers_line}
 {anchor_end}
 """
 
@@ -149,6 +161,11 @@ class ReadmeInjector:
         forcegraph_output: str = "graph-force.html",
         bundlegraph_output: str = "graph-bundle.html",
         apidocs_output_dir: str = "readmenator-apidocs",
+        readme_heading: str = "",
+        readme_intro: str = "",
+        readme_agents_line: str = "",
+        readme_developers_line: str = "",
+        readme_regen_command: str = "",
     ) -> None:
         """Initialise the injector with output locations.
 
@@ -170,6 +187,11 @@ class ReadmeInjector:
             forcegraph_output: Force-graph explorer filename.
             bundlegraph_output: Edge bundle explorer filename.
             apidocs_output_dir: API reference output directory.
+            readme_heading: Override for the section heading ("" = built-in).
+            readme_intro: Override for the opening paragraph ("" = built-in).
+            readme_agents_line: Override for the closing agents line ("" = built-in).
+            readme_developers_line: Override for the closing developers line ("" = built-in).
+            readme_regen_command: Override for the rebuild command ("" = built-in).
         """
         self._kb_filename = kb_filename
         self._agent_output_dir = agent_output_dir
@@ -188,6 +210,11 @@ class ReadmeInjector:
         self._forcegraph_output = forcegraph_output
         self._bundlegraph_output = bundlegraph_output
         self._apidocs_output_dir = apidocs_output_dir
+        self._readme_heading = readme_heading
+        self._readme_intro = readme_intro
+        self._readme_agents_line = readme_agents_line
+        self._readme_developers_line = readme_developers_line
+        self._readme_regen_command = readme_regen_command
 
     def inject(self, project_root: str) -> bool:
         """Inject or refresh the knowledge base section in the README.
@@ -342,6 +369,27 @@ class ReadmeInjector:
         Returns:
             Injection block with all output locations filled in.
         """
+        is_rst = suffix == ".rst"
+        heading = self._readme_heading.strip() or _README_HEADING_DEFAULT
+        if is_rst:
+            intro = self._readme_intro.strip() or _README_INTRO_RST_DEFAULT
+            agents = self._readme_agents_line.strip() or (
+                f"AI agents: Read ``{self._wiki_output_dir}/index.md`` first, "
+                f"then ``{self._agent_output_dir}/INDEX.md``."
+            )
+            developers = self._readme_developers_line.strip() or (
+                f"Developers: Read ``{self._kb_filename}`` for full architecture reference."
+            )
+        else:
+            intro = self._readme_intro.strip() or _README_INTRO_DEFAULT
+            agents = self._readme_agents_line.strip() or (
+                f"AI agents: Read `{self._wiki_output_dir}/index.md` first for the big picture, "
+                f"then `{self._agent_output_dir}/INDEX.md` for grep-friendly lookup."
+            )
+            developers = self._readme_developers_line.strip() or (
+                f"Developers: Read `{self._kb_filename}` for full architecture reference, "
+                f"open `{self._maps_output_dir}/index.html` for the visual gallery."
+            )
         kwargs = dict(
             anchor_start=_ANCHOR_START,
             anchor_end=_ANCHOR_END,
@@ -362,7 +410,15 @@ class ReadmeInjector:
             forcegraph_output=self._forcegraph_output,
             bundlegraph_output=self._bundlegraph_output,
             apidocs_output_dir=self._apidocs_output_dir,
+            readme_heading=heading,
+            readme_heading_underline="-" * max(len(heading), 1),
+            readme_intro=intro,
+            readme_agents_line=agents,
+            readme_developers_line=developers,
+            readme_regen_command=(
+                self._readme_regen_command.strip() or _README_REGEN_DEFAULT
+            ),
         )
-        if suffix == ".rst":
+        if is_rst:
             return _INJECTION_TEXT_RST.format(**kwargs)
         return _INJECTION_TEXT_MD.format(**kwargs)

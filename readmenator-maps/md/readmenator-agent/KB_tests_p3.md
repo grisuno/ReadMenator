@@ -296,6 +296,46 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `builder` (function, line 65) `def builder()`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
 
+## tests/test_project_config.py
+- Doc: Contract tests for per-project readmenator.toml configuration.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestProjectConfigContract` (class, line 25) `class TestProjectConfigContract(TestCase)`
+  - `TestViewerModalBehavior` (class, line 280) `class TestViewerModalBehavior(TestCase)`
+  - `test_template_parses_back_to_defaults` (method, line 26) `def test_template_parses_back_to_defaults(self)`
+  - `test_toml_map_covers_deliverables` (method, line 36) `def test_toml_map_covers_deliverables(self)`
+  - `test_ensure_creates_but_never_overwrites` (method, line 45) `def test_ensure_creates_but_never_overwrites(self)`
+  - `test_ensure_refuses_symlink` (method, line 55) `def test_ensure_refuses_symlink(self)`
+  - `test_load_applies_toml_over_defaults` (method, line 68) `def test_load_applies_toml_over_defaults(self)`
+  - `test_cli_flags_win_over_toml` (method, line 81) `def test_cli_flags_win_over_toml(self)`
+  - `test_load_ignores_broken_toml` (method, line 91) `def test_load_ignores_broken_toml(self)`
+  - `test_tuple_coercion` (method, line 99) `def test_tuple_coercion(self)`
+  - `test_viewer_config_dict_has_viewer_keys` (method, line 109) `def test_viewer_config_dict_has_viewer_keys(self)`
+  - `test_write_viewer_config` (method, line 115) `def test_write_viewer_config(self)`
+  - `test_forcegraph_embeds_config_modal` (method, line 123) `def test_forcegraph_embeds_config_modal(self)`
+  - `test_bundlegraph_embeds_config_modal` (method, line 132) `def test_bundlegraph_embeds_config_modal(self)`
+  - `test_flows_embeds_config_modal` (method, line 138) `def test_flows_embeds_config_modal(self)`
+  - `test_gallery_embeds_config_modal` (method, line 143) `def test_gallery_embeds_config_modal(self)`
+  - `test_maps_budgets_load_from_toml` (method, line 149) `def test_maps_budgets_load_from_toml(self)`
+  - `test_template_has_maps_and_messages_sections` (method, line 160) `def test_template_has_maps_and_messages_sections(self)`
+  - `test_example_toml_matches_template` (method, line 171) `def test_example_toml_matches_template(self)`
+  - `test_modal_schema_covers_maps_and_messages` (method, line 178) `def test_modal_schema_covers_maps_and_messages(self)`
+  - `test_messages_load_from_toml_with_multiline` (method, line 194) `def test_messages_load_from_toml_with_multiline(self)`
+  - `test_mini_parser_keeps_hash_inside_quotes` (method, line 205) `def test_mini_parser_keeps_hash_inside_quotes(self)`
+  - `test_readme_injector_message_overrides` (method, line 211) `def test_readme_injector_message_overrides(self)`
+  - `test_readme_injector_rst_underline_matches_heading` (method, line 234) `def test_readme_injector_rst_underline_matches_heading(self)`
+  - `test_agent_injector_message_overrides` (method, line 246) `def test_agent_injector_message_overrides(self)`
+  - `test_folder_readme_notice_override` (method, line 265) `def test_folder_readme_notice_override(self)`
+  - `test_gallery_config_button_matches_theme_style` (method, line 281) `def test_gallery_config_button_matches_theme_style(self)`
+  - `test_modal_applies_only_dirty_keys_with_honest_status` (method, line 286) `def test_modal_applies_only_dirty_keys_with_honest_status(self)`
+  - `test_modal_reset_asks_for_confirmation` (method, line 293) `def test_modal_reset_asks_for_confirmation(self)`
+  - `test_forcegraph_hook_maps_modal_keys_and_busts_ink_cache` (method, line 298) `def test_forcegraph_hook_maps_modal_keys_and_busts_ink_cache(self)`
+  - `test_bundlegraph_hook_rebuilds_labels_and_busts_ink` (method, line 311) `def test_bundlegraph_hook_rebuilds_labels_and_busts_ink(self)`
+  - `test_flows_hook_uses_global_draw` (method, line 317) `def test_flows_hook_uses_global_draw(self)`
+  - `test_toml_viewer_keys_reach_embedded_settings` (method, line 323) `def test_toml_viewer_keys_reach_embedded_settings(self)`
+- Depends on: `readmenator/_agent_injector.py`, `readmenator/_bundlegraph.py`, `readmenator/_bundlegraph_page.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_folder_readme.py`, `readmenator/_forcegraph.py`, `readmenator/_forcegraph_page.py`, `readmenator/_project_config.py`, `readmenator/_readme_injector.py`, `readmenator/_viewer_ui.py`
+
 ## tests/test_query.py
 - Layer: testing
 - Language: py
@@ -433,59 +473,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_inject_lists_all_artifacts` (method, line 168) `def test_inject_lists_all_artifacts(self)`
   - `test_inject_repairs_partial_anchor` (method, line 181) `def test_inject_repairs_partial_anchor(self)`
 - Depends on: `readmenator/_readme_injector.py`
-
-## tests/test_refactorizer.py
-- Doc: Contract tests for the MonolithRefactorizer.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestMonolithRefactorizerContract` (class, line 18) `class TestMonolithRefactorizerContract(TestCase)`
-  - `setUp` (method, line 21) `def setUp(self)`
-  - `_make_symbol` (method, line 25) `def _make_symbol(self, name, kind, line)`
-  - `_make_node` (method, line 28) `def _make_node(self, nid, symbols)`
-  - `_make_edge` (method, line 37) `def _make_edge(self, src, tgt)`
-  - `test_analyze_empty_graph_returns_empty` (method, line 40) `def test_analyze_empty_graph_returns_empty(self)`
-  - `test_analyze_ignores_small_files` (method, line 44) `def test_analyze_ignores_small_files(self)`
-  - `test_analyze_detects_large_file` (method, line 50) `def test_analyze_detects_large_file(self)`
-  - `test_analyze_generates_extract_class_for_multiple_classes` (method, line 59) `def test_analyze_generates_extract_class_for_multiple_classes(self)`
-  - `test_analyze_generates_extract_function_for_multiple_functions` (method, line 74) `def test_analyze_generates_extract_function_for_multiple_functions(self)`
-  - `test_analyze_splits_file_with_many_symbols` (method, line 89) `def test_analyze_splits_file_with_many_symbols(self)`
-  - `test_analyze_estimates_impact_from_resolved_edges` (method, line 97) `def test_analyze_estimates_impact_from_resolved_edges(self)`
-  - `test_generate_script_contains_shebang` (method, line 109) `def test_generate_script_contains_shebang(self)`
-  - `test_generate_script_contains_set_e` (method, line 129) `def test_generate_script_contains_set_e(self)`
-  - `test_generate_script_contains_sed_commands` (method, line 140) `def test_generate_script_contains_sed_commands(self)`
-  - `test_analyze_sorted_by_line_count` (method, line 160) `def test_analyze_sorted_by_line_count(self)`
-  - `test_analyze_respects_max_files_limit` (method, line 173) `def test_analyze_respects_max_files_limit(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_refactorizer.py`
-
-## tests/test_resolver.py
-- Doc: Contract tests for the ImportResolver.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestImportResolverContract` (class, line 15) `class TestImportResolverContract(TestCase)`
-  - `test_resolves_python_module_dotpath` (method, line 18) `def test_resolves_python_module_dotpath(self)`
-  - `test_resolves_relative_import` (method, line 25) `def test_resolves_relative_import(self)`
-  - `test_resolves_extensionless_python_import` (method, line 32) `def test_resolves_extensionless_python_import(self)`
-  - `test_resolves_package_init` (method, line 39) `def test_resolves_package_init(self)`
-  - `test_returns_none_for_external_stdlib` (method, line 46) `def test_returns_none_for_external_stdlib(self)`
-  - `test_returns_none_for_unknown_import` (method, line 53) `def test_returns_none_for_unknown_import(self)`
-  - `test_resolves_stem_match_when_unique` (method, line 60) `def test_resolves_stem_match_when_unique(self)`
-  - `test_returns_none_for_empty_import` (method, line 67) `def test_returns_none_for_empty_import(self)`
-  - `test_resolves_go_import` (method, line 72) `def test_resolves_go_import(self)`
-  - `test_resolves_same_directory_import` (method, line 79) `def test_resolves_same_directory_import(self)`
-  - `test_resolves_c_quoted_header_same_dir` (method, line 86) `def test_resolves_c_quoted_header_same_dir(self)`
-  - `test_resolves_c_quoted_header_subdir` (method, line 93) `def test_resolves_c_quoted_header_subdir(self)`
-  - `test_resolves_c_extensionless_header` (method, line 100) `def test_resolves_c_extensionless_header(self)`
-  - `test_resolves_c_source_from_header_dir` (method, line 107) `def test_resolves_c_source_from_header_dir(self)`
-  - `test_resolves_cpp_header_same_dir` (method, line 114) `def test_resolves_cpp_header_same_dir(self)`
-  - `test_resolves_c_header_stem_across_dirs` (method, line 121) `def test_resolves_c_header_stem_across_dirs(self)`
-  - `test_returns_none_for_c_system_header` (method, line 128) `def test_returns_none_for_c_system_header(self)`
-  - `test_resolves_parent_dir_include` (method, line 135) `def test_resolves_parent_dir_include(self)`
-  - `test_resolves_parent_dir_include_despite_ambiguous_stem` (method, line 142) `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)`
-  - `test_resolves_include_dir_suffix_match` (method, line 149) `def test_resolves_include_dir_suffix_match(self)`
-  - `test_returns_none_for_ambiguous_suffix_match` (method, line 156) `def test_returns_none_for_ambiguous_suffix_match(self)`
-- Depends on: `readmenator/_resolver.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

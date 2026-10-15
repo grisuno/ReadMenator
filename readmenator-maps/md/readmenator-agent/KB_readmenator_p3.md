@@ -377,7 +377,7 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Language: py
 - Symbols:
   - `AnalyzerFactory` (class, line 67) `class AnalyzerFactory`
-  - `DeepAnalysisRunner` (class, line 476) `class DeepAnalysisRunner`
+  - `DeepAnalysisRunner` (class, line 484) `class DeepAnalysisRunner`
   - `__init__` (method, line 75) `def __init__(self, config)`
   - `scanner` (method, line 125) `def scanner(self)`
   - `generator` (method, line 131) `def generator(self)`
@@ -395,42 +395,68 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `uml` (method, line 207) `def uml(self)`
   - `wiki` (method, line 213) `def wiki(self)`
   - `readme_injector` (method, line 220) `def readme_injector(self)`
-  - `agent_injector` (method, line 244) `def agent_injector(self)`
-  - `gh_wiki` (method, line 254) `def gh_wiki(self)`
-  - `agent_output` (method, line 261) `def agent_output(self)`
-  - `diagram_builder` (method, line 267) `def diagram_builder(self)`
-  - `diagram_renderer` (method, line 274) `def diagram_renderer(self)`
-  - `diagram_validator` (method, line 281) `def diagram_validator(self)`
-  - `diagram_publisher` (method, line 288) `def diagram_publisher(self)`
-  - `vis_renderer` (method, line 295) `def vis_renderer(self)`
-  - `video` (method, line 302) `def video(self)`
-  - `concepts` (method, line 309) `def concepts(self)`
-  - `forcegraph` (method, line 316) `def forcegraph(self)`
-  - `bundlegraph` (method, line 323) `def bundlegraph(self)`
-  - `analytics` (method, line 330) `def analytics(self)`
-  - `scantext` (method, line 337) `def scantext(self)`
-  - `provenance` (method, line 344) `def provenance(self)`
-  - `exclusions` (method, line 351) `def exclusions(self)`
-  - `embedder` (method, line 358) `def embedder(self)`
-  - `graphrag` (method, line 365) `def graphrag(self)`
-  - `graphrag_store` (method, line 372) `def graphrag_store(self)`
-  - `memory` (method, line 379) `def memory(self)`
-  - `skills` (method, line 386) `def skills(self)`
-  - `sourceview` (method, line 393) `def sourceview(self)`
-  - `symindex` (method, line 400) `def symindex(self)`
-  - `components` (method, line 407) `def components(self)`
-  - `folder_readme` (method, line 414) `def folder_readme(self)`
-  - `apidocs` (method, line 421) `def apidocs(self)`
-  - `apidocs_writer` (method, line 428) `def apidocs_writer(self)`
-  - `ollama` (method, line 435) `def ollama(self)`
-  - `build_typed_graph` (method, line 441) `def build_typed_graph(self, nodes, edges, resolved_edges)`
-  - `make_ranker` (method, line 451) `def make_ranker(self, typed_graph)`
-  - `last_category` (method, line 468) `def last_category(self)`
-  - `last_typed_graph` (method, line 472) `def last_typed_graph(self)`
-  - `__init__` (method, line 485) `def __init__(self, factory)`
-  - `run` (method, line 488) `def run(self, nodes, edges, resolved_edges, layers, content_map)`
+  - `agent_injector` (method, line 249) `def agent_injector(self)`
+  - `gh_wiki` (method, line 262) `def gh_wiki(self)`
+  - `agent_output` (method, line 269) `def agent_output(self)`
+  - `diagram_builder` (method, line 275) `def diagram_builder(self)`
+  - `diagram_renderer` (method, line 282) `def diagram_renderer(self)`
+  - `diagram_validator` (method, line 289) `def diagram_validator(self)`
+  - `diagram_publisher` (method, line 296) `def diagram_publisher(self)`
+  - `vis_renderer` (method, line 303) `def vis_renderer(self)`
+  - `video` (method, line 310) `def video(self)`
+  - `concepts` (method, line 317) `def concepts(self)`
+  - `forcegraph` (method, line 324) `def forcegraph(self)`
+  - `bundlegraph` (method, line 331) `def bundlegraph(self)`
+  - `analytics` (method, line 338) `def analytics(self)`
+  - `scantext` (method, line 345) `def scantext(self)`
+  - `provenance` (method, line 352) `def provenance(self)`
+  - `exclusions` (method, line 359) `def exclusions(self)`
+  - `embedder` (method, line 366) `def embedder(self)`
+  - `graphrag` (method, line 373) `def graphrag(self)`
+  - `graphrag_store` (method, line 380) `def graphrag_store(self)`
+  - `memory` (method, line 387) `def memory(self)`
+  - `skills` (method, line 394) `def skills(self)`
+  - `sourceview` (method, line 401) `def sourceview(self)`
+  - `symindex` (method, line 408) `def symindex(self)`
+  - `components` (method, line 415) `def components(self)`
+  - `folder_readme` (method, line 422) `def folder_readme(self)`
+  - `apidocs` (method, line 429) `def apidocs(self)`
+  - `apidocs_writer` (method, line 436) `def apidocs_writer(self)`
+  - `ollama` (method, line 443) `def ollama(self)`
+  - `build_typed_graph` (method, line 449) `def build_typed_graph(self, nodes, edges, resolved_edges)`
+  - `make_ranker` (method, line 459) `def make_ranker(self, typed_graph)`
+  - `last_category` (method, line 476) `def last_category(self)`
+  - `last_typed_graph` (method, line 480) `def last_typed_graph(self)`
+  - `__init__` (method, line 493) `def __init__(self, factory)`
+  - `run` (method, line 496) `def run(self, nodes, edges, resolved_edges, layers, content_map)`
 - Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_bundlegraph.py`, `readmenator/_category.py`, `readmenator/_components.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_folder_readme.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_ollama.py`, `readmenator/_provenance.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_sourceview.py`, `readmenator/_symindex.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`
 - Imported by: `readmenator/_app.py`
+
+## readmenator/_project_config.py
+- Doc: Per-project persistent configuration (readmenator.toml).
+- Layer: infrastructure
+- Language: py
+- Symbols:
+  - `_toml_str` (function, line 136) `def _toml_str(value)`
+  - `_toml_value` (function, line 148) `def _toml_value(value)`
+  - `template_text` (function, line 159) `def template_text(config)`
+  - `config_path` (function, line 286) `def config_path(project_root, config)`
+  - `ensure_project_config` (function, line 300) `def ensure_project_config(project_root, config)`
+  - `_mini_toml_parse` (function, line 333) `def _mini_toml_parse(text)`
+  - `_strip_toml_comment` (function, line 367) `def _strip_toml_comment(value)`
+  - `_mini_toml_value` (function, line 395) `def _mini_toml_value(value)`
+  - `parse_toml` (function, line 450) `def parse_toml(text)`
+  - `_field_types` (function, line 484) `def _field_types()`
+  - `_coerce` (function, line 492) `def _coerce(field_name, value, default)`
+  - `load_project_config` (function, line 544) `def load_project_config(project_root, base)`
+  - `display_name` (function, line 595) `def display_name(config, fallback)`
+  - `safe_url` (function, line 609) `def safe_url(url)`
+  - `safe_color` (function, line 624) `def safe_color(value, fallback)`
+  - `branding_css` (function, line 642) `def branding_css(config)`
+  - `viewer_config_dict` (function, line 663) `def viewer_config_dict(config, project_root)`
+  - `write_viewer_config` (function, line 717) `def write_viewer_config(maps_dir, config, project_root)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `readmenator/_viewer_ui.py`, `tests/test_project_config.py`
 
 ## readmenator/_projections.py
 - Doc: Functors and projections for the readmenator code category.
@@ -454,39 +480,6 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `map_morphism` (method, line 91) `def map_morphism(self, m)`
 - Depends on: `readmenator/_category.py`, `readmenator/_models.py`
 - Imported by: `tests/test_ranking.py`
-
-## readmenator/_provenance.py
-- Doc: Evidence-provenance audit for readmenator security findings.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `ProvenanceFinding` (class, line 20) `class ProvenanceFinding`
-  - `ProvenanceAuditor` (class, line 46) `class ProvenanceAuditor`
-  - `_corpus_frequency` (function, line 153) `def _corpus_frequency(patterns, rows)`
-  - `is_inferred_only` (method, line 32) `def is_inferred_only(self)`
-  - `reading` (method, line 37) `def reading(self)`
-  - `__init__` (method, line 49) `def __init__(self, config)`
-  - `audit` (method, line 57) `def audit(self, findings, content_map)`
-  - `summary` (method, line 98) `def summary(self, findings)`
-  - `_snippet_in_content` (method, line 115) `def _snippet_in_content(self, file_path, snippet, content_map)`
-  - `_attach_frequency` (method, line 124) `def _attach_frequency(self, findings, content_map)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-- Imported by: `readmenator/_pipeline.py`, `tests/test_interactive_graph.py`
-
-## readmenator/_purpose.py
-- Doc: Purpose extraction shared by every agent-facing document generator.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `is_garbage_doc` (function, line 26) `def is_garbage_doc(text)`
-  - `clean_purpose` (function, line 43) `def clean_purpose(text)`
-  - `escape_cell` (function, line 66) `def escape_cell(text)`
-  - `truncate_words` (function, line 78) `def truncate_words(text, max_chars)`
-  - `first_sentence` (function, line 98) `def first_sentence(doc)`
-  - `_primary_symbol` (function, line 116) `def _primary_symbol(symbols)`
-  - `file_purpose` (function, line 140) `def file_purpose(node, max_chars)`
-- Depends on: `readmenator/_models.py`
-- Imported by: `readmenator/_agent_output.py`, `readmenator/_components.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `readmenator/_memory.py`, `readmenator/_wiki.py`, `tests/test_agent_friendliness.py`
 
 
 Next: [KB_readmenator_p4.md](KB_readmenator_p4.md)

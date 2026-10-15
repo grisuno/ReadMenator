@@ -390,8 +390,8 @@ Previous: [KB_tests.md](KB_tests.md)
   - `TestGalleryCardContract` (class, line 369) `class TestGalleryCardContract(TestCase)`
   - `TestForceGraphInspectorPayload` (class, line 426) `class TestForceGraphInspectorPayload(TestCase)`
   - `_inline_script` (function, line 477) `def _inline_script(html)`
-  - `_const_json` (function, line 482) `def _const_json(html, name)`
-  - `TestForceGraphExplorerInteraction` (class, line 493) `class TestForceGraphExplorerInteraction(TestCase)`
+  - `_const_json` (function, line 486) `def _const_json(html, name)`
+  - `TestForceGraphExplorerInteraction` (class, line 497) `class TestForceGraphExplorerInteraction(TestCase)`
   - `setUp` (method, line 55) `def setUp(self)`
   - `test_family_color_is_deterministic` (method, line 61) `def test_family_color_is_deterministic(self)`
   - `test_node_value_dampens_large_files` (method, line 66) `def test_node_value_dampens_large_files(self)`
@@ -426,16 +426,16 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_forcegraph_privacy_mode_strips_docs` (method, line 454) `def test_forcegraph_privacy_mode_strips_docs(self)`
   - `test_forcegraph_thumbnail_escapes_colors` (method, line 462) `def test_forcegraph_thumbnail_escapes_colors(self)`
   - `test_forcegraph_render_has_inspector_and_layouts` (method, line 470) `def test_forcegraph_render_has_inspector_and_layouts(self)`
-  - `setUp` (method, line 496) `def setUp(self)`
-  - `test_explorer_hit_tests_against_live_positions` (method, line 510) `def test_explorer_hit_tests_against_live_positions(self)`
-  - `test_explorer_3d_draws_flat_glyphs_on_overlay` (method, line 515) `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)`
-  - `test_explorer_3d_engine_is_pinned` (method, line 520) `def test_explorer_3d_engine_is_pinned(self)`
-  - `test_explorer_ships_edge_path_and_lens_actions` (method, line 526) `def test_explorer_ships_edge_path_and_lens_actions(self)`
-  - `test_explorer_settings_come_from_config` (method, line 531) `def test_explorer_settings_come_from_config(self)`
-  - `test_explorer_structural_edges_use_their_own_colors` (method, line 542) `def test_explorer_structural_edges_use_their_own_colors(self)`
-  - `test_explorer_placeholders_inside_data_are_left_alone` (method, line 549) `def test_explorer_placeholders_inside_data_are_left_alone(self)`
-  - `test_explorer_data_cannot_close_the_script` (method, line 559) `def test_explorer_data_cannot_close_the_script(self)`
-  - `test_explorer_script_is_valid_javascript` (method, line 567) `def test_explorer_script_is_valid_javascript(self)`
+  - `setUp` (method, line 500) `def setUp(self)`
+  - `test_explorer_hit_tests_against_live_positions` (method, line 514) `def test_explorer_hit_tests_against_live_positions(self)`
+  - `test_explorer_3d_draws_flat_glyphs_on_overlay` (method, line 519) `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)`
+  - `test_explorer_3d_engine_is_pinned` (method, line 524) `def test_explorer_3d_engine_is_pinned(self)`
+  - `test_explorer_ships_edge_path_and_lens_actions` (method, line 530) `def test_explorer_ships_edge_path_and_lens_actions(self)`
+  - `test_explorer_settings_come_from_config` (method, line 535) `def test_explorer_settings_come_from_config(self)`
+  - `test_explorer_structural_edges_use_their_own_colors` (method, line 546) `def test_explorer_structural_edges_use_their_own_colors(self)`
+  - `test_explorer_placeholders_inside_data_are_left_alone` (method, line 553) `def test_explorer_placeholders_inside_data_are_left_alone(self)`
+  - `test_explorer_data_cannot_close_the_script` (method, line 563) `def test_explorer_data_cannot_close_the_script(self)`
+  - `test_explorer_script_is_valid_javascript` (method, line 571) `def test_explorer_script_is_valid_javascript(self)`
 - Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
 
 ## tests/test_layer_rules.py

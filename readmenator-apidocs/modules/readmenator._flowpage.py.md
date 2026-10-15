@@ -28,8 +28,18 @@ flowchart LR
     n_readmenator__flowpage_py__render_flows_page(["render_flows_page"])
     n_readmenator__config_py__Config["_config.Config"]
     n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
+    n_readmenator__project_config_py__branding_css["_project_config.branding_css"]
+    n_readmenator__project_config_py__display_name["_project_config.display_name"]
+    n_readmenator__viewer_ui_py__home_anchor["_viewer_ui.home_anchor"]
+    n_readmenator__viewer_ui_py__modal_html["_viewer_ui.modal_html"]
+    n_readmenator__viewer_ui_py__modal_script["_viewer_ui.modal_script"]
     n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__config_py__Config
     n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__htmlpack_py__payload_script
+    n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__project_config_py__branding_css
+    n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__project_config_py__display_name
+    n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__viewer_ui_py__home_anchor
+    n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__viewer_ui_py__modal_html
+    n_readmenator__flowpage_py__render_flows_page -.-> n_readmenator__viewer_ui_py__modal_script
 ```
 
 ## Functions
@@ -38,7 +48,7 @@ flowchart LR
 
 ### `flows_payload_json`
 
-`function` | [readmenator/_flowpage.py:221](../../readmenator/_flowpage.py#L221)
+`function` | [readmenator/_flowpage.py:225](../../readmenator/_flowpage.py#L225)
 
 ```python
 def flows_payload_json(graphs: List[FlowGraph], api_href: str = '') -> str
@@ -61,7 +71,7 @@ Serialise laid-out graphs for embedding in a page (angle brackets and ampersands
 
 ### `render_flows_page`
 
-`function` | [readmenator/_flowpage.py:227](../../readmenator/_flowpage.py#L227)
+`function` | [readmenator/_flowpage.py:231](../../readmenator/_flowpage.py#L231)
 
 ```python
 def render_flows_page(graphs: List[FlowGraph], project_name: str, api_href: str = '', config: Optional[Config] = None) -> str
@@ -80,7 +90,7 @@ Render the standalone architecture and execution-flow page.
 
 **Returns:** `str` - Complete self-contained HTML document (zero external requests).
 
-*Calls:* [`Config`](readmenator._config.py.md#config), [`payload_script`](readmenator._htmlpack.py.md#payload_script)
+*Calls:* [`Config`](readmenator._config.py.md#config), [`payload_script`](readmenator._htmlpack.py.md#payload_script), [`branding_css`](readmenator._project_config.py.md#branding_css), [`display_name`](readmenator._project_config.py.md#display_name), [`home_anchor`](readmenator._viewer_ui.py.md#home_anchor), [`modal_html`](readmenator._viewer_ui.py.md#modal_html), [`modal_script`](readmenator._viewer_ui.py.md#modal_script)
 
 *Called by:* [`ApiDocsWriter.write`](readmenator._apidocs_render.py.md#apidocswriter-write)
 
@@ -90,7 +100,7 @@ Render the standalone architecture and execution-flow page.
 
 ### `flow_thumbnail_svg`
 
-`function` | [readmenator/_flowpage.py:251](../../readmenator/_flowpage.py#L251)
+`function` | [readmenator/_flowpage.py:264](../../readmenator/_flowpage.py#L264)
 
 ```python
 def flow_thumbnail_svg(graph: FlowGraph, width: int, height: int) -> str

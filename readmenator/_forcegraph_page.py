@@ -182,6 +182,7 @@ html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;
 .btn-view{border-color:var(--accent)!important;background:color-mix(in srgb,var(--accent) 14%,var(--mask))!important}
 @media (max-width:980px){.app{grid-template-columns:minmax(0,1fr)}#stage{min-height:62vh}#inspector{border-left:none;border-top:1px solid var(--border);max-height:none}#legend{width:min(290px,calc(100% - 24px))}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+__VIEWER_CSS__
 </style>
 <script src="__VENDOR_SRC__"></script>
 </head>
@@ -210,6 +211,7 @@ __HOME__
 <button type="button" id="btn-png" title="Export PNG snapshot of the current view">PNG</button>
 <button type="button" id="btn-json" title="Export graph JSON">JSON</button>
 <button type="button" id="btn-theme" title="Toggle dark and light theme ( T )">Theme</button>
+<button type="button" data-rm-config title="Viewer config (no reload)">Config</button>
 </div>
 </header>
 <div id="engine-error" role="alert"></div>
@@ -242,6 +244,7 @@ __HOME__
 <div id="src-scrim"></div>
 <aside id="src-viewer" role="dialog" aria-modal="true" aria-labelledby="src-title" aria-hidden="true"><div class="src-bar"><h2 id="src-title">Source</h2><span id="src-lang" class="badge"></span><button type="button" id="src-close" title="Close source viewer ( Esc )">Close</button></div><div id="src-meta" class="src-meta">Pick View on any file to read it here with syntax colors.</div><div id="src-body" class="src-body" tabindex="0"></div><div class="src-hint">Hover a symbol for docs &middot; Ctrl+Click jumps to its definition &middot; Esc closes</div></aside>
 <div id="src-tip" role="tooltip"></div>
+__VIEWER_MODAL__
 <script>__LOADER__</script>
 __DATA__
 __ANALYTICS__
@@ -983,7 +986,7 @@ function openSource(id,opts){
   if(!text){
     if(!SETTINGS.srcEnabled){$("src-meta").textContent=(n.file||n.label)+" · source viewer disabled (privacy mode or SOURCEVIEW_ENABLED off)";return;}
     const why=n.src_why||"";
-    if(why==="budget"){$("src-meta").textContent=(n.file||n.label)+" · cut by SOURCEVIEW budgets (raise SOURCEVIEW_MAX_FILES or SOURCEVIEW_MAX_TOTAL_CHARS and rebuild: readmenator . --rebuild)";return;}
+    if(why==="budget"){$("src-meta").textContent=(n.file||n.label)+" · cut by SOURCEVIEW budgets (raise [maps] sourceview_max_files / sourceview_max_total_chars in readmenator.toml, or in the Config modal, and rebuild)";return;}
     if(why==="empty"){$("src-meta").textContent=(n.file||n.label)+" · file is empty";return;}
     const file=n.file||n.label;
     const stale=()=>{if(my===SRC.job&&SRC.open)$("src-meta").textContent=file+" · no embedded source (file added or changed after the last build; rebuild: readmenator . --rebuild, republish Pages with readmenator . pages)";};
@@ -1409,6 +1412,33 @@ function screenOf(id){
   if(is3d){const q=PROJ_BY[id];return q?{x:q.x,y:q.y,r:q.r}:null;}
   if(!g2)return null;const s=g2.graph2ScreenCoords(n.x,n.y);return {x:s.x,y:s.y,r:radius(n)*(S.zoom||1)};
 }
+window.__RM_SETTINGS__=SETTINGS;
+window.ReadmenatorViewerApply=function(patch){
+  patch=patch||{};const handled=[];
+  const ALIAS={label_top_n:"labelTopN",label_zoom:"labelZoom",link_distance:"linkDistance",link_strength:"linkStrength",hulls_enabled:"hulls"};
+  const SETKEYS=["charge","linkDistance","linkStrength","nodeRelSize","hulls","hullFill","hullStroke","hullPad","particles","dimNode","dimLink","labelTopN","labelZoom","labelMax","labelHighlightMax","clusterStrength","collidePad","flyMs","flyZoom","arrowLen","arrowZoom","curveStep","hubTopN"];
+  for(const mk in patch){
+    const sk=ALIAS[mk]||mk;
+    if(SETKEYS.indexOf(sk)>=0&&patch[mk]!==SETTINGS[sk]){SETTINGS[sk]=patch[mk];handled.push(mk);}
+  }
+  if("mode" in patch&&patch.mode!==SETTINGS.mode){SETTINGS.mode=patch.mode;handled.push("mode");try{setView(patch.mode==="3d"?"3d":"2d");}catch(e){}}
+  if(handled.indexOf("hulls_enabled")>=0){try{S.hulls=!!SETTINGS.hulls;}catch(e){}}
+  if(handled.indexOf("label_top_n")>=0){
+    try{
+      labelSet.clear();
+      byRank.slice(0,Math.max(0,SETTINGS.labelTopN)).forEach(n=>labelSet.add(n.id));
+      RAW.nodes.forEach(n=>{if(n.type==="community"||n.type==="layer")labelSet.add(n.id);});
+    }catch(e){}
+  }
+  for(const k of ["theme","html_style","accent","accent2"])if(k in patch&&handled.indexOf(k)<0)handled.push(k);
+  if(!handled.length)return handled;
+  inkCache=null;
+  try{
+    if(handled.indexOf("charge")>=0||handled.indexOf("link_distance")>=0||handled.indexOf("link_strength")>=0){applyLayout(true);}
+    else{refresh();hud();}
+  }catch(e){try{refresh();}catch(_){}}
+  return handled;
+};
 window.ReadmenatorExplorer=Object.freeze({state:S,graph:()=>cur(),is3d:()=>is3d,select:id=>select(id,{fly:true}),selectEdge,path:runPath,lens:showLens,view:setView,colorBy:setColorBy,screenOf,openSource,closeSource,hitAt:(x,y)=>{const h=hitAt({x,y});return h?(h.node?{node:h.node.id}:{edge:h.link.key}):null;}});
 if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>resize()).observe($("stage"));
 window.addEventListener("resize",resize);
@@ -1416,6 +1446,7 @@ renderEmpty();
 if(applyHashSettings())ensure3D(()=>{is3d=true;mount();},()=>ensure2D(mount));else ensure2D(mount);
 },readmenatorPayloadError);
 </script>
+<script>__VIEWER_JS__</script>
 </body>
 </html>
 """

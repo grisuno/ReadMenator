@@ -2,6 +2,31 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_project_config.py` -> `readmenator/_config.py`
+- `tests/test_project_config.py` -> `readmenator/_diagrams.py`
+- `tests/test_project_config.py` -> `readmenator/_flowpage.py`
+- `tests/test_project_config.py` -> `readmenator/_folder_readme.py`
+- `tests/test_project_config.py` -> `readmenator/_forcegraph.py`
+- `tests/test_project_config.py` -> `readmenator/_forcegraph_page.py`
+- `tests/test_project_config.py` -> `readmenator/_project_config.py`
+- `tests/test_project_config.py` -> `readmenator/_readme_injector.py`
+- `tests/test_project_config.py` -> `readmenator/_viewer_ui.py`
+- `tests/test_query.py` -> `readmenator/_models.py`
+- `tests/test_query.py` -> `readmenator/_query.py`
+- `tests/test_ranking.py` -> `readmenator/_category.py`
+- `tests/test_ranking.py` -> `readmenator/_explain.py`
+- `tests/test_ranking.py` -> `readmenator/_models.py`
+- `tests/test_ranking.py` -> `readmenator/_projections.py`
+- `tests/test_ranking.py` -> `readmenator/_rank.py`
+- `tests/test_readme_injector.py` -> `readmenator/_readme_injector.py`
+- `tests/test_refactorizer.py` -> `readmenator/_config.py`
+- `tests/test_refactorizer.py` -> `readmenator/_models.py`
+- `tests/test_refactorizer.py` -> `readmenator/_refactorizer.py`
+- `tests/test_resolver.py` -> `readmenator/_resolver.py`
+- `tests/test_rule_gen.py` -> `readmenator/_config.py`
+- `tests/test_rule_gen.py` -> `readmenator/_models.py`
+- `tests/test_rule_gen.py` -> `readmenator/_rule_gen.py`
+- `tests/test_sarif.py` -> `readmenator/_config.py`
 - `tests/test_sarif.py` -> `readmenator/_models.py`
 - `tests/test_sarif.py` -> `readmenator/_sarif.py`
 - `tests/test_scanner.py` -> `readmenator/_config.py`
@@ -90,6 +115,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_models.py` -> __future__, dataclasses, typing
 - `readmenator/_ollama.py` -> __future__, json, re, typing, urllib.request
 - `readmenator/_pipeline.py` -> __future__, typing
+- `readmenator/_project_config.py` -> __future__, dataclasses, json, logging, pathlib, re, time, tomli, tomllib, typing
 - `readmenator/_projections.py` -> __future__, typing
 - `readmenator/_provenance.py` -> __future__, dataclasses, typing
 - `readmenator/_purpose.py` -> __future__, re, typing
@@ -110,6 +136,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
 - `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, textwrap, typing
+- `readmenator/_viewer_ui.py` -> __future__, html, json, typing
 - `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
 - `readmenator/_wiki.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
 - `readmenator/_yaralite.py` -> __future__, dataclasses, re, typing
@@ -172,6 +199,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_parsers.py` -> unittest, warnings
 - `tests/test_parsers_new.py` -> __future__, unittest
 - `tests/test_parsers_property.py` -> __future__, hypothesis, pathlib, sys, typing, unittest
+- `tests/test_project_config.py` -> dataclasses, json, pathlib, tempfile, unittest
 - `tests/test_query.py` -> unittest
 - `tests/test_ranking.py` -> __future__, pytest, typing
 - `tests/test_readme_injector.py` -> __future__, pathlib, shutil, tempfile, unittest

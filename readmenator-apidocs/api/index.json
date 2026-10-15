@@ -2,35 +2,35 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 96,
-  "entities": 1905,
+  "modules": 98,
+  "entities": 1958,
   "languages": {
-   "py": 96
+   "py": 98
   },
   "kinds": {
-   "attribute": 997,
+   "attribute": 1018,
    "class": 171,
    "classmethod": 1,
-   "constant": 71,
+   "constant": 83,
    "constructor": 77,
    "enum": 1,
    "exception": 1,
-   "function": 111,
+   "function": 129,
    "method": 313,
-   "module": 96,
+   "module": 98,
    "property": 61,
    "protocol": 1,
    "staticmethod": 4
   },
   "truncated": false,
-  "skipped_files": 55,
+  "skipped_files": 56,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 690,
-   "total": 837,
-   "percent": 82.4
+   "documented": 710,
+   "total": 857,
+   "percent": 82.8
   },
   "by_kind": {
    "class": {
@@ -59,9 +59,9 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 107,
-    "total": 111,
-    "percent": 96.4
+    "documented": 125,
+    "total": 129,
+    "percent": 96.9
    },
    "method": {
     "documented": 238,
@@ -69,8 +69,8 @@
     "percent": 76.0
    },
    "module": {
-    "documented": 95,
-    "total": 96,
+    "documented": 97,
+    "total": 98,
     "percent": 99.0
    },
    "property": {
@@ -345,6 +345,11 @@
     "total": 54,
     "percent": 59.3
    },
+   "readmenator/_project_config.py": {
+    "documented": 12,
+    "total": 12,
+    "percent": 100.0
+   },
    "readmenator/_projections.py": {
     "documented": 8,
     "total": 16,
@@ -443,6 +448,11 @@
    "readmenator/_video.py": {
     "documented": 38,
     "total": 38,
+    "percent": 100.0
+   },
+   "readmenator/_viewer_ui.py": {
+    "documented": 8,
+    "total": 8,
     "percent": 100.0
    },
    "readmenator/_watcher.py": {
@@ -661,7 +671,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 520
+   "entities": 541
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -829,6 +839,11 @@
    "entities": 54
   },
   {
+   "uid": "readmenator/_project_config.py",
+   "path": "modules/readmenator._project_config.py.jsonl",
+   "entities": 19
+  },
+  {
    "uid": "readmenator/_projections.py",
    "path": "modules/readmenator._projections.py.jsonl",
    "entities": 17
@@ -927,6 +942,11 @@
    "uid": "readmenator/_video.py",
    "path": "modules/readmenator._video.py.jsonl",
    "entities": 57
+  },
+  {
+   "uid": "readmenator/_viewer_ui.py",
+   "path": "modules/readmenator._viewer_ui.py.jsonl",
+   "entities": 13
   },
   {
    "uid": "readmenator/_watcher.py",

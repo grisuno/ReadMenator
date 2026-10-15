@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 96 modules, 1905 documented entities, documentation coverage 82.4% (690/837 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 98 modules, 1958 documented entities, documentation coverage 82.8% (710/857 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (96)
+Languages: py (98)
 
 ## Modules
 
@@ -69,6 +69,7 @@ Languages: py (96)
 | [`readmenator._models`](modules/readmenator._models.py.md) | Data model types for the readmenator knowledge graph. | 22 | 1 | 100.0% |
 | [`readmenator._ollama`](modules/readmenator._ollama.py.md) | Local Ollama client for optional LLM enrichment. | 1 | 6 | 100.0% |
 | [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | 2 | 51 | 59.3% |
+| [`readmenator._project_config`](modules/readmenator._project_config.py.md) | Per-project persistent configuration (readmenator.toml). | 0 | 11 | 100.0% |
 | [`readmenator._projections`](modules/readmenator._projections.py.md) | Functors and projections for the readmenator code category. | 4 | 11 | 50.0% |
 | [`readmenator._provenance`](modules/readmenator._provenance.py.md) | Evidence-provenance audit for readmenator security findings. | 2 | 5 | 100.0% |
 | [`readmenator._purpose`](modules/readmenator._purpose.py.md) | Purpose extraction shared by every agent-facing document generator. | 0 | 6 | 100.0% |
@@ -89,6 +90,7 @@ Languages: py (96)
 | [`readmenator._taint`](modules/readmenator._taint.py.md) | Taint propagation analysis of dangerous imports through the resolved import graph. | 1 | 2 | 75.0% |
 | [`readmenator._uml`](modules/readmenator._uml.py.md) | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | 1 | 3 | 20.0% |
 | [`readmenator._video`](modules/readmenator._video.py.md) | Cinematic codebase overview video, general purpose. | 2 | 35 | 100.0% |
+| [`readmenator._viewer_ui`](modules/readmenator._viewer_ui.py.md) | Shared Config button + modal for maps/explorer pages. | 0 | 7 | 100.0% |
 | [`readmenator._watcher`](modules/readmenator._watcher.py.md) | Filesystem watcher for auto-rebuilding the knowledge base. | 1 | 3 | 100.0% |
 | [`readmenator._wiki`](modules/readmenator._wiki.py.md) | Deterministic agent wiki generator for readmenator. | 1 | 4 | 100.0% |
 | [`readmenator._yaralite`](modules/readmenator._yaralite.py.md) | Zero-dependency YARA-lite rule parser and runner. | 4 | 4 | 100.0% |

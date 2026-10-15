@@ -555,5 +555,26 @@ defined here and consumed by reference elsewhere.
 | [`ARCH_DIAGRAM_MAX_PER_ROW`](#config-arch_diagram_max_per_row) | `int` | `4` |  |
 | [`ARCH_DIAGRAM_PANEL_FILES`](#config-arch_diagram_panel_files) | `int` | `40` |  |
 | [`FLOWS_OUTPUT`](#config-flows_output) | `str` | `'flows.html'` |  |
+| [`PROJECT_NAME`](#config-project_name) | `str` | `''` |  |
+| [`PROJECT_AUTHOR`](#config-project_author) | `str` | `''` |  |
+| [`PROJECT_DESCRIPTION`](#config-project_description) | `str` | `''` |  |
+| [`PROJECT_GITHUB_URL`](#config-project_github_url) | `str` | `''` |  |
+| [`PROJECT_PAGES_URL`](#config-project_pages_url) | `str` | `''` |  |
+| [`PROJECT_HOME_URL`](#config-project_home_url) | `str` | `''` |  |
+| [`PROJECT_LOGO_URL`](#config-project_logo_url) | `str` | `''` |  |
+| [`PROJECT_ACCENT`](#config-project_accent) | `str` | `'#22d3ee'` |  |
+| [`PROJECT_ACCENT2`](#config-project_accent2) | `str` | `'#f472b6'` |  |
+| [`MSG_README_HEADING`](#config-msg_readme_heading) | `str` | `''` |  |
+| [`MSG_README_INTRO`](#config-msg_readme_intro) | `str` | `''` |  |
+| [`MSG_README_AGENTS_LINE`](#config-msg_readme_agents_line) | `str` | `''` |  |
+| [`MSG_README_DEVELOPERS_LINE`](#config-msg_readme_developers_line) | `str` | `''` |  |
+| [`MSG_README_REGEN_COMMAND`](#config-msg_readme_regen_command) | `str` | `''` |  |
+| [`MSG_AGENT_HEADING`](#config-msg_agent_heading) | `str` | `''` |  |
+| [`MSG_AGENT_INTRO`](#config-msg_agent_intro) | `str` | `''` |  |
+| [`MSG_AGENT_EXTRA`](#config-msg_agent_extra) | `str` | `''` |  |
+| [`MSG_FOLDER_NOTICE`](#config-msg_folder_notice) | `str` | `''` |  |
+| [`PROJECT_CONFIG_FILENAME`](#config-project_config_filename) | `str` | `'readmenator.toml'` |  |
+| [`PROJECT_CONFIG_ENABLED`](#config-project_config_enabled) | `bool` | `True` |  |
+| [`VIEWER_CONFIG_FILENAME`](#config-viewer_config_filename) | `str` | `'config.json'` |  |
 
 ---

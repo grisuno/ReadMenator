@@ -38,6 +38,10 @@ flowchart LR
     n_readmenator__graphlayout_py__spherical_edge_bundling["_graphlayout.spherical_edge_bundling"]
     n_readmenator__forcegraph_py__ForceGraphRenderer_group_colors["_forcegraph.ForceGraphRenderer.group_colors"]
     n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
+    n_readmenator__project_config_py__branding_css["_project_config.branding_css"]
+    n_readmenator__viewer_ui_py__home_anchor["_viewer_ui.home_anchor"]
+    n_readmenator__viewer_ui_py__modal_html["_viewer_ui.modal_html"]
+    n_readmenator__viewer_ui_py__modal_script["_viewer_ui.modal_script"]
     n_readmenator__bundlegraph_py__BundleGraphRenderer_render --> n_readmenator__bundlegraph_py__BundleGraphRenderer_build_payload
     n_readmenator__bundlegraph_py__BundleGraphRenderer_render --> n_readmenator__bundlegraph_py__BundleGraphRenderer_page_settings
     n_readmenator__bundlegraph_py__BundleGraphRenderer_write --> n_readmenator__bundlegraph_py__BundleGraphRenderer_render
@@ -50,6 +54,10 @@ flowchart LR
     n_readmenator__bundlegraph_py__BundleGraphRenderer_build_payload -.-> n_readmenator__graphlayout_py__spherical_edge_bundling
     n_readmenator__bundlegraph_py__BundleGraphRenderer_page_settings -.-> n_readmenator__forcegraph_py__ForceGraphRenderer_group_colors
     n_readmenator__bundlegraph_py__BundleGraphRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
+    n_readmenator__bundlegraph_py__BundleGraphRenderer_render -.-> n_readmenator__project_config_py__branding_css
+    n_readmenator__bundlegraph_py__BundleGraphRenderer_render -.-> n_readmenator__viewer_ui_py__home_anchor
+    n_readmenator__bundlegraph_py__BundleGraphRenderer_render -.-> n_readmenator__viewer_ui_py__modal_html
+    n_readmenator__bundlegraph_py__BundleGraphRenderer_render -.-> n_readmenator__viewer_ui_py__modal_script
     n_readmenator__bundlegraph_py__BundleGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__hierarchical_edge_bundling
 ```
 
@@ -59,7 +67,7 @@ flowchart LR
 
 ### `BundleGraphRenderer`
 
-`class` | [readmenator/_bundlegraph.py:49](../../readmenator/_bundlegraph.py#L49)
+`class` | [readmenator/_bundlegraph.py:51](../../readmenator/_bundlegraph.py#L51)
 
 ```python
 class BundleGraphRenderer
@@ -82,7 +90,7 @@ Builds the bundle payload and renders the edge bundle explorer page.
 
 #### `BundleGraphRenderer.__init__`
 
-`constructor` | [readmenator/_bundlegraph.py:52](../../readmenator/_bundlegraph.py#L52)
+`constructor` | [readmenator/_bundlegraph.py:54](../../readmenator/_bundlegraph.py#L54)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -104,7 +112,7 @@ Initialise with application configuration.
 
 #### `BundleGraphRenderer.build_payload`
 
-`method` | [readmenator/_bundlegraph.py:61](../../readmenator/_bundlegraph.py#L61)
+`method` | [readmenator/_bundlegraph.py:63](../../readmenator/_bundlegraph.py#L63)
 
 ```python
 def build_payload(self, force_payload: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Any]
@@ -136,7 +144,7 @@ directed file pairs.
 
 #### `BundleGraphRenderer.page_settings`
 
-`method` | [readmenator/_bundlegraph.py:182](../../readmenator/_bundlegraph.py#L182)
+`method` | [readmenator/_bundlegraph.py:184](../../readmenator/_bundlegraph.py#L184)
 
 ```python
 def page_settings(self, force_payload: Dict[str, List[Dict[str, Any]]], explorer_href: Optional[str], live_api: bool = False) -> Dict[str, Any]
@@ -162,7 +170,7 @@ Collect the page settings serialized into the HTML.
 
 #### `BundleGraphRenderer.render`
 
-`method` | [readmenator/_bundlegraph.py:226](../../readmenator/_bundlegraph.py#L226)
+`method` | [readmenator/_bundlegraph.py:228](../../readmenator/_bundlegraph.py#L228)
 
 ```python
 def render(self, force_payload: Dict[str, List[Dict[str, Any]]], title: str = 'Edge Bundles', home_href: Optional[str] = 'index.html', explorer_href: Optional[str] = None, live_api: bool = False) -> str
@@ -182,7 +190,7 @@ Render the standalone edge bundle explorer HTML document.
 
 **Returns:** `str` - Complete HTML document as a string.
 
-*Calls:* [`BundleGraphRenderer.build_payload`](#bundlegraphrenderer-build_payload), [`BundleGraphRenderer.page_settings`](#bundlegraphrenderer-page_settings), [`payload_script`](readmenator._htmlpack.py.md#payload_script)
+*Calls:* [`BundleGraphRenderer.build_payload`](#bundlegraphrenderer-build_payload), [`BundleGraphRenderer.page_settings`](#bundlegraphrenderer-page_settings), [`payload_script`](readmenator._htmlpack.py.md#payload_script), [`branding_css`](readmenator._project_config.py.md#branding_css), [`home_anchor`](readmenator._viewer_ui.py.md#home_anchor), [`modal_html`](readmenator._viewer_ui.py.md#modal_html), [`modal_script`](readmenator._viewer_ui.py.md#modal_script)
 
 *Called by:* [`BundleGraphRenderer.write`](#bundlegraphrenderer-write)
 
@@ -190,7 +198,7 @@ Render the standalone edge bundle explorer HTML document.
 
 #### `BundleGraphRenderer.write`
 
-`method` | [readmenator/_bundlegraph.py:265](../../readmenator/_bundlegraph.py#L265)
+`method` | [readmenator/_bundlegraph.py:273](../../readmenator/_bundlegraph.py#L273)
 
 ```python
 def write(self, output_path: str | Path, force_payload: Dict[str, List[Dict[str, Any]]], title: str = 'Edge Bundles', home_href: Optional[str] = 'index.html', explorer_href: Optional[str] = None) -> str
@@ -216,7 +224,7 @@ Write the edge bundle explorer HTML document.
 
 #### `BundleGraphRenderer.thumbnail_svg`
 
-`method` | [readmenator/_bundlegraph.py:291](../../readmenator/_bundlegraph.py#L291)
+`method` | [readmenator/_bundlegraph.py:299](../../readmenator/_bundlegraph.py#L299)
 
 ```python
 def thumbnail_svg(self, force_payload: Dict[str, List[Dict[str, Any]]]) -> str
@@ -246,7 +254,7 @@ reach the markup.
 
 ### `BUNDLE_RELATIONS`
 
-`constant` | [readmenator/_bundlegraph.py:30](../../readmenator/_bundlegraph.py#L30)
+`constant` | [readmenator/_bundlegraph.py:32](../../readmenator/_bundlegraph.py#L32)
 
 ```python
 BUNDLE_RELATIONS = ('resolved_imports', 'imports', 'calls', 'inherits')
@@ -258,7 +266,7 @@ BUNDLE_RELATIONS = ('resolved_imports', 'imports', 'calls', 'inherits')
 
 ### `UNASSIGNED_KEY`
 
-`constant` | [readmenator/_bundlegraph.py:32](../../readmenator/_bundlegraph.py#L32)
+`constant` | [readmenator/_bundlegraph.py:34](../../readmenator/_bundlegraph.py#L34)
 
 ```python
 UNASSIGNED_KEY = 'unassigned'
@@ -270,7 +278,7 @@ UNASSIGNED_KEY = 'unassigned'
 
 ### `COORD_DIGITS`
 
-`constant` | [readmenator/_bundlegraph.py:34](../../readmenator/_bundlegraph.py#L34)
+`constant` | [readmenator/_bundlegraph.py:36](../../readmenator/_bundlegraph.py#L36)
 
 ```python
 COORD_DIGITS = 5

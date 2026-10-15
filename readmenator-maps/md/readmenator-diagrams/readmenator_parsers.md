@@ -1,6 +1,6 @@
 # readmenator/parsers
 
-readmenator/parsers groups 37 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Dead code detection for the readmenator knowledge graph.
+readmenator/parsers groups 35 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.
 
 ```mermaid
 graph LR
@@ -11,18 +11,17 @@ graph LR
 
 ## readmenator (2.1)
 
-readmenator groups 28 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Dead code detection for the readmenator knowledge graph.
+readmenator groups 27 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.
 
 ## tests (2.2)
 
-tests groups 9 files (py) around TestDeadCodeStripperContract, setUp, _make_symbol, _make_node, _make_edge. Contract tests for the DeadCodeStripper.
+tests groups 8 files (py) around TestMermaidRendererContract, setUp, test_renders_graph_header, test_renders_module_node, test_renders_symbol_subnodes. TestMermaidEdgeBudget: Contract: the structural map never exceeds Mermaid's 500-edge...
 
 **Files**:
 
-- readmenator/_dead_code.py
 - readmenator/_mermaid.py
 - readmenator/_models.py
-- readmenator/_refactorizer.py
+- readmenator/_rule_gen.py
 - readmenator/_sarif.py
 - readmenator/_scanner.py
 - readmenator/_taint.py
@@ -47,11 +46,10 @@ tests groups 9 files (py) around TestDeadCodeStripperContract, setUp, _make_symb
 - readmenator/parsers/_scala.py
 - readmenator/parsers/_shell.py
 - readmenator/parsers/_swift.py
-- tests/test_dead_code.py
 - tests/test_mermaid.py
 - tests/test_models.py
 - tests/test_parsers_property.py
-- tests/test_refactorizer.py
+- tests/test_rule_gen.py
 - tests/test_sarif.py
 - tests/test_scanner.py
 - tests/test_taint.py

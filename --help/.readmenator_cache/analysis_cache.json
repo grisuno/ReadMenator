@@ -1,0 +1,14 @@
+{
+  "analysis_v2": {
+    "god_nodes": [],
+    "communities": [],
+    "surprising_connections": [],
+    "suggested_questions": [
+      "What is the overall architecture of this codebase?"
+    ]
+  },
+  "layers": {},
+  "security": {
+    "findings": []
+  }
+}

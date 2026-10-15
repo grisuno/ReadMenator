@@ -25,7 +25,9 @@ from readmenator._forcegraph import ForceGraphRenderer
 from readmenator._graphlayout import hierarchical_edge_bundling, optimize_bundle_order, spherical_edge_bundling
 from readmenator._htmlpack import PAYLOAD_LOADER_JS, payload_script
 
-_PLACEHOLDER = re.compile(r"__(TITLE|HOME|EXPLORER|DATA|SETTINGS|LOADER)__")
+_PLACEHOLDER = re.compile(
+    r"__(TITLE|HOME|EXPLORER|DATA|SETTINGS|LOADER|VIEWER_CSS|VIEWER_MODAL|VIEWER_JS)__"
+)
 
 BUNDLE_RELATIONS = ("resolved_imports", "imports", "calls", "inherits")
 
@@ -252,13 +254,19 @@ class BundleGraphRenderer:
                 '<a class="home" href="' + html.escape(explorer_href, quote=True)
                 + '" title="Open the force-graph explorer (2D and 3D)">Force graph →</a>'
             )
+        from readmenator._project_config import branding_css
+        from readmenator._viewer_ui import VIEWER_MODAL_CSS, home_anchor, modal_html, modal_script
+
         values = {
             "TITLE": html.escape(title, quote=True),
-            "HOME": home,
+            "HOME": home + home_anchor(self._config),
             "EXPLORER": explorer,
             "DATA": payload_script("bundle-data", self.build_payload(force_payload), self._config, compact=False, escape="<>"),
             "LOADER": PAYLOAD_LOADER_JS,
             "SETTINGS": _json_script(self.page_settings(force_payload, explorer_href, live_api=live_api)),
+            "VIEWER_CSS": "<style>" + VIEWER_MODAL_CSS + branding_css(self._config) + "</style>",
+            "VIEWER_MODAL": modal_html(),
+            "VIEWER_JS": modal_script(self._config),
         }
         return _PLACEHOLDER.sub(lambda match: values[match.group(1)], BUNDLEGRAPH_PAGE_TEMPLATE)
 

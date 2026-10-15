@@ -135,6 +135,7 @@ html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;
 #src-tip .m{color:var(--muted)}#src-tip code{color:var(--muted);font-size:10.5px;display:block;margin-top:4px;white-space:pre-wrap;word-break:break-word}
 .btn-view{border-color:var(--accent)!important;background:color-mix(in srgb,var(--accent) 14%,var(--mask))!important}
 @media (max-width:900px){.app{grid-template-columns:1fr;grid-template-rows:minmax(420px,62vh) auto}#panel{border-left:none;border-top:1px solid var(--border)}.beta input{width:80px}}
+__VIEWER_CSS__
 </style>
 </head>
 <body>
@@ -163,6 +164,7 @@ html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;
   <button id="reset" title="Reset camera and focus (double-click the canvas)">Reset</button>
   <button id="png" title="Save the current view as PNG">PNG</button>
   <button id="theme" title="Toggle light and dark theme">Theme</button>
+  <button type="button" data-rm-config title="Viewer config (no reload)">Config</button>
 </header>
 <main class="app">
   <section id="stage" aria-label="Edge bundle canvas">
@@ -176,6 +178,7 @@ html[data-theme="light"]{--code:#f1f5f9;--kw:#0369a1;--str:#15803d;--cm:#94a3b8;
 <div id="src-scrim"></div>
 <aside id="src-viewer" role="dialog" aria-modal="true" aria-labelledby="src-title" aria-hidden="true"><div class="src-bar"><h2 id="src-title">Source</h2><span id="src-lang" class="badge"></span><button type="button" id="src-close" title="Close source viewer ( Esc )">Close</button></div><div id="src-meta" class="src-meta">Pick View on any file to read it here with syntax colors.</div><div id="src-body" class="src-body" tabindex="0"></div><div class="src-hint">Hover a symbol for docs &middot; Ctrl+Click jumps to its definition &middot; Esc closes</div></aside>
 <div id="src-tip" role="tooltip"></div>
+__VIEWER_MODAL__
 <script>__LOADER__</script>
 __DATA__
 <script>
@@ -492,7 +495,7 @@ function openSource(i,opts){
   if(!text){
     if(!CFG.srcEnabled){$("src-meta").textContent=n.f+" · source viewer disabled (privacy mode or SOURCEVIEW_ENABLED off)";return;}
     const why=n.src_why||"";
-    if(why==="budget"){$("src-meta").textContent=n.f+" · cut by SOURCEVIEW budgets (raise SOURCEVIEW_MAX_FILES or SOURCEVIEW_MAX_TOTAL_CHARS and rebuild: readmenator . --rebuild)";return;}
+    if(why==="budget"){$("src-meta").textContent=n.f+" · cut by SOURCEVIEW budgets (raise [maps] sourceview_max_files / sourceview_max_total_chars in readmenator.toml, or in the Config modal, and rebuild)";return;}
     if(why==="empty"){$("src-meta").textContent=n.f+" · file is empty";return;}
     const stale=()=>{if(my===SRC.job&&SRC.open)$("src-meta").textContent=n.f+" · no embedded source (file added or changed after the last build; rebuild: readmenator . --rebuild, republish Pages with readmenator . pages)";};
     if(CFG.srcLive&&location.protocol.indexOf("http")===0&&typeof fetch==="function"){
@@ -763,10 +766,31 @@ $("src-scrim").addEventListener("click",closeSource);
 $("src-body").addEventListener("mousemove",ev=>{const t=ev.target.closest?ev.target.closest(".tok-sym"):null;if(t&&t.dataset.sym)srcHover(t.dataset.sym,ev.clientX,ev.clientY);else $("src-tip").style.display="none";});
 $("src-body").addEventListener("mouseleave",()=>{$("src-tip").style.display="none";});
 $("src-body").addEventListener("click",ev=>{const t=ev.target.closest?ev.target.closest(".tok-sym"):null;if(!t)return;if(ev.ctrlKey||ev.metaKey){ev.preventDefault();srcFollow(t.dataset.sym,SRC.file);}else srcHover(t.dataset.sym,ev.clientX,ev.clientY);});
+window.__RM_VIEWER__={theme:CFG.theme||"dark",preset:"classic",motion_enabled:true,mode:CFG.mode||"2d",label_top_n:CFG.labelTopN||24,label_zoom:1.6,charge:-300,link_distance:120,link_strength:0.3,hulls_enabled:true,particles:CFG.particles||0,bundle_beta:CFG.beta||0.85,html_style:"dark"};
+try{var __rmStored=localStorage.getItem("readmenator.viewer.v1");if(__rmStored){var __rmP=JSON.parse(__rmStored);if(__rmP.bundle_beta!=null)setBeta(Number(__rmP.bundle_beta));if(__rmP.theme)document.documentElement.setAttribute("data-theme",__rmP.theme);}}catch(__rmE){}
+window.ReadmenatorViewerApply=function(patch){
+  patch=patch||{};const handled=[];
+  if(patch.bundle_beta!=null){setBeta(Number(patch.bundle_beta));handled.push("bundle_beta");}
+  if(patch.particles!=null){CFG.particles=Math.max(0,Math.round(Number(patch.particles)));handled.push("particles");}
+  if(patch.label_top_n!=null){
+    try{
+      topSet.clear();
+      byRank.slice(0,Math.max(0,Math.round(Number(patch.label_top_n)))).forEach(i=>topSet.add(i));
+    }catch(e){}
+    handled.push("label_top_n");
+  }
+  if(patch.theme||patch.html_style||patch.accent||patch.accent2){
+    INK=null;
+    try{renderLegend();draw(performance.now());}catch(e){}
+    ["theme","html_style","accent","accent2"].forEach(k=>{if(k in patch&&handled.indexOf(k)<0)handled.push(k);});
+  }
+  return handled;
+};
 window.ReadmenatorBundles=Object.freeze({state:S,focusNode,focusGroup,setView,setBeta,setColor,setDir,openSource,closeSource});
 requestAnimationFrame(frame);
 },readmenatorPayloadError);
 </script>
+<script>__VIEWER_JS__</script>
 </body>
 </html>
 """

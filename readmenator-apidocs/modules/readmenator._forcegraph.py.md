@@ -44,10 +44,12 @@ flowchart LR
     n_readmenator__sourceview_py__SourceViewBuilder_enabled["_sourceview.SourceViewBuilder.enabled"]
     n_readmenator__sourceview_py__SourceViewBuilder_to_payload["_sourceview.SourceViewBuilder.to_payload"]
     n_readmenator__htmlpack_py__payload_script["_htmlpack.payload_script"]
+    n_readmenator__project_config_py__branding_css["_project_config.branding_css"]
+    n_readmenator__viewer_ui_py__home_anchor["_viewer_ui.home_anchor"]
+    n_readmenator__viewer_ui_py__modal_html["_viewer_ui.modal_html"]
+    n_readmenator__viewer_ui_py__modal_script["_viewer_ui.modal_script"]
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg(["ForceGraphRenderer.thumbnail_svg"])
     n_readmenator__graphlayout_py__ForceAtlas2Settings["_graphlayout.ForceAtlas2Settings"]
-    n_readmenator__graphlayout_py__fit_frames["_graphlayout.fit_frames"]
-    n_readmenator__graphlayout_py__forceatlas2_frames["_graphlayout.forceatlas2_frames"]
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload --> n_readmenator__forcegraph_py__ForceGraphRenderer_edge_palette
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload --> n_readmenator__forcegraph_py__ForceGraphRenderer_node_palette
     n_readmenator__forcegraph_py__ForceGraphRenderer_render --> n_readmenator__forcegraph_py__ForceGraphRenderer_page_settings
@@ -67,9 +69,11 @@ flowchart LR
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload -.-> n_readmenator__sourceview_py__SourceViewBuilder_enabled
     n_readmenator__forcegraph_py__ForceGraphRenderer_build_payload -.-> n_readmenator__sourceview_py__SourceViewBuilder_to_payload
     n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__htmlpack_py__payload_script
+    n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__project_config_py__branding_css
+    n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__viewer_ui_py__home_anchor
+    n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__viewer_ui_py__modal_html
+    n_readmenator__forcegraph_py__ForceGraphRenderer_render -.-> n_readmenator__viewer_ui_py__modal_script
     n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__ForceAtlas2Settings
-    n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__fit_frames
-    n_readmenator__forcegraph_py__ForceGraphRenderer_thumbnail_svg -.-> n_readmenator__graphlayout_py__forceatlas2_frames
 ```
 
 ## Classes
@@ -78,7 +82,7 @@ flowchart LR
 
 ### `ForceGraphRenderer`
 
-`class` | [readmenator/_forcegraph.py:80](../../readmenator/_forcegraph.py#L80)
+`class` | [readmenator/_forcegraph.py:82](../../readmenator/_forcegraph.py#L82)
 
 ```python
 class ForceGraphRenderer
@@ -108,7 +112,7 @@ Builds force-graph payloads and renders the explorer HTML.
 
 #### `ForceGraphRenderer.__init__`
 
-`constructor` | [readmenator/_forcegraph.py:83](../../readmenator/_forcegraph.py#L83)
+`constructor` | [readmenator/_forcegraph.py:85](../../readmenator/_forcegraph.py#L85)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -128,7 +132,7 @@ Initialise with application configuration.
 
 #### `ForceGraphRenderer.node_palette`
 
-`method` | [readmenator/_forcegraph.py:91](../../readmenator/_forcegraph.py#L91)
+`method` | [readmenator/_forcegraph.py:93](../../readmenator/_forcegraph.py#L93)
 
 ```python
 def node_palette(self) -> Dict[str, str]
@@ -144,7 +148,7 @@ Return the node-type color palette from configuration.
 
 #### `ForceGraphRenderer.edge_palette`
 
-`method` | [readmenator/_forcegraph.py:95](../../readmenator/_forcegraph.py#L95)
+`method` | [readmenator/_forcegraph.py:97](../../readmenator/_forcegraph.py#L97)
 
 ```python
 def edge_palette(self) -> Dict[str, str]
@@ -160,7 +164,7 @@ Return the edge-relation color palette from configuration.
 
 #### `ForceGraphRenderer.vendor_source`
 
-`method` | [readmenator/_forcegraph.py:99](../../readmenator/_forcegraph.py#L99)
+`method` | [readmenator/_forcegraph.py:101](../../readmenator/_forcegraph.py#L101)
 
 ```python
 def vendor_source(self) -> Path
@@ -176,7 +180,7 @@ Return the path of the vendored 2D engine shipped in the package.
 
 #### `ForceGraphRenderer.vendor_href`
 
-`method` | [readmenator/_forcegraph.py:107](../../readmenator/_forcegraph.py#L107)
+`method` | [readmenator/_forcegraph.py:109](../../readmenator/_forcegraph.py#L109)
 
 ```python
 def vendor_href(self) -> str
@@ -192,7 +196,7 @@ Return the relative vendor script href used beside the page.
 
 #### `ForceGraphRenderer.build_payload`
 
-`method` | [readmenator/_forcegraph.py:112](../../readmenator/_forcegraph.py#L112)
+`method` | [readmenator/_forcegraph.py:114](../../readmenator/_forcegraph.py#L114)
 
 ```python
 def build_payload(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None, analysis: Optional[AnalysisResult] = None, layers: Optional[Dict[str, str]] = None, findings: Optional[List[SecurityFinding]] = None, content_map: Optional[Dict[str, str]] = None) -> Dict[str, List[Dict[str, Any]]]
@@ -222,7 +226,7 @@ Build a heterogeneous graph payload for the explorer.
 
 #### `ForceGraphRenderer.render`
 
-`method` | [readmenator/_forcegraph.py:356](../../readmenator/_forcegraph.py#L356)
+`method` | [readmenator/_forcegraph.py:359](../../readmenator/_forcegraph.py#L359)
 
 ```python
 def render(self, payload: Dict[str, List[Dict[str, Any]]], analytics: Optional[Dict[str, Any]] = None, title: str = 'Force Graph', home_href: Optional[str] = 'index.html', live_api: bool = False) -> str
@@ -242,7 +246,7 @@ Render the standalone force-graph explorer HTML document.
 
 **Returns:** `str` - Complete HTML document as a string.
 
-*Calls:* [`ForceGraphRenderer.page_settings`](#forcegraphrenderer-page_settings), [`ForceGraphRenderer.vendor_href`](#forcegraphrenderer-vendor_href), [`payload_script`](readmenator._htmlpack.py.md#payload_script)
+*Calls:* [`ForceGraphRenderer.page_settings`](#forcegraphrenderer-page_settings), [`ForceGraphRenderer.vendor_href`](#forcegraphrenderer-vendor_href), [`payload_script`](readmenator._htmlpack.py.md#payload_script), [`branding_css`](readmenator._project_config.py.md#branding_css), [`home_anchor`](readmenator._viewer_ui.py.md#home_anchor), [`modal_html`](readmenator._viewer_ui.py.md#modal_html), [`modal_script`](readmenator._viewer_ui.py.md#modal_script)
 
 *Called by:* [`ExplorerState.__init__`](readmenator._explorer.py.md#explorerstate-__init__), [`GraphExporter.to_forcegraph`](readmenator._exporter.py.md#graphexporter-to_forcegraph), [`ForceGraphRenderer.write`](#forcegraphrenderer-write)
 
@@ -250,7 +254,7 @@ Render the standalone force-graph explorer HTML document.
 
 #### `ForceGraphRenderer.group_colors`
 
-`method` | [readmenator/_forcegraph.py:403](../../readmenator/_forcegraph.py#L403)
+`method` | [readmenator/_forcegraph.py:413](../../readmenator/_forcegraph.py#L413)
 
 ```python
 def group_colors(self, payload: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Dict[str, str]]
@@ -272,7 +276,7 @@ Return stable colors for the layer and language groupings in a payload.
 
 #### `ForceGraphRenderer.page_settings`
 
-`method` | [readmenator/_forcegraph.py:426](../../readmenator/_forcegraph.py#L426)
+`method` | [readmenator/_forcegraph.py:436](../../readmenator/_forcegraph.py#L436)
 
 ```python
 def page_settings(self, payload: Dict[str, List[Dict[str, Any]]], live_api: bool = False) -> Dict[str, Any]
@@ -297,7 +301,7 @@ Collect the explorer page settings serialized into the HTML.
 
 #### `ForceGraphRenderer.family_color`
 
-`method` | [readmenator/_forcegraph.py:502](../../readmenator/_forcegraph.py#L502)
+`method` | [readmenator/_forcegraph.py:512](../../readmenator/_forcegraph.py#L512)
 
 ```python
 def family_color(self, name: str) -> str
@@ -319,7 +323,7 @@ Return the configured stable hash color for a group name.
 
 #### `ForceGraphRenderer.thumbnail_svg`
 
-`method` | [readmenator/_forcegraph.py:530](../../readmenator/_forcegraph.py#L530)
+`method` | [readmenator/_forcegraph.py:540](../../readmenator/_forcegraph.py#L540)
 
 ```python
 def thumbnail_svg(self, payload: Dict[str, List[Dict[str, Any]]]) -> str
@@ -344,7 +348,7 @@ fragment is safe to embed in the gallery card.
 
 #### `ForceGraphRenderer.write`
 
-`method` | [readmenator/_forcegraph.py:570](../../readmenator/_forcegraph.py#L570)
+`method` | [readmenator/_forcegraph.py:580](../../readmenator/_forcegraph.py#L580)
 
 ```python
 def write(self, output_path: str | Path, payload: Dict[str, List[Dict[str, Any]]], analytics: Optional[Dict[str, Any]] = None, title: str = 'Force Graph', home_href: Optional[str] = 'index.html') -> str
@@ -370,7 +374,7 @@ Write the explorer HTML plus the vendored engine beside it.
 
 #### `ForceGraphRenderer.copy_vendor`
 
-`method` | [readmenator/_forcegraph.py:597](../../readmenator/_forcegraph.py#L597)
+`method` | [readmenator/_forcegraph.py:607](../../readmenator/_forcegraph.py#L607)
 
 ```python
 def copy_vendor(self, dest_dir: str | Path) -> Optional[Path]
@@ -398,7 +402,7 @@ Copy the vendored 2D engine next to an exported page.
 
 ### `family_color_from_name`
 
-`function` | [readmenator/_forcegraph.py:39](../../readmenator/_forcegraph.py#L39)
+`function` | [readmenator/_forcegraph.py:41](../../readmenator/_forcegraph.py#L41)
 
 ```python
 def family_color_from_name(name: str, sat_base: int = 55, sat_span: int = 12, light_base: int = 58, light_span: int = 10) -> str
@@ -424,7 +428,7 @@ Derive a stable, visually-distinct HSL color from a label.
 
 ### `node_value`
 
-`function` | [readmenator/_forcegraph.py:67](../../readmenator/_forcegraph.py#L67)
+`function` | [readmenator/_forcegraph.py:69](../../readmenator/_forcegraph.py#L69)
 
 ```python
 def node_value(symbols: int, degree: int) -> float

@@ -78,8 +78,11 @@ readmenator/
   _flowlayout.py      - FlowGraph model + deterministic layered layout (ranks, barycenter ordering, row wrapping, curve routing, lanes)
   _flowpage.py        - Offline interactive SVG viewer for flow graphs (flows.html, API Flows tab, gallery thumbnail)
   _pytypes.py         - Deterministic Python receiver typing (constructors, annotations, self attributes) for precise call graphs
+  _project_config.py  - Per-project readmenator.toml: ensure-from-template, allow-listed load (CLI wins), viewer config.json
+  _viewer_ui.py       - Shared Config button + modal for maps pages: live segment re-render, localStorage, Copy TOML
   _skills/          - Packaged Agent Skills: readmenator-orient, -ask, -change, -memory
   _vendor/          - Vendored frontend assets (force-graph 2D engine, MIT) copied beside exported pages
+example.readmenator.toml - Human template copy of the embedded project config template
 tests/
   test_config.py        - Config contract tests
   test_models.py        - Data model contract tests
@@ -154,6 +157,8 @@ tests/
 - Rule generation settings (RULE_GEN_ENABLED, RULE_GEN_MIN_PATTERN_COUNT, RULE_GEN_OUTPUT_DIR)
 - Layer violation settings (LAYER_VIOLATION_ENABLED, LAYER_VIOLATION_STRICT_MODE)
 - Privacy and gitignore settings (PRIVACY_MODE, GITIGNORE_AWARE)
+- Per-project config file (PROJECT_CONFIG_FILENAME, PROJECT_CONFIG_ENABLED, PROJECT_NAME) and viewer config (VIEWER_CONFIG_FILENAME)
+- Project branding (PROJECT_AUTHOR/DESCRIPTION/GITHUB_URL/PAGES_URL/HOME_URL/LOGO_URL/ACCENT/ACCENT2), injection message overrides (MSG_*), and maps budgets (SOURCEVIEW_* via [maps])
 - Context budget for token-optimized KB (CONTEXT_BUDGET)
 - Linter settings (LINTER_ENABLED, LINTER_MAX_LINES, LINTER_CROSS_LAYER_VIOLATIONS)
 - Dead code settings (DEAD_CODE_ENABLED, DEAD_CODE_ENTRY_POINTS, DEAD_CODE_QUARANTINE_DIR)
@@ -454,6 +459,22 @@ tests/
 - Pages boot as readmenatorPayloads([...]).then(function(__rmPayload){ unchanged body }): API browser (api-data), flows pages (fv-data), force-graph explorer (fg-data, fg-analytics; SETTINGS stays inline), edge bundle explorer (bundle-data; CFG stays inline), live vis maps (vis-*), offline SVG maps (map-*); the flows page restores the theme synchronously before data loads
 - read_payload_script(document, element_id) decodes either encoding for tests and tools
 - Rendered DOM is identical to the pre-compression pages in plain and compressed modes (verified in headless Chromium)
+
+### Project Config Contract
+- Per-project readmenator.toml (readmenator/_project_config.py): ensure-from-template on run/rebuild/update (never overwrites, symlinks refused), allow-listed TOML_MAP load ([project]/[branding]/[outputs]/[features]/[viewer]/[scan]/[maps]/[messages] -> Config fields), CLI flags win (non-default base values preserved), stdlib tomllib with zero-dep mini-parser fallback (3.10 safe, quote-aware `#` comments, `\n` escapes)
+- Viewer config: viewer_config_dict/write_viewer_config emit maps config.json (viewer + branding/messages/maps subsets + _meta) on every run/update/diagrams export; example.readmenator.toml mirrors template_text() output
+- CLI `config` ensures the file and prints its path plus the effective viewer JSON
+
+### Viewer Config UI Contract
+- Shared Config button + modal (readmenator/_viewer_ui.py): VIEWER_SCHEMA (viewer/branding/maps/messages sections with types/bounds/help, textarea for long texts), modal CSS/HTML/JS injected into force-graph, edge bundles, flows, and the maps gallery; placeholders filled in the existing single regex pass
+- Config buttons are native per-template buttons (gallery pairs `[data-rm-config]` with `#theme` in CSS); no custom button class
+- Apply diffs the form against its opening values, applies only what changed, and reports per key via window.ReadmenatorViewerApply(patch) returning handled keys (force-graph: snake_case modal keys mapped to camelCase SETTINGS, physics reheat, label-set rebuild, S.hulls sync, inkCache bust for theme/accents; bundles: live beta, label rebuild, INK bust; flows/gallery: redraw/theme, accents via live CSS vars); status shows "Live: ..." vs "Needs rebuild: ..."
+- Stored localStorage overrides auto-apply on page load; Reset asks for confirmation before clearing them back to last-rebuild defaults
+- Copy TOML emits paste-ready section blocks for readmenator.toml (strings escaped, incl. newlines)
+
+### Injection Messages Contract
+- Automated injection texts are overridable per project via [messages] (MSG_* Config fields, empty = built-in): ReadmeInjector heading/intro/agents/developers/regen (RST underline adapts to heading length), AgentInjector heading/intro/extra (extra appends raw project rules to every agent file), FolderReadmeWriter notice paragraph; override values are inserted verbatim (braces safe)
+- Wired through AnalyzerFactory from the effective Config, so `readmenator . --rebuild` applies them; idempotency compares the fully built text
 
 ### Interactive Explorer Modules Contract
 - ScanTextBuilder (readmenator/_scantext.py): build_for_node/build_corpus flatten names, symbols, signatures, imports, content snippets into labelled blobs; respects PRIVACY_MODE and SCANTEXT_* budgets; CLI `scan-text`

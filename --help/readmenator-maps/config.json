@@ -1,0 +1,21 @@
+{
+ "_meta": {
+  "generated_at": 1792020787,
+  "project": "--help",
+  "source": "readmenator.toml",
+  "version": 1
+ },
+ "bundle_beta": 0.85,
+ "charge": -300,
+ "html_style": "dark",
+ "hulls_enabled": true,
+ "label_top_n": 30,
+ "label_zoom": 1.6,
+ "link_distance": 120,
+ "link_strength": 0.3,
+ "mode": "2d",
+ "motion_enabled": true,
+ "particles": 4,
+ "preset": "classic",
+ "theme": "dark"
+}

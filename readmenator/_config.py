@@ -1198,3 +1198,45 @@ class Config:
     ARCH_DIAGRAM_PANEL_FILES: int = 40
 
     FLOWS_OUTPUT: str = "flows.html"
+
+    PROJECT_NAME: str = ""
+
+    PROJECT_AUTHOR: str = ""
+
+    PROJECT_DESCRIPTION: str = ""
+
+    PROJECT_GITHUB_URL: str = ""
+
+    PROJECT_PAGES_URL: str = ""
+
+    PROJECT_HOME_URL: str = ""
+
+    PROJECT_LOGO_URL: str = ""
+
+    PROJECT_ACCENT: str = "#22d3ee"
+
+    PROJECT_ACCENT2: str = "#f472b6"
+
+    MSG_README_HEADING: str = ""
+
+    MSG_README_INTRO: str = ""
+
+    MSG_README_AGENTS_LINE: str = ""
+
+    MSG_README_DEVELOPERS_LINE: str = ""
+
+    MSG_README_REGEN_COMMAND: str = ""
+
+    MSG_AGENT_HEADING: str = ""
+
+    MSG_AGENT_INTRO: str = ""
+
+    MSG_AGENT_EXTRA: str = ""
+
+    MSG_FOLDER_NOTICE: str = ""
+
+    PROJECT_CONFIG_FILENAME: str = "readmenator.toml"
+
+    PROJECT_CONFIG_ENABLED: bool = True
+
+    VIEWER_CONFIG_FILENAME: str = "config.json"

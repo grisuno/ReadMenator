@@ -3,6 +3,38 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:517` | `def test_publish_card_reports_primary_scope(self)` |
+| `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:478` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
+| `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:446` | `def test_publish_escapes_malicious_project_name(self)` |
+| `test_publish_escapes_malicious_stat_keys` | method | `tests/test_diagrams.py:455` | `def test_publish_escapes_malicious_stat_keys(self)` |
+| `test_publish_flat_subdir_keeps_links_relative` | method | `tests/test_diagrams.py:496` | `def test_publish_flat_subdir_keeps_links_relative(self)` |
+| `test_publish_footer_links_github_and_pypi` | method | `tests/test_diagrams.py:423` | `def test_publish_footer_links_github_and_pypi(self)` |
+| `test_publish_index_explains_how_to_read` | method | `tests/test_diagrams.py:509` | `def test_publish_index_explains_how_to_read(self)` |
+| `test_publish_index_links_every_map` | method | `tests/test_diagrams.py:397` | `def test_publish_index_links_every_map(self)` |
+| `test_publish_is_deterministic` | method | `tests/test_diagrams.py:435` | `def test_publish_is_deterministic(self)` |
+| `test_publish_leaves_input_maps_unmodified` | method | `tests/test_diagrams.py:487` | `def test_publish_leaves_input_maps_unmodified(self)` |
+| `test_publish_output_has_no_external_requests` | method | `tests/test_diagrams.py:406` | `def test_publish_output_has_no_external_requests(self)` |
+| `test_publish_skips_invalid_maps` | method | `tests/test_diagrams.py:466` | `def test_publish_skips_invalid_maps(self)` |
+| `test_publish_writes_index_plus_five_maps` | method | `tests/test_diagrams.py:386` | `def test_publish_writes_index_plus_five_maps(self)` |
+| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:581` | `def test_renderer_builds_vis_network_with_physics(self)` |
+| `test_renderer_buttons_explain_their_purpose` | method | `tests/test_diagrams.py:355` | `def test_renderer_buttons_explain_their_purpose(self)` |
+| `test_renderer_covers_all_five_kinds` | method | `tests/test_diagrams.py:314` | `def test_renderer_covers_all_five_kinds(self)` |
+| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:597` | `def test_renderer_disables_physics_from_config(self)` |
+| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:636` | `def test_renderer_documents_symbols_per_file(self)` |
+| `test_renderer_embeds_valid_json_payloads` | method | `tests/test_diagrams.py:305` | `def test_renderer_embeds_valid_json_payloads(self)` |
+| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:628` | `def test_renderer_embeds_valid_payloads(self)` |
+| `test_renderer_escapes_malicious_labels` | method | `tests/test_diagrams.py:292` | `def test_renderer_escapes_malicious_labels(self)` |
+| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:652` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
+| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:604` | `def test_renderer_escapes_malicious_titles(self)` |
+| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:617` | `def test_renderer_exposes_reader_controls(self)` |
+| `test_renderer_has_no_external_requests` | method | `tests/test_diagrams.py:270` | `def test_renderer_has_no_external_requests(self)` |
+| `test_renderer_includes_interaction_controls` | method | `tests/test_diagrams.py:277` | `def test_renderer_includes_interaction_controls(self)` |
+| `test_renderer_includes_keyboard_and_deep_links` | method | `tests/test_diagrams.py:283` | `def test_renderer_includes_keyboard_and_deep_links(self)` |
+| `test_renderer_is_deterministic` | method | `tests/test_diagrams.py:623` | `def test_renderer_is_deterministic(self)` |
+| `test_renderer_keeps_canvas_distinct_from_nodes` | method | `tests/test_diagrams.py:333` | `def test_renderer_keeps_canvas_distinct_from_nodes(self)` |
+| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:321` | `def test_renderer_links_gallery_home_when_configured(self)` |
+| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:589` | `def test_renderer_links_gallery_home_when_configured(self)` |
+| `test_renderer_never_uses_inner_html` | method | `tests/test_diagrams.py:263` | `def test_renderer_never_uses_inner_html(self)` |
 | `test_renderer_omits_gallery_home_by_default` | method | `tests/test_diagrams.py:328` | `def test_renderer_omits_gallery_home_by_default(self)` |
 | `test_renderer_produces_standalone_document` | method | `tests/test_diagrams.py:256` | `def test_renderer_produces_standalone_document(self)` |
 | `test_renderer_sanitizes_viewer_state_on_export` | method | `tests/test_diagrams.py:349` | `def test_renderer_sanitizes_viewer_state_on_export(self)` |
@@ -242,21 +274,21 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `TestExclusionsContract` | class | `tests/test_interactive_graph.py:234` | `class TestExclusionsContract(TestCase)` |
 | `TestExplorerContract` | class | `tests/test_interactive_graph.py:275` | `class TestExplorerContract(TestCase)` |
 | `TestForceGraphContract` | class | `tests/test_interactive_graph.py:52` | `class TestForceGraphContract(TestCase)` |
-| `TestForceGraphExplorerInteraction` | class | `tests/test_interactive_graph.py:493` | `class TestForceGraphExplorerInteraction(TestCase)` |
+| `TestForceGraphExplorerInteraction` | class | `tests/test_interactive_graph.py:497` | `class TestForceGraphExplorerInteraction(TestCase)` |
 | `TestForceGraphInspectorPayload` | class | `tests/test_interactive_graph.py:426` | `class TestForceGraphInspectorPayload(TestCase)` |
 | `TestGalleryCardContract` | class | `tests/test_interactive_graph.py:369` | `class TestGalleryCardContract(TestCase)` |
 | `TestProvenanceContract` | class | `tests/test_interactive_graph.py:211` | `class TestProvenanceContract(TestCase)` |
 | `TestRebuildContract` | class | `tests/test_interactive_graph.py:317` | `class TestRebuildContract(TestCase)` |
 | `TestScanTextContract` | class | `tests/test_interactive_graph.py:133` | `class TestScanTextContract(TestCase)` |
 | `TestYaraLiteContract` | class | `tests/test_interactive_graph.py:158` | `class TestYaraLiteContract(TestCase)` |
-| `_const_json` | function | `tests/test_interactive_graph.py:482` | `def _const_json(html, name)` |
+| `_const_json` | function | `tests/test_interactive_graph.py:486` | `def _const_json(html, name)` |
 | `_inline_script` | function | `tests/test_interactive_graph.py:477` | `def _inline_script(html)` |
 | `_node` | function | `tests/test_interactive_graph.py:40` | `def _node(nid, symbols)` |
 | `_run_app` | method | `tests/test_interactive_graph.py:320` | `def _run_app(self, tmp)` |
 | `self_nodes` | function | `tests/test_interactive_graph.py:153` | `def self_nodes()` |
 | `setUp` | method | `tests/test_interactive_graph.py:55` | `def setUp(self)` |
 | `setUp` | method | `tests/test_interactive_graph.py:429` | `def setUp(self)` |
-| `setUp` | method | `tests/test_interactive_graph.py:496` | `def setUp(self)` |
+| `setUp` | method | `tests/test_interactive_graph.py:500` | `def setUp(self)` |
 | `test_audit_flags_snippetless_findings` | method | `tests/test_interactive_graph.py:214` | `def test_audit_flags_snippetless_findings(self)` |
 | `test_build_corpus_maps_every_node` | method | `tests/test_interactive_graph.py:146` | `def test_build_corpus_maps_every_node(self)` |
 | `test_build_for_node_includes_sections` | method | `tests/test_interactive_graph.py:136` | `def test_build_for_node_includes_sections(self)` |
@@ -265,15 +297,15 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_build_payload_maps_communities` | method | `tests/test_interactive_graph.py:82` | `def test_build_payload_maps_communities(self)` |
 | `test_build_state_serves_apis` | method | `tests/test_interactive_graph.py:278` | `def test_build_state_serves_apis(self)` |
 | `test_cluster_groups_similar_files` | method | `tests/test_interactive_graph.py:304` | `def test_cluster_groups_similar_files(self)` |
-| `test_explorer_3d_draws_flat_glyphs_on_overlay` | method | `tests/test_interactive_graph.py:515` | `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)` |
-| `test_explorer_3d_engine_is_pinned` | method | `tests/test_interactive_graph.py:520` | `def test_explorer_3d_engine_is_pinned(self)` |
-| `test_explorer_data_cannot_close_the_script` | method | `tests/test_interactive_graph.py:559` | `def test_explorer_data_cannot_close_the_script(self)` |
-| `test_explorer_hit_tests_against_live_positions` | method | `tests/test_interactive_graph.py:510` | `def test_explorer_hit_tests_against_live_positions(self)` |
-| `test_explorer_placeholders_inside_data_are_left_alone` | method | `tests/test_interactive_graph.py:549` | `def test_explorer_placeholders_inside_data_are_left_alone(self)` |
-| `test_explorer_script_is_valid_javascript` | method | `tests/test_interactive_graph.py:567` | `def test_explorer_script_is_valid_javascript(self)` |
-| `test_explorer_settings_come_from_config` | method | `tests/test_interactive_graph.py:531` | `def test_explorer_settings_come_from_config(self)` |
-| `test_explorer_ships_edge_path_and_lens_actions` | method | `tests/test_interactive_graph.py:526` | `def test_explorer_ships_edge_path_and_lens_actions(self)` |
-| `test_explorer_structural_edges_use_their_own_colors` | method | `tests/test_interactive_graph.py:542` | `def test_explorer_structural_edges_use_their_own_colors(self)` |
+| `test_explorer_3d_draws_flat_glyphs_on_overlay` | method | `tests/test_interactive_graph.py:519` | `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)` |
+| `test_explorer_3d_engine_is_pinned` | method | `tests/test_interactive_graph.py:524` | `def test_explorer_3d_engine_is_pinned(self)` |
+| `test_explorer_data_cannot_close_the_script` | method | `tests/test_interactive_graph.py:563` | `def test_explorer_data_cannot_close_the_script(self)` |
+| `test_explorer_hit_tests_against_live_positions` | method | `tests/test_interactive_graph.py:514` | `def test_explorer_hit_tests_against_live_positions(self)` |
+| `test_explorer_placeholders_inside_data_are_left_alone` | method | `tests/test_interactive_graph.py:553` | `def test_explorer_placeholders_inside_data_are_left_alone(self)` |
+| `test_explorer_script_is_valid_javascript` | method | `tests/test_interactive_graph.py:571` | `def test_explorer_script_is_valid_javascript(self)` |
+| `test_explorer_settings_come_from_config` | method | `tests/test_interactive_graph.py:535` | `def test_explorer_settings_come_from_config(self)` |
+| `test_explorer_ships_edge_path_and_lens_actions` | method | `tests/test_interactive_graph.py:530` | `def test_explorer_ships_edge_path_and_lens_actions(self)` |
+| `test_explorer_structural_edges_use_their_own_colors` | method | `tests/test_interactive_graph.py:546` | `def test_explorer_structural_edges_use_their_own_colors(self)` |
 | `test_export_diagrams_writes_forcegraph_and_card` | method | `tests/test_interactive_graph.py:399` | `def test_export_diagrams_writes_forcegraph_and_card(self)` |
 | `test_exporter_delegates_to_forcegraph` | method | `tests/test_interactive_graph.py:127` | `def test_exporter_delegates_to_forcegraph(self)` |
 | `test_family_color_is_deterministic` | method | `tests/test_interactive_graph.py:61` | `def test_family_color_is_deterministic(self)` |
@@ -464,37 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_extracts_function_keyword` | method | `tests/test_parsers.py:353` | `def test_extracts_function_keyword(self)` |
 | `test_extracts_function_with_parentheses` | method | `tests/test_parsers.py:346` | `def test_extracts_function_with_parentheses(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:295` | `def test_extracts_import(self)` |
-| `test_extracts_import` | method | `tests/test_parsers.py:405` | `def test_extracts_import(self)` |
-| `test_extracts_import` | method | `tests/test_parsers.py:448` | `def test_extracts_import(self)` |
-| `test_extracts_import_and_require` | method | `tests/test_parsers.py:263` | `def test_extracts_import_and_require(self)` |
-| `test_extracts_import_block` | method | `tests/test_parsers.py:175` | `def test_extracts_import_block(self)` |
-| `test_extracts_imports` | method | `tests/test_parsers.py:106` | `def test_extracts_imports(self)` |
-| `test_extracts_include` | method | `tests/test_parsers.py:40` | `def test_extracts_include(self)` |
-| `test_extracts_includes` | method | `tests/test_parsers.py:475` | `def test_extracts_includes(self)` |
-| `test_extracts_label` | method | `tests/test_parsers.py:460` | `def test_extracts_label(self)` |
-| `test_extracts_method` | method | `tests/test_parsers.py:288` | `def test_extracts_method(self)` |
-| `test_extracts_method` | method | `tests/test_parsers.py:320` | `def test_extracts_method(self)` |
-| `test_extracts_method_receiver` | method | `tests/test_parsers.py:168` | `def test_extracts_method_receiver(self)` |
-| `test_extracts_multiple_labels` | method | `tests/test_parsers.py:467` | `def test_extracts_multiple_labels(self)` |
-| `test_extracts_proc` | method | `tests/test_parsers.py:434` | `def test_extracts_proc(self)` |
-| `test_extracts_pub_function` | method | `tests/test_parsers.py:211` | `def test_extracts_pub_function(self)` |
-| `test_extracts_signature_with_params` | method | `tests/test_parsers.py:139` | `def test_extracts_signature_with_params(self)` |
-| `test_extracts_single_import` | method | `tests/test_parsers.py:182` | `def test_extracts_single_import(self)` |
-| `test_extracts_struct` | method | `tests/test_parsers.py:33` | `def test_extracts_struct(self)` |
-| `test_extracts_struct_and_interface` | method | `tests/test_parsers.py:188` | `def test_extracts_struct_and_interface(self)` |
-| `test_extracts_struct_and_trait_and_enum` | method | `tests/test_parsers.py:218` | `def test_extracts_struct_and_trait_and_enum(self)` |
-| `test_extracts_type` | method | `tests/test_parsers.py:441` | `def test_extracts_type(self)` |
-| `test_extracts_use` | method | `tests/test_parsers.py:231` | `def test_extracts_use(self)` |
-| `test_extracts_use_and_require` | method | `tests/test_parsers.py:379` | `def test_extracts_use_and_require(self)` |
-| `test_extracts_using` | method | `tests/test_parsers.py:327` | `def test_extracts_using(self)` |
-| `test_function_line_points_at_definition` | method | `tests/test_parsers.py:64` | `def test_function_line_points_at_definition(self)` |
-| `test_handles_syntax_error_gracefully` | method | `tests/test_parsers.py:121` | `def test_handles_syntax_error_gracefully(self)` |
-| `test_record_and_interface` | method | `tests/test_parsers.py:333` | `def test_record_and_interface(self)` |
-| `test_returns_c_parser_for_c_extensions` | method | `tests/test_parsers.py:487` | `def test_returns_c_parser_for_c_extensions(self)` |
-| `test_returns_none_for_unknown_extension` | method | `tests/test_parsers.py:498` | `def test_returns_none_for_unknown_extension(self)` |
-| `test_returns_python_parser_for_py` | method | `tests/test_parsers.py:493` | `def test_returns_python_parser_for_py(self)` |
-| `test_returns_rust_parser_for_rs` | method | `tests/test_parsers.py:502` | `def test_returns_rust_parser_for_rs(self)` |
-| `test_skips_reserved_words` | method | `tests/test_parsers.py:54` | `def test_skips_reserved_words(self)` |
-| `test_skips_reserved_words` | method | `tests/test_parsers.py:270` | `def test_skips_reserved_words(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

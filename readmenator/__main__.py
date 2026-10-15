@@ -59,6 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  flows                   Export interactive architecture + execution-flow diagrams (readmenator-maps/flows.html)\n"
             "  apidocs                 Generate the API reference (Sphinx/Doxygen style: readmenator-apidocs/)\n"
             "  doc-coverage [--fail-under N]  Print documentation coverage and warnings (exit 1 below N%)\n"
+            "  config                  Ensure readmenator.toml exists and print viewer config\n"
             "  analytics               Print corpus analytics JSON (funnel, layers, hotspots)\n"
             "  near <file|text>        Nearest files by scan-text similarity (offline Jaccard)\n"
             "  scan-text               Print synthesized scan-text blobs per file\n"
@@ -338,6 +339,20 @@ def main() -> None:
             return
         elif command == "flows":
             print(app.export_flows(target))
+            return
+        elif command == "config":
+            from readmenator._project_config import (
+                ensure_project_config,
+                load_project_config,
+                viewer_config_dict,
+            )
+
+            import json as _json
+
+            path = ensure_project_config(target, app._config)
+            effective = load_project_config(target, app._config)
+            print(str(path))
+            print(_json.dumps(viewer_config_dict(effective, target), indent=1))
             return
         elif command == "apidocs":
             written = app.export_apidocs(target)

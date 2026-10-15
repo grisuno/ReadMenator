@@ -79,7 +79,7 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `SystemMapBuilder` (class, line 456) `class SystemMapBuilder`
   - `InteractiveMapRenderer` (class, line 1522) `class InteractiveMapRenderer`
   - `VisNetworkRenderer` (class, line 2233) `class VisNetworkRenderer`
-  - `DocsSitePublisher` (class, line 3219) `class DocsSitePublisher`
+  - `DocsSitePublisher` (class, line 3225) `class DocsSitePublisher`
   - `__init__` (method, line 235) `def __init__(self, config)`
   - `_effective_canvas` (method, line 243) `def _effective_canvas(self, system_map)`
   - `validate` (method, line 264) `def validate(self, system_map)`
@@ -131,33 +131,38 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `write` (method, line 2375) `def write(self, system_map, output_path)`
   - `_tooltip` (method, line 2392) `def _tooltip(self, node)`
   - `_template` (method, line 2423) `def _template(self)`
-  - `__init__` (method, line 3236) `def __init__(self, config)`
-  - `description_for` (method, line 3246) `def description_for(self, kind)`
-  - `publish` (method, line 3260) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)`
-  - `collect_doc_sources` (method, line 3354) `def collect_doc_sources(self, project_root)`
-  - `publish_assets` (method, line 3380) `def publish_assets(self, project_root, output_dir)`
-  - `_render_poster` (method, line 3449) `def _render_poster(self, video, site_root)`
-  - `_doc_title` (method, line 3487) `def _doc_title(text)`
-  - `_doc_preview` (method, line 3496) `def _doc_preview(self, text)`
-  - `_prune_stale_docs` (method, line 3532) `def _prune_stale_docs(docs_root, keep)`
-  - `render_llms_txt` (method, line 3549) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
-  - `render_index` (method, line 3628) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)`
-  - `_footer` (method, line 3697) `def _footer(self)`
-  - `_stat_tiles` (method, line 3738) `def _stat_tiles(self, stats)`
-  - `_start_here` (method, line 3758) `def _start_here(self, entries, video_rel)`
-  - `_video_section` (method, line 3798) `def _video_section(self, video_rel, poster_rel)`
-  - `_doc_group` (method, line 3825) `def _doc_group(self, name)`
-  - `_docs_section` (method, line 3837) `def _docs_section(self, doc_entries)`
-  - `_href_prefix` (method, line 3919) `def _href_prefix(self)`
-  - `_glyph` (method, line 3949) `def _glyph(self, kind)`
-  - `_card` (method, line 3967) `def _card(self, kind, system_map, href_prefix)`
-  - `_extra_card` (method, line 4008) `def _extra_card(self, entry)`
-  - `_stats_line` (method, line 4039) `def _stats_line(self, stats)`
-  - `_escape` (method, line 4053) `def _escape(self, value)`
-  - `order` (function, line 3600) `def order(entry)`
-  - `doc_order` (function, line 3863) `def doc_order(base)`
-- Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_folder_readme.py`, `tests/test_interactive_graph.py`
+  - `__init__` (method, line 3242) `def __init__(self, config)`
+  - `description_for` (method, line 3252) `def description_for(self, kind)`
+  - `publish` (method, line 3266) `def publish(self, maps, project_name, output_dir, stats, renderer, project_root, video_rel, doc_entries, extra_cards)`
+  - `collect_doc_sources` (method, line 3360) `def collect_doc_sources(self, project_root)`
+  - `publish_assets` (method, line 3386) `def publish_assets(self, project_root, output_dir)`
+  - `_render_poster` (method, line 3455) `def _render_poster(self, video, site_root)`
+  - `_doc_title` (method, line 3493) `def _doc_title(text)`
+  - `_doc_preview` (method, line 3502) `def _doc_preview(self, text)`
+  - `_prune_stale_docs` (method, line 3538) `def _prune_stale_docs(docs_root, keep)`
+  - `render_llms_txt` (method, line 3555) `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)`
+  - `render_index` (method, line 3634) `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)`
+  - `_brand_block` (method, line 3712) `def _brand_block(self)`
+  - `_project_pills` (method, line 3739) `def _project_pills(self)`
+  - `_footer` (method, line 3768) `def _footer(self)`
+  - `_stat_tiles` (method, line 3816) `def _stat_tiles(self, stats)`
+  - `_start_here` (method, line 3836) `def _start_here(self, entries, video_rel)`
+  - `_video_section` (method, line 3876) `def _video_section(self, video_rel, poster_rel)`
+  - `_doc_group` (method, line 3903) `def _doc_group(self, name)`
+  - `_docs_section` (method, line 3915) `def _docs_section(self, doc_entries)`
+  - `_href_prefix` (method, line 3997) `def _href_prefix(self)`
+  - `_viewer_modal` (method, line 4008) `def _viewer_modal(self)`
+  - `_viewer_script` (method, line 4014) `def _viewer_script(self)`
+  - `_viewer_css` (method, line 4027) `def _viewer_css(self)`
+  - `_glyph` (method, line 4053) `def _glyph(self, kind)`
+  - `_card` (method, line 4071) `def _card(self, kind, system_map, href_prefix)`
+  - `_extra_card` (method, line 4112) `def _extra_card(self, entry)`
+  - `_stats_line` (method, line 4143) `def _stats_line(self, stats)`
+  - `_escape` (method, line 4157) `def _escape(self, value)`
+  - `order` (function, line 3606) `def order(entry)`
+  - `doc_order` (function, line 3941) `def doc_order(base)`
+- Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_viewer_ui.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_folder_readme.py`, `tests/test_interactive_graph.py`, `tests/test_project_config.py`
 
 ## readmenator/_docstrings.py
 - Doc: Multi-style docstring parser for the deterministic API reference.
@@ -415,11 +420,11 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `flows_payload_json` (function, line 221) `def flows_payload_json(graphs, api_href)`
-  - `render_flows_page` (function, line 227) `def render_flows_page(graphs, project_name, api_href, config)`
-  - `flow_thumbnail_svg` (function, line 251) `def flow_thumbnail_svg(graph, width, height)`
-- Depends on: `readmenator/_config.py`, `readmenator/_flowlayout.py`, `readmenator/_htmlpack.py`
-- Imported by: `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `tests/test_flowcharts.py`
+  - `flows_payload_json` (function, line 225) `def flows_payload_json(graphs, api_href)`
+  - `render_flows_page` (function, line 231) `def render_flows_page(graphs, project_name, api_href, config)`
+  - `flow_thumbnail_svg` (function, line 264) `def flow_thumbnail_svg(graph, width, height)`
+- Depends on: `readmenator/_config.py`, `readmenator/_flowlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_project_config.py`, `readmenator/_viewer_ui.py`
+- Imported by: `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py`, `tests/test_flowcharts.py`, `tests/test_project_config.py`
 
 ## readmenator/_folder_readme.py
 - Doc: Per-folder README.md files for every generated readmenator-* directory.
@@ -432,46 +437,46 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `__init__` (method, line 68) `def __init__(self, config)`
   - `specs` (method, line 76) `def specs(self)`
   - `render` (method, line 272) `def render(self, spec, folder)`
-  - `write_all` (method, line 307) `def write_all(self, project_root)`
+  - `write_all` (method, line 310) `def write_all(self, project_root)`
 - Depends on: `readmenator/_config.py`
-- Imported by: `readmenator/_agent_output.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_pipeline.py`, `tests/test_folder_readme.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_pipeline.py`, `tests/test_folder_readme.py`, `tests/test_project_config.py`
 
 ## readmenator/_forcegraph.py
 - Doc: Force-graph explorer for the readmenator knowledge graph.
 - Layer: utility
 - Language: py
 - Symbols:
-  - `family_color_from_name` (function, line 39) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
-  - `node_value` (function, line 67) `def node_value(symbols, degree)`
-  - `ForceGraphRenderer` (class, line 80) `class ForceGraphRenderer`
-  - `__init__` (method, line 83) `def __init__(self, config)`
-  - `node_palette` (method, line 91) `def node_palette(self)`
-  - `edge_palette` (method, line 95) `def edge_palette(self)`
-  - `vendor_source` (method, line 99) `def vendor_source(self)`
-  - `vendor_href` (method, line 107) `def vendor_href(self)`
-  - `build_payload` (method, line 112) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)`
-  - `_seed_positions` (method, line 313) `def _seed_positions(self, payload)`
-  - `render` (method, line 356) `def render(self, payload, analytics, title, home_href, live_api)`
-  - `group_colors` (method, line 403) `def group_colors(self, payload)`
-  - `page_settings` (method, line 426) `def page_settings(self, payload, live_api)`
-  - `family_color` (method, line 502) `def family_color(self, name)`
-  - `_family_color` (method, line 513) `def _family_color(self, name)`
-  - `thumbnail_svg` (method, line 530) `def thumbnail_svg(self, payload)`
-  - `write` (method, line 570) `def write(self, output_path, payload, analytics, title, home_href)`
-  - `copy_vendor` (method, line 597) `def copy_vendor(self, dest_dir)`
-  - `_node_doc` (method, line 616) `def _node_doc(self, node)`
-  - `_symbol_list` (method, line 622) `def _symbol_list(self, node)`
-  - `_file_color` (method, line 635) `def _file_color(self, node_id, family, layer, palette)`
-  - `file_of` (function, line 148) `def file_of(edge_id)`
-  - `add_node` (function, line 202) `def add_node(node_id, label, node_type)`
-- Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_sourceview.py`
-- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`, `tests/test_interactive_graph.py`, `tests/test_layout_quality.py`, `tests/test_sourceview.py`
+  - `family_color_from_name` (function, line 41) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
+  - `node_value` (function, line 69) `def node_value(symbols, degree)`
+  - `ForceGraphRenderer` (class, line 82) `class ForceGraphRenderer`
+  - `__init__` (method, line 85) `def __init__(self, config)`
+  - `node_palette` (method, line 93) `def node_palette(self)`
+  - `edge_palette` (method, line 97) `def edge_palette(self)`
+  - `vendor_source` (method, line 101) `def vendor_source(self)`
+  - `vendor_href` (method, line 109) `def vendor_href(self)`
+  - `build_payload` (method, line 114) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)`
+  - `_seed_positions` (method, line 316) `def _seed_positions(self, payload)`
+  - `render` (method, line 359) `def render(self, payload, analytics, title, home_href, live_api)`
+  - `group_colors` (method, line 413) `def group_colors(self, payload)`
+  - `page_settings` (method, line 436) `def page_settings(self, payload, live_api)`
+  - `family_color` (method, line 512) `def family_color(self, name)`
+  - `_family_color` (method, line 523) `def _family_color(self, name)`
+  - `thumbnail_svg` (method, line 540) `def thumbnail_svg(self, payload)`
+  - `write` (method, line 580) `def write(self, output_path, payload, analytics, title, home_href)`
+  - `copy_vendor` (method, line 607) `def copy_vendor(self, dest_dir)`
+  - `_node_doc` (method, line 626) `def _node_doc(self, node)`
+  - `_symbol_list` (method, line 632) `def _symbol_list(self, node)`
+  - `_file_color` (method, line 645) `def _file_color(self, node_id, family, layer, palette)`
+  - `file_of` (function, line 150) `def file_of(edge_id)`
+  - `add_node` (function, line 204) `def add_node(node_id, label, node_type)`
+- Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_sourceview.py`, `readmenator/_viewer_ui.py`
+- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`, `tests/test_interactive_graph.py`, `tests/test_layout_quality.py`, `tests/test_project_config.py`, `tests/test_sourceview.py`
 
 ## readmenator/_forcegraph_page.py
 - Doc: HTML page template for the force-graph explorer.
 - Layer: presentation
 - Language: py
-- Imported by: `readmenator/_forcegraph.py`, `tests/test_layout_quality.py`
+- Imported by: `readmenator/_forcegraph.py`, `tests/test_layout_quality.py`, `tests/test_project_config.py`
 
 
 Next: [KB_readmenator_p3.md](KB_readmenator_p3.md)

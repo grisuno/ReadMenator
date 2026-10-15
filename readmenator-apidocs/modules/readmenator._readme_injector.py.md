@@ -14,7 +14,7 @@ Injects a knowledge base section into the project README (Markdown or RST).
 
 ### `ReadmeInjector`
 
-`class` | [readmenator/_readme_injector.py:122](../../readmenator/_readme_injector.py#L122)
+`class` | [readmenator/_readme_injector.py:134](../../readmenator/_readme_injector.py#L134)
 
 ```python
 class ReadmeInjector
@@ -41,10 +41,10 @@ exists but the text is outdated it is replaced in place.
 
 #### `ReadmeInjector.__init__`
 
-`constructor` | [readmenator/_readme_injector.py:133](../../readmenator/_readme_injector.py#L133)
+`constructor` | [readmenator/_readme_injector.py:145](../../readmenator/_readme_injector.py#L145)
 
 ```python
-def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', wiki_output_dir: str = 'readmenator-wiki', graphrag_output_dir: str = 'readmenator-graphrag', maps_output_dir: str = 'readmenator-maps', pages_dir: str = 'docs', components_output_dir: str = 'readmenator-diagrams', rules_output_dir: str = 'readmenator-rules', video_output: str = 'readmenator.mp4', cursorrules_output: str = '.cursorrules', sarif_output: str = 'readmenator_audit.sarif', cache_dir: str = '.readmenator_cache', skills_dir: str = '.claude/skills', llms_txt: str = 'llms.txt', forcegraph_output: str = 'graph-force.html', bundlegraph_output: str = 'graph-bundle.html', apidocs_output_dir: str = 'readmenator-apidocs') -> None
+def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', wiki_output_dir: str = 'readmenator-wiki', graphrag_output_dir: str = 'readmenator-graphrag', maps_output_dir: str = 'readmenator-maps', pages_dir: str = 'docs', components_output_dir: str = 'readmenator-diagrams', rules_output_dir: str = 'readmenator-rules', video_output: str = 'readmenator.mp4', cursorrules_output: str = '.cursorrules', sarif_output: str = 'readmenator_audit.sarif', cache_dir: str = '.readmenator_cache', skills_dir: str = '.claude/skills', llms_txt: str = 'llms.txt', forcegraph_output: str = 'graph-force.html', bundlegraph_output: str = 'graph-bundle.html', apidocs_output_dir: str = 'readmenator-apidocs', readme_heading: str = '', readme_intro: str = '', readme_agents_line: str = '', readme_developers_line: str = '', readme_regen_command: str = '') -> None
 ```
 
 Initialise the injector with output locations.
@@ -70,6 +70,11 @@ Initialise the injector with output locations.
 | `forcegraph_output` | `str` | `'graph-force.html'` | Force-graph explorer filename. |
 | `bundlegraph_output` | `str` | `'graph-bundle.html'` | Edge bundle explorer filename. |
 | `apidocs_output_dir` | `str` | `'readmenator-apidocs'` | API reference output directory. |
+| `readme_heading` | `str` | `''` | Override for the section heading ("" = built-in). |
+| `readme_intro` | `str` | `''` | Override for the opening paragraph ("" = built-in). |
+| `readme_agents_line` | `str` | `''` | Override for the closing agents line ("" = built-in). |
+| `readme_developers_line` | `str` | `''` | Override for the closing developers line ("" = built-in). |
+| `readme_regen_command` | `str` | `''` | Override for the rebuild command ("" = built-in). |
 
 *Called by:* [`AnalyzerFactory.readme_injector`](readmenator._pipeline.py.md#analyzerfactory-readme_injector)
 
@@ -77,7 +82,7 @@ Initialise the injector with output locations.
 
 #### `ReadmeInjector.inject`
 
-`method` | [readmenator/_readme_injector.py:192](../../readmenator/_readme_injector.py#L192)
+`method` | [readmenator/_readme_injector.py:219](../../readmenator/_readme_injector.py#L219)
 
 ```python
 def inject(self, project_root: str) -> bool
@@ -97,7 +102,7 @@ Inject or refresh the knowledge base section in the README.
 
 #### `ReadmeInjector.remove`
 
-`method` | [readmenator/_readme_injector.py:284](../../readmenator/_readme_injector.py#L284)
+`method` | [readmenator/_readme_injector.py:311](../../readmenator/_readme_injector.py#L311)
 
 ```python
 def remove(self, project_root: str) -> bool

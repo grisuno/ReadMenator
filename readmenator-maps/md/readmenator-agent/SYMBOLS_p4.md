@@ -3,6 +3,38 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_extract_specifics` | method | `readmenator/parsers/_base.py:45` | `def _extract_specifics(self, content)` |
+| `parse` | method | `readmenator/parsers/_base.py:36` | `def parse(self, content)` |
+| `CParser` | class | `readmenator/parsers/_c.py:30` | `class CParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_c.py:37` | `def _extract_specifics(self, content)` |
+| `_has_type_prefix` | function | `readmenator/parsers/_c.py:18` | `def _has_type_prefix(prefix)` |
+| `CSharpParser` | class | `readmenator/parsers/_csharp.py:11` | `class CSharpParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_csharp.py:18` | `def _extract_specifics(self, content)` |
+| `DartParser` | class | `readmenator/parsers/_dart.py:11` | `class DartParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_dart.py:18` | `def _extract_specifics(self, content)` |
+| `ElixirParser` | class | `readmenator/parsers/_elixir.py:11` | `class ElixirParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_elixir.py:18` | `def _extract_specifics(self, content)` |
+| `GDScriptParser` | class | `readmenator/parsers/_gdscript.py:11` | `class GDScriptParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_gdscript.py:18` | `def _extract_specifics(self, content)` |
+| `GoParser` | class | `readmenator/parsers/_go.py:11` | `class GoParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_go.py:18` | `def _extract_specifics(self, content)` |
+| `JavaParser` | class | `readmenator/parsers/_java.py:11` | `class JavaParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_java.py:18` | `def _extract_specifics(self, content)` |
+| `JavaScriptParser` | class | `readmenator/parsers/_javascript.py:11` | `class JavaScriptParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_javascript.py:19` | `def _extract_specifics(self, content)` |
+| `KotlinParser` | class | `readmenator/parsers/_kotlin.py:11` | `class KotlinParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_kotlin.py:18` | `def _extract_specifics(self, content)` |
+| `LuaParser` | class | `readmenator/parsers/_lua.py:11` | `class LuaParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_lua.py:18` | `def _extract_specifics(self, content)` |
+| `NimParser` | class | `readmenator/parsers/_nim.py:11` | `class NimParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_nim.py:18` | `def _extract_specifics(self, content)` |
+| `PHPParser` | class | `readmenator/parsers/_php.py:11` | `class PHPParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_php.py:18` | `def _extract_specifics(self, content)` |
+| `PythonParser` | class | `readmenator/parsers/_python.py:12` | `class PythonParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_python.py:19` | `def _extract_specifics(self, content)` |
+| `RubyParser` | class | `readmenator/parsers/_ruby.py:11` | `class RubyParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_ruby.py:18` | `def _extract_specifics(self, content)` |
+| `RustParser` | class | `readmenator/parsers/_rust.py:11` | `class RustParser(LanguageParser)` |
 | `_extract_specifics` | method | `readmenator/parsers/_rust.py:18` | `def _extract_specifics(self, content)` |
 | `ScalaParser` | class | `readmenator/parsers/_scala.py:11` | `class ScalaParser(LanguageParser)` |
 | `_extract_specifics` | method | `readmenator/parsers/_scala.py:18` | `def _extract_specifics(self, content)` |
@@ -106,44 +138,44 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_shared_directory_labels_use_core_file` | method | `tests/test_agent_friendliness.py:380` | `def test_shared_directory_labels_use_core_file(self)` |
 | `test_small_community_merges_into_best_connected_neighbor` | method | `tests/test_agent_friendliness.py:366` | `def test_small_community_merges_into_best_connected_neighbor(self)` |
 | `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:540` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
-| `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:248` | `class TestAgentInjectorEdgeCases(TestCase)` |
-| `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:211` | `class TestAgentInjectorFindFiles(TestCase)` |
+| `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:241` | `class TestAgentInjectorEdgeCases(TestCase)` |
+| `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:204` | `class TestAgentInjectorFindFiles(TestCase)` |
 | `TestAgentInjectorInjectBehavior` | class | `tests/test_agent_injector.py:19` | `class TestAgentInjectorInjectBehavior(TestCase)` |
-| `TestAgentInjectorRemoveBehavior` | class | `tests/test_agent_injector.py:168` | `class TestAgentInjectorRemoveBehavior(TestCase)` |
+| `TestAgentInjectorRemoveBehavior` | class | `tests/test_agent_injector.py:161` | `class TestAgentInjectorRemoveBehavior(TestCase)` |
 | `setUp` | method | `tests/test_agent_injector.py:22` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:171` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:214` | `def setUp(self)` |
-| `setUp` | method | `tests/test_agent_injector.py:251` | `def setUp(self)` |
+| `setUp` | method | `tests/test_agent_injector.py:164` | `def setUp(self)` |
+| `setUp` | method | `tests/test_agent_injector.py:207` | `def setUp(self)` |
+| `setUp` | method | `tests/test_agent_injector.py:244` | `def setUp(self)` |
 | `tearDown` | method | `tests/test_agent_injector.py:27` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:176` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:218` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_agent_injector.py:256` | `def tearDown(self)` |
-| `test_custom_kb_filename_works` | method | `tests/test_agent_injector.py:145` | `def test_custom_kb_filename_works(self)` |
-| `test_finds_agents_md` | method | `tests/test_agent_injector.py:221` | `def test_finds_agents_md(self)` |
-| `test_finds_all_listed_files` | method | `tests/test_agent_injector.py:227` | `def test_finds_all_listed_files(self)` |
-| `test_finds_cursor_rules_glob` | method | `tests/test_agent_injector.py:234` | `def test_finds_cursor_rules_glob(self)` |
-| `test_inject_does_not_execute_commands` | method | `tests/test_agent_injector.py:160` | `def test_inject_does_not_execute_commands(self)` |
-| `test_inject_does_not_touch_unlisted_files` | method | `tests/test_agent_injector.py:275` | `def test_inject_does_not_touch_unlisted_files(self)` |
+| `tearDown` | method | `tests/test_agent_injector.py:169` | `def tearDown(self)` |
+| `tearDown` | method | `tests/test_agent_injector.py:211` | `def tearDown(self)` |
+| `tearDown` | method | `tests/test_agent_injector.py:249` | `def tearDown(self)` |
+| `test_custom_kb_filename_works` | method | `tests/test_agent_injector.py:138` | `def test_custom_kb_filename_works(self)` |
+| `test_finds_agents_md` | method | `tests/test_agent_injector.py:214` | `def test_finds_agents_md(self)` |
+| `test_finds_all_listed_files` | method | `tests/test_agent_injector.py:220` | `def test_finds_all_listed_files(self)` |
+| `test_finds_cursor_rules_glob` | method | `tests/test_agent_injector.py:227` | `def test_finds_cursor_rules_glob(self)` |
+| `test_inject_does_not_execute_commands` | method | `tests/test_agent_injector.py:153` | `def test_inject_does_not_execute_commands(self)` |
+| `test_inject_does_not_touch_unlisted_files` | method | `tests/test_agent_injector.py:268` | `def test_inject_does_not_touch_unlisted_files(self)` |
 | `test_inject_into_agents_md_adds_kb_link` | method | `tests/test_agent_injector.py:30` | `def test_inject_into_agents_md_adds_kb_link(self)` |
 | `test_inject_into_claude_md_adds_kb_link` | method | `tests/test_agent_injector.py:39` | `def test_inject_into_claude_md_adds_kb_link(self)` |
-| `test_inject_into_cursor_rules_mdc_glob` | method | `tests/test_agent_injector.py:96` | `def test_inject_into_cursor_rules_mdc_glob(self)` |
+| `test_inject_into_cursor_rules_mdc_glob` | method | `tests/test_agent_injector.py:89` | `def test_inject_into_cursor_rules_mdc_glob(self)` |
 | `test_inject_into_cursorrules_adds_kb_link` | method | `tests/test_agent_injector.py:49` | `def test_inject_into_cursorrules_adds_kb_link(self)` |
-| `test_inject_into_empty_file` | method | `tests/test_agent_injector.py:259` | `def test_inject_into_empty_file(self)` |
+| `test_inject_into_empty_file` | method | `tests/test_agent_injector.py:252` | `def test_inject_into_empty_file(self)` |
 | `test_inject_into_github_copilot_instructions` | method | `tests/test_agent_injector.py:57` | `def test_inject_into_github_copilot_instructions(self)` |
-| `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_agent_injector.py:106` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
-| `test_inject_multiple_agent_files` | method | `tests/test_agent_injector.py:129` | `def test_inject_multiple_agent_files(self)` |
-| `test_inject_no_agent_files_returns_zero` | method | `tests/test_agent_injector.py:117` | `def test_inject_no_agent_files_returns_zero(self)` |
-| `test_inject_plain_text_format_for_yaml` | method | `tests/test_agent_injector.py:136` | `def test_inject_plain_text_format_for_yaml(self)` |
-| `test_inject_preserves_existing_content` | method | `tests/test_agent_injector.py:121` | `def test_inject_preserves_existing_content(self)` |
+| `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_agent_injector.py:99` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
+| `test_inject_multiple_agent_files` | method | `tests/test_agent_injector.py:122` | `def test_inject_multiple_agent_files(self)` |
+| `test_inject_no_agent_files_returns_zero` | method | `tests/test_agent_injector.py:110` | `def test_inject_no_agent_files_returns_zero(self)` |
+| `test_inject_plain_text_format_for_yaml` | method | `tests/test_agent_injector.py:129` | `def test_inject_plain_text_format_for_yaml(self)` |
+| `test_inject_preserves_existing_content` | method | `tests/test_agent_injector.py:114` | `def test_inject_preserves_existing_content(self)` |
 | `test_inject_replaces_old_injection_without_regen_command` | method | `tests/test_agent_injector.py:67` | `def test_inject_replaces_old_injection_without_regen_command(self)` |
-| `test_inject_respects_custom_agent_files_list` | method | `tests/test_agent_injector.py:267` | `def test_inject_respects_custom_agent_files_list(self)` |
+| `test_inject_respects_custom_agent_files_list` | method | `tests/test_agent_injector.py:260` | `def test_inject_respects_custom_agent_files_list(self)` |
 | `test_inject_skips_when_already_up_to_date` | method | `tests/test_agent_injector.py:82` | `def test_inject_skips_when_already_up_to_date(self)` |
-| `test_injection_includes_regeneration_command` | method | `tests/test_agent_injector.py:153` | `def test_injection_includes_regeneration_command(self)` |
-| `test_remove_no_files_returns_zero` | method | `tests/test_agent_injector.py:196` | `def test_remove_no_files_returns_zero(self)` |
-| `test_remove_preserves_original_content` | method | `tests/test_agent_injector.py:200` | `def test_remove_preserves_original_content(self)` |
-| `test_remove_strips_injected_section` | method | `tests/test_agent_injector.py:179` | `def test_remove_strips_injected_section(self)` |
-| `test_remove_without_injection_returns_zero` | method | `tests/test_agent_injector.py:190` | `def test_remove_without_injection_returns_zero(self)` |
-| `test_returns_empty_when_no_files` | method | `tests/test_agent_injector.py:243` | `def test_returns_empty_when_no_files(self)` |
+| `test_injection_includes_regeneration_command` | method | `tests/test_agent_injector.py:146` | `def test_injection_includes_regeneration_command(self)` |
+| `test_remove_no_files_returns_zero` | method | `tests/test_agent_injector.py:189` | `def test_remove_no_files_returns_zero(self)` |
+| `test_remove_preserves_original_content` | method | `tests/test_agent_injector.py:193` | `def test_remove_preserves_original_content(self)` |
+| `test_remove_strips_injected_section` | method | `tests/test_agent_injector.py:172` | `def test_remove_strips_injected_section(self)` |
+| `test_remove_without_injection_returns_zero` | method | `tests/test_agent_injector.py:183` | `def test_remove_without_injection_returns_zero(self)` |
+| `test_returns_empty_when_no_files` | method | `tests/test_agent_injector.py:236` | `def test_returns_empty_when_no_files(self)` |
 | `TestAgentOutputContract` | class | `tests/test_agent_output.py:49` | `class TestAgentOutputContract(TestCase)` |
 | `TestApiGeneration` | class | `tests/test_agent_output.py:268` | `class TestApiGeneration(TestCase)` |
 | `TestArchitectureGeneration` | class | `tests/test_agent_output.py:246` | `class TestArchitectureGeneration(TestCase)` |
@@ -464,37 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
 | `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:688` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
 | `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:674` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
-| `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:517` | `def test_publish_card_reports_primary_scope(self)` |
-| `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:478` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
-| `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:446` | `def test_publish_escapes_malicious_project_name(self)` |
-| `test_publish_escapes_malicious_stat_keys` | method | `tests/test_diagrams.py:455` | `def test_publish_escapes_malicious_stat_keys(self)` |
-| `test_publish_flat_subdir_keeps_links_relative` | method | `tests/test_diagrams.py:496` | `def test_publish_flat_subdir_keeps_links_relative(self)` |
-| `test_publish_footer_links_github_and_pypi` | method | `tests/test_diagrams.py:423` | `def test_publish_footer_links_github_and_pypi(self)` |
-| `test_publish_index_explains_how_to_read` | method | `tests/test_diagrams.py:509` | `def test_publish_index_explains_how_to_read(self)` |
-| `test_publish_index_links_every_map` | method | `tests/test_diagrams.py:397` | `def test_publish_index_links_every_map(self)` |
-| `test_publish_is_deterministic` | method | `tests/test_diagrams.py:435` | `def test_publish_is_deterministic(self)` |
-| `test_publish_leaves_input_maps_unmodified` | method | `tests/test_diagrams.py:487` | `def test_publish_leaves_input_maps_unmodified(self)` |
-| `test_publish_output_has_no_external_requests` | method | `tests/test_diagrams.py:406` | `def test_publish_output_has_no_external_requests(self)` |
-| `test_publish_skips_invalid_maps` | method | `tests/test_diagrams.py:466` | `def test_publish_skips_invalid_maps(self)` |
-| `test_publish_writes_index_plus_five_maps` | method | `tests/test_diagrams.py:386` | `def test_publish_writes_index_plus_five_maps(self)` |
-| `test_renderer_builds_vis_network_with_physics` | method | `tests/test_diagrams.py:581` | `def test_renderer_builds_vis_network_with_physics(self)` |
-| `test_renderer_buttons_explain_their_purpose` | method | `tests/test_diagrams.py:355` | `def test_renderer_buttons_explain_their_purpose(self)` |
-| `test_renderer_covers_all_five_kinds` | method | `tests/test_diagrams.py:314` | `def test_renderer_covers_all_five_kinds(self)` |
-| `test_renderer_disables_physics_from_config` | method | `tests/test_diagrams.py:597` | `def test_renderer_disables_physics_from_config(self)` |
-| `test_renderer_documents_symbols_per_file` | method | `tests/test_diagrams.py:636` | `def test_renderer_documents_symbols_per_file(self)` |
-| `test_renderer_embeds_valid_json_payloads` | method | `tests/test_diagrams.py:305` | `def test_renderer_embeds_valid_json_payloads(self)` |
-| `test_renderer_embeds_valid_payloads` | method | `tests/test_diagrams.py:628` | `def test_renderer_embeds_valid_payloads(self)` |
-| `test_renderer_escapes_malicious_labels` | method | `tests/test_diagrams.py:292` | `def test_renderer_escapes_malicious_labels(self)` |
-| `test_renderer_escapes_malicious_symbol_docs` | method | `tests/test_diagrams.py:652` | `def test_renderer_escapes_malicious_symbol_docs(self)` |
-| `test_renderer_escapes_malicious_titles` | method | `tests/test_diagrams.py:604` | `def test_renderer_escapes_malicious_titles(self)` |
-| `test_renderer_exposes_reader_controls` | method | `tests/test_diagrams.py:617` | `def test_renderer_exposes_reader_controls(self)` |
-| `test_renderer_has_no_external_requests` | method | `tests/test_diagrams.py:270` | `def test_renderer_has_no_external_requests(self)` |
-| `test_renderer_includes_interaction_controls` | method | `tests/test_diagrams.py:277` | `def test_renderer_includes_interaction_controls(self)` |
-| `test_renderer_includes_keyboard_and_deep_links` | method | `tests/test_diagrams.py:283` | `def test_renderer_includes_keyboard_and_deep_links(self)` |
-| `test_renderer_is_deterministic` | method | `tests/test_diagrams.py:623` | `def test_renderer_is_deterministic(self)` |
-| `test_renderer_keeps_canvas_distinct_from_nodes` | method | `tests/test_diagrams.py:333` | `def test_renderer_keeps_canvas_distinct_from_nodes(self)` |
-| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:321` | `def test_renderer_links_gallery_home_when_configured(self)` |
-| `test_renderer_links_gallery_home_when_configured` | method | `tests/test_diagrams.py:589` | `def test_renderer_links_gallery_home_when_configured(self)` |
-| `test_renderer_never_uses_inner_html` | method | `tests/test_diagrams.py:263` | `def test_renderer_never_uses_inner_html(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

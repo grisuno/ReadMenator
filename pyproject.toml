@@ -41,6 +41,7 @@ include = [
     "/readmenator.py",
     "/readmenator_orchestrator.py",
     "/tests",
+    "/example.readmenator.toml",
 ]
 
 [tool.hatch.build.targets.wheel]

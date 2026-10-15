@@ -77,9 +77,9 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
 - Language: py
 - Symbols:
   - `TestAgentInjectorInjectBehavior` (class, line 19) `class TestAgentInjectorInjectBehavior(TestCase)`
-  - `TestAgentInjectorRemoveBehavior` (class, line 168) `class TestAgentInjectorRemoveBehavior(TestCase)`
-  - `TestAgentInjectorFindFiles` (class, line 211) `class TestAgentInjectorFindFiles(TestCase)`
-  - `TestAgentInjectorEdgeCases` (class, line 248) `class TestAgentInjectorEdgeCases(TestCase)`
+  - `TestAgentInjectorRemoveBehavior` (class, line 161) `class TestAgentInjectorRemoveBehavior(TestCase)`
+  - `TestAgentInjectorFindFiles` (class, line 204) `class TestAgentInjectorFindFiles(TestCase)`
+  - `TestAgentInjectorEdgeCases` (class, line 241) `class TestAgentInjectorEdgeCases(TestCase)`
   - `setUp` (method, line 22) `def setUp(self)`
   - `tearDown` (method, line 27) `def tearDown(self)`
   - `test_inject_into_agents_md_adds_kb_link` (method, line 30) `def test_inject_into_agents_md_adds_kb_link(self)`
@@ -88,32 +88,32 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_inject_into_github_copilot_instructions` (method, line 57) `def test_inject_into_github_copilot_instructions(self)`
   - `test_inject_replaces_old_injection_without_regen_command` (method, line 67) `def test_inject_replaces_old_injection_without_regen_command(self)`
   - `test_inject_skips_when_already_up_to_date` (method, line 82) `def test_inject_skips_when_already_up_to_date(self)`
-  - `test_inject_into_cursor_rules_mdc_glob` (method, line 96) `def test_inject_into_cursor_rules_mdc_glob(self)`
-  - `test_inject_is_idempotent_does_not_duplicate` (method, line 106) `def test_inject_is_idempotent_does_not_duplicate(self)`
-  - `test_inject_no_agent_files_returns_zero` (method, line 117) `def test_inject_no_agent_files_returns_zero(self)`
-  - `test_inject_preserves_existing_content` (method, line 121) `def test_inject_preserves_existing_content(self)`
-  - `test_inject_multiple_agent_files` (method, line 129) `def test_inject_multiple_agent_files(self)`
-  - `test_inject_plain_text_format_for_yaml` (method, line 136) `def test_inject_plain_text_format_for_yaml(self)`
-  - `test_custom_kb_filename_works` (method, line 145) `def test_custom_kb_filename_works(self)`
-  - `test_injection_includes_regeneration_command` (method, line 153) `def test_injection_includes_regeneration_command(self)`
-  - `test_inject_does_not_execute_commands` (method, line 160) `def test_inject_does_not_execute_commands(self)`
-  - `setUp` (method, line 171) `def setUp(self)`
-  - `tearDown` (method, line 176) `def tearDown(self)`
-  - `test_remove_strips_injected_section` (method, line 179) `def test_remove_strips_injected_section(self)`
-  - `test_remove_without_injection_returns_zero` (method, line 190) `def test_remove_without_injection_returns_zero(self)`
-  - `test_remove_no_files_returns_zero` (method, line 196) `def test_remove_no_files_returns_zero(self)`
-  - `test_remove_preserves_original_content` (method, line 200) `def test_remove_preserves_original_content(self)`
-  - `setUp` (method, line 214) `def setUp(self)`
-  - `tearDown` (method, line 218) `def tearDown(self)`
-  - `test_finds_agents_md` (method, line 221) `def test_finds_agents_md(self)`
-  - `test_finds_all_listed_files` (method, line 227) `def test_finds_all_listed_files(self)`
-  - `test_finds_cursor_rules_glob` (method, line 234) `def test_finds_cursor_rules_glob(self)`
-  - `test_returns_empty_when_no_files` (method, line 243) `def test_returns_empty_when_no_files(self)`
-  - `setUp` (method, line 251) `def setUp(self)`
-  - `tearDown` (method, line 256) `def tearDown(self)`
-  - `test_inject_into_empty_file` (method, line 259) `def test_inject_into_empty_file(self)`
-  - `test_inject_respects_custom_agent_files_list` (method, line 267) `def test_inject_respects_custom_agent_files_list(self)`
-  - `test_inject_does_not_touch_unlisted_files` (method, line 275) `def test_inject_does_not_touch_unlisted_files(self)`
+  - `test_inject_into_cursor_rules_mdc_glob` (method, line 89) `def test_inject_into_cursor_rules_mdc_glob(self)`
+  - `test_inject_is_idempotent_does_not_duplicate` (method, line 99) `def test_inject_is_idempotent_does_not_duplicate(self)`
+  - `test_inject_no_agent_files_returns_zero` (method, line 110) `def test_inject_no_agent_files_returns_zero(self)`
+  - `test_inject_preserves_existing_content` (method, line 114) `def test_inject_preserves_existing_content(self)`
+  - `test_inject_multiple_agent_files` (method, line 122) `def test_inject_multiple_agent_files(self)`
+  - `test_inject_plain_text_format_for_yaml` (method, line 129) `def test_inject_plain_text_format_for_yaml(self)`
+  - `test_custom_kb_filename_works` (method, line 138) `def test_custom_kb_filename_works(self)`
+  - `test_injection_includes_regeneration_command` (method, line 146) `def test_injection_includes_regeneration_command(self)`
+  - `test_inject_does_not_execute_commands` (method, line 153) `def test_inject_does_not_execute_commands(self)`
+  - `setUp` (method, line 164) `def setUp(self)`
+  - `tearDown` (method, line 169) `def tearDown(self)`
+  - `test_remove_strips_injected_section` (method, line 172) `def test_remove_strips_injected_section(self)`
+  - `test_remove_without_injection_returns_zero` (method, line 183) `def test_remove_without_injection_returns_zero(self)`
+  - `test_remove_no_files_returns_zero` (method, line 189) `def test_remove_no_files_returns_zero(self)`
+  - `test_remove_preserves_original_content` (method, line 193) `def test_remove_preserves_original_content(self)`
+  - `setUp` (method, line 207) `def setUp(self)`
+  - `tearDown` (method, line 211) `def tearDown(self)`
+  - `test_finds_agents_md` (method, line 214) `def test_finds_agents_md(self)`
+  - `test_finds_all_listed_files` (method, line 220) `def test_finds_all_listed_files(self)`
+  - `test_finds_cursor_rules_glob` (method, line 227) `def test_finds_cursor_rules_glob(self)`
+  - `test_returns_empty_when_no_files` (method, line 236) `def test_returns_empty_when_no_files(self)`
+  - `setUp` (method, line 244) `def setUp(self)`
+  - `tearDown` (method, line 249) `def tearDown(self)`
+  - `test_inject_into_empty_file` (method, line 252) `def test_inject_into_empty_file(self)`
+  - `test_inject_respects_custom_agent_files_list` (method, line 260) `def test_inject_respects_custom_agent_files_list(self)`
+  - `test_inject_does_not_touch_unlisted_files` (method, line 268) `def test_inject_does_not_touch_unlisted_files(self)`
 - Depends on: `readmenator/_agent_injector.py`
 
 ## tests/test_agent_output.py

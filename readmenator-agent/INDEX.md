@@ -5,26 +5,26 @@
 | `readmenator.py` | Launcher shim that runs the readmenator CLI from a source checkout. | root | 0 | 0 |
 | `readmenator/__init__.py` | ReadMenator -- Zero-token polyglot codebase knowledge graph generator. | readmenator | 0 | 0 |
 | `readmenator/__main__.py` | Command line entry point: argument parsing and subcommand dispatch. | readmenator | 3 | 1 |
-| `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 3 |
+| `readmenator/_agent_injector.py` | Injects KNOWLEDGE_BASE.md references into AI agent instruction files. | readmenator | 14 | 4 |
 | `readmenator/_agent_output.py` | Agent-friendly output generator for ReadMenator. | readmenator | 33 | 4 |
 | `readmenator/_analytics.py` | Corpus analytics aggregations for the readmenator knowledge graph. | readmenator | 9 | 5 |
 | `readmenator/_analyzer.py` | Graph analysis engine for the readmenator knowledge graph. | readmenator | 23 | 5 |
 | `readmenator/_apidocs.py` | Deterministic API reference model: extraction, cross-references, coverage. | readmenator | 52 | 7 |
 | `readmenator/_apidocs_page.py` | Self-contained HTML browser for the deterministic API reference. | readmenator | 2 | 3 |
 | `readmenator/_apidocs_render.py` | Markdown, JSON, and writer layer for the deterministic API reference. | readmenator | 45 | 2 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 85 | 16 |
-| `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 5 |
-| `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 1 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 87 | 16 |
+| `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 6 |
+| `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 2 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 4 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 98 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 100 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
-| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 92 | 8 |
+| `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 97 | 9 |
 | `readmenator/_docstrings.py` | Multi-style docstring parser for the deterministic API reference. | readmenator | 30 | 3 |
 | `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 31 | 3 |
 | `readmenator/_embed.py` | Optional semantic embeddings for the readmenator knowledge graph. | readmenator | 11 | 2 |
@@ -34,10 +34,10 @@
 | `readmenator/_exporter.py` | Multi-format exporter for the readmenator knowledge graph. | readmenator | 16 | 3 |
 | `readmenator/_flowcharts.py` | Architecture and execution-flow Mermaid diagrams from static structure. | readmenator | 54 | 4 |
 | `readmenator/_flowlayout.py` | Flow graph model and deterministic layered layout (Sugiyama style). | readmenator | 11 | 6 |
-| `readmenator/_flowpage.py` | Interactive SVG viewer for laid-out architecture and execution-flow diagrams. | readmenator | 3 | 4 |
-| `readmenator/_folder_readme.py` | Per-folder README.md files for every generated readmenator-* directory. | readmenator | 7 | 5 |
-| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 23 | 9 |
-| `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 2 |
+| `readmenator/_flowpage.py` | Interactive SVG viewer for laid-out architecture and execution-flow diagrams. | readmenator | 3 | 5 |
+| `readmenator/_folder_readme.py` | Per-folder README.md files for every generated readmenator-* directory. | readmenator | 7 | 6 |
+| `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 23 | 10 |
+| `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 3 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 4 |
 | `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 5 |
 | `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 26 | 5 |
@@ -53,13 +53,14 @@
 | `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 23 | 101 |
 | `readmenator/_ollama.py` | Local Ollama client for optional LLM enrichment. | readmenator | 7 | 4 |
 | `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 53 | 1 |
+| `readmenator/_project_config.py` | Per-project persistent configuration (readmenator.toml). | readmenator | 18 | 9 |
 | `readmenator/_projections.py` | Functors and projections for the readmenator code category. | readmenator | 15 | 1 |
 | `readmenator/_provenance.py` | Evidence-provenance audit for readmenator security findings. | readmenator | 10 | 2 |
 | `readmenator/_purpose.py` | Purpose extraction shared by every agent-facing document generator. | readmenator | 7 | 7 |
 | `readmenator/_pytypes.py` | Lightweight, deterministic receiver typing for Python attribute calls. | readmenator | 16 | 3 |
 | `readmenator/_query.py` | Query engine for the readmenator knowledge base. | readmenator | 17 | 3 |
 | `readmenator/_rank.py` | PageRank, Personalized PageRank, HITS, and composite scoring. | readmenator | 18 | 11 |
-| `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 9 | 4 |
+| `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 9 | 5 |
 | `readmenator/_refactorizer.py` | Monolithic file refactoring planner for the readmenator knowledge graph. | readmenator | 9 | 2 |
 | `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 7 |
 | `readmenator/_rule_gen.py` | Suggested linting rule generator producing Semgrep YAML from detected antipatterns. | readmenator | 9 | 2 |
@@ -74,6 +75,7 @@
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_vendor/force-graph.min.js` | Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph | misc | 35 | 0 |
 | `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 90 | 3 |
+| `readmenator/_viewer_ui.py` | Shared Config button + modal for maps/explorer pages. | readmenator | 7 | 5 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
 | `readmenator/_yaralite.py` | Zero-dependency YARA-lite rule parser and runner. | readmenator | 20 | 2 |
@@ -137,6 +139,7 @@
 | `tests/test_parsers.py` | - | tests | 87 | 0 |
 | `tests/test_parsers_new.py` | Contract tests for the 6 new language parsers. | tests | 36 | 0 |
 | `tests/test_parsers_property.py` | Property-based contract tests for all 19 language parsers. | tests | 27 | 0 |
+| `tests/test_project_config.py` | Contract tests for per-project readmenator.toml configuration. | tests | 33 | 0 |
 | `tests/test_query.py` | - | tests | 18 | 0 |
 | `tests/test_ranking.py` | Contract tests for the category theory and ranking system. | tests | 72 | 0 |
 | `tests/test_readme_injector.py` | Contract tests for README injection into documented projects. | tests | 28 | 0 |

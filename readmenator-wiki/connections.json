@@ -1,7 +1,7 @@
 [
   {
     "community_a": 3,
-    "community_b": 2,
+    "community_b": 0,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.",
     "strength": 0.9,
@@ -9,15 +9,15 @@
   },
   {
     "community_a": 3,
-    "community_b": 0,
+    "community_b": 5,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_config.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_project_config.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
     "community_a": 3,
-    "community_b": 4,
+    "community_b": 6,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.",
     "strength": 0.9,
@@ -33,9 +33,17 @@
   },
   {
     "community_a": 3,
-    "community_b": 6,
+    "community_b": 4,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 0,
+    "community_b": 5,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
@@ -43,7 +51,7 @@
     "community_a": 2,
     "community_b": 0,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_config.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
@@ -56,15 +64,15 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 2,
-    "community_b": 5,
+    "community_a": 4,
+    "community_b": 0,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_security.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 0,
+    "community_a": 4,
     "community_b": 1,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.",
@@ -72,23 +80,7 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 5,
-    "community_b": 0,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_analyzer.py imports readmenator/_config.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 5,
-    "community_b": 1,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_analyzer.py imports readmenator/_models.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 4,
+    "community_a": 6,
     "community_b": 0,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.",
@@ -96,7 +88,7 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 4,
+    "community_a": 6,
     "community_b": 1,
     "connection_type": "depends_on",
     "explanation": "Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.",
@@ -104,59 +96,67 @@
     "confidence": "EXTRACTED"
   },
   {
-    "community_a": 2,
-    "community_b": 4,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_apidocs.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 3,
+    "community_a": 6,
     "community_b": 5,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_graphrag.py imports readmenator/_analyzer.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
     "community_a": 0,
-    "community_b": 6,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_injector.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 6,
-    "community_b": 2,
-    "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_agent_output.py.",
-    "strength": 0.9,
-    "confidence": "EXTRACTED"
-  },
-  {
-    "community_a": 6,
     "community_b": 1,
     "connection_type": "depends_on",
-    "explanation": "Extracted import edge crosses communities: tests/test_agent_output.py imports readmenator/_models.py.",
+    "explanation": "Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 3,
+    "community_b": 2,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_cache.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 5,
+    "community_b": 2,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_folder_readme.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 5,
+    "community_b": 1,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.",
     "strength": 0.9,
     "confidence": "EXTRACTED"
   },
   {
     "community_a": 4,
-    "community_b": 0,
-    "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator/_docstrings.py reaches tests/test_graphlayout.py in 5 hops.",
-    "strength": 0.5,
-    "confidence": "INFERRED"
+    "community_b": 5,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_forcegraph.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
   },
   {
-    "community_a": 2,
+    "community_a": 4,
     "community_b": 6,
-    "connection_type": "bridges",
-    "explanation": "Inferred cross-community bridge: readmenator.py reaches tests/test_agent_injector.py in 5 hops.",
-    "strength": 0.5,
-    "confidence": "INFERRED"
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
+  },
+  {
+    "community_a": 4,
+    "community_b": 2,
+    "connection_type": "depends_on",
+    "explanation": "Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.",
+    "strength": 0.9,
+    "confidence": "EXTRACTED"
   }
 ]

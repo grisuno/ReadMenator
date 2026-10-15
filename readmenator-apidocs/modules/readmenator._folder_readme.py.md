@@ -167,7 +167,7 @@ Render the README text for one folder.
 
 #### `FolderReadmeWriter.write_all`
 
-`method` | [readmenator/_folder_readme.py:307](../../readmenator/_folder_readme.py#L307)
+`method` | [readmenator/_folder_readme.py:310](../../readmenator/_folder_readme.py#L310)
 
 ```python
 def write_all(self, project_root: str) -> List[str]
