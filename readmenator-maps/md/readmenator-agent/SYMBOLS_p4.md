@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_extract_signature` | method | `readmenator/parsers/_base.py:91` | `def _extract_signature(self, content, match_start, pattern)` |
 | `_extract_specifics` | method | `readmenator/parsers/_base.py:45` | `def _extract_specifics(self, content)` |
 | `parse` | method | `readmenator/parsers/_base.py:36` | `def parse(self, content)` |
 | `CParser` | class | `readmenator/parsers/_c.py:30` | `class CParser(LanguageParser)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
 | `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
 | `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:688` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
-| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:674` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

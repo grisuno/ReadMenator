@@ -1,12 +1,12 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 7 communities, 154 files, 1332 imports, 2 languages, 3028 symbols.
+> Static analysis knowledge base for ReadMenator: 7 communities, 155 files, 1332 imports, 3 languages, 3029 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
-- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 6 layers, dominant utility (83 files) across 8 import-based communities....
+- [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on models.py, config.py, pipeline.py. Architecturally it is 6 layers, dominant utility (84 files) across 8 import-based communities....
 - [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-14 | offline, deterministic
 - [readmenator-wiki/community_0_readmenator_video.md](md/readmenator-wiki/community_0_readmenator_video.md): Community 0 | 35 files | cohesion 0.30
 - [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 35 files | cohesion 0.52
@@ -15,20 +15,20 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-wiki/community_4_readmenator_pipeline.md](md/readmenator-wiki/community_4_readmenator_pipeline.md): Community 4 | 17 files | cohesion 0.26
 - [readmenator-wiki/community_5_readmenator_diagrams.md](md/readmenator-wiki/community_5_readmenator_diagrams.md): Community 5 | 15 files | cohesion 0.39
 - [readmenator-wiki/community_6_readmenator_flowcharts.md](md/readmenator-wiki/community_6_readmenator_flowcharts.md): Community 6 | 12 files | cohesion 0.44
-- [readmenator-wiki/community_7_orphans.md](md/readmenator-wiki/community_7_orphans.md): Community 7 | 3 files | cohesion 0.00
+- [readmenator-wiki/community_7_orphans.md](md/readmenator-wiki/community_7_orphans.md): Community 7 | 4 files | cohesion 0.00
 - [readmenator-wiki/concepts.md](md/readmenator-wiki/concepts.md): Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
 - [readmenator-wiki/queries.md](md/readmenator-wiki/queries.md): Log each answered question here so the wiki compounds. Format: question, answer, cited files.
 
 ## GraphRAG
 
-- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 3275 | Relationships: 11332 | Communities: 8 | Themes: 2 | Text units: 3162
+- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 3277 | Relationships: 11336 | Communities: 8 | Themes: 2 | Text units: 3164
 
 ## Agent Docs
 
 - [readmenator-agent/INDEX.md](md/readmenator-agent/INDEX.md)
 - [readmenator-agent/GOTCHAS.md](md/readmenator-agent/GOTCHAS.md): These files have the most connections. Changes here have high blast radius.
-- [readmenator-agent/API.md](md/readmenator-agent/API.md): Depends on: readmenator/app.py, readmenator/config.py, readmenator/mcpserver.py, readmenator/projectconfig.py
-- [readmenator-agent/API_p2.md](md/readmenator-agent/API_p2.md): Depends on: readmenator/models.py
+- [readmenator-agent/API.md](md/readmenator-agent/API.md): ensurepkg (function) deploy.sh:22 -- Install or update one package (best effort: works offline with current versions, on PEP 668 systems, and before the...
+- [readmenator-agent/API_p2.md](md/readmenator-agent/API_p2.md): Depends on: readmenator/config.py, readmenator/models.py
 - [readmenator-agent/ARCHITECTURE.md](md/readmenator-agent/ARCHITECTURE.md): readmenator.py -> readmenator/main.py
 - [readmenator-agent/ARCHITECTURE_p2.md](md/readmenator-agent/ARCHITECTURE_p2.md): tests/testprojectconfig.py -> readmenator/config.py
 - [readmenator-agent/CONCEPTS.md](md/readmenator-agent/CONCEPTS.md): Nouns map atomically to file sets (EXTRACTED); verbs aggregate structural edges (INFERRED).
@@ -39,12 +39,12 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/KB_readmenator_p3.md](md/readmenator-agent/KB_readmenator_p3.md): Doc: GitHub wiki publisher: mirrors generated knowledge into the repository wiki.
 - [readmenator-agent/KB_readmenator_p4.md](md/readmenator-agent/KB_readmenator_p4.md): Doc: Evidence-provenance audit for readmenator security findings.
 - [readmenator-agent/KB_readmenator_p5.md](md/readmenator-agent/KB_readmenator_p5.md): Doc: Filesystem watcher for auto-rebuilding the knowledge base.
-- [readmenator-agent/KB_root.md](md/readmenator-agent/KB_root.md): Doc: Launcher shim that runs the readmenator CLI from a source checkout.
+- [readmenator-agent/KB_root.md](md/readmenator-agent/KB_root.md): Doc: one-liner deploy via deploynator (generic per-repo script).
 - [readmenator-agent/KB_tests.md](md/readmenator-agent/KB_tests.md): Doc: Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 - [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for interactive system maps.
 - [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for the ArchitectureLinter.
 - [readmenator-agent/KB_tests_p4.md](md/readmenator-agent/KB_tests_p4.md): Doc: Contract tests for the MonolithRefactorizer.
-- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 154 files at commit 2ac6fa683a55. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
+- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 155 files at commit b1c817ed3492. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)
@@ -54,7 +54,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/SYMBOLS_p6.md](md/readmenator-agent/SYMBOLS_p6.md)
 - [readmenator-agent/SYMBOLS_p7.md](md/readmenator-agent/SYMBOLS_p7.md)
 - [readmenator-agent/recipes/add-function.md](md/readmenator-agent/recipes/add-function.md): Find the target file by purpose: grep -in '<topic>' readmenator-agent/INDEX.md
-- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (105 dependents)
+- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (104 dependents)
 - [readmenator-agent/recipes/fix-cycle.md](md/readmenator-agent/recipes/fix-cycle.md): Read cycles: grep -A5 'Dependency Cycles' readmenator-agent/GOTCHAS.md
 - [readmenator-agent/recipes/fix-security.md](md/readmenator-agent/recipes/fix-security.md): Read findings: grep -n '<file>' readmenator-agent/SECURITY.md
 - [readmenator-agent/recipes/reduce-complexity.md](md/readmenator-agent/recipes/reduce-complexity.md): Target hotspot: readmenator/vendor/force-graph.min.js
@@ -65,7 +65,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [README.md](md/README.md): A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer.
 - [SECURITY.md](md/SECURITY.md): Use this section to tell people about which versions of your project are
 - [SKILL.md](md/SKILL.md): Turn any codebase into a queryable knowledge base using pure static analysis. No LLMs. No tokens. No cloud.
-- [readmenator-diagrams/overview.md](md/readmenator-diagrams/overview.md): Static architecture map of 154 files (js, py) in 7 components: readmenator: video, readmenator/parsers, readmenator: agentoutput, readmenator: graphrag...
+- [readmenator-diagrams/overview.md](md/readmenator-diagrams/overview.md): Static architecture map of 155 files (js, py, sh) in 7 components: readmenator: video, readmenator/parsers, readmenator: agentoutput, readmenator: graphrag...
 - [readmenator-diagrams/readmenator__agent_output.md](md/readmenator-diagrams/readmenator__agent_output.md): readmenator: agentoutput groups 19 files (py) around ImportResolver, init, buildstemindex, builddirindex, resolve. Agent-friendly output generator for...
 - [readmenator-diagrams/readmenator__diagrams.md](md/readmenator-diagrams/readmenator__diagrams.md): readmenator: diagrams groups 15 files (py) around tomlstr, tomlvalue, templatetext, configpath, ensureprojectconfig. Edge bundle explorer: circle and sphere...
 - [readmenator-diagrams/readmenator__flowcharts.md](md/readmenator-diagrams/readmenator__flowcharts.md): readmenator: flowcharts groups 12 files (py) around receivertext, SymbolDef, CallSite, ResolvedCall, kindtonodetype. Deterministic API reference model...

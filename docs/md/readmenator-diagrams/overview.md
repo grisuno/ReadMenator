@@ -59,7 +59,7 @@ graph LR
 
 ## Details
 
-Static architecture map of 154 files (js, py) in 7 components: readmenator: _video, readmenator/parsers, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.
+Static architecture map of 155 files (js, py, sh) in 7 components: readmenator: _video, readmenator/parsers, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.
 
 ### readmenator: _video (1)
 

@@ -3,6 +3,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_indent` | function | `readmenator/_docstrings.py:321` | `def _indent(line)` |
 | `_join_block` | function | `readmenator/_docstrings.py:326` | `def _join_block(lines)` |
 | `_parse_items` | function | `readmenator/_docstrings.py:393` | `def _parse_items(body, mode, allow_bare)` |
 | `_parse_jsdoc_param` | function | `readmenator/_docstrings.py:664` | `def _parse_jsdoc_param(rest)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `exclusions` | method | `readmenator/_pipeline.py:359` | `def exclusions(self)` |
 | `exporter` | method | `readmenator/_pipeline.py:149` | `def exporter(self)` |
 | `folder_readme` | method | `readmenator/_pipeline.py:422` | `def folder_readme(self)` |
-| `forcegraph` | method | `readmenator/_pipeline.py:324` | `def forcegraph(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

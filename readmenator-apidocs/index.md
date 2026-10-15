@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 98 modules, 1958 documented entities, documentation coverage 82.8% (710/857 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 99 modules, 1960 documented entities, documentation coverage 82.9% (712/859 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (98)
+Languages: py (98), sh (1)
 
 ## Modules
 
@@ -12,6 +12,7 @@ Languages: py (98)
 
 | Module | Summary | Types | Callables | Coverage |
 |---|---|---|---|---|
+| [`deploy.sh`](modules/deploy.sh.md) | deploy.sh -- one-liner deploy via deploynator (generic per-repo script). | 0 | 1 | 100.0% |
 | [`readmenator`](modules/readmenator.py.md) | Launcher shim that runs the readmenator CLI from a source checkout. | 0 | 0 | 100.0% |
 | [`readmenator_orchestrator`](modules/readmenator_orchestrator.py.md) |  | 5 | 20 | 3.8% |
 

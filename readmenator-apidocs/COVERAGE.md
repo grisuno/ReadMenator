@@ -1,6 +1,6 @@
 # Documentation Coverage
 
-Overall: **82.8%** (710 of 857 public modules, types, and callables). Data members are excluded from the ratio.
+Overall: **82.9%** (712 of 859 public modules, types, and callables). Data members are excluded from the ratio.
 
 [Back to index](index.md)
 
@@ -13,9 +13,9 @@ Overall: **82.8%** (710 of 857 public modules, types, and callables). Data membe
 | constructor | 46 | 77 | 59.7% |
 | enum | 1 | 1 | 100.0% |
 | exception | 0 | 1 | 0.0% |
-| function | 125 | 129 | 96.9% |
+| function | 126 | 130 | 96.9% |
 | method | 238 | 313 | 76.0% |
-| module | 97 | 98 | 99.0% |
+| module | 98 | 99 | 99.0% |
 | property | 37 | 61 | 60.7% |
 | protocol | 1 | 1 | 100.0% |
 | staticmethod | 4 | 4 | 100.0% |
@@ -47,6 +47,7 @@ Overall: **82.8%** (710 of 857 public modules, types, and callables). Data membe
 | [`readmenator._rank`](modules/readmenator._rank.py.md) | 13 | 16 | 81.2% |
 | [`readmenator._hotspots`](modules/readmenator._hotspots.py.md) | 5 | 6 | 83.3% |
 | [`readmenator._agent_injector`](modules/readmenator._agent_injector.py.md) | 6 | 7 | 85.7% |
+| [`deploy.sh`](modules/deploy.sh.md) | 2 | 2 | 100.0% |
 | [`readmenator`](modules/readmenator.py.md) | 1 | 1 | 100.0% |
 | [`readmenator`](modules/readmenator.__init__.py.md) | 1 | 1 | 100.0% |
 | [`readmenator._agent_output`](modules/readmenator._agent_output.py.md) | 4 | 4 | 100.0% |

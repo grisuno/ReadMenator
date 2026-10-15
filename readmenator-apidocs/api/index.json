@@ -2,10 +2,11 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 98,
-  "entities": 1958,
+  "modules": 99,
+  "entities": 1960,
   "languages": {
-   "py": 98
+   "py": 98,
+   "sh": 1
   },
   "kinds": {
    "attribute": 1018,
@@ -15,9 +16,9 @@
    "constructor": 77,
    "enum": 1,
    "exception": 1,
-   "function": 129,
+   "function": 130,
    "method": 313,
-   "module": 98,
+   "module": 99,
    "property": 61,
    "protocol": 1,
    "staticmethod": 4
@@ -28,9 +29,9 @@
  },
  "coverage": {
   "overall": {
-   "documented": 710,
-   "total": 857,
-   "percent": 82.8
+   "documented": 712,
+   "total": 859,
+   "percent": 82.9
   },
   "by_kind": {
    "class": {
@@ -59,8 +60,8 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 125,
-    "total": 129,
+    "documented": 126,
+    "total": 130,
     "percent": 96.9
    },
    "method": {
@@ -69,8 +70,8 @@
     "percent": 76.0
    },
    "module": {
-    "documented": 97,
-    "total": 98,
+    "documented": 98,
+    "total": 99,
     "percent": 99.0
    },
    "property": {
@@ -90,6 +91,11 @@
    }
   },
   "by_module": {
+   "deploy.sh": {
+    "documented": 2,
+    "total": 2,
+    "percent": 100.0
+   },
    "readmenator.py": {
     "documented": 1,
     "total": 1,
@@ -583,6 +589,11 @@
   }
  },
  "modules": [
+  {
+   "uid": "deploy.sh",
+   "path": "modules/deploy.sh.jsonl",
+   "entities": 2
+  },
   {
    "uid": "readmenator.py",
    "path": "modules/readmenator.py.jsonl",

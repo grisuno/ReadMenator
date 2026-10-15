@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:674` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
 | `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:517` | `def test_publish_card_reports_primary_scope(self)` |
 | `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:478` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
 | `test_publish_escapes_malicious_project_name` | method | `tests/test_diagrams.py:446` | `def test_publish_escapes_malicious_project_name(self)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_extracts_function` | method | `tests/test_parsers.py:416` | `def test_extracts_function(self)` |
 | `test_extracts_function_keyword` | method | `tests/test_parsers.py:353` | `def test_extracts_function_keyword(self)` |
 | `test_extracts_function_with_parentheses` | method | `tests/test_parsers.py:346` | `def test_extracts_function_with_parentheses(self)` |
-| `test_extracts_import` | method | `tests/test_parsers.py:295` | `def test_extracts_import(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

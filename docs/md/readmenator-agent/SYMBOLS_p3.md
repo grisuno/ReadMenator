@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `forcegraph` | method | `readmenator/_pipeline.py:324` | `def forcegraph(self)` |
 | `generator` | method | `readmenator/_pipeline.py:131` | `def generator(self)` |
 | `gh_wiki` | method | `readmenator/_pipeline.py:262` | `def gh_wiki(self)` |
 | `graphrag` | method | `readmenator/_pipeline.py:373` | `def graphrag(self)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `LanguageParser` | class | `readmenator/parsers/_base.py:12` | `class LanguageParser` |
 | `__init__` | method | `readmenator/parsers/_base.py:21` | `def __init__(self, filename, config)` |
 | `_extract_docstring` | method | `readmenator/parsers/_base.py:49` | `def _extract_docstring(self, line_num)` |
-| `_extract_signature` | method | `readmenator/parsers/_base.py:91` | `def _extract_signature(self, content, match_start, pattern)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

@@ -16,7 +16,7 @@ flowchart TB
     subgraph lane_0["Tier 1 - entry / orchestration"]
         direction LR
         n_c4["readmenator: _pipeline<br/>13 files, 213 symbols<br/>Core / utility"]:::cycle
-        n_d__root_["(root)<br/>1 files, 37 symbols<br/>Core / utility"]:::default
+        n_d__root_["(root)<br/>2 files, 38 symbols<br/>Core / utility"]:::default
     end
     subgraph lane_1["Tier 2"]
         direction LR

@@ -1,0 +1,26 @@
+# deploynator.toml -- ReadMenator deploy config.
+# `deploynator release` / `./deploy.sh` read this. CLI flags win.
+
+[project]
+name = "ReadMenator"
+version_file = "pyproject.toml"
+
+[tests]
+commands = ["python -m pytest tests/ -q"]
+timeout_s = 1800
+allow_no_tests = false
+
+[docs]
+auto = true
+command = "python -m readmenator . --rebuild"
+timeout_s = 600
+
+[deploy]
+branch = "main"
+remote = "origin"
+
+[pypi]
+enabled = true
+repo = "pypi"
+clean_dist = true
+timeout_s = 600

@@ -1,12 +1,12 @@
 # GraphRAG Community Reports
 
-Entities: 3275 | Relationships: 11332 | Communities: 8 | Themes: 2 | Text units: 3162
+Entities: 3277 | Relationships: 11336 | Communities: 8 | Themes: 2 | Text units: 3164
 
 Query with `readmenator . ask "<question>"` (local: BM25 + Personalized PageRank; global: map-reduce over these reports) or the MCP tool `readmenator.graphrag`.
 
 ## Project overview (`root`, root, rating 7.0)
 
-154 files in 8 communities and 2 themes. Highest-impact communities: readmenator/parsers (7.0), readmenator: _video (6.8), readmenator: _graphrag (5.0). God nodes: readmenator/_models.py, readmenator/_config.py, readmenator/_pipeline.py, readmenator/_app.py, readmenator/parsers/__init__.py.
+155 files in 8 communities and 2 themes. Highest-impact communities: readmenator/parsers (7.0), readmenator: _video (6.8), readmenator: _graphrag (5.0). God nodes: readmenator/_models.py, readmenator/_config.py, readmenator/_pipeline.py, readmenator/_app.py, readmenator/parsers/__init__.py.
 
 - [readmenator/parsers] rating 7.0: `readmenator/_models.py` ranks 1 by PageRank, 114 importers, 23 symbols: Data model types for the readmenator knowledge graph.
 - [readmenator: _video] rating 6.8: `readmenator/_config.py` ranks 1 by PageRank, 102 importers, 1 symbols: Immutable configuration dataclass for readmenator.
@@ -15,7 +15,7 @@ Query with `readmenator . ask "<question>"` (local: BM25 + Personalized PageRank
 - [readmenator: _diagrams] rating 2.0: `readmenator/_project_config.py` ranks 1 by PageRank, 18 importers, 18 symbols: Per-project persistent configuration (readmenator.toml).
 - [readmenator: _pipeline] rating 1.6: `readmenator/_readme_injector.py` ranks 1 by PageRank, 7 importers, 9 symbols: Injects a knowledge base section into the project README (Markdown or RST).
 - [readmenator: _flowcharts] rating 1.3: `readmenator/_symindex.py` ranks 1 by PageRank, 7 importers, 22 symbols: Deterministic symbol index with call-site resolution.
-- [unassigned files] rating 0.2: `readmenator/_vendor/force-graph.min.js` ranks 1 by PageRank, 0 importers, 35 symbols: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
+- [unassigned files] rating 0.3: `deploy.sh` ranks 1 by PageRank, 0 importers, 1 symbols: one-liner deploy via deploynator (generic per-repo script).
 - Key entities: file:readmenator/_models.py, sym:readmenator/_models.py::Node@37, file:tests/test_parsers.py, file:readmenator/_app.py, file:tests/test_ranking.py, file:readmenator/_graphrag.py
 - Children: t0, t1
 - Root rating = highest community rating.
@@ -36,19 +36,19 @@ Theme of 7 communities and 151 files: readmenator/parsers (35 files, rating 7.0)
 - Children: c1, c0, c3, c2, c5, c4, c6
 - Theme rating = highest child community rating.
 
-## unassigned files (`t1`, theme, rating 0.2)
+## unassigned files (`t1`, theme, rating 0.3)
 
-Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
+Theme of 1 communities and 4 files: unassigned files (4 files, rating 0.3).
 
-- [unassigned files] `readmenator/_vendor/force-graph.min.js` ranks 1 by PageRank, 0 importers, 35 symbols: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
-- [unassigned files] `readmenator_orchestrator.py` ranks 2 by PageRank, 0 importers, 37 symbols: test_rebuild_command_includes_full_concept_layer: The orchestrator must force a full rebuild with all improvements.
+- [unassigned files] `deploy.sh` ranks 1 by PageRank, 0 importers, 1 symbols: one-liner deploy via deploynator (generic per-repo script).
+- [unassigned files] `readmenator/_vendor/force-graph.min.js` ranks 2 by PageRank, 0 importers, 35 symbols: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
 - Key entities: file:readmenator/_vendor/force-graph.min.js, file:readmenator_orchestrator.py
 - Children: c7
 - Theme rating = highest child community rating.
 
 ## readmenator/parsers (`c1`, community, rating 7.0)
 
-35 files under readmenator/parsers (py 35), mostly utility. Core file readmenator/_models.py (PageRank 0.1328, imported by 114 files): Data model types for the readmenator knowledge graph. Key abstractions: Symbol, Node, Edge, SecurityFinding, CommunityResult, AnalysisResult. Depends on readmenator: _video (11), readmenator: _agent_output (1), readmenator: _graphrag (1). Used by readmenator: _video (34), readmenator: _pipeline (19), readmenator: _agent_output (12).
+35 files under readmenator/parsers (py 35), mostly utility. Core file readmenator/_models.py (PageRank 0.1325, imported by 114 files): Data model types for the readmenator knowledge graph. Key abstractions: Symbol, Node, Edge, SecurityFinding, CommunityResult, AnalysisResult. Depends on readmenator: _video (11), readmenator: _agent_output (1), readmenator: _graphrag (1). Used by readmenator: _video (34), readmenator: _pipeline (19), readmenator: _agent_output (12).
 
 - `readmenator/_models.py` ranks 1 by PageRank, 114 importers, 23 symbols: Data model types for the readmenator knowledge graph.
 - `readmenator/parsers/_base.py` ranks 2 by PageRank, 20 importers, 6 symbols: LanguageParser base class with shared docstring and signature extraction.
@@ -61,7 +61,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _video (`c0`, community, rating 6.8)
 
-35 files under tests (py 35), mostly testing. Core file readmenator/_config.py (PageRank 0.1388, imported by 102 files): Immutable configuration dataclass for readmenator. Key abstractions: Config, readmenatorApplication, run, check_freshness, publish_github_wiki, generate_uml_code. Depends on readmenator/parsers (34), readmenator: _diagrams (11), readmenator: _pipeline (7). Used by readmenator: _agent_output (21), readmenator: _pipeline (21), readmenator: _graphrag (18).
+35 files under tests (py 35), mostly testing. Core file readmenator/_config.py (PageRank 0.1384, imported by 102 files): Immutable configuration dataclass for readmenator. Key abstractions: Config, readmenatorApplication, run, check_freshness, publish_github_wiki, generate_uml_code. Depends on readmenator/parsers (34), readmenator: _diagrams (11), readmenator: _pipeline (7). Used by readmenator: _agent_output (21), readmenator: _pipeline (21), readmenator: _graphrag (18).
 
 - `readmenator/_config.py` ranks 1 by PageRank, 102 importers, 1 symbols: Immutable configuration dataclass for readmenator.
 - `readmenator/_app.py` ranks 2 by PageRank, 26 importers, 87 symbols: Application orchestrator: scan, resolve, analyze, and write every output.
@@ -75,7 +75,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _graphrag (`c3`, community, rating 5.0)
 
-18 files under readmenator (py 18), mostly utility. Core file readmenator/_category.py (PageRank 0.1290, imported by 9 files): Category theory model for the readmenator code graph. Key abstractions: EdgeKind, Morphism, Category, TypedGraph, weight, add_object. Depends on readmenator: _video (18), readmenator/parsers (12), readmenator: _agent_output (6). Used by readmenator: _pipeline (8), readmenator: _video (5), readmenator/parsers (1).
+18 files under readmenator (py 18), mostly utility. Core file readmenator/_category.py (PageRank 0.1287, imported by 9 files): Category theory model for the readmenator code graph. Key abstractions: EdgeKind, Morphism, Category, TypedGraph, weight, add_object. Depends on readmenator: _video (18), readmenator/parsers (12), readmenator: _agent_output (6). Used by readmenator: _pipeline (8), readmenator: _video (5), readmenator/parsers (1).
 
 - `readmenator/_category.py` ranks 1 by PageRank, 9 importers, 26 symbols: Category theory model for the readmenator code graph.
 - `readmenator/_rank.py` ranks 2 by PageRank, 11 importers, 18 symbols: PageRank, Personalized PageRank, HITS, and composite scoring.
@@ -103,7 +103,7 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 
 ## readmenator: _diagrams (`c5`, community, rating 2.0)
 
-15 files under readmenator (py 15), mostly utility. Core file readmenator/_project_config.py (PageRank 0.0147, imported by 18 files): Per-project persistent configuration (readmenator.toml). Key abstractions: template_text, config_path, ensure_project_config, parse_toml, load_project_config, display_name. Depends on readmenator: _video (15), readmenator/parsers (6), readmenator: _agent_output (4). Used by readmenator: _video (11), readmenator: _pipeline (11), readmenator: _agent_output (4).
+15 files under readmenator (py 15), mostly utility. Core file readmenator/_project_config.py (PageRank 0.0146, imported by 18 files): Per-project persistent configuration (readmenator.toml). Key abstractions: template_text, config_path, ensure_project_config, parse_toml, load_project_config, display_name. Depends on readmenator: _video (15), readmenator/parsers (6), readmenator: _agent_output (4). Used by readmenator: _video (11), readmenator: _pipeline (11), readmenator: _agent_output (4).
 
 - `readmenator/_project_config.py` ranks 1 by PageRank, 18 importers, 18 symbols: Per-project persistent configuration (readmenator.toml).
 - `readmenator/_graphlayout.py` ranks 2 by PageRank, 5 importers, 26 symbols: Deterministic graph layout algorithms for animated renders.
@@ -145,14 +145,14 @@ Theme of 1 communities and 3 files: unassigned files (3 files, rating 0.2).
 - Key entities: file:tests/test_apidocs.py, file:readmenator/_apidocs.py, sym:readmenator/_flowcharts.py::add@800, file:readmenator/_flowcharts.py, file:readmenator/_apidocs_render.py, file:tests/test_flowcharts.py, file:readmenator/_symindex.py, file:readmenator/_docstrings.py
 - Rating 1.3/10 = 7 x PageRank share 0.19 + 3 x risk 0.00. Internal imports: 27.
 
-## unassigned files (`c7`, community, rating 0.2)
+## unassigned files (`c7`, community, rating 0.3)
 
-3 files under readmenator/_vendor (py 2, js 1), mostly utility. Core file readmenator/_vendor/force-graph.min.js (PageRank 0.0028, imported by 0 files): Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph Key abstractions: Fe, as, as, wa, Na, t.
+4 files under root (py 2, js 1, sh 1), mostly utility. Core file deploy.sh (PageRank 0.0028, imported by 0 files): one-liner deploy via deploynator (generic per-repo script). Key abstractions: ensure_pkg, Fe, as, as, wa, Na.
 
-- `readmenator/_vendor/force-graph.min.js` ranks 1 by PageRank, 0 importers, 35 symbols: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
-- `readmenator_orchestrator.py` ranks 2 by PageRank, 0 importers, 37 symbols: test_rebuild_command_includes_full_concept_layer: The orchestrator must force a full rebuild with all improvements.
-- `tests/__init__.py` ranks 3 by PageRank, 0 importers, 0 symbols.
+- `deploy.sh` ranks 1 by PageRank, 0 importers, 1 symbols: one-liner deploy via deploynator (generic per-repo script).
+- `readmenator/_vendor/force-graph.min.js` ranks 2 by PageRank, 0 importers, 35 symbols: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
+- `readmenator_orchestrator.py` ranks 3 by PageRank, 0 importers, 37 symbols: test_rebuild_command_includes_full_concept_layer: The orchestrator must force a full rebuild with all improvements.
 - Hotspot `readmenator/_vendor/force-graph.min.js`: 35 symbols, 1732 connections (score 0.74).
 - Hotspot `readmenator_orchestrator.py`: 37 symbols, 15 connections (score 0.16).
 - Key entities: file:readmenator/_vendor/force-graph.min.js, file:readmenator_orchestrator.py, sym:readmenator_orchestrator.py::run@372, sym:readmenator_orchestrator.py::_safe_env@68, sym:readmenator_orchestrator.py::process@202, sym:readmenator_orchestrator.py::_validate_repo_name@56, sym:readmenator_orchestrator.py::Config@21, sym:readmenator_orchestrator.py::__init__@84
-- Rating 0.2/10 = 7 x PageRank share 0.03 + 3 x risk 0.00. Internal imports: 0.
+- Rating 0.3/10 = 7 x PageRank share 0.04 + 3 x risk 0.00. Internal imports: 0.

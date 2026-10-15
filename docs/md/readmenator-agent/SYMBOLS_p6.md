@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_extracts_import` | method | `tests/test_parsers.py:295` | `def test_extracts_import(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:405` | `def test_extracts_import(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:448` | `def test_extracts_import(self)` |
 | `test_extracts_import_and_require` | method | `tests/test_parsers.py:263` | `def test_extracts_import_and_require(self)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_generate_go_struct_produces_valid_code` | method | `tests/test_uml.py:313` | `def test_generate_go_struct_produces_valid_code(self)` |
 | `test_generate_java_class_produces_valid_code` | method | `tests/test_uml.py:246` | `def test_generate_java_class_produces_valid_code(self)` |
 | `test_generate_java_interface_produces_interface` | method | `tests/test_uml.py:265` | `def test_generate_java_interface_produces_interface(self)` |
-| `test_generate_kotlin_produces_valid_code` | method | `tests/test_uml.py:446` | `def test_generate_kotlin_produces_valid_code(self)` |
 
 Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

@@ -1,13 +1,13 @@
 # Second Brain
 
-*Last synthesized: 2026-10-14 | 154 files | 8 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-14 | 155 files | 8 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
 
 ## Vault Overview
 
-The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (83 files) across 8 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
+The codebase centres on `_models.py`, `_config.py`, `_pipeline.py`. Architecturally it is 6 layers, dominant utility (84 files) across 8 import-based communities. Recorded risk surface: 0 security findings and 0 dependency cycles.
 
 Surprising tissue lives between readmenator: _video, readmenator/parsers, readmenator: _agent_output: 20 extracted cross-community imports and 0 inferred bridges. Follow `connections.json` sorted by strength before refactoring.
 
@@ -17,14 +17,14 @@ Open work clusters around documentation (87% file coverage), 0 security findings
 
 | Metric | Value |
 |--------|-------|
-| Files | 154 |
-| Symbols | 3028 |
+| Files | 155 |
+| Symbols | 3029 |
 | Resolved imports | 611 |
-| Languages | js, py |
+| Languages | js, py, sh |
 | Communities | 8 |
-| Doc coverage | 87% (134/154 files) |
+| Doc coverage | 87% (135/155 files) |
 | Security findings | 0 |
-| Estimated read cost | ~83897 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~84027 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 
@@ -46,7 +46,7 @@ readmenator query "<question>" --target ReadMenator
 - [readmenator: _pipeline (17 files, cohesion 0.26)](./community_4_readmenator_pipeline.md)
 - [readmenator: _diagrams (15 files, cohesion 0.39)](./community_5_readmenator_diagrams.md)
 - [readmenator: _flowcharts (12 files, cohesion 0.44)](./community_6_readmenator_flowcharts.md)
-- [orphans (3 files, cohesion 0.00)](./community_7_orphans.md)
+- [orphans (4 files, cohesion 0.00)](./community_7_orphans.md)
 
 ## God Nodes
 

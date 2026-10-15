@@ -524,6 +524,7 @@
 - [`end_line`](modules/readmenator._graphrag.py.md#ragtextunit-end_line) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`end_line`](modules/readmenator._models.py.md#refactoringaction-end_line) attribute of `RefactoringAction` in `readmenator._models`
 - [`end_line`](modules/readmenator._symindex.py.md#symboldef-end_line) attribute of `SymbolDef` in `readmenator._symindex`
+- [`ensure_pkg`](modules/deploy.sh.md#ensure_pkg) function in `deploy.sh`
 - [`ensure_project_config`](modules/readmenator._project_config.py.md#ensure_project_config) function in `readmenator._project_config`
 - [`ensure_readmenator_installed`](modules/readmenator._agent_injector.py.md#ensure_readmenator_installed) function in `readmenator._agent_injector`
 - [`entities`](modules/readmenator._apidocs.py.md#apireference-entities) attribute of `ApiReference` in `readmenator._apidocs`

@@ -1,5 +1,12 @@
 # Subsystem: root
 
+## deploy.sh
+- Doc: one-liner deploy via deploynator (generic per-repo script).
+- Layer: utility
+- Language: sh
+- Symbols:
+  - `ensure_pkg` (function, line 22)
+
 ## readmenator.py
 - Doc: Launcher shim that runs the readmenator CLI from a source checkout.
 - Layer: utility

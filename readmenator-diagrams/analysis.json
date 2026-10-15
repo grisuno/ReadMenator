@@ -1,20 +1,24 @@
 {
  "metadata": {
-  "generated_at": "2026-10-15T01:16:11.432282+00:00",
-  "source_tree_hash": "e49dfcd39e6dff6cfb8fc5158338d9564a3363a7c0125702d3651075b5a487b4",
+  "generated_at": "2026-10-15T01:57:59.490225+00:00",
+  "source_tree_hash": "077e2c18704366b18ff4d32a75090a49c143569ee83a56d4e2ffac5ca877f3a7",
   "repo_name": "ReadMenator",
   "depth_level": 2,
   "depth_cap": 3,
   "file_coverage_summary": {
-   "total_files": 154,
-   "analyzed": 154,
+   "total_files": 155,
+   "analyzed": 155,
    "not_analyzed": 0,
    "not_analyzed_by_reason": {}
   },
   "tree_spec": {}
  },
- "description": "Static architecture map of 154 files (js, py) in 7 components: readmenator: _video, readmenator/parsers, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.",
+ "description": "Static architecture map of 155 files (js, py, sh) in 7 components: readmenator: _video, readmenator/parsers, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.",
  "files": {
+  "deploy.sh": {
+   "language": "sh",
+   "symbols": 1
+  },
   "readmenator.py": {
    "language": "py",
    "symbols": 0
@@ -633,6 +637,14 @@
   }
  },
  "methods_index": {
+  "deploy.sh|deploy.sh::ensure_pkg": {
+   "file_path": "deploy.sh",
+   "qualified_name": "deploy.sh::ensure_pkg",
+   "start_line": 22,
+   "end_line": 42,
+   "type": "FUNCTION",
+   "content_hash": "79736d55910e2195"
+  },
   "readmenator/__main__.py|readmenator/__main__.py::build_parser": {
    "file_path": "readmenator/__main__.py",
    "qualified_name": "readmenator/__main__.py::build_parser",

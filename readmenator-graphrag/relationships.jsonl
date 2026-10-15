@@ -500,6 +500,7 @@
 {"confidence": "INFERRED", "description": "concept deterministic appears in test_symindex.py", "relation": "documents", "source": "concept:deterministic", "target": "file:tests/test_symindex.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept deterministic appears in test_video.py", "relation": "documents", "source": "concept:deterministic", "target": "file:tests/test_video.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept deterministic appears in test_wiki.py", "relation": "documents", "source": "concept:deterministic", "target": "file:tests/test_wiki.py", "weight": 0.45}
+{"confidence": "INFERRED", "description": "concept directory appears in deploy.sh", "relation": "documents", "source": "concept:directory", "target": "file:deploy.sh", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept directory appears in _agent_output.py", "relation": "documents", "source": "concept:directory", "target": "file:readmenator/_agent_output.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept directory appears in _analyzer.py", "relation": "documents", "source": "concept:directory", "target": "file:readmenator/_analyzer.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept directory appears in _apidocs_render.py", "relation": "documents", "source": "concept:directory", "target": "file:readmenator/_apidocs_render.py", "weight": 0.45}
@@ -1659,6 +1660,7 @@
 {"confidence": "INFERRED", "description": "concept not appears in test_readme_injector.py", "relation": "documents", "source": "concept:not", "target": "file:tests/test_readme_injector.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept not appears in test_taint_bdd.py", "relation": "documents", "source": "concept:not", "target": "file:tests/test_taint_bdd.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "one depends_on readmenator", "relation": "depends_on", "source": "concept:one", "target": "concept:readmenator", "weight": 0.6}
+{"confidence": "INFERRED", "description": "concept one appears in deploy.sh", "relation": "documents", "source": "concept:one", "target": "file:deploy.sh", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept one appears in _agent_output.py", "relation": "documents", "source": "concept:one", "target": "file:readmenator/_agent_output.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept one appears in _analyzer.py", "relation": "documents", "source": "concept:one", "target": "file:readmenator/_analyzer.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept one appears in _apidocs.py", "relation": "documents", "source": "concept:one", "target": "file:readmenator/_apidocs.py", "weight": 0.45}
@@ -1875,6 +1877,7 @@
 {"confidence": "INFERRED", "description": "concept path appears in test_taint.py", "relation": "documents", "source": "concept:path", "target": "file:tests/test_taint.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept path appears in test_taint_bdd.py", "relation": "documents", "source": "concept:path", "target": "file:tests/test_taint_bdd.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "per depends_on readmenator", "relation": "depends_on", "source": "concept:per", "target": "concept:readmenator", "weight": 0.6}
+{"confidence": "INFERRED", "description": "concept per appears in deploy.sh", "relation": "documents", "source": "concept:per", "target": "file:deploy.sh", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept per appears in _agent_output.py", "relation": "documents", "source": "concept:per", "target": "file:readmenator/_agent_output.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept per appears in _analytics.py", "relation": "documents", "source": "concept:per", "target": "file:readmenator/_analytics.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept per appears in _apidocs.py", "relation": "documents", "source": "concept:per", "target": "file:readmenator/_apidocs.py", "weight": 0.45}
@@ -2686,6 +2689,7 @@
 {"confidence": "INFERRED", "description": "concept without appears in test_symindex.py", "relation": "documents", "source": "concept:without", "target": "file:tests/test_symindex.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept without appears in test_video.py", "relation": "documents", "source": "concept:without", "target": "file:tests/test_video.py", "weight": 0.45}
 {"confidence": "INFERRED", "description": "concept without appears in test_wiki.py", "relation": "documents", "source": "concept:without", "target": "file:tests/test_wiki.py", "weight": 0.45}
+{"confidence": "EXTRACTED", "description": "deploy.sh defines function ensure_pkg", "relation": "defines", "source": "file:deploy.sh", "target": "sym:deploy.sh::ensure_pkg@22", "weight": 0.7}
 {"confidence": "EXTRACTED", "description": "readmenator.py imports external pathlib", "relation": "imports", "source": "file:readmenator.py", "target": "ext:pathlib", "weight": 0.85}
 {"confidence": "EXTRACTED", "description": "readmenator.py imports external sys", "relation": "imports", "source": "file:readmenator.py", "target": "ext:sys", "weight": 0.85}
 {"confidence": "EXTRACTED", "description": "readmenator.py imports __main__.py", "relation": "resolved_imports", "source": "file:readmenator.py", "target": "file:readmenator/__main__.py", "weight": 0.85}

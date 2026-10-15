@@ -3,6 +3,7 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `ensure_pkg` | function | `deploy.sh:22` | `` |
 | `_run_tests` | function | `readmenator/__main__.py:137` | `def _run_tests()` |
 | `build_parser` | function | `readmenator/__main__.py:18` | `def build_parser()` |
 | `main` | function | `readmenator/__main__.py:152` | `def main()` |
@@ -495,6 +496,5 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `_apply_section` | function | `readmenator/_docstrings.py:336` | `def _apply_section(doc, key, body, item_mode)` |
 | `_elixir_doc` | function | `readmenator/_docstrings.py:888` | `def _elixir_doc(lines, index, lookback)` |
 | `_extract_doctests` | function | `readmenator/_docstrings.py:642` | `def _extract_doctests(text)` |
-| `_indent` | function | `readmenator/_docstrings.py:321` | `def _indent(line)` |
 
 Next: [SYMBOLS_p2.md](SYMBOLS_p2.md)

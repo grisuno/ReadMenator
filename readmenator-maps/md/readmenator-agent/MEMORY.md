@@ -2,12 +2,12 @@
 
 > Cross-session context for agents. Sections 1-6 are regenerated from the source tree with zero LLM tokens: declared rules are quoted verbatim with `file:line`, measured baselines come from the scan. Section 7 is written by agents and humans and is preserved across rebuilds.
 
-Generated from 154 files at commit `2ac6fa683a55`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
+Generated from 155 files at commit `b1c817ed3492`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
 
 ## 1. Purpose and domain
 
 - What it is: A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer. (`README.md:7`)
-- Domain vocabulary (term, files): `readmenator` (104), `file` (91), `graph` (73), `node` (67), `files` (66), `symbols` (61), `project` (59), `edges` (59), `imports` (56), `nodes` (55), `build` (54), `config` (54), `symbol` (53), `all` (53), `set` (52)
+- Domain vocabulary (term, files): `readmenator` (104), `file` (91), `graph` (73), `node` (67), `files` (66), `symbols` (61), `project` (59), `edges` (59), `imports` (56), `nodes` (55), `build` (54), `config` (54), `symbol` (53), `all` (53), `one` (52)
 - Subsystem `readmenator: _video`: 35 files, core `readmenator/_video.py`: Cinematic codebase overview video, general purpose.
 - Subsystem `readmenator/parsers`: 35 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
 - Subsystem `readmenator: _agent_output`: 19 files, core `readmenator/_agent_output.py`: Agent-friendly output generator for ReadMenator.
@@ -93,6 +93,7 @@ Declared:
 Measured baseline:
 - py: 153 files, 2993 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 204 lines, max 4166.
 - js: 1 files, 35 symbols; docstrings on 100% of symbols; functions snake_case (80%); types PascalCase (40%); median file 5 lines, max 5.
+- sh: 1 files, 1 symbols; docstrings on 100% of symbols; functions snake_case (100%); median file 42 lines, max 42.
 - Tests: 55 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
 
 ## 5. Minimum deliverables

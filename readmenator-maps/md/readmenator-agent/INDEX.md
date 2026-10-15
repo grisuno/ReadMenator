@@ -2,6 +2,7 @@
 
 | File | Purpose | Subsystem | Symbols | Used by |
 |------|---------|-----------|---------|---------|
+| `deploy.sh` | one-liner deploy via deploynator (generic per-repo script). | root | 1 | 0 |
 | `readmenator.py` | Launcher shim that runs the readmenator CLI from a source checkout. | root | 0 | 0 |
 | `readmenator/__init__.py` | ReadMenator -- Zero-token polyglot codebase knowledge graph generator. | readmenator | 0 | 0 |
 | `readmenator/__main__.py` | Command line entry point: argument parsing and subcommand dispatch. | readmenator | 3 | 1 |

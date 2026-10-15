@@ -1,6 +1,9 @@
 # API (page 1 of 2)
 Pages: [API.md](API.md), [API_p2.md](API_p2.md)
 
+## deploy.sh
+- `ensure_pkg` (function) `deploy.sh:22` -- Install or update one package (best effort: works offline with current versions, on PEP 668 systems, and before the...
+
 ## readmenator/__main__.py
 Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`, `readmenator/_project_config.py`
 Imported by: `readmenator.py`
@@ -487,13 +490,6 @@ Imported by: `readmenator/_apidocs_page.py`, `readmenator/_bundlegraph.py`, `rea
 - `compress_text` (function) `readmenator/_htmlpack.py:77` `def compress_text(text, config)` -- Gzip and base64-encode text deterministically (mtime fixed at zero).
 - `payload_script` (function) `readmenator/_htmlpack.py:92` `def payload_script(element_id, payload, config, compact, escape)` -- Render the script element carrying a page payload.
 - `read_payload_script` (function) `readmenator/_htmlpack.py:119` `def read_payload_script(document, element_id)` -- Decode a payload script element from a rendered page (plain or gzip+base64).
-
-## readmenator/_layer_rules.py
-Depends on: `readmenator/_config.py`, `readmenator/_models.py`
-Imported by: `readmenator/_pipeline.py`, `tests/test_layer_rules.py`
-- `LayerRuleEngine.__init__` (method) `readmenator/_layer_rules.py:36` `def __init__(self, config)`
-- `LayerRuleEngine.detect_violations` (method) `readmenator/_layer_rules.py:39` `def detect_violations(self, nodes, edges, resolved_edges, layers)` -- Detect architectural layer violations.
-- `LayerRuleEngine.violation_summary` (method) `readmenator/_layer_rules.py:111` `def violation_summary(violations)` -- Summarise violations by severity.
 
 
 Next: [API_p2.md](API_p2.md)

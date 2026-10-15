@@ -1,21 +1,23 @@
 # orphans
 
-*Community 7 | 3 files | cohesion 0.00*
+*Community 7 | 4 files | cohesion 0.00*
 
 ## Definition
 
-This community groups 3 file(s) rooted at `readmenator/_vendor` with dominant language py (cohesion 0.00). Central symbols: `Config`, `Fe`, `GitHubClient`, `Ha`, `Ia`, `La`, `Lo`, `Na`. Core file: `readmenator_orchestrator.py` (37 symbols). Documented purpose: Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph.
+This community groups 4 file(s) rooted at `root` with dominant language py (cohesion 0.00). Central symbols: `Config`, `Fe`, `GitHubClient`, `Ha`, `Ia`, `La`, `Lo`, `Na`. Core file: `readmenator_orchestrator.py` (37 symbols). Documented purpose: one-liner deploy via deploynator (generic per-repo script). Deployed by deploynator: detects its own directory, ensures tooling, then releases this repo. Usage:.
 
 ## Files
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `deploy.sh` | sh | utility | 1 | yes |
 | `readmenator/_vendor/force-graph.min.js` | js | utility | 35 | yes |
 | `readmenator_orchestrator.py` | py | utility | 37 | no |
 | `tests/__init__.py` | py | testing | 0 | no |
 
 ## Key Symbols
 
+- `ensure_pkg` (function, `deploy.sh:22`) - Install or update one package (best effort: works offline with current versions, on PEP 668 systems,
 - `t` (function, `readmenator/_vendor/force-graph.min.js:2`) - Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
 - `n` (function, `readmenator/_vendor/force-graph.min.js:2`) - Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
 - `_n` (function, `readmenator/_vendor/force-graph.min.js:2`) - Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph
@@ -45,7 +47,6 @@ This community groups 3 file(s) rooted at `readmenator/_vendor` with dominant la
 - `r` (function, `readmenator/_vendor/force-graph.min.js:5`) - <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 col
 - `n` (function, `readmenator/_vendor/force-graph.min.js:5`) - <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 col
 - `Ia` (function, `readmenator/_vendor/force-graph.min.js:5`) - <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 col
-- `La` (function, `readmenator/_vendor/force-graph.min.js:5`) - <http://www.w3.org/TR/2008/REC-WCAG20-20081211/#contrast-ratiodef (WCAG Version 2) Analyze the 2 col
 
 ## Internal vs External Edges
 
@@ -68,6 +69,7 @@ This community groups 3 file(s) rooted at `readmenator/_vendor` with dominant la
 
 ## Sources
 
+- `deploy.sh`
 - `readmenator/_vendor/force-graph.min.js`
 - `readmenator_orchestrator.py`
 - `tests/__init__.py`

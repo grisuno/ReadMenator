@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p6.md](SYMBOLS_p6.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_generate_kotlin_produces_valid_code` | method | `tests/test_uml.py:446` | `def test_generate_kotlin_produces_valid_code(self)` |
 | `test_generate_php_class_produces_valid_code` | method | `tests/test_uml.py:394` | `def test_generate_php_class_produces_valid_code(self)` |
 | `test_generate_php_interface_produces_valid_code` | method | `tests/test_uml.py:411` | `def test_generate_php_interface_produces_valid_code(self)` |
 | `test_generate_ruby_produces_valid_code` | method | `tests/test_uml.py:480` | `def test_generate_ruby_produces_valid_code(self)` |

@@ -17,7 +17,7 @@ These files have the most connections. Changes here have high blast radius.
 
 Editing these files can break the listed number of dependents. Run their tests after any change.
 
-- `readmenator/_category.py` -- 9 direct, 105 total dependents
+- `readmenator/_category.py` -- 9 direct, 104 total dependents
 - `readmenator/_models.py` -- 50 direct, 101 total dependents
 - `readmenator/_config.py` -- 50 direct, 100 total dependents
 - `readmenator/parsers/_base.py` -- 20 direct, 45 total dependents
