@@ -83,7 +83,7 @@ Theme of 1 communities and 4 files: unassigned files (4 files, rating 0.3).
 - Hotspot `tests/test_ranking.py`: 72 symbols, 13 connections (score 0.30).
 - Hotspot `readmenator/_graphrag.py`: 53 symbols, 26 connections (score 0.23).
 - 1 layer violations, e.g. test_components.py (testing) -> _components.py (presentation).
-- Taint: 3 paths reach this group via subprocess.
+- Taint: 2 paths reach this group via subprocess.
 - Key entities: file:tests/test_ranking.py, file:readmenator/_graphrag.py, file:tests/test_components.py, file:readmenator/_components.py, file:tests/test_graphrag.py, file:readmenator/_category.py, file:readmenator/_rank.py, sym:readmenator/_graphrag.py::search@1004
 - Rating 5.0/10 = 7 x PageRank share 0.71 + 3 x risk 0.00. Internal imports: 26.
 
@@ -111,7 +111,7 @@ Theme of 1 communities and 4 files: unassigned files (4 files, rating 0.3).
 - Hotspot `readmenator/_diagrams.py`: 97 symbols, 43 connections (score 0.41).
 - Hotspot `tests/test_project_config.py`: 33 symbols, 39 connections (score 0.15).
 - 6 layer violations, e.g. test_layout_quality.py (testing) -> _forcegraph_page.py (presentation).
-- Taint: 5 paths reach this group via subprocess.
+- Taint: 6 paths reach this group via subprocess.
 - Surprising bridge: _docstrings.py <-> test_graphlayout.py (5 hops across communities).
 - Key entities: file:readmenator/_diagrams.py, file:readmenator/_forcegraph.py, file:tests/test_project_config.py, file:tests/test_graphlayout.py, file:tests/test_bundlegraph.py, file:readmenator/_project_config.py, file:readmenator/_graphlayout.py, file:tests/test_sourceview.py
 - Rating 2.0/10 = 7 x PageRank share 0.29 + 3 x risk 0.00. Internal imports: 45.
