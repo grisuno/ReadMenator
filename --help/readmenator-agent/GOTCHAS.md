@@ -1,3 +1,0 @@
-# Gotchas
-
-No gotchas detected.
