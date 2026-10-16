@@ -3771,11 +3771,13 @@ class DocsSitePublisher:
         Returns:
             Footer HTML with the offline notice, the llms.txt agent
             pointer, the analysed project's pills and author credit when
-            configured, plus the ReadMenator GitHub/PyPI links.
+            configured, plus the ReadMenator GitHub/PyPI links and the
+            deploynator GitHub link.
         """
         llms = self._escape(self._config.SITE_LLMS_TXT_FILENAME)
         github = self._escape(self._config.SITE_GITHUB_URL)
         pypi = self._escape(self._config.SITE_PYPI_URL)
+        deploynator = self._escape(getattr(self._config, "SITE_DEPLOYNATOR_URL", "https://github.com/grisuno/deploynator"))
         author = str(getattr(self._config, "PROJECT_AUTHOR", "") or "").strip()
         credit = (
             " Maintained by " + self._escape(author) + "."
@@ -3810,6 +3812,20 @@ class DocsSitePublisher:
             '<path fill="url(#rm-pypi-grad)" d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2zm0 2.3L5.7 7.7 12 11l6.3-3.3L12 4.3zM5 '
             '9.7v5.1l6 3.4v-5.1l-6-3.4zm14 0l-6 3.4v5.1l6-3.4V9.7z"/></svg>'
             "<span>PyPI</span></a>"
+            '<a class="footer-link" href="' + deploynator + '" target="_blank" rel="noopener">'
+            '<svg class="gh-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
+            "<defs><linearGradient id=\"rm-dp-grad\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\">"
+            '<stop offset="0" stop-color="#38bdf8"/>'
+            '<stop offset="1" stop-color="#22d3ee"/>'
+            "</linearGradient></defs>"
+            '<path fill="url(#rm-dp-grad)" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 '
+            "5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94"
+            "-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07"
+            "-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 "
+            "1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 "
+            "2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 "
+            '8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
+            "<span>Deployed with deploynator</span></a>"
             "</nav></footer>"
         )
 

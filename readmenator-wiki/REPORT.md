@@ -1,6 +1,6 @@
 # Audit Report
 
-*Project: ReadMenator | 2026-10-14 | offline, deterministic*
+*Project: ReadMenator | 2026-10-15 | offline, deterministic*
 
 ## Confidence Trail
 
@@ -31,7 +31,7 @@ Every edge is tagged. Extracted means parsed from source; inferred means derived
 
 ## Token Benchmark
 
-- Wiki index plus community pages estimate: ~83427 tokens (chars/4).
+- Wiki index plus community pages estimate: ~83434 tokens (chars/4).
 - Full re-read of every source file would cost strictly more on any non-trivial project; this wiki is the cheaper entry point.
 - Generation cost: $0, offline, no network calls.
 

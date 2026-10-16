@@ -408,7 +408,7 @@ class TestDocsSitePublisherContract(unittest.TestCase):
         import re
         import tempfile
         from readmenator._config import Config
-        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL}
+        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL, Config().SITE_DEPLOYNATOR_URL}
         with tempfile.TemporaryDirectory() as tmp:
             written = self.publisher.publish(self._maps(), "Demo", tmp, {})
             for key, path in written.items():
@@ -421,7 +421,7 @@ class TestDocsSitePublisherContract(unittest.TestCase):
                 self.assertNotIn("unpkg", content)
 
     def test_publish_footer_links_github_and_pypi(self) -> None:
-        """Gallery index footer links GitHub and PyPI with the site palette."""
+        """Gallery index footer links GitHub, PyPI, and deploynator."""
         import tempfile
         from readmenator._config import Config
         with tempfile.TemporaryDirectory() as tmp:
@@ -429,6 +429,8 @@ class TestDocsSitePublisherContract(unittest.TestCase):
             index = Path(written["index"]).read_text(encoding="utf-8")
             self.assertIn(Config().SITE_GITHUB_URL, index)
             self.assertIn(Config().SITE_PYPI_URL, index)
+            self.assertIn(Config().SITE_DEPLOYNATOR_URL, index)
+            self.assertIn("Deployed with deploynator", index)
             self.assertIn("gh-icon", index)
             self.assertIn("footer-links", index)
 

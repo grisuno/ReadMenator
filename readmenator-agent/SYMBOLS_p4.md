@@ -85,7 +85,7 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `TestCommunityHubDamping` | class | `tests/test_agent_friendliness.py:308` | `class TestCommunityHubDamping(TestCase)` |
 | `TestCommunityShaping` | class | `tests/test_agent_friendliness.py:363` | `class TestCommunityShaping(TestCase)` |
 | `TestGalleryIndex` | class | `tests/test_agent_friendliness.py:456` | `class TestGalleryIndex(TestCase)` |
-| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:512` | `class TestLiveMapCommunities(TestCase)` |
+| `TestLiveMapCommunities` | class | `tests/test_agent_friendliness.py:514` | `class TestLiveMapCommunities(TestCase)` |
 | `TestLlmsTxt` | class | `tests/test_agent_friendliness.py:281` | `class TestLlmsTxt(TestCase)` |
 | `TestLouvainCommunities` | class | `tests/test_agent_friendliness.py:411` | `class TestLouvainCommunities(TestCase)` |
 | `TestManifestFreshness` | class | `tests/test_agent_friendliness.py:199` | `class TestManifestFreshness(TestCase)` |
@@ -97,7 +97,7 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `_edge` | function | `tests/test_agent_friendliness.py:29` | `def _edge(source, target, relation)` |
 | `_entries` | method | `tests/test_agent_friendliness.py:459` | `def _entries(self)` |
 | `_git_repo` | method | `tests/test_agent_friendliness.py:202` | `def _git_repo(self, root, packed)` |
-| `_inputs` | method | `tests/test_agent_friendliness.py:515` | `def _inputs(self)` |
+| `_inputs` | method | `tests/test_agent_friendliness.py:517` | `def _inputs(self)` |
 | `_node` | function | `tests/test_agent_friendliness.py:21` | `def _node(node_id, doc, symbols)` |
 | `_two_cliques` | method | `tests/test_agent_friendliness.py:414` | `def _two_cliques(self)` |
 | `test_agent_output_pages_repeat_table_header_and_link_next` | method | `tests/test_agent_friendliness.py:84` | `def test_agent_output_pages_repeat_table_header_and_link_next(self)` |
@@ -108,11 +108,11 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_api_skips_private_helpers_and_test_layer` | method | `tests/test_agent_friendliness.py:122` | `def test_api_skips_private_helpers_and_test_layer(self)` |
 | `test_api_states_dependencies_once_per_file` | method | `tests/test_agent_friendliness.py:113` | `def test_api_states_dependencies_once_per_file(self)` |
 | `test_architecture_external_excludes_internally_resolved_imports` | method | `tests/test_agent_friendliness.py:144` | `def test_architecture_external_excludes_internally_resolved_imports(self)` |
-| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:531` | `def test_built_maps_carry_community_and_core_role(self)` |
+| `test_built_maps_carry_community_and_core_role` | method | `tests/test_agent_friendliness.py:533` | `def test_built_maps_carry_community_and_core_role(self)` |
 | `test_check_freshness_detects_source_edits` | method | `tests/test_agent_friendliness.py:343` | `def test_check_freshness_detects_source_edits(self)` |
 | `test_communities_survive_a_shared_hub` | method | `tests/test_agent_friendliness.py:311` | `def test_communities_survive_a_shared_hub(self)` |
 | `test_community_label_ignores_test_directory` | method | `tests/test_agent_friendliness.py:446` | `def test_community_label_ignores_test_directory(self)` |
-| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:505` | `def test_doc_preview_skips_markdown_syntax(self)` |
+| `test_doc_preview_skips_markdown_syntax` | method | `tests/test_agent_friendliness.py:507` | `def test_doc_preview_skips_markdown_syntax(self)` |
 | `test_fingerprint_changes_with_content_not_with_order` | method | `tests/test_agent_friendliness.py:332` | `def test_fingerprint_changes_with_content_not_with_order(self)` |
 | `test_gallery_footer_links_github_and_pypi` | method | `tests/test_agent_friendliness.py:497` | `def test_gallery_footer_links_github_and_pypi(self)` |
 | `test_gallery_groups_docs_and_collapses_pages` | method | `tests/test_agent_friendliness.py:470` | `def test_gallery_groups_docs_and_collapses_pages(self)` |
@@ -138,7 +138,7 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_scanner_skips_own_generated_outputs` | method | `tests/test_agent_friendliness.py:247` | `def test_scanner_skips_own_generated_outputs(self)` |
 | `test_shared_directory_labels_use_core_file` | method | `tests/test_agent_friendliness.py:380` | `def test_shared_directory_labels_use_core_file(self)` |
 | `test_small_community_merges_into_best_connected_neighbor` | method | `tests/test_agent_friendliness.py:366` | `def test_small_community_merges_into_best_connected_neighbor(self)` |
-| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:540` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
+| `test_vis_render_includes_legend_and_dot_scaling` | method | `tests/test_agent_friendliness.py:542` | `def test_vis_render_includes_legend_and_dot_scaling(self)` |
 | `TestAgentInjectorEdgeCases` | class | `tests/test_agent_injector.py:241` | `class TestAgentInjectorEdgeCases(TestCase)` |
 | `TestAgentInjectorFindFiles` | class | `tests/test_agent_injector.py:204` | `class TestAgentInjectorFindFiles(TestCase)` |
 | `TestAgentInjectorInjectBehavior` | class | `tests/test_agent_injector.py:19` | `class TestAgentInjectorInjectBehavior(TestCase)` |
@@ -468,23 +468,23 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
 | `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
 | `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
-| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:666` | `class TestDiagramVariantsContract(TestCase)` |
+| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:668` | `class TestDiagramVariantsContract(TestCase)` |
 | `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
 | `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
 | `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
 | `TestSystemMapValidatorContract` | class | `tests/test_diagrams.py:176` | `class TestSystemMapValidatorContract(TestCase)` |
-| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:526` | `class TestVisNetworkRendererContract(TestCase)` |
+| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:528` | `class TestVisNetworkRendererContract(TestCase)` |
 | `_make_graph` | method | `tests/test_diagrams.py:38` | `def _make_graph(self)` |
 | `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
-| `_map` | method | `tests/test_diagrams.py:535` | `def _map(self, kind)` |
+| `_map` | method | `tests/test_diagrams.py:537` | `def _map(self, kind)` |
 | `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
-| `_project` | method | `tests/test_diagrams.py:669` | `def _project(self, tmp)` |
+| `_project` | method | `tests/test_diagrams.py:671` | `def _project(self, tmp)` |
 | `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
 | `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
 | `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
 | `setUp` | method | `tests/test_diagrams.py:240` | `def setUp(self)` |
 | `setUp` | method | `tests/test_diagrams.py:370` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:529` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:531` | `def setUp(self)` |
 | `test_builder_attaches_symbols_and_docs` | method | `tests/test_diagrams.py:126` | `def test_builder_attaches_symbols_and_docs(self)` |
 | `test_builder_is_deterministic` | method | `tests/test_diagrams.py:68` | `def test_builder_is_deterministic(self)` |
 | `test_builder_orders_links_deterministically` | method | `tests/test_diagrams.py:80` | `def test_builder_orders_links_deterministically(self)` |
@@ -495,6 +495,6 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
 | `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
 | `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
-| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:688` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
+| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:690` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

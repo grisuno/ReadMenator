@@ -67,7 +67,7 @@ readmenator: _video groups 35 files (py) around Config, readmenatorApplication, 
 
 **Related Classes/Methods**:
 
-- <a href="../readmenator/_config.py#L15-L1242">readmenator/_config.py::Config</a>
+- <a href="../readmenator/_config.py#L15-L1244">readmenator/_config.py::Config</a>
 - <a href="../readmenator/_app.py">readmenator/_app.py::readmenatorApplication</a>
 - <a href="../readmenator/_app.py#L55-L63">readmenator/_app.py::__init__</a>
 - <a href="../readmenator/_app.py#L64-L71">readmenator/_app.py::_scan</a>

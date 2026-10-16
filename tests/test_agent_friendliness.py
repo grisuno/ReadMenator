@@ -490,7 +490,7 @@ class TestGalleryIndex(unittest.TestCase):
         html = DocsSitePublisher(Config()).render_index("Demo", {}, {}, "", None, entries)
         self.assertNotIn('src="http', html)
         self.assertNotIn("<img src=x", html)
-        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL}
+        allowed = {Config().SITE_GITHUB_URL, Config().SITE_PYPI_URL, Config().SITE_DEPLOYNATOR_URL}
         for match in re.findall(r'href="(https?://[^"]+)"', html):
             self.assertIn(match, allowed)
 
@@ -498,6 +498,8 @@ class TestGalleryIndex(unittest.TestCase):
         html = DocsSitePublisher(Config()).render_index("Demo", {}, {"files": 3}, "", None, [])
         self.assertIn(Config().SITE_GITHUB_URL, html)
         self.assertIn(Config().SITE_PYPI_URL, html)
+        self.assertIn(Config().SITE_DEPLOYNATOR_URL, html)
+        self.assertIn("Deployed with deploynator", html)
         self.assertIn("gh-icon", html)
         self.assertIn("footer-links", html)
         self.assertIn("Generated offline", html)

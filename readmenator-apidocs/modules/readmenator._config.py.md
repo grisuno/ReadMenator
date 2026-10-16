@@ -81,6 +81,7 @@ defined here and consumed by reference elsewhere.
 | [`SITE_LLMS_TXT_FILENAME`](#config-site_llms_txt_filename) | `str` | `'llms.txt'` |  |
 | [`SITE_GITHUB_URL`](#config-site_github_url) | `str` | `'https://github.com/grisuno/ReadMenator'` |  |
 | [`SITE_PYPI_URL`](#config-site_pypi_url) | `str` | `'https://pypi.org/project/readmenator/'` |  |
+| [`SITE_DEPLOYNATOR_URL`](#config-site_deploynator_url) | `str` | `'https://github.com/grisuno/deploynator'` |  |
 | [`GENERATED_FILE_PREFIXES`](#config-generated_file_prefixes) | `Tuple[str, ...]` | `('.refactor_',)` |  |
 | [`SKIP_GENERATED_OUTPUTS`](#config-skip_generated_outputs) | `bool` | `True` |  |
 | [`SYMBOL_TYPE_PLURALS`](#config-symbol_type_plurals) | `Tuple[Tuple[str, str], ...]` | `(('class', 'classes'), ('struct', 'structs'), ('function', 'functions'), ('method', 'methods'), ('macro', 'macros'), ('trait', 'traits'), ('enum', 'enums'), ('interface', 'interfaces'), ('record', 'records'), ('variable', 'variables'), ('constant', 'constants'), ('type_alias', 'type_aliases'), ('module', 'modules'), ('protocol', 'protocols'), ('extension', 'extensions'))` |  |

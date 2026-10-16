@@ -83,7 +83,7 @@ Theme of 1 communities and 4 files: unassigned files (4 files, rating 0.3).
 - Hotspot `tests/test_ranking.py`: 72 symbols, 13 connections (score 0.30).
 - Hotspot `readmenator/_graphrag.py`: 53 symbols, 26 connections (score 0.23).
 - 1 layer violations, e.g. test_components.py (testing) -> _components.py (presentation).
-- Taint: 2 paths reach this group via subprocess.
+- Taint: 3 paths reach this group via subprocess.
 - Key entities: file:tests/test_ranking.py, file:readmenator/_graphrag.py, file:tests/test_components.py, file:readmenator/_components.py, file:tests/test_graphrag.py, file:readmenator/_category.py, file:readmenator/_rank.py, sym:readmenator/_graphrag.py::search@1004
 - Rating 5.0/10 = 7 x PageRank share 0.71 + 3 x risk 0.00. Internal imports: 26.
 
@@ -140,7 +140,7 @@ Theme of 1 communities and 4 files: unassigned files (4 files, rating 0.3).
 - Hotspot `readmenator/_flowcharts.py`: 54 symbols, 23 connections (score 0.23).
 - Hotspot `readmenator/_apidocs.py`: 52 symbols, 24 connections (score 0.22).
 - 3 layer violations, e.g. test_apidocs.py (testing) -> _apidocs_page.py (presentation).
-- Taint: 2 paths reach this group via subprocess.
+- Taint: 1 paths reach this group via subprocess.
 - Surprising bridge: _docstrings.py <-> test_graphlayout.py (5 hops across communities).
 - Key entities: file:tests/test_apidocs.py, file:readmenator/_apidocs.py, sym:readmenator/_flowcharts.py::add@800, file:readmenator/_flowcharts.py, file:readmenator/_apidocs_render.py, file:tests/test_flowcharts.py, file:readmenator/_symindex.py, file:readmenator/_docstrings.py
 - Rating 1.3/10 = 7 x PageRank share 0.19 + 3 x risk 0.00. Internal imports: 27.

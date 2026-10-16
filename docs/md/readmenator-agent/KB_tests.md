@@ -25,7 +25,7 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `TestSiteDocsPruning` (class, line 394) `class TestSiteDocsPruning(TestCase)`
   - `TestLouvainCommunities` (class, line 411) `class TestLouvainCommunities(TestCase)`
   - `TestGalleryIndex` (class, line 456) `class TestGalleryIndex(TestCase)`
-  - `TestLiveMapCommunities` (class, line 512) `class TestLiveMapCommunities(TestCase)`
+  - `TestLiveMapCommunities` (class, line 514) `class TestLiveMapCommunities(TestCase)`
   - `test_agent_output_pages_respect_line_cap_on_large_projects` (method, line 58) `def test_agent_output_pages_respect_line_cap_on_large_projects(self)`
   - `test_agent_output_pagination_keeps_every_symbol_greppable` (method, line 71) `def test_agent_output_pagination_keeps_every_symbol_greppable(self)`
   - `test_agent_output_pages_repeat_table_header_and_link_next` (method, line 84) `def test_agent_output_pages_repeat_table_header_and_link_next(self)`
@@ -65,10 +65,10 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_gallery_video_has_poster_and_start_here` (method, line 480) `def test_gallery_video_has_poster_and_start_here(self)`
   - `test_gallery_has_no_external_resources_and_escapes_titles` (method, line 486) `def test_gallery_has_no_external_resources_and_escapes_titles(self)`
   - `test_gallery_footer_links_github_and_pypi` (method, line 497) `def test_gallery_footer_links_github_and_pypi(self)`
-  - `test_doc_preview_skips_markdown_syntax` (method, line 505) `def test_doc_preview_skips_markdown_syntax(self)`
-  - `_inputs` (method, line 515) `def _inputs(self)`
-  - `test_built_maps_carry_community_and_core_role` (method, line 531) `def test_built_maps_carry_community_and_core_role(self)`
-  - `test_vis_render_includes_legend_and_dot_scaling` (method, line 540) `def test_vis_render_includes_legend_and_dot_scaling(self)`
+  - `test_doc_preview_skips_markdown_syntax` (method, line 507) `def test_doc_preview_skips_markdown_syntax(self)`
+  - `_inputs` (method, line 517) `def _inputs(self)`
+  - `test_built_maps_carry_community_and_core_role` (method, line 533) `def test_built_maps_carry_community_and_core_role(self)`
+  - `test_vis_render_includes_legend_and_dot_scaling` (method, line 542) `def test_vis_render_includes_legend_and_dot_scaling(self)`
 - Depends on: `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_gitmeta.py`, `readmenator/_layers.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
 
 ## tests/test_agent_injector.py

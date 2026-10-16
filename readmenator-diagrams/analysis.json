@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "generated_at": "2026-10-15T02:16:23.764562+00:00",
-  "source_tree_hash": "077e2c18704366b18ff4d32a75090a49c143569ee83a56d4e2ffac5ca877f3a7",
+  "generated_at": "2026-10-16T01:54:38.250031+00:00",
+  "source_tree_hash": "17877c45e694c1d5d87f75931b6c962c50e7cdea5bc4c4812fde5c4bc6baab17",
   "repo_name": "ReadMenator",
   "depth_level": 2,
   "depth_cap": 3,
@@ -3385,7 +3385,7 @@
    "file_path": "readmenator/_config.py",
    "qualified_name": "readmenator/_config.py::Config",
    "start_line": 15,
-   "end_line": 1242,
+   "end_line": 1244,
    "type": "CLASS",
    "content_hash": "ab00e9b033283d9e"
   },
@@ -4120,10 +4120,10 @@
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_escape": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_escape",
-   "start_line": 4157,
-   "end_line": 4166,
+   "start_line": 4173,
+   "end_line": 4182,
    "type": "FUNCTION",
-   "content_hash": "36bf4fa93d93f2c3"
+   "content_hash": "8a207c4d5a8f8d17"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_edge_path": {
    "file_path": "readmenator/_diagrams.py",
@@ -4297,121 +4297,121 @@
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_footer",
    "start_line": 3768,
-   "end_line": 3815,
+   "end_line": 3831,
    "type": "FUNCTION",
    "content_hash": "4ee2f7442d4d564d"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_stat_tiles": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_stat_tiles",
-   "start_line": 3816,
-   "end_line": 3835,
+   "start_line": 3832,
+   "end_line": 3851,
    "type": "FUNCTION",
-   "content_hash": "0ee7af2286c956cb"
+   "content_hash": "9f2e54b6479e915d"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_start_here": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_start_here",
-   "start_line": 3836,
-   "end_line": 3875,
+   "start_line": 3852,
+   "end_line": 3891,
    "type": "FUNCTION",
-   "content_hash": "10f88a5bd2421091"
+   "content_hash": "b9b21948e7e5a373"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_video_section": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_video_section",
-   "start_line": 3876,
-   "end_line": 3902,
+   "start_line": 3892,
+   "end_line": 3918,
    "type": "FUNCTION",
-   "content_hash": "4f982085c431164e"
+   "content_hash": "d2d9bf543723b869"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_doc_group": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_doc_group",
-   "start_line": 3903,
-   "end_line": 3914,
+   "start_line": 3919,
+   "end_line": 3930,
    "type": "FUNCTION",
-   "content_hash": "a98c7ae97926bbb1"
+   "content_hash": "58ec16a2b52eb9ec"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_docs_section": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_docs_section",
-   "start_line": 3915,
-   "end_line": 3940,
+   "start_line": 3931,
+   "end_line": 3956,
    "type": "FUNCTION",
-   "content_hash": "c7714f6c11299d19"
+   "content_hash": "5e2bc2e9bf72a969"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::doc_order": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::doc_order",
-   "start_line": 3941,
-   "end_line": 3996,
+   "start_line": 3957,
+   "end_line": 4012,
    "type": "FUNCTION",
-   "content_hash": "5f304b50e036dbd5"
+   "content_hash": "0cb3e33a8f71b375"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_href_prefix": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_href_prefix",
-   "start_line": 3997,
-   "end_line": 4007,
+   "start_line": 4013,
+   "end_line": 4023,
    "type": "FUNCTION",
-   "content_hash": "4aa12c62a0bf2fd8"
+   "content_hash": "23785092598e2e1a"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_viewer_modal": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_viewer_modal",
-   "start_line": 4008,
-   "end_line": 4013,
+   "start_line": 4024,
+   "end_line": 4029,
    "type": "FUNCTION",
-   "content_hash": "1a5218fd8f64c099"
+   "content_hash": "991d61ccc1d2569d"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_viewer_script": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_viewer_script",
-   "start_line": 4014,
-   "end_line": 4026,
+   "start_line": 4030,
+   "end_line": 4042,
    "type": "FUNCTION",
-   "content_hash": "dae051ca7fc92b07"
+   "content_hash": "37bcd692e6d1f75e"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_viewer_css": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_viewer_css",
-   "start_line": 4027,
-   "end_line": 4052,
+   "start_line": 4043,
+   "end_line": 4068,
    "type": "FUNCTION",
-   "content_hash": "a08def50e2a3d534"
+   "content_hash": "f789c87df3435eb6"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_glyph": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_glyph",
-   "start_line": 4053,
-   "end_line": 4070,
+   "start_line": 4069,
+   "end_line": 4086,
    "type": "FUNCTION",
-   "content_hash": "83c944b04b06cce5"
+   "content_hash": "cba06a53e4aed427"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_card": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_card",
-   "start_line": 4071,
-   "end_line": 4111,
+   "start_line": 4087,
+   "end_line": 4127,
    "type": "FUNCTION",
-   "content_hash": "1e13ea607dc49e2a"
+   "content_hash": "e9c46bc9cd8fd37c"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_extra_card": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_extra_card",
-   "start_line": 4112,
-   "end_line": 4142,
+   "start_line": 4128,
+   "end_line": 4158,
    "type": "FUNCTION",
-   "content_hash": "3b3fdcb3107cd360"
+   "content_hash": "3408dcd1d2f1e775"
   },
   "readmenator/_diagrams.py|readmenator/_diagrams.py::_stats_line": {
    "file_path": "readmenator/_diagrams.py",
    "qualified_name": "readmenator/_diagrams.py::_stats_line",
-   "start_line": 4143,
-   "end_line": 4156,
+   "start_line": 4159,
+   "end_line": 4172,
    "type": "FUNCTION",
-   "content_hash": "94f9fde53c719e69"
+   "content_hash": "200281a6d72ac769"
   },
   "readmenator/_docstrings.py|readmenator/_docstrings.py::DocField": {
    "file_path": "readmenator/_docstrings.py",
@@ -13137,49 +13137,49 @@
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::test_gallery_footer_links_github_and_pypi",
    "start_line": 497,
-   "end_line": 504,
+   "end_line": 506,
    "type": "FUNCTION",
    "content_hash": "4a1991ac82ddbbe2"
   },
   "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_doc_preview_skips_markdown_syntax": {
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::test_doc_preview_skips_markdown_syntax",
-   "start_line": 505,
-   "end_line": 511,
+   "start_line": 507,
+   "end_line": 513,
    "type": "FUNCTION",
-   "content_hash": "25cc4fc0a02735e3"
+   "content_hash": "a9536da156e341f1"
   },
   "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::TestLiveMapCommunities": {
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::TestLiveMapCommunities",
-   "start_line": 512,
-   "end_line": 514,
+   "start_line": 514,
+   "end_line": 516,
    "type": "CLASS",
-   "content_hash": "0fadfd40942d6907"
+   "content_hash": "da1e9bdf70b75d7b"
   },
   "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::_inputs": {
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::_inputs",
-   "start_line": 515,
-   "end_line": 530,
+   "start_line": 517,
+   "end_line": 532,
    "type": "FUNCTION",
-   "content_hash": "e7b1576047f3322f"
+   "content_hash": "27dc8afd606a1a8c"
   },
   "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_built_maps_carry_community_and_core_role": {
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::test_built_maps_carry_community_and_core_role",
-   "start_line": 531,
-   "end_line": 539,
+   "start_line": 533,
+   "end_line": 541,
    "type": "FUNCTION",
-   "content_hash": "7091574284c0c3a4"
+   "content_hash": "5c59c4011b4c57cf"
   },
   "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_vis_render_includes_legend_and_dot_scaling": {
    "file_path": "tests/test_agent_friendliness.py",
    "qualified_name": "tests/test_agent_friendliness.py::test_vis_render_includes_legend_and_dot_scaling",
-   "start_line": 540,
-   "end_line": 549,
+   "start_line": 542,
+   "end_line": 551,
    "type": "FUNCTION",
-   "content_hash": "7964a70843462eed"
+   "content_hash": "8d913694d13209ab"
   },
   "tests/test_agent_injector.py|tests/test_agent_injector.py::TestAgentInjectorInjectBehavior": {
    "file_path": "tests/test_agent_injector.py",
@@ -15744,10 +15744,10 @@
   "tests/test_diagrams.py|tests/test_diagrams.py::setUp": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::setUp",
-   "start_line": 529,
-   "end_line": 534,
+   "start_line": 531,
+   "end_line": 536,
    "type": "FUNCTION",
-   "content_hash": "3aa6855673483bc1"
+   "content_hash": "6b39485659a4b0df"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::_make_graph": {
    "file_path": "tests/test_diagrams.py",
@@ -15904,10 +15904,10 @@
   "tests/test_diagrams.py|tests/test_diagrams.py::_map": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::_map",
-   "start_line": 535,
-   "end_line": 544,
+   "start_line": 537,
+   "end_line": 546,
    "type": "FUNCTION",
-   "content_hash": "9d1e6d4ac644ffc9"
+   "content_hash": "e0cb5267ddfb81d7"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_produces_standalone_document": {
    "file_path": "tests/test_diagrams.py",
@@ -15976,10 +15976,10 @@
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_links_gallery_home_when_configured": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_links_gallery_home_when_configured",
-   "start_line": 589,
-   "end_line": 596,
+   "start_line": 591,
+   "end_line": 598,
    "type": "FUNCTION",
-   "content_hash": "f861518dafbef4b3"
+   "content_hash": "1057722219286da5"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_omits_gallery_home_by_default": {
    "file_path": "tests/test_diagrams.py",
@@ -16065,209 +16065,209 @@
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_footer_links_github_and_pypi",
    "start_line": 423,
-   "end_line": 434,
+   "end_line": 436,
    "type": "FUNCTION",
    "content_hash": "9d5d91fe057902c4"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_is_deterministic": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_is_deterministic",
-   "start_line": 435,
-   "end_line": 445,
+   "start_line": 437,
+   "end_line": 447,
    "type": "FUNCTION",
-   "content_hash": "4fd6f657c8379f32"
+   "content_hash": "a247859b9ee9ba43"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_escapes_malicious_project_name": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_escapes_malicious_project_name",
-   "start_line": 446,
-   "end_line": 454,
+   "start_line": 448,
+   "end_line": 456,
    "type": "FUNCTION",
-   "content_hash": "90f9975e4622c76e"
+   "content_hash": "d334962c58d569fc"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_escapes_malicious_stat_keys": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_escapes_malicious_stat_keys",
-   "start_line": 455,
-   "end_line": 465,
+   "start_line": 457,
+   "end_line": 467,
    "type": "FUNCTION",
-   "content_hash": "0ad78919da1a0d83"
+   "content_hash": "478c68c256140b8d"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_skips_invalid_maps": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_skips_invalid_maps",
-   "start_line": 466,
-   "end_line": 477,
+   "start_line": 468,
+   "end_line": 479,
    "type": "FUNCTION",
-   "content_hash": "e1a35a1ad1ffc7c3"
+   "content_hash": "67d30609cf9ee91c"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_empty_maps_writes_empty_gallery": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_empty_maps_writes_empty_gallery",
-   "start_line": 478,
-   "end_line": 486,
+   "start_line": 480,
+   "end_line": 488,
    "type": "FUNCTION",
-   "content_hash": "ee5b32200652f9e1"
+   "content_hash": "cd25c83224f2cc64"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_leaves_input_maps_unmodified": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_leaves_input_maps_unmodified",
-   "start_line": 487,
-   "end_line": 495,
+   "start_line": 489,
+   "end_line": 497,
    "type": "FUNCTION",
-   "content_hash": "4161db1f9847253b"
+   "content_hash": "846a7e760c0e6bba"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_flat_subdir_keeps_links_relative": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_flat_subdir_keeps_links_relative",
-   "start_line": 496,
-   "end_line": 508,
+   "start_line": 498,
+   "end_line": 510,
    "type": "FUNCTION",
-   "content_hash": "2c2c0cab79d8db5e"
+   "content_hash": "cc3e9c3b4cab6e56"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_index_explains_how_to_read": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_index_explains_how_to_read",
-   "start_line": 509,
-   "end_line": 516,
+   "start_line": 511,
+   "end_line": 518,
    "type": "FUNCTION",
-   "content_hash": "4f5a47096c5df81b"
+   "content_hash": "471484f22c2b70f8"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_publish_card_reports_primary_scope": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_publish_card_reports_primary_scope",
-   "start_line": 517,
-   "end_line": 525,
+   "start_line": 519,
+   "end_line": 527,
    "type": "FUNCTION",
-   "content_hash": "0cf627188d689d62"
+   "content_hash": "b90c2dba75a4944c"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::TestVisNetworkRendererContract": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::TestVisNetworkRendererContract",
-   "start_line": 526,
-   "end_line": 528,
+   "start_line": 528,
+   "end_line": 530,
    "type": "CLASS",
-   "content_hash": "cb80a693224b4590"
+   "content_hash": "d59f59b2db6ed4e2"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderers_ignore_placeholders_inside_payload_text": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderers_ignore_placeholders_inside_payload_text",
-   "start_line": 545,
-   "end_line": 561,
+   "start_line": 547,
+   "end_line": 563,
    "type": "FUNCTION",
-   "content_hash": "0a093dff2c689bc6"
+   "content_hash": "0dae468247b805c5"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_ships_edge_actions": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_ships_edge_actions",
-   "start_line": 562,
-   "end_line": 567,
+   "start_line": 564,
+   "end_line": 569,
    "type": "FUNCTION",
-   "content_hash": "a50bde79765b088a"
+   "content_hash": "9bd6b37871c93cfd"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_uses_configured_cdn_urls": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_uses_configured_cdn_urls",
-   "start_line": 568,
-   "end_line": 580,
+   "start_line": 570,
+   "end_line": 582,
    "type": "FUNCTION",
-   "content_hash": "9aa80d84ae0df3da"
+   "content_hash": "d617d53068122318"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_builds_vis_network_with_physics": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_builds_vis_network_with_physics",
-   "start_line": 581,
-   "end_line": 588,
+   "start_line": 583,
+   "end_line": 590,
    "type": "FUNCTION",
-   "content_hash": "75067ffca10316ee"
+   "content_hash": "cda8d97e9e343d62"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_disables_physics_from_config": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_disables_physics_from_config",
-   "start_line": 597,
-   "end_line": 603,
+   "start_line": 599,
+   "end_line": 605,
    "type": "FUNCTION",
-   "content_hash": "8fa7b310970385d6"
+   "content_hash": "8457c3d901be7376"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_escapes_malicious_titles": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_escapes_malicious_titles",
-   "start_line": 604,
-   "end_line": 616,
+   "start_line": 606,
+   "end_line": 618,
    "type": "FUNCTION",
-   "content_hash": "d6cbf46f9374ecbb"
+   "content_hash": "78cc6815569792cd"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_exposes_reader_controls": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_exposes_reader_controls",
-   "start_line": 617,
-   "end_line": 622,
+   "start_line": 619,
+   "end_line": 624,
    "type": "FUNCTION",
-   "content_hash": "3c7feaeb944a9f8c"
+   "content_hash": "ad496761f3b327b7"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_is_deterministic": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_is_deterministic",
-   "start_line": 623,
-   "end_line": 627,
+   "start_line": 625,
+   "end_line": 629,
    "type": "FUNCTION",
-   "content_hash": "dc13c4c61621e211"
+   "content_hash": "4d20a1f19b11e2d9"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_embeds_valid_payloads": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_embeds_valid_payloads",
-   "start_line": 628,
-   "end_line": 635,
+   "start_line": 630,
+   "end_line": 637,
    "type": "FUNCTION",
-   "content_hash": "d6e39b65211fccf6"
+   "content_hash": "3e8dce85d77e5a8c"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_documents_symbols_per_file": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_documents_symbols_per_file",
-   "start_line": 636,
-   "end_line": 651,
+   "start_line": 638,
+   "end_line": 653,
    "type": "FUNCTION",
-   "content_hash": "7f58884335ff5214"
+   "content_hash": "1adb4dbe46adf38c"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_renderer_escapes_malicious_symbol_docs": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_renderer_escapes_malicious_symbol_docs",
-   "start_line": 652,
-   "end_line": 665,
+   "start_line": 654,
+   "end_line": 667,
    "type": "FUNCTION",
-   "content_hash": "a4f5ebf95ba1941b"
+   "content_hash": "2f2a4a90808bb7e0"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::TestDiagramVariantsContract": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::TestDiagramVariantsContract",
-   "start_line": 666,
-   "end_line": 668,
+   "start_line": 668,
+   "end_line": 670,
    "type": "CLASS",
-   "content_hash": "0758582681f5bfcc"
+   "content_hash": "0cec6118a906218c"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::_project": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::_project",
-   "start_line": 669,
-   "end_line": 673,
+   "start_line": 671,
+   "end_line": 675,
    "type": "FUNCTION",
-   "content_hash": "830b3547442ee02e"
+   "content_hash": "961ddb8bbb0ab860"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_export_diagrams_writes_vis_maps_by_default": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_export_diagrams_writes_vis_maps_by_default",
-   "start_line": 674,
-   "end_line": 687,
+   "start_line": 676,
+   "end_line": 689,
    "type": "FUNCTION",
-   "content_hash": "bde0bf62ee97a235"
+   "content_hash": "27d9a09adb323bc6"
   },
   "tests/test_diagrams.py|tests/test_diagrams.py::test_export_diagrams_falls_back_offline_when_disabled": {
    "file_path": "tests/test_diagrams.py",
    "qualified_name": "tests/test_diagrams.py::test_export_diagrams_falls_back_offline_when_disabled",
-   "start_line": 688,
-   "end_line": 704,
+   "start_line": 690,
+   "end_line": 706,
    "type": "FUNCTION",
-   "content_hash": "c1837a7f48a67160"
+   "content_hash": "ce540336316d7a79"
   },
   "tests/test_documentation.py|tests/test_documentation.py::TestDocumentationGeneratorContract": {
    "file_path": "tests/test_documentation.py",
@@ -23863,7 +23863,7 @@
      "qualified_name": "readmenator/_config.py::Config",
      "reference_file": "readmenator/_config.py",
      "reference_start_line": 15,
-     "reference_end_line": 1242
+     "reference_end_line": 1244
     },
     {
      "qualified_name": "readmenator/_app.py::readmenatorApplication",
@@ -24949,7 +24949,7 @@
        "qualified_name": "readmenator/_config.py::Config",
        "reference_file": "readmenator/_config.py",
        "reference_start_line": 15,
-       "reference_end_line": 1242
+       "reference_end_line": 1244
       },
       {
        "qualified_name": "readmenator/_app.py::readmenatorApplication",
@@ -26183,9 +26183,9 @@
      "relation": "calls into",
      "src_name": "tests",
      "dst_name": "readmenator",
-     "evidence": "36 imports, 278 calls across the boundary",
+     "evidence": "36 imports, 280 calls across the boundary",
      "import_count": 36,
-     "call_count": 278,
+     "call_count": 280,
      "key_edges": [
       {
        "source": "tests/test_config.py|tests/test_config.py::test_config_is_immutable",
@@ -30532,7 +30532,7 @@
        "target": "readmenator/_analyzer.py|readmenator/_analyzer.py::GraphAnalyzer",
        "call_sites": [
         {
-         "line": 527,
+         "line": 529,
          "column": 19
         }
        ],
@@ -30543,7 +30543,7 @@
        "target": "readmenator/_analyzer.py|readmenator/_analyzer.py::analyze",
        "call_sites": [
         {
-         "line": 527,
+         "line": 529,
          "column": 19
         }
        ],
@@ -39197,7 +39197,7 @@
      "target": "readmenator/_graphrag.py|readmenator/_graphrag.py::search",
      "call_sites": [
       {
-       "line": 631,
+       "line": 633,
        "column": 16
       }
      ],
@@ -42332,9 +42332,9 @@
    "relation": "calls into",
    "src_name": "readmenator: _agent_output",
    "dst_name": "readmenator: _video",
-   "evidence": "21 imports, 112 calls across the boundary",
+   "evidence": "21 imports, 114 calls across the boundary",
    "import_count": 21,
-   "call_count": 112,
+   "call_count": 114,
    "key_edges": [
     {
      "source": "readmenator/_agent_output.py|readmenator/_agent_output.py::_infer_subsystems",
@@ -42936,6 +42936,17 @@
      "description": ""
     },
     {
+     "source": "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_gallery_has_no_external_resources_and_escapes_titles",
+     "target": "readmenator/_config.py|readmenator/_config.py::Config",
+     "call_sites": [
+      {
+       "line": 493,
+       "column": 69
+      }
+     ],
+     "description": ""
+    },
+    {
      "source": "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_gallery_footer_links_github_and_pypi",
      "target": "readmenator/_config.py|readmenator/_config.py::Config",
      "call_sites": [
@@ -42964,17 +42975,6 @@
       {
        "line": 500,
        "column": 22
-      }
-     ],
-     "description": ""
-    },
-    {
-     "source": "tests/test_agent_friendliness.py|tests/test_agent_friendliness.py::test_doc_preview_skips_markdown_syntax",
-     "target": "readmenator/_config.py|readmenator/_config.py::Config",
-     "call_sites": [
-      {
-       "line": 506,
-       "column": 38
       }
      ],
      "description": ""
@@ -44386,7 +44386,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::DocsSitePublisher",
      "call_sites": [
       {
-       "line": 506,
+       "line": 508,
        "column": 20
       }
      ],
@@ -44397,7 +44397,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::_doc_preview",
      "call_sites": [
       {
-       "line": 508,
+       "line": 510,
        "column": 25
       }
      ],
@@ -44408,7 +44408,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::_doc_title",
      "call_sites": [
       {
-       "line": 509,
+       "line": 511,
        "column": 25
       }
      ],
@@ -44419,7 +44419,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::SystemMapBuilder",
      "call_sites": [
       {
-       "line": 535,
+       "line": 537,
        "column": 21
       }
      ],
@@ -44430,7 +44430,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::build",
      "call_sites": [
       {
-       "line": 535,
+       "line": 537,
        "column": 21
       }
      ],
@@ -44441,7 +44441,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::SystemMapBuilder",
      "call_sites": [
       {
-       "line": 544,
+       "line": 546,
        "column": 21
       }
      ],
@@ -44452,7 +44452,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::build",
      "call_sites": [
       {
-       "line": 544,
+       "line": 546,
        "column": 21
       }
      ],
@@ -44463,7 +44463,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::VisNetworkRenderer",
      "call_sites": [
       {
-       "line": 545,
+       "line": 547,
        "column": 15
       }
      ],
@@ -44474,7 +44474,7 @@
      "target": "readmenator/_diagrams.py|readmenator/_diagrams.py::render",
      "call_sites": [
       {
-       "line": 545,
+       "line": 547,
        "column": 15
       }
      ],

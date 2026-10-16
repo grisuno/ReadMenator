@@ -128,6 +128,8 @@ class Config:
 
     SITE_PYPI_URL: str = "https://pypi.org/project/readmenator/"
 
+    SITE_DEPLOYNATOR_URL: str = "https://github.com/grisuno/deploynator"
+
     GENERATED_FILE_PREFIXES: Tuple[str, ...] = (".refactor_",)
 
     SKIP_GENERATED_OUTPUTS: bool = True

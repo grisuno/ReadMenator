@@ -260,7 +260,7 @@ Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pip
 - `DocsSitePublisher.render_llms_txt` (method) `readmenator/_diagrams.py:3555` `def render_llms_txt(self, project_name, maps, stats, href_prefix, doc_entries)` -- Render an llms.txt entry point so agents can navigate the site as text.
 - `order` (function) `readmenator/_diagrams.py:3606` `def order(entry)` -- Sort entry points first, then alphabetically.
 - `DocsSitePublisher.render_index` (method) `readmenator/_diagrams.py:3634` `def render_index(self, project_name, maps, stats, href_prefix, video_rel, doc_entries, poster_rel, extra_cards)` -- Render the gallery index page for published maps.
-- `doc_order` (function) `readmenator/_diagrams.py:3941` `def doc_order(base)` -- Entry points first, then alphabetical.
+- `doc_order` (function) `readmenator/_diagrams.py:3957` `def doc_order(base)` -- Entry points first, then alphabetical.
 
 ## readmenator/_docstrings.py
 Imported by: `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `tests/test_apidocs.py`

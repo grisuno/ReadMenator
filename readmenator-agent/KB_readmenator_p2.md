@@ -145,22 +145,22 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `_brand_block` (method, line 3712) `def _brand_block(self)`
   - `_project_pills` (method, line 3739) `def _project_pills(self)`
   - `_footer` (method, line 3768) `def _footer(self)`
-  - `_stat_tiles` (method, line 3816) `def _stat_tiles(self, stats)`
-  - `_start_here` (method, line 3836) `def _start_here(self, entries, video_rel)`
-  - `_video_section` (method, line 3876) `def _video_section(self, video_rel, poster_rel)`
-  - `_doc_group` (method, line 3903) `def _doc_group(self, name)`
-  - `_docs_section` (method, line 3915) `def _docs_section(self, doc_entries)`
-  - `_href_prefix` (method, line 3997) `def _href_prefix(self)`
-  - `_viewer_modal` (method, line 4008) `def _viewer_modal(self)`
-  - `_viewer_script` (method, line 4014) `def _viewer_script(self)`
-  - `_viewer_css` (method, line 4027) `def _viewer_css(self)`
-  - `_glyph` (method, line 4053) `def _glyph(self, kind)`
-  - `_card` (method, line 4071) `def _card(self, kind, system_map, href_prefix)`
-  - `_extra_card` (method, line 4112) `def _extra_card(self, entry)`
-  - `_stats_line` (method, line 4143) `def _stats_line(self, stats)`
-  - `_escape` (method, line 4157) `def _escape(self, value)`
+  - `_stat_tiles` (method, line 3832) `def _stat_tiles(self, stats)`
+  - `_start_here` (method, line 3852) `def _start_here(self, entries, video_rel)`
+  - `_video_section` (method, line 3892) `def _video_section(self, video_rel, poster_rel)`
+  - `_doc_group` (method, line 3919) `def _doc_group(self, name)`
+  - `_docs_section` (method, line 3931) `def _docs_section(self, doc_entries)`
+  - `_href_prefix` (method, line 4013) `def _href_prefix(self)`
+  - `_viewer_modal` (method, line 4024) `def _viewer_modal(self)`
+  - `_viewer_script` (method, line 4030) `def _viewer_script(self)`
+  - `_viewer_css` (method, line 4043) `def _viewer_css(self)`
+  - `_glyph` (method, line 4069) `def _glyph(self, kind)`
+  - `_card` (method, line 4087) `def _card(self, kind, system_map, href_prefix)`
+  - `_extra_card` (method, line 4128) `def _extra_card(self, entry)`
+  - `_stats_line` (method, line 4159) `def _stats_line(self, stats)`
+  - `_escape` (method, line 4173) `def _escape(self, value)`
   - `order` (function, line 3606) `def order(entry)`
-  - `doc_order` (function, line 3941) `def doc_order(base)`
+  - `doc_order` (function, line 3957) `def doc_order(base)`
 - Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_viewer_ui.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_folder_readme.py`, `tests/test_interactive_graph.py`, `tests/test_project_config.py`
 

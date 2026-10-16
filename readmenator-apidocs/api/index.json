@@ -3,13 +3,13 @@
  "format": "jsonl",
  "meta": {
   "modules": 99,
-  "entities": 1960,
+  "entities": 1961,
   "languages": {
    "py": 98,
    "sh": 1
   },
   "kinds": {
-   "attribute": 1018,
+   "attribute": 1019,
    "class": 171,
    "classmethod": 1,
    "constant": 83,
@@ -682,7 +682,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 541
+   "entities": 542
   },
   {
    "uid": "readmenator/_cpg.py",
