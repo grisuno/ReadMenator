@@ -1,10 +1,10 @@
 {
   "tool": "readmenator",
   "schema_version": 2,
-  "generated_at": "2026-10-21T04:25:09Z",
+  "generated_at": "2026-10-21T04:27:12Z",
   "project_root": ".",
   "project_name": "ReadMenator",
-  "git_commit": "dac48f868722620f0d01dac0d33102c5a514c03c",
+  "git_commit": "dffd8d3f33b8ae40bfad7a9cca41576fb80d48aa",
   "git_branch": "main",
   "source_fingerprint": "3346b4a190a4801993519d7d953e412af25ad2292b1914d27c8fa0fa7b06069e",
   "freshness_check": "readmenator . fresh  # exit 0 = docs match sources, exit 1 = run: readmenator . --rebuild",
