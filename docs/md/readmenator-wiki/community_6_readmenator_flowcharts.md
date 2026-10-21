@@ -72,7 +72,6 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 ## Risks
 
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_pytypes.py` via `subprocess` (2 hops)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_render.py` (presentation)
 - [layer strict] `tests/test_flowcharts.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)
