@@ -65,6 +65,7 @@ def build_parser() -> argparse.ArgumentParser:
             "  scan-text               Print synthesized scan-text blobs per file\n"
             "  validate-rules          Validate readmenator-rules/yara_rules.yar (T1/T2/T3)\n"
             "  provenance              Audit security findings by static vs inferred evidence\n"
+            "  receipts [dir]          Ingest deploynator release receipts (release layer)\n"
             "  graphrag                Build the zero-token GraphRAG index (readmenator-graphrag/)\n"
             "  memory                  Print readmenator-agent/MEMORY.md (rules, workflow, session log)\n"
             "  remember \"<note>\"       Append to the MEMORY.md session log (--kind decision|business|...)\n"
@@ -448,6 +449,11 @@ def main() -> None:
         elif command == "provenance":
             for item in app.audit_provenance(target):
                 print(f"{item.severity}:{item.rule} {item.file_path} [{item.provenance}]")
+            return
+        elif command == "receipts":
+            receipts_dir = sys.argv[3] if len(sys.argv) > 3 else ""
+            out_dir = app.ingest_receipts(target, receipts_dir)
+            print(f"Release receipts ingested: {out_dir}")
             return
         elif command == "--rebuild":
             argset = set(sys.argv[3:])

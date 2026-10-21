@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 1 | 35 files | cohesion 0.52*
+*Community 0 | 37 files | cohesion 0.53*
 
 ## Definition
 
-This community groups 35 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.52). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Mermaid graph renderer with intelligent pruning.  Converts the internal Node/Edge graph into a Mermaid flowchart (string) suitable for embedding in Markdown. Ha.
+This community groups 37 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Architecture layer rule engine: forbidden and warning edges between layers..
 
 ## Files
 
@@ -20,34 +20,38 @@ This community groups 35 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/parsers/_dart.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_elixir.py` | py | utility | 2 | yes |
 
-### `tests` (8 files)
+### `tests` (9 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `tests/test_layer_rules.py` | py | testing | 13 | no |
 | `tests/test_mermaid.py` | py | testing | 13 | no |
 | `tests/test_models.py` | py | testing | 11 | no |
 | `tests/test_parsers_property.py` | py | testing | 27 | yes |
 | `tests/test_rule_gen.py` | py | testing | 10 | no |
 | `tests/test_sarif.py` | py | testing | 10 | no |
 | `tests/test_scanner.py` | py | testing | 21 | no |
-| `tests/test_taint.py` | py | testing | 10 | no |
 
-### `readmenator` (6 files)
+### `readmenator` (7 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `readmenator/_layer_rules.py` | py | business_logic | 4 | yes |
 | `readmenator/_mermaid.py` | py | utility | 4 | yes |
 | `readmenator/_models.py` | py | business_logic | 23 | yes |
 | `readmenator/_rule_gen.py` | py | business_logic | 9 | yes |
 | `readmenator/_sarif.py` | py | utility | 5 | yes |
 | `readmenator/_scanner.py` | py | utility | 14 | yes |
-| `readmenator/_taint.py` | py | utility | 6 | yes |
 
-*... and 15 more files in this community.*
+*... and 17 more files in this community.*
 
 
 ## Key Symbols
 
+- `LayerRuleEngine` (class, `readmenator/_layer_rules.py:11`) `class LayerRuleEngine` - Architectural layer violation detection engine.
+- `__init__` (method, `readmenator/_layer_rules.py:36`) `def __init__(self, config)`
+- `detect_violations` (method, `readmenator/_layer_rules.py:39`) `def detect_violations(self, nodes, edges, resolved_edges, layers)` - Detect architectural layer violations.
+- `violation_summary` (method, `readmenator/_layer_rules.py:111`) `def violation_summary(violations)` - Summarise violations by severity.
 - `MermaidRenderer` (class, `readmenator/_mermaid.py:17`) `class MermaidRenderer` - Renders a knowledge graph to Mermaid JS flowchart syntax.
 - `__init__` (method, `readmenator/_mermaid.py:26`) `def __init__(self, max_nodes, max_symbols_per_file, module_style, class_style, f` - Initialise rendering budgets and styles.
 - `_sanitize_id` (method, `readmenator/_mermaid.py:75`) `def _sanitize_id(node_id)` - Convert *node_id* to a Mermaid-safe identifier.
@@ -74,39 +78,36 @@ This community groups 35 file(s) rooted at `readmenator/parsers` with dominant l
 - `RefactoringPlan` (class, `readmenator/_models.py:387`) `class RefactoringPlan` - A complete refactoring plan for a monolithic file.
 - `ConceptNode` (class, `readmenator/_models.py:404`) `class ConceptNode` - A semantic noun node in the concept graph.
 - `ConceptRelation` (class, `readmenator/_models.py:421`) `class ConceptRelation` - A verb edge between two concept noun nodes.
-- `ConceptGraph` (class, `readmenator/_models.py:442`) `class ConceptGraph` - Deterministic semantic layer over the structural graph.
-- `RuleGenerator` (class, `readmenator/_rule_gen.py:14`) `class RuleGenerator` - Generates suggested linting and security rules from code patterns.
-- `__init__` (method, `readmenator/_rule_gen.py:90`) `def __init__(self, config)`
-- `generate` (method, `readmenator/_rule_gen.py:94`) `def generate(self, nodes, content_map)` - Generate suggested rules by scanning code patterns.
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 98
-- Cross-boundary resolved imports (EXTRACTED): 102
+- Internal resolved imports (EXTRACTED): 101
+- Cross-boundary resolved imports (EXTRACTED): 103
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 
 ## Open Questions
 
-- Why do 6 file(s) lack file-level docs (e.g. `tests/test_mermaid.py`)? What purpose do they serve?
+- Why do 7 file(s) lack file-level docs (e.g. `tests/test_layer_rules.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.52?
+- Should readmenator/parsers be split, given cohesion 0.53?
 
 ## Sources
 
+- `readmenator/_layer_rules.py`
 - `readmenator/_mermaid.py`
 - `readmenator/_models.py`
 - `readmenator/_rule_gen.py`
@@ -126,5 +127,4 @@ This community groups 35 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/parsers/_javascript.py`
 - `readmenator/parsers/_kotlin.py`
 - `readmenator/parsers/_lua.py`
-- `readmenator/parsers/_nim.py`
-- *... and 15 more*
+- *... and 17 more*

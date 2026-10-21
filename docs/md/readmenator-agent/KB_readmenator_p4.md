@@ -1,6 +1,29 @@
 # Subsystem: readmenator (page 4 of 5)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_projections.py
+- Doc: Functors and projections for the readmenator code category.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `Projection` (class, line 17) `class Projection(Protocol)`
+  - `IdentityProjection` (class, line 32) `class IdentityProjection`
+  - `DocProjection` (class, line 42) `class DocProjection`
+  - `RiskProjection` (class, line 63) `class RiskProjection`
+  - `apply_view` (function, line 95) `def apply_view(category, view_config)`
+  - `map_node` (method, line 23) `def map_node(self, node)`
+  - `map_morphism` (method, line 27) `def map_morphism(self, m)`
+  - `map_node` (method, line 35) `def map_node(self, node)`
+  - `map_morphism` (method, line 38) `def map_morphism(self, m)`
+  - `__init__` (method, line 49) `def __init__(self, documented_ids)`
+  - `map_node` (method, line 52) `def map_node(self, node)`
+  - `map_morphism` (method, line 57) `def map_morphism(self, m)`
+  - `__init__` (method, line 70) `def __init__(self, fan_in, fan_out, test_files)`
+  - `map_node` (method, line 80) `def map_node(self, node)`
+  - `map_morphism` (method, line 91) `def map_morphism(self, m)`
+- Depends on: `readmenator/_category.py`, `readmenator/_models.py`
+- Imported by: `tests/test_ranking.py`
+
 ## readmenator/_provenance.py
 - Doc: Evidence-provenance audit for readmenator security findings.
 - Layer: utility
@@ -123,6 +146,38 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `_find_readme` (method, line 348) `def _find_readme(root)`
   - `_build_injection` (method, line 363) `def _build_injection(self, suffix)`
 - Imported by: `readmenator/__init__.py`, `readmenator/_pipeline.py`, `tests/test_agent_output.py`, `tests/test_project_config.py`, `tests/test_readme_injector.py`
+
+## readmenator/_receipts.py
+- Doc: Release receipts ingest contract: deploys as first-class evidence.  deploynator writes...
+- Layer: utility
+- Language: py
+- Symbols:
+  - `ReleaseReceiptRecord` (class, line 43) `class ReleaseReceiptRecord`
+  - `EdgeInfo` (class, line 91) `class EdgeInfo`
+  - `_now_iso` (function, line 109) `def _now_iso()`
+  - `ReceiptIngestor` (class, line 113) `class ReceiptIngestor`
+  - `_edge_from_command` (function, line 201) `def _edge_from_command(raw, provenance)`
+  - `_caller_from_stage` (function, line 247) `def _caller_from_stage(stage, default)`
+  - `_dedupe` (function, line 257) `def _dedupe(edges)`
+  - `ReceiptsReconciler` (class, line 269) `class ReceiptsReconciler`
+  - `_receipt_title` (function, line 346) `def _receipt_title(receipt)`
+  - `_format_receipt` (function, line 354) `def _format_receipt(receipt)`
+  - `_opt` (function, line 370) `def _opt(value)`
+  - `_edges_section` (function, line 376) `def _edges_section(edges, title)`
+  - `from_dict` (method, line 64) `def from_dict(cls, data, source_path)`
+  - `to_dict` (method, line 101) `def to_dict(self)`
+  - `__init__` (method, line 116) `def __init__(self, config)`
+  - `load_file` (method, line 121) `def load_file(self, path)`
+  - `load_dir` (method, line 134) `def load_dir(self, receipts_dir)`
+  - `observed_edges` (method, line 156) `def observed_edges(self, records)`
+  - `candidate_edges` (method, line 169) `def candidate_edges(self, records)`
+  - `_explicit_edges` (method, line 185) `def _explicit_edges(self, records)`
+  - `__init__` (method, line 272) `def __init__(self, config)`
+  - `reconcile` (method, line 276) `def reconcile(self, records, candidate_edges, predicted_edges)`
+  - `releases_markdown` (method, line 307) `def releases_markdown(self, report)`
+  - `write_pages` (method, line 330) `def write_pages(self, report, target_dir, out_dirname)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_hypotheses.py`, `readmenator/_uncertainty.py`, `tests/test_receipts.py`
 
 ## readmenator/_refactorizer.py
 - Doc: Monolithic file refactoring planner for the readmenator knowledge graph.
@@ -378,118 +433,27 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
 
-## readmenator/_video.py
-- Doc: Cinematic codebase overview video, general purpose.
+## readmenator/_uncertainty.py
+- Doc: Uncertainty engine: classify candidate edges, never invent facts.
 - Layer: utility
 - Language: py
 - Symbols:
-  - `ease` (function, line 100) `def ease(x)`
-  - `fmt_int` (function, line 111) `def fmt_int(n)`
-  - `mix` (function, line 116) `def mix(a, b, t)`
-  - `alpha` (function, line 121) `def alpha(c, a)`
-  - `hash_color` (function, line 126) `def hash_color(digest)`
-  - `short_label` (function, line 135) `def short_label(text, limit)`
-  - `_panel` (function, line 143) `def _panel(cfg)`
-  - `_caption_y` (function, line 148) `def _caption_y(cfg)`
-  - `_graph_boxes` (function, line 153) `def _graph_boxes(cfg)`
-  - `_dna_boxes` (function, line 162) `def _dna_boxes(cfg)`
-  - `_split_boxes` (function, line 171) `def _split_boxes(cfg)`
-  - `community_color` (function, line 180) `def community_color(index)`
-  - `_polyline_point` (function, line 187) `def _polyline_point(points, f)`
-  - `project3d` (function, line 198) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
-  - `_depth_alpha` (function, line 227) `def _depth_alpha(z, fade)`
-  - `_language_color` (function, line 232) `def _language_color(language)`
-  - `mode_color` (function, line 237) `def mode_color(data, nid, mode)`
-  - `_lerp3` (function, line 246) `def _lerp3(a, b, t)`
-  - `_camera_track` (function, line 251) `def _camera_track(keys, f)`
-  - `_place_label` (function, line 262) `def _place_label(d, placed, x, y, text, font, col, a)`
-  - `_clipped` (function, line 274) `def _clipped(img, box, paint)`
-  - `draw_cloud3d` (function, line 286) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `_cloud_core` (function, line 330) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `draw_sphere3d` (function, line 406) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_sphere_core` (function, line 445) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_verdict_badge` (function, line 530) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
-  - `_scan_cursor` (function, line 545) `def _scan_cursor(d, box, progress, col)`
-  - `_code_tint` (function, line 554) `def _code_tint(line)`
-  - `_packet_offset` (function, line 564) `def _packet_offset(a, b, k)`
-  - `dependencies_available` (function, line 570) `def dependencies_available()`
-  - `resolve_fonts` (function, line 579) `def resolve_fonts()`
-  - `Backdrop` (class, line 618) `class Backdrop`
-  - `_img` (function, line 674) `def _img()`
-  - `draw_grid` (function, line 681) `def draw_grid(img, t, strength, bd)`
-  - `draw_sun` (function, line 701) `def draw_sun(img, a, bd, cy)`
-  - `post` (function, line 718) `def post(img, glitch, seed)`
-  - `glitch_fx` (function, line 736) `def glitch_fx(img, amount, seed)`
-  - `chroma_text` (function, line 759) `def chroma_text(img, xy, text, font, col, spread, anchor)`
-  - `hud_panel` (function, line 770) `def hud_panel(d, box, title, fonts, col)`
-  - `draw_header` (function, line 783) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
-  - `draw_caption` (function, line 797) `def draw_caption(d, text, lt, dur, fonts, width, y)`
-  - `CinematicVideoRenderer` (class, line 813) `class CinematicVideoRenderer`
-  - `_render_frame_bytes` (function, line 1305) `def _render_frame_bytes(fi)`
-  - `_scene_index` (function, line 1313) `def _scene_index(gt)`
-  - `_paint_scene` (function, line 1321) `def _paint_scene(index, lt)`
-  - `_motion_blurred` (function, line 1336) `def _motion_blurred(index, lt)`
-  - `_outgoing_frame` (function, line 1351) `def _outgoing_frame(index)`
-  - `_draw_frame` (function, line 1360) `def _draw_frame(fi)`
-  - `_scene_title` (function, line 1384) `def _scene_title(img, d, lt, gt, sc)`
-  - `_scene_card` (function, line 1419) `def _scene_card(img, d, lt, gt, sc)`
-  - `_scene_layers` (function, line 1433) `def _scene_layers(img, d, lt, gt, sc)`
-  - `_scene_gods` (function, line 1458) `def _scene_gods(img, d, lt, gt, sc)`
-  - `_scene_tree` (function, line 1501) `def _scene_tree(img, d, lt, gt, sc)`
-  - `_scene_communities` (function, line 1575) `def _scene_communities(img, d, lt, gt, sc)`
-  - `_scene_graph` (function, line 1619) `def _scene_graph(img, d, lt, gt, sc)`
-  - `_scene_bundle` (function, line 1705) `def _scene_bundle(img, d, lt, gt, sc)`
-  - `_orbit_plan` (function, line 1791) `def _orbit_plan(dur)`
-  - `_scene_orbit` (function, line 1796) `def _scene_orbit(img, d, lt, gt, sc)`
-  - `_scene_sphere` (function, line 1912) `def _scene_sphere(img, d, lt, gt, sc)`
-  - `_scene_invite` (function, line 1973) `def _scene_invite(img, d, lt, gt, sc)`
-  - `_scene_dna` (function, line 2020) `def _scene_dna(img, d, lt, gt, sc)`
-  - `_scene_outro` (function, line 2079) `def _scene_outro(img, d, lt, gt, sc)`
-  - `_flow_graph` (function, line 2109) `def _flow_graph(kind)`
-  - `_bezier` (function, line 2117) `def _bezier(points, t)`
-  - `_draw_flow_edge` (function, line 2125) `def _draw_flow_edge(d, pts, col, a, width, upto, dashed)`
-  - `_draw_flow_node` (function, line 2144) `def _draw_flow_node(d, node, tf, fonts, col, a, glow, lines)`
-  - `_scene_tiers` (function, line 2167) `def _scene_tiers(img, d, lt, gt, sc)`
-  - `_scene_flow` (function, line 2246) `def _scene_flow(img, d, lt, gt, sc)`
-  - `_img_draw` (function, line 2339) `def _img_draw(img)`
-  - `pr` (function, line 473) `def pr(p)`
-  - `_find` (function, line 583) `def _find(style)`
-  - `__init__` (method, line 621) `def __init__(self, width, height)`
-  - `_sun` (method, line 659) `def _sun(self, r)`
-  - `collect` (method, line 818) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
-  - `_build_dep_tree` (method, line 991) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
-  - `build_scenes` (method, line 1042) `def build_scenes(self, data)`
-  - `graph_positions` (method, line 1072) `def graph_positions(self, data, box)`
-  - `tree_positions` (method, line 1119) `def tree_positions(self, data, box)`
-  - `emergence_frames` (method, line 1162) `def emergence_frames(self, data, box)`
-  - `bundle_groups` (method, line 1172) `def bundle_groups(self, data)`
-  - `ordered_groups` (method, line 1187) `def ordered_groups(self, data)`
-  - `bundle_layout` (method, line 1197) `def bundle_layout(self, data, box)`
-  - `orbit_positions` (method, line 1206) `def orbit_positions(self, data)`
-  - `sphere_layout` (method, line 1216) `def sphere_layout(self, data)`
-  - `orbit_stops` (method, line 1225) `def orbit_stops(self, data, positions)`
-  - `_prepare_layouts` (method, line 1240) `def _prepare_layouts(self, data)`
-  - `render_single_frame` (method, line 1254) `def render_single_frame(self, data, frame_index)`
-  - `render` (method, line 1268) `def render(self, data, output_path)`
-  - `tf` (function, line 2187) `def tf(x, y)`
-  - `tf` (function, line 2285) `def tf(x, y)`
-- Depends on: `readmenator/_config.py`, `readmenator/_flowcharts.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
-- Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
-
-## readmenator/_viewer_ui.py
-- Doc: Shared Config button + modal for maps/explorer pages.
-- Layer: presentation
-- Language: py
-- Symbols:
-  - `viewer_json` (function, line 272) `def viewer_json(config)`
-  - `branding_style` (function, line 318) `def branding_style(config)`
-  - `home_anchor` (function, line 333) `def home_anchor(config)`
-  - `project_links` (function, line 356) `def project_links(config)`
-  - `modal_html` (function, line 380) `def modal_html()`
-  - `modal_script` (function, line 403) `def modal_script(config)`
-  - `config_button_markup` (function, line 419) `def config_button_markup()`
-- Depends on: `readmenator/_project_config.py`
-- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `tests/test_project_config.py`
+  - `_bucket_evidence` (function, line 50) `def _bucket_evidence(evidence)`
+  - `_bucket_target` (function, line 67) `def _bucket_target(callee)`
+  - `featurize` (function, line 83) `def featurize(edge, known_observed)`
+  - `UncertaintyPrediction` (class, line 93) `class UncertaintyPrediction`
+  - `HeuristicScorer` (class, line 101) `class HeuristicScorer`
+  - `RandomForestScorer` (class, line 138) `class RandomForestScorer`
+  - `_sigmoid` (function, line 180) `def _sigmoid(x)`
+  - `predict_uncertain_edges` (function, line 187) `def predict_uncertain_edges(candidate_edges, known_observed, config, min_confidence, scorer)`
+  - `prediction_edges` (function, line 214) `def prediction_edges(predictions, provenance_version)`
+  - `score` (method, line 129) `def score(self, features)`
+  - `__init__` (method, line 143) `def __init__(self, n_estimators, random_state)`
+  - `available` (method, line 149) `def available()`
+  - `fit` (method, line 156) `def fit(self, x, y)`
+  - `score` (method, line 171) `def score(self, features)`
+- Depends on: `readmenator/_config.py`, `readmenator/_receipts.py`
+- Imported by: `readmenator/_app.py`, `tests/test_receipts.py`
 
 
 Next: [KB_readmenator_p5.md](KB_readmenator_p5.md)

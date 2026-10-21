@@ -1,6 +1,44 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_receipts.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestLoading` (class, line 127) `class TestLoading`
+  - `TestEdges` (class, line 155) `class TestEdges`
+  - `TestReconciler` (class, line 187) `class TestReconciler`
+  - `TestUncertainty` (class, line 238) `class TestUncertainty`
+  - `TestHypotheses` (class, line 297) `class TestHypotheses`
+  - `test_load_bad_schema_rejected` (method, line 128) `def test_load_bad_schema_rejected(self, tmp_path)`
+  - `test_load_valid_record` (method, line 134) `def test_load_valid_record(self, tmp_path)`
+  - `test_load_dir_sorted_and_invalid_skipped` (method, line 142) `def test_load_dir_sorted_and_invalid_skipped(self, tmp_path)`
+  - `test_missing_dir_returns_empty` (method, line 151) `def test_missing_dir_returns_empty(self)`
+  - `test_observed_edges_explicit` (method, line 156) `def test_observed_edges_explicit(self, tmp_path)`
+  - `test_command_derived_edges` (method, line 166) `def test_command_derived_edges(self)`
+  - `test_planned_commands_not_observed` (method, line 173) `def test_planned_commands_not_observed(self)`
+  - `test_candidate_edges_partition` (method, line 178) `def test_candidate_edges_partition(self)`
+  - `_run` (method, line 188) `def _run(self, records)`
+  - `test_confirmation_resolves_candidates` (method, line 197) `def test_confirmation_resolves_candidates(self)`
+  - `test_markdown_lists_platforms_and_states` (method, line 208) `def test_markdown_lists_platforms_and_states(self)`
+  - `test_write_pages_artifacts` (method, line 220) `def test_write_pages_artifacts(self, tmp_path)`
+  - `test_feature_vector_shape` (method, line 239) `def test_feature_vector_shape(self)`
+  - `test_heuristic_high_for_cli_evidence` (method, line 247) `def test_heuristic_high_for_cli_evidence(self)`
+  - `test_heuristic_low_for_unobserved_generic` (method, line 253) `def test_heuristic_low_for_unobserved_generic(self)`
+  - `test_predict_labels_predicted` (method, line 259) `def test_predict_labels_predicted(self)`
+  - `test_min_confidence_filters` (method, line 269) `def test_min_confidence_filters(self)`
+  - `test_random_forest_fallback_and_fit` (method, line 274) `def test_random_forest_fallback_and_fit(self)`
+  - `_validator` (method, line 298) `def _validator(self)`
+  - `test_already_observed_verified` (method, line 305) `def test_already_observed_verified(self)`
+  - `test_callee_known_via_class_match_verified` (method, line 311) `def test_callee_known_via_class_match_verified(self)`
+  - `test_unknown_callee_rejected` (method, line 321) `def test_unknown_callee_rejected(self)`
+  - `test_unknown_caller_rejected_by_default` (method, line 328) `def test_unknown_caller_rejected_by_default(self)`
+  - `test_unknown_caller_assumed_when_allowed` (method, line 334) `def test_unknown_caller_assumed_when_allowed(self)`
+  - `test_json_list_validation` (method, line 341) `def test_json_list_validation(self)`
+  - `test_missing_fields_rejected` (method, line 351) `def test_missing_fields_rejected(self)`
+  - `test_extra_context_preserved` (method, line 355) `def test_extra_context_preserved(self)`
+- Depends on: `readmenator/_hypotheses.py`, `readmenator/_receipts.py`, `readmenator/_uncertainty.py`
+
 ## tests/test_refactorizer.py
 - Doc: Contract tests for the MonolithRefactorizer.
 - Layer: testing

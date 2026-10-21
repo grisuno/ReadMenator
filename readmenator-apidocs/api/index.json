@@ -2,52 +2,52 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 99,
-  "entities": 1961,
+  "modules": 102,
+  "entities": 2055,
   "languages": {
-   "py": 98,
+   "py": 101,
    "sh": 1
   },
   "kinds": {
-   "attribute": 1019,
-   "class": 171,
-   "classmethod": 1,
-   "constant": 83,
-   "constructor": 77,
+   "attribute": 1062,
+   "class": 181,
+   "classmethod": 3,
+   "constant": 95,
+   "constructor": 81,
    "enum": 1,
    "exception": 1,
-   "function": 130,
-   "method": 313,
-   "module": 99,
+   "function": 133,
+   "method": 329,
+   "module": 102,
    "property": 61,
    "protocol": 1,
-   "staticmethod": 4
+   "staticmethod": 5
   },
   "truncated": false,
-  "skipped_files": 56,
+  "skipped_files": 57,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 712,
-   "total": 859,
-   "percent": 82.9
+   "documented": 728,
+   "total": 898,
+   "percent": 81.1
   },
   "by_kind": {
    "class": {
-    "documented": 160,
-    "total": 171,
-    "percent": 93.6
+    "documented": 167,
+    "total": 181,
+    "percent": 92.3
    },
    "classmethod": {
     "documented": 1,
-    "total": 1,
-    "percent": 100.0
+    "total": 3,
+    "percent": 33.3
    },
    "constructor": {
     "documented": 46,
-    "total": 77,
-    "percent": 59.7
+    "total": 81,
+    "percent": 56.8
    },
    "enum": {
     "documented": 1,
@@ -60,18 +60,18 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 126,
-    "total": 130,
-    "percent": 96.9
+    "documented": 128,
+    "total": 133,
+    "percent": 96.2
    },
    "method": {
-    "documented": 238,
-    "total": 313,
-    "percent": 76.0
+    "documented": 242,
+    "total": 329,
+    "percent": 73.6
    },
    "module": {
-    "documented": 98,
-    "total": 99,
+    "documented": 101,
+    "total": 102,
     "percent": 99.0
    },
    "property": {
@@ -86,8 +86,8 @@
    },
    "staticmethod": {
     "documented": 4,
-    "total": 4,
-    "percent": 100.0
+    "total": 5,
+    "percent": 80.0
    }
   },
   "by_module": {
@@ -147,9 +147,9 @@
     "percent": 100.0
    },
    "readmenator/_app.py": {
-    "documented": 28,
-    "total": 56,
-    "percent": 50.0
+    "documented": 29,
+    "total": 57,
+    "percent": 50.9
    },
    "readmenator/_bundlegraph.py": {
     "documented": 8,
@@ -306,6 +306,11 @@
     "total": 6,
     "percent": 100.0
    },
+   "readmenator/_hypotheses.py": {
+    "documented": 3,
+    "total": 10,
+    "percent": 30.0
+   },
    "readmenator/_layer_rules.py": {
     "documented": 4,
     "total": 5,
@@ -391,6 +396,11 @@
     "total": 5,
     "percent": 100.0
    },
+   "readmenator/_receipts.py": {
+    "documented": 7,
+    "total": 16,
+    "percent": 43.8
+   },
    "readmenator/_refactorizer.py": {
     "documented": 3,
     "total": 5,
@@ -450,6 +460,11 @@
     "documented": 1,
     "total": 5,
     "percent": 20.0
+   },
+   "readmenator/_uncertainty.py": {
+    "documented": 5,
+    "total": 12,
+    "percent": 41.7
    },
    "readmenator/_video.py": {
     "documented": 38,
@@ -647,7 +662,7 @@
   {
    "uid": "readmenator/_app.py",
    "path": "modules/readmenator._app.py.jsonl",
-   "entities": 56
+   "entities": 57
   },
   {
    "uid": "readmenator/_bundlegraph.py",
@@ -682,7 +697,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 542
+   "entities": 545
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -805,6 +820,11 @@
    "entities": 8
   },
   {
+   "uid": "readmenator/_hypotheses.py",
+   "path": "modules/readmenator._hypotheses.py.jsonl",
+   "entities": 22
+  },
+  {
    "uid": "readmenator/_layer_rules.py",
    "path": "modules/readmenator._layer_rules.py.jsonl",
    "entities": 8
@@ -890,6 +910,11 @@
    "entities": 5
   },
   {
+   "uid": "readmenator/_receipts.py",
+   "path": "modules/readmenator._receipts.py.jsonl",
+   "entities": 44
+  },
+  {
    "uid": "readmenator/_refactorizer.py",
    "path": "modules/readmenator._refactorizer.py.jsonl",
    "entities": 5
@@ -948,6 +973,11 @@
    "uid": "readmenator/_uml.py",
    "path": "modules/readmenator._uml.py.jsonl",
    "entities": 5
+  },
+  {
+   "uid": "readmenator/_uncertainty.py",
+   "path": "modules/readmenator._uncertainty.py.jsonl",
+   "entities": 24
   },
   {
    "uid": "readmenator/_video.py",
@@ -1087,7 +1117,7 @@
  ],
  "warnings": {
   "path": "warnings.jsonl",
-  "total": 131
+  "total": 150
  },
  "usage": [
   "grep -h '\"name\":\"<Name>\"' readmenator-apidocs/api/modules/*.jsonl",

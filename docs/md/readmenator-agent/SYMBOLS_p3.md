@@ -3,6 +3,17 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `concepts` | method | `readmenator/_pipeline.py:317` | `def concepts(self)` |
+| `cpg` | method | `readmenator/_pipeline.py:192` | `def cpg(self)` |
+| `dataflow` | method | `readmenator/_pipeline.py:161` | `def dataflow(self)` |
+| `diagram_builder` | method | `readmenator/_pipeline.py:275` | `def diagram_builder(self)` |
+| `diagram_publisher` | method | `readmenator/_pipeline.py:296` | `def diagram_publisher(self)` |
+| `diagram_renderer` | method | `readmenator/_pipeline.py:282` | `def diagram_renderer(self)` |
+| `diagram_validator` | method | `readmenator/_pipeline.py:289` | `def diagram_validator(self)` |
+| `embedder` | method | `readmenator/_pipeline.py:366` | `def embedder(self)` |
+| `exclusions` | method | `readmenator/_pipeline.py:359` | `def exclusions(self)` |
+| `exporter` | method | `readmenator/_pipeline.py:149` | `def exporter(self)` |
+| `folder_readme` | method | `readmenator/_pipeline.py:422` | `def folder_readme(self)` |
 | `forcegraph` | method | `readmenator/_pipeline.py:324` | `def forcegraph(self)` |
 | `generator` | method | `readmenator/_pipeline.py:131` | `def generator(self)` |
 | `gh_wiki` | method | `readmenator/_pipeline.py:262` | `def gh_wiki(self)` |
@@ -142,6 +153,30 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_strip_partial_anchor` | method | `readmenator/_readme_injector.py:296` | `def _strip_partial_anchor(content)` |
 | `inject` | method | `readmenator/_readme_injector.py:219` | `def inject(self, project_root)` |
 | `remove` | method | `readmenator/_readme_injector.py:311` | `def remove(self, project_root)` |
+| `EdgeInfo` | class | `readmenator/_receipts.py:91` | `class EdgeInfo` |
+| `ReceiptIngestor` | class | `readmenator/_receipts.py:113` | `class ReceiptIngestor` |
+| `ReceiptsReconciler` | class | `readmenator/_receipts.py:269` | `class ReceiptsReconciler` |
+| `ReleaseReceiptRecord` | class | `readmenator/_receipts.py:43` | `class ReleaseReceiptRecord` |
+| `__init__` | method | `readmenator/_receipts.py:116` | `def __init__(self, config)` |
+| `__init__` | method | `readmenator/_receipts.py:272` | `def __init__(self, config)` |
+| `_caller_from_stage` | function | `readmenator/_receipts.py:247` | `def _caller_from_stage(stage, default)` |
+| `_dedupe` | function | `readmenator/_receipts.py:257` | `def _dedupe(edges)` |
+| `_edge_from_command` | function | `readmenator/_receipts.py:201` | `def _edge_from_command(raw, provenance)` |
+| `_edges_section` | function | `readmenator/_receipts.py:376` | `def _edges_section(edges, title)` |
+| `_explicit_edges` | method | `readmenator/_receipts.py:185` | `def _explicit_edges(self, records)` |
+| `_format_receipt` | function | `readmenator/_receipts.py:354` | `def _format_receipt(receipt)` |
+| `_now_iso` | function | `readmenator/_receipts.py:109` | `def _now_iso()` |
+| `_opt` | function | `readmenator/_receipts.py:370` | `def _opt(value)` |
+| `_receipt_title` | function | `readmenator/_receipts.py:346` | `def _receipt_title(receipt)` |
+| `candidate_edges` | method | `readmenator/_receipts.py:169` | `def candidate_edges(self, records)` |
+| `from_dict` | method | `readmenator/_receipts.py:64` | `def from_dict(cls, data, source_path)` |
+| `load_dir` | method | `readmenator/_receipts.py:134` | `def load_dir(self, receipts_dir)` |
+| `load_file` | method | `readmenator/_receipts.py:121` | `def load_file(self, path)` |
+| `observed_edges` | method | `readmenator/_receipts.py:156` | `def observed_edges(self, records)` |
+| `reconcile` | method | `readmenator/_receipts.py:276` | `def reconcile(self, records, candidate_edges, predicted_edges)` |
+| `releases_markdown` | method | `readmenator/_receipts.py:307` | `def releases_markdown(self, report)` |
+| `to_dict` | method | `readmenator/_receipts.py:101` | `def to_dict(self)` |
+| `write_pages` | method | `readmenator/_receipts.py:330` | `def write_pages(self, report, target_dir, out_dirname)` |
 | `MonolithRefactorizer` | class | `readmenator/_refactorizer.py:24` | `class MonolithRefactorizer` |
 | `__init__` | method | `readmenator/_refactorizer.py:32` | `def __init__(self, config)` |
 | `_estimate_impact` | method | `readmenator/_refactorizer.py:147` | `def _estimate_impact(self, file_id, resolved_edges)` |
@@ -300,6 +335,20 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_type_map_py_to_target` | function | `readmenator/_uml.py:190` | `def _type_map_py_to_target(target, py_type_hint)` |
 | `generate_code` | method | `readmenator/_uml.py:129` | `def generate_code(self, nodes, edges, target_language)` |
 | `render_mermaid_class_diagram` | method | `readmenator/_uml.py:39` | `def render_mermaid_class_diagram(self, nodes, edges)` |
+| `HeuristicScorer` | class | `readmenator/_uncertainty.py:101` | `class HeuristicScorer` |
+| `RandomForestScorer` | class | `readmenator/_uncertainty.py:138` | `class RandomForestScorer` |
+| `UncertaintyPrediction` | class | `readmenator/_uncertainty.py:93` | `class UncertaintyPrediction` |
+| `__init__` | method | `readmenator/_uncertainty.py:143` | `def __init__(self, n_estimators, random_state)` |
+| `_bucket_evidence` | function | `readmenator/_uncertainty.py:50` | `def _bucket_evidence(evidence)` |
+| `_bucket_target` | function | `readmenator/_uncertainty.py:67` | `def _bucket_target(callee)` |
+| `_sigmoid` | function | `readmenator/_uncertainty.py:180` | `def _sigmoid(x)` |
+| `available` | method | `readmenator/_uncertainty.py:149` | `def available()` |
+| `featurize` | function | `readmenator/_uncertainty.py:83` | `def featurize(edge, known_observed)` |
+| `fit` | method | `readmenator/_uncertainty.py:156` | `def fit(self, x, y)` |
+| `predict_uncertain_edges` | function | `readmenator/_uncertainty.py:187` | `def predict_uncertain_edges(candidate_edges, known_observed, config, min_confidence, scorer)` |
+| `prediction_edges` | function | `readmenator/_uncertainty.py:214` | `def prediction_edges(predictions, provenance_version)` |
+| `score` | method | `readmenator/_uncertainty.py:129` | `def score(self, features)` |
+| `score` | method | `readmenator/_uncertainty.py:171` | `def score(self, features)` |
 | `Fe` | class | `readmenator/_vendor/force-graph.min.js:2` | `` |
 | `Ha` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
 | `Ia` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
@@ -447,54 +496,5 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `_build_queries` | method | `readmenator/_wiki.py:936` | `def _build_queries(self, analysis)` |
 | `_build_report` | method | `readmenator/_wiki.py:961` | `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...` |
 | `_community_of` | method | `readmenator/_wiki.py:268` | `def _community_of(self, node_id, communities)` |
-| `_connective_paragraph` | method | `readmenator/_wiki.py:899` | `def _connective_paragraph(self, communities, connections)` |
-| `_definition_for` | method | `readmenator/_wiki.py:458` | `def _definition_for(self, community, node_map)` |
-| `_display_names` | function | `readmenator/_wiki.py:72` | `def _display_names(communities)` |
-| `_duplicate_links` | method | `readmenator/_wiki.py:342` | `def _duplicate_links(communities, node_map, skip_pairs)` |
-| `_estimate_tokens` | method | `readmenator/_wiki.py:1033` | `def _estimate_tokens(self, nodes, connections)` |
-| `_file_row` | method | `readmenator/_wiki.py:487` | `def _file_row(self, fid, node_map, layers)` |
-| `_is_garbage_purpose` | function | `readmenator/_wiki.py:47` | `def _is_garbage_purpose(text)` |
-| `_large_files` | method | `readmenator/_wiki.py:741` | `def _large_files(self, nodes, project_root)` |
-| `_overview_paragraph` | method | `readmenator/_wiki.py:866` | `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)` |
-| `_prune_stale_pages` | method | `readmenator/_wiki.py:210` | `def _prune_stale_pages(self, out_dir, current)` |
-| `_questions_for` | method | `readmenator/_wiki.py:703` | `def _questions_for(self, community, node_map, member_set, analysis_v2)` |
-| `_questions_paragraph` | method | `readmenator/_wiki.py:920` | `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)` |
-| `_resolve_communities` | method | `readmenator/_wiki.py:242` | `def _resolve_communities(self, nodes, analysis, resolved)` |
-| `_shared_context` | method | `readmenator/_wiki.py:421` | `def _shared_context(first, second, node_map, layers)` |
-| `_shared_context_links` | method | `readmenator/_wiki.py:385` | `def _shared_context_links(self, communities, existing, node_map, layers)` |
-| `_slug` | function | `readmenator/_wiki.py:55` | `def _slug(text)` |
-| `_write` | method | `readmenator/_wiki.py:1044` | `def _write(path, content)` |
-| `_write_concepts` | method | `readmenator/_wiki.py:143` | `def _write_concepts(self, out_dir, analysis_v2)` |
-| `dominant` | function | `readmenator/_wiki.py:428` | `def dominant(ids, key)` |
-| `existing_ids` | function | `readmenator/_wiki.py:62` | `def existing_ids(connections)` |
-| `generate` | method | `readmenator/_wiki.py:94` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` |
-| `lint` | method | `readmenator/_wiki.py:219` | `def lint(self, project_root)` |
-| `YaraLiteHit` | class | `readmenator/_yaralite.py:56` | `class YaraLiteHit` |
-| `YaraLiteMatch` | class | `readmenator/_yaralite.py:66` | `class YaraLiteMatch` |
-| `YaraLiteRule` | class | `readmenator/_yaralite.py:33` | `class YaraLiteRule` |
-| `YaraLiteString` | class | `readmenator/_yaralite.py:24` | `class YaraLiteString` |
-| `_condition_matches` | function | `readmenator/_yaralite.py:265` | `def _condition_matches(condition, hits)` |
-| `_confidence` | function | `readmenator/_yaralite.py:305` | `def _confidence(value)` |
-| `_decode_yara_string` | function | `readmenator/_yaralite.py:238` | `def _decode_yara_string(value)` |
-| `_excerpt` | function | `readmenator/_yaralite.py:322` | `def _excerpt(text, offset, length)` |
-| `_parse_meta` | function | `readmenator/_yaralite.py:196` | `def _parse_meta(meta_body)` |
-| `_parse_strings` | function | `readmenator/_yaralite.py:215` | `def _parse_strings(strings_body)` |
-| `_rule_blocks` | function | `readmenator/_yaralite.py:161` | `def _rule_blocks(rules_text)` |
-| `_section` | function | `readmenator/_yaralite.py:182` | `def _section(body, start_marker, end_marker)` |
-| `_string_hits` | function | `readmenator/_yaralite.py:243` | `def _string_hits(text, rule)` |
-| `_strip_comments` | function | `readmenator/_yaralite.py:233` | `def _strip_comments(text)` |
-| `parse_yaralite_rules` | function | `readmenator/_yaralite.py:76` | `def parse_yaralite_rules(rules_text)` |
-| `replace_group` | function | `readmenator/_yaralite.py:270` | `def replace_group(match)` |
-| `replace_identifier` | function | `readmenator/_yaralite.py:292` | `def replace_identifier(match)` |
-| `run_yaralite_rules` | function | `readmenator/_yaralite.py:112` | `def run_yaralite_rules(text, rules)` |
-| `tier` | method | `readmenator/_yaralite.py:42` | `def tier(self)` |
-| `validate_yaralite_rules` | function | `readmenator/_yaralite.py:139` | `def validate_yaralite_rules(rules_text)` |
-| `_init_parser_map` | function | `readmenator/parsers/__init__.py:34` | `def _init_parser_map()` |
-| `create_parser` | function | `readmenator/parsers/__init__.py:70` | `def create_parser(extension, filename, config)` |
-| `AssemblyParser` | class | `readmenator/parsers/_assembly.py:11` | `class AssemblyParser(LanguageParser)` |
-| `_extract_specifics` | method | `readmenator/parsers/_assembly.py:19` | `def _extract_specifics(self, content)` |
-| `LanguageParser` | class | `readmenator/parsers/_base.py:12` | `class LanguageParser` |
-| `__init__` | method | `readmenator/parsers/_base.py:21` | `def __init__(self, filename, config)` |
-| `_extract_docstring` | method | `readmenator/parsers/_base.py:49` | `def _extract_docstring(self, line_num)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

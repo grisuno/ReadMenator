@@ -61,6 +61,35 @@ class readmenatorApplication:
         self._last_resolved_edges: List[Edge] = []
         self._last_findings: List[SecurityFinding] = []
 
+    def ingest_receipts(self, target_dir: str, receipts_dir: str = "") -> str:
+        """Ingest deploynator release receipts into the release layer.
+
+        Loads receipts (observed steps, commands, edges), reconciles
+        candidate vs observed evidence, predicts uncertainty for
+        candidate edges, and writes
+        ``<target>/<RELEASES_DIR>/RELEASES.md`` plus the
+        ``release-edges.json`` reconciliation artifact. Returns the
+        output directory.
+        """
+        import os
+
+        from readmenator._receipts import ReceiptsReconciler
+        from readmenator._uncertainty import prediction_edges, predict_uncertain_edges
+
+        reconciler = ReceiptsReconciler(self._config)
+        base = receipts_dir or os.path.join(target_dir,
+                                            self._config.RECEIPTS_SCAN_DIR)
+        records = reconciler._ingestor.load_dir(base)
+        observed = reconciler._ingestor.observed_edges(records)
+        known_observed = {(e.caller, e.callee) for e in observed}
+        candidates = reconciler._ingestor.candidate_edges(records)
+        predictions = predict_uncertain_edges(candidates, known_observed,
+                                              config=self._config)
+        predicted = prediction_edges(predictions)
+        report = reconciler.reconcile(records, candidates, predicted)
+        return reconciler.write_pages(report, target_dir)
+
+
     def _scan(self, target_dir: str) -> Tuple[List[Node], List[Edge]]:
         root = Path(target_dir).resolve()
         nodes, edges = self._factory.scanner.scan(root)

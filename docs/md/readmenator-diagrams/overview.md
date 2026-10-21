@@ -1,55 +1,55 @@
 ```mermaid
 graph LR
-    readmenator__video["readmenator: _video"]
     readmenator_parsers["readmenator/parsers"]
+    readmenator__video["readmenator: _video"]
     readmenator__agent_output["readmenator: _agent_output"]
     readmenator__graphrag["readmenator: _graphrag"]
     readmenator__pipeline["readmenator: _pipeline"]
     readmenator__diagrams["readmenator: _diagrams"]
     readmenator__flowcharts["readmenator: _flowcharts"]
+    readmenator_parsers -- "calls into" --> readmenator__video
+    readmenator_parsers -- "calls into" --> readmenator__agent_output
+    readmenator_parsers -- "calls into" --> readmenator__graphrag
+    readmenator_parsers -- "calls into" --> readmenator__pipeline
+    readmenator_parsers -- "calls into" --> readmenator__flowcharts
     readmenator__video -- "calls into" --> readmenator_parsers
     readmenator__video -- "calls into" --> readmenator__agent_output
     readmenator__video -- "calls into" --> readmenator__graphrag
     readmenator__video -- "calls into" --> readmenator__pipeline
     readmenator__video -- "calls into" --> readmenator__diagrams
     readmenator__video -- "calls into" --> readmenator__flowcharts
-    readmenator_parsers -- "calls into" --> readmenator__video
-    readmenator_parsers -- "calls into" --> readmenator__agent_output
-    readmenator_parsers -- "calls into" --> readmenator__graphrag
-    readmenator_parsers -- "calls into" --> readmenator__pipeline
-    readmenator_parsers -- "calls into" --> readmenator__flowcharts
-    readmenator__agent_output -- "calls into" --> readmenator__video
     readmenator__agent_output -- "calls into" --> readmenator_parsers
+    readmenator__agent_output -- "calls into" --> readmenator__video
     readmenator__agent_output -- "calls into" --> readmenator__graphrag
     readmenator__agent_output -- "calls into" --> readmenator__pipeline
     readmenator__agent_output -- "calls into" --> readmenator__diagrams
     readmenator__agent_output -- "calls into" --> readmenator__flowcharts
-    readmenator__graphrag -- "calls into" --> readmenator__video
     readmenator__graphrag -- "calls into" --> readmenator_parsers
+    readmenator__graphrag -- "calls into" --> readmenator__video
     readmenator__graphrag -- "calls into" --> readmenator__agent_output
     readmenator__graphrag -- "depends on" --> readmenator__pipeline
     readmenator__graphrag -- "depends on" --> readmenator__diagrams
     readmenator__graphrag -- "calls into" --> readmenator__flowcharts
-    readmenator__pipeline -- "calls into" --> readmenator__video
     readmenator__pipeline -- "calls into" --> readmenator_parsers
+    readmenator__pipeline -- "calls into" --> readmenator__video
     readmenator__pipeline -- "calls into" --> readmenator__agent_output
     readmenator__pipeline -- "calls into" --> readmenator__graphrag
     readmenator__pipeline -- "calls into" --> readmenator__diagrams
     readmenator__pipeline -- "calls into" --> readmenator__flowcharts
-    readmenator__diagrams -- "calls into" --> readmenator__video
     readmenator__diagrams -- "calls into" --> readmenator_parsers
+    readmenator__diagrams -- "calls into" --> readmenator__video
     readmenator__diagrams -- "calls into" --> readmenator__agent_output
     readmenator__diagrams -- "calls into" --> readmenator__graphrag
     readmenator__diagrams -- "calls into" --> readmenator__pipeline
     readmenator__diagrams -- "calls into" --> readmenator__flowcharts
-    readmenator__flowcharts -- "calls into" --> readmenator__video
     readmenator__flowcharts -- "calls into" --> readmenator_parsers
+    readmenator__flowcharts -- "calls into" --> readmenator__video
     readmenator__flowcharts -- "calls into" --> readmenator__agent_output
     readmenator__flowcharts -- "calls into" --> readmenator__graphrag
     readmenator__flowcharts -- "calls into" --> readmenator__pipeline
     readmenator__flowcharts -- "calls into" --> readmenator__diagrams
-    click readmenator__video href "./readmenator__video.md" "Details"
     click readmenator_parsers href "./readmenator_parsers.md" "Details"
+    click readmenator__video href "./readmenator__video.md" "Details"
     click readmenator__agent_output href "./readmenator__agent_output.md" "Details"
     click readmenator__graphrag href "./readmenator__graphrag.md" "Details"
     click readmenator__pipeline href "./readmenator__pipeline.md" "Details"
@@ -59,26 +59,11 @@ graph LR
 
 ## Details
 
-Static architecture map of 155 files (js, py, sh) in 7 components: readmenator: _video, readmenator/parsers, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.
+Static architecture map of 159 files (js, py, sh) in 7 components: readmenator/parsers, readmenator: _video, readmenator: _agent_output, readmenator: _graphrag, readmenator: _pipeline, readmenator: _diagrams, readmenator: _flowcharts. Structure is extracted statically without LLM calls; component prose may be enriched locally.
 
-### readmenator: _video (1)
+### readmenator/parsers (1)
 
-readmenator: _video groups 35 files (py) around Config, readmenatorApplication, __init__, _scan, _scan_with_content. Launcher shim that runs the readmenator CLI from a source checkout.
-
-**Related Classes/Methods**:
-
-- <a href="../readmenator/_config.py#L15-L1244">readmenator/_config.py::Config</a>
-- <a href="../readmenator/_app.py">readmenator/_app.py::readmenatorApplication</a>
-- <a href="../readmenator/_app.py#L55-L63">readmenator/_app.py::__init__</a>
-- <a href="../readmenator/_app.py#L64-L71">readmenator/_app.py::_scan</a>
-- <a href="../readmenator/_app.py#L72-L81">readmenator/_app.py::_scan_with_content</a>
-- <a href="../readmenator/_app.py#L82-L100">readmenator/_app.py::_resolve_imports</a>
-- <a href="../readmenator/_app.py#L101-L131">readmenator/_app.py::_apply_project_config</a>
-- <a href="../readmenator/_app.py#L132-L149">readmenator/_app.py::_write_viewer_config</a>
-
-### readmenator/parsers (2)
-
-readmenator/parsers groups 35 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.
+readmenator/parsers groups 37 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Architecture layer rule engine: forbidden and warning edges between layers.
 
 **Related Classes/Methods**:
 
@@ -90,6 +75,21 @@ readmenator/parsers groups 35 files (py) around Symbol, Node, Edge, SecurityFind
 - <a href="../readmenator/_models.py#L111-L129">readmenator/_models.py::CommunityResult</a>
 - <a href="../readmenator/_models.py#L130-L150">readmenator/_models.py::AnalysisResult</a>
 - <a href="../readmenator/_models.py#L151-L171">readmenator/_models.py::TaintPath</a>
+
+### readmenator: _video (2)
+
+readmenator: _video groups 36 files (py) around Config, readmenatorApplication, __init__, ingest_receipts, _scan. Launcher shim that runs the readmenator CLI from a source checkout.
+
+**Related Classes/Methods**:
+
+- <a href="../readmenator/_config.py#L15-L1250">readmenator/_config.py::Config</a>
+- <a href="../readmenator/_app.py">readmenator/_app.py::readmenatorApplication</a>
+- <a href="../readmenator/_app.py#L55-L63">readmenator/_app.py::__init__</a>
+- <a href="../readmenator/_app.py#L64-L92">readmenator/_app.py::ingest_receipts</a>
+- <a href="../readmenator/_app.py#L93-L100">readmenator/_app.py::_scan</a>
+- <a href="../readmenator/_app.py#L101-L110">readmenator/_app.py::_scan_with_content</a>
+- <a href="../readmenator/_app.py#L111-L129">readmenator/_app.py::_resolve_imports</a>
+- <a href="../readmenator/_app.py#L130-L160">readmenator/_app.py::_apply_project_config</a>
 
 ### readmenator: _agent_output (3)
 
@@ -123,7 +123,7 @@ readmenator: _graphrag groups 18 files (py) around EdgeKind, __str__, Morphism, 
 
 ### readmenator: _pipeline (5)
 
-readmenator: _pipeline groups 17 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
+readmenator: _pipeline groups 18 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 
 **Related Classes/Methods**:
 

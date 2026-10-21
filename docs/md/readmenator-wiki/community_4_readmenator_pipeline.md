@@ -1,10 +1,10 @@
 # readmenator: _pipeline
 
-*Community 4 | 17 files | cohesion 0.26*
+*Community 4 | 18 files | cohesion 0.26*
 
 ## Definition
 
-This community groups 17 file(s) rooted at `readmenator` with dominant language py (cohesion 0.26). Central symbols: `AgentInjector`, `AnalyticsBuilder`, `AnalyzerFactory`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`, `ExclusionEntry`. Core file: `tests/test_interactive_graph.py` (60 symbols). Documented purpose: Injects KNOWLEDGE_BASE.md references into AI agent instruction files.  Detects common AI agent configuration files (AGENTS.md, CLAUDE.md, .cursorrules, etc.) an.
+This community groups 18 file(s) rooted at `readmenator` with dominant language py (cohesion 0.26). Central symbols: `AgentInjector`, `AnalyticsBuilder`, `AnalyzerFactory`, `CodePropertyGraph`, `DeepAnalysisRunner`, `DocumentationGenerator`, `Embedder`, `ExclusionEntry`. Core file: `tests/test_interactive_graph.py` (60 symbols). Documented purpose: Injects KNOWLEDGE_BASE.md references into AI agent instruction files.  Detects common AI agent configuration files (AGENTS.md, CLAUDE.md, .cursorrules, etc.) an.
 
 ## Files
 
@@ -27,6 +27,7 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 | `tests/test_agent_output.py` | py | testing | 45 | no |
 | `tests/test_interactive_graph.py` | py | testing | 60 | yes |
 | `tests/test_readme_injector.py` | py | testing | 28 | yes |
+| `tests/test_uml.py` | py | testing | 49 | yes |
 
 ## Key Symbols
 
@@ -63,14 +64,14 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 29
-- Cross-boundary resolved imports (EXTRACTED): 84
+- Internal resolved imports (EXTRACTED): 30
+- Cross-boundary resolved imports (EXTRACTED): 85
 
 ## Connections
 
 - [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 4 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_forcegraph.py.
 - [EXTRACTED] depends_on community 4 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
 - [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
@@ -79,16 +80,16 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_agent_injector.py` via `subprocess` (0 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_pytypes.py` via `subprocess` (2 hops)
 
 ## Open Questions
 
@@ -116,3 +117,4 @@ This community groups 17 file(s) rooted at `readmenator` with dominant language 
 - `tests/test_agent_output.py`
 - `tests/test_interactive_graph.py`
 - `tests/test_readme_injector.py`
+- `tests/test_uml.py`

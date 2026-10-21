@@ -3,6 +3,55 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_sizeof_is_not_a_read` | method | `tests/test_dataflow.py:216` | `def test_sizeof_is_not_a_read(self)` |
+| `test_static_never_uninit` | method | `tests/test_dataflow.py:196` | `def test_static_never_uninit(self)` |
+| `test_subscript_store_counts_as_init` | method | `tests/test_dataflow.py:110` | `def test_subscript_store_counts_as_init(self)` |
+| `test_unchecked_alloc_detected` | method | `tests/test_dataflow.py:71` | `def test_unchecked_alloc_detected(self)` |
+| `test_uninit_use_detected` | method | `tests/test_dataflow.py:37` | `def test_uninit_use_detected(self)` |
+| `test_url_string_does_not_truncate_line` | method | `tests/test_dataflow.py:344` | `def test_url_string_does_not_truncate_line(self)` |
+| `TestDeadCodeStripperContract` | class | `tests/test_dead_code.py:16` | `class TestDeadCodeStripperContract(TestCase)` |
+| `_make_edge` | method | `tests/test_dead_code.py:35` | `def _make_edge(self, src, tgt)` |
+| `_make_node` | method | `tests/test_dead_code.py:26` | `def _make_node(self, nid, symbols)` |
+| `_make_symbol` | method | `tests/test_dead_code.py:23` | `def _make_symbol(self, name, kind)` |
+| `setUp` | method | `tests/test_dead_code.py:19` | `def setUp(self)` |
+| `test_all_symbols_imported_returns_empty` | method | `tests/test_dead_code.py:101` | `def test_all_symbols_imported_returns_empty(self)` |
+| `test_identify_empty_graph_returns_empty` | method | `tests/test_dead_code.py:38` | `def test_identify_empty_graph_returns_empty(self)` |
+| `test_identify_excludes_app_entry_point` | method | `tests/test_dead_code.py:61` | `def test_identify_excludes_app_entry_point(self)` |
+| `test_identify_excludes_entry_points` | method | `tests/test_dead_code.py:53` | `def test_identify_excludes_entry_points(self)` |
+| `test_identify_excludes_init_entry_point` | method | `tests/test_dead_code.py:69` | `def test_identify_excludes_init_entry_point(self)` |
+| `test_identify_finds_dead_symbol` | method | `tests/test_dead_code.py:42` | `def test_identify_finds_dead_symbol(self)` |
+| `test_identify_recommends_review_for_classes` | method | `tests/test_dead_code.py:77` | `def test_identify_recommends_review_for_classes(self)` |
+| `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
+| `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
+| `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
+| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:668` | `class TestDiagramVariantsContract(TestCase)` |
+| `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
+| `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
+| `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
+| `TestSystemMapValidatorContract` | class | `tests/test_diagrams.py:176` | `class TestSystemMapValidatorContract(TestCase)` |
+| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:528` | `class TestVisNetworkRendererContract(TestCase)` |
+| `_make_graph` | method | `tests/test_diagrams.py:38` | `def _make_graph(self)` |
+| `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
+| `_map` | method | `tests/test_diagrams.py:537` | `def _map(self, kind)` |
+| `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
+| `_project` | method | `tests/test_diagrams.py:671` | `def _project(self, tmp)` |
+| `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
+| `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:240` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:370` | `def setUp(self)` |
+| `setUp` | method | `tests/test_diagrams.py:531` | `def setUp(self)` |
+| `test_builder_attaches_symbols_and_docs` | method | `tests/test_diagrams.py:126` | `def test_builder_attaches_symbols_and_docs(self)` |
+| `test_builder_is_deterministic` | method | `tests/test_diagrams.py:68` | `def test_builder_is_deterministic(self)` |
+| `test_builder_orders_links_deterministically` | method | `tests/test_diagrams.py:80` | `def test_builder_orders_links_deterministically(self)` |
+| `test_builder_produces_all_kinds` | method | `tests/test_diagrams.py:59` | `def test_builder_produces_all_kinds(self)` |
+| `test_builder_reports_total_scope` | method | `tests/test_diagrams.py:119` | `def test_builder_reports_total_scope(self)` |
+| `test_builder_supports_five_kinds` | method | `tests/test_diagrams.py:52` | `def test_builder_supports_five_kinds(self)` |
+| `test_builder_truncates_symbols_per_node` | method | `tests/test_diagrams.py:143` | `def test_builder_truncates_symbols_per_node(self)` |
+| `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
+| `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
+| `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
+| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:690` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
 | `test_export_diagrams_writes_vis_maps_by_default` | method | `tests/test_diagrams.py:676` | `def test_export_diagrams_writes_vis_maps_by_default(self)` |
 | `test_publish_card_reports_primary_scope` | method | `tests/test_diagrams.py:519` | `def test_publish_card_reports_primary_scope(self)` |
 | `test_publish_empty_maps_writes_empty_gallery` | method | `tests/test_diagrams.py:480` | `def test_publish_empty_maps_writes_empty_gallery(self)` |
@@ -447,54 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `TestCParserContract` | class | `tests/test_parsers.py:22` | `class TestCParserContract(TestCase)` |
 | `TestCSharpParserContract` | class | `tests/test_parsers.py:309` | `class TestCSharpParserContract(TestCase)` |
 | `TestDartParserContract` | class | `tests/test_parsers.py:387` | `class TestDartParserContract(TestCase)` |
-| `TestGDScriptParserContract` | class | `tests/test_parsers.py:412` | `class TestGDScriptParserContract(TestCase)` |
-| `TestGoParserContract` | class | `tests/test_parsers.py:157` | `class TestGoParserContract(TestCase)` |
-| `TestJavaParserContract` | class | `tests/test_parsers.py:277` | `class TestJavaParserContract(TestCase)` |
-| `TestJavaScriptParserContract` | class | `tests/test_parsers.py:238` | `class TestJavaScriptParserContract(TestCase)` |
-| `TestNimParserContract` | class | `tests/test_parsers.py:430` | `class TestNimParserContract(TestCase)` |
-| `TestPHPParserContract` | class | `tests/test_parsers.py:361` | `class TestPHPParserContract(TestCase)` |
-| `TestParserFactoryContract` | class | `tests/test_parsers.py:483` | `class TestParserFactoryContract(TestCase)` |
-| `TestPythonParserContract` | class | `tests/test_parsers.py:88` | `class TestPythonParserContract(TestCase)` |
-| `TestRustParserContract` | class | `tests/test_parsers.py:200` | `class TestRustParserContract(TestCase)` |
-| `TestShellParserContract` | class | `tests/test_parsers.py:342` | `class TestShellParserContract(TestCase)` |
-| `setUp` | method | `tests/test_parsers.py:23` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:89` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:158` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:201` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:239` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:278` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:310` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:343` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:362` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:388` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:413` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:431` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:457` | `def setUp(self)` |
-| `setUp` | method | `tests/test_parsers.py:484` | `def setUp(self)` |
-| `test_abstract_class` | method | `tests/test_parsers.py:301` | `def test_abstract_class(self)` |
-| `test_calls_are_not_prototypes` | method | `tests/test_parsers.py:71` | `def test_calls_are_not_prototypes(self)` |
-| `test_case_insensitive_extension` | method | `tests/test_parsers.py:507` | `def test_case_insensitive_extension(self)` |
-| `test_class_with_inheritance` | method | `tests/test_parsers.py:80` | `def test_class_with_inheritance(self)` |
-| `test_extracts_arrow_function` | method | `tests/test_parsers.py:249` | `def test_extracts_arrow_function(self)` |
-| `test_extracts_async_function` | method | `tests/test_parsers.py:114` | `def test_extracts_async_function(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:99` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:256` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:281` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:313` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:372` | `def test_extracts_class(self)` |
-| `test_extracts_class` | method | `tests/test_parsers.py:391` | `def test_extracts_class(self)` |
-| `test_extracts_class_with_bases` | method | `tests/test_parsers.py:147` | `def test_extracts_class_with_bases(self)` |
-| `test_extracts_define` | method | `tests/test_parsers.py:47` | `def test_extracts_define(self)` |
-| `test_extracts_extends` | method | `tests/test_parsers.py:423` | `def test_extracts_extends(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:26` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:92` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:161` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:204` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:242` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:365` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:398` | `def test_extracts_function(self)` |
-| `test_extracts_function` | method | `tests/test_parsers.py:416` | `def test_extracts_function(self)` |
-| `test_extracts_function_keyword` | method | `tests/test_parsers.py:353` | `def test_extracts_function_keyword(self)` |
-| `test_extracts_function_with_parentheses` | method | `tests/test_parsers.py:346` | `def test_extracts_function_with_parentheses(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

@@ -2,17 +2,17 @@
 
 > Cross-session context for agents. Sections 1-6 are regenerated from the source tree with zero LLM tokens: declared rules are quoted verbatim with `file:line`, measured baselines come from the scan. Section 7 is written by agents and humans and is preserved across rebuilds.
 
-Generated from 155 files at commit `0c608d6d6fa2`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
+Generated from 159 files at commit `dac48f868722`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
 
 ## 1. Purpose and domain
 
 - What it is: A token-free, offline, production-grade polyglot codebase knowledge graph & architectural analyzer. (`README.md:7`)
-- Domain vocabulary (term, files): `readmenator` (104), `file` (91), `graph` (73), `node` (67), `files` (66), `symbols` (61), `project` (59), `edges` (59), `imports` (56), `nodes` (55), `build` (54), `config` (54), `symbol` (53), `all` (53), `one` (52)
-- Subsystem `readmenator: _video`: 35 files, core `readmenator/_video.py`: Cinematic codebase overview video, general purpose.
-- Subsystem `readmenator/parsers`: 35 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
+- Domain vocabulary (term, files): `readmenator` (107), `file` (92), `graph` (74), `node` (67), `files` (66), `edges` (63), `symbols` (61), `project` (60), `config` (56), `imports` (56), `nodes` (55), `build` (54), `symbol` (54), `set` (54), `one` (53)
+- Subsystem `readmenator/parsers`: 37 files, core `readmenator/_models.py`: Data model types for the readmenator knowledge graph.
+- Subsystem `readmenator: _video`: 36 files, core `readmenator/_video.py`: Cinematic codebase overview video, general purpose.
 - Subsystem `readmenator: _agent_output`: 19 files, core `readmenator/_agent_output.py`: Agent-friendly output generator for ReadMenator.
 - Subsystem `readmenator: _graphrag`: 18 files, core `readmenator/_graphrag.py`: Zero-token GraphRAG index and retrieval for AI agents.
-- Subsystem `readmenator: _pipeline`: 17 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
+- Subsystem `readmenator: _pipeline`: 18 files, core `readmenator/_pipeline.py`: AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
 - Subsystem `readmenator: _diagrams`: 15 files, core `readmenator/_diagrams.py`: Self-contained interactive system maps for the knowledge graph.
 - Subsystem `readmenator: _flowcharts`: 12 files, core `readmenator/_flowcharts.py`: Architecture and execution-flow Mermaid diagrams from static structure.
 - Business rules that the code cannot show live in section 7: record them there.
@@ -91,10 +91,10 @@ Declared:
 - Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:876`)
 
 Measured baseline:
-- py: 153 files, 2993 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 204 lines, max 4182.
+- py: 157 files, 3074 symbols; docstrings on 54% of symbols; functions snake_case (96%); types PascalCase (100%); median file 205 lines, max 4182.
 - js: 1 files, 35 symbols; docstrings on 100% of symbols; functions snake_case (80%); types PascalCase (40%); median file 5 lines, max 5.
 - sh: 1 files, 1 symbols; docstrings on 100% of symbols; functions snake_case (100%); median file 42 lines, max 42.
-- Tests: 55 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
+- Tests: 56 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).
 
 ## 5. Minimum deliverables
 
@@ -116,7 +116,7 @@ Declared:
 
 Measured baseline:
 - Tests pass: `python -m pytest -q`.
-- Docstring coverage stays at or above 55%.
+- Docstring coverage stays at or above 54%.
 - No new security findings at medium or above (current: 0).
 - No new dependency cycles (current: 0).
 - Files stay under 300 lines where possible (`readmenator . lint`).
@@ -124,7 +124,7 @@ Measured baseline:
 
 ## 6. Risks to respect
 
-- God nodes (changes ripple widely): `readmenator/_models.py`, `readmenator/_config.py`, `readmenator/_pipeline.py`, `readmenator/_app.py`, `readmenator/parsers/__init__.py`
+- God nodes (changes ripple widely): `readmenator/_models.py`, `readmenator/_config.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `readmenator/parsers/__init__.py`
 - Hotspots (complex and central): `readmenator/_vendor/force-graph.min.js`, `readmenator/_diagrams.py`, `readmenator/_app.py`, `readmenator/_video.py`, `tests/test_parsers.py`
 - Full blast radius: `readmenator-agent/GOTCHAS.md`; findings: `readmenator-agent/SECURITY.md`.
 
@@ -133,4 +133,7 @@ Measured baseline:
 Append with `readmenator . remember "<note>" --kind <kind>` (kinds: business, decision, rule, workflow, style, deliverable, gotcha, todo, note) or the MCP tool `readmenator.remember`. Record business rules, decisions and their reasons, workflow changes, and anything the next session must not rediscover.
 
 <!-- readmenator:memory:notes:begin -->
+- 2026-10-21 [decision] Added _receipts/_uncertainty/_hypotheses contracts: deploynator release receipts ingest (observed/candidate/predicted evidence hierarchy), uncertainty scorer (heuristic + optional sklearn RF, predictions carry model version and provenance), hypothesis validator (LLM proposals never enter graph unverified). CLI: readmenator . receipts [dir].
+- 2026-10-21 [workflow] Deployment flow: deploynator release --receipt (or --trace with dry-run) writes receipt JSON at release-receipts/; readmenator . receipts consumes them writing RELEASES.md + release-edges.json (confirmed/unobserved/predicted edges). _receipts.py maps receipt commands to callership via stage labels (release:<platform> -> Platform.create_release).
+- 2026-10-21 [decision] Packaged skills updated: new readmenator-receipts skill (receipt ingest + evidence reconciliation workflow); orient cheat sheet links release evidence layer; deploynator SKILL.md now documents --receipt/--trace and the receipt consumption chain.
 <!-- readmenator:memory:notes:end -->

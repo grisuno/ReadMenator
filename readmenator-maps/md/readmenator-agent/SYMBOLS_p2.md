@@ -3,6 +3,7 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_extract_doctests` | function | `readmenator/_docstrings.py:642` | `def _extract_doctests(text)` |
 | `_indent` | function | `readmenator/_docstrings.py:321` | `def _indent(line)` |
 | `_join_block` | function | `readmenator/_docstrings.py:326` | `def _join_block(lines)` |
 | `_parse_items` | function | `readmenator/_docstrings.py:393` | `def _parse_items(body, mode, allow_bare)` |
@@ -325,6 +326,16 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `payload_script` | function | `readmenator/_htmlpack.py:92` | `def payload_script(element_id, payload, config, compact, escape)` |
 | `read_payload_script` | function | `readmenator/_htmlpack.py:119` | `def read_payload_script(document, element_id)` |
 | `should_compress` | function | `readmenator/_htmlpack.py:64` | `def should_compress(raw_size, config)` |
+| `Hypothesis` | class | `readmenator/_hypotheses.py:25` | `class Hypothesis` |
+| `HypothesisValidator` | class | `readmenator/_hypotheses.py:73` | `class HypothesisValidator` |
+| `HypothesisVerdict` | class | `readmenator/_hypotheses.py:58` | `class HypothesisVerdict` |
+| `__init__` | method | `readmenator/_hypotheses.py:84` | `def __init__(self, known_edges, known_symbols)` |
+| `_callee_symbol_match` | function | `readmenator/_hypotheses.py:141` | `def _callee_symbol_match(callee, symbols)` |
+| `from_dict` | method | `readmenator/_hypotheses.py:33` | `def from_dict(cls, data)` |
+| `to_dict` | method | `readmenator/_hypotheses.py:49` | `def to_dict(self)` |
+| `to_dict` | method | `readmenator/_hypotheses.py:64` | `def to_dict(self)` |
+| `validate` | method | `readmenator/_hypotheses.py:92` | `def validate(self, hypothesis, allow_assumed)` |
+| `validate_json` | method | `readmenator/_hypotheses.py:126` | `def validate_json(self, raw_json, allow_assumed)` |
 | `LayerRuleEngine` | class | `readmenator/_layer_rules.py:11` | `class LayerRuleEngine` |
 | `__init__` | method | `readmenator/_layer_rules.py:36` | `def __init__(self, config)` |
 | `detect_violations` | method | `readmenator/_layer_rules.py:39` | `def detect_violations(self, nodes, edges, resolved_edges, layers)` |
@@ -485,16 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `build_typed_graph` | method | `readmenator/_pipeline.py:449` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
 | `bundlegraph` | method | `readmenator/_pipeline.py:331` | `def bundlegraph(self)` |
 | `components` | method | `readmenator/_pipeline.py:415` | `def components(self)` |
-| `concepts` | method | `readmenator/_pipeline.py:317` | `def concepts(self)` |
-| `cpg` | method | `readmenator/_pipeline.py:192` | `def cpg(self)` |
-| `dataflow` | method | `readmenator/_pipeline.py:161` | `def dataflow(self)` |
-| `diagram_builder` | method | `readmenator/_pipeline.py:275` | `def diagram_builder(self)` |
-| `diagram_publisher` | method | `readmenator/_pipeline.py:296` | `def diagram_publisher(self)` |
-| `diagram_renderer` | method | `readmenator/_pipeline.py:282` | `def diagram_renderer(self)` |
-| `diagram_validator` | method | `readmenator/_pipeline.py:289` | `def diagram_validator(self)` |
-| `embedder` | method | `readmenator/_pipeline.py:366` | `def embedder(self)` |
-| `exclusions` | method | `readmenator/_pipeline.py:359` | `def exclusions(self)` |
-| `exporter` | method | `readmenator/_pipeline.py:149` | `def exporter(self)` |
-| `folder_readme` | method | `readmenator/_pipeline.py:422` | `def folder_readme(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

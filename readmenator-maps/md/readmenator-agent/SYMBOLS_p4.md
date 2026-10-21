@@ -3,6 +3,55 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_connective_paragraph` | method | `readmenator/_wiki.py:899` | `def _connective_paragraph(self, communities, connections)` |
+| `_definition_for` | method | `readmenator/_wiki.py:458` | `def _definition_for(self, community, node_map)` |
+| `_display_names` | function | `readmenator/_wiki.py:72` | `def _display_names(communities)` |
+| `_duplicate_links` | method | `readmenator/_wiki.py:342` | `def _duplicate_links(communities, node_map, skip_pairs)` |
+| `_estimate_tokens` | method | `readmenator/_wiki.py:1033` | `def _estimate_tokens(self, nodes, connections)` |
+| `_file_row` | method | `readmenator/_wiki.py:487` | `def _file_row(self, fid, node_map, layers)` |
+| `_is_garbage_purpose` | function | `readmenator/_wiki.py:47` | `def _is_garbage_purpose(text)` |
+| `_large_files` | method | `readmenator/_wiki.py:741` | `def _large_files(self, nodes, project_root)` |
+| `_overview_paragraph` | method | `readmenator/_wiki.py:866` | `def _overview_paragraph(self, nodes, analysis, layers, findings, analysis_v2, communities)` |
+| `_prune_stale_pages` | method | `readmenator/_wiki.py:210` | `def _prune_stale_pages(self, out_dir, current)` |
+| `_questions_for` | method | `readmenator/_wiki.py:703` | `def _questions_for(self, community, node_map, member_set, analysis_v2)` |
+| `_questions_paragraph` | method | `readmenator/_wiki.py:920` | `def _questions_paragraph(self, analysis, findings, analysis_v2, coverage)` |
+| `_resolve_communities` | method | `readmenator/_wiki.py:242` | `def _resolve_communities(self, nodes, analysis, resolved)` |
+| `_shared_context` | method | `readmenator/_wiki.py:421` | `def _shared_context(first, second, node_map, layers)` |
+| `_shared_context_links` | method | `readmenator/_wiki.py:385` | `def _shared_context_links(self, communities, existing, node_map, layers)` |
+| `_slug` | function | `readmenator/_wiki.py:55` | `def _slug(text)` |
+| `_write` | method | `readmenator/_wiki.py:1044` | `def _write(path, content)` |
+| `_write_concepts` | method | `readmenator/_wiki.py:143` | `def _write_concepts(self, out_dir, analysis_v2)` |
+| `dominant` | function | `readmenator/_wiki.py:428` | `def dominant(ids, key)` |
+| `existing_ids` | function | `readmenator/_wiki.py:62` | `def existing_ids(connections)` |
+| `generate` | method | `readmenator/_wiki.py:94` | `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` |
+| `lint` | method | `readmenator/_wiki.py:219` | `def lint(self, project_root)` |
+| `YaraLiteHit` | class | `readmenator/_yaralite.py:56` | `class YaraLiteHit` |
+| `YaraLiteMatch` | class | `readmenator/_yaralite.py:66` | `class YaraLiteMatch` |
+| `YaraLiteRule` | class | `readmenator/_yaralite.py:33` | `class YaraLiteRule` |
+| `YaraLiteString` | class | `readmenator/_yaralite.py:24` | `class YaraLiteString` |
+| `_condition_matches` | function | `readmenator/_yaralite.py:265` | `def _condition_matches(condition, hits)` |
+| `_confidence` | function | `readmenator/_yaralite.py:305` | `def _confidence(value)` |
+| `_decode_yara_string` | function | `readmenator/_yaralite.py:238` | `def _decode_yara_string(value)` |
+| `_excerpt` | function | `readmenator/_yaralite.py:322` | `def _excerpt(text, offset, length)` |
+| `_parse_meta` | function | `readmenator/_yaralite.py:196` | `def _parse_meta(meta_body)` |
+| `_parse_strings` | function | `readmenator/_yaralite.py:215` | `def _parse_strings(strings_body)` |
+| `_rule_blocks` | function | `readmenator/_yaralite.py:161` | `def _rule_blocks(rules_text)` |
+| `_section` | function | `readmenator/_yaralite.py:182` | `def _section(body, start_marker, end_marker)` |
+| `_string_hits` | function | `readmenator/_yaralite.py:243` | `def _string_hits(text, rule)` |
+| `_strip_comments` | function | `readmenator/_yaralite.py:233` | `def _strip_comments(text)` |
+| `parse_yaralite_rules` | function | `readmenator/_yaralite.py:76` | `def parse_yaralite_rules(rules_text)` |
+| `replace_group` | function | `readmenator/_yaralite.py:270` | `def replace_group(match)` |
+| `replace_identifier` | function | `readmenator/_yaralite.py:292` | `def replace_identifier(match)` |
+| `run_yaralite_rules` | function | `readmenator/_yaralite.py:112` | `def run_yaralite_rules(text, rules)` |
+| `tier` | method | `readmenator/_yaralite.py:42` | `def tier(self)` |
+| `validate_yaralite_rules` | function | `readmenator/_yaralite.py:139` | `def validate_yaralite_rules(rules_text)` |
+| `_init_parser_map` | function | `readmenator/parsers/__init__.py:34` | `def _init_parser_map()` |
+| `create_parser` | function | `readmenator/parsers/__init__.py:70` | `def create_parser(extension, filename, config)` |
+| `AssemblyParser` | class | `readmenator/parsers/_assembly.py:11` | `class AssemblyParser(LanguageParser)` |
+| `_extract_specifics` | method | `readmenator/parsers/_assembly.py:19` | `def _extract_specifics(self, content)` |
+| `LanguageParser` | class | `readmenator/parsers/_base.py:12` | `class LanguageParser` |
+| `__init__` | method | `readmenator/parsers/_base.py:21` | `def __init__(self, filename, config)` |
+| `_extract_docstring` | method | `readmenator/parsers/_base.py:49` | `def _extract_docstring(self, line_num)` |
 | `_extract_signature` | method | `readmenator/parsers/_base.py:91` | `def _extract_signature(self, content, match_start, pattern)` |
 | `_extract_specifics` | method | `readmenator/parsers/_base.py:45` | `def _extract_specifics(self, content)` |
 | `parse` | method | `readmenator/parsers/_base.py:36` | `def parse(self, content)` |
@@ -447,54 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_same_line_only_assign_is_dead` | method | `tests/test_dataflow.py:264` | `def test_same_line_only_assign_is_dead(self)` |
 | `test_same_line_use_not_dead` | method | `tests/test_dataflow.py:256` | `def test_same_line_use_not_dead(self)` |
 | `test_scanf_addr_counts_as_init` | method | `tests/test_dataflow.py:58` | `def test_scanf_addr_counts_as_init(self)` |
-| `test_sizeof_is_not_a_read` | method | `tests/test_dataflow.py:216` | `def test_sizeof_is_not_a_read(self)` |
-| `test_static_never_uninit` | method | `tests/test_dataflow.py:196` | `def test_static_never_uninit(self)` |
-| `test_subscript_store_counts_as_init` | method | `tests/test_dataflow.py:110` | `def test_subscript_store_counts_as_init(self)` |
-| `test_unchecked_alloc_detected` | method | `tests/test_dataflow.py:71` | `def test_unchecked_alloc_detected(self)` |
-| `test_uninit_use_detected` | method | `tests/test_dataflow.py:37` | `def test_uninit_use_detected(self)` |
-| `test_url_string_does_not_truncate_line` | method | `tests/test_dataflow.py:344` | `def test_url_string_does_not_truncate_line(self)` |
-| `TestDeadCodeStripperContract` | class | `tests/test_dead_code.py:16` | `class TestDeadCodeStripperContract(TestCase)` |
-| `_make_edge` | method | `tests/test_dead_code.py:35` | `def _make_edge(self, src, tgt)` |
-| `_make_node` | method | `tests/test_dead_code.py:26` | `def _make_node(self, nid, symbols)` |
-| `_make_symbol` | method | `tests/test_dead_code.py:23` | `def _make_symbol(self, name, kind)` |
-| `setUp` | method | `tests/test_dead_code.py:19` | `def setUp(self)` |
-| `test_all_symbols_imported_returns_empty` | method | `tests/test_dead_code.py:101` | `def test_all_symbols_imported_returns_empty(self)` |
-| `test_identify_empty_graph_returns_empty` | method | `tests/test_dead_code.py:38` | `def test_identify_empty_graph_returns_empty(self)` |
-| `test_identify_excludes_app_entry_point` | method | `tests/test_dead_code.py:61` | `def test_identify_excludes_app_entry_point(self)` |
-| `test_identify_excludes_entry_points` | method | `tests/test_dead_code.py:53` | `def test_identify_excludes_entry_points(self)` |
-| `test_identify_excludes_init_entry_point` | method | `tests/test_dead_code.py:69` | `def test_identify_excludes_init_entry_point(self)` |
-| `test_identify_finds_dead_symbol` | method | `tests/test_dead_code.py:42` | `def test_identify_finds_dead_symbol(self)` |
-| `test_identify_recommends_review_for_classes` | method | `tests/test_dead_code.py:77` | `def test_identify_recommends_review_for_classes(self)` |
-| `test_identify_recommends_trash_for_functions` | method | `tests/test_dead_code.py:85` | `def test_identify_recommends_trash_for_functions(self)` |
-| `test_identify_recommends_trash_for_variables` | method | `tests/test_dead_code.py:93` | `def test_identify_recommends_trash_for_variables(self)` |
-| `test_reports_sorted_by_file_path` | method | `tests/test_dead_code.py:113` | `def test_reports_sorted_by_file_path(self)` |
-| `TestDiagramVariantsContract` | class | `tests/test_diagrams.py:668` | `class TestDiagramVariantsContract(TestCase)` |
-| `TestDocsSitePublisherContract` | class | `tests/test_diagrams.py:367` | `class TestDocsSitePublisherContract(TestCase)` |
-| `TestInteractiveMapRendererContract` | class | `tests/test_diagrams.py:237` | `class TestInteractiveMapRendererContract(TestCase)` |
-| `TestSystemMapBuilderContract` | class | `tests/test_diagrams.py:30` | `class TestSystemMapBuilderContract(TestCase)` |
-| `TestSystemMapValidatorContract` | class | `tests/test_diagrams.py:176` | `class TestSystemMapValidatorContract(TestCase)` |
-| `TestVisNetworkRendererContract` | class | `tests/test_diagrams.py:528` | `class TestVisNetworkRendererContract(TestCase)` |
-| `_make_graph` | method | `tests/test_diagrams.py:38` | `def _make_graph(self)` |
-| `_map` | method | `tests/test_diagrams.py:246` | `def _map(self, kind)` |
-| `_map` | method | `tests/test_diagrams.py:537` | `def _map(self, kind)` |
-| `_maps` | method | `tests/test_diagrams.py:376` | `def _maps(self)` |
-| `_project` | method | `tests/test_diagrams.py:671` | `def _project(self, tmp)` |
-| `_valid_map` | method | `tests/test_diagrams.py:184` | `def _valid_map(self)` |
-| `setUp` | method | `tests/test_diagrams.py:33` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:179` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:240` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:370` | `def setUp(self)` |
-| `setUp` | method | `tests/test_diagrams.py:531` | `def setUp(self)` |
-| `test_builder_attaches_symbols_and_docs` | method | `tests/test_diagrams.py:126` | `def test_builder_attaches_symbols_and_docs(self)` |
-| `test_builder_is_deterministic` | method | `tests/test_diagrams.py:68` | `def test_builder_is_deterministic(self)` |
-| `test_builder_orders_links_deterministically` | method | `tests/test_diagrams.py:80` | `def test_builder_orders_links_deterministically(self)` |
-| `test_builder_produces_all_kinds` | method | `tests/test_diagrams.py:59` | `def test_builder_produces_all_kinds(self)` |
-| `test_builder_reports_total_scope` | method | `tests/test_diagrams.py:119` | `def test_builder_reports_total_scope(self)` |
-| `test_builder_supports_five_kinds` | method | `tests/test_diagrams.py:52` | `def test_builder_supports_five_kinds(self)` |
-| `test_builder_truncates_symbols_per_node` | method | `tests/test_diagrams.py:143` | `def test_builder_truncates_symbols_per_node(self)` |
-| `test_builder_truncates_to_configured_limit` | method | `tests/test_diagrams.py:152` | `def test_builder_truncates_to_configured_limit(self)` |
-| `test_builder_validates_large_graph_for_all_kinds` | method | `tests/test_diagrams.py:101` | `def test_builder_validates_large_graph_for_all_kinds(self)` |
-| `test_compare_reports_added_removed_rerouted` | method | `tests/test_diagrams.py:162` | `def test_compare_reports_added_removed_rerouted(self)` |
-| `test_export_diagrams_falls_back_offline_when_disabled` | method | `tests/test_diagrams.py:690` | `def test_export_diagrams_falls_back_offline_when_disabled(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

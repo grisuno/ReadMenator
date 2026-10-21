@@ -366,6 +366,12 @@ class Config:
 
     GH_WIKI_COMMIT_MESSAGE: str = "docs(wiki): regenerate from readmenator"
 
+    RELEASES_DIR: str = "readmenator-releases"
+
+    RECEIPTS_SCAN_DIR: str = "release-receipts"
+
+    RECEIPTS_MAX_HISTORICAL: int = 200
+
     WIKI_LARGE_FILE_KB: int = 256
 
     DATAFLOW_ENABLED: bool = True

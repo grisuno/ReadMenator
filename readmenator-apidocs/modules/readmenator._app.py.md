@@ -1,6 +1,6 @@
 # `readmenator._app`
 
-> Source: [readmenator/_app.py:1](../../readmenator/_app.py#L1) | language `py` | coverage 50.0% | [API index](../index.md)
+> Source: [readmenator/_app.py:1](../../readmenator/_app.py#L1) | language `py` | coverage 50.9% | [API index](../index.md)
 
 Application orchestrator: scan, resolve, analyze, and write every output.
 
@@ -37,16 +37,17 @@ flowchart LR
     n_readmenator__config_py__Config["_config.Config"]
     n_readmenator__pipeline_py__AnalyzerFactory___init__["_pipeline.AnalyzerFactory.__init__"]
     n_readmenator__pipeline_py__DeepAnalysisRunner___init__["_pipeline.DeepAnalysisRunner.__init__"]
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts(["readmenatorApplication.ingest_receipts"])
+    n_readmenator__receipts_py__ReceiptIngestor_candidate_edges["_receipts.ReceiptIngestor.candidate_edges"]
+    n_readmenator__receipts_py__ReceiptIngestor_load_dir["_receipts.ReceiptIngestor.load_dir"]
+    n_readmenator__receipts_py__ReceiptIngestor_observed_edges["_receipts.ReceiptIngestor.observed_edges"]
+    n_readmenator__receipts_py__ReceiptsReconciler___init__["_receipts.ReceiptsReconciler.__init__"]
+    n_readmenator__receipts_py__ReceiptsReconciler_reconcile["_receipts.ReceiptsReconciler.reconcile"]
+    n_readmenator__receipts_py__ReceiptsReconciler_write_pages["_receipts.ReceiptsReconciler.write_pages"]
+    n_readmenator__uncertainty_py__predict_uncertain_edges["_uncertainty.predict_uncertain_edges"]
+    n_readmenator__uncertainty_py__prediction_edges["_uncertainty.prediction_edges"]
     n_readmenator__cache_py__FileCache___init__["_cache.FileCache.__init__"]
     n_readmenator__cache_py__FileCache_compute_hashes["_cache.FileCache.compute_hashes"]
-    n_readmenator__cache_py__FileCache_save["_cache.FileCache.save"]
-    n_readmenator__cache_py__FileCache_save_analysis["_cache.FileCache.save_analysis"]
-    n_readmenator__layers_py__LayerDetector["_layers.LayerDetector"]
-    n_readmenator__layers_py__LayerDetector_detect["_layers.LayerDetector.detect"]
-    n_readmenator__layers_py__LayerDetector_layer_summary["_layers.LayerDetector.layer_summary"]
-    n_readmenator__pipeline_py__AnalyzerFactory_build_typed_graph["_pipeline.AnalyzerFactory.build_typed_graph"]
-    n_readmenator__pipeline_py__AnalyzerFactory_make_ranker["_pipeline.AnalyzerFactory.make_ranker"]
-    n_readmenator__pipeline_py__DeepAnalysisRunner_run["_pipeline.DeepAnalysisRunner.run"]
     n_readmenator__app_py__readmenatorApplication_run --> n_readmenator__app_py__readmenatorApplication_export_components
     n_readmenator__app_py__readmenatorApplication_run --> n_readmenator__app_py__readmenatorApplication_export_diagrams
     n_readmenator__app_py__readmenatorApplication_rebuild --> n_readmenator__app_py__readmenatorApplication_run
@@ -61,16 +62,16 @@ flowchart LR
     n_readmenator__app_py__readmenatorApplication___init__ -.-> n_readmenator__config_py__Config
     n_readmenator__app_py__readmenatorApplication___init__ -.-> n_readmenator__pipeline_py__AnalyzerFactory___init__
     n_readmenator__app_py__readmenatorApplication___init__ -.-> n_readmenator__pipeline_py__DeepAnalysisRunner___init__
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptIngestor_candidate_edges
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptIngestor_load_dir
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptIngestor_observed_edges
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptsReconciler___init__
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptsReconciler_reconcile
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__receipts_py__ReceiptsReconciler_write_pages
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__uncertainty_py__predict_uncertain_edges
+    n_readmenator__app_py__readmenatorApplication_ingest_receipts -.-> n_readmenator__uncertainty_py__prediction_edges
     n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__cache_py__FileCache___init__
     n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__cache_py__FileCache_compute_hashes
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__cache_py__FileCache_save
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__cache_py__FileCache_save_analysis
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__layers_py__LayerDetector
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__layers_py__LayerDetector_detect
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__layers_py__LayerDetector_layer_summary
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__pipeline_py__AnalyzerFactory_build_typed_graph
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__pipeline_py__AnalyzerFactory_make_ranker
-    n_readmenator__app_py__readmenatorApplication_run -.-> n_readmenator__pipeline_py__DeepAnalysisRunner_run
 ```
 
 ## Classes
@@ -90,6 +91,7 @@ class readmenatorApplication
 | Member | Kind | Summary |
 |---|---|---|
 | [`__init__`](#readmenatorapplication-__init__) | constructor |  |
+| [`ingest_receipts`](#readmenatorapplication-ingest_receipts) | method | Ingest deploynator release receipts into the release layer. |
 | [`run`](#readmenatorapplication-run) | method |  |
 | [`check_freshness`](#readmenatorapplication-check_freshness) | method | Compare the MANIFEST source fingerprint against the current sources. |
 | [`publish_github_wiki`](#readmenatorapplication-publish_github_wiki) | method | Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki. |
@@ -164,11 +166,43 @@ def __init__(self, config: Optional[Config] = None)
 
 *Called by:* [`main`](readmenator.__main__.py.md#main), [`main`](readmenator._mcp_server.py.md#main)
 
+<a id="readmenatorapplication-ingest_receipts"></a>
+
+#### `readmenatorApplication.ingest_receipts`
+
+`method` | [readmenator/_app.py:64](../../readmenator/_app.py#L64)
+
+```python
+def ingest_receipts(self, target_dir: str, receipts_dir: str = '') -> str
+```
+
+Ingest deploynator release receipts into the release layer.
+
+Loads receipts (observed steps, commands, edges), reconciles
+candidate vs observed evidence, predicts uncertainty for
+candidate edges, and writes
+``<target>/<RELEASES_DIR>/RELEASES.md`` plus the
+``release-edges.json`` reconciliation artifact. Returns the
+output directory.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `target_dir` | `str` |  |  |
+| `receipts_dir` | `str` | `''` |  |
+
+**Returns:** `str`
+
+*Calls:* [`ReceiptIngestor.candidate_edges`](readmenator._receipts.py.md#receiptingestor-candidate_edges), [`ReceiptIngestor.load_dir`](readmenator._receipts.py.md#receiptingestor-load_dir), [`ReceiptIngestor.observed_edges`](readmenator._receipts.py.md#receiptingestor-observed_edges), [`ReceiptsReconciler.__init__`](readmenator._receipts.py.md#receiptsreconciler-__init__), [`ReceiptsReconciler.reconcile`](readmenator._receipts.py.md#receiptsreconciler-reconcile), [`ReceiptsReconciler.write_pages`](readmenator._receipts.py.md#receiptsreconciler-write_pages), [`predict_uncertain_edges`](readmenator._uncertainty.py.md#predict_uncertain_edges), [`prediction_edges`](readmenator._uncertainty.py.md#prediction_edges)
+
+*Called by:* [`main`](readmenator.__main__.py.md#main)
+
 <a id="readmenatorapplication-run"></a>
 
 #### `readmenatorApplication.run`
 
-`method` | [readmenator/_app.py:150](../../readmenator/_app.py#L150)
+`method` | [readmenator/_app.py:179](../../readmenator/_app.py#L179)
 
 ```python
 def run(self, target_dir: str, resolve_imports: bool = True, run_analysis: bool = True, run_security: Optional[bool] = None, run_v2_analysis: Optional[bool] = None) -> None
@@ -192,7 +226,7 @@ def run(self, target_dir: str, resolve_imports: bool = True, run_analysis: bool 
 
 #### `readmenatorApplication.check_freshness`
 
-`method` | [readmenator/_app.py:304](../../readmenator/_app.py#L304)
+`method` | [readmenator/_app.py:333](../../readmenator/_app.py#L333)
 
 ```python
 def check_freshness(self, target_dir: str) -> Tuple[bool, str]
@@ -216,7 +250,7 @@ Compare the MANIFEST source fingerprint against the current sources.
 
 #### `readmenatorApplication.publish_github_wiki`
 
-`method` | [readmenator/_app.py:367](../../readmenator/_app.py#L367)
+`method` | [readmenator/_app.py:396](../../readmenator/_app.py#L396)
 
 ```python
 def publish_github_wiki(self, target_dir: str, dry_run: bool = False) -> WikiPublishResult
@@ -239,7 +273,7 @@ Mirror the generated wiki, agent docs, and knowledge base to the GitHub wiki.
 
 #### `readmenatorApplication.generate_uml_code`
 
-`method` | [readmenator/_app.py:440](../../readmenator/_app.py#L440)
+`method` | [readmenator/_app.py:469](../../readmenator/_app.py#L469)
 
 ```python
 def generate_uml_code(self, target_dir: str, language: str, output_path: Optional[str] = None) -> str
@@ -261,7 +295,7 @@ def generate_uml_code(self, target_dir: str, language: str, output_path: Optiona
 
 #### `readmenatorApplication.update`
 
-`method` | [readmenator/_app.py:507](../../readmenator/_app.py#L507)
+`method` | [readmenator/_app.py:536](../../readmenator/_app.py#L536)
 
 ```python
 def update(self, target_dir: str, run_security: Optional[bool] = None) -> None
@@ -282,7 +316,7 @@ def update(self, target_dir: str, run_security: Optional[bool] = None) -> None
 
 #### `readmenatorApplication.query`
 
-`method` | [readmenator/_app.py:641](../../readmenator/_app.py#L641)
+`method` | [readmenator/_app.py:670](../../readmenator/_app.py#L670)
 
 ```python
 def query(self, target_dir: str, question: str) -> str
@@ -305,7 +339,7 @@ def query(self, target_dir: str, question: str) -> str
 
 #### `readmenatorApplication.explain`
 
-`method` | [readmenator/_app.py:646](../../readmenator/_app.py#L646)
+`method` | [readmenator/_app.py:675](../../readmenator/_app.py#L675)
 
 ```python
 def explain(self, target_dir: str, symbol_name: str) -> str
@@ -328,7 +362,7 @@ def explain(self, target_dir: str, symbol_name: str) -> str
 
 #### `readmenatorApplication.find_path`
 
-`method` | [readmenator/_app.py:658](../../readmenator/_app.py#L658)
+`method` | [readmenator/_app.py:687](../../readmenator/_app.py#L687)
 
 ```python
 def find_path(self, target_dir: str, symbol_a: str, symbol_b: str) -> str
@@ -352,7 +386,7 @@ def find_path(self, target_dir: str, symbol_a: str, symbol_b: str) -> str
 
 #### `readmenatorApplication.summary`
 
-`method` | [readmenator/_app.py:671](../../readmenator/_app.py#L671)
+`method` | [readmenator/_app.py:700](../../readmenator/_app.py#L700)
 
 ```python
 def summary(self, target_dir: str) -> str
@@ -374,7 +408,7 @@ def summary(self, target_dir: str) -> str
 
 #### `readmenatorApplication.rank_query`
 
-`method` | [readmenator/_app.py:676](../../readmenator/_app.py#L676)
+`method` | [readmenator/_app.py:705](../../readmenator/_app.py#L705)
 
 ```python
 def rank_query(self, target_dir: str, query: str, top_n: Optional[int] = None) -> RankedResult
@@ -401,7 +435,7 @@ a relevance-ranked list of files with score decomposition.
 
 #### `readmenatorApplication.rebuild`
 
-`method` | [readmenator/_app.py:706](../../readmenator/_app.py#L706)
+`method` | [readmenator/_app.py:735](../../readmenator/_app.py#L735)
 
 ```python
 def rebuild(self, target_dir: str, run_security: Optional[bool] = None) -> None
@@ -422,7 +456,7 @@ def rebuild(self, target_dir: str, run_security: Optional[bool] = None) -> None
 
 #### `readmenatorApplication.analyze`
 
-`method` | [readmenator/_app.py:709](../../readmenator/_app.py#L709)
+`method` | [readmenator/_app.py:738](../../readmenator/_app.py#L738)
 
 ```python
 def analyze(self, target_dir: str) -> AnalysisResult
@@ -442,7 +476,7 @@ def analyze(self, target_dir: str) -> AnalysisResult
 
 #### `readmenatorApplication.export_json`
 
-`method` | [readmenator/_app.py:713](../../readmenator/_app.py#L713)
+`method` | [readmenator/_app.py:742](../../readmenator/_app.py#L742)
 
 ```python
 def export_json(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -463,7 +497,7 @@ def export_json(self, target_dir: str, output_path: Optional[str] = None) -> str
 
 #### `readmenatorApplication.export_html`
 
-`method` | [readmenator/_app.py:730](../../readmenator/_app.py#L730)
+`method` | [readmenator/_app.py:759](../../readmenator/_app.py#L759)
 
 ```python
 def export_html(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -484,7 +518,7 @@ def export_html(self, target_dir: str, output_path: Optional[str] = None) -> str
 
 #### `readmenatorApplication.export_svg`
 
-`method` | [readmenator/_app.py:741](../../readmenator/_app.py#L741)
+`method` | [readmenator/_app.py:770](../../readmenator/_app.py#L770)
 
 ```python
 def export_svg(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -505,7 +539,7 @@ def export_svg(self, target_dir: str, output_path: Optional[str] = None) -> str
 
 #### `readmenatorApplication.export`
 
-`method` | [readmenator/_app.py:752](../../readmenator/_app.py#L752)
+`method` | [readmenator/_app.py:781](../../readmenator/_app.py#L781)
 
 ```python
 def export(self, target_dir: str) -> None
@@ -525,7 +559,7 @@ def export(self, target_dir: str) -> None
 
 #### `readmenatorApplication.export_forcegraph`
 
-`method` | [readmenator/_app.py:1017](../../readmenator/_app.py#L1017)
+`method` | [readmenator/_app.py:1046](../../readmenator/_app.py#L1046)
 
 ```python
 def export_forcegraph(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -550,7 +584,7 @@ Export the force-graph explorer HTML document.
 
 #### `readmenatorApplication.export_bundlegraph`
 
-`method` | [readmenator/_app.py:1036](../../readmenator/_app.py#L1036)
+`method` | [readmenator/_app.py:1065](../../readmenator/_app.py#L1065)
 
 ```python
 def export_bundlegraph(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -575,7 +609,7 @@ Export the edge bundle explorer HTML document (circle and sphere views).
 
 #### `readmenatorApplication.export_components`
 
-`method` | [readmenator/_app.py:1062](../../readmenator/_app.py#L1062)
+`method` | [readmenator/_app.py:1091](../../readmenator/_app.py#L1091)
 
 ```python
 def export_components(self, target_dir: str, output_dir: Optional[str] = None) -> Dict[str, str]
@@ -598,7 +632,7 @@ Export component diagrams (analysis.json + graph LR markdown + index.html).
 
 #### `readmenatorApplication.build_api_reference`
 
-`method` | [readmenator/_app.py:1198](../../readmenator/_app.py#L1198)
+`method` | [readmenator/_app.py:1227](../../readmenator/_app.py#L1227)
 
 ```python
 def build_api_reference(self, target_dir: str) -> ApiReference
@@ -620,7 +654,7 @@ Scan *target_dir* and build its API reference without writing it.
 
 #### `readmenatorApplication.export_apidocs`
 
-`method` | [readmenator/_app.py:1210](../../readmenator/_app.py#L1210)
+`method` | [readmenator/_app.py:1239](../../readmenator/_app.py#L1239)
 
 ```python
 def export_apidocs(self, target_dir: str) -> Dict[str, str]
@@ -642,7 +676,7 @@ Generate the API reference tree (Markdown, api.json, index.html).
 
 #### `readmenatorApplication.export_flows`
 
-`method` | [readmenator/_app.py:1232](../../readmenator/_app.py#L1232)
+`method` | [readmenator/_app.py:1261](../../readmenator/_app.py#L1261)
 
 ```python
 def export_flows(self, target_dir: str) -> str
@@ -664,7 +698,7 @@ Write the standalone interactive architecture and flow page into the maps direct
 
 #### `readmenatorApplication.explorer_state`
 
-`method` | [readmenator/_app.py:1249](../../readmenator/_app.py#L1249)
+`method` | [readmenator/_app.py:1278](../../readmenator/_app.py#L1278)
 
 ```python
 def explorer_state(self, target_dir: str)
@@ -688,7 +722,7 @@ Build explorer state for the local HTTP server.
 
 #### `readmenatorApplication.serve_explorer`
 
-`method` | [readmenator/_app.py:1265](../../readmenator/_app.py#L1265)
+`method` | [readmenator/_app.py:1294](../../readmenator/_app.py#L1294)
 
 ```python
 def serve_explorer(self, target_dir: str, open_browser: bool = False) -> str
@@ -713,7 +747,7 @@ Serve the local explorer UI until interrupted.
 
 #### `readmenatorApplication.analytics`
 
-`method` | [readmenator/_app.py:1278](../../readmenator/_app.py#L1278)
+`method` | [readmenator/_app.py:1307](../../readmenator/_app.py#L1307)
 
 ```python
 def analytics(self, target_dir: str) -> dict
@@ -737,7 +771,7 @@ Compute the corpus analytics payload.
 
 #### `readmenatorApplication.scan_texts`
 
-`method` | [readmenator/_app.py:1295](../../readmenator/_app.py#L1295)
+`method` | [readmenator/_app.py:1324](../../readmenator/_app.py#L1324)
 
 ```python
 def scan_texts(self, target_dir: str) -> dict
@@ -759,7 +793,7 @@ Build scan-text blobs for every file in the project.
 
 #### `readmenatorApplication.near`
 
-`method` | [readmenator/_app.py:1307](../../readmenator/_app.py#L1307)
+`method` | [readmenator/_app.py:1336](../../readmenator/_app.py#L1336)
 
 ```python
 def near(self, target_dir: str, query: str, top_k: int = 0) -> list
@@ -785,7 +819,7 @@ Find semantically similar files for a query file or text.
 
 #### `readmenatorApplication.audit_provenance`
 
-`method` | [readmenator/_app.py:1321](../../readmenator/_app.py#L1321)
+`method` | [readmenator/_app.py:1350](../../readmenator/_app.py#L1350)
 
 ```python
 def audit_provenance(self, target_dir: str) -> list
@@ -807,7 +841,7 @@ Audit security findings by evidence provenance.
 
 #### `readmenatorApplication.validate_yaralite`
 
-`method` | [readmenator/_app.py:1344](../../readmenator/_app.py#L1344)
+`method` | [readmenator/_app.py:1373](../../readmenator/_app.py#L1373)
 
 ```python
 def validate_yaralite(self, target_dir: str) -> dict
@@ -831,7 +865,7 @@ Validate the project YARA-lite rules file.
 
 #### `readmenatorApplication.export_graphml`
 
-`method` | [readmenator/_app.py:1358](../../readmenator/_app.py#L1358)
+`method` | [readmenator/_app.py:1387](../../readmenator/_app.py#L1387)
 
 ```python
 def export_graphml(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -852,7 +886,7 @@ def export_graphml(self, target_dir: str, output_path: Optional[str] = None) -> 
 
 #### `readmenatorApplication.export_cypher`
 
-`method` | [readmenator/_app.py:1369](../../readmenator/_app.py#L1369)
+`method` | [readmenator/_app.py:1398](../../readmenator/_app.py#L1398)
 
 ```python
 def export_cypher(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -873,7 +907,7 @@ def export_cypher(self, target_dir: str, output_path: Optional[str] = None) -> s
 
 #### `readmenatorApplication.export_obsidian`
 
-`method` | [readmenator/_app.py:1385](../../readmenator/_app.py#L1385)
+`method` | [readmenator/_app.py:1414](../../readmenator/_app.py#L1414)
 
 ```python
 def export_obsidian(self, target_dir: str, output_dir: Optional[str] = None) -> int
@@ -894,7 +928,7 @@ def export_obsidian(self, target_dir: str, output_dir: Optional[str] = None) -> 
 
 #### `readmenatorApplication.export_wiki`
 
-`method` | [readmenator/_app.py:1400](../../readmenator/_app.py#L1400)
+`method` | [readmenator/_app.py:1429](../../readmenator/_app.py#L1429)
 
 ```python
 def export_wiki(self, target_dir: str, output_dir: Optional[str] = None) -> str
@@ -919,7 +953,7 @@ Generate the navigable agent wiki for the target project.
 
 #### `readmenatorApplication.lint_wiki`
 
-`method` | [readmenator/_app.py:1424](../../readmenator/_app.py#L1424)
+`method` | [readmenator/_app.py:1453](../../readmenator/_app.py#L1453)
 
 ```python
 def lint_wiki(self, target_dir: str) -> List[str]
@@ -941,7 +975,7 @@ Check wiki health and log reported issues.
 
 #### `readmenatorApplication.export_diagrams`
 
-`method` | [readmenator/_app.py:1442](../../readmenator/_app.py#L1442)
+`method` | [readmenator/_app.py:1471](../../readmenator/_app.py#L1471)
 
 ```python
 def export_diagrams(self, target_dir: str, output_dir: Optional[str] = None, full: bool = False) -> Dict[str, str]
@@ -967,7 +1001,7 @@ Export all five interactive system maps plus a gallery index.
 
 #### `readmenatorApplication.export_diagram`
 
-`method` | [readmenator/_app.py:1511](../../readmenator/_app.py#L1511)
+`method` | [readmenator/_app.py:1540](../../readmenator/_app.py#L1540)
 
 ```python
 def export_diagram(self, target_dir: str, kind: str, output_path: Optional[str] = None, full: bool = False) -> str
@@ -994,7 +1028,7 @@ Export a single interactive system map as standalone HTML.
 
 #### `readmenatorApplication.export_pages`
 
-`method` | [readmenator/_app.py:1550](../../readmenator/_app.py#L1550)
+`method` | [readmenator/_app.py:1579](../../readmenator/_app.py#L1579)
 
 ```python
 def export_pages(self, target_dir: str, output_dir: Optional[str] = None, full: bool = False) -> Dict[str, str]
@@ -1020,7 +1054,7 @@ Publish all system maps plus a gallery index as a static site.
 
 #### `readmenatorApplication.export_video`
 
-`method` | [readmenator/_app.py:1595](../../readmenator/_app.py#L1595)
+`method` | [readmenator/_app.py:1624](../../readmenator/_app.py#L1624)
 
 ```python
 def export_video(self, target_dir: str, output_path: Optional[str] = None) -> Optional[str]
@@ -1045,7 +1079,7 @@ Render the cinematic overview video for the target project.
 
 #### `readmenatorApplication.memory`
 
-`method` | [readmenator/_app.py:1822](../../readmenator/_app.py#L1822)
+`method` | [readmenator/_app.py:1851](../../readmenator/_app.py#L1851)
 
 ```python
 def memory(self, target_dir: str) -> str
@@ -1069,7 +1103,7 @@ Return MEMORY.md, generating it first when missing.
 
 #### `readmenatorApplication.remember`
 
-`method` | [readmenator/_app.py:1845](../../readmenator/_app.py#L1845)
+`method` | [readmenator/_app.py:1874](../../readmenator/_app.py#L1874)
 
 ```python
 def remember(self, target_dir: str, note: str, kind: str = 'note') -> str
@@ -1093,7 +1127,7 @@ Append a note to the preserved MEMORY.md session log.
 
 #### `readmenatorApplication.install_skills`
 
-`method` | [readmenator/_app.py:1859](../../readmenator/_app.py#L1859)
+`method` | [readmenator/_app.py:1888](../../readmenator/_app.py#L1888)
 
 ```python
 def install_skills(self, target_dir: str, target: Optional[str] = None) -> List[Path]
@@ -1116,7 +1150,7 @@ Install the packaged agent skills into the project.
 
 #### `readmenatorApplication.build_graphrag`
 
-`method` | [readmenator/_app.py:1871](../../readmenator/_app.py#L1871)
+`method` | [readmenator/_app.py:1900](../../readmenator/_app.py#L1900)
 
 ```python
 def build_graphrag(self, target_dir: str) -> GraphRagIndex
@@ -1140,7 +1174,7 @@ Scan, analyse, and write the GraphRAG index for a project.
 
 #### `readmenatorApplication.graphrag_search`
 
-`method` | [readmenator/_app.py:1895](../../readmenator/_app.py#L1895)
+`method` | [readmenator/_app.py:1924](../../readmenator/_app.py#L1924)
 
 ```python
 def graphrag_search(self, target_dir: str, query: str, mode: str = 'auto', budget_tokens: int = 0) -> RagContext
@@ -1169,7 +1203,7 @@ Loads GRAPHRAG_OUTPUT_DIR/index.json and builds it first when missing.
 
 #### `readmenatorApplication.watch`
 
-`method` | [readmenator/_app.py:1916](../../readmenator/_app.py#L1916)
+`method` | [readmenator/_app.py:1945](../../readmenator/_app.py#L1945)
 
 ```python
 def watch(self, target_dir: str) -> None
@@ -1189,7 +1223,7 @@ def watch(self, target_dir: str) -> None
 
 #### `readmenatorApplication.audit`
 
-`method` | [readmenator/_app.py:1926](../../readmenator/_app.py#L1926)
+`method` | [readmenator/_app.py:1955](../../readmenator/_app.py#L1955)
 
 ```python
 def audit(self, target_dir: str) -> List[SecurityFinding]
@@ -1209,7 +1243,7 @@ def audit(self, target_dir: str) -> List[SecurityFinding]
 
 #### `readmenatorApplication.audit_deep`
 
-`method` | [readmenator/_app.py:1933](../../readmenator/_app.py#L1933)
+`method` | [readmenator/_app.py:1962](../../readmenator/_app.py#L1962)
 
 ```python
 def audit_deep(self, target_dir: str) -> AnalysisResultV2
@@ -1231,7 +1265,7 @@ def audit_deep(self, target_dir: str) -> AnalysisResultV2
 
 #### `readmenatorApplication.export_sarif`
 
-`method` | [readmenator/_app.py:1953](../../readmenator/_app.py#L1953)
+`method` | [readmenator/_app.py:1982](../../readmenator/_app.py#L1982)
 
 ```python
 def export_sarif(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -1252,7 +1286,7 @@ def export_sarif(self, target_dir: str, output_path: Optional[str] = None) -> st
 
 #### `readmenatorApplication.export_rules`
 
-`method` | [readmenator/_app.py:1963](../../readmenator/_app.py#L1963)
+`method` | [readmenator/_app.py:1992](../../readmenator/_app.py#L1992)
 
 ```python
 def export_rules(self, target_dir: str, output_dir: Optional[str] = None) -> int
@@ -1273,7 +1307,7 @@ def export_rules(self, target_dir: str, output_dir: Optional[str] = None) -> int
 
 #### `readmenatorApplication.detect_layers`
 
-`method` | [readmenator/_app.py:1974](../../readmenator/_app.py#L1974)
+`method` | [readmenator/_app.py:2003](../../readmenator/_app.py#L2003)
 
 ```python
 def detect_layers(self, target_dir: str) -> dict
@@ -1295,7 +1329,7 @@ def detect_layers(self, target_dir: str) -> dict
 
 #### `readmenatorApplication.lint`
 
-`method` | [readmenator/_app.py:1984](../../readmenator/_app.py#L1984)
+`method` | [readmenator/_app.py:2013](../../readmenator/_app.py#L2013)
 
 ```python
 def lint(self, target_dir: str) -> List[LinterViolation]
@@ -1317,7 +1351,7 @@ def lint(self, target_dir: str) -> List[LinterViolation]
 
 #### `readmenatorApplication.strip_dead_code`
 
-`method` | [readmenator/_app.py:1997](../../readmenator/_app.py#L1997)
+`method` | [readmenator/_app.py:2026](../../readmenator/_app.py#L2026)
 
 ```python
 def strip_dead_code(self, target_dir: str) -> List[DeadCodeReport]
@@ -1339,7 +1373,7 @@ def strip_dead_code(self, target_dir: str) -> List[DeadCodeReport]
 
 #### `readmenatorApplication.generate_cursorrules`
 
-`method` | [readmenator/_app.py:2007](../../readmenator/_app.py#L2007)
+`method` | [readmenator/_app.py:2036](../../readmenator/_app.py#L2036)
 
 ```python
 def generate_cursorrules(self, target_dir: str) -> str
@@ -1361,7 +1395,7 @@ def generate_cursorrules(self, target_dir: str) -> str
 
 #### `readmenatorApplication.refactor_monolith`
 
-`method` | [readmenator/_app.py:2022](../../readmenator/_app.py#L2022)
+`method` | [readmenator/_app.py:2051](../../readmenator/_app.py#L2051)
 
 ```python
 def refactor_monolith(self, target_dir: str) -> List[RefactoringPlan]

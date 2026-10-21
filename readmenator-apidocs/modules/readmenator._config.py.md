@@ -188,6 +188,9 @@ defined here and consumed by reference elsewhere.
 | [`GH_WIKI_DRY_RUN_DIR`](#config-gh_wiki_dry_run_dir) | `str` | `'readmenator-ghwiki'` |  |
 | [`GH_WIKI_TIMEOUT_S`](#config-gh_wiki_timeout_s) | `int` | `120` |  |
 | [`GH_WIKI_COMMIT_MESSAGE`](#config-gh_wiki_commit_message) | `str` | `'docs(wiki): regenerate from readmenator'` |  |
+| [`RELEASES_DIR`](#config-releases_dir) | `str` | `'readmenator-releases'` |  |
+| [`RECEIPTS_SCAN_DIR`](#config-receipts_scan_dir) | `str` | `'release-receipts'` |  |
+| [`RECEIPTS_MAX_HISTORICAL`](#config-receipts_max_historical) | `int` | `200` |  |
 | [`WIKI_LARGE_FILE_KB`](#config-wiki_large_file_kb) | `int` | `256` |  |
 | [`DATAFLOW_ENABLED`](#config-dataflow_enabled) | `bool` | `True` |  |
 | [`DATAFLOW_MAX_ISSUES`](#config-dataflow_max_issues) | `int` | `50` |  |

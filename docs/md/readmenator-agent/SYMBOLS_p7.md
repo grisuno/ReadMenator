@@ -3,6 +3,87 @@ Previous: [SYMBOLS_p6.md](SYMBOLS_p6.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_no_network_requests` | method | `tests/test_sourceview.py:94` | `def test_no_network_requests(self)` |
+| `test_privacy_mode_strips_viewer` | method | `tests/test_sourceview.py:108` | `def test_privacy_mode_strips_viewer(self)` |
+| `test_settings_carry_src_budgets` | method | `tests/test_sourceview.py:89` | `def test_settings_carry_src_budgets(self)` |
+| `test_static_pages_never_probe_the_api` | method | `tests/test_sourceview.py:136` | `def test_static_pages_never_probe_the_api(self)` |
+| `test_theme_tokens_for_both_modes` | method | `tests/test_sourceview.py:102` | `def test_theme_tokens_for_both_modes(self)` |
+| `test_untrusted_source_cannot_break_script` | method | `tests/test_sourceview.py:120` | `def test_untrusted_source_cannot_break_script(self)` |
+| `test_update_refreshes_explorer_sources` | method | `tests/test_sourceview.py:179` | `def test_update_refreshes_explorer_sources(self)` |
+| `TestSymbolIndexContract` | class | `tests/test_symindex.py:20` | `class TestSymbolIndexContract(TestCase)` |
+| `_node` | function | `tests/test_symindex.py:12` | `def _node(nid)` |
+| `setUp` | method | `tests/test_symindex.py:23` | `def setUp(self)` |
+| `test_build_assigns_spans` | method | `tests/test_symindex.py:33` | `def test_build_assigns_spans(self)` |
+| `test_edge_fallback_without_content` | method | `tests/test_symindex.py:81` | `def test_edge_fallback_without_content(self)` |
+| `test_methods_index_matches_pipe_keys` | method | `tests/test_symindex.py:71` | `def test_methods_index_matches_pipe_keys(self)` |
+| `test_python_call_sites_carry_lines` | method | `tests/test_symindex.py:40` | `def test_python_call_sites_carry_lines(self)` |
+| `test_resolve_follows_imports` | method | `tests/test_symindex.py:54` | `def test_resolve_follows_imports(self)` |
+| `test_resolve_prefers_same_file` | method | `tests/test_symindex.py:46` | `def test_resolve_prefers_same_file(self)` |
+| `test_unresolved_and_builtin_tiers` | method | `tests/test_symindex.py:62` | `def test_unresolved_and_builtin_tiers(self)` |
+| `TestTaintAnalyzerContract` | class | `tests/test_taint.py:10` | `class TestTaintAnalyzerContract(TestCase)` |
+| `_make_node` | method | `tests/test_taint.py:17` | `def _make_node(self, nid, label)` |
+| `setUp` | method | `tests/test_taint.py:13` | `def setUp(self)` |
+| `test_dangerous_import_by_language` | method | `tests/test_taint.py:62` | `def test_dangerous_import_by_language(self)` |
+| `test_direct_dangerous_import_found` | method | `tests/test_taint.py:31` | `def test_direct_dangerous_import_found(self)` |
+| `test_empty_graph_returns_empty_result` | method | `tests/test_taint.py:20` | `def test_empty_graph_returns_empty_result(self)` |
+| `test_max_depth_limits_propagation` | method | `tests/test_taint.py:77` | `def test_max_depth_limits_propagation(self)` |
+| `test_no_dangerous_imports_returns_empty` | method | `tests/test_taint.py:25` | `def test_no_dangerous_imports_returns_empty(self)` |
+| `test_taint_path_has_severity` | method | `tests/test_taint.py:70` | `def test_taint_path_has_severity(self)` |
+| `test_taint_propagates_through_resolved_edges` | method | `tests/test_taint.py:38` | `def test_taint_propagates_through_resolved_edges(self)` |
+| `_bkg` | function | `tests/test_taint_bdd.py:112` | `def _bkg()` |
+| `_build_project_files` | function | `tests/test_taint_bdd.py:29` | `def _build_project_files(project, root)` |
+| `_chain_given` | function | `tests/test_taint_bdd.py:144` | `def _chain_given()` |
+| `_chain_given2` | function | `tests/test_taint_bdd.py:163` | `def _chain_given2()` |
+| `_chain_when` | function | `tests/test_taint_bdd.py:148` | `def _chain_when(_taint_result)` |
+| `_check_direct_path` | function | `tests/test_taint_bdd.py:130` | `def _check_direct_path(_taint_result)` |
+| `_check_has_path` | function | `tests/test_taint_bdd.py:125` | `def _check_has_path(_taint_result)` |
+| `_check_js_dangerous` | function | `tests/test_taint_bdd.py:186` | `def _check_js_dangerous(_taint_result)` |
+| `_check_js_source` | function | `tests/test_taint_bdd.py:192` | `def _check_js_source(_taint_result)` |
+| `_check_long_path` | function | `tests/test_taint_bdd.py:152` | `def _check_long_path(_taint_result)` |
+| `_check_shallow` | function | `tests/test_taint_bdd.py:171` | `def _check_shallow(_taint_result)` |
+| `_check_sink` | function | `tests/test_taint_bdd.py:139` | `def _check_sink(_taint_result)` |
+| `_check_src` | function | `tests/test_taint_bdd.py:135` | `def _check_src(_taint_result)` |
+| `_direct_given` | function | `tests/test_taint_bdd.py:117` | `def _direct_given()` |
+| `_direct_when` | function | `tests/test_taint_bdd.py:121` | `def _direct_when(_taint_result)` |
+| `_js_given` | function | `tests/test_taint_bdd.py:178` | `def _js_given()` |
+| `_js_when` | function | `tests/test_taint_bdd.py:182` | `def _js_when(_taint_result)` |
+| `_run_shallow` | function | `tests/test_taint_bdd.py:167` | `def _run_shallow(_shallow_cfg)` |
+| `_run_taint` | function | `tests/test_taint_bdd.py:54` | `def _run_taint(files, cfg)` |
+| `_scan_project` | function | `tests/test_taint_bdd.py:36` | `def _scan_project(root, cfg)` |
+| `_shallow_cfg` | function | `tests/test_taint_bdd.py:159` | `def _shallow_cfg()` |
+| `test_bdd_skipped` | function | `tests/test_taint_bdd.py:87` | `def test_bdd_skipped()` |
+| `test_cross_language_taint` | function | `tests/test_taint_bdd.py:83` | `def test_cross_language_taint()` |
+| `test_direct_dangerous_import` | function | `tests/test_taint_bdd.py:71` | `def test_direct_dangerous_import()` |
+| `test_taint_max_depth` | function | `tests/test_taint_bdd.py:79` | `def test_taint_max_depth()` |
+| `test_taint_propagates_chain` | function | `tests/test_taint_bdd.py:75` | `def test_taint_propagates_chain()` |
+| `TestUmlCodeGenerationCSharp` | class | `tests/test_uml.py:281` | `class TestUmlCodeGenerationCSharp(TestCase)` |
+| `TestUmlCodeGenerationCpp` | class | `tests/test_uml.py:181` | `class TestUmlCodeGenerationCpp(TestCase)` |
+| `TestUmlCodeGenerationGo` | class | `tests/test_uml.py:306` | `class TestUmlCodeGenerationGo(TestCase)` |
+| `TestUmlCodeGenerationJava` | class | `tests/test_uml.py:239` | `class TestUmlCodeGenerationJava(TestCase)` |
+| `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` | class | `tests/test_uml.py:427` | `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)` |
+| `TestUmlCodeGenerationPhp` | class | `tests/test_uml.py:387` | `class TestUmlCodeGenerationPhp(TestCase)` |
+| `TestUmlCodeGenerationRust` | class | `tests/test_uml.py:347` | `class TestUmlCodeGenerationRust(TestCase)` |
+| `TestUmlMermaidDiagram` | class | `tests/test_uml.py:16` | `class TestUmlMermaidDiagram(TestCase)` |
+| `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
+| `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
+| `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
+| `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
+| `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |
+| `test_generate_cpp_unknown_language_returns_error_message` | method | `tests/test_uml.py:223` | `def test_generate_cpp_unknown_language_returns_error_message(self)` |
+| `test_generate_cpp_with_empty_classes` | method | `tests/test_uml.py:208` | `def test_generate_cpp_with_empty_classes(self)` |
+| `test_generate_csharp_produces_valid_code` | method | `tests/test_uml.py:288` | `def test_generate_csharp_produces_valid_code(self)` |
+| `test_generate_dart_produces_valid_code` | method | `tests/test_uml.py:474` | `def test_generate_dart_produces_valid_code(self)` |
+| `test_generate_go_interface_produces_valid_code` | method | `tests/test_uml.py:330` | `def test_generate_go_interface_produces_valid_code(self)` |
+| `test_generate_go_struct_produces_valid_code` | method | `tests/test_uml.py:313` | `def test_generate_go_struct_produces_valid_code(self)` |
+| `test_generate_java_class_produces_valid_code` | method | `tests/test_uml.py:246` | `def test_generate_java_class_produces_valid_code(self)` |
+| `test_generate_java_interface_produces_interface` | method | `tests/test_uml.py:265` | `def test_generate_java_interface_produces_interface(self)` |
 | `test_generate_kotlin_produces_valid_code` | method | `tests/test_uml.py:446` | `def test_generate_kotlin_produces_valid_code(self)` |
 | `test_generate_php_class_produces_valid_code` | method | `tests/test_uml.py:394` | `def test_generate_php_class_produces_valid_code(self)` |
 | `test_generate_php_interface_produces_valid_code` | method | `tests/test_uml.py:411` | `def test_generate_php_interface_produces_valid_code(self)` |

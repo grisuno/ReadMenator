@@ -2,6 +2,12 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_scala.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_shell.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_swift.py`
+- `tests/test_project_config.py` -> `readmenator/_agent_injector.py`
+- `tests/test_project_config.py` -> `readmenator/_bundlegraph.py`
+- `tests/test_project_config.py` -> `readmenator/_bundlegraph_page.py`
 - `tests/test_project_config.py` -> `readmenator/_config.py`
 - `tests/test_project_config.py` -> `readmenator/_diagrams.py`
 - `tests/test_project_config.py` -> `readmenator/_flowpage.py`
@@ -19,6 +25,9 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_ranking.py` -> `readmenator/_projections.py`
 - `tests/test_ranking.py` -> `readmenator/_rank.py`
 - `tests/test_readme_injector.py` -> `readmenator/_readme_injector.py`
+- `tests/test_receipts.py` -> `readmenator/_hypotheses.py`
+- `tests/test_receipts.py` -> `readmenator/_receipts.py`
+- `tests/test_receipts.py` -> `readmenator/_uncertainty.py`
 - `tests/test_refactorizer.py` -> `readmenator/_config.py`
 - `tests/test_refactorizer.py` -> `readmenator/_models.py`
 - `tests/test_refactorizer.py` -> `readmenator/_refactorizer.py`
@@ -106,6 +115,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_graphrag.py` -> __future__, dataclasses, json, logging, math, pathlib, re, typing
 - `readmenator/_hotspots.py` -> __future__, collections, typing
 - `readmenator/_htmlpack.py` -> __future__, base64, gzip, html, json, re, typing
+- `readmenator/_hypotheses.py` -> __future__, dataclasses, json, typing
 - `readmenator/_layer_rules.py` -> __future__, typing
 - `readmenator/_layers.py` -> __future__, collections, re, typing
 - `readmenator/_linter.py` -> __future__, pathlib, typing
@@ -123,6 +133,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_query.py` -> __future__, collections, typing
 - `readmenator/_rank.py` -> __future__, dataclasses, math, typing
 - `readmenator/_readme_injector.py` -> __future__, logging, pathlib, typing
+- `readmenator/_receipts.py` -> __future__, dataclasses, datetime, json, os, typing
 - `readmenator/_refactorizer.py` -> __future__, pathlib, re, typing
 - `readmenator/_resolver.py` -> __future__, pathlib, posixpath, re, typing
 - `readmenator/_rule_gen.py` -> __future__, collections, os, pathlib, re, typing
@@ -135,6 +146,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_symindex.py` -> __future__, ast, dataclasses, hashlib, re, typing
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
+- `readmenator/_uncertainty.py` -> __future__, dataclasses, math, sklearn, sklearn.ensemble, typing
 - `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, textwrap, typing
 - `readmenator/_viewer_ui.py` -> __future__, html, json, typing
 - `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
@@ -203,6 +215,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_query.py` -> unittest
 - `tests/test_ranking.py` -> __future__, pytest, typing
 - `tests/test_readme_injector.py` -> __future__, pathlib, shutil, tempfile, unittest
+- `tests/test_receipts.py` -> json, os, pathlib, pytest
 - `tests/test_refactorizer.py` -> __future__, pathlib, tempfile, unittest
 - `tests/test_resolver.py` -> __future__, unittest
 - `tests/test_rule_gen.py` -> __future__, pathlib, tempfile, unittest

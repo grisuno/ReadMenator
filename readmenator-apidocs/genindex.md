@@ -104,6 +104,7 @@
 - [`ArchitectureDiagramBuilder`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder) class in `readmenator._flowcharts`
 - [`ArchitectureLinter`](modules/readmenator._linter.py.md#architecturelinter) class in `readmenator._linter`
 - [`AssemblyParser`](modules/readmenator.parsers._assembly.py.md#assemblyparser) class in `readmenator.parsers._assembly`
+- [`assumed`](modules/readmenator._hypotheses.py.md#hypothesisverdict-assumed) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`attributes`](modules/readmenator._docstrings.py.md#doccomment-attributes) attribute of `DocComment` in `readmenator._docstrings`
 - [`audit`](modules/readmenator._provenance.py.md#provenanceauditor-audit) method of `ProvenanceAuditor` in `readmenator._provenance`
 - [`audit`](modules/readmenator._app.py.md#readmenatorapplication-audit) method of `readmenatorApplication` in `readmenator._app`
@@ -112,6 +113,7 @@
 - [`authority_score`](modules/readmenator._rank.py.md#rankeditem-authority_score) attribute of `RankedItem` in `readmenator._rank`
 - [`autolink`](modules/readmenator._apidocs_render.py.md#apilinker-autolink) method of `ApiLinker` in `readmenator._apidocs_render`
 - [`available`](modules/readmenator._ollama.py.md#ollamaclient-available) method of `OllamaClient` in `readmenator._ollama`
+- [`available`](modules/readmenator._uncertainty.py.md#randomforestscorer-available) staticmethod of `RandomForestScorer` in `readmenator._uncertainty`
 - [`available`](modules/readmenator._skill_installer.py.md#skillinstaller-available) method of `SkillInstaller` in `readmenator._skill_installer`
 
 <a id="b"></a>
@@ -123,7 +125,9 @@
 - [`bases`](modules/readmenator._apidocs.py.md#apientity-bases) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`BG_HORIZON`](modules/readmenator._video.py.md#bg_horizon) constant in `readmenator._video`
 - [`BG_TOP`](modules/readmenator._video.py.md#bg_top) constant in `readmenator._video`
+- [`BIAS`](modules/readmenator._uncertainty.py.md#heuristicscorer-bias) attribute of `HeuristicScorer` in `readmenator._uncertainty`
 - [`Bm25Index`](modules/readmenator._graphrag.py.md#bm25index) class in `readmenator._graphrag`
+- [`branch`](modules/readmenator._receipts.py.md#releasereceiptrecord-branch) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`BRANCH_LABELS`](modules/readmenator._flowlayout.py.md#branch_labels) constant in `readmenator._flowlayout`
 - [`branding_css`](modules/readmenator._project_config.py.md#branding_css) function in `readmenator._project_config`
 - [`branding_style`](modules/readmenator._viewer_ui.py.md#branding_style) function in `readmenator._viewer_ui`
@@ -202,12 +206,17 @@
 - [`CALLABLE_KINDS`](modules/readmenator._apidocs.py.md#callable_kinds) constant in `readmenator._apidocs`
 - [`called_by`](modules/readmenator._apidocs.py.md#apientity-called_by) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`callee`](modules/readmenator._symindex.py.md#callsite-callee) attribute of `CallSite` in `readmenator._symindex`
+- [`callee`](modules/readmenator._receipts.py.md#edgeinfo-callee) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`callee`](modules/readmenator._flowcharts.py.md#flowstep-callee) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`callee`](modules/readmenator._hypotheses.py.md#hypothesis-callee) attribute of `Hypothesis` in `readmenator._hypotheses`
 - [`caller`](modules/readmenator._symindex.py.md#callsite-caller) attribute of `CallSite` in `readmenator._symindex`
+- [`caller`](modules/readmenator._receipts.py.md#edgeinfo-caller) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`caller`](modules/readmenator._flowcharts.py.md#flowstep-caller) attribute of `FlowStep` in `readmenator._flowcharts`
+- [`caller`](modules/readmenator._hypotheses.py.md#hypothesis-caller) attribute of `Hypothesis` in `readmenator._hypotheses`
 - [`calls`](modules/readmenator._apidocs.py.md#apientity-calls) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`CALLS`](modules/readmenator._category.py.md#edgekind-calls) attribute of `EdgeKind` in `readmenator._category`
 - [`CallSite`](modules/readmenator._symindex.py.md#callsite) class in `readmenator._symindex`
+- [`candidate_edges`](modules/readmenator._receipts.py.md#receiptingestor-candidate_edges) method of `ReceiptIngestor` in `readmenator._receipts`
 - [`candidates`](modules/readmenator._symindex.py.md#resolvedcall-candidates) attribute of `ResolvedCall` in `readmenator._symindex`
 - [`caption`](modules/readmenator._flowlayout.py.md#flowgraph-caption) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`Category`](modules/readmenator._category.py.md#category) class in `readmenator._category`
@@ -243,7 +252,9 @@
 - [`COLOR_MODES`](modules/readmenator._video.py.md#color_modes) constant in `readmenator._video`
 - [`column`](modules/readmenator._symindex.py.md#callsite-column) attribute of `CallSite` in `readmenator._symindex`
 - [`combined_score`](modules/readmenator._models.py.md#hotspotresult-combined_score) attribute of `HotspotResult` in `readmenator._models`
+- [`commands`](modules/readmenator._receipts.py.md#releasereceiptrecord-commands) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`COMMENT_RE`](modules/readmenator._yaralite.py.md#comment_re) constant in `readmenator._yaralite`
+- [`commit`](modules/readmenator._receipts.py.md#releasereceiptrecord-commit) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`commit_message`](modules/readmenator_orchestrator.py.md#config-commit_message) attribute of `Config` in `readmenator_orchestrator`
 - [`communities`](modules/readmenator._models.py.md#analysisresult-communities) attribute of `AnalysisResult` in `readmenator._models`
 - [`communities`](modules/readmenator._graphrag.py.md#graphragindex-communities) attribute of `GraphRagIndex` in `readmenator._graphrag`
@@ -310,6 +321,7 @@
 - [`confidence`](modules/readmenator._models.py.md#conceptrelation-confidence) attribute of `ConceptRelation` in `readmenator._models`
 - [`confidence`](modules/readmenator._models.py.md#dataflowissue-confidence) attribute of `DataflowIssue` in `readmenator._models`
 - [`confidence`](modules/readmenator._models.py.md#edge-confidence) attribute of `Edge` in `readmenator._models`
+- [`confidence`](modules/readmenator._receipts.py.md#edgeinfo-confidence) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`confidence`](modules/readmenator._category.py.md#morphism-confidence) attribute of `Morphism` in `readmenator._category`
 - [`confidence`](modules/readmenator._graphrag.py.md#ragrelation-confidence) attribute of `RagRelation` in `readmenator._graphrag`
 - [`confidence`](modules/readmenator._symindex.py.md#resolvedcall-confidence) attribute of `ResolvedCall` in `readmenator._symindex`
@@ -338,6 +350,7 @@
 - [`CPG_ENABLED`](modules/readmenator._config.py.md#config-cpg_enabled) attribute of `Config` in `readmenator._config`
 - [`create_parser`](modules/readmenator.parsers.__init__.py.md#create_parser) function in `readmenator.parsers`
 - [`create_pr`](modules/readmenator_orchestrator.py.md#githubclient-create_pr) method of `GitHubClient` in `readmenator_orchestrator`
+- [`created_at`](modules/readmenator._receipts.py.md#releasereceiptrecord-created_at) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`CSharpParser`](modules/readmenator.parsers._csharp.py.md#csharpparser) class in `readmenator.parsers._csharp`
 - [`current_lines`](modules/readmenator._models.py.md#refactoringplan-current_lines) attribute of `RefactoringPlan` in `readmenator._models`
 - [`CURSORRULES_ENABLED`](modules/readmenator._config.py.md#config-cursorrules_enabled) attribute of `Config` in `readmenator._config`
@@ -494,6 +507,7 @@
 - [`draw_header`](modules/readmenator._video.py.md#draw_header) function in `readmenator._video`
 - [`draw_sphere3d`](modules/readmenator._video.py.md#draw_sphere3d) function in `readmenator._video`
 - [`draw_sun`](modules/readmenator._video.py.md#draw_sun) function in `readmenator._video`
+- [`duration_ms`](modules/readmenator._receipts.py.md#releasereceiptrecord-duration_ms) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 
 <a id="e"></a>
 
@@ -502,13 +516,17 @@
 - [`eades_lin_smyth`](modules/readmenator._flowcharts.py.md#eades_lin_smyth) function in `readmenator._flowcharts`
 - [`ease`](modules/readmenator._video.py.md#ease) function in `readmenator._video`
 - [`Edge`](modules/readmenator._models.py.md#edge) class in `readmenator._models`
+- [`edge`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-edge) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
 - [`edge_count`](modules/readmenator._models.py.md#analysisresult-edge_count) attribute of `AnalysisResult` in `readmenator._models`
 - [`edge_palette`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-edge_palette) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`EDGE_STYLES`](modules/readmenator._flowlayout.py.md#edge_styles) constant in `readmenator._flowlayout`
 - [`EDGE_WEIGHTS`](modules/readmenator._category.py.md#edge_weights) constant in `readmenator._category`
+- [`EdgeInfo`](modules/readmenator._receipts.py.md#edgeinfo) class in `readmenator._receipts`
 - [`EdgeKind`](modules/readmenator._category.py.md#edgekind) enum in `readmenator._category`
 - [`edges`](modules/readmenator._flowlayout.py.md#flowgraph-edges) attribute of `FlowGraph` in `readmenator._flowlayout`
+- [`edges`](modules/readmenator._receipts.py.md#releasereceiptrecord-edges) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`edges`](modules/readmenator._diagrams.py.md#systemmap-edges) attribute of `SystemMap` in `readmenator._diagrams`
+- [`EDGES_JSON_NAME`](modules/readmenator._receipts.py.md#edges_json_name) constant in `readmenator._receipts`
 - [`ElixirParser`](modules/readmenator.parsers._elixir.py.md#elixirparser) class in `readmenator.parsers._elixir`
 - [`EMBED_ENABLED`](modules/readmenator._config.py.md#config-embed_enabled) attribute of `Config` in `readmenator._config`
 - [`EMBED_MAX_NEIGHBORS`](modules/readmenator._config.py.md#config-embed_max_neighbors) attribute of `Config` in `readmenator._config`
@@ -537,10 +555,12 @@
 - [`entry_points`](modules/readmenator._flowcharts.py.md#executionflowbuilder-entry_points) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
 - [`EntryPoint`](modules/readmenator._flowcharts.py.md#entrypoint) class in `readmenator._flowcharts`
 - [`error`](modules/readmenator._mcp_server.py.md#mcprequest-error) method of `MCPRequest` in `readmenator._mcp_server`
+- [`error`](modules/readmenator._receipts.py.md#releasereceiptrecord-error) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`errors`](modules/readmenator._diagrams.py.md#mapreceipt-errors) attribute of `MapReceipt` in `readmenator._diagrams`
 - [`escape_cell`](modules/readmenator._purpose.py.md#escape_cell) function in `readmenator._purpose`
 - [`escape_json_for_script`](modules/readmenator._htmlpack.py.md#escape_json_for_script) function in `readmenator._htmlpack`
 - [`estimated_impact`](modules/readmenator._models.py.md#refactoringplan-estimated_impact) attribute of `RefactoringPlan` in `readmenator._models`
+- [`evidence`](modules/readmenator._receipts.py.md#edgeinfo-evidence) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`evidence`](modules/readmenator._diagrams.py.md#mapdiagnostic-evidence) attribute of `MapDiagnostic` in `readmenator._diagrams`
 - [`examples`](modules/readmenator._docstrings.py.md#doccomment-examples) attribute of `DocComment` in `readmenator._docstrings`
 - [`excerpt`](modules/readmenator._yaralite.py.md#yaralitehit-excerpt) attribute of `YaraLiteHit` in `readmenator._yaralite`
@@ -581,6 +601,7 @@
 - [`export_video`](modules/readmenator._app.py.md#readmenatorapplication-export_video) method of `readmenatorApplication` in `readmenator._app`
 - [`export_wiki`](modules/readmenator._app.py.md#readmenatorapplication-export_wiki) method of `readmenatorApplication` in `readmenator._app`
 - [`exporter`](modules/readmenator._pipeline.py.md#analyzerfactory-exporter) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`extra`](modules/readmenator._hypotheses.py.md#hypothesis-extra) attribute of `Hypothesis` in `readmenator._hypotheses`
 - [`extract`](modules/readmenator._concepts.py.md#conceptextractor-extract) method of `ConceptExtractor` in `readmenator._concepts`
 - [`extract_call_sites`](modules/readmenator._symindex.py.md#symbolindex-extract_call_sites) method of `SymbolIndex` in `readmenator._symindex`
 - [`extract_rules`](modules/readmenator._memory.py.md#projectmemory-extract_rules) method of `ProjectMemory` in `readmenator._memory`
@@ -593,6 +614,9 @@
 - [`fallback_budget`](modules/readmenator._graphlayout.py.md#forceatlas2settings-fallback_budget) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`family_color`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-family_color) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`family_color_from_name`](modules/readmenator._forcegraph.py.md#family_color_from_name) function in `readmenator._forcegraph`
+- [`FEATURE_NAMES`](modules/readmenator._uncertainty.py.md#feature_names) constant in `readmenator._uncertainty`
+- [`features`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-features) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
+- [`featurize`](modules/readmenator._uncertainty.py.md#featurize) function in `readmenator._uncertainty`
 - [`FENCE_LANGUAGES`](modules/readmenator._apidocs_render.py.md#fence_languages) constant in `readmenator._apidocs_render`
 - [`fibonacci_sphere`](modules/readmenator._graphlayout.py.md#fibonacci_sphere) function in `readmenator._graphlayout`
 - [`file`](modules/readmenator._apidocs.py.md#apientity-file) attribute of `ApiEntity` in `readmenator._apidocs`
@@ -629,6 +653,7 @@
 - [`find_symbol`](modules/readmenator._query.py.md#queryengine-find_symbol) method of `QueryEngine` in `readmenator._query`
 - [`findings`](modules/readmenator._graphrag.py.md#ragcommunity-findings) attribute of `RagCommunity` in `readmenator._graphrag`
 - [`first_sentence`](modules/readmenator._purpose.py.md#first_sentence) function in `readmenator._purpose`
+- [`fit`](modules/readmenator._uncertainty.py.md#randomforestscorer-fit) method of `RandomForestScorer` in `readmenator._uncertainty`
 - [`fit_frames`](modules/readmenator._graphlayout.py.md#fit_frames) function in `readmenator._graphlayout`
 - [`fix_hint_for`](modules/readmenator._security.py.md#fix_hint_for) function in `readmenator._security`
 - [`FLOW_CFG_MAX_NODES`](modules/readmenator._config.py.md#config-flow_cfg_max_nodes) attribute of `Config` in `readmenator._config`
@@ -743,6 +768,8 @@
 - [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
 - [`freshness`](modules/readmenator._rank.py.md#rankeditem-freshness) attribute of `RankedItem` in `readmenator._rank`
 - [`from_dict`](modules/readmenator._graphrag.py.md#graphragindex-from_dict) classmethod of `GraphRagIndex` in `readmenator._graphrag`
+- [`from_dict`](modules/readmenator._hypotheses.py.md#hypothesis-from_dict) classmethod of `Hypothesis` in `readmenator._hypotheses`
+- [`from_dict`](modules/readmenator._receipts.py.md#releasereceiptrecord-from_dict) classmethod of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`function`](modules/readmenator._models.py.md#dataflowissue-function) attribute of `DataflowIssue` in `readmenator._models`
 
 <a id="g"></a>
@@ -852,6 +879,7 @@
 - [`hash_color`](modules/readmenator._video.py.md#hash_color) function in `readmenator._video`
 - [`heading`](modules/readmenator._memory.py.md#declaredrule-heading) attribute of `DeclaredRule` in `readmenator._memory`
 - [`height`](modules/readmenator._flowlayout.py.md#flowgraph-height) attribute of `FlowGraph` in `readmenator._flowlayout`
+- [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
 - [`hierarchical_edge_bundling`](modules/readmenator._graphlayout.py.md#hierarchical_edge_bundling) function in `readmenator._graphlayout`
 - [`hits`](modules/readmenator._rank.py.md#hits) function in `readmenator._rank`
 - [`home_anchor`](modules/readmenator._viewer_ui.py.md#home_anchor) function in `readmenator._viewer_ui`
@@ -869,6 +897,10 @@
 - [`HUB_PENALTY_NAMES`](modules/readmenator._rank.py.md#hub_penalty_names) constant in `readmenator._rank`
 - [`hubs`](modules/readmenator._graphlayout.py.md#spherebundlelayout-hubs) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
 - [`hud_panel`](modules/readmenator._video.py.md#hud_panel) function in `readmenator._video`
+- [`Hypothesis`](modules/readmenator._hypotheses.py.md#hypothesis) class in `readmenator._hypotheses`
+- [`hypothesis`](modules/readmenator._hypotheses.py.md#hypothesisverdict-hypothesis) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
+- [`HypothesisValidator`](modules/readmenator._hypotheses.py.md#hypothesisvalidator) class in `readmenator._hypotheses`
+- [`HypothesisVerdict`](modules/readmenator._hypotheses.py.md#hypothesisverdict) class in `readmenator._hypotheses`
 
 <a id="i"></a>
 
@@ -886,6 +918,7 @@
 - [`IMPORTS`](modules/readmenator._category.py.md#edgekind-imports) attribute of `EdgeKind` in `readmenator._category`
 - [`incoming`](modules/readmenator._category.py.md#category-incoming) method of `Category` in `readmenator._category`
 - [`inferred_raises`](modules/readmenator._apidocs.py.md#apientity-inferred_raises) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`ingest_receipts`](modules/readmenator._app.py.md#readmenatorapplication-ingest_receipts) method of `readmenatorApplication` in `readmenator._app`
 - [`INHERITS`](modules/readmenator._category.py.md#edgekind-inherits) attribute of `EdgeKind` in `readmenator._category`
 - [`__init__`](modules/readmenator._agent_injector.py.md#agentinjector-__init__) constructor of `AgentInjector` in `readmenator._agent_injector`
 - [`__init__`](modules/readmenator._agent_output.py.md#agentoutputgenerator-__init__) constructor of `AgentOutputGenerator` in `readmenator._agent_output`
@@ -928,6 +961,7 @@
 - [`__init__`](modules/readmenator._graphrag.py.md#graphragsearcher-__init__) constructor of `GraphRagSearcher` in `readmenator._graphrag`
 - [`__init__`](modules/readmenator._graphrag.py.md#graphragstore-__init__) constructor of `GraphRagStore` in `readmenator._graphrag`
 - [`__init__`](modules/readmenator._hotspots.py.md#hotspotanalyzer-__init__) constructor of `HotspotAnalyzer` in `readmenator._hotspots`
+- [`__init__`](modules/readmenator._hypotheses.py.md#hypothesisvalidator-__init__) constructor of `HypothesisValidator` in `readmenator._hypotheses`
 - [`__init__`](modules/readmenator._resolver.py.md#importresolver-__init__) constructor of `ImportResolver` in `readmenator._resolver`
 - [`__init__`](modules/readmenator._diagrams.py.md#interactivemaprenderer-__init__) constructor of `InteractiveMapRenderer` in `readmenator._diagrams`
 - [`__init__`](modules/readmenator.parsers._base.py.md#languageparser-__init__) constructor of `LanguageParser` in `readmenator.parsers._base`
@@ -946,7 +980,10 @@
 - [`__init__`](modules/readmenator._provenance.py.md#provenanceauditor-__init__) constructor of `ProvenanceAuditor` in `readmenator._provenance`
 - [`__init__`](modules/readmenator._pytypes.py.md#pythonreceivertypes-__init__) constructor of `PythonReceiverTypes` in `readmenator._pytypes`
 - [`__init__`](modules/readmenator._query.py.md#queryengine-__init__) constructor of `QueryEngine` in `readmenator._query`
+- [`__init__`](modules/readmenator._uncertainty.py.md#randomforestscorer-__init__) constructor of `RandomForestScorer` in `readmenator._uncertainty`
 - [`__init__`](modules/readmenator._readme_injector.py.md#readmeinjector-__init__) constructor of `ReadmeInjector` in `readmenator._readme_injector`
+- [`__init__`](modules/readmenator._receipts.py.md#receiptingestor-__init__) constructor of `ReceiptIngestor` in `readmenator._receipts`
+- [`__init__`](modules/readmenator._receipts.py.md#receiptsreconciler-__init__) constructor of `ReceiptsReconciler` in `readmenator._receipts`
 - [`__init__`](modules/readmenator_orchestrator.py.md#repositoryprocessor-__init__) constructor of `RepositoryProcessor` in `readmenator_orchestrator`
 - [`__init__`](modules/readmenator._projections.py.md#riskprojection-__init__) constructor of `RiskProjection` in `readmenator._projections`
 - [`__init__`](modules/readmenator._rule_gen.py.md#rulegenerator-__init__) constructor of `RuleGenerator` in `readmenator._rule_gen`
@@ -1010,6 +1047,7 @@
 - [`kind`](modules/readmenator._apidocs.py.md#apiparam-kind) attribute of `ApiParam` in `readmenator._apidocs`
 - [`kind`](modules/readmenator._models.py.md#dataflowissue-kind) attribute of `DataflowIssue` in `readmenator._models`
 - [`kind`](modules/readmenator._models.py.md#edge-kind) attribute of `Edge` in `readmenator._models`
+- [`kind`](modules/readmenator._receipts.py.md#edgeinfo-kind) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`kind`](modules/readmenator._flowlayout.py.md#flowgraph-kind) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`kind`](modules/readmenator._diagrams.py.md#mapdelta-kind) attribute of `MapDelta` in `readmenator._diagrams`
 - [`kind`](modules/readmenator._diagrams.py.md#mapedge-kind) attribute of `MapEdge` in `readmenator._diagrams`
@@ -1020,7 +1058,10 @@
 - [`kind`](modules/readmenator._models.py.md#symbol-kind) attribute of `Symbol` in `readmenator._models`
 - [`kind`](modules/readmenator._symindex.py.md#symboldef-kind) attribute of `SymbolDef` in `readmenator._symindex`
 - [`kind`](modules/readmenator._diagrams.py.md#systemmap-kind) attribute of `SystemMap` in `readmenator._diagrams`
+- [`KIND_CANDIDATE`](modules/readmenator._receipts.py.md#kind_candidate) constant in `readmenator._receipts`
 - [`KIND_MODULE`](modules/readmenator._apidocs.py.md#kind_module) constant in `readmenator._apidocs`
+- [`KIND_OBSERVED`](modules/readmenator._receipts.py.md#kind_observed) constant in `readmenator._receipts`
+- [`KIND_PREDICTED`](modules/readmenator._receipts.py.md#kind_predicted) constant in `readmenator._receipts`
 - [`KIND_TITLES`](modules/readmenator._apidocs_render.py.md#kind_titles) constant in `readmenator._apidocs_render`
 - [`KotlinParser`](modules/readmenator.parsers._kotlin.py.md#kotlinparser) class in `readmenator.parsers._kotlin`
 
@@ -1095,6 +1136,8 @@
 - [`load`](modules/readmenator._cache.py.md#filecache-load) method of `FileCache` in `readmenator._cache`
 - [`load`](modules/readmenator._graphrag.py.md#graphragstore-load) method of `GraphRagStore` in `readmenator._graphrag`
 - [`load_analysis`](modules/readmenator._cache.py.md#filecache-load_analysis) method of `FileCache` in `readmenator._cache`
+- [`load_dir`](modules/readmenator._receipts.py.md#receiptingestor-load_dir) method of `ReceiptIngestor` in `readmenator._receipts`
+- [`load_file`](modules/readmenator._receipts.py.md#receiptingestor-load_file) method of `ReceiptIngestor` in `readmenator._receipts`
 - [`load_project_config`](modules/readmenator._project_config.py.md#load_project_config) function in `readmenator._project_config`
 - [`local_search`](modules/readmenator._graphrag.py.md#graphragsearcher-local_search) method of `GraphRagSearcher` in `readmenator._graphrag`
 - [`LuaParser`](modules/readmenator.parsers._lua.py.md#luaparser) class in `readmenator.parsers._lua`
@@ -1203,8 +1246,14 @@
 - [`modal_html`](modules/readmenator._viewer_ui.py.md#modal_html) function in `readmenator._viewer_ui`
 - [`modal_script`](modules/readmenator._viewer_ui.py.md#modal_script) function in `readmenator._viewer_ui`
 - [`mode`](modules/readmenator._graphrag.py.md#ragcontext-mode) attribute of `RagContext` in `readmenator._graphrag`
+- [`mode`](modules/readmenator._receipts.py.md#releasereceiptrecord-mode) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`mode_color`](modules/readmenator._video.py.md#mode_color) function in `readmenator._video`
 - [`model`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder-model) method of `ArchitectureDiagramBuilder` in `readmenator._flowcharts`
+- [`model`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-model) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
+- [`model_kind`](modules/readmenator._uncertainty.py.md#randomforestscorer-model_kind) attribute of `RandomForestScorer` in `readmenator._uncertainty`
+- [`model_kind`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-model_kind) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
+- [`MODEL_NAME`](modules/readmenator._uncertainty.py.md#model_name) constant in `readmenator._uncertainty`
+- [`MODEL_VERSION`](modules/readmenator._uncertainty.py.md#model_version) constant in `readmenator._uncertainty`
 - [`model_version`](modules/readmenator._rank.py.md#rankedresult-model_version) attribute of `RankedResult` in `readmenator._rank`
 - [`modifiers`](modules/readmenator._apidocs.py.md#apientity-modifiers) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`module_display_name`](modules/readmenator._apidocs_render.py.md#module_display_name) function in `readmenator._apidocs_render`
@@ -1266,6 +1315,7 @@
 ## O
 
 - [`objects`](modules/readmenator._category.py.md#category-objects) property of `Category` in `readmenator._category`
+- [`observed_edges`](modules/readmenator._receipts.py.md#receiptingestor-observed_edges) method of `ReceiptIngestor` in `readmenator._receipts`
 - [`offset`](modules/readmenator._yaralite.py.md#yaralitehit-offset) attribute of `YaraLiteHit` in `readmenator._yaralite`
 - [`ollama`](modules/readmenator._pipeline.py.md#analyzerfactory-ollama) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`OLLAMA_ENABLED`](modules/readmenator._config.py.md#config-ollama_enabled) attribute of `Config` in `readmenator._config`
@@ -1333,6 +1383,7 @@
 - [`payload_script`](modules/readmenator._htmlpack.py.md#payload_script) function in `readmenator._htmlpack`
 - [`personalized_pagerank`](modules/readmenator._rank.py.md#personalized_pagerank) function in `readmenator._rank`
 - [`PHPParser`](modules/readmenator.parsers._php.py.md#phpparser) class in `readmenator.parsers._php`
+- [`platforms`](modules/readmenator._receipts.py.md#releasereceiptrecord-platforms) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`pluralize_symbol_kind`](modules/readmenator._models.py.md#pluralize_symbol_kind) function in `readmenator._models`
 - [`points`](modules/readmenator._flowlayout.py.md#flowedge-points) attribute of `FlowEdge` in `readmenator._flowlayout`
 - [`PolyglotScanner`](modules/readmenator._scanner.py.md#polyglotscanner) class in `readmenator._scanner`
@@ -1340,9 +1391,12 @@
 - [`ppr_score`](modules/readmenator._rank.py.md#rankeditem-ppr_score) attribute of `RankedItem` in `readmenator._rank`
 - [`pr_body_template`](modules/readmenator_orchestrator.py.md#config-pr_body_template) attribute of `Config` in `readmenator_orchestrator`
 - [`pr_title`](modules/readmenator_orchestrator.py.md#config-pr_title) attribute of `Config` in `readmenator_orchestrator`
+- [`predict_uncertain_edges`](modules/readmenator._uncertainty.py.md#predict_uncertain_edges) function in `readmenator._uncertainty`
+- [`prediction_edges`](modules/readmenator._uncertainty.py.md#prediction_edges) function in `readmenator._uncertainty`
 - [`PRIVACY_MODE`](modules/readmenator._config.py.md#config-privacy_mode) attribute of `Config` in `readmenator._config`
 - [`process`](modules/readmenator_orchestrator.py.md#repositoryprocessor-process) method of `RepositoryProcessor` in `readmenator_orchestrator`
 - [`PROGRESS_REPORT_BATCH`](modules/readmenator._config.py.md#config-progress_report_batch) attribute of `Config` in `readmenator._config`
+- [`project`](modules/readmenator._receipts.py.md#releasereceiptrecord-project) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`project3d`](modules/readmenator._video.py.md#project3d) function in `readmenator._video`
 - [`PROJECT_ACCENT`](modules/readmenator._config.py.md#config-project_accent) attribute of `Config` in `readmenator._config`
 - [`PROJECT_ACCENT2`](modules/readmenator._config.py.md#config-project_accent2) attribute of `Config` in `readmenator._config`
@@ -1360,7 +1414,9 @@
 - [`PROJECT_PAGES_URL`](modules/readmenator._config.py.md#config-project_pages_url) attribute of `Config` in `readmenator._config`
 - [`Projection`](modules/readmenator._projections.py.md#projection) protocol in `readmenator._projections`
 - [`ProjectMemory`](modules/readmenator._memory.py.md#projectmemory) class in `readmenator._memory`
+- [`proposed_by`](modules/readmenator._hypotheses.py.md#hypothesis-proposed_by) attribute of `Hypothesis` in `readmenator._hypotheses`
 - [`provenance`](modules/readmenator._pipeline.py.md#analyzerfactory-provenance) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`provenance`](modules/readmenator._receipts.py.md#edgeinfo-provenance) attribute of `EdgeInfo` in `readmenator._receipts`
 - [`provenance`](modules/readmenator._provenance.py.md#provenancefinding-provenance) attribute of `ProvenanceFinding` in `readmenator._provenance`
 - [`PROVENANCE_ENABLED`](modules/readmenator._config.py.md#config-provenance_enabled) attribute of `Config` in `readmenator._config`
 - [`ProvenanceAuditor`](modules/readmenator._provenance.py.md#provenanceauditor) class in `readmenator._provenance`
@@ -1399,6 +1455,7 @@
 - [`RagRelation`](modules/readmenator._graphrag.py.md#ragrelation) class in `readmenator._graphrag`
 - [`RagTextUnit`](modules/readmenator._graphrag.py.md#ragtextunit) class in `readmenator._graphrag`
 - [`raises`](modules/readmenator._docstrings.py.md#doccomment-raises) attribute of `DocComment` in `readmenator._docstrings`
+- [`RandomForestScorer`](modules/readmenator._uncertainty.py.md#randomforestscorer) class in `readmenator._uncertainty`
 - [`rank`](modules/readmenator._rank.py.md#compositeranker-rank) method of `CompositeRanker` in `readmenator._rank`
 - [`rank`](modules/readmenator._flowlayout.py.md#flownode-rank) attribute of `FlowNode` in `readmenator._flowlayout`
 - [`rank`](modules/readmenator._graphrag.py.md#ragentity-rank) attribute of `RagEntity` in `readmenator._graphrag`
@@ -1421,6 +1478,7 @@
 - [`RANKING_TOP_N`](modules/readmenator._config.py.md#config-ranking_top_n) attribute of `Config` in `readmenator._config`
 - [`rating`](modules/readmenator._graphrag.py.md#ragcommunity-rating) attribute of `RagCommunity` in `readmenator._graphrag`
 - [`rating_explanation`](modules/readmenator._graphrag.py.md#ragcommunity-rating_explanation) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`rationale`](modules/readmenator._hypotheses.py.md#hypothesis-rationale) attribute of `Hypothesis` in `readmenator._hypotheses`
 - [`read`](modules/readmenator._mcp_server.py.md#mcpresource-read) method of `MCPResource` in `readmenator._mcp_server`
 - [`read`](modules/readmenator._memory.py.md#projectmemory-read) method of `ProjectMemory` in `readmenator._memory`
 - [`read_api_jsonl`](modules/readmenator._apidocs_render.py.md#read_api_jsonl) function in `readmenator._apidocs_render`
@@ -1434,11 +1492,18 @@
 - [`readmenatorApplication`](modules/readmenator._app.py.md#readmenatorapplication) class in `readmenator._app`
 - [`reason`](modules/readmenator._exclusions.py.md#exclusionentry-reason) attribute of `ExclusionEntry` in `readmenator._exclusions`
 - [`reasons`](modules/readmenator._flowcharts.py.md#entrypoint-reasons) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`reasons`](modules/readmenator._hypotheses.py.md#hypothesisverdict-reasons) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`rebuild`](modules/readmenator._app.py.md#readmenatorapplication-rebuild) method of `readmenatorApplication` in `readmenator._app`
+- [`RECEIPT_SCHEMA_PREFIX`](modules/readmenator._receipts.py.md#receipt_schema_prefix) constant in `readmenator._receipts`
+- [`ReceiptIngestor`](modules/readmenator._receipts.py.md#receiptingestor) class in `readmenator._receipts`
+- [`RECEIPTS_MAX_HISTORICAL`](modules/readmenator._config.py.md#config-receipts_max_historical) attribute of `Config` in `readmenator._config`
+- [`RECEIPTS_SCAN_DIR`](modules/readmenator._config.py.md#config-receipts_scan_dir) attribute of `Config` in `readmenator._config`
+- [`ReceiptsReconciler`](modules/readmenator._receipts.py.md#receiptsreconciler) class in `readmenator._receipts`
 - [`receiver`](modules/readmenator._symindex.py.md#callsite-receiver) attribute of `CallSite` in `readmenator._symindex`
 - [`receiver_class`](modules/readmenator._pytypes.py.md#pythonreceivertypes-receiver_class) method of `PythonReceiverTypes` in `readmenator._pytypes`
 - [`reclassified_as`](modules/readmenator._exclusions.py.md#exclusionentry-reclassified_as) attribute of `ExclusionEntry` in `readmenator._exclusions`
 - [`recommendation`](modules/readmenator._models.py.md#deadcodereport-recommendation) attribute of `DeadCodeReport` in `readmenator._models`
+- [`reconcile`](modules/readmenator._receipts.py.md#receiptsreconciler-reconcile) method of `ReceiptsReconciler` in `readmenator._receipts`
 - [`recover_comment`](modules/readmenator._docstrings.py.md#recover_comment) function in `readmenator._docstrings`
 - [`recursive`](modules/readmenator._flowcharts.py.md#flowstep-recursive) attribute of `FlowStep` in `readmenator._flowcharts`
 - [`RED`](modules/readmenator._video.py.md#red) constant in `readmenator._video`
@@ -1458,6 +1523,10 @@
 - [`relations`](modules/readmenator._models.py.md#conceptgraph-relations) attribute of `ConceptGraph` in `readmenator._models`
 - [`relations`](modules/readmenator._graphrag.py.md#ragcontext-relations) attribute of `RagContext` in `readmenator._graphrag`
 - [`relationships`](modules/readmenator._graphrag.py.md#graphragindex-relationships) attribute of `GraphRagIndex` in `readmenator._graphrag`
+- [`ReleaseReceiptRecord`](modules/readmenator._receipts.py.md#releasereceiptrecord) class in `readmenator._receipts`
+- [`RELEASES_DIR`](modules/readmenator._config.py.md#config-releases_dir) attribute of `Config` in `readmenator._config`
+- [`releases_markdown`](modules/readmenator._receipts.py.md#receiptsreconciler-releases_markdown) method of `ReceiptsReconciler` in `readmenator._receipts`
+- [`RELEASES_PAGE_NAME`](modules/readmenator._receipts.py.md#releases_page_name) constant in `readmenator._receipts`
 - [`remember`](modules/readmenator._memory.py.md#projectmemory-remember) method of `ProjectMemory` in `readmenator._memory`
 - [`remember`](modules/readmenator._app.py.md#readmenatorapplication-remember) method of `readmenatorApplication` in `readmenator._app`
 - [`remote`](modules/readmenator._gh_wiki.py.md#wikipublishresult-remote) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
@@ -1489,6 +1558,7 @@
 - [`repeat`](modules/readmenator._flowcharts.py.md#flowstep-repeat) attribute of `FlowStep` in `readmenator._flowcharts`
 - [`reports`](modules/readmenator._graphrag.py.md#ragcontext-reports) attribute of `RagContext` in `readmenator._graphrag`
 - [`RepositoryProcessor`](modules/readmenator_orchestrator.py.md#repositoryprocessor) class in `readmenator_orchestrator`
+- [`REQUIRED_FIELDS`](modules/readmenator._hypotheses.py.md#required_fields) constant in `readmenator._hypotheses`
 - [`rerouted`](modules/readmenator._diagrams.py.md#mapdelta-rerouted) attribute of `MapDelta` in `readmenator._diagrams`
 - [`resolve`](modules/readmenator._apidocs_render.py.md#apilinker-resolve) method of `ApiLinker` in `readmenator._apidocs_render`
 - [`resolve`](modules/readmenator._resolver.py.md#importresolver-resolve) method of `ImportResolver` in `readmenator._resolver`
@@ -1563,6 +1633,9 @@
 - [`SCHEMA_VERSION`](modules/readmenator._graphrag.py.md#schema_version) constant in `readmenator._graphrag`
 - [`scope_at`](modules/readmenator._pytypes.py.md#pythonreceivertypes-scope_at) method of `PythonReceiverTypes` in `readmenator._pytypes`
 - [`score`](modules/readmenator._flowcharts.py.md#entrypoint-score) attribute of `EntryPoint` in `readmenator._flowcharts`
+- [`score`](modules/readmenator._uncertainty.py.md#heuristicscorer-score) method of `HeuristicScorer` in `readmenator._uncertainty`
+- [`score`](modules/readmenator._uncertainty.py.md#randomforestscorer-score) method of `RandomForestScorer` in `readmenator._uncertainty`
+- [`score`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-score) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
 - [`scores`](modules/readmenator._graphrag.py.md#bm25index-scores) method of `Bm25Index` in `readmenator._graphrag`
 - [`search`](modules/readmenator._graphrag.py.md#graphragsearcher-search) method of `GraphRagSearcher` in `readmenator._graphrag`
 - [`security`](modules/readmenator._pipeline.py.md#analyzerfactory-security) property of `AnalyzerFactory` in `readmenator._pipeline`
@@ -1649,6 +1722,7 @@
 - [`source_file`](modules/readmenator._models.py.md#taintpath-source_file) attribute of `TaintPath` in `readmenator._models`
 - [`source_fingerprint`](modules/readmenator._cache.py.md#source_fingerprint) function in `readmenator._cache`
 - [`source_layer`](modules/readmenator._models.py.md#layerviolation-source_layer) attribute of `LayerViolation` in `readmenator._models`
+- [`source_path`](modules/readmenator._receipts.py.md#releasereceiptrecord-source_path) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`SourceEntry`](modules/readmenator._sourceview.py.md#sourceentry) class in `readmenator._sourceview`
 - [`sourceview`](modules/readmenator._pipeline.py.md#analyzerfactory-sourceview) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`SOURCEVIEW_CHUNK_LINES`](modules/readmenator._config.py.md#config-sourceview_chunk_lines) attribute of `Config` in `readmenator._config`
@@ -1668,6 +1742,11 @@
 - [`start_line`](modules/readmenator._graphrag.py.md#ragtextunit-start_line) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`start_line`](modules/readmenator._models.py.md#refactoringaction-start_line) attribute of `RefactoringAction` in `readmenator._models`
 - [`static_patterns`](modules/readmenator._provenance.py.md#provenancefinding-static_patterns) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`status`](modules/readmenator._hypotheses.py.md#hypothesisverdict-status) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
+- [`status`](modules/readmenator._receipts.py.md#releasereceiptrecord-status) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
+- [`STATUS_REJECTED`](modules/readmenator._hypotheses.py.md#status_rejected) constant in `readmenator._hypotheses`
+- [`STATUS_VERIFIED`](modules/readmenator._hypotheses.py.md#status_verified) constant in `readmenator._hypotheses`
+- [`steps`](modules/readmenator._receipts.py.md#releasereceiptrecord-steps) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`stochastic_row`](modules/readmenator._category.py.md#typedgraph-stochastic_row) method of `TypedGraph` in `readmenator._category`
 - [`stop`](modules/readmenator._watcher.py.md#directorywatcher-stop) method of `DirectoryWatcher` in `readmenator._watcher`
 - [`strength`](modules/readmenator._models.py.md#conceptrelation-strength) attribute of `ConceptRelation` in `readmenator._models`
@@ -1729,6 +1808,7 @@
 
 ## T
 
+- [`tag`](modules/readmenator._receipts.py.md#releasereceiptrecord-tag) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`taint`](modules/readmenator._models.py.md#analysisresultv2-taint) attribute of `AnalysisResultV2` in `readmenator._models`
 - [`taint`](modules/readmenator._pipeline.py.md#analyzerfactory-taint) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`TAINT_ENABLED`](modules/readmenator._config.py.md#config-taint_enabled) attribute of `Config` in `readmenator._config`
@@ -1789,8 +1869,11 @@
 - [`to_dict`](modules/readmenator._docstrings.py.md#doccomment-to_dict) method of `DocComment` in `readmenator._docstrings`
 - [`to_dict`](modules/readmenator._docstrings.py.md#docfield-to_dict) method of `DocField` in `readmenator._docstrings`
 - [`to_dict`](modules/readmenator._apidocs.py.md#docwarning-to_dict) method of `DocWarning` in `readmenator._apidocs`
+- [`to_dict`](modules/readmenator._receipts.py.md#edgeinfo-to_dict) method of `EdgeInfo` in `readmenator._receipts`
 - [`to_dict`](modules/readmenator._flowlayout.py.md#flowgraph-to_dict) method of `FlowGraph` in `readmenator._flowlayout`
 - [`to_dict`](modules/readmenator._graphrag.py.md#graphragindex-to_dict) method of `GraphRagIndex` in `readmenator._graphrag`
+- [`to_dict`](modules/readmenator._hypotheses.py.md#hypothesis-to_dict) method of `Hypothesis` in `readmenator._hypotheses`
+- [`to_dict`](modules/readmenator._hypotheses.py.md#hypothesisverdict-to_dict) method of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`to_forcegraph`](modules/readmenator._exporter.py.md#graphexporter-to_forcegraph) method of `GraphExporter` in `readmenator._exporter`
 - [`to_graphml`](modules/readmenator._exporter.py.md#graphexporter-to_graphml) method of `GraphExporter` in `readmenator._exporter`
 - [`to_html`](modules/readmenator._exporter.py.md#graphexporter-to_html) method of `GraphExporter` in `readmenator._exporter`
@@ -1833,6 +1916,7 @@
 - [`UML_MAX_CLASSES`](modules/readmenator._config.py.md#config-uml_max_classes) attribute of `Config` in `readmenator._config`
 - [`UmlGenerator`](modules/readmenator._uml.py.md#umlgenerator) class in `readmenator._uml`
 - [`UNASSIGNED_KEY`](modules/readmenator._bundlegraph.py.md#unassigned_key) constant in `readmenator._bundlegraph`
+- [`UncertaintyPrediction`](modules/readmenator._uncertainty.py.md#uncertaintyprediction) class in `readmenator._uncertainty`
 - [`unit_id`](modules/readmenator._graphrag.py.md#ragtextunit-unit_id) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`update`](modules/readmenator._app.py.md#readmenatorapplication-update) method of `readmenatorApplication` in `readmenator._app`
 - [`usage`](modules/readmenator._folder_readme.py.md#folderspec-usage) attribute of `FolderSpec` in `readmenator._folder_readme`
@@ -1841,7 +1925,9 @@
 
 ## V
 
+- [`validate`](modules/readmenator._hypotheses.py.md#hypothesisvalidator-validate) method of `HypothesisValidator` in `readmenator._hypotheses`
 - [`validate`](modules/readmenator._diagrams.py.md#systemmapvalidator-validate) method of `SystemMapValidator` in `readmenator._diagrams`
+- [`validate_json`](modules/readmenator._hypotheses.py.md#hypothesisvalidator-validate_json) method of `HypothesisValidator` in `readmenator._hypotheses`
 - [`validate_yaralite`](modules/readmenator._app.py.md#readmenatorapplication-validate_yaralite) method of `readmenatorApplication` in `readmenator._app`
 - [`validate_yaralite_rules`](modules/readmenator._yaralite.py.md#validate_yaralite_rules) function in `readmenator._yaralite`
 - [`value`](modules/readmenator._apidocs.py.md#apientity-value) attribute of `ApiEntity` in `readmenator._apidocs`
@@ -1850,6 +1936,8 @@
 - [`vendor_source`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-vendor_source) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`verb`](modules/readmenator._models.py.md#conceptrelation-verb) attribute of `ConceptRelation` in `readmenator._models`
 - [`verb_for_relation`](modules/readmenator._concepts.py.md#verb_for_relation) function in `readmenator._concepts`
+- [`version_from`](modules/readmenator._receipts.py.md#releasereceiptrecord-version_from) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
+- [`version_to`](modules/readmenator._receipts.py.md#releasereceiptrecord-version_to) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`video`](modules/readmenator._pipeline.py.md#analyzerfactory-video) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`VIDEO_BUNDLE_BETA`](modules/readmenator._config.py.md#config-video_bundle_beta) attribute of `Config` in `readmenator._config`
 - [`VIDEO_BUNDLE_S`](modules/readmenator._config.py.md#config-video_bundle_s) attribute of `Config` in `readmenator._config`
@@ -1941,8 +2029,10 @@
 - [`warnings`](modules/readmenator._apidocs.py.md#apireference-warnings) attribute of `ApiReference` in `readmenator._apidocs`
 - [`warnings`](modules/readmenator._diagrams.py.md#mapreceipt-warnings) attribute of `MapReceipt` in `readmenator._diagrams`
 - [`watch`](modules/readmenator._app.py.md#readmenatorapplication-watch) method of `readmenatorApplication` in `readmenator._app`
+- [`WEAK_NO_HISTORY_PENALTY`](modules/readmenator._uncertainty.py.md#heuristicscorer-weak_no_history_penalty) attribute of `HeuristicScorer` in `readmenator._uncertainty`
 - [`weight`](modules/readmenator._category.py.md#morphism-weight) property of `Morphism` in `readmenator._category`
 - [`weight`](modules/readmenator._graphrag.py.md#ragrelation-weight) attribute of `RagRelation` in `readmenator._graphrag`
+- [`WEIGHTS`](modules/readmenator._uncertainty.py.md#heuristicscorer-weights) attribute of `HeuristicScorer` in `readmenator._uncertainty`
 - [`width`](modules/readmenator._flowlayout.py.md#flowgraph-width) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`wiki`](modules/readmenator._pipeline.py.md#analyzerfactory-wiki) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`WIKI_ENABLED`](modules/readmenator._config.py.md#config-wiki_enabled) attribute of `Config` in `readmenator._config`
@@ -1964,6 +2054,7 @@
 - [`write`](modules/readmenator._memory.py.md#projectmemory-write) method of `ProjectMemory` in `readmenator._memory`
 - [`write`](modules/readmenator._diagrams.py.md#visnetworkrenderer-write) method of `VisNetworkRenderer` in `readmenator._diagrams`
 - [`write_all`](modules/readmenator._folder_readme.py.md#folderreadmewriter-write_all) method of `FolderReadmeWriter` in `readmenator._folder_readme`
+- [`write_pages`](modules/readmenator._receipts.py.md#receiptsreconciler-write_pages) method of `ReceiptsReconciler` in `readmenator._receipts`
 - [`write_rules`](modules/readmenator._rule_gen.py.md#rulegenerator-write_rules) method of `RuleGenerator` in `readmenator._rule_gen`
 - [`write_static`](modules/readmenator._explorer.py.md#write_static) function in `readmenator._explorer`
 - [`write_viewer_config`](modules/readmenator._project_config.py.md#write_viewer_config) function in `readmenator._project_config`

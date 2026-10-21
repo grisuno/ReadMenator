@@ -1,6 +1,6 @@
 # readmenator/parsers
 
-readmenator/parsers groups 35 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.
+readmenator/parsers groups 37 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Architecture layer rule engine: forbidden and warning edges between layers.
 
 ```mermaid
 graph LR
@@ -9,16 +9,17 @@ graph LR
     tests -- "calls into" --> readmenator
 ```
 
-## readmenator (2.1)
+## readmenator (1.1)
 
-readmenator groups 27 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Mermaid graph renderer with intelligent pruning.
+readmenator groups 28 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Architecture layer rule engine: forbidden and warning edges between layers.
 
-## tests (2.2)
+## tests (1.2)
 
-tests groups 8 files (py) around TestMermaidRendererContract, setUp, test_renders_graph_header, test_renders_module_node, test_renders_symbol_subnodes. TestMermaidEdgeBudget: Contract: the structural map never exceeds Mermaid's 500-edge...
+tests groups 9 files (py) around TestLayerRuleEngineContract, setUp, _make_node, test_empty_graph_returns_empty_violations, test_no_layers_returns_empty_violations. TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer...
 
 **Files**:
 
+- readmenator/_layer_rules.py
 - readmenator/_mermaid.py
 - readmenator/_models.py
 - readmenator/_rule_gen.py
@@ -46,6 +47,7 @@ tests groups 8 files (py) around TestMermaidRendererContract, setUp, test_render
 - readmenator/parsers/_scala.py
 - readmenator/parsers/_shell.py
 - readmenator/parsers/_swift.py
+- tests/test_layer_rules.py
 - tests/test_mermaid.py
 - tests/test_models.py
 - tests/test_parsers_property.py

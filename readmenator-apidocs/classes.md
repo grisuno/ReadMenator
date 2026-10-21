@@ -54,6 +54,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`DocumentationGenerator`](modules/readmenator._documentation.py.md#documentationgenerator) class in `readmenator._documentation`
 - [`DocWarning`](modules/readmenator._apidocs.py.md#docwarning) class in `readmenator._apidocs`
 - [`Edge`](modules/readmenator._models.py.md#edge) class in `readmenator._models`
+- [`EdgeInfo`](modules/readmenator._receipts.py.md#edgeinfo) class in `readmenator._receipts`
 - [`EdgeKind`](modules/readmenator._category.py.md#edgekind) enum in `readmenator._category`(str, Enum)
 - [`Embedder`](modules/readmenator._embed.py.md#embedder) class in `readmenator._embed`
 - [`EntryPoint`](modules/readmenator._flowcharts.py.md#entrypoint) class in `readmenator._flowcharts`
@@ -78,8 +79,12 @@ Project types nested under the project types they derive from. External bases ar
 - [`GraphRagIndex`](modules/readmenator._graphrag.py.md#graphragindex) class in `readmenator._graphrag`
 - [`GraphRagSearcher`](modules/readmenator._graphrag.py.md#graphragsearcher) class in `readmenator._graphrag`
 - [`GraphRagStore`](modules/readmenator._graphrag.py.md#graphragstore) class in `readmenator._graphrag`
+- [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
 - [`HotspotAnalyzer`](modules/readmenator._hotspots.py.md#hotspotanalyzer) class in `readmenator._hotspots`
 - [`HotspotResult`](modules/readmenator._models.py.md#hotspotresult) class in `readmenator._models`
+- [`Hypothesis`](modules/readmenator._hypotheses.py.md#hypothesis) class in `readmenator._hypotheses`
+- [`HypothesisValidator`](modules/readmenator._hypotheses.py.md#hypothesisvalidator) class in `readmenator._hypotheses`
+- [`HypothesisVerdict`](modules/readmenator._hypotheses.py.md#hypothesisverdict) class in `readmenator._hypotheses`
 - [`IdentityProjection`](modules/readmenator._projections.py.md#identityprojection) class in `readmenator._projections`
 - [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
 - [`InteractiveMapRenderer`](modules/readmenator._diagrams.py.md#interactivemaprenderer) class in `readmenator._diagrams`
@@ -138,13 +143,17 @@ Project types nested under the project types they derive from. External bases ar
 - [`RagEntity`](modules/readmenator._graphrag.py.md#ragentity) class in `readmenator._graphrag`
 - [`RagRelation`](modules/readmenator._graphrag.py.md#ragrelation) class in `readmenator._graphrag`
 - [`RagTextUnit`](modules/readmenator._graphrag.py.md#ragtextunit) class in `readmenator._graphrag`
+- [`RandomForestScorer`](modules/readmenator._uncertainty.py.md#randomforestscorer) class in `readmenator._uncertainty`
 - [`RankConfig`](modules/readmenator._rank.py.md#rankconfig) class in `readmenator._rank`
 - [`RankedItem`](modules/readmenator._rank.py.md#rankeditem) class in `readmenator._rank`
 - [`RankedResult`](modules/readmenator._rank.py.md#rankedresult) class in `readmenator._rank`
 - [`ReadmeInjector`](modules/readmenator._readme_injector.py.md#readmeinjector) class in `readmenator._readme_injector`
 - [`readmenatorApplication`](modules/readmenator._app.py.md#readmenatorapplication) class in `readmenator._app`
+- [`ReceiptIngestor`](modules/readmenator._receipts.py.md#receiptingestor) class in `readmenator._receipts`
+- [`ReceiptsReconciler`](modules/readmenator._receipts.py.md#receiptsreconciler) class in `readmenator._receipts`
 - [`RefactoringAction`](modules/readmenator._models.py.md#refactoringaction) class in `readmenator._models`
 - [`RefactoringPlan`](modules/readmenator._models.py.md#refactoringplan) class in `readmenator._models`
+- [`ReleaseReceiptRecord`](modules/readmenator._receipts.py.md#releasereceiptrecord) class in `readmenator._receipts`
 - [`RepositoryProcessor`](modules/readmenator_orchestrator.py.md#repositoryprocessor) class in `readmenator_orchestrator`
 - [`ResolvedCall`](modules/readmenator._symindex.py.md#resolvedcall) class in `readmenator._symindex`
 - [`RiskProjection`](modules/readmenator._projections.py.md#riskprojection) class in `readmenator._projections`
@@ -171,6 +180,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`TestOrchestrator`](modules/readmenator_orchestrator.py.md#testorchestrator) class in `readmenator_orchestrator`(unittest.TestCase)
 - [`TypedGraph`](modules/readmenator._category.py.md#typedgraph) class in `readmenator._category`
 - [`UmlGenerator`](modules/readmenator._uml.py.md#umlgenerator) class in `readmenator._uml`
+- [`UncertaintyPrediction`](modules/readmenator._uncertainty.py.md#uncertaintyprediction) class in `readmenator._uncertainty`
 - [`VisNetworkRenderer`](modules/readmenator._diagrams.py.md#visnetworkrenderer) class in `readmenator._diagrams`
 - [`WikiGenerator`](modules/readmenator._wiki.py.md#wikigenerator) class in `readmenator._wiki`
 - [`WikiPublishResult`](modules/readmenator._gh_wiki.py.md#wikipublishresult) class in `readmenator._gh_wiki`

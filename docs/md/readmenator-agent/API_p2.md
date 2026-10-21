@@ -1,6 +1,16 @@
 # API (page 2 of 2)
 Previous: [API.md](API.md)
 
+## readmenator/_hypotheses.py
+Depends on: `readmenator/_receipts.py`
+Imported by: `tests/test_receipts.py`
+- `Hypothesis.from_dict` (method) `readmenator/_hypotheses.py:33` `def from_dict(cls, data)`
+- `Hypothesis.to_dict` (method) `readmenator/_hypotheses.py:49` `def to_dict(self)`
+- `HypothesisVerdict.to_dict` (method) `readmenator/_hypotheses.py:64` `def to_dict(self)`
+- `HypothesisValidator.__init__` (method) `readmenator/_hypotheses.py:84` `def __init__(self, known_edges, known_symbols)`
+- `HypothesisValidator.validate` (method) `readmenator/_hypotheses.py:92` `def validate(self, hypothesis, allow_assumed)`
+- `HypothesisValidator.validate_json` (method) `readmenator/_hypotheses.py:126` `def validate_json(self, raw_json, allow_assumed)` -- Validate a JSON list (or single object) of LLM proposals.
+
 ## readmenator/_layer_rules.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/_pipeline.py`, `tests/test_layer_rules.py`
@@ -225,6 +235,21 @@ Imported by: `readmenator/__init__.py`, `readmenator/_pipeline.py`, `tests/test_
 - `ReadmeInjector.inject` (method) `readmenator/_readme_injector.py:219` `def inject(self, project_root)` -- Inject or refresh the knowledge base section in the README.
 - `ReadmeInjector.remove` (method) `readmenator/_readme_injector.py:311` `def remove(self, project_root)` -- Remove the injected section from the README.
 
+## readmenator/_receipts.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_app.py`, `readmenator/_hypotheses.py`, `readmenator/_uncertainty.py`, `tests/test_receipts.py`
+- `ReleaseReceiptRecord.from_dict` (method) `readmenator/_receipts.py:64` `def from_dict(cls, data, source_path)`
+- `EdgeInfo.to_dict` (method) `readmenator/_receipts.py:101` `def to_dict(self)`
+- `ReceiptIngestor.__init__` (method) `readmenator/_receipts.py:116` `def __init__(self, config)`
+- `ReceiptIngestor.load_file` (method) `readmenator/_receipts.py:121` `def load_file(self, path)`
+- `ReceiptIngestor.load_dir` (method) `readmenator/_receipts.py:134` `def load_dir(self, receipts_dir)`
+- `ReceiptIngestor.observed_edges` (method) `readmenator/_receipts.py:156` `def observed_edges(self, records)` -- Observed facts: explicit receipt edges plus command-derived ones.
+- `ReceiptIngestor.candidate_edges` (method) `readmenator/_receipts.py:169` `def candidate_edges(self, records)` -- Feasible-set edges (kind=candidate) declared by receipts.
+- `ReceiptsReconciler.__init__` (method) `readmenator/_receipts.py:272` `def __init__(self, config)`
+- `ReceiptsReconciler.reconcile` (method) `readmenator/_receipts.py:276` `def reconcile(self, records, candidate_edges, predicted_edges)`
+- `ReceiptsReconciler.releases_markdown` (method) `readmenator/_receipts.py:307` `def releases_markdown(self, report)`
+- `ReceiptsReconciler.write_pages` (method) `readmenator/_receipts.py:330` `def write_pages(self, report, target_dir, out_dirname)`
+
 ## readmenator/_refactorizer.py
 Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 Imported by: `readmenator/_app.py`, `tests/test_refactorizer.py`
@@ -318,6 +343,18 @@ Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readme
 - `UmlGenerator.__init__` (method) `readmenator/_uml.py:36` `def __init__(self, config)`
 - `UmlGenerator.render_mermaid_class_diagram` (method) `readmenator/_uml.py:39` `def render_mermaid_class_diagram(self, nodes, edges)`
 - `UmlGenerator.generate_code` (method) `readmenator/_uml.py:129` `def generate_code(self, nodes, edges, target_language)`
+
+## readmenator/_uncertainty.py
+Depends on: `readmenator/_config.py`, `readmenator/_receipts.py`
+Imported by: `readmenator/_app.py`, `tests/test_receipts.py`
+- `featurize` (function) `readmenator/_uncertainty.py:83` `def featurize(edge, known_observed)`
+- `HeuristicScorer.score` (method) `readmenator/_uncertainty.py:129` `def score(self, features)`
+- `RandomForestScorer.__init__` (method) `readmenator/_uncertainty.py:143` `def __init__(self, n_estimators, random_state)`
+- `RandomForestScorer.available` (method) `readmenator/_uncertainty.py:149` `def available()`
+- `RandomForestScorer.fit` (method) `readmenator/_uncertainty.py:156` `def fit(self, x, y)`
+- `RandomForestScorer.score` (method) `readmenator/_uncertainty.py:171` `def score(self, features)`
+- `predict_uncertain_edges` (function) `readmenator/_uncertainty.py:187` `def predict_uncertain_edges(candidate_edges, known_observed, config, min_confidence, scorer)` -- Predict outcome probabilities for candidate edges.
+- `prediction_edges` (function) `readmenator/_uncertainty.py:214` `def prediction_edges(predictions, provenance_version)` -- Convert predictions into EdgeInfo records (kind=predicted).
 
 ## readmenator/_vendor/force-graph.min.js
 - `t` (function) `readmenator/_vendor/force-graph.min.js:2` -- Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph

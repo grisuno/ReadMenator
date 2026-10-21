@@ -3,6 +3,55 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestGDScriptParserContract` | class | `tests/test_parsers.py:412` | `class TestGDScriptParserContract(TestCase)` |
+| `TestGoParserContract` | class | `tests/test_parsers.py:157` | `class TestGoParserContract(TestCase)` |
+| `TestJavaParserContract` | class | `tests/test_parsers.py:277` | `class TestJavaParserContract(TestCase)` |
+| `TestJavaScriptParserContract` | class | `tests/test_parsers.py:238` | `class TestJavaScriptParserContract(TestCase)` |
+| `TestNimParserContract` | class | `tests/test_parsers.py:430` | `class TestNimParserContract(TestCase)` |
+| `TestPHPParserContract` | class | `tests/test_parsers.py:361` | `class TestPHPParserContract(TestCase)` |
+| `TestParserFactoryContract` | class | `tests/test_parsers.py:483` | `class TestParserFactoryContract(TestCase)` |
+| `TestPythonParserContract` | class | `tests/test_parsers.py:88` | `class TestPythonParserContract(TestCase)` |
+| `TestRustParserContract` | class | `tests/test_parsers.py:200` | `class TestRustParserContract(TestCase)` |
+| `TestShellParserContract` | class | `tests/test_parsers.py:342` | `class TestShellParserContract(TestCase)` |
+| `setUp` | method | `tests/test_parsers.py:23` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:89` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:158` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:201` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:239` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:278` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:310` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:343` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:362` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:388` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:413` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:431` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:457` | `def setUp(self)` |
+| `setUp` | method | `tests/test_parsers.py:484` | `def setUp(self)` |
+| `test_abstract_class` | method | `tests/test_parsers.py:301` | `def test_abstract_class(self)` |
+| `test_calls_are_not_prototypes` | method | `tests/test_parsers.py:71` | `def test_calls_are_not_prototypes(self)` |
+| `test_case_insensitive_extension` | method | `tests/test_parsers.py:507` | `def test_case_insensitive_extension(self)` |
+| `test_class_with_inheritance` | method | `tests/test_parsers.py:80` | `def test_class_with_inheritance(self)` |
+| `test_extracts_arrow_function` | method | `tests/test_parsers.py:249` | `def test_extracts_arrow_function(self)` |
+| `test_extracts_async_function` | method | `tests/test_parsers.py:114` | `def test_extracts_async_function(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:99` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:256` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:281` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:313` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:372` | `def test_extracts_class(self)` |
+| `test_extracts_class` | method | `tests/test_parsers.py:391` | `def test_extracts_class(self)` |
+| `test_extracts_class_with_bases` | method | `tests/test_parsers.py:147` | `def test_extracts_class_with_bases(self)` |
+| `test_extracts_define` | method | `tests/test_parsers.py:47` | `def test_extracts_define(self)` |
+| `test_extracts_extends` | method | `tests/test_parsers.py:423` | `def test_extracts_extends(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:26` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:92` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:161` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:204` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:242` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:365` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:398` | `def test_extracts_function(self)` |
+| `test_extracts_function` | method | `tests/test_parsers.py:416` | `def test_extracts_function(self)` |
+| `test_extracts_function_keyword` | method | `tests/test_parsers.py:353` | `def test_extracts_function_keyword(self)` |
+| `test_extracts_function_with_parentheses` | method | `tests/test_parsers.py:346` | `def test_extracts_function_with_parentheses(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:295` | `def test_extracts_import(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:405` | `def test_extracts_import(self)` |
 | `test_extracts_import` | method | `tests/test_parsers.py:448` | `def test_extracts_import(self)` |
@@ -251,6 +300,38 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_remove_strips_injected_section` | method | `tests/test_readme_injector.py:84` | `def test_remove_strips_injected_section(self)` |
 | `test_remove_without_injection_returns_false` | method | `tests/test_readme_injector.py:94` | `def test_remove_without_injection_returns_false(self)` |
 | `test_returns_none_when_no_readme` | method | `tests/test_readme_injector.py:135` | `def test_returns_none_when_no_readme(self)` |
+| `TestEdges` | class | `tests/test_receipts.py:155` | `class TestEdges` |
+| `TestHypotheses` | class | `tests/test_receipts.py:297` | `class TestHypotheses` |
+| `TestLoading` | class | `tests/test_receipts.py:127` | `class TestLoading` |
+| `TestReconciler` | class | `tests/test_receipts.py:187` | `class TestReconciler` |
+| `TestUncertainty` | class | `tests/test_receipts.py:238` | `class TestUncertainty` |
+| `_run` | method | `tests/test_receipts.py:188` | `def _run(self, records)` |
+| `_validator` | method | `tests/test_receipts.py:298` | `def _validator(self)` |
+| `test_already_observed_verified` | method | `tests/test_receipts.py:305` | `def test_already_observed_verified(self)` |
+| `test_callee_known_via_class_match_verified` | method | `tests/test_receipts.py:311` | `def test_callee_known_via_class_match_verified(self)` |
+| `test_candidate_edges_partition` | method | `tests/test_receipts.py:178` | `def test_candidate_edges_partition(self)` |
+| `test_command_derived_edges` | method | `tests/test_receipts.py:166` | `def test_command_derived_edges(self)` |
+| `test_confirmation_resolves_candidates` | method | `tests/test_receipts.py:197` | `def test_confirmation_resolves_candidates(self)` |
+| `test_extra_context_preserved` | method | `tests/test_receipts.py:355` | `def test_extra_context_preserved(self)` |
+| `test_feature_vector_shape` | method | `tests/test_receipts.py:239` | `def test_feature_vector_shape(self)` |
+| `test_heuristic_high_for_cli_evidence` | method | `tests/test_receipts.py:247` | `def test_heuristic_high_for_cli_evidence(self)` |
+| `test_heuristic_low_for_unobserved_generic` | method | `tests/test_receipts.py:253` | `def test_heuristic_low_for_unobserved_generic(self)` |
+| `test_json_list_validation` | method | `tests/test_receipts.py:341` | `def test_json_list_validation(self)` |
+| `test_load_bad_schema_rejected` | method | `tests/test_receipts.py:128` | `def test_load_bad_schema_rejected(self, tmp_path)` |
+| `test_load_dir_sorted_and_invalid_skipped` | method | `tests/test_receipts.py:142` | `def test_load_dir_sorted_and_invalid_skipped(self, tmp_path)` |
+| `test_load_valid_record` | method | `tests/test_receipts.py:134` | `def test_load_valid_record(self, tmp_path)` |
+| `test_markdown_lists_platforms_and_states` | method | `tests/test_receipts.py:208` | `def test_markdown_lists_platforms_and_states(self)` |
+| `test_min_confidence_filters` | method | `tests/test_receipts.py:269` | `def test_min_confidence_filters(self)` |
+| `test_missing_dir_returns_empty` | method | `tests/test_receipts.py:151` | `def test_missing_dir_returns_empty(self)` |
+| `test_missing_fields_rejected` | method | `tests/test_receipts.py:351` | `def test_missing_fields_rejected(self)` |
+| `test_observed_edges_explicit` | method | `tests/test_receipts.py:156` | `def test_observed_edges_explicit(self, tmp_path)` |
+| `test_planned_commands_not_observed` | method | `tests/test_receipts.py:173` | `def test_planned_commands_not_observed(self)` |
+| `test_predict_labels_predicted` | method | `tests/test_receipts.py:259` | `def test_predict_labels_predicted(self)` |
+| `test_random_forest_fallback_and_fit` | method | `tests/test_receipts.py:274` | `def test_random_forest_fallback_and_fit(self)` |
+| `test_unknown_callee_rejected` | method | `tests/test_receipts.py:321` | `def test_unknown_callee_rejected(self)` |
+| `test_unknown_caller_assumed_when_allowed` | method | `tests/test_receipts.py:334` | `def test_unknown_caller_assumed_when_allowed(self)` |
+| `test_unknown_caller_rejected_by_default` | method | `tests/test_receipts.py:328` | `def test_unknown_caller_rejected_by_default(self)` |
+| `test_write_pages_artifacts` | method | `tests/test_receipts.py:220` | `def test_write_pages_artifacts(self, tmp_path)` |
 | `TestMonolithRefactorizerContract` | class | `tests/test_refactorizer.py:18` | `class TestMonolithRefactorizerContract(TestCase)` |
 | `_make_edge` | method | `tests/test_refactorizer.py:37` | `def _make_edge(self, src, tgt)` |
 | `_make_node` | method | `tests/test_refactorizer.py:28` | `def _make_node(self, nid, symbols)` |
@@ -415,86 +496,5 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_empty_files_say_so` | method | `tests/test_sourceview.py:158` | `def test_empty_files_say_so(self)` |
 | `test_forcegraph_embeds_src_fields` | method | `tests/test_sourceview.py:64` | `def test_forcegraph_embeds_src_fields(self)` |
 | `test_missing_source_falls_back_to_live_api` | method | `tests/test_sourceview.py:127` | `def test_missing_source_falls_back_to_live_api(self)` |
-| `test_no_network_requests` | method | `tests/test_sourceview.py:94` | `def test_no_network_requests(self)` |
-| `test_privacy_mode_strips_viewer` | method | `tests/test_sourceview.py:108` | `def test_privacy_mode_strips_viewer(self)` |
-| `test_settings_carry_src_budgets` | method | `tests/test_sourceview.py:89` | `def test_settings_carry_src_budgets(self)` |
-| `test_static_pages_never_probe_the_api` | method | `tests/test_sourceview.py:136` | `def test_static_pages_never_probe_the_api(self)` |
-| `test_theme_tokens_for_both_modes` | method | `tests/test_sourceview.py:102` | `def test_theme_tokens_for_both_modes(self)` |
-| `test_untrusted_source_cannot_break_script` | method | `tests/test_sourceview.py:120` | `def test_untrusted_source_cannot_break_script(self)` |
-| `test_update_refreshes_explorer_sources` | method | `tests/test_sourceview.py:179` | `def test_update_refreshes_explorer_sources(self)` |
-| `TestSymbolIndexContract` | class | `tests/test_symindex.py:20` | `class TestSymbolIndexContract(TestCase)` |
-| `_node` | function | `tests/test_symindex.py:12` | `def _node(nid)` |
-| `setUp` | method | `tests/test_symindex.py:23` | `def setUp(self)` |
-| `test_build_assigns_spans` | method | `tests/test_symindex.py:33` | `def test_build_assigns_spans(self)` |
-| `test_edge_fallback_without_content` | method | `tests/test_symindex.py:81` | `def test_edge_fallback_without_content(self)` |
-| `test_methods_index_matches_pipe_keys` | method | `tests/test_symindex.py:71` | `def test_methods_index_matches_pipe_keys(self)` |
-| `test_python_call_sites_carry_lines` | method | `tests/test_symindex.py:40` | `def test_python_call_sites_carry_lines(self)` |
-| `test_resolve_follows_imports` | method | `tests/test_symindex.py:54` | `def test_resolve_follows_imports(self)` |
-| `test_resolve_prefers_same_file` | method | `tests/test_symindex.py:46` | `def test_resolve_prefers_same_file(self)` |
-| `test_unresolved_and_builtin_tiers` | method | `tests/test_symindex.py:62` | `def test_unresolved_and_builtin_tiers(self)` |
-| `TestTaintAnalyzerContract` | class | `tests/test_taint.py:10` | `class TestTaintAnalyzerContract(TestCase)` |
-| `_make_node` | method | `tests/test_taint.py:17` | `def _make_node(self, nid, label)` |
-| `setUp` | method | `tests/test_taint.py:13` | `def setUp(self)` |
-| `test_dangerous_import_by_language` | method | `tests/test_taint.py:62` | `def test_dangerous_import_by_language(self)` |
-| `test_direct_dangerous_import_found` | method | `tests/test_taint.py:31` | `def test_direct_dangerous_import_found(self)` |
-| `test_empty_graph_returns_empty_result` | method | `tests/test_taint.py:20` | `def test_empty_graph_returns_empty_result(self)` |
-| `test_max_depth_limits_propagation` | method | `tests/test_taint.py:77` | `def test_max_depth_limits_propagation(self)` |
-| `test_no_dangerous_imports_returns_empty` | method | `tests/test_taint.py:25` | `def test_no_dangerous_imports_returns_empty(self)` |
-| `test_taint_path_has_severity` | method | `tests/test_taint.py:70` | `def test_taint_path_has_severity(self)` |
-| `test_taint_propagates_through_resolved_edges` | method | `tests/test_taint.py:38` | `def test_taint_propagates_through_resolved_edges(self)` |
-| `_bkg` | function | `tests/test_taint_bdd.py:112` | `def _bkg()` |
-| `_build_project_files` | function | `tests/test_taint_bdd.py:29` | `def _build_project_files(project, root)` |
-| `_chain_given` | function | `tests/test_taint_bdd.py:144` | `def _chain_given()` |
-| `_chain_given2` | function | `tests/test_taint_bdd.py:163` | `def _chain_given2()` |
-| `_chain_when` | function | `tests/test_taint_bdd.py:148` | `def _chain_when(_taint_result)` |
-| `_check_direct_path` | function | `tests/test_taint_bdd.py:130` | `def _check_direct_path(_taint_result)` |
-| `_check_has_path` | function | `tests/test_taint_bdd.py:125` | `def _check_has_path(_taint_result)` |
-| `_check_js_dangerous` | function | `tests/test_taint_bdd.py:186` | `def _check_js_dangerous(_taint_result)` |
-| `_check_js_source` | function | `tests/test_taint_bdd.py:192` | `def _check_js_source(_taint_result)` |
-| `_check_long_path` | function | `tests/test_taint_bdd.py:152` | `def _check_long_path(_taint_result)` |
-| `_check_shallow` | function | `tests/test_taint_bdd.py:171` | `def _check_shallow(_taint_result)` |
-| `_check_sink` | function | `tests/test_taint_bdd.py:139` | `def _check_sink(_taint_result)` |
-| `_check_src` | function | `tests/test_taint_bdd.py:135` | `def _check_src(_taint_result)` |
-| `_direct_given` | function | `tests/test_taint_bdd.py:117` | `def _direct_given()` |
-| `_direct_when` | function | `tests/test_taint_bdd.py:121` | `def _direct_when(_taint_result)` |
-| `_js_given` | function | `tests/test_taint_bdd.py:178` | `def _js_given()` |
-| `_js_when` | function | `tests/test_taint_bdd.py:182` | `def _js_when(_taint_result)` |
-| `_run_shallow` | function | `tests/test_taint_bdd.py:167` | `def _run_shallow(_shallow_cfg)` |
-| `_run_taint` | function | `tests/test_taint_bdd.py:54` | `def _run_taint(files, cfg)` |
-| `_scan_project` | function | `tests/test_taint_bdd.py:36` | `def _scan_project(root, cfg)` |
-| `_shallow_cfg` | function | `tests/test_taint_bdd.py:159` | `def _shallow_cfg()` |
-| `test_bdd_skipped` | function | `tests/test_taint_bdd.py:87` | `def test_bdd_skipped()` |
-| `test_cross_language_taint` | function | `tests/test_taint_bdd.py:83` | `def test_cross_language_taint()` |
-| `test_direct_dangerous_import` | function | `tests/test_taint_bdd.py:71` | `def test_direct_dangerous_import()` |
-| `test_taint_max_depth` | function | `tests/test_taint_bdd.py:79` | `def test_taint_max_depth()` |
-| `test_taint_propagates_chain` | function | `tests/test_taint_bdd.py:75` | `def test_taint_propagates_chain()` |
-| `TestUmlCodeGenerationCSharp` | class | `tests/test_uml.py:281` | `class TestUmlCodeGenerationCSharp(TestCase)` |
-| `TestUmlCodeGenerationCpp` | class | `tests/test_uml.py:181` | `class TestUmlCodeGenerationCpp(TestCase)` |
-| `TestUmlCodeGenerationGo` | class | `tests/test_uml.py:306` | `class TestUmlCodeGenerationGo(TestCase)` |
-| `TestUmlCodeGenerationJava` | class | `tests/test_uml.py:239` | `class TestUmlCodeGenerationJava(TestCase)` |
-| `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` | class | `tests/test_uml.py:427` | `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)` |
-| `TestUmlCodeGenerationPhp` | class | `tests/test_uml.py:387` | `class TestUmlCodeGenerationPhp(TestCase)` |
-| `TestUmlCodeGenerationRust` | class | `tests/test_uml.py:347` | `class TestUmlCodeGenerationRust(TestCase)` |
-| `TestUmlMermaidDiagram` | class | `tests/test_uml.py:16` | `class TestUmlMermaidDiagram(TestCase)` |
-| `TestUmlSanitizeId` | class | `tests/test_uml.py:157` | `class TestUmlSanitizeId(TestCase)` |
-| `_make_class_node` | method | `tests/test_uml.py:434` | `def _make_class_node(self, name, lang, kind)` |
-| `setUp` | method | `tests/test_uml.py:19` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:160` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:184` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:242` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:284` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:309` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:350` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:390` | `def setUp(self)` |
-| `setUp` | method | `tests/test_uml.py:430` | `def setUp(self)` |
-| `test_generate_cpp_produces_valid_code` | method | `tests/test_uml.py:188` | `def test_generate_cpp_produces_valid_code(self)` |
-| `test_generate_cpp_unknown_language_returns_error_message` | method | `tests/test_uml.py:223` | `def test_generate_cpp_unknown_language_returns_error_message(self)` |
-| `test_generate_cpp_with_empty_classes` | method | `tests/test_uml.py:208` | `def test_generate_cpp_with_empty_classes(self)` |
-| `test_generate_csharp_produces_valid_code` | method | `tests/test_uml.py:288` | `def test_generate_csharp_produces_valid_code(self)` |
-| `test_generate_dart_produces_valid_code` | method | `tests/test_uml.py:474` | `def test_generate_dart_produces_valid_code(self)` |
-| `test_generate_go_interface_produces_valid_code` | method | `tests/test_uml.py:330` | `def test_generate_go_interface_produces_valid_code(self)` |
-| `test_generate_go_struct_produces_valid_code` | method | `tests/test_uml.py:313` | `def test_generate_go_struct_produces_valid_code(self)` |
-| `test_generate_java_class_produces_valid_code` | method | `tests/test_uml.py:246` | `def test_generate_java_class_produces_valid_code(self)` |
-| `test_generate_java_interface_produces_interface` | method | `tests/test_uml.py:265` | `def test_generate_java_interface_produces_interface(self)` |
 
 Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

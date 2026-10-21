@@ -71,8 +71,10 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_app.py` -> `readmenator/_project_config.py`
 - `readmenator/_app.py` -> `readmenator/_query.py`
 - `readmenator/_app.py` -> `readmenator/_rank.py`
+- `readmenator/_app.py` -> `readmenator/_receipts.py`
 - `readmenator/_app.py` -> `readmenator/_refactorizer.py`
 - `readmenator/_app.py` -> `readmenator/_resolver.py`
+- `readmenator/_app.py` -> `readmenator/_uncertainty.py`
 - `readmenator/_app.py` -> `readmenator/_video.py`
 - `readmenator/_app.py` -> `readmenator/_watcher.py`
 - `readmenator/_app.py` -> `readmenator/_yaralite.py`
@@ -166,6 +168,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_hotspots.py` -> `readmenator/_config.py`
 - `readmenator/_hotspots.py` -> `readmenator/_models.py`
 - `readmenator/_htmlpack.py` -> `readmenator/_config.py`
+- `readmenator/_hypotheses.py` -> `readmenator/_receipts.py`
 - `readmenator/_layer_rules.py` -> `readmenator/_config.py`
 - `readmenator/_layer_rules.py` -> `readmenator/_models.py`
 - `readmenator/_layers.py` -> `readmenator/_models.py`
@@ -237,6 +240,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_query.py` -> `readmenator/_models.py`
 - `readmenator/_query.py` -> `readmenator/_rank.py`
 - `readmenator/_rank.py` -> `readmenator/_category.py`
+- `readmenator/_receipts.py` -> `readmenator/_config.py`
 - `readmenator/_refactorizer.py` -> `readmenator/_config.py`
 - `readmenator/_refactorizer.py` -> `readmenator/_models.py`
 - `readmenator/_resolver.py` -> `readmenator/_config.py`
@@ -259,6 +263,8 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_taint.py` -> `readmenator/_models.py`
 - `readmenator/_uml.py` -> `readmenator/_config.py`
 - `readmenator/_uml.py` -> `readmenator/_models.py`
+- `readmenator/_uncertainty.py` -> `readmenator/_config.py`
+- `readmenator/_uncertainty.py` -> `readmenator/_receipts.py`
 - `readmenator/_video.py` -> `readmenator/_config.py`
 - `readmenator/_video.py` -> `readmenator/_flowcharts.py`
 - `readmenator/_video.py` -> `readmenator/_graphlayout.py`
@@ -490,11 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_python.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_ruby.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_rust.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_scala.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_shell.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_swift.py`
-- `tests/test_project_config.py` -> `readmenator/_agent_injector.py`
-- `tests/test_project_config.py` -> `readmenator/_bundlegraph.py`
-- `tests/test_project_config.py` -> `readmenator/_bundlegraph_page.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)

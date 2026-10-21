@@ -160,6 +160,24 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_apidocs_page.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `tests/test_bundlegraph.py`, `tests/test_htmlpack.py`, `tests/test_interactive_graph.py`
 
+## readmenator/_hypotheses.py
+- Doc: Hypothesis validator: LLM/agent proposals are never facts.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `Hypothesis` (class, line 25) `class Hypothesis`
+  - `HypothesisVerdict` (class, line 58) `class HypothesisVerdict`
+  - `HypothesisValidator` (class, line 73) `class HypothesisValidator`
+  - `_callee_symbol_match` (function, line 141) `def _callee_symbol_match(callee, symbols)`
+  - `from_dict` (method, line 33) `def from_dict(cls, data)`
+  - `to_dict` (method, line 49) `def to_dict(self)`
+  - `to_dict` (method, line 64) `def to_dict(self)`
+  - `__init__` (method, line 84) `def __init__(self, known_edges, known_symbols)`
+  - `validate` (method, line 92) `def validate(self, hypothesis, allow_assumed)`
+  - `validate_json` (method, line 126) `def validate_json(self, raw_json, allow_assumed)`
+- Depends on: `readmenator/_receipts.py`
+- Imported by: `tests/test_receipts.py`
+
 ## readmenator/_layer_rules.py
 - Doc: Architecture layer rule engine: forbidden and warning edges between layers.
 - Layer: business_logic
@@ -457,29 +475,6 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `write_viewer_config` (function, line 717) `def write_viewer_config(maps_dir, config, project_root)`
 - Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `readmenator/_viewer_ui.py`, `tests/test_project_config.py`
-
-## readmenator/_projections.py
-- Doc: Functors and projections for the readmenator code category.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `Projection` (class, line 17) `class Projection(Protocol)`
-  - `IdentityProjection` (class, line 32) `class IdentityProjection`
-  - `DocProjection` (class, line 42) `class DocProjection`
-  - `RiskProjection` (class, line 63) `class RiskProjection`
-  - `apply_view` (function, line 95) `def apply_view(category, view_config)`
-  - `map_node` (method, line 23) `def map_node(self, node)`
-  - `map_morphism` (method, line 27) `def map_morphism(self, m)`
-  - `map_node` (method, line 35) `def map_node(self, node)`
-  - `map_morphism` (method, line 38) `def map_morphism(self, m)`
-  - `__init__` (method, line 49) `def __init__(self, documented_ids)`
-  - `map_node` (method, line 52) `def map_node(self, node)`
-  - `map_morphism` (method, line 57) `def map_morphism(self, m)`
-  - `__init__` (method, line 70) `def __init__(self, fan_in, fan_out, test_files)`
-  - `map_node` (method, line 80) `def map_node(self, node)`
-  - `map_morphism` (method, line 91) `def map_morphism(self, m)`
-- Depends on: `readmenator/_category.py`, `readmenator/_models.py`
-- Imported by: `tests/test_ranking.py`
 
 
 Next: [KB_readmenator_p4.md](KB_readmenator_p4.md)

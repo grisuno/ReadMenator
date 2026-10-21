@@ -1,6 +1,6 @@
 # readmenator: _pipeline
 
-readmenator: _pipeline groups 17 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
+readmenator: _pipeline groups 18 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
 
 ```mermaid
 graph LR
@@ -15,7 +15,7 @@ readmenator groups 13 files (py) around ReadmeInjector, __init__, inject, _extra
 
 ## tests (5.2)
 
-tests groups 4 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection.
+tests groups 5 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection.
 
 **Files**:
 
@@ -36,3 +36,4 @@ tests groups 4 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDow
 - tests/test_agent_output.py
 - tests/test_interactive_graph.py
 - tests/test_readme_injector.py
+- tests/test_uml.py
