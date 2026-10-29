@@ -54,7 +54,7 @@ class PolyglotScanner:
             return any(part in always for part in path.parts)
         return any(part in self._config.IGNORE_DIRS for part in path.parts)
 
-    def _is_generated(self, rel_path: Path) -> bool:
+    def is_generated(self, rel_path: Path) -> bool:
         """Return ``True`` for artifacts readmenator itself wrote into the project.
 
         Rescanning its own output (agent docs, wiki, rules, maps, refactor
@@ -284,6 +284,116 @@ class PolyglotScanner:
         """
         return self._scan_impl(root)
 
+    def _parse_source(
+        self, rel_path_str: str, content: str, label: str, privacy: bool,
+    ) -> Optional[Tuple[Node, List[Edge]]]:
+        """Parse one source file into a node and its edges.
+
+        Shared by the filesystem scan and by the git history replay, so a
+        historical tree is parsed exactly like the working copy.
+
+        Args:
+            rel_path_str: Path of the file relative to the scan root.
+            content: Raw file content.
+            label: Display label of the node (usually the file name).
+            privacy: When true, docstrings and signatures are stripped.
+
+        Returns:
+            The parsed node with its edges, or ``None`` when parsing failed.
+        """
+        extension = Path(rel_path_str).suffix
+        parser = create_parser(extension, rel_path_str, self._config)
+        if parser is None:
+            return None
+        try:
+            file_doc = self._extract_file_doc(content) if not privacy else ""
+            parser.parse(content)
+
+            if privacy:
+                parser.symbols = [
+                    Symbol(s.name, s.kind, s.line, "", "")
+                    for s in parser.symbols
+                ] if hasattr(parser, "symbols") else parser.symbols
+
+            node = Node(
+                node_id=rel_path_str,
+                label=label,
+                kind="module",
+                language=extension.lstrip("."),
+                doc=file_doc,
+                symbols=parser.symbols,
+            )
+            edges: List[Edge] = []
+            for imp in parser.imports:
+                edges.append(Edge(source=rel_path_str, target=imp, relation="imports"))
+
+            for caller, callee in parser.calls:
+                if caller and callee:
+                    edges.append(
+                        Edge(
+                            source=f"{rel_path_str}::{caller}",
+                            target=f"{rel_path_str}::{callee}",
+                            relation="calls",
+                        )
+                    )
+                elif callee:
+                    edges.append(
+                        Edge(
+                            source=rel_path_str,
+                            target=callee,
+                            relation="calls",
+                        )
+                    )
+
+            for child, parent in parser.inherits:
+                edges.append(
+                    Edge(
+                        source=f"{rel_path_str}::{child}",
+                        target=parent,
+                        relation="inherits",
+                    )
+                )
+            return node, edges
+        except Exception:
+            return None
+
+    def scan_contents(
+        self, contents: Dict[str, str]
+    ) -> Tuple[List[Node], List[Edge], Dict[str, str]]:
+        """Scan an in-memory file map instead of the filesystem.
+
+        Used to replay historical trees read from git: the same parsers,
+        the same file-level doc extraction, the same generated-output
+        filtering, but over contents that already live in memory.
+
+        Args:
+            contents: Mapping of relative file path to raw file content.
+
+        Returns:
+            Tuple of (list of Node, list of Edge, content map).
+        """
+        nodes: List[Node] = []
+        edges: List[Edge] = []
+        content_map: Dict[str, str] = {}
+        privacy = self._config.PRIVACY_MODE
+        for rel_path_str in sorted(contents):
+            rel_path = Path(rel_path_str)
+            if self._is_ignored(rel_path):
+                continue
+            if self.is_generated(rel_path):
+                continue
+            if not self._check_directory_depth(rel_path, Path(".")):
+                continue
+            content = contents[rel_path_str]
+            parsed = self._parse_source(rel_path_str, content, rel_path.name, privacy)
+            if parsed is None:
+                continue
+            node, file_edges = parsed
+            nodes.append(node)
+            edges.extend(file_edges)
+            content_map[rel_path_str] = content
+        return nodes, edges, content_map
+
     def _scan_impl(
         self, root: Path
     ) -> Tuple[List[Node], List[Edge], Dict[str, str]]:
@@ -322,7 +432,7 @@ class PolyglotScanner:
                 skip_counts["ignored_dir"] += 1
                 continue
 
-            if self._is_generated(rel_path):
+            if self.is_generated(rel_path):
                 skip_counts["generated"] += 1
                 continue
 
@@ -339,71 +449,27 @@ class PolyglotScanner:
 
             extension = file_path.suffix
 
-            parser = create_parser(extension, rel_path_str, self._config)
-            if parser is None:
+            if create_parser(extension, rel_path_str, self._config) is None:
                 skip_counts["unsupported_ext"] += 1
                 continue
 
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
-                file_doc = self._extract_file_doc(content) if not privacy else ""
-                parser.parse(content)
-
-                if privacy:
-                    parser.symbols = [
-                        Symbol(s.name, s.kind, s.line, "", "")
-                        for s in parser.symbols
-                    ] if hasattr(parser, "symbols") else parser.symbols
-
-                node = Node(
-                    node_id=rel_path_str,
-                    label=file_path.name,
-                    kind="module",
-                    language=extension.lstrip("."),
-                    doc=file_doc,
-                    symbols=parser.symbols,
-                )
-                nodes.append(node)
-                content_map[rel_path_str] = content
-
-                for imp in parser.imports:
-                    edges.append(
-                        Edge(source=rel_path_str, target=imp, relation="imports")
-                    )
-
-                for caller, callee in parser.calls:
-                    if caller and callee:
-                        edges.append(
-                            Edge(
-                                source=f"{rel_path_str}::{caller}",
-                                target=f"{rel_path_str}::{callee}",
-                                relation="calls",
-                            )
-                        )
-                    elif callee:
-                        edges.append(
-                            Edge(
-                                source=rel_path_str,
-                                target=callee,
-                                relation="calls",
-                            )
-                        )
-
-                for child, parent in parser.inherits:
-                    edges.append(
-                        Edge(
-                            source=f"{rel_path_str}::{child}",
-                            target=parent,
-                            relation="inherits",
-                        )
-                    )
-
-                scanned_count += 1
-                self._emit_progress(scanned_count)
-
-            except Exception:
+            except OSError:
                 skip_counts["parse_error"] += 1
                 continue
+
+            parsed = self._parse_source(rel_path_str, content, file_path.name, privacy)
+            if parsed is None:
+                skip_counts["parse_error"] += 1
+                continue
+            node, file_edges = parsed
+            nodes.append(node)
+            content_map[rel_path_str] = content
+            edges.extend(file_edges)
+
+            scanned_count += 1
+            self._emit_progress(scanned_count)
 
         self.last_skip_counts = dict(skip_counts)
         self.last_gitignored_examples = list(gitignored_examples)

@@ -35,6 +35,7 @@ readmenator/
   _uml.py           - UML class diagram generator (Mermaid classDiagram + 12-language code generation)
   _diagrams.py      - Interactive system maps: typed IR, validator, builder, standalone HTML renderer
   _video.py         - Cinematic synthwave overview video (general-purpose codebase explainer, PIL + ffmpeg)
+  _githistory.py    - Read-only git release timeline (per-release source snapshots for the growth act)
   _readme_injector.py - Auto-injects KNOWLEDGE_BASE.md link into project README
   _agent_injector.py - Injects KB + agent output references into AI agent config files
   _agent_output.py   - Agent-friendly grep-optimized output generator (INDEX.md, API.md, etc.)
@@ -112,6 +113,7 @@ tests/
   test_uml.py           - UML class diagram and code generation contract tests
   test_diagrams.py      - Interactive system maps contract tests (IR, validation, rendering)
   test_video.py         - Cinematic video contract tests (collect, scenes, frames, skip)
+  test_githistory.py    - Git release timeline contract tests (order, snapshots, budgets, isolation)
   test_readme_injector.py - README injection contract tests
   test_agent_output.py - Agent output generator contract tests (subsystems, grep-friendly, injection)
   test_wiki.py - Agent wiki contract tests (index, community pages, connections, orphans, lint, privacy)
@@ -178,6 +180,8 @@ tests/
 - Site media settings (SITE_VIDEO_ENABLED, SITE_VIDEO_FILENAME, SITE_DOCS_ENABLED, SITE_DOCS_SUBDIR, SITE_MAX_DOCS, SITE_MD_PREVIEW_CHARS)
 - Cinematic video settings (VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS)
 - Video act durations (VIDEO_TITLE_S, VIDEO_CARD_S, VIDEO_LAYER_S, VIDEO_GOD_S, VIDEO_TREE_S, VIDEO_COMM_S, VIDEO_GRAPH_S, VIDEO_DNA_S, VIDEO_OUTRO_S)
+- Growth act settings (VIDEO_GROWTH_S, VIDEO_GROWTH_BIRTH_S, VIDEO_GROWTH_PULSES, VIDEO_GROWTH_GHOST)
+- Git history settings (VIDEO_HISTORY_ENABLED, VIDEO_HISTORY_MAX_SNAPSHOTS, VIDEO_HISTORY_MAX_FILES, VIDEO_HISTORY_TIMEOUT_S)
 - Video scope settings (VIDEO_MAX_GRAPH_NODES 0 = all, VIDEO_TREE_MAX_NODES 0 = all, VIDEO_TREE_RING_MARGIN, VIDEO_TREE_LABEL_GAP, VIDEO_TREE_CHAR_PX, VIDEO_GRAPH_TRIM_FRACTION, VIDEO_GRAPH_SPREAD, VIDEO_GRAPH_LOOSE_STRIP, VIDEO_DNA_MAX_CELL, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH, VIDEO_PREVIEW_LINES)
 - Agent budget settings (AGENT_OUTPUT_MAX_LINES, AGENT_PURPOSE_MAX_CHARS, AGENT_DOC_MAX_CHARS, AGENT_SIGNATURE_MAX_CHARS, AGENT_GOTCHAS_TOP_N, AGENT_GOTCHAS_EXCLUDE_LAYERS, AGENT_API_PUBLIC_ONLY, AGENT_API_EXCLUDE_LAYERS, AGENT_CHARS_PER_TOKEN, AGENT_ENTRYPOINT_FILENAMES)
 - Generated artifact settings (GENERATED_FILE_PREFIXES, SKIP_GENERATED_OUTPUTS, REFACTORIZER_SCRIPT_PREFIX)
@@ -265,6 +269,8 @@ tests/
 - Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
 - Skips its own generated outputs (agent, wiki, rules, maps, site, cache, graphrag, component diagrams, gh-wiki dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
 - scan_with_content() returns content map for rule gen, taint analysis
+- is_generated(rel_path) is public (the git history replay filters historical trees with it)
+- scan_contents(contents) parses an in-memory file map with the same parsers and the same _parse_source path, used to replay historical trees
 
 ### Import Resolver Contract
 - Maps raw import strings (Python dots, relative paths, bare module names) to project file paths
@@ -830,7 +836,7 @@ tests/
 ### Cinematic Video Contract
 - CinematicVideoRenderer class with collect() + build_scenes() + render() entry points (readmenator/_video.py)
 - General-purpose synthwave overview: same neon HUD / sun / grid / bloom / scanline / glitch language as the miniGCC self-host video, driven by real scan data (never staged numbers)
-- Eleven acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, X The Tiers (tier-by-tier architecture assembly, upward imports flashing red with a fix-first list), XI Execution (camera follows the entry call tree in call order with a travelling packet and a callee doc panel), invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
+- Twelve acts: title (counting stats + language chips), I layers, II god nodes (formula exposed + real source preview), III true dependency tree (BFS from hub, focus-file symbols), IV communities (hub, cohesion bar, inside/crossing imports, key symbols), V Emergence (ForceAtlas2 LinLog convergence animated from snapshots, PageRank sizing, random-surfer particles on top-PageRank edges, PageRank telemetry), VI Orbit (3D ForceAtlas2 layout through an orbiting perspective camera: assemble, color-mode montage community/layer/language, eased camera tour over the VIDEO_ORBIT_TOUR_STOPS largest communities with cohesion and seams, 1-hop reach of the top hub with particles, explorer-style side panel and graph-force path), VII The Wiring (hierarchical edge bundling by community, community spotlight sweep, flow ranking), VIII The Sphere (3D layout morphs onto spherical community caps, bundled curves grow, rotation, spotlight sweep with crossing particles, graph-bundle path), IX code DNA (sha256 color per file, scan sweep, hub zoom) + security side panel, X The Tiers (tier-by-tier architecture assembly, upward imports flashing red with a fix-first list), XI Execution (camera follows the entry call tree in call order with a travelling packet and a callee doc panel), XII The Organism (git release timeline played as a growing organism: every release snapshot materialises its files and import edges, the unborn shape waits as a ghost, a landing release pulses from its hub, the finished organism folds onto a globe of communities), invite scene (both explorers spinning with their paths), outro telemetry; layouts precomputed before forking frame workers; 3D panels clipped to their box
 - An act with duration <= 0 is skipped together with its card; VIDEO_INVITE_S <= 0 drops the invite
 - Motion: ease() is quintic smootherstep (C2); scenes crossfade from the previous scene's last frame over VIDEO_TRANSITION_S (glitch scaled by VIDEO_TRANSITION_GLITCH); VIDEO_MOTION_BLUR_ACTS average VIDEO_MOTION_BLUR_SAMPLES shutter sub-frames
 - Deterministic: content-hashed DNA colors, seed-7 graph layout, networkx spring layout with circular fallback when networkx is missing
@@ -841,6 +847,15 @@ tests/
 - AnalyzerFactory exposes video (lazy init); app.export_video(target) renders standalone, run()/rebuild() auto-render to VIDEO_OUTPUT unless VIDEO_ENABLED=False
 - CLI: `video` renders the mp4, `--video` forces it, `--no-video` skips it (including on the `--rebuild` path)
 - Configurable via VIDEO_ENABLED, VIDEO_OUTPUT, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_FPS, VIDEO_CRF, VIDEO_JOBS, per-act VIDEO_*_S durations, VIDEO_MAX_GRAPH_NODES, VIDEO_MAX_LABEL_CHARS, VIDEO_MUSIC_PATH
+
+### Git History Contract
+- GitHistoryReader class with available() + timeline() entry points (readmenator/_githistory.py)
+- Read-only: git plumbing only (rev-list, for-each-ref, rev-parse, log, ls-tree, cat-file --batch), explicit argument lists, never a shell, bounded by VIDEO_HISTORY_TIMEOUT_S, sanitised environment (no inherited GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE), no network
+- Timeline order: first commit (named after its tag when it carries one, otherwise "genesis"), then every tag by creation date, then HEAD when it is ahead of the last tag; one snapshot per commit
+- Each snapshot materialises the tracked tree at that commit, parses it with the same PolyglotScanner (shared _parse_source path), and resolves project-internal imports with ImportResolver
+- Generated outputs, unsupported extensions, oversized files and too deep paths are skipped; budgets VIDEO_HISTORY_MAX_SNAPSHOTS (first + most recent) and VIDEO_HISTORY_MAX_FILES apply
+- Repositories without git, without tags, or without a reachable history produce an empty timeline; the act is skipped instead of failing
+- Wired into the growth act: collect(project_root=...) fills data["growth"], which lays out the union graph once (nodes and edges carry birth indices), materialises each release with a birth window, keeps unborn files as ghosts (VIDEO_GROWTH_GHOST) and pulses the hub of the landing release (VIDEO_GROWTH_PULSES)
 
 ## Design Principles
 

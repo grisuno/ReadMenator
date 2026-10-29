@@ -834,7 +834,23 @@ class Config:
 
     VIDEO_MOTION_BLUR_SHUTTER: float = 0.5
 
-    VIDEO_MOTION_BLUR_ACTS: Tuple[str, ...] = ("orbit", "sphere", "invite")
+    VIDEO_MOTION_BLUR_ACTS: Tuple[str, ...] = ("orbit", "sphere", "growth", "invite")
+
+    VIDEO_GROWTH_S: float = 20.0
+
+    VIDEO_HISTORY_ENABLED: bool = True
+
+    VIDEO_HISTORY_MAX_SNAPSHOTS: int = 24
+
+    VIDEO_HISTORY_MAX_FILES: int = 500
+
+    VIDEO_HISTORY_TIMEOUT_S: int = 30
+
+    VIDEO_GROWTH_BIRTH_S: float = 0.9
+
+    VIDEO_GROWTH_PULSES: int = 4
+
+    VIDEO_GROWTH_GHOST: float = 0.14
 
     BUNDLEGRAPH_ENABLED: bool = True
 

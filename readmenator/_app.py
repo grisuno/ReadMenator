@@ -1676,6 +1676,7 @@ class readmenatorApplication:
             data = self._factory.video.collect(
                 nodes, edges, resolved_edges, analysis, layers,
                 findings or [], analysis_v2, root.name, content_map or {},
+                project_root=str(root),
             )
             written = self._factory.video.render(data, str(out))
             logger.info("Overview video: %s", written)

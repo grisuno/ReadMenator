@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import colorsys
 import hashlib
+import logging
 import math
 import multiprocessing
 import os
@@ -25,10 +26,11 @@ import subprocess
 import textwrap
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from readmenator._config import Config
 from readmenator._flowcharts import build_flow_graphs
+from readmenator._githistory import GitHistoryReader
 from readmenator._graphlayout import (
     BundleLayout,
     ForceAtlas2Settings,
@@ -43,6 +45,8 @@ from readmenator._graphlayout import (
 )
 from readmenator._models import AnalysisResult, AnalysisResultV2, Edge, Node, SecurityFinding
 from readmenator._rank import file_pagerank
+
+logger = logging.getLogger(__name__)
 
 BG_TOP = (6, 3, 16)
 BG_HORIZON = (34, 6, 52)
@@ -85,6 +89,7 @@ ACT_CARDS = {
     "IX": ("ACT IX", "CODE DNA", "each file becomes a color"),
     "X": ("ACT X", "THE TIERS", "who depends on whom, and which imports break the layering"),
     "XI": ("ACT XI", "EXECUTION", "one entry point, followed call by call"),
+    "XII": ("ACT XII", "THE ORGANISM", "the repository grown release by release, from genesis to now"),
 }
 
 COLOR_MODES = ("community", "layer", "language")
@@ -357,9 +362,14 @@ def _cloud_core(
             for nid, p in pos.items()}
     fade = cfg.VIDEO_ORBIT_DEPTH_FADE
     links = data["graph_links"]
+    birth = data.get("node_birth", {})
+    edge_birth = data.get("edge_birth", {})
     hot: List[Tuple[str, str]] = []
     for a, b in links:
         if a not in proj or b not in proj or a == b:
+            continue
+        bfactor = edge_birth.get((a, b), 1.0)
+        if bfactor <= 0.01:
             continue
         pa, pb = proj[a], proj[b]
         on = edge_lit is None or edge_lit(a, b)
@@ -367,7 +377,7 @@ def _cloud_core(
             hot.append((a, b))
             continue
         depth = _depth_alpha((pa[2] + pb[2]) / 2, fade)
-        strength = (0.22 if edge_lit is None else 0.05) * depth * grow
+        strength = (0.22 if edge_lit is None else 0.05) * depth * grow * bfactor
         d.line((pa[0], pa[1], pb[0], pb[1]), fill=alpha(mode_color(data, a, mode), strength), width=1)
     for k, (a, b) in enumerate(hot):
         pa, pb = proj[a], proj[b]
@@ -379,28 +389,76 @@ def _cloud_core(
         x, y = pa[0] + (pb[0] - pa[0]) * f, pa[1] + (pb[1] - pa[1]) * f
         d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha((255, 255, 255), 0.9))
     order = sorted(proj, key=lambda nid: -proj[nid][2])
+    ghost = float(cfg.VIDEO_GROWTH_GHOST) if birth else 0.0
     for nid in order:
         x, y, z, k = proj[nid]
         if not (x0 - 20 < x < x1 + 20 and y0 - 20 < y < y1 + 20):
             continue
-        weight = math.sqrt(rank.get(nid, 0.0) / top_rank)
-        r = (2.0 + 7.0 * weight) * k * math.sqrt(zoom) * (0.3 + 0.7 * grow)
-        on = lit_nodes is None or nid in lit_nodes
-        a = (0.95 if on else 0.18) * _depth_alpha(z, fade)
+        bfactor = birth.get(nid, 1.0)
         col = mode_color(data, nid, mode)
+        if bfactor <= 0.01:
+            if ghost <= 0:
+                continue
+            d.ellipse((x - 1.5, y - 1.5, x + 1.5, y + 1.5),
+                      fill=alpha(col, ghost * _depth_alpha(z, fade)))
+            continue
+        weight = math.sqrt(rank.get(nid, 0.0) / top_rank)
+        r = (2.0 + 7.0 * weight) * k * math.sqrt(zoom) * (0.3 + 0.7 * grow) * bfactor
+        on = lit_nodes is None or nid in lit_nodes
+        a = (0.95 if on else 0.18) * _depth_alpha(z, fade) * bfactor
         if on and lit_nodes is not None and weight > 0.3:
             glow = r + 5 + 2 * math.sin(gt * 3 + weight * 5)
             d.ellipse((x - glow, y - glow, x + glow, y + glow), fill=alpha(col, 0.2 * a))
+        if bfactor < 0.999:
+            flash = r + 12 * (1.0 - bfactor)
+            d.ellipse((x - flash, y - flash, x + flash, y + flash), outline=alpha(col, 0.45 * a), width=1)
         d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, a), outline=alpha((255, 255, 255), 0.45 * a), width=1)
+    _growth_pulse(d, data, proj, cfg)
+
     if labels > 0 and grow >= 1:
         placed: List[Tuple[float, float, float, float]] = []
-        pool = [nid for nid in proj if lit_nodes is None or nid in lit_nodes]
+        pool = [nid for nid in proj
+                if (lit_nodes is None or nid in lit_nodes) and birth.get(nid, 1.0) > 0.5]
         for nid in sorted(pool, key=lambda n: (-rank.get(n, 0.0), n))[:labels]:
             x, y, z, _k = proj[nid]
             if z > 0.4 or not (x0 < x < x1 - 120 and y0 + 20 < y < y1):
                 continue
             _place_label(d, placed, x, y, short_label(nid.rpartition("/")[2] or nid, 22), fonts["tiny_b"],
                          mode_color(data, nid, mode), _depth_alpha(z, fade))
+
+
+def _growth_pulse(
+    d: Any, data: Dict[str, Any],
+    proj: Dict[str, Tuple[float, float, float, float]], cfg: Config,
+) -> None:
+    """Draw the heartbeat of a release landing on the growing organism.
+
+    The rings expand from the hub of the release that is materialising,
+    so every tag in the history lands with a visible pulse.
+
+    Args:
+        d: Drawing surface of the cloud panel.
+        data: Frame payload carrying the pulse anchor.
+        proj: Projected positions of the union graph.
+        cfg: Video settings (number of pulse rings).
+    """
+    pulse = data.get("pulse")
+    if not pulse:
+        return
+    point = proj.get(str(pulse.get("hub", "")))
+    if point is None:
+        return
+    strength = max(0.0, min(1.0, float(pulse.get("strength", 0.0))))
+    if strength <= 0.0:
+        return
+    rings = max(1, int(cfg.VIDEO_GROWTH_PULSES))
+    x, y = point[0], point[1]
+    for i in range(rings):
+        phase = ((strength * rings) + i) % rings / rings
+        radius = 8.0 + 80.0 * phase
+        fade = (1.0 - phase) * 0.4 * strength
+        d.ellipse((x - radius, y - radius, x + radius, y + radius),
+                  outline=alpha(GREEN, fade), width=2)
 
 
 def draw_sphere3d(
@@ -416,6 +474,7 @@ def draw_sphere3d(
     gt: float,
     fonts: Dict[str, Any],
     group_labels: bool = True,
+    zoom: float = 1.0,
 ) -> None:
     """Draw the bundled sphere, optionally morphing out of the 3D force layout.
 
@@ -434,12 +493,13 @@ def draw_sphere3d(
         gt: Global time for particles.
         fonts: Font set.
         group_labels: Draw cap labels when the morph is complete.
+        zoom: Scale multiplier of the globe.
     """
     layout: Optional[SphereBundleLayout] = data.get("sphere")
     if layout is None or not layout.leaves:
         return
     _clipped(img, box, lambda d, local: _sphere_core(d, data, layout, local, cfg, yaw, pitch, morph,
-                                                      reveal, spot, gt, fonts, group_labels))
+                                                      reveal, spot, gt, fonts, group_labels, zoom))
 
 
 def _sphere_core(
@@ -456,6 +516,7 @@ def _sphere_core(
     gt: float,
     fonts: Dict[str, Any],
     group_labels: bool,
+    zoom: float = 1.0,
 ) -> None:
     """Paint the bundled sphere into a local box (see draw_sphere3d)."""
     membership: Dict[str, int] = data.get("membership", {})
@@ -464,7 +525,7 @@ def _sphere_core(
     orbit: Dict[str, Tuple[float, float, float]] = data.get("orbit_pos", {})
     x0, y0, x1, y1 = box
     persp = cfg.VIDEO_ORBIT_PERSPECTIVE
-    scale = min(x1 - x0, y1 - y0) / 2 * 0.7
+    scale = min(x1 - x0, y1 - y0) / 2 * 0.7 * zoom
     center = ((x0 + x1) / 2, (y0 + y1) / 2)
     origin = (0.0, 0.0, 0.0)
     fade = cfg.VIDEO_ORBIT_DEPTH_FADE
@@ -481,16 +542,24 @@ def _sphere_core(
             d.line([(q[0], q[1]) for q in ring], fill=alpha(FAINT, 0.35 * m), width=1)
     pos = {nid: _lerp3(orbit.get(nid, leaf), leaf, m) for nid, leaf in layout.leaves.items()}
     proj = {nid: pr(p) for nid, p in pos.items()}
+    birth = data.get("node_birth", {})
+    edge_birth = data.get("edge_birth", {})
     if reveal < 1:
         for a, b in data["graph_links"]:
             if a in proj and b in proj and a != b:
+                efactor = edge_birth.get((a, b), 1.0)
+                if efactor <= 0.01:
+                    continue
                 pa, pb = proj[a], proj[b]
                 d.line((pa[0], pa[1], pb[0], pb[1]),
-                       fill=alpha(community_color(membership.get(a, -1)), 0.2 * (1 - reveal)), width=1)
+                       fill=alpha(community_color(membership.get(a, -1)), 0.2 * (1 - reveal) * efactor), width=1)
     if reveal > 0:
         hot: List[Tuple[int, List[Tuple[float, float]]]] = []
         for k, (a, b, pts) in enumerate(layout.curves):
             ca, cb = membership.get(a, -1), membership.get(b, -1)
+            efactor = edge_birth.get((a, b), 1.0)
+            if efactor <= 0.01:
+                continue
             stop = max(2, int(math.ceil(len(pts) * reveal)))
             q = [pr(p) for p in pts[:stop]]
             depth = _depth_alpha(sum(v[2] for v in q) / len(q), fade)
@@ -499,7 +568,7 @@ def _sphere_core(
             if spot is not None and lit:
                 hot.append((k, flat))
                 continue
-            d.line(flat, fill=alpha(community_color(ca), (0.3 if lit else 0.05) * depth), width=1)
+            d.line(flat, fill=alpha(community_color(ca), (0.3 if lit else 0.05) * depth * efactor), width=1)
         for k, flat in hot:
             a, b, _pts = layout.curves[k]
             d.line(flat, fill=alpha(community_color(membership.get(a, -1)), 0.8), width=2)
@@ -509,11 +578,14 @@ def _sphere_core(
                 d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha((255, 255, 255), 0.9))
     for nid in sorted(proj, key=lambda n: -proj[n][2]):
         x, y, z, k = proj[nid]
+        bfactor = birth.get(nid, 1.0)
+        if bfactor <= 0.01:
+            continue
         comm = membership.get(nid, -1)
         on = spot is None or comm == spot
-        r = (1.8 + 4.5 * math.sqrt(rank.get(nid, 0.0) / top_rank)) * k
+        r = (1.8 + 4.5 * math.sqrt(rank.get(nid, 0.0) / top_rank)) * k * bfactor
         d.ellipse((x - r, y - r, x + r, y + r),
-                  fill=alpha(community_color(comm), (0.95 if on else 0.25) * _depth_alpha(z, fade)))
+                  fill=alpha(community_color(comm), (0.95 if on else 0.25) * _depth_alpha(z, fade) * bfactor))
     if group_labels and m >= 1:
         placed: List[Tuple[float, float, float, float]] = []
         for label, cap, count in layout.groups:
@@ -827,8 +899,26 @@ class CinematicVideoRenderer:
         project_name: str,
         content_map: Optional[Dict[str, str]] = None,
         concept_graph: Optional[Any] = None,
+        project_root: str = "",
     ) -> Dict[str, Any]:
-        """Collect every number each scene draws, from real scan data."""
+        """Collect every number each scene draws, from real scan data.
+
+        Args:
+            nodes: Scanned file nodes.
+            edges: Raw edges (imports, calls, inherits).
+            resolved_edges: Import edges resolved to project files.
+            analysis: Graph analysis result.
+            layers: File to architectural layer map.
+            findings: Security findings.
+            analysis_v2: Deep analysis result.
+            project_name: Display name of the project.
+            content_map: Raw file contents.
+            concept_graph: Optional semantic concept graph.
+            project_root: Repository root, used to read the release history.
+
+        Returns:
+            The scene payload every act reads from.
+        """
         content_map = content_map or {}
         node_by_id: Dict[str, Node] = {n.node_id: n for n in nodes}
         file_count = len(nodes)
@@ -969,8 +1059,10 @@ class CinematicVideoRenderer:
                 )
             except (ValueError, KeyError, RecursionError):
                 flows = []
+        growth = self._build_growth(project_root, graph_nodes, graph_links)
         return {"project": short_label(project_name, 40), "files": file_count,
                 "flows": flows,
+                "growth": growth,
                 "membership": membership, "community_labels": community_labels,
                 "rank": rank,
                 "symbols": symbol_count, "imports": import_count,
@@ -987,6 +1079,61 @@ class CinematicVideoRenderer:
                 "node_language": {nid: node.language or "unknown" for nid, node in node_by_id.items()},
                 "node_symbols": {nid: [(s.name, s.kind, s.line) for s in node.symbols[:12]]
                                  for nid, node in node_by_id.items() if node.symbols}}
+
+    def _build_growth(
+        self,
+        project_root: str,
+        graph_nodes: List[str],
+        graph_links: List[Tuple[str, str]],
+    ) -> Dict[str, Any]:
+        """Read the release history into timelapse data.
+
+        Every release becomes a frame holding the files and the internal
+        import edges that existed at that point. The union of all frames
+        is the shape the timelapse draws, so a file keeps its place while
+        the organism around it grows.
+
+        Args:
+            project_root: Repository root to read the history from.
+            graph_nodes: Current graph node ids.
+            graph_links: Current graph link pairs.
+
+        Returns:
+            Growth payload; empty releases when history is unavailable.
+        """
+        cfg = self.config
+        if not cfg.VIDEO_HISTORY_ENABLED or not project_root:
+            return {"releases": []}
+        try:
+            history = GitHistoryReader(cfg).timeline(project_root)
+        except (OSError, ValueError, RuntimeError):
+            logger.warning("Git history unavailable for the growth act", exc_info=True)
+            return {"releases": []}
+        if len(history) < 2:
+            return {"releases": []}
+        releases: List[Dict[str, Any]] = []
+        for release in history:
+            releases.append({
+                "label": release.label,
+                "date": release.date,
+                "commit": release.commit,
+                "files": len(release.file_ids),
+                "symbols": release.symbol_count,
+                "imports": release.import_count,
+                "nodes": tuple(release.file_ids),
+                "links": tuple(release.links),
+            })
+        union_nodes = set(graph_nodes)
+        union_links = set(graph_links)
+        for release in releases:
+            union_nodes.update(release["nodes"])
+            union_links.update(release["links"])
+        logger.info("Growth timeline: %d releases, %d files", len(releases), len(union_nodes))
+        return {
+            "releases": releases,
+            "union_nodes": tuple(sorted(union_nodes)),
+            "union_links": tuple(sorted(union_links)),
+        }
 
     def _build_dep_tree(
         self,
@@ -1051,6 +1198,8 @@ class CinematicVideoRenderer:
                 ("VII", "bundle", c.VIDEO_BUNDLE_S), ("VIII", "sphere", c.VIDEO_SPHERE_S),
                 ("IX", "dna", c.VIDEO_DNA_S), ("X", "tiers", c.VIDEO_TIERS_S),
                 ("XI", "flow", c.VIDEO_FLOW_S)]
+        if c.VIDEO_GROWTH_S > 0 and data.get("growth", {}).get("releases"):
+            acts.append(("XII", "growth", c.VIDEO_GROWTH_S))
         plan: List[Tuple[str, float, Dict[str, Any]]] = [("title", c.VIDEO_TITLE_S, {})]
         for card, kind, dur in acts:
             if dur <= 0:
@@ -1250,6 +1399,61 @@ class CinematicVideoRenderer:
             data["orbit_pos"] = self.orbit_positions(data)
             data["orbit_stops"] = self.orbit_stops(data, data["orbit_pos"])
             data["sphere"] = self.sphere_layout(data)
+        self._prepare_growth(data)
+
+    def _prepare_growth(self, data: Dict[str, Any]) -> None:
+        """Lay out the union graph the growth timelapse draws.
+
+        The union of every release is laid out once, so a file keeps its
+        place in the organism while the rest of the project grows around
+        it. Birth indices record when each file and each import edge
+        entered the repository.
+        """
+        growth = data.get("growth", {})
+        releases = growth.get("releases", [])
+        union_nodes = list(growth.get("union_nodes", []))
+        union_links = list(growth.get("union_links", []))
+        if not releases or not union_nodes:
+            return
+        node_set = set(union_nodes)
+        membership = {
+            nid: index for nid, index in data.get("membership", {}).items() if nid in node_set
+        }
+        rank = file_pagerank(
+            union_nodes, union_links, self.config.RANKING_ALPHA,
+            self.config.RANKING_MAX_ITER, self.config.RANKING_TOLERANCE,
+        )
+        layers = data.get("node_layer", {})
+        languages = data.get("node_language", {})
+        union = {
+            "graph_nodes": union_nodes,
+            "graph_links": union_links,
+            "membership": membership,
+            "community_labels": list(data.get("community_labels", [])),
+            "rank": rank,
+            "node_layer": {nid: layers.get(nid, "unknown") for nid in union_nodes},
+            "node_language": {
+                nid: languages.get(nid, Path(nid).suffix.lstrip(".").lower() or "unknown")
+                for nid in union_nodes
+            },
+        }
+        growth["union"] = union
+        growth["orbit_pos"] = self.orbit_positions(union)
+        growth["sphere"] = self.sphere_layout(union)
+        node_birth: Dict[str, int] = {}
+        edge_birth: Dict[Tuple[str, str], int] = {}
+        for index, release in enumerate(releases):
+            for nid in release["nodes"]:
+                node_birth.setdefault(nid, index)
+            for link in release["links"]:
+                edge_birth.setdefault(tuple(link), index)
+        last = len(releases) - 1
+        for nid in union_nodes:
+            node_birth.setdefault(nid, last)
+        for link in union_links:
+            edge_birth.setdefault(tuple(link), last)
+        growth["node_birth"] = node_birth
+        growth["edge_birth"] = edge_birth
 
     def render_single_frame(self, data: Dict[str, Any], frame_index: int) -> bytes:
         """Render one frame to raw RGB bytes without touching ffmpeg."""
@@ -1970,6 +2174,184 @@ def _scene_sphere(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
     draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
 
 
+def _growth_frame(
+    data: Dict[str, Any], cfg: Config, local_t: float, phase_dur: float,
+) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    """Build the growth frame at a point of the release timeline.
+
+    Nodes and edges carry a birth weight: a file materialises as its
+    release arrives and an import threads itself in once it exists. The
+    union layout is shared, so the organism keeps its shape while it
+    fills up.
+
+    Args:
+        data: Scene payload carrying the growth timeline.
+        cfg: Video settings (birth duration).
+        local_t: Seconds elapsed inside the current phase.
+        phase_dur: Duration of the current phase in seconds.
+
+    Returns:
+        Tuple of (frame payload, timeline metadata).
+    """
+    growth = data.get("growth", {})
+    releases = growth.get("releases", [])
+    union = growth.get("union", {})
+    if not releases or not union:
+        return {}, {}
+    count = len(releases)
+    progress = max(0.0, min(1.0, local_t / max(1e-9, phase_dur)))
+    span = phase_dur / max(1, count - 1)
+    window = max(1e-3, min(float(cfg.VIDEO_GROWTH_BIRTH_S), span))
+
+    def factor(born: int) -> float:
+        """Birth weight of an element that entered the repository at *born*."""
+        start = born * span - 0.5 * window
+        return max(0.0, min(1.0, (local_t - start) / window))
+
+    node_factor = {nid: factor(born) for nid, born in growth.get("node_birth", {}).items()}
+    edge_factor = {link: factor(born) for link, born in growth.get("edge_birth", {}).items()}
+    frame = dict(union)
+    frame["orbit_pos"] = growth.get("orbit_pos", {})
+    frame["sphere"] = growth.get("sphere")
+    frame["node_birth"] = node_factor
+    frame["edge_birth"] = edge_factor
+    frame["graph_nodes"] = [nid for nid, f in node_factor.items() if f > 0.01]
+    frame["graph_links"] = [link for link, f in edge_factor.items() if f > 0.01]
+    union_rank = union.get("rank", {})
+    top_rank = max([1e-9] + list(union_rank.values()))
+    frame["rank"] = {nid: max(value, 0.0625 * top_rank) for nid, value in union_rank.items()}
+    pulse = _growth_pulse_anchor(releases, factor, union_rank)
+    frame["pulse"] = pulse
+    index = min(count - 1, int(progress * (count - 1)))
+    meta = {
+        "index": index,
+        "release": releases[index],
+        "progress": progress,
+        "files": len(frame["graph_nodes"]),
+        "links": len(frame["graph_links"]),
+        "count": count,
+        "pulse": pulse,
+    }
+    return frame, meta
+
+
+def _growth_pulse_anchor(
+    releases: List[Dict[str, Any]], factor: Callable[[int], float], rank: Dict[str, float],
+) -> Dict[str, Any]:
+    """Find the release that is materialising right now.
+
+    Args:
+        releases: Release snapshots in chronological order.
+        factor: Birth weight function of a release index.
+        rank: PageRank of every file in the union graph.
+
+    Returns:
+        Pulse anchor with the hub of the landing release and its strength.
+    """
+    for index, release in enumerate(releases):
+        strength = factor(index)
+        if not 0.0 < strength < 1.0:
+            continue
+        members = [nid for nid in release.get("nodes", ()) if nid in rank]
+        if not members:
+            return {}
+        hub = max(members, key=lambda nid: (rank.get(nid, 0.0), nid))
+        return {"hub": hub, "strength": strength}
+    return {}
+
+
+def _growth_ticker(
+    d: Any, side: Tuple[int, int, int, int], meta: Dict[str, Any],
+    releases: List[Dict[str, Any]], fonts: Dict[str, Any],
+) -> None:
+    """Draw the release ticker: the current release and the whole ladder."""
+    x0, _, x1, _ = side
+    y = side[1] + 44
+    current = meta["release"]
+    d.text((x0 + 16, y), short_label(current["label"], 16), font=fonts["mid"], fill=GREEN)
+    y += 40
+    d.text((x0 + 16, y), current["date"], font=fonts["tiny"], fill=DIM)
+    y += 20
+    d.text((x0 + 16, y), f"{current['files']} files", font=fonts["tiny_b"], fill=CYAN)
+    y += 17
+    d.text((x0 + 16, y), f"{current['symbols']} symbols", font=fonts["tiny_b"], fill=MAGENTA)
+    y += 17
+    d.text((x0 + 16, y), f"{current['imports']} imports", font=fonts["tiny_b"], fill=YELLOW)
+    y += 24
+    d.text((x0 + 16, y), f"release {meta['index'] + 1}/{meta['count']}", font=fonts["tiny"], fill=TXT)
+    y += 18
+    bar = x1 - x0 - 32
+    d.rectangle((x0 + 16, y, x0 + 16 + bar, y + 6), fill=(12, 8, 30, 200))
+    d.rectangle((x0 + 16, y, x0 + 16 + bar * meta["progress"], y + 6), fill=alpha(GREEN, 0.9))
+    y += 26
+    available = max(15, side[3] - 12 - y)
+    step = max(9, min(15, available // max(1, len(releases))))
+    for index, release in enumerate(releases):
+        if y + step > side[3] - 8:
+            break
+        on = index == meta["index"]
+        col = GREEN if on else DIM
+        d.text((x0 + 16, y), short_label(release["label"], 14), font=fonts["tiny_b"], fill=col)
+        d.text((x1 - 16, y), str(release["files"]), font=fonts["tiny"], fill=col, anchor="ra")
+        y += step
+
+
+def _scene_growth(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """The repository grows release by release: a living organism in 3D."""
+    assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
+    data, fonts, cfg = _RENDER_D, _RENDER_FONTS, _RENDER_CFG
+    growth = data.get("growth", {})
+    releases = growth.get("releases", [])
+    draw_header(img, d, gt, _RENDER_TOTAL, data["project"], "ACT XII // THE ORGANISM", fonts, cfg.VIDEO_WIDTH)
+    box, side = _graph_boxes(cfg)
+    hud_panel(d, box, "git history // release timelapse", fonts, GREEN)
+    hud_panel(d, side, "timeline // releases", fonts, YELLOW)
+    if not releases:
+        d.text(((box[0] + box[2]) / 2, (box[1] + box[3]) / 2), "no release history",
+               font=fonts["cap"], fill=DIM, anchor="mm")
+        draw_caption(d, "this project carries no release history", lt, sc["dur"], fonts,
+                     cfg.VIDEO_WIDTH, _caption_y(cfg))
+        return
+    dur = sc["dur"]
+    grow_end = 0.72 * dur
+    fold_end = 0.92 * dur
+    inner = (box[0] + 2, box[1] + 31, box[2] - 2, box[3] - 34)
+    if lt < grow_end:
+        frame, meta = _growth_frame(data, cfg, lt, grow_end)
+        yaw = 0.3 + cfg.VIDEO_ORBIT_TURNS * 2 * math.pi * (lt / max(1e-9, dur))
+        zoom = 1.45 - 0.4 * meta["progress"]
+        draw_cloud3d(img, frame, inner, cfg, yaw, -0.25, (0.0, 0.0, 0.0), zoom,
+                     "community", None, None, gt, fonts, appear=1.0, labels=cfg.VIDEO_ORBIT_LABELS)
+        phase = "grow"
+    elif lt < fold_end:
+        frame, meta = _growth_frame(data, cfg, grow_end, grow_end)
+        local = lt - grow_end
+        phase_dur = fold_end - grow_end
+        yaw = 0.3 + cfg.VIDEO_SPHERE_TURNS * 2 * math.pi * (local / max(1e-9, phase_dur))
+        morph = ease(local / max(1e-9, 0.35 * phase_dur))
+        reveal = ease((local - 0.12 * phase_dur) / max(1e-9, 0.3 * phase_dur))
+        draw_sphere3d(img, frame, inner, cfg, yaw, -0.35, morph, reveal, None, gt, fonts,
+                      group_labels=True, zoom=1.25)
+        phase = "fold"
+    else:
+        frame, meta = _growth_frame(data, cfg, grow_end, grow_end)
+        yaw = 0.3 + cfg.VIDEO_ORBIT_TURNS * 2 * math.pi * (lt / max(1e-9, dur))
+        draw_cloud3d(img, frame, inner, cfg, yaw, -0.25, (0.0, 0.0, 0.0), 1.05,
+                     "community", None, None, gt, fonts, appear=1.0, labels=cfg.VIDEO_ORBIT_LABELS)
+        phase = "bloom"
+    _growth_ticker(d, side, meta, releases, fonts)
+    current = meta["release"]
+    if phase == "grow":
+        caption = (f"{current['label']} ({current['date']}): {current['files']} files and "
+                   f"{current['imports']} imports alive")
+    elif phase == "fold":
+        caption = f"{current['label']}: the grown organism folded onto a globe of communities"
+    else:
+        caption = (f"{meta['count']} releases later: {current['files']} files, "
+                   f"{current['symbols']} symbols, {current['imports']} imports")
+    draw_caption(d, caption, lt, sc["dur"], fonts, cfg.VIDEO_WIDTH, _caption_y(cfg))
+
+
 def _scene_invite(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
     """Invitation to open the live explorers, with both 3D views spinning."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
@@ -2347,5 +2729,5 @@ _SCENE_FN = {"title": _scene_title, "card": _scene_card, "layers": _scene_layers
              "gods": _scene_gods, "tree": _scene_tree, "communities": _scene_communities,
              "graph": _scene_graph, "orbit": _scene_orbit, "bundle": _scene_bundle,
              "sphere": _scene_sphere, "dna": _scene_dna, "invite": _scene_invite,
-             "tiers": _scene_tiers, "flow": _scene_flow,
+             "tiers": _scene_tiers, "flow": _scene_flow, "growth": _scene_growth,
              "outro": _scene_outro}
