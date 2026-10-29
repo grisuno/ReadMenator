@@ -393,7 +393,15 @@ defined here and consumed by reference elsewhere.
 | [`VIDEO_TRANSITION_GLITCH`](#config-video_transition_glitch) | `float` | `0.35` |  |
 | [`VIDEO_MOTION_BLUR_SAMPLES`](#config-video_motion_blur_samples) | `int` | `3` |  |
 | [`VIDEO_MOTION_BLUR_SHUTTER`](#config-video_motion_blur_shutter) | `float` | `0.5` |  |
-| [`VIDEO_MOTION_BLUR_ACTS`](#config-video_motion_blur_acts) | `Tuple[str, ...]` | `('orbit', 'sphere', 'invite')` |  |
+| [`VIDEO_MOTION_BLUR_ACTS`](#config-video_motion_blur_acts) | `Tuple[str, ...]` | `('orbit', 'sphere', 'growth', 'invite')` |  |
+| [`VIDEO_GROWTH_S`](#config-video_growth_s) | `float` | `20.0` |  |
+| [`VIDEO_HISTORY_ENABLED`](#config-video_history_enabled) | `bool` | `True` |  |
+| [`VIDEO_HISTORY_MAX_SNAPSHOTS`](#config-video_history_max_snapshots) | `int` | `24` |  |
+| [`VIDEO_HISTORY_MAX_FILES`](#config-video_history_max_files) | `int` | `500` |  |
+| [`VIDEO_HISTORY_TIMEOUT_S`](#config-video_history_timeout_s) | `int` | `30` |  |
+| [`VIDEO_GROWTH_BIRTH_S`](#config-video_growth_birth_s) | `float` | `0.9` |  |
+| [`VIDEO_GROWTH_PULSES`](#config-video_growth_pulses) | `int` | `4` |  |
+| [`VIDEO_GROWTH_GHOST`](#config-video_growth_ghost) | `float` | `0.14` |  |
 | [`BUNDLEGRAPH_ENABLED`](#config-bundlegraph_enabled) | `bool` | `True` |  |
 | [`BUNDLEGRAPH_OUTPUT`](#config-bundlegraph_output) | `str` | `'graph-bundle.html'` |  |
 | [`BUNDLEGRAPH_MODE`](#config-bundlegraph_mode) | `str` | `'2d'` |  |

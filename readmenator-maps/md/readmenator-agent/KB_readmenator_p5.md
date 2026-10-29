@@ -6,97 +6,105 @@ Previous: [KB_readmenator_p4.md](KB_readmenator_p4.md)
 - Layer: utility
 - Language: py
 - Symbols:
-  - `ease` (function, line 100) `def ease(x)`
-  - `fmt_int` (function, line 111) `def fmt_int(n)`
-  - `mix` (function, line 116) `def mix(a, b, t)`
-  - `alpha` (function, line 121) `def alpha(c, a)`
-  - `hash_color` (function, line 126) `def hash_color(digest)`
-  - `short_label` (function, line 135) `def short_label(text, limit)`
-  - `_panel` (function, line 143) `def _panel(cfg)`
-  - `_caption_y` (function, line 148) `def _caption_y(cfg)`
-  - `_graph_boxes` (function, line 153) `def _graph_boxes(cfg)`
-  - `_dna_boxes` (function, line 162) `def _dna_boxes(cfg)`
-  - `_split_boxes` (function, line 171) `def _split_boxes(cfg)`
-  - `community_color` (function, line 180) `def community_color(index)`
-  - `_polyline_point` (function, line 187) `def _polyline_point(points, f)`
-  - `project3d` (function, line 198) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
-  - `_depth_alpha` (function, line 227) `def _depth_alpha(z, fade)`
-  - `_language_color` (function, line 232) `def _language_color(language)`
-  - `mode_color` (function, line 237) `def mode_color(data, nid, mode)`
-  - `_lerp3` (function, line 246) `def _lerp3(a, b, t)`
-  - `_camera_track` (function, line 251) `def _camera_track(keys, f)`
-  - `_place_label` (function, line 262) `def _place_label(d, placed, x, y, text, font, col, a)`
-  - `_clipped` (function, line 274) `def _clipped(img, box, paint)`
-  - `draw_cloud3d` (function, line 286) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `_cloud_core` (function, line 330) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
-  - `draw_sphere3d` (function, line 406) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_sphere_core` (function, line 445) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels)`
-  - `_verdict_badge` (function, line 530) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
-  - `_scan_cursor` (function, line 545) `def _scan_cursor(d, box, progress, col)`
-  - `_code_tint` (function, line 554) `def _code_tint(line)`
-  - `_packet_offset` (function, line 564) `def _packet_offset(a, b, k)`
-  - `dependencies_available` (function, line 570) `def dependencies_available()`
-  - `resolve_fonts` (function, line 579) `def resolve_fonts()`
-  - `Backdrop` (class, line 618) `class Backdrop`
-  - `_img` (function, line 674) `def _img()`
-  - `draw_grid` (function, line 681) `def draw_grid(img, t, strength, bd)`
-  - `draw_sun` (function, line 701) `def draw_sun(img, a, bd, cy)`
-  - `post` (function, line 718) `def post(img, glitch, seed)`
-  - `glitch_fx` (function, line 736) `def glitch_fx(img, amount, seed)`
-  - `chroma_text` (function, line 759) `def chroma_text(img, xy, text, font, col, spread, anchor)`
-  - `hud_panel` (function, line 770) `def hud_panel(d, box, title, fonts, col)`
-  - `draw_header` (function, line 783) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
-  - `draw_caption` (function, line 797) `def draw_caption(d, text, lt, dur, fonts, width, y)`
-  - `CinematicVideoRenderer` (class, line 813) `class CinematicVideoRenderer`
-  - `_render_frame_bytes` (function, line 1305) `def _render_frame_bytes(fi)`
-  - `_scene_index` (function, line 1313) `def _scene_index(gt)`
-  - `_paint_scene` (function, line 1321) `def _paint_scene(index, lt)`
-  - `_motion_blurred` (function, line 1336) `def _motion_blurred(index, lt)`
-  - `_outgoing_frame` (function, line 1351) `def _outgoing_frame(index)`
-  - `_draw_frame` (function, line 1360) `def _draw_frame(fi)`
-  - `_scene_title` (function, line 1384) `def _scene_title(img, d, lt, gt, sc)`
-  - `_scene_card` (function, line 1419) `def _scene_card(img, d, lt, gt, sc)`
-  - `_scene_layers` (function, line 1433) `def _scene_layers(img, d, lt, gt, sc)`
-  - `_scene_gods` (function, line 1458) `def _scene_gods(img, d, lt, gt, sc)`
-  - `_scene_tree` (function, line 1501) `def _scene_tree(img, d, lt, gt, sc)`
-  - `_scene_communities` (function, line 1575) `def _scene_communities(img, d, lt, gt, sc)`
-  - `_scene_graph` (function, line 1619) `def _scene_graph(img, d, lt, gt, sc)`
-  - `_scene_bundle` (function, line 1705) `def _scene_bundle(img, d, lt, gt, sc)`
-  - `_orbit_plan` (function, line 1791) `def _orbit_plan(dur)`
-  - `_scene_orbit` (function, line 1796) `def _scene_orbit(img, d, lt, gt, sc)`
-  - `_scene_sphere` (function, line 1912) `def _scene_sphere(img, d, lt, gt, sc)`
-  - `_scene_invite` (function, line 1973) `def _scene_invite(img, d, lt, gt, sc)`
-  - `_scene_dna` (function, line 2020) `def _scene_dna(img, d, lt, gt, sc)`
-  - `_scene_outro` (function, line 2079) `def _scene_outro(img, d, lt, gt, sc)`
-  - `_flow_graph` (function, line 2109) `def _flow_graph(kind)`
-  - `_bezier` (function, line 2117) `def _bezier(points, t)`
-  - `_draw_flow_edge` (function, line 2125) `def _draw_flow_edge(d, pts, col, a, width, upto, dashed)`
-  - `_draw_flow_node` (function, line 2144) `def _draw_flow_node(d, node, tf, fonts, col, a, glow, lines)`
-  - `_scene_tiers` (function, line 2167) `def _scene_tiers(img, d, lt, gt, sc)`
-  - `_scene_flow` (function, line 2246) `def _scene_flow(img, d, lt, gt, sc)`
-  - `_img_draw` (function, line 2339) `def _img_draw(img)`
-  - `pr` (function, line 473) `def pr(p)`
-  - `_find` (function, line 583) `def _find(style)`
-  - `__init__` (method, line 621) `def __init__(self, width, height)`
-  - `_sun` (method, line 659) `def _sun(self, r)`
-  - `collect` (method, line 818) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
-  - `_build_dep_tree` (method, line 991) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
-  - `build_scenes` (method, line 1042) `def build_scenes(self, data)`
-  - `graph_positions` (method, line 1072) `def graph_positions(self, data, box)`
-  - `tree_positions` (method, line 1119) `def tree_positions(self, data, box)`
-  - `emergence_frames` (method, line 1162) `def emergence_frames(self, data, box)`
-  - `bundle_groups` (method, line 1172) `def bundle_groups(self, data)`
-  - `ordered_groups` (method, line 1187) `def ordered_groups(self, data)`
-  - `bundle_layout` (method, line 1197) `def bundle_layout(self, data, box)`
-  - `orbit_positions` (method, line 1206) `def orbit_positions(self, data)`
-  - `sphere_layout` (method, line 1216) `def sphere_layout(self, data)`
-  - `orbit_stops` (method, line 1225) `def orbit_stops(self, data, positions)`
-  - `_prepare_layouts` (method, line 1240) `def _prepare_layouts(self, data)`
-  - `render_single_frame` (method, line 1254) `def render_single_frame(self, data, frame_index)`
-  - `render` (method, line 1268) `def render(self, data, output_path)`
-  - `tf` (function, line 2187) `def tf(x, y)`
-  - `tf` (function, line 2285) `def tf(x, y)`
-- Depends on: `readmenator/_config.py`, `readmenator/_flowcharts.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
+  - `ease` (function, line 105) `def ease(x)`
+  - `fmt_int` (function, line 116) `def fmt_int(n)`
+  - `mix` (function, line 121) `def mix(a, b, t)`
+  - `alpha` (function, line 126) `def alpha(c, a)`
+  - `hash_color` (function, line 131) `def hash_color(digest)`
+  - `short_label` (function, line 140) `def short_label(text, limit)`
+  - `_panel` (function, line 148) `def _panel(cfg)`
+  - `_caption_y` (function, line 153) `def _caption_y(cfg)`
+  - `_graph_boxes` (function, line 158) `def _graph_boxes(cfg)`
+  - `_dna_boxes` (function, line 167) `def _dna_boxes(cfg)`
+  - `_split_boxes` (function, line 176) `def _split_boxes(cfg)`
+  - `community_color` (function, line 185) `def community_color(index)`
+  - `_polyline_point` (function, line 192) `def _polyline_point(points, f)`
+  - `project3d` (function, line 203) `def project3d(p, yaw, pitch, target, scale, center, perspective)`
+  - `_depth_alpha` (function, line 232) `def _depth_alpha(z, fade)`
+  - `_language_color` (function, line 237) `def _language_color(language)`
+  - `mode_color` (function, line 242) `def mode_color(data, nid, mode)`
+  - `_lerp3` (function, line 251) `def _lerp3(a, b, t)`
+  - `_camera_track` (function, line 256) `def _camera_track(keys, f)`
+  - `_place_label` (function, line 267) `def _place_label(d, placed, x, y, text, font, col, a)`
+  - `_clipped` (function, line 279) `def _clipped(img, box, paint)`
+  - `draw_cloud3d` (function, line 291) `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `_cloud_core` (function, line 335) `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)`
+  - `_growth_pulse` (function, line 430) `def _growth_pulse(d, data, proj, cfg)`
+  - `draw_sphere3d` (function, line 464) `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels, zoom)`
+  - `_sphere_core` (function, line 505) `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels, zoom)`
+  - `_verdict_badge` (function, line 602) `def _verdict_badge(d, box, text, fonts, lt, dur, col)`
+  - `_scan_cursor` (function, line 617) `def _scan_cursor(d, box, progress, col)`
+  - `_code_tint` (function, line 626) `def _code_tint(line)`
+  - `_packet_offset` (function, line 636) `def _packet_offset(a, b, k)`
+  - `dependencies_available` (function, line 642) `def dependencies_available()`
+  - `resolve_fonts` (function, line 651) `def resolve_fonts()`
+  - `Backdrop` (class, line 690) `class Backdrop`
+  - `_img` (function, line 746) `def _img()`
+  - `draw_grid` (function, line 753) `def draw_grid(img, t, strength, bd)`
+  - `draw_sun` (function, line 773) `def draw_sun(img, a, bd, cy)`
+  - `post` (function, line 790) `def post(img, glitch, seed)`
+  - `glitch_fx` (function, line 808) `def glitch_fx(img, amount, seed)`
+  - `chroma_text` (function, line 831) `def chroma_text(img, xy, text, font, col, spread, anchor)`
+  - `hud_panel` (function, line 842) `def hud_panel(d, box, title, fonts, col)`
+  - `draw_header` (function, line 855) `def draw_header(img, d, gt, total, project, act_label, fonts, width)`
+  - `draw_caption` (function, line 869) `def draw_caption(d, text, lt, dur, fonts, width, y)`
+  - `CinematicVideoRenderer` (class, line 885) `class CinematicVideoRenderer`
+  - `_render_frame_bytes` (function, line 1509) `def _render_frame_bytes(fi)`
+  - `_scene_index` (function, line 1517) `def _scene_index(gt)`
+  - `_paint_scene` (function, line 1525) `def _paint_scene(index, lt)`
+  - `_motion_blurred` (function, line 1540) `def _motion_blurred(index, lt)`
+  - `_outgoing_frame` (function, line 1555) `def _outgoing_frame(index)`
+  - `_draw_frame` (function, line 1564) `def _draw_frame(fi)`
+  - `_scene_title` (function, line 1588) `def _scene_title(img, d, lt, gt, sc)`
+  - `_scene_card` (function, line 1623) `def _scene_card(img, d, lt, gt, sc)`
+  - `_scene_layers` (function, line 1637) `def _scene_layers(img, d, lt, gt, sc)`
+  - `_scene_gods` (function, line 1662) `def _scene_gods(img, d, lt, gt, sc)`
+  - `_scene_tree` (function, line 1705) `def _scene_tree(img, d, lt, gt, sc)`
+  - `_scene_communities` (function, line 1779) `def _scene_communities(img, d, lt, gt, sc)`
+  - `_scene_graph` (function, line 1823) `def _scene_graph(img, d, lt, gt, sc)`
+  - `_scene_bundle` (function, line 1909) `def _scene_bundle(img, d, lt, gt, sc)`
+  - `_orbit_plan` (function, line 1995) `def _orbit_plan(dur)`
+  - `_scene_orbit` (function, line 2000) `def _scene_orbit(img, d, lt, gt, sc)`
+  - `_scene_sphere` (function, line 2116) `def _scene_sphere(img, d, lt, gt, sc)`
+  - `_growth_frame` (function, line 2177) `def _growth_frame(data, cfg, local_t, phase_dur)`
+  - `_growth_pulse_anchor` (function, line 2238) `def _growth_pulse_anchor(releases, factor, rank)`
+  - `_growth_ticker` (function, line 2263) `def _growth_ticker(d, side, meta, releases, fonts)`
+  - `_scene_growth` (function, line 2299) `def _scene_growth(img, d, lt, gt, sc)`
+  - `_scene_invite` (function, line 2355) `def _scene_invite(img, d, lt, gt, sc)`
+  - `_scene_dna` (function, line 2402) `def _scene_dna(img, d, lt, gt, sc)`
+  - `_scene_outro` (function, line 2461) `def _scene_outro(img, d, lt, gt, sc)`
+  - `_flow_graph` (function, line 2491) `def _flow_graph(kind)`
+  - `_bezier` (function, line 2499) `def _bezier(points, t)`
+  - `_draw_flow_edge` (function, line 2507) `def _draw_flow_edge(d, pts, col, a, width, upto, dashed)`
+  - `_draw_flow_node` (function, line 2526) `def _draw_flow_node(d, node, tf, fonts, col, a, glow, lines)`
+  - `_scene_tiers` (function, line 2549) `def _scene_tiers(img, d, lt, gt, sc)`
+  - `_scene_flow` (function, line 2628) `def _scene_flow(img, d, lt, gt, sc)`
+  - `_img_draw` (function, line 2721) `def _img_draw(img)`
+  - `pr` (function, line 534) `def pr(p)`
+  - `_find` (function, line 655) `def _find(style)`
+  - `__init__` (method, line 693) `def __init__(self, width, height)`
+  - `_sun` (method, line 731) `def _sun(self, r)`
+  - `collect` (method, line 890) `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...`
+  - `_build_growth` (method, line 1083) `def _build_growth(self, project_root, graph_nodes, graph_links)`
+  - `_build_dep_tree` (method, line 1138) `def _build_dep_tree(self, node_by_id, link_set, god_names)`
+  - `build_scenes` (method, line 1189) `def build_scenes(self, data)`
+  - `graph_positions` (method, line 1221) `def graph_positions(self, data, box)`
+  - `tree_positions` (method, line 1268) `def tree_positions(self, data, box)`
+  - `emergence_frames` (method, line 1311) `def emergence_frames(self, data, box)`
+  - `bundle_groups` (method, line 1321) `def bundle_groups(self, data)`
+  - `ordered_groups` (method, line 1336) `def ordered_groups(self, data)`
+  - `bundle_layout` (method, line 1346) `def bundle_layout(self, data, box)`
+  - `orbit_positions` (method, line 1355) `def orbit_positions(self, data)`
+  - `sphere_layout` (method, line 1365) `def sphere_layout(self, data)`
+  - `orbit_stops` (method, line 1374) `def orbit_stops(self, data, positions)`
+  - `_prepare_layouts` (method, line 1389) `def _prepare_layouts(self, data)`
+  - `_prepare_growth` (method, line 1404) `def _prepare_growth(self, data)`
+  - `render_single_frame` (method, line 1458) `def render_single_frame(self, data, frame_index)`
+  - `render` (method, line 1472) `def render(self, data, output_path)`
+  - `factor` (function, line 2206) `def factor(born)`
+  - `tf` (function, line 2569) `def tf(x, y)`
+  - `tf` (function, line 2667) `def tf(x, y)`
+- Depends on: `readmenator/_config.py`, `readmenator/_flowcharts.py`, `readmenator/_githistory.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`, `readmenator/_rank.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_video.py`
 
 ## readmenator/_viewer_ui.py

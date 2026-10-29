@@ -112,6 +112,7 @@
 - [`audit_provenance`](modules/readmenator._app.py.md#readmenatorapplication-audit_provenance) method of `readmenatorApplication` in `readmenator._app`
 - [`authority_score`](modules/readmenator._rank.py.md#rankeditem-authority_score) attribute of `RankedItem` in `readmenator._rank`
 - [`autolink`](modules/readmenator._apidocs_render.py.md#apilinker-autolink) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`available`](modules/readmenator._githistory.py.md#githistoryreader-available) method of `GitHistoryReader` in `readmenator._githistory`
 - [`available`](modules/readmenator._ollama.py.md#ollamaclient-available) method of `OllamaClient` in `readmenator._ollama`
 - [`available`](modules/readmenator._uncertainty.py.md#randomforestscorer-available) staticmethod of `RandomForestScorer` in `readmenator._uncertainty`
 - [`available`](modules/readmenator._skill_installer.py.md#skillinstaller-available) method of `SkillInstaller` in `readmenator._skill_installer`
@@ -254,6 +255,7 @@
 - [`combined_score`](modules/readmenator._models.py.md#hotspotresult-combined_score) attribute of `HotspotResult` in `readmenator._models`
 - [`commands`](modules/readmenator._receipts.py.md#releasereceiptrecord-commands) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`COMMENT_RE`](modules/readmenator._yaralite.py.md#comment_re) constant in `readmenator._yaralite`
+- [`commit`](modules/readmenator._githistory.py.md#historyrelease-commit) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`commit`](modules/readmenator._receipts.py.md#releasereceiptrecord-commit) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`commit_message`](modules/readmenator_orchestrator.py.md#config-commit_message) attribute of `Config` in `readmenator_orchestrator`
 - [`communities`](modules/readmenator._models.py.md#analysisresult-communities) attribute of `AnalysisResult` in `readmenator._models`
@@ -380,6 +382,7 @@
 - [`DATAFLOW_MAX_ISSUES`](modules/readmenator._config.py.md#config-dataflow_max_issues) attribute of `Config` in `readmenator._config`
 - [`DataflowAnalyzer`](modules/readmenator._dataflow.py.md#dataflowanalyzer) class in `readmenator._dataflow`
 - [`DataflowIssue`](modules/readmenator._models.py.md#dataflowissue) class in `readmenator._models`
+- [`date`](modules/readmenator._githistory.py.md#historyrelease-date) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`date`](modules/readmenator._memory.py.md#memorynote-date) attribute of `MemoryNote` in `readmenator._memory`
 - [`DEAD_CODE_ENABLED`](modules/readmenator._config.py.md#config-dead_code_enabled) attribute of `Config` in `readmenator._config`
 - [`DEAD_CODE_ENTRY_POINTS`](modules/readmenator._config.py.md#config-dead_code_entry_points) attribute of `Config` in `readmenator._config`
@@ -633,6 +636,7 @@
 - [`file_id`](modules/readmenator._models.py.md#hotspotresult-file_id) attribute of `HotspotResult` in `readmenator._models`
 - [`file_ids`](modules/readmenator._models.py.md#communityresult-file_ids) attribute of `CommunityResult` in `readmenator._models`
 - [`file_ids`](modules/readmenator._models.py.md#conceptnode-file_ids) attribute of `ConceptNode` in `readmenator._models`
+- [`file_ids`](modules/readmenator._githistory.py.md#historyrelease-file_ids) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`file_ids`](modules/readmenator._graphrag.py.md#ragcommunity-file_ids) attribute of `RagCommunity` in `readmenator._graphrag`
 - [`file_pagerank`](modules/readmenator._rank.py.md#file_pagerank) function in `readmenator._rank`
 - [`file_path`](modules/readmenator._models.py.md#dataflowissue-file_path) attribute of `DataflowIssue` in `readmenator._models`
@@ -809,6 +813,7 @@
 - [`GH_WIKI_TIMEOUT_S`](modules/readmenator._config.py.md#config-gh_wiki_timeout_s) attribute of `Config` in `readmenator._config`
 - [`git_user_email`](modules/readmenator_orchestrator.py.md#config-git_user_email) attribute of `Config` in `readmenator_orchestrator`
 - [`git_user_name`](modules/readmenator_orchestrator.py.md#config-git_user_name) attribute of `Config` in `readmenator_orchestrator`
+- [`GitHistoryReader`](modules/readmenator._githistory.py.md#githistoryreader) class in `readmenator._githistory`
 - [`github_user`](modules/readmenator_orchestrator.py.md#config-github_user) attribute of `Config` in `readmenator_orchestrator`
 - [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`
 - [`GitHubWikiPublisher`](modules/readmenator._gh_wiki.py.md#githubwikipublisher) class in `readmenator._gh_wiki`
@@ -881,6 +886,7 @@
 - [`height`](modules/readmenator._flowlayout.py.md#flowgraph-height) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
 - [`hierarchical_edge_bundling`](modules/readmenator._graphlayout.py.md#hierarchical_edge_bundling) function in `readmenator._graphlayout`
+- [`HistoryRelease`](modules/readmenator._githistory.py.md#historyrelease) class in `readmenator._githistory`
 - [`hits`](modules/readmenator._rank.py.md#hits) function in `readmenator._rank`
 - [`home_anchor`](modules/readmenator._viewer_ui.py.md#home_anchor) function in `readmenator._viewer_ui`
 - [`hops`](modules/readmenator._models.py.md#taintpath-hops) attribute of `TaintPath` in `readmenator._models`
@@ -914,6 +920,7 @@
 - [`IdentityProjection`](modules/readmenator._projections.py.md#identityprojection) class in `readmenator._projections`
 - [`IGNORE_DIRS`](modules/readmenator._config.py.md#config-ignore_dirs) attribute of `Config` in `readmenator._config`
 - [`IMPLEMENTS`](modules/readmenator._category.py.md#edgekind-implements) attribute of `EdgeKind` in `readmenator._category`
+- [`import_count`](modules/readmenator._githistory.py.md#historyrelease-import_count) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
 - [`IMPORTS`](modules/readmenator._category.py.md#edgekind-imports) attribute of `EdgeKind` in `readmenator._category`
 - [`incoming`](modules/readmenator._category.py.md#category-incoming) method of `Category` in `readmenator._category`
@@ -953,6 +960,7 @@
 - [`__init__`](modules/readmenator._cache.py.md#filecache-__init__) constructor of `FileCache` in `readmenator._cache`
 - [`__init__`](modules/readmenator._folder_readme.py.md#folderreadmewriter-__init__) constructor of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`__init__`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-__init__) constructor of `ForceGraphRenderer` in `readmenator._forcegraph`
+- [`__init__`](modules/readmenator._githistory.py.md#githistoryreader-__init__) constructor of `GitHistoryReader` in `readmenator._githistory`
 - [`__init__`](modules/readmenator_orchestrator.py.md#githubclient-__init__) constructor of `GitHubClient` in `readmenator_orchestrator`
 - [`__init__`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-__init__) constructor of `GitHubWikiPublisher` in `readmenator._gh_wiki`
 - [`__init__`](modules/readmenator._analyzer.py.md#graphanalyzer-__init__) constructor of `GraphAnalyzer` in `readmenator._analyzer`
@@ -1013,6 +1021,7 @@
 - [`is_empty`](modules/readmenator._docstrings.py.md#doccomment-is_empty) property of `DocComment` in `readmenator._docstrings`
 - [`is_excluded`](modules/readmenator._exclusions.py.md#exclusionlist-is_excluded) method of `ExclusionList` in `readmenator._exclusions`
 - [`is_garbage_doc`](modules/readmenator._purpose.py.md#is_garbage_doc) function in `readmenator._purpose`
+- [`is_generated`](modules/readmenator._scanner.py.md#polyglotscanner-is_generated) method of `PolyglotScanner` in `readmenator._scanner`
 - [`is_generated_folder_readme`](modules/readmenator._folder_readme.py.md#is_generated_folder_readme) function in `readmenator._folder_readme`
 - [`is_inferred_only`](modules/readmenator._provenance.py.md#provenancefinding-is_inferred_only) property of `ProvenanceFinding` in `readmenator._provenance`
 - [`is_notification`](modules/readmenator._mcp_server.py.md#mcprequest-is_notification) property of `MCPRequest` in `readmenator._mcp_server`
@@ -1072,6 +1081,7 @@
 - [`label`](modules/readmenator._models.py.md#communityresult-label) attribute of `CommunityResult` in `readmenator._models`
 - [`label`](modules/readmenator._flowcharts.py.md#component-label) attribute of `Component` in `readmenator._flowcharts`
 - [`label`](modules/readmenator._flowlayout.py.md#flowedge-label) attribute of `FlowEdge` in `readmenator._flowlayout`
+- [`label`](modules/readmenator._githistory.py.md#historyrelease-label) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`label`](modules/readmenator._diagrams.py.md#mapedge-label) attribute of `MapEdge` in `readmenator._diagrams`
 - [`label`](modules/readmenator._diagrams.py.md#mapnode-label) attribute of `MapNode` in `readmenator._diagrams`
 - [`label`](modules/readmenator._models.py.md#node-label) attribute of `Node` in `readmenator._models`
@@ -1121,6 +1131,7 @@
 - [`lines`](modules/readmenator._sourceview.py.md#sourceentry-lines) attribute of `SourceEntry` in `readmenator._sourceview`
 - [`link`](modules/readmenator._apidocs_render.py.md#apilinker-link) method of `ApiLinker` in `readmenator._apidocs_render`
 - [`link_uid`](modules/readmenator._apidocs_render.py.md#apilinker-link_uid) method of `ApiLinker` in `readmenator._apidocs_render`
+- [`links`](modules/readmenator._githistory.py.md#historyrelease-links) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`linlog`](modules/readmenator._graphlayout.py.md#forceatlas2settings-linlog) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`lint`](modules/readmenator._linter.py.md#architecturelinter-lint) method of `ArchitectureLinter` in `readmenator._linter`
 - [`lint`](modules/readmenator._wiki.py.md#wikigenerator-lint) method of `WikiGenerator` in `readmenator._wiki`
@@ -1507,6 +1518,7 @@
 - [`recover_comment`](modules/readmenator._docstrings.py.md#recover_comment) function in `readmenator._docstrings`
 - [`recursive`](modules/readmenator._flowcharts.py.md#flowstep-recursive) attribute of `FlowStep` in `readmenator._flowcharts`
 - [`RED`](modules/readmenator._video.py.md#red) constant in `readmenator._video`
+- [`ref`](modules/readmenator._githistory.py.md#historyrelease-ref) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`refactor_monolith`](modules/readmenator._app.py.md#readmenatorapplication-refactor_monolith) method of `readmenatorApplication` in `readmenator._app`
 - [`RefactoringAction`](modules/readmenator._models.py.md#refactoringaction) class in `readmenator._models`
 - [`RefactoringPlan`](modules/readmenator._models.py.md#refactoringplan) class in `readmenator._models`
@@ -1618,6 +1630,7 @@
 - [`scaling`](modules/readmenator._graphlayout.py.md#forceatlas2settings-scaling) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`scan`](modules/readmenator._scanner.py.md#polyglotscanner-scan) method of `PolyglotScanner` in `readmenator._scanner`
 - [`scan`](modules/readmenator._security.py.md#securityanalyzer-scan) method of `SecurityAnalyzer` in `readmenator._security`
+- [`scan_contents`](modules/readmenator._scanner.py.md#polyglotscanner-scan_contents) method of `PolyglotScanner` in `readmenator._scanner`
 - [`SCAN_EXCLUDE_PATTERNS`](modules/readmenator._config.py.md#config-scan_exclude_patterns) attribute of `Config` in `readmenator._config`
 - [`SCAN_INCLUDE_DIRS`](modules/readmenator._config.py.md#config-scan_include_dirs) attribute of `Config` in `readmenator._config`
 - [`SCAN_MODE`](modules/readmenator._config.py.md#config-scan_mode) attribute of `Config` in `readmenator._config`
@@ -1786,6 +1799,7 @@
 - [`SVG_MAX_NODES`](modules/readmenator._config.py.md#config-svg_max_nodes) attribute of `Config` in `readmenator._config`
 - [`SwiftParser`](modules/readmenator.parsers._swift.py.md#swiftparser) class in `readmenator.parsers._swift`
 - [`Symbol`](modules/readmenator._models.py.md#symbol) class in `readmenator._models`
+- [`symbol_count`](modules/readmenator._githistory.py.md#historyrelease-symbol_count) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`symbol_count`](modules/readmenator._models.py.md#hotspotresult-symbol_count) attribute of `HotspotResult` in `readmenator._models`
 - [`symbol_name`](modules/readmenator._models.py.md#deadcodereport-symbol_name) attribute of `DeadCodeReport` in `readmenator._models`
 - [`symbol_total`](modules/readmenator._diagrams.py.md#mapnode-symbol_total) attribute of `MapNode` in `readmenator._diagrams`
@@ -1855,6 +1869,7 @@
 - [`thumbnail_svg`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-thumbnail_svg) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`tier`](modules/readmenator._yaralite.py.md#yaralitematch-tier) attribute of `YaraLiteMatch` in `readmenator._yaralite`
 - [`tier`](modules/readmenator._yaralite.py.md#yaraliterule-tier) property of `YaraLiteRule` in `readmenator._yaralite`
+- [`timeline`](modules/readmenator._githistory.py.md#githistoryreader-timeline) method of `GitHistoryReader` in `readmenator._githistory`
 - [`title`](modules/readmenator._flowlayout.py.md#flowgraph-title) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`title`](modules/readmenator._flowlayout.py.md#flownode-title) attribute of `FlowNode` in `readmenator._flowlayout`
 - [`title`](modules/readmenator._diagrams.py.md#mapview-title) attribute of `MapView` in `readmenator._diagrams`
@@ -1961,7 +1976,15 @@
 - [`VIDEO_GRAPH_S`](modules/readmenator._config.py.md#config-video_graph_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_SPREAD`](modules/readmenator._config.py.md#config-video_graph_spread) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_TRIM_FRACTION`](modules/readmenator._config.py.md#config-video_graph_trim_fraction) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_BIRTH_S`](modules/readmenator._config.py.md#config-video_growth_birth_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_GHOST`](modules/readmenator._config.py.md#config-video_growth_ghost) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_PULSES`](modules/readmenator._config.py.md#config-video_growth_pulses) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_S`](modules/readmenator._config.py.md#config-video_growth_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_HEIGHT`](modules/readmenator._config.py.md#config-video_height) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HISTORY_ENABLED`](modules/readmenator._config.py.md#config-video_history_enabled) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HISTORY_MAX_FILES`](modules/readmenator._config.py.md#config-video_history_max_files) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HISTORY_MAX_SNAPSHOTS`](modules/readmenator._config.py.md#config-video_history_max_snapshots) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HISTORY_TIMEOUT_S`](modules/readmenator._config.py.md#config-video_history_timeout_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_INVITE_S`](modules/readmenator._config.py.md#config-video_invite_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_JOBS`](modules/readmenator._config.py.md#config-video_jobs) attribute of `Config` in `readmenator._config`
 - [`VIDEO_LAYER_S`](modules/readmenator._config.py.md#config-video_layer_s) attribute of `Config` in `readmenator._config`

@@ -1,6 +1,29 @@
 # Subsystem: tests (page 3 of 4)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_layout_quality.py
+- Doc: Contract tests for bundle crossing reduction and seeded explorer layouts.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_clustered` (function, line 23) `def _clustered()`
+  - `_chords` (function, line 37) `def _chords(layout, edges)`
+  - `TestBundleOrdering` (class, line 42) `class TestBundleOrdering(TestCase)`
+  - `_force_payload_inputs` (function, line 100) `def _force_payload_inputs()`
+  - `TestSeededExplorer` (class, line 116) `class TestSeededExplorer(TestCase)`
+  - `test_layout_order_reduces_angular_cost` (method, line 45) `def test_layout_order_reduces_angular_cost(self)`
+  - `test_layout_order_keeps_members_and_first_group` (method, line 50) `def test_layout_order_keeps_members_and_first_group(self)`
+  - `test_layout_order_deterministic_and_never_worse` (method, line 56) `def test_layout_order_deterministic_and_never_worse(self)`
+  - `test_layout_more_sweeps_never_increase_cost` (method, line 63) `def test_layout_more_sweeps_never_increase_cost(self)`
+  - `test_layout_center_out_puts_hub_mid_arc` (method, line 77) `def test_layout_center_out_puts_hub_mid_arc(self)`
+  - `test_layout_sphere_refinement_shortens_chords` (method, line 82) `def test_layout_sphere_refinement_shortens_chords(self)`
+  - `test_layout_sphere_refine_in_bundling_call` (method, line 92) `def test_layout_sphere_refine_in_bundling_call(self)`
+  - `test_layout_seed_positions_present_and_scaled` (method, line 119) `def test_layout_seed_positions_present_and_scaled(self)`
+  - `test_layout_seed_deterministic_and_disableable` (method, line 132) `def test_layout_seed_deterministic_and_disableable(self)`
+  - `test_layout_seed_page_wiring` (method, line 142) `def test_layout_seed_page_wiring(self)`
+  - `test_layout_bundle_payload_uses_optimized_order` (method, line 150) `def test_layout_bundle_payload_uses_optimized_order(self)`
+- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`
+
 ## tests/test_linter.py
 - Doc: Contract tests for the ArchitectureLinter.
 - Layer: testing
@@ -438,41 +461,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_ppr_favors_seed` (method, line 625) `def test_ppr_favors_seed(self)`
   - `test_ranker_from_real_data` (method, line 637) `def test_ranker_from_real_data(self)`
 - Depends on: `readmenator/_category.py`, `readmenator/_explain.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_rank.py`
-
-## tests/test_readme_injector.py
-- Doc: Contract tests for README injection into documented projects.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestReadmeInjectorInjectBehavior` (class, line 16) `class TestReadmeInjectorInjectBehavior(TestCase)`
-  - `TestReadmeInjectorRemoveBehavior` (class, line 72) `class TestReadmeInjectorRemoveBehavior(TestCase)`
-  - `TestReadmeInjectorFindReadme` (class, line 105) `class TestReadmeInjectorFindReadme(TestCase)`
-  - `TestReadmeInjectorEdgeCases` (class, line 140) `class TestReadmeInjectorEdgeCases(TestCase)`
-  - `setUp` (method, line 19) `def setUp(self)`
-  - `tearDown` (method, line 24) `def tearDown(self)`
-  - `test_inject_into_markdown_readme_adds_kb_link` (method, line 28) `def test_inject_into_markdown_readme_adds_kb_link(self)`
-  - `test_inject_into_rst_readme_adds_kb_link` (method, line 39) `def test_inject_into_rst_readme_adds_kb_link(self)`
-  - `test_inject_is_idempotent_does_not_duplicate` (method, line 48) `def test_inject_is_idempotent_does_not_duplicate(self)`
-  - `test_inject_no_readme_file_returns_false` (method, line 59) `def test_inject_no_readme_file_returns_false(self)`
-  - `test_inject_preserves_existing_content` (method, line 63) `def test_inject_preserves_existing_content(self)`
-  - `setUp` (method, line 75) `def setUp(self)`
-  - `tearDown` (method, line 80) `def tearDown(self)`
-  - `test_remove_strips_injected_section` (method, line 84) `def test_remove_strips_injected_section(self)`
-  - `test_remove_without_injection_returns_false` (method, line 94) `def test_remove_without_injection_returns_false(self)`
-  - `test_remove_no_readme_returns_false` (method, line 100) `def test_remove_no_readme_returns_false(self)`
-  - `setUp` (method, line 108) `def setUp(self)`
-  - `tearDown` (method, line 112) `def tearDown(self)`
-  - `test_finds_readme_md` (method, line 116) `def test_finds_readme_md(self)`
-  - `test_finds_readme_rst` (method, line 122) `def test_finds_readme_rst(self)`
-  - `test_prefers_readme_md_over_rst` (method, line 128) `def test_prefers_readme_md_over_rst(self)`
-  - `test_returns_none_when_no_readme` (method, line 135) `def test_returns_none_when_no_readme(self)`
-  - `setUp` (method, line 143) `def setUp(self)`
-  - `tearDown` (method, line 148) `def tearDown(self)`
-  - `test_inject_into_empty_readme` (method, line 152) `def test_inject_into_empty_readme(self)`
-  - `test_custom_kb_filename_works` (method, line 160) `def test_custom_kb_filename_works(self)`
-  - `test_inject_lists_all_artifacts` (method, line 168) `def test_inject_lists_all_artifacts(self)`
-  - `test_inject_repairs_partial_anchor` (method, line 181) `def test_inject_repairs_partial_anchor(self)`
-- Depends on: `readmenator/_readme_injector.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

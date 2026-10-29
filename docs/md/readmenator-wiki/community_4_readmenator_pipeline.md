@@ -25,9 +25,9 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_uml.py` | py | utility | 25 | yes |
 | `tests/test_agent_injector.py` | py | testing | 38 | yes |
 | `tests/test_agent_output.py` | py | testing | 45 | no |
+| `tests/test_exporter.py` | py | testing | 15 | yes |
 | `tests/test_interactive_graph.py` | py | testing | 60 | yes |
 | `tests/test_readme_injector.py` | py | testing | 28 | yes |
-| `tests/test_uml.py` | py | testing | 49 | yes |
 
 ## Key Symbols
 
@@ -70,8 +70,8 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 ## Connections
 
 - [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 4 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_forcegraph.py.
 - [EXTRACTED] depends_on community 4 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
 - [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
@@ -80,14 +80,14 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 
 - [taint high] `readmenator/_agent_injector.py` -> `readmenator/_agent_injector.py` via `subprocess` (0 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_uml.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 
@@ -115,6 +115,6 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_uml.py`
 - `tests/test_agent_injector.py`
 - `tests/test_agent_output.py`
+- `tests/test_exporter.py`
 - `tests/test_interactive_graph.py`
 - `tests/test_readme_injector.py`
-- `tests/test_uml.py`

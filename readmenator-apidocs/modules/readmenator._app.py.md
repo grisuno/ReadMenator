@@ -1079,7 +1079,7 @@ Render the cinematic overview video for the target project.
 
 #### `readmenatorApplication.memory`
 
-`method` | [readmenator/_app.py:1851](../../readmenator/_app.py#L1851)
+`method` | [readmenator/_app.py:1852](../../readmenator/_app.py#L1852)
 
 ```python
 def memory(self, target_dir: str) -> str
@@ -1103,7 +1103,7 @@ Return MEMORY.md, generating it first when missing.
 
 #### `readmenatorApplication.remember`
 
-`method` | [readmenator/_app.py:1874](../../readmenator/_app.py#L1874)
+`method` | [readmenator/_app.py:1875](../../readmenator/_app.py#L1875)
 
 ```python
 def remember(self, target_dir: str, note: str, kind: str = 'note') -> str
@@ -1127,7 +1127,7 @@ Append a note to the preserved MEMORY.md session log.
 
 #### `readmenatorApplication.install_skills`
 
-`method` | [readmenator/_app.py:1888](../../readmenator/_app.py#L1888)
+`method` | [readmenator/_app.py:1889](../../readmenator/_app.py#L1889)
 
 ```python
 def install_skills(self, target_dir: str, target: Optional[str] = None) -> List[Path]
@@ -1150,7 +1150,7 @@ Install the packaged agent skills into the project.
 
 #### `readmenatorApplication.build_graphrag`
 
-`method` | [readmenator/_app.py:1900](../../readmenator/_app.py#L1900)
+`method` | [readmenator/_app.py:1901](../../readmenator/_app.py#L1901)
 
 ```python
 def build_graphrag(self, target_dir: str) -> GraphRagIndex
@@ -1174,7 +1174,7 @@ Scan, analyse, and write the GraphRAG index for a project.
 
 #### `readmenatorApplication.graphrag_search`
 
-`method` | [readmenator/_app.py:1924](../../readmenator/_app.py#L1924)
+`method` | [readmenator/_app.py:1925](../../readmenator/_app.py#L1925)
 
 ```python
 def graphrag_search(self, target_dir: str, query: str, mode: str = 'auto', budget_tokens: int = 0) -> RagContext
@@ -1203,7 +1203,7 @@ Loads GRAPHRAG_OUTPUT_DIR/index.json and builds it first when missing.
 
 #### `readmenatorApplication.watch`
 
-`method` | [readmenator/_app.py:1945](../../readmenator/_app.py#L1945)
+`method` | [readmenator/_app.py:1946](../../readmenator/_app.py#L1946)
 
 ```python
 def watch(self, target_dir: str) -> None
@@ -1223,7 +1223,7 @@ def watch(self, target_dir: str) -> None
 
 #### `readmenatorApplication.audit`
 
-`method` | [readmenator/_app.py:1955](../../readmenator/_app.py#L1955)
+`method` | [readmenator/_app.py:1956](../../readmenator/_app.py#L1956)
 
 ```python
 def audit(self, target_dir: str) -> List[SecurityFinding]
@@ -1243,7 +1243,7 @@ def audit(self, target_dir: str) -> List[SecurityFinding]
 
 #### `readmenatorApplication.audit_deep`
 
-`method` | [readmenator/_app.py:1962](../../readmenator/_app.py#L1962)
+`method` | [readmenator/_app.py:1963](../../readmenator/_app.py#L1963)
 
 ```python
 def audit_deep(self, target_dir: str) -> AnalysisResultV2
@@ -1265,7 +1265,7 @@ def audit_deep(self, target_dir: str) -> AnalysisResultV2
 
 #### `readmenatorApplication.export_sarif`
 
-`method` | [readmenator/_app.py:1982](../../readmenator/_app.py#L1982)
+`method` | [readmenator/_app.py:1983](../../readmenator/_app.py#L1983)
 
 ```python
 def export_sarif(self, target_dir: str, output_path: Optional[str] = None) -> str
@@ -1286,7 +1286,7 @@ def export_sarif(self, target_dir: str, output_path: Optional[str] = None) -> st
 
 #### `readmenatorApplication.export_rules`
 
-`method` | [readmenator/_app.py:1992](../../readmenator/_app.py#L1992)
+`method` | [readmenator/_app.py:1993](../../readmenator/_app.py#L1993)
 
 ```python
 def export_rules(self, target_dir: str, output_dir: Optional[str] = None) -> int
@@ -1307,7 +1307,7 @@ def export_rules(self, target_dir: str, output_dir: Optional[str] = None) -> int
 
 #### `readmenatorApplication.detect_layers`
 
-`method` | [readmenator/_app.py:2003](../../readmenator/_app.py#L2003)
+`method` | [readmenator/_app.py:2004](../../readmenator/_app.py#L2004)
 
 ```python
 def detect_layers(self, target_dir: str) -> dict
@@ -1329,7 +1329,7 @@ def detect_layers(self, target_dir: str) -> dict
 
 #### `readmenatorApplication.lint`
 
-`method` | [readmenator/_app.py:2013](../../readmenator/_app.py#L2013)
+`method` | [readmenator/_app.py:2014](../../readmenator/_app.py#L2014)
 
 ```python
 def lint(self, target_dir: str) -> List[LinterViolation]
@@ -1351,7 +1351,7 @@ def lint(self, target_dir: str) -> List[LinterViolation]
 
 #### `readmenatorApplication.strip_dead_code`
 
-`method` | [readmenator/_app.py:2026](../../readmenator/_app.py#L2026)
+`method` | [readmenator/_app.py:2027](../../readmenator/_app.py#L2027)
 
 ```python
 def strip_dead_code(self, target_dir: str) -> List[DeadCodeReport]
@@ -1373,7 +1373,7 @@ def strip_dead_code(self, target_dir: str) -> List[DeadCodeReport]
 
 #### `readmenatorApplication.generate_cursorrules`
 
-`method` | [readmenator/_app.py:2036](../../readmenator/_app.py#L2036)
+`method` | [readmenator/_app.py:2037](../../readmenator/_app.py#L2037)
 
 ```python
 def generate_cursorrules(self, target_dir: str) -> str
@@ -1395,7 +1395,7 @@ def generate_cursorrules(self, target_dir: str) -> str
 
 #### `readmenatorApplication.refactor_monolith`
 
-`method` | [readmenator/_app.py:2051](../../readmenator/_app.py#L2051)
+`method` | [readmenator/_app.py:2052](../../readmenator/_app.py#L2052)
 
 ```python
 def refactor_monolith(self, target_dir: str) -> List[RefactoringPlan]

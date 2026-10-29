@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 102 modules, 2055 documented entities, documentation coverage 81.1% (728/898 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 103 modules, 2079 documented entities, documentation coverage 81.2% (736/906 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (101), sh (1)
+Languages: py (102), sh (1)
 
 ## Modules
 
@@ -56,6 +56,7 @@ Languages: py (101), sh (1)
 | [`readmenator._forcegraph`](modules/readmenator._forcegraph.py.md) | Force-graph explorer for the readmenator knowledge graph. | 1 | 15 | 100.0% |
 | [`readmenator._forcegraph_page`](modules/readmenator._forcegraph_page.py.md) | HTML page template for the force-graph explorer. | 0 | 0 | 100.0% |
 | [`readmenator._gh_wiki`](modules/readmenator._gh_wiki.py.md) | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | 2 | 7 | 100.0% |
+| [`readmenator._githistory`](modules/readmenator._githistory.py.md) | Git history replay: read release snapshots from a repository. | 2 | 3 | 100.0% |
 | [`readmenator._gitmeta`](modules/readmenator._gitmeta.py.md) | Read-only git metadata for freshness stamps on generated documents. | 0 | 1 | 100.0% |
 | [`readmenator._graphlayout`](modules/readmenator._graphlayout.py.md) | Deterministic graph layout algorithms for animated renders. | 3 | 10 | 100.0% |
 | [`readmenator._graphrag`](modules/readmenator._graphrag.py.md) | Zero-token GraphRAG index and retrieval for AI agents. | 10 | 17 | 100.0% |
@@ -84,7 +85,7 @@ Languages: py (101), sh (1)
 | [`readmenator._resolver`](modules/readmenator._resolver.py.md) | Import path resolver for the readmenator knowledge graph. | 1 | 3 | 100.0% |
 | [`readmenator._rule_gen`](modules/readmenator._rule_gen.py.md) | Suggested linting rule generator producing Semgrep YAML from detected antipatterns. | 1 | 3 | 80.0% |
 | [`readmenator._sarif`](modules/readmenator._sarif.py.md) | SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible). | 1 | 2 | 75.0% |
-| [`readmenator._scanner`](modules/readmenator._scanner.py.md) | Secure polyglot directory traversal and file analysis. | 1 | 3 | 100.0% |
+| [`readmenator._scanner`](modules/readmenator._scanner.py.md) | Secure polyglot directory traversal and file analysis. | 1 | 5 | 100.0% |
 | [`readmenator._scantext`](modules/readmenator._scantext.py.md) | Synthesized scan-text builder for the readmenator knowledge graph. | 1 | 3 | 100.0% |
 | [`readmenator._security`](modules/readmenator._security.py.md) | Pattern-based static security analysis for the readmenator knowledge graph. | 2 | 4 | 57.1% |
 | [`readmenator._skill_installer`](modules/readmenator._skill_installer.py.md) | Installs the packaged ReadMenator agent skills into a project. | 1 | 6 | 100.0% |

@@ -4,11 +4,11 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 ## Suggested
 
-### Q: What does _models.py depend on, and what depends on it? (102 connections)
+### Q: What does _config.py depend on, and what depends on it? (104 connections)
 
 - Status: unanswered
 
-### Q: What does _config.py depend on, and what depends on it? (102 connections)
+### Q: What does _models.py depend on, and what depends on it? (102 connections)
 
 - Status: unanswered
 
@@ -16,7 +16,7 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: How are the 37 files in 'readmenator/parsers' related to each other?
+### Q: How are the 41 files in 'readmenator: _video' related to each other?
 
 - Status: unanswered
 

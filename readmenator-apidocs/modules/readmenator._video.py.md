@@ -113,7 +113,7 @@ flowchart LR
 
 ### `Backdrop`
 
-`class` | [readmenator/_video.py:618](../../readmenator/_video.py#L618)
+`class` | [readmenator/_video.py:690](../../readmenator/_video.py#L690)
 
 ```python
 class Backdrop
@@ -131,7 +131,7 @@ Precomputed synthwave background with sun and CRT mask.
 
 #### `Backdrop.__init__`
 
-`constructor` | [readmenator/_video.py:621](../../readmenator/_video.py#L621)
+`constructor` | [readmenator/_video.py:693](../../readmenator/_video.py#L693)
 
 ```python
 def __init__(self, width: int, height: int) -> None
@@ -156,7 +156,7 @@ Build the gradient sky, star field, sun and CRT mask.
 
 ### `CinematicVideoRenderer`
 
-`class` `dataclass` | [readmenator/_video.py:813](../../readmenator/_video.py#L813)
+`class` `dataclass` | [readmenator/_video.py:885](../../readmenator/_video.py#L885)
 
 Decorators: `@dataclass`
 
@@ -194,10 +194,10 @@ Builds and renders the general-purpose codebase overview video.
 
 #### `CinematicVideoRenderer.collect`
 
-`method` | [readmenator/_video.py:818](../../readmenator/_video.py#L818)
+`method` | [readmenator/_video.py:890](../../readmenator/_video.py#L890)
 
 ```python
-def collect(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult], layers: Optional[Dict[str, str]], findings: Optional[List[SecurityFinding]], analysis_v2: Optional[AnalysisResultV2], project_name: str, content_map: Optional[Dict[str, str]] = None, concept_graph: Optional[Any] = None) -> Dict[str, Any]
+def collect(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]], analysis: Optional[AnalysisResult], layers: Optional[Dict[str, str]], findings: Optional[List[SecurityFinding]], analysis_v2: Optional[AnalysisResultV2], project_name: str, content_map: Optional[Dict[str, str]] = None, concept_graph: Optional[Any] = None, project_root: str = '') -> Dict[str, Any]
 ```
 
 Collect every number each scene draws, from real scan data.
@@ -206,18 +206,19 @@ Collect every number each scene draws, from real scan data.
 
 | Name | Type | Default | Description |
 |---|---|---|---|
-| `nodes` | `List[Node]` |  |  |
-| `edges` | `List[Edge]` |  |  |
-| `resolved_edges` | `Optional[List[Edge]]` |  |  |
-| `analysis` | `Optional[AnalysisResult]` |  |  |
-| `layers` | `Optional[Dict[str, str]]` |  |  |
-| `findings` | `Optional[List[SecurityFinding]]` |  |  |
-| `analysis_v2` | `Optional[AnalysisResultV2]` |  |  |
-| `project_name` | `str` |  |  |
-| `content_map` | `Optional[Dict[str, str]]` | `None` |  |
-| `concept_graph` | `Optional[Any]` | `None` |  |
+| `nodes` | `List[Node]` |  | Scanned file nodes. |
+| `edges` | `List[Edge]` |  | Raw edges (imports, calls, inherits). |
+| `resolved_edges` | `Optional[List[Edge]]` |  | Import edges resolved to project files. |
+| `analysis` | `Optional[AnalysisResult]` |  | Graph analysis result. |
+| `layers` | `Optional[Dict[str, str]]` |  | File to architectural layer map. |
+| `findings` | `Optional[List[SecurityFinding]]` |  | Security findings. |
+| `analysis_v2` | `Optional[AnalysisResultV2]` |  | Deep analysis result. |
+| `project_name` | `str` |  | Display name of the project. |
+| `content_map` | `Optional[Dict[str, str]]` | `None` | Raw file contents. |
+| `concept_graph` | `Optional[Any]` | `None` | Optional semantic concept graph. |
+| `project_root` | `str` | `''` | Repository root, used to read the release history. |
 
-**Returns:** `Dict[str, Any]`
+**Returns:** `Dict[str, Any]` - The scene payload every act reads from.
 
 *Calls:* [`build_flow_graphs`](readmenator._flowcharts.py.md#build_flow_graphs), [`file_pagerank`](readmenator._rank.py.md#file_pagerank), [`hash_color`](#hash_color), [`short_label`](#short_label)
 
@@ -225,7 +226,7 @@ Collect every number each scene draws, from real scan data.
 
 #### `CinematicVideoRenderer.build_scenes`
 
-`method` | [readmenator/_video.py:1042](../../readmenator/_video.py#L1042)
+`method` | [readmenator/_video.py:1189](../../readmenator/_video.py#L1189)
 
 ```python
 def build_scenes(self, data: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], float]
@@ -249,7 +250,7 @@ Acts with a non-positive duration are skipped together with their card.
 
 #### `CinematicVideoRenderer.graph_positions`
 
-`method` | [readmenator/_video.py:1072](../../readmenator/_video.py#L1072)
+`method` | [readmenator/_video.py:1221](../../readmenator/_video.py#L1221)
 
 ```python
 def graph_positions(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> Dict[str, Tuple[float, float]]
@@ -270,7 +271,7 @@ Compute deterministic positions for graph nodes inside a box.
 
 #### `CinematicVideoRenderer.tree_positions`
 
-`method` | [readmenator/_video.py:1119](../../readmenator/_video.py#L1119)
+`method` | [readmenator/_video.py:1268](../../readmenator/_video.py#L1268)
 
 ```python
 def tree_positions(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> Dict[str, Tuple[float, float]]
@@ -294,7 +295,7 @@ leaves, so every dependent fits on screen without truncation.
 
 #### `CinematicVideoRenderer.emergence_frames`
 
-`method` | [readmenator/_video.py:1162](../../readmenator/_video.py#L1162)
+`method` | [readmenator/_video.py:1311](../../readmenator/_video.py#L1311)
 
 ```python
 def emergence_frames(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> List[Dict[str, Tuple[float, float]]]
@@ -317,7 +318,7 @@ ForceAtlas2 snapshots of the resolved import graph fitted to a pixel box.
 
 #### `CinematicVideoRenderer.bundle_groups`
 
-`method` | [readmenator/_video.py:1172](../../readmenator/_video.py#L1172)
+`method` | [readmenator/_video.py:1321](../../readmenator/_video.py#L1321)
 
 ```python
 def bundle_groups(self, data: Dict[str, Any]) -> Dict[str, List[str]]
@@ -339,7 +340,7 @@ Group graph files by community (hubs first), unassigned files last.
 
 #### `CinematicVideoRenderer.ordered_groups`
 
-`method` | [readmenator/_video.py:1187](../../readmenator/_video.py#L1187)
+`method` | [readmenator/_video.py:1336](../../readmenator/_video.py#L1336)
 
 ```python
 def ordered_groups(self, data: Dict[str, Any]) -> Dict[str, List[str]]
@@ -363,7 +364,7 @@ Bundle groups reordered to shorten bundled edges (same optimizer as the explorer
 
 #### `CinematicVideoRenderer.bundle_layout`
 
-`method` | [readmenator/_video.py:1197](../../readmenator/_video.py#L1197)
+`method` | [readmenator/_video.py:1346](../../readmenator/_video.py#L1346)
 
 ```python
 def bundle_layout(self, data: Dict[str, Any], box: Tuple[int, int, int, int]) -> BundleLayout
@@ -386,7 +387,7 @@ Hierarchical edge bundling of resolved imports grouped by community.
 
 #### `CinematicVideoRenderer.orbit_positions`
 
-`method` | [readmenator/_video.py:1206](../../readmenator/_video.py#L1206)
+`method` | [readmenator/_video.py:1355](../../readmenator/_video.py#L1355)
 
 ```python
 def orbit_positions(self, data: Dict[str, Any]) -> Dict[str, Tuple[float, float, float]]
@@ -408,7 +409,7 @@ def orbit_positions(self, data: Dict[str, Any]) -> Dict[str, Tuple[float, float,
 
 #### `CinematicVideoRenderer.sphere_layout`
 
-`method` | [readmenator/_video.py:1216](../../readmenator/_video.py#L1216)
+`method` | [readmenator/_video.py:1365](../../readmenator/_video.py#L1365)
 
 ```python
 def sphere_layout(self, data: Dict[str, Any]) -> SphereBundleLayout
@@ -430,7 +431,7 @@ Spherical edge bundling of resolved imports on community caps.
 
 #### `CinematicVideoRenderer.orbit_stops`
 
-`method` | [readmenator/_video.py:1225](../../readmenator/_video.py#L1225)
+`method` | [readmenator/_video.py:1374](../../readmenator/_video.py#L1374)
 
 ```python
 def orbit_stops(self, data: Dict[str, Any], positions: Dict[str, Tuple[float, float, float]]) -> List[Dict[str, Any]]
@@ -451,7 +452,7 @@ Camera tour stops: the largest communities with their 3D centroid.
 
 #### `CinematicVideoRenderer.render_single_frame`
 
-`method` | [readmenator/_video.py:1254](../../readmenator/_video.py#L1254)
+`method` | [readmenator/_video.py:1458](../../readmenator/_video.py#L1458)
 
 ```python
 def render_single_frame(self, data: Dict[str, Any], frame_index: int) -> bytes
@@ -474,7 +475,7 @@ Render one frame to raw RGB bytes without touching ffmpeg.
 
 #### `CinematicVideoRenderer.render`
 
-`method` | [readmenator/_video.py:1268](../../readmenator/_video.py#L1268)
+`method` | [readmenator/_video.py:1472](../../readmenator/_video.py#L1472)
 
 ```python
 def render(self, data: Dict[str, Any], output_path: str) -> str
@@ -505,7 +506,7 @@ Render all frames and encode to mp4, muxing music if configured.
 
 ### `ease`
 
-`function` | [readmenator/_video.py:100](../../readmenator/_video.py#L100)
+`function` | [readmenator/_video.py:105](../../readmenator/_video.py#L105)
 
 ```python
 def ease(x: float) -> float
@@ -533,7 +534,7 @@ without the visible acceleration jump of cubic smoothstep.
 
 ### `fmt_int`
 
-`function` | [readmenator/_video.py:111](../../readmenator/_video.py#L111)
+`function` | [readmenator/_video.py:116](../../readmenator/_video.py#L116)
 
 ```python
 def fmt_int(n: int) -> str
@@ -555,7 +556,7 @@ Group thousands with commas.
 
 ### `mix`
 
-`function` | [readmenator/_video.py:116](../../readmenator/_video.py#L116)
+`function` | [readmenator/_video.py:121](../../readmenator/_video.py#L121)
 
 ```python
 def mix(a: Tuple[int, int, int], b: Tuple[int, int, int], t: float) -> Tuple[int, int, int]
@@ -581,7 +582,7 @@ Linear blend of two RGB colors.
 
 ### `alpha`
 
-`function` | [readmenator/_video.py:121](../../readmenator/_video.py#L121)
+`function` | [readmenator/_video.py:126](../../readmenator/_video.py#L126)
 
 ```python
 def alpha(c: Tuple[int, int, int], a: float) -> Tuple[int, int, int, int]
@@ -606,7 +607,7 @@ RGB color plus an alpha in [0, 1] as an RGBA tuple.
 
 ### `hash_color`
 
-`function` | [readmenator/_video.py:126](../../readmenator/_video.py#L126)
+`function` | [readmenator/_video.py:131](../../readmenator/_video.py#L131)
 
 ```python
 def hash_color(digest: bytes) -> Tuple[int, int, int]
@@ -630,7 +631,7 @@ Neon color derived from a digest: the file fingerprint.
 
 ### `short_label`
 
-`function` | [readmenator/_video.py:135](../../readmenator/_video.py#L135)
+`function` | [readmenator/_video.py:140](../../readmenator/_video.py#L140)
 
 ```python
 def short_label(text: str, limit: int) -> str
@@ -655,7 +656,7 @@ Truncate a label to a character budget without newlines.
 
 ### `community_color`
 
-`function` | [readmenator/_video.py:180](../../readmenator/_video.py#L180)
+`function` | [readmenator/_video.py:185](../../readmenator/_video.py#L185)
 
 ```python
 def community_color(index: int) -> Tuple[int, int, int]
@@ -679,7 +680,7 @@ Neon color for a community index (grey for unassigned).
 
 ### `project3d`
 
-`function` | [readmenator/_video.py:198](../../readmenator/_video.py#L198)
+`function` | [readmenator/_video.py:203](../../readmenator/_video.py#L203)
 
 ```python
 def project3d(p: Tuple[float, ...], yaw: float, pitch: float, target: Tuple[float, ...], scale: float, center: Tuple[float, float], perspective: float) -> Tuple[float, float, float, float]
@@ -711,7 +712,7 @@ perspective scale factor.
 
 ### `mode_color`
 
-`function` | [readmenator/_video.py:237](../../readmenator/_video.py#L237)
+`function` | [readmenator/_video.py:242](../../readmenator/_video.py#L242)
 
 ```python
 def mode_color(data: Dict[str, Any], nid: str, mode: str) -> Tuple[int, int, int]
@@ -737,7 +738,7 @@ Node color under an explorer color mode (community, layer, language).
 
 ### `draw_cloud3d`
 
-`function` | [readmenator/_video.py:286](../../readmenator/_video.py#L286)
+`function` | [readmenator/_video.py:291](../../readmenator/_video.py#L291)
 
 ```python
 def draw_cloud3d(img: Any, data: Dict[str, Any], box: Tuple[int, int, int, int], cfg: Config, yaw: float, pitch: float, target: Tuple[float, ...], zoom: float, mode: str, lit_nodes: Optional[set], edge_lit: Optional[Any], gt: float, fonts: Dict[str, Any], appear: float = 1.0, labels: int = 0) -> None
@@ -773,10 +774,10 @@ Drawing is clipped to box.
 
 ### `draw_sphere3d`
 
-`function` | [readmenator/_video.py:406](../../readmenator/_video.py#L406)
+`function` | [readmenator/_video.py:464](../../readmenator/_video.py#L464)
 
 ```python
-def draw_sphere3d(img: Any, data: Dict[str, Any], box: Tuple[int, int, int, int], cfg: Config, yaw: float, pitch: float, morph: float, reveal: float, spot: Optional[int], gt: float, fonts: Dict[str, Any], group_labels: bool = True) -> None
+def draw_sphere3d(img: Any, data: Dict[str, Any], box: Tuple[int, int, int, int], cfg: Config, yaw: float, pitch: float, morph: float, reveal: float, spot: Optional[int], gt: float, fonts: Dict[str, Any], group_labels: bool = True, zoom: float = 1.0) -> None
 ```
 
 Draw the bundled sphere, optionally morphing out of the 3D force layout.
@@ -799,6 +800,7 @@ Drawing is clipped to box.
 | `gt` | `float` |  | Global time for particles. |
 | `fonts` | `Dict[str, Any]` |  | Font set. |
 | `group_labels` | `bool` | `True` | Draw cap labels when the morph is complete. |
+| `zoom` | `float` | `1.0` | Scale multiplier of the globe. |
 
 ---
 
@@ -806,7 +808,7 @@ Drawing is clipped to box.
 
 ### `dependencies_available`
 
-`function` | [readmenator/_video.py:570](../../readmenator/_video.py#L570)
+`function` | [readmenator/_video.py:642](../../readmenator/_video.py#L642)
 
 ```python
 def dependencies_available() -> bool
@@ -822,7 +824,7 @@ Check that PIL and ffmpeg exist for video rendering.
 
 ### `resolve_fonts`
 
-`function` | [readmenator/_video.py:579](../../readmenator/_video.py#L579)
+`function` | [readmenator/_video.py:651](../../readmenator/_video.py#L651)
 
 ```python
 def resolve_fonts() -> Dict[str, Any]
@@ -840,7 +842,7 @@ Resolve monospace fonts through fontconfig with PIL fallback.
 
 ### `draw_grid`
 
-`function` | [readmenator/_video.py:681](../../readmenator/_video.py#L681)
+`function` | [readmenator/_video.py:753](../../readmenator/_video.py#L753)
 
 ```python
 def draw_grid(img: Any, t: float, strength: float, bd: Backdrop) -> None
@@ -865,7 +867,7 @@ Draw the scrolling perspective grid below the horizon.
 
 ### `draw_sun`
 
-`function` | [readmenator/_video.py:701](../../readmenator/_video.py#L701)
+`function` | [readmenator/_video.py:773](../../readmenator/_video.py#L773)
 
 ```python
 def draw_sun(img: Any, a: float, bd: Backdrop, cy: Optional[int] = None) -> None
@@ -888,7 +890,7 @@ Paste the striped synthwave sun behind the horizon.
 
 ### `post`
 
-`function` | [readmenator/_video.py:718](../../readmenator/_video.py#L718)
+`function` | [readmenator/_video.py:790](../../readmenator/_video.py#L790)
 
 ```python
 def post(img: Any, glitch: float = 0.0, seed: int = 0) -> Any
@@ -914,7 +916,7 @@ Apply bloom, scanlines, vignette and optional glitch.
 
 ### `glitch_fx`
 
-`function` | [readmenator/_video.py:736](../../readmenator/_video.py#L736)
+`function` | [readmenator/_video.py:808](../../readmenator/_video.py#L808)
 
 ```python
 def glitch_fx(img: Any, amount: float, seed: int) -> Any
@@ -940,7 +942,7 @@ RGB split plus horizontal slice displacement.
 
 ### `chroma_text`
 
-`function` | [readmenator/_video.py:759](../../readmenator/_video.py#L759)
+`function` | [readmenator/_video.py:831](../../readmenator/_video.py#L831)
 
 ```python
 def chroma_text(img: Any, xy: Tuple[float, float], text: str, font: Any, col: Tuple[int, int, int], spread: int = 2, anchor: str = 'la') -> None
@@ -968,7 +970,7 @@ Draw text with red/cyan CRT chromatic aberration.
 
 ### `hud_panel`
 
-`function` | [readmenator/_video.py:770](../../readmenator/_video.py#L770)
+`function` | [readmenator/_video.py:842](../../readmenator/_video.py#L842)
 
 ```python
 def hud_panel(d: Any, box: Tuple[int, int, int, int], title: str, fonts: Dict[str, Any], col: Tuple[int, int, int] = CYAN) -> None
@@ -994,7 +996,7 @@ Draw a translucent HUD panel with neon edge and corner brackets.
 
 ### `draw_header`
 
-`function` | [readmenator/_video.py:783](../../readmenator/_video.py#L783)
+`function` | [readmenator/_video.py:855](../../readmenator/_video.py#L855)
 
 ```python
 def draw_header(img: Any, d: Any, gt: float, total: float, project: str, act_label: str, fonts: Dict[str, Any], width: int) -> None
@@ -1023,7 +1025,7 @@ Draw the top strip with project title, act label and progress.
 
 ### `draw_caption`
 
-`function` | [readmenator/_video.py:797](../../readmenator/_video.py#L797)
+`function` | [readmenator/_video.py:869](../../readmenator/_video.py#L869)
 
 ```python
 def draw_caption(d: Any, text: str, lt: float, dur: float, fonts: Dict[str, Any], width: int, y: int) -> None
@@ -1053,7 +1055,7 @@ Draw the lower-third narration line with typing effect.
 
 ### `BG_TOP`
 
-`constant` | [readmenator/_video.py:47](../../readmenator/_video.py#L47)
+`constant` | [readmenator/_video.py:51](../../readmenator/_video.py#L51)
 
 ```python
 BG_TOP = (6, 3, 16)
@@ -1065,7 +1067,7 @@ BG_TOP = (6, 3, 16)
 
 ### `BG_HORIZON`
 
-`constant` | [readmenator/_video.py:48](../../readmenator/_video.py#L48)
+`constant` | [readmenator/_video.py:52](../../readmenator/_video.py#L52)
 
 ```python
 BG_HORIZON = (34, 6, 52)
@@ -1077,7 +1079,7 @@ BG_HORIZON = (34, 6, 52)
 
 ### `PANEL_FILL`
 
-`constant` | [readmenator/_video.py:49](../../readmenator/_video.py#L49)
+`constant` | [readmenator/_video.py:53](../../readmenator/_video.py#L53)
 
 ```python
 PANEL_FILL = (10, 7, 26, 225)
@@ -1089,7 +1091,7 @@ PANEL_FILL = (10, 7, 26, 225)
 
 ### `PANEL_HEAD`
 
-`constant` | [readmenator/_video.py:50](../../readmenator/_video.py#L50)
+`constant` | [readmenator/_video.py:54](../../readmenator/_video.py#L54)
 
 ```python
 PANEL_HEAD = (22, 12, 48, 240)
@@ -1101,7 +1103,7 @@ PANEL_HEAD = (22, 12, 48, 240)
 
 ### `TXT`
 
-`constant` | [readmenator/_video.py:51](../../readmenator/_video.py#L51)
+`constant` | [readmenator/_video.py:55](../../readmenator/_video.py#L55)
 
 ```python
 TXT = (222, 220, 255)
@@ -1113,7 +1115,7 @@ TXT = (222, 220, 255)
 
 ### `DIM`
 
-`constant` | [readmenator/_video.py:52](../../readmenator/_video.py#L52)
+`constant` | [readmenator/_video.py:56](../../readmenator/_video.py#L56)
 
 ```python
 DIM = (130, 120, 180)
@@ -1125,7 +1127,7 @@ DIM = (130, 120, 180)
 
 ### `FAINT`
 
-`constant` | [readmenator/_video.py:53](../../readmenator/_video.py#L53)
+`constant` | [readmenator/_video.py:57](../../readmenator/_video.py#L57)
 
 ```python
 FAINT = (80, 70, 125)
@@ -1137,7 +1139,7 @@ FAINT = (80, 70, 125)
 
 ### `MAGENTA`
 
-`constant` | [readmenator/_video.py:54](../../readmenator/_video.py#L54)
+`constant` | [readmenator/_video.py:58](../../readmenator/_video.py#L58)
 
 ```python
 MAGENTA = (255, 46, 151)
@@ -1149,7 +1151,7 @@ MAGENTA = (255, 46, 151)
 
 ### `CYAN`
 
-`constant` | [readmenator/_video.py:55](../../readmenator/_video.py#L55)
+`constant` | [readmenator/_video.py:59](../../readmenator/_video.py#L59)
 
 ```python
 CYAN = (0, 234, 255)
@@ -1161,7 +1163,7 @@ CYAN = (0, 234, 255)
 
 ### `YELLOW`
 
-`constant` | [readmenator/_video.py:56](../../readmenator/_video.py#L56)
+`constant` | [readmenator/_video.py:60](../../readmenator/_video.py#L60)
 
 ```python
 YELLOW = (255, 225, 60)
@@ -1173,7 +1175,7 @@ YELLOW = (255, 225, 60)
 
 ### `GREEN`
 
-`constant` | [readmenator/_video.py:57](../../readmenator/_video.py#L57)
+`constant` | [readmenator/_video.py:61](../../readmenator/_video.py#L61)
 
 ```python
 GREEN = (57, 255, 136)
@@ -1185,7 +1187,7 @@ GREEN = (57, 255, 136)
 
 ### `ORANGE`
 
-`constant` | [readmenator/_video.py:58](../../readmenator/_video.py#L58)
+`constant` | [readmenator/_video.py:62](../../readmenator/_video.py#L62)
 
 ```python
 ORANGE = (255, 140, 50)
@@ -1197,7 +1199,7 @@ ORANGE = (255, 140, 50)
 
 ### `VIOLET`
 
-`constant` | [readmenator/_video.py:59](../../readmenator/_video.py#L59)
+`constant` | [readmenator/_video.py:63](../../readmenator/_video.py#L63)
 
 ```python
 VIOLET = (170, 100, 255)
@@ -1209,7 +1211,7 @@ VIOLET = (170, 100, 255)
 
 ### `RED`
 
-`constant` | [readmenator/_video.py:60](../../readmenator/_video.py#L60)
+`constant` | [readmenator/_video.py:64](../../readmenator/_video.py#L64)
 
 ```python
 RED = (255, 60, 90)
@@ -1221,7 +1223,7 @@ RED = (255, 60, 90)
 
 ### `COMMUNITY_PALETTE`
 
-`constant` | [readmenator/_video.py:62](../../readmenator/_video.py#L62)
+`constant` | [readmenator/_video.py:66](../../readmenator/_video.py#L66)
 
 ```python
 COMMUNITY_PALETTE
@@ -1233,7 +1235,7 @@ COMMUNITY_PALETTE
 
 ### `LAYER_COLORS`
 
-`constant` | [readmenator/_video.py:67](../../readmenator/_video.py#L67)
+`constant` | [readmenator/_video.py:71](../../readmenator/_video.py#L71)
 
 ```python
 LAYER_COLORS
@@ -1245,7 +1247,7 @@ LAYER_COLORS
 
 ### `ACT_CARDS`
 
-`constant` | [readmenator/_video.py:76](../../readmenator/_video.py#L76)
+`constant` | [readmenator/_video.py:80](../../readmenator/_video.py#L80)
 
 ```python
 ACT_CARDS
@@ -1257,7 +1259,7 @@ ACT_CARDS
 
 ### `COLOR_MODES`
 
-`constant` | [readmenator/_video.py:90](../../readmenator/_video.py#L90)
+`constant` | [readmenator/_video.py:95](../../readmenator/_video.py#L95)
 
 ```python
 COLOR_MODES = ('community', 'layer', 'language')

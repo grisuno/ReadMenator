@@ -2,41 +2,41 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 102,
-  "entities": 2055,
+  "modules": 103,
+  "entities": 2079,
   "languages": {
-   "py": 101,
+   "py": 102,
    "sh": 1
   },
   "kinds": {
-   "attribute": 1062,
-   "class": 181,
+   "attribute": 1078,
+   "class": 183,
    "classmethod": 3,
    "constant": 95,
-   "constructor": 81,
+   "constructor": 82,
    "enum": 1,
    "exception": 1,
    "function": 133,
-   "method": 329,
-   "module": 102,
+   "method": 333,
+   "module": 103,
    "property": 61,
    "protocol": 1,
    "staticmethod": 5
   },
   "truncated": false,
-  "skipped_files": 57,
+  "skipped_files": 58,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 728,
-   "total": 898,
-   "percent": 81.1
+   "documented": 736,
+   "total": 906,
+   "percent": 81.2
   },
   "by_kind": {
    "class": {
-    "documented": 167,
-    "total": 181,
+    "documented": 169,
+    "total": 183,
     "percent": 92.3
    },
    "classmethod": {
@@ -45,9 +45,9 @@
     "percent": 33.3
    },
    "constructor": {
-    "documented": 46,
-    "total": 81,
-    "percent": 56.8
+    "documented": 47,
+    "total": 82,
+    "percent": 57.3
    },
    "enum": {
     "documented": 1,
@@ -65,13 +65,13 @@
     "percent": 96.2
    },
    "method": {
-    "documented": 242,
-    "total": 329,
-    "percent": 73.6
+    "documented": 246,
+    "total": 333,
+    "percent": 73.9
    },
    "module": {
-    "documented": 101,
-    "total": 102,
+    "documented": 102,
+    "total": 103,
     "percent": 99.0
    },
    "property": {
@@ -281,6 +281,11 @@
     "total": 10,
     "percent": 100.0
    },
+   "readmenator/_githistory.py": {
+    "documented": 6,
+    "total": 6,
+    "percent": 100.0
+   },
    "readmenator/_gitmeta.py": {
     "documented": 2,
     "total": 2,
@@ -422,8 +427,8 @@
     "percent": 75.0
    },
    "readmenator/_scanner.py": {
-    "documented": 5,
-    "total": 5,
+    "documented": 7,
+    "total": 7,
     "percent": 100.0
    },
    "readmenator/_scantext.py": {
@@ -697,7 +702,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 545
+   "entities": 553
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -793,6 +798,11 @@
    "uid": "readmenator/_gh_wiki.py",
    "path": "modules/readmenator._gh_wiki.py.jsonl",
    "entities": 16
+  },
+  {
+   "uid": "readmenator/_githistory.py",
+   "path": "modules/readmenator._githistory.py.jsonl",
+   "entities": 14
   },
   {
    "uid": "readmenator/_gitmeta.py",
@@ -937,7 +947,7 @@
   {
    "uid": "readmenator/_scanner.py",
    "path": "modules/readmenator._scanner.py.jsonl",
-   "entities": 5
+   "entities": 7
   },
   {
    "uid": "readmenator/_scantext.py",

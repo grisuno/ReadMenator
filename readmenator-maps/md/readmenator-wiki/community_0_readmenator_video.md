@@ -1,14 +1,14 @@
 # readmenator: _video
 
-*Community 1 | 36 files | cohesion 0.32*
+*Community 0 | 41 files | cohesion 0.35*
 
 ## Definition
 
-This community groups 36 file(s) rooted at `tests` with dominant language py (cohesion 0.32). Central symbols: `ArchitectureLinter`, `Backdrop`, `CinematicVideoRenderer`, `Config`, `CursorRulesGenerator`, `DataflowAnalyzer`, `DeadCodeStripper`, `DirectoryWatcher`. Core file: `readmenator/_video.py` (90 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 41 file(s) rooted at `tests` with dominant language py (cohesion 0.35). Central symbols: `ArchitectureLinter`, `Backdrop`, `CinematicVideoRenderer`, `Config`, `CursorRulesGenerator`, `DataflowAnalyzer`, `DeadCodeStripper`, `DirectoryWatcher`. Core file: `readmenator/_video.py` (98 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
-### `tests` (18 files)
+### `tests` (21 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -19,11 +19,11 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 | `tests/test_dead_code.py` | py | testing | 15 | yes |
 | `tests/test_diagrams.py` | py | testing | 73 | yes |
 | `tests/test_documentation.py` | py | testing | 29 | no |
-| `tests/test_exporter.py` | py | testing | 15 | yes |
-| `tests/test_hotspots.py` | py | testing | 11 | no |
+| `tests/test_githistory.py` | py | testing | 21 | yes |
 | `tests/test_htmlpack.py` | py | testing | 18 | yes |
+| `tests/test_integration.py` | py | testing | 16 | no |
 
-### `readmenator` (17 files)
+### `readmenator` (19 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -33,7 +33,7 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 | `readmenator/_cursorrules_generator.py` | py | utility | 8 | yes |
 | `readmenator/_dataflow.py` | py | data_access | 21 | yes |
 | `readmenator/_dead_code.py` | py | utility | 5 | yes |
-| `readmenator/_hotspots.py` | py | utility | 7 | yes |
+| `readmenator/_githistory.py` | py | utility | 23 | yes |
 | `readmenator/_hypotheses.py` | py | utility | 10 | yes |
 | `readmenator/_layers.py` | py | utility | 7 | yes |
 
@@ -43,7 +43,7 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 |------|----------|-------|---------|-----|
 | `readmenator.py` | py | utility | 0 | yes |
 
-*... and 16 more files in this community.*
+*... and 21 more files in this community.*
 
 
 ## Key Symbols
@@ -81,17 +81,17 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 69
-- Cross-boundary resolved imports (EXTRACTED): 161
+- Internal resolved imports (EXTRACTED): 82
+- Cross-boundary resolved imports (EXTRACTED): 166
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
-- [EXTRACTED] depends_on community 1 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
+- [EXTRACTED] depends_on community 0 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
 
 ## Risks
 
@@ -100,9 +100,9 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 
 ## Open Questions
 
-- Why do 8 file(s) lack file-level docs (e.g. `tests/test_config.py`)? What purpose do they serve?
+- Why do 9 file(s) lack file-level docs (e.g. `tests/test_config.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _video changed?
-- Should readmenator: _video be split, given cohesion 0.32?
+- Should readmenator: _video be split, given cohesion 0.35?
 
 ## Sources
 
@@ -113,17 +113,17 @@ This community groups 36 file(s) rooted at `tests` with dominant language py (co
 - `readmenator/_cursorrules_generator.py`
 - `readmenator/_dataflow.py`
 - `readmenator/_dead_code.py`
-- `readmenator/_hotspots.py`
+- `readmenator/_githistory.py`
 - `readmenator/_hypotheses.py`
 - `readmenator/_layers.py`
 - `readmenator/_linter.py`
 - `readmenator/_mcp_server.py`
 - `readmenator/_receipts.py`
 - `readmenator/_refactorizer.py`
+- `readmenator/_scanner.py`
+- `readmenator/_taint.py`
 - `readmenator/_uncertainty.py`
 - `readmenator/_video.py`
 - `readmenator/_watcher.py`
 - `readmenator/_yaralite.py`
-- `tests/test_config.py`
-- `tests/test_cpg.py`
-- *... and 16 more*
+- *... and 21 more*

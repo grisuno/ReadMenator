@@ -1,6 +1,41 @@
 # Subsystem: tests (page 4 of 4)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
+## tests/test_readme_injector.py
+- Doc: Contract tests for README injection into documented projects.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestReadmeInjectorInjectBehavior` (class, line 16) `class TestReadmeInjectorInjectBehavior(TestCase)`
+  - `TestReadmeInjectorRemoveBehavior` (class, line 72) `class TestReadmeInjectorRemoveBehavior(TestCase)`
+  - `TestReadmeInjectorFindReadme` (class, line 105) `class TestReadmeInjectorFindReadme(TestCase)`
+  - `TestReadmeInjectorEdgeCases` (class, line 140) `class TestReadmeInjectorEdgeCases(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `tearDown` (method, line 24) `def tearDown(self)`
+  - `test_inject_into_markdown_readme_adds_kb_link` (method, line 28) `def test_inject_into_markdown_readme_adds_kb_link(self)`
+  - `test_inject_into_rst_readme_adds_kb_link` (method, line 39) `def test_inject_into_rst_readme_adds_kb_link(self)`
+  - `test_inject_is_idempotent_does_not_duplicate` (method, line 48) `def test_inject_is_idempotent_does_not_duplicate(self)`
+  - `test_inject_no_readme_file_returns_false` (method, line 59) `def test_inject_no_readme_file_returns_false(self)`
+  - `test_inject_preserves_existing_content` (method, line 63) `def test_inject_preserves_existing_content(self)`
+  - `setUp` (method, line 75) `def setUp(self)`
+  - `tearDown` (method, line 80) `def tearDown(self)`
+  - `test_remove_strips_injected_section` (method, line 84) `def test_remove_strips_injected_section(self)`
+  - `test_remove_without_injection_returns_false` (method, line 94) `def test_remove_without_injection_returns_false(self)`
+  - `test_remove_no_readme_returns_false` (method, line 100) `def test_remove_no_readme_returns_false(self)`
+  - `setUp` (method, line 108) `def setUp(self)`
+  - `tearDown` (method, line 112) `def tearDown(self)`
+  - `test_finds_readme_md` (method, line 116) `def test_finds_readme_md(self)`
+  - `test_finds_readme_rst` (method, line 122) `def test_finds_readme_rst(self)`
+  - `test_prefers_readme_md_over_rst` (method, line 128) `def test_prefers_readme_md_over_rst(self)`
+  - `test_returns_none_when_no_readme` (method, line 135) `def test_returns_none_when_no_readme(self)`
+  - `setUp` (method, line 143) `def setUp(self)`
+  - `tearDown` (method, line 148) `def tearDown(self)`
+  - `test_inject_into_empty_readme` (method, line 152) `def test_inject_into_empty_readme(self)`
+  - `test_custom_kb_filename_works` (method, line 160) `def test_custom_kb_filename_works(self)`
+  - `test_inject_lists_all_artifacts` (method, line 168) `def test_inject_lists_all_artifacts(self)`
+  - `test_inject_repairs_partial_anchor` (method, line 181) `def test_inject_repairs_partial_anchor(self)`
+- Depends on: `readmenator/_readme_injector.py`
+
 ## tests/test_receipts.py
 - Layer: testing
 - Language: py
@@ -389,7 +424,10 @@ Previous: [KB_tests_p3.md](KB_tests_p3.md)
   - `_nodes` (function, line 17) `def _nodes()`
   - `_analysis` (function, line 25) `def _analysis()`
   - `TestVideoContract` (class, line 37) `class TestVideoContract(TestCase)`
-  - `TestVideoFlowActs` (class, line 224) `class TestVideoFlowActs(TestCase)`
+  - `_growth_payload` (function, line 220) `def _growth_payload()`
+  - `_growth_data` (function, line 246) `def _growth_data(renderer, config)`
+  - `TestVideoGrowthAct` (class, line 257) `class TestVideoGrowthAct(TestCase)`
+  - `TestVideoFlowActs` (class, line 374) `class TestVideoFlowActs(TestCase)`
   - `test_video_collect_counts` (method, line 38) `def test_video_collect_counts(self)`
   - `test_video_collect_empty_project` (method, line 50) `def test_video_collect_empty_project(self)`
   - `test_video_collect_enriched_fields` (method, line 60) `def test_video_collect_enriched_fields(self)`
@@ -405,7 +443,14 @@ Previous: [KB_tests_p3.md](KB_tests_p3.md)
   - `test_video_short_label_truncates` (method, line 200) `def test_video_short_label_truncates(self)`
   - `test_video_dependencies_returns_bool` (method, line 205) `def test_video_dependencies_returns_bool(self)`
   - `test_video_disabled_skips_without_render` (method, line 208) `def test_video_disabled_skips_without_render(self)`
-  - `test_video_flow_acts_scheduled_and_drawn` (method, line 227) `def test_video_flow_acts_scheduled_and_drawn(self)`
+  - `test_video_growth_act_scheduled_with_history` (method, line 260) `def test_video_growth_act_scheduled_with_history(self)`
+  - `test_video_growth_act_absent_without_history` (method, line 268) `def test_video_growth_act_absent_without_history(self)`
+  - `test_video_growth_act_can_be_dropped` (method, line 279) `def test_video_growth_act_can_be_dropped(self)`
+  - `test_video_growth_act_renders_every_phase` (method, line 287) `def test_video_growth_act_renders_every_phase(self)`
+  - `test_video_growth_timeline_grows_release_by_release` (method, line 298) `def test_video_growth_timeline_grows_release_by_release(self)`
+  - `test_video_growth_pulse_marks_the_landing_release` (method, line 316) `def test_video_growth_pulse_marks_the_landing_release(self)`
+  - `test_video_growth_history_read_from_project_root` (method, line 335) `def test_video_growth_history_read_from_project_root(self)`
+  - `test_video_flow_acts_scheduled_and_drawn` (method, line 377) `def test_video_flow_acts_scheduled_and_drawn(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_video.py`
 
 ## tests/test_wiki.py

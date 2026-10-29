@@ -2,6 +2,12 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_lua.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_nim.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_php.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_python.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_ruby.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_rust.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_scala.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_shell.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_swift.py`
@@ -110,6 +116,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_forcegraph.py` -> __future__, html, json, logging, math, pathlib, re, shutil, typing
 - `readmenator/_forcegraph_page.py` -> __future__
 - `readmenator/_gh_wiki.py` -> __future__, dataclasses, logging, pathlib, posixpath, re, shutil, subprocess, tempfile, typing
+- `readmenator/_githistory.py` -> __future__, dataclasses, logging, os, pathlib, shutil, subprocess, tempfile, typing
 - `readmenator/_gitmeta.py` -> __future__, pathlib, typing
 - `readmenator/_graphlayout.py` -> __future__, dataclasses, math, numpy, random, typing
 - `readmenator/_graphrag.py` -> __future__, dataclasses, json, logging, math, pathlib, re, typing
@@ -147,7 +154,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
 - `readmenator/_uncertainty.py` -> __future__, dataclasses, math, sklearn, sklearn.ensemble, typing
-- `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, textwrap, typing
+- `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, logging, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, textwrap, typing
 - `readmenator/_viewer_ui.py` -> __future__, html, json, typing
 - `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
 - `readmenator/_wiki.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
@@ -194,6 +201,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_flowcharts.py` -> __future__, dataclasses, json, re, unittest
 - `tests/test_folder_readme.py` -> __future__, dataclasses, pathlib, shutil, tempfile, unittest
 - `tests/test_gh_wiki.py` -> dataclasses, pathlib, subprocess, tempfile, typing, unittest, unittest.mock
+- `tests/test_githistory.py` -> os, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_graphlayout.py` -> __future__, math, unittest
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
 - `tests/test_hotspots.py` -> __future__, unittest
@@ -227,6 +235,6 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_taint.py` -> __future__, unittest
 - `tests/test_taint_bdd.py` -> __future__, pathlib, pytest_bdd, tempfile, typing, unittest
 - `tests/test_uml.py` -> __future__, unittest
-- `tests/test_video.py` -> hashlib, math, pathlib, unittest
+- `tests/test_video.py` -> hashlib, math, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_wiki.py` -> dataclasses, json, os, pathlib, tempfile, unittest
 

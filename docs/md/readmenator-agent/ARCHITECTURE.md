@@ -158,6 +158,9 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_gh_wiki.py` -> `readmenator/_config.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_folder_readme.py`
 - `readmenator/_gh_wiki.py` -> `readmenator/_gitmeta.py`
+- `readmenator/_githistory.py` -> `readmenator/_config.py`
+- `readmenator/_githistory.py` -> `readmenator/_resolver.py`
+- `readmenator/_githistory.py` -> `readmenator/_scanner.py`
 - `readmenator/_graphrag.py` -> `readmenator/_analyzer.py`
 - `readmenator/_graphrag.py` -> `readmenator/_category.py`
 - `readmenator/_graphrag.py` -> `readmenator/_config.py`
@@ -267,6 +270,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_uncertainty.py` -> `readmenator/_receipts.py`
 - `readmenator/_video.py` -> `readmenator/_config.py`
 - `readmenator/_video.py` -> `readmenator/_flowcharts.py`
+- `readmenator/_video.py` -> `readmenator/_githistory.py`
 - `readmenator/_video.py` -> `readmenator/_graphlayout.py`
 - `readmenator/_video.py` -> `readmenator/_models.py`
 - `readmenator/_video.py` -> `readmenator/_rank.py`
@@ -424,6 +428,8 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_gh_wiki.py` -> `readmenator/_app.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_config.py`
 - `tests/test_gh_wiki.py` -> `readmenator/_gh_wiki.py`
+- `tests/test_githistory.py` -> `readmenator/_config.py`
+- `tests/test_githistory.py` -> `readmenator/_githistory.py`
 - `tests/test_graphlayout.py` -> `readmenator/_graphlayout.py`
 - `tests/test_graphrag.py` -> `readmenator/_config.py`
 - `tests/test_graphrag.py` -> `readmenator/_graphrag.py`
@@ -490,11 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_java.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_javascript.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_kotlin.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_lua.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_nim.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_php.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_python.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_ruby.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_rust.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)

@@ -1,5 +1,5 @@
-# API (page 1 of 2)
-Pages: [API.md](API.md), [API_p2.md](API_p2.md)
+# API (page 1 of 3)
+Pages: [API.md](API.md), [API_p2.md](API_p2.md), [API_p3.md](API_p3.md)
 
 ## deploy.sh
 - `ensure_pkg` (function) `deploy.sh:22` -- Install or update one package (best effort: works offline with current versions, on PEP 668 systems, and before the...
@@ -129,22 +129,22 @@ Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/
 - `readmenatorApplication.export_diagram` (method) `readmenator/_app.py:1540` `def export_diagram(self, target_dir, kind, output_path, full)` -- Export a single interactive system map as standalone HTML.
 - `readmenatorApplication.export_pages` (method) `readmenator/_app.py:1579` `def export_pages(self, target_dir, output_dir, full)` -- Publish all system maps plus a gallery index as a static site.
 - `readmenatorApplication.export_video` (method) `readmenator/_app.py:1624` `def export_video(self, target_dir, output_path)` -- Render the cinematic overview video for the target project.
-- `readmenatorApplication.memory` (method) `readmenator/_app.py:1851` `def memory(self, target_dir)` -- Return MEMORY.md, generating it first when missing.
-- `readmenatorApplication.remember` (method) `readmenator/_app.py:1874` `def remember(self, target_dir, note, kind)` -- Append a note to the preserved MEMORY.md session log.
-- `readmenatorApplication.install_skills` (method) `readmenator/_app.py:1888` `def install_skills(self, target_dir, target)` -- Install the packaged agent skills into the project.
-- `readmenatorApplication.build_graphrag` (method) `readmenator/_app.py:1900` `def build_graphrag(self, target_dir)` -- Scan, analyse, and write the GraphRAG index for a project.
-- `readmenatorApplication.graphrag_search` (method) `readmenator/_app.py:1924` `def graphrag_search(self, target_dir, query, mode, budget_tokens)` -- Answer a question with GraphRAG retrieval over the persisted index.
-- `readmenatorApplication.watch` (method) `readmenator/_app.py:1945` `def watch(self, target_dir)`
-- `on_change` (function) `readmenator/_app.py:1949` `def on_change()`
-- `readmenatorApplication.audit` (method) `readmenator/_app.py:1955` `def audit(self, target_dir)`
-- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:1962` `def audit_deep(self, target_dir)`
-- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:1982` `def export_sarif(self, target_dir, output_path)`
-- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:1992` `def export_rules(self, target_dir, output_dir)`
-- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:2003` `def detect_layers(self, target_dir)`
-- `readmenatorApplication.lint` (method) `readmenator/_app.py:2013` `def lint(self, target_dir)`
-- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:2026` `def strip_dead_code(self, target_dir)`
-- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:2036` `def generate_cursorrules(self, target_dir)`
-- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:2051` `def refactor_monolith(self, target_dir)`
+- `readmenatorApplication.memory` (method) `readmenator/_app.py:1852` `def memory(self, target_dir)` -- Return MEMORY.md, generating it first when missing.
+- `readmenatorApplication.remember` (method) `readmenator/_app.py:1875` `def remember(self, target_dir, note, kind)` -- Append a note to the preserved MEMORY.md session log.
+- `readmenatorApplication.install_skills` (method) `readmenator/_app.py:1889` `def install_skills(self, target_dir, target)` -- Install the packaged agent skills into the project.
+- `readmenatorApplication.build_graphrag` (method) `readmenator/_app.py:1901` `def build_graphrag(self, target_dir)` -- Scan, analyse, and write the GraphRAG index for a project.
+- `readmenatorApplication.graphrag_search` (method) `readmenator/_app.py:1925` `def graphrag_search(self, target_dir, query, mode, budget_tokens)` -- Answer a question with GraphRAG retrieval over the persisted index.
+- `readmenatorApplication.watch` (method) `readmenator/_app.py:1946` `def watch(self, target_dir)`
+- `on_change` (function) `readmenator/_app.py:1950` `def on_change()`
+- `readmenatorApplication.audit` (method) `readmenator/_app.py:1956` `def audit(self, target_dir)`
+- `readmenatorApplication.audit_deep` (method) `readmenator/_app.py:1963` `def audit_deep(self, target_dir)`
+- `readmenatorApplication.export_sarif` (method) `readmenator/_app.py:1983` `def export_sarif(self, target_dir, output_path)`
+- `readmenatorApplication.export_rules` (method) `readmenator/_app.py:1993` `def export_rules(self, target_dir, output_dir)`
+- `readmenatorApplication.detect_layers` (method) `readmenator/_app.py:2004` `def detect_layers(self, target_dir)`
+- `readmenatorApplication.lint` (method) `readmenator/_app.py:2014` `def lint(self, target_dir)`
+- `readmenatorApplication.strip_dead_code` (method) `readmenator/_app.py:2027` `def strip_dead_code(self, target_dir)`
+- `readmenatorApplication.generate_cursorrules` (method) `readmenator/_app.py:2037` `def generate_cursorrules(self, target_dir)`
+- `readmenatorApplication.refactor_monolith` (method) `readmenator/_app.py:2052` `def refactor_monolith(self, target_dir)`
 
 ## readmenator/_bundlegraph.py
 Depends on: `readmenator/_bundlegraph_page.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_project_config.py`, `readmenator/_viewer_ui.py`
@@ -434,6 +434,13 @@ Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_fold
 - `GitHubWikiPublisher.wiki_remote` (method) `readmenator/_gh_wiki.py:250` `def wiki_remote(self, project_root)` -- Resolve the wiki remote from config, ``gh``, or the git origin.
 - `GitHubWikiPublisher.publish` (method) `readmenator/_gh_wiki.py:314` `def publish(self, project_root, dry_run)` -- Render pages and push them to the GitHub wiki (or a local folder).
 
+## readmenator/_githistory.py
+Depends on: `readmenator/_config.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
+Imported by: `readmenator/_video.py`, `tests/test_githistory.py`
+- `GitHistoryReader.__init__` (method) `readmenator/_githistory.py:76` `def __init__(self, config, runner)` -- Initialise the reader with configuration and optional runner.
+- `GitHistoryReader.available` (method) `readmenator/_githistory.py:81` `def available(self, project_root)` -- Return ``True`` when the target looks like a readable git checkout.
+- `GitHistoryReader.timeline` (method) `readmenator/_githistory.py:100` `def timeline(self, project_root)` -- Build the ordered release timeline of a repository.
+
 ## readmenator/_gitmeta.py
 Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_gh_wiki.py`, `readmenator/_memory.py`, `tests/test_agent_friendliness.py`
 - `read_git_head` (function) `readmenator/_gitmeta.py:84` `def read_git_head(project_root)` -- Return the current commit and branch of a project, when available.
@@ -482,15 +489,6 @@ Imported by: `readmenator/_pipeline.py`, `tests/test_hotspots.py`
 - `HotspotAnalyzer.analyze_hotspots` (method) `readmenator/_hotspots.py:34` `def analyze_hotspots(self, nodes, edges, resolved_edges)` -- Rank files by combined complexity and centrality scores.
 - `HotspotAnalyzer.detect_cycles` (method) `readmenator/_hotspots.py:90` `def detect_cycles(self, nodes, resolved_edges)` -- Detect cycles in the resolved import graph using DFS.
 - `HotspotAnalyzer.analyze_change_impact` (method) `readmenator/_hotspots.py:155` `def analyze_change_impact(self, nodes, resolved_edges)` -- Compute change impact for every file in the project.
-
-## readmenator/_htmlpack.py
-Depends on: `readmenator/_config.py`
-Imported by: `readmenator/_apidocs_page.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `tests/test_bundlegraph.py`, `tests/test_htmlpack.py`, `tests/test_interactive_graph.py`
-- `escape_json_for_script` (function) `readmenator/_htmlpack.py:49` `def escape_json_for_script(text, chars)` -- Escape JSON text so it can never close or confuse a script element.
-- `should_compress` (function) `readmenator/_htmlpack.py:64` `def should_compress(raw_size, config)` -- Decide whether a payload of raw_size bytes gets compressed.
-- `compress_text` (function) `readmenator/_htmlpack.py:77` `def compress_text(text, config)` -- Gzip and base64-encode text deterministically (mtime fixed at zero).
-- `payload_script` (function) `readmenator/_htmlpack.py:92` `def payload_script(element_id, payload, config, compact, escape)` -- Render the script element carrying a page payload.
-- `read_payload_script` (function) `readmenator/_htmlpack.py:119` `def read_payload_script(document, element_id)` -- Decode a payload script element from a rendered page (plain or gzip+base64).
 
 
 Next: [API_p2.md](API_p2.md)

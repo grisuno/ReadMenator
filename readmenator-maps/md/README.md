@@ -317,7 +317,7 @@ gallery, every `--rebuild` refreshes it (video and docs included).
 
 ### Overview Video
 
-`readmenator . video` renders a synthwave mp4 from real scan data in eleven acts:
+`readmenator . video` renders a synthwave mp4 from real scan data in twelve acts:
 layers, god nodes, blast-radius tree, communities, **Emergence** (ForceAtlas2
 LinLog with adaptive speed, animated from seeded chaos to convergence, nodes
 sized by PageRank with random-surfer particles on the hottest edges), **Orbit**
@@ -334,7 +334,13 @@ where to go next. Set an act's duration (`VIDEO_ORBIT_S`, `VIDEO_SPHERE_S`,
 assembles tier by tier, then the upward imports that break the layering flash red
 with a "fix first" list) and **XI Execution** (a camera follows the main entry
 point's call tree in real call order, a light packet travels along each call,
-and a side panel shows the callee, its file:line and docstring). Motion uses quintic
+and a side panel shows the callee, its file:line and docstring). **XII The
+Organism** tells the git history: every release tag (plus the first commit and
+HEAD) is materialised from the repository, parsed with the same scanner as the
+working copy, and replayed as a timelapse where files and import edges appear
+with the release that introduced them, the unborn shape waits as a ghost, each
+landing release pulses from its hub, and the finished organism folds onto a
+globe of communities. Motion uses quintic
 smootherstep easing, scenes crossfade into each other (`VIDEO_TRANSITION_S`),
 and the 3D camera acts get shutter motion blur (`VIDEO_MOTION_BLUR_SAMPLES`).
 The circle and sphere acts share the explorer's crossing-reduction ordering.

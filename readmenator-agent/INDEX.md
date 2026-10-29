@@ -20,7 +20,7 @@
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 4 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 102 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 104 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
@@ -40,6 +40,7 @@
 | `readmenator/_forcegraph.py` | Force-graph explorer for the readmenator knowledge graph. | readmenator | 23 | 10 |
 | `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 3 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 4 |
+| `readmenator/_githistory.py` | Git history replay: read release snapshots from a repository. | readmenator | 23 | 2 |
 | `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 5 |
 | `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 26 | 5 |
 | `readmenator/_graphrag.py` | Zero-token GraphRAG index and retrieval for AI agents. | readmenator | 53 | 4 |
@@ -65,10 +66,10 @@
 | `readmenator/_readme_injector.py` | Injects a knowledge base section into the project README (Markdown or RST). | readmenator | 9 | 5 |
 | `readmenator/_receipts.py` | Release receipts ingest contract: deploys as first-class evidence.  deploynator writes... | readmenator | 24 | 4 |
 | `readmenator/_refactorizer.py` | Monolithic file refactoring planner for the readmenator knowledge graph. | readmenator | 9 | 2 |
-| `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 7 |
+| `readmenator/_resolver.py` | Import path resolver for the readmenator knowledge graph. | readmenator | 17 | 8 |
 | `readmenator/_rule_gen.py` | Suggested linting rule generator producing Semgrep YAML from detected antipatterns. | readmenator | 9 | 2 |
 | `readmenator/_sarif.py` | SARIF v2.1.0 exporter for security findings (GitHub Code Scanning compatible). | readmenator | 5 | 2 |
-| `readmenator/_scanner.py` | Secure polyglot directory traversal and file analysis. | readmenator | 14 | 4 |
+| `readmenator/_scanner.py` | Secure polyglot directory traversal and file analysis. | readmenator | 16 | 5 |
 | `readmenator/_scantext.py` | Synthesized scan-text builder for the readmenator knowledge graph. | readmenator | 4 | 2 |
 | `readmenator/_security.py` | Pattern-based static security analysis for the readmenator knowledge graph. | readmenator | 32 | 4 |
 | `readmenator/_skill_installer.py` | Installs the packaged ReadMenator agent skills into a project. | readmenator | 7 | 2 |
@@ -78,7 +79,7 @@
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_uncertainty.py` | Uncertainty engine: classify candidate edges, never invent facts. | readmenator | 14 | 2 |
 | `readmenator/_vendor/force-graph.min.js` | Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph | misc | 35 | 0 |
-| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 90 | 3 |
+| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 98 | 3 |
 | `readmenator/_viewer_ui.py` | Shared Config button + modal for maps/explorer pages. | readmenator | 7 | 5 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
@@ -126,6 +127,7 @@
 | `tests/test_flowcharts.py` | Contract tests for architecture tiers, execution flows, and receiver typing. | tests | 35 | 0 |
 | `tests/test_folder_readme.py` | Contract tests for per-folder README.md files (readmenator/_folder_readme.py). | tests | 20 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
+| `tests/test_githistory.py` | Contract tests for the git history reader used by the growth video act. | tests | 21 | 0 |
 | `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 33 | 0 |
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
@@ -159,5 +161,5 @@
 | `tests/test_taint.py` | TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths. | tests | 10 | 0 |
 | `tests/test_taint_bdd.py` | BDD-style contract tests for taint propagation analysis. | tests | 26 | 0 |
 | `tests/test_uml.py` | Contract tests for UML class diagram generation and language code generation. | tests | 49 | 0 |
-| `tests/test_video.py` | Contract tests for the cinematic overview video renderer. | tests | 20 | 0 |
+| `tests/test_video.py` | Contract tests for the cinematic overview video renderer. | tests | 30 | 0 |
 | `tests/test_wiki.py` | - | tests | 30 | 0 |

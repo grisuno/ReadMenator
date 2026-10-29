@@ -27,6 +27,37 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
 - Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_gitmeta.py`
 - Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_folder_readme.py`, `tests/test_gh_wiki.py`
 
+## readmenator/_githistory.py
+- Doc: Git history replay: read release snapshots from a repository.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `HistoryRelease` (class, line 43) `class HistoryRelease`
+  - `GitHistoryReader` (class, line 67) `class GitHistoryReader`
+  - `__init__` (method, line 76) `def __init__(self, config, runner)`
+  - `available` (method, line 81) `def available(self, project_root)`
+  - `timeline` (method, line 100) `def timeline(self, project_root)`
+  - `_entries` (method, line 129) `def _entries(self, root)`
+  - `_genesis` (method, line 152) `def _genesis(self, root)`
+  - `_tags` (method, line 161) `def _tags(self, root)`
+  - `_head` (method, line 181) `def _head(self, root)`
+  - `_commit_date` (method, line 188) `def _commit_date(self, root, commit)`
+  - `_snapshot` (method, line 192) `def _snapshot(self, root, label, ref, commit, date)`
+  - `_resolve_links` (method, line 223) `def _resolve_links(self, file_ids, edges, root)`
+  - `_source_files` (method, line 237) `def _source_files(self, tree)`
+  - `_is_source` (method, line 251) `def _is_source(self, path, scanner)`
+  - `_tree` (method, line 264) `def _tree(self, root, commit)`
+  - `_blobs` (method, line 269) `def _blobs(self, root, shas)`
+  - `_git` (method, line 286) `def _git(self, root, args)`
+  - `_git_bytes` (method, line 291) `def _git_bytes(self, root, args)`
+  - `_run` (method, line 298) `def _run(self, root, args, stdin_file, stdout_file)`
+  - `_git_env` (method, line 323) `def _git_env()`
+  - `_version_label` (method, line 331) `def _version_label(ref)`
+  - `_parse_tree` (method, line 343) `def _parse_tree(raw)`
+  - `_parse_blobs` (method, line 357) `def _parse_blobs(payload)`
+- Depends on: `readmenator/_config.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
+- Imported by: `readmenator/_video.py`, `tests/test_githistory.py`
+
 ## readmenator/_gitmeta.py
 - Doc: Read-only git metadata for freshness stamps on generated documents.
 - Layer: utility
@@ -449,32 +480,6 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `run` (method, line 496) `def run(self, nodes, edges, resolved_edges, layers, content_map)`
 - Depends on: `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_bundlegraph.py`, `readmenator/_category.py`, `readmenator/_components.py`, `readmenator/_concepts.py`, `readmenator/_config.py`, `readmenator/_cpg.py`, `readmenator/_dataflow.py`, `readmenator/_diagrams.py`, `readmenator/_documentation.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_exporter.py`, `readmenator/_folder_readme.py`, `readmenator/_forcegraph.py`, `readmenator/_gh_wiki.py`, `readmenator/_graphrag.py`, `readmenator/_hotspots.py`, `readmenator/_layer_rules.py`, `readmenator/_layers.py`, `readmenator/_memory.py`, `readmenator/_models.py`, `readmenator/_ollama.py`, `readmenator/_provenance.py`, `readmenator/_rank.py`, `readmenator/_readme_injector.py`, `readmenator/_rule_gen.py`, `readmenator/_sarif.py`, `readmenator/_scanner.py`, `readmenator/_scantext.py`, `readmenator/_security.py`, `readmenator/_skill_installer.py`, `readmenator/_sourceview.py`, `readmenator/_symindex.py`, `readmenator/_taint.py`, `readmenator/_uml.py`, `readmenator/_video.py`, `readmenator/_wiki.py`
 - Imported by: `readmenator/_app.py`
-
-## readmenator/_project_config.py
-- Doc: Per-project persistent configuration (readmenator.toml).
-- Layer: infrastructure
-- Language: py
-- Symbols:
-  - `_toml_str` (function, line 136) `def _toml_str(value)`
-  - `_toml_value` (function, line 148) `def _toml_value(value)`
-  - `template_text` (function, line 159) `def template_text(config)`
-  - `config_path` (function, line 286) `def config_path(project_root, config)`
-  - `ensure_project_config` (function, line 300) `def ensure_project_config(project_root, config)`
-  - `_mini_toml_parse` (function, line 333) `def _mini_toml_parse(text)`
-  - `_strip_toml_comment` (function, line 367) `def _strip_toml_comment(value)`
-  - `_mini_toml_value` (function, line 395) `def _mini_toml_value(value)`
-  - `parse_toml` (function, line 450) `def parse_toml(text)`
-  - `_field_types` (function, line 484) `def _field_types()`
-  - `_coerce` (function, line 492) `def _coerce(field_name, value, default)`
-  - `load_project_config` (function, line 544) `def load_project_config(project_root, base)`
-  - `display_name` (function, line 595) `def display_name(config, fallback)`
-  - `safe_url` (function, line 609) `def safe_url(url)`
-  - `safe_color` (function, line 624) `def safe_color(value, fallback)`
-  - `branding_css` (function, line 642) `def branding_css(config)`
-  - `viewer_config_dict` (function, line 663) `def viewer_config_dict(config, project_root)`
-  - `write_viewer_config` (function, line 717) `def write_viewer_config(maps_dir, config, project_root)`
-- Depends on: `readmenator/_config.py`
-- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `readmenator/_viewer_ui.py`, `tests/test_project_config.py`
 
 
 Next: [KB_readmenator_p4.md](KB_readmenator_p4.md)

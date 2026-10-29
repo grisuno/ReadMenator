@@ -66,12 +66,12 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 ## Internal vs External Edges
 
 - Internal resolved imports (EXTRACTED): 39
-- Cross-boundary resolved imports (EXTRACTED): 61
+- Cross-boundary resolved imports (EXTRACTED): 62
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 3 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_cache.py.
 - [EXTRACTED] depends_on community 5 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_folder_readme.py.
 - [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.

@@ -1,6 +1,32 @@
 # Subsystem: readmenator (page 4 of 5)
 Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 
+## readmenator/_project_config.py
+- Doc: Per-project persistent configuration (readmenator.toml).
+- Layer: infrastructure
+- Language: py
+- Symbols:
+  - `_toml_str` (function, line 136) `def _toml_str(value)`
+  - `_toml_value` (function, line 148) `def _toml_value(value)`
+  - `template_text` (function, line 159) `def template_text(config)`
+  - `config_path` (function, line 286) `def config_path(project_root, config)`
+  - `ensure_project_config` (function, line 300) `def ensure_project_config(project_root, config)`
+  - `_mini_toml_parse` (function, line 333) `def _mini_toml_parse(text)`
+  - `_strip_toml_comment` (function, line 367) `def _strip_toml_comment(value)`
+  - `_mini_toml_value` (function, line 395) `def _mini_toml_value(value)`
+  - `parse_toml` (function, line 450) `def parse_toml(text)`
+  - `_field_types` (function, line 484) `def _field_types()`
+  - `_coerce` (function, line 492) `def _coerce(field_name, value, default)`
+  - `load_project_config` (function, line 544) `def load_project_config(project_root, base)`
+  - `display_name` (function, line 595) `def display_name(config, fallback)`
+  - `safe_url` (function, line 609) `def safe_url(url)`
+  - `safe_color` (function, line 624) `def safe_color(value, fallback)`
+  - `branding_css` (function, line 642) `def branding_css(config)`
+  - `viewer_config_dict` (function, line 663) `def viewer_config_dict(config, project_root)`
+  - `write_viewer_config` (function, line 717) `def write_viewer_config(maps_dir, config, project_root)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/__main__.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_diagrams.py`, `readmenator/_flowpage.py`, `readmenator/_forcegraph.py`, `readmenator/_viewer_ui.py`, `tests/test_project_config.py`
+
 ## readmenator/_projections.py
 - Doc: Functors and projections for the readmenator code category.
 - Layer: utility
@@ -219,7 +245,7 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `_resolve_stem_match` (method, line 324) `def _resolve_stem_match(self, import_str)`
   - `_strip_extension` (method, line 333) `def _strip_extension(self, name)`
 - Depends on: `readmenator/_config.py`
-- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_forcegraph.py`, `readmenator/_graphrag.py`, `tests/test_agent_friendliness.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
+- Imported by: `readmenator/_agent_output.py`, `readmenator/_app.py`, `readmenator/_forcegraph.py`, `readmenator/_githistory.py`, `readmenator/_graphrag.py`, `tests/test_agent_friendliness.py`, `tests/test_resolver.py`, `tests/test_taint_bdd.py`
 
 ## readmenator/_rule_gen.py
 - Doc: Suggested linting rule generator producing Semgrep YAML from detected antipatterns.
@@ -259,7 +285,7 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `PolyglotScanner` (class, line 28) `class PolyglotScanner`
   - `__init__` (method, line 39) `def __init__(self, config)`
   - `_is_ignored` (method, line 50) `def _is_ignored(self, path)`
-  - `_is_generated` (method, line 57) `def _is_generated(self, rel_path)`
+  - `is_generated` (method, line 57) `def is_generated(self, rel_path)`
   - `_load_gitignore` (method, line 84) `def _load_gitignore(self, root)`
   - `_gitignore_glob_to_regex` (method, line 106) `def _gitignore_glob_to_regex(pattern)`
   - `_is_gitignored` (method, line 146) `def _is_gitignored(self, rel_path)`
@@ -269,9 +295,11 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `_emit_progress` (method, line 252) `def _emit_progress(self, count)`
   - `scan` (method, line 262) `def scan(self, root)`
   - `scan_with_content` (method, line 276) `def scan_with_content(self, root)`
-  - `_scan_impl` (method, line 287) `def _scan_impl(self, root)`
+  - `_parse_source` (method, line 287) `def _parse_source(self, rel_path_str, content, label, privacy)`
+  - `scan_contents` (method, line 360) `def scan_contents(self, contents)`
+  - `_scan_impl` (method, line 397) `def _scan_impl(self, root)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/parsers/__init__.py`
-- Imported by: `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
+- Imported by: `readmenator/_githistory.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_scanner.py`, `tests/test_taint_bdd.py`
 
 ## readmenator/_scantext.py
 - Doc: Synthesized scan-text builder for the readmenator knowledge graph.

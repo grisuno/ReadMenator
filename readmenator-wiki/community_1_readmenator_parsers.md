@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 0 | 37 files | cohesion 0.53*
+*Community 1 | 34 files | cohesion 0.52*
 
 ## Definition
 
-This community groups 37 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Architecture layer rule engine: forbidden and warning edges between layers..
+This community groups 34 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.52). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Hotspot, dependency cycle, and change impact analysis.  Scores files by complexity plus centrality, finds import cycles with DFS, and measures transitive depend.
 
 ## Files
 
@@ -20,34 +20,41 @@ This community groups 37 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/parsers/_dart.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_elixir.py` | py | utility | 2 | yes |
 
-### `tests` (9 files)
+### `tests` (7 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `tests/test_hotspots.py` | py | testing | 11 | no |
 | `tests/test_layer_rules.py` | py | testing | 13 | no |
 | `tests/test_mermaid.py` | py | testing | 13 | no |
 | `tests/test_models.py` | py | testing | 11 | no |
 | `tests/test_parsers_property.py` | py | testing | 27 | yes |
 | `tests/test_rule_gen.py` | py | testing | 10 | no |
 | `tests/test_sarif.py` | py | testing | 10 | no |
-| `tests/test_scanner.py` | py | testing | 21 | no |
 
-### `readmenator` (7 files)
+### `readmenator` (6 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `readmenator/_hotspots.py` | py | utility | 7 | yes |
 | `readmenator/_layer_rules.py` | py | business_logic | 4 | yes |
 | `readmenator/_mermaid.py` | py | utility | 4 | yes |
 | `readmenator/_models.py` | py | business_logic | 23 | yes |
 | `readmenator/_rule_gen.py` | py | business_logic | 9 | yes |
 | `readmenator/_sarif.py` | py | utility | 5 | yes |
-| `readmenator/_scanner.py` | py | utility | 14 | yes |
 
-*... and 17 more files in this community.*
+*... and 14 more files in this community.*
 
 
 ## Key Symbols
 
+- `HotspotAnalyzer` (class, `readmenator/_hotspots.py:22`) `class HotspotAnalyzer` - Hotspot detection, cycle analysis, and change impact analysis.
+- `__init__` (method, `readmenator/_hotspots.py:31`) `def __init__(self, config)`
+- `analyze_hotspots` (method, `readmenator/_hotspots.py:34`) `def analyze_hotspots(self, nodes, edges, resolved_edges)` - Rank files by combined complexity and centrality scores.
+- `detect_cycles` (method, `readmenator/_hotspots.py:90`) `def detect_cycles(self, nodes, resolved_edges)` - Detect cycles in the resolved import graph using DFS.
+- `_dfs_visit` (function, `readmenator/_hotspots.py:114`) `def _dfs_visit(current)`
+- `_record_cycle` (function, `readmenator/_hotspots.py:125`) `def _record_cycle(start, end)`
+- `analyze_change_impact` (method, `readmenator/_hotspots.py:155`) `def analyze_change_impact(self, nodes, resolved_edges)` - Compute change impact for every file in the project.
 - `LayerRuleEngine` (class, `readmenator/_layer_rules.py:11`) `class LayerRuleEngine` - Architectural layer violation detection engine.
 - `__init__` (method, `readmenator/_layer_rules.py:36`) `def __init__(self, config)`
 - `detect_violations` (method, `readmenator/_layer_rules.py:39`) `def detect_violations(self, nodes, edges, resolved_edges, layers)` - Detect architectural layer violations.
@@ -71,27 +78,20 @@ This community groups 37 file(s) rooted at `readmenator/parsers` with dominant l
 - `SuggestedRule` (class, `readmenator/_models.py:238`) `class SuggestedRule` - A suggested linting/security rule derived from code patterns.
 - `LayerViolation` (class, `readmenator/_models.py:263`) `class LayerViolation` - A detected architectural layer violation.
 - `AnalysisResultV2` (class, `readmenator/_models.py:284`) `class AnalysisResultV2` - Extended analysis result combining all new analysis modules.
-- `DataflowIssue` (class, `readmenator/_models.py:309`) `class DataflowIssue` - A procedural intra-function dataflow finding.
-- `LinterViolation` (class, `readmenator/_models.py:332`) `class LinterViolation` - A violation detected by the architecture linter.
-- `DeadCodeReport` (class, `readmenator/_models.py:349`) `class DeadCodeReport` - A dead code symbol identified by the stripper.
-- `RefactoringAction` (class, `readmenator/_models.py:366`) `class RefactoringAction` - A single refactoring action within a plan.
-- `RefactoringPlan` (class, `readmenator/_models.py:387`) `class RefactoringPlan` - A complete refactoring plan for a monolithic file.
-- `ConceptNode` (class, `readmenator/_models.py:404`) `class ConceptNode` - A semantic noun node in the concept graph.
-- `ConceptRelation` (class, `readmenator/_models.py:421`) `class ConceptRelation` - A verb edge between two concept noun nodes.
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 101
-- Cross-boundary resolved imports (EXTRACTED): 103
+- Internal resolved imports (EXTRACTED): 94
+- Cross-boundary resolved imports (EXTRACTED): 101
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
 
 ## Risks
 
@@ -101,19 +101,18 @@ This community groups 37 file(s) rooted at `readmenator/parsers` with dominant l
 
 ## Open Questions
 
-- Why do 7 file(s) lack file-level docs (e.g. `tests/test_layer_rules.py`)? What purpose do they serve?
+- Why do 6 file(s) lack file-level docs (e.g. `tests/test_hotspots.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.53?
+- Should readmenator/parsers be split, given cohesion 0.52?
 
 ## Sources
 
+- `readmenator/_hotspots.py`
 - `readmenator/_layer_rules.py`
 - `readmenator/_mermaid.py`
 - `readmenator/_models.py`
 - `readmenator/_rule_gen.py`
 - `readmenator/_sarif.py`
-- `readmenator/_scanner.py`
-- `readmenator/_taint.py`
 - `readmenator/parsers/__init__.py`
 - `readmenator/parsers/_assembly.py`
 - `readmenator/parsers/_base.py`
@@ -127,4 +126,5 @@ This community groups 37 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/parsers/_javascript.py`
 - `readmenator/parsers/_kotlin.py`
 - `readmenator/parsers/_lua.py`
-- *... and 17 more*
+- `readmenator/parsers/_nim.py`
+- *... and 14 more*

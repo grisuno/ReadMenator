@@ -71,6 +71,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`FolderSpec`](modules/readmenator._folder_readme.py.md#folderspec) class in `readmenator._folder_readme`
 - [`ForceAtlas2Settings`](modules/readmenator._graphlayout.py.md#forceatlas2settings) class in `readmenator._graphlayout`
 - [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
+- [`GitHistoryReader`](modules/readmenator._githistory.py.md#githistoryreader) class in `readmenator._githistory`
 - [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`
 - [`GitHubWikiPublisher`](modules/readmenator._gh_wiki.py.md#githubwikipublisher) class in `readmenator._gh_wiki`
 - [`GraphAnalyzer`](modules/readmenator._analyzer.py.md#graphanalyzer) class in `readmenator._analyzer`
@@ -80,6 +81,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`GraphRagSearcher`](modules/readmenator._graphrag.py.md#graphragsearcher) class in `readmenator._graphrag`
 - [`GraphRagStore`](modules/readmenator._graphrag.py.md#graphragstore) class in `readmenator._graphrag`
 - [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
+- [`HistoryRelease`](modules/readmenator._githistory.py.md#historyrelease) class in `readmenator._githistory`
 - [`HotspotAnalyzer`](modules/readmenator._hotspots.py.md#hotspotanalyzer) class in `readmenator._hotspots`
 - [`HotspotResult`](modules/readmenator._models.py.md#hotspotresult) class in `readmenator._models`
 - [`Hypothesis`](modules/readmenator._hypotheses.py.md#hypothesis) class in `readmenator._hypotheses`

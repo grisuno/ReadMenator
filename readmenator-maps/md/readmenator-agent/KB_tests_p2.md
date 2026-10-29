@@ -231,6 +231,34 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_rebuild_publishes_wiki_in_git_checkout` (method, line 167) `def test_rebuild_publishes_wiki_in_git_checkout(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_gh_wiki.py`
 
+## tests/test_githistory.py
+- Doc: Contract tests for the git history reader used by the growth video act.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_git_available` (function, line 14) `def _git_available()`
+  - `_run_git` (function, line 19) `def _run_git(root)`
+  - `_write` (function, line 36) `def _write(path, text)`
+  - `TestGitHistoryReader` (class, line 43) `class TestGitHistoryReader(TestCase)`
+  - `TestGitHistoryParsing` (class, line 134) `class TestGitHistoryParsing(TestCase)`
+  - `setUp` (method, line 46) `def setUp(self)`
+  - `tearDown` (method, line 64) `def tearDown(self)`
+  - `test_githistory_timeline_orders_releases` (method, line 68) `def test_githistory_timeline_orders_releases(self)`
+  - `test_githistory_untagged_first_commit_is_genesis` (method, line 76) `def test_githistory_untagged_first_commit_is_genesis(self)`
+  - `test_githistory_snapshots_count_files_and_links` (method, line 83) `def test_githistory_snapshots_count_files_and_links(self)`
+  - `test_githistory_skips_generated_outputs` (method, line 94) `def test_githistory_skips_generated_outputs(self)`
+  - `test_githistory_respects_snapshot_budget` (method, line 103) `def test_githistory_respects_snapshot_budget(self)`
+  - `test_githistory_disabled_returns_empty` (method, line 111) `def test_githistory_disabled_returns_empty(self)`
+  - `test_githistory_ignores_inherited_git_environment` (method, line 116) `def test_githistory_ignores_inherited_git_environment(self)`
+  - `test_githistory_unavailable_paths_are_empty` (method, line 125) `def test_githistory_unavailable_paths_are_empty(self)`
+  - `test_githistory_version_label_normalises_tags` (method, line 137) `def test_githistory_version_label_normalises_tags(self)`
+  - `test_githistory_parses_tree_listing` (method, line 144) `def test_githistory_parses_tree_listing(self)`
+  - `test_githistory_parses_blob_batch` (method, line 152) `def test_githistory_parses_blob_batch(self)`
+  - `test_githistory_failed_git_returns_empty_timeline` (method, line 160) `def test_githistory_failed_git_returns_empty_timeline(self)`
+  - `test_githistory_git_environment_is_sanitised` (method, line 170) `def test_githistory_git_environment_is_sanitised(self)`
+  - `broken` (function, line 163) `def broken(args, root, stdin_file, stdout_file)`
+- Depends on: `readmenator/_config.py`, `readmenator/_githistory.py`
+
 ## tests/test_graphlayout.py
 - Doc: Contract tests for ForceAtlas2 and hierarchical edge bundling layouts.
 - Layer: testing
@@ -457,29 +485,6 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_resolved_edges_also_checked` (method, line 104) `def test_resolved_edges_also_checked(self)`
   - `test_presentation_to_data_access_forbidden` (method, line 115) `def test_presentation_to_data_access_forbidden(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`
-
-## tests/test_layout_quality.py
-- Doc: Contract tests for bundle crossing reduction and seeded explorer layouts.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_clustered` (function, line 23) `def _clustered()`
-  - `_chords` (function, line 37) `def _chords(layout, edges)`
-  - `TestBundleOrdering` (class, line 42) `class TestBundleOrdering(TestCase)`
-  - `_force_payload_inputs` (function, line 100) `def _force_payload_inputs()`
-  - `TestSeededExplorer` (class, line 116) `class TestSeededExplorer(TestCase)`
-  - `test_layout_order_reduces_angular_cost` (method, line 45) `def test_layout_order_reduces_angular_cost(self)`
-  - `test_layout_order_keeps_members_and_first_group` (method, line 50) `def test_layout_order_keeps_members_and_first_group(self)`
-  - `test_layout_order_deterministic_and_never_worse` (method, line 56) `def test_layout_order_deterministic_and_never_worse(self)`
-  - `test_layout_more_sweeps_never_increase_cost` (method, line 63) `def test_layout_more_sweeps_never_increase_cost(self)`
-  - `test_layout_center_out_puts_hub_mid_arc` (method, line 77) `def test_layout_center_out_puts_hub_mid_arc(self)`
-  - `test_layout_sphere_refinement_shortens_chords` (method, line 82) `def test_layout_sphere_refinement_shortens_chords(self)`
-  - `test_layout_sphere_refine_in_bundling_call` (method, line 92) `def test_layout_sphere_refine_in_bundling_call(self)`
-  - `test_layout_seed_positions_present_and_scaled` (method, line 119) `def test_layout_seed_positions_present_and_scaled(self)`
-  - `test_layout_seed_deterministic_and_disableable` (method, line 132) `def test_layout_seed_deterministic_and_disableable(self)`
-  - `test_layout_seed_page_wiring` (method, line 142) `def test_layout_seed_page_wiring(self)`
-  - `test_layout_bundle_payload_uses_optimized_order` (method, line 150) `def test_layout_bundle_payload_uses_optimized_order(self)`
-- Depends on: `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_models.py`
 
 
 Next: [KB_tests_p3.md](KB_tests_p3.md)

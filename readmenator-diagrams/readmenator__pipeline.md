@@ -34,6 +34,6 @@ tests groups 5 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDow
 - readmenator/_uml.py
 - tests/test_agent_injector.py
 - tests/test_agent_output.py
+- tests/test_exporter.py
 - tests/test_interactive_graph.py
 - tests/test_readme_injector.py
-- tests/test_uml.py

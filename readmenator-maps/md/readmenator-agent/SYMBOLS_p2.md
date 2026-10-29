@@ -231,6 +231,29 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `render` | method | `readmenator/_gh_wiki.py:180` | `def render(self, project_root, remote)` |
 | `rewrite` | method | `readmenator/_gh_wiki.py:130` | `def rewrite(self, text, rel_path, names, project_root, blob_base)` |
 | `wiki_remote` | method | `readmenator/_gh_wiki.py:250` | `def wiki_remote(self, project_root)` |
+| `GitHistoryReader` | class | `readmenator/_githistory.py:67` | `class GitHistoryReader` |
+| `HistoryRelease` | class | `readmenator/_githistory.py:43` | `class HistoryRelease` |
+| `__init__` | method | `readmenator/_githistory.py:76` | `def __init__(self, config, runner)` |
+| `_blobs` | method | `readmenator/_githistory.py:269` | `def _blobs(self, root, shas)` |
+| `_commit_date` | method | `readmenator/_githistory.py:188` | `def _commit_date(self, root, commit)` |
+| `_entries` | method | `readmenator/_githistory.py:129` | `def _entries(self, root)` |
+| `_genesis` | method | `readmenator/_githistory.py:152` | `def _genesis(self, root)` |
+| `_git` | method | `readmenator/_githistory.py:286` | `def _git(self, root, args)` |
+| `_git_bytes` | method | `readmenator/_githistory.py:291` | `def _git_bytes(self, root, args)` |
+| `_git_env` | method | `readmenator/_githistory.py:323` | `def _git_env()` |
+| `_head` | method | `readmenator/_githistory.py:181` | `def _head(self, root)` |
+| `_is_source` | method | `readmenator/_githistory.py:251` | `def _is_source(self, path, scanner)` |
+| `_parse_blobs` | method | `readmenator/_githistory.py:357` | `def _parse_blobs(payload)` |
+| `_parse_tree` | method | `readmenator/_githistory.py:343` | `def _parse_tree(raw)` |
+| `_resolve_links` | method | `readmenator/_githistory.py:223` | `def _resolve_links(self, file_ids, edges, root)` |
+| `_run` | method | `readmenator/_githistory.py:298` | `def _run(self, root, args, stdin_file, stdout_file)` |
+| `_snapshot` | method | `readmenator/_githistory.py:192` | `def _snapshot(self, root, label, ref, commit, date)` |
+| `_source_files` | method | `readmenator/_githistory.py:237` | `def _source_files(self, tree)` |
+| `_tags` | method | `readmenator/_githistory.py:161` | `def _tags(self, root)` |
+| `_tree` | method | `readmenator/_githistory.py:264` | `def _tree(self, root, commit)` |
+| `_version_label` | method | `readmenator/_githistory.py:331` | `def _version_label(ref)` |
+| `available` | method | `readmenator/_githistory.py:81` | `def available(self, project_root)` |
+| `timeline` | method | `readmenator/_githistory.py:100` | `def timeline(self, project_root)` |
 | `_git_dir` | function | `readmenator/_gitmeta.py:38` | `def _git_dir(root)` |
 | `_packed_ref` | function | `readmenator/_gitmeta.py:59` | `def _packed_ref(git_dir, ref)` |
 | `_read_small` | function | `readmenator/_gitmeta.py:19` | `def _read_small(path)` |
@@ -473,28 +496,5 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `SecurityFinding` | class | `readmenator/_models.py:77` | `class SecurityFinding` |
 | `SuggestedRule` | class | `readmenator/_models.py:238` | `class SuggestedRule` |
 | `Symbol` | class | `readmenator/_models.py:18` | `class Symbol` |
-| `TaintAnalysisResult` | class | `readmenator/_models.py:172` | `class TaintAnalysisResult` |
-| `TaintPath` | class | `readmenator/_models.py:151` | `class TaintPath` |
-| `pluralize_symbol_kind` | function | `readmenator/_models.py:101` | `def pluralize_symbol_kind(kind, plural_map)` |
-| `OllamaClient` | class | `readmenator/_ollama.py:33` | `class OllamaClient` |
-| `__init__` | method | `readmenator/_ollama.py:36` | `def __init__(self, config)` |
-| `available` | method | `readmenator/_ollama.py:48` | `def available(self, timeout)` |
-| `describe_component` | method | `readmenator/_ollama.py:104` | `def describe_component(self, name, files, symbols, imports)` |
-| `enabled` | method | `readmenator/_ollama.py:44` | `def enabled(self)` |
-| `generate` | method | `readmenator/_ollama.py:69` | `def generate(self, prompt, system)` |
-| `strip_thinking` | function | `readmenator/_ollama.py:21` | `def strip_thinking(text)` |
-| `AnalyzerFactory` | class | `readmenator/_pipeline.py:67` | `class AnalyzerFactory` |
-| `DeepAnalysisRunner` | class | `readmenator/_pipeline.py:484` | `class DeepAnalysisRunner` |
-| `__init__` | method | `readmenator/_pipeline.py:75` | `def __init__(self, config)` |
-| `__init__` | method | `readmenator/_pipeline.py:493` | `def __init__(self, factory)` |
-| `agent_injector` | method | `readmenator/_pipeline.py:249` | `def agent_injector(self)` |
-| `agent_output` | method | `readmenator/_pipeline.py:269` | `def agent_output(self)` |
-| `analytics` | method | `readmenator/_pipeline.py:338` | `def analytics(self)` |
-| `analyzer` | method | `readmenator/_pipeline.py:137` | `def analyzer(self)` |
-| `apidocs` | method | `readmenator/_pipeline.py:429` | `def apidocs(self)` |
-| `apidocs_writer` | method | `readmenator/_pipeline.py:436` | `def apidocs_writer(self)` |
-| `build_typed_graph` | method | `readmenator/_pipeline.py:449` | `def build_typed_graph(self, nodes, edges, resolved_edges)` |
-| `bundlegraph` | method | `readmenator/_pipeline.py:331` | `def bundlegraph(self)` |
-| `components` | method | `readmenator/_pipeline.py:415` | `def components(self)` |
 
 Next: [SYMBOLS_p3.md](SYMBOLS_p3.md)

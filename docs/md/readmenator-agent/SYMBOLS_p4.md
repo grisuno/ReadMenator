@@ -3,6 +3,39 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `post` | function | `readmenator/_video.py:790` | `def post(img, glitch, seed)` |
+| `pr` | function | `readmenator/_video.py:534` | `def pr(p)` |
+| `project3d` | function | `readmenator/_video.py:203` | `def project3d(p, yaw, pitch, target, scale, center, perspective)` |
+| `render` | method | `readmenator/_video.py:1472` | `def render(self, data, output_path)` |
+| `render_single_frame` | method | `readmenator/_video.py:1458` | `def render_single_frame(self, data, frame_index)` |
+| `resolve_fonts` | function | `readmenator/_video.py:651` | `def resolve_fonts()` |
+| `short_label` | function | `readmenator/_video.py:140` | `def short_label(text, limit)` |
+| `sphere_layout` | method | `readmenator/_video.py:1365` | `def sphere_layout(self, data)` |
+| `tf` | function | `readmenator/_video.py:2569` | `def tf(x, y)` |
+| `tf` | function | `readmenator/_video.py:2667` | `def tf(x, y)` |
+| `tree_positions` | method | `readmenator/_video.py:1268` | `def tree_positions(self, data, box)` |
+| `branding_style` | function | `readmenator/_viewer_ui.py:318` | `def branding_style(config)` |
+| `config_button_markup` | function | `readmenator/_viewer_ui.py:419` | `def config_button_markup()` |
+| `home_anchor` | function | `readmenator/_viewer_ui.py:333` | `def home_anchor(config)` |
+| `modal_html` | function | `readmenator/_viewer_ui.py:380` | `def modal_html()` |
+| `modal_script` | function | `readmenator/_viewer_ui.py:403` | `def modal_script(config)` |
+| `project_links` | function | `readmenator/_viewer_ui.py:356` | `def project_links(config)` |
+| `viewer_json` | function | `readmenator/_viewer_ui.py:272` | `def viewer_json(config)` |
+| `DirectoryWatcher` | class | `readmenator/_watcher.py:21` | `class DirectoryWatcher` |
+| `__init__` | method | `readmenator/_watcher.py:29` | `def __init__(self, root, config, callback, interval_seconds)` |
+| `_compute_snapshot` | method | `readmenator/_watcher.py:51` | `def _compute_snapshot(self)` |
+| `start` | method | `readmenator/_watcher.py:80` | `def start(self)` |
+| `stop` | method | `readmenator/_watcher.py:97` | `def stop(self)` |
+| `WikiGenerator` | class | `readmenator/_wiki.py:86` | `class WikiGenerator` |
+| `__init__` | method | `readmenator/_wiki.py:89` | `def __init__(self, config)` |
+| `_build_community_page` | method | `readmenator/_wiki.py:550` | `def _build_community_page(self, community, node_map, resolved, analysis, layers, findings, analysis_v2, connections)` |
+| `_build_connections` | method | `readmenator/_wiki.py:277` | `def _build_connections(self, communities, resolved, analysis, node_map, layers)` |
+| `_build_connections_json` | method | `readmenator/_wiki.py:454` | `def _build_connections_json(self, connections)` |
+| `_build_grouped_files` | method | `readmenator/_wiki.py:501` | `def _build_grouped_files(self, members, node_map, layers, max_files)` |
+| `_build_index` | method | `readmenator/_wiki.py:754` | `def _build_index(self, nodes, resolved, analysis, layers, findings, analysis_v2, communities, pages, connections...` |
+| `_build_queries` | method | `readmenator/_wiki.py:936` | `def _build_queries(self, analysis)` |
+| `_build_report` | method | `readmenator/_wiki.py:961` | `def _build_report(self, nodes, edges, resolved, analysis, layers, findings, analysis_v2, communities, project_name...` |
+| `_community_of` | method | `readmenator/_wiki.py:268` | `def _community_of(self, node_id, communities)` |
 | `_connective_paragraph` | method | `readmenator/_wiki.py:899` | `def _connective_paragraph(self, communities, connections)` |
 | `_definition_for` | method | `readmenator/_wiki.py:458` | `def _definition_for(self, community, node_map)` |
 | `_display_names` | function | `readmenator/_wiki.py:72` | `def _display_names(communities)` |
@@ -463,38 +496,5 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_alias_pointer_store_initializes_array` | method | `tests/test_dataflow.py:272` | `def test_alias_pointer_store_initializes_array(self)` |
 | `test_array_arg_to_filler_counts_as_init` | method | `tests/test_dataflow.py:173` | `def test_array_arg_to_filler_counts_as_init(self)` |
 | `test_array_arg_to_readonly_still_uninit` | method | `tests/test_dataflow.py:181` | `def test_array_arg_to_readonly_still_uninit(self)` |
-| `test_array_filled_in_decl_init_call` | method | `tests/test_dataflow.py:188` | `def test_array_filled_in_decl_init_call(self)` |
-| `test_array_store_before_read_suppresses_uninit` | method | `tests/test_dataflow.py:248` | `def test_array_store_before_read_suppresses_uninit(self)` |
-| `test_asm_output_counts_as_init` | method | `tests/test_dataflow.py:116` | `def test_asm_output_counts_as_init(self)` |
-| `test_assert_macro_counts_as_null_check` | method | `tests/test_dataflow.py:352` | `def test_assert_macro_counts_as_null_check(self)` |
-| `test_block_comment_malloc_ignored` | method | `tests/test_dataflow.py:225` | `def test_block_comment_malloc_ignored(self)` |
-| `test_checked_alloc_clean` | method | `tests/test_dataflow.py:78` | `def test_checked_alloc_clean(self)` |
-| `test_config_defaults` | method | `tests/test_dataflow.py:26` | `def test_config_defaults(self)` |
-| `test_config_immutable` | method | `tests/test_dataflow.py:31` | `def test_config_immutable(self)` |
-| `test_dead_store_detected` | method | `tests/test_dataflow.py:62` | `def test_dead_store_detected(self)` |
-| `test_derived_pointer_not_dead` | method | `tests/test_dataflow.py:203` | `def test_derived_pointer_not_dead(self)` |
-| `test_disabled_returns_empty` | method | `tests/test_dataflow.py:84` | `def test_disabled_returns_empty(self)` |
-| `test_fd_lt_zero_counts_as_checked` | method | `tests/test_dataflow.py:123` | `def test_fd_lt_zero_counts_as_checked(self)` |
-| `test_file_scope_symbol_still_bounds_span` | method | `tests/test_dataflow.py:329` | `def test_file_scope_symbol_still_bounds_span(self)` |
-| `test_function_pointer_call_counts_as_use` | method | `tests/test_dataflow.py:290` | `def test_function_pointer_call_counts_as_use(self)` |
-| `test_initialized_use_clean` | method | `tests/test_dataflow.py:46` | `def test_initialized_use_clean(self)` |
-| `test_inline_alias_fill_suppresses_uninit` | method | `tests/test_dataflow.py:281` | `def test_inline_alias_fill_suppresses_uninit(self)` |
-| `test_issue_cap_respected` | method | `tests/test_dataflow.py:96` | `def test_issue_cap_respected(self)` |
-| `test_line_numbers_survive_subscript_stores` | method | `tests/test_dataflow.py:156` | `def test_line_numbers_survive_subscript_stores(self)` |
-| `test_local_struct_does_not_truncate_span` | method | `tests/test_dataflow.py:305` | `def test_local_struct_does_not_truncate_span(self)` |
-| `test_loop_carried_var_not_dead` | method | `tests/test_dataflow.py:144` | `def test_loop_carried_var_not_dead(self)` |
-| `test_map_failed_counts_as_checked` | method | `tests/test_dataflow.py:129` | `def test_map_failed_counts_as_checked(self)` |
-| `test_member_null_check_counts` | method | `tests/test_dataflow.py:136` | `def test_member_null_check_counts(self)` |
-| `test_member_store_initializes_base` | method | `tests/test_dataflow.py:377` | `def test_member_store_initializes_base(self)` |
-| `test_member_store_not_local_assign` | method | `tests/test_dataflow.py:167` | `def test_member_store_not_local_assign(self)` |
-| `test_missing_content_skipped` | method | `tests/test_dataflow.py:91` | `def test_missing_content_skipped(self)` |
-| `test_multiline_call_assigns_array_arg` | method | `tests/test_dataflow.py:360` | `def test_multiline_call_assigns_array_arg(self)` |
-| `test_params_count_as_initialized` | method | `tests/test_dataflow.py:50` | `def test_params_count_as_initialized(self)` |
-| `test_plain_assignment_is_not_a_declaration` | method | `tests/test_dataflow.py:105` | `def test_plain_assignment_is_not_a_declaration(self)` |
-| `test_plain_call_is_not_a_local_use` | method | `tests/test_dataflow.py:298` | `def test_plain_call_is_not_a_local_use(self)` |
-| `test_read_store_clean` | method | `tests/test_dataflow.py:67` | `def test_read_store_clean(self)` |
-| `test_same_line_only_assign_is_dead` | method | `tests/test_dataflow.py:264` | `def test_same_line_only_assign_is_dead(self)` |
-| `test_same_line_use_not_dead` | method | `tests/test_dataflow.py:256` | `def test_same_line_use_not_dead(self)` |
-| `test_scanf_addr_counts_as_init` | method | `tests/test_dataflow.py:58` | `def test_scanf_addr_counts_as_init(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)
