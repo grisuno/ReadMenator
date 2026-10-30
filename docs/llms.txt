@@ -1,13 +1,13 @@
 # ReadMenator
 
-> Static analysis knowledge base for ReadMenator: 7 communities, 161 files, 1391 imports, 3 languages, 3174 symbols.
+> Static analysis knowledge base for ReadMenator: 7 communities, 161 files, 1391 imports, 3 languages, 3175 symbols.
 
 Generated offline by readmenator (zero LLM tokens). Start with the wiki index for the big picture, then the agent INDEX for file lookup.
 
 ## Wiki
 
 - [readmenator-wiki/index.md](md/readmenator-wiki/index.md): The codebase centres on config.py, models.py, app.py. Architecturally it is 6 layers, dominant utility (88 files) across 8 import-based communities. Recorded...
-- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-28 | offline, deterministic
+- [readmenator-wiki/REPORT.md](md/readmenator-wiki/REPORT.md): Project: ReadMenator | 2026-10-30 | offline, deterministic
 - [readmenator-wiki/community_0_readmenator_video.md](md/readmenator-wiki/community_0_readmenator_video.md): Community 0 | 41 files | cohesion 0.35
 - [readmenator-wiki/community_1_readmenator_parsers.md](md/readmenator-wiki/community_1_readmenator_parsers.md): Community 1 | 34 files | cohesion 0.52
 - [readmenator-wiki/community_2_readmenator_agent_output.md](md/readmenator-wiki/community_2_readmenator_agent_output.md): Community 2 | 19 files | cohesion 0.33
@@ -21,7 +21,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 
 ## GraphRAG
 
-- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 3431 | Relationships: 11863 | Communities: 8 | Themes: 2 | Text units: 3318
+- [readmenator-graphrag/REPORTS.md](md/readmenator-graphrag/REPORTS.md): Entities: 3432 | Relationships: 11867 | Communities: 8 | Themes: 2 | Text units: 3319
 
 ## Agent Docs
 
@@ -45,7 +45,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/KB_tests_p2.md](md/readmenator-agent/KB_tests_p2.md): Doc: Contract tests for interactive system maps.
 - [readmenator-agent/KB_tests_p3.md](md/readmenator-agent/KB_tests_p3.md): Doc: Contract tests for bundle crossing reduction and seeded explorer layouts.
 - [readmenator-agent/KB_tests_p4.md](md/readmenator-agent/KB_tests_p4.md): Doc: Contract tests for README injection into documented projects.
-- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 161 files at commit 36f3485baecf. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
+- [readmenator-agent/MEMORY.md](md/readmenator-agent/MEMORY.md): Generated from 161 files at commit 855c3acd34c8. Read this first, then readmenator-wiki/index.md, then readmenator . ask "<question>" for anything specific.
 - [readmenator-agent/SECURITY.md](md/readmenator-agent/SECURITY.md)
 - [readmenator-agent/SYMBOLS.md](md/readmenator-agent/SYMBOLS.md)
 - [readmenator-agent/SYMBOLS_p2.md](md/readmenator-agent/SYMBOLS_p2.md)
@@ -55,7 +55,7 @@ Generated offline by readmenator (zero LLM tokens). Start with the wiki index fo
 - [readmenator-agent/SYMBOLS_p6.md](md/readmenator-agent/SYMBOLS_p6.md)
 - [readmenator-agent/SYMBOLS_p7.md](md/readmenator-agent/SYMBOLS_p7.md)
 - [readmenator-agent/recipes/add-function.md](md/readmenator-agent/recipes/add-function.md): Find the target file by purpose: grep -in '<topic>' readmenator-agent/INDEX.md
-- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (104 dependents)
+- [readmenator-agent/recipes/change-impact.md](md/readmenator-agent/recipes/change-impact.md): Riskiest file: readmenator/category.py (105 dependents)
 - [readmenator-agent/recipes/fix-cycle.md](md/readmenator-agent/recipes/fix-cycle.md): Read cycles: grep -A5 'Dependency Cycles' readmenator-agent/GOTCHAS.md
 - [readmenator-agent/recipes/fix-security.md](md/readmenator-agent/recipes/fix-security.md): Read findings: grep -n '<file>' readmenator-agent/SECURITY.md
 - [readmenator-agent/recipes/reduce-complexity.md](md/readmenator-agent/recipes/reduce-complexity.md): Target hotspot: readmenator/vendor/force-graph.min.js

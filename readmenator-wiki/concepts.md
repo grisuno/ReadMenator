@@ -8,7 +8,7 @@ Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verb
 | `returns` | 102 | 509 | `readmenator/_agent_injector.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py` |
 | `file` | 94 | 676 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py` |
 | `graph` | 75 | 367 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py` |
-| `when` | 70 | 243 | `readmenator/_agent_injector.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py` |
+| `when` | 70 | 244 | `readmenator/_agent_injector.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py` |
 | `files` | 69 | 217 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py` |
 | `node` | 67 | 272 | `readmenator/__init__.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py` |
 | `args` | 64 | 384 | `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py` |
@@ -23,7 +23,7 @@ Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verb
 | `imports` | 57 | 89 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_cpg.py` |
 | `build` | 55 | 260 | `readmenator/__main__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py` |
 | `nodes` | 55 | 226 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_app.py` |
-| `one` | 55 | 195 | `deploy.sh`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py` |
+| `one` | 55 | 196 | `deploy.sh`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py` |
 | `symbol` | 55 | 160 | `readmenator/__init__.py`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py` |
 | `set` | 55 | 114 | `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_category.py`, `readmenator/_concepts.py`, `readmenator/_diagrams.py` |
 | `text` | 53 | 243 | `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py` |
@@ -34,12 +34,12 @@ Second-brain semantic layer: nouns map atomically to file sets (EXTRACTED); verb
 | `source` | 50 | 188 | `readmenator.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py` |
 | `edge` | 50 | 154 | `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_bundlegraph_page.py`, `readmenator/_category.py` |
 | `map` | 48 | 202 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_app.py`, `readmenator/_category.py` |
-| `without` | 48 | 86 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py` |
+| `without` | 48 | 87 | `readmenator/__init__.py`, `readmenator/_agent_injector.py`, `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py` |
+| `only` | 44 | 83 | `readmenator/_apidocs.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_components.py` |
 | `not` | 44 | 66 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_app.py`, `readmenator/_cache.py` |
 | `analysis` | 43 | 176 | `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_analyzer.py`, `readmenator/_app.py`, `readmenator/_cache.py` |
 | `line` | 43 | 175 | `readmenator/__main__.py`, `readmenator/_agent_output.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py` |
 | `name` | 43 | 169 | `readmenator/_agent_output.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_components.py` |
-| `only` | 43 | 81 | `readmenator/_apidocs.py`, `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_cache.py`, `readmenator/_components.py` |
 | `per` | 42 | 101 | `deploy.sh`, `readmenator/_agent_output.py`, `readmenator/_analytics.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py` |
 | `deterministic` | 42 | 95 | `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_page.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py` |
 | `list` | 42 | 94 | `readmenator/_agent_output.py`, `readmenator/_analyzer.py`, `readmenator/_apidocs.py`, `readmenator/_apidocs_render.py`, `readmenator/_app.py` |

@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p6.md](SYMBOLS_p6.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_java_runtime_exec` | method | `tests/test_security.py:158` | `def test_java_runtime_exec(self)` |
 | `test_java_sql_injection` | method | `tests/test_security.py:163` | `def test_java_sql_injection(self)` |
 | `test_javascript_child_process` | method | `tests/test_security.py:133` | `def test_javascript_child_process(self)` |
 | `test_javascript_dangerously_set_inner_html` | method | `tests/test_security.py:138` | `def test_javascript_dangerously_set_inner_html(self)` |

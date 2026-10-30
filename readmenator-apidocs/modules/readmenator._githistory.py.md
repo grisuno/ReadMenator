@@ -167,6 +167,11 @@ The first commit comes first (named after its tag when it carries
 one), then every tag ordered by its creation date, then HEAD when
 it is ahead of the last tag.
 
+When the timeline exceeds the snapshot budget the surviving
+releases are spread evenly between the first and the last entry,
+so the growth story keeps running from the beginning without
+jumping from the first release to a distant one.
+
 **Parameters**
 
 | Name | Type | Default | Description |

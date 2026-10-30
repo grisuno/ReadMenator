@@ -1,6 +1,6 @@
 # Second Brain
 
-*Last synthesized: 2026-10-28 | 161 files | 8 concept pages | offline, zero tokens*
+*Last synthesized: 2026-10-30 | 161 files | 8 concept pages | offline, zero tokens*
 
 > Raw sources -> readmenator wiki -> links (Karpathy LLM Wiki Pattern, deterministic).
 > Start here, then open one community page. Prefer grep over full reads.
@@ -18,13 +18,13 @@ Open work clusters around documentation (87% file coverage), 0 security findings
 | Metric | Value |
 |--------|-------|
 | Files | 161 |
-| Symbols | 3174 |
+| Symbols | 3175 |
 | Resolved imports | 629 |
 | Languages | js, py, sh |
 | Communities | 8 |
 | Doc coverage | 87% (140/161 files) |
 | Security findings | 0 |
-| Estimated read cost | ~87833 tokens (chars/4, offline so $0) |
+| Estimated read cost | ~87918 tokens (chars/4, offline so $0) |
 
 ## Reading Order
 

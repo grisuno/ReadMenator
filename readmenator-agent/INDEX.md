@@ -127,7 +127,7 @@
 | `tests/test_flowcharts.py` | Contract tests for architecture tiers, execution flows, and receiver typing. | tests | 35 | 0 |
 | `tests/test_folder_readme.py` | Contract tests for per-folder README.md files (readmenator/_folder_readme.py). | tests | 20 | 0 |
 | `tests/test_gh_wiki.py` | Contract tests for the GitHub wiki publisher (no network: git/gh calls are faked). | tests | 17 | 0 |
-| `tests/test_githistory.py` | Contract tests for the git history reader used by the growth video act. | tests | 21 | 0 |
+| `tests/test_githistory.py` | Contract tests for the git history reader used by the growth video act. | tests | 22 | 0 |
 | `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 33 | 0 |
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |

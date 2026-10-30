@@ -3,6 +3,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_query_tool_requires_text_param` | method | `tests/test_mcp_server.py:226` | `def test_query_tool_requires_text_param(self)` |
 | `test_read_resource_kb_returns_markdown` | method | `tests/test_mcp_server.py:205` | `def test_read_resource_kb_returns_markdown(self)` |
 | `test_read_resource_summary_returns_json` | method | `tests/test_mcp_server.py:186` | `def test_read_resource_summary_returns_json(self)` |
 | `test_read_resource_unknown_uri_returns_error` | method | `tests/test_mcp_server.py:197` | `def test_read_resource_unknown_uri_returns_error(self)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_ignores_ignored_dirs` | method | `tests/test_security.py:345` | `def test_ignores_ignored_dirs(self)` |
 | `test_ignores_symlinks` | method | `tests/test_security.py:330` | `def test_ignores_symlinks(self)` |
 | `test_init_with_config` | method | `tests/test_security.py:58` | `def test_init_with_config(self)` |
-| `test_java_runtime_exec` | method | `tests/test_security.py:158` | `def test_java_runtime_exec(self)` |
 
 Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

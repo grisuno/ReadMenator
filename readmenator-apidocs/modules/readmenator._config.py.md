@@ -396,7 +396,7 @@ defined here and consumed by reference elsewhere.
 | [`VIDEO_MOTION_BLUR_ACTS`](#config-video_motion_blur_acts) | `Tuple[str, ...]` | `('orbit', 'sphere', 'growth', 'invite')` |  |
 | [`VIDEO_GROWTH_S`](#config-video_growth_s) | `float` | `20.0` |  |
 | [`VIDEO_HISTORY_ENABLED`](#config-video_history_enabled) | `bool` | `True` |  |
-| [`VIDEO_HISTORY_MAX_SNAPSHOTS`](#config-video_history_max_snapshots) | `int` | `24` |  |
+| [`VIDEO_HISTORY_MAX_SNAPSHOTS`](#config-video_history_max_snapshots) | `int` | `50` |  |
 | [`VIDEO_HISTORY_MAX_FILES`](#config-video_history_max_files) | `int` | `500` |  |
 | [`VIDEO_HISTORY_TIMEOUT_S`](#config-video_history_timeout_s) | `int` | `30` |  |
 | [`VIDEO_GROWTH_BIRTH_S`](#config-video_growth_birth_s) | `float` | `0.9` |  |

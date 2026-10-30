@@ -19,7 +19,7 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 | `tests/test_dead_code.py` | py | testing | 15 | yes |
 | `tests/test_diagrams.py` | py | testing | 73 | yes |
 | `tests/test_documentation.py` | py | testing | 29 | no |
-| `tests/test_githistory.py` | py | testing | 21 | yes |
+| `tests/test_githistory.py` | py | testing | 22 | yes |
 | `tests/test_htmlpack.py` | py | testing | 18 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
 

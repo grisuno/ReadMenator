@@ -101,12 +101,19 @@ class TestGitHistoryReader(unittest.TestCase):
         self.assertNotIn("readmenator-agent/INDEX.md", releases[-1].file_ids)
 
     def test_githistory_respects_snapshot_budget(self) -> None:
-        """The timeline keeps the first snapshot plus the most recent ones."""
+        """The timeline keeps an even sample inside the snapshot budget."""
         reader = GitHistoryReader(Config(VIDEO_HISTORY_MAX_SNAPSHOTS=2))
         releases = reader.timeline(str(self.root))
         self.assertEqual(len(releases), 2)
         self.assertEqual(releases[0].label, "v1.0.0")
         self.assertEqual(releases[-1].label, "HEAD")
+
+    def test_githistory_single_snapshot_budget_keeps_only_first(self) -> None:
+        """A single-snapshot budget keeps only the first release."""
+        reader = GitHistoryReader(Config(VIDEO_HISTORY_MAX_SNAPSHOTS=1))
+        releases = reader.timeline(str(self.root))
+        self.assertEqual(len(releases), 1)
+        self.assertEqual(releases[0].label, "v1.0.0")
 
     def test_githistory_disabled_returns_empty(self) -> None:
         """A disabled history reader never touches the repository."""

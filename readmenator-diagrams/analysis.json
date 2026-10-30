@@ -1,7 +1,7 @@
 {
  "metadata": {
-  "generated_at": "2026-10-29T02:15:52.723154+00:00",
-  "source_tree_hash": "683cbace06c2a3d0ca07819755b09f07b55bb14d7425de420e92475985d47c52",
+  "generated_at": "2026-10-30T03:10:22.158196+00:00",
+  "source_tree_hash": "b4f15b0ec532e4c4f001e86ccce7e6749bb8d790c97fb3270fbf74820804a24c",
   "repo_name": "ReadMenator",
   "depth_level": 2,
   "depth_cap": 3,
@@ -517,7 +517,7 @@
   },
   "tests/test_githistory.py": {
    "language": "py",
-   "symbols": 21
+   "symbols": 22
   },
   "tests/test_graphlayout.py": {
    "language": "py",
@@ -6313,153 +6313,153 @@
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::timeline",
    "start_line": 100,
-   "end_line": 128,
+   "end_line": 138,
    "type": "FUNCTION",
    "content_hash": "020d5d2b4183904e"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_entries": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_entries",
-   "start_line": 129,
-   "end_line": 151,
+   "start_line": 139,
+   "end_line": 161,
    "type": "FUNCTION",
-   "content_hash": "567a06819221b6d3"
+   "content_hash": "f402bcf32887a7fb"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_genesis": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_genesis",
-   "start_line": 152,
-   "end_line": 160,
+   "start_line": 162,
+   "end_line": 170,
    "type": "FUNCTION",
-   "content_hash": "a4a5472e733f1852"
+   "content_hash": "1c023b5cfb792653"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_tags": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_tags",
-   "start_line": 161,
-   "end_line": 180,
+   "start_line": 171,
+   "end_line": 190,
    "type": "FUNCTION",
-   "content_hash": "10eda873f41820b9"
+   "content_hash": "cec6de617749f6b6"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_head": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_head",
-   "start_line": 181,
-   "end_line": 187,
+   "start_line": 191,
+   "end_line": 197,
    "type": "FUNCTION",
-   "content_hash": "86c8929421a972fe"
+   "content_hash": "03bbf235b6212a8c"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_commit_date": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_commit_date",
-   "start_line": 188,
-   "end_line": 191,
+   "start_line": 198,
+   "end_line": 201,
    "type": "FUNCTION",
-   "content_hash": "812299562f0303b2"
+   "content_hash": "bbc6481ba5c5bf46"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_snapshot": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_snapshot",
-   "start_line": 192,
-   "end_line": 222,
+   "start_line": 202,
+   "end_line": 232,
    "type": "FUNCTION",
-   "content_hash": "6cc5feba5a1d1557"
+   "content_hash": "ae751cfcfed37d71"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_resolve_links": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_resolve_links",
-   "start_line": 223,
-   "end_line": 236,
+   "start_line": 233,
+   "end_line": 246,
    "type": "FUNCTION",
-   "content_hash": "a0d1594fb729baf5"
+   "content_hash": "b929901eaa16cb1c"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_source_files": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_source_files",
-   "start_line": 237,
-   "end_line": 250,
+   "start_line": 247,
+   "end_line": 260,
    "type": "FUNCTION",
-   "content_hash": "7bf5601724d6838d"
+   "content_hash": "1e5967f95c6885a1"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_is_source": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_is_source",
-   "start_line": 251,
-   "end_line": 263,
+   "start_line": 261,
+   "end_line": 273,
    "type": "FUNCTION",
-   "content_hash": "72513c1bcea8bc06"
+   "content_hash": "a065f2cc0298354f"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_tree": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_tree",
-   "start_line": 264,
-   "end_line": 268,
+   "start_line": 274,
+   "end_line": 278,
    "type": "FUNCTION",
-   "content_hash": "ee8ecfb2fe7cd458"
+   "content_hash": "c1bded5c9186a6f6"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_blobs": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_blobs",
-   "start_line": 269,
-   "end_line": 285,
+   "start_line": 279,
+   "end_line": 295,
    "type": "FUNCTION",
-   "content_hash": "c339698725c30c96"
+   "content_hash": "753c32b630894166"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_git": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_git",
-   "start_line": 286,
-   "end_line": 290,
+   "start_line": 296,
+   "end_line": 300,
    "type": "FUNCTION",
-   "content_hash": "2a548d61a79c2ee7"
+   "content_hash": "32676087cacff9ce"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_git_bytes": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_git_bytes",
-   "start_line": 291,
-   "end_line": 297,
+   "start_line": 301,
+   "end_line": 307,
    "type": "FUNCTION",
-   "content_hash": "7e5c04d7c3dcdec8"
+   "content_hash": "be481e3c85280836"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_run": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_run",
-   "start_line": 298,
-   "end_line": 322,
+   "start_line": 308,
+   "end_line": 332,
    "type": "FUNCTION",
-   "content_hash": "cb446c0d8d6eed92"
+   "content_hash": "85c00eeb6d7e4c5f"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_git_env": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_git_env",
-   "start_line": 323,
-   "end_line": 330,
+   "start_line": 333,
+   "end_line": 340,
    "type": "FUNCTION",
-   "content_hash": "b0a304db76bcdd95"
+   "content_hash": "88bfae9cb60baa6f"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_version_label": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_version_label",
-   "start_line": 331,
-   "end_line": 342,
+   "start_line": 341,
+   "end_line": 352,
    "type": "FUNCTION",
-   "content_hash": "6915622f25ab44ed"
+   "content_hash": "41bd92c45ec9b5de"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_parse_tree": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_parse_tree",
-   "start_line": 343,
-   "end_line": 356,
+   "start_line": 353,
+   "end_line": 366,
    "type": "FUNCTION",
-   "content_hash": "aebc8d9edf8f88a4"
+   "content_hash": "997601f8963fd229"
   },
   "readmenator/_githistory.py|readmenator/_githistory.py::_parse_blobs": {
    "file_path": "readmenator/_githistory.py",
    "qualified_name": "readmenator/_githistory.py::_parse_blobs",
-   "start_line": 357,
-   "end_line": 380,
+   "start_line": 367,
+   "end_line": 390,
    "type": "FUNCTION",
-   "content_hash": "937f98f7ece796a8"
+   "content_hash": "3722901ab58a9882"
   },
   "readmenator/_gitmeta.py|readmenator/_gitmeta.py::_read_small": {
    "file_path": "readmenator/_gitmeta.py",
@@ -17917,85 +17917,93 @@
    "type": "FUNCTION",
    "content_hash": "41041cbc5721887c"
   },
+  "tests/test_githistory.py|tests/test_githistory.py::test_githistory_single_snapshot_budget_keeps_only_first": {
+   "file_path": "tests/test_githistory.py",
+   "qualified_name": "tests/test_githistory.py::test_githistory_single_snapshot_budget_keeps_only_first",
+   "start_line": 111,
+   "end_line": 117,
+   "type": "FUNCTION",
+   "content_hash": "d510b5535505776f"
+  },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_disabled_returns_empty": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_disabled_returns_empty",
-   "start_line": 111,
-   "end_line": 115,
+   "start_line": 118,
+   "end_line": 122,
    "type": "FUNCTION",
-   "content_hash": "f13846ed1f8e0917"
+   "content_hash": "d2a349287e775540"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_ignores_inherited_git_environment": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_ignores_inherited_git_environment",
-   "start_line": 116,
-   "end_line": 124,
+   "start_line": 123,
+   "end_line": 131,
    "type": "FUNCTION",
-   "content_hash": "7e17837e08750634"
+   "content_hash": "a1933fa914fc020f"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_unavailable_paths_are_empty": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_unavailable_paths_are_empty",
-   "start_line": 125,
-   "end_line": 133,
+   "start_line": 132,
+   "end_line": 140,
    "type": "FUNCTION",
-   "content_hash": "b5058b52fe2388b2"
+   "content_hash": "c98eab7e60706157"
   },
   "tests/test_githistory.py|tests/test_githistory.py::TestGitHistoryParsing": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::TestGitHistoryParsing",
-   "start_line": 134,
-   "end_line": 136,
+   "start_line": 141,
+   "end_line": 143,
    "type": "CLASS",
-   "content_hash": "b55d1078ca7e10cb"
+   "content_hash": "4035d75a457d0327"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_version_label_normalises_tags": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_version_label_normalises_tags",
-   "start_line": 137,
-   "end_line": 143,
+   "start_line": 144,
+   "end_line": 150,
    "type": "FUNCTION",
-   "content_hash": "c3fe887824a26baf"
+   "content_hash": "215635b0d953df14"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_parses_tree_listing": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_parses_tree_listing",
-   "start_line": 144,
-   "end_line": 151,
+   "start_line": 151,
+   "end_line": 158,
    "type": "FUNCTION",
-   "content_hash": "355ec28ebf0cb4f8"
+   "content_hash": "747e74ebe61ac40e"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_parses_blob_batch": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_parses_blob_batch",
-   "start_line": 152,
-   "end_line": 159,
+   "start_line": 159,
+   "end_line": 166,
    "type": "FUNCTION",
-   "content_hash": "ccc99ec542fd6b5c"
+   "content_hash": "f65fe60ea5b77091"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_failed_git_returns_empty_timeline": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_failed_git_returns_empty_timeline",
-   "start_line": 160,
-   "end_line": 162,
+   "start_line": 167,
+   "end_line": 169,
    "type": "FUNCTION",
-   "content_hash": "a9279caa1afaff81"
+   "content_hash": "5361f62cc7cf8134"
   },
   "tests/test_githistory.py|tests/test_githistory.py::broken": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::broken",
-   "start_line": 163,
-   "end_line": 169,
+   "start_line": 170,
+   "end_line": 176,
    "type": "FUNCTION",
-   "content_hash": "8ec97d27339c7b06"
+   "content_hash": "ee6963ca074ace62"
   },
   "tests/test_githistory.py|tests/test_githistory.py::test_githistory_git_environment_is_sanitised": {
    "file_path": "tests/test_githistory.py",
    "qualified_name": "tests/test_githistory.py::test_githistory_git_environment_is_sanitised",
-   "start_line": 170,
-   "end_line": 178,
+   "start_line": 177,
+   "end_line": 185,
    "type": "FUNCTION",
-   "content_hash": "29196f47727d6bba"
+   "content_hash": "78557e3cfdf51847"
   },
   "tests/test_graphlayout.py|tests/test_graphlayout.py::_two_cliques": {
    "file_path": "tests/test_graphlayout.py",
@@ -25841,6 +25849,7 @@
       "tests/test_githistory.py::test_githistory_snapshots_count_files_and_links",
       "tests/test_githistory.py::test_githistory_skips_generated_outputs",
       "tests/test_githistory.py::test_githistory_respects_snapshot_budget",
+      "tests/test_githistory.py::test_githistory_single_snapshot_budget_keeps_only_first",
       "tests/test_githistory.py::test_githistory_disabled_returns_empty",
       "tests/test_githistory.py::test_githistory_ignores_inherited_git_environment",
       "tests/test_githistory.py::test_githistory_unavailable_paths_are_empty",
@@ -27223,6 +27232,7 @@
         "tests/test_githistory.py::test_githistory_snapshots_count_files_and_links",
         "tests/test_githistory.py::test_githistory_skips_generated_outputs",
         "tests/test_githistory.py::test_githistory_respects_snapshot_budget",
+        "tests/test_githistory.py::test_githistory_single_snapshot_budget_keeps_only_first",
         "tests/test_githistory.py::test_githistory_disabled_returns_empty",
         "tests/test_githistory.py::test_githistory_ignores_inherited_git_environment",
         "tests/test_githistory.py::test_githistory_unavailable_paths_are_empty",
@@ -27687,7 +27697,7 @@
      "components": [],
      "components_relations": [],
      "layer": "testing",
-     "symbol_count": 595,
+     "symbol_count": 596,
      "top_symbols": [
       {
        "n": "TestConfigContract",
@@ -27702,7 +27712,7 @@
        "k": "method"
       }
      ],
-     "top_symbols_more": 507
+     "top_symbols_more": 508
     }
    ],
    "components_relations": [
@@ -27747,9 +27757,9 @@
      "relation": "calls into",
      "src_name": "tests",
      "dst_name": "readmenator",
-     "evidence": "46 imports, 461 calls across the boundary",
+     "evidence": "46 imports, 464 calls across the boundary",
      "import_count": 46,
-     "call_count": 461,
+     "call_count": 464,
      "key_edges": [
       {
        "source": "tests/test_config.py|tests/test_config.py::test_config_is_immutable",
@@ -28398,7 +28408,7 @@
     }
    ],
    "layer": "testing",
-   "symbol_count": 1025,
+   "symbol_count": 1026,
    "top_symbols": [
     {
      "n": "Config",
@@ -28413,7 +28423,7 @@
      "k": "method"
     }
    ],
-   "top_symbols_more": 903,
+   "top_symbols_more": 904,
    "hub": true
   },
   {
@@ -41129,7 +41139,7 @@
      "target": "readmenator/_embed.py|readmenator/_embed.py::encode",
      "call_sites": [
       {
-       "line": 274,
+       "line": 284,
        "column": 29
       }
      ],
@@ -41140,7 +41150,7 @@
      "target": "readmenator/_embed.py|readmenator/_embed.py::find",
      "call_sites": [
       {
-       "line": 363,
+       "line": 373,
        "column": 22
       }
      ],
@@ -42567,7 +42577,7 @@
      "target": "readmenator/_flowcharts.py|readmenator/_flowcharts.py::add",
      "call_sites": [
       {
-       "line": 138,
+       "line": 148,
        "column": 12
       }
      ],
@@ -42578,7 +42588,7 @@
      "target": "readmenator/_flowcharts.py|readmenator/_flowcharts.py::add",
      "call_sites": [
       {
-       "line": 145,
+       "line": 155,
        "column": 12
       }
      ],
@@ -42589,7 +42599,7 @@
      "target": "readmenator/_flowcharts.py|readmenator/_flowcharts.py::add",
      "call_sites": [
       {
-       "line": 234,
+       "line": 244,
        "column": 16
       }
      ],

@@ -246,27 +246,28 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_gh_wiki_render_rewrites_links_and_permalinks` | method | `tests/test_gh_wiki.py:71` | `def test_gh_wiki_render_rewrites_links_and_permalinks(self)` |
 | `test_rebuild_publishes_wiki_in_git_checkout` | method | `tests/test_gh_wiki.py:167` | `def test_rebuild_publishes_wiki_in_git_checkout(self)` |
 | `test_rebuild_skips_wiki_outside_git_checkout` | method | `tests/test_gh_wiki.py:157` | `def test_rebuild_skips_wiki_outside_git_checkout(self)` |
-| `TestGitHistoryParsing` | class | `tests/test_githistory.py:134` | `class TestGitHistoryParsing(TestCase)` |
+| `TestGitHistoryParsing` | class | `tests/test_githistory.py:141` | `class TestGitHistoryParsing(TestCase)` |
 | `TestGitHistoryReader` | class | `tests/test_githistory.py:43` | `class TestGitHistoryReader(TestCase)` |
 | `_git_available` | function | `tests/test_githistory.py:14` | `def _git_available()` |
 | `_run_git` | function | `tests/test_githistory.py:19` | `def _run_git(root)` |
 | `_write` | function | `tests/test_githistory.py:36` | `def _write(path, text)` |
-| `broken` | function | `tests/test_githistory.py:163` | `def broken(args, root, stdin_file, stdout_file)` |
+| `broken` | function | `tests/test_githistory.py:170` | `def broken(args, root, stdin_file, stdout_file)` |
 | `setUp` | method | `tests/test_githistory.py:46` | `def setUp(self)` |
 | `tearDown` | method | `tests/test_githistory.py:64` | `def tearDown(self)` |
-| `test_githistory_disabled_returns_empty` | method | `tests/test_githistory.py:111` | `def test_githistory_disabled_returns_empty(self)` |
-| `test_githistory_failed_git_returns_empty_timeline` | method | `tests/test_githistory.py:160` | `def test_githistory_failed_git_returns_empty_timeline(self)` |
-| `test_githistory_git_environment_is_sanitised` | method | `tests/test_githistory.py:170` | `def test_githistory_git_environment_is_sanitised(self)` |
-| `test_githistory_ignores_inherited_git_environment` | method | `tests/test_githistory.py:116` | `def test_githistory_ignores_inherited_git_environment(self)` |
-| `test_githistory_parses_blob_batch` | method | `tests/test_githistory.py:152` | `def test_githistory_parses_blob_batch(self)` |
-| `test_githistory_parses_tree_listing` | method | `tests/test_githistory.py:144` | `def test_githistory_parses_tree_listing(self)` |
+| `test_githistory_disabled_returns_empty` | method | `tests/test_githistory.py:118` | `def test_githistory_disabled_returns_empty(self)` |
+| `test_githistory_failed_git_returns_empty_timeline` | method | `tests/test_githistory.py:167` | `def test_githistory_failed_git_returns_empty_timeline(self)` |
+| `test_githistory_git_environment_is_sanitised` | method | `tests/test_githistory.py:177` | `def test_githistory_git_environment_is_sanitised(self)` |
+| `test_githistory_ignores_inherited_git_environment` | method | `tests/test_githistory.py:123` | `def test_githistory_ignores_inherited_git_environment(self)` |
+| `test_githistory_parses_blob_batch` | method | `tests/test_githistory.py:159` | `def test_githistory_parses_blob_batch(self)` |
+| `test_githistory_parses_tree_listing` | method | `tests/test_githistory.py:151` | `def test_githistory_parses_tree_listing(self)` |
 | `test_githistory_respects_snapshot_budget` | method | `tests/test_githistory.py:103` | `def test_githistory_respects_snapshot_budget(self)` |
+| `test_githistory_single_snapshot_budget_keeps_only_first` | method | `tests/test_githistory.py:111` | `def test_githistory_single_snapshot_budget_keeps_only_first(self)` |
 | `test_githistory_skips_generated_outputs` | method | `tests/test_githistory.py:94` | `def test_githistory_skips_generated_outputs(self)` |
 | `test_githistory_snapshots_count_files_and_links` | method | `tests/test_githistory.py:83` | `def test_githistory_snapshots_count_files_and_links(self)` |
 | `test_githistory_timeline_orders_releases` | method | `tests/test_githistory.py:68` | `def test_githistory_timeline_orders_releases(self)` |
-| `test_githistory_unavailable_paths_are_empty` | method | `tests/test_githistory.py:125` | `def test_githistory_unavailable_paths_are_empty(self)` |
+| `test_githistory_unavailable_paths_are_empty` | method | `tests/test_githistory.py:132` | `def test_githistory_unavailable_paths_are_empty(self)` |
 | `test_githistory_untagged_first_commit_is_genesis` | method | `tests/test_githistory.py:76` | `def test_githistory_untagged_first_commit_is_genesis(self)` |
-| `test_githistory_version_label_normalises_tags` | method | `tests/test_githistory.py:137` | `def test_githistory_version_label_normalises_tags(self)` |
+| `test_githistory_version_label_normalises_tags` | method | `tests/test_githistory.py:144` | `def test_githistory_version_label_normalises_tags(self)` |
 | `TestEdgeBundlingContract` | class | `tests/test_graphlayout.py:88` | `class TestEdgeBundlingContract(TestCase)` |
 | `TestForceAtlas2Contract` | class | `tests/test_graphlayout.py:31` | `class TestForceAtlas2Contract(TestCase)` |
 | `TestForceAtlas2ThreeDContract` | class | `tests/test_graphlayout.py:126` | `class TestForceAtlas2ThreeDContract(TestCase)` |
@@ -495,6 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_notifications_initialized_returns_no_response` | method | `tests/test_mcp_server.py:62` | `def test_notifications_initialized_returns_no_response(self)` |
 | `test_parse_error_for_invalid_json` | method | `tests/test_mcp_server.py:243` | `def test_parse_error_for_invalid_json(self)` |
 | `test_path_tool_requires_two_params` | method | `tests/test_mcp_server.py:234` | `def test_path_tool_requires_two_params(self)` |
-| `test_query_tool_requires_text_param` | method | `tests/test_mcp_server.py:226` | `def test_query_tool_requires_text_param(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

@@ -234,24 +234,24 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `GitHistoryReader` | class | `readmenator/_githistory.py:67` | `class GitHistoryReader` |
 | `HistoryRelease` | class | `readmenator/_githistory.py:43` | `class HistoryRelease` |
 | `__init__` | method | `readmenator/_githistory.py:76` | `def __init__(self, config, runner)` |
-| `_blobs` | method | `readmenator/_githistory.py:269` | `def _blobs(self, root, shas)` |
-| `_commit_date` | method | `readmenator/_githistory.py:188` | `def _commit_date(self, root, commit)` |
-| `_entries` | method | `readmenator/_githistory.py:129` | `def _entries(self, root)` |
-| `_genesis` | method | `readmenator/_githistory.py:152` | `def _genesis(self, root)` |
-| `_git` | method | `readmenator/_githistory.py:286` | `def _git(self, root, args)` |
-| `_git_bytes` | method | `readmenator/_githistory.py:291` | `def _git_bytes(self, root, args)` |
-| `_git_env` | method | `readmenator/_githistory.py:323` | `def _git_env()` |
-| `_head` | method | `readmenator/_githistory.py:181` | `def _head(self, root)` |
-| `_is_source` | method | `readmenator/_githistory.py:251` | `def _is_source(self, path, scanner)` |
-| `_parse_blobs` | method | `readmenator/_githistory.py:357` | `def _parse_blobs(payload)` |
-| `_parse_tree` | method | `readmenator/_githistory.py:343` | `def _parse_tree(raw)` |
-| `_resolve_links` | method | `readmenator/_githistory.py:223` | `def _resolve_links(self, file_ids, edges, root)` |
-| `_run` | method | `readmenator/_githistory.py:298` | `def _run(self, root, args, stdin_file, stdout_file)` |
-| `_snapshot` | method | `readmenator/_githistory.py:192` | `def _snapshot(self, root, label, ref, commit, date)` |
-| `_source_files` | method | `readmenator/_githistory.py:237` | `def _source_files(self, tree)` |
-| `_tags` | method | `readmenator/_githistory.py:161` | `def _tags(self, root)` |
-| `_tree` | method | `readmenator/_githistory.py:264` | `def _tree(self, root, commit)` |
-| `_version_label` | method | `readmenator/_githistory.py:331` | `def _version_label(ref)` |
+| `_blobs` | method | `readmenator/_githistory.py:279` | `def _blobs(self, root, shas)` |
+| `_commit_date` | method | `readmenator/_githistory.py:198` | `def _commit_date(self, root, commit)` |
+| `_entries` | method | `readmenator/_githistory.py:139` | `def _entries(self, root)` |
+| `_genesis` | method | `readmenator/_githistory.py:162` | `def _genesis(self, root)` |
+| `_git` | method | `readmenator/_githistory.py:296` | `def _git(self, root, args)` |
+| `_git_bytes` | method | `readmenator/_githistory.py:301` | `def _git_bytes(self, root, args)` |
+| `_git_env` | method | `readmenator/_githistory.py:333` | `def _git_env()` |
+| `_head` | method | `readmenator/_githistory.py:191` | `def _head(self, root)` |
+| `_is_source` | method | `readmenator/_githistory.py:261` | `def _is_source(self, path, scanner)` |
+| `_parse_blobs` | method | `readmenator/_githistory.py:367` | `def _parse_blobs(payload)` |
+| `_parse_tree` | method | `readmenator/_githistory.py:353` | `def _parse_tree(raw)` |
+| `_resolve_links` | method | `readmenator/_githistory.py:233` | `def _resolve_links(self, file_ids, edges, root)` |
+| `_run` | method | `readmenator/_githistory.py:308` | `def _run(self, root, args, stdin_file, stdout_file)` |
+| `_snapshot` | method | `readmenator/_githistory.py:202` | `def _snapshot(self, root, label, ref, commit, date)` |
+| `_source_files` | method | `readmenator/_githistory.py:247` | `def _source_files(self, tree)` |
+| `_tags` | method | `readmenator/_githistory.py:171` | `def _tags(self, root)` |
+| `_tree` | method | `readmenator/_githistory.py:274` | `def _tree(self, root, commit)` |
+| `_version_label` | method | `readmenator/_githistory.py:341` | `def _version_label(ref)` |
 | `available` | method | `readmenator/_githistory.py:81` | `def available(self, project_root)` |
 | `timeline` | method | `readmenator/_githistory.py:100` | `def timeline(self, project_root)` |
 | `_git_dir` | function | `readmenator/_gitmeta.py:38` | `def _git_dir(root)` |

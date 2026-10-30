@@ -2,7 +2,7 @@
 
 > Cross-session context for agents. Sections 1-6 are regenerated from the source tree with zero LLM tokens: declared rules are quoted verbatim with `file:line`, measured baselines come from the scan. Section 7 is written by agents and humans and is preserved across rebuilds.
 
-Generated from 161 files at commit `36f3485baecf`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
+Generated from 161 files at commit `855c3acd34c8`. Read this first, then `readmenator-wiki/index.md`, then `readmenator . ask "<question>"` for anything specific.
 
 ## 1. Purpose and domain
 
@@ -91,7 +91,7 @@ Declared:
 - Each module gets its own logger via `logger = logging.getLogger(__name__)` (`CLAUDE.md:891`)
 
 Measured baseline:
-- py: 159 files, 3138 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 205 lines, max 4182.
+- py: 159 files, 3139 symbols; docstrings on 55% of symbols; functions snake_case (96%); types PascalCase (100%); median file 205 lines, max 4182.
 - js: 1 files, 35 symbols; docstrings on 100% of symbols; functions snake_case (80%); types PascalCase (40%); median file 5 lines, max 5.
 - sh: 1 files, 1 symbols; docstrings on 100% of symbols; functions snake_case (100%); median file 42 lines, max 42.
 - Tests: 57 files under tests; follow the existing naming (e.g. `test_agent_friendliness.py`).

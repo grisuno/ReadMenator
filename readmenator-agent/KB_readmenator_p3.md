@@ -37,24 +37,24 @@ Previous: [KB_readmenator_p2.md](KB_readmenator_p2.md)
   - `__init__` (method, line 76) `def __init__(self, config, runner)`
   - `available` (method, line 81) `def available(self, project_root)`
   - `timeline` (method, line 100) `def timeline(self, project_root)`
-  - `_entries` (method, line 129) `def _entries(self, root)`
-  - `_genesis` (method, line 152) `def _genesis(self, root)`
-  - `_tags` (method, line 161) `def _tags(self, root)`
-  - `_head` (method, line 181) `def _head(self, root)`
-  - `_commit_date` (method, line 188) `def _commit_date(self, root, commit)`
-  - `_snapshot` (method, line 192) `def _snapshot(self, root, label, ref, commit, date)`
-  - `_resolve_links` (method, line 223) `def _resolve_links(self, file_ids, edges, root)`
-  - `_source_files` (method, line 237) `def _source_files(self, tree)`
-  - `_is_source` (method, line 251) `def _is_source(self, path, scanner)`
-  - `_tree` (method, line 264) `def _tree(self, root, commit)`
-  - `_blobs` (method, line 269) `def _blobs(self, root, shas)`
-  - `_git` (method, line 286) `def _git(self, root, args)`
-  - `_git_bytes` (method, line 291) `def _git_bytes(self, root, args)`
-  - `_run` (method, line 298) `def _run(self, root, args, stdin_file, stdout_file)`
-  - `_git_env` (method, line 323) `def _git_env()`
-  - `_version_label` (method, line 331) `def _version_label(ref)`
-  - `_parse_tree` (method, line 343) `def _parse_tree(raw)`
-  - `_parse_blobs` (method, line 357) `def _parse_blobs(payload)`
+  - `_entries` (method, line 139) `def _entries(self, root)`
+  - `_genesis` (method, line 162) `def _genesis(self, root)`
+  - `_tags` (method, line 171) `def _tags(self, root)`
+  - `_head` (method, line 191) `def _head(self, root)`
+  - `_commit_date` (method, line 198) `def _commit_date(self, root, commit)`
+  - `_snapshot` (method, line 202) `def _snapshot(self, root, label, ref, commit, date)`
+  - `_resolve_links` (method, line 233) `def _resolve_links(self, file_ids, edges, root)`
+  - `_source_files` (method, line 247) `def _source_files(self, tree)`
+  - `_is_source` (method, line 261) `def _is_source(self, path, scanner)`
+  - `_tree` (method, line 274) `def _tree(self, root, commit)`
+  - `_blobs` (method, line 279) `def _blobs(self, root, shas)`
+  - `_git` (method, line 296) `def _git(self, root, args)`
+  - `_git_bytes` (method, line 301) `def _git_bytes(self, root, args)`
+  - `_run` (method, line 308) `def _run(self, root, args, stdin_file, stdout_file)`
+  - `_git_env` (method, line 333) `def _git_env()`
+  - `_version_label` (method, line 341) `def _version_label(ref)`
+  - `_parse_tree` (method, line 353) `def _parse_tree(raw)`
+  - `_parse_blobs` (method, line 367) `def _parse_blobs(payload)`
 - Depends on: `readmenator/_config.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`
 - Imported by: `readmenator/_video.py`, `tests/test_githistory.py`
 

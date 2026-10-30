@@ -840,7 +840,7 @@ class Config:
 
     VIDEO_HISTORY_ENABLED: bool = True
 
-    VIDEO_HISTORY_MAX_SNAPSHOTS: int = 24
+    VIDEO_HISTORY_MAX_SNAPSHOTS: int = 50
 
     VIDEO_HISTORY_MAX_FILES: int = 500
 

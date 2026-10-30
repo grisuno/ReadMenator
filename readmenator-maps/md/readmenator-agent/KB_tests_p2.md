@@ -240,7 +240,7 @@ Previous: [KB_tests.md](KB_tests.md)
   - `_run_git` (function, line 19) `def _run_git(root)`
   - `_write` (function, line 36) `def _write(path, text)`
   - `TestGitHistoryReader` (class, line 43) `class TestGitHistoryReader(TestCase)`
-  - `TestGitHistoryParsing` (class, line 134) `class TestGitHistoryParsing(TestCase)`
+  - `TestGitHistoryParsing` (class, line 141) `class TestGitHistoryParsing(TestCase)`
   - `setUp` (method, line 46) `def setUp(self)`
   - `tearDown` (method, line 64) `def tearDown(self)`
   - `test_githistory_timeline_orders_releases` (method, line 68) `def test_githistory_timeline_orders_releases(self)`
@@ -248,15 +248,16 @@ Previous: [KB_tests.md](KB_tests.md)
   - `test_githistory_snapshots_count_files_and_links` (method, line 83) `def test_githistory_snapshots_count_files_and_links(self)`
   - `test_githistory_skips_generated_outputs` (method, line 94) `def test_githistory_skips_generated_outputs(self)`
   - `test_githistory_respects_snapshot_budget` (method, line 103) `def test_githistory_respects_snapshot_budget(self)`
-  - `test_githistory_disabled_returns_empty` (method, line 111) `def test_githistory_disabled_returns_empty(self)`
-  - `test_githistory_ignores_inherited_git_environment` (method, line 116) `def test_githistory_ignores_inherited_git_environment(self)`
-  - `test_githistory_unavailable_paths_are_empty` (method, line 125) `def test_githistory_unavailable_paths_are_empty(self)`
-  - `test_githistory_version_label_normalises_tags` (method, line 137) `def test_githistory_version_label_normalises_tags(self)`
-  - `test_githistory_parses_tree_listing` (method, line 144) `def test_githistory_parses_tree_listing(self)`
-  - `test_githistory_parses_blob_batch` (method, line 152) `def test_githistory_parses_blob_batch(self)`
-  - `test_githistory_failed_git_returns_empty_timeline` (method, line 160) `def test_githistory_failed_git_returns_empty_timeline(self)`
-  - `test_githistory_git_environment_is_sanitised` (method, line 170) `def test_githistory_git_environment_is_sanitised(self)`
-  - `broken` (function, line 163) `def broken(args, root, stdin_file, stdout_file)`
+  - `test_githistory_single_snapshot_budget_keeps_only_first` (method, line 111) `def test_githistory_single_snapshot_budget_keeps_only_first(self)`
+  - `test_githistory_disabled_returns_empty` (method, line 118) `def test_githistory_disabled_returns_empty(self)`
+  - `test_githistory_ignores_inherited_git_environment` (method, line 123) `def test_githistory_ignores_inherited_git_environment(self)`
+  - `test_githistory_unavailable_paths_are_empty` (method, line 132) `def test_githistory_unavailable_paths_are_empty(self)`
+  - `test_githistory_version_label_normalises_tags` (method, line 144) `def test_githistory_version_label_normalises_tags(self)`
+  - `test_githistory_parses_tree_listing` (method, line 151) `def test_githistory_parses_tree_listing(self)`
+  - `test_githistory_parses_blob_batch` (method, line 159) `def test_githistory_parses_blob_batch(self)`
+  - `test_githistory_failed_git_returns_empty_timeline` (method, line 167) `def test_githistory_failed_git_returns_empty_timeline(self)`
+  - `test_githistory_git_environment_is_sanitised` (method, line 177) `def test_githistory_git_environment_is_sanitised(self)`
+  - `broken` (function, line 170) `def broken(args, root, stdin_file, stdout_file)`
 - Depends on: `readmenator/_config.py`, `readmenator/_githistory.py`
 
 ## tests/test_graphlayout.py

@@ -853,7 +853,7 @@ tests/
 - Read-only: git plumbing only (rev-list, for-each-ref, rev-parse, log, ls-tree, cat-file --batch), explicit argument lists, never a shell, bounded by VIDEO_HISTORY_TIMEOUT_S, sanitised environment (no inherited GIT_DIR/GIT_WORK_TREE/GIT_INDEX_FILE), no network
 - Timeline order: first commit (named after its tag when it carries one, otherwise "genesis"), then every tag by creation date, then HEAD when it is ahead of the last tag; one snapshot per commit
 - Each snapshot materialises the tracked tree at that commit, parses it with the same PolyglotScanner (shared _parse_source path), and resolves project-internal imports with ImportResolver
-- Generated outputs, unsupported extensions, oversized files and too deep paths are skipped; budgets VIDEO_HISTORY_MAX_SNAPSHOTS (first + most recent) and VIDEO_HISTORY_MAX_FILES apply
+- Generated outputs, unsupported extensions, oversized files and too deep paths are skipped; budgets VIDEO_HISTORY_MAX_SNAPSHOTS (evenly spaced sample between the first and the last release) and VIDEO_HISTORY_MAX_FILES apply
 - Repositories without git, without tags, or without a reachable history produce an empty timeline; the act is skipped instead of failing
 - Wired into the growth act: collect(project_root=...) fills data["growth"], which lays out the union graph once (nodes and edges carry birth indices), materialises each release with a birth window, keeps unborn files as ghosts (VIDEO_GROWTH_GHOST) and pulses the hub of the landing release (VIDEO_GROWTH_PULSES)
 

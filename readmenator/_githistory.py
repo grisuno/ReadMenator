@@ -104,6 +104,11 @@ class GitHistoryReader:
         one), then every tag ordered by its creation date, then HEAD when
         it is ahead of the last tag.
 
+        When the timeline exceeds the snapshot budget the surviving
+        releases are spread evenly between the first and the last entry,
+        so the growth story keeps running from the beginning without
+        jumping from the first release to a distant one.
+
         Args:
             project_root: Repository root to read.
 
@@ -118,7 +123,12 @@ class GitHistoryReader:
         entries = self._entries(root)
         limit = max(1, int(self._config.VIDEO_HISTORY_MAX_SNAPSHOTS))
         if len(entries) > limit:
-            entries = entries[:1] + entries[-(limit - 1):]
+            if limit <= 1:
+                entries = entries[:1]
+            else:
+                step = (len(entries) - 1) / (limit - 1)
+                picked = [int(round(index * step)) for index in range(limit)]
+                entries = [entries[min(len(entries) - 1, picked_index)] for picked_index in picked]
         releases: List[HistoryRelease] = []
         for label, ref, commit, date in entries:
             release = self._snapshot(root, label, ref, commit, date)
