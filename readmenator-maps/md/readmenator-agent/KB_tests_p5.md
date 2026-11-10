@@ -1,0 +1,76 @@
+# Subsystem: tests (page 5 of 5)
+Previous: [KB_tests_p4.md](KB_tests_p4.md)
+
+## tests/test_video.py
+- Doc: Contract tests for the cinematic overview video renderer.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_nodes` (function, line 17) `def _nodes()`
+  - `_analysis` (function, line 25) `def _analysis()`
+  - `TestVideoContract` (class, line 37) `class TestVideoContract(TestCase)`
+  - `_growth_payload` (function, line 220) `def _growth_payload()`
+  - `_growth_data` (function, line 246) `def _growth_data(renderer, config)`
+  - `TestVideoGrowthAct` (class, line 257) `class TestVideoGrowthAct(TestCase)`
+  - `TestVideoFlowActs` (class, line 374) `class TestVideoFlowActs(TestCase)`
+  - `test_video_collect_counts` (method, line 38) `def test_video_collect_counts(self)`
+  - `test_video_collect_empty_project` (method, line 50) `def test_video_collect_empty_project(self)`
+  - `test_video_collect_enriched_fields` (method, line 60) `def test_video_collect_enriched_fields(self)`
+  - `test_video_build_scenes_durations` (method, line 80) `def test_video_build_scenes_durations(self)`
+  - `test_video_all_scenes_render_small_canvas` (method, line 92) `def test_video_all_scenes_render_small_canvas(self)`
+  - `test_video_new_scenes_render_every_phase` (method, line 111) `def test_video_new_scenes_render_every_phase(self)`
+  - `test_video_zero_duration_act_skips_its_card` (method, line 130) `def test_video_zero_duration_act_skips_its_card(self)`
+  - `test_video_orbit_layout_is_normalized_and_stable` (method, line 141) `def test_video_orbit_layout_is_normalized_and_stable(self)`
+  - `test_video_project3d_centers_target` (method, line 159) `def test_video_project3d_centers_target(self)`
+  - `test_video_graph_positions_deterministic` (method, line 168) `def test_video_graph_positions_deterministic(self)`
+  - `test_video_single_frame_bytes` (method, line 179) `def test_video_single_frame_bytes(self)`
+  - `test_video_hash_color_deterministic` (method, line 194) `def test_video_hash_color_deterministic(self)`
+  - `test_video_short_label_truncates` (method, line 200) `def test_video_short_label_truncates(self)`
+  - `test_video_dependencies_returns_bool` (method, line 205) `def test_video_dependencies_returns_bool(self)`
+  - `test_video_disabled_skips_without_render` (method, line 208) `def test_video_disabled_skips_without_render(self)`
+  - `test_video_growth_act_scheduled_with_history` (method, line 260) `def test_video_growth_act_scheduled_with_history(self)`
+  - `test_video_growth_act_absent_without_history` (method, line 268) `def test_video_growth_act_absent_without_history(self)`
+  - `test_video_growth_act_can_be_dropped` (method, line 279) `def test_video_growth_act_can_be_dropped(self)`
+  - `test_video_growth_act_renders_every_phase` (method, line 287) `def test_video_growth_act_renders_every_phase(self)`
+  - `test_video_growth_timeline_grows_release_by_release` (method, line 298) `def test_video_growth_timeline_grows_release_by_release(self)`
+  - `test_video_growth_pulse_marks_the_landing_release` (method, line 316) `def test_video_growth_pulse_marks_the_landing_release(self)`
+  - `test_video_growth_history_read_from_project_root` (method, line 335) `def test_video_growth_history_read_from_project_root(self)`
+  - `test_video_flow_acts_scheduled_and_drawn` (method, line 377) `def test_video_flow_acts_scheduled_and_drawn(self)`
+- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_video.py`
+
+## tests/test_wiki.py
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_make_node` (function, line 12) `def _make_node(node_id, doc, symbols, language)`
+  - `_make_symbol` (function, line 23) `def _make_symbol(name, kind, line, doc)`
+  - `_make_analysis` (function, line 27) `def _make_analysis()`
+  - `_make_nodes` (function, line 41) `def _make_nodes()`
+  - `TestWikiConfigContract` (class, line 49) `class TestWikiConfigContract(TestCase)`
+  - `TestWikiGenerationContract` (class, line 65) `class TestWikiGenerationContract(TestCase)`
+  - `test_config_defaults` (method, line 50) `def test_config_defaults(self)`
+  - `test_config_immutable` (method, line 58) `def test_config_immutable(self)`
+  - `test_generate_writes_all_files` (method, line 66) `def test_generate_writes_all_files(self)`
+  - `test_community_page_sections` (method, line 81) `def test_community_page_sections(self)`
+  - `test_connections_typed_with_confidence` (method, line 95) `def test_connections_typed_with_confidence(self)`
+  - `test_fallback_single_community_without_analysis` (method, line 115) `def test_fallback_single_community_without_analysis(self)`
+  - `test_report_honest_audit_sections` (method, line 125) `def test_report_honest_audit_sections(self)`
+  - `test_index_entry_point` (method, line 139) `def test_index_entry_point(self)`
+  - `test_lint_healthy_after_generate` (method, line 152) `def test_lint_healthy_after_generate(self)`
+  - `test_deterministic_connections` (method, line 161) `def test_deterministic_connections(self)`
+  - `test_privacy_mode_strips_docs` (method, line 174) `def test_privacy_mode_strips_docs(self)`
+  - `test_leftover_files_covered_by_orphans_community` (method, line 184) `def test_leftover_files_covered_by_orphans_community(self)`
+  - `test_shared_context_link_for_disconnected_communities` (method, line 194) `def test_shared_context_link_for_disconnected_communities(self)`
+  - `test_garbage_doc_filtered_from_definition` (method, line 210) `def test_garbage_doc_filtered_from_definition(self)`
+  - `test_definition_names_core_file` (method, line 217) `def test_definition_names_core_file(self)`
+  - `test_duplicate_community_labels_disambiguated` (method, line 240) `def test_duplicate_community_labels_disambiguated(self)`
+  - `test_duplicate_god_basenames_disambiguated` (method, line 259) `def test_duplicate_god_basenames_disambiguated(self)`
+  - `test_oversized_community_grouped_by_directory` (method, line 278) `def test_oversized_community_grouped_by_directory(self)`
+  - `test_large_files_flagged_in_index_and_report` (method, line 302) `def test_large_files_flagged_in_index_and_report(self)`
+  - `test_stale_pages_pruned_on_regenerate` (method, line 323) `def test_stale_pages_pruned_on_regenerate(self)`
+  - `test_risks_carry_fix_hint_scope_and_closed_cycle` (method, line 335) `def test_risks_carry_fix_hint_scope_and_closed_cycle(self)`
+  - `test_duplicate_symbol_scope_detected` (method, line 365) `def test_duplicate_symbol_scope_detected(self)`
+  - `test_no_duplicate_link_for_disjoint_scopes` (method, line 388) `def test_no_duplicate_link_for_disjoint_scopes(self)`
+  - `test_garbage_purpose_filtered` (method, line 408) `def test_garbage_purpose_filtered(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_wiki.py`
+

@@ -459,14 +459,14 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `render` (method, line 359) `def render(self, payload, analytics, title, home_href, live_api)`
   - `group_colors` (method, line 413) `def group_colors(self, payload)`
   - `page_settings` (method, line 436) `def page_settings(self, payload, live_api)`
-  - `family_color` (method, line 512) `def family_color(self, name)`
-  - `_family_color` (method, line 523) `def _family_color(self, name)`
-  - `thumbnail_svg` (method, line 540) `def thumbnail_svg(self, payload)`
-  - `write` (method, line 580) `def write(self, output_path, payload, analytics, title, home_href)`
-  - `copy_vendor` (method, line 607) `def copy_vendor(self, dest_dir)`
-  - `_node_doc` (method, line 626) `def _node_doc(self, node)`
-  - `_symbol_list` (method, line 632) `def _symbol_list(self, node)`
-  - `_file_color` (method, line 645) `def _file_color(self, node_id, family, layer, palette)`
+  - `family_color` (method, line 542) `def family_color(self, name)`
+  - `_family_color` (method, line 553) `def _family_color(self, name)`
+  - `thumbnail_svg` (method, line 570) `def thumbnail_svg(self, payload)`
+  - `write` (method, line 610) `def write(self, output_path, payload, analytics, title, home_href)`
+  - `copy_vendor` (method, line 637) `def copy_vendor(self, dest_dir)`
+  - `_node_doc` (method, line 656) `def _node_doc(self, node)`
+  - `_symbol_list` (method, line 662) `def _symbol_list(self, node)`
+  - `_file_color` (method, line 675) `def _file_color(self, node_id, family, layer, palette)`
   - `file_of` (function, line 150) `def file_of(edge_id)`
   - `add_node` (function, line 204) `def add_node(node_id, label, node_type)`
 - Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_sourceview.py`, `readmenator/_viewer_ui.py`

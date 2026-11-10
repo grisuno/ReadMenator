@@ -170,7 +170,7 @@ Collect the page settings serialized into the HTML.
 
 #### `BundleGraphRenderer.render`
 
-`method` | [readmenator/_bundlegraph.py:228](../../readmenator/_bundlegraph.py#L228)
+`method` | [readmenator/_bundlegraph.py:236](../../readmenator/_bundlegraph.py#L236)
 
 ```python
 def render(self, force_payload: Dict[str, List[Dict[str, Any]]], title: str = 'Edge Bundles', home_href: Optional[str] = 'index.html', explorer_href: Optional[str] = None, live_api: bool = False) -> str
@@ -198,7 +198,7 @@ Render the standalone edge bundle explorer HTML document.
 
 #### `BundleGraphRenderer.write`
 
-`method` | [readmenator/_bundlegraph.py:273](../../readmenator/_bundlegraph.py#L273)
+`method` | [readmenator/_bundlegraph.py:281](../../readmenator/_bundlegraph.py#L281)
 
 ```python
 def write(self, output_path: str | Path, force_payload: Dict[str, List[Dict[str, Any]]], title: str = 'Edge Bundles', home_href: Optional[str] = 'index.html', explorer_href: Optional[str] = None) -> str
@@ -224,7 +224,7 @@ Write the edge bundle explorer HTML document.
 
 #### `BundleGraphRenderer.thumbnail_svg`
 
-`method` | [readmenator/_bundlegraph.py:299](../../readmenator/_bundlegraph.py#L299)
+`method` | [readmenator/_bundlegraph.py:307](../../readmenator/_bundlegraph.py#L307)
 
 ```python
 def thumbnail_svg(self, force_payload: Dict[str, List[Dict[str, Any]]]) -> str

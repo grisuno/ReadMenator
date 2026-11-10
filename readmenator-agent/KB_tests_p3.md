@@ -1,5 +1,25 @@
-# Subsystem: tests (page 3 of 4)
+# Subsystem: tests (page 3 of 5)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
+
+## tests/test_layer_rules.py
+- Doc: TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestLayerRuleEngineContract` (class, line 10) `class TestLayerRuleEngineContract(TestCase)`
+  - `setUp` (method, line 13) `def setUp(self)`
+  - `_make_node` (method, line 17) `def _make_node(self, nid, label)`
+  - `test_empty_graph_returns_empty_violations` (method, line 20) `def test_empty_graph_returns_empty_violations(self)`
+  - `test_no_layers_returns_empty_violations` (method, line 24) `def test_no_layers_returns_empty_violations(self)`
+  - `test_same_layer_no_violation` (method, line 29) `def test_same_layer_no_violation(self)`
+  - `test_forbidden_edge_detected` (method, line 36) `def test_forbidden_edge_detected(self)`
+  - `test_allowed_testing_edges_no_violation` (method, line 46) `def test_allowed_testing_edges_no_violation(self)`
+  - `test_multiple_violations` (method, line 57) `def test_multiple_violations(self)`
+  - `test_utility_layer_ignored` (method, line 75) `def test_utility_layer_ignored(self)`
+  - `test_violation_summary` (method, line 82) `def test_violation_summary(self)`
+  - `test_resolved_edges_also_checked` (method, line 104) `def test_resolved_edges_also_checked(self)`
+  - `test_presentation_to_data_access_forbidden` (method, line 115) `def test_presentation_to_data_access_forbidden(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_layer_rules.py`, `readmenator/_models.py`
 
 ## tests/test_layout_quality.py
 - Doc: Contract tests for bundle crossing reduction and seeded explorer layouts.

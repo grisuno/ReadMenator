@@ -301,7 +301,7 @@ Collect the explorer page settings serialized into the HTML.
 
 #### `ForceGraphRenderer.family_color`
 
-`method` | [readmenator/_forcegraph.py:512](../../readmenator/_forcegraph.py#L512)
+`method` | [readmenator/_forcegraph.py:542](../../readmenator/_forcegraph.py#L542)
 
 ```python
 def family_color(self, name: str) -> str
@@ -323,7 +323,7 @@ Return the configured stable hash color for a group name.
 
 #### `ForceGraphRenderer.thumbnail_svg`
 
-`method` | [readmenator/_forcegraph.py:540](../../readmenator/_forcegraph.py#L540)
+`method` | [readmenator/_forcegraph.py:570](../../readmenator/_forcegraph.py#L570)
 
 ```python
 def thumbnail_svg(self, payload: Dict[str, List[Dict[str, Any]]]) -> str
@@ -348,7 +348,7 @@ fragment is safe to embed in the gallery card.
 
 #### `ForceGraphRenderer.write`
 
-`method` | [readmenator/_forcegraph.py:580](../../readmenator/_forcegraph.py#L580)
+`method` | [readmenator/_forcegraph.py:610](../../readmenator/_forcegraph.py#L610)
 
 ```python
 def write(self, output_path: str | Path, payload: Dict[str, List[Dict[str, Any]]], analytics: Optional[Dict[str, Any]] = None, title: str = 'Force Graph', home_href: Optional[str] = 'index.html') -> str
@@ -374,7 +374,7 @@ Write the explorer HTML plus the vendored engine beside it.
 
 #### `ForceGraphRenderer.copy_vendor`
 
-`method` | [readmenator/_forcegraph.py:607](../../readmenator/_forcegraph.py#L607)
+`method` | [readmenator/_forcegraph.py:637](../../readmenator/_forcegraph.py#L637)
 
 ```python
 def copy_vendor(self, dest_dir: str | Path) -> Optional[Path]

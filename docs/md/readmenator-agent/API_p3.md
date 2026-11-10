@@ -1,6 +1,26 @@
 # API (page 3 of 3)
 Previous: [API_p2.md](API_p2.md)
 
+## readmenator/_yaralite.py
+Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
+- `YaraLiteRule.tier` (method) `readmenator/_yaralite.py:42` `def tier(self)` -- Return the rule tier from meta or name prefix.
+- `parse_yaralite_rules` (function) `readmenator/_yaralite.py:76` `def parse_yaralite_rules(rules_text)` -- Parse YARA-lite rules text into rules and error messages.
+- `run_yaralite_rules` (function) `readmenator/_yaralite.py:112` `def run_yaralite_rules(text, rules)` -- Run parsed rules against a scan-text blob.
+- `validate_yaralite_rules` (function) `readmenator/_yaralite.py:139` `def validate_yaralite_rules(rules_text)` -- Validate rules text and summarize tier counts.
+- `replace_group` (function) `readmenator/_yaralite.py:270` `def replace_group(match)` -- Replace an N-of group with its boolean outcome.
+- `replace_identifier` (function) `readmenator/_yaralite.py:292` `def replace_identifier(match)` -- Replace a string identifier with its hit boolean.
+
+## readmenator/parsers/__init__.py
+Depends on: `readmenator/_config.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_base.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+Imported by: `readmenator/_scanner.py`, `tests/test_parsers.py`, `tests/test_parsers_new.py`
+- `create_parser` (function) `readmenator/parsers/__init__.py:70` `def create_parser(extension, filename, config)` -- Factory: return a parser instance for the given file extension.
+
+## readmenator/parsers/_base.py
+Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+Imported by: `readmenator/parsers/__init__.py`, `readmenator/parsers/_assembly.py`, `readmenator/parsers/_c.py`, `readmenator/parsers/_csharp.py`, `readmenator/parsers/_dart.py`, `readmenator/parsers/_elixir.py`, `readmenator/parsers/_gdscript.py`, `readmenator/parsers/_go.py`, `readmenator/parsers/_java.py`, `readmenator/parsers/_javascript.py`, `readmenator/parsers/_kotlin.py`, `readmenator/parsers/_lua.py`, `readmenator/parsers/_nim.py`, `readmenator/parsers/_php.py`, `readmenator/parsers/_python.py`, `readmenator/parsers/_ruby.py`, `readmenator/parsers/_rust.py`, `readmenator/parsers/_scala.py`, `readmenator/parsers/_shell.py`, `readmenator/parsers/_swift.py`
+- `LanguageParser.__init__` (method) `readmenator/parsers/_base.py:21` `def __init__(self, filename, config)` -- Initialise the parser with a file path and application config.
+- `LanguageParser.parse` (method) `readmenator/parsers/_base.py:36` `def parse(self, content)` -- Parse *content* and populate symbol/import lists.
+
 ## readmenator_orchestrator.py
 - `GitHubClient.__init__` (method) `readmenator_orchestrator.py:84` `def __init__(self, config)`
 - `GitHubClient.list_repos` (method) `readmenator_orchestrator.py:124` `def list_repos(self)`

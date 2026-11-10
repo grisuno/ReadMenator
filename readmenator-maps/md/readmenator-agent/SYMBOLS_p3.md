@@ -299,6 +299,33 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `maybe_install_on_run` | method | `readmenator/_skill_installer.py:87` | `def maybe_install_on_run(self, project_root)` |
 | `source_dir` | method | `readmenator/_skill_installer.py:34` | `def source_dir()` |
 | `target_dir` | method | `readmenator/_skill_installer.py:48` | `def target_dir(self, project_root, target)` |
+| `AudioCue` | class | `readmenator/_soundtrack.py:39` | `class AudioCue` |
+| `SoundtrackComposer` | class | `readmenator/_soundtrack.py:71` | `class SoundtrackComposer` |
+| `__init__` | method | `readmenator/_soundtrack.py:78` | `def __init__(self, config)` |
+| `_all_stems` | method | `readmenator/_soundtrack.py:260` | `def _all_stems(self)` |
+| `_arp` | method | `readmenator/_soundtrack.py:331` | `def _arp(self)` |
+| `_bass` | method | `readmenator/_soundtrack.py:292` | `def _bass(self)` |
+| `_bed` | method | `readmenator/_soundtrack.py:186` | `def _bed(self, scenes, frames)` |
+| `_chords` | method | `readmenator/_soundtrack.py:272` | `def _chords(self)` |
+| `_clamp_pcm` | function | `readmenator/_soundtrack.py:58` | `def _clamp_pcm(value)` |
+| `_drums` | method | `readmenator/_soundtrack.py:310` | `def _drums(self, noise)` |
+| `_event` | method | `readmenator/_soundtrack.py:345` | `def _event(self, cue)` |
+| `_fade` | method | `readmenator/_soundtrack.py:416` | `def _fade(self, track, frames)` |
+| `_impact` | method | `readmenator/_soundtrack.py:353` | `def _impact(self, cue)` |
+| `_loop` | method | `readmenator/_soundtrack.py:238` | `def _loop(self, level)` |
+| `_normalized` | function | `readmenator/_soundtrack.py:63` | `def _normalized(samples)` |
+| `_overlay` | method | `readmenator/_soundtrack.py:402` | `def _overlay(self, track, start, samples)` |
+| `_pad` | method | `readmenator/_soundtrack.py:277` | `def _pad(self)` |
+| `_ping` | method | `readmenator/_soundtrack.py:387` | `def _ping(self, cue)` |
+| `_riser` | method | `readmenator/_soundtrack.py:369` | `def _riser(self, cue)` |
+| `_semitone` | function | `readmenator/_soundtrack.py:53` | `def _semitone(base, offset)` |
+| `_tile` | method | `readmenator/_soundtrack.py:224` | `def _tile(loop, phase, frames)` |
+| `beat_seconds` | method | `readmenator/_soundtrack.py:89` | `def beat_seconds(self)` |
+| `compose` | method | `readmenator/_soundtrack.py:139` | `def compose(self, scenes, total, release_times)` |
+| `cues` | method | `readmenator/_soundtrack.py:105` | `def cues(self, scenes, release_times)` |
+| `level` | method | `readmenator/_soundtrack.py:99` | `def level(self, kind)` |
+| `stem_weight` | method | `readmenator/_soundtrack.py:93` | `def stem_weight(self, name, level)` |
+| `write` | method | `readmenator/_soundtrack.py:168` | `def write(self, path, scenes, total, release_times)` |
 | `SourceEntry` | class | `readmenator/_sourceview.py:20` | `class SourceEntry` |
 | `SourceViewBuilder` | class | `readmenator/_sourceview.py:36` | `class SourceViewBuilder` |
 | `__init__` | method | `readmenator/_sourceview.py:39` | `def __init__(self, config)` |
@@ -409,92 +436,65 @@ Previous: [SYMBOLS_p2.md](SYMBOLS_p2.md)
 | `wa` | class | `readmenator/_vendor/force-graph.min.js:5` | `` |
 | `xo` | function | `readmenator/_vendor/force-graph.min.js:5` | `` |
 | `y` | function | `readmenator/_vendor/force-graph.min.js:2` | `` |
-| `Backdrop` | class | `readmenator/_video.py:690` | `class Backdrop` |
-| `CinematicVideoRenderer` | class | `readmenator/_video.py:885` | `class CinematicVideoRenderer` |
-| `__init__` | method | `readmenator/_video.py:693` | `def __init__(self, width, height)` |
-| `_bezier` | function | `readmenator/_video.py:2499` | `def _bezier(points, t)` |
-| `_build_dep_tree` | method | `readmenator/_video.py:1138` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
-| `_build_growth` | method | `readmenator/_video.py:1083` | `def _build_growth(self, project_root, graph_nodes, graph_links)` |
-| `_camera_track` | function | `readmenator/_video.py:256` | `def _camera_track(keys, f)` |
-| `_caption_y` | function | `readmenator/_video.py:153` | `def _caption_y(cfg)` |
-| `_clipped` | function | `readmenator/_video.py:279` | `def _clipped(img, box, paint)` |
-| `_cloud_core` | function | `readmenator/_video.py:335` | `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
-| `_code_tint` | function | `readmenator/_video.py:626` | `def _code_tint(line)` |
-| `_depth_alpha` | function | `readmenator/_video.py:232` | `def _depth_alpha(z, fade)` |
-| `_dna_boxes` | function | `readmenator/_video.py:167` | `def _dna_boxes(cfg)` |
-| `_draw_flow_edge` | function | `readmenator/_video.py:2507` | `def _draw_flow_edge(d, pts, col, a, width, upto, dashed)` |
-| `_draw_flow_node` | function | `readmenator/_video.py:2526` | `def _draw_flow_node(d, node, tf, fonts, col, a, glow, lines)` |
-| `_draw_frame` | function | `readmenator/_video.py:1564` | `def _draw_frame(fi)` |
-| `_find` | function | `readmenator/_video.py:655` | `def _find(style)` |
-| `_flow_graph` | function | `readmenator/_video.py:2491` | `def _flow_graph(kind)` |
-| `_graph_boxes` | function | `readmenator/_video.py:158` | `def _graph_boxes(cfg)` |
-| `_growth_frame` | function | `readmenator/_video.py:2177` | `def _growth_frame(data, cfg, local_t, phase_dur)` |
-| `_growth_pulse` | function | `readmenator/_video.py:430` | `def _growth_pulse(d, data, proj, cfg)` |
-| `_growth_pulse_anchor` | function | `readmenator/_video.py:2238` | `def _growth_pulse_anchor(releases, factor, rank)` |
-| `_growth_ticker` | function | `readmenator/_video.py:2263` | `def _growth_ticker(d, side, meta, releases, fonts)` |
-| `_img` | function | `readmenator/_video.py:746` | `def _img()` |
-| `_img_draw` | function | `readmenator/_video.py:2721` | `def _img_draw(img)` |
-| `_language_color` | function | `readmenator/_video.py:237` | `def _language_color(language)` |
-| `_lerp3` | function | `readmenator/_video.py:251` | `def _lerp3(a, b, t)` |
-| `_motion_blurred` | function | `readmenator/_video.py:1540` | `def _motion_blurred(index, lt)` |
-| `_orbit_plan` | function | `readmenator/_video.py:1995` | `def _orbit_plan(dur)` |
-| `_outgoing_frame` | function | `readmenator/_video.py:1555` | `def _outgoing_frame(index)` |
-| `_packet_offset` | function | `readmenator/_video.py:636` | `def _packet_offset(a, b, k)` |
-| `_paint_scene` | function | `readmenator/_video.py:1525` | `def _paint_scene(index, lt)` |
-| `_panel` | function | `readmenator/_video.py:148` | `def _panel(cfg)` |
-| `_place_label` | function | `readmenator/_video.py:267` | `def _place_label(d, placed, x, y, text, font, col, a)` |
-| `_polyline_point` | function | `readmenator/_video.py:192` | `def _polyline_point(points, f)` |
-| `_prepare_growth` | method | `readmenator/_video.py:1404` | `def _prepare_growth(self, data)` |
-| `_prepare_layouts` | method | `readmenator/_video.py:1389` | `def _prepare_layouts(self, data)` |
-| `_render_frame_bytes` | function | `readmenator/_video.py:1509` | `def _render_frame_bytes(fi)` |
-| `_scan_cursor` | function | `readmenator/_video.py:617` | `def _scan_cursor(d, box, progress, col)` |
-| `_scene_bundle` | function | `readmenator/_video.py:1909` | `def _scene_bundle(img, d, lt, gt, sc)` |
-| `_scene_card` | function | `readmenator/_video.py:1623` | `def _scene_card(img, d, lt, gt, sc)` |
-| `_scene_communities` | function | `readmenator/_video.py:1779` | `def _scene_communities(img, d, lt, gt, sc)` |
-| `_scene_dna` | function | `readmenator/_video.py:2402` | `def _scene_dna(img, d, lt, gt, sc)` |
-| `_scene_flow` | function | `readmenator/_video.py:2628` | `def _scene_flow(img, d, lt, gt, sc)` |
-| `_scene_gods` | function | `readmenator/_video.py:1662` | `def _scene_gods(img, d, lt, gt, sc)` |
-| `_scene_graph` | function | `readmenator/_video.py:1823` | `def _scene_graph(img, d, lt, gt, sc)` |
-| `_scene_growth` | function | `readmenator/_video.py:2299` | `def _scene_growth(img, d, lt, gt, sc)` |
-| `_scene_index` | function | `readmenator/_video.py:1517` | `def _scene_index(gt)` |
-| `_scene_invite` | function | `readmenator/_video.py:2355` | `def _scene_invite(img, d, lt, gt, sc)` |
-| `_scene_layers` | function | `readmenator/_video.py:1637` | `def _scene_layers(img, d, lt, gt, sc)` |
-| `_scene_orbit` | function | `readmenator/_video.py:2000` | `def _scene_orbit(img, d, lt, gt, sc)` |
-| `_scene_outro` | function | `readmenator/_video.py:2461` | `def _scene_outro(img, d, lt, gt, sc)` |
-| `_scene_sphere` | function | `readmenator/_video.py:2116` | `def _scene_sphere(img, d, lt, gt, sc)` |
-| `_scene_tiers` | function | `readmenator/_video.py:2549` | `def _scene_tiers(img, d, lt, gt, sc)` |
-| `_scene_title` | function | `readmenator/_video.py:1588` | `def _scene_title(img, d, lt, gt, sc)` |
-| `_scene_tree` | function | `readmenator/_video.py:1705` | `def _scene_tree(img, d, lt, gt, sc)` |
-| `_sphere_core` | function | `readmenator/_video.py:505` | `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels, zoom)` |
-| `_split_boxes` | function | `readmenator/_video.py:176` | `def _split_boxes(cfg)` |
-| `_sun` | method | `readmenator/_video.py:731` | `def _sun(self, r)` |
-| `_verdict_badge` | function | `readmenator/_video.py:602` | `def _verdict_badge(d, box, text, fonts, lt, dur, col)` |
-| `alpha` | function | `readmenator/_video.py:126` | `def alpha(c, a)` |
-| `build_scenes` | method | `readmenator/_video.py:1189` | `def build_scenes(self, data)` |
-| `bundle_groups` | method | `readmenator/_video.py:1321` | `def bundle_groups(self, data)` |
-| `bundle_layout` | method | `readmenator/_video.py:1346` | `def bundle_layout(self, data, box)` |
-| `chroma_text` | function | `readmenator/_video.py:831` | `def chroma_text(img, xy, text, font, col, spread, anchor)` |
-| `collect` | method | `readmenator/_video.py:890` | `def collect(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_name, content_map...` |
-| `community_color` | function | `readmenator/_video.py:185` | `def community_color(index)` |
-| `dependencies_available` | function | `readmenator/_video.py:642` | `def dependencies_available()` |
-| `draw_caption` | function | `readmenator/_video.py:869` | `def draw_caption(d, text, lt, dur, fonts, width, y)` |
-| `draw_cloud3d` | function | `readmenator/_video.py:291` | `def draw_cloud3d(img, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
-| `draw_grid` | function | `readmenator/_video.py:753` | `def draw_grid(img, t, strength, bd)` |
-| `draw_header` | function | `readmenator/_video.py:855` | `def draw_header(img, d, gt, total, project, act_label, fonts, width)` |
-| `draw_sphere3d` | function | `readmenator/_video.py:464` | `def draw_sphere3d(img, data, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels, zoom)` |
-| `draw_sun` | function | `readmenator/_video.py:773` | `def draw_sun(img, a, bd, cy)` |
-| `ease` | function | `readmenator/_video.py:105` | `def ease(x)` |
-| `emergence_frames` | method | `readmenator/_video.py:1311` | `def emergence_frames(self, data, box)` |
-| `factor` | function | `readmenator/_video.py:2206` | `def factor(born)` |
-| `fmt_int` | function | `readmenator/_video.py:116` | `def fmt_int(n)` |
-| `glitch_fx` | function | `readmenator/_video.py:808` | `def glitch_fx(img, amount, seed)` |
-| `graph_positions` | method | `readmenator/_video.py:1221` | `def graph_positions(self, data, box)` |
-| `hash_color` | function | `readmenator/_video.py:131` | `def hash_color(digest)` |
-| `hud_panel` | function | `readmenator/_video.py:842` | `def hud_panel(d, box, title, fonts, col)` |
-| `mix` | function | `readmenator/_video.py:121` | `def mix(a, b, t)` |
-| `mode_color` | function | `readmenator/_video.py:242` | `def mode_color(data, nid, mode)` |
-| `orbit_positions` | method | `readmenator/_video.py:1355` | `def orbit_positions(self, data)` |
-| `orbit_stops` | method | `readmenator/_video.py:1374` | `def orbit_stops(self, data, positions)` |
-| `ordered_groups` | method | `readmenator/_video.py:1336` | `def ordered_groups(self, data)` |
+| `Backdrop` | class | `readmenator/_video.py:838` | `class Backdrop` |
+| `CinematicVideoRenderer` | class | `readmenator/_video.py:1034` | `class CinematicVideoRenderer` |
+| `__init__` | method | `readmenator/_video.py:841` | `def __init__(self, width, height)` |
+| `_bezier` | function | `readmenator/_video.py:2931` | `def _bezier(points, t)` |
+| `_build_dep_tree` | method | `readmenator/_video.py:1287` | `def _build_dep_tree(self, node_by_id, link_set, god_names)` |
+| `_build_growth` | method | `readmenator/_video.py:1232` | `def _build_growth(self, project_root, graph_nodes, graph_links)` |
+| `_camera_track` | function | `readmenator/_video.py:259` | `def _camera_track(keys, f)` |
+| `_caption_y` | function | `readmenator/_video.py:156` | `def _caption_y(cfg)` |
+| `_clipped` | function | `readmenator/_video.py:369` | `def _clipped(img, box, paint)` |
+| `_cloud_core` | function | `readmenator/_video.py:436` | `def _cloud_core(d, data, box, cfg, yaw, pitch, target, zoom, mode, lit_nodes, edge_lit, gt, fonts, appear, labels)` |
+| `_cloud_fog` | function | `readmenator/_video.py:536` | `def _cloud_fog(data, proj, birth, lit_nodes, cfg, scale, grow)` |
+| `_code_tint` | function | `readmenator/_video.py:774` | `def _code_tint(line)` |
+| `_depth_alpha` | function | `readmenator/_video.py:235` | `def _depth_alpha(z, fade)` |
+| `_dna_boxes` | function | `readmenator/_video.py:170` | `def _dna_boxes(cfg)` |
+| `_draw_flow_edge` | function | `readmenator/_video.py:2939` | `def _draw_flow_edge(d, pts, col, a, width, upto, dashed)` |
+| `_draw_flow_node` | function | `readmenator/_video.py:2958` | `def _draw_flow_node(d, node, tf, fonts, col, a, glow, lines)` |
+| `_draw_frame` | function | `readmenator/_video.py:1984` | `def _draw_frame(fi)` |
+| `_encode_command` | method | `readmenator/_video.py:1662` | `def _encode_command(self, data, scenes, total, output_path, workdir)` |
+| `_ffmeta_escape` | function | `readmenator/_video.py:1773` | `def _ffmeta_escape(text)` |
+| `_find` | function | `readmenator/_video.py:803` | `def _find(style)` |
+| `_flow_graph` | function | `readmenator/_video.py:2923` | `def _flow_graph(kind)` |
+| `_graph_boxes` | function | `readmenator/_video.py:161` | `def _graph_boxes(cfg)` |
+| `_growth_frame` | function | `readmenator/_video.py:2609` | `def _growth_frame(data, cfg, local_t, phase_dur)` |
+| `_growth_pulse` | function | `readmenator/_video.py:574` | `def _growth_pulse(d, data, proj, cfg)` |
+| `_growth_pulse_anchor` | function | `readmenator/_video.py:2670` | `def _growth_pulse_anchor(releases, factor, rank)` |
+| `_growth_ticker` | function | `readmenator/_video.py:2695` | `def _growth_ticker(d, side, meta, releases, fonts)` |
+| `_img` | function | `readmenator/_video.py:894` | `def _img()` |
+| `_img_draw` | function | `readmenator/_video.py:3153` | `def _img_draw(img)` |
+| `_language_color` | function | `readmenator/_video.py:240` | `def _language_color(language)` |
+| `_lerp3` | function | `readmenator/_video.py:254` | `def _lerp3(a, b, t)` |
+| `_motion_blurred` | function | `readmenator/_video.py:1854` | `def _motion_blurred(index, lt)` |
+| `_orbit_plan` | function | `readmenator/_video.py:2427` | `def _orbit_plan(dur)` |
+| `_outgoing_frame` | function | `readmenator/_video.py:1869` | `def _outgoing_frame(index)` |
+| `_packet_offset` | function | `readmenator/_video.py:784` | `def _packet_offset(a, b, k)` |
+| `_paint_scene` | function | `readmenator/_video.py:1833` | `def _paint_scene(index, lt)` |
+| `_panel` | function | `readmenator/_video.py:151` | `def _panel(cfg)` |
+| `_place_label` | function | `readmenator/_video.py:270` | `def _place_label(d, placed, x, y, text, font, col, a)` |
+| `_polyline_point` | function | `readmenator/_video.py:195` | `def _polyline_point(points, f)` |
+| `_prepare_growth` | method | `readmenator/_video.py:1559` | `def _prepare_growth(self, data)` |
+| `_prepare_layouts` | method | `readmenator/_video.py:1544` | `def _prepare_layouts(self, data)` |
+| `_render_frame_bytes` | function | `readmenator/_video.py:1817` | `def _render_frame_bytes(fi)` |
+| `_scan_cursor` | function | `readmenator/_video.py:765` | `def _scan_cursor(d, box, progress, col)` |
+| `_scene_bundle` | function | `readmenator/_video.py:2339` | `def _scene_bundle(img, d, lt, gt, sc)` |
+| `_scene_card` | function | `readmenator/_video.py:2050` | `def _scene_card(img, d, lt, gt, sc)` |
+| `_scene_communities` | function | `readmenator/_video.py:2207` | `def _scene_communities(img, d, lt, gt, sc)` |
+| `_scene_dna` | function | `readmenator/_video.py:2834` | `def _scene_dna(img, d, lt, gt, sc)` |
+| `_scene_flow` | function | `readmenator/_video.py:3060` | `def _scene_flow(img, d, lt, gt, sc)` |
+| `_scene_gods` | function | `readmenator/_video.py:2089` | `def _scene_gods(img, d, lt, gt, sc)` |
+| `_scene_graph` | function | `readmenator/_video.py:2251` | `def _scene_graph(img, d, lt, gt, sc)` |
+| `_scene_growth` | function | `readmenator/_video.py:2731` | `def _scene_growth(img, d, lt, gt, sc)` |
+| `_scene_hook` | function | `readmenator/_video.py:1954` | `def _scene_hook(img, d, lt, gt, sc)` |
+| `_scene_index` | function | `readmenator/_video.py:1825` | `def _scene_index(gt)` |
+| `_scene_invite` | function | `readmenator/_video.py:2787` | `def _scene_invite(img, d, lt, gt, sc)` |
+| `_scene_layers` | function | `readmenator/_video.py:2064` | `def _scene_layers(img, d, lt, gt, sc)` |
+| `_scene_orbit` | function | `readmenator/_video.py:2432` | `def _scene_orbit(img, d, lt, gt, sc)` |
+| `_scene_outro` | function | `readmenator/_video.py:2893` | `def _scene_outro(img, d, lt, gt, sc)` |
+| `_scene_sphere` | function | `readmenator/_video.py:2548` | `def _scene_sphere(img, d, lt, gt, sc)` |
+| `_scene_tiers` | function | `readmenator/_video.py:2981` | `def _scene_tiers(img, d, lt, gt, sc)` |
+| `_scene_title` | function | `readmenator/_video.py:2015` | `def _scene_title(img, d, lt, gt, sc)` |
+| `_scene_tree` | function | `readmenator/_video.py:2132` | `def _scene_tree(img, d, lt, gt, sc)` |
 
 Next: [SYMBOLS_p4.md](SYMBOLS_p4.md)

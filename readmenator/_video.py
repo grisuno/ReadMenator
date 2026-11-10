@@ -23,6 +23,7 @@ import multiprocessing
 import os
 import shutil
 import subprocess
+import tempfile
 import textwrap
 from dataclasses import dataclass
 from pathlib import Path
@@ -45,6 +46,7 @@ from readmenator._graphlayout import (
 )
 from readmenator._models import AnalysisResult, AnalysisResultV2, Edge, Node, SecurityFinding
 from readmenator._rank import file_pagerank
+from readmenator._soundtrack import SoundtrackComposer
 
 logger = logging.getLogger(__name__)
 
@@ -100,6 +102,7 @@ _RENDER_TOTAL: float = 0.0
 _RENDER_BD: Any = None
 _RENDER_FONTS: Optional[Dict[str, Any]] = None
 _RENDER_CFG: Optional[Config] = None
+_RENDER_SYNC: Optional[SoundtrackComposer] = None
 
 
 def ease(x: float) -> float:
@@ -276,15 +279,113 @@ def _place_label(d: Any, placed: List[Tuple[float, float, float, float]], x: flo
     d.text((x + 12, y - 16), text, font=font, fill=alpha(TXT, a))
 
 
+_EMIT: Optional[List[Tuple[Any, ...]]] = None
+
+
+def emit_orb(x: float, y: float, r: float, col: Tuple[int, int, int], a: float, fog: bool = False) -> None:
+    """Record a light source for the glow pass of the surface being painted.
+
+    Args:
+        x: Center x in the surface being painted.
+        y: Center y in the surface being painted.
+        r: Radius of the emitter (a fog blob keeps it, an orb is widened by VIDEO_GLOW_SPREAD).
+        col: Light color.
+        a: Light intensity in [0, 1].
+        fog: True for a volumetric haze blob.
+    """
+    if _EMIT is not None and a > 0.003 and r > 0:
+        _EMIT.append(("fog" if fog else "orb", x, y, r, col, min(1.0, a)))
+
+
+def emit_beam(points: List[Tuple[float, float]], col: Tuple[int, int, int], a: float, width: float = 2.0) -> None:
+    """Record a glowing polyline for the glow pass of the surface being painted."""
+    if _EMIT is not None and a > 0.003 and len(points) >= 2:
+        _EMIT.append(("beam", points, col, min(1.0, a), width))
+
+
+def draw_orb(d: Any, x: float, y: float, r: float, col: Tuple[int, int, int], a: float, glow: float = 1.0) -> None:
+    """Draw a luminous node: colored body, lighter heart, white-hot core, emitted light.
+
+    Args:
+        d: Drawing surface.
+        x: Center x.
+        y: Center y.
+        r: Body radius in pixels.
+        col: Body color.
+        a: Opacity in [0, 1].
+        glow: Multiplier of the light the node emits into the glow pass.
+    """
+    d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, a))
+    if r >= 2.2:
+        heart = r * 0.62
+        d.ellipse((x - heart, y - heart, x + heart, y + heart), fill=alpha(mix(col, (255, 255, 255), 0.45), a))
+        core = r * 0.3
+        d.ellipse((x - core, y - core, x + core, y + core), fill=alpha((255, 255, 255), 0.92 * a))
+    emit_orb(x, y, r, col, a * glow)
+
+
+def apply_glow(img: Any, emitters: List[Tuple[Any, ...]], cfg: Config) -> Any:
+    """Add the light of every recorded emitter to *img* (additive bloom).
+
+    Emitters are painted at half resolution on black, blurred once
+    tightly and once widely, and added to the frame, so nodes read as
+    light sources, lit edges as beams and fog blobs as volumetric haze.
+
+    Args:
+        img: RGB surface the emitters were recorded for.
+        emitters: Records from emit_orb and emit_beam.
+        cfg: Video settings (VIDEO_GLOW_*).
+
+    Returns:
+        The surface with the glow added.
+    """
+    if not emitters or not cfg.VIDEO_GLOW_ENABLED:
+        return img
+    from PIL import Image, ImageChops, ImageDraw, ImageFilter
+
+    w, h = img.size
+    sw, sh = max(1, w // 2), max(1, h // 2)
+    layer = Image.new("RGB", (sw, sh), (0, 0, 0))
+    ld = ImageDraw.Draw(layer, "RGBA")
+    spread = float(cfg.VIDEO_GLOW_SPREAD)
+    for item in emitters:
+        if item[0] == "beam":
+            _kind, points, col, a, width = item
+            ld.line([(px / 2, py / 2) for px, py in points], fill=alpha(col, a), width=max(1, int(round(width / 2))))
+            continue
+        kind, x, y, r, col, a = item
+        rr = max(1.0, (r if kind == "fog" else r * spread) / 2)
+        ld.ellipse((x / 2 - rr, y / 2 - rr, x / 2 + rr, y / 2 + rr), fill=alpha(col, a))
+    blur = float(cfg.VIDEO_GLOW_BLUR)
+    tight = layer.filter(ImageFilter.GaussianBlur(blur))
+    wide = layer.resize((max(1, sw // 2), max(1, sh // 2)), Image.BILINEAR).filter(ImageFilter.GaussianBlur(blur))
+    glow = ImageChops.add(tight, wide.resize((sw, sh), Image.BILINEAR))
+    gain = float(cfg.VIDEO_GLOW_GAIN)
+    if gain != 1.0:
+        glow = glow.point(lambda v: min(255, int(v * gain)))
+    return ImageChops.add(img, glow.resize((w, h), Image.BILINEAR))
+
+
 def _clipped(img: Any, box: Tuple[int, int, int, int], paint: Any) -> None:
-    """Run paint(draw, local_box) on a crop of img and paste it back (clips to box)."""
+    """Run paint(draw, local_box) on a crop of img and paste it back (clips to box).
+
+    Light emitted while painting is added to the crop only, so the
+    glow never bleeds outside the panel.
+    """
     from PIL import ImageDraw
 
+    global _EMIT
     x0, y0, x1, y1 = (int(v) for v in box)
     if x1 <= x0 or y1 <= y0:
         return
     crop = img.crop((x0, y0, x1, y1))
-    paint(ImageDraw.Draw(crop, "RGBA"), (0, 0, x1 - x0, y1 - y0))
+    outer, _EMIT = _EMIT, []
+    try:
+        paint(ImageDraw.Draw(crop, "RGBA"), (0, 0, x1 - x0, y1 - y0))
+        emitted = _EMIT
+    finally:
+        _EMIT = outer
+    crop = apply_glow(crop, emitted, _RENDER_CFG or Config())
     img.paste(crop, (x0, y0))
 
 
@@ -358,12 +459,14 @@ def _cloud_core(
     scale = min(x1 - x0, y1 - y0) / 2 * 0.8 * zoom
     center = ((x0 + x1) / 2, (y0 + y1) / 2)
     grow = ease(appear)
+    draw_stars(d, box, yaw, pitch, gt, cfg.VIDEO_STARS)
     proj = {nid: project3d((p[0] * grow, p[1] * grow, p[2] * grow), yaw, pitch, target, scale, center, persp)
             for nid, p in pos.items()}
     fade = cfg.VIDEO_ORBIT_DEPTH_FADE
     links = data["graph_links"]
     birth = data.get("node_birth", {})
     edge_birth = data.get("edge_birth", {})
+    _cloud_fog(data, proj, birth, lit_nodes, cfg, scale, grow)
     hot: List[Tuple[str, str]] = []
     for a, b in links:
         if a not in proj or b not in proj or a == b:
@@ -379,10 +482,13 @@ def _cloud_core(
         depth = _depth_alpha((pa[2] + pb[2]) / 2, fade)
         strength = (0.22 if edge_lit is None else 0.05) * depth * grow * bfactor
         d.line((pa[0], pa[1], pb[0], pb[1]), fill=alpha(mode_color(data, a, mode), strength), width=1)
+        if edge_lit is None:
+            emit_beam([(pa[0], pa[1]), (pb[0], pb[1])], mode_color(data, a, mode), 0.5 * strength)
     for k, (a, b) in enumerate(hot):
         pa, pb = proj[a], proj[b]
         depth = _depth_alpha((pa[2] + pb[2]) / 2, fade)
         d.line((pa[0], pa[1], pb[0], pb[1]), fill=alpha(mode_color(data, a, mode), 0.75 * depth), width=2)
+        emit_beam([(pa[0], pa[1]), (pb[0], pb[1])], mode_color(data, a, mode), 0.2 * depth, 2)
     for k, (a, b) in enumerate(hot[: cfg.VIDEO_SURFERS]):
         pa, pb = proj[a], proj[b]
         f = (gt * 0.6 + _packet_offset(a, b, k)) % 1.0
@@ -403,7 +509,7 @@ def _cloud_core(
                       fill=alpha(col, ghost * _depth_alpha(z, fade)))
             continue
         weight = math.sqrt(rank.get(nid, 0.0) / top_rank)
-        r = (2.0 + 7.0 * weight) * k * math.sqrt(zoom) * (0.3 + 0.7 * grow) * bfactor
+        r = (2.4 + 9.0 * weight) * k * math.sqrt(zoom) * (0.3 + 0.7 * grow) * bfactor
         on = lit_nodes is None or nid in lit_nodes
         a = (0.95 if on else 0.18) * _depth_alpha(z, fade) * bfactor
         if on and lit_nodes is not None and weight > 0.3:
@@ -412,7 +518,7 @@ def _cloud_core(
         if bfactor < 0.999:
             flash = r + 12 * (1.0 - bfactor)
             d.ellipse((x - flash, y - flash, x + flash, y + flash), outline=alpha(col, 0.45 * a), width=1)
-        d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, a), outline=alpha((255, 255, 255), 0.45 * a), width=1)
+        draw_orb(d, x, y, r, col, a, 1.0 if on else 0.3)
     _growth_pulse(d, data, proj, cfg)
 
     if labels > 0 and grow >= 1:
@@ -425,6 +531,44 @@ def _cloud_core(
                 continue
             _place_label(d, placed, x, y, short_label(nid.rpartition("/")[2] or nid, 22), fonts["tiny_b"],
                          mode_color(data, nid, mode), _depth_alpha(z, fade))
+
+
+def _cloud_fog(
+    data: Dict[str, Any], proj: Dict[str, Tuple[float, float, float, float]],
+    birth: Dict[str, float], lit_nodes: Optional[set], cfg: Config, scale: float, grow: float,
+) -> None:
+    """Emit one haze blob per community so clusters sit in colored nebulae.
+
+    Args:
+        data: Frame payload carrying the community membership.
+        proj: Projected node positions.
+        birth: Birth weights of the growth act (empty elsewhere).
+        lit_nodes: Highlighted node ids, or None for no focus.
+        cfg: Video settings (VIDEO_NEBULA_ALPHA, VIDEO_NEBULA_RADIUS).
+        scale: Pixel scale of the cloud.
+        grow: Assembly progress in [0, 1].
+    """
+    strength = float(cfg.VIDEO_NEBULA_ALPHA) * grow
+    if strength <= 0:
+        return
+    membership: Dict[str, int] = data.get("membership", {})
+    sums: Dict[int, List[float]] = {}
+    for nid, point in proj.items():
+        weight = birth.get(nid, 1.0)
+        if weight <= 0.01 or nid not in membership:
+            continue
+        acc = sums.setdefault(membership[nid], [0.0, 0.0, 0.0, 0.0])
+        acc[0] += point[0] * weight
+        acc[1] += point[1] * weight
+        acc[2] += weight
+        acc[3] += 1.0 if lit_nodes is None or nid in lit_nodes else 0.15
+    for index in sorted(sums):
+        sx, sy, total, lit = sums[index]
+        if total < 2:
+            continue
+        share = min(1.0, lit / total)
+        radius = float(cfg.VIDEO_NEBULA_RADIUS) * scale * min(1.0, 0.45 + total / 40.0)
+        emit_orb(sx / total, sy / total, radius, community_color(index), strength * share, fog=True)
 
 
 def _growth_pulse(
@@ -535,6 +679,7 @@ def _sphere_core(
         """Project a layout point through the scene camera."""
         return project3d(p, yaw, pitch, origin, scale, center, persp)
 
+    draw_stars(d, box, yaw, pitch, gt, cfg.VIDEO_STARS)
     if m > 0:
         for lat in (-60, -30, 0, 30, 60):
             c, sn = math.cos(math.radians(lat)), math.sin(math.radians(lat))
@@ -569,9 +714,12 @@ def _sphere_core(
                 hot.append((k, flat))
                 continue
             d.line(flat, fill=alpha(community_color(ca), (0.3 if lit else 0.05) * depth * efactor), width=1)
+            if lit:
+                emit_beam(flat, community_color(ca), 0.16 * depth * efactor)
         for k, flat in hot:
             a, b, _pts = layout.curves[k]
             d.line(flat, fill=alpha(community_color(membership.get(a, -1)), 0.8), width=2)
+            emit_beam(flat, community_color(membership.get(a, -1)), 0.3, 2)
             if reveal >= 1 and membership.get(a, -1) != membership.get(b, -1):
                 f = (gt * 0.45 + _packet_offset(a, b, k)) % 1.0
                 x, y = _polyline_point(flat, f)
@@ -583,9 +731,9 @@ def _sphere_core(
             continue
         comm = membership.get(nid, -1)
         on = spot is None or comm == spot
-        r = (1.8 + 4.5 * math.sqrt(rank.get(nid, 0.0) / top_rank)) * k * bfactor
-        d.ellipse((x - r, y - r, x + r, y + r),
-                  fill=alpha(community_color(comm), (0.95 if on else 0.25) * _depth_alpha(z, fade) * bfactor))
+        r = (2.2 + 6.0 * math.sqrt(rank.get(nid, 0.0) / top_rank)) * k * bfactor
+        draw_orb(d, x, y, r, community_color(comm), (0.95 if on else 0.25) * _depth_alpha(z, fade) * bfactor,
+                 1.0 if on else 0.3)
     if group_labels and m >= 1:
         placed: List[Tuple[float, float, float, float]] = []
         for label, cap, count in layout.groups:
@@ -787,15 +935,16 @@ def draw_sun(img: Any, a: float, bd: Backdrop, cy: Optional[int] = None) -> None
     img.paste(s, (bd.width // 2 - s.width // 2, top), s)
 
 
-def post(img: Any, glitch: float = 0.0, seed: int = 0) -> Any:
-    """Apply bloom, scanlines, vignette and optional glitch."""
+def post(img: Any, glitch: float = 0.0, seed: int = 0, boost: float = 0.0) -> Any:
+    """Apply bloom (lifted by *boost* on the beat), scanlines, vignette and optional glitch."""
     from PIL import Image, ImageChops, ImageFilter
 
     w, h = img.size
     small = img.resize((max(1, w // 4), max(1, h // 4)), Image.BILINEAR)
     small = small.point(lambda v: max(0, v - 70) * 255 // 185)
     small = small.filter(ImageFilter.GaussianBlur(7))
-    glow = small.resize((w, h), Image.BILINEAR).point(lambda v: int(v * 0.85))
+    gain = 0.85 * (1.0 + max(0.0, boost))
+    glow = small.resize((w, h), Image.BILINEAR).point(lambda v: min(255, int(v * gain)))
     img = ImageChops.screen(img, glow)
     if glitch > 0:
         img = glitch_fx(img, glitch, seed)
@@ -1200,7 +1349,13 @@ class CinematicVideoRenderer:
                 ("XI", "flow", c.VIDEO_FLOW_S)]
         if c.VIDEO_GROWTH_S > 0 and data.get("growth", {}).get("releases"):
             acts.append(("XII", "growth", c.VIDEO_GROWTH_S))
-        plan: List[Tuple[str, float, Dict[str, Any]]] = [("title", c.VIDEO_TITLE_S, {})]
+        plan: List[Tuple[str, float, Dict[str, Any]]] = []
+        lines = hook_lines(data)
+        if c.VIDEO_HOOK_S > 0 and lines:
+            count = len(lines)
+            accents = [c.VIDEO_HOOK_S * (c.VIDEO_HOOK_LEAD + c.VIDEO_HOOK_SPAN * i / count) for i in range(count)]
+            plan.append(("hook", c.VIDEO_HOOK_S, {"lines": lines, "accents": accents}))
+        plan.append(("title", c.VIDEO_TITLE_S, {}))
         for card, kind, dur in acts:
             if dur <= 0:
                 continue
@@ -1462,9 +1617,10 @@ class CinematicVideoRenderer:
         scenes, total = self.build_scenes(data)
         bd = Backdrop(cfg.VIDEO_WIDTH, cfg.VIDEO_HEIGHT)
         fonts = resolve_fonts()
-        global _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL, _RENDER_BD, _RENDER_FONTS, _RENDER_CFG
+        global _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL, _RENDER_BD, _RENDER_FONTS, _RENDER_CFG, _RENDER_SYNC
         _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL = data, scenes, total
         _RENDER_BD, _RENDER_FONTS, _RENDER_CFG = bd, fonts, cfg
+        _RENDER_SYNC = SoundtrackComposer(cfg)
         self._prepare_layouts(data)
         img = _draw_frame(frame_index)
         return img.tobytes()
@@ -1479,31 +1635,183 @@ class CinematicVideoRenderer:
         except ImportError as exc:
             raise RuntimeError("PIL not installed, skipping video") from exc
         scenes, total = self.build_scenes(data)
-        global _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL, _RENDER_BD, _RENDER_FONTS, _RENDER_CFG
+        global _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL, _RENDER_BD, _RENDER_FONTS, _RENDER_CFG, _RENDER_SYNC
         _RENDER_D, _RENDER_SCENES, _RENDER_TOTAL = data, scenes, total
         _RENDER_BD = Backdrop(cfg.VIDEO_WIDTH, cfg.VIDEO_HEIGHT)
         _RENDER_FONTS = resolve_fonts()
         _RENDER_CFG = cfg
+        _RENDER_SYNC = SoundtrackComposer(cfg)
         self._prepare_layouts(data)
         n_frames = max(1, int(total * cfg.VIDEO_FPS))
+        workdir = tempfile.mkdtemp(prefix="readmenator-video-")
+        try:
+            cmd = self._encode_command(data, scenes, total, str(output_path), workdir)
+            proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
+            jobs = cfg.VIDEO_JOBS or (os.cpu_count() or 4)
+            ctx = multiprocessing.get_context("fork")
+            with ctx.Pool(jobs) as pool:
+                for buf in pool.imap(_render_frame_bytes, range(n_frames), chunksize=4):
+                    proc.stdin.write(buf)
+            proc.stdin.close()
+            if proc.wait() != 0:
+                raise RuntimeError("ffmpeg failed while encoding video")
+        finally:
+            shutil.rmtree(workdir, ignore_errors=True)
+        return str(output_path)
+
+    def _encode_command(
+        self, data: Dict[str, Any], scenes: List[Dict[str, Any]], total: float,
+        output_path: str, workdir: str,
+    ) -> List[str]:
+        """Build the ffmpeg argument list: raw frames, score, chapters, encoder.
+
+        Args:
+            data: Collected scene payload (release timeline for the pings).
+            scenes: Scenes on the global clock.
+            total: Video duration in seconds.
+            output_path: Destination mp4 path.
+            workdir: Private temporary directory for the score and metadata.
+
+        Returns:
+            Argument list for subprocess, never a shell string.
+        """
+        cfg = self.config
         cmd = ["ffmpeg", "-y", "-loglevel", "error", "-f", "rawvideo", "-pix_fmt", "rgb24",
                "-s", f"{cfg.VIDEO_WIDTH}x{cfg.VIDEO_HEIGHT}", "-r", str(cfg.VIDEO_FPS), "-i", "-"]
+        maps = ["-map", "0:v"]
+        inputs = 1
+        audio = self.audio_track(data, scenes, total, workdir)
+        if audio:
+            cmd += ["-i", audio]
+            maps += ["-map", f"{inputs}:a", "-c:a", "aac", "-b:a", str(cfg.VIDEO_AUDIO_BITRATE), "-shortest"]
+            inputs += 1
+        if cfg.VIDEO_CHAPTERS_ENABLED:
+            meta = Path(workdir) / "chapters.txt"
+            meta.write_text(chapter_metadata(scenes, total, cfg, data.get("project", "")), encoding="utf-8")
+            cmd += ["-f", "ffmetadata", "-i", str(meta)]
+            maps += ["-map_metadata", str(inputs), "-map_chapters", str(inputs)]
+        cmd += maps
+        cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", str(cfg.VIDEO_CRF),
+                "-pix_fmt", "yuv420p", "-movflags", "+faststart", output_path]
+        return cmd
+
+    def audio_track(
+        self, data: Dict[str, Any], scenes: List[Dict[str, Any]], total: float, workdir: str,
+    ) -> str:
+        """Return the audio file to mux, or "" for a silent video.
+
+        A user supplied track (VIDEO_MUSIC_PATH or READMENATOR_MUSIC) wins;
+        otherwise the procedural score is composed when VIDEO_AUDIO_ENABLED.
+        A failed composition never fails the render.
+        """
+        cfg = self.config
         music = cfg.VIDEO_MUSIC_PATH or os.environ.get("READMENATOR_MUSIC", "")
         if music and Path(music).is_file():
-            cmd += ["-i", str(music), "-map", "0:v", "-map", "1:a",
-                    "-c:a", "aac", "-b:a", "128k", "-shortest"]
-        cmd += ["-c:v", "libx264", "-preset", "medium", "-crf", str(cfg.VIDEO_CRF),
-                "-pix_fmt", "yuv420p", "-movflags", "+faststart", str(output_path)]
-        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
-        jobs = cfg.VIDEO_JOBS or (os.cpu_count() or 4)
-        ctx = multiprocessing.get_context("fork")
-        with ctx.Pool(jobs) as pool:
-            for buf in pool.imap(_render_frame_bytes, range(n_frames), chunksize=4):
-                proc.stdin.write(buf)
-        proc.stdin.close()
-        if proc.wait() != 0:
-            raise RuntimeError("ffmpeg failed while encoding video")
-        return str(output_path)
+            return str(music)
+        if not cfg.VIDEO_AUDIO_ENABLED:
+            return ""
+        try:
+            target = str(Path(workdir) / "score.wav")
+            composer = SoundtrackComposer(cfg)
+            return composer.write(target, scenes, total, score_ping_times(scenes, data, cfg))
+        except (OSError, ValueError, ArithmeticError):
+            logger.debug("Soundtrack skipped", exc_info=True)
+            return ""
+
+
+def hook_lines(data: Dict[str, Any]) -> List[str]:
+    """Cold-open statements: the most striking measured facts of the project.
+
+    Every line is derived from the scan (file and symbol counts, the
+    blast radius of the most central file, the release history). An
+    empty project yields no lines, which skips the cold open.
+    """
+    files = int(data.get("files", 0))
+    if files <= 0:
+        return []
+    lines = [f"{fmt_int(files)} FILES. {fmt_int(int(data.get('symbols', 0)))} SYMBOLS."]
+    tree = data.get("dep_tree", {})
+    dependents = len(tree.get("order", [])) - 1
+    if tree.get("root") and dependents > 0:
+        hub = short_label(Path(str(tree["root"])).name, 28).upper()
+        lines.append(f"{fmt_int(dependents)} OF THEM BREAK IF {hub} BREAKS.")
+    releases = len(data.get("growth", {}).get("releases", []))
+    if releases > 1:
+        lines.append(f"{fmt_int(releases)} RELEASES OF HISTORY.")
+    lines.append("THIS IS ITS ANATOMY.")
+    return lines
+
+
+def score_ping_times(
+    scenes: List[Dict[str, Any]], data: Dict[str, Any], cfg: Config,
+) -> List[float]:
+    """Video-clock seconds of every pinged moment: cold-open lines, then releases."""
+    out: List[float] = []
+    for scene in scenes:
+        out.extend(scene["start"] + accent for accent in scene.get("accents", []))
+    return out + growth_release_times(scenes, data, cfg)
+
+
+def growth_release_times(
+    scenes: List[Dict[str, Any]], data: Dict[str, Any], cfg: Config,
+) -> List[float]:
+    """Video-clock seconds at which each release lands in the growth act.
+
+    Mirrors the birth timing of the growth scene: releases are spread
+    evenly over the growing phase, the first one at the scene start.
+    """
+    count = len(data.get("growth", {}).get("releases", []))
+    out: List[float] = []
+    for scene in scenes:
+        if scene["kind"] != "growth" or count == 0:
+            continue
+        span = float(cfg.VIDEO_GROWTH_GROW_FRACTION) * scene["dur"] / max(1, count - 1)
+        out.extend(scene["start"] + index * span for index in range(count))
+    return out
+
+
+def _ffmeta_escape(text: str) -> str:
+    """Escape the characters ffmetadata treats as syntax."""
+    out = text.replace("\\", "\\\\")
+    for char in ("=", ";", "#", "\n"):
+        out = out.replace(char, "\\" + char)
+    return out
+
+
+def chapter_metadata(
+    scenes: List[Dict[str, Any]], total: float, cfg: Config, project: str = "",
+) -> str:
+    """Render ffmetadata chapters, one per act, starting at its title card.
+
+    Args:
+        scenes: Scenes on the global clock.
+        total: Video duration in seconds.
+        cfg: Configuration carrying VIDEO_CHAPTER_TITLES.
+        project: Project name used as the container title.
+
+    Returns:
+        FFMETADATA1 text with millisecond chapter marks covering the video.
+    """
+    titles = dict(cfg.VIDEO_CHAPTER_TITLES)
+    marks: List[Tuple[float, str]] = []
+    pending: Optional[float] = None
+    for scene in scenes:
+        if scene["kind"] in cfg.VIDEO_LEAD_IN_KINDS:
+            pending = scene["start"] if pending is None else pending
+            continue
+        label = titles.get(scene["kind"], scene["kind"])
+        if scene.get("act"):
+            label = f"{scene['act']}. {label}"
+        marks.append((scene["start"] if pending is None else pending, label))
+        pending = None
+    lines = [";FFMETADATA1"]
+    if project:
+        lines.append(f"title={_ffmeta_escape(project)} // codebase overview")
+    for index, (start, label) in enumerate(marks):
+        end = marks[index + 1][0] if index + 1 < len(marks) else total
+        lines += ["[CHAPTER]", "TIMEBASE=1/1000", f"START={int(round(start * 1000))}",
+                  f"END={int(round(end * 1000))}", f"title={_ffmeta_escape(label)}"]
+    return "\n".join(lines) + "\n"
 
 
 def _render_frame_bytes(fi: int) -> bytes:
@@ -1530,11 +1838,17 @@ def _paint_scene(index: int, lt: float) -> Any:
     lt = max(0.0, min(sc["dur"], lt))
     gt = sc["start"] + lt
     img = _RENDER_BD.base.copy()
-    if sc["kind"] not in ("title", "card", "outro", "invite"):
+    if sc["kind"] not in ("hook", "title", "card", "outro", "invite"):
         draw_grid(img, gt, 0.35, _RENDER_BD)
     d = ImageDraw.Draw(img, "RGBA")
-    _SCENE_FN[sc["kind"]](img, d, lt, gt, sc)
-    return img
+    global _EMIT
+    _EMIT = []
+    try:
+        _SCENE_FN[sc["kind"]](img, d, lt, gt, sc)
+        emitted = _EMIT
+    finally:
+        _EMIT = None
+    return apply_glow(img, emitted, _RENDER_CFG or Config())
 
 
 def _motion_blurred(index: int, lt: float) -> Any:
@@ -1561,6 +1875,112 @@ def _outgoing_frame(index: int) -> Any:
     return _TRANSITION_CACHE[index]
 
 
+def score_sync(
+    scenes: List[Dict[str, Any]], index: int, lt: float, cfg: Config,
+    composer: Optional[SoundtrackComposer],
+) -> Tuple[float, float]:
+    """Return (beat, punch) in [0, 1] for a frame, matching the generated score.
+
+    The beat envelope peaks on every kick of the scene's loop (which
+    restarts on the first frame of each scene outside
+    VIDEO_AUDIO_CONTINUE_KINDS) and is scaled by how present the drums
+    are at that scene's energy. The punch decays from the cut of every
+    scene that receives an audio impact. Both are zero without a score.
+    """
+    if composer is None or not cfg.VIDEO_AUDIO_ENABLED or not scenes:
+        return 0.0, 0.0
+    scene = scenes[index]
+    anchor = index
+    while anchor > 0 and scenes[anchor]["kind"] in cfg.VIDEO_AUDIO_CONTINUE_KINDS:
+        anchor -= 1
+    elapsed = scene["start"] + lt - scenes[anchor]["start"]
+    phase = (elapsed / composer.beat_seconds) % 1.0
+    drums = composer.stem_weight("drums", composer.level(scene["kind"]))
+    beat = drums * math.exp(-float(cfg.VIDEO_BEAT_DECAY) * phase)
+    punch = 0.0
+    window = float(cfg.VIDEO_IMPACT_VISUAL_S)
+    if index > 0 and window > 0 and lt < window and scene["kind"] not in cfg.VIDEO_AUDIO_CONTINUE_KINDS:
+        punch = (1.0 - lt / window) ** 2
+    return beat, punch
+
+
+def impact_punch(img: Any, punch: float, cfg: Config) -> Any:
+    """Zoom-punch and flash a frame on a cut (punch in [0, 1])."""
+    image = _img()
+    w, h = img.size
+    zoom = 1.0 + float(cfg.VIDEO_IMPACT_ZOOM) * punch
+    cw, ch = max(1, int(w / zoom)), max(1, int(h / zoom))
+    left, top = (w - cw) // 2, (h - ch) // 2
+    img = img.crop((left, top, left + cw, top + ch)).resize((w, h), image.BILINEAR)
+    flash = max(0.0, min(1.0, float(cfg.VIDEO_IMPACT_FLASH) * punch))
+    return image.blend(img, image.new("RGB", (w, h), (255, 255, 255)), flash) if flash > 0 else img
+
+
+def draw_stars(
+    d: Any, box: Tuple[int, int, int, int], yaw: float, pitch: float, gt: float, count: int,
+) -> None:
+    """Draw a deterministic star field that turns with the 3D camera.
+
+    Stars are fixed directions on the celestial sphere, rotated by the
+    camera yaw and pitch, so they drift behind the graph and give the
+    orbit a sense of depth.
+    """
+    x0, y0, x1, y1 = box
+    cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
+    reach = 0.75 * math.hypot(x1 - x0, y1 - y0)
+    cyaw, syaw = math.cos(yaw), math.sin(yaw)
+    cpitch, spitch = math.cos(pitch), math.sin(pitch)
+    seed = 4242
+    for index in range(max(0, count)):
+        seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF
+        angle = 2 * math.pi * (seed % 10007) / 10007
+        seed = (seed * 1103515245 + 12345) & 0x7FFFFFFF
+        glow = 0.25 + 0.75 * (seed % 1000) / 1000
+        z = 1 - 2 * (index + 0.5) / count
+        ring = math.sqrt(max(0.0, 1 - z * z))
+        x, y = ring * math.cos(angle), ring * math.sin(angle)
+        x1r = x * cyaw + z * syaw
+        z1r = -x * syaw + z * cyaw
+        y2r = y * cpitch - z1r * spitch
+        if y * spitch + z1r * cpitch <= 0:
+            continue
+        px, py = cx + x1r * reach, cy + y2r * reach
+        if not (x0 <= px < x1 and y0 <= py < y1):
+            continue
+        twinkle = 0.7 + 0.3 * math.sin(gt * (1.0 + glow) + index)
+        d.point((px, py), fill=alpha((200, 210, 255), 0.8 * glow * twinkle))
+
+
+def _scene_hook(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> None:
+    """Cold open: the most striking measured facts slam in on black, one per beat."""
+    assert _RENDER_FONTS is not None and _RENDER_CFG is not None
+    fonts, cfg = _RENDER_FONTS, _RENDER_CFG
+    w, h = cfg.VIDEO_WIDTH, cfg.VIDEO_HEIGHT
+    d.rectangle((0, 0, w, h), fill=(0, 0, 0, 255))
+    lines: List[str] = sc.get("lines", [])
+    accents: List[float] = sc.get("accents", [])
+    shown = [i for i, accent in enumerate(accents) if lt >= accent]
+    if not shown:
+        return
+    out = 1 - ease((lt - (sc["dur"] - 0.35)) / 0.35)
+    gap = h * 0.13
+    top = h / 2 - gap * (len(lines) - 1) / 2
+    for i in shown:
+        age = lt - accents[i]
+        newest = i == shown[-1]
+        font = next((fonts[k] for k in ("big", "mid", "head") if fonts[k].getlength(lines[i]) <= 0.9 * w),
+                    fonts["head"])
+        y = top + gap * i
+        if newest:
+            slam = 1 - ease(age / 0.3)
+            chroma_text(img, (w / 2, y), lines[i], font, alpha((255, 255, 255), out),
+                        spread=int(2 + 12 * slam), anchor="mm")
+            d.line((w / 2 - 200 * ease(age / 0.5), y + gap * 0.38, w / 2 + 200 * ease(age / 0.5), y + gap * 0.38),
+                   fill=alpha(MAGENTA, 0.9 * out), width=2)
+        else:
+            d.text((w / 2, y), lines[i], font=font, fill=alpha(DIM, out), anchor="mm")
+
+
 def _draw_frame(fi: int) -> Any:
     """Draw one frame: scene, motion blur, crossfade from the previous scene, post."""
     assert _RENDER_D is not None and _RENDER_FONTS is not None and _RENDER_CFG is not None
@@ -1579,7 +1999,14 @@ def _draw_frame(fi: int) -> Any:
     glitch = max(0.0, 1 - edge / 12) if gt > 12 / max(1, fps) else 0.0
     if fade > 0:
         glitch *= float(cfg.VIDEO_TRANSITION_GLITCH)
-    img = post(img, glitch * 0.8, fi)
+    window = max(1e-6, float(cfg.VIDEO_HOOK_GLITCH_S))
+    for accent in sc.get("accents", []):
+        if 0 <= lt - accent < window:
+            glitch = max(glitch, 1 - (lt - accent) / window)
+    beat, punch = score_sync(_RENDER_SCENES, index, lt, cfg, _RENDER_SYNC)
+    if punch > 0:
+        img = impact_punch(img, punch, cfg)
+    img = post(img, glitch * 0.8, fi, beat * float(cfg.VIDEO_BEAT_BLOOM))
     if gt < 0.8:
         img = _img().blend(_img().new("RGB", img.size, (0, 0, 0)), img, ease(gt / 0.8))
     return img
@@ -1740,8 +2167,9 @@ def _scene_tree(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> N
         dep = depth.get(nid, 0)
         r = (9 if nid == root else 6 if dep == 1 else 4) + 4 * flash
         col = YELLOW if nid == root else (MAGENTA if dep == 1 else CYAN)
-        d.ellipse((x - r, y - r, x + r, y + r), fill=col,
-                  outline=(255, 255, 255) if flash > 0 else None, width=2)
+        draw_orb(d, x, y, r, col, 1.0, 0.7 + 0.3 * flash)
+        if flash > 0:
+            d.ellipse((x - r - 2, y - r - 2, x + r + 2, y + r + 2), outline=alpha((255, 255, 255), flash), width=2)
     for i in by_rank:
         nid = shown[i]
         if nid not in pos:
@@ -1844,6 +2272,8 @@ def _scene_graph(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> 
         ca, cb = membership.get(a, -1), membership.get(b, -1)
         col = community_color(ca) if ca == cb else (150, 140, 210)
         d.line((*pos[a], *pos[b]), fill=alpha(col, edge_a if ca == cb else edge_a * 0.6), width=1)
+        if ca == cb:
+            emit_beam([pos[a], pos[b]], col, 0.35 * edge_a)
     after = ease((lt - 0.4 - settle) / 1.2)
     if after > 0 and links:
         hot = sorted(links, key=lambda e: (-(rank.get(e[0], 0.0) + rank.get(e[1], 0.0)), e))[: cfg.VIDEO_SURFERS]
@@ -1864,7 +2294,7 @@ def _scene_graph(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) -> 
         if weight > 0.5 and after > 0:
             glow = r + 6 + 3 * math.sin(gt * 3 + weight * 5)
             d.ellipse((x - glow, y - glow, x + glow, y + glow), fill=alpha(col, 0.18 * after))
-        d.ellipse((x - r, y - r, x + r, y + r), fill=alpha(col, 0.95), outline=alpha((255, 255, 255), 0.5), width=1)
+        draw_orb(d, x, y, r, col, 0.95, 0.5 + 0.5 * p)
     ranked = sorted(ids, key=lambda nid: (-rank.get(nid, 0.0), nid))
     label_a = ease((lt - 0.6 - settle) / 1.0)
     if label_a > 0:
@@ -1938,6 +2368,8 @@ def _scene_bundle(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
         lit = spot_index is None or ca == spot_index or cb == spot_index
         col = community_color(ca)
         d.line(pts, fill=alpha(col, (0.32 if lit else 0.05)), width=2 if lit and spot_index is not None else 1)
+        if lit:
+            emit_beam(pts, col, 0.22 if spot_index is not None else 0.12, 2)
     if reveal >= 1:
         for k, (a, b, pts) in enumerate(layout.curves):
             ca, cb = membership.get(a, -1), membership.get(b, -1)
@@ -1962,7 +2394,7 @@ def _scene_bundle(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
             d.text((tx, ty), f"{name} ({count})", font=fonts["tiny_b"], fill=alpha(col, 0.95 if lit else 0.45), anchor=anchor)
     for nid, (x, y) in layout.leaves.items():
         col = community_color(membership.get(nid, -1))
-        d.ellipse((x - 2.5, y - 2.5, x + 2.5, y + 2.5), fill=alpha(col, 0.9))
+        draw_orb(d, x, y, 3.0, col, 0.9)
     flows: Dict[Tuple[int, int], int] = {}
     for a, b, _pts in layout.curves:
         ca, cb = membership.get(a, -1), membership.get(b, -1)
@@ -2313,8 +2745,8 @@ def _scene_growth(img: Any, d: Any, lt: float, gt: float, sc: Dict[str, Any]) ->
                      cfg.VIDEO_WIDTH, _caption_y(cfg))
         return
     dur = sc["dur"]
-    grow_end = 0.72 * dur
-    fold_end = 0.92 * dur
+    grow_end = float(cfg.VIDEO_GROWTH_GROW_FRACTION) * dur
+    fold_end = float(cfg.VIDEO_GROWTH_FOLD_FRACTION) * dur
     inner = (box[0] + 2, box[1] + 31, box[2] - 2, box[3] - 34)
     if lt < grow_end:
         frame, meta = _growth_frame(data, cfg, lt, grow_end)
@@ -2725,7 +3157,7 @@ def _img_draw(img: Any) -> Any:
     return ImageDraw.Draw(img, "RGBA")
 
 
-_SCENE_FN = {"title": _scene_title, "card": _scene_card, "layers": _scene_layers,
+_SCENE_FN = {"hook": _scene_hook, "title": _scene_title, "card": _scene_card, "layers": _scene_layers,
              "gods": _scene_gods, "tree": _scene_tree, "communities": _scene_communities,
              "graph": _scene_graph, "orbit": _scene_orbit, "bundle": _scene_bundle,
              "sphere": _scene_sphere, "dna": _scene_dna, "invite": _scene_invite,

@@ -1,14 +1,14 @@
 # readmenator: _video
 
-*Community 0 | 41 files | cohesion 0.35*
+*Community 1 | 38 files | cohesion 0.34*
 
 ## Definition
 
-This community groups 41 file(s) rooted at `tests` with dominant language py (cohesion 0.35). Central symbols: `ArchitectureLinter`, `Backdrop`, `CinematicVideoRenderer`, `Config`, `CursorRulesGenerator`, `DataflowAnalyzer`, `DeadCodeStripper`, `DirectoryWatcher`. Core file: `readmenator/_video.py` (98 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
+This community groups 38 file(s) rooted at `tests` with dominant language py (cohesion 0.34). Central symbols: `ArchitectureLinter`, `AudioCue`, `Backdrop`, `CinematicVideoRenderer`, `Config`, `CursorRulesGenerator`, `DataflowAnalyzer`, `DeadCodeStripper`. Core file: `readmenator/_video.py` (114 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
-### `tests` (21 files)
+### `tests` (19 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -23,7 +23,7 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 | `tests/test_htmlpack.py` | py | testing | 18 | yes |
 | `tests/test_integration.py` | py | testing | 16 | no |
 
-### `readmenator` (19 files)
+### `readmenator` (18 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -43,7 +43,7 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 |------|----------|-------|---------|-----|
 | `readmenator.py` | py | utility | 0 | yes |
 
-*... and 21 more files in this community.*
+*... and 18 more files in this community.*
 
 
 ## Key Symbols
@@ -81,17 +81,17 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 82
-- Cross-boundary resolved imports (EXTRACTED): 166
+- Internal resolved imports (EXTRACTED): 78
+- Cross-boundary resolved imports (EXTRACTED): 162
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
-- [EXTRACTED] depends_on community 0 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
+- [EXTRACTED] depends_on community 1 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
 
 ## Risks
 
@@ -100,9 +100,9 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 
 ## Open Questions
 
-- Why do 9 file(s) lack file-level docs (e.g. `tests/test_config.py`)? What purpose do they serve?
+- Why do 7 file(s) lack file-level docs (e.g. `tests/test_config.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator: _video changed?
-- Should readmenator: _video be split, given cohesion 0.35?
+- Should readmenator: _video be split, given cohesion 0.34?
 
 ## Sources
 
@@ -120,10 +120,10 @@ This community groups 41 file(s) rooted at `tests` with dominant language py (co
 - `readmenator/_mcp_server.py`
 - `readmenator/_receipts.py`
 - `readmenator/_refactorizer.py`
-- `readmenator/_scanner.py`
-- `readmenator/_taint.py`
+- `readmenator/_soundtrack.py`
 - `readmenator/_uncertainty.py`
 - `readmenator/_video.py`
 - `readmenator/_watcher.py`
 - `readmenator/_yaralite.py`
-- *... and 21 more*
+- `tests/test_config.py`
+- *... and 18 more*

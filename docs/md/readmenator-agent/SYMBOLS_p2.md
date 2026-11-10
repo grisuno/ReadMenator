@@ -192,16 +192,16 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `write_all` | method | `readmenator/_folder_readme.py:310` | `def write_all(self, project_root)` |
 | `ForceGraphRenderer` | class | `readmenator/_forcegraph.py:82` | `class ForceGraphRenderer` |
 | `__init__` | method | `readmenator/_forcegraph.py:85` | `def __init__(self, config)` |
-| `_family_color` | method | `readmenator/_forcegraph.py:523` | `def _family_color(self, name)` |
-| `_file_color` | method | `readmenator/_forcegraph.py:645` | `def _file_color(self, node_id, family, layer, palette)` |
-| `_node_doc` | method | `readmenator/_forcegraph.py:626` | `def _node_doc(self, node)` |
+| `_family_color` | method | `readmenator/_forcegraph.py:553` | `def _family_color(self, name)` |
+| `_file_color` | method | `readmenator/_forcegraph.py:675` | `def _file_color(self, node_id, family, layer, palette)` |
+| `_node_doc` | method | `readmenator/_forcegraph.py:656` | `def _node_doc(self, node)` |
 | `_seed_positions` | method | `readmenator/_forcegraph.py:316` | `def _seed_positions(self, payload)` |
-| `_symbol_list` | method | `readmenator/_forcegraph.py:632` | `def _symbol_list(self, node)` |
+| `_symbol_list` | method | `readmenator/_forcegraph.py:662` | `def _symbol_list(self, node)` |
 | `add_node` | function | `readmenator/_forcegraph.py:204` | `def add_node(node_id, label, node_type)` |
 | `build_payload` | method | `readmenator/_forcegraph.py:114` | `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)` |
-| `copy_vendor` | method | `readmenator/_forcegraph.py:607` | `def copy_vendor(self, dest_dir)` |
+| `copy_vendor` | method | `readmenator/_forcegraph.py:637` | `def copy_vendor(self, dest_dir)` |
 | `edge_palette` | method | `readmenator/_forcegraph.py:97` | `def edge_palette(self)` |
-| `family_color` | method | `readmenator/_forcegraph.py:512` | `def family_color(self, name)` |
+| `family_color` | method | `readmenator/_forcegraph.py:542` | `def family_color(self, name)` |
 | `family_color_from_name` | function | `readmenator/_forcegraph.py:41` | `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)` |
 | `file_of` | function | `readmenator/_forcegraph.py:150` | `def file_of(edge_id)` |
 | `group_colors` | method | `readmenator/_forcegraph.py:413` | `def group_colors(self, payload)` |
@@ -209,10 +209,10 @@ Previous: [SYMBOLS.md](SYMBOLS.md)
 | `node_value` | function | `readmenator/_forcegraph.py:69` | `def node_value(symbols, degree)` |
 | `page_settings` | method | `readmenator/_forcegraph.py:436` | `def page_settings(self, payload, live_api)` |
 | `render` | method | `readmenator/_forcegraph.py:359` | `def render(self, payload, analytics, title, home_href, live_api)` |
-| `thumbnail_svg` | method | `readmenator/_forcegraph.py:540` | `def thumbnail_svg(self, payload)` |
+| `thumbnail_svg` | method | `readmenator/_forcegraph.py:570` | `def thumbnail_svg(self, payload)` |
 | `vendor_href` | method | `readmenator/_forcegraph.py:109` | `def vendor_href(self)` |
 | `vendor_source` | method | `readmenator/_forcegraph.py:101` | `def vendor_source(self)` |
-| `write` | method | `readmenator/_forcegraph.py:580` | `def write(self, output_path, payload, analytics, title, home_href)` |
+| `write` | method | `readmenator/_forcegraph.py:610` | `def write(self, output_path, payload, analytics, title, home_href)` |
 | `GitHubWikiPublisher` | class | `readmenator/_gh_wiki.py:60` | `class GitHubWikiPublisher` |
 | `WikiPublishResult` | class | `readmenator/_gh_wiki.py:40` | `class WikiPublishResult` |
 | `__init__` | method | `readmenator/_gh_wiki.py:63` | `def __init__(self, config, runner)` |

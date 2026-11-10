@@ -182,6 +182,26 @@ external in a 2D map or a 3D space:
   rings (shells in 3D) and dependency tree.
 - **Lenses for logic bugs.** Import cycles (Tarjan SCC), files nothing imports
   (entry points or dead code), disconnected files, and PageRank hubs.
+- **Guided tour.** Press `G` (or the Tour button, or open `#tour=1`) and the
+  camera walks the architecture with a narrated bar: the whole project, the
+  top hub, the largest communities, the hubs, import cycles, and the longest
+  entry path into the hub. Left/Right step, Esc ends, touching the graph
+  pauses; in 3D the camera orbits while it plays (`FORCEGRAPH_TOUR_*`).
+- **Cinema mode.** Press `K` (or the Cinema button, or open `#cinema=1`): the
+  3D view turns files into glowing spheres with a bloom pass, a star field
+  that turns with the camera, a vignette and a slow orbit. The bloom pass is
+  the only extra download (pinned three.js module from the CDN); without
+  network the mode still works, minus the glow. Combine it with the tour:
+  `#cinema=1&tour=1`.
+- **Lit by default.** Files glow in their community color, the most central
+  dependencies carry travelling particles while nothing is selected, the
+  stage floats on a drifting nebula, and the 3D view opens in cinema mode on
+  the dark theme. The edge bundle page gets the same treatment: glowing
+  wires and nodes, an atmosphere around the globe, stars behind it.
+- **Motion that explains.** On load the files materialise in PageRank order
+  and each dependency appears once both ends exist; selecting a file sends a
+  ring out of it and its neighbourhood swells hop by hop. All of it is off
+  under `prefers-reduced-motion`.
 - Deep links restore the view: `#node=<id>&view=3d&layout=cluster&color=layer&dir=up&depth=2`,
   `#path=<a>~<b>`, `#lens=cycles`, `#edge=<key>`. The page also exposes
   `window.ReadmenatorExplorer` for console scripting.
@@ -344,6 +364,26 @@ globe of communities. Motion uses quintic
 smootherstep easing, scenes crossfade into each other (`VIDEO_TRANSITION_S`),
 and the 3D camera acts get shutter motion blur (`VIDEO_MOTION_BLUR_SAMPLES`).
 The circle and sphere acts share the explorer's crossing-reduction ordering.
+
+The video ships with a generated soundtrack: a deterministic synthwave score
+synthesised with the standard library (no samples, no network). The beat
+restarts on the first frame of every act, title cards drop to a pad with a
+riser into the cut, each cut lands with an impact, and every release of the
+growth act rings one note higher. Tune it with `VIDEO_AUDIO_*`, replace it
+with your own track through `VIDEO_MUSIC_PATH` or `READMENATOR_MUSIC`, or set
+`VIDEO_AUDIO_ENABLED=False` for silence. The mp4 also carries one chapter
+mark per act (`VIDEO_CHAPTERS_ENABLED`), so players can jump between them.
+
+Graphs are drawn as light: nodes are luminous orbs with a white-hot core,
+highlighted dependencies are beams, and every community sits in its own
+colored haze (an additive glow pass, `VIDEO_GLOW_*`, `VIDEO_NEBULA_*`).
+
+It opens cold: before the title, the most striking measured facts slam in on
+black (files and symbols, how many files break if the hub breaks, releases of
+history), one per ping (`VIDEO_HOOK_S`, 0 to skip). The picture follows the
+score: the neon bloom breathes on every kick (`VIDEO_BEAT_BLOOM`), each cut
+lands with a zoom punch and a flash on the audio impact (`VIDEO_IMPACT_*`),
+and the 3D acts get a star field that turns with the camera (`VIDEO_STARS`).
 
 ### GraphRAG for agents (zero tokens to build, cheap to query)
 

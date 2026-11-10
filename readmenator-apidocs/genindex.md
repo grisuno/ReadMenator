@@ -93,6 +93,7 @@
 - [`ApiParam`](modules/readmenator._apidocs.py.md#apiparam) class in `readmenator._apidocs`
 - [`ApiReference`](modules/readmenator._apidocs.py.md#apireference) class in `readmenator._apidocs`
 - [`ApiReferenceBuilder`](modules/readmenator._apidocs.py.md#apireferencebuilder) class in `readmenator._apidocs`
+- [`apply_glow`](modules/readmenator._video.py.md#apply_glow) function in `readmenator._video`
 - [`apply_view`](modules/readmenator._projections.py.md#apply_view) function in `readmenator._projections`
 - [`approx_tokens`](modules/readmenator._graphrag.py.md#ragcontext-approx_tokens) attribute of `RagContext` in `readmenator._graphrag`
 - [`ARCH_DIAGRAM_ENABLED`](modules/readmenator._config.py.md#config-arch_diagram_enabled) attribute of `Config` in `readmenator._config`
@@ -106,6 +107,8 @@
 - [`AssemblyParser`](modules/readmenator.parsers._assembly.py.md#assemblyparser) class in `readmenator.parsers._assembly`
 - [`assumed`](modules/readmenator._hypotheses.py.md#hypothesisverdict-assumed) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`attributes`](modules/readmenator._docstrings.py.md#doccomment-attributes) attribute of `DocComment` in `readmenator._docstrings`
+- [`audio_track`](modules/readmenator._video.py.md#cinematicvideorenderer-audio_track) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`AudioCue`](modules/readmenator._soundtrack.py.md#audiocue) class in `readmenator._soundtrack`
 - [`audit`](modules/readmenator._provenance.py.md#provenanceauditor-audit) method of `ProvenanceAuditor` in `readmenator._provenance`
 - [`audit`](modules/readmenator._app.py.md#readmenatorapplication-audit) method of `readmenatorApplication` in `readmenator._app`
 - [`audit_deep`](modules/readmenator._app.py.md#readmenatorapplication-audit_deep) method of `readmenatorApplication` in `readmenator._app`
@@ -124,6 +127,8 @@
 - [`Backdrop`](modules/readmenator._video.py.md#backdrop) class in `readmenator._video`
 - [`base_uids`](modules/readmenator._apidocs.py.md#apientity-base_uids) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`bases`](modules/readmenator._apidocs.py.md#apientity-bases) attribute of `ApiEntity` in `readmenator._apidocs`
+- [`beat_seconds`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-beat_seconds) property of `SoundtrackComposer` in `readmenator._soundtrack`
+- [`BEATS_PER_BAR`](modules/readmenator._soundtrack.py.md#beats_per_bar) constant in `readmenator._soundtrack`
 - [`BG_HORIZON`](modules/readmenator._video.py.md#bg_horizon) constant in `readmenator._video`
 - [`BG_TOP`](modules/readmenator._video.py.md#bg_top) constant in `readmenator._video`
 - [`BIAS`](modules/readmenator._uncertainty.py.md#heuristicscorer-bias) attribute of `HeuristicScorer` in `readmenator._uncertainty`
@@ -162,13 +167,19 @@
 - [`bundle_layout`](modules/readmenator._video.py.md#cinematicvideorenderer-bundle_layout) method of `CinematicVideoRenderer` in `readmenator._video`
 - [`BUNDLE_RELATIONS`](modules/readmenator._bundlegraph.py.md#bundle_relations) constant in `readmenator._bundlegraph`
 - [`bundlegraph`](modules/readmenator._pipeline.py.md#analyzerfactory-bundlegraph) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`BUNDLEGRAPH_AMBIENT_PARTICLES`](modules/readmenator._config.py.md#config-bundlegraph_ambient_particles) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_BETA`](modules/readmenator._config.py.md#config-bundlegraph_beta) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_DEPTH_FADE`](modules/readmenator._config.py.md#config-bundlegraph_depth_fade) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_DIM_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_dim_alpha) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_EDGE_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_edge_alpha) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_ENABLED`](modules/readmenator._config.py.md#config-bundlegraph_enabled) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_FLOW_TOP_N`](modules/readmenator._config.py.md#config-bundlegraph_flow_top_n) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_GLOW_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_glow_alpha) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_GLOW_CURVES`](modules/readmenator._config.py.md#config-bundlegraph_glow_curves) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_GLOW_ENABLED`](modules/readmenator._config.py.md#config-bundlegraph_glow_enabled) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_GLOW_SPREAD`](modules/readmenator._config.py.md#config-bundlegraph_glow_spread) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_GROUP_GAP`](modules/readmenator._config.py.md#config-bundlegraph_group_gap) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_HALO_ALPHA`](modules/readmenator._config.py.md#config-bundlegraph_halo_alpha) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_HIT_PX`](modules/readmenator._config.py.md#config-bundlegraph_hit_px) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_INNER_RATIO`](modules/readmenator._config.py.md#config-bundlegraph_inner_ratio) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_LABEL_ALL_MAX`](modules/readmenator._config.py.md#config-bundlegraph_label_all_max) attribute of `Config` in `readmenator._config`
@@ -189,6 +200,7 @@
 - [`BUNDLEGRAPH_ROTATE_SPEED`](modules/readmenator._config.py.md#config-bundlegraph_rotate_speed) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_SAMPLES`](modules/readmenator._config.py.md#config-bundlegraph_samples) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_SPHERE_REFINE_SWEEPS`](modules/readmenator._config.py.md#config-bundlegraph_sphere_refine_sweeps) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_STARS`](modules/readmenator._config.py.md#config-bundlegraph_stars) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_THUMB_EDGES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_edges) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_THUMB_SAMPLES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_samples) attribute of `Config` in `readmenator._config`
 - [`BundleGraphRenderer`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer) class in `readmenator._bundlegraph`
@@ -229,6 +241,8 @@
 - [`change_impacts`](modules/readmenator._models.py.md#analysisresultv2-change_impacts) attribute of `AnalysisResultV2` in `readmenator._models`
 - [`changed`](modules/readmenator._diagrams.py.md#mapdelta-changed) attribute of `MapDelta` in `readmenator._diagrams`
 - [`ChangeImpact`](modules/readmenator._models.py.md#changeimpact) class in `readmenator._models`
+- [`CHANNELS`](modules/readmenator._soundtrack.py.md#channels) constant in `readmenator._soundtrack`
+- [`chapter_metadata`](modules/readmenator._video.py.md#chapter_metadata) function in `readmenator._video`
 - [`char_w`](modules/readmenator._flowlayout.py.md#layoutmetrics-char_w) attribute of `LayoutMetrics` in `readmenator._flowlayout`
 - [`check_freshness`](modules/readmenator._app.py.md#readmenatorapplication-check_freshness) method of `readmenatorApplication` in `readmenator._app`
 - [`checks`](modules/readmenator._diagrams.py.md#mapreceipt-checks) attribute of `MapReceipt` in `readmenator._diagrams`
@@ -293,6 +307,7 @@
 - [`COMPONENTS_NODE_SYMBOLS`](modules/readmenator._config.py.md#config-components_node_symbols) attribute of `Config` in `readmenator._config`
 - [`COMPONENTS_OUTPUT_DIR`](modules/readmenator._config.py.md#config-components_output_dir) attribute of `Config` in `readmenator._config`
 - [`compose`](modules/readmenator._category.py.md#category-compose) method of `Category` in `readmenator._category`
+- [`compose`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-compose) method of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`composite_authority_weight`](modules/readmenator._rank.py.md#rankconfig-composite_authority_weight) attribute of `RankConfig` in `readmenator._rank`
 - [`composite_doc_weight`](modules/readmenator._rank.py.md#rankconfig-composite_doc_weight) attribute of `RankConfig` in `readmenator._rank`
 - [`composite_freshness_weight`](modules/readmenator._rank.py.md#rankconfig-composite_freshness_weight) attribute of `RankConfig` in `readmenator._rank`
@@ -354,6 +369,7 @@
 - [`create_pr`](modules/readmenator_orchestrator.py.md#githubclient-create_pr) method of `GitHubClient` in `readmenator_orchestrator`
 - [`created_at`](modules/readmenator._receipts.py.md#releasereceiptrecord-created_at) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`CSharpParser`](modules/readmenator.parsers._csharp.py.md#csharpparser) class in `readmenator.parsers._csharp`
+- [`cues`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-cues) method of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`current_lines`](modules/readmenator._models.py.md#refactoringplan-current_lines) attribute of `RefactoringPlan` in `readmenator._models`
 - [`CURSORRULES_ENABLED`](modules/readmenator._config.py.md#config-cursorrules_enabled) attribute of `Config` in `readmenator._config`
 - [`CURSORRULES_OUTPUT`](modules/readmenator._config.py.md#config-cursorrules_output) attribute of `Config` in `readmenator._config`
@@ -508,7 +524,9 @@
 - [`draw_cloud3d`](modules/readmenator._video.py.md#draw_cloud3d) function in `readmenator._video`
 - [`draw_grid`](modules/readmenator._video.py.md#draw_grid) function in `readmenator._video`
 - [`draw_header`](modules/readmenator._video.py.md#draw_header) function in `readmenator._video`
+- [`draw_orb`](modules/readmenator._video.py.md#draw_orb) function in `readmenator._video`
 - [`draw_sphere3d`](modules/readmenator._video.py.md#draw_sphere3d) function in `readmenator._video`
+- [`draw_stars`](modules/readmenator._video.py.md#draw_stars) function in `readmenator._video`
 - [`draw_sun`](modules/readmenator._video.py.md#draw_sun) function in `readmenator._video`
 - [`duration_ms`](modules/readmenator._receipts.py.md#releasereceiptrecord-duration_ms) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 
@@ -538,6 +556,8 @@
 - [`embedder`](modules/readmenator._pipeline.py.md#analyzerfactory-embedder) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`Embedder`](modules/readmenator._embed.py.md#embedder) class in `readmenator._embed`
 - [`emergence_frames`](modules/readmenator._video.py.md#cinematicvideorenderer-emergence_frames) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`emit_beam`](modules/readmenator._video.py.md#emit_beam) function in `readmenator._video`
+- [`emit_orb`](modules/readmenator._video.py.md#emit_orb) function in `readmenator._video`
 - [`enabled`](modules/readmenator._ollama.py.md#ollamaclient-enabled) method of `OllamaClient` in `readmenator._ollama`
 - [`enabled`](modules/readmenator._sourceview.py.md#sourceviewbuilder-enabled) method of `SourceViewBuilder` in `readmenator._sourceview`
 - [`encode`](modules/readmenator._embed.py.md#embedder-encode) method of `Embedder` in `readmenator._embed`
@@ -704,12 +724,24 @@
 - [`FORCEGRAPH_3D_MIN_GLYPH_PX`](modules/readmenator._config.py.md#config-forcegraph_3d_min_glyph_px) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_3D_ORBIT_SPEED`](modules/readmenator._config.py.md#config-forcegraph_3d_orbit_speed) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_3D_PARTICLE_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_3d_particle_width) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_AMBIENT_EDGES`](modules/readmenator._config.py.md#config-forcegraph_ambient_edges) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_ARROW_LENGTH`](modules/readmenator._config.py.md#config-forcegraph_arrow_length) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_ARROW_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_arrow_zoom) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_BG`](modules/readmenator._config.py.md#config-forcegraph_bg) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_CDN_JS_2D`](modules/readmenator._config.py.md#config-forcegraph_cdn_js_2d) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_CDN_JS_3D`](modules/readmenator._config.py.md#config-forcegraph_cdn_js_3d) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_CHARGE`](modules/readmenator._config.py.md#config-forcegraph_charge) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_BLOOM_CDN_JS`](modules/readmenator._config.py.md#config-forcegraph_cinema_bloom_cdn_js) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_BLOOM_RADIUS`](modules/readmenator._config.py.md#config-forcegraph_cinema_bloom_radius) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_BLOOM_STRENGTH`](modules/readmenator._config.py.md#config-forcegraph_cinema_bloom_strength) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_BLOOM_THRESHOLD`](modules/readmenator._config.py.md#config-forcegraph_cinema_bloom_threshold) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_DEFAULT`](modules/readmenator._config.py.md#config-forcegraph_cinema_default) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_cinema_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_LINK_OPACITY`](modules/readmenator._config.py.md#config-forcegraph_cinema_link_opacity) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_NODE_OPACITY`](modules/readmenator._config.py.md#config-forcegraph_cinema_node_opacity) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_NODE_RESOLUTION`](modules/readmenator._config.py.md#config-forcegraph_cinema_node_resolution) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_STAR_COLOR`](modules/readmenator._config.py.md#config-forcegraph_cinema_star_color) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_CINEMA_STARS`](modules/readmenator._config.py.md#config-forcegraph_cinema_stars) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_CLUSTER_STRENGTH`](modules/readmenator._config.py.md#config-forcegraph_cluster_strength) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_COLLIDE_MAX_NODES`](modules/readmenator._config.py.md#config-forcegraph_collide_max_nodes) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_COLLIDE_PADDING`](modules/readmenator._config.py.md#config-forcegraph_collide_padding) attribute of `Config` in `readmenator._config`
@@ -735,12 +767,19 @@
 - [`FORCEGRAPH_FIT_PADDING_PX`](modules/readmenator._config.py.md#config-forcegraph_fit_padding_px) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_FLY_MS`](modules/readmenator._config.py.md#config-forcegraph_fly_ms) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_FLY_ZOOM`](modules/readmenator._config.py.md#config-forcegraph_fly_zoom) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_GLOW_ALPHA`](modules/readmenator._config.py.md#config-forcegraph_glow_alpha) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_GLOW_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_glow_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_GLOW_MAX_NODES`](modules/readmenator._config.py.md#config-forcegraph_glow_max_nodes) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_GLOW_SPREAD`](modules/readmenator._config.py.md#config-forcegraph_glow_spread) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HIT_PADDING_PX`](modules/readmenator._config.py.md#config-forcegraph_hit_padding_px) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HUB_TOP_N`](modules/readmenator._config.py.md#config-forcegraph_hub_top_n) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HULL_FILL_ALPHA`](modules/readmenator._config.py.md#config-forcegraph_hull_fill_alpha) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HULL_PAD`](modules/readmenator._config.py.md#config-forcegraph_hull_pad) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HULL_STROKE_ALPHA`](modules/readmenator._config.py.md#config-forcegraph_hull_stroke_alpha) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_HULLS_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_hulls_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_INTRO_FADE_MS`](modules/readmenator._config.py.md#config-forcegraph_intro_fade_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_INTRO_MS`](modules/readmenator._config.py.md#config-forcegraph_intro_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_INTRO_REFRESH_MS`](modules/readmenator._config.py.md#config-forcegraph_intro_refresh_ms) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_LABEL_HIGHLIGHT_MAX`](modules/readmenator._config.py.md#config-forcegraph_label_highlight_max) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_LABEL_MAX_CHARS`](modules/readmenator._config.py.md#config-forcegraph_label_max_chars) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_LABEL_TOP_N`](modules/readmenator._config.py.md#config-forcegraph_label_top_n) attribute of `Config` in `readmenator._config`
@@ -755,6 +794,8 @@
 - [`FORCEGRAPH_OUTPUT`](modules/readmenator._config.py.md#config-forcegraph_output) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_PAGE_TEMPLATE`](modules/readmenator._forcegraph_page.py.md#forcegraph_page_template) constant in `readmenator._forcegraph_page`
 - [`FORCEGRAPH_PARTICLES_ON_HIGHLIGHT`](modules/readmenator._config.py.md#config-forcegraph_particles_on_highlight) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_PULSE_MS`](modules/readmenator._config.py.md#config-forcegraph_pulse_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_PULSE_PX`](modules/readmenator._config.py.md#config-forcegraph_pulse_px) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_SEARCH_RESULTS`](modules/readmenator._config.py.md#config-forcegraph_search_results) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_SEED_GRAVITY`](modules/readmenator._config.py.md#config-forcegraph_seed_gravity) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_SEED_ITERATIONS`](modules/readmenator._config.py.md#config-forcegraph_seed_iterations) attribute of `Config` in `readmenator._config`
@@ -767,8 +808,17 @@
 - [`FORCEGRAPH_THUMB_ITERATIONS`](modules/readmenator._config.py.md#config-forcegraph_thumb_iterations) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_THUMB_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_thumb_width) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_TIP_DOC_CHARS`](modules/readmenator._config.py.md#config-forcegraph_tip_doc_chars) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_COMMUNITIES`](modules/readmenator._config.py.md#config-forcegraph_tour_communities) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_ENABLED`](modules/readmenator._config.py.md#config-forcegraph_tour_enabled) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_FLY_MS`](modules/readmenator._config.py.md#config-forcegraph_tour_fly_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_ORBIT_SPEED`](modules/readmenator._config.py.md#config-forcegraph_tour_orbit_speed) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_PATH_CANDIDATES`](modules/readmenator._config.py.md#config-forcegraph_tour_path_candidates) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_TOUR_STEP_MS`](modules/readmenator._config.py.md#config-forcegraph_tour_step_ms) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_VENDOR_JS_2D`](modules/readmenator._config.py.md#config-forcegraph_vendor_js_2d) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_VENDOR_SUBDIR`](modules/readmenator._config.py.md#config-forcegraph_vendor_subdir) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_WAVE_GAIN`](modules/readmenator._config.py.md#config-forcegraph_wave_gain) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_WAVE_HOP_MS`](modules/readmenator._config.py.md#config-forcegraph_wave_hop_ms) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_WAVE_MS`](modules/readmenator._config.py.md#config-forcegraph_wave_ms) attribute of `Config` in `readmenator._config`
 - [`ForceGraphRenderer`](modules/readmenator._forcegraph.py.md#forcegraphrenderer) class in `readmenator._forcegraph`
 - [`freshness`](modules/readmenator._rank.py.md#rankeditem-freshness) attribute of `RankedItem` in `readmenator._rank`
 - [`from_dict`](modules/readmenator._graphrag.py.md#graphragindex-from_dict) classmethod of `GraphRagIndex` in `readmenator._graphrag`
@@ -873,6 +923,7 @@
 - [`group_colors`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-group_colors) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`groups`](modules/readmenator._graphlayout.py.md#bundlelayout-groups) attribute of `BundleLayout` in `readmenator._graphlayout`
 - [`groups`](modules/readmenator._graphlayout.py.md#spherebundlelayout-groups) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
+- [`growth_release_times`](modules/readmenator._video.py.md#growth_release_times) function in `readmenator._video`
 
 <a id="h"></a>
 
@@ -889,6 +940,7 @@
 - [`HistoryRelease`](modules/readmenator._githistory.py.md#historyrelease) class in `readmenator._githistory`
 - [`hits`](modules/readmenator._rank.py.md#hits) function in `readmenator._rank`
 - [`home_anchor`](modules/readmenator._viewer_ui.py.md#home_anchor) function in `readmenator._viewer_ui`
+- [`hook_lines`](modules/readmenator._video.py.md#hook_lines) function in `readmenator._video`
 - [`hops`](modules/readmenator._models.py.md#taintpath-hops) attribute of `TaintPath` in `readmenator._models`
 - [`HOTSPOT_CENTRALITY_WEIGHT`](modules/readmenator._config.py.md#config-hotspot_centrality_weight) attribute of `Config` in `readmenator._config`
 - [`HOTSPOT_COMPLEXITY_WEIGHT`](modules/readmenator._config.py.md#config-hotspot_complexity_weight) attribute of `Config` in `readmenator._config`
@@ -919,6 +971,7 @@
 - [`identify`](modules/readmenator._dead_code.py.md#deadcodestripper-identify) method of `DeadCodeStripper` in `readmenator._dead_code`
 - [`IdentityProjection`](modules/readmenator._projections.py.md#identityprojection) class in `readmenator._projections`
 - [`IGNORE_DIRS`](modules/readmenator._config.py.md#config-ignore_dirs) attribute of `Config` in `readmenator._config`
+- [`impact_punch`](modules/readmenator._video.py.md#impact_punch) function in `readmenator._video`
 - [`IMPLEMENTS`](modules/readmenator._category.py.md#edgekind-implements) attribute of `EdgeKind` in `readmenator._category`
 - [`import_count`](modules/readmenator._githistory.py.md#historyrelease-import_count) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
@@ -999,6 +1052,7 @@
 - [`__init__`](modules/readmenator._scantext.py.md#scantextbuilder-__init__) constructor of `ScanTextBuilder` in `readmenator._scantext`
 - [`__init__`](modules/readmenator._security.py.md#securityanalyzer-__init__) constructor of `SecurityAnalyzer` in `readmenator._security`
 - [`__init__`](modules/readmenator._skill_installer.py.md#skillinstaller-__init__) constructor of `SkillInstaller` in `readmenator._skill_installer`
+- [`__init__`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-__init__) constructor of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`__init__`](modules/readmenator._sourceview.py.md#sourceviewbuilder-__init__) constructor of `SourceViewBuilder` in `readmenator._sourceview`
 - [`__init__`](modules/readmenator._symindex.py.md#symbolindex-__init__) constructor of `SymbolIndex` in `readmenator._symindex`
 - [`__init__`](modules/readmenator._diagrams.py.md#systemmapbuilder-__init__) constructor of `SystemMapBuilder` in `readmenator._diagrams`
@@ -1054,6 +1108,7 @@
 - [`key_relations`](modules/readmenator._graphrag.py.md#ragcommunity-key_relations) attribute of `RagCommunity` in `readmenator._graphrag`
 - [`kind`](modules/readmenator._apidocs.py.md#apientity-kind) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`kind`](modules/readmenator._apidocs.py.md#apiparam-kind) attribute of `ApiParam` in `readmenator._apidocs`
+- [`kind`](modules/readmenator._soundtrack.py.md#audiocue-kind) attribute of `AudioCue` in `readmenator._soundtrack`
 - [`kind`](modules/readmenator._models.py.md#dataflowissue-kind) attribute of `DataflowIssue` in `readmenator._models`
 - [`kind`](modules/readmenator._models.py.md#edge-kind) attribute of `Edge` in `readmenator._models`
 - [`kind`](modules/readmenator._receipts.py.md#edgeinfo-kind) attribute of `EdgeInfo` in `readmenator._receipts`
@@ -1115,6 +1170,7 @@
 - [`leaves`](modules/readmenator._graphlayout.py.md#spherebundlelayout-leaves) attribute of `SphereBundleLayout` in `readmenator._graphlayout`
 - [`length`](modules/readmenator._models.py.md#dependencycycle-length) attribute of `DependencyCycle` in `readmenator._models`
 - [`level`](modules/readmenator._graphrag.py.md#ragcommunity-level) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`level`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-level) method of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`line`](modules/readmenator._apidocs.py.md#apientity-line) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`line`](modules/readmenator._symindex.py.md#callsite-line) attribute of `CallSite` in `readmenator._symindex`
 - [`line`](modules/readmenator._models.py.md#dataflowissue-line) attribute of `DataflowIssue` in `readmenator._models`
@@ -1392,8 +1448,10 @@
 - [`PAYLOAD_ENCODING_GZIP`](modules/readmenator._htmlpack.py.md#payload_encoding_gzip) constant in `readmenator._htmlpack`
 - [`PAYLOAD_LOADER_JS`](modules/readmenator._htmlpack.py.md#payload_loader_js) constant in `readmenator._htmlpack`
 - [`payload_script`](modules/readmenator._htmlpack.py.md#payload_script) function in `readmenator._htmlpack`
+- [`PCM_PEAK`](modules/readmenator._soundtrack.py.md#pcm_peak) constant in `readmenator._soundtrack`
 - [`personalized_pagerank`](modules/readmenator._rank.py.md#personalized_pagerank) function in `readmenator._rank`
 - [`PHPParser`](modules/readmenator.parsers._php.py.md#phpparser) class in `readmenator.parsers._php`
+- [`pitch`](modules/readmenator._soundtrack.py.md#audiocue-pitch) attribute of `AudioCue` in `readmenator._soundtrack`
 - [`platforms`](modules/readmenator._receipts.py.md#releasereceiptrecord-platforms) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`pluralize_symbol_kind`](modules/readmenator._models.py.md#pluralize_symbol_kind) function in `readmenator._models`
 - [`points`](modules/readmenator._flowlayout.py.md#flowedge-points) attribute of `FlowEdge` in `readmenator._flowlayout`
@@ -1615,6 +1673,7 @@
 
 - [`safe_color`](modules/readmenator._project_config.py.md#safe_color) function in `readmenator._project_config`
 - [`safe_url`](modules/readmenator._project_config.py.md#safe_url) function in `readmenator._project_config`
+- [`SAMPLE_WIDTH`](modules/readmenator._soundtrack.py.md#sample_width) constant in `readmenator._soundtrack`
 - [`samples`](modules/readmenator._explorer.py.md#explorerstate-samples) method of `ExplorerState` in `readmenator._explorer`
 - [`sanitize`](modules/readmenator._components.py.md#sanitize) function in `readmenator._components`
 - [`sanitize_note`](modules/readmenator._memory.py.md#sanitize_note) function in `readmenator._memory`
@@ -1649,6 +1708,8 @@
 - [`score`](modules/readmenator._uncertainty.py.md#heuristicscorer-score) method of `HeuristicScorer` in `readmenator._uncertainty`
 - [`score`](modules/readmenator._uncertainty.py.md#randomforestscorer-score) method of `RandomForestScorer` in `readmenator._uncertainty`
 - [`score`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-score) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
+- [`score_ping_times`](modules/readmenator._video.py.md#score_ping_times) function in `readmenator._video`
+- [`score_sync`](modules/readmenator._video.py.md#score_sync) function in `readmenator._video`
 - [`scores`](modules/readmenator._graphrag.py.md#bm25index-scores) method of `Bm25Index` in `readmenator._graphrag`
 - [`search`](modules/readmenator._graphrag.py.md#graphragsearcher-search) method of `GraphRagSearcher` in `readmenator._graphrag`
 - [`security`](modules/readmenator._pipeline.py.md#analyzerfactory-security) property of `AnalyzerFactory` in `readmenator._pipeline`
@@ -1662,6 +1723,7 @@
 - [`seed`](modules/readmenator._graphlayout.py.md#forceatlas2settings-seed) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`seed_nodes`](modules/readmenator._rank.py.md#rankedresult-seed_nodes) attribute of `RankedResult` in `readmenator._rank`
 - [`semgrep_yaml`](modules/readmenator._models.py.md#suggestedrule-semgrep_yaml) attribute of `SuggestedRule` in `readmenator._models`
+- [`SEMITONES`](modules/readmenator._soundtrack.py.md#semitones) constant in `readmenator._soundtrack`
 - [`sequence_mermaid`](modules/readmenator._flowcharts.py.md#executionflowbuilder-sequence_mermaid) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
 - [`sequence_model`](modules/readmenator._flowcharts.py.md#executionflowbuilder-sequence_model) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
 - [`serve`](modules/readmenator._explorer.py.md#serve) function in `readmenator._explorer`
@@ -1720,6 +1782,7 @@
 - [`skip_repos`](modules/readmenator_orchestrator.py.md#config-skip_repos) attribute of `Config` in `readmenator_orchestrator`
 - [`snapshots`](modules/readmenator._graphlayout.py.md#forceatlas2settings-snapshots) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`snippet`](modules/readmenator._models.py.md#securityfinding-snippet) attribute of `SecurityFinding` in `readmenator._models`
+- [`SoundtrackComposer`](modules/readmenator._soundtrack.py.md#soundtrackcomposer) class in `readmenator._soundtrack`
 - [`source`](modules/readmenator._models.py.md#conceptrelation-source) attribute of `ConceptRelation` in `readmenator._models`
 - [`source`](modules/readmenator._memory.py.md#declaredrule-source) attribute of `DeclaredRule` in `readmenator._memory`
 - [`source`](modules/readmenator._models.py.md#edge-source) attribute of `Edge` in `readmenator._models`
@@ -1759,7 +1822,10 @@
 - [`status`](modules/readmenator._receipts.py.md#releasereceiptrecord-status) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`STATUS_REJECTED`](modules/readmenator._hypotheses.py.md#status_rejected) constant in `readmenator._hypotheses`
 - [`STATUS_VERIFIED`](modules/readmenator._hypotheses.py.md#status_verified) constant in `readmenator._hypotheses`
+- [`stem_weight`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-stem_weight) method of `SoundtrackComposer` in `readmenator._soundtrack`
+- [`STEMS`](modules/readmenator._soundtrack.py.md#stems) constant in `readmenator._soundtrack`
 - [`steps`](modules/readmenator._receipts.py.md#releasereceiptrecord-steps) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
+- [`STEPS_PER_BEAT`](modules/readmenator._soundtrack.py.md#steps_per_beat) constant in `readmenator._soundtrack`
 - [`stochastic_row`](modules/readmenator._category.py.md#typedgraph-stochastic_row) method of `TypedGraph` in `readmenator._category`
 - [`stop`](modules/readmenator._watcher.py.md#directorywatcher-stop) method of `DirectoryWatcher` in `readmenator._watcher`
 - [`strength`](modules/readmenator._models.py.md#conceptrelation-strength) attribute of `ConceptRelation` in `readmenator._models`
@@ -1864,11 +1930,13 @@
 - [`text`](modules/readmenator._sourceview.py.md#sourceentry-text) attribute of `SourceEntry` in `readmenator._sourceview`
 - [`text_units`](modules/readmenator._graphrag.py.md#graphragindex-text_units) attribute of `GraphRagIndex` in `readmenator._graphrag`
 - [`text_units`](modules/readmenator._graphrag.py.md#ragcontext-text_units) attribute of `RagContext` in `readmenator._graphrag`
+- [`THIRDS`](modules/readmenator._soundtrack.py.md#thirds) constant in `readmenator._soundtrack`
 - [`thumbnail_svg`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer-thumbnail_svg) method of `BundleGraphRenderer` in `readmenator._bundlegraph`
 - [`thumbnail_svg`](modules/readmenator._components.py.md#componentdiagrambuilder-thumbnail_svg) method of `ComponentDiagramBuilder` in `readmenator._components`
 - [`thumbnail_svg`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-thumbnail_svg) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`tier`](modules/readmenator._yaralite.py.md#yaralitematch-tier) attribute of `YaraLiteMatch` in `readmenator._yaralite`
 - [`tier`](modules/readmenator._yaralite.py.md#yaraliterule-tier) property of `YaraLiteRule` in `readmenator._yaralite`
+- [`time`](modules/readmenator._soundtrack.py.md#audiocue-time) attribute of `AudioCue` in `readmenator._soundtrack`
 - [`timeline`](modules/readmenator._githistory.py.md#githistoryreader-timeline) method of `GitHistoryReader` in `readmenator._githistory`
 - [`title`](modules/readmenator._flowlayout.py.md#flowgraph-title) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`title`](modules/readmenator._flowlayout.py.md#flownode-title) attribute of `FlowNode` in `readmenator._flowlayout`
@@ -1914,6 +1982,7 @@
 - [`truncate_words`](modules/readmenator._purpose.py.md#truncate_words) function in `readmenator._purpose`
 - [`truncated`](modules/readmenator._sourceview.py.md#sourceentry-truncated) attribute of `SourceEntry` in `readmenator._sourceview`
 - [`TRUNK_LABELS`](modules/readmenator._flowlayout.py.md#trunk_labels) constant in `readmenator._flowlayout`
+- [`TWO_PI`](modules/readmenator._soundtrack.py.md#two_pi) constant in `readmenator._soundtrack`
 - [`TXT`](modules/readmenator._video.py.md#txt) constant in `readmenator._video`
 - [`type`](modules/readmenator._docstrings.py.md#docfield-type) attribute of `DocField` in `readmenator._docstrings`
 - [`TypedGraph`](modules/readmenator._category.py.md#typedgraph) class in `readmenator._category`
@@ -1954,10 +2023,39 @@
 - [`version_from`](modules/readmenator._receipts.py.md#releasereceiptrecord-version_from) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`version_to`](modules/readmenator._receipts.py.md#releasereceiptrecord-version_to) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`video`](modules/readmenator._pipeline.py.md#analyzerfactory-video) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`VIDEO_AUDIO_BITRATE`](modules/readmenator._config.py.md#config-video_audio_bitrate) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_BPM`](modules/readmenator._config.py.md#config-video_audio_bpm) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_CONTINUE_KINDS`](modules/readmenator._config.py.md#config-video_audio_continue_kinds) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_CROSSFADE_S`](modules/readmenator._config.py.md#config-video_audio_crossfade_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_DEFAULT_LEVEL`](modules/readmenator._config.py.md#config-video_audio_default_level) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_ENABLED`](modules/readmenator._config.py.md#config-video_audio_enabled) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_FADE_IN_S`](modules/readmenator._config.py.md#config-video_audio_fade_in_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_FADE_OUT_S`](modules/readmenator._config.py.md#config-video_audio_fade_out_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_IMPACT_GAIN`](modules/readmenator._config.py.md#config-video_audio_impact_gain) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_IMPACT_S`](modules/readmenator._config.py.md#config-video_audio_impact_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_MASTER_GAIN`](modules/readmenator._config.py.md#config-video_audio_master_gain) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_PING_GAIN`](modules/readmenator._config.py.md#config-video_audio_ping_gain) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_PING_S`](modules/readmenator._config.py.md#config-video_audio_ping_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_PING_SCALE`](modules/readmenator._config.py.md#config-video_audio_ping_scale) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_PROGRESSION`](modules/readmenator._config.py.md#config-video_audio_progression) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_RISER_GAIN`](modules/readmenator._config.py.md#config-video_audio_riser_gain) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_RISER_S`](modules/readmenator._config.py.md#config-video_audio_riser_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_ROOT_HZ`](modules/readmenator._config.py.md#config-video_audio_root_hz) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_SAMPLE_RATE`](modules/readmenator._config.py.md#config-video_audio_sample_rate) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_SCENE_LEVELS`](modules/readmenator._config.py.md#config-video_audio_scene_levels) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_SEED`](modules/readmenator._config.py.md#config-video_audio_seed) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_STEM_GAINS`](modules/readmenator._config.py.md#config-video_audio_stem_gains) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_STEM_RAMP`](modules/readmenator._config.py.md#config-video_audio_stem_ramp) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_STEM_THRESHOLDS`](modules/readmenator._config.py.md#config-video_audio_stem_thresholds) attribute of `Config` in `readmenator._config`
+- [`VIDEO_AUDIO_STEREO_DELAY_MS`](modules/readmenator._config.py.md#config-video_audio_stereo_delay_ms) attribute of `Config` in `readmenator._config`
+- [`VIDEO_BEAT_BLOOM`](modules/readmenator._config.py.md#config-video_beat_bloom) attribute of `Config` in `readmenator._config`
+- [`VIDEO_BEAT_DECAY`](modules/readmenator._config.py.md#config-video_beat_decay) attribute of `Config` in `readmenator._config`
 - [`VIDEO_BUNDLE_BETA`](modules/readmenator._config.py.md#config-video_bundle_beta) attribute of `Config` in `readmenator._config`
 - [`VIDEO_BUNDLE_S`](modules/readmenator._config.py.md#config-video_bundle_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_BUNDLE_SAMPLES`](modules/readmenator._config.py.md#config-video_bundle_samples) attribute of `Config` in `readmenator._config`
 - [`VIDEO_CARD_S`](modules/readmenator._config.py.md#config-video_card_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_CHAPTER_TITLES`](modules/readmenator._config.py.md#config-video_chapter_titles) attribute of `Config` in `readmenator._config`
+- [`VIDEO_CHAPTERS_ENABLED`](modules/readmenator._config.py.md#config-video_chapters_enabled) attribute of `Config` in `readmenator._config`
 - [`VIDEO_COMM_S`](modules/readmenator._config.py.md#config-video_comm_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_CRF`](modules/readmenator._config.py.md#config-video_crf) attribute of `Config` in `readmenator._config`
 - [`VIDEO_DNA_MAX_CELL`](modules/readmenator._config.py.md#config-video_dna_max_cell) attribute of `Config` in `readmenator._config`
@@ -1971,13 +2069,19 @@
 - [`VIDEO_FLOW_S`](modules/readmenator._config.py.md#config-video_flow_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_FLOW_VIEW_WIDTH`](modules/readmenator._config.py.md#config-video_flow_view_width) attribute of `Config` in `readmenator._config`
 - [`VIDEO_FPS`](modules/readmenator._config.py.md#config-video_fps) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GLOW_BLUR`](modules/readmenator._config.py.md#config-video_glow_blur) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GLOW_ENABLED`](modules/readmenator._config.py.md#config-video_glow_enabled) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GLOW_GAIN`](modules/readmenator._config.py.md#config-video_glow_gain) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GLOW_SPREAD`](modules/readmenator._config.py.md#config-video_glow_spread) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GOD_S`](modules/readmenator._config.py.md#config-video_god_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_LOOSE_STRIP`](modules/readmenator._config.py.md#config-video_graph_loose_strip) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_S`](modules/readmenator._config.py.md#config-video_graph_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_SPREAD`](modules/readmenator._config.py.md#config-video_graph_spread) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GRAPH_TRIM_FRACTION`](modules/readmenator._config.py.md#config-video_graph_trim_fraction) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GROWTH_BIRTH_S`](modules/readmenator._config.py.md#config-video_growth_birth_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_FOLD_FRACTION`](modules/readmenator._config.py.md#config-video_growth_fold_fraction) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GROWTH_GHOST`](modules/readmenator._config.py.md#config-video_growth_ghost) attribute of `Config` in `readmenator._config`
+- [`VIDEO_GROWTH_GROW_FRACTION`](modules/readmenator._config.py.md#config-video_growth_grow_fraction) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GROWTH_PULSES`](modules/readmenator._config.py.md#config-video_growth_pulses) attribute of `Config` in `readmenator._config`
 - [`VIDEO_GROWTH_S`](modules/readmenator._config.py.md#config-video_growth_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_HEIGHT`](modules/readmenator._config.py.md#config-video_height) attribute of `Config` in `readmenator._config`
@@ -1985,15 +2089,25 @@
 - [`VIDEO_HISTORY_MAX_FILES`](modules/readmenator._config.py.md#config-video_history_max_files) attribute of `Config` in `readmenator._config`
 - [`VIDEO_HISTORY_MAX_SNAPSHOTS`](modules/readmenator._config.py.md#config-video_history_max_snapshots) attribute of `Config` in `readmenator._config`
 - [`VIDEO_HISTORY_TIMEOUT_S`](modules/readmenator._config.py.md#config-video_history_timeout_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HOOK_GLITCH_S`](modules/readmenator._config.py.md#config-video_hook_glitch_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HOOK_LEAD`](modules/readmenator._config.py.md#config-video_hook_lead) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HOOK_S`](modules/readmenator._config.py.md#config-video_hook_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_HOOK_SPAN`](modules/readmenator._config.py.md#config-video_hook_span) attribute of `Config` in `readmenator._config`
+- [`VIDEO_IMPACT_FLASH`](modules/readmenator._config.py.md#config-video_impact_flash) attribute of `Config` in `readmenator._config`
+- [`VIDEO_IMPACT_VISUAL_S`](modules/readmenator._config.py.md#config-video_impact_visual_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_IMPACT_ZOOM`](modules/readmenator._config.py.md#config-video_impact_zoom) attribute of `Config` in `readmenator._config`
 - [`VIDEO_INVITE_S`](modules/readmenator._config.py.md#config-video_invite_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_JOBS`](modules/readmenator._config.py.md#config-video_jobs) attribute of `Config` in `readmenator._config`
 - [`VIDEO_LAYER_S`](modules/readmenator._config.py.md#config-video_layer_s) attribute of `Config` in `readmenator._config`
+- [`VIDEO_LEAD_IN_KINDS`](modules/readmenator._config.py.md#config-video_lead_in_kinds) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MAX_GRAPH_NODES`](modules/readmenator._config.py.md#config-video_max_graph_nodes) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MAX_LABEL_CHARS`](modules/readmenator._config.py.md#config-video_max_label_chars) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MOTION_BLUR_ACTS`](modules/readmenator._config.py.md#config-video_motion_blur_acts) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MOTION_BLUR_SAMPLES`](modules/readmenator._config.py.md#config-video_motion_blur_samples) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MOTION_BLUR_SHUTTER`](modules/readmenator._config.py.md#config-video_motion_blur_shutter) attribute of `Config` in `readmenator._config`
 - [`VIDEO_MUSIC_PATH`](modules/readmenator._config.py.md#config-video_music_path) attribute of `Config` in `readmenator._config`
+- [`VIDEO_NEBULA_ALPHA`](modules/readmenator._config.py.md#config-video_nebula_alpha) attribute of `Config` in `readmenator._config`
+- [`VIDEO_NEBULA_RADIUS`](modules/readmenator._config.py.md#config-video_nebula_radius) attribute of `Config` in `readmenator._config`
 - [`VIDEO_ORBIT_DEPTH_FADE`](modules/readmenator._config.py.md#config-video_orbit_depth_fade) attribute of `Config` in `readmenator._config`
 - [`VIDEO_ORBIT_FA2_ITERATIONS`](modules/readmenator._config.py.md#config-video_orbit_fa2_iterations) attribute of `Config` in `readmenator._config`
 - [`VIDEO_ORBIT_LABELS`](modules/readmenator._config.py.md#config-video_orbit_labels) attribute of `Config` in `readmenator._config`
@@ -2010,6 +2124,7 @@
 - [`VIDEO_SPHERE_S`](modules/readmenator._config.py.md#config-video_sphere_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_SPHERE_SAMPLES`](modules/readmenator._config.py.md#config-video_sphere_samples) attribute of `Config` in `readmenator._config`
 - [`VIDEO_SPHERE_TURNS`](modules/readmenator._config.py.md#config-video_sphere_turns) attribute of `Config` in `readmenator._config`
+- [`VIDEO_STARS`](modules/readmenator._config.py.md#config-video_stars) attribute of `Config` in `readmenator._config`
 - [`VIDEO_SURFERS`](modules/readmenator._config.py.md#config-video_surfers) attribute of `Config` in `readmenator._config`
 - [`VIDEO_TIERS_S`](modules/readmenator._config.py.md#config-video_tiers_s) attribute of `Config` in `readmenator._config`
 - [`VIDEO_TITLE_S`](modules/readmenator._config.py.md#config-video_title_s) attribute of `Config` in `readmenator._config`
@@ -2075,6 +2190,7 @@
 - [`write`](modules/readmenator._graphrag.py.md#graphragstore-write) method of `GraphRagStore` in `readmenator._graphrag`
 - [`write`](modules/readmenator._diagrams.py.md#interactivemaprenderer-write) method of `InteractiveMapRenderer` in `readmenator._diagrams`
 - [`write`](modules/readmenator._memory.py.md#projectmemory-write) method of `ProjectMemory` in `readmenator._memory`
+- [`write`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-write) method of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`write`](modules/readmenator._diagrams.py.md#visnetworkrenderer-write) method of `VisNetworkRenderer` in `readmenator._diagrams`
 - [`write_all`](modules/readmenator._folder_readme.py.md#folderreadmewriter-write_all) method of `FolderReadmeWriter` in `readmenator._folder_readme`
 - [`write_pages`](modules/readmenator._receipts.py.md#receiptsreconciler-write_pages) method of `ReceiptsReconciler` in `readmenator._receipts`

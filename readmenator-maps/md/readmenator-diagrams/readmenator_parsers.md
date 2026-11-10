@@ -1,6 +1,6 @@
 # readmenator/parsers
 
-readmenator/parsers groups 34 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
+readmenator/parsers groups 39 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
 
 ```mermaid
 graph LR
@@ -9,13 +9,13 @@ graph LR
     tests -- "calls into" --> readmenator
 ```
 
-## readmenator (2.1)
+## readmenator (1.1)
 
-readmenator groups 27 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
+readmenator groups 29 files (py) around Symbol, Node, Edge, SecurityFinding, pluralize_symbol_kind. Hotspot, dependency cycle, and change impact analysis.
 
-## tests (2.2)
+## tests (1.2)
 
-tests groups 7 files (py) around TestHotspotAnalyzerContract, setUp, _make_node, test_empty_graph_returns_empty_hotspots, test_hotspots_rank_by_combined_score. TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and...
+tests groups 10 files (py) around TestHotspotAnalyzerContract, setUp, _make_node, test_empty_graph_returns_empty_hotspots, test_hotspots_rank_by_combined_score. TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and...
 
 **Files**:
 
@@ -25,6 +25,8 @@ tests groups 7 files (py) around TestHotspotAnalyzerContract, setUp, _make_node,
 - readmenator/_models.py
 - readmenator/_rule_gen.py
 - readmenator/_sarif.py
+- readmenator/_scanner.py
+- readmenator/_taint.py
 - readmenator/parsers/__init__.py
 - readmenator/parsers/_assembly.py
 - readmenator/parsers/_base.py
@@ -53,3 +55,6 @@ tests groups 7 files (py) around TestHotspotAnalyzerContract, setUp, _make_node,
 - tests/test_parsers_property.py
 - tests/test_rule_gen.py
 - tests/test_sarif.py
+- tests/test_scanner.py
+- tests/test_taint.py
+- tests/test_taint_bdd.py

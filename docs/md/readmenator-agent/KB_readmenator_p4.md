@@ -368,6 +368,41 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
 - Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_pipeline.py`, `tests/test_memory.py`
 
+## readmenator/_soundtrack.py
+- Doc: Procedural synthwave soundtrack for the overview video.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `AudioCue` (class, line 39) `class AudioCue`
+  - `_semitone` (function, line 53) `def _semitone(base, offset)`
+  - `_clamp_pcm` (function, line 58) `def _clamp_pcm(value)`
+  - `_normalized` (function, line 63) `def _normalized(samples)`
+  - `SoundtrackComposer` (class, line 71) `class SoundtrackComposer`
+  - `__init__` (method, line 78) `def __init__(self, config)`
+  - `beat_seconds` (method, line 89) `def beat_seconds(self)`
+  - `stem_weight` (method, line 93) `def stem_weight(self, name, level)`
+  - `level` (method, line 99) `def level(self, kind)`
+  - `cues` (method, line 105) `def cues(self, scenes, release_times)`
+  - `compose` (method, line 139) `def compose(self, scenes, total, release_times)`
+  - `write` (method, line 168) `def write(self, path, scenes, total, release_times)`
+  - `_bed` (method, line 186) `def _bed(self, scenes, frames)`
+  - `_tile` (method, line 224) `def _tile(loop, phase, frames)`
+  - `_loop` (method, line 238) `def _loop(self, level)`
+  - `_all_stems` (method, line 260) `def _all_stems(self)`
+  - `_chords` (method, line 272) `def _chords(self)`
+  - `_pad` (method, line 277) `def _pad(self)`
+  - `_bass` (method, line 292) `def _bass(self)`
+  - `_drums` (method, line 310) `def _drums(self, noise)`
+  - `_arp` (method, line 331) `def _arp(self)`
+  - `_event` (method, line 345) `def _event(self, cue)`
+  - `_impact` (method, line 353) `def _impact(self, cue)`
+  - `_riser` (method, line 369) `def _riser(self, cue)`
+  - `_ping` (method, line 387) `def _ping(self, cue)`
+  - `_overlay` (method, line 402) `def _overlay(self, track, start, samples)`
+  - `_fade` (method, line 416) `def _fade(self, track, frames)`
+- Depends on: `readmenator/_config.py`
+- Imported by: `readmenator/_video.py`, `tests/test_soundtrack.py`
+
 ## readmenator/_sourceview.py
 - Doc: Source viewer payload builder for the graph explorers.
 - Layer: utility
@@ -460,28 +495,6 @@ Previous: [KB_readmenator_p3.md](KB_readmenator_p3.md)
   - `_find_node` (method, line 165) `def _find_node(nodes, node_id)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
-
-## readmenator/_uncertainty.py
-- Doc: Uncertainty engine: classify candidate edges, never invent facts.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `_bucket_evidence` (function, line 50) `def _bucket_evidence(evidence)`
-  - `_bucket_target` (function, line 67) `def _bucket_target(callee)`
-  - `featurize` (function, line 83) `def featurize(edge, known_observed)`
-  - `UncertaintyPrediction` (class, line 93) `class UncertaintyPrediction`
-  - `HeuristicScorer` (class, line 101) `class HeuristicScorer`
-  - `RandomForestScorer` (class, line 138) `class RandomForestScorer`
-  - `_sigmoid` (function, line 180) `def _sigmoid(x)`
-  - `predict_uncertain_edges` (function, line 187) `def predict_uncertain_edges(candidate_edges, known_observed, config, min_confidence, scorer)`
-  - `prediction_edges` (function, line 214) `def prediction_edges(predictions, provenance_version)`
-  - `score` (method, line 129) `def score(self, features)`
-  - `__init__` (method, line 143) `def __init__(self, n_estimators, random_state)`
-  - `available` (method, line 149) `def available()`
-  - `fit` (method, line 156) `def fit(self, x, y)`
-  - `score` (method, line 171) `def score(self, features)`
-- Depends on: `readmenator/_config.py`, `readmenator/_receipts.py`
-- Imported by: `readmenator/_app.py`, `tests/test_receipts.py`
 
 
 Next: [KB_readmenator_p5.md](KB_readmenator_p5.md)

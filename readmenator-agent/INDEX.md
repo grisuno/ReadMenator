@@ -20,7 +20,7 @@
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 4 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 104 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 106 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
@@ -73,13 +73,14 @@
 | `readmenator/_scantext.py` | Synthesized scan-text builder for the readmenator knowledge graph. | readmenator | 4 | 2 |
 | `readmenator/_security.py` | Pattern-based static security analysis for the readmenator knowledge graph. | readmenator | 32 | 4 |
 | `readmenator/_skill_installer.py` | Installs the packaged ReadMenator agent skills into a project. | readmenator | 7 | 2 |
+| `readmenator/_soundtrack.py` | Procedural synthwave soundtrack for the overview video. | readmenator | 27 | 2 |
 | `readmenator/_sourceview.py` | Source viewer payload builder for the graph explorers. | readmenator | 8 | 4 |
 | `readmenator/_symindex.py` | Deterministic symbol index with call-site resolution. | readmenator | 22 | 7 |
 | `readmenator/_taint.py` | Taint propagation analysis of dangerous imports through the resolved import graph. | readmenator | 6 | 3 |
 | `readmenator/_uml.py` | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | readmenator | 25 | 4 |
 | `readmenator/_uncertainty.py` | Uncertainty engine: classify candidate edges, never invent facts. | readmenator | 14 | 2 |
 | `readmenator/_vendor/force-graph.min.js` | Version 1.52.0 force-graph - https://github.com/vasturiano/force-graph | misc | 35 | 0 |
-| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 98 | 3 |
+| `readmenator/_video.py` | Cinematic codebase overview video, general purpose. | readmenator | 114 | 4 |
 | `readmenator/_viewer_ui.py` | Shared Config button + modal for maps/explorer pages. | readmenator | 7 | 5 |
 | `readmenator/_watcher.py` | Filesystem watcher for auto-rebuilding the knowledge base. | readmenator | 5 | 1 |
 | `readmenator/_wiki.py` | Deterministic agent wiki generator for readmenator. | readmenator | 32 | 2 |
@@ -112,7 +113,7 @@
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
 | `tests/test_apidocs.py` | Contract tests for the docstring parser and the deterministic API reference. | tests | 48 | 0 |
-| `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 27 | 0 |
+| `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 29 | 0 |
 | `tests/test_cache.py` | Contract tests for the FileCache. | tests | 22 | 0 |
 | `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 36 | 0 |
 | `tests/test_concepts.py` | test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets. | tests | 8 | 0 |
@@ -133,7 +134,7 @@
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
 | `tests/test_htmlpack.py` | Contract tests for embedded page payload compression (readmenator/_htmlpack.py). | tests | 18 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
-| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 60 | 0 |
+| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 70 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |
 | `tests/test_layout_quality.py` | Contract tests for bundle crossing reduction and seeded explorer layouts. | tests | 16 | 0 |
 | `tests/test_linter.py` | Contract tests for the ArchitectureLinter. | tests | 14 | 0 |
@@ -156,6 +157,7 @@
 | `tests/test_sarif.py` | TestSarifExporterContract: Contract: SarifExporter produces valid SARIF v2.1.0 JSON. | tests | 10 | 0 |
 | `tests/test_scanner.py` | - | tests | 21 | 0 |
 | `tests/test_security.py` | Contract tests for the static security analysis module. | tests | 68 | 0 |
+| `tests/test_soundtrack.py` | Contract tests for the procedural video soundtrack and chapter marks. | tests | 51 | 0 |
 | `tests/test_sourceview.py` | Contract tests for the source viewer (View drawer in explorers). | tests | 23 | 0 |
 | `tests/test_symindex.py` | Contract tests for the deterministic symbol index. | tests | 10 | 0 |
 | `tests/test_taint.py` | TestTaintAnalyzerContract: Contract: TaintAnalyzer discovers taint propagation paths. | tests | 10 | 0 |

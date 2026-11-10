@@ -2,6 +2,8 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_javascript.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_kotlin.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_lua.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_nim.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_php.py`
@@ -50,6 +52,9 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_security.py` -> `readmenator/_config.py`
 - `tests/test_security.py` -> `readmenator/_models.py`
 - `tests/test_security.py` -> `readmenator/_security.py`
+- `tests/test_soundtrack.py` -> `readmenator/_config.py`
+- `tests/test_soundtrack.py` -> `readmenator/_soundtrack.py`
+- `tests/test_soundtrack.py` -> `readmenator/_video.py`
 - `tests/test_sourceview.py` -> `readmenator/_app.py`
 - `tests/test_sourceview.py` -> `readmenator/_bundlegraph.py`
 - `tests/test_sourceview.py` -> `readmenator/_config.py`
@@ -149,12 +154,13 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_scantext.py` -> __future__, typing
 - `readmenator/_security.py` -> __future__, dataclasses, pathlib, re, typing
 - `readmenator/_skill_installer.py` -> __future__, logging, pathlib, typing
+- `readmenator/_soundtrack.py` -> __future__, array, dataclasses, io, math, pathlib, random, sys, typing, wave
 - `readmenator/_sourceview.py` -> __future__, dataclasses, typing
 - `readmenator/_symindex.py` -> __future__, ast, dataclasses, hashlib, re, typing
 - `readmenator/_taint.py` -> __future__, collections, typing
 - `readmenator/_uml.py` -> __future__, collections, enum, typing
 - `readmenator/_uncertainty.py` -> __future__, dataclasses, math, sklearn, sklearn.ensemble, typing
-- `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, logging, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, textwrap, typing
+- `readmenator/_video.py` -> PIL, __future__, colorsys, dataclasses, hashlib, logging, math, multiprocessing, networkx, os, pathlib, shutil, subprocess, tempfile, textwrap, typing
 - `readmenator/_viewer_ui.py` -> __future__, html, json, typing
 - `readmenator/_watcher.py` -> __future__, hashlib, logging, pathlib, time, typing
 - `readmenator/_wiki.py` -> __future__, collections, json, logging, os, pathlib, re, time, typing
@@ -186,7 +192,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_agent_output.py` -> dataclasses, json, os, pathlib, tempfile, unittest, unittest.mock
 - `tests/test_analyzer.py` -> __future__, unittest
 - `tests/test_apidocs.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, tempfile, unittest
-- `tests/test_bundlegraph.py` -> __future__, json, math, pathlib, re, tempfile, unittest
+- `tests/test_bundlegraph.py` -> __future__, dataclasses, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
 - `tests/test_components.py` -> __future__, json, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_concepts.py` -> unittest
@@ -207,7 +213,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_hotspots.py` -> __future__, unittest
 - `tests/test_htmlpack.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, subprocess, tempfile, typing, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest
-- `tests/test_interactive_graph.py` -> __future__, json, pathlib, re, shutil, subprocess, tempfile, unittest
+- `tests/test_interactive_graph.py` -> __future__, dataclasses, json, pathlib, re, shutil, subprocess, tempfile, unittest
 - `tests/test_layer_rules.py` -> __future__, unittest
 - `tests/test_layout_quality.py` -> __future__, dataclasses, math, random, unittest
 - `tests/test_linter.py` -> __future__, unittest
@@ -230,6 +236,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_sarif.py` -> __future__, json, unittest
 - `tests/test_scanner.py` -> os, pathlib, re, shutil, tempfile, unittest
 - `tests/test_security.py` -> __future__, os, pathlib, tempfile, unittest
+- `tests/test_soundtrack.py` -> PIL, array, dataclasses, io, math, os, tempfile, unittest, wave
 - `tests/test_sourceview.py` -> __future__, pathlib, re, tempfile, unittest
 - `tests/test_symindex.py` -> __future__, unittest
 - `tests/test_taint.py` -> __future__, unittest

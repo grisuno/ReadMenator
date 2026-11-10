@@ -278,9 +278,9 @@ Pages: [SYMBOLS.md](SYMBOLS.md), [SYMBOLS_p2.md](SYMBOLS_p2.md), [SYMBOLS_p3.md]
 | `_json_script` | function | `readmenator/_bundlegraph.py:39` | `def _json_script(value)` |
 | `build_payload` | method | `readmenator/_bundlegraph.py:63` | `def build_payload(self, force_payload)` |
 | `page_settings` | method | `readmenator/_bundlegraph.py:184` | `def page_settings(self, force_payload, explorer_href, live_api)` |
-| `render` | method | `readmenator/_bundlegraph.py:228` | `def render(self, force_payload, title, home_href, explorer_href, live_api)` |
-| `thumbnail_svg` | method | `readmenator/_bundlegraph.py:299` | `def thumbnail_svg(self, force_payload)` |
-| `write` | method | `readmenator/_bundlegraph.py:273` | `def write(self, output_path, force_payload, title, home_href, explorer_href)` |
+| `render` | method | `readmenator/_bundlegraph.py:236` | `def render(self, force_payload, title, home_href, explorer_href, live_api)` |
+| `thumbnail_svg` | method | `readmenator/_bundlegraph.py:307` | `def thumbnail_svg(self, force_payload)` |
+| `write` | method | `readmenator/_bundlegraph.py:281` | `def write(self, output_path, force_payload, title, home_href, explorer_href)` |
 | `FileCache` | class | `readmenator/_cache.py:20` | `class FileCache` |
 | `__init__` | method | `readmenator/_cache.py:31` | `def __init__(self, config, project_root)` |
 | `_prune_analysis_cache` | method | `readmenator/_cache.py:155` | `def _prune_analysis_cache(self, current_file_ids)` |

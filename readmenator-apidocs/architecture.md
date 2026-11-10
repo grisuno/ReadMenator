@@ -4,9 +4,9 @@
 
 ## Architecture Overview
 
-8 components stacked in 7 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 13 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
+8 components stacked in 6 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 12 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
 
-Upward dependencies to fix first: `readmenator: _diagrams` -> `readmenator: _video` (6 imports); `readmenator: _flowcharts` -> `readmenator: _video` (6 imports); `readmenator: _video` -> `readmenator: _agent_output` (5 imports); `readmenator: _video` -> `readmenator: _graphrag` (5 imports); `readmenator/parsers` -> `readmenator: _video` (5 imports); `readmenator: _video` -> `readmenator: _pipeline` (3 imports); `readmenator: _diagrams` -> `readmenator: _agent_output` (3 imports); `readmenator: _graphrag` -> `readmenator: _pipeline` (2 imports); `readmenator/parsers` -> `readmenator: _graphrag` (1 imports); `readmenator: _diagrams` -> `readmenator: _graphrag` (1 imports)
+Upward dependencies to fix first: `readmenator/parsers` -> `readmenator: _video` (7 imports); `readmenator: _video` -> `readmenator: _flowcharts` (6 imports); `readmenator: _diagrams` -> `readmenator: _video` (6 imports); `readmenator: _video` -> `readmenator: _agent_output` (5 imports); `readmenator: _video` -> `readmenator: _graphrag` (5 imports); `readmenator: _video` -> `readmenator: _pipeline` (3 imports); `readmenator: _diagrams` -> `readmenator: _agent_output` (3 imports); `readmenator: _graphrag` -> `readmenator: _pipeline` (2 imports); `readmenator/parsers` -> `readmenator: _graphrag` (1 imports); `readmenator: _diagrams` -> `readmenator: _graphrag` (1 imports)
 
 ```mermaid
 flowchart TB
@@ -25,46 +25,43 @@ flowchart TB
     subgraph lane_2["Tier 3"]
         direction LR
         n_c2["readmenator: _agent_output<br/>11 files, 217 symbols<br/>Core / utility"]:::cycle
+        n_c6["readmenator: _flowcharts<br/>9 files, 235 symbols<br/>Core / utility"]:::cycle
     end
     subgraph lane_3["Tier 4"]
         direction LR
-        n_c0["readmenator: _video<br/>20 files, 430 symbols<br/>Core / utility"]:::entry
+        n_c1["readmenator: _video<br/>19 files, 451 symbols<br/>Core / utility"]:::entry
     end
     subgraph lane_4["Tier 5"]
         direction LR
-        n_c6["readmenator: _flowcharts<br/>9 files, 235 symbols<br/>Core / utility"]:::cycle
-    end
-    subgraph lane_5["Tier 6"]
-        direction LR
         n_c5["readmenator: _diagrams<br/>10 files, 192 symbols<br/>Core / utility"]:::cycle
     end
-    subgraph lane_6["Tier 7 - foundation"]
+    subgraph lane_5["Tier 6 - foundation"]
         direction LR
-        n_c1["readmenator/parsers<br/>27 files, 99 symbols<br/>Core / utility"]:::cycle
+        n_c0["readmenator/parsers<br/>29 files, 121 symbols<br/>Core / utility"]:::cycle
     end
-    n_c0 ==>|"6"| n_c6
-    n_c2 ==>|"9"| n_c0
+    n_c1 ==>|"8"| n_c5
+    n_c2 ==>|"9"| n_c1
     n_c3 -->|"5"| n_c2
+    n_c3 -->|"2"| n_c6
     n_c4 ==>|"8"| n_c3
-    n_c5 -->|"3"| n_c1
-    n_c6 -->|"4"| n_c5
-    n_c2 <-.-|"5 upward"| n_c0
-    n_c3 <-.-|"5 upward"| n_c0
-    n_c4 <-.-|"3 upward"| n_c0
-    n_c0 <-.-|"5 upward"| n_c1
-    n_c3 <-.-|"1 upward"| n_c1
+    n_c5 -->|"3"| n_c0
+    n_c6 -->|"6"| n_c1
+    n_c1 <-.-|"7 upward"| n_c0
+    n_c3 <-.-|"1 upward"| n_c0
+    n_c2 <-.-|"5 upward"| n_c1
+    n_c3 <-.-|"5 upward"| n_c1
+    n_c4 <-.-|"3 upward"| n_c1
+    n_c6 <-.-|"6 upward"| n_c1
     n_c4 <-.-|"2 upward"| n_c3
-    n_c0 <-.-|"6 upward"| n_c5
+    n_c1 <-.-|"6 upward"| n_c5
     n_c2 <-.-|"3 upward"| n_c5
     n_c3 <-.-|"1 upward"| n_c5
-    n_c0 <-.-|"6 upward"| n_c6
-    linkStyle 6,7,8,9,10,11,12,13,14,15 stroke:#f87171,stroke-width:2px;
+    linkStyle 7,8,9,10,11,12,13,14,15,16 stroke:#f87171,stroke-width:2px;
     n_c4 ~~~ n_c3
     n_c3 ~~~ n_c2
-    n_c2 ~~~ n_c0
-    n_c0 ~~~ n_c6
-    n_c6 ~~~ n_c5
-    n_c5 ~~~ n_c1
+    n_c2 ~~~ n_c1
+    n_c1 ~~~ n_c5
+    n_c5 ~~~ n_c0
 ```
 
 ---

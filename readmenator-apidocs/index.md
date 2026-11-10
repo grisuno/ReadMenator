@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 103 modules, 2079 documented entities, documentation coverage 81.2% (736/906 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 104 modules, 2196 documented entities, documentation coverage 81.7% (758/928 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (102), sh (1)
+Languages: py (103), sh (1)
 
 ## Modules
 
@@ -89,12 +89,13 @@ Languages: py (102), sh (1)
 | [`readmenator._scantext`](modules/readmenator._scantext.py.md) | Synthesized scan-text builder for the readmenator knowledge graph. | 1 | 3 | 100.0% |
 | [`readmenator._security`](modules/readmenator._security.py.md) | Pattern-based static security analysis for the readmenator knowledge graph. | 2 | 4 | 57.1% |
 | [`readmenator._skill_installer`](modules/readmenator._skill_installer.py.md) | Installs the packaged ReadMenator agent skills into a project. | 1 | 6 | 100.0% |
+| [`readmenator._soundtrack`](modules/readmenator._soundtrack.py.md) | Procedural synthwave soundtrack for the overview video. | 2 | 7 | 100.0% |
 | [`readmenator._sourceview`](modules/readmenator._sourceview.py.md) | Source viewer payload builder for the graph explorers. | 2 | 5 | 100.0% |
 | [`readmenator._symindex`](modules/readmenator._symindex.py.md) | Deterministic symbol index with call-site resolution. | 4 | 5 | 100.0% |
 | [`readmenator._taint`](modules/readmenator._taint.py.md) | Taint propagation analysis of dangerous imports through the resolved import graph. | 1 | 2 | 75.0% |
 | [`readmenator._uml`](modules/readmenator._uml.py.md) | UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator. | 1 | 3 | 20.0% |
 | [`readmenator._uncertainty`](modules/readmenator._uncertainty.py.md) | Uncertainty engine: classify candidate edges, never invent facts. | 3 | 8 | 41.7% |
-| [`readmenator._video`](modules/readmenator._video.py.md) | Cinematic codebase overview video, general purpose. | 2 | 35 | 100.0% |
+| [`readmenator._video`](modules/readmenator._video.py.md) | Cinematic codebase overview video, general purpose. | 2 | 47 | 100.0% |
 | [`readmenator._viewer_ui`](modules/readmenator._viewer_ui.py.md) | Shared Config button + modal for maps/explorer pages. | 0 | 7 | 100.0% |
 | [`readmenator._watcher`](modules/readmenator._watcher.py.md) | Filesystem watcher for auto-rebuilding the knowledge base. | 1 | 3 | 100.0% |
 | [`readmenator._wiki`](modules/readmenator._wiki.py.md) | Deterministic agent wiki generator for readmenator. | 1 | 4 | 100.0% |

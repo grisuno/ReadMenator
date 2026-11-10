@@ -3,6 +3,61 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_no_layers_returns_empty_violations` | method | `tests/test_layer_rules.py:24` | `def test_no_layers_returns_empty_violations(self)` |
+| `test_presentation_to_data_access_forbidden` | method | `tests/test_layer_rules.py:115` | `def test_presentation_to_data_access_forbidden(self)` |
+| `test_resolved_edges_also_checked` | method | `tests/test_layer_rules.py:104` | `def test_resolved_edges_also_checked(self)` |
+| `test_same_layer_no_violation` | method | `tests/test_layer_rules.py:29` | `def test_same_layer_no_violation(self)` |
+| `test_utility_layer_ignored` | method | `tests/test_layer_rules.py:75` | `def test_utility_layer_ignored(self)` |
+| `test_violation_summary` | method | `tests/test_layer_rules.py:82` | `def test_violation_summary(self)` |
+| `TestBundleOrdering` | class | `tests/test_layout_quality.py:42` | `class TestBundleOrdering(TestCase)` |
+| `TestSeededExplorer` | class | `tests/test_layout_quality.py:116` | `class TestSeededExplorer(TestCase)` |
+| `_chords` | function | `tests/test_layout_quality.py:37` | `def _chords(layout, edges)` |
+| `_clustered` | function | `tests/test_layout_quality.py:23` | `def _clustered()` |
+| `_force_payload_inputs` | function | `tests/test_layout_quality.py:100` | `def _force_payload_inputs()` |
+| `test_layout_bundle_payload_uses_optimized_order` | method | `tests/test_layout_quality.py:150` | `def test_layout_bundle_payload_uses_optimized_order(self)` |
+| `test_layout_center_out_puts_hub_mid_arc` | method | `tests/test_layout_quality.py:77` | `def test_layout_center_out_puts_hub_mid_arc(self)` |
+| `test_layout_more_sweeps_never_increase_cost` | method | `tests/test_layout_quality.py:63` | `def test_layout_more_sweeps_never_increase_cost(self)` |
+| `test_layout_order_deterministic_and_never_worse` | method | `tests/test_layout_quality.py:56` | `def test_layout_order_deterministic_and_never_worse(self)` |
+| `test_layout_order_keeps_members_and_first_group` | method | `tests/test_layout_quality.py:50` | `def test_layout_order_keeps_members_and_first_group(self)` |
+| `test_layout_order_reduces_angular_cost` | method | `tests/test_layout_quality.py:45` | `def test_layout_order_reduces_angular_cost(self)` |
+| `test_layout_seed_deterministic_and_disableable` | method | `tests/test_layout_quality.py:132` | `def test_layout_seed_deterministic_and_disableable(self)` |
+| `test_layout_seed_page_wiring` | method | `tests/test_layout_quality.py:142` | `def test_layout_seed_page_wiring(self)` |
+| `test_layout_seed_positions_present_and_scaled` | method | `tests/test_layout_quality.py:119` | `def test_layout_seed_positions_present_and_scaled(self)` |
+| `test_layout_sphere_refine_in_bundling_call` | method | `tests/test_layout_quality.py:92` | `def test_layout_sphere_refine_in_bundling_call(self)` |
+| `test_layout_sphere_refinement_shortens_chords` | method | `tests/test_layout_quality.py:82` | `def test_layout_sphere_refinement_shortens_chords(self)` |
+| `TestArchitectureLinterContract` | class | `tests/test_linter.py:16` | `class TestArchitectureLinterContract(TestCase)` |
+| `_make_edge` | method | `tests/test_linter.py:26` | `def _make_edge(self, src, tgt, rel)` |
+| `_make_node` | method | `tests/test_linter.py:23` | `def _make_node(self, nid, label, lang)` |
+| `setUp` | method | `tests/test_linter.py:19` | `def setUp(self)` |
+| `test_lint_allows_same_layer_imports` | method | `tests/test_linter.py:61` | `def test_lint_allows_same_layer_imports(self)` |
+| `test_lint_allows_testing_to_business_logic` | method | `tests/test_linter.py:72` | `def test_lint_allows_testing_to_business_logic(self)` |
+| `test_lint_detects_circular_dependencies` | method | `tests/test_linter.py:94` | `def test_lint_detects_circular_dependencies(self)` |
+| `test_lint_detects_cross_layer_violation` | method | `tests/test_linter.py:49` | `def test_lint_detects_cross_layer_violation(self)` |
+| `test_lint_detects_file_exceeding_max_lines` | method | `tests/test_linter.py:40` | `def test_lint_detects_file_exceeding_max_lines(self)` |
+| `test_lint_empty_graph_returns_no_violations` | method | `tests/test_linter.py:29` | `def test_lint_empty_graph_returns_no_violations(self)` |
+| `test_lint_ignores_utility_layer` | method | `tests/test_linter.py:83` | `def test_lint_ignores_utility_layer(self)` |
+| `test_lint_returns_empty_for_files_under_threshold` | method | `tests/test_linter.py:33` | `def test_lint_returns_empty_for_files_under_threshold(self)` |
+| `test_lint_returns_empty_when_disabled` | method | `tests/test_linter.py:121` | `def test_lint_returns_empty_when_disabled(self)` |
+| `test_violations_sorted_by_severity` | method | `tests/test_linter.py:108` | `def test_violations_sorted_by_severity(self)` |
+| `TestMCPProtocol` | class | `tests/test_mcp_server.py:21` | `class TestMCPProtocol(TestCase)` |
+| `_call` | method | `tests/test_mcp_server.py:42` | `def _call(self, req)` |
+| `_get_tool_def` | method | `tests/test_mcp_server.py:219` | `def _get_tool_def(self, name)` |
+| `_make_request` | method | `tests/test_mcp_server.py:36` | `def _make_request(self, method, params, msg_id)` |
+| `setUp` | method | `tests/test_mcp_server.py:24` | `def setUp(self)` |
+| `tearDown` | method | `tests/test_mcp_server.py:33` | `def tearDown(self)` |
+| `test_call_query_tool_missing_required_param_raises` | method | `tests/test_mcp_server.py:154` | `def test_call_query_tool_missing_required_param_raises(self)` |
+| `test_call_query_tool_with_text_returns_results` | method | `tests/test_mcp_server.py:145` | `def test_call_query_tool_with_text_returns_results(self)` |
+| `test_call_summary_tool_returns_content` | method | `tests/test_mcp_server.py:132` | `def test_call_summary_tool_returns_content(self)` |
+| `test_call_tool_returns_text_content_list` | method | `tests/test_mcp_server.py:251` | `def test_call_tool_returns_text_content_list(self)` |
+| `test_call_tool_unknown_tool_returns_method_not_found` | method | `tests/test_mcp_server.py:123` | `def test_call_tool_unknown_tool_returns_method_not_found(self)` |
+| `test_call_tool_without_initialize_returns_error` | method | `tests/test_mcp_server.py:115` | `def test_call_tool_without_initialize_returns_error(self)` |
+| `test_explain_tool_requires_name_param` | method | `tests/test_mcp_server.py:230` | `def test_explain_tool_requires_name_param(self)` |
+| `test_initialize_exchanges_protocol_version` | method | `tests/test_mcp_server.py:49` | `def test_initialize_exchanges_protocol_version(self)` |
+| `test_list_resources_returns_resource_definitions` | method | `tests/test_mcp_server.py:168` | `def test_list_resources_returns_resource_definitions(self)` |
+| `test_list_tools_returns_all_tool_definitions` | method | `tests/test_mcp_server.py:85` | `def test_list_tools_returns_all_tool_definitions(self)` |
+| `test_notifications_initialized_returns_no_response` | method | `tests/test_mcp_server.py:62` | `def test_notifications_initialized_returns_no_response(self)` |
+| `test_parse_error_for_invalid_json` | method | `tests/test_mcp_server.py:243` | `def test_parse_error_for_invalid_json(self)` |
+| `test_path_tool_requires_two_params` | method | `tests/test_mcp_server.py:234` | `def test_path_tool_requires_two_params(self)` |
 | `test_query_tool_requires_text_param` | method | `tests/test_mcp_server.py:226` | `def test_query_tool_requires_text_param(self)` |
 | `test_read_resource_kb_returns_markdown` | method | `tests/test_mcp_server.py:205` | `def test_read_resource_kb_returns_markdown(self)` |
 | `test_read_resource_summary_returns_json` | method | `tests/test_mcp_server.py:186` | `def test_read_resource_summary_returns_json(self)` |
@@ -441,60 +496,5 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `setUp` | method | `tests/test_sarif.py:14` | `def setUp(self)` |
 | `test_empty_findings_produces_valid_sarif` | method | `tests/test_sarif.py:97` | `def test_empty_findings_produces_valid_sarif(self)` |
 | `test_export_includes_result` | method | `tests/test_sarif.py:62` | `def test_export_includes_result(self)` |
-| `test_export_includes_rule` | method | `tests/test_sarif.py:54` | `def test_export_includes_rule(self)` |
-| `test_export_includes_tool_info` | method | `tests/test_sarif.py:46` | `def test_export_includes_tool_info(self)` |
-| `test_export_returns_valid_json` | method | `tests/test_sarif.py:38` | `def test_export_returns_valid_json(self)` |
-| `test_privacy_mode_strips_snippets` | method | `tests/test_sarif.py:88` | `def test_privacy_mode_strips_snippets(self)` |
-| `test_severity_maps_correctly` | method | `tests/test_sarif.py:73` | `def test_severity_maps_correctly(self)` |
-| `TestScannerContract` | class | `tests/test_scanner.py:11` | `class TestScannerContract(TestCase)` |
-| `_write` | method | `tests/test_scanner.py:20` | `def _write(self, path, content)` |
-| `setUp` | method | `tests/test_scanner.py:12` | `def setUp(self)` |
-| `tearDown` | method | `tests/test_scanner.py:16` | `def tearDown(self)` |
-| `test_coding_cookie_ignored_as_file_doc` | method | `tests/test_scanner.py:129` | `def test_coding_cookie_ignored_as_file_doc(self)` |
-| `test_gitignore_disabled_by_default` | method | `tests/test_scanner.py:162` | `def test_gitignore_disabled_by_default(self)` |
-| `test_gitignore_glob_conversion` | method | `tests/test_scanner.py:171` | `def test_gitignore_glob_conversion(self)` |
-| `test_gitignore_respected_when_enabled` | method | `tests/test_scanner.py:151` | `def test_gitignore_respected_when_enabled(self)` |
-| `test_ignores_env_and_vendor_dirs` | method | `tests/test_scanner.py:32` | `def test_ignores_env_and_vendor_dirs(self)` |
-| `test_import_edges_are_created` | method | `tests/test_scanner.py:94` | `def test_import_edges_are_created(self)` |
-| `test_module_docstring_extracted_as_file_doc` | method | `tests/test_scanner.py:114` | `def test_module_docstring_extracted_as_file_doc(self)` |
-| `test_multiline_module_docstring_extracted` | method | `tests/test_scanner.py:121` | `def test_multiline_module_docstring_extracted(self)` |
-| `test_preprocessor_guards_ignored_as_file_doc` | method | `tests/test_scanner.py:136` | `def test_preprocessor_guards_ignored_as_file_doc(self)` |
-| `test_privacy_mode_strips_docs` | method | `tests/test_scanner.py:104` | `def test_privacy_mode_strips_docs(self)` |
-| `test_raises_on_invalid_directory` | method | `tests/test_scanner.py:89` | `def test_raises_on_invalid_directory(self)` |
-| `test_rejects_symlinks` | method | `tests/test_scanner.py:45` | `def test_rejects_symlinks(self)` |
-| `test_respects_max_directory_depth` | method | `tests/test_scanner.py:79` | `def test_respects_max_directory_depth(self)` |
-| `test_scan_with_content_returns_content_map` | method | `tests/test_scanner.py:143` | `def test_scan_with_content_returns_content_map(self)` |
-| `test_scans_multiple_languages` | method | `tests/test_scanner.py:70` | `def test_scans_multiple_languages(self)` |
-| `test_scans_python_files` | method | `tests/test_scanner.py:25` | `def test_scans_python_files(self)` |
-| `test_skips_non_code_files` | method | `tests/test_scanner.py:59` | `def test_skips_non_code_files(self)` |
-| `TestFixGuidance` | class | `tests/test_security.py:396` | `class TestFixGuidance(TestCase)` |
-| `TestSecurityAnalyzerConfig` | class | `tests/test_security.py:43` | `class TestSecurityAnalyzerConfig(TestCase)` |
-| `TestSecurityAnalyzerPathValidation` | class | `tests/test_security.py:327` | `class TestSecurityAnalyzerPathValidation(TestCase)` |
-| `TestSecurityAnalyzerRules` | class | `tests/test_security.py:64` | `class TestSecurityAnalyzerRules(TestCase)` |
-| `TestSecurityAnalyzerSummary` | class | `tests/test_security.py:374` | `class TestSecurityAnalyzerSummary(TestCase)` |
-| `TestSecurityAnalyzerThreshold` | class | `tests/test_security.py:295` | `class TestSecurityAnalyzerThreshold(TestCase)` |
-| `TestSecurityFinding` | class | `tests/test_security.py:21` | `class TestSecurityFinding(TestCase)` |
-| `_finding` | method | `tests/test_security.py:399` | `def _finding(self, cwe)` |
-| `_scan_content` | method | `tests/test_security.py:71` | `def _scan_content(self, content, extension)` |
-| `setUp` | method | `tests/test_security.py:67` | `def setUp(self)` |
-| `test_c_gets` | method | `tests/test_security.py:148` | `def test_c_gets(self)` |
-| `test_c_strcpy` | method | `tests/test_security.py:143` | `def test_c_strcpy(self)` |
-| `test_c_system` | method | `tests/test_security.py:153` | `def test_c_system(self)` |
-| `test_csharp_binary_formatter` | method | `tests/test_security.py:274` | `def test_csharp_binary_formatter(self)` |
-| `test_csharp_process_start` | method | `tests/test_security.py:203` | `def test_csharp_process_start(self)` |
-| `test_dart_process_run` | method | `tests/test_security.py:228` | `def test_dart_process_run(self)` |
-| `test_default_config_disables_security` | method | `tests/test_security.py:46` | `def test_default_config_disables_security(self)` |
-| `test_default_security_output` | method | `tests/test_security.py:54` | `def test_default_security_output(self)` |
-| `test_default_severity_threshold` | method | `tests/test_security.py:50` | `def test_default_severity_threshold(self)` |
-| `test_elixir_code_eval` | method | `tests/test_security.py:238` | `def test_elixir_code_eval(self)` |
-| `test_elixir_system_cmd` | method | `tests/test_security.py:243` | `def test_elixir_system_cmd(self)` |
-| `test_empty_cwe_falls_back` | method | `tests/test_security.py:413` | `def test_empty_cwe_falls_back(self)` |
-| `test_empty_directory` | method | `tests/test_security.py:357` | `def test_empty_directory(self)` |
-| `test_gdscript_os_execute` | method | `tests/test_security.py:248` | `def test_gdscript_os_execute(self)` |
-| `test_go_exec_command` | method | `tests/test_security.py:168` | `def test_go_exec_command(self)` |
-| `test_go_unsafe_package` | method | `tests/test_security.py:289` | `def test_go_unsafe_package(self)` |
-| `test_ignores_ignored_dirs` | method | `tests/test_security.py:345` | `def test_ignores_ignored_dirs(self)` |
-| `test_ignores_symlinks` | method | `tests/test_security.py:330` | `def test_ignores_symlinks(self)` |
-| `test_init_with_config` | method | `tests/test_security.py:58` | `def test_init_with_config(self)` |
 
 Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

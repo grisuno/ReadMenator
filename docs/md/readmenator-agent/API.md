@@ -152,9 +152,9 @@ Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_bund
 - `BundleGraphRenderer.__init__` (method) `readmenator/_bundlegraph.py:54` `def __init__(self, config)` -- Initialise with application configuration.
 - `BundleGraphRenderer.build_payload` (method) `readmenator/_bundlegraph.py:63` `def build_payload(self, force_payload)` -- Derive the bundle payload from a force-graph payload.
 - `BundleGraphRenderer.page_settings` (method) `readmenator/_bundlegraph.py:184` `def page_settings(self, force_payload, explorer_href, live_api)` -- Collect the page settings serialized into the HTML.
-- `BundleGraphRenderer.render` (method) `readmenator/_bundlegraph.py:228` `def render(self, force_payload, title, home_href, explorer_href, live_api)` -- Render the standalone edge bundle explorer HTML document.
-- `BundleGraphRenderer.write` (method) `readmenator/_bundlegraph.py:273` `def write(self, output_path, force_payload, title, home_href, explorer_href)` -- Write the edge bundle explorer HTML document.
-- `BundleGraphRenderer.thumbnail_svg` (method) `readmenator/_bundlegraph.py:299` `def thumbnail_svg(self, force_payload)` -- Render a small circular bundle preview as inline SVG.
+- `BundleGraphRenderer.render` (method) `readmenator/_bundlegraph.py:236` `def render(self, force_payload, title, home_href, explorer_href, live_api)` -- Render the standalone edge bundle explorer HTML document.
+- `BundleGraphRenderer.write` (method) `readmenator/_bundlegraph.py:281` `def write(self, output_path, force_payload, title, home_href, explorer_href)` -- Write the edge bundle explorer HTML document.
+- `BundleGraphRenderer.thumbnail_svg` (method) `readmenator/_bundlegraph.py:307` `def thumbnail_svg(self, force_payload)` -- Render a small circular bundle preview as inline SVG.
 
 ## readmenator/_cache.py
 Depends on: `readmenator/_config.py`
@@ -416,10 +416,10 @@ Imported by: `readmenator/_bundlegraph.py`, `readmenator/_documentation.py`, `re
 - `ForceGraphRenderer.render` (method) `readmenator/_forcegraph.py:359` `def render(self, payload, analytics, title, home_href, live_api)` -- Render the standalone force-graph explorer HTML document.
 - `ForceGraphRenderer.group_colors` (method) `readmenator/_forcegraph.py:413` `def group_colors(self, payload)` -- Return stable colors for the layer and language groupings in a payload.
 - `ForceGraphRenderer.page_settings` (method) `readmenator/_forcegraph.py:436` `def page_settings(self, payload, live_api)` -- Collect the explorer page settings serialized into the HTML.
-- `ForceGraphRenderer.family_color` (method) `readmenator/_forcegraph.py:512` `def family_color(self, name)` -- Return the configured stable hash color for a group name.
-- `ForceGraphRenderer.thumbnail_svg` (method) `readmenator/_forcegraph.py:540` `def thumbnail_svg(self, payload)` -- Render a small ForceAtlas2 preview of the file graph as inline SVG.
-- `ForceGraphRenderer.write` (method) `readmenator/_forcegraph.py:580` `def write(self, output_path, payload, analytics, title, home_href)` -- Write the explorer HTML plus the vendored engine beside it.
-- `ForceGraphRenderer.copy_vendor` (method) `readmenator/_forcegraph.py:607` `def copy_vendor(self, dest_dir)` -- Copy the vendored 2D engine next to an exported page.
+- `ForceGraphRenderer.family_color` (method) `readmenator/_forcegraph.py:542` `def family_color(self, name)` -- Return the configured stable hash color for a group name.
+- `ForceGraphRenderer.thumbnail_svg` (method) `readmenator/_forcegraph.py:570` `def thumbnail_svg(self, payload)` -- Render a small ForceAtlas2 preview of the file graph as inline SVG.
+- `ForceGraphRenderer.write` (method) `readmenator/_forcegraph.py:610` `def write(self, output_path, payload, analytics, title, home_href)` -- Write the explorer HTML plus the vendored engine beside it.
+- `ForceGraphRenderer.copy_vendor` (method) `readmenator/_forcegraph.py:637` `def copy_vendor(self, dest_dir)` -- Copy the vendored 2D engine next to an exported page.
 
 ## readmenator/_gh_wiki.py
 Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_gitmeta.py`

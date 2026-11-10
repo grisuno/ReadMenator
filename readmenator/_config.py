@@ -852,7 +852,129 @@ class Config:
 
     VIDEO_GROWTH_GHOST: float = 0.14
 
+    VIDEO_GROWTH_GROW_FRACTION: float = 0.72
+
+    VIDEO_GROWTH_FOLD_FRACTION: float = 0.92
+
+    VIDEO_AUDIO_ENABLED: bool = True
+
+    VIDEO_AUDIO_SAMPLE_RATE: int = 32000
+
+    VIDEO_AUDIO_BITRATE: str = "160k"
+
+    VIDEO_AUDIO_BPM: float = 100.0
+
+    VIDEO_AUDIO_SEED: int = 7
+
+    VIDEO_AUDIO_ROOT_HZ: float = 55.0
+
+    VIDEO_AUDIO_PROGRESSION: Tuple[Tuple[int, str], ...] = (
+        (0, "minor"), (-4, "major"), (3, "major"), (-2, "major"),
+    )
+
+    VIDEO_AUDIO_MASTER_GAIN: float = 0.8
+
+    VIDEO_AUDIO_STEM_GAINS: Tuple[Tuple[str, float], ...] = (
+        ("pad", 0.22), ("bass", 0.30), ("drums", 0.34), ("arp", 0.20),
+    )
+
+    VIDEO_AUDIO_STEM_THRESHOLDS: Tuple[Tuple[str, float], ...] = (
+        ("pad", -1.0), ("bass", 0.2), ("drums", 0.45), ("arp", 0.6),
+    )
+
+    VIDEO_AUDIO_STEM_RAMP: float = 0.25
+
+    VIDEO_AUDIO_DEFAULT_LEVEL: float = 1.0
+
+    VIDEO_AUDIO_SCENE_LEVELS: Tuple[Tuple[str, float], ...] = (
+        ("hook", 0.3), ("title", 0.45), ("card", 0.1), ("layers", 0.7), ("gods", 0.7),
+        ("invite", 0.7), ("outro", 0.45),
+    )
+
+    VIDEO_AUDIO_CONTINUE_KINDS: Tuple[str, ...] = ("card",)
+
+    VIDEO_AUDIO_CROSSFADE_S: float = 0.4
+
+    VIDEO_AUDIO_FADE_IN_S: float = 0.8
+
+    VIDEO_AUDIO_FADE_OUT_S: float = 2.5
+
+    VIDEO_AUDIO_STEREO_DELAY_MS: float = 11.0
+
+    VIDEO_AUDIO_IMPACT_S: float = 1.1
+
+    VIDEO_AUDIO_IMPACT_GAIN: float = 0.5
+
+    VIDEO_AUDIO_RISER_S: float = 1.4
+
+    VIDEO_AUDIO_RISER_GAIN: float = 0.22
+
+    VIDEO_AUDIO_PING_S: float = 0.6
+
+    VIDEO_AUDIO_PING_GAIN: float = 0.2
+
+    VIDEO_AUDIO_PING_SCALE: Tuple[int, ...] = (0, 3, 5, 7, 10)
+
+    VIDEO_HOOK_S: float = 4.0
+
+    VIDEO_HOOK_LEAD: float = 0.08
+
+    VIDEO_HOOK_SPAN: float = 0.8
+
+    VIDEO_HOOK_GLITCH_S: float = 0.2
+
+    VIDEO_BEAT_BLOOM: float = 0.4
+
+    VIDEO_BEAT_DECAY: float = 5.0
+
+    VIDEO_IMPACT_VISUAL_S: float = 0.4
+
+    VIDEO_IMPACT_ZOOM: float = 0.035
+
+    VIDEO_IMPACT_FLASH: float = 0.12
+
+    VIDEO_STARS: int = 260
+
+    VIDEO_GLOW_ENABLED: bool = True
+
+    VIDEO_GLOW_SPREAD: float = 2.6
+
+    VIDEO_GLOW_BLUR: float = 6.0
+
+    VIDEO_GLOW_GAIN: float = 0.8
+
+    VIDEO_NEBULA_ALPHA: float = 0.13
+
+    VIDEO_NEBULA_RADIUS: float = 0.34
+
+    VIDEO_LEAD_IN_KINDS: Tuple[str, ...] = ("card", "hook")
+
+    VIDEO_CHAPTERS_ENABLED: bool = True
+
+    VIDEO_CHAPTER_TITLES: Tuple[Tuple[str, str], ...] = (
+        ("title", "Overview"), ("layers", "Layers"), ("gods", "God Nodes"),
+        ("tree", "The Blast Radius"), ("communities", "Communities"),
+        ("graph", "Emergence"), ("orbit", "Orbit"), ("bundle", "The Wiring"),
+        ("sphere", "The Sphere"), ("dna", "Code DNA"), ("tiers", "The Tiers"),
+        ("flow", "Execution"), ("growth", "The Organism"),
+        ("invite", "Explore"), ("outro", "Telemetry"),
+    )
+
     BUNDLEGRAPH_ENABLED: bool = True
+
+    BUNDLEGRAPH_GLOW_ENABLED: bool = True
+
+    BUNDLEGRAPH_GLOW_SPREAD: float = 3.8
+
+    BUNDLEGRAPH_GLOW_ALPHA: float = 0.55
+
+    BUNDLEGRAPH_GLOW_CURVES: int = 300
+
+    BUNDLEGRAPH_HALO_ALPHA: float = 0.22
+
+    BUNDLEGRAPH_STARS: int = 500
+
+    BUNDLEGRAPH_AMBIENT_PARTICLES: int = 160
 
     BUNDLEGRAPH_OUTPUT: str = "graph-bundle.html"
 
@@ -985,6 +1107,68 @@ class Config:
     FORCEGRAPH_3D_LABEL_PX: float = 9.0
 
     FORCEGRAPH_3D_ORBIT_SPEED: float = 0.6
+
+    FORCEGRAPH_CINEMA_ENABLED: bool = True
+
+    FORCEGRAPH_CINEMA_DEFAULT: bool = True
+
+    FORCEGRAPH_GLOW_ENABLED: bool = True
+
+    FORCEGRAPH_GLOW_SPREAD: float = 4.2
+
+    FORCEGRAPH_GLOW_ALPHA: float = 0.55
+
+    FORCEGRAPH_GLOW_MAX_NODES: int = 2500
+
+    FORCEGRAPH_AMBIENT_EDGES: int = 80
+
+    FORCEGRAPH_CINEMA_BLOOM_CDN_JS: str = (
+        "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/postprocessing/UnrealBloomPass.js/+esm"
+    )
+
+    FORCEGRAPH_CINEMA_BLOOM_STRENGTH: float = 0.8
+
+    FORCEGRAPH_CINEMA_BLOOM_RADIUS: float = 0.7
+
+    FORCEGRAPH_CINEMA_BLOOM_THRESHOLD: float = 0.2
+
+    FORCEGRAPH_CINEMA_STARS: int = 600
+
+    FORCEGRAPH_CINEMA_STAR_COLOR: str = "#e2e8f0"
+
+    FORCEGRAPH_CINEMA_NODE_OPACITY: float = 0.95
+
+    FORCEGRAPH_CINEMA_NODE_RESOLUTION: int = 12
+
+    FORCEGRAPH_CINEMA_LINK_OPACITY: float = 0.12
+
+    FORCEGRAPH_INTRO_MS: int = 1600
+
+    FORCEGRAPH_INTRO_FADE_MS: int = 320
+
+    FORCEGRAPH_INTRO_REFRESH_MS: int = 150
+
+    FORCEGRAPH_PULSE_MS: int = 900
+
+    FORCEGRAPH_PULSE_PX: int = 90
+
+    FORCEGRAPH_WAVE_MS: int = 360
+
+    FORCEGRAPH_WAVE_HOP_MS: int = 140
+
+    FORCEGRAPH_WAVE_GAIN: float = 0.45
+
+    FORCEGRAPH_TOUR_ENABLED: bool = True
+
+    FORCEGRAPH_TOUR_STEP_MS: int = 6000
+
+    FORCEGRAPH_TOUR_FLY_MS: int = 1800
+
+    FORCEGRAPH_TOUR_COMMUNITIES: int = 3
+
+    FORCEGRAPH_TOUR_PATH_CANDIDATES: int = 24
+
+    FORCEGRAPH_TOUR_ORBIT_SPEED: float = 1.2
 
     FORCEGRAPH_3D_FLY_DISTANCE: int = 320
 

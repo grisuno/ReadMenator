@@ -3,6 +3,51 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `TestConceptGraphContract` | class | `tests/test_concepts.py:20` | `class TestConceptGraphContract(TestCase)` |
+| `_node` | function | `tests/test_concepts.py:8` | `def _node(fid, symbols, doc)` |
+| `test_concept_atomic_breakdown_splits_camelcase` | method | `tests/test_concepts.py:53` | `def test_concept_atomic_breakdown_splits_camelcase(self)` |
+| `test_concept_deterministic_ordering` | method | `tests/test_concepts.py:62` | `def test_concept_deterministic_ordering(self)` |
+| `test_concept_dialectic_questions_for_overlap` | method | `tests/test_concepts.py:85` | `def test_concept_dialectic_questions_for_overlap(self)` |
+| `test_concept_disabled_returns_empty_graph` | method | `tests/test_concepts.py:76` | `def test_concept_disabled_returns_empty_graph(self)` |
+| `test_concept_nouns_map_to_file_sets` | method | `tests/test_concepts.py:21` | `def test_concept_nouns_map_to_file_sets(self)` |
+| `test_concept_verbs_come_from_structural_edges` | method | `tests/test_concepts.py:36` | `def test_concept_verbs_come_from_structural_edges(self)` |
+| `TestConfigContract` | class | `tests/test_config.py:7` | `class TestConfigContract(TestCase)` |
+| `test_config_defaults_are_sane` | method | `tests/test_config.py:13` | `def test_config_defaults_are_sane(self)` |
+| `test_config_is_immutable` | method | `tests/test_config.py:8` | `def test_config_is_immutable(self)` |
+| `test_ignore_dirs_are_comprehensive` | method | `tests/test_config.py:24` | `def test_ignore_dirs_are_comprehensive(self)` |
+| `test_plural_map_covers_all_symbol_types` | method | `tests/test_config.py:30` | `def test_plural_map_covers_all_symbol_types(self)` |
+| `test_supported_extensions_no_duplicates` | method | `tests/test_config.py:41` | `def test_supported_extensions_no_duplicates(self)` |
+| `TestCodePropertyGraphContract` | class | `tests/test_cpg.py:11` | `class TestCodePropertyGraphContract(TestCase)` |
+| `_make_node` | method | `tests/test_cpg.py:18` | `def _make_node(self, nid, label, lang)` |
+| `_make_sym` | method | `tests/test_cpg.py:21` | `def _make_sym(self, name, kind, line)` |
+| `setUp` | method | `tests/test_cpg.py:14` | `def setUp(self)` |
+| `test_empty_graph_returns_valid_json` | method | `tests/test_cpg.py:96` | `def test_empty_graph_returns_valid_json(self)` |
+| `test_generate_includes_edges` | method | `tests/test_cpg.py:49` | `def test_generate_includes_edges(self)` |
+| `test_generate_includes_metadata` | method | `tests/test_cpg.py:61` | `def test_generate_includes_metadata(self)` |
+| `test_generate_includes_node_data` | method | `tests/test_cpg.py:33` | `def test_generate_includes_node_data(self)` |
+| `test_generate_returns_valid_json` | method | `tests/test_cpg.py:24` | `def test_generate_returns_valid_json(self)` |
+| `test_privacy_mode_strips_docs` | method | `tests/test_cpg.py:71` | `def test_privacy_mode_strips_docs(self)` |
+| `test_sha256_hash_included` | method | `tests/test_cpg.py:89` | `def test_sha256_hash_included(self)` |
+| `TestCursorRulesGeneratorContract` | class | `tests/test_cursorrules.py:18` | `class TestCursorRulesGeneratorContract(TestCase)` |
+| `setUp` | method | `tests/test_cursorrules.py:21` | `def setUp(self)` |
+| `test_generate_contains_base_rules` | method | `tests/test_cursorrules.py:33` | `def test_generate_contains_base_rules(self)` |
+| `test_generate_contains_header` | method | `tests/test_cursorrules.py:29` | `def test_generate_contains_header(self)` |
+| `test_generate_idempotent` | method | `tests/test_cursorrules.py:111` | `def test_generate_idempotent(self)` |
+| `test_generate_includes_communities` | method | `tests/test_cursorrules.py:62` | `def test_generate_includes_communities(self)` |
+| `test_generate_includes_god_nodes` | method | `tests/test_cursorrules.py:49` | `def test_generate_includes_god_nodes(self)` |
+| `test_generate_includes_layer_constraints` | method | `tests/test_cursorrules.py:38` | `def test_generate_includes_layer_constraints(self)` |
+| `test_generate_includes_violations` | method | `tests/test_cursorrules.py:82` | `def test_generate_includes_violations(self)` |
+| `test_generate_limits_violations_to_ten` | method | `tests/test_cursorrules.py:95` | `def test_generate_limits_violations_to_ten(self)` |
+| `test_generate_returns_string` | method | `tests/test_cursorrules.py:25` | `def test_generate_returns_string(self)` |
+| `test_generate_writes_file_when_project_root` | method | `tests/test_cursorrules.py:103` | `def test_generate_writes_file_when_project_root(self)` |
+| `TestDataflowContract` | class | `tests/test_dataflow.py:25` | `class TestDataflowContract(TestCase)` |
+| `_analyze` | function | `tests/test_dataflow.py:17` | `def _analyze(body)` |
+| `_node` | function | `tests/test_dataflow.py:8` | `def _node(node_id, funcs)` |
+| `test_address_alias_pointer_not_dead` | method | `tests/test_dataflow.py:234` | `def test_address_alias_pointer_not_dead(self)` |
+| `test_address_taken_suppresses_dead_store` | method | `tests/test_dataflow.py:369` | `def test_address_taken_suppresses_dead_store(self)` |
+| `test_alias_pointer_store_initializes_array` | method | `tests/test_dataflow.py:272` | `def test_alias_pointer_store_initializes_array(self)` |
+| `test_array_arg_to_filler_counts_as_init` | method | `tests/test_dataflow.py:173` | `def test_array_arg_to_filler_counts_as_init(self)` |
+| `test_array_arg_to_readonly_still_uninit` | method | `tests/test_dataflow.py:181` | `def test_array_arg_to_readonly_still_uninit(self)` |
 | `test_array_filled_in_decl_init_call` | method | `tests/test_dataflow.py:188` | `def test_array_filled_in_decl_init_call(self)` |
 | `test_array_store_before_read_suppresses_uninit` | method | `tests/test_dataflow.py:248` | `def test_array_store_before_read_suppresses_uninit(self)` |
 | `test_asm_output_counts_as_init` | method | `tests/test_dataflow.py:116` | `def test_asm_output_counts_as_init(self)` |
@@ -374,66 +419,76 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_query_subcommand_works` | method | `tests/test_integration.py:48` | `def test_query_subcommand_works(self)` |
 | `test_rebuild` | method | `tests/test_integration.py:71` | `def test_rebuild(self)` |
 | `test_summary_works` | method | `tests/test_integration.py:65` | `def test_summary_works(self)` |
-| `TestAnalyticsContract` | class | `tests/test_interactive_graph.py:254` | `class TestAnalyticsContract(TestCase)` |
-| `TestEmbedContract` | class | `tests/test_interactive_graph.py:290` | `class TestEmbedContract(TestCase)` |
-| `TestExclusionsContract` | class | `tests/test_interactive_graph.py:234` | `class TestExclusionsContract(TestCase)` |
-| `TestExplorerContract` | class | `tests/test_interactive_graph.py:275` | `class TestExplorerContract(TestCase)` |
-| `TestForceGraphContract` | class | `tests/test_interactive_graph.py:52` | `class TestForceGraphContract(TestCase)` |
-| `TestForceGraphExplorerInteraction` | class | `tests/test_interactive_graph.py:497` | `class TestForceGraphExplorerInteraction(TestCase)` |
-| `TestForceGraphInspectorPayload` | class | `tests/test_interactive_graph.py:426` | `class TestForceGraphInspectorPayload(TestCase)` |
-| `TestGalleryCardContract` | class | `tests/test_interactive_graph.py:369` | `class TestGalleryCardContract(TestCase)` |
-| `TestProvenanceContract` | class | `tests/test_interactive_graph.py:211` | `class TestProvenanceContract(TestCase)` |
-| `TestRebuildContract` | class | `tests/test_interactive_graph.py:317` | `class TestRebuildContract(TestCase)` |
-| `TestScanTextContract` | class | `tests/test_interactive_graph.py:133` | `class TestScanTextContract(TestCase)` |
-| `TestYaraLiteContract` | class | `tests/test_interactive_graph.py:158` | `class TestYaraLiteContract(TestCase)` |
-| `_const_json` | function | `tests/test_interactive_graph.py:486` | `def _const_json(html, name)` |
-| `_inline_script` | function | `tests/test_interactive_graph.py:477` | `def _inline_script(html)` |
-| `_node` | function | `tests/test_interactive_graph.py:40` | `def _node(nid, symbols)` |
-| `_run_app` | method | `tests/test_interactive_graph.py:320` | `def _run_app(self, tmp)` |
-| `self_nodes` | function | `tests/test_interactive_graph.py:153` | `def self_nodes()` |
-| `setUp` | method | `tests/test_interactive_graph.py:55` | `def setUp(self)` |
-| `setUp` | method | `tests/test_interactive_graph.py:429` | `def setUp(self)` |
-| `setUp` | method | `tests/test_interactive_graph.py:500` | `def setUp(self)` |
-| `test_audit_flags_snippetless_findings` | method | `tests/test_interactive_graph.py:214` | `def test_audit_flags_snippetless_findings(self)` |
-| `test_build_corpus_maps_every_node` | method | `tests/test_interactive_graph.py:146` | `def test_build_corpus_maps_every_node(self)` |
-| `test_build_for_node_includes_sections` | method | `tests/test_interactive_graph.py:136` | `def test_build_for_node_includes_sections(self)` |
-| `test_build_has_all_sections` | method | `tests/test_interactive_graph.py:257` | `def test_build_has_all_sections(self)` |
-| `test_build_payload_has_heterogeneous_nodes` | method | `tests/test_interactive_graph.py:74` | `def test_build_payload_has_heterogeneous_nodes(self)` |
-| `test_build_payload_maps_communities` | method | `tests/test_interactive_graph.py:82` | `def test_build_payload_maps_communities(self)` |
-| `test_build_state_serves_apis` | method | `tests/test_interactive_graph.py:278` | `def test_build_state_serves_apis(self)` |
-| `test_cluster_groups_similar_files` | method | `tests/test_interactive_graph.py:304` | `def test_cluster_groups_similar_files(self)` |
-| `test_explorer_3d_draws_flat_glyphs_on_overlay` | method | `tests/test_interactive_graph.py:519` | `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)` |
-| `test_explorer_3d_engine_is_pinned` | method | `tests/test_interactive_graph.py:524` | `def test_explorer_3d_engine_is_pinned(self)` |
-| `test_explorer_data_cannot_close_the_script` | method | `tests/test_interactive_graph.py:563` | `def test_explorer_data_cannot_close_the_script(self)` |
-| `test_explorer_hit_tests_against_live_positions` | method | `tests/test_interactive_graph.py:514` | `def test_explorer_hit_tests_against_live_positions(self)` |
-| `test_explorer_placeholders_inside_data_are_left_alone` | method | `tests/test_interactive_graph.py:553` | `def test_explorer_placeholders_inside_data_are_left_alone(self)` |
-| `test_explorer_script_is_valid_javascript` | method | `tests/test_interactive_graph.py:571` | `def test_explorer_script_is_valid_javascript(self)` |
-| `test_explorer_settings_come_from_config` | method | `tests/test_interactive_graph.py:535` | `def test_explorer_settings_come_from_config(self)` |
-| `test_explorer_ships_edge_path_and_lens_actions` | method | `tests/test_interactive_graph.py:530` | `def test_explorer_ships_edge_path_and_lens_actions(self)` |
-| `test_explorer_structural_edges_use_their_own_colors` | method | `tests/test_interactive_graph.py:546` | `def test_explorer_structural_edges_use_their_own_colors(self)` |
-| `test_export_diagrams_writes_forcegraph_and_card` | method | `tests/test_interactive_graph.py:399` | `def test_export_diagrams_writes_forcegraph_and_card(self)` |
-| `test_exporter_delegates_to_forcegraph` | method | `tests/test_interactive_graph.py:127` | `def test_exporter_delegates_to_forcegraph(self)` |
-| `test_family_color_is_deterministic` | method | `tests/test_interactive_graph.py:61` | `def test_family_color_is_deterministic(self)` |
-| `test_filter_findings_removes_excluded` | method | `tests/test_interactive_graph.py:243` | `def test_filter_findings_removes_excluded(self)` |
-| `test_forcegraph_externals_exclude_calls_and_internal_imports` | method | `tests/test_interactive_graph.py:449` | `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)` |
-| `test_forcegraph_file_nodes_carry_inspector_fields` | method | `tests/test_interactive_graph.py:441` | `def test_forcegraph_file_nodes_carry_inspector_fields(self)` |
-| `test_forcegraph_privacy_mode_strips_docs` | method | `tests/test_interactive_graph.py:454` | `def test_forcegraph_privacy_mode_strips_docs(self)` |
-| `test_forcegraph_render_has_inspector_and_layouts` | method | `tests/test_interactive_graph.py:470` | `def test_forcegraph_render_has_inspector_and_layouts(self)` |
-| `test_forcegraph_thumbnail_escapes_colors` | method | `tests/test_interactive_graph.py:462` | `def test_forcegraph_thumbnail_escapes_colors(self)` |
-| `test_near_jaccard_prefers_shared_terms` | method | `tests/test_interactive_graph.py:293` | `def test_near_jaccard_prefers_shared_terms(self)` |
-| `test_node_value_dampens_large_files` | method | `tests/test_interactive_graph.py:66` | `def test_node_value_dampens_large_files(self)` |
-| `test_parse_and_match_glob` | method | `tests/test_interactive_graph.py:237` | `def test_parse_and_match_glob(self)` |
-| `test_parse_reports_tiers` | method | `tests/test_interactive_graph.py:184` | `def test_parse_reports_tiers(self)` |
-| `test_publish_appends_extra_card` | method | `tests/test_interactive_graph.py:372` | `def test_publish_appends_extra_card(self)` |
-| `test_render_produces_standalone_html` | method | `tests/test_interactive_graph.py:94` | `def test_render_produces_standalone_html(self)` |
-| `test_render_uses_supported_cdn_fallback` | method | `tests/test_interactive_graph.py:106` | `def test_render_uses_supported_cdn_fallback(self)` |
-| `test_run_matches_any_of_them` | method | `tests/test_interactive_graph.py:190` | `def test_run_matches_any_of_them(self)` |
-| `test_run_requires_cooccurrence` | method | `tests/test_interactive_graph.py:196` | `def test_run_requires_cooccurrence(self)` |
-| `test_run_skips_forcegraph_when_disabled` | method | `tests/test_interactive_graph.py:347` | `def test_run_skips_forcegraph_when_disabled(self)` |
-| `test_run_writes_forcegraph_html` | method | `tests/test_interactive_graph.py:335` | `def test_run_writes_forcegraph_html(self)` |
-| `test_summary_counts_classes` | method | `tests/test_interactive_graph.py:226` | `def test_summary_counts_classes(self)` |
-| `test_validate_counts_rules` | method | `tests/test_interactive_graph.py:203` | `def test_validate_counts_rules(self)` |
-| `test_write_copies_vendor_engine` | method | `tests/test_interactive_graph.py:112` | `def test_write_copies_vendor_engine(self)` |
+| `TestAnalyticsContract` | class | `tests/test_interactive_graph.py:255` | `class TestAnalyticsContract(TestCase)` |
+| `TestEmbedContract` | class | `tests/test_interactive_graph.py:291` | `class TestEmbedContract(TestCase)` |
+| `TestExclusionsContract` | class | `tests/test_interactive_graph.py:235` | `class TestExclusionsContract(TestCase)` |
+| `TestExplorerContract` | class | `tests/test_interactive_graph.py:276` | `class TestExplorerContract(TestCase)` |
+| `TestForceGraphContract` | class | `tests/test_interactive_graph.py:53` | `class TestForceGraphContract(TestCase)` |
+| `TestForceGraphExplorerInteraction` | class | `tests/test_interactive_graph.py:498` | `class TestForceGraphExplorerInteraction(TestCase)` |
+| `TestForceGraphInspectorPayload` | class | `tests/test_interactive_graph.py:427` | `class TestForceGraphInspectorPayload(TestCase)` |
+| `TestGalleryCardContract` | class | `tests/test_interactive_graph.py:370` | `class TestGalleryCardContract(TestCase)` |
+| `TestProvenanceContract` | class | `tests/test_interactive_graph.py:212` | `class TestProvenanceContract(TestCase)` |
+| `TestRebuildContract` | class | `tests/test_interactive_graph.py:318` | `class TestRebuildContract(TestCase)` |
+| `TestScanTextContract` | class | `tests/test_interactive_graph.py:134` | `class TestScanTextContract(TestCase)` |
+| `TestYaraLiteContract` | class | `tests/test_interactive_graph.py:159` | `class TestYaraLiteContract(TestCase)` |
+| `_const_json` | function | `tests/test_interactive_graph.py:487` | `def _const_json(html, name)` |
+| `_inline_script` | function | `tests/test_interactive_graph.py:478` | `def _inline_script(html)` |
+| `_node` | function | `tests/test_interactive_graph.py:41` | `def _node(nid, symbols)` |
+| `_run_app` | method | `tests/test_interactive_graph.py:321` | `def _run_app(self, tmp)` |
+| `self_nodes` | function | `tests/test_interactive_graph.py:154` | `def self_nodes()` |
+| `setUp` | method | `tests/test_interactive_graph.py:56` | `def setUp(self)` |
+| `setUp` | method | `tests/test_interactive_graph.py:430` | `def setUp(self)` |
+| `setUp` | method | `tests/test_interactive_graph.py:501` | `def setUp(self)` |
+| `test_audit_flags_snippetless_findings` | method | `tests/test_interactive_graph.py:215` | `def test_audit_flags_snippetless_findings(self)` |
+| `test_build_corpus_maps_every_node` | method | `tests/test_interactive_graph.py:147` | `def test_build_corpus_maps_every_node(self)` |
+| `test_build_for_node_includes_sections` | method | `tests/test_interactive_graph.py:137` | `def test_build_for_node_includes_sections(self)` |
+| `test_build_has_all_sections` | method | `tests/test_interactive_graph.py:258` | `def test_build_has_all_sections(self)` |
+| `test_build_payload_has_heterogeneous_nodes` | method | `tests/test_interactive_graph.py:75` | `def test_build_payload_has_heterogeneous_nodes(self)` |
+| `test_build_payload_maps_communities` | method | `tests/test_interactive_graph.py:83` | `def test_build_payload_maps_communities(self)` |
+| `test_build_state_serves_apis` | method | `tests/test_interactive_graph.py:279` | `def test_build_state_serves_apis(self)` |
+| `test_cluster_groups_similar_files` | method | `tests/test_interactive_graph.py:305` | `def test_cluster_groups_similar_files(self)` |
+| `test_explorer_3d_draws_flat_glyphs_on_overlay` | method | `tests/test_interactive_graph.py:520` | `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)` |
+| `test_explorer_3d_engine_is_pinned` | method | `tests/test_interactive_graph.py:525` | `def test_explorer_3d_engine_is_pinned(self)` |
+| `test_explorer_ambient_motion_honors_reduced_motion` | method | `tests/test_interactive_graph.py:611` | `def test_explorer_ambient_motion_honors_reduced_motion(self)` |
+| `test_explorer_cinema_settings_come_from_config` | method | `tests/test_interactive_graph.py:564` | `def test_explorer_cinema_settings_come_from_config(self)` |
+| `test_explorer_data_cannot_close_the_script` | method | `tests/test_interactive_graph.py:644` | `def test_explorer_data_cannot_close_the_script(self)` |
+| `test_explorer_glows_and_flows_by_default` | method | `tests/test_interactive_graph.py:596` | `def test_explorer_glows_and_flows_by_default(self)` |
+| `test_explorer_hit_tests_against_live_positions` | method | `tests/test_interactive_graph.py:515` | `def test_explorer_hit_tests_against_live_positions(self)` |
+| `test_explorer_motion_effects_honor_reduced_motion` | method | `tests/test_interactive_graph.py:590` | `def test_explorer_motion_effects_honor_reduced_motion(self)` |
+| `test_explorer_overlay_paints_once_per_scene_render` | method | `tests/test_interactive_graph.py:576` | `def test_explorer_overlay_paints_once_per_scene_render(self)` |
+| `test_explorer_placeholders_inside_data_are_left_alone` | method | `tests/test_interactive_graph.py:634` | `def test_explorer_placeholders_inside_data_are_left_alone(self)` |
+| `test_explorer_script_is_valid_javascript` | method | `tests/test_interactive_graph.py:652` | `def test_explorer_script_is_valid_javascript(self)` |
+| `test_explorer_settings_come_from_config` | method | `tests/test_interactive_graph.py:616` | `def test_explorer_settings_come_from_config(self)` |
+| `test_explorer_ships_cinema_mode` | method | `tests/test_interactive_graph.py:559` | `def test_explorer_ships_cinema_mode(self)` |
+| `test_explorer_ships_edge_path_and_lens_actions` | method | `tests/test_interactive_graph.py:531` | `def test_explorer_ships_edge_path_and_lens_actions(self)` |
+| `test_explorer_ships_guided_tour` | method | `tests/test_interactive_graph.py:536` | `def test_explorer_ships_guided_tour(self)` |
+| `test_explorer_ships_motion_effects` | method | `tests/test_interactive_graph.py:580` | `def test_explorer_ships_motion_effects(self)` |
+| `test_explorer_structural_edges_use_their_own_colors` | method | `tests/test_interactive_graph.py:627` | `def test_explorer_structural_edges_use_their_own_colors(self)` |
+| `test_explorer_tour_honors_reduced_motion` | method | `tests/test_interactive_graph.py:553` | `def test_explorer_tour_honors_reduced_motion(self)` |
+| `test_explorer_tour_settings_come_from_config` | method | `tests/test_interactive_graph.py:541` | `def test_explorer_tour_settings_come_from_config(self)` |
+| `test_export_diagrams_writes_forcegraph_and_card` | method | `tests/test_interactive_graph.py:400` | `def test_export_diagrams_writes_forcegraph_and_card(self)` |
+| `test_exporter_delegates_to_forcegraph` | method | `tests/test_interactive_graph.py:128` | `def test_exporter_delegates_to_forcegraph(self)` |
+| `test_family_color_is_deterministic` | method | `tests/test_interactive_graph.py:62` | `def test_family_color_is_deterministic(self)` |
+| `test_filter_findings_removes_excluded` | method | `tests/test_interactive_graph.py:244` | `def test_filter_findings_removes_excluded(self)` |
+| `test_forcegraph_externals_exclude_calls_and_internal_imports` | method | `tests/test_interactive_graph.py:450` | `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)` |
+| `test_forcegraph_file_nodes_carry_inspector_fields` | method | `tests/test_interactive_graph.py:442` | `def test_forcegraph_file_nodes_carry_inspector_fields(self)` |
+| `test_forcegraph_privacy_mode_strips_docs` | method | `tests/test_interactive_graph.py:455` | `def test_forcegraph_privacy_mode_strips_docs(self)` |
+| `test_forcegraph_render_has_inspector_and_layouts` | method | `tests/test_interactive_graph.py:471` | `def test_forcegraph_render_has_inspector_and_layouts(self)` |
+| `test_forcegraph_thumbnail_escapes_colors` | method | `tests/test_interactive_graph.py:463` | `def test_forcegraph_thumbnail_escapes_colors(self)` |
+| `test_near_jaccard_prefers_shared_terms` | method | `tests/test_interactive_graph.py:294` | `def test_near_jaccard_prefers_shared_terms(self)` |
+| `test_node_value_dampens_large_files` | method | `tests/test_interactive_graph.py:67` | `def test_node_value_dampens_large_files(self)` |
+| `test_parse_and_match_glob` | method | `tests/test_interactive_graph.py:238` | `def test_parse_and_match_glob(self)` |
+| `test_parse_reports_tiers` | method | `tests/test_interactive_graph.py:185` | `def test_parse_reports_tiers(self)` |
+| `test_publish_appends_extra_card` | method | `tests/test_interactive_graph.py:373` | `def test_publish_appends_extra_card(self)` |
+| `test_render_produces_standalone_html` | method | `tests/test_interactive_graph.py:95` | `def test_render_produces_standalone_html(self)` |
+| `test_render_uses_supported_cdn_fallback` | method | `tests/test_interactive_graph.py:107` | `def test_render_uses_supported_cdn_fallback(self)` |
+| `test_run_matches_any_of_them` | method | `tests/test_interactive_graph.py:191` | `def test_run_matches_any_of_them(self)` |
+| `test_run_requires_cooccurrence` | method | `tests/test_interactive_graph.py:197` | `def test_run_requires_cooccurrence(self)` |
+| `test_run_skips_forcegraph_when_disabled` | method | `tests/test_interactive_graph.py:348` | `def test_run_skips_forcegraph_when_disabled(self)` |
+| `test_run_writes_forcegraph_html` | method | `tests/test_interactive_graph.py:336` | `def test_run_writes_forcegraph_html(self)` |
+| `test_summary_counts_classes` | method | `tests/test_interactive_graph.py:227` | `def test_summary_counts_classes(self)` |
+| `test_validate_counts_rules` | method | `tests/test_interactive_graph.py:204` | `def test_validate_counts_rules(self)` |
+| `test_write_copies_vendor_engine` | method | `tests/test_interactive_graph.py:113` | `def test_write_copies_vendor_engine(self)` |
 | `TestLayerRuleEngineContract` | class | `tests/test_layer_rules.py:10` | `class TestLayerRuleEngineContract(TestCase)` |
 | `_make_node` | method | `tests/test_layer_rules.py:17` | `def _make_node(self, nid, label)` |
 | `setUp` | method | `tests/test_layer_rules.py:13` | `def setUp(self)` |
@@ -441,60 +496,5 @@ Previous: [SYMBOLS_p4.md](SYMBOLS_p4.md)
 | `test_empty_graph_returns_empty_violations` | method | `tests/test_layer_rules.py:20` | `def test_empty_graph_returns_empty_violations(self)` |
 | `test_forbidden_edge_detected` | method | `tests/test_layer_rules.py:36` | `def test_forbidden_edge_detected(self)` |
 | `test_multiple_violations` | method | `tests/test_layer_rules.py:57` | `def test_multiple_violations(self)` |
-| `test_no_layers_returns_empty_violations` | method | `tests/test_layer_rules.py:24` | `def test_no_layers_returns_empty_violations(self)` |
-| `test_presentation_to_data_access_forbidden` | method | `tests/test_layer_rules.py:115` | `def test_presentation_to_data_access_forbidden(self)` |
-| `test_resolved_edges_also_checked` | method | `tests/test_layer_rules.py:104` | `def test_resolved_edges_also_checked(self)` |
-| `test_same_layer_no_violation` | method | `tests/test_layer_rules.py:29` | `def test_same_layer_no_violation(self)` |
-| `test_utility_layer_ignored` | method | `tests/test_layer_rules.py:75` | `def test_utility_layer_ignored(self)` |
-| `test_violation_summary` | method | `tests/test_layer_rules.py:82` | `def test_violation_summary(self)` |
-| `TestBundleOrdering` | class | `tests/test_layout_quality.py:42` | `class TestBundleOrdering(TestCase)` |
-| `TestSeededExplorer` | class | `tests/test_layout_quality.py:116` | `class TestSeededExplorer(TestCase)` |
-| `_chords` | function | `tests/test_layout_quality.py:37` | `def _chords(layout, edges)` |
-| `_clustered` | function | `tests/test_layout_quality.py:23` | `def _clustered()` |
-| `_force_payload_inputs` | function | `tests/test_layout_quality.py:100` | `def _force_payload_inputs()` |
-| `test_layout_bundle_payload_uses_optimized_order` | method | `tests/test_layout_quality.py:150` | `def test_layout_bundle_payload_uses_optimized_order(self)` |
-| `test_layout_center_out_puts_hub_mid_arc` | method | `tests/test_layout_quality.py:77` | `def test_layout_center_out_puts_hub_mid_arc(self)` |
-| `test_layout_more_sweeps_never_increase_cost` | method | `tests/test_layout_quality.py:63` | `def test_layout_more_sweeps_never_increase_cost(self)` |
-| `test_layout_order_deterministic_and_never_worse` | method | `tests/test_layout_quality.py:56` | `def test_layout_order_deterministic_and_never_worse(self)` |
-| `test_layout_order_keeps_members_and_first_group` | method | `tests/test_layout_quality.py:50` | `def test_layout_order_keeps_members_and_first_group(self)` |
-| `test_layout_order_reduces_angular_cost` | method | `tests/test_layout_quality.py:45` | `def test_layout_order_reduces_angular_cost(self)` |
-| `test_layout_seed_deterministic_and_disableable` | method | `tests/test_layout_quality.py:132` | `def test_layout_seed_deterministic_and_disableable(self)` |
-| `test_layout_seed_page_wiring` | method | `tests/test_layout_quality.py:142` | `def test_layout_seed_page_wiring(self)` |
-| `test_layout_seed_positions_present_and_scaled` | method | `tests/test_layout_quality.py:119` | `def test_layout_seed_positions_present_and_scaled(self)` |
-| `test_layout_sphere_refine_in_bundling_call` | method | `tests/test_layout_quality.py:92` | `def test_layout_sphere_refine_in_bundling_call(self)` |
-| `test_layout_sphere_refinement_shortens_chords` | method | `tests/test_layout_quality.py:82` | `def test_layout_sphere_refinement_shortens_chords(self)` |
-| `TestArchitectureLinterContract` | class | `tests/test_linter.py:16` | `class TestArchitectureLinterContract(TestCase)` |
-| `_make_edge` | method | `tests/test_linter.py:26` | `def _make_edge(self, src, tgt, rel)` |
-| `_make_node` | method | `tests/test_linter.py:23` | `def _make_node(self, nid, label, lang)` |
-| `setUp` | method | `tests/test_linter.py:19` | `def setUp(self)` |
-| `test_lint_allows_same_layer_imports` | method | `tests/test_linter.py:61` | `def test_lint_allows_same_layer_imports(self)` |
-| `test_lint_allows_testing_to_business_logic` | method | `tests/test_linter.py:72` | `def test_lint_allows_testing_to_business_logic(self)` |
-| `test_lint_detects_circular_dependencies` | method | `tests/test_linter.py:94` | `def test_lint_detects_circular_dependencies(self)` |
-| `test_lint_detects_cross_layer_violation` | method | `tests/test_linter.py:49` | `def test_lint_detects_cross_layer_violation(self)` |
-| `test_lint_detects_file_exceeding_max_lines` | method | `tests/test_linter.py:40` | `def test_lint_detects_file_exceeding_max_lines(self)` |
-| `test_lint_empty_graph_returns_no_violations` | method | `tests/test_linter.py:29` | `def test_lint_empty_graph_returns_no_violations(self)` |
-| `test_lint_ignores_utility_layer` | method | `tests/test_linter.py:83` | `def test_lint_ignores_utility_layer(self)` |
-| `test_lint_returns_empty_for_files_under_threshold` | method | `tests/test_linter.py:33` | `def test_lint_returns_empty_for_files_under_threshold(self)` |
-| `test_lint_returns_empty_when_disabled` | method | `tests/test_linter.py:121` | `def test_lint_returns_empty_when_disabled(self)` |
-| `test_violations_sorted_by_severity` | method | `tests/test_linter.py:108` | `def test_violations_sorted_by_severity(self)` |
-| `TestMCPProtocol` | class | `tests/test_mcp_server.py:21` | `class TestMCPProtocol(TestCase)` |
-| `_call` | method | `tests/test_mcp_server.py:42` | `def _call(self, req)` |
-| `_get_tool_def` | method | `tests/test_mcp_server.py:219` | `def _get_tool_def(self, name)` |
-| `_make_request` | method | `tests/test_mcp_server.py:36` | `def _make_request(self, method, params, msg_id)` |
-| `setUp` | method | `tests/test_mcp_server.py:24` | `def setUp(self)` |
-| `tearDown` | method | `tests/test_mcp_server.py:33` | `def tearDown(self)` |
-| `test_call_query_tool_missing_required_param_raises` | method | `tests/test_mcp_server.py:154` | `def test_call_query_tool_missing_required_param_raises(self)` |
-| `test_call_query_tool_with_text_returns_results` | method | `tests/test_mcp_server.py:145` | `def test_call_query_tool_with_text_returns_results(self)` |
-| `test_call_summary_tool_returns_content` | method | `tests/test_mcp_server.py:132` | `def test_call_summary_tool_returns_content(self)` |
-| `test_call_tool_returns_text_content_list` | method | `tests/test_mcp_server.py:251` | `def test_call_tool_returns_text_content_list(self)` |
-| `test_call_tool_unknown_tool_returns_method_not_found` | method | `tests/test_mcp_server.py:123` | `def test_call_tool_unknown_tool_returns_method_not_found(self)` |
-| `test_call_tool_without_initialize_returns_error` | method | `tests/test_mcp_server.py:115` | `def test_call_tool_without_initialize_returns_error(self)` |
-| `test_explain_tool_requires_name_param` | method | `tests/test_mcp_server.py:230` | `def test_explain_tool_requires_name_param(self)` |
-| `test_initialize_exchanges_protocol_version` | method | `tests/test_mcp_server.py:49` | `def test_initialize_exchanges_protocol_version(self)` |
-| `test_list_resources_returns_resource_definitions` | method | `tests/test_mcp_server.py:168` | `def test_list_resources_returns_resource_definitions(self)` |
-| `test_list_tools_returns_all_tool_definitions` | method | `tests/test_mcp_server.py:85` | `def test_list_tools_returns_all_tool_definitions(self)` |
-| `test_notifications_initialized_returns_no_response` | method | `tests/test_mcp_server.py:62` | `def test_notifications_initialized_returns_no_response(self)` |
-| `test_parse_error_for_invalid_json` | method | `tests/test_mcp_server.py:243` | `def test_parse_error_for_invalid_json(self)` |
-| `test_path_tool_requires_two_params` | method | `tests/test_mcp_server.py:234` | `def test_path_tool_requires_two_params(self)` |
 
 Next: [SYMBOLS_p6.md](SYMBOLS_p6.md)

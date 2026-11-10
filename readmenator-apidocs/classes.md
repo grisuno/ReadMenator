@@ -19,6 +19,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`ApiReferenceBuilder`](modules/readmenator._apidocs.py.md#apireferencebuilder) class in `readmenator._apidocs`
 - [`ArchitectureDiagramBuilder`](modules/readmenator._flowcharts.py.md#architecturediagrambuilder) class in `readmenator._flowcharts`
 - [`ArchitectureLinter`](modules/readmenator._linter.py.md#architecturelinter) class in `readmenator._linter`
+- [`AudioCue`](modules/readmenator._soundtrack.py.md#audiocue) class in `readmenator._soundtrack`
 - [`Backdrop`](modules/readmenator._video.py.md#backdrop) class in `readmenator._video`
 - [`Bm25Index`](modules/readmenator._graphrag.py.md#bm25index) class in `readmenator._graphrag`
 - [`BundleGraphRenderer`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer) class in `readmenator._bundlegraph`
@@ -166,6 +167,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`SecurityFinding`](modules/readmenator._models.py.md#securityfinding) class in `readmenator._models`
 - [`SecurityRule`](modules/readmenator._security.py.md#securityrule) class in `readmenator._security`
 - [`SkillInstaller`](modules/readmenator._skill_installer.py.md#skillinstaller) class in `readmenator._skill_installer`
+- [`SoundtrackComposer`](modules/readmenator._soundtrack.py.md#soundtrackcomposer) class in `readmenator._soundtrack`
 - [`SourceEntry`](modules/readmenator._sourceview.py.md#sourceentry) class in `readmenator._sourceview`
 - [`SourceViewBuilder`](modules/readmenator._sourceview.py.md#sourceviewbuilder) class in `readmenator._sourceview`
 - [`SphereBundleLayout`](modules/readmenator._graphlayout.py.md#spherebundlelayout) class in `readmenator._graphlayout`

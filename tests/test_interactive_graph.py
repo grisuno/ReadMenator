@@ -8,6 +8,7 @@ similarity, and the rebuild wiring into the maps directory.
 
 from __future__ import annotations
 
+import dataclasses
 import json
 import re
 import shutil
@@ -531,6 +532,86 @@ class TestForceGraphExplorerInteraction(unittest.TestCase):
         """Edges, routes, lenses, reach direction, and color modes are wired in."""
         for token in ("function renderEdge", "function renderPath", "function runPath", "stronglyConnected", "LENSES", 'data-color="layer"', 'data-color="language"', 'data-view="3d"', 'id="ctx"', "function setDir", "Path to..."):
             self.assertIn(token, self.html)
+
+    def test_explorer_ships_guided_tour(self) -> None:
+        """The tour button, bar, stops builder, keys, deep link and API are wired in."""
+        for token in ('id="btn-tour"', 'id="tourbar"', 'id="tour-progress"', "function tourStops", "function tourStart", "function tourStop", 'k==="g"', 'p.get("tour")==="1"', 'p.set("tour","1")', "tour:Object.freeze(", "gEl.addEventListener(\"pointerdown\",tourPause)"):
+            self.assertIn(token, self.html)
+
+    def test_explorer_tour_settings_come_from_config(self) -> None:
+        """Tour pacing and scope are serialized from Config and can be disabled."""
+        settings = _const_json(self.html, "SETTINGS")
+        self.assertTrue(settings["tourEnabled"])
+        self.assertEqual(settings["tourStepMs"], self.config.FORCEGRAPH_TOUR_STEP_MS)
+        self.assertEqual(settings["tourFlyMs"], self.config.FORCEGRAPH_TOUR_FLY_MS)
+        self.assertEqual(settings["tourCommunities"], self.config.FORCEGRAPH_TOUR_COMMUNITIES)
+        self.assertEqual(settings["tourPathCandidates"], self.config.FORCEGRAPH_TOUR_PATH_CANDIDATES)
+        self.assertEqual(settings["tourOrbitSpeed"], self.config.FORCEGRAPH_TOUR_ORBIT_SPEED)
+        off = ForceGraphRenderer(dataclasses.replace(self.config, FORCEGRAPH_TOUR_ENABLED=False))
+        self.assertFalse(off.page_settings(self.payload)["tourEnabled"])
+
+    def test_explorer_tour_honors_reduced_motion(self) -> None:
+        """Reduced motion never autoplays the tour or animates the camera."""
+        self.assertIn("TOUR.playing=!reduced", self.html)
+        self.assertIn("fly=reduced?0:SETTINGS.tourFlyMs", self.html)
+        self.assertIn("c.autoRotate=on?!reduced:S.orbit", self.html)
+
+    def test_explorer_ships_cinema_mode(self) -> None:
+        """Cinema mode wires glowing nodes, the CDN bloom pass, stars, key, deep link and API."""
+        for token in ('id="btn-cinema"', "function setCinema", "function applyCinema", "function paintStars", "import(SETTINGS.cinemaBloomCdn)", "postProcessingComposer().addPass(pass)", "removePass(CIN.pass)", 'k==="k"', 'p.set("cinema","1")', 'p.get("cinema")==="1"', "cinema:setCinema", "#stage.cinema::after"):
+            self.assertIn(token, self.html)
+
+    def test_explorer_cinema_settings_come_from_config(self) -> None:
+        """Bloom, star and sphere tuneables are serialized from Config; the CDN is pinned."""
+        settings = _const_json(self.html, "SETTINGS")
+        self.assertTrue(settings["cinemaEnabled"])
+        self.assertEqual(settings["cinemaBloomCdn"], self.config.FORCEGRAPH_CINEMA_BLOOM_CDN_JS)
+        self.assertRegex(settings["cinemaBloomCdn"], r"^https://cdn\.jsdelivr\.net/npm/three@\d+\.\d+\.\d+/")
+        self.assertEqual(settings["cinemaBloomStrength"], self.config.FORCEGRAPH_CINEMA_BLOOM_STRENGTH)
+        self.assertEqual(settings["cinemaStars"], self.config.FORCEGRAPH_CINEMA_STARS)
+        self.assertEqual(settings["cinemaLinkOpacity"], self.config.FORCEGRAPH_CINEMA_LINK_OPACITY)
+        off = ForceGraphRenderer(dataclasses.replace(self.config, FORCEGRAPH_CINEMA_ENABLED=False))
+        self.assertFalse(off.page_settings(self.payload)["cinemaEnabled"])
+
+    def test_explorer_overlay_paints_once_per_scene_render(self) -> None:
+        """Post-processing passes re-enter renderer.render; only the graph scene repaints the overlay."""
+        self.assertIn("if(!g3||s===g3.scene())paint3D();", self.html)
+
+    def test_explorer_ships_motion_effects(self) -> None:
+        """Intro materialisation, selection pulse and hop wave are wired and config driven."""
+        for token in ("function startIntro", "function introAlpha", "function linkBorn", "function drawPulse", "function waveScale", "FX.hop[other]=d+1", "FX.pulse=reduced?null:"):
+            self.assertIn(token, self.html)
+        settings = _const_json(self.html, "SETTINGS")
+        self.assertEqual(settings["introMs"], self.config.FORCEGRAPH_INTRO_MS)
+        self.assertEqual(settings["pulseMs"], self.config.FORCEGRAPH_PULSE_MS)
+        self.assertEqual(settings["waveHopMs"], self.config.FORCEGRAPH_WAVE_HOP_MS)
+        self.assertEqual(settings["waveGain"], self.config.FORCEGRAPH_WAVE_GAIN)
+
+    def test_explorer_motion_effects_honor_reduced_motion(self) -> None:
+        """Reduced motion skips the intro, the pulse, the wave and the cinema auto-orbit."""
+        self.assertIn("FX.intro=fxNow();if(reduced||SETTINGS.introMs<=0)return;", self.html)
+        self.assertIn("FX.wave=reduced?0:fxNow()", self.html)
+        self.assertIn("if(c&&CIN.on&&!reduced&&!TOUR.on)", self.html)
+
+    def test_explorer_glows_and_flows_by_default(self) -> None:
+        """Node halos, ambient flow, the nebula backdrop and default 3D cinema ship enabled."""
+        for token in ("function glowSprite", 'ctx.globalCompositeOperation="lighter"', "const AMBIENT=new Set(", "AMBIENT.has(l.key)", "#stage::before{", "@keyframes rm-drift", "SETTINGS.cinemaDefault&&!CIN.off", '.topbar::after{'):
+            self.assertIn(token, self.html)
+        settings = _const_json(self.html, "SETTINGS")
+        self.assertTrue(settings["glow"])
+        self.assertTrue(settings["cinemaDefault"])
+        self.assertEqual(settings["glowSpread"], self.config.FORCEGRAPH_GLOW_SPREAD)
+        self.assertEqual(settings["glowMaxNodes"], self.config.FORCEGRAPH_GLOW_MAX_NODES)
+        self.assertEqual(settings["ambientEdges"], self.config.FORCEGRAPH_AMBIENT_EDGES)
+        off = ForceGraphRenderer(dataclasses.replace(self.config, FORCEGRAPH_GLOW_ENABLED=False, FORCEGRAPH_CINEMA_DEFAULT=False))
+        plain = off.page_settings(self.payload)
+        self.assertFalse(plain["glow"])
+        self.assertFalse(plain["cinemaDefault"])
+
+    def test_explorer_ambient_motion_honors_reduced_motion(self) -> None:
+        """Ambient particles and the drifting backdrop stop under reduced motion."""
+        self.assertIn("return !reduced&&!S.hl.size&&!S.selEdge&&!FX.introOn&&AMBIENT.has(l.key)?1:0;", self.html)
+        self.assertIn("#stage::before{animation:none}", self.html)
 
     def test_explorer_settings_come_from_config(self) -> None:
         """Every hit-testing and 3D tuneable is serialized from Config."""

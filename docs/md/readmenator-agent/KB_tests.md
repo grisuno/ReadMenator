@@ -1,5 +1,5 @@
-# Subsystem: tests (page 1 of 4)
-Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p3.md](KB_tests_p3.md), [KB_tests_p4.md](KB_tests_p4.md)
+# Subsystem: tests (page 1 of 5)
+Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p3.md](KB_tests_p3.md), [KB_tests_p4.md](KB_tests_p4.md), [KB_tests_p5.md](KB_tests_p5.md)
 
 ## tests/__init__.py
 - Layer: testing
@@ -248,33 +248,35 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_node` (function, line 19) `def _node(nid, doc)`
-  - `_fixture` (function, line 24) `def _fixture(config)`
-  - `_script_json` (function, line 49) `def _script_json(html, name)`
-  - `TestBundleGraphPayloadContract` (class, line 58) `class TestBundleGraphPayloadContract(TestCase)`
-  - `TestBundleGraphRenderContract` (class, line 108) `class TestBundleGraphRenderContract(TestCase)`
-  - `TestBundleGraphAppContract` (class, line 172) `class TestBundleGraphAppContract(TestCase)`
-  - `setUp` (method, line 61) `def setUp(self)`
-  - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 67) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
-  - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 73) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
-  - `test_bundlegraph_nodes_on_circle_and_sphere` (method, line 81) `def test_bundlegraph_nodes_on_circle_and_sphere(self)`
-  - `test_bundlegraph_hub_leads_its_arc` (method, line 87) `def test_bundlegraph_hub_leads_its_arc(self)`
-  - `test_bundlegraph_empty_payload` (method, line 95) `def test_bundlegraph_empty_payload(self)`
-  - `test_bundlegraph_privacy_mode_strips_docs` (method, line 101) `def test_bundlegraph_privacy_mode_strips_docs(self)`
-  - `setUp` (method, line 111) `def setUp(self)`
-  - `test_bundlegraph_render_fills_placeholders` (method, line 118) `def test_bundlegraph_render_fills_placeholders(self)`
-  - `test_bundlegraph_render_has_no_network_requests` (method, line 127) `def test_bundlegraph_render_has_no_network_requests(self)`
-  - `test_bundlegraph_render_has_both_views_and_controls` (method, line 134) `def test_bundlegraph_render_has_both_views_and_controls(self)`
-  - `test_bundlegraph_render_escapes_untrusted_text` (method, line 140) `def test_bundlegraph_render_escapes_untrusted_text(self)`
-  - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 151) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
-  - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 157) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
-  - `test_bundlegraph_write_creates_parent` (method, line 164) `def test_bundlegraph_write_creates_parent(self)`
-  - `_project` (method, line 175) `def _project(self, tmp)`
-  - `_config` (method, line 180) `def _config(self)`
-  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 185) `def test_export_diagrams_writes_bundle_page_and_card(self)`
-  - `test_bundle_page_skipped_when_disabled` (method, line 201) `def test_bundle_page_skipped_when_disabled(self)`
-  - `test_export_bundlegraph_cli_entry` (method, line 212) `def test_export_bundlegraph_cli_entry(self)`
-  - `test_pages_subdir_card_points_into_maps_dir` (method, line 222) `def test_pages_subdir_card_points_into_maps_dir(self)`
+  - `_node` (function, line 20) `def _node(nid, doc)`
+  - `_fixture` (function, line 25) `def _fixture(config)`
+  - `_script_json` (function, line 50) `def _script_json(html, name)`
+  - `TestBundleGraphPayloadContract` (class, line 59) `class TestBundleGraphPayloadContract(TestCase)`
+  - `TestBundleGraphRenderContract` (class, line 109) `class TestBundleGraphRenderContract(TestCase)`
+  - `TestBundleGraphAppContract` (class, line 191) `class TestBundleGraphAppContract(TestCase)`
+  - `setUp` (method, line 62) `def setUp(self)`
+  - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 68) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
+  - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 74) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
+  - `test_bundlegraph_nodes_on_circle_and_sphere` (method, line 82) `def test_bundlegraph_nodes_on_circle_and_sphere(self)`
+  - `test_bundlegraph_hub_leads_its_arc` (method, line 88) `def test_bundlegraph_hub_leads_its_arc(self)`
+  - `test_bundlegraph_empty_payload` (method, line 96) `def test_bundlegraph_empty_payload(self)`
+  - `test_bundlegraph_privacy_mode_strips_docs` (method, line 102) `def test_bundlegraph_privacy_mode_strips_docs(self)`
+  - `setUp` (method, line 112) `def setUp(self)`
+  - `test_bundlegraph_render_fills_placeholders` (method, line 119) `def test_bundlegraph_render_fills_placeholders(self)`
+  - `test_bundlegraph_render_ships_glow_stars_and_ambient_flow` (method, line 128) `def test_bundlegraph_render_ships_glow_stars_and_ambient_flow(self)`
+  - `test_bundlegraph_render_effects_honor_reduced_motion_and_light_theme` (method, line 140) `def test_bundlegraph_render_effects_honor_reduced_motion_and_light_theme(self)`
+  - `test_bundlegraph_render_has_no_network_requests` (method, line 146) `def test_bundlegraph_render_has_no_network_requests(self)`
+  - `test_bundlegraph_render_has_both_views_and_controls` (method, line 153) `def test_bundlegraph_render_has_both_views_and_controls(self)`
+  - `test_bundlegraph_render_escapes_untrusted_text` (method, line 159) `def test_bundlegraph_render_escapes_untrusted_text(self)`
+  - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 170) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
+  - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 176) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
+  - `test_bundlegraph_write_creates_parent` (method, line 183) `def test_bundlegraph_write_creates_parent(self)`
+  - `_project` (method, line 194) `def _project(self, tmp)`
+  - `_config` (method, line 199) `def _config(self)`
+  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 204) `def test_export_diagrams_writes_bundle_page_and_card(self)`
+  - `test_bundle_page_skipped_when_disabled` (method, line 220) `def test_bundle_page_skipped_when_disabled(self)`
+  - `test_export_bundlegraph_cli_entry` (method, line 231) `def test_export_bundlegraph_cli_entry(self)`
+  - `test_pages_subdir_card_points_into_maps_dir` (method, line 241) `def test_pages_subdir_card_points_into_maps_dir(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`
 
 ## tests/test_cache.py

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import math
+import dataclasses
 import re
 import tempfile
 import unittest
@@ -123,6 +124,24 @@ class TestBundleGraphRenderContract(unittest.TestCase):
         settings = _script_json(self.html, "CFG")
         self.assertEqual(settings["beta"], self.config.BUNDLEGRAPH_BETA)
         self.assertEqual(settings["explorerHref"], "graph-force.html")
+
+    def test_bundlegraph_render_ships_glow_stars_and_ambient_flow(self) -> None:
+        """Glowing nodes and wires, the sphere atmosphere, stars and idle particles are config driven."""
+        for token in ("function glowSprite", "function drawStars", "const AMBIENT=", "CFG.haloAlpha", "lit.slice(0,CFG.glowCurves)", "#stage::before{"):
+            self.assertIn(token, self.html)
+        settings = _script_json(self.html, "CFG")
+        self.assertTrue(settings["glow"])
+        self.assertEqual(settings["glowSpread"], self.config.BUNDLEGRAPH_GLOW_SPREAD)
+        self.assertEqual(settings["stars"], self.config.BUNDLEGRAPH_STARS)
+        self.assertEqual(settings["ambientParticles"], self.config.BUNDLEGRAPH_AMBIENT_PARTICLES)
+        off = BundleGraphRenderer(dataclasses.replace(self.config, BUNDLEGRAPH_GLOW_ENABLED=False))
+        self.assertFalse(off.page_settings(self.force, None)["glow"])
+
+    def test_bundlegraph_render_effects_honor_reduced_motion_and_light_theme(self) -> None:
+        """Glow is additive on dark only; idle motion stops under reduced motion."""
+        self.assertIn("const fx=CFG.glow&&!K.light;", self.html)
+        self.assertIn("if(!fs&&!reduce&&CFG.ambientParticles>0&&S.reveal>=1)", self.html)
+        self.assertIn("#stage::before{animation:none}", self.html)
 
     def test_bundlegraph_render_has_no_network_requests(self) -> None:
         """The page loads no script, stylesheet, or font from the network."""

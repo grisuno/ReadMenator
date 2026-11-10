@@ -1,10 +1,10 @@
 # readmenator/parsers
 
-*Community 1 | 34 files | cohesion 0.52*
+*Community 0 | 39 files | cohesion 0.53*
 
 ## Definition
 
-This community groups 34 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.52). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Hotspot, dependency cycle, and change impact analysis.  Scores files by complexity plus centrality, finds import cycles with DFS, and measures transitive depend.
+This community groups 39 file(s) rooted at `readmenator/parsers` with dominant language py (cohesion 0.53). Central symbols: `AnalysisResult`, `AnalysisResultV2`, `AssemblyParser`, `CParser`, `CSharpParser`, `ChangeImpact`, `CommunityResult`, `ConceptGraph`. Core file: `tests/test_parsers_property.py` (27 symbols). Documented purpose: Hotspot, dependency cycle, and change impact analysis.  Scores files by complexity plus centrality, finds import cycles with DFS, and measures transitive depend.
 
 ## Files
 
@@ -20,7 +20,7 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/parsers/_dart.py` | py | utility | 2 | yes |
 | `readmenator/parsers/_elixir.py` | py | utility | 2 | yes |
 
-### `tests` (7 files)
+### `tests` (10 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -32,7 +32,7 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 | `tests/test_rule_gen.py` | py | testing | 10 | no |
 | `tests/test_sarif.py` | py | testing | 10 | no |
 
-### `readmenator` (6 files)
+### `readmenator` (8 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
@@ -43,7 +43,7 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 | `readmenator/_rule_gen.py` | py | business_logic | 9 | yes |
 | `readmenator/_sarif.py` | py | utility | 5 | yes |
 
-*... and 14 more files in this community.*
+*... and 19 more files in this community.*
 
 
 ## Key Symbols
@@ -81,29 +81,29 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 94
-- Cross-boundary resolved imports (EXTRACTED): 101
+- Internal resolved imports (EXTRACTED): 104
+- Cross-boundary resolved imports (EXTRACTED): 105
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 0 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_analytics.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 1 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_app.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 
 ## Open Questions
 
-- Why do 6 file(s) lack file-level docs (e.g. `tests/test_hotspots.py`)? What purpose do they serve?
+- Why do 8 file(s) lack file-level docs (e.g. `tests/test_hotspots.py`)? What purpose do they serve?
 - What would break if the most connected file in readmenator/parsers changed?
-- Should readmenator/parsers be split, given cohesion 0.52?
+- Should readmenator/parsers be split, given cohesion 0.53?
 
 ## Sources
 
@@ -113,6 +113,8 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/_models.py`
 - `readmenator/_rule_gen.py`
 - `readmenator/_sarif.py`
+- `readmenator/_scanner.py`
+- `readmenator/_taint.py`
 - `readmenator/parsers/__init__.py`
 - `readmenator/parsers/_assembly.py`
 - `readmenator/parsers/_base.py`
@@ -125,6 +127,4 @@ This community groups 34 file(s) rooted at `readmenator/parsers` with dominant l
 - `readmenator/parsers/_java.py`
 - `readmenator/parsers/_javascript.py`
 - `readmenator/parsers/_kotlin.py`
-- `readmenator/parsers/_lua.py`
-- `readmenator/parsers/_nim.py`
-- *... and 14 more*
+- *... and 19 more*

@@ -1,4 +1,4 @@
-# Subsystem: tests (page 4 of 4)
+# Subsystem: tests (page 4 of 5)
 Previous: [KB_tests_p3.md](KB_tests_p3.md)
 
 ## tests/test_readme_injector.py
@@ -263,6 +263,64 @@ Previous: [KB_tests_p3.md](KB_tests_p3.md)
   - `test_empty_cwe_falls_back` (method, line 413) `def test_empty_cwe_falls_back(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_security.py`
 
+## tests/test_soundtrack.py
+- Doc: Contract tests for the procedural video soundtrack and chapter marks.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_config` (function, line 32) `def _config()`
+  - `_scenes` (function, line 39) `def _scenes()`
+  - `_frames` (function, line 49) `def _frames(blob)`
+  - `_rms` (function, line 57) `def _rms(samples, rate, start, end)`
+  - `TestSoundtrackContract` (class, line 63) `class TestSoundtrackContract(TestCase)`
+  - `TestVideoAudioWiringContract` (class, line 152) `class TestVideoAudioWiringContract(TestCase)`
+  - `_hook_data` (function, line 211) `def _hook_data()`
+  - `TestVideoColdOpenContract` (class, line 220) `class TestVideoColdOpenContract(TestCase)`
+  - `TestVideoScoreSyncContract` (class, line 263) `class TestVideoScoreSyncContract(TestCase)`
+  - `TestVideoImpactFramesContract` (class, line 305) `class TestVideoImpactFramesContract(TestCase)`
+  - `TestVideoGlowContract` (class, line 344) `class TestVideoGlowContract(TestCase)`
+  - `test_soundtrack_wav_shape_matches_video_duration` (method, line 64) `def test_soundtrack_wav_shape_matches_video_duration(self)`
+  - `test_soundtrack_is_deterministic` (method, line 72) `def test_soundtrack_is_deterministic(self)`
+  - `test_soundtrack_seed_changes_noise` (method, line 77) `def test_soundtrack_seed_changes_noise(self)`
+  - `test_soundtrack_acts_are_louder_than_cards` (method, line 82) `def test_soundtrack_acts_are_louder_than_cards(self)`
+  - `test_soundtrack_never_clips_past_pcm_range` (method, line 90) `def test_soundtrack_never_clips_past_pcm_range(self)`
+  - `test_soundtrack_master_fades_reach_silence` (method, line 96) `def test_soundtrack_master_fades_reach_silence(self)`
+  - `test_soundtrack_cues_follow_scene_cuts` (method, line 103) `def test_soundtrack_cues_follow_scene_cuts(self)`
+  - `test_soundtrack_pings_rise_along_the_scale` (method, line 113) `def test_soundtrack_pings_rise_along_the_scale(self)`
+  - `test_soundtrack_impact_adds_energy_on_the_cut` (method, line 120) `def test_soundtrack_impact_adds_energy_on_the_cut(self)`
+  - `test_soundtrack_beat_restarts_on_every_act` (method, line 128) `def test_soundtrack_beat_restarts_on_every_act(self)`
+  - `test_soundtrack_empty_timeline_is_valid_silence` (method, line 135) `def test_soundtrack_empty_timeline_is_valid_silence(self)`
+  - `test_soundtrack_unknown_cue_is_ignored` (method, line 140) `def test_soundtrack_unknown_cue_is_ignored(self)`
+  - `test_soundtrack_level_is_clamped` (method, line 144) `def test_soundtrack_level_is_clamped(self)`
+  - `test_video_audio_track_composes_score_in_workdir` (method, line 153) `def test_video_audio_track_composes_score_in_workdir(self)`
+  - `test_video_audio_disabled_yields_silent_video` (method, line 161) `def test_video_audio_disabled_yields_silent_video(self)`
+  - `test_video_user_music_wins_over_generated_score` (method, line 169) `def test_video_user_music_wins_over_generated_score(self)`
+  - `test_video_encode_command_maps_audio_and_chapters` (method, line 177) `def test_video_encode_command_maps_audio_and_chapters(self)`
+  - `test_video_chapters_cover_the_timeline_from_each_card` (method, line 188) `def test_video_chapters_cover_the_timeline_from_each_card(self)`
+  - `test_video_chapter_titles_escape_metadata_syntax` (method, line 198) `def test_video_chapter_titles_escape_metadata_syntax(self)`
+  - `test_video_growth_release_times_span_the_growing_phase` (method, line 202) `def test_video_growth_release_times_span_the_growing_phase(self)`
+  - `test_video_hook_lines_state_measured_facts` (method, line 221) `def test_video_hook_lines_state_measured_facts(self)`
+  - `test_video_hook_lines_skip_missing_facts` (method, line 228) `def test_video_hook_lines_skip_missing_facts(self)`
+  - `test_video_hook_scene_opens_the_timeline_with_accents` (method, line 233) `def test_video_hook_scene_opens_the_timeline_with_accents(self)`
+  - `test_video_hook_disabled_or_empty_starts_on_title` (method, line 243) `def test_video_hook_disabled_or_empty_starts_on_title(self)`
+  - `test_video_ping_times_cover_hook_lines_then_releases` (method, line 249) `def test_video_ping_times_cover_hook_lines_then_releases(self)`
+  - `test_video_chapters_fold_the_hook_into_the_overview` (method, line 256) `def test_video_chapters_fold_the_hook_into_the_overview(self)`
+  - `setUp` (method, line 264) `def setUp(self)`
+  - `test_video_beat_peaks_on_the_downbeat_of_an_act` (method, line 269) `def test_video_beat_peaks_on_the_downbeat_of_an_act(self)`
+  - `test_video_beat_is_silent_where_the_drums_are` (method, line 278) `def test_video_beat_is_silent_where_the_drums_are(self)`
+  - `test_video_punch_decays_from_every_scored_cut` (method, line 282) `def test_video_punch_decays_from_every_scored_cut(self)`
+  - `test_video_sync_is_off_without_a_generated_score` (method, line 293) `def test_video_sync_is_off_without_a_generated_score(self)`
+  - `test_soundtrack_stem_weight_follows_thresholds` (method, line 298) `def test_soundtrack_stem_weight_follows_thresholds(self)`
+  - `test_video_impact_punch_keeps_size_and_brightens` (method, line 306) `def test_video_impact_punch_keeps_size_and_brightens(self)`
+  - `test_video_stars_turn_with_the_camera_and_stay_in_the_box` (method, line 316) `def test_video_stars_turn_with_the_camera_and_stay_in_the_box(self)`
+  - `test_video_stars_behind_the_camera_are_culled` (method, line 332) `def test_video_stars_behind_the_camera_are_culled(self)`
+  - `test_video_glow_adds_light_around_an_emitter_only` (method, line 345) `def test_video_glow_adds_light_around_an_emitter_only(self)`
+  - `test_video_glow_draws_beams_and_fog` (method, line 355) `def test_video_glow_draws_beams_and_fog(self)`
+  - `test_video_glow_disabled_or_empty_returns_the_frame` (method, line 365) `def test_video_glow_disabled_or_empty_returns_the_frame(self)`
+  - `test_video_emitters_record_only_inside_a_glow_pass` (method, line 373) `def test_video_emitters_record_only_inside_a_glow_pass(self)`
+  - `field` (function, line 319) `def field(yaw)`
+- Depends on: `readmenator/_config.py`, `readmenator/_soundtrack.py`, `readmenator/_video.py`
+
 ## tests/test_sourceview.py
 - Doc: Contract tests for the source viewer (View drawer in explorers).
 - Layer: testing
@@ -416,76 +474,5 @@ Previous: [KB_tests_p3.md](KB_tests_p3.md)
   - `test_generate_ruby_produces_valid_code` (method, line 480) `def test_generate_ruby_produces_valid_code(self)`
 - Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_uml.py`
 
-## tests/test_video.py
-- Doc: Contract tests for the cinematic overview video renderer.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_nodes` (function, line 17) `def _nodes()`
-  - `_analysis` (function, line 25) `def _analysis()`
-  - `TestVideoContract` (class, line 37) `class TestVideoContract(TestCase)`
-  - `_growth_payload` (function, line 220) `def _growth_payload()`
-  - `_growth_data` (function, line 246) `def _growth_data(renderer, config)`
-  - `TestVideoGrowthAct` (class, line 257) `class TestVideoGrowthAct(TestCase)`
-  - `TestVideoFlowActs` (class, line 374) `class TestVideoFlowActs(TestCase)`
-  - `test_video_collect_counts` (method, line 38) `def test_video_collect_counts(self)`
-  - `test_video_collect_empty_project` (method, line 50) `def test_video_collect_empty_project(self)`
-  - `test_video_collect_enriched_fields` (method, line 60) `def test_video_collect_enriched_fields(self)`
-  - `test_video_build_scenes_durations` (method, line 80) `def test_video_build_scenes_durations(self)`
-  - `test_video_all_scenes_render_small_canvas` (method, line 92) `def test_video_all_scenes_render_small_canvas(self)`
-  - `test_video_new_scenes_render_every_phase` (method, line 111) `def test_video_new_scenes_render_every_phase(self)`
-  - `test_video_zero_duration_act_skips_its_card` (method, line 130) `def test_video_zero_duration_act_skips_its_card(self)`
-  - `test_video_orbit_layout_is_normalized_and_stable` (method, line 141) `def test_video_orbit_layout_is_normalized_and_stable(self)`
-  - `test_video_project3d_centers_target` (method, line 159) `def test_video_project3d_centers_target(self)`
-  - `test_video_graph_positions_deterministic` (method, line 168) `def test_video_graph_positions_deterministic(self)`
-  - `test_video_single_frame_bytes` (method, line 179) `def test_video_single_frame_bytes(self)`
-  - `test_video_hash_color_deterministic` (method, line 194) `def test_video_hash_color_deterministic(self)`
-  - `test_video_short_label_truncates` (method, line 200) `def test_video_short_label_truncates(self)`
-  - `test_video_dependencies_returns_bool` (method, line 205) `def test_video_dependencies_returns_bool(self)`
-  - `test_video_disabled_skips_without_render` (method, line 208) `def test_video_disabled_skips_without_render(self)`
-  - `test_video_growth_act_scheduled_with_history` (method, line 260) `def test_video_growth_act_scheduled_with_history(self)`
-  - `test_video_growth_act_absent_without_history` (method, line 268) `def test_video_growth_act_absent_without_history(self)`
-  - `test_video_growth_act_can_be_dropped` (method, line 279) `def test_video_growth_act_can_be_dropped(self)`
-  - `test_video_growth_act_renders_every_phase` (method, line 287) `def test_video_growth_act_renders_every_phase(self)`
-  - `test_video_growth_timeline_grows_release_by_release` (method, line 298) `def test_video_growth_timeline_grows_release_by_release(self)`
-  - `test_video_growth_pulse_marks_the_landing_release` (method, line 316) `def test_video_growth_pulse_marks_the_landing_release(self)`
-  - `test_video_growth_history_read_from_project_root` (method, line 335) `def test_video_growth_history_read_from_project_root(self)`
-  - `test_video_flow_acts_scheduled_and_drawn` (method, line 377) `def test_video_flow_acts_scheduled_and_drawn(self)`
-- Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_video.py`
 
-## tests/test_wiki.py
-- Layer: testing
-- Language: py
-- Symbols:
-  - `_make_node` (function, line 12) `def _make_node(node_id, doc, symbols, language)`
-  - `_make_symbol` (function, line 23) `def _make_symbol(name, kind, line, doc)`
-  - `_make_analysis` (function, line 27) `def _make_analysis()`
-  - `_make_nodes` (function, line 41) `def _make_nodes()`
-  - `TestWikiConfigContract` (class, line 49) `class TestWikiConfigContract(TestCase)`
-  - `TestWikiGenerationContract` (class, line 65) `class TestWikiGenerationContract(TestCase)`
-  - `test_config_defaults` (method, line 50) `def test_config_defaults(self)`
-  - `test_config_immutable` (method, line 58) `def test_config_immutable(self)`
-  - `test_generate_writes_all_files` (method, line 66) `def test_generate_writes_all_files(self)`
-  - `test_community_page_sections` (method, line 81) `def test_community_page_sections(self)`
-  - `test_connections_typed_with_confidence` (method, line 95) `def test_connections_typed_with_confidence(self)`
-  - `test_fallback_single_community_without_analysis` (method, line 115) `def test_fallback_single_community_without_analysis(self)`
-  - `test_report_honest_audit_sections` (method, line 125) `def test_report_honest_audit_sections(self)`
-  - `test_index_entry_point` (method, line 139) `def test_index_entry_point(self)`
-  - `test_lint_healthy_after_generate` (method, line 152) `def test_lint_healthy_after_generate(self)`
-  - `test_deterministic_connections` (method, line 161) `def test_deterministic_connections(self)`
-  - `test_privacy_mode_strips_docs` (method, line 174) `def test_privacy_mode_strips_docs(self)`
-  - `test_leftover_files_covered_by_orphans_community` (method, line 184) `def test_leftover_files_covered_by_orphans_community(self)`
-  - `test_shared_context_link_for_disconnected_communities` (method, line 194) `def test_shared_context_link_for_disconnected_communities(self)`
-  - `test_garbage_doc_filtered_from_definition` (method, line 210) `def test_garbage_doc_filtered_from_definition(self)`
-  - `test_definition_names_core_file` (method, line 217) `def test_definition_names_core_file(self)`
-  - `test_duplicate_community_labels_disambiguated` (method, line 240) `def test_duplicate_community_labels_disambiguated(self)`
-  - `test_duplicate_god_basenames_disambiguated` (method, line 259) `def test_duplicate_god_basenames_disambiguated(self)`
-  - `test_oversized_community_grouped_by_directory` (method, line 278) `def test_oversized_community_grouped_by_directory(self)`
-  - `test_large_files_flagged_in_index_and_report` (method, line 302) `def test_large_files_flagged_in_index_and_report(self)`
-  - `test_stale_pages_pruned_on_regenerate` (method, line 323) `def test_stale_pages_pruned_on_regenerate(self)`
-  - `test_risks_carry_fix_hint_scope_and_closed_cycle` (method, line 335) `def test_risks_carry_fix_hint_scope_and_closed_cycle(self)`
-  - `test_duplicate_symbol_scope_detected` (method, line 365) `def test_duplicate_symbol_scope_detected(self)`
-  - `test_no_duplicate_link_for_disjoint_scopes` (method, line 388) `def test_no_duplicate_link_for_disjoint_scopes(self)`
-  - `test_garbage_purpose_filtered` (method, line 408) `def test_garbage_purpose_filtered(self)`
-- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_wiki.py`
-
+Next: [KB_tests_p5.md](KB_tests_p5.md)

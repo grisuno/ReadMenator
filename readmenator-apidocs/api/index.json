@@ -2,42 +2,42 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 103,
-  "entities": 2079,
+  "modules": 104,
+  "entities": 2196,
   "languages": {
-   "py": 102,
+   "py": 103,
    "sh": 1
   },
   "kinds": {
-   "attribute": 1078,
-   "class": 183,
+   "attribute": 1164,
+   "class": 185,
    "classmethod": 3,
-   "constant": 95,
-   "constructor": 82,
+   "constant": 104,
+   "constructor": 83,
    "enum": 1,
    "exception": 1,
-   "function": 133,
-   "method": 333,
-   "module": 103,
-   "property": 61,
+   "function": 144,
+   "method": 339,
+   "module": 104,
+   "property": 62,
    "protocol": 1,
    "staticmethod": 5
   },
   "truncated": false,
-  "skipped_files": 58,
+  "skipped_files": 59,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 736,
-   "total": 906,
-   "percent": 81.2
+   "documented": 758,
+   "total": 928,
+   "percent": 81.7
   },
   "by_kind": {
    "class": {
-    "documented": 169,
-    "total": 183,
-    "percent": 92.3
+    "documented": 171,
+    "total": 185,
+    "percent": 92.4
    },
    "classmethod": {
     "documented": 1,
@@ -45,9 +45,9 @@
     "percent": 33.3
    },
    "constructor": {
-    "documented": 47,
-    "total": 82,
-    "percent": 57.3
+    "documented": 48,
+    "total": 83,
+    "percent": 57.8
    },
    "enum": {
     "documented": 1,
@@ -60,24 +60,24 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 128,
-    "total": 133,
-    "percent": 96.2
+    "documented": 139,
+    "total": 144,
+    "percent": 96.5
    },
    "method": {
-    "documented": 246,
-    "total": 333,
-    "percent": 73.9
+    "documented": 252,
+    "total": 339,
+    "percent": 74.3
    },
    "module": {
-    "documented": 102,
-    "total": 103,
+    "documented": 103,
+    "total": 104,
     "percent": 99.0
    },
    "property": {
-    "documented": 37,
-    "total": 61,
-    "percent": 60.7
+    "documented": 38,
+    "total": 62,
+    "percent": 61.3
    },
    "protocol": {
     "documented": 1,
@@ -446,6 +446,11 @@
     "total": 8,
     "percent": 100.0
    },
+   "readmenator/_soundtrack.py": {
+    "documented": 10,
+    "total": 10,
+    "percent": 100.0
+   },
    "readmenator/_sourceview.py": {
     "documented": 8,
     "total": 8,
@@ -472,8 +477,8 @@
     "percent": 41.7
    },
    "readmenator/_video.py": {
-    "documented": 38,
-    "total": 38,
+    "documented": 50,
+    "total": 50,
     "percent": 100.0
    },
    "readmenator/_viewer_ui.py": {
@@ -702,7 +707,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 553
+   "entities": 636
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -965,6 +970,11 @@
    "entities": 9
   },
   {
+   "uid": "readmenator/_soundtrack.py",
+   "path": "modules/readmenator._soundtrack.py.jsonl",
+   "entities": 22
+  },
+  {
    "uid": "readmenator/_sourceview.py",
    "path": "modules/readmenator._sourceview.py.jsonl",
    "entities": 12
@@ -992,7 +1002,7 @@
   {
    "uid": "readmenator/_video.py",
    "path": "modules/readmenator._video.py.jsonl",
-   "entities": 57
+   "entities": 69
   },
   {
    "uid": "readmenator/_viewer_ui.py",

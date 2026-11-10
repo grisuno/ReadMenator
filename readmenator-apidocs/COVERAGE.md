@@ -1,6 +1,6 @@
 # Documentation Coverage
 
-Overall: **81.2%** (736 of 906 public modules, types, and callables). Data members are excluded from the ratio.
+Overall: **81.7%** (758 of 928 public modules, types, and callables). Data members are excluded from the ratio.
 
 [Back to index](index.md)
 
@@ -8,15 +8,15 @@ Overall: **81.2%** (736 of 906 public modules, types, and callables). Data membe
 
 | Kind | Documented | Total | Coverage |
 |---|---|---|---|
-| class | 169 | 183 | 92.3% |
+| class | 171 | 185 | 92.4% |
 | classmethod | 1 | 3 | 33.3% |
-| constructor | 47 | 82 | 57.3% |
+| constructor | 48 | 83 | 57.8% |
 | enum | 1 | 1 | 100.0% |
 | exception | 0 | 1 | 0.0% |
-| function | 128 | 133 | 96.2% |
-| method | 246 | 333 | 73.9% |
-| module | 102 | 103 | 99.0% |
-| property | 37 | 61 | 60.7% |
+| function | 139 | 144 | 96.5% |
+| method | 252 | 339 | 74.3% |
+| module | 103 | 104 | 99.0% |
+| property | 38 | 62 | 61.3% |
 | protocol | 1 | 1 | 100.0% |
 | staticmethod | 4 | 5 | 80.0% |
 
@@ -99,9 +99,10 @@ Overall: **81.2%** (736 of 906 public modules, types, and callables). Data membe
 | [`readmenator._scanner`](modules/readmenator._scanner.py.md) | 7 | 7 | 100.0% |
 | [`readmenator._scantext`](modules/readmenator._scantext.py.md) | 5 | 5 | 100.0% |
 | [`readmenator._skill_installer`](modules/readmenator._skill_installer.py.md) | 8 | 8 | 100.0% |
+| [`readmenator._soundtrack`](modules/readmenator._soundtrack.py.md) | 10 | 10 | 100.0% |
 | [`readmenator._sourceview`](modules/readmenator._sourceview.py.md) | 8 | 8 | 100.0% |
 | [`readmenator._symindex`](modules/readmenator._symindex.py.md) | 10 | 10 | 100.0% |
-| [`readmenator._video`](modules/readmenator._video.py.md) | 38 | 38 | 100.0% |
+| [`readmenator._video`](modules/readmenator._video.py.md) | 50 | 50 | 100.0% |
 | [`readmenator._viewer_ui`](modules/readmenator._viewer_ui.py.md) | 8 | 8 | 100.0% |
 | [`readmenator._watcher`](modules/readmenator._watcher.py.md) | 5 | 5 | 100.0% |
 | [`readmenator._wiki`](modules/readmenator._wiki.py.md) | 6 | 6 | 100.0% |

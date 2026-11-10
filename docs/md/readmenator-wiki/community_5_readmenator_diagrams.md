@@ -20,7 +20,7 @@ This community groups 15 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_project_config.py` | py | infrastructure | 18 | yes |
 | `readmenator/_sourceview.py` | py | utility | 8 | yes |
 | `readmenator/_viewer_ui.py` | py | presentation | 7 | yes |
-| `tests/test_bundlegraph.py` | py | testing | 27 | yes |
+| `tests/test_bundlegraph.py` | py | testing | 29 | yes |
 | `tests/test_graphlayout.py` | py | testing | 33 | yes |
 | `tests/test_layout_quality.py` | py | testing | 16 | yes |
 | `tests/test_project_config.py` | py | testing | 33 | yes |
@@ -33,9 +33,9 @@ This community groups 15 file(s) rooted at `readmenator` with dominant language 
 - `__init__` (method, `readmenator/_bundlegraph.py:54`) `def __init__(self, config)` - Initialise with application configuration.
 - `build_payload` (method, `readmenator/_bundlegraph.py:63`) `def build_payload(self, force_payload)` - Derive the bundle payload from a force-graph payload.
 - `page_settings` (method, `readmenator/_bundlegraph.py:184`) `def page_settings(self, force_payload, explorer_href, live_api)` - Collect the page settings serialized into the HTML.
-- `render` (method, `readmenator/_bundlegraph.py:228`) `def render(self, force_payload, title, home_href, explorer_href, live_api)` - Render the standalone edge bundle explorer HTML document.
-- `write` (method, `readmenator/_bundlegraph.py:273`) `def write(self, output_path, force_payload, title, home_href, explorer_href)` - Write the edge bundle explorer HTML document.
-- `thumbnail_svg` (method, `readmenator/_bundlegraph.py:299`) `def thumbnail_svg(self, force_payload)` - Render a small circular bundle preview as inline SVG.
+- `render` (method, `readmenator/_bundlegraph.py:236`) `def render(self, force_payload, title, home_href, explorer_href, live_api)` - Render the standalone edge bundle explorer HTML document.
+- `write` (method, `readmenator/_bundlegraph.py:281`) `def write(self, output_path, force_payload, title, home_href, explorer_href)` - Write the edge bundle explorer HTML document.
+- `thumbnail_svg` (method, `readmenator/_bundlegraph.py:307`) `def thumbnail_svg(self, force_payload)` - Render a small circular bundle preview as inline SVG.
 - `_escape_markup` (function, `readmenator/_diagrams.py:33`) `def _escape_markup(value)` - Escape text for HTML and tooltip embedding.
 - `_json_payload` (function, `readmenator/_diagrams.py:45`) `def _json_payload(payload)` - Serialize a payload for safe inline script embedding.
 - `_fill_template` (function, `readmenator/_diagrams.py:57`) `def _fill_template(template, values)` - Substitute __KEY__ placeholders in a single pass.
@@ -67,21 +67,21 @@ This community groups 15 file(s) rooted at `readmenator` with dominant language 
 ## Connections
 
 - [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_project_config.py.
-- [EXTRACTED] depends_on community 0 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
+- [EXTRACTED] depends_on community 1 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__main__.py imports readmenator/_project_config.py.
 - [EXTRACTED] depends_on community 6 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.
 - [EXTRACTED] depends_on community 5 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_folder_readme.py.
-- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_models.py.
 - [EXTRACTED] depends_on community 4 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_forcegraph.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_diagrams.py` via `subprocess` (0 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_viewer_ui.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_htmlpack.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_folder_readme.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_project_config.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_diagrams.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_viewer_ui.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_diagrams.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [layer strict] `tests/test_layout_quality.py` (testing) -> `readmenator/_forcegraph_page.py` (presentation)

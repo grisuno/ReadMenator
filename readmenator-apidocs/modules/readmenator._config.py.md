@@ -402,7 +402,60 @@ defined here and consumed by reference elsewhere.
 | [`VIDEO_GROWTH_BIRTH_S`](#config-video_growth_birth_s) | `float` | `0.9` |  |
 | [`VIDEO_GROWTH_PULSES`](#config-video_growth_pulses) | `int` | `4` |  |
 | [`VIDEO_GROWTH_GHOST`](#config-video_growth_ghost) | `float` | `0.14` |  |
+| [`VIDEO_GROWTH_GROW_FRACTION`](#config-video_growth_grow_fraction) | `float` | `0.72` |  |
+| [`VIDEO_GROWTH_FOLD_FRACTION`](#config-video_growth_fold_fraction) | `float` | `0.92` |  |
+| [`VIDEO_AUDIO_ENABLED`](#config-video_audio_enabled) | `bool` | `True` |  |
+| [`VIDEO_AUDIO_SAMPLE_RATE`](#config-video_audio_sample_rate) | `int` | `32000` |  |
+| [`VIDEO_AUDIO_BITRATE`](#config-video_audio_bitrate) | `str` | `'160k'` |  |
+| [`VIDEO_AUDIO_BPM`](#config-video_audio_bpm) | `float` | `100.0` |  |
+| [`VIDEO_AUDIO_SEED`](#config-video_audio_seed) | `int` | `7` |  |
+| [`VIDEO_AUDIO_ROOT_HZ`](#config-video_audio_root_hz) | `float` | `55.0` |  |
+| [`VIDEO_AUDIO_PROGRESSION`](#config-video_audio_progression) | `Tuple[Tuple[int, str], ...]` | `((0, 'minor'), (-4, 'major'), (3, 'major'), (-2, 'major'))` |  |
+| [`VIDEO_AUDIO_MASTER_GAIN`](#config-video_audio_master_gain) | `float` | `0.8` |  |
+| [`VIDEO_AUDIO_STEM_GAINS`](#config-video_audio_stem_gains) | `Tuple[Tuple[str, float], ...]` | `(('pad', 0.22), ('bass', 0.3), ('drums', 0.34), ('arp', 0.2))` |  |
+| [`VIDEO_AUDIO_STEM_THRESHOLDS`](#config-video_audio_stem_thresholds) | `Tuple[Tuple[str, float], ...]` | `(('pad', -1.0), ('bass', 0.2), ('drums', 0.45), ('arp', 0.6))` |  |
+| [`VIDEO_AUDIO_STEM_RAMP`](#config-video_audio_stem_ramp) | `float` | `0.25` |  |
+| [`VIDEO_AUDIO_DEFAULT_LEVEL`](#config-video_audio_default_level) | `float` | `1.0` |  |
+| [`VIDEO_AUDIO_SCENE_LEVELS`](#config-video_audio_scene_levels) | `Tuple[Tuple[str, float], ...]` | `(('hook', 0.3), ('title', 0.45), ('card', 0.1), ('layers', 0.7), ('gods', 0.7), ('invite', 0.7), ('outro', 0.45))` |  |
+| [`VIDEO_AUDIO_CONTINUE_KINDS`](#config-video_audio_continue_kinds) | `Tuple[str, ...]` | `('card',)` |  |
+| [`VIDEO_AUDIO_CROSSFADE_S`](#config-video_audio_crossfade_s) | `float` | `0.4` |  |
+| [`VIDEO_AUDIO_FADE_IN_S`](#config-video_audio_fade_in_s) | `float` | `0.8` |  |
+| [`VIDEO_AUDIO_FADE_OUT_S`](#config-video_audio_fade_out_s) | `float` | `2.5` |  |
+| [`VIDEO_AUDIO_STEREO_DELAY_MS`](#config-video_audio_stereo_delay_ms) | `float` | `11.0` |  |
+| [`VIDEO_AUDIO_IMPACT_S`](#config-video_audio_impact_s) | `float` | `1.1` |  |
+| [`VIDEO_AUDIO_IMPACT_GAIN`](#config-video_audio_impact_gain) | `float` | `0.5` |  |
+| [`VIDEO_AUDIO_RISER_S`](#config-video_audio_riser_s) | `float` | `1.4` |  |
+| [`VIDEO_AUDIO_RISER_GAIN`](#config-video_audio_riser_gain) | `float` | `0.22` |  |
+| [`VIDEO_AUDIO_PING_S`](#config-video_audio_ping_s) | `float` | `0.6` |  |
+| [`VIDEO_AUDIO_PING_GAIN`](#config-video_audio_ping_gain) | `float` | `0.2` |  |
+| [`VIDEO_AUDIO_PING_SCALE`](#config-video_audio_ping_scale) | `Tuple[int, ...]` | `(0, 3, 5, 7, 10)` |  |
+| [`VIDEO_HOOK_S`](#config-video_hook_s) | `float` | `4.0` |  |
+| [`VIDEO_HOOK_LEAD`](#config-video_hook_lead) | `float` | `0.08` |  |
+| [`VIDEO_HOOK_SPAN`](#config-video_hook_span) | `float` | `0.8` |  |
+| [`VIDEO_HOOK_GLITCH_S`](#config-video_hook_glitch_s) | `float` | `0.2` |  |
+| [`VIDEO_BEAT_BLOOM`](#config-video_beat_bloom) | `float` | `0.4` |  |
+| [`VIDEO_BEAT_DECAY`](#config-video_beat_decay) | `float` | `5.0` |  |
+| [`VIDEO_IMPACT_VISUAL_S`](#config-video_impact_visual_s) | `float` | `0.4` |  |
+| [`VIDEO_IMPACT_ZOOM`](#config-video_impact_zoom) | `float` | `0.035` |  |
+| [`VIDEO_IMPACT_FLASH`](#config-video_impact_flash) | `float` | `0.12` |  |
+| [`VIDEO_STARS`](#config-video_stars) | `int` | `260` |  |
+| [`VIDEO_GLOW_ENABLED`](#config-video_glow_enabled) | `bool` | `True` |  |
+| [`VIDEO_GLOW_SPREAD`](#config-video_glow_spread) | `float` | `2.6` |  |
+| [`VIDEO_GLOW_BLUR`](#config-video_glow_blur) | `float` | `6.0` |  |
+| [`VIDEO_GLOW_GAIN`](#config-video_glow_gain) | `float` | `0.8` |  |
+| [`VIDEO_NEBULA_ALPHA`](#config-video_nebula_alpha) | `float` | `0.13` |  |
+| [`VIDEO_NEBULA_RADIUS`](#config-video_nebula_radius) | `float` | `0.34` |  |
+| [`VIDEO_LEAD_IN_KINDS`](#config-video_lead_in_kinds) | `Tuple[str, ...]` | `('card', 'hook')` |  |
+| [`VIDEO_CHAPTERS_ENABLED`](#config-video_chapters_enabled) | `bool` | `True` |  |
+| [`VIDEO_CHAPTER_TITLES`](#config-video_chapter_titles) | `Tuple[Tuple[str, str], ...]` | `(('title', 'Overview'), ('layers', 'Layers'), ('gods', 'God Nodes'), ('tree', 'The Blast Radius'), ('communities', 'Communities'), ('graph', 'Emergence'), ('orbit', 'Orbit'), ('bundle', 'The Wiring'), ('sphere', 'The Sphere'), ('dna', 'Code DNA'), ('tiers', 'The Tiers'), ('flow', 'Execution'), ('growth', 'The Organism'), ('invite', 'Explore'), ('outro', 'Telemetry'))` |  |
 | [`BUNDLEGRAPH_ENABLED`](#config-bundlegraph_enabled) | `bool` | `True` |  |
+| [`BUNDLEGRAPH_GLOW_ENABLED`](#config-bundlegraph_glow_enabled) | `bool` | `True` |  |
+| [`BUNDLEGRAPH_GLOW_SPREAD`](#config-bundlegraph_glow_spread) | `float` | `3.8` |  |
+| [`BUNDLEGRAPH_GLOW_ALPHA`](#config-bundlegraph_glow_alpha) | `float` | `0.55` |  |
+| [`BUNDLEGRAPH_GLOW_CURVES`](#config-bundlegraph_glow_curves) | `int` | `300` |  |
+| [`BUNDLEGRAPH_HALO_ALPHA`](#config-bundlegraph_halo_alpha) | `float` | `0.22` |  |
+| [`BUNDLEGRAPH_STARS`](#config-bundlegraph_stars) | `int` | `500` |  |
+| [`BUNDLEGRAPH_AMBIENT_PARTICLES`](#config-bundlegraph_ambient_particles) | `int` | `160` |  |
 | [`BUNDLEGRAPH_OUTPUT`](#config-bundlegraph_output) | `str` | `'graph-bundle.html'` |  |
 | [`BUNDLEGRAPH_MODE`](#config-bundlegraph_mode) | `str` | `'2d'` |  |
 | [`BUNDLEGRAPH_BETA`](#config-bundlegraph_beta) | `float` | `0.85` |  |
@@ -465,6 +518,36 @@ defined here and consumed by reference elsewhere.
 | [`FORCEGRAPH_3D_MIN_GLYPH_PX`](#config-forcegraph_3d_min_glyph_px) | `float` | `2.5` |  |
 | [`FORCEGRAPH_3D_LABEL_PX`](#config-forcegraph_3d_label_px) | `float` | `9.0` |  |
 | [`FORCEGRAPH_3D_ORBIT_SPEED`](#config-forcegraph_3d_orbit_speed) | `float` | `0.6` |  |
+| [`FORCEGRAPH_CINEMA_ENABLED`](#config-forcegraph_cinema_enabled) | `bool` | `True` |  |
+| [`FORCEGRAPH_CINEMA_DEFAULT`](#config-forcegraph_cinema_default) | `bool` | `True` |  |
+| [`FORCEGRAPH_GLOW_ENABLED`](#config-forcegraph_glow_enabled) | `bool` | `True` |  |
+| [`FORCEGRAPH_GLOW_SPREAD`](#config-forcegraph_glow_spread) | `float` | `4.2` |  |
+| [`FORCEGRAPH_GLOW_ALPHA`](#config-forcegraph_glow_alpha) | `float` | `0.55` |  |
+| [`FORCEGRAPH_GLOW_MAX_NODES`](#config-forcegraph_glow_max_nodes) | `int` | `2500` |  |
+| [`FORCEGRAPH_AMBIENT_EDGES`](#config-forcegraph_ambient_edges) | `int` | `80` |  |
+| [`FORCEGRAPH_CINEMA_BLOOM_CDN_JS`](#config-forcegraph_cinema_bloom_cdn_js) | `str` | `'https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/postprocessing/UnrealBloomPass.js/+esm'` |  |
+| [`FORCEGRAPH_CINEMA_BLOOM_STRENGTH`](#config-forcegraph_cinema_bloom_strength) | `float` | `0.8` |  |
+| [`FORCEGRAPH_CINEMA_BLOOM_RADIUS`](#config-forcegraph_cinema_bloom_radius) | `float` | `0.7` |  |
+| [`FORCEGRAPH_CINEMA_BLOOM_THRESHOLD`](#config-forcegraph_cinema_bloom_threshold) | `float` | `0.2` |  |
+| [`FORCEGRAPH_CINEMA_STARS`](#config-forcegraph_cinema_stars) | `int` | `600` |  |
+| [`FORCEGRAPH_CINEMA_STAR_COLOR`](#config-forcegraph_cinema_star_color) | `str` | `'#e2e8f0'` |  |
+| [`FORCEGRAPH_CINEMA_NODE_OPACITY`](#config-forcegraph_cinema_node_opacity) | `float` | `0.95` |  |
+| [`FORCEGRAPH_CINEMA_NODE_RESOLUTION`](#config-forcegraph_cinema_node_resolution) | `int` | `12` |  |
+| [`FORCEGRAPH_CINEMA_LINK_OPACITY`](#config-forcegraph_cinema_link_opacity) | `float` | `0.12` |  |
+| [`FORCEGRAPH_INTRO_MS`](#config-forcegraph_intro_ms) | `int` | `1600` |  |
+| [`FORCEGRAPH_INTRO_FADE_MS`](#config-forcegraph_intro_fade_ms) | `int` | `320` |  |
+| [`FORCEGRAPH_INTRO_REFRESH_MS`](#config-forcegraph_intro_refresh_ms) | `int` | `150` |  |
+| [`FORCEGRAPH_PULSE_MS`](#config-forcegraph_pulse_ms) | `int` | `900` |  |
+| [`FORCEGRAPH_PULSE_PX`](#config-forcegraph_pulse_px) | `int` | `90` |  |
+| [`FORCEGRAPH_WAVE_MS`](#config-forcegraph_wave_ms) | `int` | `360` |  |
+| [`FORCEGRAPH_WAVE_HOP_MS`](#config-forcegraph_wave_hop_ms) | `int` | `140` |  |
+| [`FORCEGRAPH_WAVE_GAIN`](#config-forcegraph_wave_gain) | `float` | `0.45` |  |
+| [`FORCEGRAPH_TOUR_ENABLED`](#config-forcegraph_tour_enabled) | `bool` | `True` |  |
+| [`FORCEGRAPH_TOUR_STEP_MS`](#config-forcegraph_tour_step_ms) | `int` | `6000` |  |
+| [`FORCEGRAPH_TOUR_FLY_MS`](#config-forcegraph_tour_fly_ms) | `int` | `1800` |  |
+| [`FORCEGRAPH_TOUR_COMMUNITIES`](#config-forcegraph_tour_communities) | `int` | `3` |  |
+| [`FORCEGRAPH_TOUR_PATH_CANDIDATES`](#config-forcegraph_tour_path_candidates) | `int` | `24` |  |
+| [`FORCEGRAPH_TOUR_ORBIT_SPEED`](#config-forcegraph_tour_orbit_speed) | `float` | `1.2` |  |
 | [`FORCEGRAPH_3D_FLY_DISTANCE`](#config-forcegraph_3d_fly_distance) | `int` | `320` |  |
 | [`MEMORY_ENABLED`](#config-memory_enabled) | `bool` | `True` |  |
 | [`MEMORY_FILENAME`](#config-memory_filename) | `str` | `'MEMORY.md'` |  |

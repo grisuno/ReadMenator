@@ -258,6 +258,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_security.py` -> `readmenator/_config.py`
 - `readmenator/_security.py` -> `readmenator/_models.py`
 - `readmenator/_skill_installer.py` -> `readmenator/_config.py`
+- `readmenator/_soundtrack.py` -> `readmenator/_config.py`
 - `readmenator/_sourceview.py` -> `readmenator/_config.py`
 - `readmenator/_sourceview.py` -> `readmenator/_models.py`
 - `readmenator/_symindex.py` -> `readmenator/_config.py`
@@ -274,6 +275,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_video.py` -> `readmenator/_graphlayout.py`
 - `readmenator/_video.py` -> `readmenator/_models.py`
 - `readmenator/_video.py` -> `readmenator/_rank.py`
+- `readmenator/_video.py` -> `readmenator/_soundtrack.py`
 - `readmenator/_viewer_ui.py` -> `readmenator/_project_config.py`
 - `readmenator/_watcher.py` -> `readmenator/_config.py`
 - `readmenator/_wiki.py` -> `readmenator/_analyzer.py`
@@ -494,7 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_gdscript.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_go.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_java.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_javascript.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_kotlin.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)
