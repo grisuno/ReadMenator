@@ -95,6 +95,7 @@ This community groups 46 file(s) rooted at `readmenator` with dominant language 
 - [taint high] `readmenator/_docbranch.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_docbranch.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_config.py` via `subprocess` (1 hops)
 - [layer strict] `tests/test_components.py` (testing) -> `readmenator/_components.py` (presentation)
 
 ## Open Questions

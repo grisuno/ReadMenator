@@ -1,10 +1,10 @@
 {
   "tool": "readmenator",
   "schema_version": 2,
-  "generated_at": "2026-11-25T22:45:37Z",
+  "generated_at": "2026-11-25T23:06:09Z",
   "project_root": ".",
   "project_name": "ReadMenator",
-  "git_commit": "43b283e45ff75ea8e96d83fccb257118955b595a",
+  "git_commit": "e90663a9ff7889bf7b9eb185a8e359b817269b47",
   "git_branch": "main",
   "source_fingerprint": "1e22b2e298fe8d61177897446c51aadbbc1488663da42ab3b33c87e097336a16",
   "freshness_check": "readmenator . fresh  # exit 0 = docs match sources, exit 1 = run: readmenator . --rebuild",
@@ -154,7 +154,7 @@
     {
       "path": "MEMORY.md",
       "lines": 140,
-      "approx_tokens": 2768
+      "approx_tokens": 2803
     },
     {
       "path": "SECURITY.md",
