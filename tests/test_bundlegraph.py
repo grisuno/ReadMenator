@@ -180,6 +180,12 @@ class TestBundleGraphRenderContract(unittest.TestCase):
         self.assertIn("<path", svg)
         self.assertNotIn("<script", svg)
 
+    def test_bundlegraph_thumbnail_respects_node_cap(self) -> None:
+        """BUNDLEGRAPH_THUMB_NODES bounds the inline SVG on large projects."""
+        capped = BundleGraphRenderer(dataclasses.replace(self.config, BUNDLEGRAPH_THUMB_NODES=1))
+        svg = capped.thumbnail_svg(self.force)
+        self.assertEqual(svg.count("<circle"), 1)
+
     def test_bundlegraph_write_creates_parent(self) -> None:
         """write() creates the destination directory."""
         with tempfile.TemporaryDirectory() as tmp:

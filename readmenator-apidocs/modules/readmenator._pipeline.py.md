@@ -1,6 +1,6 @@
 # `readmenator._pipeline`
 
-> Source: [readmenator/_pipeline.py:1](../../readmenator/_pipeline.py#L1) | language `py` | coverage 59.3% | [API index](../index.md)
+> Source: [readmenator/_pipeline.py:1](../../readmenator/_pipeline.py#L1) | language `py` | coverage 60.7% | [API index](../index.md)
 
 AnalyzerFactory (lazy component construction) and DeepAnalysisRunner.
 
@@ -132,7 +132,7 @@ flowchart LR
 
 ### `AnalyzerFactory`
 
-`class` | [readmenator/_pipeline.py:67](../../readmenator/_pipeline.py#L67)
+`class` | [readmenator/_pipeline.py:69](../../readmenator/_pipeline.py#L69)
 
 ```python
 class AnalyzerFactory
@@ -185,6 +185,8 @@ on first access and cached for the lifetime of the factory.
 | [`graphrag`](#analyzerfactory-graphrag) | property | Return the lazily initialised GraphRAG index builder. |
 | [`graphrag_store`](#analyzerfactory-graphrag_store) | property | Return the lazily initialised GraphRAG index store. |
 | [`memory`](#analyzerfactory-memory) | property | Return the lazily initialised project memory. |
+| [`hebbian`](#analyzerfactory-hebbian) | property | Return the lazily initialised zero-inference recall engine. |
+| [`docbranch`](#analyzerfactory-docbranch) | property | Return the lazily initialised documentation branch publisher. |
 | [`skills`](#analyzerfactory-skills) | property | Return the lazily initialised agent skill installer. |
 | [`sourceview`](#analyzerfactory-sourceview) | property | Return the lazily initialised source viewer builder. |
 | [`symindex`](#analyzerfactory-symindex) | property | Return the lazily initialised symbol index. |
@@ -202,7 +204,7 @@ on first access and cached for the lifetime of the factory.
 
 #### `AnalyzerFactory.__init__`
 
-`constructor` | [readmenator/_pipeline.py:75](../../readmenator/_pipeline.py#L75)
+`constructor` | [readmenator/_pipeline.py:77](../../readmenator/_pipeline.py#L77)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -220,7 +222,7 @@ def __init__(self, config: Config) -> None
 
 #### `AnalyzerFactory.scanner`
 
-`property` | [readmenator/_pipeline.py:125](../../readmenator/_pipeline.py#L125)
+`property` | [readmenator/_pipeline.py:129](../../readmenator/_pipeline.py#L129)
 
 Decorators: `@property`
 
@@ -236,7 +238,7 @@ def scanner(self) -> PolyglotScanner
 
 #### `AnalyzerFactory.generator`
 
-`property` | [readmenator/_pipeline.py:131](../../readmenator/_pipeline.py#L131)
+`property` | [readmenator/_pipeline.py:135](../../readmenator/_pipeline.py#L135)
 
 Decorators: `@property`
 
@@ -254,7 +256,7 @@ def generator(self) -> DocumentationGenerator
 
 #### `AnalyzerFactory.analyzer`
 
-`property` | [readmenator/_pipeline.py:137](../../readmenator/_pipeline.py#L137)
+`property` | [readmenator/_pipeline.py:141](../../readmenator/_pipeline.py#L141)
 
 Decorators: `@property`
 
@@ -270,7 +272,7 @@ def analyzer(self) -> GraphAnalyzer
 
 #### `AnalyzerFactory.security`
 
-`property` | [readmenator/_pipeline.py:143](../../readmenator/_pipeline.py#L143)
+`property` | [readmenator/_pipeline.py:147](../../readmenator/_pipeline.py#L147)
 
 Decorators: `@property`
 
@@ -286,7 +288,7 @@ def security(self) -> SecurityAnalyzer
 
 #### `AnalyzerFactory.exporter`
 
-`property` | [readmenator/_pipeline.py:149](../../readmenator/_pipeline.py#L149)
+`property` | [readmenator/_pipeline.py:153](../../readmenator/_pipeline.py#L153)
 
 Decorators: `@property`
 
@@ -302,7 +304,7 @@ def exporter(self) -> GraphExporter
 
 #### `AnalyzerFactory.taint`
 
-`property` | [readmenator/_pipeline.py:155](../../readmenator/_pipeline.py#L155)
+`property` | [readmenator/_pipeline.py:159](../../readmenator/_pipeline.py#L159)
 
 Decorators: `@property`
 
@@ -318,7 +320,7 @@ def taint(self) -> TaintAnalyzer
 
 #### `AnalyzerFactory.dataflow`
 
-`property` | [readmenator/_pipeline.py:161](../../readmenator/_pipeline.py#L161)
+`property` | [readmenator/_pipeline.py:165](../../readmenator/_pipeline.py#L165)
 
 Decorators: `@property`
 
@@ -336,7 +338,7 @@ Return the lazily initialised dataflow analyzer.
 
 #### `AnalyzerFactory.hotspots`
 
-`property` | [readmenator/_pipeline.py:168](../../readmenator/_pipeline.py#L168)
+`property` | [readmenator/_pipeline.py:172](../../readmenator/_pipeline.py#L172)
 
 Decorators: `@property`
 
@@ -352,7 +354,7 @@ def hotspots(self) -> HotspotAnalyzer
 
 #### `AnalyzerFactory.layer_rules`
 
-`property` | [readmenator/_pipeline.py:174](../../readmenator/_pipeline.py#L174)
+`property` | [readmenator/_pipeline.py:178](../../readmenator/_pipeline.py#L178)
 
 Decorators: `@property`
 
@@ -368,7 +370,7 @@ def layer_rules(self) -> LayerRuleEngine
 
 #### `AnalyzerFactory.rule_gen`
 
-`property` | [readmenator/_pipeline.py:180](../../readmenator/_pipeline.py#L180)
+`property` | [readmenator/_pipeline.py:184](../../readmenator/_pipeline.py#L184)
 
 Decorators: `@property`
 
@@ -384,7 +386,7 @@ def rule_gen(self) -> RuleGenerator
 
 #### `AnalyzerFactory.sarif`
 
-`property` | [readmenator/_pipeline.py:186](../../readmenator/_pipeline.py#L186)
+`property` | [readmenator/_pipeline.py:190](../../readmenator/_pipeline.py#L190)
 
 Decorators: `@property`
 
@@ -400,7 +402,7 @@ def sarif(self) -> SarifExporter
 
 #### `AnalyzerFactory.cpg`
 
-`property` | [readmenator/_pipeline.py:192](../../readmenator/_pipeline.py#L192)
+`property` | [readmenator/_pipeline.py:196](../../readmenator/_pipeline.py#L196)
 
 Decorators: `@property`
 
@@ -416,7 +418,7 @@ def cpg(self) -> CodePropertyGraph
 
 #### `AnalyzerFactory.layer_detector`
 
-`property` | [readmenator/_pipeline.py:201](../../readmenator/_pipeline.py#L201)
+`property` | [readmenator/_pipeline.py:205](../../readmenator/_pipeline.py#L205)
 
 Decorators: `@property`
 
@@ -432,7 +434,7 @@ def layer_detector(self) -> LayerDetector
 
 #### `AnalyzerFactory.uml`
 
-`property` | [readmenator/_pipeline.py:207](../../readmenator/_pipeline.py#L207)
+`property` | [readmenator/_pipeline.py:211](../../readmenator/_pipeline.py#L211)
 
 Decorators: `@property`
 
@@ -448,7 +450,7 @@ def uml(self) -> UmlGenerator
 
 #### `AnalyzerFactory.wiki`
 
-`property` | [readmenator/_pipeline.py:213](../../readmenator/_pipeline.py#L213)
+`property` | [readmenator/_pipeline.py:217](../../readmenator/_pipeline.py#L217)
 
 Decorators: `@property`
 
@@ -466,7 +468,7 @@ Return the lazily initialised agent wiki generator.
 
 #### `AnalyzerFactory.readme_injector`
 
-`property` | [readmenator/_pipeline.py:220](../../readmenator/_pipeline.py#L220)
+`property` | [readmenator/_pipeline.py:224](../../readmenator/_pipeline.py#L224)
 
 Decorators: `@property`
 
@@ -482,7 +484,7 @@ def readme_injector(self) -> ReadmeInjector
 
 #### `AnalyzerFactory.agent_injector`
 
-`property` | [readmenator/_pipeline.py:249](../../readmenator/_pipeline.py#L249)
+`property` | [readmenator/_pipeline.py:254](../../readmenator/_pipeline.py#L254)
 
 Decorators: `@property`
 
@@ -498,7 +500,7 @@ def agent_injector(self) -> AgentInjector
 
 #### `AnalyzerFactory.gh_wiki`
 
-`property` | [readmenator/_pipeline.py:262](../../readmenator/_pipeline.py#L262)
+`property` | [readmenator/_pipeline.py:267](../../readmenator/_pipeline.py#L267)
 
 Decorators: `@property`
 
@@ -516,7 +518,7 @@ Return the lazily initialised GitHub wiki publisher.
 
 #### `AnalyzerFactory.agent_output`
 
-`property` | [readmenator/_pipeline.py:269](../../readmenator/_pipeline.py#L269)
+`property` | [readmenator/_pipeline.py:274](../../readmenator/_pipeline.py#L274)
 
 Decorators: `@property`
 
@@ -532,7 +534,7 @@ def agent_output(self) -> AgentOutputGenerator
 
 #### `AnalyzerFactory.diagram_builder`
 
-`property` | [readmenator/_pipeline.py:275](../../readmenator/_pipeline.py#L275)
+`property` | [readmenator/_pipeline.py:280](../../readmenator/_pipeline.py#L280)
 
 Decorators: `@property`
 
@@ -550,7 +552,7 @@ Return the lazily initialised system map builder.
 
 #### `AnalyzerFactory.diagram_renderer`
 
-`property` | [readmenator/_pipeline.py:282](../../readmenator/_pipeline.py#L282)
+`property` | [readmenator/_pipeline.py:287](../../readmenator/_pipeline.py#L287)
 
 Decorators: `@property`
 
@@ -568,7 +570,7 @@ Return the lazily initialised interactive map renderer.
 
 #### `AnalyzerFactory.diagram_validator`
 
-`property` | [readmenator/_pipeline.py:289](../../readmenator/_pipeline.py#L289)
+`property` | [readmenator/_pipeline.py:294](../../readmenator/_pipeline.py#L294)
 
 Decorators: `@property`
 
@@ -586,7 +588,7 @@ Return the lazily initialised system map validator.
 
 #### `AnalyzerFactory.diagram_publisher`
 
-`property` | [readmenator/_pipeline.py:296](../../readmenator/_pipeline.py#L296)
+`property` | [readmenator/_pipeline.py:301](../../readmenator/_pipeline.py#L301)
 
 Decorators: `@property`
 
@@ -604,7 +606,7 @@ Return the lazily initialised documentation site publisher.
 
 #### `AnalyzerFactory.vis_renderer`
 
-`property` | [readmenator/_pipeline.py:303](../../readmenator/_pipeline.py#L303)
+`property` | [readmenator/_pipeline.py:308](../../readmenator/_pipeline.py#L308)
 
 Decorators: `@property`
 
@@ -622,7 +624,7 @@ Return the lazily initialised vis.js network renderer.
 
 #### `AnalyzerFactory.video`
 
-`property` | [readmenator/_pipeline.py:310](../../readmenator/_pipeline.py#L310)
+`property` | [readmenator/_pipeline.py:315](../../readmenator/_pipeline.py#L315)
 
 Decorators: `@property`
 
@@ -640,7 +642,7 @@ Return the lazily initialised cinematic video renderer.
 
 #### `AnalyzerFactory.concepts`
 
-`property` | [readmenator/_pipeline.py:317](../../readmenator/_pipeline.py#L317)
+`property` | [readmenator/_pipeline.py:322](../../readmenator/_pipeline.py#L322)
 
 Decorators: `@property`
 
@@ -658,7 +660,7 @@ Return the lazily initialised semantic concept extractor.
 
 #### `AnalyzerFactory.forcegraph`
 
-`property` | [readmenator/_pipeline.py:324](../../readmenator/_pipeline.py#L324)
+`property` | [readmenator/_pipeline.py:329](../../readmenator/_pipeline.py#L329)
 
 Decorators: `@property`
 
@@ -676,7 +678,7 @@ Return the lazily initialised force-graph renderer.
 
 #### `AnalyzerFactory.bundlegraph`
 
-`property` | [readmenator/_pipeline.py:331](../../readmenator/_pipeline.py#L331)
+`property` | [readmenator/_pipeline.py:336](../../readmenator/_pipeline.py#L336)
 
 Decorators: `@property`
 
@@ -694,7 +696,7 @@ Return the lazily initialised edge bundle explorer renderer.
 
 #### `AnalyzerFactory.analytics`
 
-`property` | [readmenator/_pipeline.py:338](../../readmenator/_pipeline.py#L338)
+`property` | [readmenator/_pipeline.py:343](../../readmenator/_pipeline.py#L343)
 
 Decorators: `@property`
 
@@ -712,7 +714,7 @@ Return the lazily initialised corpus analytics builder.
 
 #### `AnalyzerFactory.scantext`
 
-`property` | [readmenator/_pipeline.py:345](../../readmenator/_pipeline.py#L345)
+`property` | [readmenator/_pipeline.py:350](../../readmenator/_pipeline.py#L350)
 
 Decorators: `@property`
 
@@ -730,7 +732,7 @@ Return the lazily initialised scan-text builder.
 
 #### `AnalyzerFactory.provenance`
 
-`property` | [readmenator/_pipeline.py:352](../../readmenator/_pipeline.py#L352)
+`property` | [readmenator/_pipeline.py:357](../../readmenator/_pipeline.py#L357)
 
 Decorators: `@property`
 
@@ -748,7 +750,7 @@ Return the lazily initialised provenance auditor.
 
 #### `AnalyzerFactory.exclusions`
 
-`property` | [readmenator/_pipeline.py:359](../../readmenator/_pipeline.py#L359)
+`property` | [readmenator/_pipeline.py:364](../../readmenator/_pipeline.py#L364)
 
 Decorators: `@property`
 
@@ -766,7 +768,7 @@ Return the lazily initialised FP exclusion list.
 
 #### `AnalyzerFactory.embedder`
 
-`property` | [readmenator/_pipeline.py:366](../../readmenator/_pipeline.py#L366)
+`property` | [readmenator/_pipeline.py:371](../../readmenator/_pipeline.py#L371)
 
 Decorators: `@property`
 
@@ -784,7 +786,7 @@ Return the lazily initialised semantic embedder.
 
 #### `AnalyzerFactory.graphrag`
 
-`property` | [readmenator/_pipeline.py:373](../../readmenator/_pipeline.py#L373)
+`property` | [readmenator/_pipeline.py:378](../../readmenator/_pipeline.py#L378)
 
 Decorators: `@property`
 
@@ -802,7 +804,7 @@ Return the lazily initialised GraphRAG index builder.
 
 #### `AnalyzerFactory.graphrag_store`
 
-`property` | [readmenator/_pipeline.py:380](../../readmenator/_pipeline.py#L380)
+`property` | [readmenator/_pipeline.py:385](../../readmenator/_pipeline.py#L385)
 
 Decorators: `@property`
 
@@ -820,7 +822,7 @@ Return the lazily initialised GraphRAG index store.
 
 #### `AnalyzerFactory.memory`
 
-`property` | [readmenator/_pipeline.py:387](../../readmenator/_pipeline.py#L387)
+`property` | [readmenator/_pipeline.py:392](../../readmenator/_pipeline.py#L392)
 
 Decorators: `@property`
 
@@ -834,11 +836,47 @@ Return the lazily initialised project memory.
 
 *Calls:* [`ProjectMemory.__init__`](readmenator._memory.py.md#projectmemory-__init__)
 
+<a id="analyzerfactory-hebbian"></a>
+
+#### `AnalyzerFactory.hebbian`
+
+`property` | [readmenator/_pipeline.py:399](../../readmenator/_pipeline.py#L399)
+
+Decorators: `@property`
+
+```python
+def hebbian(self) -> HebbianMemory
+```
+
+Return the lazily initialised zero-inference recall engine.
+
+**Returns:** `HebbianMemory`
+
+*Calls:* [`HebbianMemory.__init__`](readmenator._hebbian.py.md#hebbianmemory-__init__)
+
+<a id="analyzerfactory-docbranch"></a>
+
+#### `AnalyzerFactory.docbranch`
+
+`property` | [readmenator/_pipeline.py:406](../../readmenator/_pipeline.py#L406)
+
+Decorators: `@property`
+
+```python
+def docbranch(self) -> DocsBranchPublisher
+```
+
+Return the lazily initialised documentation branch publisher.
+
+**Returns:** `DocsBranchPublisher`
+
+*Calls:* [`DocsBranchPublisher.__init__`](readmenator._docbranch.py.md#docsbranchpublisher-__init__)
+
 <a id="analyzerfactory-skills"></a>
 
 #### `AnalyzerFactory.skills`
 
-`property` | [readmenator/_pipeline.py:394](../../readmenator/_pipeline.py#L394)
+`property` | [readmenator/_pipeline.py:413](../../readmenator/_pipeline.py#L413)
 
 Decorators: `@property`
 
@@ -856,7 +894,7 @@ Return the lazily initialised agent skill installer.
 
 #### `AnalyzerFactory.sourceview`
 
-`property` | [readmenator/_pipeline.py:401](../../readmenator/_pipeline.py#L401)
+`property` | [readmenator/_pipeline.py:420](../../readmenator/_pipeline.py#L420)
 
 Decorators: `@property`
 
@@ -874,7 +912,7 @@ Return the lazily initialised source viewer builder.
 
 #### `AnalyzerFactory.symindex`
 
-`property` | [readmenator/_pipeline.py:408](../../readmenator/_pipeline.py#L408)
+`property` | [readmenator/_pipeline.py:427](../../readmenator/_pipeline.py#L427)
 
 Decorators: `@property`
 
@@ -892,7 +930,7 @@ Return the lazily initialised symbol index.
 
 #### `AnalyzerFactory.components`
 
-`property` | [readmenator/_pipeline.py:415](../../readmenator/_pipeline.py#L415)
+`property` | [readmenator/_pipeline.py:434](../../readmenator/_pipeline.py#L434)
 
 Decorators: `@property`
 
@@ -910,7 +948,7 @@ Return the lazily initialised component diagram builder.
 
 #### `AnalyzerFactory.folder_readme`
 
-`property` | [readmenator/_pipeline.py:422](../../readmenator/_pipeline.py#L422)
+`property` | [readmenator/_pipeline.py:441](../../readmenator/_pipeline.py#L441)
 
 Decorators: `@property`
 
@@ -928,7 +966,7 @@ Return the lazily initialised per-folder README writer.
 
 #### `AnalyzerFactory.apidocs`
 
-`property` | [readmenator/_pipeline.py:429](../../readmenator/_pipeline.py#L429)
+`property` | [readmenator/_pipeline.py:448](../../readmenator/_pipeline.py#L448)
 
 Decorators: `@property`
 
@@ -946,7 +984,7 @@ Return the lazily initialised API reference builder.
 
 #### `AnalyzerFactory.apidocs_writer`
 
-`property` | [readmenator/_pipeline.py:436](../../readmenator/_pipeline.py#L436)
+`property` | [readmenator/_pipeline.py:455](../../readmenator/_pipeline.py#L455)
 
 Decorators: `@property`
 
@@ -964,7 +1002,7 @@ Return the lazily initialised API reference writer.
 
 #### `AnalyzerFactory.ollama`
 
-`property` | [readmenator/_pipeline.py:443](../../readmenator/_pipeline.py#L443)
+`property` | [readmenator/_pipeline.py:462](../../readmenator/_pipeline.py#L462)
 
 Decorators: `@property`
 
@@ -982,7 +1020,7 @@ Return the lazily initialised local Ollama client.
 
 #### `AnalyzerFactory.build_typed_graph`
 
-`method` | [readmenator/_pipeline.py:449](../../readmenator/_pipeline.py#L449)
+`method` | [readmenator/_pipeline.py:468](../../readmenator/_pipeline.py#L468)
 
 ```python
 def build_typed_graph(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None) -> Category
@@ -1006,7 +1044,7 @@ def build_typed_graph(self, nodes: List[Node], edges: List[Edge], resolved_edges
 
 #### `AnalyzerFactory.make_ranker`
 
-`method` | [readmenator/_pipeline.py:459](../../readmenator/_pipeline.py#L459)
+`method` | [readmenator/_pipeline.py:478](../../readmenator/_pipeline.py#L478)
 
 ```python
 def make_ranker(self, typed_graph: TypedGraph) -> CompositeRanker
@@ -1030,7 +1068,7 @@ Create a CompositeRanker for the given typed graph.
 
 #### `AnalyzerFactory.last_category`
 
-`property` | [readmenator/_pipeline.py:476](../../readmenator/_pipeline.py#L476)
+`property` | [readmenator/_pipeline.py:495](../../readmenator/_pipeline.py#L495)
 
 Decorators: `@property`
 
@@ -1044,7 +1082,7 @@ def last_category(self) -> Optional[Category]
 
 #### `AnalyzerFactory.last_typed_graph`
 
-`property` | [readmenator/_pipeline.py:480](../../readmenator/_pipeline.py#L480)
+`property` | [readmenator/_pipeline.py:499](../../readmenator/_pipeline.py#L499)
 
 Decorators: `@property`
 
@@ -1060,7 +1098,7 @@ def last_typed_graph(self) -> Optional[TypedGraph]
 
 ### `DeepAnalysisRunner`
 
-`class` | [readmenator/_pipeline.py:484](../../readmenator/_pipeline.py#L484)
+`class` | [readmenator/_pipeline.py:503](../../readmenator/_pipeline.py#L503)
 
 ```python
 class DeepAnalysisRunner
@@ -1084,7 +1122,7 @@ coupling in the primary orchestration layer.
 
 #### `DeepAnalysisRunner.__init__`
 
-`constructor` | [readmenator/_pipeline.py:493](../../readmenator/_pipeline.py#L493)
+`constructor` | [readmenator/_pipeline.py:512](../../readmenator/_pipeline.py#L512)
 
 ```python
 def __init__(self, factory: AnalyzerFactory) -> None
@@ -1102,7 +1140,7 @@ def __init__(self, factory: AnalyzerFactory) -> None
 
 #### `DeepAnalysisRunner.run`
 
-`method` | [readmenator/_pipeline.py:496](../../readmenator/_pipeline.py#L496)
+`method` | [readmenator/_pipeline.py:515](../../readmenator/_pipeline.py#L515)
 
 ```python
 def run(self, nodes: List[Node], edges: List[Edge], resolved_edges: Optional[List[Edge]] = None, layers: Optional[Dict[str, str]] = None, content_map: Optional[Dict[str, str]] = None) -> AnalysisResultV2

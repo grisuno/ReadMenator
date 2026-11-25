@@ -23,6 +23,7 @@ from readmenator._cpg import CodePropertyGraph
 from readmenator._dataflow import DataflowAnalyzer
 from readmenator._bundlegraph import BundleGraphRenderer
 from readmenator._diagrams import DocsSitePublisher, InteractiveMapRenderer, SystemMapBuilder, SystemMapValidator, VisNetworkRenderer
+from readmenator._docbranch import DocsBranchPublisher
 from readmenator._documentation import DocumentationGenerator
 from readmenator._embed import Embedder
 from readmenator._exclusions import ExclusionList
@@ -32,6 +33,7 @@ from readmenator._provenance import ProvenanceAuditor
 from readmenator._scantext import ScanTextBuilder
 from readmenator._gh_wiki import GitHubWikiPublisher
 from readmenator._graphrag import GraphRagBuilder, GraphRagStore
+from readmenator._hebbian import HebbianMemory
 from readmenator._memory import ProjectMemory
 from readmenator._ollama import OllamaClient
 from readmenator._skill_installer import SkillInstaller
@@ -110,6 +112,8 @@ class AnalyzerFactory:
         self._graphrag: GraphRagBuilder | None = None
         self._graphrag_store: GraphRagStore | None = None
         self._memory: ProjectMemory | None = None
+        self._hebbian: HebbianMemory | None = None
+        self._docbranch: DocsBranchPublisher | None = None
         self._skills: SkillInstaller | None = None
         self._sourceview: SourceViewBuilder | None = None
         self._symindex: SymbolIndex | None = None
@@ -242,6 +246,7 @@ class AnalyzerFactory:
                 readme_agents_line=self._config.MSG_README_AGENTS_LINE,
                 readme_developers_line=self._config.MSG_README_DEVELOPERS_LINE,
                 readme_regen_command=self._config.MSG_README_REGEN_COMMAND,
+                docs_branch=self._config.DOC_BRANCH_NAME,
             )
         return self._readme_injector
 
@@ -389,6 +394,20 @@ class AnalyzerFactory:
         if self._memory is None:
             self._memory = ProjectMemory(self._config)
         return self._memory
+
+    @property
+    def hebbian(self) -> HebbianMemory:
+        """Return the lazily initialised zero-inference recall engine."""
+        if self._hebbian is None:
+            self._hebbian = HebbianMemory(self._config, self.memory)
+        return self._hebbian
+
+    @property
+    def docbranch(self) -> DocsBranchPublisher:
+        """Return the lazily initialised documentation branch publisher."""
+        if self._docbranch is None:
+            self._docbranch = DocsBranchPublisher(self._config)
+        return self._docbranch
 
     @property
     def skills(self) -> SkillInstaller:

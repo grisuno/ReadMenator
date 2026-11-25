@@ -2,42 +2,42 @@
  "schema_version": 1,
  "format": "jsonl",
  "meta": {
-  "modules": 104,
-  "entities": 2196,
+  "modules": 106,
+  "entities": 2258,
   "languages": {
-   "py": 103,
+   "py": 105,
    "sh": 1
   },
   "kinds": {
-   "attribute": 1164,
-   "class": 185,
+   "attribute": 1203,
+   "class": 189,
    "classmethod": 3,
    "constant": 104,
-   "constructor": 83,
+   "constructor": 85,
    "enum": 1,
    "exception": 1,
-   "function": 144,
-   "method": 339,
-   "module": 104,
-   "property": 62,
+   "function": 145,
+   "method": 350,
+   "module": 106,
+   "property": 64,
    "protocol": 1,
-   "staticmethod": 5
+   "staticmethod": 6
   },
   "truncated": false,
-  "skipped_files": 59,
+  "skipped_files": 61,
   "privacy_mode": false
  },
  "coverage": {
   "overall": {
-   "documented": 758,
-   "total": 928,
-   "percent": 81.7
+   "documented": 781,
+   "total": 951,
+   "percent": 82.1
   },
   "by_kind": {
    "class": {
-    "documented": 171,
-    "total": 185,
-    "percent": 92.4
+    "documented": 175,
+    "total": 189,
+    "percent": 92.6
    },
    "classmethod": {
     "documented": 1,
@@ -45,9 +45,9 @@
     "percent": 33.3
    },
    "constructor": {
-    "documented": 48,
-    "total": 83,
-    "percent": 57.8
+    "documented": 50,
+    "total": 85,
+    "percent": 58.8
    },
    "enum": {
     "documented": 1,
@@ -60,24 +60,24 @@
     "percent": 0.0
    },
    "function": {
-    "documented": 139,
-    "total": 144,
-    "percent": 96.5
+    "documented": 140,
+    "total": 145,
+    "percent": 96.6
    },
    "method": {
-    "documented": 252,
-    "total": 339,
-    "percent": 74.3
+    "documented": 263,
+    "total": 350,
+    "percent": 75.1
    },
    "module": {
-    "documented": 103,
-    "total": 104,
-    "percent": 99.0
+    "documented": 105,
+    "total": 106,
+    "percent": 99.1
    },
    "property": {
-    "documented": 38,
-    "total": 62,
-    "percent": 61.3
+    "documented": 40,
+    "total": 64,
+    "percent": 62.5
    },
    "protocol": {
     "documented": 1,
@@ -85,9 +85,9 @@
     "percent": 100.0
    },
    "staticmethod": {
-    "documented": 4,
-    "total": 5,
-    "percent": 80.0
+    "documented": 5,
+    "total": 6,
+    "percent": 83.3
    }
   },
   "by_module": {
@@ -147,9 +147,9 @@
     "percent": 100.0
    },
    "readmenator/_app.py": {
-    "documented": 29,
-    "total": 57,
-    "percent": 50.9
+    "documented": 31,
+    "total": 59,
+    "percent": 52.5
    },
    "readmenator/_bundlegraph.py": {
     "documented": 8,
@@ -209,6 +209,11 @@
    "readmenator/_diagrams.py": {
     "documented": 33,
     "total": 33,
+    "percent": 100.0
+   },
+   "readmenator/_docbranch.py": {
+    "documented": 10,
+    "total": 10,
     "percent": 100.0
    },
    "readmenator/_docstrings.py": {
@@ -301,6 +306,11 @@
     "total": 28,
     "percent": 100.0
    },
+   "readmenator/_hebbian.py": {
+    "documented": 8,
+    "total": 8,
+    "percent": 100.0
+   },
    "readmenator/_hotspots.py": {
     "documented": 5,
     "total": 6,
@@ -337,8 +347,8 @@
     "percent": 8.7
    },
    "readmenator/_memory.py": {
-    "documented": 14,
-    "total": 14,
+    "documented": 15,
+    "total": 15,
     "percent": 100.0
    },
    "readmenator/_mermaid.py": {
@@ -357,9 +367,9 @@
     "percent": 100.0
    },
    "readmenator/_pipeline.py": {
-    "documented": 32,
-    "total": 54,
-    "percent": 59.3
+    "documented": 34,
+    "total": 56,
+    "percent": 60.7
    },
    "readmenator/_project_config.py": {
     "documented": 12,
@@ -672,7 +682,7 @@
   {
    "uid": "readmenator/_app.py",
    "path": "modules/readmenator._app.py.jsonl",
-   "entities": 57
+   "entities": 59
   },
   {
    "uid": "readmenator/_bundlegraph.py",
@@ -707,7 +717,7 @@
   {
    "uid": "readmenator/_config.py",
    "path": "modules/readmenator._config.py.jsonl",
-   "entities": 636
+   "entities": 658
   },
   {
    "uid": "readmenator/_cpg.py",
@@ -733,6 +743,11 @@
    "uid": "readmenator/_diagrams.py",
    "path": "modules/readmenator._diagrams.py.jsonl",
    "entities": 74
+  },
+  {
+   "uid": "readmenator/_docbranch.py",
+   "path": "modules/readmenator._docbranch.py.jsonl",
+   "entities": 18
   },
   {
    "uid": "readmenator/_docstrings.py",
@@ -825,6 +840,11 @@
    "entities": 75
   },
   {
+   "uid": "readmenator/_hebbian.py",
+   "path": "modules/readmenator._hebbian.py.jsonl",
+   "entities": 16
+  },
+  {
    "uid": "readmenator/_hotspots.py",
    "path": "modules/readmenator._hotspots.py.jsonl",
    "entities": 6
@@ -862,7 +882,7 @@
   {
    "uid": "readmenator/_memory.py",
    "path": "modules/readmenator._memory.py.jsonl",
-   "entities": 23
+   "entities": 25
   },
   {
    "uid": "readmenator/_mermaid.py",
@@ -882,7 +902,7 @@
   {
    "uid": "readmenator/_pipeline.py",
    "path": "modules/readmenator._pipeline.py.jsonl",
-   "entities": 54
+   "entities": 56
   },
   {
    "uid": "readmenator/_project_config.py",

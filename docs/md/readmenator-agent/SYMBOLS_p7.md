@@ -3,6 +3,99 @@ Previous: [SYMBOLS_p6.md](SYMBOLS_p6.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_inject_repairs_partial_anchor` | method | `tests/test_readme_injector.py:196` | `def test_inject_repairs_partial_anchor(self)` |
+| `test_inject_with_docs_site_url_adds_site_bullet` | method | `tests/test_readme_injector.py:48` | `def test_inject_with_docs_site_url_adds_site_bullet(self)` |
+| `test_prefers_readme_md_over_rst` | method | `tests/test_readme_injector.py:143` | `def test_prefers_readme_md_over_rst(self)` |
+| `test_remove_no_readme_returns_false` | method | `tests/test_readme_injector.py:115` | `def test_remove_no_readme_returns_false(self)` |
+| `test_remove_strips_injected_section` | method | `tests/test_readme_injector.py:99` | `def test_remove_strips_injected_section(self)` |
+| `test_remove_without_injection_returns_false` | method | `tests/test_readme_injector.py:109` | `def test_remove_without_injection_returns_false(self)` |
+| `test_returns_none_when_no_readme` | method | `tests/test_readme_injector.py:150` | `def test_returns_none_when_no_readme(self)` |
+| `TestEdges` | class | `tests/test_receipts.py:155` | `class TestEdges` |
+| `TestHypotheses` | class | `tests/test_receipts.py:297` | `class TestHypotheses` |
+| `TestLoading` | class | `tests/test_receipts.py:127` | `class TestLoading` |
+| `TestReconciler` | class | `tests/test_receipts.py:187` | `class TestReconciler` |
+| `TestUncertainty` | class | `tests/test_receipts.py:238` | `class TestUncertainty` |
+| `_run` | method | `tests/test_receipts.py:188` | `def _run(self, records)` |
+| `_validator` | method | `tests/test_receipts.py:298` | `def _validator(self)` |
+| `test_already_observed_verified` | method | `tests/test_receipts.py:305` | `def test_already_observed_verified(self)` |
+| `test_callee_known_via_class_match_verified` | method | `tests/test_receipts.py:311` | `def test_callee_known_via_class_match_verified(self)` |
+| `test_candidate_edges_partition` | method | `tests/test_receipts.py:178` | `def test_candidate_edges_partition(self)` |
+| `test_command_derived_edges` | method | `tests/test_receipts.py:166` | `def test_command_derived_edges(self)` |
+| `test_confirmation_resolves_candidates` | method | `tests/test_receipts.py:197` | `def test_confirmation_resolves_candidates(self)` |
+| `test_extra_context_preserved` | method | `tests/test_receipts.py:355` | `def test_extra_context_preserved(self)` |
+| `test_feature_vector_shape` | method | `tests/test_receipts.py:239` | `def test_feature_vector_shape(self)` |
+| `test_heuristic_high_for_cli_evidence` | method | `tests/test_receipts.py:247` | `def test_heuristic_high_for_cli_evidence(self)` |
+| `test_heuristic_low_for_unobserved_generic` | method | `tests/test_receipts.py:253` | `def test_heuristic_low_for_unobserved_generic(self)` |
+| `test_json_list_validation` | method | `tests/test_receipts.py:341` | `def test_json_list_validation(self)` |
+| `test_load_bad_schema_rejected` | method | `tests/test_receipts.py:128` | `def test_load_bad_schema_rejected(self, tmp_path)` |
+| `test_load_dir_sorted_and_invalid_skipped` | method | `tests/test_receipts.py:142` | `def test_load_dir_sorted_and_invalid_skipped(self, tmp_path)` |
+| `test_load_valid_record` | method | `tests/test_receipts.py:134` | `def test_load_valid_record(self, tmp_path)` |
+| `test_markdown_lists_platforms_and_states` | method | `tests/test_receipts.py:208` | `def test_markdown_lists_platforms_and_states(self)` |
+| `test_min_confidence_filters` | method | `tests/test_receipts.py:269` | `def test_min_confidence_filters(self)` |
+| `test_missing_dir_returns_empty` | method | `tests/test_receipts.py:151` | `def test_missing_dir_returns_empty(self)` |
+| `test_missing_fields_rejected` | method | `tests/test_receipts.py:351` | `def test_missing_fields_rejected(self)` |
+| `test_observed_edges_explicit` | method | `tests/test_receipts.py:156` | `def test_observed_edges_explicit(self, tmp_path)` |
+| `test_planned_commands_not_observed` | method | `tests/test_receipts.py:173` | `def test_planned_commands_not_observed(self)` |
+| `test_predict_labels_predicted` | method | `tests/test_receipts.py:259` | `def test_predict_labels_predicted(self)` |
+| `test_random_forest_fallback_and_fit` | method | `tests/test_receipts.py:274` | `def test_random_forest_fallback_and_fit(self)` |
+| `test_unknown_callee_rejected` | method | `tests/test_receipts.py:321` | `def test_unknown_callee_rejected(self)` |
+| `test_unknown_caller_assumed_when_allowed` | method | `tests/test_receipts.py:334` | `def test_unknown_caller_assumed_when_allowed(self)` |
+| `test_unknown_caller_rejected_by_default` | method | `tests/test_receipts.py:328` | `def test_unknown_caller_rejected_by_default(self)` |
+| `test_write_pages_artifacts` | method | `tests/test_receipts.py:220` | `def test_write_pages_artifacts(self, tmp_path)` |
+| `TestMonolithRefactorizerContract` | class | `tests/test_refactorizer.py:18` | `class TestMonolithRefactorizerContract(TestCase)` |
+| `_make_edge` | method | `tests/test_refactorizer.py:37` | `def _make_edge(self, src, tgt)` |
+| `_make_node` | method | `tests/test_refactorizer.py:28` | `def _make_node(self, nid, symbols)` |
+| `_make_symbol` | method | `tests/test_refactorizer.py:25` | `def _make_symbol(self, name, kind, line)` |
+| `setUp` | method | `tests/test_refactorizer.py:21` | `def setUp(self)` |
+| `test_analyze_detects_large_file` | method | `tests/test_refactorizer.py:50` | `def test_analyze_detects_large_file(self)` |
+| `test_analyze_empty_graph_returns_empty` | method | `tests/test_refactorizer.py:40` | `def test_analyze_empty_graph_returns_empty(self)` |
+| `test_analyze_estimates_impact_from_resolved_edges` | method | `tests/test_refactorizer.py:97` | `def test_analyze_estimates_impact_from_resolved_edges(self)` |
+| `test_analyze_generates_extract_class_for_multiple_classes` | method | `tests/test_refactorizer.py:59` | `def test_analyze_generates_extract_class_for_multiple_classes(self)` |
+| `test_analyze_generates_extract_function_for_multiple_functions` | method | `tests/test_refactorizer.py:74` | `def test_analyze_generates_extract_function_for_multiple_functions(self)` |
+| `test_analyze_ignores_small_files` | method | `tests/test_refactorizer.py:44` | `def test_analyze_ignores_small_files(self)` |
+| `test_analyze_respects_max_files_limit` | method | `tests/test_refactorizer.py:173` | `def test_analyze_respects_max_files_limit(self)` |
+| `test_analyze_sorted_by_line_count` | method | `tests/test_refactorizer.py:160` | `def test_analyze_sorted_by_line_count(self)` |
+| `test_analyze_splits_file_with_many_symbols` | method | `tests/test_refactorizer.py:89` | `def test_analyze_splits_file_with_many_symbols(self)` |
+| `test_generate_script_contains_sed_commands` | method | `tests/test_refactorizer.py:140` | `def test_generate_script_contains_sed_commands(self)` |
+| `test_generate_script_contains_set_e` | method | `tests/test_refactorizer.py:129` | `def test_generate_script_contains_set_e(self)` |
+| `test_generate_script_contains_shebang` | method | `tests/test_refactorizer.py:109` | `def test_generate_script_contains_shebang(self)` |
+| `TestImportResolverContract` | class | `tests/test_resolver.py:15` | `class TestImportResolverContract(TestCase)` |
+| `test_resolves_c_extensionless_header` | method | `tests/test_resolver.py:100` | `def test_resolves_c_extensionless_header(self)` |
+| `test_resolves_c_header_stem_across_dirs` | method | `tests/test_resolver.py:121` | `def test_resolves_c_header_stem_across_dirs(self)` |
+| `test_resolves_c_quoted_header_same_dir` | method | `tests/test_resolver.py:86` | `def test_resolves_c_quoted_header_same_dir(self)` |
+| `test_resolves_c_quoted_header_subdir` | method | `tests/test_resolver.py:93` | `def test_resolves_c_quoted_header_subdir(self)` |
+| `test_resolves_c_source_from_header_dir` | method | `tests/test_resolver.py:107` | `def test_resolves_c_source_from_header_dir(self)` |
+| `test_resolves_cpp_header_same_dir` | method | `tests/test_resolver.py:114` | `def test_resolves_cpp_header_same_dir(self)` |
+| `test_resolves_extensionless_python_import` | method | `tests/test_resolver.py:32` | `def test_resolves_extensionless_python_import(self)` |
+| `test_resolves_go_import` | method | `tests/test_resolver.py:72` | `def test_resolves_go_import(self)` |
+| `test_resolves_include_dir_suffix_match` | method | `tests/test_resolver.py:149` | `def test_resolves_include_dir_suffix_match(self)` |
+| `test_resolves_package_init` | method | `tests/test_resolver.py:39` | `def test_resolves_package_init(self)` |
+| `test_resolves_parent_dir_include` | method | `tests/test_resolver.py:135` | `def test_resolves_parent_dir_include(self)` |
+| `test_resolves_parent_dir_include_despite_ambiguous_stem` | method | `tests/test_resolver.py:142` | `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)` |
+| `test_resolves_python_module_dotpath` | method | `tests/test_resolver.py:18` | `def test_resolves_python_module_dotpath(self)` |
+| `test_resolves_relative_import` | method | `tests/test_resolver.py:25` | `def test_resolves_relative_import(self)` |
+| `test_resolves_same_directory_import` | method | `tests/test_resolver.py:79` | `def test_resolves_same_directory_import(self)` |
+| `test_resolves_stem_match_when_unique` | method | `tests/test_resolver.py:60` | `def test_resolves_stem_match_when_unique(self)` |
+| `test_returns_none_for_ambiguous_suffix_match` | method | `tests/test_resolver.py:156` | `def test_returns_none_for_ambiguous_suffix_match(self)` |
+| `test_returns_none_for_c_system_header` | method | `tests/test_resolver.py:128` | `def test_returns_none_for_c_system_header(self)` |
+| `test_returns_none_for_empty_import` | method | `tests/test_resolver.py:67` | `def test_returns_none_for_empty_import(self)` |
+| `test_returns_none_for_external_stdlib` | method | `tests/test_resolver.py:46` | `def test_returns_none_for_external_stdlib(self)` |
+| `test_returns_none_for_unknown_import` | method | `tests/test_resolver.py:53` | `def test_returns_none_for_unknown_import(self)` |
+| `TestRuleGeneratorContract` | class | `tests/test_rule_gen.py:12` | `class TestRuleGeneratorContract(TestCase)` |
+| `_make_node` | method | `tests/test_rule_gen.py:19` | `def _make_node(self, nid, label, lang)` |
+| `_make_node_with_symbols` | method | `tests/test_rule_gen.py:29` | `def _make_node_with_symbols(self, nid, sym_count)` |
+| `setUp` | method | `tests/test_rule_gen.py:15` | `def setUp(self)` |
+| `test_antipattern_threshold_from_config` | method | `tests/test_rule_gen.py:67` | `def test_antipattern_threshold_from_config(self)` |
+| `test_detects_antipatterns_with_content` | method | `tests/test_rule_gen.py:56` | `def test_detects_antipatterns_with_content(self)` |
+| `test_empty_nodes_returns_empty_rules` | method | `tests/test_rule_gen.py:44` | `def test_empty_nodes_returns_empty_rules(self)` |
+| `test_generates_rules_for_function_heavy_language` | method | `tests/test_rule_gen.py:48` | `def test_generates_rules_for_function_heavy_language(self)` |
+| `test_rule_id_increments` | method | `tests/test_rule_gen.py:90` | `def test_rule_id_increments(self)` |
+| `test_write_rules_creates_files` | method | `tests/test_rule_gen.py:77` | `def test_write_rules_creates_files(self)` |
+| `TestSarifExporterContract` | class | `tests/test_sarif.py:11` | `class TestSarifExporterContract(TestCase)` |
+| `_make_finding` | method | `tests/test_sarif.py:18` | `def _make_finding(self, file_path, line, severity, rule_id, description, snippet, cwe)` |
+| `setUp` | method | `tests/test_sarif.py:14` | `def setUp(self)` |
+| `test_empty_findings_produces_valid_sarif` | method | `tests/test_sarif.py:97` | `def test_empty_findings_produces_valid_sarif(self)` |
+| `test_export_includes_result` | method | `tests/test_sarif.py:62` | `def test_export_includes_result(self)` |
 | `test_export_includes_rule` | method | `tests/test_sarif.py:54` | `def test_export_includes_rule(self)` |
 | `test_export_includes_tool_info` | method | `tests/test_sarif.py:46` | `def test_export_includes_tool_info(self)` |
 | `test_export_returns_valid_json` | method | `tests/test_sarif.py:38` | `def test_export_returns_valid_json(self)` |

@@ -1,36 +1,36 @@
-# readmenator: _graphrag
+# readmenator: _mcp_server
 
-*Community 3 | 18 files | cohesion 0.32*
+*Community 4 | 15 files | cohesion 0.32*
 
 ## Definition
 
-This community groups 18 file(s) rooted at `readmenator` with dominant language py (cohesion 0.32). Central symbols: `Bm25Index`, `Category`, `ComponentDiagramBuilder`, `CompositeRanker`, `ConceptExtractor`, `DocProjection`, `EdgeKind`, `GraphRagBuilder`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: ReadMenator -- Zero-token polyglot codebase knowledge graph generator.  Public API: Config, Symbol, Node, Edge, EdgeKind, Morphism, Category, and readmenatorApp.
+This community groups 15 file(s) rooted at `readmenator` with dominant language py (cohesion 0.32). Central symbols: `Bm25Index`, `Category`, `CompositeRanker`, `DocProjection`, `EdgeKind`, `GraphRagBuilder`, `GraphRagIndex`, `GraphRagSearcher`. Core file: `tests/test_ranking.py` (72 symbols). Documented purpose: Launcher shim that runs the readmenator CLI from a source checkout..
 
 ## Files
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
+| `readmenator.py` | py | utility | 0 | yes |
 | `readmenator/__init__.py` | py | utility | 0 | yes |
+| `readmenator/__main__.py` | py | utility | 3 | yes |
 | `readmenator/_category.py` | py | utility | 26 | yes |
-| `readmenator/_components.py` | py | presentation | 25 | yes |
-| `readmenator/_concepts.py` | py | utility | 8 | yes |
 | `readmenator/_explain.py` | py | utility | 3 | yes |
 | `readmenator/_graphrag.py` | py | utility | 53 | yes |
-| `readmenator/_ollama.py` | py | utility | 7 | yes |
+| `readmenator/_mcp_server.py` | py | utility | 65 | yes |
 | `readmenator/_projections.py` | py | utility | 15 | yes |
 | `readmenator/_query.py` | py | data_access | 17 | yes |
 | `readmenator/_rank.py` | py | utility | 18 | yes |
-| `readmenator/_skill_installer.py` | py | utility | 7 | yes |
-| `tests/test_components.py` | py | testing | 36 | yes |
-| `tests/test_concepts.py` | py | testing | 8 | no |
+| `readmenator/_uml.py` | py | utility | 25 | yes |
 | `tests/test_graphrag.py` | py | testing | 28 | yes |
-| `tests/test_memory.py` | py | testing | 17 | yes |
-| `tests/test_ollama.py` | py | testing | 4 | yes |
 | `tests/test_query.py` | py | testing | 18 | no |
 | `tests/test_ranking.py` | py | testing | 72 | yes |
+| `tests/test_uml.py` | py | testing | 49 | yes |
 
 ## Key Symbols
 
+- `build_parser` (function, `readmenator/__main__.py:18`) `def build_parser()`
+- `_run_tests` (function, `readmenator/__main__.py:140`) `def _run_tests()`
+- `main` (function, `readmenator/__main__.py:155`) `def main()`
 - `EdgeKind` (class, `readmenator/_category.py:24`) `class EdgeKind(str, Enum)` - Semantic type of a morphism between two code artifacts.
 - `__str__` (method, `readmenator/_category.py:38`) `def __str__(self)`
 - `Morphism` (class, `readmenator/_category.py:57`) `class Morphism` - A typed directed edge between two code artifacts.
@@ -57,56 +57,47 @@ This community groups 18 file(s) rooted at `readmenator` with dominant language 
 - `stochastic_row` (method, `readmenator/_category.py:221`) `def stochastic_row(self, source)` - Return dict of target -> probability for the row of *source*.
 - `build_category_from_edges` (function, `readmenator/_category.py:236`) `def build_category_from_edges(edges, resolved_edges, node_ids)` - Build a Category from lists of Edge objects.
 - `_infer_edge_kind` (function, `readmenator/_category.py:278`) `def _infer_edge_kind(relation)` - Map a relation string to an EdgeKind.
-- `sanitize` (function, `readmenator/_components.py:45`) `def sanitize(name)` - Replace non-alphanumerics with underscores for Mermaid node ids.
-- `ComponentDiagramBuilder` (class, `readmenator/_components.py:57`) `class ComponentDiagramBuilder` - Builds component-diagram analysis from readmenator topology.
-- `__init__` (method, `readmenator/_components.py:60`) `def __init__(self, config)` - Initialise with application configuration.
-- `build` (method, `readmenator/_components.py:70`) `def build(self, nodes, edges, resolved_edges, analysis, project_root, content_ma` - Build the full analysis document.
+- `explain_rank` (function, `readmenator/_explain.py:16`) `def explain_rank(node_id, ranked, category)` - Return a detailed breakdown of why *node_id* has its rank.
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 26
-- Cross-boundary resolved imports (EXTRACTED): 59
+- Internal resolved imports (EXTRACTED): 22
+- Cross-boundary resolved imports (EXTRACTED): 47
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
-- [EXTRACTED] depends_on community 3 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_project_config.py.
-- [EXTRACTED] depends_on community 3 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
-- [EXTRACTED] depends_on community 3 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 4 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_readme_injector.py.
-- [EXTRACTED] depends_on community 3 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_cache.py.
+- [EXTRACTED] depends_on community 4 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_app.py.
+- [EXTRACTED] depends_on community 4 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_project_config.py.
+- [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_components.py.
+- [EXTRACTED] depends_on community 4 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 4 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 4 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/_graphrag.py imports readmenator/_resolver.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
-- [taint high] `readmenator/_documentation.py` -> `readmenator/_category.py` via `subprocess` (2 hops)
-- [layer strict] `tests/test_components.py` (testing) -> `readmenator/_components.py` (presentation)
-- [layer strict] `tests/test_folder_readme.py` (testing) -> `readmenator/_components.py` (presentation)
 
 ## Open Questions
 
-- Why do 2 file(s) lack file-level docs (e.g. `tests/test_concepts.py`)? What purpose do they serve?
-- What would break if the most connected file in readmenator: _graphrag changed?
-- Should readmenator: _graphrag be split, given cohesion 0.32?
+- Why do 1 file(s) lack file-level docs (e.g. `tests/test_query.py`)? What purpose do they serve?
+- What would break if the most connected file in readmenator: _mcp_server changed?
+- Should readmenator: _mcp_server be split, given cohesion 0.32?
 
 ## Sources
 
+- `readmenator.py`
 - `readmenator/__init__.py`
+- `readmenator/__main__.py`
 - `readmenator/_category.py`
-- `readmenator/_components.py`
-- `readmenator/_concepts.py`
 - `readmenator/_explain.py`
 - `readmenator/_graphrag.py`
-- `readmenator/_ollama.py`
+- `readmenator/_mcp_server.py`
 - `readmenator/_projections.py`
 - `readmenator/_query.py`
 - `readmenator/_rank.py`
-- `readmenator/_skill_installer.py`
-- `tests/test_components.py`
-- `tests/test_concepts.py`
+- `readmenator/_uml.py`
 - `tests/test_graphrag.py`
-- `tests/test_memory.py`
-- `tests/test_ollama.py`
 - `tests/test_query.py`
 - `tests/test_ranking.py`
+- `tests/test_uml.py`

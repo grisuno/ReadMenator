@@ -1,6 +1,22 @@
 # API (page 3 of 3)
 Previous: [API_p2.md](API_p2.md)
 
+## readmenator/_watcher.py
+Depends on: `readmenator/_config.py`
+Imported by: `readmenator/_app.py`
+- `DirectoryWatcher.__init__` (method) `readmenator/_watcher.py:29` `def __init__(self, root, config, callback, interval_seconds)` -- Initialise the watcher for a project root.
+- `DirectoryWatcher.start` (method) `readmenator/_watcher.py:80` `def start(self)` -- Start watching the directory (blocking).
+- `DirectoryWatcher.stop` (method) `readmenator/_watcher.py:97` `def stop(self)` -- Stop watching.
+
+## readmenator/_wiki.py
+Depends on: `readmenator/_analyzer.py`, `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_purpose.py`, `readmenator/_security.py`
+Imported by: `readmenator/_pipeline.py`, `tests/test_wiki.py`
+- `existing_ids` (function) `readmenator/_wiki.py:62` `def existing_ids(connections)` -- Return community id pairs already linked, to avoid duplicate edges.
+- `WikiGenerator.__init__` (method) `readmenator/_wiki.py:89` `def __init__(self, config)` -- Store configuration for wiki output limits and paths.
+- `WikiGenerator.generate` (method) `readmenator/_wiki.py:94` `def generate(self, nodes, edges, resolved_edges, analysis, layers, findings, analysis_v2, project_root)` -- Write all wiki files and return the output directory path.
+- `WikiGenerator.lint` (method) `readmenator/_wiki.py:219` `def lint(self, project_root)` -- Check wiki health and return a list of issue descriptions.
+- `dominant` (function) `readmenator/_wiki.py:428` `def dominant(ids, key)`
+
 ## readmenator/_yaralite.py
 Imported by: `readmenator/_app.py`, `tests/test_interactive_graph.py`
 - `YaraLiteRule.tier` (method) `readmenator/_yaralite.py:42` `def tier(self)` -- Return the rule tier from meta or name prefix.

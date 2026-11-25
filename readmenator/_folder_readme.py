@@ -267,6 +267,24 @@ class FolderReadmeWriter:
                 ),
                 regenerate=("readmenator . gh-wiki --dry-run",),
             ),
+            FolderSpec(
+                dirname=cfg.DOC_DRY_RUN_DIR,
+                purpose=(
+                    "Docs branch dry run: the static site that `readmenator . doc-branch` would "
+                    "commit to the docs branch for GitHub Pages, staged locally without any git call."
+                ),
+                entries=(
+                    ("index.html", "Gallery home of the site"),
+                    ("maps/", "Interactive system maps"),
+                    (f"{cfg.SITE_DOCS_SUBDIR}/", "Markdown documents shown in the gallery drawer"),
+                    (cfg.SITE_LLMS_TXT_FILENAME, "Agent entry point listing every document"),
+                ),
+                usage=(
+                    "Review the site, then publish with `readmenator . doc-branch` "
+                    "and point GitHub Pages at the docs branch.",
+                ),
+                regenerate=("readmenator . doc-branch --dry-run",),
+            ),
         ]
 
     def render(self, spec: FolderSpec, folder: Path) -> str:

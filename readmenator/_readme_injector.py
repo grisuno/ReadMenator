@@ -26,7 +26,7 @@ _INJECTION_TEXT_MD = """{anchor_start}
 {readme_intro} Regenerate with
 `{readme_regen_command}`. Analysis outputs:
 
-- **[{kb_filename}](./{kb_filename})** -- Full architecture reference with all
+{docs_site_bullet}- **[{kb_filename}](./{kb_filename})** -- Full architecture reference with all
   classes, functions, imports, dependency graphs, UML class diagrams, security
   audit findings, community analysis, taint paths, hotspots, cycles, and more.
 - **[{agent_output_dir}/](./{agent_output_dir}/)** -- Agent-friendly, grep-optimized index.
@@ -88,7 +88,7 @@ _INJECTION_TEXT_RST = """{anchor_start}
 {readme_intro} Regenerate with
 ``{readme_regen_command}``. Analysis outputs:
 
-- **{kb_filename}** -- Full architecture reference with all classes, functions,
+{docs_site_bullet}- **{kb_filename}** -- Full architecture reference with all classes, functions,
   imports, dependency graphs, UML class diagrams, security audit findings,
   community analysis, taint paths, hotspots, cycles, and more.
 - **{agent_output_dir}/** -- Agent-friendly, grep-optimized index.
@@ -166,6 +166,7 @@ class ReadmeInjector:
         readme_agents_line: str = "",
         readme_developers_line: str = "",
         readme_regen_command: str = "",
+        docs_branch: str = "docs",
     ) -> None:
         """Initialise the injector with output locations.
 
@@ -192,6 +193,7 @@ class ReadmeInjector:
             readme_agents_line: Override for the closing agents line ("" = built-in).
             readme_developers_line: Override for the closing developers line ("" = built-in).
             readme_regen_command: Override for the rebuild command ("" = built-in).
+            docs_branch: Git branch the deployed docs site lives in.
         """
         self._kb_filename = kb_filename
         self._agent_output_dir = agent_output_dir
@@ -215,12 +217,17 @@ class ReadmeInjector:
         self._readme_agents_line = readme_agents_line
         self._readme_developers_line = readme_developers_line
         self._readme_regen_command = readme_regen_command
+        self._docs_branch = docs_branch
 
-    def inject(self, project_root: str) -> bool:
+    def inject(self, project_root: str, docs_site_url: str = "") -> bool:
         """Inject or refresh the knowledge base section in the README.
 
         Args:
             project_root: Project root directory holding the README.
+            docs_site_url: Deployed documentation URL. When set, a leading
+                bullet links the README reader to the live site (maps, API
+                browser, video, and the document drawer) instead of only
+                repo paths that may not exist on the default branch.
 
         Returns:
             True when the README was created or modified, False otherwise.
@@ -232,7 +239,7 @@ class ReadmeInjector:
             return False
 
         content = readme_path.read_text(encoding="utf-8", errors="replace")
-        injection = self._build_injection(readme_path.suffix.lower())
+        injection = self._build_injection(readme_path.suffix.lower(), docs_site_url)
         has_start = _ANCHOR_START in content
         has_end = _ANCHOR_END in content
 
@@ -360,11 +367,12 @@ class ReadmeInjector:
                 return path
         return None
 
-    def _build_injection(self, suffix: str) -> str:
+    def _build_injection(self, suffix: str, docs_site_url: str = "") -> str:
         """Build the injection text for a README suffix.
 
         Args:
             suffix: Lowercase file suffix (``.rst`` selects RST).
+            docs_site_url: Deployed documentation URL ("" omits the bullet).
 
         Returns:
             Injection block with all output locations filled in.
@@ -380,6 +388,14 @@ class ReadmeInjector:
             developers = self._readme_developers_line.strip() or (
                 f"Developers: Read ``{self._kb_filename}`` for full architecture reference."
             )
+            bullet = ""
+            if docs_site_url:
+                url = docs_site_url.replace("{", "{{").replace("}", "}}")
+                bullet = (
+                    f"- **Docs site**: `{url} <{url}>`_ -- Deployed documentation "
+                    f"(GitHub Pages from the `{self._docs_branch}` branch): interactive maps, "
+                    "API browser, video, and every document in the drawer.\n"
+                )
         else:
             intro = self._readme_intro.strip() or _README_INTRO_DEFAULT
             agents = self._readme_agents_line.strip() or (
@@ -390,6 +406,14 @@ class ReadmeInjector:
                 f"Developers: Read `{self._kb_filename}` for full architecture reference, "
                 f"open `{self._maps_output_dir}/index.html` for the visual gallery."
             )
+            bullet = ""
+            if docs_site_url:
+                url = docs_site_url.replace("{", "{{").replace("}", "}}")
+                bullet = (
+                    f"- **[Docs site]({url})** -- Deployed documentation (GitHub Pages from the "
+                    f"`{self._docs_branch}` branch): interactive maps, API browser, video, and "
+                    "every document in the drawer.\n"
+                )
         kwargs = dict(
             anchor_start=_ANCHOR_START,
             anchor_end=_ANCHOR_END,
@@ -418,6 +442,7 @@ class ReadmeInjector:
             readme_regen_command=(
                 self._readme_regen_command.strip() or _README_REGEN_DEFAULT
             ),
+            docs_site_bullet=bullet,
         )
         if is_rst:
             return _INJECTION_TEXT_RST.format(**kwargs)

@@ -4,10 +4,10 @@
 
 These files have the most connections. Changes here have high blast radius.
 
-- `readmenator/_config.py` (score: 212.10, imported by 106 files)
+- `readmenator/_config.py` (score: 220.10, imported by 110 files)
 - `readmenator/_models.py` (score: 206.30, imported by 101 files)
-- `readmenator/_app.py` (score: 96.80, imported by 16 files)
-- `readmenator/_pipeline.py` (score: 93.30, imported by 1 files)
+- `readmenator/_app.py` (score: 103.00, imported by 17 files)
+- `readmenator/_pipeline.py` (score: 97.50, imported by 1 files)
 - `readmenator/parsers/__init__.py` (score: 48.20, imported by 3 files)
 - `readmenator/parsers/_base.py` (score: 44.60, imported by 20 files)
 - `readmenator/_forcegraph.py` (score: 44.30, imported by 10 files)
@@ -17,23 +17,23 @@ These files have the most connections. Changes here have high blast radius.
 
 Editing these files can break the listed number of dependents. Run their tests after any change.
 
-- `readmenator/_config.py` -- 50 direct, 106 total dependents
+- `readmenator/_config.py` -- 50 direct, 110 total dependents
 - `readmenator/_category.py` -- 9 direct, 105 total dependents
 - `readmenator/_models.py` -- 50 direct, 101 total dependents
-- `readmenator/parsers/_base.py` -- 20 direct, 49 total dependents
-- `readmenator/_resolver.py` -- 8 direct, 40 total dependents
-- `readmenator/_rank.py` -- 11 direct, 39 total dependents
-- `readmenator/_purpose.py` -- 7 direct, 38 total dependents
-- `readmenator/_project_config.py` -- 9 direct, 34 total dependents
-- `readmenator/_htmlpack.py` -- 8 direct, 33 total dependents
-- `readmenator/_viewer_ui.py` -- 5 direct, 33 total dependents
+- `readmenator/parsers/_base.py` -- 20 direct, 50 total dependents
+- `readmenator/_resolver.py` -- 8 direct, 42 total dependents
+- `readmenator/_purpose.py` -- 7 direct, 41 total dependents
+- `readmenator/_rank.py` -- 11 direct, 41 total dependents
+- `readmenator/_project_config.py` -- 9 direct, 35 total dependents
+- `readmenator/_htmlpack.py` -- 8 direct, 34 total dependents
+- `readmenator/_viewer_ui.py` -- 5 direct, 34 total dependents
 
 ## Hotspots (complexity + centrality)
 
 - `readmenator/_vendor/force-graph.min.js` -- complexity: 0.3, centrality: 1.0, combined: 0.7
 - `readmenator/_video.py` -- complexity: 1.0, centrality: 0.0, combined: 0.4
 - `readmenator/_diagrams.py` -- complexity: 0.9, centrality: 0.0, combined: 0.4
-- `readmenator/_app.py` -- complexity: 0.8, centrality: 0.1, combined: 0.3
+- `readmenator/_app.py` -- complexity: 0.8, centrality: 0.1, combined: 0.4
 - `readmenator/_mcp_server.py` -- complexity: 0.6, centrality: 0.0, combined: 0.2
 - `readmenator/_pipeline.py` -- complexity: 0.5, centrality: 0.1, combined: 0.2
 - `readmenator/_flowcharts.py` -- complexity: 0.5, centrality: 0.0, combined: 0.2

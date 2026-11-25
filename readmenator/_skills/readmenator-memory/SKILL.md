@@ -17,6 +17,7 @@ description: Persist and recall cross-session project knowledge (business rules,
 ## Recall
 
 ```bash
+readmenator . recall "<query>"                  # scored notes, sem seeds + Hebbian co-activation
 cat readmenator-agent/MEMORY.md                 # or MCP: readmenator.memory
 readmenator . ask "<topic>"                     # notes are indexed as GraphRAG sources too
 ```
@@ -24,10 +25,14 @@ readmenator . ask "<topic>"                     # notes are indexed as GraphRAG 
 ## Record
 
 ```bash
-readmenator . remember "<one-line note>" --kind <kind>
+readmenator . remember "<one-line note>" --kind <kind> --sem "synonym, synonym"
 ```
 
-MCP: `readmenator.remember {"note": "...", "kind": "decision"}`.
+MCP: `readmenator.remember {"note": "...", "kind": "decision", "sem": "synonym, synonym"}`.
+
+`--sem` seeds 3-5 synonyms the note is "about" (hebbmesh-style write-time
+semantic seeding): later `readmenator . recall "<query>"` finds the note in
+other words with zero embeddings and zero LLM calls.
 
 | kind | Use for |
 |------|---------|

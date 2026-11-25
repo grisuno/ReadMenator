@@ -3,6 +3,36 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `_motion_blurred` | function | `readmenator/_video.py:1854` | `def _motion_blurred(index, lt)` |
+| `_orbit_plan` | function | `readmenator/_video.py:2427` | `def _orbit_plan(dur)` |
+| `_outgoing_frame` | function | `readmenator/_video.py:1869` | `def _outgoing_frame(index)` |
+| `_packet_offset` | function | `readmenator/_video.py:784` | `def _packet_offset(a, b, k)` |
+| `_paint_scene` | function | `readmenator/_video.py:1833` | `def _paint_scene(index, lt)` |
+| `_panel` | function | `readmenator/_video.py:151` | `def _panel(cfg)` |
+| `_place_label` | function | `readmenator/_video.py:270` | `def _place_label(d, placed, x, y, text, font, col, a)` |
+| `_polyline_point` | function | `readmenator/_video.py:195` | `def _polyline_point(points, f)` |
+| `_prepare_growth` | method | `readmenator/_video.py:1559` | `def _prepare_growth(self, data)` |
+| `_prepare_layouts` | method | `readmenator/_video.py:1544` | `def _prepare_layouts(self, data)` |
+| `_render_frame_bytes` | function | `readmenator/_video.py:1817` | `def _render_frame_bytes(fi)` |
+| `_scan_cursor` | function | `readmenator/_video.py:765` | `def _scan_cursor(d, box, progress, col)` |
+| `_scene_bundle` | function | `readmenator/_video.py:2339` | `def _scene_bundle(img, d, lt, gt, sc)` |
+| `_scene_card` | function | `readmenator/_video.py:2050` | `def _scene_card(img, d, lt, gt, sc)` |
+| `_scene_communities` | function | `readmenator/_video.py:2207` | `def _scene_communities(img, d, lt, gt, sc)` |
+| `_scene_dna` | function | `readmenator/_video.py:2834` | `def _scene_dna(img, d, lt, gt, sc)` |
+| `_scene_flow` | function | `readmenator/_video.py:3060` | `def _scene_flow(img, d, lt, gt, sc)` |
+| `_scene_gods` | function | `readmenator/_video.py:2089` | `def _scene_gods(img, d, lt, gt, sc)` |
+| `_scene_graph` | function | `readmenator/_video.py:2251` | `def _scene_graph(img, d, lt, gt, sc)` |
+| `_scene_growth` | function | `readmenator/_video.py:2731` | `def _scene_growth(img, d, lt, gt, sc)` |
+| `_scene_hook` | function | `readmenator/_video.py:1954` | `def _scene_hook(img, d, lt, gt, sc)` |
+| `_scene_index` | function | `readmenator/_video.py:1825` | `def _scene_index(gt)` |
+| `_scene_invite` | function | `readmenator/_video.py:2787` | `def _scene_invite(img, d, lt, gt, sc)` |
+| `_scene_layers` | function | `readmenator/_video.py:2064` | `def _scene_layers(img, d, lt, gt, sc)` |
+| `_scene_orbit` | function | `readmenator/_video.py:2432` | `def _scene_orbit(img, d, lt, gt, sc)` |
+| `_scene_outro` | function | `readmenator/_video.py:2893` | `def _scene_outro(img, d, lt, gt, sc)` |
+| `_scene_sphere` | function | `readmenator/_video.py:2548` | `def _scene_sphere(img, d, lt, gt, sc)` |
+| `_scene_tiers` | function | `readmenator/_video.py:2981` | `def _scene_tiers(img, d, lt, gt, sc)` |
+| `_scene_title` | function | `readmenator/_video.py:2015` | `def _scene_title(img, d, lt, gt, sc)` |
+| `_scene_tree` | function | `readmenator/_video.py:2132` | `def _scene_tree(img, d, lt, gt, sc)` |
 | `_sphere_core` | function | `readmenator/_video.py:649` | `def _sphere_core(d, data, layout, box, cfg, yaw, pitch, morph, reveal, spot, gt, fonts, group_labels, zoom)` |
 | `_split_boxes` | function | `readmenator/_video.py:179` | `def _split_boxes(cfg)` |
 | `_sun` | method | `readmenator/_video.py:879` | `def _sun(self, r)` |
@@ -409,17 +439,17 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_docstrings_recover_elixir_doc_heredoc` | method | `tests/test_apidocs.py:252` | `def test_docstrings_recover_elixir_doc_heredoc(self)` |
 | `test_docstrings_rest_fields_and_directives` | method | `tests/test_apidocs.py:191` | `def test_docstrings_rest_fields_and_directives(self)` |
 | `test_docstrings_rustdoc_sections` | method | `tests/test_apidocs.py:231` | `def test_docstrings_rustdoc_sections(self)` |
-| `TestBundleGraphAppContract` | class | `tests/test_bundlegraph.py:191` | `class TestBundleGraphAppContract(TestCase)` |
+| `TestBundleGraphAppContract` | class | `tests/test_bundlegraph.py:197` | `class TestBundleGraphAppContract(TestCase)` |
 | `TestBundleGraphPayloadContract` | class | `tests/test_bundlegraph.py:59` | `class TestBundleGraphPayloadContract(TestCase)` |
 | `TestBundleGraphRenderContract` | class | `tests/test_bundlegraph.py:109` | `class TestBundleGraphRenderContract(TestCase)` |
-| `_config` | method | `tests/test_bundlegraph.py:199` | `def _config(self)` |
+| `_config` | method | `tests/test_bundlegraph.py:205` | `def _config(self)` |
 | `_fixture` | function | `tests/test_bundlegraph.py:25` | `def _fixture(config)` |
 | `_node` | function | `tests/test_bundlegraph.py:20` | `def _node(nid, doc)` |
-| `_project` | method | `tests/test_bundlegraph.py:194` | `def _project(self, tmp)` |
+| `_project` | method | `tests/test_bundlegraph.py:200` | `def _project(self, tmp)` |
 | `_script_json` | function | `tests/test_bundlegraph.py:50` | `def _script_json(html, name)` |
 | `setUp` | method | `tests/test_bundlegraph.py:62` | `def setUp(self)` |
 | `setUp` | method | `tests/test_bundlegraph.py:112` | `def setUp(self)` |
-| `test_bundle_page_skipped_when_disabled` | method | `tests/test_bundlegraph.py:220` | `def test_bundle_page_skipped_when_disabled(self)` |
+| `test_bundle_page_skipped_when_disabled` | method | `tests/test_bundlegraph.py:226` | `def test_bundle_page_skipped_when_disabled(self)` |
 | `test_bundlegraph_edges_are_distinct_file_pairs` | method | `tests/test_bundlegraph.py:74` | `def test_bundlegraph_edges_are_distinct_file_pairs(self)` |
 | `test_bundlegraph_empty_payload` | method | `tests/test_bundlegraph.py:96` | `def test_bundlegraph_empty_payload(self)` |
 | `test_bundlegraph_groups_follow_community_order_with_unassigned_last` | method | `tests/test_bundlegraph.py:68` | `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)` |
@@ -434,10 +464,11 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_bundlegraph_render_payload_naming_a_token_stays_literal` | method | `tests/test_bundlegraph.py:170` | `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)` |
 | `test_bundlegraph_render_ships_glow_stars_and_ambient_flow` | method | `tests/test_bundlegraph.py:128` | `def test_bundlegraph_render_ships_glow_stars_and_ambient_flow(self)` |
 | `test_bundlegraph_thumbnail_is_safe_svg` | method | `tests/test_bundlegraph.py:176` | `def test_bundlegraph_thumbnail_is_safe_svg(self)` |
-| `test_bundlegraph_write_creates_parent` | method | `tests/test_bundlegraph.py:183` | `def test_bundlegraph_write_creates_parent(self)` |
-| `test_export_bundlegraph_cli_entry` | method | `tests/test_bundlegraph.py:231` | `def test_export_bundlegraph_cli_entry(self)` |
-| `test_export_diagrams_writes_bundle_page_and_card` | method | `tests/test_bundlegraph.py:204` | `def test_export_diagrams_writes_bundle_page_and_card(self)` |
-| `test_pages_subdir_card_points_into_maps_dir` | method | `tests/test_bundlegraph.py:241` | `def test_pages_subdir_card_points_into_maps_dir(self)` |
+| `test_bundlegraph_thumbnail_respects_node_cap` | method | `tests/test_bundlegraph.py:183` | `def test_bundlegraph_thumbnail_respects_node_cap(self)` |
+| `test_bundlegraph_write_creates_parent` | method | `tests/test_bundlegraph.py:189` | `def test_bundlegraph_write_creates_parent(self)` |
+| `test_export_bundlegraph_cli_entry` | method | `tests/test_bundlegraph.py:237` | `def test_export_bundlegraph_cli_entry(self)` |
+| `test_export_diagrams_writes_bundle_page_and_card` | method | `tests/test_bundlegraph.py:210` | `def test_export_diagrams_writes_bundle_page_and_card(self)` |
+| `test_pages_subdir_card_points_into_maps_dir` | method | `tests/test_bundlegraph.py:247` | `def test_pages_subdir_card_points_into_maps_dir(self)` |
 | `TestFileCacheContract` | class | `tests/test_cache.py:18` | `class TestFileCacheContract(TestCase)` |
 | `_write` | method | `tests/test_cache.py:30` | `def _write(self, rel_path, content)` |
 | `setUp` | method | `tests/test_cache.py:21` | `def setUp(self)` |
@@ -460,41 +491,10 @@ Previous: [SYMBOLS_p3.md](SYMBOLS_p3.md)
 | `test_same_content_produces_same_hash` | method | `tests/test_cache.py:49` | `def test_same_content_produces_same_hash(self)` |
 | `test_save_and_load_analysis_roundtrip` | method | `tests/test_cache.py:109` | `def test_save_and_load_analysis_roundtrip(self)` |
 | `test_save_and_load_roundtrip` | method | `tests/test_cache.py:60` | `def test_save_and_load_roundtrip(self)` |
-| `TestComponentGalleryContract` | class | `tests/test_components.py:238` | `class TestComponentGalleryContract(TestCase)` |
-| `TestComponentPageContract` | class | `tests/test_components.py:140` | `class TestComponentPageContract(TestCase)` |
-| `TestComponentRenderContract` | class | `tests/test_components.py:94` | `class TestComponentRenderContract(TestCase)` |
-| `TestComponentSchemaContract` | class | `tests/test_components.py:46` | `class TestComponentSchemaContract(TestCase)` |
-| `_config` | method | `tests/test_components.py:246` | `def _config(self)` |
-| `_fixture` | function | `tests/test_components.py:25` | `def _fixture()` |
-| `_node` | function | `tests/test_components.py:17` | `def _node(nid)` |
-| `_project` | method | `tests/test_components.py:241` | `def _project(self, tmp)` |
-| `setUp` | method | `tests/test_components.py:49` | `def setUp(self)` |
-| `setUp` | method | `tests/test_components.py:97` | `def setUp(self)` |
-| `setUp` | method | `tests/test_components.py:143` | `def setUp(self)` |
-| `test_build_records_layers_hub_and_counts` | method | `tests/test_components.py:177` | `def test_build_records_layers_hub_and_counts(self)` |
-| `test_card_skipped_when_disabled` | method | `tests/test_components.py:305` | `def test_card_skipped_when_disabled(self)` |
-| `test_components_carry_entities_and_file_methods` | method | `tests/test_components.py:67` | `def test_components_carry_entities_and_file_methods(self)` |
-| `test_docs_collect_components_overview` | method | `tests/test_components.py:319` | `def test_docs_collect_components_overview(self)` |
-| `test_empty_project_yields_empty_diagram` | method | `tests/test_components.py:133` | `def test_empty_project_yields_empty_diagram(self)` |
-| `test_export_diagrams_links_components_card` | method | `tests/test_components.py:251` | `def test_export_diagrams_links_components_card(self)` |
-| `test_export_pages_links_components_relatively` | method | `tests/test_components.py:266` | `def test_export_pages_links_components_relatively(self)` |
-| `test_mermaid_matches_layered_style` | method | `tests/test_components.py:105` | `def test_mermaid_matches_layered_style(self)` |
-| `test_methods_index_keys_use_pipe_separator` | method | `tests/test_components.py:89` | `def test_methods_index_keys_use_pipe_separator(self)` |
-| `test_nested_relations_roll_up` | method | `tests/test_components.py:331` | `def test_nested_relations_roll_up(self)` |
-| `test_overview_lists_related_entities` | method | `tests/test_components.py:118` | `def test_overview_lists_related_entities(self)` |
-| `test_overview_prefixes_source_links` | method | `tests/test_components.py:293` | `def test_overview_prefixes_source_links(self)` |
-| `test_page_draws_nodes_edges_and_links` | method | `tests/test_components.py:152` | `def test_page_draws_nodes_edges_and_links(self)` |
-| `test_page_escapes_untrusted_text` | method | `tests/test_components.py:194` | `def test_page_escapes_untrusted_text(self)` |
-| `test_page_has_no_network_requests` | method | `tests/test_components.py:186` | `def test_page_has_no_network_requests(self)` |
-| `test_page_nodes_explain_themselves` | method | `tests/test_components.py:162` | `def test_page_nodes_explain_themselves(self)` |
-| `test_page_script_is_valid_javascript` | method | `tests/test_components.py:223` | `def test_page_script_is_valid_javascript(self)` |
-| `test_relations_link_components_with_call_sites` | method | `tests/test_components.py:78` | `def test_relations_link_components_with_call_sites(self)` |
-| `test_relations_section_lists_call_evidence` | method | `tests/test_components.py:171` | `def test_relations_section_lists_call_evidence(self)` |
-| `test_sanitize_for_mermaid_ids` | method | `tests/test_components.py:114` | `def test_sanitize_for_mermaid_ids(self)` |
-| `test_site_copy_has_no_source_links` | method | `tests/test_components.py:284` | `def test_site_copy_has_no_source_links(self)` |
-| `test_thumbnail_is_safe_svg` | method | `tests/test_components.py:204` | `def test_thumbnail_is_safe_svg(self)` |
-| `test_top_level_keys_match_schema` | method | `tests/test_components.py:57` | `def test_top_level_keys_match_schema(self)` |
-| `test_write_emits_analysis_and_pages` | method | `tests/test_components.py:124` | `def test_write_emits_analysis_and_pages(self)` |
-| `test_write_emits_index_page` | method | `tests/test_components.py:213` | `def test_write_emits_index_page(self)` |
+| `TestComponentGalleryContract` | class | `tests/test_components.py:253` | `class TestComponentGalleryContract(TestCase)` |
+| `TestComponentPageContract` | class | `tests/test_components.py:141` | `class TestComponentPageContract(TestCase)` |
+| `TestComponentRenderContract` | class | `tests/test_components.py:95` | `class TestComponentRenderContract(TestCase)` |
+| `TestComponentSchemaContract` | class | `tests/test_components.py:47` | `class TestComponentSchemaContract(TestCase)` |
+| `_config` | method | `tests/test_components.py:261` | `def _config(self)` |
 
 Next: [SYMBOLS_p5.md](SYMBOLS_p5.md)

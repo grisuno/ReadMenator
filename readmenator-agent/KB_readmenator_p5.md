@@ -1,6 +1,83 @@
 # Subsystem: readmenator (page 5 of 5)
 Previous: [KB_readmenator_p4.md](KB_readmenator_p4.md)
 
+## readmenator/_symindex.py
+- Doc: Deterministic symbol index with call-site resolution.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `_receiver_text` (function, line 42) `def _receiver_text(node)`
+  - `SymbolDef` (class, line 56) `class SymbolDef`
+  - `CallSite` (class, line 81) `class CallSite`
+  - `ResolvedCall` (class, line 102) `class ResolvedCall`
+  - `_kind_to_node_type` (function, line 122) `def _kind_to_node_type(kind)`
+  - `SymbolIndex` (class, line 132) `class SymbolIndex`
+  - `__init__` (method, line 135) `def __init__(self, config)`
+  - `build` (method, line 144) `def build(self, nodes, content_map)`
+  - `methods_index` (method, line 184) `def methods_index(self, index)`
+  - `extract_call_sites` (method, line 212) `def extract_call_sites(self, file_id, content, language, symbols)`
+  - `resolve` (method, line 237) `def resolve(self, nodes, edges, resolved_edges, content_map)`
+  - `_resolve_one` (method, line 286) `def _resolve_one(self, site, by_name, imports_of)`
+  - `_edge_call_sites` (method, line 331) `def _edge_call_sites(self, edges)`
+  - `_python_call_sites` (method, line 348) `def _python_call_sites(self, file_id, content)`
+  - `_regex_call_sites` (method, line 422) `def _regex_call_sites(self, file_id, content, symbols)`
+  - `_Visitor` (class, line 365) `class _Visitor(NodeVisitor)`
+  - `_push` (method, line 368) `def _push(self, node)`
+  - `_pop` (method, line 374) `def _pop(self, node)`
+  - `visit_ClassDef` (method, line 379) `def visit_ClassDef(self, node)`
+  - `visit_FunctionDef` (method, line 385) `def visit_FunctionDef(self, node)`
+  - `visit_AsyncFunctionDef` (method, line 391) `def visit_AsyncFunctionDef(self, node)`
+  - `visit_Call` (method, line 397) `def visit_Call(self, node)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_apidocs.py`, `readmenator/_components.py`, `readmenator/_flowcharts.py`, `readmenator/_linter.py`, `readmenator/_pipeline.py`, `tests/test_symindex.py`
+
+## readmenator/_taint.py
+- Doc: Taint propagation analysis of dangerous imports through the resolved import graph.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `TaintAnalyzer` (class, line 12) `class TaintAnalyzer`
+  - `__init__` (method, line 73) `def __init__(self, config)`
+  - `analyze` (method, line 77) `def analyze(self, nodes, edges, resolved_edges)`
+  - `_find_direct_sources` (method, line 136) `def _find_direct_sources(self, nodes, edges)`
+  - `_propagate` (method, line 162) `def _propagate(self, source_node_id, danger_import, adj, nodes, max_depth)`
+  - `_build_forward_graph` (method, line 213) `def _build_forward_graph(nodes, resolved_edges)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/_pipeline.py`, `tests/test_taint.py`, `tests/test_taint_bdd.py`
+
+## readmenator/_uml.py
+- Doc: UML class diagram renderer (Mermaid classDiagram) and 12-language stub generator.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `UmlGenerator` (class, line 34) `class UmlGenerator`
+  - `_get_code_generator` (function, line 172) `def _get_code_generator(language)`
+  - `_type_map_py_to_target` (function, line 190) `def _type_map_py_to_target(target, py_type_hint)`
+  - `_generate_cpp` (function, line 233) `def _generate_cpp(class_symbols, nodes, edges)`
+  - `_cpp_params` (function, line 259) `def _cpp_params(params)`
+  - `_generate_java` (function, line 274) `def _generate_java(class_symbols, nodes, edges)`
+  - `_java_params` (function, line 301) `def _java_params(params)`
+  - `_generate_csharp` (function, line 316) `def _generate_csharp(class_symbols, nodes, edges)`
+  - `_cs_params` (function, line 345) `def _cs_params(params)`
+  - `_generate_python` (function, line 360) `def _generate_python(class_symbols, nodes, edges)`
+  - `_generate_go` (function, line 395) `def _generate_go(class_symbols, nodes, edges)`
+  - `_generate_rust` (function, line 422) `def _generate_rust(class_symbols, nodes, edges)`
+  - `_generate_php` (function, line 448) `def _generate_php(class_symbols, nodes, edges)`
+  - `_generate_kotlin` (function, line 476) `def _generate_kotlin(class_symbols, nodes, edges)`
+  - `_generate_scala` (function, line 496) `def _generate_scala(class_symbols, nodes, edges)`
+  - `_generate_swift` (function, line 518) `def _generate_swift(class_symbols, nodes, edges)`
+  - `_generate_dart` (function, line 547) `def _generate_dart(class_symbols, nodes, edges)`
+  - `_generate_ruby` (function, line 567) `def _generate_ruby(class_symbols, nodes, edges)`
+  - `_safe_name` (function, line 588) `def _safe_name(name)`
+  - `_extract_params` (function, line 592) `def _extract_params(signature)`
+  - `__init__` (method, line 36) `def __init__(self, config)`
+  - `render_mermaid_class_diagram` (method, line 39) `def render_mermaid_class_diagram(self, nodes, edges)`
+  - `generate_code` (method, line 129) `def generate_code(self, nodes, edges, target_language)`
+  - `_sanitize_id` (method, line 153) `def _sanitize_id(raw)`
+  - `_find_node` (method, line 165) `def _find_node(nodes, node_id)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`
+- Imported by: `readmenator/__init__.py`, `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_uml.py`
+
 ## readmenator/_uncertainty.py
 - Doc: Uncertainty engine: classify candidate edges, never invent facts.
 - Layer: utility

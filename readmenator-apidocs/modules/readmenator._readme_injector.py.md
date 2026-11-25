@@ -44,7 +44,7 @@ exists but the text is outdated it is replaced in place.
 `constructor` | [readmenator/_readme_injector.py:145](../../readmenator/_readme_injector.py#L145)
 
 ```python
-def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', wiki_output_dir: str = 'readmenator-wiki', graphrag_output_dir: str = 'readmenator-graphrag', maps_output_dir: str = 'readmenator-maps', pages_dir: str = 'docs', components_output_dir: str = 'readmenator-diagrams', rules_output_dir: str = 'readmenator-rules', video_output: str = 'readmenator.mp4', cursorrules_output: str = '.cursorrules', sarif_output: str = 'readmenator_audit.sarif', cache_dir: str = '.readmenator_cache', skills_dir: str = '.claude/skills', llms_txt: str = 'llms.txt', forcegraph_output: str = 'graph-force.html', bundlegraph_output: str = 'graph-bundle.html', apidocs_output_dir: str = 'readmenator-apidocs', readme_heading: str = '', readme_intro: str = '', readme_agents_line: str = '', readme_developers_line: str = '', readme_regen_command: str = '') -> None
+def __init__(self, kb_filename: str = 'KNOWLEDGE_BASE.md', agent_output_dir: str = 'readmenator-agent', wiki_output_dir: str = 'readmenator-wiki', graphrag_output_dir: str = 'readmenator-graphrag', maps_output_dir: str = 'readmenator-maps', pages_dir: str = 'docs', components_output_dir: str = 'readmenator-diagrams', rules_output_dir: str = 'readmenator-rules', video_output: str = 'readmenator.mp4', cursorrules_output: str = '.cursorrules', sarif_output: str = 'readmenator_audit.sarif', cache_dir: str = '.readmenator_cache', skills_dir: str = '.claude/skills', llms_txt: str = 'llms.txt', forcegraph_output: str = 'graph-force.html', bundlegraph_output: str = 'graph-bundle.html', apidocs_output_dir: str = 'readmenator-apidocs', readme_heading: str = '', readme_intro: str = '', readme_agents_line: str = '', readme_developers_line: str = '', readme_regen_command: str = '', docs_branch: str = 'docs') -> None
 ```
 
 Initialise the injector with output locations.
@@ -75,6 +75,7 @@ Initialise the injector with output locations.
 | `readme_agents_line` | `str` | `''` | Override for the closing agents line ("" = built-in). |
 | `readme_developers_line` | `str` | `''` | Override for the closing developers line ("" = built-in). |
 | `readme_regen_command` | `str` | `''` | Override for the rebuild command ("" = built-in). |
+| `docs_branch` | `str` | `'docs'` | Git branch the deployed docs site lives in. |
 
 *Called by:* [`AnalyzerFactory.readme_injector`](readmenator._pipeline.py.md#analyzerfactory-readme_injector)
 
@@ -82,10 +83,10 @@ Initialise the injector with output locations.
 
 #### `ReadmeInjector.inject`
 
-`method` | [readmenator/_readme_injector.py:219](../../readmenator/_readme_injector.py#L219)
+`method` | [readmenator/_readme_injector.py:222](../../readmenator/_readme_injector.py#L222)
 
 ```python
-def inject(self, project_root: str) -> bool
+def inject(self, project_root: str, docs_site_url: str = '') -> bool
 ```
 
 Inject or refresh the knowledge base section in the README.
@@ -95,6 +96,7 @@ Inject or refresh the knowledge base section in the README.
 | Name | Type | Default | Description |
 |---|---|---|---|
 | `project_root` | `str` |  | Project root directory holding the README. |
+| `docs_site_url` | `str` | `''` | Deployed documentation URL. When set, a leading bullet links the README reader to the live site (maps, API browser, video, and the document drawer) instead of only repo paths that may not exist on the default branch. |
 
 **Returns:** `bool` - True when the README was created or modified, False otherwise.
 
@@ -102,7 +104,7 @@ Inject or refresh the knowledge base section in the README.
 
 #### `ReadmeInjector.remove`
 
-`method` | [readmenator/_readme_injector.py:311](../../readmenator/_readme_injector.py#L311)
+`method` | [readmenator/_readme_injector.py:318](../../readmenator/_readme_injector.py#L318)
 
 ```python
 def remove(self, project_root: str) -> bool

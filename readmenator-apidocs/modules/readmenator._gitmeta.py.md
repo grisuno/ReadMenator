@@ -32,9 +32,9 @@ Return the current commit and branch of a project, when available.
 |---|---|---|---|
 | `project_root` | `str` |  | Work tree root directory. |
 
-**Returns:** `Dict[str, str]` - Mapping with ``commit`` and `[`branch`](readmenator._receipts.py.md#releasereceiptrecord-branch)` keys (empty strings when
+**Returns:** `Dict[str, str]` - Mapping with ``commit`` and ``branch`` keys (empty strings when
 unknown or not a git repository).
 
-*Called by:* [`GitHubWikiPublisher.publish`](readmenator._gh_wiki.py.md#githubwikipublisher-publish), [`GitHubWikiPublisher.render`](readmenator._gh_wiki.py.md#githubwikipublisher-render), [`ProjectMemory.build`](readmenator._memory.py.md#projectmemory-build)
+*Called by:* [`DocsBranchPublisher.publish`](readmenator._docbranch.py.md#docsbranchpublisher-publish), [`GitHubWikiPublisher.publish`](readmenator._gh_wiki.py.md#githubwikipublisher-publish), [`GitHubWikiPublisher.render`](readmenator._gh_wiki.py.md#githubwikipublisher-render), [`ProjectMemory.build`](readmenator._memory.py.md#projectmemory-build)
 
 ---

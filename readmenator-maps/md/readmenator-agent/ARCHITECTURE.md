@@ -57,6 +57,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_app.py` -> `readmenator/_cursorrules_generator.py`
 - `readmenator/_app.py` -> `readmenator/_dead_code.py`
 - `readmenator/_app.py` -> `readmenator/_diagrams.py`
+- `readmenator/_app.py` -> `readmenator/_docbranch.py`
 - `readmenator/_app.py` -> `readmenator/_explorer.py`
 - `readmenator/_app.py` -> `readmenator/_flowcharts.py`
 - `readmenator/_app.py` -> `readmenator/_flowlayout.py`
@@ -64,6 +65,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_app.py` -> `readmenator/_gh_wiki.py`
 - `readmenator/_app.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_app.py` -> `readmenator/_graphrag.py`
+- `readmenator/_app.py` -> `readmenator/_hebbian.py`
 - `readmenator/_app.py` -> `readmenator/_layers.py`
 - `readmenator/_app.py` -> `readmenator/_linter.py`
 - `readmenator/_app.py` -> `readmenator/_models.py`
@@ -110,6 +112,8 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_diagrams.py` -> `readmenator/_models.py`
 - `readmenator/_diagrams.py` -> `readmenator/_project_config.py`
 - `readmenator/_diagrams.py` -> `readmenator/_viewer_ui.py`
+- `readmenator/_docbranch.py` -> `readmenator/_config.py`
+- `readmenator/_docbranch.py` -> `readmenator/_gitmeta.py`
 - `readmenator/_documentation.py` -> `readmenator/_analytics.py`
 - `readmenator/_documentation.py` -> `readmenator/_config.py`
 - `readmenator/_documentation.py` -> `readmenator/_cpg.py`
@@ -168,6 +172,8 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_graphrag.py` -> `readmenator/_purpose.py`
 - `readmenator/_graphrag.py` -> `readmenator/_rank.py`
 - `readmenator/_graphrag.py` -> `readmenator/_resolver.py`
+- `readmenator/_hebbian.py` -> `readmenator/_config.py`
+- `readmenator/_hebbian.py` -> `readmenator/_memory.py`
 - `readmenator/_hotspots.py` -> `readmenator/_config.py`
 - `readmenator/_hotspots.py` -> `readmenator/_models.py`
 - `readmenator/_htmlpack.py` -> `readmenator/_config.py`
@@ -204,6 +210,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_pipeline.py` -> `readmenator/_cpg.py`
 - `readmenator/_pipeline.py` -> `readmenator/_dataflow.py`
 - `readmenator/_pipeline.py` -> `readmenator/_diagrams.py`
+- `readmenator/_pipeline.py` -> `readmenator/_docbranch.py`
 - `readmenator/_pipeline.py` -> `readmenator/_documentation.py`
 - `readmenator/_pipeline.py` -> `readmenator/_embed.py`
 - `readmenator/_pipeline.py` -> `readmenator/_exclusions.py`
@@ -212,6 +219,7 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `readmenator/_pipeline.py` -> `readmenator/_forcegraph.py`
 - `readmenator/_pipeline.py` -> `readmenator/_gh_wiki.py`
 - `readmenator/_pipeline.py` -> `readmenator/_graphrag.py`
+- `readmenator/_pipeline.py` -> `readmenator/_hebbian.py`
 - `readmenator/_pipeline.py` -> `readmenator/_hotspots.py`
 - `readmenator/_pipeline.py` -> `readmenator/_layer_rules.py`
 - `readmenator/_pipeline.py` -> `readmenator/_layers.py`
@@ -405,6 +413,9 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_diagrams.py` -> `readmenator/_config.py`
 - `tests/test_diagrams.py` -> `readmenator/_diagrams.py`
 - `tests/test_diagrams.py` -> `readmenator/_models.py`
+- `tests/test_docbranch.py` -> `readmenator/_app.py`
+- `tests/test_docbranch.py` -> `readmenator/_config.py`
+- `tests/test_docbranch.py` -> `readmenator/_docbranch.py`
 - `tests/test_documentation.py` -> `readmenator/_config.py`
 - `tests/test_documentation.py` -> `readmenator/_documentation.py`
 - `tests/test_documentation.py` -> `readmenator/_models.py`
@@ -436,6 +447,10 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_graphrag.py` -> `readmenator/_config.py`
 - `tests/test_graphrag.py` -> `readmenator/_graphrag.py`
 - `tests/test_graphrag.py` -> `readmenator/_models.py`
+- `tests/test_hebbian.py` -> `readmenator/_config.py`
+- `tests/test_hebbian.py` -> `readmenator/_graphrag.py`
+- `tests/test_hebbian.py` -> `readmenator/_hebbian.py`
+- `tests/test_hebbian.py` -> `readmenator/_memory.py`
 - `tests/test_hotspots.py` -> `readmenator/_config.py`
 - `tests/test_hotspots.py` -> `readmenator/_hotspots.py`
 - `tests/test_hotspots.py` -> `readmenator/_models.py`
@@ -481,20 +496,5 @@ Pages: [ARCHITECTURE.md](ARCHITECTURE.md), [ARCHITECTURE_p2.md](ARCHITECTURE_p2.
 - `tests/test_mermaid.py` -> `readmenator/_mermaid.py`
 - `tests/test_mermaid.py` -> `readmenator/_models.py`
 - `tests/test_models.py` -> `readmenator/_models.py`
-- `tests/test_ollama.py` -> `readmenator/_config.py`
-- `tests/test_ollama.py` -> `readmenator/_ollama.py`
-- `tests/test_parsers.py` -> `readmenator/_config.py`
-- `tests/test_parsers.py` -> `readmenator/parsers/__init__.py`
-- `tests/test_parsers_new.py` -> `readmenator/_config.py`
-- `tests/test_parsers_new.py` -> `readmenator/parsers/__init__.py`
-- `tests/test_parsers_property.py` -> `readmenator/_config.py`
-- `tests/test_parsers_property.py` -> `readmenator/_models.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_c.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_csharp.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_dart.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_elixir.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_gdscript.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_go.py`
-- `tests/test_parsers_property.py` -> `readmenator/parsers/_java.py`
 
 Next: [ARCHITECTURE_p2.md](ARCHITECTURE_p2.md)

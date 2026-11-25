@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from readmenator._components import ComponentDiagramBuilder, sanitize
@@ -209,6 +210,20 @@ class TestComponentPageContract(unittest.TestCase):
         self.assertTrue(svg.startswith('<svg class="thumb"'))
         self.assertNotIn("<script", svg)
         self.assertEqual(ComponentDiagramBuilder(Config()).thumbnail_svg([], []), "")
+
+    def test_thumbnail_respects_relation_cap(self) -> None:
+        """COMPONENTS_THUMB_MAX_RELATIONS bounds the inline SVG."""
+        relations = self.document["components_relations"]
+        capped = ComponentDiagramBuilder(replace(Config(), COMPONENTS_THUMB_MAX_RELATIONS=2))
+        svg = capped.thumbnail_svg(self.document["components"], relations)
+        drawn = len([
+            r for r in relations[:2]
+            if r.get("src_id") in {c["component_id"] for c in self.document["components"]}
+            and r.get("dst_id") in {c["component_id"] for c in self.document["components"]}
+            and r.get("src_id") != r.get("dst_id")
+        ])
+        self.assertEqual(svg.count("<path"), drawn)
+        self.assertLessEqual(svg.count("<path"), 2)
 
     def test_write_emits_index_page(self) -> None:
         """write() emits index.html next to analysis.json and overview.md."""

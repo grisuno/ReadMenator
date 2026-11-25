@@ -1,6 +1,20 @@
 # Subsystem: readmenator (page 2 of 5)
 Previous: [KB_readmenator.md](KB_readmenator.md)
 
+## readmenator/_cpg.py
+- Doc: Code Property Graph (CPG) generator emitting JSON-LD for AI agents.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `CodePropertyGraph` (class, line 16) `class CodePropertyGraph`
+  - `__init__` (method, line 26) `def __init__(self, privacy_mode, cpg_context)`
+  - `generate` (method, line 30) `def generate(self, nodes, edges, resolved_edges, analysis, findings)`
+  - `_severity_counts` (method, line 147) `def _severity_counts(self, findings)`
+  - `_build_symbol_list` (method, line 153) `def _build_symbol_list(self, node)`
+  - `_compute_node_hash` (method, line 169) `def _compute_node_hash(node)`
+- Depends on: `readmenator/_models.py`
+- Imported by: `readmenator/_documentation.py`, `readmenator/_pipeline.py`, `tests/test_cpg.py`
+
 ## readmenator/_cursorrules_generator.py
 - Doc: Dynamic .cursorrules generator for the readmenator knowledge graph.
 - Layer: utility
@@ -163,6 +177,26 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `doc_order` (function, line 3957) `def doc_order(base)`
 - Depends on: `readmenator/_config.py`, `readmenator/_folder_readme.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_viewer_ui.py`
 - Imported by: `readmenator/__init__.py`, `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_agent_friendliness.py`, `tests/test_components.py`, `tests/test_diagrams.py`, `tests/test_folder_readme.py`, `tests/test_interactive_graph.py`, `tests/test_project_config.py`
+
+## readmenator/_docbranch.py
+- Doc: Documentation branch publisher: artifacts live in their own git branch.
+- Layer: utility
+- Language: py
+- Symbols:
+  - `DocsBranchResult` (class, line 48) `class DocsBranchResult`
+  - `DocsBranchPublisher` (class, line 72) `class DocsBranchPublisher`
+  - `__init__` (method, line 75) `def __init__(self, config, runner)`
+  - `generated_paths` (method, line 85) `def generated_paths(self)`
+  - `_gitattributes_block` (method, line 98) `def _gitattributes_block(self)`
+  - `ensure_gitattributes` (method, line 119) `def ensure_gitattributes(self, project_root)`
+  - `origin` (method, line 162) `def origin(self, project_root)`
+  - `pages_url` (method, line 170) `def pages_url(self, project_root)`
+  - `infer_pages_url` (method, line 178) `def infer_pages_url(remote)`
+  - `_call` (method, line 198) `def _call(self, command, cwd)`
+  - `_stage_site` (method, line 212) `def _stage_site(self, site_dir, target)`
+  - `publish` (method, line 229) `def publish(self, project_root, push, dry_run)`
+- Depends on: `readmenator/_config.py`, `readmenator/_gitmeta.py`
+- Imported by: `readmenator/_app.py`, `readmenator/_pipeline.py`, `tests/test_docbranch.py`
 
 ## readmenator/_docstrings.py
 - Doc: Multi-style docstring parser for the deterministic API reference.
@@ -436,47 +470,10 @@ Previous: [KB_readmenator.md](KB_readmenator.md)
   - `FolderReadmeWriter` (class, line 65) `class FolderReadmeWriter`
   - `__init__` (method, line 68) `def __init__(self, config)`
   - `specs` (method, line 76) `def specs(self)`
-  - `render` (method, line 272) `def render(self, spec, folder)`
-  - `write_all` (method, line 310) `def write_all(self, project_root)`
+  - `render` (method, line 290) `def render(self, spec, folder)`
+  - `write_all` (method, line 328) `def write_all(self, project_root)`
 - Depends on: `readmenator/_config.py`
 - Imported by: `readmenator/_agent_output.py`, `readmenator/_diagrams.py`, `readmenator/_gh_wiki.py`, `readmenator/_pipeline.py`, `tests/test_folder_readme.py`, `tests/test_project_config.py`
-
-## readmenator/_forcegraph.py
-- Doc: Force-graph explorer for the readmenator knowledge graph.
-- Layer: utility
-- Language: py
-- Symbols:
-  - `family_color_from_name` (function, line 41) `def family_color_from_name(name, sat_base, sat_span, light_base, light_span)`
-  - `node_value` (function, line 69) `def node_value(symbols, degree)`
-  - `ForceGraphRenderer` (class, line 82) `class ForceGraphRenderer`
-  - `__init__` (method, line 85) `def __init__(self, config)`
-  - `node_palette` (method, line 93) `def node_palette(self)`
-  - `edge_palette` (method, line 97) `def edge_palette(self)`
-  - `vendor_source` (method, line 101) `def vendor_source(self)`
-  - `vendor_href` (method, line 109) `def vendor_href(self)`
-  - `build_payload` (method, line 114) `def build_payload(self, nodes, edges, resolved_edges, analysis, layers, findings, content_map)`
-  - `_seed_positions` (method, line 316) `def _seed_positions(self, payload)`
-  - `render` (method, line 359) `def render(self, payload, analytics, title, home_href, live_api)`
-  - `group_colors` (method, line 413) `def group_colors(self, payload)`
-  - `page_settings` (method, line 436) `def page_settings(self, payload, live_api)`
-  - `family_color` (method, line 542) `def family_color(self, name)`
-  - `_family_color` (method, line 553) `def _family_color(self, name)`
-  - `thumbnail_svg` (method, line 570) `def thumbnail_svg(self, payload)`
-  - `write` (method, line 610) `def write(self, output_path, payload, analytics, title, home_href)`
-  - `copy_vendor` (method, line 637) `def copy_vendor(self, dest_dir)`
-  - `_node_doc` (method, line 656) `def _node_doc(self, node)`
-  - `_symbol_list` (method, line 662) `def _symbol_list(self, node)`
-  - `_file_color` (method, line 675) `def _file_color(self, node_id, family, layer, palette)`
-  - `file_of` (function, line 150) `def file_of(edge_id)`
-  - `add_node` (function, line 204) `def add_node(node_id, label, node_type)`
-- Depends on: `readmenator/_config.py`, `readmenator/_forcegraph_page.py`, `readmenator/_graphlayout.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_project_config.py`, `readmenator/_purpose.py`, `readmenator/_rank.py`, `readmenator/_resolver.py`, `readmenator/_sourceview.py`, `readmenator/_viewer_ui.py`
-- Imported by: `readmenator/_bundlegraph.py`, `readmenator/_documentation.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_pipeline.py`, `tests/test_bundlegraph.py`, `tests/test_interactive_graph.py`, `tests/test_layout_quality.py`, `tests/test_project_config.py`, `tests/test_sourceview.py`
-
-## readmenator/_forcegraph_page.py
-- Doc: HTML page template for the force-graph explorer.
-- Layer: presentation
-- Language: py
-- Imported by: `readmenator/_forcegraph.py`, `tests/test_layout_quality.py`, `tests/test_project_config.py`
 
 
 Next: [KB_readmenator_p3.md](KB_readmenator_p3.md)

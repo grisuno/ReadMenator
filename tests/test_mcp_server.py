@@ -258,6 +258,33 @@ class TestMCPProtocol(unittest.TestCase):
         self.assertIsInstance(content, list)
         self.assertEqual(content[0]["type"], "text")
 
+    def test_call_recall_tool_matches_sem_seeded_note(self) -> None:
+        """remember with sem seeds + recall finds the note without embeddings."""
+        self._call(self._make_request("initialize", {}))
+        self.server._register_all()
+        remember = self._call(self._make_request("tools/call", {
+            "name": "readmenator.remember",
+            "arguments": {"note": "Deploy behind the canary first.", "kind": "workflow",
+                          "sem": "rollout, staging"},
+        }))
+        self.assertIn("sem: rollout", remember["result"]["content"][0]["text"])
+        recall = self._call(self._make_request("tools/call", {
+            "name": "readmenator.recall",
+            "arguments": {"query": "canary rollout"},
+        }))
+        text = recall["result"]["content"][0]["text"]
+        self.assertIn("canary", text)
+
+    def test_tools_list_includes_recall(self) -> None:
+        """The recall tool is advertised with a query schema."""
+        self._call(self._make_request("initialize", {}))
+        self.server._register_all()
+        resp = self._call(self._make_request("tools/list"))
+        tools = {t["name"]: t for t in resp["result"]["tools"]}
+        self.assertIn("readmenator.recall", tools)
+        self.assertIn("query", tools["readmenator.recall"]["inputSchema"]["properties"])
+        self.assertIn("sem", tools["readmenator.remember"]["inputSchema"]["properties"])
+
 
 if __name__ == "__main__":
     unittest.main()

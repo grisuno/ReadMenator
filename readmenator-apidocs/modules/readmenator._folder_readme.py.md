@@ -144,7 +144,7 @@ Return the folder descriptions built from Config names.
 
 #### `FolderReadmeWriter.render`
 
-`method` | [readmenator/_folder_readme.py:272](../../readmenator/_folder_readme.py#L272)
+`method` | [readmenator/_folder_readme.py:290](../../readmenator/_folder_readme.py#L290)
 
 ```python
 def render(self, spec: FolderSpec, folder: Path) -> str
@@ -167,7 +167,7 @@ Render the README text for one folder.
 
 #### `FolderReadmeWriter.write_all`
 
-`method` | [readmenator/_folder_readme.py:310](../../readmenator/_folder_readme.py#L310)
+`method` | [readmenator/_folder_readme.py:328](../../readmenator/_folder_readme.py#L328)
 
 ```python
 def write_all(self, project_root: str) -> List[str]

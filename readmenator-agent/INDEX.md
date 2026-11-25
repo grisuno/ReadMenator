@@ -13,19 +13,20 @@
 | `readmenator/_apidocs.py` | Deterministic API reference model: extraction, cross-references, coverage. | readmenator | 52 | 7 |
 | `readmenator/_apidocs_page.py` | Self-contained HTML browser for the deterministic API reference. | readmenator | 2 | 3 |
 | `readmenator/_apidocs_render.py` | Markdown, JSON, and writer layer for the deterministic API reference. | readmenator | 45 | 2 |
-| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 88 | 16 |
+| `readmenator/_app.py` | Application orchestrator: scan, resolve, analyze, and write every output. | readmenator | 90 | 17 |
 | `readmenator/_bundlegraph.py` | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | readmenator | 8 | 6 |
 | `readmenator/_bundlegraph_page.py` | HTML page template for the edge bundle explorer. | readmenator | 0 | 2 |
 | `readmenator/_cache.py` | File-content hash cache for incremental scanning and analysis caching. | readmenator | 14 | 5 |
 | `readmenator/_category.py` | Category theory model for the readmenator code graph. | readmenator | 26 | 9 |
 | `readmenator/_components.py` | Component architecture diagrams, token-free by default. | readmenator | 25 | 4 |
 | `readmenator/_concepts.py` | Deterministic semantic concept graph over the structural knowledge graph. | readmenator | 8 | 3 |
-| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 106 |
+| `readmenator/_config.py` | Immutable configuration dataclass for readmenator. | readmenator | 1 | 110 |
 | `readmenator/_cpg.py` | Code Property Graph (CPG) generator emitting JSON-LD for AI agents. | readmenator | 6 | 3 |
 | `readmenator/_cursorrules_generator.py` | Dynamic .cursorrules generator for the readmenator knowledge graph. | readmenator | 8 | 2 |
 | `readmenator/_dataflow.py` | Procedural intra-function dataflow analysis for readmenator. | readmenator | 21 | 2 |
 | `readmenator/_dead_code.py` | Dead code detection for the readmenator knowledge graph. | readmenator | 5 | 2 |
 | `readmenator/_diagrams.py` | Self-contained interactive system maps for the knowledge graph. | readmenator | 97 | 9 |
+| `readmenator/_docbranch.py` | Documentation branch publisher: artifacts live in their own git branch. | readmenator | 12 | 3 |
 | `readmenator/_docstrings.py` | Multi-style docstring parser for the deterministic API reference. | readmenator | 30 | 3 |
 | `readmenator/_documentation.py` | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | readmenator | 31 | 3 |
 | `readmenator/_embed.py` | Optional semantic embeddings for the readmenator knowledge graph. | readmenator | 11 | 2 |
@@ -41,21 +42,22 @@
 | `readmenator/_forcegraph_page.py` | HTML page template for the force-graph explorer. | readmenator | 0 | 3 |
 | `readmenator/_gh_wiki.py` | GitHub wiki publisher: mirrors generated knowledge into the repository wiki. | readmenator | 18 | 4 |
 | `readmenator/_githistory.py` | Git history replay: read release snapshots from a repository. | readmenator | 23 | 2 |
-| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 5 |
+| `readmenator/_gitmeta.py` | Read-only git metadata for freshness stamps on generated documents. | readmenator | 4 | 6 |
 | `readmenator/_graphlayout.py` | Deterministic graph layout algorithms for animated renders. | readmenator | 26 | 5 |
-| `readmenator/_graphrag.py` | Zero-token GraphRAG index and retrieval for AI agents. | readmenator | 53 | 4 |
+| `readmenator/_graphrag.py` | Zero-token GraphRAG index and retrieval for AI agents. | readmenator | 53 | 5 |
+| `readmenator/_hebbian.py` | Zero-inference recall over the preserved session log, hebbmesh style. | readmenator | 12 | 3 |
 | `readmenator/_hotspots.py` | Hotspot, dependency cycle, and change impact analysis. | readmenator | 7 | 2 |
 | `readmenator/_htmlpack.py` | Compact JSON payload embedding for self-contained HTML pages. | readmenator | 5 | 8 |
 | `readmenator/_hypotheses.py` | Hypothesis validator: LLM/agent proposals are never facts. | readmenator | 10 | 1 |
 | `readmenator/_layer_rules.py` | Architecture layer rule engine: forbidden and warning edges between layers. | readmenator | 4 | 2 |
 | `readmenator/_layers.py` | Architectural layer detection for the readmenator knowledge graph. | readmenator | 7 | 7 |
 | `readmenator/_linter.py` | Architecture linter for the readmenator knowledge graph. | readmenator | 8 | 2 |
-| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 64 | 3 |
-| `readmenator/_memory.py` | Persistent project memory for agents, generated with zero tokens. | readmenator | 30 | 2 |
+| `readmenator/_mcp_server.py` | MCP (Model Context Protocol) stdio server for ReadMenator. | readmenator | 65 | 3 |
+| `readmenator/_memory.py` | Persistent project memory for agents, generated with zero tokens. | readmenator | 31 | 4 |
 | `readmenator/_mermaid.py` | Mermaid graph renderer with intelligent pruning. | readmenator | 4 | 2 |
 | `readmenator/_models.py` | Data model types for the readmenator knowledge graph. | readmenator | 23 | 101 |
 | `readmenator/_ollama.py` | Local Ollama client for optional LLM enrichment. | readmenator | 7 | 4 |
-| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 53 | 1 |
+| `readmenator/_pipeline.py` | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | readmenator | 55 | 1 |
 | `readmenator/_project_config.py` | Per-project persistent configuration (readmenator.toml). | readmenator | 18 | 9 |
 | `readmenator/_projections.py` | Functors and projections for the readmenator code category. | readmenator | 15 | 1 |
 | `readmenator/_provenance.py` | Evidence-provenance audit for readmenator security findings. | readmenator | 10 | 2 |
@@ -113,9 +115,9 @@
 | `tests/test_agent_output.py` | - | tests | 45 | 0 |
 | `tests/test_analyzer.py` | Contract tests for the GraphAnalyzer. | tests | 14 | 0 |
 | `tests/test_apidocs.py` | Contract tests for the docstring parser and the deterministic API reference. | tests | 48 | 0 |
-| `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 29 | 0 |
+| `tests/test_bundlegraph.py` | Contract tests for the edge bundle explorer (circle and sphere views). | tests | 30 | 0 |
 | `tests/test_cache.py` | Contract tests for the FileCache. | tests | 22 | 0 |
-| `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 36 | 0 |
+| `tests/test_components.py` | Contract tests for the component diagram exporter. | tests | 37 | 0 |
 | `tests/test_concepts.py` | test_concept_nouns_map_to_file_sets: Noun tokens become concepts mapping to file sets. | tests | 8 | 0 |
 | `tests/test_config.py` | - | tests | 6 | 0 |
 | `tests/test_cpg.py` | TestCodePropertyGraphContract: Contract: CodePropertyGraph generates valid JSON-LD CPG output. | tests | 11 | 0 |
@@ -123,6 +125,7 @@
 | `tests/test_dataflow.py` | - | tests | 47 | 0 |
 | `tests/test_dead_code.py` | Contract tests for the DeadCodeStripper. | tests | 15 | 0 |
 | `tests/test_diagrams.py` | Contract tests for interactive system maps. | tests | 73 | 0 |
+| `tests/test_docbranch.py` | Contract tests for the docs branch publisher and linguist gitattributes. | tests | 37 | 0 |
 | `tests/test_documentation.py` | - | tests | 29 | 0 |
 | `tests/test_exporter.py` | Contract tests for the GraphExporter. | tests | 15 | 0 |
 | `tests/test_flowcharts.py` | Contract tests for architecture tiers, execution flows, and receiver typing. | tests | 35 | 0 |
@@ -131,14 +134,15 @@
 | `tests/test_githistory.py` | Contract tests for the git history reader used by the growth video act. | tests | 22 | 0 |
 | `tests/test_graphlayout.py` | Contract tests for ForceAtlas2 and hierarchical edge bundling layouts. | tests | 33 | 0 |
 | `tests/test_graphrag.py` | Contract tests for the zero-token GraphRAG index and retrieval. | tests | 28 | 0 |
+| `tests/test_hebbian.py` | Contract tests for zero-inference Hebbian recall over the session log. | tests | 20 | 0 |
 | `tests/test_hotspots.py` | TestHotspotAnalyzerContract: Contract: HotspotAnalyzer detects hotspots, cycles, and change impact. | tests | 11 | 0 |
 | `tests/test_htmlpack.py` | Contract tests for embedded page payload compression (readmenator/_htmlpack.py). | tests | 18 | 0 |
 | `tests/test_integration.py` | - | tests | 16 | 0 |
-| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 70 | 0 |
+| `tests/test_interactive_graph.py` | Contract tests for the interactive explorer modules. | tests | 71 | 0 |
 | `tests/test_layer_rules.py` | TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations. | tests | 13 | 0 |
 | `tests/test_layout_quality.py` | Contract tests for bundle crossing reduction and seeded explorer layouts. | tests | 16 | 0 |
 | `tests/test_linter.py` | Contract tests for the ArchitectureLinter. | tests | 14 | 0 |
-| `tests/test_mcp_server.py` | Contract tests for the MCP server protocol and tool dispatch. | tests | 25 | 0 |
+| `tests/test_mcp_server.py` | Contract tests for the MCP server protocol and tool dispatch. | tests | 27 | 0 |
 | `tests/test_memory.py` | Contract tests for project memory, the session log, and agent skills. | tests | 17 | 0 |
 | `tests/test_mermaid.py` | TestMermaidEdgeBudget: Contract: the structural map never exceeds Mermaid's 500-edge render limit. | tests | 13 | 0 |
 | `tests/test_models.py` | - | tests | 11 | 0 |
@@ -149,7 +153,7 @@
 | `tests/test_project_config.py` | Contract tests for per-project readmenator.toml configuration. | tests | 33 | 0 |
 | `tests/test_query.py` | - | tests | 18 | 0 |
 | `tests/test_ranking.py` | Contract tests for the category theory and ranking system. | tests | 72 | 0 |
-| `tests/test_readme_injector.py` | Contract tests for README injection into documented projects. | tests | 28 | 0 |
+| `tests/test_readme_injector.py` | Contract tests for README injection into documented projects. | tests | 29 | 0 |
 | `tests/test_receipts.py` | - | tests | 32 | 0 |
 | `tests/test_refactorizer.py` | Contract tests for the MonolithRefactorizer. | tests | 17 | 0 |
 | `tests/test_resolver.py` | Contract tests for the ImportResolver. | tests | 22 | 0 |

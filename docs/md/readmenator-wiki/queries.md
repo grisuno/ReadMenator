@@ -4,7 +4,7 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 ## Suggested
 
-### Q: What does _config.py depend on, and what depends on it? (106 connections)
+### Q: What does _config.py depend on, and what depends on it? (110 connections)
 
 - Status: unanswered
 
@@ -12,11 +12,11 @@ Log each answered question here so the wiki compounds. Format: question, answer,
 
 - Status: unanswered
 
-### Q: What does _app.py depend on, and what depends on it? (44 connections)
+### Q: What does _app.py depend on, and what depends on it? (47 connections)
 
 - Status: unanswered
 
-### Q: How are the 39 files in 'readmenator/parsers' related to each other?
+### Q: How are the 46 files in 'readmenator: _app' related to each other?
 
 - Status: unanswered
 

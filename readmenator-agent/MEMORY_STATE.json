@@ -1,0 +1,17 @@
+{
+ "fires": {
+  "2026-10-21|decision|Added _receipts/_uncertainty/_hypotheses contracts: deploynator release receipts": 1,
+  "2026-10-21|decision|Packaged skills updated: new readmenator-receipts skill (receipt ingest + eviden": 1,
+  "2026-10-21|workflow|Deployment flow: deploynator release --receipt (or --trace with dry-run) writes ": 1,
+  "2026-10-28|decision|Video act XII (The Organism) tells the git history: readmenator/_githistory.py r": 1
+ },
+ "pairs": {
+  "2026-10-21|decision|Added _receipts/_uncertainty/_hypotheses contracts: deploynator release receipts|2026-10-21|decision|Packaged skills updated: new readmenator-receipts skill (receipt ingest + eviden": 1,
+  "2026-10-21|decision|Added _receipts/_uncertainty/_hypotheses contracts: deploynator release receipts|2026-10-21|workflow|Deployment flow: deploynator release --receipt (or --trace with dry-run) writes ": 1,
+  "2026-10-21|decision|Added _receipts/_uncertainty/_hypotheses contracts: deploynator release receipts|2026-10-28|decision|Video act XII (The Organism) tells the git history: readmenator/_githistory.py r": 1,
+  "2026-10-21|decision|Packaged skills updated: new readmenator-receipts skill (receipt ingest + eviden|2026-10-21|workflow|Deployment flow: deploynator release --receipt (or --trace with dry-run) writes ": 1,
+  "2026-10-21|decision|Packaged skills updated: new readmenator-receipts skill (receipt ingest + eviden|2026-10-28|decision|Video act XII (The Organism) tells the git history: readmenator/_githistory.py r": 1,
+  "2026-10-21|workflow|Deployment flow: deploynator release --receipt (or --trace with dry-run) writes |2026-10-28|decision|Video act XII (The Organism) tells the git history: readmenator/_githistory.py r": 1
+ },
+ "schema_version": 1
+}

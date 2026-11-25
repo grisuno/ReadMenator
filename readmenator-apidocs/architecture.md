@@ -4,9 +4,9 @@
 
 ## Architecture Overview
 
-8 components stacked in 6 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 12 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
+8 components stacked in 7 dependency tiers (weighted Eades-Lin-Smyth ordering: arrows point from dependent to dependency, top to bottom). Labels are import counts, thick arrows the top quartile; 14 transitively implied edges are omitted. Dashed red arrows are upward dependencies: the smallest set of imports that closes every cycle and breaks the layering. Cyan components hold entry points. Interactive version: `readmenator-apidocs/index.html#/flows`.
 
-Upward dependencies to fix first: `readmenator/parsers` -> `readmenator: _video` (7 imports); `readmenator: _video` -> `readmenator: _flowcharts` (6 imports); `readmenator: _diagrams` -> `readmenator: _video` (6 imports); `readmenator: _video` -> `readmenator: _agent_output` (5 imports); `readmenator: _video` -> `readmenator: _graphrag` (5 imports); `readmenator: _video` -> `readmenator: _pipeline` (3 imports); `readmenator: _diagrams` -> `readmenator: _agent_output` (3 imports); `readmenator: _graphrag` -> `readmenator: _pipeline` (2 imports); `readmenator/parsers` -> `readmenator: _graphrag` (1 imports); `readmenator: _diagrams` -> `readmenator: _graphrag` (1 imports)
+Upward dependencies to fix first: `readmenator: _app` -> `readmenator: _pipeline` (9 imports); `readmenator: _diagrams` -> `readmenator: _app` (6 imports); `readmenator: _video` -> `readmenator: _app` (6 imports); `readmenator: _app` -> `readmenator: _flowcharts` (5 imports); `readmenator: _mcp_server` -> `readmenator: _pipeline` (5 imports); `readmenator: _app` -> `readmenator: _mcp_server` (3 imports); `readmenator/parsers` -> `readmenator: _app` (2 imports); `readmenator: _diagrams` -> `readmenator: _pipeline` (2 imports); `readmenator/parsers` -> `readmenator: _mcp_server` (1 imports); `readmenator: _diagrams` -> `readmenator: _mcp_server` (1 imports); `readmenator: _mcp_server` -> `readmenator: _flowcharts` (1 imports); `readmenator: _video` -> `readmenator: _diagrams` (1 imports); `readmenator: _video` -> `readmenator: _mcp_server` (1 imports); `readmenator: _video` -> `readmenator: _flowcharts` (1 imports)
 
 ```mermaid
 flowchart TB
@@ -15,53 +15,60 @@ flowchart TB
     classDef entry fill:#0e7490,stroke:#22d3ee,color:#ecfeff,stroke-width:2px;
     subgraph lane_0["Tier 1 - entry / orchestration"]
         direction LR
-        n_c4["readmenator: _pipeline<br/>13 files, 213 symbols<br/>Core / utility"]:::cycle
+        n_c2["readmenator: _pipeline<br/>16 files, 314 symbols<br/>Core / utility"]:::cycle
         n_d__root_["(root)<br/>2 files, 38 symbols<br/>Core / utility"]:::default
     end
     subgraph lane_1["Tier 2"]
         direction LR
-        n_c3["readmenator: _graphrag<br/>11 files, 179 symbols<br/>Core / utility"]:::cycle
+        n_c5["readmenator: _flowcharts<br/>10 files, 266 symbols<br/>Core / utility"]:::cycle
     end
     subgraph lane_2["Tier 3"]
         direction LR
-        n_c2["readmenator: _agent_output<br/>11 files, 217 symbols<br/>Core / utility"]:::cycle
-        n_c6["readmenator: _flowcharts<br/>9 files, 235 symbols<br/>Core / utility"]:::cycle
+        n_c4["readmenator: _mcp_server<br/>11 files, 225 symbols<br/>Core / utility"]:::entry
     end
     subgraph lane_3["Tier 4"]
         direction LR
-        n_c1["readmenator: _video<br/>19 files, 451 symbols<br/>Core / utility"]:::entry
+        n_c0["readmenator: _app<br/>24 files, 330 symbols<br/>Core / utility"]:::cycle
     end
     subgraph lane_4["Tier 5"]
         direction LR
-        n_c5["readmenator: _diagrams<br/>10 files, 192 symbols<br/>Core / utility"]:::cycle
+        n_c3["readmenator: _diagrams<br/>12 files, 215 symbols<br/>Core / utility"]:::cycle
     end
-    subgraph lane_5["Tier 6 - foundation"]
+    subgraph lane_5["Tier 6"]
         direction LR
-        n_c0["readmenator/parsers<br/>29 files, 121 symbols<br/>Core / utility"]:::cycle
+        n_c6["readmenator: _video<br/>6 files, 203 symbols<br/>Core / utility"]:::cycle
     end
-    n_c1 ==>|"8"| n_c5
-    n_c2 ==>|"9"| n_c1
-    n_c3 -->|"5"| n_c2
-    n_c3 -->|"2"| n_c6
-    n_c4 ==>|"8"| n_c3
-    n_c5 -->|"3"| n_c0
-    n_c6 -->|"6"| n_c1
-    n_c1 <-.-|"7 upward"| n_c0
-    n_c3 <-.-|"1 upward"| n_c0
-    n_c2 <-.-|"5 upward"| n_c1
-    n_c3 <-.-|"5 upward"| n_c1
-    n_c4 <-.-|"3 upward"| n_c1
-    n_c6 <-.-|"6 upward"| n_c1
-    n_c4 <-.-|"2 upward"| n_c3
-    n_c1 <-.-|"6 upward"| n_c5
-    n_c2 <-.-|"3 upward"| n_c5
-    n_c3 <-.-|"1 upward"| n_c5
-    linkStyle 7,8,9,10,11,12,13,14,15,16 stroke:#f87171,stroke-width:2px;
-    n_c4 ~~~ n_c3
-    n_c3 ~~~ n_c2
-    n_c2 ~~~ n_c1
-    n_c1 ~~~ n_c5
-    n_c5 ~~~ n_c0
+    subgraph lane_6["Tier 7 - foundation"]
+        direction LR
+        n_c1["readmenator/parsers<br/>25 files, 85 symbols<br/>Core / utility"]:::cycle
+    end
+    n_c0 ==>|"9"| n_c3
+    n_c2 ==>|"5"| n_c5
+    n_c3 -->|"1"| n_c6
+    n_c4 ==>|"9"| n_c0
+    n_c5 -->|"2"| n_c4
+    n_c6 -->|"4"| n_c1
+    n_c2 <-.-|"9 upward"| n_c0
+    n_c4 <-.-|"3 upward"| n_c0
+    n_c5 <-.-|"5 upward"| n_c0
+    n_c0 <-.-|"2 upward"| n_c1
+    n_c4 <-.-|"1 upward"| n_c1
+    n_c0 <-.-|"6 upward"| n_c3
+    n_c2 <-.-|"2 upward"| n_c3
+    n_c4 <-.-|"1 upward"| n_c3
+    n_c2 <-.-|"5 upward"| n_c4
+    n_c5 <-.-|"1 upward"| n_c4
+    n_c0 <-.-|"6 upward"| n_c6
+    n_c3 <-.-|"1 upward"| n_c6
+    n_c4 <-.-|"1 upward"| n_c6
+    n_c5 <-.-|"1 upward"| n_c6
+    linkStyle 6,7,8,9,10,11,12,13,14,15,16,17,18,19 stroke:#f87171,stroke-width:2px;
+    n_c2 ~~~ n_c5
+    n_c5 ~~~ n_c4
+    n_c4 ~~~ n_c0
+    n_c0 ~~~ n_c3
+    n_c3 ~~~ n_c6
+    n_c6 ~~~ n_c1
 ```
 
 ---
@@ -72,7 +79,7 @@ Entry points are scored from `__main__` guards, `main` functions, entry-style na
 
 ### `__main__.main`
 
-`readmenator/__main__.py:153`, score 9: entry-style name `main`; defined in entry file `__main__.py`; called from the `__main__` guard.
+`readmenator/__main__.py:155`, score 9: entry-style name `main`; defined in entry file `__main__.py`; called from the `__main__` guard.
 
 Control flow:
 
@@ -213,35 +220,35 @@ flowchart TB
     n_s129{"command == 'remember'?<br/>and len(sys.argv) #gt;= 4"}:::decision
     n_s130{"'--kind' in sys.argv?"}:::decision
     n_s131{"position + 1 #lt; len(sys.argv)?"}:::decision
-    n_s132[/"try"/]:::default
-    n_s133["remember()<br/>Append a note to the preserved MEMORY.md sess..."]:::default
-    n_s134(["return"]):::entry
-    n_s135{"command == 'skills'?"}:::decision
-    n_s136{"'--target' in sys.argv?"}:::decision
-    n_s137{"position + 1 #lt; len(sys.argv)?"}:::decision
-    n_s138["install_skills()<br/>Install the packaged agent skills into the pr..."]:::default
-    n_s139{{"for path in written"}}:::decision
-    n_s140(["return after available()"]):::entry
-    n_s141{"command == 'provenance'?"}:::decision
-    n_s142{{"for item in app.audit_provenance(target)"}}:::decision
-    n_s143(["return"]):::entry
-    n_s144{"command == 'receipts'?"}:::decision
-    n_s145(["return after ingest_receipts()<br/>Ingest deploynator release receipts into the..."]):::entry
-    n_s146{"command == '--rebuild'?"}:::decision
-    n_s147{"'--no-video' in argset?"}:::decision
-    n_s148["readmenatorApplication(), Config()<br/>Single source of truth for all readmenator se..."]:::default
-    n_s149(["return after rebuild()"]):::entry
-    n_s150{"command.startswith('--')?"}:::decision
-    n_s151["error()"]:::default
-    n_s152{"has_export_flags?"}:::decision
-    n_s153["build_parser(), readmenatorApplication()"]:::default
-    n_s154{"args.export_all or (args.json and args.html and args.svg)?"}:::decision
-    n_s155["export()"]:::default
-    n_s156{"args.json?"}:::decision
-    n_s157["export_json()"]:::default
-    n_s158{"args.html?"}:::decision
-    n_s159["export_html()"]:::default
-    n_s160{"args.svg?"}:::decision
+    n_s132{"'--sem' in sys.argv?"}:::decision
+    n_s133{"position + 1 #lt; len(sys.argv)?"}:::decision
+    n_s134[/"try"/]:::default
+    n_s135["remember()<br/>Append a note to the preserved MEMORY.md sess..."]:::default
+    n_s136(["return"]):::entry
+    n_s137{"command == 'recall'?<br/>and len(sys.argv) #gt;= 4"}:::decision
+    n_s138{"'--k' in sys.argv?"}:::decision
+    n_s139{"position + 1 #lt; len(sys.argv) and sys.argv[position + 1].i..."}:::decision
+    n_s140["recall()<br/>Zero-inference recall over the preserved sess..."]:::default
+    n_s141{"not hits?"}:::decision
+    n_s142(["return"]):::entry
+    n_s143{{"for hit in hits"}}:::decision
+    n_s144["line()<br/>Render the hit as one greppable line."]:::default
+    n_s145(["return"]):::entry
+    n_s146{"command == 'doc-branch'?"}:::decision
+    n_s147(["return after publish_doc_branch()<br/>Stage the static site into the dedicated docs..."]):::entry
+    n_s148{"command == 'skills'?"}:::decision
+    n_s149{"'--target' in sys.argv?"}:::decision
+    n_s150{"position + 1 #lt; len(sys.argv)?"}:::decision
+    n_s151["install_skills()<br/>Install the packaged agent skills into the pr..."]:::default
+    n_s152{{"for path in written"}}:::decision
+    n_s153(["return after available()"]):::entry
+    n_s154{"command == 'provenance'?"}:::decision
+    n_s155{{"for item in app.audit_provenance(target)"}}:::decision
+    n_s156(["return"]):::entry
+    n_s157{"command == 'receipts'?"}:::decision
+    n_s158(["return after ingest_receipts()<br/>Ingest deploynator release receipts into the..."]):::entry
+    n_s159{"command == '--rebuild'?"}:::decision
+    n_s160{"'--no-video' in argset?"}:::decision
     n_s161(["end"]):::entry
     n_s162["truncated at FLOW_CFG_MAX_NODES=160"]:::muted
     n_s1 --> n_s2
@@ -395,52 +402,52 @@ flowchart TB
     n_s131 -->|"yes"| n_s132
     n_s131 -->|"no"| n_s132
     n_s130 -->|"no"| n_s132
-    n_s132 --> n_s133
-    n_s133 --> n_s134
-    n_s132 -->|"except ValueError"| n_s134
-    n_s129 -->|"no"| n_s135
-    n_s135 -->|"yes"| n_s136
-    n_s136 -->|"yes"| n_s137
+    n_s132 -->|"yes"| n_s133
+    n_s133 -->|"yes"| n_s134
+    n_s133 -->|"no"| n_s134
+    n_s132 -->|"no"| n_s134
+    n_s134 --> n_s135
+    n_s135 --> n_s136
+    n_s134 -->|"except ValueError"| n_s136
+    n_s129 -->|"no"| n_s137
     n_s137 -->|"yes"| n_s138
-    n_s137 -->|"no"| n_s138
-    n_s136 -->|"no"| n_s138
-    n_s138 --> n_s139
-    n_s139 -.->|"each"| n_s139
-    n_s139 -->|"done"| n_s140
-    n_s135 -->|"no"| n_s141
+    n_s138 -->|"yes"| n_s139
+    n_s139 -->|"yes"| n_s140
+    n_s139 -->|"no"| n_s140
+    n_s138 -->|"no"| n_s140
+    n_s140 --> n_s141
     n_s141 -->|"yes"| n_s142
-    n_s142 -.->|"each"| n_s142
-    n_s142 -->|"done"| n_s143
-    n_s141 -->|"no"| n_s144
-    n_s144 -->|"yes"| n_s145
-    n_s144 -->|"no"| n_s146
+    n_s141 -->|"no"| n_s143
+    n_s143 -->|"each"| n_s144
+    n_s144 -.->|"next"| n_s143
+    n_s143 -->|"done"| n_s145
+    n_s137 -->|"no"| n_s146
     n_s146 -->|"yes"| n_s147
-    n_s147 -->|"yes"| n_s148
-    n_s148 --> n_s149
-    n_s147 -->|"no"| n_s149
-    n_s146 -->|"no"| n_s150
+    n_s146 -->|"no"| n_s148
+    n_s148 -->|"yes"| n_s149
+    n_s149 -->|"yes"| n_s150
+    n_s150 -->|"yes"| n_s151
     n_s150 -->|"no"| n_s151
-    n_s83 --> n_s152
-    n_s106 -->|"done"| n_s152
-    n_s150 -->|"yes"| n_s152
+    n_s149 -->|"no"| n_s151
     n_s151 --> n_s152
-    n_s9 -->|"no"| n_s152
-    n_s152 -->|"yes"| n_s153
-    n_s153 --> n_s154
+    n_s152 -.->|"each"| n_s152
+    n_s152 -->|"done"| n_s153
+    n_s148 -->|"no"| n_s154
     n_s154 -->|"yes"| n_s155
-    n_s154 -->|"no"| n_s156
-    n_s156 -->|"yes"| n_s157
-    n_s157 --> n_s158
-    n_s156 -->|"no"| n_s158
-    n_s158 -->|"yes"| n_s159
-    n_s159 --> n_s160
-    n_s158 -->|"no"| n_s160
-    n_s155 --> n_s161
+    n_s155 -.->|"each"| n_s155
+    n_s155 -->|"done"| n_s156
+    n_s154 -->|"no"| n_s157
+    n_s157 -->|"yes"| n_s158
+    n_s157 -->|"no"| n_s159
+    n_s159 -->|"yes"| n_s160
+    n_s83 --> n_s161
+    n_s106 -->|"done"| n_s161
     n_s160 -->|"yes"| n_s161
     n_s160 -->|"no"| n_s161
-    n_s152 -->|"no"| n_s161
+    n_s159 -->|"no"| n_s161
+    n_s9 -->|"no"| n_s161
     n_s1 -.-> n_s162
-    linkStyle 5,39,61,69,70,75,82,109,118,122,131,161,165 stroke:#f87171,stroke-width:2px;
+    linkStyle 5,39,61,69,70,75,82,109,118,122,131,168,179,183 stroke:#f87171,stroke-width:2px;
 ```
 
 Call tree:
@@ -450,37 +457,37 @@ flowchart LR
     classDef default fill:#111827,stroke:#38bdf8,color:#e5e7eb;
     classDef entry fill:#0e7490,stroke:#22d3ee,color:#ecfeff,stroke-width:2px;
     classDef external fill:#1a1530,stroke:#a78bfa,color:#ede9fe;
-    n_readmenator___main___py__main["__main__.main<br/>__main__.py:153"]:::entry
-    n_readmenator___main___py___run_tests["__main__._run_tests<br/>__main__.py:138"]:::default
+    n_readmenator___main___py__main["__main__.main<br/>__main__.py:155"]:::entry
+    n_readmenator___main___py___run_tests["__main__._run_tests<br/>__main__.py:140"]:::default
     n_readmenator___main___py__build_parser["__main__.build_parser<br/>__main__.py:18"]:::default
-    n_readmenator__app_py__readmenatorApplication["_app.readmenatorApplication<br/>_app.py:54"]:::external
-    n_readmenator__app_py__generate_uml_code["_app.readmenatorApplication.generate_uml_code<br/>_app.py:469"]:::external
-    n_readmenator__app_py___scan["_app.readmenatorApplication._scan<br/>_app.py:93"]:::external
-    n_readmenator__app_py___resolve_imports["_app.readmenatorApplication._resolve_imports<br/>_app.py:111"]:::external
+    n_readmenator__app_py__readmenatorApplication["_app.readmenatorApplication<br/>_app.py:56"]:::external
+    n_readmenator__app_py__generate_uml_code["_app.readmenatorApplication.generate_uml_code<br/>_app.py:471"]:::external
+    n_readmenator__app_py___scan["_app.readmenatorApplication._scan<br/>_app.py:95"]:::external
+    n_readmenator__app_py___resolve_imports["_app.readmenatorApplication._resolve_imports<br/>_app.py:113"]:::external
     n_readmenator__resolver_py__ImportResolver["_resolver.ImportResolver<br/>Resolves raw import strings to project file p...<br/>_resolver.py:18"]:::external
     n_readmenator__resolver_py__resolve["_resolver.ImportResolver.resolve<br/>Resolve an import string to a concrete projec...<br/>_resolver.py:110"]:::external
     n_readmenator__models_py__Edge["_models.Edge<br/>A directed relationship between two nodes in...<br/>_models.py:58"]:::external
-    n_readmenator__app_py__query["_app.readmenatorApplication.query<br/>_app.py:670"]:::external
+    n_readmenator__app_py__query["_app.readmenatorApplication.query<br/>_app.py:672"]:::external
     n_readmenator__query_py__QueryEngine["_query.QueryEngine<br/>In-memory query engine over the scanned knowl...<br/>_query.py:25"]:::external
     n_readmenator__query_py__query["_query.QueryEngine.query<br/>Free-text search over symbols and file paths.<br/>_query.py:355"]:::external
-    n_readmenator__app_py__explain["_app.readmenatorApplication.explain<br/>_app.py:675"]:::external
+    n_readmenator__app_py__explain["_app.readmenatorApplication.explain<br/>_app.py:677"]:::external
     n_readmenator__query_py__explain["_query.QueryEngine.explain<br/>Return a detailed multi-line explanation of *...<br/>_query.py:238"]:::external
     n_readmenator__query_py__find_symbol["_query.QueryEngine.find_symbol<br/>Look up *name* by exact match, then by substr...<br/>_query.py:220"]:::external
     n_readmenator__query_py___find_incoming_imports["_query.QueryEngine._find_incoming_imports<br/>List all node IDs that import *target*.<br/>_query.py:277"]:::external
-    n_readmenator__app_py__find_path["_app.readmenatorApplication.find_path<br/>_app.py:687"]:::external
+    n_readmenator__app_py__find_path["_app.readmenatorApplication.find_path<br/>_app.py:689"]:::external
     n_readmenator__query_py__find_path["_query.QueryEngine.find_path<br/>Find the shortest import path from *symbol_a*...<br/>_query.py:285"]:::external
     n_readmenator__query_py___make_bidirectional["_query.QueryEngine._make_bidirectional<br/>Convert a directed graph to a bidirectional one.<br/>_query.py:315"]:::external
     n_readmenator__query_py___bfs_shortest_path["_query.QueryEngine._bfs_shortest_path<br/>Run BFS to find the shortest path from *start...<br/>_query.py:331"]:::external
-    n_readmenator__app_py__summary["_app.readmenatorApplication.summary<br/>_app.py:700"]:::external
+    n_readmenator__app_py__summary["_app.readmenatorApplication.summary<br/>_app.py:702"]:::external
     n_readmenator__query_py__summary["_query.QueryEngine.summary<br/>Return a concise overview of the loaded knowl...<br/>_query.py:411"]:::external
-    n_readmenator__app_py__update["_app.readmenatorApplication.update<br/>_app.py:536"]:::external
-    n_readmenator__app_py___apply_project_config["_app.readmenatorApplication._apply_project_config<br/>Ensure readmenator.toml exists and adopt it a...<br/>_app.py:130"]:::external
-    n_readmenator__project_config_py__ensure_project_config["_project_config.ensure_project_config<br/>Create #96;#96;readmenator.toml#96;#96; from the template...<br/>_project_config.py:300"]:::external
+    n_readmenator__app_py__update["_app.readmenatorApplication.update<br/>_app.py:538"]:::external
+    n_readmenator__app_py___apply_project_config["_app.readmenatorApplication._apply_project_config<br/>Ensure readmenator.toml exists and adopt it a...<br/>_app.py:132"]:::external
+    n_readmenator__project_config_py__ensure_project_config["_project_config.ensure_project_config<br/>Create #96;#96;readmenator.toml#96;#96; from the template...<br/>_project_config.py:314"]:::external
     n_readmenator__config_py__Config["_config.Config<br/>Single source of truth for all readmenator se...<br/>_config.py:15"]:::external
-    n_readmenator__project_config_py__config_path["_project_config.config_path<br/>Return the readmenator.toml path for a projec...<br/>_project_config.py:286"]:::external
-    n_readmenator__project_config_py__template_text["_project_config.template_text<br/>Render the example #96;#96;readmenator.toml#96;#96; conte...<br/>_project_config.py:159"]:::external
-    n_readmenator__project_config_py__load_project_config["_project_config.load_project_config<br/>Load #96;#96;readmenator.toml#96;#96; over a base Config...<br/>_project_config.py:544"]:::external
-    n_readmenator__project_config_py__parse_toml["_project_config.parse_toml<br/>Parse TOML text with the stdlib when availabl...<br/>_project_config.py:450"]:::external
+    n_readmenator__project_config_py__config_path["_project_config.config_path<br/>Return the readmenator.toml path for a projec...<br/>_project_config.py:300"]:::external
+    n_readmenator__project_config_py__template_text["_project_config.template_text<br/>Render the example #96;#96;readmenator.toml#96;#96; conte...<br/>_project_config.py:165"]:::external
+    n_readmenator__project_config_py__load_project_config["_project_config.load_project_config<br/>Load #96;#96;readmenator.toml#96;#96; over a base Config...<br/>_project_config.py:558"]:::external
+    n_readmenator__project_config_py__parse_toml["_project_config.parse_toml<br/>Parse TOML text with the stdlib when availabl...<br/>_project_config.py:464"]:::external
     n_readmenator___main___py__main -->|"1"| n_readmenator___main___py___run_tests
     n_readmenator___main___py__main -->|"2"| n_readmenator___main___py__build_parser
     n_readmenator___main___py__main -->|"3"| n_readmenator__app_py__readmenatorApplication
@@ -558,7 +565,7 @@ sequenceDiagram
 
 ### `_mcp_server (__main__)`
 
-`readmenator/_mcp_server.py:1090`, score 8: `if __name__ == "__main__"` guard.
+`readmenator/_mcp_server.py:1115`, score 8: `if __name__ == "__main__"` guard.
 
 Call tree:
 
@@ -568,16 +575,16 @@ flowchart LR
     classDef entry fill:#0e7490,stroke:#22d3ee,color:#ecfeff,stroke-width:2px;
     classDef external fill:#1a1530,stroke:#a78bfa,color:#ede9fe;
     n_readmenator__mcp_server_py___main_["_mcp_server (__main__)<br/>_mcp_server.py"]:::entry
-    n_readmenator__mcp_server_py__main["_mcp_server.main<br/>CLI entry point for #96;readmenator serve #lt;path#gt;#96;.<br/>_mcp_server.py:1074"]:::default
+    n_readmenator__mcp_server_py__main["_mcp_server.main<br/>CLI entry point for #96;readmenator serve #lt;path#gt;#96;.<br/>_mcp_server.py:1099"]:::default
     n_readmenator__config_py__Config["_config.Config<br/>Single source of truth for all readmenator se...<br/>_config.py:15"]:::external
-    n_readmenator__app_py__readmenatorApplication["_app.readmenatorApplication<br/>_app.py:54"]:::external
-    n_readmenator__app_py__run["_app.readmenatorApplication.run<br/>_app.py:179"]:::external
-    n_readmenator__app_py___apply_project_config["_app.readmenatorApplication._apply_project_config<br/>Ensure readmenator.toml exists and adopt it a...<br/>_app.py:130"]:::external
-    n_readmenator__project_config_py__ensure_project_config["_project_config.ensure_project_config<br/>Create #96;#96;readmenator.toml#96;#96; from the template...<br/>_project_config.py:300"]:::external
-    n_readmenator__project_config_py__load_project_config["_project_config.load_project_config<br/>Load #96;#96;readmenator.toml#96;#96; over a base Config...<br/>_project_config.py:544"]:::external
-    n_readmenator__pipeline_py__AnalyzerFactory["_pipeline.AnalyzerFactory<br/>Lazy factory for all readmenator analyzer and...<br/>_pipeline.py:67"]:::external
-    n_readmenator__pipeline_py__DeepAnalysisRunner["_pipeline.DeepAnalysisRunner<br/>Orchestrates the extended V2 analysis pipeline.<br/>_pipeline.py:484"]:::external
-    n_readmenator__app_py___resolve_imports["_app.readmenatorApplication._resolve_imports<br/>_app.py:111"]:::external
+    n_readmenator__app_py__readmenatorApplication["_app.readmenatorApplication<br/>_app.py:56"]:::external
+    n_readmenator__app_py__run["_app.readmenatorApplication.run<br/>_app.py:181"]:::external
+    n_readmenator__app_py___apply_project_config["_app.readmenatorApplication._apply_project_config<br/>Ensure readmenator.toml exists and adopt it a...<br/>_app.py:132"]:::external
+    n_readmenator__project_config_py__ensure_project_config["_project_config.ensure_project_config<br/>Create #96;#96;readmenator.toml#96;#96; from the template...<br/>_project_config.py:314"]:::external
+    n_readmenator__project_config_py__load_project_config["_project_config.load_project_config<br/>Load #96;#96;readmenator.toml#96;#96; over a base Config...<br/>_project_config.py:558"]:::external
+    n_readmenator__pipeline_py__AnalyzerFactory["_pipeline.AnalyzerFactory<br/>Lazy factory for all readmenator analyzer and...<br/>_pipeline.py:69"]:::external
+    n_readmenator__pipeline_py__DeepAnalysisRunner["_pipeline.DeepAnalysisRunner<br/>Orchestrates the extended V2 analysis pipeline.<br/>_pipeline.py:503"]:::external
+    n_readmenator__app_py___resolve_imports["_app.readmenatorApplication._resolve_imports<br/>_app.py:113"]:::external
     n_readmenator__resolver_py__ImportResolver["_resolver.ImportResolver<br/>Resolves raw import strings to project file p...<br/>_resolver.py:18"]:::external
     n_readmenator__resolver_py__resolve["_resolver.ImportResolver.resolve<br/>Resolve an import string to a concrete projec...<br/>_resolver.py:110"]:::external
     n_readmenator__models_py__Edge["_models.Edge<br/>A directed relationship between two nodes in...<br/>_models.py:58"]:::external
@@ -585,12 +592,12 @@ flowchart LR
     n_readmenator__layers_py__detect["_layers.LayerDetector.detect<br/>Assign each file node to an architectural layer.<br/>_layers.py:83"]:::external
     n_readmenator__layers_py___classify_file["_layers.LayerDetector._classify_file<br/>Classify a single file into an architectural...<br/>_layers.py:138"]:::external
     n_readmenator__layers_py__layer_summary["_layers.LayerDetector.layer_summary<br/>Count files per layer.<br/>_layers.py:189"]:::external
-    n_readmenator__pipeline_py__run["_pipeline.DeepAnalysisRunner.run<br/>_pipeline.py:496"]:::external
+    n_readmenator__pipeline_py__run["_pipeline.DeepAnalysisRunner.run<br/>_pipeline.py:515"]:::external
     n_readmenator__models_py__AnalysisResultV2["_models.AnalysisResultV2<br/>Extended analysis result combining all new an...<br/>_models.py:284"]:::external
-    n_readmenator__pipeline_py__build_typed_graph["_pipeline.AnalyzerFactory.build_typed_graph<br/>_pipeline.py:449"]:::external
+    n_readmenator__pipeline_py__build_typed_graph["_pipeline.AnalyzerFactory.build_typed_graph<br/>_pipeline.py:468"]:::external
     n_readmenator__category_py__build_category_from_edges["_category.build_category_from_edges<br/>Build a Category from lists of Edge objects.<br/>_category.py:236"]:::external
     n_readmenator__category_py__TypedGraph["_category.TypedGraph<br/>Weighted directed graph for PageRank computat...<br/>_category.py:181"]:::external
-    n_readmenator__pipeline_py__make_ranker["_pipeline.AnalyzerFactory.make_ranker<br/>Create a CompositeRanker for the given typed...<br/>_pipeline.py:459"]:::external
+    n_readmenator__pipeline_py__make_ranker["_pipeline.AnalyzerFactory.make_ranker<br/>Create a CompositeRanker for the given typed...<br/>_pipeline.py:478"]:::external
     n_readmenator__rank_py__RankConfig["_rank.RankConfig<br/>Tuneable parameters for the ranking system.<br/>_rank.py:32"]:::external
     n_readmenator__rank_py__CompositeRanker["_rank.CompositeRanker<br/>Combines PPR, authority, test/doc coverage, a...<br/>_rank.py:411"]:::external
     n_readmenator__query_py__QueryEngine["_query.QueryEngine<br/>In-memory query engine over the scanned knowl...<br/>_query.py:25"]:::external
@@ -605,8 +612,8 @@ flowchart LR
     n_readmenator__cache_py__compute_hash["_cache.FileCache.compute_hash<br/>_cache.py:55"]:::external
     n_readmenator__cache_py__save["_cache.FileCache.save<br/>_cache.py:49"]:::external
     n_readmenator__cache_py__save_analysis["_cache.FileCache.save_analysis<br/>Save an analysis result to the semantic cache.<br/>_cache.py:95"]:::external
-    n_readmenator__app_py___write_sidecar_outputs["_app.readmenatorApplication._write_sidecar_outputs<br/>_app.py:412"]:::external
-    n_readmenator__app_py___maybe_write_memory["_app.readmenatorApplication._maybe_write_memory<br/>Regenerate MEMORY.md (preserving the session...<br/>_app.py:1826"]:::external
+    n_readmenator__app_py___write_sidecar_outputs["_app.readmenatorApplication._write_sidecar_outputs<br/>_app.py:414"]:::external
+    n_readmenator__app_py___maybe_write_memory["_app.readmenatorApplication._maybe_write_memory<br/>Regenerate MEMORY.md (preserving the session...<br/>_app.py:1835"]:::external
     n_readmenator__mcp_server_py___main_ -->|"1"| n_readmenator__mcp_server_py__main
     n_readmenator__mcp_server_py__main -->|"1"| n_readmenator__config_py__Config
     n_readmenator__mcp_server_py__main -->|"2"| n_readmenator__app_py__readmenatorApplication

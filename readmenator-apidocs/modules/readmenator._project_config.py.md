@@ -57,7 +57,7 @@ flowchart LR
 
 ### `template_text`
 
-`function` | [readmenator/_project_config.py:159](../../readmenator/_project_config.py#L159)
+`function` | [readmenator/_project_config.py:165](../../readmenator/_project_config.py#L165)
 
 ```python
 def template_text(config: Optional[Config] = None) -> str
@@ -83,7 +83,7 @@ Render the example ``readmenator.toml`` content from Config defaults.
 
 ### `config_path`
 
-`function` | [readmenator/_project_config.py:286](../../readmenator/_project_config.py#L286)
+`function` | [readmenator/_project_config.py:300](../../readmenator/_project_config.py#L300)
 
 ```python
 def config_path(project_root: Union[str, Path], config: Optional[Config] = None) -> Path
@@ -110,7 +110,7 @@ Return the readmenator.toml path for a project root.
 
 ### `ensure_project_config`
 
-`function` | [readmenator/_project_config.py:300](../../readmenator/_project_config.py#L300)
+`function` | [readmenator/_project_config.py:314](../../readmenator/_project_config.py#L314)
 
 ```python
 def ensure_project_config(project_root: Union[str, Path], config: Optional[Config] = None) -> Path
@@ -139,7 +139,7 @@ Never overwrites an existing file and refuses symlinked paths.
 
 ### `parse_toml`
 
-`function` | [readmenator/_project_config.py:450](../../readmenator/_project_config.py#L450)
+`function` | [readmenator/_project_config.py:464](../../readmenator/_project_config.py#L464)
 
 ```python
 def parse_toml(text: str) -> Dict[str, Dict[str, Any]]
@@ -163,7 +163,7 @@ Parse TOML text with the stdlib when available, else the mini parser.
 
 ### `load_project_config`
 
-`function` | [readmenator/_project_config.py:544](../../readmenator/_project_config.py#L544)
+`function` | [readmenator/_project_config.py:558](../../readmenator/_project_config.py#L558)
 
 ```python
 def load_project_config(project_root: Union[str, Path], base: Optional[Config] = None) -> Config
@@ -193,7 +193,7 @@ treated as explicit CLI overrides and are never clobbered by TOML.
 
 ### `display_name`
 
-`function` | [readmenator/_project_config.py:595](../../readmenator/_project_config.py#L595)
+`function` | [readmenator/_project_config.py:609](../../readmenator/_project_config.py#L609)
 
 ```python
 def display_name(config: Config, fallback: str = '') -> str
@@ -218,7 +218,7 @@ Return the configured project name, falling back to a default.
 
 ### `safe_url`
 
-`function` | [readmenator/_project_config.py:609](../../readmenator/_project_config.py#L609)
+`function` | [readmenator/_project_config.py:623](../../readmenator/_project_config.py#L623)
 
 ```python
 def safe_url(url: Any) -> str
@@ -242,7 +242,7 @@ Return a URL only when it is an absolute http(s) link.
 
 ### `safe_color`
 
-`function` | [readmenator/_project_config.py:624](../../readmenator/_project_config.py#L624)
+`function` | [readmenator/_project_config.py:638](../../readmenator/_project_config.py#L638)
 
 ```python
 def safe_color(value: Any, fallback: str = '') -> str
@@ -267,7 +267,7 @@ Return a hex color only when it matches #rgb/#rrggbb/#rrggbbaa.
 
 ### `branding_css`
 
-`function` | [readmenator/_project_config.py:642](../../readmenator/_project_config.py#L642)
+`function` | [readmenator/_project_config.py:656](../../readmenator/_project_config.py#L656)
 
 ```python
 def branding_css(config: Config) -> str
@@ -293,7 +293,7 @@ Return a CSS override block with the configured accent colors.
 
 ### `viewer_config_dict`
 
-`function` | [readmenator/_project_config.py:663](../../readmenator/_project_config.py#L663)
+`function` | [readmenator/_project_config.py:677](../../readmenator/_project_config.py#L677)
 
 ```python
 def viewer_config_dict(config: Config, project_root: Union[str, Path, None] = None) -> Dict[str, Any]
@@ -324,7 +324,7 @@ overrides, and the [maps] source-viewer budgets.
 
 ### `write_viewer_config`
 
-`function` | [readmenator/_project_config.py:717](../../readmenator/_project_config.py#L717)
+`function` | [readmenator/_project_config.py:731](../../readmenator/_project_config.py#L731)
 
 ```python
 def write_viewer_config(maps_dir: Union[str, Path], config: Config, project_root: Union[str, Path, None] = None) -> Optional[Path]
@@ -376,7 +376,7 @@ TOML_MAP: Dict[Tuple[str, str], str]
 
 ### `CONFIG_TO_TOML`
 
-`constant` | [readmenator/_project_config.py:108](../../readmenator/_project_config.py#L108)
+`constant` | [readmenator/_project_config.py:114](../../readmenator/_project_config.py#L114)
 
 ```python
 CONFIG_TO_TOML: Dict[str, Tuple[str, str]] = {v: k for k, v in TOML_MAP.items()}
@@ -388,7 +388,7 @@ CONFIG_TO_TOML: Dict[str, Tuple[str, str]] = {v: k for k, v in TOML_MAP.items()}
 
 ### `VIEWER_TOML_KEYS`
 
-`constant` | [readmenator/_project_config.py:111](../../readmenator/_project_config.py#L111)
+`constant` | [readmenator/_project_config.py:117](../../readmenator/_project_config.py#L117)
 
 ```python
 VIEWER_TOML_KEYS
@@ -400,7 +400,7 @@ VIEWER_TOML_KEYS
 
 ### `BRANDING_TOML_KEYS`
 
-`constant` | [readmenator/_project_config.py:118](../../readmenator/_project_config.py#L118)
+`constant` | [readmenator/_project_config.py:124](../../readmenator/_project_config.py#L124)
 
 ```python
 BRANDING_TOML_KEYS
@@ -412,7 +412,7 @@ BRANDING_TOML_KEYS
 
 ### `MESSAGES_TOML_KEYS`
 
-`constant` | [readmenator/_project_config.py:124](../../readmenator/_project_config.py#L124)
+`constant` | [readmenator/_project_config.py:130](../../readmenator/_project_config.py#L130)
 
 ```python
 MESSAGES_TOML_KEYS
@@ -424,7 +424,7 @@ MESSAGES_TOML_KEYS
 
 ### `MAPS_TOML_KEYS`
 
-`constant` | [readmenator/_project_config.py:131](../../readmenator/_project_config.py#L131)
+`constant` | [readmenator/_project_config.py:137](../../readmenator/_project_config.py#L137)
 
 ```python
 MAPS_TOML_KEYS = ('sourceview_max_files', 'sourceview_max_total_chars')

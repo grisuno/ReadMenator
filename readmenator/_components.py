@@ -757,7 +757,7 @@ class ComponentDiagramBuilder:
         slots = {cid: pos for pos, cid in enumerate(names)}
         parts = [f'<svg class="thumb" viewBox="0 0 {w} {h}" aria-hidden="true" focusable="false">']
         drawn = 0
-        for relation in relations:
+        for relation in relations[: self._config.COMPONENTS_THUMB_MAX_RELATIONS]:
             a = slots.get(str(relation.get("src_id", "")))
             b = slots.get(str(relation.get("dst_id", "")))
             if a is None or b is None or a == b:

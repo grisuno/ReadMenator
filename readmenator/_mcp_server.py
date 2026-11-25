@@ -557,8 +557,26 @@ class MCPServer:
                     "note": {"type": "string", "description": "One self-contained line"},
                     "kind": {"type": "string",
                              "description": "business, decision, rule, workflow, style, deliverable, gotcha, todo, note"},
+                    "sem": {"type": "string", "description":
+                            "Optional comma-separated semantic seeds (synonyms) stored as | sem: "
+                            "so zero-inference recall matches the note in other words"},
                 },
                 "required": ["note"],
+            },
+        ))
+        self.register_tool(MCPTool(
+            "readmenator.recall",
+            "Zero-inference recall: score MEMORY.md session notes against a query with "
+            "lexical overlap plus write-time | sem: seeds, boosted by Hebbian co-activation "
+            "from past recalls. No embeddings, no LLM calls. Winners strengthen the graph.",
+            self._tool_recall,
+            {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Free-text query"},
+                    "top_k": {"type": "integer", "description": "Winners kept (default 5)"},
+                },
+                "required": ["query"],
             },
         ))
         self.register_resource(MCPResource(
@@ -915,12 +933,19 @@ class MCPServer:
         """Return the project memory document."""
         return self._app.memory(self._target_dir)
 
-    def _tool_remember(self, note: str, kind: str = "note") -> str:
+    def _tool_remember(self, note: str, kind: str = "note", sem: str = "") -> str:
         """Append a note to the preserved session log."""
         try:
-            return self._app.remember(self._target_dir, note, kind)
+            return self._app.remember(self._target_dir, note, kind, sem=sem)
         except ValueError as exc:
             raise MCPError(INVALID_PARAMS, str(exc))
+
+    def _tool_recall(self, query: str, top_k: int = 0) -> str:
+        """Zero-inference recall over the session log."""
+        hits = self._app.recall(self._target_dir, query, top_k=top_k)
+        if not hits:
+            return "No notes matched. Record context with readmenator.remember (sem seeds help)."
+        return "\n".join(hit.line() for hit in hits)
 
     def _tool_graphrag(self, query: str, mode: str = "auto", budget_tokens: int = 0) -> str:
         """Return a GraphRAG context for a question."""

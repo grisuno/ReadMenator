@@ -1,10 +1,10 @@
 # readmenator: _flowcharts
 
-*Community 6 | 12 files | cohesion 0.44*
+*Community 5 | 14 files | cohesion 0.41*
 
 ## Definition
 
-This community groups 12 file(s) rooted at `readmenator` with dominant language py (cohesion 0.44). Central symbols: `ApiDocsWriter`, `ApiEntity`, `ApiLinker`, `ApiMarkdownRenderer`, `ApiParam`, `ApiReference`, `ApiReferenceBuilder`, `ArchitectureDiagramBuilder`. Core file: `readmenator/_flowcharts.py` (54 symbols). Documented purpose: Deterministic API reference model: extraction, cross-references, coverage.  Builds a Sphinx / Doxygen style API reference from the scanned graph with zero token.
+This community groups 14 file(s) rooted at `readmenator` with dominant language py (cohesion 0.41). Central symbols: `ApiDocsWriter`, `ApiEntity`, `ApiLinker`, `ApiMarkdownRenderer`, `ApiParam`, `ApiReference`, `ApiReferenceBuilder`, `ArchitectureDiagramBuilder`. Core file: `readmenator/_flowcharts.py` (54 symbols). Documented purpose: Deterministic API reference model: extraction, cross-references, coverage.  Builds a Sphinx / Doxygen style API reference from the scanned graph with zero token.
 
 ## Files
 
@@ -14,12 +14,14 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 | `readmenator/_apidocs_page.py` | py | presentation | 2 | yes |
 | `readmenator/_apidocs_render.py` | py | presentation | 45 | yes |
 | `readmenator/_docstrings.py` | py | utility | 30 | yes |
+| `readmenator/_documentation.py` | py | utility | 31 | yes |
 | `readmenator/_flowcharts.py` | py | utility | 54 | yes |
 | `readmenator/_flowlayout.py` | py | utility | 11 | yes |
 | `readmenator/_flowpage.py` | py | utility | 3 | yes |
 | `readmenator/_pytypes.py` | py | utility | 16 | yes |
 | `readmenator/_symindex.py` | py | utility | 22 | yes |
 | `tests/test_apidocs.py` | py | testing | 48 | yes |
+| `tests/test_documentation.py` | py | testing | 29 | no |
 | `tests/test_flowcharts.py` | py | testing | 35 | yes |
 | `tests/test_symindex.py` | py | testing | 10 | yes |
 
@@ -58,28 +60,37 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 27
-- Cross-boundary resolved imports (EXTRACTED): 35
+- Internal resolved imports (EXTRACTED): 30
+- Cross-boundary resolved imports (EXTRACTED): 48
 
 ## Connections
 
-- [EXTRACTED] depends_on community 3 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
-- [EXTRACTED] depends_on community 6 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 6 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 6 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.
-- [EXTRACTED] depends_on community 4 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/_documentation.py imports readmenator/_flowcharts.py.
+- [EXTRACTED] depends_on community 4 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 5 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 5 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 5 <-> 3 (strength 0.9): Extracted import edge crosses communities: readmenator/_apidocs_page.py imports readmenator/_htmlpack.py.
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_symindex.py.
 
 ## Risks
 
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_documentation.py` via `subprocess` (0 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_forcegraph.py` via `subprocess` (1 hops)
 - [taint high] `readmenator/_documentation.py` -> `readmenator/_flowcharts.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_cpg.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_models.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_rank.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_mermaid.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_documentation.py` -> `readmenator/_analytics.py` via `subprocess` (1 hops)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)
 - [layer strict] `tests/test_apidocs.py` (testing) -> `readmenator/_apidocs_render.py` (presentation)
 - [layer strict] `tests/test_flowcharts.py` (testing) -> `readmenator/_apidocs_page.py` (presentation)
 
 ## Open Questions
 
+- Why do 1 file(s) lack file-level docs (e.g. `tests/test_documentation.py`)? What purpose do they serve?
+- Is the dangerous import `subprocess` in `readmenator/_documentation.py` still required, or can it be isolated?
 - What would break if the most connected file in readmenator: _flowcharts changed?
-- Should readmenator: _flowcharts be split, given cohesion 0.44?
+- Should readmenator: _flowcharts be split, given cohesion 0.41?
 
 ## Sources
 
@@ -87,11 +98,13 @@ This community groups 12 file(s) rooted at `readmenator` with dominant language 
 - `readmenator/_apidocs_page.py`
 - `readmenator/_apidocs_render.py`
 - `readmenator/_docstrings.py`
+- `readmenator/_documentation.py`
 - `readmenator/_flowcharts.py`
 - `readmenator/_flowlayout.py`
 - `readmenator/_flowpage.py`
 - `readmenator/_pytypes.py`
 - `readmenator/_symindex.py`
 - `tests/test_apidocs.py`
+- `tests/test_documentation.py`
 - `tests/test_flowcharts.py`
 - `tests/test_symindex.py`

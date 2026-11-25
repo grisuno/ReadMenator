@@ -1,66 +1,34 @@
 # readmenator: _video
 
-readmenator: _video groups 38 files (py) around Config, readmenatorApplication, __init__, ingest_receipts, _scan. Launcher shim that runs the readmenator CLI from a source checkout.
+readmenator: _video groups 13 files (py) around ImportResolver, __init__, _build_stem_index, _build_dir_index, resolve. Git history replay: read release snapshots from a repository.
 
 ```mermaid
 graph LR
     readmenator["readmenator"]
-    root["root"]
     tests["tests"]
-    readmenator -- "calls into" --> tests
-    root -- "calls into" --> readmenator
     tests -- "calls into" --> readmenator
 ```
 
-## readmenator (2.1)
+## readmenator (7.1)
 
-readmenator groups 18 files (py) around Config, readmenatorApplication, __init__, ingest_receipts, _scan. Command line entry point: argument parsing and subcommand dispatch.
+readmenator groups 6 files (py) around ImportResolver, __init__, _build_stem_index, _build_dir_index, resolve. Git history replay: read release snapshots from a repository.
 
-## root (2.2)
+## tests (7.2)
 
-root groups 1 files (py). Launcher shim that runs the readmenator CLI from a source checkout.
-
-## tests (2.3)
-
-tests groups 19 files (py) around TestConfigContract, test_config_is_immutable, test_config_defaults_are_sane, test_ignore_dirs_are_comprehensive, test_plural_map_covers_all_symbol_types. TestCodePropertyGraphContract: Contract: CodePropertyGraph generates valid JSON-LD CPG...
+tests groups 7 files (py) around _git_available, _run_git, _write, TestGitHistoryReader, setUp. Contract tests for the git history reader used by the growth video act.
 
 **Files**:
 
-- readmenator.py
-- readmenator/__main__.py
-- readmenator/_app.py
-- readmenator/_config.py
-- readmenator/_cursorrules_generator.py
-- readmenator/_dataflow.py
-- readmenator/_dead_code.py
 - readmenator/_githistory.py
-- readmenator/_hypotheses.py
-- readmenator/_layers.py
-- readmenator/_linter.py
-- readmenator/_mcp_server.py
-- readmenator/_receipts.py
-- readmenator/_refactorizer.py
+- readmenator/_resolver.py
+- readmenator/_scanner.py
 - readmenator/_soundtrack.py
-- readmenator/_uncertainty.py
+- readmenator/_taint.py
 - readmenator/_video.py
-- readmenator/_watcher.py
-- readmenator/_yaralite.py
-- tests/test_config.py
-- tests/test_cpg.py
-- tests/test_cursorrules.py
-- tests/test_dataflow.py
-- tests/test_dead_code.py
-- tests/test_diagrams.py
-- tests/test_documentation.py
 - tests/test_githistory.py
-- tests/test_htmlpack.py
-- tests/test_integration.py
-- tests/test_linter.py
-- tests/test_mcp_server.py
-- tests/test_parsers.py
-- tests/test_parsers_new.py
-- tests/test_receipts.py
-- tests/test_refactorizer.py
+- tests/test_resolver.py
+- tests/test_scanner.py
 - tests/test_soundtrack.py
-- tests/test_uml.py
+- tests/test_taint.py
+- tests/test_taint_bdd.py
 - tests/test_video.py

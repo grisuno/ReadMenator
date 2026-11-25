@@ -3,6 +3,96 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 
 | Symbol | Kind | File:Line | Signature |
 |--------|------|-----------|-----------|
+| `test_audit_deep_returns_analysis` | method | `tests/test_integration.py:98` | `def test_audit_deep_returns_analysis(self)` |
+| `test_explain_subcommand_works` | method | `tests/test_integration.py:53` | `def test_explain_subcommand_works(self)` |
+| `test_export_sarif_produces_file` | method | `tests/test_integration.py:114` | `def test_export_sarif_produces_file(self)` |
+| `test_full_pipeline_generates_knowledge_base` | method | `tests/test_integration.py:24` | `def test_full_pipeline_generates_knowledge_base(self)` |
+| `test_knowledge_base_contains_cpg` | method | `tests/test_integration.py:81` | `def test_knowledge_base_contains_cpg(self)` |
+| `test_knowledge_base_contains_mermaid` | method | `tests/test_integration.py:40` | `def test_knowledge_base_contains_mermaid(self)` |
+| `test_knowledge_base_contains_statistics_dashboard` | method | `tests/test_integration.py:89` | `def test_knowledge_base_contains_statistics_dashboard(self)` |
+| `test_path_subcommand_works` | method | `tests/test_integration.py:59` | `def test_path_subcommand_works(self)` |
+| `test_privacy_mode_works` | method | `tests/test_integration.py:105` | `def test_privacy_mode_works(self)` |
+| `test_query_subcommand_works` | method | `tests/test_integration.py:48` | `def test_query_subcommand_works(self)` |
+| `test_rebuild` | method | `tests/test_integration.py:71` | `def test_rebuild(self)` |
+| `test_summary_works` | method | `tests/test_integration.py:65` | `def test_summary_works(self)` |
+| `TestAnalyticsContract` | class | `tests/test_interactive_graph.py:255` | `class TestAnalyticsContract(TestCase)` |
+| `TestEmbedContract` | class | `tests/test_interactive_graph.py:291` | `class TestEmbedContract(TestCase)` |
+| `TestExclusionsContract` | class | `tests/test_interactive_graph.py:235` | `class TestExclusionsContract(TestCase)` |
+| `TestExplorerContract` | class | `tests/test_interactive_graph.py:276` | `class TestExplorerContract(TestCase)` |
+| `TestForceGraphContract` | class | `tests/test_interactive_graph.py:53` | `class TestForceGraphContract(TestCase)` |
+| `TestForceGraphExplorerInteraction` | class | `tests/test_interactive_graph.py:511` | `class TestForceGraphExplorerInteraction(TestCase)` |
+| `TestForceGraphInspectorPayload` | class | `tests/test_interactive_graph.py:427` | `class TestForceGraphInspectorPayload(TestCase)` |
+| `TestGalleryCardContract` | class | `tests/test_interactive_graph.py:370` | `class TestGalleryCardContract(TestCase)` |
+| `TestProvenanceContract` | class | `tests/test_interactive_graph.py:212` | `class TestProvenanceContract(TestCase)` |
+| `TestRebuildContract` | class | `tests/test_interactive_graph.py:318` | `class TestRebuildContract(TestCase)` |
+| `TestScanTextContract` | class | `tests/test_interactive_graph.py:134` | `class TestScanTextContract(TestCase)` |
+| `TestYaraLiteContract` | class | `tests/test_interactive_graph.py:159` | `class TestYaraLiteContract(TestCase)` |
+| `_const_json` | function | `tests/test_interactive_graph.py:500` | `def _const_json(html, name)` |
+| `_inline_script` | function | `tests/test_interactive_graph.py:491` | `def _inline_script(html)` |
+| `_node` | function | `tests/test_interactive_graph.py:41` | `def _node(nid, symbols)` |
+| `_run_app` | method | `tests/test_interactive_graph.py:321` | `def _run_app(self, tmp)` |
+| `self_nodes` | function | `tests/test_interactive_graph.py:154` | `def self_nodes()` |
+| `setUp` | method | `tests/test_interactive_graph.py:56` | `def setUp(self)` |
+| `setUp` | method | `tests/test_interactive_graph.py:430` | `def setUp(self)` |
+| `setUp` | method | `tests/test_interactive_graph.py:514` | `def setUp(self)` |
+| `test_audit_flags_snippetless_findings` | method | `tests/test_interactive_graph.py:215` | `def test_audit_flags_snippetless_findings(self)` |
+| `test_build_corpus_maps_every_node` | method | `tests/test_interactive_graph.py:147` | `def test_build_corpus_maps_every_node(self)` |
+| `test_build_for_node_includes_sections` | method | `tests/test_interactive_graph.py:137` | `def test_build_for_node_includes_sections(self)` |
+| `test_build_has_all_sections` | method | `tests/test_interactive_graph.py:258` | `def test_build_has_all_sections(self)` |
+| `test_build_payload_has_heterogeneous_nodes` | method | `tests/test_interactive_graph.py:75` | `def test_build_payload_has_heterogeneous_nodes(self)` |
+| `test_build_payload_maps_communities` | method | `tests/test_interactive_graph.py:83` | `def test_build_payload_maps_communities(self)` |
+| `test_build_state_serves_apis` | method | `tests/test_interactive_graph.py:279` | `def test_build_state_serves_apis(self)` |
+| `test_cluster_groups_similar_files` | method | `tests/test_interactive_graph.py:305` | `def test_cluster_groups_similar_files(self)` |
+| `test_explorer_3d_draws_flat_glyphs_on_overlay` | method | `tests/test_interactive_graph.py:533` | `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)` |
+| `test_explorer_3d_engine_is_pinned` | method | `tests/test_interactive_graph.py:538` | `def test_explorer_3d_engine_is_pinned(self)` |
+| `test_explorer_ambient_motion_honors_reduced_motion` | method | `tests/test_interactive_graph.py:624` | `def test_explorer_ambient_motion_honors_reduced_motion(self)` |
+| `test_explorer_cinema_settings_come_from_config` | method | `tests/test_interactive_graph.py:577` | `def test_explorer_cinema_settings_come_from_config(self)` |
+| `test_explorer_data_cannot_close_the_script` | method | `tests/test_interactive_graph.py:657` | `def test_explorer_data_cannot_close_the_script(self)` |
+| `test_explorer_glows_and_flows_by_default` | method | `tests/test_interactive_graph.py:609` | `def test_explorer_glows_and_flows_by_default(self)` |
+| `test_explorer_hit_tests_against_live_positions` | method | `tests/test_interactive_graph.py:528` | `def test_explorer_hit_tests_against_live_positions(self)` |
+| `test_explorer_motion_effects_honor_reduced_motion` | method | `tests/test_interactive_graph.py:603` | `def test_explorer_motion_effects_honor_reduced_motion(self)` |
+| `test_explorer_overlay_paints_once_per_scene_render` | method | `tests/test_interactive_graph.py:589` | `def test_explorer_overlay_paints_once_per_scene_render(self)` |
+| `test_explorer_placeholders_inside_data_are_left_alone` | method | `tests/test_interactive_graph.py:647` | `def test_explorer_placeholders_inside_data_are_left_alone(self)` |
+| `test_explorer_script_is_valid_javascript` | method | `tests/test_interactive_graph.py:665` | `def test_explorer_script_is_valid_javascript(self)` |
+| `test_explorer_settings_come_from_config` | method | `tests/test_interactive_graph.py:629` | `def test_explorer_settings_come_from_config(self)` |
+| `test_explorer_ships_cinema_mode` | method | `tests/test_interactive_graph.py:572` | `def test_explorer_ships_cinema_mode(self)` |
+| `test_explorer_ships_edge_path_and_lens_actions` | method | `tests/test_interactive_graph.py:544` | `def test_explorer_ships_edge_path_and_lens_actions(self)` |
+| `test_explorer_ships_guided_tour` | method | `tests/test_interactive_graph.py:549` | `def test_explorer_ships_guided_tour(self)` |
+| `test_explorer_ships_motion_effects` | method | `tests/test_interactive_graph.py:593` | `def test_explorer_ships_motion_effects(self)` |
+| `test_explorer_structural_edges_use_their_own_colors` | method | `tests/test_interactive_graph.py:640` | `def test_explorer_structural_edges_use_their_own_colors(self)` |
+| `test_explorer_tour_honors_reduced_motion` | method | `tests/test_interactive_graph.py:566` | `def test_explorer_tour_honors_reduced_motion(self)` |
+| `test_explorer_tour_settings_come_from_config` | method | `tests/test_interactive_graph.py:554` | `def test_explorer_tour_settings_come_from_config(self)` |
+| `test_export_diagrams_writes_forcegraph_and_card` | method | `tests/test_interactive_graph.py:400` | `def test_export_diagrams_writes_forcegraph_and_card(self)` |
+| `test_exporter_delegates_to_forcegraph` | method | `tests/test_interactive_graph.py:128` | `def test_exporter_delegates_to_forcegraph(self)` |
+| `test_family_color_is_deterministic` | method | `tests/test_interactive_graph.py:62` | `def test_family_color_is_deterministic(self)` |
+| `test_filter_findings_removes_excluded` | method | `tests/test_interactive_graph.py:244` | `def test_filter_findings_removes_excluded(self)` |
+| `test_forcegraph_externals_exclude_calls_and_internal_imports` | method | `tests/test_interactive_graph.py:450` | `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)` |
+| `test_forcegraph_file_nodes_carry_inspector_fields` | method | `tests/test_interactive_graph.py:442` | `def test_forcegraph_file_nodes_carry_inspector_fields(self)` |
+| `test_forcegraph_privacy_mode_strips_docs` | method | `tests/test_interactive_graph.py:455` | `def test_forcegraph_privacy_mode_strips_docs(self)` |
+| `test_forcegraph_render_has_inspector_and_layouts` | method | `tests/test_interactive_graph.py:484` | `def test_forcegraph_render_has_inspector_and_layouts(self)` |
+| `test_forcegraph_thumbnail_escapes_colors` | method | `tests/test_interactive_graph.py:463` | `def test_forcegraph_thumbnail_escapes_colors(self)` |
+| `test_forcegraph_thumbnail_respects_budget` | method | `tests/test_interactive_graph.py:471` | `def test_forcegraph_thumbnail_respects_budget(self)` |
+| `test_near_jaccard_prefers_shared_terms` | method | `tests/test_interactive_graph.py:294` | `def test_near_jaccard_prefers_shared_terms(self)` |
+| `test_node_value_dampens_large_files` | method | `tests/test_interactive_graph.py:67` | `def test_node_value_dampens_large_files(self)` |
+| `test_parse_and_match_glob` | method | `tests/test_interactive_graph.py:238` | `def test_parse_and_match_glob(self)` |
+| `test_parse_reports_tiers` | method | `tests/test_interactive_graph.py:185` | `def test_parse_reports_tiers(self)` |
+| `test_publish_appends_extra_card` | method | `tests/test_interactive_graph.py:373` | `def test_publish_appends_extra_card(self)` |
+| `test_render_produces_standalone_html` | method | `tests/test_interactive_graph.py:95` | `def test_render_produces_standalone_html(self)` |
+| `test_render_uses_supported_cdn_fallback` | method | `tests/test_interactive_graph.py:107` | `def test_render_uses_supported_cdn_fallback(self)` |
+| `test_run_matches_any_of_them` | method | `tests/test_interactive_graph.py:191` | `def test_run_matches_any_of_them(self)` |
+| `test_run_requires_cooccurrence` | method | `tests/test_interactive_graph.py:197` | `def test_run_requires_cooccurrence(self)` |
+| `test_run_skips_forcegraph_when_disabled` | method | `tests/test_interactive_graph.py:348` | `def test_run_skips_forcegraph_when_disabled(self)` |
+| `test_run_writes_forcegraph_html` | method | `tests/test_interactive_graph.py:336` | `def test_run_writes_forcegraph_html(self)` |
+| `test_summary_counts_classes` | method | `tests/test_interactive_graph.py:227` | `def test_summary_counts_classes(self)` |
+| `test_validate_counts_rules` | method | `tests/test_interactive_graph.py:204` | `def test_validate_counts_rules(self)` |
+| `test_write_copies_vendor_engine` | method | `tests/test_interactive_graph.py:113` | `def test_write_copies_vendor_engine(self)` |
+| `TestLayerRuleEngineContract` | class | `tests/test_layer_rules.py:10` | `class TestLayerRuleEngineContract(TestCase)` |
+| `_make_node` | method | `tests/test_layer_rules.py:17` | `def _make_node(self, nid, label)` |
+| `setUp` | method | `tests/test_layer_rules.py:13` | `def setUp(self)` |
+| `test_allowed_testing_edges_no_violation` | method | `tests/test_layer_rules.py:46` | `def test_allowed_testing_edges_no_violation(self)` |
+| `test_empty_graph_returns_empty_violations` | method | `tests/test_layer_rules.py:20` | `def test_empty_graph_returns_empty_violations(self)` |
+| `test_forbidden_edge_detected` | method | `tests/test_layer_rules.py:36` | `def test_forbidden_edge_detected(self)` |
+| `test_multiple_violations` | method | `tests/test_layer_rules.py:57` | `def test_multiple_violations(self)` |
 | `test_no_layers_returns_empty_violations` | method | `tests/test_layer_rules.py:24` | `def test_no_layers_returns_empty_violations(self)` |
 | `test_presentation_to_data_access_forbidden` | method | `tests/test_layer_rules.py:115` | `def test_presentation_to_data_access_forbidden(self)` |
 | `test_resolved_edges_also_checked` | method | `tests/test_layer_rules.py:104` | `def test_resolved_edges_also_checked(self)` |
@@ -47,6 +137,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `tearDown` | method | `tests/test_mcp_server.py:33` | `def tearDown(self)` |
 | `test_call_query_tool_missing_required_param_raises` | method | `tests/test_mcp_server.py:154` | `def test_call_query_tool_missing_required_param_raises(self)` |
 | `test_call_query_tool_with_text_returns_results` | method | `tests/test_mcp_server.py:145` | `def test_call_query_tool_with_text_returns_results(self)` |
+| `test_call_recall_tool_matches_sem_seeded_note` | method | `tests/test_mcp_server.py:261` | `def test_call_recall_tool_matches_sem_seeded_note(self)` |
 | `test_call_summary_tool_returns_content` | method | `tests/test_mcp_server.py:132` | `def test_call_summary_tool_returns_content(self)` |
 | `test_call_tool_returns_text_content_list` | method | `tests/test_mcp_server.py:251` | `def test_call_tool_returns_text_content_list(self)` |
 | `test_call_tool_unknown_tool_returns_method_not_found` | method | `tests/test_mcp_server.py:123` | `def test_call_tool_unknown_tool_returns_method_not_found(self)` |
@@ -62,6 +153,7 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_read_resource_kb_returns_markdown` | method | `tests/test_mcp_server.py:205` | `def test_read_resource_kb_returns_markdown(self)` |
 | `test_read_resource_summary_returns_json` | method | `tests/test_mcp_server.py:186` | `def test_read_resource_summary_returns_json(self)` |
 | `test_read_resource_unknown_uri_returns_error` | method | `tests/test_mcp_server.py:197` | `def test_read_resource_unknown_uri_returns_error(self)` |
+| `test_tools_list_includes_recall` | method | `tests/test_mcp_server.py:278` | `def test_tools_list_includes_recall(self)` |
 | `test_uninitialized_request_returns_error` | method | `tests/test_mcp_server.py:75` | `def test_uninitialized_request_returns_error(self)` |
 | `test_unknown_method_returns_error` | method | `tests/test_mcp_server.py:67` | `def test_unknown_method_returns_error(self)` |
 | `TestProjectMemoryContract` | class | `tests/test_memory.py:40` | `class TestProjectMemoryContract(TestCase)` |
@@ -382,119 +474,27 @@ Previous: [SYMBOLS_p5.md](SYMBOLS_p5.md)
 | `test_transition_weight_aggregates_parallel_edges` | method | `tests/test_ranking.py:205` | `def test_transition_weight_aggregates_parallel_edges(self)` |
 | `test_weight_default_confidence` | method | `tests/test_ranking.py:90` | `def test_weight_default_confidence(self)` |
 | `test_weight_is_edge_weight_times_confidence` | method | `tests/test_ranking.py:85` | `def test_weight_is_edge_weight_times_confidence(self)` |
-| `TestReadmeInjectorEdgeCases` | class | `tests/test_readme_injector.py:140` | `class TestReadmeInjectorEdgeCases(TestCase)` |
-| `TestReadmeInjectorFindReadme` | class | `tests/test_readme_injector.py:105` | `class TestReadmeInjectorFindReadme(TestCase)` |
+| `TestReadmeInjectorEdgeCases` | class | `tests/test_readme_injector.py:155` | `class TestReadmeInjectorEdgeCases(TestCase)` |
+| `TestReadmeInjectorFindReadme` | class | `tests/test_readme_injector.py:120` | `class TestReadmeInjectorFindReadme(TestCase)` |
 | `TestReadmeInjectorInjectBehavior` | class | `tests/test_readme_injector.py:16` | `class TestReadmeInjectorInjectBehavior(TestCase)` |
-| `TestReadmeInjectorRemoveBehavior` | class | `tests/test_readme_injector.py:72` | `class TestReadmeInjectorRemoveBehavior(TestCase)` |
+| `TestReadmeInjectorRemoveBehavior` | class | `tests/test_readme_injector.py:87` | `class TestReadmeInjectorRemoveBehavior(TestCase)` |
 | `setUp` | method | `tests/test_readme_injector.py:19` | `def setUp(self)` |
-| `setUp` | method | `tests/test_readme_injector.py:75` | `def setUp(self)` |
-| `setUp` | method | `tests/test_readme_injector.py:108` | `def setUp(self)` |
-| `setUp` | method | `tests/test_readme_injector.py:143` | `def setUp(self)` |
+| `setUp` | method | `tests/test_readme_injector.py:90` | `def setUp(self)` |
+| `setUp` | method | `tests/test_readme_injector.py:123` | `def setUp(self)` |
+| `setUp` | method | `tests/test_readme_injector.py:158` | `def setUp(self)` |
 | `tearDown` | method | `tests/test_readme_injector.py:24` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_readme_injector.py:80` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_readme_injector.py:112` | `def tearDown(self)` |
-| `tearDown` | method | `tests/test_readme_injector.py:148` | `def tearDown(self)` |
-| `test_custom_kb_filename_works` | method | `tests/test_readme_injector.py:160` | `def test_custom_kb_filename_works(self)` |
-| `test_finds_readme_md` | method | `tests/test_readme_injector.py:116` | `def test_finds_readme_md(self)` |
-| `test_finds_readme_rst` | method | `tests/test_readme_injector.py:122` | `def test_finds_readme_rst(self)` |
-| `test_inject_into_empty_readme` | method | `tests/test_readme_injector.py:152` | `def test_inject_into_empty_readme(self)` |
+| `tearDown` | method | `tests/test_readme_injector.py:95` | `def tearDown(self)` |
+| `tearDown` | method | `tests/test_readme_injector.py:127` | `def tearDown(self)` |
+| `tearDown` | method | `tests/test_readme_injector.py:163` | `def tearDown(self)` |
+| `test_custom_kb_filename_works` | method | `tests/test_readme_injector.py:175` | `def test_custom_kb_filename_works(self)` |
+| `test_finds_readme_md` | method | `tests/test_readme_injector.py:131` | `def test_finds_readme_md(self)` |
+| `test_finds_readme_rst` | method | `tests/test_readme_injector.py:137` | `def test_finds_readme_rst(self)` |
+| `test_inject_into_empty_readme` | method | `tests/test_readme_injector.py:167` | `def test_inject_into_empty_readme(self)` |
 | `test_inject_into_markdown_readme_adds_kb_link` | method | `tests/test_readme_injector.py:28` | `def test_inject_into_markdown_readme_adds_kb_link(self)` |
 | `test_inject_into_rst_readme_adds_kb_link` | method | `tests/test_readme_injector.py:39` | `def test_inject_into_rst_readme_adds_kb_link(self)` |
-| `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_readme_injector.py:48` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
-| `test_inject_lists_all_artifacts` | method | `tests/test_readme_injector.py:168` | `def test_inject_lists_all_artifacts(self)` |
-| `test_inject_no_readme_file_returns_false` | method | `tests/test_readme_injector.py:59` | `def test_inject_no_readme_file_returns_false(self)` |
-| `test_inject_preserves_existing_content` | method | `tests/test_readme_injector.py:63` | `def test_inject_preserves_existing_content(self)` |
-| `test_inject_repairs_partial_anchor` | method | `tests/test_readme_injector.py:181` | `def test_inject_repairs_partial_anchor(self)` |
-| `test_prefers_readme_md_over_rst` | method | `tests/test_readme_injector.py:128` | `def test_prefers_readme_md_over_rst(self)` |
-| `test_remove_no_readme_returns_false` | method | `tests/test_readme_injector.py:100` | `def test_remove_no_readme_returns_false(self)` |
-| `test_remove_strips_injected_section` | method | `tests/test_readme_injector.py:84` | `def test_remove_strips_injected_section(self)` |
-| `test_remove_without_injection_returns_false` | method | `tests/test_readme_injector.py:94` | `def test_remove_without_injection_returns_false(self)` |
-| `test_returns_none_when_no_readme` | method | `tests/test_readme_injector.py:135` | `def test_returns_none_when_no_readme(self)` |
-| `TestEdges` | class | `tests/test_receipts.py:155` | `class TestEdges` |
-| `TestHypotheses` | class | `tests/test_receipts.py:297` | `class TestHypotheses` |
-| `TestLoading` | class | `tests/test_receipts.py:127` | `class TestLoading` |
-| `TestReconciler` | class | `tests/test_receipts.py:187` | `class TestReconciler` |
-| `TestUncertainty` | class | `tests/test_receipts.py:238` | `class TestUncertainty` |
-| `_run` | method | `tests/test_receipts.py:188` | `def _run(self, records)` |
-| `_validator` | method | `tests/test_receipts.py:298` | `def _validator(self)` |
-| `test_already_observed_verified` | method | `tests/test_receipts.py:305` | `def test_already_observed_verified(self)` |
-| `test_callee_known_via_class_match_verified` | method | `tests/test_receipts.py:311` | `def test_callee_known_via_class_match_verified(self)` |
-| `test_candidate_edges_partition` | method | `tests/test_receipts.py:178` | `def test_candidate_edges_partition(self)` |
-| `test_command_derived_edges` | method | `tests/test_receipts.py:166` | `def test_command_derived_edges(self)` |
-| `test_confirmation_resolves_candidates` | method | `tests/test_receipts.py:197` | `def test_confirmation_resolves_candidates(self)` |
-| `test_extra_context_preserved` | method | `tests/test_receipts.py:355` | `def test_extra_context_preserved(self)` |
-| `test_feature_vector_shape` | method | `tests/test_receipts.py:239` | `def test_feature_vector_shape(self)` |
-| `test_heuristic_high_for_cli_evidence` | method | `tests/test_receipts.py:247` | `def test_heuristic_high_for_cli_evidence(self)` |
-| `test_heuristic_low_for_unobserved_generic` | method | `tests/test_receipts.py:253` | `def test_heuristic_low_for_unobserved_generic(self)` |
-| `test_json_list_validation` | method | `tests/test_receipts.py:341` | `def test_json_list_validation(self)` |
-| `test_load_bad_schema_rejected` | method | `tests/test_receipts.py:128` | `def test_load_bad_schema_rejected(self, tmp_path)` |
-| `test_load_dir_sorted_and_invalid_skipped` | method | `tests/test_receipts.py:142` | `def test_load_dir_sorted_and_invalid_skipped(self, tmp_path)` |
-| `test_load_valid_record` | method | `tests/test_receipts.py:134` | `def test_load_valid_record(self, tmp_path)` |
-| `test_markdown_lists_platforms_and_states` | method | `tests/test_receipts.py:208` | `def test_markdown_lists_platforms_and_states(self)` |
-| `test_min_confidence_filters` | method | `tests/test_receipts.py:269` | `def test_min_confidence_filters(self)` |
-| `test_missing_dir_returns_empty` | method | `tests/test_receipts.py:151` | `def test_missing_dir_returns_empty(self)` |
-| `test_missing_fields_rejected` | method | `tests/test_receipts.py:351` | `def test_missing_fields_rejected(self)` |
-| `test_observed_edges_explicit` | method | `tests/test_receipts.py:156` | `def test_observed_edges_explicit(self, tmp_path)` |
-| `test_planned_commands_not_observed` | method | `tests/test_receipts.py:173` | `def test_planned_commands_not_observed(self)` |
-| `test_predict_labels_predicted` | method | `tests/test_receipts.py:259` | `def test_predict_labels_predicted(self)` |
-| `test_random_forest_fallback_and_fit` | method | `tests/test_receipts.py:274` | `def test_random_forest_fallback_and_fit(self)` |
-| `test_unknown_callee_rejected` | method | `tests/test_receipts.py:321` | `def test_unknown_callee_rejected(self)` |
-| `test_unknown_caller_assumed_when_allowed` | method | `tests/test_receipts.py:334` | `def test_unknown_caller_assumed_when_allowed(self)` |
-| `test_unknown_caller_rejected_by_default` | method | `tests/test_receipts.py:328` | `def test_unknown_caller_rejected_by_default(self)` |
-| `test_write_pages_artifacts` | method | `tests/test_receipts.py:220` | `def test_write_pages_artifacts(self, tmp_path)` |
-| `TestMonolithRefactorizerContract` | class | `tests/test_refactorizer.py:18` | `class TestMonolithRefactorizerContract(TestCase)` |
-| `_make_edge` | method | `tests/test_refactorizer.py:37` | `def _make_edge(self, src, tgt)` |
-| `_make_node` | method | `tests/test_refactorizer.py:28` | `def _make_node(self, nid, symbols)` |
-| `_make_symbol` | method | `tests/test_refactorizer.py:25` | `def _make_symbol(self, name, kind, line)` |
-| `setUp` | method | `tests/test_refactorizer.py:21` | `def setUp(self)` |
-| `test_analyze_detects_large_file` | method | `tests/test_refactorizer.py:50` | `def test_analyze_detects_large_file(self)` |
-| `test_analyze_empty_graph_returns_empty` | method | `tests/test_refactorizer.py:40` | `def test_analyze_empty_graph_returns_empty(self)` |
-| `test_analyze_estimates_impact_from_resolved_edges` | method | `tests/test_refactorizer.py:97` | `def test_analyze_estimates_impact_from_resolved_edges(self)` |
-| `test_analyze_generates_extract_class_for_multiple_classes` | method | `tests/test_refactorizer.py:59` | `def test_analyze_generates_extract_class_for_multiple_classes(self)` |
-| `test_analyze_generates_extract_function_for_multiple_functions` | method | `tests/test_refactorizer.py:74` | `def test_analyze_generates_extract_function_for_multiple_functions(self)` |
-| `test_analyze_ignores_small_files` | method | `tests/test_refactorizer.py:44` | `def test_analyze_ignores_small_files(self)` |
-| `test_analyze_respects_max_files_limit` | method | `tests/test_refactorizer.py:173` | `def test_analyze_respects_max_files_limit(self)` |
-| `test_analyze_sorted_by_line_count` | method | `tests/test_refactorizer.py:160` | `def test_analyze_sorted_by_line_count(self)` |
-| `test_analyze_splits_file_with_many_symbols` | method | `tests/test_refactorizer.py:89` | `def test_analyze_splits_file_with_many_symbols(self)` |
-| `test_generate_script_contains_sed_commands` | method | `tests/test_refactorizer.py:140` | `def test_generate_script_contains_sed_commands(self)` |
-| `test_generate_script_contains_set_e` | method | `tests/test_refactorizer.py:129` | `def test_generate_script_contains_set_e(self)` |
-| `test_generate_script_contains_shebang` | method | `tests/test_refactorizer.py:109` | `def test_generate_script_contains_shebang(self)` |
-| `TestImportResolverContract` | class | `tests/test_resolver.py:15` | `class TestImportResolverContract(TestCase)` |
-| `test_resolves_c_extensionless_header` | method | `tests/test_resolver.py:100` | `def test_resolves_c_extensionless_header(self)` |
-| `test_resolves_c_header_stem_across_dirs` | method | `tests/test_resolver.py:121` | `def test_resolves_c_header_stem_across_dirs(self)` |
-| `test_resolves_c_quoted_header_same_dir` | method | `tests/test_resolver.py:86` | `def test_resolves_c_quoted_header_same_dir(self)` |
-| `test_resolves_c_quoted_header_subdir` | method | `tests/test_resolver.py:93` | `def test_resolves_c_quoted_header_subdir(self)` |
-| `test_resolves_c_source_from_header_dir` | method | `tests/test_resolver.py:107` | `def test_resolves_c_source_from_header_dir(self)` |
-| `test_resolves_cpp_header_same_dir` | method | `tests/test_resolver.py:114` | `def test_resolves_cpp_header_same_dir(self)` |
-| `test_resolves_extensionless_python_import` | method | `tests/test_resolver.py:32` | `def test_resolves_extensionless_python_import(self)` |
-| `test_resolves_go_import` | method | `tests/test_resolver.py:72` | `def test_resolves_go_import(self)` |
-| `test_resolves_include_dir_suffix_match` | method | `tests/test_resolver.py:149` | `def test_resolves_include_dir_suffix_match(self)` |
-| `test_resolves_package_init` | method | `tests/test_resolver.py:39` | `def test_resolves_package_init(self)` |
-| `test_resolves_parent_dir_include` | method | `tests/test_resolver.py:135` | `def test_resolves_parent_dir_include(self)` |
-| `test_resolves_parent_dir_include_despite_ambiguous_stem` | method | `tests/test_resolver.py:142` | `def test_resolves_parent_dir_include_despite_ambiguous_stem(self)` |
-| `test_resolves_python_module_dotpath` | method | `tests/test_resolver.py:18` | `def test_resolves_python_module_dotpath(self)` |
-| `test_resolves_relative_import` | method | `tests/test_resolver.py:25` | `def test_resolves_relative_import(self)` |
-| `test_resolves_same_directory_import` | method | `tests/test_resolver.py:79` | `def test_resolves_same_directory_import(self)` |
-| `test_resolves_stem_match_when_unique` | method | `tests/test_resolver.py:60` | `def test_resolves_stem_match_when_unique(self)` |
-| `test_returns_none_for_ambiguous_suffix_match` | method | `tests/test_resolver.py:156` | `def test_returns_none_for_ambiguous_suffix_match(self)` |
-| `test_returns_none_for_c_system_header` | method | `tests/test_resolver.py:128` | `def test_returns_none_for_c_system_header(self)` |
-| `test_returns_none_for_empty_import` | method | `tests/test_resolver.py:67` | `def test_returns_none_for_empty_import(self)` |
-| `test_returns_none_for_external_stdlib` | method | `tests/test_resolver.py:46` | `def test_returns_none_for_external_stdlib(self)` |
-| `test_returns_none_for_unknown_import` | method | `tests/test_resolver.py:53` | `def test_returns_none_for_unknown_import(self)` |
-| `TestRuleGeneratorContract` | class | `tests/test_rule_gen.py:12` | `class TestRuleGeneratorContract(TestCase)` |
-| `_make_node` | method | `tests/test_rule_gen.py:19` | `def _make_node(self, nid, label, lang)` |
-| `_make_node_with_symbols` | method | `tests/test_rule_gen.py:29` | `def _make_node_with_symbols(self, nid, sym_count)` |
-| `setUp` | method | `tests/test_rule_gen.py:15` | `def setUp(self)` |
-| `test_antipattern_threshold_from_config` | method | `tests/test_rule_gen.py:67` | `def test_antipattern_threshold_from_config(self)` |
-| `test_detects_antipatterns_with_content` | method | `tests/test_rule_gen.py:56` | `def test_detects_antipatterns_with_content(self)` |
-| `test_empty_nodes_returns_empty_rules` | method | `tests/test_rule_gen.py:44` | `def test_empty_nodes_returns_empty_rules(self)` |
-| `test_generates_rules_for_function_heavy_language` | method | `tests/test_rule_gen.py:48` | `def test_generates_rules_for_function_heavy_language(self)` |
-| `test_rule_id_increments` | method | `tests/test_rule_gen.py:90` | `def test_rule_id_increments(self)` |
-| `test_write_rules_creates_files` | method | `tests/test_rule_gen.py:77` | `def test_write_rules_creates_files(self)` |
-| `TestSarifExporterContract` | class | `tests/test_sarif.py:11` | `class TestSarifExporterContract(TestCase)` |
-| `_make_finding` | method | `tests/test_sarif.py:18` | `def _make_finding(self, file_path, line, severity, rule_id, description, snippet, cwe)` |
-| `setUp` | method | `tests/test_sarif.py:14` | `def setUp(self)` |
-| `test_empty_findings_produces_valid_sarif` | method | `tests/test_sarif.py:97` | `def test_empty_findings_produces_valid_sarif(self)` |
-| `test_export_includes_result` | method | `tests/test_sarif.py:62` | `def test_export_includes_result(self)` |
+| `test_inject_is_idempotent_does_not_duplicate` | method | `tests/test_readme_injector.py:63` | `def test_inject_is_idempotent_does_not_duplicate(self)` |
+| `test_inject_lists_all_artifacts` | method | `tests/test_readme_injector.py:183` | `def test_inject_lists_all_artifacts(self)` |
+| `test_inject_no_readme_file_returns_false` | method | `tests/test_readme_injector.py:74` | `def test_inject_no_readme_file_returns_false(self)` |
+| `test_inject_preserves_existing_content` | method | `tests/test_readme_injector.py:78` | `def test_inject_preserves_existing_content(self)` |
 
 Next: [SYMBOLS_p7.md](SYMBOLS_p7.md)

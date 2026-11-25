@@ -1,6 +1,84 @@
 # Subsystem: tests (page 3 of 5)
 Previous: [KB_tests_p2.md](KB_tests_p2.md)
 
+## tests/test_interactive_graph.py
+- Doc: Contract tests for the interactive explorer modules.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_node` (function, line 41) `def _node(nid, symbols)`
+  - `TestForceGraphContract` (class, line 53) `class TestForceGraphContract(TestCase)`
+  - `TestScanTextContract` (class, line 134) `class TestScanTextContract(TestCase)`
+  - `self_nodes` (function, line 154) `def self_nodes()`
+  - `TestYaraLiteContract` (class, line 159) `class TestYaraLiteContract(TestCase)`
+  - `TestProvenanceContract` (class, line 212) `class TestProvenanceContract(TestCase)`
+  - `TestExclusionsContract` (class, line 235) `class TestExclusionsContract(TestCase)`
+  - `TestAnalyticsContract` (class, line 255) `class TestAnalyticsContract(TestCase)`
+  - `TestExplorerContract` (class, line 276) `class TestExplorerContract(TestCase)`
+  - `TestEmbedContract` (class, line 291) `class TestEmbedContract(TestCase)`
+  - `TestRebuildContract` (class, line 318) `class TestRebuildContract(TestCase)`
+  - `TestGalleryCardContract` (class, line 370) `class TestGalleryCardContract(TestCase)`
+  - `TestForceGraphInspectorPayload` (class, line 427) `class TestForceGraphInspectorPayload(TestCase)`
+  - `_inline_script` (function, line 491) `def _inline_script(html)`
+  - `_const_json` (function, line 500) `def _const_json(html, name)`
+  - `TestForceGraphExplorerInteraction` (class, line 511) `class TestForceGraphExplorerInteraction(TestCase)`
+  - `setUp` (method, line 56) `def setUp(self)`
+  - `test_family_color_is_deterministic` (method, line 62) `def test_family_color_is_deterministic(self)`
+  - `test_node_value_dampens_large_files` (method, line 67) `def test_node_value_dampens_large_files(self)`
+  - `test_build_payload_has_heterogeneous_nodes` (method, line 75) `def test_build_payload_has_heterogeneous_nodes(self)`
+  - `test_build_payload_maps_communities` (method, line 83) `def test_build_payload_maps_communities(self)`
+  - `test_render_produces_standalone_html` (method, line 95) `def test_render_produces_standalone_html(self)`
+  - `test_render_uses_supported_cdn_fallback` (method, line 107) `def test_render_uses_supported_cdn_fallback(self)`
+  - `test_write_copies_vendor_engine` (method, line 113) `def test_write_copies_vendor_engine(self)`
+  - `test_exporter_delegates_to_forcegraph` (method, line 128) `def test_exporter_delegates_to_forcegraph(self)`
+  - `test_build_for_node_includes_sections` (method, line 137) `def test_build_for_node_includes_sections(self)`
+  - `test_build_corpus_maps_every_node` (method, line 147) `def test_build_corpus_maps_every_node(self)`
+  - `test_parse_reports_tiers` (method, line 185) `def test_parse_reports_tiers(self)`
+  - `test_run_matches_any_of_them` (method, line 191) `def test_run_matches_any_of_them(self)`
+  - `test_run_requires_cooccurrence` (method, line 197) `def test_run_requires_cooccurrence(self)`
+  - `test_validate_counts_rules` (method, line 204) `def test_validate_counts_rules(self)`
+  - `test_audit_flags_snippetless_findings` (method, line 215) `def test_audit_flags_snippetless_findings(self)`
+  - `test_summary_counts_classes` (method, line 227) `def test_summary_counts_classes(self)`
+  - `test_parse_and_match_glob` (method, line 238) `def test_parse_and_match_glob(self)`
+  - `test_filter_findings_removes_excluded` (method, line 244) `def test_filter_findings_removes_excluded(self)`
+  - `test_build_has_all_sections` (method, line 258) `def test_build_has_all_sections(self)`
+  - `test_build_state_serves_apis` (method, line 279) `def test_build_state_serves_apis(self)`
+  - `test_near_jaccard_prefers_shared_terms` (method, line 294) `def test_near_jaccard_prefers_shared_terms(self)`
+  - `test_cluster_groups_similar_files` (method, line 305) `def test_cluster_groups_similar_files(self)`
+  - `_run_app` (method, line 321) `def _run_app(self, tmp)`
+  - `test_run_writes_forcegraph_html` (method, line 336) `def test_run_writes_forcegraph_html(self)`
+  - `test_run_skips_forcegraph_when_disabled` (method, line 348) `def test_run_skips_forcegraph_when_disabled(self)`
+  - `test_publish_appends_extra_card` (method, line 373) `def test_publish_appends_extra_card(self)`
+  - `test_export_diagrams_writes_forcegraph_and_card` (method, line 400) `def test_export_diagrams_writes_forcegraph_and_card(self)`
+  - `setUp` (method, line 430) `def setUp(self)`
+  - `test_forcegraph_file_nodes_carry_inspector_fields` (method, line 442) `def test_forcegraph_file_nodes_carry_inspector_fields(self)`
+  - `test_forcegraph_externals_exclude_calls_and_internal_imports` (method, line 450) `def test_forcegraph_externals_exclude_calls_and_internal_imports(self)`
+  - `test_forcegraph_privacy_mode_strips_docs` (method, line 455) `def test_forcegraph_privacy_mode_strips_docs(self)`
+  - `test_forcegraph_thumbnail_escapes_colors` (method, line 463) `def test_forcegraph_thumbnail_escapes_colors(self)`
+  - `test_forcegraph_thumbnail_respects_budget` (method, line 471) `def test_forcegraph_thumbnail_respects_budget(self)`
+  - `test_forcegraph_render_has_inspector_and_layouts` (method, line 484) `def test_forcegraph_render_has_inspector_and_layouts(self)`
+  - `setUp` (method, line 514) `def setUp(self)`
+  - `test_explorer_hit_tests_against_live_positions` (method, line 528) `def test_explorer_hit_tests_against_live_positions(self)`
+  - `test_explorer_3d_draws_flat_glyphs_on_overlay` (method, line 533) `def test_explorer_3d_draws_flat_glyphs_on_overlay(self)`
+  - `test_explorer_3d_engine_is_pinned` (method, line 538) `def test_explorer_3d_engine_is_pinned(self)`
+  - `test_explorer_ships_edge_path_and_lens_actions` (method, line 544) `def test_explorer_ships_edge_path_and_lens_actions(self)`
+  - `test_explorer_ships_guided_tour` (method, line 549) `def test_explorer_ships_guided_tour(self)`
+  - `test_explorer_tour_settings_come_from_config` (method, line 554) `def test_explorer_tour_settings_come_from_config(self)`
+  - `test_explorer_tour_honors_reduced_motion` (method, line 566) `def test_explorer_tour_honors_reduced_motion(self)`
+  - `test_explorer_ships_cinema_mode` (method, line 572) `def test_explorer_ships_cinema_mode(self)`
+  - `test_explorer_cinema_settings_come_from_config` (method, line 577) `def test_explorer_cinema_settings_come_from_config(self)`
+  - `test_explorer_overlay_paints_once_per_scene_render` (method, line 589) `def test_explorer_overlay_paints_once_per_scene_render(self)`
+  - `test_explorer_ships_motion_effects` (method, line 593) `def test_explorer_ships_motion_effects(self)`
+  - `test_explorer_motion_effects_honor_reduced_motion` (method, line 603) `def test_explorer_motion_effects_honor_reduced_motion(self)`
+  - `test_explorer_glows_and_flows_by_default` (method, line 609) `def test_explorer_glows_and_flows_by_default(self)`
+  - `test_explorer_ambient_motion_honors_reduced_motion` (method, line 624) `def test_explorer_ambient_motion_honors_reduced_motion(self)`
+  - `test_explorer_settings_come_from_config` (method, line 629) `def test_explorer_settings_come_from_config(self)`
+  - `test_explorer_structural_edges_use_their_own_colors` (method, line 640) `def test_explorer_structural_edges_use_their_own_colors(self)`
+  - `test_explorer_placeholders_inside_data_are_left_alone` (method, line 647) `def test_explorer_placeholders_inside_data_are_left_alone(self)`
+  - `test_explorer_data_cannot_close_the_script` (method, line 657) `def test_explorer_data_cannot_close_the_script(self)`
+  - `test_explorer_script_is_valid_javascript` (method, line 665) `def test_explorer_script_is_valid_javascript(self)`
+- Depends on: `readmenator/_analytics.py`, `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_embed.py`, `readmenator/_exclusions.py`, `readmenator/_explorer.py`, `readmenator/_exporter.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`, `readmenator/_provenance.py`, `readmenator/_scantext.py`, `readmenator/_yaralite.py`
+
 ## tests/test_layer_rules.py
 - Doc: TestLayerRuleEngineContract: Contract: LayerRuleEngine detects architectural layer violations.
 - Layer: testing
@@ -95,6 +173,8 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_path_tool_requires_two_params` (method, line 234) `def test_path_tool_requires_two_params(self)`
   - `test_parse_error_for_invalid_json` (method, line 243) `def test_parse_error_for_invalid_json(self)`
   - `test_call_tool_returns_text_content_list` (method, line 251) `def test_call_tool_returns_text_content_list(self)`
+  - `test_call_recall_tool_matches_sem_seeded_note` (method, line 261) `def test_call_recall_tool_matches_sem_seeded_note(self)`
+  - `test_tools_list_includes_recall` (method, line 278) `def test_tools_list_includes_recall(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_config.py`, `readmenator/_mcp_server.py`
 
 ## tests/test_memory.py
@@ -402,85 +482,6 @@ Previous: [KB_tests_p2.md](KB_tests_p2.md)
   - `test_query_returns_matching_symbols` (method, line 98) `def test_query_returns_matching_symbols(self)`
   - `test_query_returns_file_matches` (method, line 102) `def test_query_returns_file_matches(self)`
 - Depends on: `readmenator/_models.py`, `readmenator/_query.py`
-
-## tests/test_ranking.py
-- Doc: Contract tests for the category theory and ranking system.
-- Layer: testing
-- Language: py
-- Symbols:
-  - `TestEdgeKind` (class, line 60) `class TestEdgeKind`
-  - `TestMorphism` (class, line 84) `class TestMorphism`
-  - `TestCategory` (class, line 104) `class TestCategory`
-  - `TestTypedGraph` (class, line 183) `class TestTypedGraph`
-  - `_make_test_graph` (function, line 238) `def _make_test_graph()`
-  - `TestGlobalPageRank` (class, line 247) `class TestGlobalPageRank`
-  - `TestPersonalizedPageRank` (class, line 288) `class TestPersonalizedPageRank`
-  - `TestHITS` (class, line 325) `class TestHITS`
-  - `TestSeedGeneration` (class, line 350) `class TestSeedGeneration`
-  - `TestCompositeRanker` (class, line 403) `class TestCompositeRanker`
-  - `TestProjections` (class, line 490) `class TestProjections`
-  - `TestExplain` (class, line 539) `class TestExplain`
-  - `TestIntegration` (class, line 587) `class TestIntegration`
-  - `test_all_edge_kinds_have_weights` (method, line 61) `def test_all_edge_kinds_have_weights(self)`
-  - `test_infer_edge_kind_maps_correctly` (method, line 66) `def test_infer_edge_kind_maps_correctly(self)`
-  - `test_infer_edge_kind_falls_back` (method, line 71) `def test_infer_edge_kind_falls_back(self)`
-  - `test_edge_kind_is_str_enum` (method, line 75) `def test_edge_kind_is_str_enum(self)`
-  - `test_weight_is_edge_weight_times_confidence` (method, line 85) `def test_weight_is_edge_weight_times_confidence(self)`
-  - `test_weight_default_confidence` (method, line 90) `def test_weight_default_confidence(self)`
-  - `test_morphism_is_frozen` (method, line 94) `def test_morphism_is_frozen(self)`
-  - `test_empty_category` (method, line 105) `def test_empty_category(self)`
-  - `test_add_object_and_morphism` (method, line 110) `def test_add_object_and_morphism(self)`
-  - `test_outgoing_and_incoming` (method, line 118) `def test_outgoing_and_incoming(self)`
-  - `test_compose_same_kind` (method, line 130) `def test_compose_same_kind(self)`
-  - `test_compose_imports_then_defines` (method, line 140) `def test_compose_imports_then_defines(self)`
-  - `test_compose_incompatible_returns_none` (method, line 148) `def test_compose_incompatible_returns_none(self)`
-  - `test_compose_mismatched_target_source` (method, line 155) `def test_compose_mismatched_target_source(self)`
-  - `test_paths_finds_composition_chains` (method, line 162) `def test_paths_finds_composition_chains(self)`
-  - `test_paths_empty_when_no_route` (method, line 171) `def test_paths_empty_when_no_route(self)`
-  - `test_empty_graph` (method, line 184) `def test_empty_graph(self)`
-  - `test_stochastic_row_normalizes_to_one` (method, line 190) `def test_stochastic_row_normalizes_to_one(self)`
-  - `test_stochastic_row_empty_for_dangling` (method, line 199) `def test_stochastic_row_empty_for_dangling(self)`
-  - `test_transition_weight_aggregates_parallel_edges` (method, line 205) `def test_transition_weight_aggregates_parallel_edges(self)`
-  - `test_build_category_from_edges` (method, line 214) `def test_build_category_from_edges(self)`
-  - `test_build_category_from_edges_filters_by_node_ids` (method, line 225) `def test_build_category_from_edges_filters_by_node_ids(self)`
-  - `test_scores_sum_to_one` (method, line 248) `def test_scores_sum_to_one(self)`
-  - `test_all_nodes_have_positive_score` (method, line 254) `def test_all_nodes_have_positive_score(self)`
-  - `test_converges_within_max_iter` (method, line 260) `def test_converges_within_max_iter(self)`
-  - `test_stable_across_calls` (method, line 266) `def test_stable_across_calls(self)`
-  - `test_dangling_node_handled` (method, line 273) `def test_dangling_node_handled(self)`
-  - `test_empty_graph` (method, line 284) `def test_empty_graph(self)`
-  - `test_seed_node_gets_highest_score` (method, line 289) `def test_seed_node_gets_highest_score(self)`
-  - `test_scores_sum_to_one` (method, line 296) `def test_scores_sum_to_one(self)`
-  - `test_different_seeds_produce_different_rankings` (method, line 303) `def test_different_seeds_produce_different_rankings(self)`
-  - `test_empty_seeds_uses_uniform` (method, line 310) `def test_empty_seeds_uses_uniform(self)`
-  - `test_multi_seed` (method, line 317) `def test_multi_seed(self)`
-  - `test_authorities_and_hubs_have_positive_scores` (method, line 326) `def test_authorities_and_hubs_have_positive_scores(self)`
-  - `test_authorities_l2_normalized` (method, line 333) `def test_authorities_l2_normalized(self)`
-  - `test_hubs_l2_normalized` (method, line 339) `def test_hubs_l2_normalized(self)`
-  - `test_build_seeds_from_query_matches_node_id` (method, line 351) `def test_build_seeds_from_query_matches_node_id(self)`
-  - `test_build_seeds_from_query_matches_symbol` (method, line 363) `def test_build_seeds_from_query_matches_symbol(self)`
-  - `test_build_seeds_from_query_no_match_returns_empty` (method, line 374) `def test_build_seeds_from_query_no_match_returns_empty(self)`
-  - `test_build_seeds_for_context` (method, line 383) `def test_build_seeds_for_context(self)`
-  - `test_build_seeds_for_context_no_match` (method, line 392) `def test_build_seeds_for_context_no_match(self)`
-  - `test_rank_returns_sorted_results` (method, line 404) `def test_rank_returns_sorted_results(self)`
-  - `test_rank_items_have_all_score_fields` (method, line 421) `def test_rank_items_have_all_score_fields(self)`
-  - `test_noise_penalty_applied` (method, line 447) `def test_noise_penalty_applied(self)`
-  - `test_top_n` (method, line 466) `def test_top_n(self)`
-  - `test_explain_returns_none_for_missing` (method, line 479) `def test_explain_returns_none_for_missing(self)`
-  - `test_identity_projection_passes_all` (method, line 491) `def test_identity_projection_passes_all(self)`
-  - `test_doc_projection_filters_undocumented` (method, line 498) `def test_doc_projection_filters_undocumented(self)`
-  - `test_doc_projection_filters_morphism_kind` (method, line 506) `def test_doc_projection_filters_morphism_kind(self)`
-  - `test_apply_view_architecture` (method, line 512) `def test_apply_view_architecture(self)`
-  - `test_apply_view_reverse` (method, line 521) `def test_apply_view_reverse(self)`
-  - `test_apply_view_empty` (method, line 528) `def test_apply_view_empty(self)`
-  - `test_explain_rank_found` (method, line 540) `def test_explain_rank_found(self)`
-  - `test_explain_rank_not_found` (method, line 559) `def test_explain_rank_not_found(self)`
-  - `test_rank_summary_format` (method, line 565) `def test_rank_summary_format(self)`
-  - `test_category_from_real_edges` (method, line 588) `def test_category_from_real_edges(self)`
-  - `test_pagerank_on_real_category` (method, line 613) `def test_pagerank_on_real_category(self)`
-  - `test_ppr_favors_seed` (method, line 625) `def test_ppr_favors_seed(self)`
-  - `test_ranker_from_real_data` (method, line 637) `def test_ranker_from_real_data(self)`
-- Depends on: `readmenator/_category.py`, `readmenator/_explain.py`, `readmenator/_models.py`, `readmenator/_projections.py`, `readmenator/_rank.py`
 
 
 Next: [KB_tests_p4.md](KB_tests_p4.md)

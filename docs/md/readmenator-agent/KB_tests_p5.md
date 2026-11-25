@@ -1,6 +1,95 @@
 # Subsystem: tests (page 5 of 5)
 Previous: [KB_tests_p4.md](KB_tests_p4.md)
 
+## tests/test_taint_bdd.py
+- Doc: BDD-style contract tests for taint propagation analysis.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `_build_project_files` (function, line 29) `def _build_project_files(project, root)`
+  - `_scan_project` (function, line 36) `def _scan_project(root, cfg)`
+  - `_run_taint` (function, line 54) `def _run_taint(files, cfg)`
+  - `test_direct_dangerous_import` (function, line 71) `def test_direct_dangerous_import()`
+  - `test_taint_propagates_chain` (function, line 75) `def test_taint_propagates_chain()`
+  - `test_taint_max_depth` (function, line 79) `def test_taint_max_depth()`
+  - `test_cross_language_taint` (function, line 83) `def test_cross_language_taint()`
+  - `test_bdd_skipped` (function, line 87) `def test_bdd_skipped()`
+  - `_bkg` (function, line 112) `def _bkg()`
+  - `_direct_given` (function, line 117) `def _direct_given()`
+  - `_direct_when` (function, line 121) `def _direct_when(_taint_result)`
+  - `_check_has_path` (function, line 125) `def _check_has_path(_taint_result)`
+  - `_check_direct_path` (function, line 130) `def _check_direct_path(_taint_result)`
+  - `_check_src` (function, line 135) `def _check_src(_taint_result)`
+  - `_check_sink` (function, line 139) `def _check_sink(_taint_result)`
+  - `_chain_given` (function, line 144) `def _chain_given()`
+  - `_chain_when` (function, line 148) `def _chain_when(_taint_result)`
+  - `_check_long_path` (function, line 152) `def _check_long_path(_taint_result)`
+  - `_shallow_cfg` (function, line 159) `def _shallow_cfg()`
+  - `_chain_given2` (function, line 163) `def _chain_given2()`
+  - `_run_shallow` (function, line 167) `def _run_shallow(_shallow_cfg)`
+  - `_check_shallow` (function, line 171) `def _check_shallow(_taint_result)`
+  - `_js_given` (function, line 178) `def _js_given()`
+  - `_js_when` (function, line 182) `def _js_when(_taint_result)`
+  - `_check_js_dangerous` (function, line 186) `def _check_js_dangerous(_taint_result)`
+  - `_check_js_source` (function, line 192) `def _check_js_source(_taint_result)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_resolver.py`, `readmenator/_scanner.py`, `readmenator/_taint.py`
+
+## tests/test_uml.py
+- Doc: Contract tests for UML class diagram generation and language code generation.
+- Layer: testing
+- Language: py
+- Symbols:
+  - `TestUmlMermaidDiagram` (class, line 16) `class TestUmlMermaidDiagram(TestCase)`
+  - `TestUmlSanitizeId` (class, line 157) `class TestUmlSanitizeId(TestCase)`
+  - `TestUmlCodeGenerationCpp` (class, line 181) `class TestUmlCodeGenerationCpp(TestCase)`
+  - `TestUmlCodeGenerationJava` (class, line 239) `class TestUmlCodeGenerationJava(TestCase)`
+  - `TestUmlCodeGenerationCSharp` (class, line 281) `class TestUmlCodeGenerationCSharp(TestCase)`
+  - `TestUmlCodeGenerationGo` (class, line 306) `class TestUmlCodeGenerationGo(TestCase)`
+  - `TestUmlCodeGenerationRust` (class, line 347) `class TestUmlCodeGenerationRust(TestCase)`
+  - `TestUmlCodeGenerationPhp` (class, line 387) `class TestUmlCodeGenerationPhp(TestCase)`
+  - `TestUmlCodeGenerationKotlinScalaSwiftDartRuby` (class, line 427) `class TestUmlCodeGenerationKotlinScalaSwiftDartRuby(TestCase)`
+  - `setUp` (method, line 19) `def setUp(self)`
+  - `test_render_empty_nodes_returns_empty_string` (method, line 23) `def test_render_empty_nodes_returns_empty_string(self)`
+  - `test_render_no_class_symbols_returns_empty_string` (method, line 27) `def test_render_no_class_symbols_returns_empty_string(self)`
+  - `test_render_single_class_produces_mermaid_class_diagram` (method, line 42) `def test_render_single_class_produces_mermaid_class_diagram(self)`
+  - `test_render_multiple_classes_from_different_files` (method, line 62) `def test_render_multiple_classes_from_different_files(self)`
+  - `test_render_with_import_edges_produces_relationships` (method, line 90) `def test_render_with_import_edges_produces_relationships(self)`
+  - `test_render_respects_max_classes_limit` (method, line 119) `def test_render_respects_max_classes_limit(self)`
+  - `test_render_with_structs_interfaces_traits` (method, line 137) `def test_render_with_structs_interfaces_traits(self)`
+  - `setUp` (method, line 160) `def setUp(self)`
+  - `test_sanitize_preserves_alphanumeric` (method, line 164) `def test_sanitize_preserves_alphanumeric(self)`
+  - `test_sanitize_replaces_special_chars` (method, line 168) `def test_sanitize_replaces_special_chars(self)`
+  - `test_sanitize_prefixes_digit_start` (method, line 172) `def test_sanitize_prefixes_digit_start(self)`
+  - `test_sanitize_handles_empty_string` (method, line 176) `def test_sanitize_handles_empty_string(self)`
+  - `setUp` (method, line 184) `def setUp(self)`
+  - `test_generate_cpp_produces_valid_code` (method, line 188) `def test_generate_cpp_produces_valid_code(self)`
+  - `test_generate_cpp_with_empty_classes` (method, line 208) `def test_generate_cpp_with_empty_classes(self)`
+  - `test_generate_cpp_unknown_language_returns_error_message` (method, line 223) `def test_generate_cpp_unknown_language_returns_error_message(self)`
+  - `setUp` (method, line 242) `def setUp(self)`
+  - `test_generate_java_class_produces_valid_code` (method, line 246) `def test_generate_java_class_produces_valid_code(self)`
+  - `test_generate_java_interface_produces_interface` (method, line 265) `def test_generate_java_interface_produces_interface(self)`
+  - `setUp` (method, line 284) `def setUp(self)`
+  - `test_generate_csharp_produces_valid_code` (method, line 288) `def test_generate_csharp_produces_valid_code(self)`
+  - `setUp` (method, line 309) `def setUp(self)`
+  - `test_generate_go_struct_produces_valid_code` (method, line 313) `def test_generate_go_struct_produces_valid_code(self)`
+  - `test_generate_go_interface_produces_valid_code` (method, line 330) `def test_generate_go_interface_produces_valid_code(self)`
+  - `setUp` (method, line 350) `def setUp(self)`
+  - `test_generate_rust_struct_produces_valid_code` (method, line 354) `def test_generate_rust_struct_produces_valid_code(self)`
+  - `test_generate_rust_trait_produces_valid_code` (method, line 370) `def test_generate_rust_trait_produces_valid_code(self)`
+  - `setUp` (method, line 390) `def setUp(self)`
+  - `test_generate_php_class_produces_valid_code` (method, line 394) `def test_generate_php_class_produces_valid_code(self)`
+  - `test_generate_php_interface_produces_valid_code` (method, line 411) `def test_generate_php_interface_produces_valid_code(self)`
+  - `setUp` (method, line 430) `def setUp(self)`
+  - `_make_class_node` (method, line 434) `def _make_class_node(self, name, lang, kind)`
+  - `test_generate_kotlin_produces_valid_code` (method, line 446) `def test_generate_kotlin_produces_valid_code(self)`
+  - `test_generate_scala_produces_valid_code` (method, line 452) `def test_generate_scala_produces_valid_code(self)`
+  - `test_generate_scala_trait_produces_valid_code` (method, line 458) `def test_generate_scala_trait_produces_valid_code(self)`
+  - `test_generate_swift_produces_valid_code` (method, line 463) `def test_generate_swift_produces_valid_code(self)`
+  - `test_generate_swift_protocol_produces_valid_code` (method, line 469) `def test_generate_swift_protocol_produces_valid_code(self)`
+  - `test_generate_dart_produces_valid_code` (method, line 474) `def test_generate_dart_produces_valid_code(self)`
+  - `test_generate_ruby_produces_valid_code` (method, line 480) `def test_generate_ruby_produces_valid_code(self)`
+- Depends on: `readmenator/_config.py`, `readmenator/_models.py`, `readmenator/_uml.py`
+
 ## tests/test_video.py
 - Doc: Contract tests for the cinematic overview video renderer.
 - Layer: testing

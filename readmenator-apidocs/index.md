@@ -1,10 +1,10 @@
 # ReadMenator API Reference
 
-> Generated offline by readmenator: 104 modules, 2196 documented entities, documentation coverage 81.7% (758/928 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
+> Generated offline by readmenator: 106 modules, 2258 documented entities, documentation coverage 82.1% (781/951 public items). Deterministic, zero tokens: signatures from source, docs parsed from Google, NumPy, reST, Javadoc/JSDoc/Doxygen, C# XML, and Rustdoc comments.
 
 Navigate: [Interactive architecture and flows](flows.html) | [Architecture and flows (Mermaid)](architecture.md) | [Class hierarchy](classes.md) | [General index](genindex.md) | [Coverage and warnings](COVERAGE.md) | [`api/index.json`](api/index.json) | [HTML browser](index.html)
 
-Languages: py (103), sh (1)
+Languages: py (105), sh (1)
 
 ## Modules
 
@@ -29,7 +29,7 @@ Languages: py (103), sh (1)
 | [`readmenator._apidocs`](modules/readmenator._apidocs.py.md) | Deterministic API reference model: extraction, cross-references, coverage. | 5 | 10 | 100.0% |
 | [`readmenator._apidocs_page`](modules/readmenator._apidocs_page.py.md) | Self-contained HTML browser for the deterministic API reference. | 0 | 1 | 100.0% |
 | [`readmenator._apidocs_render`](modules/readmenator._apidocs_render.py.md) | Markdown, JSON, and writer layer for the deterministic API reference. | 3 | 18 | 100.0% |
-| [`readmenator._app`](modules/readmenator._app.py.md) | Application orchestrator: scan, resolve, analyze, and write every output. | 1 | 55 | 50.9% |
+| [`readmenator._app`](modules/readmenator._app.py.md) | Application orchestrator: scan, resolve, analyze, and write every output. | 1 | 57 | 52.5% |
 | [`readmenator._bundlegraph`](modules/readmenator._bundlegraph.py.md) | Edge bundle explorer: circle and sphere hierarchical edge bundling pages. | 1 | 6 | 100.0% |
 | [`readmenator._bundlegraph_page`](modules/readmenator._bundlegraph_page.py.md) | HTML page template for the edge bundle explorer. | 0 | 0 | 100.0% |
 | [`readmenator._cache`](modules/readmenator._cache.py.md) | File-content hash cache for incremental scanning and analysis caching. | 1 | 12 | 50.0% |
@@ -42,6 +42,7 @@ Languages: py (103), sh (1)
 | [`readmenator._dataflow`](modules/readmenator._dataflow.py.md) | Procedural intra-function dataflow analysis for readmenator. | 1 | 2 | 100.0% |
 | [`readmenator._dead_code`](modules/readmenator._dead_code.py.md) | Dead code detection for the readmenator knowledge graph. | 1 | 2 | 75.0% |
 | [`readmenator._diagrams`](modules/readmenator._diagrams.py.md) | Self-contained interactive system maps for the knowledge graph. | 12 | 20 | 100.0% |
+| [`readmenator._docbranch`](modules/readmenator._docbranch.py.md) | Documentation branch publisher: artifacts live in their own git branch. | 2 | 7 | 100.0% |
 | [`readmenator._docstrings`](modules/readmenator._docstrings.py.md) | Multi-style docstring parser for the deterministic API reference. | 2 | 9 | 100.0% |
 | [`readmenator._documentation`](modules/readmenator._documentation.py.md) | KNOWLEDGE_BASE.md generator: the human-facing architecture reference. | 1 | 2 | 75.0% |
 | [`readmenator._embed`](modules/readmenator._embed.py.md) | Optional semantic embeddings for the readmenator knowledge graph. | 1 | 6 | 100.0% |
@@ -60,6 +61,7 @@ Languages: py (103), sh (1)
 | [`readmenator._gitmeta`](modules/readmenator._gitmeta.py.md) | Read-only git metadata for freshness stamps on generated documents. | 0 | 1 | 100.0% |
 | [`readmenator._graphlayout`](modules/readmenator._graphlayout.py.md) | Deterministic graph layout algorithms for animated renders. | 3 | 10 | 100.0% |
 | [`readmenator._graphrag`](modules/readmenator._graphrag.py.md) | Zero-token GraphRAG index and retrieval for AI agents. | 10 | 17 | 100.0% |
+| [`readmenator._hebbian`](modules/readmenator._hebbian.py.md) | Zero-inference recall over the preserved session log, hebbmesh style. | 2 | 5 | 100.0% |
 | [`readmenator._hotspots`](modules/readmenator._hotspots.py.md) | Hotspot, dependency cycle, and change impact analysis. | 1 | 4 | 83.3% |
 | [`readmenator._htmlpack`](modules/readmenator._htmlpack.py.md) | Compact JSON payload embedding for self-contained HTML pages. | 0 | 5 | 100.0% |
 | [`readmenator._hypotheses`](modules/readmenator._hypotheses.py.md) | Hypothesis validator: LLM/agent proposals are never facts. | 3 | 6 | 30.0% |
@@ -67,11 +69,11 @@ Languages: py (103), sh (1)
 | [`readmenator._layers`](modules/readmenator._layers.py.md) | Architectural layer detection for the readmenator knowledge graph. | 1 | 2 | 100.0% |
 | [`readmenator._linter`](modules/readmenator._linter.py.md) | Architecture linter for the readmenator knowledge graph. | 1 | 2 | 75.0% |
 | [`readmenator._mcp_server`](modules/readmenator._mcp_server.py.md) | MCP (Model Context Protocol) stdio server for ReadMenator. | 5 | 17 | 8.7% |
-| [`readmenator._memory`](modules/readmenator._memory.py.md) | Persistent project memory for agents, generated with zero tokens. | 3 | 10 | 100.0% |
+| [`readmenator._memory`](modules/readmenator._memory.py.md) | Persistent project memory for agents, generated with zero tokens. | 3 | 11 | 100.0% |
 | [`readmenator._mermaid`](modules/readmenator._mermaid.py.md) | Mermaid graph renderer with intelligent pruning. | 1 | 2 | 100.0% |
 | [`readmenator._models`](modules/readmenator._models.py.md) | Data model types for the readmenator knowledge graph. | 22 | 1 | 100.0% |
 | [`readmenator._ollama`](modules/readmenator._ollama.py.md) | Local Ollama client for optional LLM enrichment. | 1 | 6 | 100.0% |
-| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | 2 | 51 | 59.3% |
+| [`readmenator._pipeline`](modules/readmenator._pipeline.py.md) | AnalyzerFactory (lazy component construction) and DeepAnalysisRunner. | 2 | 53 | 60.7% |
 | [`readmenator._project_config`](modules/readmenator._project_config.py.md) | Per-project persistent configuration (readmenator.toml). | 0 | 11 | 100.0% |
 | [`readmenator._projections`](modules/readmenator._projections.py.md) | Functors and projections for the readmenator code category. | 4 | 11 | 50.0% |
 | [`readmenator._provenance`](modules/readmenator._provenance.py.md) | Evidence-provenance audit for readmenator security findings. | 2 | 5 | 100.0% |

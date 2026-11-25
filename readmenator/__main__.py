@@ -68,7 +68,9 @@ def build_parser() -> argparse.ArgumentParser:
             "  receipts [dir]          Ingest deploynator release receipts (release layer)\n"
             "  graphrag                Build the zero-token GraphRAG index (readmenator-graphrag/)\n"
             "  memory                  Print readmenator-agent/MEMORY.md (rules, workflow, session log)\n"
-            "  remember \"<note>\"       Append to the MEMORY.md session log (--kind decision|business|...)\n"
+            "  remember \"<note>\"       Append to the MEMORY.md session log (--kind decision|business|... --sem \"syn1, syn2\")\n"
+            "  recall \"<query>\"        Zero-inference recall over MEMORY.md notes (sem seeds + Hebbian co-activation)\n"
+            "  doc-branch              Stage docs/ into the docs git branch for GitHub Pages (--dry-run, --no-push)\n"
             "  skills [--target DIR]   Install agent skills (default .claude/skills)\n"
             "  ask \"<question>\"        GraphRAG context for agents (--local, --global, --budget N)\n"
             "\n"
@@ -429,11 +431,35 @@ def main() -> None:
                 position = sys.argv.index("--kind")
                 if position + 1 < len(sys.argv):
                     kind = sys.argv[position + 1]
+            sem = ""
+            if "--sem" in sys.argv:
+                position = sys.argv.index("--sem")
+                if position + 1 < len(sys.argv):
+                    sem = sys.argv[position + 1]
             try:
-                print(app.remember(target, sys.argv[3], kind))
+                print(app.remember(target, sys.argv[3], kind, sem=sem))
             except ValueError as exc:
                 print(f"remember failed: {exc}", file=sys.stderr)
                 sys.exit(2)
+            return
+        elif command == "recall" and len(sys.argv) >= 4:
+            top_k = 0
+            if "--k" in sys.argv:
+                position = sys.argv.index("--k")
+                if position + 1 < len(sys.argv) and sys.argv[position + 1].isdigit():
+                    top_k = int(sys.argv[position + 1])
+            hits = app.recall(target, sys.argv[3], top_k=top_k)
+            if not hits:
+                print("No notes matched. Record context with: readmenator . remember \"<note>\" --sem \"seeds\"")
+                return
+            for hit in hits:
+                print(hit.line())
+            return
+        elif command == "doc-branch":
+            dry_run = "--dry-run" in sys.argv
+            push = "--no-push" not in sys.argv
+            result = app.publish_doc_branch(target, push=push, dry_run=dry_run)
+            print(result.message)
             return
         elif command == "skills":
             dest = None

@@ -1,6 +1,6 @@
 # readmenator: _pipeline
 
-readmenator: _pipeline groups 18 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
+readmenator: _pipeline groups 25 files (py) around _read_small, _git_dir, _packed_ref, read_git_head, is_garbage_doc. Agent-friendly output generator for ReadMenator.
 
 ```mermaid
 graph LR
@@ -9,31 +9,38 @@ graph LR
     tests -- "calls into" --> readmenator
 ```
 
-## readmenator (5.1)
+## readmenator (3.1)
 
-readmenator groups 13 files (py) around ReadmeInjector, __init__, inject, _extract_current_injection, _remove_old_injection. Injects KNOWLEDGE_BASE.md references into AI agent instruction files.
+readmenator groups 16 files (py) around _read_small, _git_dir, _packed_ref, read_git_head, is_garbage_doc. Agent-friendly output generator for ReadMenator.
 
-## tests (5.2)
+## tests (3.2)
 
-tests groups 5 files (py) around TestAgentInjectorInjectBehavior, setUp, tearDown, test_inject_into_agents_md_adds_kb_link, test_inject_into_claude_md_adds_kb_link. Contract tests for AI agent file injection.
+tests groups 9 files (py) around _node, _edge, _big_project, TestAgentOutputBudget, test_agent_output_pages_respect_line_cap_on_large_projects. Contract tests for agent-facing output quality: budgets, purposes, freshness, noise.
 
 **Files**:
 
-- readmenator/_agent_injector.py
-- readmenator/_analytics.py
-- readmenator/_cpg.py
-- readmenator/_documentation.py
-- readmenator/_embed.py
-- readmenator/_exclusions.py
-- readmenator/_explorer.py
-- readmenator/_exporter.py
+- readmenator/_agent_output.py
+- readmenator/_analyzer.py
+- readmenator/_cache.py
+- readmenator/_components.py
+- readmenator/_folder_readme.py
+- readmenator/_gh_wiki.py
+- readmenator/_gitmeta.py
+- readmenator/_hebbian.py
+- readmenator/_layers.py
+- readmenator/_memory.py
+- readmenator/_ollama.py
 - readmenator/_pipeline.py
-- readmenator/_provenance.py
-- readmenator/_readme_injector.py
-- readmenator/_scantext.py
-- readmenator/_uml.py
-- tests/test_agent_injector.py
-- tests/test_agent_output.py
-- tests/test_exporter.py
-- tests/test_interactive_graph.py
-- tests/test_readme_injector.py
+- readmenator/_purpose.py
+- readmenator/_security.py
+- readmenator/_skill_installer.py
+- readmenator/_wiki.py
+- tests/test_agent_friendliness.py
+- tests/test_analyzer.py
+- tests/test_cache.py
+- tests/test_folder_readme.py
+- tests/test_hebbian.py
+- tests/test_memory.py
+- tests/test_ollama.py
+- tests/test_security.py
+- tests/test_wiki.py

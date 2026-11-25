@@ -51,12 +51,20 @@ sarif_enabled = false
 
 [features]
 # Analysis features + GitHub wiki publishing for this project.
+# doc_branch_name/doc_pages_url drive `readmenator . doc-branch` and the
+# README docs-site link; doc_pages_url empty infers it from the git origin.
 security_enabled = false
 privacy_mode = false
 gitignore_aware = true
 gh_wiki_enabled = true
 gh_wiki_remote = ""
 memory_enabled = true
+memory_sem_weight = 0.8
+recall_top_k = 5
+doc_branch_enabled = true
+doc_branch_name = "docs"
+doc_pages_url = ""
+gitattributes_enabled = true
 skills_enabled = true
 concept_enabled = true
 hotspots_enabled = true

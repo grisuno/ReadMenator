@@ -25,7 +25,7 @@ model writing the rest of the file.
 ## Contents
 
 - **Classes:** [`DeclaredRule`](#declaredrule), [`MemoryNote`](#memorynote), [`ProjectMemory`](#projectmemory)
-- **Functions:** [`sanitize_note`](#sanitize_note)
+- **Functions:** [`split_sem`](#split_sem), [`sanitize_note`](#sanitize_note)
 - **Constants:** [`NOTES_BEGIN`](#notes_begin), [`NOTES_END`](#notes_end)
 
 ## Type Diagram
@@ -42,6 +42,7 @@ classDiagram
     MemoryNote : str date
     MemoryNote : str kind
     MemoryNote : str text
+    MemoryNote : str sem
     class ProjectMemory
     ProjectMemory : __init__()
     ProjectMemory : path()
@@ -64,6 +65,7 @@ flowchart LR
     n_readmenator__memory_py__ProjectMemory_path(["ProjectMemory.path"])
     n_readmenator__memory_py__ProjectMemory_notes(["ProjectMemory.notes"])
     n_readmenator__memory_py__MemoryNote(["MemoryNote"])
+    n_readmenator__memory_py__split_sem(["split_sem"])
     n_readmenator__memory_py__ProjectMemory_remember(["ProjectMemory.remember"])
     n_readmenator__memory_py__sanitize_note(["sanitize_note"])
     n_readmenator__memory_py__ProjectMemory_write(["ProjectMemory.write"])
@@ -74,9 +76,11 @@ flowchart LR
     n_readmenator__memory_py__ProjectMemory_read --> n_readmenator__memory_py__ProjectMemory_path
     n_readmenator__memory_py__ProjectMemory_notes --> n_readmenator__memory_py__MemoryNote
     n_readmenator__memory_py__ProjectMemory_notes --> n_readmenator__memory_py__ProjectMemory_read
+    n_readmenator__memory_py__ProjectMemory_notes --> n_readmenator__memory_py__split_sem
     n_readmenator__memory_py__ProjectMemory_remember --> n_readmenator__memory_py__MemoryNote
     n_readmenator__memory_py__ProjectMemory_remember --> n_readmenator__memory_py__ProjectMemory_read
     n_readmenator__memory_py__ProjectMemory_remember --> n_readmenator__memory_py__sanitize_note
+    n_readmenator__memory_py__ProjectMemory_remember --> n_readmenator__memory_py__split_sem
     n_readmenator__memory_py__ProjectMemory_write --> n_readmenator__memory_py__ProjectMemory_read
     n_readmenator__memory_py__ProjectMemory_build --> n_readmenator__memory_py__ProjectMemory_extract_rules
     n_readmenator__memory_py__ProjectMemory_extract_rules --> n_readmenator__memory_py__DeclaredRule
@@ -89,7 +93,7 @@ flowchart LR
 
 ### `DeclaredRule`
 
-`class` `dataclass` | [readmenator/_memory.py:53](../../readmenator/_memory.py#L53)
+`class` `dataclass` | [readmenator/_memory.py:54](../../readmenator/_memory.py#L54)
 
 Decorators: `@dataclass(frozen=True)`
 
@@ -114,7 +118,7 @@ One rule line extracted verbatim from an instruction file.
 
 ### `MemoryNote`
 
-`class` `dataclass` | [readmenator/_memory.py:70](../../readmenator/_memory.py#L70)
+`class` `dataclass` | [readmenator/_memory.py:71](../../readmenator/_memory.py#L71)
 
 Decorators: `@dataclass(frozen=True)`
 
@@ -130,7 +134,8 @@ One entry of the preserved session log.
 |---|---|---|---|
 | [`date`](#memorynote-date) | `str` |  | ISO date the note was recorded. |
 | [`kind`](#memorynote-kind) | `str` |  | Note kind from MEMORY_NOTE_KINDS. |
-| [`text`](#memorynote-text) | `str` |  | Single-line note text. |
+| [`text`](#memorynote-text) | `str` |  | Single-line note text (without the ``\| sem:`` suffix). |
+| [`sem`](#memorynote-sem) | `str` | `''` | Write-time semantic seeding terms ("" when the note has none). |
 
 ---
 
@@ -138,7 +143,7 @@ One entry of the preserved session log.
 
 ### `ProjectMemory`
 
-`class` | [readmenator/_memory.py:102](../../readmenator/_memory.py#L102)
+`class` | [readmenator/_memory.py:120](../../readmenator/_memory.py#L120)
 
 ```python
 class ProjectMemory
@@ -164,7 +169,7 @@ Builds, preserves, and appends to the agent memory file.
 
 #### `ProjectMemory.__init__`
 
-`constructor` | [readmenator/_memory.py:105](../../readmenator/_memory.py#L105)
+`constructor` | [readmenator/_memory.py:123](../../readmenator/_memory.py#L123)
 
 ```python
 def __init__(self, config: Config) -> None
@@ -178,13 +183,13 @@ Initialise with application configuration.
 |---|---|---|---|
 | `config` | `Config` |  | MEMORY_* settings and output directories. |
 
-*Called by:* [`AnalyzerFactory.memory`](readmenator._pipeline.py.md#analyzerfactory-memory)
+*Called by:* [`HebbianMemory.__init__`](readmenator._hebbian.py.md#hebbianmemory-__init__), [`AnalyzerFactory.memory`](readmenator._pipeline.py.md#analyzerfactory-memory)
 
 <a id="projectmemory-path"></a>
 
 #### `ProjectMemory.path`
 
-`method` | [readmenator/_memory.py:113](../../readmenator/_memory.py#L113)
+`method` | [readmenator/_memory.py:131](../../readmenator/_memory.py#L131)
 
 ```python
 def path(self, project_root: str) -> Path
@@ -206,7 +211,7 @@ Return the MEMORY.md location for a project root.
 
 #### `ProjectMemory.read`
 
-`method` | [readmenator/_memory.py:117](../../readmenator/_memory.py#L117)
+`method` | [readmenator/_memory.py:135](../../readmenator/_memory.py#L135)
 
 ```python
 def read(self, project_root: str) -> str
@@ -230,7 +235,7 @@ Return the current memory file text ("" when missing).
 
 #### `ProjectMemory.notes`
 
-`method` | [readmenator/_memory.py:124](../../readmenator/_memory.py#L124)
+`method` | [readmenator/_memory.py:142](../../readmenator/_memory.py#L142)
 
 ```python
 def notes(self, project_root: str) -> List[MemoryNote]
@@ -246,22 +251,26 @@ Parse the preserved session log into notes.
 
 **Returns:** `List[MemoryNote]` - Notes in file order.
 
-*Calls:* [`MemoryNote`](#memorynote), [`ProjectMemory.read`](#projectmemory-read)
+*Calls:* [`MemoryNote`](#memorynote), [`ProjectMemory.read`](#projectmemory-read), [`split_sem`](#split_sem)
 
 <a id="projectmemory-remember"></a>
 
 #### `ProjectMemory.remember`
 
-`method` | [readmenator/_memory.py:149](../../readmenator/_memory.py#L149)
+`method` | [readmenator/_memory.py:168](../../readmenator/_memory.py#L168)
 
 ```python
-def remember(self, project_root: str, note: str, kind: str = 'note', today: Optional[str] = None) -> MemoryNote
+def remember(self, project_root: str, note: str, kind: str = 'note', today: Optional[str] = None, sem: str = '') -> MemoryNote
 ```
 
 Append one note to the preserved session log.
 
 Creates a minimal MEMORY.md when none exists yet; the next rebuild
-fills the generated sections around the preserved log.
+fills the generated sections around the preserved log. The optional
+`[`sem`](#memorynote-sem)` argument is write-time semantic seeding (3-5 synonyms or
+concepts the note is "about", hebbmesh style): it is stored as a
+``| sem:`` suffix so zero-inference recall can match synonyms
+without embeddings.
 
 **Parameters**
 
@@ -271,6 +280,7 @@ fills the generated sections around the preserved log.
 | `note` | `str` |  | Note text (collapsed to one line). |
 | `kind` | `str` | `'note'` | One of MEMORY_NOTE_KINDS. |
 | `today` | `Optional[str]` | `None` | ISO date override (defaults to the local date). |
+| `sem` | `str` | `''` | Comma-separated seed terms stored as ``\| sem:``. |
 
 **Returns:** `MemoryNote` - The stored note.
 
@@ -278,13 +288,13 @@ fills the generated sections around the preserved log.
 
 - `ValueError`: Unknown kind or empty note.
 
-*Calls:* [`MemoryNote`](#memorynote), [`ProjectMemory.read`](#projectmemory-read), [`sanitize_note`](#sanitize_note)
+*Calls:* [`MemoryNote`](#memorynote), [`ProjectMemory.read`](#projectmemory-read), [`sanitize_note`](#sanitize_note), [`split_sem`](#split_sem)
 
 <a id="projectmemory-write"></a>
 
 #### `ProjectMemory.write`
 
-`method` | [readmenator/_memory.py:218](../../readmenator/_memory.py#L218)
+`method` | [readmenator/_memory.py:252](../../readmenator/_memory.py#L252)
 
 ```python
 def write(self, project_root: str, generated: str) -> Path
@@ -307,7 +317,7 @@ Write generated sections while preserving the existing session log.
 
 #### `ProjectMemory.build`
 
-`method` | [readmenator/_memory.py:231](../../readmenator/_memory.py#L231)
+`method` | [readmenator/_memory.py:265](../../readmenator/_memory.py#L265)
 
 ```python
 def build(self, project_root: str, nodes: List[Node], analysis: Optional[AnalysisResult] = None, analysis_v2: Optional[AnalysisResultV2] = None, findings: Optional[List[SecurityFinding]] = None, concept_graph: Optional[ConceptGraph] = None, content_map: Optional[Dict[str, str]] = None) -> str
@@ -335,7 +345,7 @@ Render the generated memory document (with an empty notes block).
 
 #### `ProjectMemory.extract_rules`
 
-`method` | [readmenator/_memory.py:291](../../readmenator/_memory.py#L291)
+`method` | [readmenator/_memory.py:325](../../readmenator/_memory.py#L325)
 
 ```python
 def extract_rules(self, project_root: str) -> List[DeclaredRule]
@@ -364,7 +374,7 @@ under MAX_FILE_SIZE_MB.
 
 #### `ProjectMemory.detect_commands`
 
-`method` | [readmenator/_memory.py:419](../../readmenator/_memory.py#L419)
+`method` | [readmenator/_memory.py:453](../../readmenator/_memory.py#L453)
 
 ```python
 def detect_commands(self, root: Path, nodes: Sequence[Node]) -> List[Tuple[str, str]]
@@ -385,11 +395,35 @@ Detect workflow commands from project manifests.
 
 ## Functions
 
+<a id="split_sem"></a>
+
+### `split_sem`
+
+`function` | [readmenator/_memory.py:87](../../readmenator/_memory.py#L87)
+
+```python
+def split_sem(text: str) -> Tuple[str, str]
+```
+
+Split a note into its body and the ``| sem:`` suffix.
+
+**Parameters**
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `text` | `str` |  | Raw stored note text. |
+
+**Returns:** `Tuple[str, str]` - (body, sem) where sem is "" when no suffix is present.
+
+*Called by:* [`ProjectMemory.notes`](#projectmemory-notes), [`ProjectMemory.remember`](#projectmemory-remember)
+
+---
+
 <a id="sanitize_note"></a>
 
 ### `sanitize_note`
 
-`function` | [readmenator/_memory.py:84](../../readmenator/_memory.py#L84)
+`function` | [readmenator/_memory.py:102](../../readmenator/_memory.py#L102)
 
 ```python
 def sanitize_note(text: str, max_chars: int) -> str

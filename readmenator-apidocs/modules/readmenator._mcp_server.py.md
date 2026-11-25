@@ -483,7 +483,7 @@ def __init__(self, code: int, message: str, data: Any = None)
 
 ### `main`
 
-`function` | [readmenator/_mcp_server.py:1074](../../readmenator/_mcp_server.py#L1074)
+`function` | [readmenator/_mcp_server.py:1099](../../readmenator/_mcp_server.py#L1099)
 
 ```python
 def main() -> None

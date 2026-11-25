@@ -468,6 +468,19 @@ class TestForceGraphInspectorPayload(unittest.TestCase):
         self.assertTrue(svg.startswith('<svg class="thumb"'))
         self.assertNotIn("<script>", svg)
 
+    def test_forcegraph_thumbnail_respects_budget(self) -> None:
+        """Node and edge caps keep the gallery index small on big projects."""
+        capped = ForceGraphRenderer(dataclasses.replace(
+            Config(), FORCEGRAPH_THUMB_MAX_NODES=2, FORCEGRAPH_THUMB_MAX_EDGES=1,
+        )).thumbnail_svg(self.payload)
+        self.assertEqual(capped.count("<circle"), 2)
+        self.assertEqual(capped.count("<line"), 1)
+        single = ForceGraphRenderer(dataclasses.replace(
+            Config(), FORCEGRAPH_THUMB_MAX_NODES=1,
+        )).thumbnail_svg(self.payload)
+        self.assertEqual(single.count("<circle"), 1)
+        self.assertEqual(single.count("<line"), 0)
+
     def test_forcegraph_render_has_inspector_and_layouts(self) -> None:
         """The explorer ships names, inspector, and the four layouts."""
         html = self.renderer.render(self.payload)

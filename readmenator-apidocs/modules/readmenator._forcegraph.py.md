@@ -348,7 +348,7 @@ fragment is safe to embed in the gallery card.
 
 #### `ForceGraphRenderer.write`
 
-`method` | [readmenator/_forcegraph.py:610](../../readmenator/_forcegraph.py#L610)
+`method` | [readmenator/_forcegraph.py:617](../../readmenator/_forcegraph.py#L617)
 
 ```python
 def write(self, output_path: str | Path, payload: Dict[str, List[Dict[str, Any]]], analytics: Optional[Dict[str, Any]] = None, title: str = 'Force Graph', home_href: Optional[str] = 'index.html') -> str
@@ -374,7 +374,7 @@ Write the explorer HTML plus the vendored engine beside it.
 
 #### `ForceGraphRenderer.copy_vendor`
 
-`method` | [readmenator/_forcegraph.py:637](../../readmenator/_forcegraph.py#L637)
+`method` | [readmenator/_forcegraph.py:644](../../readmenator/_forcegraph.py#L644)
 
 ```python
 def copy_vendor(self, dest_dir: str | Path) -> Optional[Path]

@@ -51,6 +51,8 @@ Project types nested under the project types they derive from. External bases ar
 - [`DocComment`](modules/readmenator._docstrings.py.md#doccomment) class in `readmenator._docstrings`
 - [`DocField`](modules/readmenator._docstrings.py.md#docfield) class in `readmenator._docstrings`
 - [`DocProjection`](modules/readmenator._projections.py.md#docprojection) class in `readmenator._projections`
+- [`DocsBranchPublisher`](modules/readmenator._docbranch.py.md#docsbranchpublisher) class in `readmenator._docbranch`
+- [`DocsBranchResult`](modules/readmenator._docbranch.py.md#docsbranchresult) class in `readmenator._docbranch`
 - [`DocsSitePublisher`](modules/readmenator._diagrams.py.md#docssitepublisher) class in `readmenator._diagrams`
 - [`DocumentationGenerator`](modules/readmenator._documentation.py.md#documentationgenerator) class in `readmenator._documentation`
 - [`DocWarning`](modules/readmenator._apidocs.py.md#docwarning) class in `readmenator._apidocs`
@@ -81,6 +83,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`GraphRagIndex`](modules/readmenator._graphrag.py.md#graphragindex) class in `readmenator._graphrag`
 - [`GraphRagSearcher`](modules/readmenator._graphrag.py.md#graphragsearcher) class in `readmenator._graphrag`
 - [`GraphRagStore`](modules/readmenator._graphrag.py.md#graphragstore) class in `readmenator._graphrag`
+- [`HebbianMemory`](modules/readmenator._hebbian.py.md#hebbianmemory) class in `readmenator._hebbian`
 - [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
 - [`HistoryRelease`](modules/readmenator._githistory.py.md#historyrelease) class in `readmenator._githistory`
 - [`HotspotAnalyzer`](modules/readmenator._hotspots.py.md#hotspotanalyzer) class in `readmenator._hotspots`
@@ -152,6 +155,7 @@ Project types nested under the project types they derive from. External bases ar
 - [`RankedResult`](modules/readmenator._rank.py.md#rankedresult) class in `readmenator._rank`
 - [`ReadmeInjector`](modules/readmenator._readme_injector.py.md#readmeinjector) class in `readmenator._readme_injector`
 - [`readmenatorApplication`](modules/readmenator._app.py.md#readmenatorapplication) class in `readmenator._app`
+- [`RecallHit`](modules/readmenator._hebbian.py.md#recallhit) class in `readmenator._hebbian`
 - [`ReceiptIngestor`](modules/readmenator._receipts.py.md#receiptingestor) class in `readmenator._receipts`
 - [`ReceiptsReconciler`](modules/readmenator._receipts.py.md#receiptsreconciler) class in `readmenator._receipts`
 - [`RefactoringAction`](modules/readmenator._models.py.md#refactoringaction) class in `readmenator._models`

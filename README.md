@@ -146,6 +146,10 @@ python -m readmenator /path/to/project diagram sequence # Export one vis.js map 
 python -m readmenator /path/to/project pages           # Publish docs/ static site: gallery index + maps (GitHub Pages ready)
 ```
 
+Gallery `index.html` stays small on any project size: the inline SVG previews
+are budgeted (`FORCEGRAPH_THUMB_MAX_NODES/EDGES`, `BUNDLEGRAPH_THUMB_NODES`,
+`BUNDLEGRAPH_THUMB_EDGES`), so adding files never balloons the index.
+
 Maps are physics-driven vis.js documents (engine loaded from a CDN pinned in
 Config). Hover a node for a preview card; click it to dim everything outside its
 neighbourhood and open a passport with metric tiles, an ego mini-map (used-by on
@@ -413,14 +417,38 @@ findings, cycles), risks, and a **session log preserved across rebuilds**:
 
 ```bash
 readmenator . remember "Retries capped at 3: the bank bans clients after 4 failures" --kind business
-readmenator . memory            # print it (MCP: readmenator.memory / readmenator.remember)
+readmenator . remember "..." --sem "webhook retries, idempotency"   # write-time semantic seeds
+readmenator . recall "idempotent webhooks"     # zero-inference recall: sem seeds + Hebbian co-activation
+readmenator . memory            # print it (MCP: readmenator.memory / readmenator.remember / readmenator.recall)
 readmenator . skills            # install agent skills into .claude/skills/
 ```
 
 Notes are indexed by GraphRAG, so `ask` surfaces recorded business rules next to
-the code they govern. Four packaged skills (`readmenator-orient`, `readmenator-ask`,
-`readmenator-change`, `readmenator-memory`) teach any agent the protocol; `run`
-installs them automatically when the project already has a `.claude/` directory.
+the code they govern. `recall` (hebbmesh-style, zero inference) scores the
+session log against a query with the `| sem:` seeds you wrote plus Hebbian
+co-activation from past recalls: no embeddings, no LLM calls, sub-millisecond,
+and every recall reinforces the notes that fired together. Four packaged skills
+(`readmenator-orient`, `readmenator-ask`, `readmenator-change`,
+`readmenator-memory`) teach any agent the protocol; `run` installs them
+automatically when the project already has a `.claude/` directory.
+
+### Documentation on its own branch (language stats stay honest)
+
+Generated artifacts committed next to source flip GitHub's language badge (a C
+project starts reading as "HTML"). ReadMenator fixes both ends:
+
+```bash
+readmenator . doc-branch        # stage docs/ into the docs git branch and push it
+readmenator . doc-branch --dry-run   # review the staged site locally first
+```
+
+`doc-branch` also writes an idempotent `.gitattributes` block marking every
+generated output `linguist-generated=true`, infers the GitHub Pages URL from
+the origin remote (overridable via `DOC_PAGES_URL` in `readmenator.toml`), and
+refreshes the README injection with a leading **Docs site** link, so following
+a link from the README lands on the deployed maps, API browser, video, and
+document drawer. Point GitHub Pages at the `docs` branch ("deploy from
+branch") once and every rebuild publishes with one command.
 
 ### Agent-Ready Output (zero tokens)
 

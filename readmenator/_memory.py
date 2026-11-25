@@ -39,6 +39,7 @@ NOTES_END = "<!-- readmenator:memory:notes:end -->"
 _HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
 _ITEM_RE = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.+?)\s*$")
 _NOTE_RE = re.compile(r"^- (\d{4}-\d{2}-\d{2}) \[([a-z_-]+)\] (.+)$")
+_SEM_RE = re.compile(r"\s*\|\s*sem:\s*(.+)\s*$", re.IGNORECASE)
 _SNAKE_RE = re.compile(r"^_*[a-z][a-z0-9]*(?:_[a-z0-9]+)*_*$")
 _CAMEL_RE = re.compile(r"^_*[a-z][a-zA-Z0-9]*$")
 _PASCAL_RE = re.compile(r"^_*[A-Z][a-zA-Z0-9]*$")
@@ -73,12 +74,29 @@ class MemoryNote:
     Attributes:
         date: ISO date the note was recorded.
         kind: Note kind from MEMORY_NOTE_KINDS.
-        text: Single-line note text.
+        text: Single-line note text (without the ``| sem:`` suffix).
+        sem: Write-time semantic seeding terms ("" when the note has none).
     """
 
     date: str
     kind: str
     text: str
+    sem: str = ""
+
+
+def split_sem(text: str) -> Tuple[str, str]:
+    """Split a note into its body and the ``| sem:`` suffix.
+
+    Args:
+        text: Raw stored note text.
+
+    Returns:
+        (body, sem) where sem is "" when no suffix is present.
+    """
+    match = _SEM_RE.search(text)
+    if not match:
+        return text, ""
+    return text[: match.start()], match.group(1)
 
 
 def sanitize_note(text: str, max_chars: int) -> str:
@@ -134,7 +152,8 @@ class ProjectMemory:
         for line in self._notes_block(self.read(project_root)).splitlines():
             match = _NOTE_RE.match(line.strip())
             if match:
-                out.append(MemoryNote(match.group(1), match.group(2), match.group(3)))
+                body, sem = split_sem(match.group(3))
+                out.append(MemoryNote(match.group(1), match.group(2), body, sem))
         return out
 
     @staticmethod
@@ -146,17 +165,24 @@ class ProjectMemory:
             return ""
         return text[start + len(NOTES_BEGIN):end].strip("\n")
 
-    def remember(self, project_root: str, note: str, kind: str = "note", today: Optional[str] = None) -> MemoryNote:
+    def remember(
+        self, project_root: str, note: str, kind: str = "note", today: Optional[str] = None, sem: str = "",
+    ) -> MemoryNote:
         """Append one note to the preserved session log.
 
         Creates a minimal MEMORY.md when none exists yet; the next rebuild
-        fills the generated sections around the preserved log.
+        fills the generated sections around the preserved log. The optional
+        ``sem`` argument is write-time semantic seeding (3-5 synonyms or
+        concepts the note is "about", hebbmesh style): it is stored as a
+        ``| sem:`` suffix so zero-inference recall can match synonyms
+        without embeddings.
 
         Args:
             project_root: Project root directory.
             note: Note text (collapsed to one line).
             kind: One of MEMORY_NOTE_KINDS.
             today: ISO date override (defaults to the local date).
+            sem: Comma-separated seed terms stored as ``| sem:``.
 
         Returns:
             The stored note.
@@ -170,13 +196,20 @@ class ProjectMemory:
         text = sanitize_note(note, cfg.MEMORY_NOTE_MAX_CHARS)
         if not text:
             raise ValueError("empty note")
-        stored = MemoryNote(today or _dt.date.today().isoformat(), kind, text)
+        body, existing = split_sem(text)
+        seeds = sanitize_note(existing or sem, cfg.MEMORY_SEM_MAX_CHARS)
+        terms = [term for term in (part.strip() for part in seeds.split(",")) if term][: cfg.MEMORY_SEM_MAX_TERMS]
+        seed = ", ".join(terms)
+        stored = MemoryNote(today or _dt.date.today().isoformat(), kind, body, seed)
         current = self.read(project_root)
         block = self._notes_block(current)
         lines = [line for line in block.splitlines() if line.strip()]
-        lines.append(f"- {stored.date} [{stored.kind}] {stored.text}")
-        body = current if NOTES_BEGIN in current and NOTES_END in current else self._skeleton()
-        self._write(project_root, self._splice(body, "\n".join(lines)))
+        rendered = f"- {stored.date} [{stored.kind}] {stored.text}"
+        if stored.sem:
+            rendered += f" | sem: {stored.sem}"
+        lines.append(rendered)
+        body_doc = current if NOTES_BEGIN in current and NOTES_END in current else self._skeleton()
+        self._write(project_root, self._splice(body_doc, "\n".join(lines)))
         return stored
 
     def _skeleton(self) -> str:
@@ -192,9 +225,10 @@ class ProjectMemory:
         kinds = ", ".join(self._config.MEMORY_NOTE_KINDS)
         return (
             "## 7. Session log (preserved across rebuilds)\n\n"
-            "Append with `readmenator . remember \"<note>\" --kind <kind>` (kinds: "
+            "Append with `readmenator . remember \"<note>\" --kind <kind> --sem \"synonym, synonym\"` (kinds: "
             + kinds + ") or the MCP tool `readmenator.remember`. Record business rules, decisions and "
-            "their reasons, workflow changes, and anything the next session must not rediscover.\n\n"
+            "their reasons, workflow changes, and anything the next session must not rediscover. "
+            "`--sem` seeds 3-5 synonyms at write time so `readmenator . recall` finds the note without embeddings.\n\n"
             + NOTES_BEGIN + "\n" + (block + "\n" if block else "") + NOTES_END + "\n"
         )
 

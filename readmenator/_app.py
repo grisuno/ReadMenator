@@ -20,6 +20,7 @@ from readmenator._config import Config
 from readmenator._cursorrules_generator import CursorRulesGenerator
 from readmenator._dead_code import DeadCodeStripper
 from readmenator._diagrams import DocsSitePublisher
+from readmenator._docbranch import DocsBranchResult
 from readmenator._explorer import build_state
 from readmenator._flowcharts import build_flow_graphs, render_architecture_section, render_flows_section
 from readmenator._flowlayout import FlowGraph
@@ -28,6 +29,7 @@ from readmenator._explorer import serve as _serve_explorer
 from readmenator._gh_wiki import WikiPublishResult
 from readmenator._gitmeta import read_git_head
 from readmenator._graphrag import GraphRagIndex, GraphRagSearcher, RagContext
+from readmenator._hebbian import RecallHit
 from readmenator._layers import LayerDetector
 from readmenator._linter import ArchitectureLinter
 from readmenator._models import (
@@ -454,7 +456,7 @@ class readmenatorApplication:
         if not self._config.README_INJECTION_ENABLED:
             return
         try:
-            self._factory.readme_injector.inject(str(root))
+            self._factory.readme_injector.inject(str(root), self._config.DOC_PAGES_URL)
         except Exception:
             logger.debug("README injection skipped", exc_info=True)
 
@@ -1818,10 +1820,17 @@ class readmenatorApplication:
         return index
 
     def _memory_notes(self, root: Path) -> List[Tuple[str, str, str]]:
-        """Session-log notes from MEMORY.md as (date, kind, text) triples."""
+        """Session-log notes from MEMORY.md as (date, kind, text) triples.
+
+        Write-time semantic seeds (``| sem:``) are appended to the text so
+        the GraphRAG index matches notes by synonym without embeddings.
+        """
         if not self._config.MEMORY_ENABLED:
             return []
-        return [(n.date, n.kind, n.text) for n in self._factory.memory.notes(str(root))]
+        return [
+            (n.date, n.kind, n.text + (f" | sem: {n.sem}" if n.sem else ""))
+            for n in self._factory.memory.notes(str(root))
+        ]
 
     def _maybe_write_memory(
         self,
@@ -1872,19 +1881,70 @@ class readmenatorApplication:
             text = memory.read(str(root))
         return text
 
-    def remember(self, target_dir: str, note: str, kind: str = "note") -> str:
+    def remember(self, target_dir: str, note: str, kind: str = "note", sem: str = "") -> str:
         """Append a note to the preserved MEMORY.md session log.
 
         Args:
             target_dir: Project root directory.
             note: Single-line note.
             kind: One of MEMORY_NOTE_KINDS.
+            sem: Optional write-time semantic seeds ("a, b, c").
 
         Returns:
             The stored log line.
         """
-        stored = self._factory.memory.remember(str(Path(target_dir).resolve()), note, kind)
-        return f"- {stored.date} [{stored.kind}] {stored.text}"
+        stored = self._factory.memory.remember(str(Path(target_dir).resolve()), note, kind, sem=sem)
+        rendered = f"- {stored.date} [{stored.kind}] {stored.text}"
+        if stored.sem:
+            rendered += f" | sem: {stored.sem}"
+        return rendered
+
+    def recall(self, target_dir: str, query: str, top_k: int = 0, reinforce_winners: bool = True) -> List[RecallHit]:
+        """Zero-inference recall over the preserved session log.
+
+        Scores MEMORY.md notes lexically (body + ``| sem:`` seeds) and
+        boosts them with Hebbian co-activation from past recalls; the
+        winners strengthen the co-activation graph for next time.
+
+        Args:
+            target_dir: Project root directory.
+            query: Free-text query.
+            top_k: Winners kept (0 = MEMORY_RECALL_TOP_K).
+            reinforce_winners: Persist the co-activation of the winners.
+
+        Returns:
+            Scored hits, best first.
+        """
+        root = Path(target_dir).resolve()
+        if "## 1." not in self._factory.memory.read(str(root)):
+            self.memory(str(root))
+        return self._factory.hebbian.recall(str(root), query, top_k, reinforce_winners)
+
+    def publish_doc_branch(self, target_dir: str, push: bool = True, dry_run: bool = False) -> DocsBranchResult:
+        """Stage the static site into the dedicated docs branch.
+
+        After a successful run with a known Pages URL the README injection
+        is refreshed so the docs-site link points at the deployed site
+        (config override ``DOC_PAGES_URL`` wins; otherwise the URL is
+        inferred from the origin remote for this call only).
+
+        Args:
+            target_dir: Project root directory.
+            push: Push the branch to the origin remote (ignored in dry runs).
+            dry_run: Stage into DOC_DRY_RUN_DIR without git calls.
+
+        Returns:
+            DocsBranchResult describing the outcome.
+        """
+        root = Path(target_dir).resolve()
+        result = self._factory.docbranch.publish(str(root), push=push, dry_run=dry_run)
+        url = result.pages_url
+        if url:
+            try:
+                self._factory.readme_injector.inject(str(root), url)
+            except Exception:
+                logger.debug("README docs-site link refresh skipped", exc_info=True)
+        return result
 
     def install_skills(self, target_dir: str, target: Optional[str] = None) -> List[Path]:
         """Install the packaged agent skills into the project.

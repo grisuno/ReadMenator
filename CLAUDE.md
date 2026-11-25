@@ -65,6 +65,8 @@ readmenator/
   _graphrag.py      - Zero-token GraphRAG: entities, relationships, text units, report hierarchy, local/global search
   _graphlayout.py   - ForceAtlas2 snapshots in 2D/3D (numpy optional), circular and spherical hierarchical edge bundling
   _memory.py        - MEMORY.md: declared rules (file:line), measured baselines, preserved session log
+  _hebbian.py       - Zero-inference recall: | sem: seeding + Hebbian co-activation over MEMORY.md
+  _docbranch.py     - Docs branch publisher (GitHub Pages from a branch) + linguist .gitattributes
   _skill_installer.py - Installs packaged agent skills (readmenator/_skills/*/SKILL.md)
   _sourceview.py      - Bounded per-file source texts for the explorer View drawer (caps, privacy)
   _symindex.py        - Deterministic symbol index: spans, call sites with lines, definition resolver
@@ -128,6 +130,8 @@ tests/
   test_graphlayout.py - ForceAtlas2 (2D/3D) and circular/spherical edge bundling contract tests (determinism, separation, bounds, caps, curves)
   test_bundlegraph.py - Edge bundle explorer contract tests (payload, escaping, no network, gallery card, disable flag)
   test_memory.py - Project memory and skill installer contract tests (rules, citations, preserved log, marker safety)
+  test_hebbian.py - Zero-inference recall contract tests (sem seeding, lexical recall, co-activation, capped state, graphrag text units)
+  test_docbranch.py - Docs branch contract tests (gitattributes block, pages URL inference, staging, push, README link refresh)
   test_sourceview.py - Source viewer contract tests (caps, privacy, View drawer, highlight, ctrl+click, themes)
   test_symindex.py - Symbol index contract tests (spans, call-site lines, confidence tiers, methods_index)
   test_components.py - Component diagram contract tests (schema, graph LR, markdown, page, gallery card)
@@ -215,6 +219,9 @@ tests/
 - Video 3D acts (VIDEO_ORBIT_S, VIDEO_SPHERE_S, VIDEO_INVITE_S, VIDEO_ORBIT_FA2_ITERATIONS, VIDEO_ORBIT_TOUR_STOPS, VIDEO_ORBIT_TURNS, VIDEO_ORBIT_PITCH_DEG, VIDEO_ORBIT_PERSPECTIVE, VIDEO_ORBIT_ZOOM, VIDEO_ORBIT_DEPTH_FADE, VIDEO_ORBIT_LABELS, VIDEO_SPHERE_TURNS, VIDEO_SPHERE_SAMPLES)
 - Edge bundle explorer (BUNDLEGRAPH_ENABLED, BUNDLEGRAPH_OUTPUT, BUNDLEGRAPH_MODE, BUNDLEGRAPH_BETA, BUNDLEGRAPH_SAMPLES, BUNDLEGRAPH_INNER_RATIO, BUNDLEGRAPH_GROUP_GAP, BUNDLEGRAPH_EDGE_ALPHA, BUNDLEGRAPH_DIM_ALPHA, BUNDLEGRAPH_LABEL_ALL_MAX, BUNDLEGRAPH_LABEL_TOP_N, BUNDLEGRAPH_LABEL_MAX_CHARS, BUNDLEGRAPH_NODE_MIN_PX/MAX_PX, BUNDLEGRAPH_HIT_PX, BUNDLEGRAPH_ROTATE_SPEED, BUNDLEGRAPH_PERSPECTIVE, BUNDLEGRAPH_DEPTH_FADE, BUNDLEGRAPH_PARTICLES, BUNDLEGRAPH_REVEAL_MS, BUNDLEGRAPH_FLOW_TOP_N, BUNDLEGRAPH_LIST_MAX, BUNDLEGRAPH_THUMB_EDGES, BUNDLEGRAPH_THUMB_SAMPLES)
 - Memory settings (MEMORY_ENABLED, MEMORY_FILENAME, MEMORY_VOCABULARY_STOPWORDS, MEMORY_NOTE_MAX_CHARS, MEMORY_NOTE_KINDS, MEMORY_RULE_SOURCES, MEMORY_CONSTRAINT/STYLE/DELIVERABLE_KEYWORDS, MEMORY_HEADING_EXCLUDE, MEMORY_MAX_RULES_PER_FILE/CATEGORY, MEMORY_MIN_RULE_CHARS, MEMORY_MAX_COMMANDS, MEMORY_VOCABULARY_TOP_N, MEMORY_SUBSYSTEMS_TOP_N, MEMORY_STYLE_LANGUAGES, MEMORY_RISKS_TOP_N)
+- Memory recall settings (MEMORY_SEM_MAX_TERMS/CHARS, MEMORY_SEM_WEIGHT, MEMORY_STATE_FILENAME, MEMORY_RECALL_TOP_K, HEBBIAN_MAX_PAIRS/MAX_PAIR_WEIGHT/BOOST/SATURATION/FIRE_CAP)
+- Gallery thumbnail budgets (FORCEGRAPH_THUMB_MAX_NODES/EDGES, BUNDLEGRAPH_THUMB_NODES, COMPONENTS_THUMB_MAX_RELATIONS)
+- Docs branch settings (DOC_BRANCH_ENABLED/NAME/TIMEOUT_S/COMMIT_MESSAGE, DOC_PAGES_URL, DOC_DRY_RUN_DIR, GITATTRIBUTES_ENABLED/FILENAME)
 - Skills settings (SKILLS_ENABLED, SKILLS_TARGET_DIR, SKILLS_INSTALL_ON_RUN)
 - Symbol index settings (SYMINDEX_MAX_CALL_SITES, SYMINDEX_BUILTINS)
 - Component diagram settings (COMPONENTS_ENABLED, COMPONENTS_OUTPUT_DIR, COMPONENTS_MAX_KEY_ENTITIES/KEY_EDGES/ALL_EDGES, COMPONENTS_EXPAND_MIN_FILES, COMPONENTS_DEPTH_CAP)
@@ -278,7 +285,7 @@ tests/
 - Emits progress messages every PROGRESS_REPORT_BATCH files
 - Supports `.gitignore`-aware scanning (GITIGNORE_AWARE)
 - Supports privacy mode (PRIVACY_MODE) that strips snippets and docstrings
-- Skips its own generated outputs (agent, wiki, rules, maps, site, cache, graphrag, component diagrams, gh-wiki dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
+- Skips its own generated outputs (agent, wiki, rules, maps, site, cache, graphrag, component diagrams, gh-wiki/doc-branch dry run dirs and `.refactor_*` scripts) via SKIP_GENERATED_OUTPUTS; counted as `generated` in last_skip_counts
 - scan_with_content() returns content map for rule gen, taint analysis
 - is_generated(rel_path) is public (the git history replay filters historical trees with it)
 - scan_contents(contents) parses an in-memory file map with the same parsers and the same _parse_source path, used to replay historical trees
@@ -464,7 +471,7 @@ tests/
 - Entry point: `python3 -m readmenator._mcp_server <path>` or `readmenator-mcp <path>`
 
 ### Folder README Contract
-- FolderReadmeWriter.write_all(project_root) (readmenator/_folder_readme.py) writes FOLDER_README_FILENAME into each existing generated folder: AGENT_OUTPUT_DIR, WIKI_OUTPUT_DIR, GRAPHRAG_OUTPUT_DIR, APIDOCS_OUTPUT_DIR, DIAGRAM_OUTPUT_DIR, COMPONENTS_OUTPUT_DIR, RULE_GEN_OUTPUT_DIR, GH_WIKI_DRY_RUN_DIR (folder names from Config)
+- FolderReadmeWriter.write_all(project_root) (readmenator/_folder_readme.py) writes FOLDER_README_FILENAME into each existing generated folder: AGENT_OUTPUT_DIR, WIKI_OUTPUT_DIR, GRAPHRAG_OUTPUT_DIR, APIDOCS_OUTPUT_DIR, DIAGRAM_OUTPUT_DIR, COMPONENTS_OUTPUT_DIR, RULE_GEN_OUTPUT_DIR, GH_WIKI_DRY_RUN_DIR, DOC_DRY_RUN_DIR (folder names from Config)
 - Content: FOLDER_README_MARKER first line, title, purpose, regenerated-on-every-run notice, Contents table listing only entries whose glob matches on disk (directories with a trailing slash), How to use (human and agent commands), Regenerate commands; deterministic and idempotent
 - A README without the marker is hand-written and never overwritten; symlinked folders and targets are refused
 - is_generated_folder_readme(path, config) lets consumers skip generated READMEs: site docs (collect_doc_sources, so llms.txt), GitHub wiki collect_sources, agent MANIFEST inventory; component stale-page pruning never deletes any README
@@ -503,7 +510,7 @@ tests/
 - ExplorerServer (readmenator/_explorer.py): stdlib HTTPServer with /api/graph, /api/analytics, /api/samples, /api/source?file= (bounded source text), /vendor/force-graph.min.js plus static write_static(); CLI `explorer` (add --no-browser to skip auto-open)
 - Embedder (readmenator/_embed.py): optional sentence-transformers encode with offline Jaccard near_jaccard/cluster_jaccard/project_jaccard fallback; CLI `near <file|text>`
 - Explorer UX: canvas names with collision-aware labels (top FORCEGRAPH_LABEL_TOP_N by PageRank, all past FORCEGRAPH_LABEL_ZOOM), shapes per type, findings badge, hover neighbourhood preview, inspector panel (PageRank position and percentile, metrics, purpose, filterable symbols with signatures and docs, neighbours grouped by relation, clickable, Back history, 1-3 hop reach, isolate), View button opening the source drawer (S key, right-click menu), search over labels, paths and symbol names, layouts force / cluster (community anchors) / radial (layer rings) / dag, deep links #node=&layout=; unresolved calls and imports that resolve to project files never become externals; payload file nodes carry rank, rank_pos, doc (empty in privacy mode), symbol_list
-- ForceGraphRenderer.thumbnail_svg(payload): escaped ForceAtlas2 preview used as the featured gallery card in both `diagrams` and `pages`
+- ForceGraphRenderer.thumbnail_svg(payload): escaped ForceAtlas2 preview used as the featured gallery card in both `diagrams` and `pages`; capped at FORCEGRAPH_THUMB_MAX_NODES (top PageRank files) and FORCEGRAPH_THUMB_MAX_EDGES (rank-weighted), so the gallery index.html stays small on large projects
 - Explorer page (readmenator/_forcegraph_page.py): template placeholders are filled in one regex pass (payload text naming a token is never rescanned); page_settings(payload) serializes every tuneable from Config plus group_colors (layer palette, language hash colors) plus srcEnabled/srcLive/srcChunk/srcContext; member_of/layered_as edges use their own palette entries; source drawer (src-viewer + src-scrim + src-tip) renders embedded sources lazily in chunks with offline keyword/string/comment/number/call highlighting themed via CSS vars, hover definition cards from the symbol index, and Ctrl/Cmd+Click follow-to-definition (same file scrolls, other files open and refocus the graph); S key, View button, context menu, Esc/scrim close; window.ReadmenatorExplorer exposes openSource/closeSource; empty embedded source reports its src_why (budget = raise SOURCEVIEW_MAX_FILES/TOTAL_CHARS, empty = file is empty) and otherwise falls back to a live `api/source?file=` fetch only when served by the explorer server (srcLive, http); static exports keep srcLive false so Pages-style hosting (e.g. readmenator-maps/ as deploy root per .github/workflows/static.yml, where no API exists) never fires a doomed fetch (no 404), showing the stale message with the exact rebuild command instead (never blames SOURCEVIEW_ENABLED, which defaults on)
 - Source viewer is always on by default (SOURCEVIEW_ENABLED=True): run()/rebuild()/update() all embed bounded sources (update() re-reads contents via _refresh_explorers, skipping symlinks and files over MAX_FILE_SIZE_MB); only PRIVACY_MODE or SOURCEVIEW_ENABLED=False disables it, with an explicit disabled message instead of the rebuild hint
 - Explorer selection: engine pointer picking is disabled (force-graph repaints its shadow canvas at most every 800 ms, so picks drifted while nodes moved); hover, click, drag-to-pin, double-click isolate and right-click menus are hit-tested in the page against the positions drawn in the same frame; priority node glyph, then label, then enlarged grab area (FORCEGRAPH_MIN_HIT_PX + padding), then dependency edges (curved edges via __controlPoints); while a focus is active only highlighted edges are pickable
@@ -529,8 +536,24 @@ tests/
 ### Project Memory Contract
 - ProjectMemory (readmenator/_memory.py) writes readmenator-agent/MEMORY.md: 1 purpose and domain (README lead with citation, concept vocabulary, subsystems), 2 workflow (commands detected from pyproject, package.json, Makefile, go.mod, Cargo.toml, CI workflows; session protocol), 3 rules and constraints, 4 style norms, 5 minimum deliverables (each Declared + Measured baseline), 6 risks, 7 session log
 - Declared rules: bullet or numbered lines under headings matching MEMORY_*_KEYWORDS in MEMORY_RULE_SOURCES files, quoted verbatim with file:line; MEMORY_HEADING_EXCLUDE headings and readmenator-injected anchor blocks skipped; symlinks and oversized files skipped
-- Session log between NOTES_BEGIN/NOTES_END markers is preserved byte for byte by write(); remember(note, kind) validates MEMORY_NOTE_KINDS, sanitizes to one line (no control chars, comment markers neutralised, MEMORY_NOTE_MAX_CHARS)
-- CLI `memory`, `remember "<note>" --kind <kind>`; MCP tools readmenator.memory, readmenator.remember, resource readmenator://memory; MANIFEST read_order starts with MEMORY.md; agent injection step 0 points at it
+- Session log between NOTES_BEGIN/NOTES_END markers is preserved byte for byte by write(); remember(note, kind, sem) validates MEMORY_NOTE_KINDS, sanitizes to one line (no control chars, comment markers neutralised, MEMORY_NOTE_MAX_CHARS)
+- Write-time semantic seeding: remember(..., sem="syn1, syn2") stores a `| sem:` suffix (capped at MEMORY_SEM_MAX_TERMS / MEMORY_SEM_MAX_CHARS); notes() parses it back into MemoryNote.sem; app._memory_notes appends it to the GraphRAG triples so BM25 matches synonyms
+- CLI `memory`, `remember "<note>" --kind <kind> --sem "a, b"`; MCP tools readmenator.memory, readmenator.remember (sem arg), resource readmenator://memory; MANIFEST read_order starts with MEMORY.md; agent injection step 0 points at it
+
+### Hebbian Memory Contract (zero-inference recall)
+- HebbianMemory (readmenator/_hebbian.py): recall(project_root, query, top_k, reinforce_winners) over the MEMORY.md session log; zero embeddings, zero LLM calls, sub-millisecond
+- Base score: unique query tokens in the note body count 1.0, tokens in the `| sem:` seeds count MEMORY_SEM_WEIGHT (0.8); no match = empty list
+- Hebbian boost: a note sharing co-activation history with any primed note gains saturating HEBBIAN_BOOST * w/(w + HEBBIAN_SATURATION) per partner, so notes that repeatedly fired together surface first
+- reinforce(winners) increments pairwise co-activation and per-note fire counts; state lives in readmenator-agent/MEMORY_STATE.json (schema_version 1, sorted keys, pairs capped at HEBBIAN_MAX_PAIRS with HEBBIAN_MAX_PAIR_WEIGHT each, fires capped at HEBBIAN_FIRE_CAP); corrupt or symlinked state degrades to pure lexical scoring
+- Deterministic ordering: (-score, date, text); every recall reinforces its winners (fire together, wire together)
+- CLI `recall "<query>" [--k N]`; MCP tool readmenator.recall; AnalyzerFactory exposes hebbian (lazy init)
+
+### Docs Branch Contract (GitHub Pages from a branch)
+- DocsBranchPublisher (readmenator/_docbranch.py): publish(project_root, push, dry_run) stages DIAGRAM_PAGES_DIR (the `readmenator . pages` site) into a fresh git repo and pushes `+HEAD:refs/heads/DOC_BRANCH_NAME` with --force; the working tree is never touched
+- Requires docs/index.html (asks for `readmenator . pages` otherwise); push requires an origin remote, push=False commits locally without one; dry_run stages into DOC_DRY_RUN_DIR (no git calls)
+- ensure_gitattributes(project_root) writes an idempotent `# readmenator:gitattributes:begin/end` block into .gitattributes marking every generated output dir plus the video/poster as `linguist-generated=true`, so committing artifacts no longer flips GitHub language stats (a C project stops showing as "HTML"); refuses symlinked targets, preserves user entries, refreshes stale blocks in place
+- infer_pages_url(remote): github.com/user/repo -> https://user.github.io/repo/, gitlab.com -> user.gitlab.io; DOC_PAGES_URL overrides; injectable runner, argument lists only, DOC_BRANCH_TIMEOUT_S
+- app.publish_doc_branch re-injects the README with the resolved site URL (ReadmeInjector.inject(project_root, docs_site_url)), adding the leading "Docs site" bullet so README links lead to the deployed site; CLI `doc-branch [--dry-run] [--no-push]`; AnalyzerFactory exposes docbranch (lazy init); Config: DOC_BRANCH_ENABLED/NAME/TIMEOUT_S/COMMIT_MESSAGE, DOC_PAGES_URL, DOC_DRY_RUN_DIR, GITATTRIBUTES_ENABLED/FILENAME
 
 ### Agent Skills Contract
 - readmenator/_skills/<readmenator-*>/SKILL.md with name + description frontmatter (orient, ask, change, memory)
@@ -549,7 +572,7 @@ tests/
 - Each node carries a circle angle (hierarchical_edge_bundling) and a unit-sphere position (spherical_edge_bundling); each group carries its arc, 2D and 3D hub, and cap center; the page builds the B-splines itself so beta is live
 - Page (readmenator/_bundlegraph_page.py): one canvas, zero external requests; 2D circle (radial labels for all files up to BUNDLEGRAPH_LABEL_ALL_MAX, community arcs) and 3D sphere (perspective camera, drag rotate, wheel zoom, auto-rotate, depth fade, fly-to on focus); hover/click hit-testing on drawn positions; cyan = imports, pink = imported by; node panel (metrics, purpose, imports and importers, links into graph-force.html #node= in 2D/3D), community panel (inside/out/in, cohesion, flows, members); crossing-only, direction, color by community/layer/language, search, PNG, theme; deep links view, node, group, beta, color, dir, cross; prefers-reduced-motion disables reveal, rotation and particles; window.ReadmenatorBundles
 - Placeholders filled in one regex pass; payload JSON escapes angle brackets; titles and hrefs HTML-escaped
-- Written beside graph-force.html from the same payload by app._write_forcegraph whenever BUNDLEGRAPH_ENABLED (run/rebuild, export, diagrams, pages); gallery gets a featured "Edge Bundle Explorer" card with a circular bundle thumbnail; CLI `bundles`; AnalyzerFactory exposes bundlegraph (lazy init)
+- Written beside graph-force.html from the same payload by app._write_forcegraph whenever BUNDLEGRAPH_ENABLED (run/rebuild, export, diagrams, pages); gallery gets a featured "Edge Bundle Explorer" card with a circular bundle thumbnail (capped at BUNDLEGRAPH_THUMB_NODES files and BUNDLEGRAPH_THUMB_EDGES rank-weighted curves); CLI `bundles`; AnalyzerFactory exposes bundlegraph (lazy init)
 
 ### Semantic ConceptGraph Contract
 - ConceptExtractor class with extract(nodes, edges, resolved_edges) entry point (readmenator/_concepts.py)

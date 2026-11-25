@@ -253,7 +253,7 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `_script_json` (function, line 50) `def _script_json(html, name)`
   - `TestBundleGraphPayloadContract` (class, line 59) `class TestBundleGraphPayloadContract(TestCase)`
   - `TestBundleGraphRenderContract` (class, line 109) `class TestBundleGraphRenderContract(TestCase)`
-  - `TestBundleGraphAppContract` (class, line 191) `class TestBundleGraphAppContract(TestCase)`
+  - `TestBundleGraphAppContract` (class, line 197) `class TestBundleGraphAppContract(TestCase)`
   - `setUp` (method, line 62) `def setUp(self)`
   - `test_bundlegraph_groups_follow_community_order_with_unassigned_last` (method, line 68) `def test_bundlegraph_groups_follow_community_order_with_unassigned_last(self)`
   - `test_bundlegraph_edges_are_distinct_file_pairs` (method, line 74) `def test_bundlegraph_edges_are_distinct_file_pairs(self)`
@@ -270,13 +270,14 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
   - `test_bundlegraph_render_escapes_untrusted_text` (method, line 159) `def test_bundlegraph_render_escapes_untrusted_text(self)`
   - `test_bundlegraph_render_payload_naming_a_token_stays_literal` (method, line 170) `def test_bundlegraph_render_payload_naming_a_token_stays_literal(self)`
   - `test_bundlegraph_thumbnail_is_safe_svg` (method, line 176) `def test_bundlegraph_thumbnail_is_safe_svg(self)`
-  - `test_bundlegraph_write_creates_parent` (method, line 183) `def test_bundlegraph_write_creates_parent(self)`
-  - `_project` (method, line 194) `def _project(self, tmp)`
-  - `_config` (method, line 199) `def _config(self)`
-  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 204) `def test_export_diagrams_writes_bundle_page_and_card(self)`
-  - `test_bundle_page_skipped_when_disabled` (method, line 220) `def test_bundle_page_skipped_when_disabled(self)`
-  - `test_export_bundlegraph_cli_entry` (method, line 231) `def test_export_bundlegraph_cli_entry(self)`
-  - `test_pages_subdir_card_points_into_maps_dir` (method, line 241) `def test_pages_subdir_card_points_into_maps_dir(self)`
+  - `test_bundlegraph_thumbnail_respects_node_cap` (method, line 183) `def test_bundlegraph_thumbnail_respects_node_cap(self)`
+  - `test_bundlegraph_write_creates_parent` (method, line 189) `def test_bundlegraph_write_creates_parent(self)`
+  - `_project` (method, line 200) `def _project(self, tmp)`
+  - `_config` (method, line 205) `def _config(self)`
+  - `test_export_diagrams_writes_bundle_page_and_card` (method, line 210) `def test_export_diagrams_writes_bundle_page_and_card(self)`
+  - `test_bundle_page_skipped_when_disabled` (method, line 226) `def test_bundle_page_skipped_when_disabled(self)`
+  - `test_export_bundlegraph_cli_entry` (method, line 237) `def test_export_bundlegraph_cli_entry(self)`
+  - `test_pages_subdir_card_points_into_maps_dir` (method, line 247) `def test_pages_subdir_card_points_into_maps_dir(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_bundlegraph.py`, `readmenator/_config.py`, `readmenator/_forcegraph.py`, `readmenator/_htmlpack.py`, `readmenator/_models.py`
 
 ## tests/test_cache.py
@@ -313,42 +314,43 @@ Pages: [KB_tests.md](KB_tests.md), [KB_tests_p2.md](KB_tests_p2.md), [KB_tests_p
 - Layer: testing
 - Language: py
 - Symbols:
-  - `_node` (function, line 17) `def _node(nid)`
-  - `_fixture` (function, line 25) `def _fixture()`
-  - `TestComponentSchemaContract` (class, line 46) `class TestComponentSchemaContract(TestCase)`
-  - `TestComponentRenderContract` (class, line 94) `class TestComponentRenderContract(TestCase)`
-  - `TestComponentPageContract` (class, line 140) `class TestComponentPageContract(TestCase)`
-  - `TestComponentGalleryContract` (class, line 238) `class TestComponentGalleryContract(TestCase)`
-  - `setUp` (method, line 49) `def setUp(self)`
-  - `test_top_level_keys_match_schema` (method, line 57) `def test_top_level_keys_match_schema(self)`
-  - `test_components_carry_entities_and_file_methods` (method, line 67) `def test_components_carry_entities_and_file_methods(self)`
-  - `test_relations_link_components_with_call_sites` (method, line 78) `def test_relations_link_components_with_call_sites(self)`
-  - `test_methods_index_keys_use_pipe_separator` (method, line 89) `def test_methods_index_keys_use_pipe_separator(self)`
-  - `setUp` (method, line 97) `def setUp(self)`
-  - `test_mermaid_matches_layered_style` (method, line 105) `def test_mermaid_matches_layered_style(self)`
-  - `test_sanitize_for_mermaid_ids` (method, line 114) `def test_sanitize_for_mermaid_ids(self)`
-  - `test_overview_lists_related_entities` (method, line 118) `def test_overview_lists_related_entities(self)`
-  - `test_write_emits_analysis_and_pages` (method, line 124) `def test_write_emits_analysis_and_pages(self)`
-  - `test_empty_project_yields_empty_diagram` (method, line 133) `def test_empty_project_yields_empty_diagram(self)`
-  - `setUp` (method, line 143) `def setUp(self)`
-  - `test_page_draws_nodes_edges_and_links` (method, line 152) `def test_page_draws_nodes_edges_and_links(self)`
-  - `test_page_nodes_explain_themselves` (method, line 162) `def test_page_nodes_explain_themselves(self)`
-  - `test_relations_section_lists_call_evidence` (method, line 171) `def test_relations_section_lists_call_evidence(self)`
-  - `test_build_records_layers_hub_and_counts` (method, line 177) `def test_build_records_layers_hub_and_counts(self)`
-  - `test_page_has_no_network_requests` (method, line 186) `def test_page_has_no_network_requests(self)`
-  - `test_page_escapes_untrusted_text` (method, line 194) `def test_page_escapes_untrusted_text(self)`
-  - `test_thumbnail_is_safe_svg` (method, line 204) `def test_thumbnail_is_safe_svg(self)`
-  - `test_write_emits_index_page` (method, line 213) `def test_write_emits_index_page(self)`
-  - `test_page_script_is_valid_javascript` (method, line 223) `def test_page_script_is_valid_javascript(self)`
-  - `_project` (method, line 241) `def _project(self, tmp)`
-  - `_config` (method, line 246) `def _config(self)`
-  - `test_export_diagrams_links_components_card` (method, line 251) `def test_export_diagrams_links_components_card(self)`
-  - `test_export_pages_links_components_relatively` (method, line 266) `def test_export_pages_links_components_relatively(self)`
-  - `test_site_copy_has_no_source_links` (method, line 284) `def test_site_copy_has_no_source_links(self)`
-  - `test_overview_prefixes_source_links` (method, line 293) `def test_overview_prefixes_source_links(self)`
-  - `test_card_skipped_when_disabled` (method, line 305) `def test_card_skipped_when_disabled(self)`
-  - `test_docs_collect_components_overview` (method, line 319) `def test_docs_collect_components_overview(self)`
-  - `test_nested_relations_roll_up` (method, line 331) `def test_nested_relations_roll_up(self)`
+  - `_node` (function, line 18) `def _node(nid)`
+  - `_fixture` (function, line 26) `def _fixture()`
+  - `TestComponentSchemaContract` (class, line 47) `class TestComponentSchemaContract(TestCase)`
+  - `TestComponentRenderContract` (class, line 95) `class TestComponentRenderContract(TestCase)`
+  - `TestComponentPageContract` (class, line 141) `class TestComponentPageContract(TestCase)`
+  - `TestComponentGalleryContract` (class, line 253) `class TestComponentGalleryContract(TestCase)`
+  - `setUp` (method, line 50) `def setUp(self)`
+  - `test_top_level_keys_match_schema` (method, line 58) `def test_top_level_keys_match_schema(self)`
+  - `test_components_carry_entities_and_file_methods` (method, line 68) `def test_components_carry_entities_and_file_methods(self)`
+  - `test_relations_link_components_with_call_sites` (method, line 79) `def test_relations_link_components_with_call_sites(self)`
+  - `test_methods_index_keys_use_pipe_separator` (method, line 90) `def test_methods_index_keys_use_pipe_separator(self)`
+  - `setUp` (method, line 98) `def setUp(self)`
+  - `test_mermaid_matches_layered_style` (method, line 106) `def test_mermaid_matches_layered_style(self)`
+  - `test_sanitize_for_mermaid_ids` (method, line 115) `def test_sanitize_for_mermaid_ids(self)`
+  - `test_overview_lists_related_entities` (method, line 119) `def test_overview_lists_related_entities(self)`
+  - `test_write_emits_analysis_and_pages` (method, line 125) `def test_write_emits_analysis_and_pages(self)`
+  - `test_empty_project_yields_empty_diagram` (method, line 134) `def test_empty_project_yields_empty_diagram(self)`
+  - `setUp` (method, line 144) `def setUp(self)`
+  - `test_page_draws_nodes_edges_and_links` (method, line 153) `def test_page_draws_nodes_edges_and_links(self)`
+  - `test_page_nodes_explain_themselves` (method, line 163) `def test_page_nodes_explain_themselves(self)`
+  - `test_relations_section_lists_call_evidence` (method, line 172) `def test_relations_section_lists_call_evidence(self)`
+  - `test_build_records_layers_hub_and_counts` (method, line 178) `def test_build_records_layers_hub_and_counts(self)`
+  - `test_page_has_no_network_requests` (method, line 187) `def test_page_has_no_network_requests(self)`
+  - `test_page_escapes_untrusted_text` (method, line 195) `def test_page_escapes_untrusted_text(self)`
+  - `test_thumbnail_is_safe_svg` (method, line 205) `def test_thumbnail_is_safe_svg(self)`
+  - `test_thumbnail_respects_relation_cap` (method, line 214) `def test_thumbnail_respects_relation_cap(self)`
+  - `test_write_emits_index_page` (method, line 228) `def test_write_emits_index_page(self)`
+  - `test_page_script_is_valid_javascript` (method, line 238) `def test_page_script_is_valid_javascript(self)`
+  - `_project` (method, line 256) `def _project(self, tmp)`
+  - `_config` (method, line 261) `def _config(self)`
+  - `test_export_diagrams_links_components_card` (method, line 266) `def test_export_diagrams_links_components_card(self)`
+  - `test_export_pages_links_components_relatively` (method, line 281) `def test_export_pages_links_components_relatively(self)`
+  - `test_site_copy_has_no_source_links` (method, line 299) `def test_site_copy_has_no_source_links(self)`
+  - `test_overview_prefixes_source_links` (method, line 308) `def test_overview_prefixes_source_links(self)`
+  - `test_card_skipped_when_disabled` (method, line 320) `def test_card_skipped_when_disabled(self)`
+  - `test_docs_collect_components_overview` (method, line 334) `def test_docs_collect_components_overview(self)`
+  - `test_nested_relations_roll_up` (method, line 346) `def test_nested_relations_roll_up(self)`
 - Depends on: `readmenator/_app.py`, `readmenator/_components.py`, `readmenator/_config.py`, `readmenator/_diagrams.py`, `readmenator/_models.py`
 
 ## tests/test_concepts.py

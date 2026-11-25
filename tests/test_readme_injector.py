@@ -45,6 +45,21 @@ class TestReadmeInjectorInjectBehavior(unittest.TestCase):
         self.assertIn("KNOWLEDGE_BASE.md", content)
         self.assertIn("<!-- readmenator-kb-link -->", content)
 
+    def test_inject_with_docs_site_url_adds_site_bullet(self) -> None:
+        """A deployed docs URL adds the leading Docs site bullet."""
+        readme = self.root / "README.md"
+        readme.write_text("# My Project\n\nSome content.\n")
+        result = self.injector.inject(str(self.root), "https://owner.github.io/repo/")
+        self.assertTrue(result)
+        content = readme.read_text()
+        self.assertIn("https://owner.github.io/repo/", content)
+        self.assertIn("Docs site", content)
+        # Idempotent with the same URL.
+        self.assertFalse(self.injector.inject(str(self.root), "https://owner.github.io/repo/"))
+        # A different URL refreshes instead of duplicating.
+        self.assertTrue(self.injector.inject(str(self.root), "https://other.example.dev/"))
+        self.assertNotIn("owner.github.io", (self.root / "README.md").read_text())
+
     def test_inject_is_idempotent_does_not_duplicate(self):
         readme = self.root / "README.md"
         readme.write_text("# My Project\n\nSome content.\n")

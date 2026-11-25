@@ -477,8 +477,8 @@ defined here and consumed by reference elsewhere.
 | [`BUNDLEGRAPH_REVEAL_MS`](#config-bundlegraph_reveal_ms) | `int` | `1400` |  |
 | [`BUNDLEGRAPH_FLOW_TOP_N`](#config-bundlegraph_flow_top_n) | `int` | `8` |  |
 | [`BUNDLEGRAPH_LIST_MAX`](#config-bundlegraph_list_max) | `int` | `40` |  |
-| [`BUNDLEGRAPH_THUMB_EDGES`](#config-bundlegraph_thumb_edges) | `int` | `500` |  |
-| [`BUNDLEGRAPH_THUMB_SAMPLES`](#config-bundlegraph_thumb_samples) | `int` | `12` |  |
+| [`BUNDLEGRAPH_THUMB_EDGES`](#config-bundlegraph_thumb_edges) | `int` | `200` |  |
+| [`BUNDLEGRAPH_THUMB_SAMPLES`](#config-bundlegraph_thumb_samples) | `int` | `8` |  |
 | [`BUNDLEGRAPH_ORDER_OPTIMIZE`](#config-bundlegraph_order_optimize) | `bool` | `True` |  |
 | [`BUNDLEGRAPH_ORDER_SWEEPS`](#config-bundlegraph_order_sweeps) | `int` | `6` |  |
 | [`BUNDLEGRAPH_ORDER_PASSES`](#config-bundlegraph_order_passes) | `int` | `8` |  |
@@ -671,5 +671,27 @@ defined here and consumed by reference elsewhere.
 | [`PROJECT_CONFIG_FILENAME`](#config-project_config_filename) | `str` | `'readmenator.toml'` |  |
 | [`PROJECT_CONFIG_ENABLED`](#config-project_config_enabled) | `bool` | `True` |  |
 | [`VIEWER_CONFIG_FILENAME`](#config-viewer_config_filename) | `str` | `'config.json'` |  |
+| [`MEMORY_SEM_MAX_TERMS`](#config-memory_sem_max_terms) | `int` | `5` |  |
+| [`MEMORY_SEM_MAX_CHARS`](#config-memory_sem_max_chars) | `int` | `200` |  |
+| [`MEMORY_SEM_WEIGHT`](#config-memory_sem_weight) | `float` | `0.8` |  |
+| [`MEMORY_STATE_FILENAME`](#config-memory_state_filename) | `str` | `'MEMORY_STATE.json'` |  |
+| [`MEMORY_RECALL_TOP_K`](#config-memory_recall_top_k) | `int` | `5` |  |
+| [`HEBBIAN_MAX_PAIRS`](#config-hebbian_max_pairs) | `int` | `4000` |  |
+| [`HEBBIAN_MAX_PAIR_WEIGHT`](#config-hebbian_max_pair_weight) | `int` | `100` |  |
+| [`HEBBIAN_BOOST`](#config-hebbian_boost) | `float` | `2.0` |  |
+| [`HEBBIAN_SATURATION`](#config-hebbian_saturation) | `float` | `4.0` |  |
+| [`HEBBIAN_FIRE_CAP`](#config-hebbian_fire_cap) | `int` | `1000` |  |
+| [`FORCEGRAPH_THUMB_MAX_NODES`](#config-forcegraph_thumb_max_nodes) | `int` | `120` |  |
+| [`FORCEGRAPH_THUMB_MAX_EDGES`](#config-forcegraph_thumb_max_edges) | `int` | `180` |  |
+| [`BUNDLEGRAPH_THUMB_NODES`](#config-bundlegraph_thumb_nodes) | `int` | `120` |  |
+| [`COMPONENTS_THUMB_MAX_RELATIONS`](#config-components_thumb_max_relations) | `int` | `60` |  |
+| [`DOC_BRANCH_ENABLED`](#config-doc_branch_enabled) | `bool` | `True` |  |
+| [`DOC_BRANCH_NAME`](#config-doc_branch_name) | `str` | `'docs'` |  |
+| [`DOC_BRANCH_TIMEOUT_S`](#config-doc_branch_timeout_s) | `int` | `120` |  |
+| [`DOC_BRANCH_COMMIT_MESSAGE`](#config-doc_branch_commit_message) | `str` | `'readmenator: publish documentation site'` |  |
+| [`DOC_PAGES_URL`](#config-doc_pages_url) | `str` | `''` |  |
+| [`DOC_DRY_RUN_DIR`](#config-doc_dry_run_dir) | `str` | `'readmenator-doc-branch'` |  |
+| [`GITATTRIBUTES_ENABLED`](#config-gitattributes_enabled) | `bool` | `True` |  |
+| [`GITATTRIBUTES_FILENAME`](#config-gitattributes_filename) | `str` | `'.gitattributes'` |  |
 
 ---

@@ -583,17 +583,24 @@ class ForceGraphRenderer:
         files = [n for n in payload.get("nodes", []) if n.get("type") == "file"]
         if not files:
             return ""
-        ids = sorted(n["id"] for n in files)
+        kept = sorted(
+            files,
+            key=lambda n: (-float(n.get("rank", 0.0)), n["id"]),
+        )[: cfg.FORCEGRAPH_THUMB_MAX_NODES]
+        ids = sorted(n["id"] for n in kept)
         known = set(ids)
-        links = sorted({
-            (e["source"], e["target"]) for e in payload.get("edges", [])
-            if e["source"] in known and e["target"] in known and e["source"] != e["target"]
-        })
+        by_id = {n["id"]: n for n in kept}
+        links = sorted(
+            (
+                (e["source"], e["target"]) for e in payload.get("edges", [])
+                if e["source"] in known and e["target"] in known and e["source"] != e["target"]
+            ),
+            key=lambda e: (-float(by_id[e[0]].get("rank", 0.0)) - float(by_id[e[1]].get("rank", 0.0)), e),
+        )[: cfg.FORCEGRAPH_THUMB_MAX_EDGES]
         w, h = cfg.FORCEGRAPH_THUMB_WIDTH, cfg.FORCEGRAPH_THUMB_HEIGHT
         frames = forceatlas2_frames(ids, links, ForceAtlas2Settings(iterations=cfg.FORCEGRAPH_THUMB_ITERATIONS, snapshots=2))
         pos = fit_frames(frames, (0, 0, w, h), 8.0, 0.02)[-1]
-        by_id = {n["id"]: n for n in files}
-        top_rank = max([1e-9] + [float(n.get("rank", 0.0)) for n in files])
+        top_rank = max([1e-9] + [float(n.get("rank", 0.0)) for n in kept])
         parts = [f'<svg class="thumb" viewBox="0 0 {w} {h}" aria-hidden="true" focusable="false">']
         for a, b in links:
             (x1, y1), (x2, y2) = pos[a], pos[b]

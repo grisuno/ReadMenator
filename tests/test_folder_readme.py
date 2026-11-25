@@ -96,7 +96,8 @@ class TestFolderReadmeWriterContract(unittest.TestCase):
         names = {spec.dirname for spec in self.writer.specs()}
         cfg = self.config
         expected = {cfg.AGENT_OUTPUT_DIR, cfg.WIKI_OUTPUT_DIR, cfg.GRAPHRAG_OUTPUT_DIR, cfg.APIDOCS_OUTPUT_DIR,
-                    cfg.DIAGRAM_OUTPUT_DIR, cfg.COMPONENTS_OUTPUT_DIR, cfg.RULE_GEN_OUTPUT_DIR, cfg.GH_WIKI_DRY_RUN_DIR}
+                    cfg.DIAGRAM_OUTPUT_DIR, cfg.COMPONENTS_OUTPUT_DIR, cfg.RULE_GEN_OUTPUT_DIR,
+                    cfg.GH_WIKI_DRY_RUN_DIR, cfg.DOC_DRY_RUN_DIR}
         self.assertEqual(names, expected)
 
 

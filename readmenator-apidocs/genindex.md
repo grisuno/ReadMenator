@@ -125,6 +125,7 @@
 ## B
 
 - [`Backdrop`](modules/readmenator._video.py.md#backdrop) class in `readmenator._video`
+- [`base`](modules/readmenator._hebbian.py.md#recallhit-base) attribute of `RecallHit` in `readmenator._hebbian`
 - [`base_uids`](modules/readmenator._apidocs.py.md#apientity-base_uids) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`bases`](modules/readmenator._apidocs.py.md#apientity-bases) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`beat_seconds`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-beat_seconds) property of `SoundtrackComposer` in `readmenator._soundtrack`
@@ -133,6 +134,8 @@
 - [`BG_TOP`](modules/readmenator._video.py.md#bg_top) constant in `readmenator._video`
 - [`BIAS`](modules/readmenator._uncertainty.py.md#heuristicscorer-bias) attribute of `HeuristicScorer` in `readmenator._uncertainty`
 - [`Bm25Index`](modules/readmenator._graphrag.py.md#bm25index) class in `readmenator._graphrag`
+- [`boost`](modules/readmenator._hebbian.py.md#recallhit-boost) attribute of `RecallHit` in `readmenator._hebbian`
+- [`branch`](modules/readmenator._docbranch.py.md#docsbranchresult-branch) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`branch`](modules/readmenator._receipts.py.md#releasereceiptrecord-branch) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`BRANCH_LABELS`](modules/readmenator._flowlayout.py.md#branch_labels) constant in `readmenator._flowlayout`
 - [`branding_css`](modules/readmenator._project_config.py.md#branding_css) function in `readmenator._project_config`
@@ -202,6 +205,7 @@
 - [`BUNDLEGRAPH_SPHERE_REFINE_SWEEPS`](modules/readmenator._config.py.md#config-bundlegraph_sphere_refine_sweeps) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_STARS`](modules/readmenator._config.py.md#config-bundlegraph_stars) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_THUMB_EDGES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_edges) attribute of `Config` in `readmenator._config`
+- [`BUNDLEGRAPH_THUMB_NODES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_nodes) attribute of `Config` in `readmenator._config`
 - [`BUNDLEGRAPH_THUMB_SAMPLES`](modules/readmenator._config.py.md#config-bundlegraph_thumb_samples) attribute of `Config` in `readmenator._config`
 - [`BundleGraphRenderer`](modules/readmenator._bundlegraph.py.md#bundlegraphrenderer) class in `readmenator._bundlegraph`
 - [`BundleLayout`](modules/readmenator._graphlayout.py.md#bundlelayout) class in `readmenator._graphlayout`
@@ -269,6 +273,7 @@
 - [`combined_score`](modules/readmenator._models.py.md#hotspotresult-combined_score) attribute of `HotspotResult` in `readmenator._models`
 - [`commands`](modules/readmenator._receipts.py.md#releasereceiptrecord-commands) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`COMMENT_RE`](modules/readmenator._yaralite.py.md#comment_re) constant in `readmenator._yaralite`
+- [`commit`](modules/readmenator._docbranch.py.md#docsbranchresult-commit) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`commit`](modules/readmenator._githistory.py.md#historyrelease-commit) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`commit`](modules/readmenator._receipts.py.md#releasereceiptrecord-commit) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
 - [`commit_message`](modules/readmenator_orchestrator.py.md#config-commit_message) attribute of `Config` in `readmenator_orchestrator`
@@ -306,6 +311,7 @@
 - [`COMPONENTS_MAX_KEY_ENTITIES`](modules/readmenator._config.py.md#config-components_max_key_entities) attribute of `Config` in `readmenator._config`
 - [`COMPONENTS_NODE_SYMBOLS`](modules/readmenator._config.py.md#config-components_node_symbols) attribute of `Config` in `readmenator._config`
 - [`COMPONENTS_OUTPUT_DIR`](modules/readmenator._config.py.md#config-components_output_dir) attribute of `Config` in `readmenator._config`
+- [`COMPONENTS_THUMB_MAX_RELATIONS`](modules/readmenator._config.py.md#config-components_thumb_max_relations) attribute of `Config` in `readmenator._config`
 - [`compose`](modules/readmenator._category.py.md#category-compose) method of `Category` in `readmenator._category`
 - [`compose`](modules/readmenator._soundtrack.py.md#soundtrackcomposer-compose) method of `SoundtrackComposer` in `readmenator._soundtrack`
 - [`composite_authority_weight`](modules/readmenator._rank.py.md#rankconfig-composite_authority_weight) attribute of `RankConfig` in `readmenator._rank`
@@ -400,6 +406,7 @@
 - [`DataflowIssue`](modules/readmenator._models.py.md#dataflowissue) class in `readmenator._models`
 - [`date`](modules/readmenator._githistory.py.md#historyrelease-date) attribute of `HistoryRelease` in `readmenator._githistory`
 - [`date`](modules/readmenator._memory.py.md#memorynote-date) attribute of `MemoryNote` in `readmenator._memory`
+- [`date`](modules/readmenator._hebbian.py.md#recallhit-date) attribute of `RecallHit` in `readmenator._hebbian`
 - [`DEAD_CODE_ENABLED`](modules/readmenator._config.py.md#config-dead_code_enabled) attribute of `Config` in `readmenator._config`
 - [`DEAD_CODE_ENTRY_POINTS`](modules/readmenator._config.py.md#config-dead_code_entry_points) attribute of `Config` in `readmenator._config`
 - [`DEAD_CODE_QUARANTINE_DIR`](modules/readmenator._config.py.md#config-dead_code_quarantine_dir) attribute of `Config` in `readmenator._config`
@@ -509,11 +516,20 @@
 - [`doc`](modules/readmenator._models.py.md#node-doc) attribute of `Node` in `readmenator._models`
 - [`doc`](modules/readmenator._models.py.md#symbol-doc) attribute of `Symbol` in `readmenator._models`
 - [`doc`](modules/readmenator._symindex.py.md#symboldef-doc) attribute of `SymbolDef` in `readmenator._symindex`
+- [`DOC_BRANCH_COMMIT_MESSAGE`](modules/readmenator._config.py.md#config-doc_branch_commit_message) attribute of `Config` in `readmenator._config`
+- [`DOC_BRANCH_ENABLED`](modules/readmenator._config.py.md#config-doc_branch_enabled) attribute of `Config` in `readmenator._config`
+- [`DOC_BRANCH_NAME`](modules/readmenator._config.py.md#config-doc_branch_name) attribute of `Config` in `readmenator._config`
+- [`DOC_BRANCH_TIMEOUT_S`](modules/readmenator._config.py.md#config-doc_branch_timeout_s) attribute of `Config` in `readmenator._config`
 - [`doc_coverage`](modules/readmenator._rank.py.md#rankeditem-doc_coverage) attribute of `RankedItem` in `readmenator._rank`
+- [`DOC_DRY_RUN_DIR`](modules/readmenator._config.py.md#config-doc_dry_run_dir) attribute of `Config` in `readmenator._config`
+- [`DOC_PAGES_URL`](modules/readmenator._config.py.md#config-doc_pages_url) attribute of `Config` in `readmenator._config`
+- [`docbranch`](modules/readmenator._pipeline.py.md#analyzerfactory-docbranch) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`DocComment`](modules/readmenator._docstrings.py.md#doccomment) class in `readmenator._docstrings`
 - [`DocField`](modules/readmenator._docstrings.py.md#docfield) class in `readmenator._docstrings`
 - [`DocProjection`](modules/readmenator._projections.py.md#docprojection) class in `readmenator._projections`
 - [`docs_subdir`](modules/readmenator_orchestrator.py.md#config-docs_subdir) attribute of `Config` in `readmenator_orchestrator`
+- [`DocsBranchPublisher`](modules/readmenator._docbranch.py.md#docsbranchpublisher) class in `readmenator._docbranch`
+- [`DocsBranchResult`](modules/readmenator._docbranch.py.md#docsbranchresult) class in `readmenator._docbranch`
 - [`DocsSitePublisher`](modules/readmenator._diagrams.py.md#docssitepublisher) class in `readmenator._diagrams`
 - [`DOCSTRING_LOOKBACK_LINES`](modules/readmenator._config.py.md#config-docstring_lookback_lines) attribute of `Config` in `readmenator._config`
 - [`DocumentationGenerator`](modules/readmenator._documentation.py.md#documentationgenerator) class in `readmenator._documentation`
@@ -565,6 +581,7 @@
 - [`end_line`](modules/readmenator._graphrag.py.md#ragtextunit-end_line) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`end_line`](modules/readmenator._models.py.md#refactoringaction-end_line) attribute of `RefactoringAction` in `readmenator._models`
 - [`end_line`](modules/readmenator._symindex.py.md#symboldef-end_line) attribute of `SymbolDef` in `readmenator._symindex`
+- [`ensure_gitattributes`](modules/readmenator._docbranch.py.md#docsbranchpublisher-ensure_gitattributes) method of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`ensure_pkg`](modules/deploy.sh.md#ensure_pkg) function in `deploy.sh`
 - [`ensure_project_config`](modules/readmenator._project_config.py.md#ensure_project_config) function in `readmenator._project_config`
 - [`ensure_readmenator_installed`](modules/readmenator._agent_injector.py.md#ensure_readmenator_installed) function in `readmenator._agent_injector`
@@ -668,6 +685,7 @@
 - [`file_purpose`](modules/readmenator._purpose.py.md#file_purpose) function in `readmenator._purpose`
 - [`FileCache`](modules/readmenator._cache.py.md#filecache) class in `readmenator._cache`
 - [`files`](modules/readmenator._flowcharts.py.md#component-files) attribute of `Component` in `readmenator._flowcharts`
+- [`files`](modules/readmenator._docbranch.py.md#docsbranchresult-files) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`filter_findings`](modules/readmenator._exclusions.py.md#exclusionlist-filter_findings) method of `ExclusionList` in `readmenator._exclusions`
 - [`find_agent_files`](modules/readmenator._agent_injector.py.md#agentinjector-find_agent_files) method of `AgentInjector` in `readmenator._agent_injector`
 - [`find_changed`](modules/readmenator._cache.py.md#filecache-find_changed) method of `FileCache` in `readmenator._cache`
@@ -676,6 +694,7 @@
 - [`find_path`](modules/readmenator._app.py.md#readmenatorapplication-find_path) method of `readmenatorApplication` in `readmenator._app`
 - [`find_symbol`](modules/readmenator._query.py.md#queryengine-find_symbol) method of `QueryEngine` in `readmenator._query`
 - [`findings`](modules/readmenator._graphrag.py.md#ragcommunity-findings) attribute of `RagCommunity` in `readmenator._graphrag`
+- [`fire_count`](modules/readmenator._hebbian.py.md#recallhit-fire_count) attribute of `RecallHit` in `readmenator._hebbian`
 - [`first_sentence`](modules/readmenator._purpose.py.md#first_sentence) function in `readmenator._purpose`
 - [`fit`](modules/readmenator._uncertainty.py.md#randomforestscorer-fit) method of `RandomForestScorer` in `readmenator._uncertainty`
 - [`fit_frames`](modules/readmenator._graphlayout.py.md#fit_frames) function in `readmenator._graphlayout`
@@ -806,6 +825,8 @@
 - [`FORCEGRAPH_SYMBOLS_PER_NODE`](modules/readmenator._config.py.md#config-forcegraph_symbols_per_node) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_THUMB_HEIGHT`](modules/readmenator._config.py.md#config-forcegraph_thumb_height) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_THUMB_ITERATIONS`](modules/readmenator._config.py.md#config-forcegraph_thumb_iterations) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_THUMB_MAX_EDGES`](modules/readmenator._config.py.md#config-forcegraph_thumb_max_edges) attribute of `Config` in `readmenator._config`
+- [`FORCEGRAPH_THUMB_MAX_NODES`](modules/readmenator._config.py.md#config-forcegraph_thumb_max_nodes) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_THUMB_WIDTH`](modules/readmenator._config.py.md#config-forcegraph_thumb_width) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_TIP_DOC_CHARS`](modules/readmenator._config.py.md#config-forcegraph_tip_doc_chars) attribute of `Config` in `readmenator._config`
 - [`FORCEGRAPH_TOUR_COMMUNITIES`](modules/readmenator._config.py.md#config-forcegraph_tour_communities) attribute of `Config` in `readmenator._config`
@@ -845,6 +866,7 @@
 - [`generate_script`](modules/readmenator._refactorizer.py.md#monolithrefactorizer-generate_script) method of `MonolithRefactorizer` in `readmenator._refactorizer`
 - [`generate_uml_code`](modules/readmenator._app.py.md#readmenatorapplication-generate_uml_code) method of `readmenatorApplication` in `readmenator._app`
 - [`GENERATED_FILE_PREFIXES`](modules/readmenator._config.py.md#config-generated_file_prefixes) attribute of `Config` in `readmenator._config`
+- [`generated_paths`](modules/readmenator._docbranch.py.md#docsbranchpublisher-generated_paths) method of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`GENERATES`](modules/readmenator._category.py.md#edgekind-generates) attribute of `EdgeKind` in `readmenator._category`
 - [`generator`](modules/readmenator._pipeline.py.md#analyzerfactory-generator) property of `AnalyzerFactory` in `readmenator._pipeline`
 - [`gh_wiki`](modules/readmenator._pipeline.py.md#analyzerfactory-gh_wiki) property of `AnalyzerFactory` in `readmenator._pipeline`
@@ -863,6 +885,8 @@
 - [`GH_WIKI_TIMEOUT_S`](modules/readmenator._config.py.md#config-gh_wiki_timeout_s) attribute of `Config` in `readmenator._config`
 - [`git_user_email`](modules/readmenator_orchestrator.py.md#config-git_user_email) attribute of `Config` in `readmenator_orchestrator`
 - [`git_user_name`](modules/readmenator_orchestrator.py.md#config-git_user_name) attribute of `Config` in `readmenator_orchestrator`
+- [`GITATTRIBUTES_ENABLED`](modules/readmenator._config.py.md#config-gitattributes_enabled) attribute of `Config` in `readmenator._config`
+- [`GITATTRIBUTES_FILENAME`](modules/readmenator._config.py.md#config-gitattributes_filename) attribute of `Config` in `readmenator._config`
 - [`GitHistoryReader`](modules/readmenator._githistory.py.md#githistoryreader) class in `readmenator._githistory`
 - [`github_user`](modules/readmenator_orchestrator.py.md#config-github_user) attribute of `Config` in `readmenator_orchestrator`
 - [`GitHubClient`](modules/readmenator_orchestrator.py.md#githubclient) class in `readmenator_orchestrator`
@@ -934,6 +958,13 @@
 - [`has_entry`](modules/readmenator._flowcharts.py.md#component-has_entry) attribute of `Component` in `readmenator._flowcharts`
 - [`hash_color`](modules/readmenator._video.py.md#hash_color) function in `readmenator._video`
 - [`heading`](modules/readmenator._memory.py.md#declaredrule-heading) attribute of `DeclaredRule` in `readmenator._memory`
+- [`hebbian`](modules/readmenator._pipeline.py.md#analyzerfactory-hebbian) property of `AnalyzerFactory` in `readmenator._pipeline`
+- [`HEBBIAN_BOOST`](modules/readmenator._config.py.md#config-hebbian_boost) attribute of `Config` in `readmenator._config`
+- [`HEBBIAN_FIRE_CAP`](modules/readmenator._config.py.md#config-hebbian_fire_cap) attribute of `Config` in `readmenator._config`
+- [`HEBBIAN_MAX_PAIR_WEIGHT`](modules/readmenator._config.py.md#config-hebbian_max_pair_weight) attribute of `Config` in `readmenator._config`
+- [`HEBBIAN_MAX_PAIRS`](modules/readmenator._config.py.md#config-hebbian_max_pairs) attribute of `Config` in `readmenator._config`
+- [`HEBBIAN_SATURATION`](modules/readmenator._config.py.md#config-hebbian_saturation) attribute of `Config` in `readmenator._config`
+- [`HebbianMemory`](modules/readmenator._hebbian.py.md#hebbianmemory) class in `readmenator._hebbian`
 - [`height`](modules/readmenator._flowlayout.py.md#flowgraph-height) attribute of `FlowGraph` in `readmenator._flowlayout`
 - [`HeuristicScorer`](modules/readmenator._uncertainty.py.md#heuristicscorer) class in `readmenator._uncertainty`
 - [`hierarchical_edge_bundling`](modules/readmenator._graphlayout.py.md#hierarchical_edge_bundling) function in `readmenator._graphlayout`
@@ -977,6 +1008,7 @@
 - [`ImportResolver`](modules/readmenator._resolver.py.md#importresolver) class in `readmenator._resolver`
 - [`IMPORTS`](modules/readmenator._category.py.md#edgekind-imports) attribute of `EdgeKind` in `readmenator._category`
 - [`incoming`](modules/readmenator._category.py.md#category-incoming) method of `Category` in `readmenator._category`
+- [`infer_pages_url`](modules/readmenator._docbranch.py.md#docsbranchpublisher-infer_pages_url) staticmethod of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`inferred_raises`](modules/readmenator._apidocs.py.md#apientity-inferred_raises) attribute of `ApiEntity` in `readmenator._apidocs`
 - [`ingest_receipts`](modules/readmenator._app.py.md#readmenatorapplication-ingest_receipts) method of `readmenatorApplication` in `readmenator._app`
 - [`INHERITS`](modules/readmenator._category.py.md#edgekind-inherits) attribute of `EdgeKind` in `readmenator._category`
@@ -1004,6 +1036,7 @@
 - [`__init__`](modules/readmenator._pipeline.py.md#deepanalysisrunner-__init__) constructor of `DeepAnalysisRunner` in `readmenator._pipeline`
 - [`__init__`](modules/readmenator._watcher.py.md#directorywatcher-__init__) constructor of `DirectoryWatcher` in `readmenator._watcher`
 - [`__init__`](modules/readmenator._projections.py.md#docprojection-__init__) constructor of `DocProjection` in `readmenator._projections`
+- [`__init__`](modules/readmenator._docbranch.py.md#docsbranchpublisher-__init__) constructor of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`__init__`](modules/readmenator._diagrams.py.md#docssitepublisher-__init__) constructor of `DocsSitePublisher` in `readmenator._diagrams`
 - [`__init__`](modules/readmenator._documentation.py.md#documentationgenerator-__init__) constructor of `DocumentationGenerator` in `readmenator._documentation`
 - [`__init__`](modules/readmenator._embed.py.md#embedder-__init__) constructor of `Embedder` in `readmenator._embed`
@@ -1021,6 +1054,7 @@
 - [`__init__`](modules/readmenator._graphrag.py.md#graphragbuilder-__init__) constructor of `GraphRagBuilder` in `readmenator._graphrag`
 - [`__init__`](modules/readmenator._graphrag.py.md#graphragsearcher-__init__) constructor of `GraphRagSearcher` in `readmenator._graphrag`
 - [`__init__`](modules/readmenator._graphrag.py.md#graphragstore-__init__) constructor of `GraphRagStore` in `readmenator._graphrag`
+- [`__init__`](modules/readmenator._hebbian.py.md#hebbianmemory-__init__) constructor of `HebbianMemory` in `readmenator._hebbian`
 - [`__init__`](modules/readmenator._hotspots.py.md#hotspotanalyzer-__init__) constructor of `HotspotAnalyzer` in `readmenator._hotspots`
 - [`__init__`](modules/readmenator._hypotheses.py.md#hypothesisvalidator-__init__) constructor of `HypothesisValidator` in `readmenator._hypotheses`
 - [`__init__`](modules/readmenator._resolver.py.md#importresolver-__init__) constructor of `ImportResolver` in `readmenator._resolver`
@@ -1119,6 +1153,7 @@
 - [`kind`](modules/readmenator._category.py.md#morphism-kind) attribute of `Morphism` in `readmenator._category`
 - [`kind`](modules/readmenator._models.py.md#node-kind) attribute of `Node` in `readmenator._models`
 - [`kind`](modules/readmenator._graphrag.py.md#ragentity-kind) attribute of `RagEntity` in `readmenator._graphrag`
+- [`kind`](modules/readmenator._hebbian.py.md#recallhit-kind) attribute of `RecallHit` in `readmenator._hebbian`
 - [`kind`](modules/readmenator._models.py.md#symbol-kind) attribute of `Symbol` in `readmenator._models`
 - [`kind`](modules/readmenator._symindex.py.md#symboldef-kind) attribute of `SymbolDef` in `readmenator._symindex`
 - [`kind`](modules/readmenator._diagrams.py.md#systemmap-kind) attribute of `SystemMap` in `readmenator._diagrams`
@@ -1178,6 +1213,7 @@
 - [`line`](modules/readmenator._flowcharts.py.md#entrypoint-line) attribute of `EntryPoint` in `readmenator._flowcharts`
 - [`line`](modules/readmenator._flowcharts.py.md#flowstep-line) attribute of `FlowStep` in `readmenator._flowcharts`
 - [`line`](modules/readmenator._graphrag.py.md#ragentity-line) attribute of `RagEntity` in `readmenator._graphrag`
+- [`line`](modules/readmenator._hebbian.py.md#recallhit-line) method of `RecallHit` in `readmenator._hebbian`
 - [`line`](modules/readmenator._models.py.md#securityfinding-line) attribute of `SecurityFinding` in `readmenator._models`
 - [`line`](modules/readmenator._models.py.md#symbol-line) attribute of `Symbol` in `readmenator._models`
 - [`line`](modules/readmenator._symindex.py.md#symboldef-line) attribute of `SymbolDef` in `readmenator._symindex`
@@ -1268,8 +1304,13 @@
 - [`MEMORY_NOTE_KINDS`](modules/readmenator._config.py.md#config-memory_note_kinds) attribute of `Config` in `readmenator._config`
 - [`MEMORY_NOTE_MAX_CHARS`](modules/readmenator._config.py.md#config-memory_note_max_chars) attribute of `Config` in `readmenator._config`
 - [`memory_only_patterns`](modules/readmenator._provenance.py.md#provenancefinding-memory_only_patterns) attribute of `ProvenanceFinding` in `readmenator._provenance`
+- [`MEMORY_RECALL_TOP_K`](modules/readmenator._config.py.md#config-memory_recall_top_k) attribute of `Config` in `readmenator._config`
 - [`MEMORY_RISKS_TOP_N`](modules/readmenator._config.py.md#config-memory_risks_top_n) attribute of `Config` in `readmenator._config`
 - [`MEMORY_RULE_SOURCES`](modules/readmenator._config.py.md#config-memory_rule_sources) attribute of `Config` in `readmenator._config`
+- [`MEMORY_SEM_MAX_CHARS`](modules/readmenator._config.py.md#config-memory_sem_max_chars) attribute of `Config` in `readmenator._config`
+- [`MEMORY_SEM_MAX_TERMS`](modules/readmenator._config.py.md#config-memory_sem_max_terms) attribute of `Config` in `readmenator._config`
+- [`MEMORY_SEM_WEIGHT`](modules/readmenator._config.py.md#config-memory_sem_weight) attribute of `Config` in `readmenator._config`
+- [`MEMORY_STATE_FILENAME`](modules/readmenator._config.py.md#config-memory_state_filename) attribute of `Config` in `readmenator._config`
 - [`MEMORY_STYLE_KEYWORDS`](modules/readmenator._config.py.md#config-memory_style_keywords) attribute of `Config` in `readmenator._config`
 - [`MEMORY_STYLE_LANGUAGES`](modules/readmenator._config.py.md#config-memory_style_languages) attribute of `Config` in `readmenator._config`
 - [`MEMORY_SUBSYSTEMS_TOP_N`](modules/readmenator._config.py.md#config-memory_subsystems_top_n) attribute of `Config` in `readmenator._config`
@@ -1294,6 +1335,7 @@
 - [`mermaid_text`](modules/readmenator._flowcharts.py.md#mermaid_text) function in `readmenator._flowcharts`
 - [`MermaidRenderer`](modules/readmenator._mermaid.py.md#mermaidrenderer) class in `readmenator._mermaid`
 - [`message`](modules/readmenator._apidocs.py.md#docwarning-message) attribute of `DocWarning` in `readmenator._apidocs`
+- [`message`](modules/readmenator._docbranch.py.md#docsbranchresult-message) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`message`](modules/readmenator._models.py.md#linterviolation-message) attribute of `LinterViolation` in `readmenator._models`
 - [`message`](modules/readmenator._gh_wiki.py.md#wikipublishresult-message) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
 - [`messages`](modules/readmenator._flowlayout.py.md#flowgraph-messages) attribute of `FlowGraph` in `readmenator._flowlayout`
@@ -1398,7 +1440,9 @@
 - [`orbit_stops`](modules/readmenator._video.py.md#cinematicvideorenderer-orbit_stops) method of `CinematicVideoRenderer` in `readmenator._video`
 - [`Orchestrator`](modules/readmenator_orchestrator.py.md#orchestrator) class in `readmenator_orchestrator`
 - [`ordered_groups`](modules/readmenator._video.py.md#cinematicvideorenderer-ordered_groups) method of `CinematicVideoRenderer` in `readmenator._video`
+- [`origin`](modules/readmenator._docbranch.py.md#docsbranchpublisher-origin) method of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`outgoing`](modules/readmenator._category.py.md#category-outgoing) method of `Category` in `readmenator._category`
+- [`output_dir`](modules/readmenator._docbranch.py.md#docsbranchresult-output_dir) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`output_dir`](modules/readmenator._gh_wiki.py.md#wikipublishresult-output_dir) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
 - [`OUTPUT_FILENAME`](modules/readmenator._config.py.md#config-output_filename) attribute of `Config` in `readmenator._config`
 - [`output_filename`](modules/readmenator_orchestrator.py.md#config-output_filename) attribute of `Config` in `readmenator_orchestrator`
@@ -1416,6 +1460,8 @@
 - [`page_settings`](modules/readmenator._forcegraph.py.md#forcegraphrenderer-page_settings) method of `ForceGraphRenderer` in `readmenator._forcegraph`
 - [`page_slug`](modules/readmenator._apidocs_render.py.md#page_slug) function in `readmenator._apidocs_render`
 - [`pages`](modules/readmenator._gh_wiki.py.md#wikipublishresult-pages) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
+- [`pages_url`](modules/readmenator._docbranch.py.md#docsbranchpublisher-pages_url) method of `DocsBranchPublisher` in `readmenator._docbranch`
+- [`pages_url`](modules/readmenator._docbranch.py.md#docsbranchresult-pages_url) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`PANEL_FILL`](modules/readmenator._video.py.md#panel_fill) constant in `readmenator._video`
 - [`PANEL_HEAD`](modules/readmenator._video.py.md#panel_head) constant in `readmenator._video`
 - [`param`](modules/readmenator._docstrings.py.md#doccomment-param) method of `DocComment` in `readmenator._docstrings`
@@ -1491,11 +1537,14 @@
 - [`ProvenanceAuditor`](modules/readmenator._provenance.py.md#provenanceauditor) class in `readmenator._provenance`
 - [`ProvenanceFinding`](modules/readmenator._provenance.py.md#provenancefinding) class in `readmenator._provenance`
 - [`prune_deleted`](modules/readmenator._cache.py.md#filecache-prune_deleted) method of `FileCache` in `readmenator._cache`
+- [`publish`](modules/readmenator._docbranch.py.md#docsbranchpublisher-publish) method of `DocsBranchPublisher` in `readmenator._docbranch`
 - [`publish`](modules/readmenator._diagrams.py.md#docssitepublisher-publish) method of `DocsSitePublisher` in `readmenator._diagrams`
 - [`publish`](modules/readmenator._gh_wiki.py.md#githubwikipublisher-publish) method of `GitHubWikiPublisher` in `readmenator._gh_wiki`
 - [`publish_assets`](modules/readmenator._diagrams.py.md#docssitepublisher-publish_assets) method of `DocsSitePublisher` in `readmenator._diagrams`
+- [`publish_doc_branch`](modules/readmenator._app.py.md#readmenatorapplication-publish_doc_branch) method of `readmenatorApplication` in `readmenator._app`
 - [`publish_github_wiki`](modules/readmenator._app.py.md#readmenatorapplication-publish_github_wiki) method of `readmenatorApplication` in `readmenator._app`
 - [`purpose`](modules/readmenator._folder_readme.py.md#folderspec-purpose) attribute of `FolderSpec` in `readmenator._folder_readme`
+- [`pushed`](modules/readmenator._docbranch.py.md#docsbranchresult-pushed) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`pushed`](modules/readmenator._gh_wiki.py.md#wikipublishresult-pushed) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
 - [`PythonParser`](modules/readmenator.parsers._python.py.md#pythonparser) class in `readmenator.parsers._python`
 - [`PythonReceiverTypes`](modules/readmenator._pytypes.py.md#pythonreceivertypes) class in `readmenator._pytypes`
@@ -1563,6 +1612,9 @@
 - [`reasons`](modules/readmenator._flowcharts.py.md#entrypoint-reasons) attribute of `EntryPoint` in `readmenator._flowcharts`
 - [`reasons`](modules/readmenator._hypotheses.py.md#hypothesisverdict-reasons) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`rebuild`](modules/readmenator._app.py.md#readmenatorapplication-rebuild) method of `readmenatorApplication` in `readmenator._app`
+- [`recall`](modules/readmenator._hebbian.py.md#hebbianmemory-recall) method of `HebbianMemory` in `readmenator._hebbian`
+- [`recall`](modules/readmenator._app.py.md#readmenatorapplication-recall) method of `readmenatorApplication` in `readmenator._app`
+- [`RecallHit`](modules/readmenator._hebbian.py.md#recallhit) class in `readmenator._hebbian`
 - [`RECEIPT_SCHEMA_PREFIX`](modules/readmenator._receipts.py.md#receipt_schema_prefix) constant in `readmenator._receipts`
 - [`ReceiptIngestor`](modules/readmenator._receipts.py.md#receiptingestor) class in `readmenator._receipts`
 - [`RECEIPTS_MAX_HISTORICAL`](modules/readmenator._config.py.md#config-receipts_max_historical) attribute of `Config` in `readmenator._config`
@@ -1588,6 +1640,7 @@
 - [`regenerate`](modules/readmenator._folder_readme.py.md#folderspec-regenerate) attribute of `FolderSpec` in `readmenator._folder_readme`
 - [`register_resource`](modules/readmenator._mcp_server.py.md#mcpserver-register_resource) method of `MCPServer` in `readmenator._mcp_server`
 - [`register_tool`](modules/readmenator._mcp_server.py.md#mcpserver-register_tool) method of `MCPServer` in `readmenator._mcp_server`
+- [`reinforce`](modules/readmenator._hebbian.py.md#hebbianmemory-reinforce) method of `HebbianMemory` in `readmenator._hebbian`
 - [`relation`](modules/readmenator._models.py.md#edge-relation) attribute of `Edge` in `readmenator._models`
 - [`relation`](modules/readmenator._graphrag.py.md#ragrelation-relation) attribute of `RagRelation` in `readmenator._graphrag`
 - [`relations`](modules/readmenator._models.py.md#conceptgraph-relations) attribute of `ConceptGraph` in `readmenator._models`
@@ -1599,6 +1652,7 @@
 - [`RELEASES_PAGE_NAME`](modules/readmenator._receipts.py.md#releases_page_name) constant in `readmenator._receipts`
 - [`remember`](modules/readmenator._memory.py.md#projectmemory-remember) method of `ProjectMemory` in `readmenator._memory`
 - [`remember`](modules/readmenator._app.py.md#readmenatorapplication-remember) method of `readmenatorApplication` in `readmenator._app`
+- [`remote`](modules/readmenator._docbranch.py.md#docsbranchresult-remote) attribute of `DocsBranchResult` in `readmenator._docbranch`
 - [`remote`](modules/readmenator._gh_wiki.py.md#wikipublishresult-remote) attribute of `WikiPublishResult` in `readmenator._gh_wiki`
 - [`remove`](modules/readmenator._agent_injector.py.md#agentinjector-remove) method of `AgentInjector` in `readmenator._agent_injector`
 - [`remove`](modules/readmenator._readme_injector.py.md#readmeinjector-remove) method of `ReadmeInjector` in `readmenator._readme_injector`
@@ -1707,6 +1761,7 @@
 - [`score`](modules/readmenator._flowcharts.py.md#entrypoint-score) attribute of `EntryPoint` in `readmenator._flowcharts`
 - [`score`](modules/readmenator._uncertainty.py.md#heuristicscorer-score) method of `HeuristicScorer` in `readmenator._uncertainty`
 - [`score`](modules/readmenator._uncertainty.py.md#randomforestscorer-score) method of `RandomForestScorer` in `readmenator._uncertainty`
+- [`score`](modules/readmenator._hebbian.py.md#recallhit-score) attribute of `RecallHit` in `readmenator._hebbian`
 - [`score`](modules/readmenator._uncertainty.py.md#uncertaintyprediction-score) attribute of `UncertaintyPrediction` in `readmenator._uncertainty`
 - [`score_ping_times`](modules/readmenator._video.py.md#score_ping_times) function in `readmenator._video`
 - [`score_sync`](modules/readmenator._video.py.md#score_sync) function in `readmenator._video`
@@ -1722,6 +1777,8 @@
 - [`see_also`](modules/readmenator._docstrings.py.md#doccomment-see_also) attribute of `DocComment` in `readmenator._docstrings`
 - [`seed`](modules/readmenator._graphlayout.py.md#forceatlas2settings-seed) attribute of `ForceAtlas2Settings` in `readmenator._graphlayout`
 - [`seed_nodes`](modules/readmenator._rank.py.md#rankedresult-seed_nodes) attribute of `RankedResult` in `readmenator._rank`
+- [`sem`](modules/readmenator._memory.py.md#memorynote-sem) attribute of `MemoryNote` in `readmenator._memory`
+- [`sem`](modules/readmenator._hebbian.py.md#recallhit-sem) attribute of `RecallHit` in `readmenator._hebbian`
 - [`semgrep_yaml`](modules/readmenator._models.py.md#suggestedrule-semgrep_yaml) attribute of `SuggestedRule` in `readmenator._models`
 - [`SEMITONES`](modules/readmenator._soundtrack.py.md#semitones) constant in `readmenator._soundtrack`
 - [`sequence_mermaid`](modules/readmenator._flowcharts.py.md#executionflowbuilder-sequence_mermaid) method of `ExecutionFlowBuilder` in `readmenator._flowcharts`
@@ -1813,10 +1870,12 @@
 - [`sphere_layout`](modules/readmenator._video.py.md#cinematicvideorenderer-sphere_layout) method of `CinematicVideoRenderer` in `readmenator._video`
 - [`SphereBundleLayout`](modules/readmenator._graphlayout.py.md#spherebundlelayout) class in `readmenator._graphlayout`
 - [`spherical_edge_bundling`](modules/readmenator._graphlayout.py.md#spherical_edge_bundling) function in `readmenator._graphlayout`
+- [`split_sem`](modules/readmenator._memory.py.md#split_sem) function in `readmenator._memory`
 - [`split_summary`](modules/readmenator._docstrings.py.md#split_summary) function in `readmenator._docstrings`
 - [`start`](modules/readmenator._watcher.py.md#directorywatcher-start) method of `DirectoryWatcher` in `readmenator._watcher`
 - [`start_line`](modules/readmenator._graphrag.py.md#ragtextunit-start_line) attribute of `RagTextUnit` in `readmenator._graphrag`
 - [`start_line`](modules/readmenator._models.py.md#refactoringaction-start_line) attribute of `RefactoringAction` in `readmenator._models`
+- [`state_path`](modules/readmenator._hebbian.py.md#hebbianmemory-state_path) method of `HebbianMemory` in `readmenator._hebbian`
 - [`static_patterns`](modules/readmenator._provenance.py.md#provenancefinding-static_patterns) attribute of `ProvenanceFinding` in `readmenator._provenance`
 - [`status`](modules/readmenator._hypotheses.py.md#hypothesisverdict-status) attribute of `HypothesisVerdict` in `readmenator._hypotheses`
 - [`status`](modules/readmenator._receipts.py.md#releasereceiptrecord-status) attribute of `ReleaseReceiptRecord` in `readmenator._receipts`
@@ -1927,6 +1986,7 @@
 - [`text`](modules/readmenator._memory.py.md#declaredrule-text) attribute of `DeclaredRule` in `readmenator._memory`
 - [`text`](modules/readmenator._memory.py.md#memorynote-text) attribute of `MemoryNote` in `readmenator._memory`
 - [`text`](modules/readmenator._graphrag.py.md#ragtextunit-text) attribute of `RagTextUnit` in `readmenator._graphrag`
+- [`text`](modules/readmenator._hebbian.py.md#recallhit-text) attribute of `RecallHit` in `readmenator._hebbian`
 - [`text`](modules/readmenator._sourceview.py.md#sourceentry-text) attribute of `SourceEntry` in `readmenator._sourceview`
 - [`text_units`](modules/readmenator._graphrag.py.md#graphragindex-text_units) attribute of `GraphRagIndex` in `readmenator._graphrag`
 - [`text_units`](modules/readmenator._graphrag.py.md#ragcontext-text_units) attribute of `RagContext` in `readmenator._graphrag`

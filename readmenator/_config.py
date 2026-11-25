@@ -1018,9 +1018,9 @@ class Config:
 
     BUNDLEGRAPH_LIST_MAX: int = 40
 
-    BUNDLEGRAPH_THUMB_EDGES: int = 500
+    BUNDLEGRAPH_THUMB_EDGES: int = 200
 
-    BUNDLEGRAPH_THUMB_SAMPLES: int = 12
+    BUNDLEGRAPH_THUMB_SAMPLES: int = 8
 
     BUNDLEGRAPH_ORDER_OPTIMIZE: bool = True
 
@@ -1448,3 +1448,47 @@ class Config:
     PROJECT_CONFIG_ENABLED: bool = True
 
     VIEWER_CONFIG_FILENAME: str = "config.json"
+
+    MEMORY_SEM_MAX_TERMS: int = 5
+
+    MEMORY_SEM_MAX_CHARS: int = 200
+
+    MEMORY_SEM_WEIGHT: float = 0.8
+
+    MEMORY_STATE_FILENAME: str = "MEMORY_STATE.json"
+
+    MEMORY_RECALL_TOP_K: int = 5
+
+    HEBBIAN_MAX_PAIRS: int = 4000
+
+    HEBBIAN_MAX_PAIR_WEIGHT: int = 100
+
+    HEBBIAN_BOOST: float = 2.0
+
+    HEBBIAN_SATURATION: float = 4.0
+
+    HEBBIAN_FIRE_CAP: int = 1000
+
+    FORCEGRAPH_THUMB_MAX_NODES: int = 120
+
+    FORCEGRAPH_THUMB_MAX_EDGES: int = 180
+
+    BUNDLEGRAPH_THUMB_NODES: int = 120
+
+    COMPONENTS_THUMB_MAX_RELATIONS: int = 60
+
+    DOC_BRANCH_ENABLED: bool = True
+
+    DOC_BRANCH_NAME: str = "docs"
+
+    DOC_BRANCH_TIMEOUT_S: int = 120
+
+    DOC_BRANCH_COMMIT_MESSAGE: str = "readmenator: publish documentation site"
+
+    DOC_PAGES_URL: str = ""
+
+    DOC_DRY_RUN_DIR: str = "readmenator-doc-branch"
+
+    GITATTRIBUTES_ENABLED: bool = True
+
+    GITATTRIBUTES_FILENAME: str = ".gitattributes"

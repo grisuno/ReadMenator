@@ -2,6 +2,21 @@
 Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 
 ## Internal Dependencies (continued)
+- `tests/test_ollama.py` -> `readmenator/_config.py`
+- `tests/test_ollama.py` -> `readmenator/_ollama.py`
+- `tests/test_parsers.py` -> `readmenator/_config.py`
+- `tests/test_parsers.py` -> `readmenator/parsers/__init__.py`
+- `tests/test_parsers_new.py` -> `readmenator/_config.py`
+- `tests/test_parsers_new.py` -> `readmenator/parsers/__init__.py`
+- `tests/test_parsers_property.py` -> `readmenator/_config.py`
+- `tests/test_parsers_property.py` -> `readmenator/_models.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_c.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_csharp.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_dart.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_elixir.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_gdscript.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_go.py`
+- `tests/test_parsers_property.py` -> `readmenator/parsers/_java.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_javascript.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_kotlin.py`
 - `tests/test_parsers_property.py` -> `readmenator/parsers/_lua.py`
@@ -107,6 +122,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_dataflow.py` -> __future__, logging, re, typing
 - `readmenator/_dead_code.py` -> __future__, collections, typing
 - `readmenator/_diagrams.py` -> __future__, dataclasses, html, json, pathlib, re, shutil, subprocess, typing
+- `readmenator/_docbranch.py` -> __future__, dataclasses, logging, pathlib, re, shutil, subprocess, tempfile, typing
 - `readmenator/_docstrings.py` -> __future__, dataclasses, re, typing
 - `readmenator/_documentation.py` -> __future__, collections, subprocess, typing
 - `readmenator/_embed.py` -> __future__, collections, math, re, sentence_transformers, typing
@@ -125,6 +141,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `readmenator/_gitmeta.py` -> __future__, pathlib, typing
 - `readmenator/_graphlayout.py` -> __future__, dataclasses, math, numpy, random, typing
 - `readmenator/_graphrag.py` -> __future__, dataclasses, json, logging, math, pathlib, re, typing
+- `readmenator/_hebbian.py` -> __future__, dataclasses, json, logging, pathlib, re, typing
 - `readmenator/_hotspots.py` -> __future__, collections, typing
 - `readmenator/_htmlpack.py` -> __future__, base64, gzip, html, json, re, typing
 - `readmenator/_hypotheses.py` -> __future__, dataclasses, json, typing
@@ -194,7 +211,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_apidocs.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, tempfile, unittest
 - `tests/test_bundlegraph.py` -> __future__, dataclasses, json, math, pathlib, re, tempfile, unittest
 - `tests/test_cache.py` -> __future__, os, pathlib, shutil, tempfile, unittest
-- `tests/test_components.py` -> __future__, json, pathlib, shutil, subprocess, tempfile, unittest
+- `tests/test_components.py` -> __future__, dataclasses, json, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_concepts.py` -> unittest
 - `tests/test_config.py` -> dataclasses, unittest
 - `tests/test_cpg.py` -> __future__, json, unittest
@@ -202,6 +219,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_dataflow.py` -> dataclasses, unittest
 - `tests/test_dead_code.py` -> __future__, unittest
 - `tests/test_diagrams.py` -> __future__, dataclasses, json, pathlib, re, tempfile, unittest
+- `tests/test_docbranch.py` -> __future__, dataclasses, pathlib, subprocess, tempfile, typing, unittest
 - `tests/test_documentation.py` -> __future__, unittest
 - `tests/test_exporter.py` -> __future__, json, unittest
 - `tests/test_flowcharts.py` -> __future__, dataclasses, json, re, unittest
@@ -210,6 +228,7 @@ Previous: [ARCHITECTURE.md](ARCHITECTURE.md)
 - `tests/test_githistory.py` -> os, pathlib, shutil, subprocess, tempfile, unittest
 - `tests/test_graphlayout.py` -> __future__, math, unittest
 - `tests/test_graphrag.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
+- `tests/test_hebbian.py` -> __future__, dataclasses, json, pathlib, tempfile, unittest
 - `tests/test_hotspots.py` -> __future__, unittest
 - `tests/test_htmlpack.py` -> __future__, base64, dataclasses, gzip, json, pathlib, re, shutil, subprocess, tempfile, typing, unittest
 - `tests/test_integration.py` -> pathlib, shutil, tempfile, unittest

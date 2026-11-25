@@ -1,34 +1,45 @@
-# readmenator: _agent_output
+# readmenator: _pipeline
 
-*Community 2 | 19 files | cohesion 0.33*
+*Community 2 | 25 files | cohesion 0.33*
 
 ## Definition
 
-This community groups 19 file(s) rooted at `readmenator` with dominant language py (cohesion 0.33). Central symbols: `AgentOutputGenerator`, `DeclaredRule`, `FileCache`, `FolderReadmeWriter`, `FolderSpec`, `GitHubWikiPublisher`, `GraphAnalyzer`, `ImportResolver`. Core file: `tests/test_security.py` (68 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
+This community groups 25 file(s) rooted at `readmenator` with dominant language py (cohesion 0.33). Central symbols: `AgentOutputGenerator`, `AnalyzerFactory`, `ComponentDiagramBuilder`, `DeclaredRule`, `DeepAnalysisRunner`, `FileCache`, `FolderReadmeWriter`, `FolderSpec`. Core file: `tests/test_security.py` (68 symbols). Documented purpose: Agent-friendly output generator for ReadMenator.  Generates grep-optimized, flat-markdown files in a dedicated output directory.  File names for per-subsystem f.
 
 ## Files
+
+### `readmenator` (16 files)
 
 | File | Language | Layer | Symbols | Doc |
 |------|----------|-------|---------|-----|
 | `readmenator/_agent_output.py` | py | utility | 33 | yes |
 | `readmenator/_analyzer.py` | py | utility | 23 | yes |
 | `readmenator/_cache.py` | py | infrastructure | 14 | yes |
+| `readmenator/_components.py` | py | presentation | 25 | yes |
 | `readmenator/_folder_readme.py` | py | utility | 7 | yes |
 | `readmenator/_gh_wiki.py` | py | utility | 18 | yes |
 | `readmenator/_gitmeta.py` | py | utility | 4 | yes |
-| `readmenator/_memory.py` | py | utility | 30 | yes |
-| `readmenator/_purpose.py` | py | utility | 7 | yes |
-| `readmenator/_resolver.py` | py | utility | 17 | yes |
-| `readmenator/_security.py` | py | utility | 32 | yes |
-| `readmenator/_wiki.py` | py | utility | 32 | yes |
+| `readmenator/_hebbian.py` | py | utility | 12 | yes |
+| `readmenator/_layers.py` | py | utility | 7 | yes |
+| `readmenator/_memory.py` | py | utility | 31 | yes |
+| `readmenator/_ollama.py` | py | utility | 7 | yes |
+
+### `tests` (9 files)
+
+| File | Language | Layer | Symbols | Doc |
+|------|----------|-------|---------|-----|
 | `tests/test_agent_friendliness.py` | py | testing | 59 | yes |
 | `tests/test_analyzer.py` | py | testing | 14 | yes |
 | `tests/test_cache.py` | py | testing | 22 | yes |
 | `tests/test_folder_readme.py` | py | testing | 20 | yes |
-| `tests/test_gh_wiki.py` | py | testing | 17 | yes |
-| `tests/test_resolver.py` | py | testing | 22 | yes |
+| `tests/test_hebbian.py` | py | testing | 20 | yes |
+| `tests/test_memory.py` | py | testing | 17 | yes |
+| `tests/test_ollama.py` | py | testing | 4 | yes |
 | `tests/test_security.py` | py | testing | 68 | yes |
 | `tests/test_wiki.py` | py | testing | 30 | no |
+
+*... and 5 more files in this community.*
+
 
 ## Key Symbols
 
@@ -65,46 +76,51 @@ This community groups 19 file(s) rooted at `readmenator` with dominant language 
 
 ## Internal vs External Edges
 
-- Internal resolved imports (EXTRACTED): 39
-- Cross-boundary resolved imports (EXTRACTED): 62
+- Internal resolved imports (EXTRACTED): 59
+- Cross-boundary resolved imports (EXTRACTED): 101
 
 ## Connections
 
-- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
-- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
-- [EXTRACTED] depends_on community 3 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_cache.py.
-- [EXTRACTED] depends_on community 5 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_folder_readme.py.
-- [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_pipeline.py imports readmenator/_agent_output.py.
+- [EXTRACTED] depends_on community 4 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/__init__.py imports readmenator/_components.py.
+- [EXTRACTED] depends_on community 2 <-> 0 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_config.py.
+- [EXTRACTED] depends_on community 2 <-> 1 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_models.py.
+- [EXTRACTED] depends_on community 2 <-> 6 (strength 0.9): Extracted import edge crosses communities: readmenator/_agent_output.py imports readmenator/_resolver.py.
+- [EXTRACTED] depends_on community 2 <-> 5 (strength 0.9): Extracted import edge crosses communities: readmenator/_components.py imports readmenator/_symindex.py.
+- [EXTRACTED] depends_on community 3 <-> 2 (strength 0.9): Extracted import edge crosses communities: readmenator/_diagrams.py imports readmenator/_folder_readme.py.
 
 ## Risks
 
 - [taint high] `readmenator/_diagrams.py` -> `readmenator/_folder_readme.py` via `subprocess` (1 hops)
+- [taint high] `readmenator/_docbranch.py` -> `readmenator/_gitmeta.py` via `subprocess` (1 hops)
+- [layer strict] `tests/test_components.py` (testing) -> `readmenator/_components.py` (presentation)
 - [layer strict] `tests/test_folder_readme.py` (testing) -> `readmenator/_components.py` (presentation)
 
 ## Open Questions
 
 - Why do 1 file(s) lack file-level docs (e.g. `tests/test_wiki.py`)? What purpose do they serve?
-- What would break if the most connected file in readmenator: _agent_output changed?
-- Should readmenator: _agent_output be split, given cohesion 0.33?
+- What would break if the most connected file in readmenator: _pipeline changed?
+- Should readmenator: _pipeline be split, given cohesion 0.33?
 
 ## Sources
 
 - `readmenator/_agent_output.py`
 - `readmenator/_analyzer.py`
 - `readmenator/_cache.py`
+- `readmenator/_components.py`
 - `readmenator/_folder_readme.py`
 - `readmenator/_gh_wiki.py`
 - `readmenator/_gitmeta.py`
+- `readmenator/_hebbian.py`
+- `readmenator/_layers.py`
 - `readmenator/_memory.py`
+- `readmenator/_ollama.py`
+- `readmenator/_pipeline.py`
 - `readmenator/_purpose.py`
-- `readmenator/_resolver.py`
 - `readmenator/_security.py`
+- `readmenator/_skill_installer.py`
 - `readmenator/_wiki.py`
 - `tests/test_agent_friendliness.py`
 - `tests/test_analyzer.py`
 - `tests/test_cache.py`
 - `tests/test_folder_readme.py`
-- `tests/test_gh_wiki.py`
-- `tests/test_resolver.py`
-- `tests/test_security.py`
-- `tests/test_wiki.py`
+- *... and 5 more*

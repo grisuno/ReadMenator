@@ -322,14 +322,21 @@ class BundleGraphRenderer:
         nodes = payload["nodes"]
         if not nodes:
             return ""
-        w, h = cfg.FORCEGRAPH_THUMB_WIDTH, cfg.FORCEGRAPH_THUMB_HEIGHT
-        members: Dict[str, List[str]] = {str(g): [] for g in range(len(payload["groups"]))}
-        for node in sorted(nodes, key=lambda n: ((n["a"] - float(payload["groups"][n["g"]]["a0"])), n["id"])):
-            members[str(node["g"])].append(node["id"])
+        keep = set(sorted(
+            range(len(nodes)),
+            key=lambda i: (-float(nodes[i].get("r", 0.0)), nodes[i]["id"]),
+        )[: cfg.BUNDLEGRAPH_THUMB_NODES])
         ranked = sorted(
-            payload["edges"],
+            (
+                (source, target) for source, target in payload["edges"]
+                if source in keep and target in keep
+            ),
             key=lambda e: (-(nodes[e[0]]["r"] + nodes[e[1]]["r"]), e[0], e[1]),
         )[: cfg.BUNDLEGRAPH_THUMB_EDGES]
+        w, h = cfg.FORCEGRAPH_THUMB_WIDTH, cfg.FORCEGRAPH_THUMB_HEIGHT
+        members: Dict[str, List[str]] = {str(g): [] for g in range(len(payload["groups"]))}
+        for i in sorted(keep, key=lambda j: ((nodes[j]["a"] - float(payload["groups"][nodes[j]["g"]]["a0"])), nodes[j]["id"])):
+            members[str(nodes[i]["g"])].append(nodes[i]["id"])
         radius = min(w, h) / 2 - 8
         layout = hierarchical_edge_bundling(
             members, [(nodes[a]["id"], nodes[b]["id"]) for a, b in ranked],
